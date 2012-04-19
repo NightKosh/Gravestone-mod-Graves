@@ -3,6 +3,7 @@ package net.minecraft.GraveStone.tileentity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public abstract class TileEntityGSGrave extends TileEntity {
@@ -10,6 +11,25 @@ public abstract class TileEntityGSGrave extends TileEntity {
     protected GSGraveStoneItems gSItems;
     protected GSGraveStoneDeathText gSDeathText;
     protected boolean isEditable = true;
+    protected byte graveType = 0;
+    
+    public void setGraveType(byte graveType) {
+        this.graveType = graveType;
+    }
+
+    public byte getGraveType() {
+        return graveType;
+    }
+
+    protected void readType(NBTTagCompound nbtTag) {
+        if (nbtTag.hasKey("GraveType")) {
+            graveType = nbtTag.getByte("GraveType");
+        }
+    }
+
+    protected void saveType(NBTTagCompound nbtTag) {
+        nbtTag.setByte("GraveType", graveType);
+    }
 
     public void setGraveContent() {
         gSItems.setRandomGraveContent();

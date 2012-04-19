@@ -21,7 +21,8 @@ public class CatacombsGenerator {
         if (GraveStoneConfig.generateCatacombs && canSpawnStructureAtCoords(world, x, z, chance)) {
             int direction = rand.nextInt(4);
             StructureGSCemeteryCatacombsSurface surface = new StructureGSCemeteryCatacombsSurface(world, rand, x, z, direction);
-
+            System.out.println("Catacombs " + x + "x" + z);
+            
             if (surface.getMausoleumY() > 55) {
                 new StructureGSCemeteryCatacombsUnderground(world, rand, direction, surface.getMausoleumX(), surface.getMausoleumY(), surface.getMausoleumZ());
             }

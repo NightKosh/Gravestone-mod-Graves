@@ -24,6 +24,9 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
     public void readFromNBT(NBTTagCompound nbtTag) {
         super.readFromNBT(nbtTag);
 
+        // grave type
+        readType(nbtTag);
+        
         // death text
         gSDeathText.readText(nbtTag);
     }
@@ -35,6 +38,9 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
     public void writeToNBT(NBTTagCompound nbtTag) {
         super.writeToNBT(nbtTag);
 
+        // grave type
+        saveType(nbtTag);
+        
         // death text
         gSDeathText.saveText(nbtTag);
     }

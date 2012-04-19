@@ -207,19 +207,20 @@ abstract class ComponentGSCemeteryCatacombs extends StructureComponent {
         return direction;
     }
 
-    protected void placeGrave(World world, Random random, int x, int y, int z, int graveMeta) {
+    protected void placeGrave(World world, Random random, int x, int y, int z, int graveMeta, byte graveType) {
         this.placeBlockAtCurrentPosition(world, GraveStoneConfig.graveStoneID, graveMeta, x, y, z, boundingBox);
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
         if (tileEntity != null) {
             tileEntity.setGraveContent();
+            tileEntity.setGraveType(graveType);
         }
     }
 
-    protected void fillGraves(World world, Random random, int xStart, int yStart, int zStart, int xEnd, int yEnd, int zEnd, int graveMeta) {
+    protected void fillGraves(World world, Random random, int xStart, int yStart, int zStart, int xEnd, int yEnd, int zEnd, int graveMeta, byte graveType) {
         for (int y = yStart; y <= yEnd; ++y) {
             for (int x = xStart; x <= xEnd; ++x) {
                 for (int z = zStart; z <= zEnd; ++z) {
-                    this.placeGrave(world, random, x, y, z, graveMeta);
+                    this.placeGrave(world, random, x, y, z, graveMeta, graveType);
                 }
             }
         }

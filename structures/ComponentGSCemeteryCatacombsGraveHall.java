@@ -147,65 +147,65 @@ public class ComponentGSCemeteryCatacombsGraveHall extends ComponentGSCemeteryCa
         buildColumn(world, 11, 12);
         
         // graves
-        int graveType = random.nextInt(mod_GraveStone.graveStone.GRAVE_TYPE_COUNT) * 4;
-        int metaLeft = graveType + mod_GraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
-        int metaRight = graveType + mod_GraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
-        int metaTop = graveType + mod_GraveStone.graveStone.getMetaDirection(coordBaseMode);
-        int metaBot = graveType + mod_GraveStone.graveStone.getMetaDirection(getInvertDirection(coordBaseMode));
+        byte graveType = (byte) random.nextInt(mod_GraveStone.graveStone.GRAVE_TYPE_COUNT);
+        int metaLeft = mod_GraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
+        int metaRight = mod_GraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
+        int metaTop = mod_GraveStone.graveStone.getMetaDirection(coordBaseMode);
+        int metaBot = mod_GraveStone.graveStone.getMetaDirection(getInvertDirection(coordBaseMode));
 
         // left wall
-        this.placeGrave(world, random, 1, 1, 2, metaLeft);
-        this.placeGrave(world, random, 1, 1, 5, metaLeft);
+        this.placeGrave(world, random, 1, 1, 2, metaLeft, graveType);
+        this.placeGrave(world, random, 1, 1, 5, metaLeft, graveType);
         
-        this.placeGrave(world, random, 1, 1, 8, metaLeft);
-        this.placeGrave(world, random, 1, 1, 10, metaLeft);
+        this.placeGrave(world, random, 1, 1, 8, metaLeft, graveType);
+        this.placeGrave(world, random, 1, 1, 10, metaLeft, graveType);
         
-        this.placeGrave(world, random, 1, 1, 13, metaLeft);
-        this.placeGrave(world, random, 1, 1, 16, metaLeft);
+        this.placeGrave(world, random, 1, 1, 13, metaLeft, graveType);
+        this.placeGrave(world, random, 1, 1, 16, metaLeft, graveType);
         
         
-        this.placeGrave(world, random, 1, 4, 2, metaLeft);
-        this.placeGrave(world, random, 1, 4, 5, metaLeft);
+        this.placeGrave(world, random, 1, 4, 2, metaLeft, graveType);
+        this.placeGrave(world, random, 1, 4, 5, metaLeft, graveType);
         
-        this.placeGrave(world, random, 1, 4, 8, metaLeft);
-        this.placeGrave(world, random, 1, 4, 10, metaLeft);
+        this.placeGrave(world, random, 1, 4, 8, metaLeft, graveType);
+        this.placeGrave(world, random, 1, 4, 10, metaLeft, graveType);
         
-        this.placeGrave(world, random, 1, 4, 13, metaLeft);
-        this.placeGrave(world, random, 1, 4, 16, metaLeft);
+        this.placeGrave(world, random, 1, 4, 13, metaLeft, graveType);
+        this.placeGrave(world, random, 1, 4, 16, metaLeft, graveType);
         
         // right wall
-        this.placeGrave(world, random, 15, 1, 2, metaRight);
-        this.placeGrave(world, random, 15, 1, 5, metaRight);
+        this.placeGrave(world, random, 15, 1, 2, metaRight, graveType);
+        this.placeGrave(world, random, 15, 1, 5, metaRight, graveType);
         
-        this.placeGrave(world, random, 15, 1, 8, metaRight);
-        this.placeGrave(world, random, 15, 1, 10, metaRight);
+        this.placeGrave(world, random, 15, 1, 8, metaRight, graveType);
+        this.placeGrave(world, random, 15, 1, 10, metaRight, graveType);
         
-        this.placeGrave(world, random, 15, 1, 13, metaRight);
-        this.placeGrave(world, random, 15, 1, 16, metaRight);
+        this.placeGrave(world, random, 15, 1, 13, metaRight, graveType);
+        this.placeGrave(world, random, 15, 1, 16, metaRight, graveType);
         
         
-        this.placeGrave(world, random, 15, 4, 2, metaRight);
-        this.placeGrave(world, random, 15, 4, 5, metaRight);
+        this.placeGrave(world, random, 15, 4, 2, metaRight, graveType);
+        this.placeGrave(world, random, 15, 4, 5, metaRight, graveType);
         
-        this.placeGrave(world, random, 15, 4, 8, metaRight);
-        this.placeGrave(world, random, 15, 4, 10, metaRight);
+        this.placeGrave(world, random, 15, 4, 8, metaRight, graveType);
+        this.placeGrave(world, random, 15, 4, 10, metaRight, graveType);
         
-        this.placeGrave(world, random, 15, 4, 13, metaRight);
-        this.placeGrave(world, random, 15, 4, 16, metaRight);
+        this.placeGrave(world, random, 15, 4, 13, metaRight, graveType);
+        this.placeGrave(world, random, 15, 4, 16, metaRight, graveType);
         
         // top walls
-        this.placeGrave(world, random, 3, 1, 17, metaTop);
-        this.placeGrave(world, random, 13, 1, 17, metaTop);
+        this.placeGrave(world, random, 3, 1, 17, metaTop, graveType);
+        this.placeGrave(world, random, 13, 1, 17, metaTop, graveType);
         
-        this.placeGrave(world, random, 3, 4, 17, metaTop);
-        this.placeGrave(world, random, 13, 4, 17, metaTop);
+        this.placeGrave(world, random, 3, 4, 17, metaTop, graveType);
+        this.placeGrave(world, random, 13, 4, 17, metaTop, graveType);
         
         // bot walls
-        this.placeGrave(world, random, 3, 1, 1, metaBot);
-        this.placeGrave(world, random, 13, 1, 1, metaBot);
+        this.placeGrave(world, random, 3, 1, 1, metaBot, graveType);
+        this.placeGrave(world, random, 13, 1, 1, metaBot, graveType);
         
-        this.placeGrave(world, random, 3, 4, 1, metaBot);
-        this.placeGrave(world, random, 13, 4, 1, metaBot);
+        this.placeGrave(world, random, 3, 4, 1, metaBot, graveType);
+        this.placeGrave(world, random, 13, 4, 1, metaBot, graveType);
         
         // trap floor 
         this.fillWithBlocks(world, boundingBox, 7, 0, 6, 9, 0, 6, GraveStoneConfig.timeTrapID, GraveStoneConfig.timeTrapID, false);

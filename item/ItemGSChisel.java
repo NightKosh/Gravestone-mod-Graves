@@ -14,8 +14,6 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class ItemGSChisel extends ItemTool {
 
-    private int chiselDamage;
-
     public ItemGSChisel(int id) {
         super(id, 1, EnumToolMaterial.IRON, new Block[0]);
 
@@ -28,7 +26,7 @@ public class ItemGSChisel extends ItemTool {
 
     @Override
     public void updateIcons(IconRegister register) {
-        this.iconIndex = register.registerIcon("/GraveStone/resources/textures/items/chisel.png");
+        this.iconIndex = register.registerIcon("GraveStone:chisel");
     }
 
     /**
@@ -55,7 +53,7 @@ public class ItemGSChisel extends ItemTool {
     private boolean setGraveText(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, boolean isMemorial) {
         TileEntityGSGrave tileEntity = (TileEntityGSGrave) world.getBlockTileEntity(x, y, z);
         if (tileEntity != null && tileEntity.isEditable() && tileEntity.getDeathText().equals("")) {
-            System.out.println("!!!!!!!!!!!!! " + tileEntity.getDeathText());
+            //System.out.println("!!!!!!!!!!!!! " + tileEntity.getDeathText());
             player.openGui(mod_GraveStone.instance, 0, world, x, y, z);
 
             if (isMemorial) {

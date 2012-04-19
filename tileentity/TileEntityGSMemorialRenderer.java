@@ -1,7 +1,6 @@
 
 package net.minecraft.GraveStone.tileentity;
 
-import net.minecraft.GraveStone.mod_GraveStone;
 import net.minecraft.GraveStone.models.ModelGraveStone;
 import net.minecraft.GraveStone.models.ModelMemorialCross;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -11,20 +10,21 @@ import org.lwjgl.opengl.GL11;
 public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer  {
     
     public void renderAModelAt(TileEntityGSMemorial tile, double d, double d1, double d2, float f) {
-        int meta = 0;
+        byte memorialType = tile.getGraveType();
+        int meta;
         if (tile.worldObj != null) {
             meta = tile.getBlockMetadata();
         } else {
             meta = tile.blockMetadata;
         }
-        getMemorialTexture(meta);
+        getMemorialTexture(memorialType);
 
         //texture
         GL11.glPushMatrix();
         GL11.glTranslatef((float) d + 0.5F, (float) d1 + 1.5F, (float) d2 + 0.5F);
         GL11.glScalef(1.0F, -1F, -1F);
 
-        switch (getMemorialDirection(tile.blockMetadata)) {
+        switch (getMemorialDirection(meta)) {
             case 0:
                 GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
                 break;
@@ -38,7 +38,7 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer  {
                 GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
                 break;
         }
-        getMemorialModel(meta).renderAll();
+        getMemorialModel(memorialType).renderAll();
         GL11.glPopMatrix(); //end
     }
 
@@ -46,8 +46,8 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer  {
         this.renderAModelAt((TileEntityGSMemorial) tileEntity, par2, par4, par6, par8);
     }
 
-    private ModelGraveStone getMemorialModel(int meta) {
-        switch (mod_GraveStone.memorial.getMemorialType(meta)) {
+    private ModelGraveStone getMemorialModel(int memorialType) {
+        switch (memorialType) {
             case 0:
                 return new ModelMemorialCross();
             default:
@@ -55,8 +55,8 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer  {
         }
     }
 
-    private void getMemorialTexture(int meta) {
-        switch (mod_GraveStone.memorial.getMemorialType(meta)) {
+    private void getMemorialTexture(int memorialType) {
+        switch (memorialType) {
             case 0: // CROSS
                 bindTextureByName("/GraveStone/resources/textures/ModelMemorialCross.png");
                 break;
@@ -67,7 +67,7 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer  {
      * Return grave direction by metadata
      */
     private static int getMemorialDirection(int meta) {
-        switch (mod_GraveStone.memorial.getMemorialMeta(meta)) {
+        switch (meta) {
             case 0: // S
                 return 0;
             case 1: // N

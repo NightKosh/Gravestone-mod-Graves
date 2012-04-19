@@ -34,8 +34,8 @@ public class ComponentGSMemorial extends ComponentGSCemeteryCatacombs {
         
         this.fillWithAir(world, boundingBox, 0, 1, 2, 0, 6, 2);
         this.fillWithBlocks(world, boundingBox, 0, 0, 0, 2, 0, 2, groundID, Block.grass.blockID, false);
-        this.placeBlockAtCurrentPosition(world, GraveStoneConfig.memorialID, random.nextInt(mod_GraveStone.memorial.MEMORIAL_TYPE_COUNT) * 4, 1, 1, 1, boundingBox);
-        
+        this.placeBlockAtCurrentPosition(world, GraveStoneConfig.memorialID, 0, 1, 1, 1, boundingBox);
+        //random.nextInt(mod_GraveStone.memorial.MEMORIAL_TYPE_COUNT)
         
         for (int x = 1; x < 3; x++) {
             for (int z = 1; z < 3; z++) {

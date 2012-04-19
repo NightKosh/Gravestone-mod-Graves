@@ -74,12 +74,12 @@ public class ComponentGSCemeteryCatacombsBridge extends ComponentGSCemeteryCatac
         this.fillWithRandomizedBlocks(world, boundingBox, 10, 9, 7, 11, 10, 7, false, random, getCemeteryCatacombsStones());
         
         // graves
-        int graveType = random.nextInt(mod_GraveStone.graveStone.GRAVE_TYPE_COUNT) * 4;
-        int metaLeft = graveType + mod_GraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
-        int metaRight = graveType + mod_GraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
+        byte graveType = (byte) random.nextInt(mod_GraveStone.graveStone.GRAVE_TYPE_COUNT);
+        int metaLeft = mod_GraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
+        int metaRight = mod_GraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
 
-        this.fillGraves(world, random, 1, 9, 1, 1, 9, 6, metaLeft);
-        this.fillGraves(world, random, 11, 9, 1, 11, 9, 6, metaRight);
+        this.fillGraves(world, random, 1, 9, 1, 1, 9, 6, metaLeft, graveType);
+        this.fillGraves(world, random, 11, 9, 1, 11, 9, 6, metaRight, graveType);
         
         // lava
         this.fillWithBlocks(world, boundingBox, 3, 1, 1, 9, 2, 6, Block.lavaStill.blockID, Block.lavaStill.blockID, false);

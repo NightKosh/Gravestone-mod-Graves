@@ -3,7 +3,6 @@ package net.minecraft.GraveStone.tileentity;
 import net.minecraft.GraveStone.models.ModelCrossGraveStone;
 import net.minecraft.GraveStone.models.ModelGraveStone;
 import net.minecraft.GraveStone.models.ModelVerticalPlateGraveStone;
-import net.minecraft.GraveStone.mod_GraveStone;
 import net.minecraft.GraveStone.models.ModelHorisontalPlateGraveStone;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -16,23 +15,25 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
     private static ModelGraveStone horisontalPlate = new ModelHorisontalPlateGraveStone();
             
     public TileEntityGSGraveStoneRenderer() {
+        System.out.println("TileEntityGSGraveStoneRenderer");
     }
 
     public void renderAModelAt(TileEntityGSGraveStone tile, double d, double d1, double d2, float f) {
-        int meta = 0;
+        byte graveType = tile.getGraveType();
+        int meta;
         if (tile.worldObj != null) {
             meta = tile.getBlockMetadata();
         } else {
             meta = tile.blockMetadata;
         }
-        getGraveTexture(meta);
+        getGraveTexture(graveType);
 
         //texture
         GL11.glPushMatrix();
         GL11.glTranslatef((float) d + 0.5F, (float) d1 + 1.5F, (float) d2 + 0.5F);
         GL11.glScalef(1.0F, -1F, -1F);
 
-        switch (getGraveDirection(tile.blockMetadata)) {
+        switch (getGraveDirection(meta)) {
             case 0:
                 GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
                 break;
@@ -46,7 +47,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
                 GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
                 break;
         }
-        getGraveModel(meta).renderAll();
+        getGraveModel(graveType).renderAll();
         GL11.glPopMatrix(); //end
     }
 
@@ -54,8 +55,8 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
         this.renderAModelAt((TileEntityGSGraveStone) par1TileEntity, par2, par4, par6, par8);
     }
 
-    private ModelGraveStone getGraveModel(int meta) {
-        switch (mod_GraveStone.graveStone.getGraveType(meta)) {
+    private ModelGraveStone getGraveModel(byte graveType) {
+        switch (graveType) {
             case 0:
                 return verticalPlate;
             case 1:
@@ -67,8 +68,8 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
         }
     }
 
-    private void getGraveTexture(int meta) {
-        switch (mod_GraveStone.graveStone.getGraveType(meta)) {
+    private void getGraveTexture(byte graveType) {
+        switch (graveType) {
             case 0: // STONE_VERTICAL_PLATE
                 bindTextureByName("/GraveStone/resources/textures/ModelVerticalPlateGraveStone.png");
                 break;
@@ -85,7 +86,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
      * Return grave direction by metadata
      */
     private static int getGraveDirection(int meta) {
-        switch (mod_GraveStone.graveStone.getGraveMeta(meta)) {
+        switch (meta) {
             case 0: // S
                 return 0;
             case 1: // N

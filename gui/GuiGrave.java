@@ -36,15 +36,6 @@ public class GuiGrave extends GuiScreen {
 
         posX = (this.width - xSizeOfTexture) / 2;
         posY = (this.height - ySizeOfTexture) / 2;
-
-        //this.buttonList.add(new GuiButton(0, posX + 4, posY + 4, 20, 20, "ButtonText"));
-        /*Parameters:
-         * button id used when checking what to do when a button is pressed
-         * The X position of the button
-         * The Y position of the button
-         * The width
-         * The height (keep this at 20 if you can)
-         * The text to be displayed on the button*/
         
         Keyboard.enableRepeatEvents(true);
         this.buttonList.add(button = new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120, "Done"));
@@ -64,23 +55,16 @@ public class GuiGrave extends GuiScreen {
         drawDefaultBackground();
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.renderEngine.bindTexture("/GraveStone/resources/textures/ModelMemorialCross.png");
+        mc.renderEngine.bindTexture("/GraveStone/resources/textures/DeathMessageBackground.png");
 
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;
 
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture); //This draws the background
         //Make sure your background texture is a multiple of 256x256.
-        //The xSizeOfTexture and ySizeOfTexture assume that the texture is 256x256. so 128 and 128 always reference half of the texture.
-        //Look in the Gui class to see what else you can do here (like rendering textures and strings)
-        this.drawString(fontRenderer, "Text", posX + 20, posY + 31, 16777215); //this is where the white variable we set up at the beginning is used
+        this.drawString(fontRenderer, "Set grave text", posX + 20, posY + 31, 16777215);
         this.drawString(fontRenderer, graveText.toString(), posX + 20, posY + 41, 16777215);
         super.drawScreen(x, y, f);
-        /*Here is a trick:
-        If you reset the texture after "super.drawScreen(x, y, f);" (this.mc.renderEngine.bindTexture("path/to/the/background/texture");),
-        you can draw on top of everything, including buttons.
-        Use this to texture buttons, if you don't want them to have text.
-         */
     }
     
     /**
@@ -90,6 +74,7 @@ public class GuiGrave extends GuiScreen {
         Keyboard.enableRepeatEvents(false);
         entityGrave.setDeathText(graveText.toString());
         entityGrave.setEditable(true);
+        
     }
 
     /**

@@ -67,17 +67,17 @@ public class ComponentGSCemeteryCatacombsTreasury extends ComponentGSCemeteryCat
         this.randomlyPlaceBlock(world, boundingBox, random, 0.4F, 2, 3, 6, Block.web.blockID, 0);
         
         // graves
-        int graveType = random.nextInt(mod_GraveStone.graveStone.GRAVE_TYPE_COUNT) * 4;
-        int metaLeft = graveType + mod_GraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
-        int metaRight = graveType + mod_GraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
+        byte graveType = (byte) random.nextInt(mod_GraveStone.graveStone.GRAVE_TYPE_COUNT);
+        int metaLeft = mod_GraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
+        int metaRight = mod_GraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
 
-        this.placeGrave(world, random, 1, 1, 2, metaLeft);
-        this.placeGrave(world, random, 1, 1, 4, metaLeft);
-        this.placeGrave(world, random, 1, 1, 6, metaLeft);
+        this.placeGrave(world, random, 1, 1, 2, metaLeft, graveType);
+        this.placeGrave(world, random, 1, 1, 4, metaLeft, graveType);
+        this.placeGrave(world, random, 1, 1, 6, metaLeft, graveType);
 
-        this.placeGrave(world, random, 5, 1, 2, metaRight);
-        this.placeGrave(world, random, 5, 1, 4, metaRight);
-        this.placeGrave(world, random, 5, 1, 6, metaRight);
+        this.placeGrave(world, random, 5, 1, 2, metaRight, graveType);
+        this.placeGrave(world, random, 5, 1, 4, metaRight, graveType);
+        this.placeGrave(world, random, 5, 1, 6, metaRight, graveType);
         
         // TNT
         this.fillWithBlocks(world, boundingBox, 0, 0, 3, 1, 0, 3, Block.tnt.blockID, Block.tnt.blockID, false);

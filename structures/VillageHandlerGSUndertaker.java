@@ -7,6 +7,7 @@ import net.minecraft.GraveStone.mod_GraveStone;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
@@ -23,24 +24,35 @@ public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCrea
                 new ItemStack(mod_GraveStone.chisel, 1, 0),
                 new ItemStack(Item.emerald, 1)));
         
-        recipeList.add(new MerchantRecipe(
-                new ItemStack(Item.emerald, 3),
-                new ItemStack(mod_GraveStone.graveStone, 1, 0)));
-        recipeList.add(new MerchantRecipe(
-                new ItemStack(Item.emerald, 3),
-                new ItemStack(mod_GraveStone.graveStone, 1, 4)));
-        recipeList.add(new MerchantRecipe(
-                new ItemStack(Item.emerald, 3),
-                new ItemStack(mod_GraveStone.graveStone, 1, 8)));
+        ItemStack stack = new ItemStack(mod_GraveStone.graveStone, 1, 0);
+        NBTTagCompound nbt = new NBTTagCompound();
+        nbt.setByte("GraveType", (byte) 0);
+        stack.setTagCompound(nbt);
+        recipeList.add(new MerchantRecipe( new ItemStack(Item.emerald, 3), stack));
+        /*
+        stack = new ItemStack(mod_GraveStone.graveStone, 1, 0);
+        nbt = new NBTTagCompound();
+        nbt.setByte("GraveType", (byte) 1);
+        stack.setTagCompound(nbt);
+        recipeList.add(new MerchantRecipe( new ItemStack(Item.emerald, 3), stack));
         
-        recipeList.add(new MerchantRecipe(
-                new ItemStack(Item.emerald, 10),
-                new ItemStack(mod_GraveStone.memorial, 1, 0)));
+        stack = new ItemStack(mod_GraveStone.graveStone, 1, 0);
+        nbt = new NBTTagCompound();
+        nbt.setByte("GraveType", (byte) 2);
+        stack.setTagCompound(nbt);
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), stack));
+        */
+        
+        stack = new ItemStack(mod_GraveStone.memorial, 1, 0);
+        nbt = new NBTTagCompound();
+        nbt.setByte("GraveType", (byte) 0);
+        stack.setTagCompound(nbt);
+        recipeList.add(new MerchantRecipe( new ItemStack(Item.emerald, 15), stack));
 
     }
 
     public StructureVillagePieceWeight getVillagePieceWeight(Random random, int size) {
-        return new StructureVillagePieceWeight(ComponentGSVillageUndertaker.class, 8, MathHelper.getRandomIntegerInRange(random, 10, 10));
+        return new StructureVillagePieceWeight(ComponentGSVillageUndertaker.class, 12, MathHelper.getRandomIntegerInRange(random, 0, 1));
     }
 
     public Class getComponentClass() {

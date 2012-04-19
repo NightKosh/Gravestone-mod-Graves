@@ -229,7 +229,7 @@ public class GSGraveStoneSpawn {
         }
     }
 
-    public void writeSpawn(NBTTagCompound nbtTag) {
+    public void saveSpawn(NBTTagCompound nbtTag) {
         nbtTag.setShort("Delay", (short) delay);
 
         if (spawnerTags != null) {

@@ -28,10 +28,6 @@ public class ComponentGSCemeteryCatacombsMausoleum extends ComponentGSCemeteryCa
 
         this.boundingBox.offset(0, averageGroundLevel - this.boundingBox.minY - 1, 0);
 
-        System.out.println("Mausoleum X " + boundingBox.getCenterX());
-        System.out.println("Mausoleum Y " + boundingBox.getCenterY());
-        System.out.println("Mausoleum Z " + boundingBox.getCenterZ());
-
         this.fillWithAir(world, boundingBox, 2, 1, 2, 11, 5, 11);
         this.fillWithAir(world, boundingBox, 1, 1, 0, 12, 5, 1);
         this.fillWithAir(world, boundingBox, 6, 0, 6, 7, 0, 8);

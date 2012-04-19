@@ -59,12 +59,12 @@ public class ComponentGSCemeteryCatacombsGraveCorridor extends ComponentGSCemete
         this.fillWithBlocks(world, boundingBox, 5, 1, 4, 5, 3, 4, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
 
         // graves
-        int graveType = random.nextInt(mod_GraveStone.graveStone.GRAVE_TYPE_COUNT) * 4;
+        byte graveType = (byte) random.nextInt(mod_GraveStone.graveStone.GRAVE_TYPE_COUNT);
         int metaLeft = graveType + mod_GraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
         int metaRight = graveType + mod_GraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
 
-        this.fillGraves(world, random, 1, 1, 1, 1, 1, 3, metaLeft);
-        this.fillGraves(world, random, 5, 1, 1, 5, 1, 3, metaRight);
+        this.fillGraves(world, random, 1, 1, 1, 1, 1, 3, metaLeft, graveType);
+        this.fillGraves(world, random, 5, 1, 1, 5, 1, 3, metaRight, graveType);
 
         // chest
         if (random.nextInt(100) < 10) {

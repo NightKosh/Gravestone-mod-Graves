@@ -26,7 +26,10 @@ public class ItemGSGraveStoneRenderer implements IItemRenderer {
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         TileEntityGSGraveStone entity = new TileEntityGSGraveStone();
-        entity.blockMetadata = item.getItemDamage();// - (item.getItemDamage() % 4);
+        if (item.stackTagCompound != null) {
+            entity.setGraveType(item.stackTagCompound.getByte("GraveType"));
+        }
+
         TileEntityRenderer.instance.renderTileEntityAt(entity, 0.0D, 0.0D, 0.0D, 0.0F);
     }
 }

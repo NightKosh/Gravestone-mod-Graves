@@ -26,7 +26,7 @@ public class ModelMemorialCross extends ModelGraveStone {
         BottomPlate.setTextureSize(64, 32);
         BottomPlate.mirror = true;
         setRotation(BottomPlate, 0F, 0F, 0F);
-        BottomPlate2 = new ModelRenderer(this, 0, 0);
+        BottomPlate2 = new ModelRenderer(this, 0, 54);
         BottomPlate2.addBox(0F, 0F, 0F, 32, 6, 32);
         BottomPlate2.setRotationPoint(-16F, 12F, -16F);
         BottomPlate2.setTextureSize(64, 32);
@@ -38,13 +38,13 @@ public class ModelMemorialCross extends ModelGraveStone {
         VerticalPart.setTextureSize(64, 32);
         VerticalPart.mirror = true;
         setRotation(VerticalPart, 0F, 0F, 0F);
-        RightHorisontalPart = new ModelRenderer(this, 0, 52);
+        RightHorisontalPart = new ModelRenderer(this, 128, 54);
         RightHorisontalPart.addBox(0F, 0F, 0F, 20, 10, 10);
         RightHorisontalPart.setRotationPoint(5F, -36F, -5F);
         RightHorisontalPart.setTextureSize(64, 32);
         RightHorisontalPart.mirror = true;
         setRotation(RightHorisontalPart, 0F, 0F, 0F);
-        LeftHorisontalPart = new ModelRenderer(this, 0, 52);
+        LeftHorisontalPart = new ModelRenderer(this, 128, 54);
         LeftHorisontalPart.addBox(0F, 0F, 0F, 20, 10, 10);
         LeftHorisontalPart.setRotationPoint(-25F, -36F, -5F);
         LeftHorisontalPart.setTextureSize(64, 32);

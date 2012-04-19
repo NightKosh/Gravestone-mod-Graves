@@ -1,6 +1,5 @@
 package net.minecraft.GraveStone;
 
-import net.minecraft.GraveStone.models.ModelMemorialCross;
 import net.minecraft.GraveStone.tileentity.TileEntityGSMemorial;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.item.ItemStack;
@@ -10,10 +9,7 @@ import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 public class ItemGSMemorialRenderer implements IItemRenderer {
 
-    private ModelMemorialCross GSMemorialCross;
-
     public ItemGSMemorialRenderer() {
-        GSMemorialCross = new ModelMemorialCross();
     }
 
     @Override
@@ -30,7 +26,10 @@ public class ItemGSMemorialRenderer implements IItemRenderer {
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         TileEntityGSMemorial entity = new TileEntityGSMemorial();
-        entity.blockMetadata = item.getItemDamage();// - (item.getItemDamage() % 4);
+        if (item.stackTagCompound != null) {
+            entity.setGraveType(item.stackTagCompound.getByte("GraveType"));
+        }
+        
         TileEntityRenderer.instance.renderTileEntityAt(entity, 0.0D, 0.0D, 0.0D, 0.0F);
     }
 }

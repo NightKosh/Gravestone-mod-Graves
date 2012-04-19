@@ -31,6 +31,7 @@ import net.minecraft.GraveStone.structures.VillageHandlerGSUndertaker;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
@@ -70,13 +71,15 @@ public class mod_GraveStone {
         // register death event
         MinecraftForge.EVENT_BUS.register(new EventHookGSGraveStone());
 
-        // register gui
-        //NetworkRegistry.instance().registerGuiHandler(this, new GraveStoneGuiHandler());
-
         // creative tab
         creativeTab = new CreativeTabs("tabGraveStone") {
+
             public ItemStack getIconItemStack() {
-                return new ItemStack(graveStone, 1, 0);
+                ItemStack stack = new ItemStack(graveStone, 1, 0);
+                NBTTagCompound nbt = new NBTTagCompound();
+                nbt.setByte("GraveType", (byte) 0);
+                stack.setTagCompound(nbt);
+                return stack;
             }
         };
         LanguageRegistry.instance().addStringLocalization("itemGroup.tabGraveStone", "en_US", "Gravestone");
@@ -84,8 +87,11 @@ public class mod_GraveStone {
         // create gravestone
         graveStone = new BlockGSGraveStone(GraveStoneConfig.graveStoneID);
         GameRegistry.registerBlock(graveStone, ItemBlockGSGraveStone.class);
-        for (int i = 0; i < BlockGSGraveStone.GRAVE_TYPE_COUNT; i++) {
-            ItemStack graveStoneStack = new ItemStack(graveStone, 1, i * 4);
+        for (byte i = 0; i < BlockGSGraveStone.GRAVE_TYPE_COUNT; i++) {
+            ItemStack graveStoneStack = new ItemStack(graveStone, 1, 0);
+            NBTTagCompound nbt = new NBTTagCompound();
+            nbt.setByte("GraveType", i);
+            graveStoneStack.setTagCompound(nbt);
             LanguageRegistry.addName(graveStoneStack, BlockGSGraveStone.blockNames[i]);
         }
         MinecraftForge.setBlockHarvestLevel(graveStone, "pickaxe", 1);
@@ -116,8 +122,11 @@ public class mod_GraveStone {
         GameRegistry.registerBlock(memorial, "GSMemorial");
         LanguageRegistry.addName(memorial, "Memorial");
         GameRegistry.registerBlock(memorial, ItemBlockGSMemorial.class);
-        for (int i = 0; i < BlockGSMemorial.MEMORIAL_TYPE_COUNT; i++) {
-            ItemStack memorialStack = new ItemStack(memorial, 1, i * 4);
+        for (byte i = 0; i < BlockGSMemorial.MEMORIAL_TYPE_COUNT; i++) {
+            ItemStack memorialStack = new ItemStack(memorial, 1, 0);
+            NBTTagCompound nbt = new NBTTagCompound();
+            nbt.setByte("GraveType", i);
+            memorialStack.setTagCompound(nbt);
             LanguageRegistry.addName(memorialStack, BlockGSMemorial.blockNames[i]);
         }
         MinecraftForge.setBlockHarvestLevel(memorial, "pickaxe", 2);
@@ -146,7 +155,7 @@ public class mod_GraveStone {
 
         // structure generator
         GameRegistry.registerWorldGenerator(new GraveStoneWorldGenerator());
-        
+
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 
         //proxy.registerRenderers();

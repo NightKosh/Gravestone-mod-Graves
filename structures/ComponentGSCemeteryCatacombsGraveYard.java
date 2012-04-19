@@ -19,6 +19,7 @@ public class ComponentGSCemeteryCatacombsGraveYard extends ComponentGSCemeteryCa
      */
     public boolean addComponentParts(World world, Random random) {
         int graveMeta = mod_GraveStone.graveStone.getMetaDirection(this.coordBaseMode);
+        byte graveType;
         int positionX, positionZ, y;
 
         for (int x = 0; x < 11; x += 2) {
@@ -35,7 +36,8 @@ public class ComponentGSCemeteryCatacombsGraveYard extends ComponentGSCemeteryCa
                     positionZ = getZWithOffset(x, z);
                     y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
                     if (!isLiquidUnder(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
-                        placeGrave(world, random, x, y, z, graveMeta + random.nextInt(mod_GraveStone.graveStone.GRAVE_TYPE_COUNT) * 4);
+                        graveType = (byte) random.nextInt(mod_GraveStone.graveStone.GRAVE_TYPE_COUNT);
+                        placeGrave(world, random, x, y, z, graveMeta, graveType);
                     }
                 }
             }

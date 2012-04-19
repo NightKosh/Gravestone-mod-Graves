@@ -39,6 +39,9 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
     public void readFromNBT(NBTTagCompound nbtTag) {
         super.readFromNBT(nbtTag);
         
+        // grave type
+        readType(nbtTag);
+        
         // grave spawn
         gsSpawn.readSpawn(nbtTag);
 
@@ -55,8 +58,11 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
     public void writeToNBT(NBTTagCompound nbtTag) {
         super.writeToNBT(nbtTag);
 
+        // grave type
+        saveType(nbtTag);
+        
         // grave spawn
-        gsSpawn.writeSpawn(nbtTag);
+        gsSpawn.saveSpawn(nbtTag);
 
         // grave loot
         gSItems.saveItems(nbtTag);
