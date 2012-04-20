@@ -1,4 +1,3 @@
-
 package net.minecraft.GraveStone.tileentity;
 
 import net.minecraft.GraveStone.models.ModelGraveStone;
@@ -7,8 +6,8 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
-public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer  {
-    
+public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
+
     public void renderAModelAt(TileEntityGSMemorial tile, double d, double d1, double d2, float f) {
         byte memorialType = tile.getGraveType();
         int meta;
@@ -21,8 +20,14 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer  {
 
         //texture
         GL11.glPushMatrix();
-        GL11.glTranslatef((float) d + 0.5F, (float) d1 + 1.5F, (float) d2 + 0.5F);
-        GL11.glScalef(1.0F, -1F, -1F);
+
+        if (tile.worldObj != null) {
+            GL11.glTranslatef((float) d + 0.5F, (float) d1 + 1.5F, (float) d2 + 0.5F);
+            GL11.glScalef(1F, -1F, -1F);
+        } else {
+            GL11.glTranslatef((float) d + 0.5F, (float) d1 + 0.5F, (float) d2 + 0.5F);
+            GL11.glScalef(0.4F, -0.4F, -0.4F);
+        }
 
         switch (getMemorialDirection(meta)) {
             case 0:
