@@ -13,8 +13,6 @@ public class GuiGrave extends GuiScreen {
      * This String is just a local copy of the characters allowed in text rendering of minecraft.
      */
     private static final String allowedCharacters = ChatAllowedCharacters.allowedCharacters;
-    /** The title string that is displayed in the top-center of the screen. */
-    protected String screenTitle = "Set text";
     private GuiButton button;
     
     final int xSizeOfTexture = 192, ySizeOfTexture = 135;
@@ -72,8 +70,8 @@ public class GuiGrave extends GuiScreen {
      */
     public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
-        entityGrave.setDeathText(graveText.toString());
         entityGrave.setEditable(true);
+        entityGrave.setDeathText(graveText.toString());
         
     }
 
@@ -81,11 +79,11 @@ public class GuiGrave extends GuiScreen {
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
     protected void keyTyped(char key, int keyCode) {
-        if (keyCode == 14 && entityGrave.getDeathText().length() > 0) {
+        if (keyCode == 14 && graveText.length() > 0) {
             graveText.deleteCharAt(graveText.length() - 1);
         }
 
-        if (allowedCharacters.indexOf(key) >= 0 && entityGrave.getDeathText().length() < 50) {
+        if (allowedCharacters.indexOf(key) >= 0 && graveText.length() < 50) {
             graveText.append(key);
         }
 
