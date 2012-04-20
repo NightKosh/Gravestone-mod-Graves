@@ -13,7 +13,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
     private static ModelGraveStone verticalPlate = new ModelVerticalPlateGraveStone();
     private static ModelGraveStone cross = new ModelCrossGraveStone();
     private static ModelGraveStone horisontalPlate = new ModelHorisontalPlateGraveStone();
-            
+
     public TileEntityGSGraveStoneRenderer() {
         System.out.println("TileEntityGSGraveStoneRenderer");
     }
@@ -33,19 +33,23 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
         GL11.glTranslatef((float) d + 0.5F, (float) d1 + 1.5F, (float) d2 + 0.5F);
         GL11.glScalef(1.0F, -1F, -1F);
 
-        switch (getGraveDirection(meta)) {
-            case 0:
-                GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
-                break;
-            case 1:
-                GL11.glRotatef(90, 0.0F, 1.0F, 0.0F);
-                break;
-            case 2:
-                GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
-                break;
-            case 3:
-                GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
-                break;
+        if (tile.worldObj != null) {
+            switch (getGraveDirection(meta)) {
+                case 0:
+                    GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
+                    break;
+                case 1:
+                    GL11.glRotatef(90, 0.0F, 1.0F, 0.0F);
+                    break;
+                case 2:
+                    GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
+                    break;
+                case 3:
+                    GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
+                    break;
+            }
+        } else {
+                    GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
         }
         getGraveModel(graveType).renderAll();
         GL11.glPopMatrix(); //end
