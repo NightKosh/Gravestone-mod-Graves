@@ -14,17 +14,20 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
     private static ModelGraveStone cross = new ModelCrossGraveStone();
     private static ModelGraveStone horisontalPlate = new ModelHorisontalPlateGraveStone();
 
-    public TileEntityGSGraveStoneRenderer() {
-        System.out.println("TileEntityGSGraveStoneRenderer");
-    }
-
     public void renderAModelAt(TileEntityGSGraveStone tile, double d, double d1, double d2, float f) {
         byte graveType = tile.getGraveType();
         int meta;
         if (tile.worldObj != null) {
-            meta = tile.getBlockMetadata();
+            meta = tile.getBlockMetadata();/*
+            TileEntityGSGraveStone te = (TileEntityGSGraveStone) tile.worldObj.getBlockTileEntity(tile.xCoord, tile.yCoord, tile.zCoord);
+            if (te != null) {
+                graveType = te.getGraveType();
+                System.out.println(graveType);
+            }
+             * 
+             */
         } else {
-            meta = tile.blockMetadata;
+            meta = 0;
         }
         getGraveTexture(graveType);
 
@@ -33,30 +36,26 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
         GL11.glTranslatef((float) d + 0.5F, (float) d1 + 1.5F, (float) d2 + 0.5F);
         GL11.glScalef(1.0F, -1F, -1F);
 
-        if (tile.worldObj != null) {
-            switch (getGraveDirection(meta)) {
-                case 0:
-                    GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
-                    break;
-                case 1:
-                    GL11.glRotatef(90, 0.0F, 1.0F, 0.0F);
-                    break;
-                case 2:
-                    GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
-                    break;
-                case 3:
-                    GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
-                    break;
-            }
-        } else {
-                    GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
+        switch (getGraveDirection(meta)) {
+            case 0:
+                GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
+                break;
+            case 1:
+                GL11.glRotatef(90, 0.0F, 1.0F, 0.0F);
+                break;
+            case 2:
+                GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
+                break;
+            case 3:
+                GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
+                break;
         }
         getGraveModel(graveType).renderAll();
-        GL11.glPopMatrix(); //end
+        GL11.glPopMatrix();
     }
 
-    public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8) {
-        this.renderAModelAt((TileEntityGSGraveStone) par1TileEntity, par2, par4, par6, par8);
+    public void renderTileEntityAt(TileEntity tileEntity, double par2, double par4, double par6, float par8) {
+        this.renderAModelAt((TileEntityGSGraveStone) tileEntity, par2, par4, par6, par8);
     }
 
     private ModelGraveStone getGraveModel(byte graveType) {

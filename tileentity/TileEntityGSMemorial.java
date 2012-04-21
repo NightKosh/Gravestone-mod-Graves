@@ -8,7 +8,7 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
     private GSGraveStoneDeathText gSDeathText = new GSGraveStoneDeathText();
     
     public TileEntityGSMemorial() {
-        gSDeathText = new GSGraveStoneDeathText();
+        super();
     }
     
     /**

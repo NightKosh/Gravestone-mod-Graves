@@ -31,7 +31,7 @@ public class BlockGSGraveStone extends BlockContainer {
     private static final Random rand = new Random();
     public static String[] blockNames = {"Gravestone", "Cross", "Grave Plate"};
     private static Icon texture;
-    public static final int GRAVE_TYPE_COUNT = 1;//3;
+    public static final int GRAVE_TYPE_COUNT = 1;
 
     public BlockGSGraveStone(int par1) {
         super(par1, Material.rock);
@@ -49,6 +49,7 @@ public class BlockGSGraveStone extends BlockContainer {
         texture = iconRegister.registerIcon("stone");
     }
 
+    @SideOnly(Side.CLIENT)
     public Icon getBlockTextureFromSideAndMetadata(int direction, int meta) {
         return texture;
     }
@@ -64,10 +65,10 @@ public class BlockGSGraveStone extends BlockContainer {
         if (direction < 0) {
             direction = 360 + direction;
         }
-
+        
         int metadata = getMetadataBasedOnRotation(direction);
-        world.setBlockMetadataWithNotify(x, y, z, metadata, 0);
-
+        world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
+        
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
         if (tileEntity != null) {
             if (itemStack.stackTagCompound != null) {
@@ -306,10 +307,6 @@ public class BlockGSGraveStone extends BlockContainer {
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
     public TileEntity createNewTileEntity(World world) {
-        //System.out.println("createNewTileEntity");
-        
-        //TileEntity tileEntity = createNewTileEntity(world);
-        //((TileEntityGSGraveStone) tileEntity).setGraveType((byte)1);
         return new TileEntityGSGraveStone();
     }
 
@@ -333,7 +330,6 @@ public class BlockGSGraveStone extends BlockContainer {
             tileEntity.setItems(items);
             tileEntity.setGraveType((byte) rand.nextInt(GRAVE_TYPE_COUNT));
         }
-        //world.setBlockTileEntity(x, y, z, tileEntity);
     }
 
     /**

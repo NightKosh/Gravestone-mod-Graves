@@ -48,6 +48,7 @@ public class BlockGSMemorial extends BlockContainer {
         texture = iconRegister.registerIcon("stone");
     }
 
+    @SideOnly(Side.CLIENT)
     public Icon getBlockTextureFromSideAndMetadata(int direction, int meta) {
         return texture;
     }
@@ -62,7 +63,7 @@ public class BlockGSMemorial extends BlockContainer {
         }
 
         int metadata = getMetadataBasedOnRotation(direction);
-        world.setBlockMetadataWithNotify(x, y, z, metadata, 0);
+        world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
 
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getBlockTileEntity(x, y, z);
         if (tileEntity != null) {

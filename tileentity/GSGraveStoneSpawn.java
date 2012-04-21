@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
 
 public class GSGraveStoneSpawn {
 
@@ -44,12 +45,23 @@ public class GSGraveStoneSpawn {
         return tileEntity.worldObj.getClosestPlayer(tileEntity.xCoord + 0.5D, tileEntity.yCoord + 0.5D, tileEntity.zCoord + 0.5D, PLAYER_RANGE) != null;
     }
 
+    /*
+     * Check time
+     */
+    private boolean isNightTime(World world) {
+        long time = world.getWorldTime();
+        if (time > 13500 && time < 22500) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Allows the entity to update its state. Overridden in most subclasses, e.g. the mob spawner uses this to count
      * ticks and creates a new spawn inside its implementation.
      */
     public void updateEntity() {
-        if (!tileEntity.worldObj.isDaytime() && anyPlayerInRange()) {
+        if (isNightTime(tileEntity.worldObj) && anyPlayerInRange()) {
             double x, y, z;
 
             if (tileEntity.worldObj.isRemote) {
@@ -254,23 +266,23 @@ public class GSGraveStoneSpawn {
         }
     }
 
-    public void writeNBTTagsTo(Entity par1Entity) {
+    public void writeNBTTagsTo(Entity entity) {
         if (spawnerTags != null) {
-            NBTTagCompound var2 = new NBTTagCompound();
-            par1Entity.addEntityID(var2);
-            Iterator var3 = spawnerTags.field_92032_b.getTags().iterator();
+            NBTTagCompound nbt = new NBTTagCompound();
+            entity.addEntityID(nbt);
+            Iterator it = spawnerTags.field_92032_b.getTags().iterator();
 
-            while (var3.hasNext()) {
-                NBTBase var4 = (NBTBase) var3.next();
-                var2.setTag(var4.getName(), var4.copy());
+            while (it.hasNext()) {
+                NBTBase nbtBase = (NBTBase) it.next();
+                nbt.setTag(nbtBase.getName(), nbtBase.copy());
             }
 
-            par1Entity.readFromNBT(var2);
-        } else if (par1Entity instanceof EntityLiving && par1Entity.worldObj != null) {
-            ((EntityLiving) par1Entity).initCreature();
+            entity.readFromNBT(nbt);
+        } else if (entity instanceof EntityLiving && entity.worldObj != null) {
+            ((EntityLiving) entity).initCreature();
         }
     }
-    
+
     public void setMinDelay() {
         delay = MIN_DELAY;
     }

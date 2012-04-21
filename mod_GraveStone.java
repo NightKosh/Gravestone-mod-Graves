@@ -5,6 +5,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PreInit;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
@@ -36,14 +37,15 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid = "GraveStone", name = "GraveStone", version = "1.7.0")
+@Mod(modid = "GraveStone", name = "GraveStone", version = "2.0.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class mod_GraveStone {
 
     @Instance("GraveStone")
     public static mod_GraveStone instance;
-    //@SidedProxy(clientSide = "GraveStone.client.ClientProxy", serverSide = "GraveStone.CommonProxy")
-    //public static CommonProxy proxy;
+    
+    @SidedProxy(clientSide = "net.minecraft.GraveStone.client.ClientProxy", serverSide = "net.minecraft.GraveStone.CommonProxy")
+    public static CommonProxy proxy;
     // block GraveStone
     public static BlockGSGraveStone graveStone;
     // Block wither spawer
@@ -97,19 +99,12 @@ public class mod_GraveStone {
         MinecraftForge.setBlockHarvestLevel(graveStone, "pickaxe", 1);
 
 
-        // register GraveStone as tile entity for spawer abilitys
-        GameRegistry.registerTileEntity(TileEntityGSGraveStone.class, "GSGraveStone");
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGSGraveStone.class, new TileEntityGSGraveStoneRenderer());
-        MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.graveStoneID, new ItemGSGraveStoneRenderer());
-
         // create wither spawner
         witherSpawner = new BlockGSWitherSpawner(GraveStoneConfig.witherSpawnerID);
         GameRegistry.registerBlock(witherSpawner, "GSWitherSpawner");
         LanguageRegistry.addName(witherSpawner, "Wither spawner");
         MinecraftForge.setBlockHarvestLevel(witherSpawner, "pickaxe", 1);
 
-        // register Wither Spawner as tile entity for spawer abilitys
-        GameRegistry.registerTileEntity(TileEntityGSWitherSpawner.class, "GSWither Spawner");
 
         // create time trap
         timeTrap = new BlockGSTimeTrap(GraveStoneConfig.timeTrapID);
@@ -138,12 +133,15 @@ public class mod_GraveStone {
         // chisel reciep
         GameRegistry.addRecipe(new ItemStack(chisel), "y", "x", 'x', Item.stick, 'y', Item.ingotIron);
 
-        // register GraveStone as tile entity for spawer abilitys
-        GameRegistry.registerTileEntity(TileEntityGSMemorial.class, "GSMemorial");
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGSMemorial.class, new TileEntityGSMemorialRenderer());
-        MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.memorialID, new ItemGSMemorialRenderer());
+        
+        // register GraveStone tile entity
+        GameRegistry.registerTileEntity(TileEntityGSGraveStone.class, "GraveStone");
+        // register Memorial tile entity 
+        GameRegistry.registerTileEntity(TileEntityGSMemorial.class, "Memorial");
+        // register Wither Spawner tile entity
+        GameRegistry.registerTileEntity(TileEntityGSWitherSpawner.class, "GSWither Spawner");
 
-        // register cemeteries as village buildings
+        // register cemeteries
         VillageHandlerGSCemetery villageCemeteryHandler = new VillageHandlerGSCemetery();
         VillagerRegistry.instance().registerVillageCreationHandler(villageCemeteryHandler);
 
@@ -158,6 +156,6 @@ public class mod_GraveStone {
 
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 
-        //proxy.registerRenderers();
+        proxy.registerRenderers();
     }
 }

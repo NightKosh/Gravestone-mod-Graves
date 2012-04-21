@@ -44,7 +44,7 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
                 break;
         }
         getMemorialModel(memorialType).renderAll();
-        GL11.glPopMatrix(); //end
+        GL11.glPopMatrix();
     }
 
     public void renderTileEntityAt(TileEntity tileEntity, double par2, double par4, double par6, float par8) {

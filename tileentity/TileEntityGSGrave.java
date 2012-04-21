@@ -12,6 +12,10 @@ public abstract class TileEntityGSGrave extends TileEntity {
     protected GSGraveStoneDeathText gSDeathText;
     protected boolean isEditable = true;
     protected byte graveType = 0;
+
+    public TileEntityGSGrave() {
+        gSDeathText = new GSGraveStoneDeathText();
+    }
     
     public void setGraveType(byte graveType) {
         this.graveType = graveType;
@@ -32,8 +36,8 @@ public abstract class TileEntityGSGrave extends TileEntity {
     }
 
     public void setGraveContent() {
-        gSItems.setRandomGraveContent();
         gSDeathText.setRandomDeathText();
+        gSItems.setRandomGraveContent();
     }
 
     /**
@@ -41,8 +45,6 @@ public abstract class TileEntityGSGrave extends TileEntity {
      */
     public void setInventorySlotContents(int slot, ItemStack itemStack) {
         gSItems.setInventorySlotContents(slot, itemStack);
-
-        this.onInventoryChanged();
     }
 
     /**
@@ -66,6 +68,8 @@ public abstract class TileEntityGSGrave extends TileEntity {
 
     public void setDeathText(String text) {
         gSDeathText.setDeathText(text);
+        
+        this.onInventoryChanged();
     }
 
     public boolean isEditable() {

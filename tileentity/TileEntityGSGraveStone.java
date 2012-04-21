@@ -9,9 +9,9 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
     protected GSGraveStoneSpawn gsSpawn;
     
     public TileEntityGSGraveStone() {
+        super();
         gsSpawn = new GSGraveStoneSpawn(this);
         gSItems = new GSGraveStoneItems(this);
-        gSDeathText = new GSGraveStoneDeathText();
     }
 
     /**
