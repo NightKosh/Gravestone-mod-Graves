@@ -3,15 +3,21 @@ package GraveStone.tileentity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.world.World;
 
 public class TileEntityGSGraveStone extends TileEntityGSGrave {
-    
+
     protected GSGraveStoneSpawn gsSpawn;
-    
+
     public TileEntityGSGraveStone() {
         super();
         gsSpawn = new GSGraveStoneSpawn(this);
         gSItems = new GSGraveStoneItems(this);
+    }
+
+    public TileEntityGSGraveStone(World world) {
+        this();
+        this.worldObj = world;
     }
 
     /**
@@ -21,7 +27,6 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
     public void updateEntity() {
         gsSpawn.updateEntity();
     }
-
 
     /**
      * Called when a client event is received with the event number and argument, see World.sendClientEvent
@@ -38,10 +43,10 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
      */
     public void readFromNBT(NBTTagCompound nbtTag) {
         super.readFromNBT(nbtTag);
-        
+
         // grave type
         readType(nbtTag);
-        
+
         // grave spawn
         gsSpawn.readSpawn(nbtTag);
 
@@ -60,7 +65,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
         // grave type
         saveType(nbtTag);
-        
+
         // grave spawn
         gsSpawn.saveSpawn(nbtTag);
 

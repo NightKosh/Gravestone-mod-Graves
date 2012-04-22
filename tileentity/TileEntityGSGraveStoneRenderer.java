@@ -18,14 +18,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
         byte graveType = tile.getGraveType();
         int meta;
         if (tile.worldObj != null) {
-            meta = tile.getBlockMetadata();/*
-            TileEntityGSGraveStone te = (TileEntityGSGraveStone) tile.worldObj.getBlockTileEntity(tile.xCoord, tile.yCoord, tile.zCoord);
-            if (te != null) {
-                graveType = te.getGraveType();
-                System.out.println(graveType);
-            }
-             * 
-             */
+            meta = tile.getBlockMetadata();
         } else {
             meta = 0;
         }
@@ -54,8 +47,8 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
         GL11.glPopMatrix();
     }
 
-    public void renderTileEntityAt(TileEntity tileEntity, double par2, double par4, double par6, float par8) {
-        this.renderAModelAt((TileEntityGSGraveStone) tileEntity, par2, par4, par6, par8);
+    public void renderTileEntityAt(TileEntity tileEntity, double d1, double d2, double d3, float par8) {
+        this.renderAModelAt((TileEntityGSGraveStone) tileEntity, d1, d2, d3, par8);
     }
 
     private ModelGraveStone getGraveModel(byte graveType) {

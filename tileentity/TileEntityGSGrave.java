@@ -4,6 +4,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 
 public abstract class TileEntityGSGrave extends TileEntity {
@@ -82,5 +84,18 @@ public abstract class TileEntityGSGrave extends TileEntity {
      */
     public void setEditable(boolean par1) {
         isEditable = par1;
+    }
+
+    /**
+     * Called when you receive a TileEntityData packet for the location this
+     * TileEntity is currently in. On the client, the NetworkManager will always
+     * be the remote server. On the server, it will be whomever is responsible for
+     * sending the packet.
+     *
+     * @param net The NetworkManager the packet originated from
+     * @param pkt The data packet
+     */
+    public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
+        readFromNBT(packet.customParam1);
     }
 }

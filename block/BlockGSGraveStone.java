@@ -31,7 +31,7 @@ public class BlockGSGraveStone extends BlockContainer {
     private static final Random rand = new Random();
     public static String[] blockNames = {"Gravestone", "Cross", "Grave Plate"};
     private static Icon texture;
-    public static final int GRAVE_TYPE_COUNT = 1;
+    public static final int GRAVE_TYPE_COUNT = 3;
 
     public BlockGSGraveStone(int par1) {
         super(par1, Material.rock);
@@ -307,7 +307,7 @@ public class BlockGSGraveStone extends BlockContainer {
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
     public TileEntity createNewTileEntity(World world) {
-        return new TileEntityGSGraveStone();
+        return new TileEntityGSGraveStone(world);
     }
 
     /*
