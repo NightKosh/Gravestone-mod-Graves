@@ -15,12 +15,12 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerRenderers() {
-        // register GraveStone as tile entity for spawer abilitys
+        // register GraveStone renderer
         ClientRegistry.registerTileEntity(TileEntityGSGraveStone.class, "GSGraveStone", new TileEntityGSGraveStoneRenderer());
         MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.graveStoneID, new ItemGSGraveStoneRenderer());
         
         
-        // register GraveStone as tile entity for spawer abilitys
+        // register GraveStone renderer
         ClientRegistry.registerTileEntity(TileEntityGSMemorial.class, "GSMemorial", new TileEntityGSMemorialRenderer());
         MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.memorialID, new ItemGSMemorialRenderer());
     }
