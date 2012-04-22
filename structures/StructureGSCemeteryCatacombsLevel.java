@@ -1,4 +1,4 @@
-package net.minecraft.GraveStone.structures;
+package GraveStone.structures;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

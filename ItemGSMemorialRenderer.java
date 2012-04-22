@@ -1,6 +1,6 @@
-package net.minecraft.GraveStone;
+package GraveStone;
 
-import net.minecraft.GraveStone.tileentity.TileEntityGSMemorial;
+import GraveStone.tileentity.TileEntityGSMemorial;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;

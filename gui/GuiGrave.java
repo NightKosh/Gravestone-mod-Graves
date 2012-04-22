@@ -1,6 +1,6 @@
-package net.minecraft.GraveStone.gui;
+package GraveStone.gui;
 
-import net.minecraft.GraveStone.tileentity.TileEntityGSGrave;
+import GraveStone.tileentity.TileEntityGSGrave;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ChatAllowedCharacters;

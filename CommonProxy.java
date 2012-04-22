@@ -1,4 +1,4 @@
-package net.minecraft.GraveStone;
+package GraveStone;
 
 public class CommonProxy {
 

@@ -1,13 +1,12 @@
-package net.minecraft.GraveStone.block;
+package GraveStone.block;
 
+import GraveStone.GraveStoneConfig;
+import GraveStone.mod_GraveStone;
+import GraveStone.tileentity.TileEntityGSMemorial;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import net.minecraft.GraveStone.GraveStoneConfig;
-import net.minecraft.GraveStone.mod_GraveStone;
-import net.minecraft.GraveStone.tileentity.TileEntityGSMemorial;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;

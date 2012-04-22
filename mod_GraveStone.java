@@ -1,6 +1,19 @@
-package net.minecraft.GraveStone;
+package GraveStone;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
+import GraveStone.block.BlockGSGraveStone;
+import GraveStone.block.BlockGSMemorial;
+import GraveStone.block.BlockGSTimeTrap;
+import GraveStone.block.BlockGSWitherSpawner;
+import GraveStone.gui.GuiHandler;
+import GraveStone.item.ItemBlockGSGraveStone;
+import GraveStone.item.ItemBlockGSMemorial;
+import GraveStone.item.ItemGSChisel;
+import GraveStone.structures.GraveStoneWorldGenerator;
+import GraveStone.structures.VillageHandlerGSCemetery;
+import GraveStone.structures.VillageHandlerGSUndertaker;
+import GraveStone.tileentity.TileEntityGSGraveStone;
+import GraveStone.tileentity.TileEntityGSMemorial;
+import GraveStone.tileentity.TileEntityGSWitherSpawner;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -13,38 +26,21 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import net.minecraft.GraveStone.block.BlockGSGraveStone;
-import net.minecraft.GraveStone.block.BlockGSMemorial;
-import net.minecraft.GraveStone.block.BlockGSTimeTrap;
-import net.minecraft.GraveStone.block.BlockGSWitherSpawner;
-import net.minecraft.GraveStone.gui.GuiHandler;
-import net.minecraft.GraveStone.item.ItemBlockGSGraveStone;
-import net.minecraft.GraveStone.item.ItemBlockGSMemorial;
-import net.minecraft.GraveStone.item.ItemGSChisel;
-import net.minecraft.GraveStone.structures.GraveStoneWorldGenerator;
-import net.minecraft.GraveStone.tileentity.TileEntityGSGraveStone;
-import net.minecraft.GraveStone.tileentity.TileEntityGSGraveStoneRenderer;
-import net.minecraft.GraveStone.tileentity.TileEntityGSMemorial;
-import net.minecraft.GraveStone.tileentity.TileEntityGSMemorialRenderer;
-import net.minecraft.GraveStone.tileentity.TileEntityGSWitherSpawner;
-import net.minecraft.GraveStone.structures.VillageHandlerGSCemetery;
-import net.minecraft.GraveStone.structures.VillageHandlerGSUndertaker;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid = "GraveStone", name = "GraveStone", version = "2.0.0")
+@Mod(modid = "GraveStone", name = "GraveStone", version = "2.0.0b1")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class mod_GraveStone {
 
     @Instance("GraveStone")
     public static mod_GraveStone instance;
     
-    @SidedProxy(clientSide = "net.minecraft.GraveStone.client.ClientProxy", serverSide = "net.minecraft.GraveStone.CommonProxy")
+    @SidedProxy(clientSide = "GraveStone.client.ClientProxy", serverSide = "GraveStone.CommonProxy")
     public static CommonProxy proxy;
     // block GraveStone
     public static BlockGSGraveStone graveStone;

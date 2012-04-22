@@ -1,8 +1,8 @@
 
-package net.minecraft.GraveStone.structures;
+package GraveStone.structures;
 
 import java.util.Random;
-import net.minecraft.GraveStone.mod_GraveStone;
+import GraveStone.mod_GraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 

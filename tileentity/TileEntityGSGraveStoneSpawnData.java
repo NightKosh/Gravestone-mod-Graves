@@ -1,5 +1,5 @@
 
-package net.minecraft.GraveStone.tileentity;
+package GraveStone.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.WeightedRandomItem;

@@ -1,7 +1,7 @@
-package net.minecraft.GraveStone.block;
+package GraveStone.block;
 
-import net.minecraft.GraveStone.mod_GraveStone;
-import net.minecraft.GraveStone.tileentity.TileEntityGSWitherSpawner;
+import GraveStone.mod_GraveStone;
+import GraveStone.tileentity.TileEntityGSWitherSpawner;
 import net.minecraft.block.BlockMobSpawner;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;

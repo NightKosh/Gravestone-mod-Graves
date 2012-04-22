@@ -1,8 +1,9 @@
-package net.minecraft.GraveStone.structures;
+package GraveStone.structures;
 
+import GraveStone.GraveStoneConfig;
+import GraveStone.tileentity.TileEntityGSGraveStone;
 import java.util.Random;
-import net.minecraft.GraveStone.GraveStoneConfig;
-import net.minecraft.GraveStone.tileentity.TileEntityGSGraveStone;
+import GraveStone.structures.StructureGSCemeteryCatacombsStones;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityBat;

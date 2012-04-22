@@ -1,4 +1,4 @@
-package net.minecraft.GraveStone;
+package GraveStone;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.Entity;

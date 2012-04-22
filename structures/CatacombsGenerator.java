@@ -1,10 +1,10 @@
-package net.minecraft.GraveStone.structures;
+package GraveStone.structures;
 
+import GraveStone.GraveStoneConfig;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Random;
-import net.minecraft.GraveStone.GraveStoneConfig;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;

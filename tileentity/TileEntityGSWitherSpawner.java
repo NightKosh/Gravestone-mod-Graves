@@ -1,4 +1,4 @@
-package net.minecraft.GraveStone.tileentity;
+package GraveStone.tileentity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;

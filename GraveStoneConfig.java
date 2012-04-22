@@ -1,10 +1,10 @@
-package net.minecraft.GraveStone;
+package GraveStone;
 
+import GraveStone.block.BlockGSGraveStone;
+import GraveStone.block.BlockGSMemorial;
+import GraveStone.block.BlockGSTimeTrap;
+import GraveStone.block.BlockGSWitherSpawner;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import net.minecraft.GraveStone.block.BlockGSGraveStone;
-import net.minecraft.GraveStone.block.BlockGSMemorial;
-import net.minecraft.GraveStone.block.BlockGSTimeTrap;
-import net.minecraft.GraveStone.block.BlockGSWitherSpawner;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;

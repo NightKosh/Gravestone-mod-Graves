@@ -1,4 +1,4 @@
-package net.minecraft.GraveStone.item;
+package GraveStone.item;
 
 import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;

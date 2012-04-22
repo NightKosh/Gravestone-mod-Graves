@@ -1,7 +1,7 @@
-package net.minecraft.GraveStone.gui;
+package GraveStone.gui;
 
 import cpw.mods.fml.common.network.IGuiHandler;
-import net.minecraft.GraveStone.tileentity.TileEntityGSGrave;
+import GraveStone.tileentity.TileEntityGSGrave;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

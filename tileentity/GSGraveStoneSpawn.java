@@ -1,4 +1,4 @@
-package net.minecraft.GraveStone.tileentity;
+package GraveStone.tileentity;
 
 import java.util.ArrayList;
 import java.util.Iterator;

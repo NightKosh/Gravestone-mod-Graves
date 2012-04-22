@@ -1,4 +1,4 @@
-package net.minecraft.GraveStone.structures;
+package GraveStone.structures;
 
 import cpw.mods.fml.common.IWorldGenerator;
 import java.util.Random;

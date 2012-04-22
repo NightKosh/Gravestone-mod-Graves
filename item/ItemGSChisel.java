@@ -1,8 +1,8 @@
-package net.minecraft.GraveStone.item;
+package GraveStone.item;
 
-import net.minecraft.GraveStone.GraveStoneConfig;
-import net.minecraft.GraveStone.mod_GraveStone;
-import net.minecraft.GraveStone.tileentity.TileEntityGSGrave;
+import GraveStone.GraveStoneConfig;
+import GraveStone.mod_GraveStone;
+import GraveStone.tileentity.TileEntityGSGrave;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;

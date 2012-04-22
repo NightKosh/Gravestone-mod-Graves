@@ -1,15 +1,14 @@
-package net.minecraft.GraveStone.client;
+package GraveStone.client;
 
+import GraveStone.CommonProxy;
+import GraveStone.GraveStoneConfig;
+import GraveStone.ItemGSGraveStoneRenderer;
+import GraveStone.ItemGSMemorialRenderer;
+import GraveStone.tileentity.TileEntityGSGraveStone;
+import GraveStone.tileentity.TileEntityGSGraveStoneRenderer;
+import GraveStone.tileentity.TileEntityGSMemorial;
+import GraveStone.tileentity.TileEntityGSMemorialRenderer;
 import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.GraveStone.CommonProxy;
-import net.minecraft.GraveStone.GraveStoneConfig;
-import net.minecraft.GraveStone.ItemGSGraveStoneRenderer;
-import net.minecraft.GraveStone.ItemGSMemorialRenderer;
-import net.minecraft.GraveStone.tileentity.TileEntityGSGraveStone;
-import net.minecraft.GraveStone.tileentity.TileEntityGSGraveStoneRenderer;
-import net.minecraft.GraveStone.tileentity.TileEntityGSMemorial;
-import net.minecraft.GraveStone.tileentity.TileEntityGSMemorialRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ClientProxy extends CommonProxy {

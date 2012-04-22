@@ -1,4 +1,4 @@
-package net.minecraft.GraveStone.structures;
+package GraveStone.structures;
 
 import java.util.LinkedList;
 import java.util.Random;

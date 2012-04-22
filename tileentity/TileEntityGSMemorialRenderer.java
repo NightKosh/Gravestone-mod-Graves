@@ -1,7 +1,7 @@
-package net.minecraft.GraveStone.tileentity;
+package GraveStone.tileentity;
 
-import net.minecraft.GraveStone.models.ModelGraveStone;
-import net.minecraft.GraveStone.models.ModelMemorialCross;
+import GraveStone.models.ModelGraveStone;
+import GraveStone.models.ModelMemorialCross;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;

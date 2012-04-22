@@ -1,7 +1,7 @@
-package net.minecraft.GraveStone.block;
+package GraveStone.block;
 
+import GraveStone.mod_GraveStone;
 import java.util.Random;
-import net.minecraft.GraveStone.mod_GraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
