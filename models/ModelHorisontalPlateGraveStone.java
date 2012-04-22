@@ -17,8 +17,8 @@ public class ModelHorisontalPlateGraveStone extends ModelGraveStone {
         textureHeight = 32;
 
         Plate = new ModelRenderer(this, 0, 0);
-        Plate.addBox(0F, 0F, 0F, 13, 1, 14);
-        Plate.setRotationPoint(-6.5F, 23F, -7F);
+        Plate.addBox(0F, 0F, 0F, 12, 1, 14);
+        Plate.setRotationPoint(-6F, 23F, -7F);
         Plate.setTextureSize(64, 32);
         Plate.mirror = true;
         setRotation(Plate, 0F, 0F, 0F);

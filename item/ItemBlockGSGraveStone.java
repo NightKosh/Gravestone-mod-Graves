@@ -46,8 +46,5 @@ public class ItemBlockGSGraveStone extends ItemBlock {
         if (stack.stackTagCompound.hasKey("DeathText") && !stack.stackTagCompound.getString("DeathText").equals("")) {
             list.add(stack.stackTagCompound.getString("DeathText"));
         }
-        if (stack.stackTagCompound.hasKey("GraveType")) {
-            //list.add(" " + stack.stackTagCompound.getByte("GraveType"));
-        }
     }
 }
