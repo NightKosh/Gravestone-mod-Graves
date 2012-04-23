@@ -27,9 +27,9 @@ import net.minecraft.world.World;
 public class BlockGSMemorial extends BlockContainer {
 
     private static final Random rand = new Random();
-    public static String[] blockNames = {"Cross Memorial"};
+    public static String[] blockNames = {"Cross Memorial", "Obelisk"};
     private static Icon texture;
-    public static final int MEMORIAL_TYPE_COUNT = 1;
+    public static final int MEMORIAL_TYPE_COUNT = 2;
 
     public BlockGSMemorial(int par1) {
         super(par1, Material.rock);

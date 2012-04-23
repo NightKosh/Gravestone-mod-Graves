@@ -3,6 +3,7 @@ package GraveStone.structures;
 import java.util.Random;
 import GraveStone.GraveStoneConfig;
 import GraveStone.mod_GraveStone;
+import GraveStone.tileentity.TileEntityGSMemorial;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
@@ -34,8 +35,9 @@ public class ComponentGSMemorial extends ComponentGSCemeteryCatacombs {
         
         this.fillWithAir(world, boundingBox, 0, 1, 2, 0, 6, 2);
         this.fillWithBlocks(world, boundingBox, 0, 0, 0, 2, 0, 2, groundID, Block.grass.blockID, false);
-        this.placeBlockAtCurrentPosition(world, GraveStoneConfig.memorialID, 0, 1, 1, 1, boundingBox);
-        //random.nextInt(mod_GraveStone.memorial.MEMORIAL_TYPE_COUNT)
+        
+        byte memorialType = (byte) random.nextInt(mod_GraveStone.memorial.MEMORIAL_TYPE_COUNT);
+        placeMemorial(world, random, 1, 1, 1, mod_GraveStone.memorial.getMetaDirection(coordBaseMode), memorialType);
         
         for (int x = 1; x < 3; x++) {
             for (int z = 1; z < 3; z++) {
@@ -49,5 +51,15 @@ public class ComponentGSMemorial extends ComponentGSCemeteryCatacombs {
         }
         
         return true;
+    }
+    
+    
+
+    protected void placeMemorial(World world, Random random, int x, int y, int z, int memorialMeta, byte memorialType) {
+        this.placeBlockAtCurrentPosition(world, GraveStoneConfig.memorialID, memorialMeta, x, y, z, boundingBox);
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getBlockTileEntity(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
+        if (tileEntity != null) {
+            tileEntity.setGraveType(memorialType);
+        }
     }
 }

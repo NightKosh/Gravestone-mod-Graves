@@ -11,7 +11,8 @@ import net.minecraft.world.World;
 public class ItemBlockGSMemorial extends ItemBlock {
 
     private final static String[] subNames = {
-        "Cross Memorial"
+        "Cross Memorial",
+        "Obelisk"
     };
 
     public ItemBlockGSMemorial(int id) {
@@ -22,7 +23,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
 
     @Override
     public int getMetadata(int damageValue) {
-        return 0;//damageValue;
+        return 0;
     }
 
     @Override
@@ -46,9 +47,6 @@ public class ItemBlockGSMemorial extends ItemBlock {
         }
         if (stack.stackTagCompound.hasKey("DeathText") && !stack.stackTagCompound.getString("DeathText").equals("")) {
             list.add(stack.stackTagCompound.getString("DeathText"));
-        }
-        if (stack.stackTagCompound.hasKey("GraveType")) {
-            //list.add(" " + stack.stackTagCompound.getByte("GraveType"));
         }
     }
 }

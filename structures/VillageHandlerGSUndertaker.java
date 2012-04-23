@@ -24,6 +24,7 @@ public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCrea
                 new ItemStack(mod_GraveStone.chisel, 1, 0),
                 new ItemStack(Item.emerald, 1)));
         
+        // graves
         ItemStack stack = new ItemStack(mod_GraveStone.graveStone, 1, 0);
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setByte("GraveType", (byte) 0);
@@ -42,9 +43,16 @@ public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCrea
         stack.setTagCompound(nbt);
         recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), stack));
         
+        // memorials
         stack = new ItemStack(mod_GraveStone.memorial, 1, 0);
         nbt = new NBTTagCompound();
         nbt.setByte("GraveType", (byte) 0);
+        stack.setTagCompound(nbt);
+        recipeList.add(new MerchantRecipe( new ItemStack(Item.emerald, 15), stack));
+        
+        stack = new ItemStack(mod_GraveStone.memorial, 1, 0);
+        nbt = new NBTTagCompound();
+        nbt.setByte("GraveType", (byte) 1);
         stack.setTagCompound(nbt);
         recipeList.add(new MerchantRecipe( new ItemStack(Item.emerald, 15), stack));
 

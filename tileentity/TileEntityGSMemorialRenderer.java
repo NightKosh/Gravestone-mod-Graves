@@ -2,12 +2,16 @@ package GraveStone.tileentity;
 
 import GraveStone.models.ModelGraveStone;
 import GraveStone.models.ModelMemorialCross;
+import GraveStone.models.ModelMemorialObelisk;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
 
+    protected static ModelGraveStone cross = new ModelMemorialCross();
+    protected static ModelGraveStone obelisk = new ModelMemorialObelisk();
+    
     public void renderAModelAt(TileEntityGSMemorial tile, double d, double d1, double d2, float f) {
         byte memorialType = tile.getGraveType();
         int meta;
@@ -54,9 +58,11 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
     private ModelGraveStone getMemorialModel(int memorialType) {
         switch (memorialType) {
             case 0:
-                return new ModelMemorialCross();
+                return cross;
+            case 1:
+                return obelisk;
             default:
-                return new ModelMemorialCross();
+                return cross;
         }
     }
 
@@ -64,6 +70,9 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
         switch (memorialType) {
             case 0: // CROSS
                 bindTextureByName("/GraveStone/resources/textures/ModelMemorialCross.png");
+                break;
+            case 1: // OBELISK
+                bindTextureByName("/GraveStone/resources/textures/ModelMemorialObelisk.png");
                 break;
         }
     }
