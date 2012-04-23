@@ -89,7 +89,7 @@ public class GraveStoneConfig {
         generateVillagerGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateVillagerGraves", true).getBoolean(true);
         generatePetGraves = config.get(Configuration.CATEGORY_GENERAL, "GeneratePetGraves", true).getBoolean(true);
 
-        Property graveItemsCountProperty = config.get(Configuration.CATEGORY_GENERAL, "SavedItemsCount", 0);
+        Property graveItemsCountProperty = config.get(Configuration.CATEGORY_GENERAL, "SavedItemsCount", 10);
         graveItemsCountProperty.comment = "This value must be between 0 an 40!";
         
         graveItemsCount = graveItemsCountProperty.getInt();
