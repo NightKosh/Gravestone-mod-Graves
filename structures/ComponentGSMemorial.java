@@ -33,14 +33,14 @@ public class ComponentGSMemorial extends ComponentGSCemeteryCatacombs {
             groundID = Block.grass.blockID;
         }
         
-        this.fillWithAir(world, boundingBox, 0, 1, 2, 0, 6, 2);
+        this.fillWithAir(world, boundingBox, 0, 0, 2, 0, 6, 2);
         this.fillWithBlocks(world, boundingBox, 0, 0, 0, 2, 0, 2, groundID, Block.grass.blockID, false);
         
         byte memorialType = (byte) random.nextInt(mod_GraveStone.memorial.MEMORIAL_TYPE_COUNT);
         placeMemorial(world, random, 1, 1, 1, mod_GraveStone.memorial.getMetaDirection(coordBaseMode), memorialType);
         
-        for (int x = 1; x < 3; x++) {
-            for (int z = 1; z < 3; z++) {
+        for (int x = 0; x < 3; x++) {
+            for (int z = 0; z < 3; z++) {
                 this.fillCurrentPositionBlocksDownwards(world, groundID, 0, x, -1, z, boundingBox);
             }
         }
