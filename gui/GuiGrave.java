@@ -72,7 +72,6 @@ public class GuiGrave extends GuiScreen {
         Keyboard.enableRepeatEvents(false);
         entityGrave.setEditable(true);
         entityGrave.setDeathText(graveText.toString());
-        
     }
 
     /**
@@ -83,7 +82,7 @@ public class GuiGrave extends GuiScreen {
             graveText.deleteCharAt(graveText.length() - 1);
         }
 
-        if (allowedCharacters.indexOf(key) >= 0 && graveText.length() < 50) {
+        if (allowedCharacters.indexOf(key) >= 0 && graveText.length() < 35) {
             graveText.append(key);
         }
 

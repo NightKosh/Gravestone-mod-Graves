@@ -71,7 +71,7 @@ public abstract class TileEntityGSGrave extends TileEntity {
     public void setDeathText(String text) {
         gSDeathText.setDeathText(text);
         
-        this.onInventoryChanged();
+        //this.onInventoryChanged();
     }
 
     public boolean isEditable() {
