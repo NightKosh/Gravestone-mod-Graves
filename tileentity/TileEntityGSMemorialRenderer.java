@@ -18,7 +18,7 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
         if (tile.worldObj != null) {
             meta = tile.getBlockMetadata();
         } else {
-            meta = tile.blockMetadata;
+            meta = 0;
         }
         getMemorialTexture(memorialType);
 

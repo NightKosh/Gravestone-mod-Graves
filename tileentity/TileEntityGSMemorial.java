@@ -2,6 +2,9 @@
 package GraveStone.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.world.World;
 
 public class TileEntityGSMemorial extends TileEntityGSGrave {
     
@@ -9,6 +12,11 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
     
     public TileEntityGSMemorial() {
         super();
+    }
+
+    public TileEntityGSMemorial(World world) {
+        this();
+        this.worldObj = world;
     }
     
     /**
@@ -55,5 +63,14 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
     
     public void setDeathText(String text) {
         gSDeathText.setDeathText(text);
+    }
+
+    /**
+     * Overriden in a sign to provide the text.
+     */
+    public Packet getDescriptionPacket() {
+        NBTTagCompound nbtTag = new NBTTagCompound();
+        this.writeToNBT(nbtTag);
+        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
     }
 }

@@ -59,6 +59,7 @@ public class ComponentGSMemorial extends ComponentGSCemeteryCatacombs {
         this.placeBlockAtCurrentPosition(world, GraveStoneConfig.memorialID, memorialMeta, x, y, z, boundingBox);
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getBlockTileEntity(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
         if (tileEntity != null) {
+            tileEntity.setMemorialContent();
             tileEntity.setGraveType(memorialType);
         }
     }
