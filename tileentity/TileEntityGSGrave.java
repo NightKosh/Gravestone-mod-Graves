@@ -2,6 +2,7 @@ package GraveStone.tileentity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
@@ -14,6 +15,7 @@ public abstract class TileEntityGSGrave extends TileEntity {
     protected GSGraveStoneDeathText gSDeathText;
     protected boolean isEditable = true;
     protected byte graveType = 0;
+    protected int age = -1;
 
     public TileEntityGSGrave() {
         gSDeathText = new GSGraveStoneDeathText();
@@ -40,6 +42,7 @@ public abstract class TileEntityGSGrave extends TileEntity {
     public void setGraveContent() {
         gSDeathText.setRandomDeathText();
         gSItems.setRandomGraveContent();
+        setRandomAge();
     }
 
     /**
@@ -74,6 +77,17 @@ public abstract class TileEntityGSGrave extends TileEntity {
         //this.onInventoryChanged();
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    protected void setRandomAge() {
+        age = 10 + (new Random()).nextInt(100);
+}
     public boolean isEditable() {
         return isEditable;
     }

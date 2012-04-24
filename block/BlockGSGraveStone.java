@@ -72,13 +72,17 @@ public class BlockGSGraveStone extends BlockContainer {
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
         if (tileEntity != null) {
             if (itemStack.stackTagCompound != null) {
-                if (itemStack.stackTagCompound.hasKey("DeathText")) {
-                    tileEntity.setDeathText(itemStack.stackTagCompound.getString("DeathText"));
-                }
                 if (itemStack.stackTagCompound.hasKey("GraveType")) {
                     tileEntity.setGraveType(itemStack.stackTagCompound.getByte("GraveType"));
                 } else {
                     tileEntity.setGraveType((byte) 0);
+                }
+                
+                if (itemStack.stackTagCompound.hasKey("DeathText")) {
+                    tileEntity.setDeathText(itemStack.stackTagCompound.getString("DeathText"));
+                }
+                if (itemStack.stackTagCompound.hasKey("Age")) {
+                    tileEntity.setDeathText(itemStack.stackTagCompound.getString("Age"));
                 }
             }
         }
@@ -205,8 +209,9 @@ public class BlockGSGraveStone extends BlockContainer {
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
         if (tileEntity != null) {
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setString("DeathText", tileEntity.getDeathText());
             nbt.setByte("GraveType", tileEntity.getGraveType());
+            nbt.setString("DeathText", tileEntity.getDeathText());
+            nbt.setInteger("Age", tileEntity.getAge());
             itemStack.setTagCompound(nbt);
         }
 
@@ -297,6 +302,9 @@ public class BlockGSGraveStone extends BlockContainer {
 
             if (!deathText.equals("")) {
                 entityPlayer.sendChatToPlayer(deathText);
+                if (entity.getAge() != -1) {
+                    entityPlayer.sendChatToPlayer("Had lived " + entity.getAge() + " days");
+                }
             }
         }
 
@@ -313,7 +321,7 @@ public class BlockGSGraveStone extends BlockContainer {
     /*
      * Create grave on death
      */
-    public void createOnDeath(World world, int x, int y, int z, String deathText, int direction, ItemStack[] items) {
+    public void createOnDeath(World world, int x, int y, int z, String deathText, int direction, ItemStack[] items, int age) {
         if (direction < 0) {
             direction = 360 + direction;
         }
@@ -329,6 +337,7 @@ public class BlockGSGraveStone extends BlockContainer {
             tileEntity.setDeathText(deathText);
             tileEntity.setItems(items);
             tileEntity.setGraveType((byte) rand.nextInt(GRAVE_TYPE_COUNT));
+            tileEntity.setAge(age);
         }
     }
 

@@ -46,7 +46,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
         // grave type
         readType(nbtTag);
-
+        
         // grave spawn
         gsSpawn.readSpawn(nbtTag);
 
@@ -55,6 +55,11 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
         // death text
         gSDeathText.readText(nbtTag);
+
+        // age
+        if (nbtTag.hasKey("Age")) {
+            age = nbtTag.getInteger("Age");
+        }
     }
 
     /**
@@ -74,6 +79,9 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
         // death text
         gSDeathText.saveText(nbtTag);
+        
+        // age
+        nbtTag.setInteger("Age", age);
     }
 
     /**
