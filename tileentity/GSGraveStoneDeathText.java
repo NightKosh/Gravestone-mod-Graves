@@ -28,6 +28,7 @@ public class GSGraveStoneDeathText {
         " was pricked to death",
         " starved to death",
         " burned to death",
+        " went up in flames",
         " blew up",
         " withered away",
         " suffocated in a wall",
