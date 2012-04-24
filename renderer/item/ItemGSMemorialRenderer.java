@@ -1,15 +1,15 @@
-package GraveStone;
+package GraveStone.renderer.item;
 
-import GraveStone.tileentity.TileEntityGSGraveStone;
+import GraveStone.tileentity.TileEntityGSMemorial;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
-public class ItemGSGraveStoneRenderer implements IItemRenderer {
+public class ItemGSMemorialRenderer implements IItemRenderer {
 
-    public ItemGSGraveStoneRenderer() {
+    public ItemGSMemorialRenderer() {
     }
 
     @Override
@@ -25,11 +25,11 @@ public class ItemGSGraveStoneRenderer implements IItemRenderer {
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-        TileEntityGSGraveStone entity = new TileEntityGSGraveStone();
+        TileEntityGSMemorial entity = new TileEntityGSMemorial();
         if (item.stackTagCompound != null) {
             entity.setGraveType(item.stackTagCompound.getByte("GraveType"));
         }
-
+        
         TileEntityRenderer.instance.renderTileEntityAt(entity, 0.0D, 0.0D, 0.0D, 0.0F);
     }
 }

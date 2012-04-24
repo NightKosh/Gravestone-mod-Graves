@@ -1,9 +1,10 @@
-package GraveStone.tileentity;
+package GraveStone.renderer.tileentity;
 
-import GraveStone.models.ModelCrossGraveStone;
-import GraveStone.models.ModelGraveStone;
-import GraveStone.models.ModelVerticalPlateGraveStone;
-import GraveStone.models.ModelHorisontalPlateGraveStone;
+import GraveStone.models.block.ModelCrossGraveStone;
+import GraveStone.models.block.ModelGraveStone;
+import GraveStone.models.block.ModelVerticalPlateGraveStone;
+import GraveStone.models.block.ModelHorisontalPlateGraveStone;
+import GraveStone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;

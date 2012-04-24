@@ -1,5 +1,5 @@
 
-package GraveStone.models;
+package GraveStone.models.block;
 
 import net.minecraft.client.model.ModelBase;
 

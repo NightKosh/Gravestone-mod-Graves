@@ -1,4 +1,4 @@
-package GraveStone.renderer;
+package GraveStone.renderer.entity;
 
 import GraveStone.entity.EntityZombieDog;
 import net.minecraft.client.model.ModelBase;

@@ -1,8 +1,9 @@
-package GraveStone.tileentity;
+package GraveStone.renderer.tileentity;
 
-import GraveStone.models.ModelGraveStone;
-import GraveStone.models.ModelMemorialCross;
-import GraveStone.models.ModelMemorialObelisk;
+import GraveStone.models.block.ModelGraveStone;
+import GraveStone.models.block.ModelMemorialCross;
+import GraveStone.models.block.ModelMemorialObelisk;
+import GraveStone.tileentity.TileEntityGSMemorial;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
