@@ -35,6 +35,7 @@ public class GraveStoneConfig {
     public static boolean generateSingleGraves;
     public static boolean generateMemorials;
     // graves for entities
+    public static boolean generatePlayerGraves;
     public static boolean generateVillagerGraves;
     public static boolean generatePetGraves;
     // saved items count
@@ -86,6 +87,7 @@ public class GraveStoneConfig {
 
     private static void gravesConfig() {
         silkTouchForGraves = config.get(Configuration.CATEGORY_GENERAL, "SilkTouchForGraves", true).getBoolean(true);
+        generatePlayerGraves = config.get(Configuration.CATEGORY_GENERAL, "GeneratePlayerGraves", true).getBoolean(true);
         generateVillagerGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateVillagerGraves", true).getBoolean(true);
         generatePetGraves = config.get(Configuration.CATEGORY_GENERAL, "GeneratePetGraves", true).getBoolean(true);
 
