@@ -4,6 +4,7 @@ import GraveStone.block.BlockGSGraveStone;
 import GraveStone.block.BlockGSMemorial;
 import GraveStone.block.BlockGSTimeTrap;
 import GraveStone.block.BlockGSWitherSpawner;
+import GraveStone.entity.EntityZombieDog;
 import GraveStone.gui.GuiHandler;
 import GraveStone.item.ItemBlockGSGraveStone;
 import GraveStone.item.ItemBlockGSMemorial;
@@ -23,13 +24,19 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityEggInfo;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -39,7 +46,6 @@ public class mod_GraveStone {
 
     @Instance("GraveStone")
     public static mod_GraveStone instance;
-    
     @SidedProxy(clientSide = "GraveStone.client.ClientProxy", serverSide = "GraveStone.CommonProxy")
     public static CommonProxy proxy;
     // block GraveStone
@@ -54,6 +60,7 @@ public class mod_GraveStone {
     public static Item chisel;
     // creative tab
     public static CreativeTabs creativeTab;
+    private static int startEntityId = 300;
 
     public mod_GraveStone() {
         instance = this;
@@ -129,7 +136,7 @@ public class mod_GraveStone {
         // chisel reciep
         GameRegistry.addRecipe(new ItemStack(chisel), "y", "x", 'x', Item.stick, 'y', Item.ingotIron);
 
-        
+
         // register GraveStone tile entity
         GameRegistry.registerTileEntity(TileEntityGSGraveStone.class, "GraveStone");
         // register Memorial tile entity 
@@ -152,6 +159,28 @@ public class mod_GraveStone {
 
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 
+
+
+        EntityRegistry.registerGlobalEntityID(EntityZombieDog.class, "GSZombieDog", EntityRegistry.findGlobalUniqueEntityId());
+        EntityRegistry.registerModEntity(EntityZombieDog.class, "GSZombieDog", 1, this, 40, 1, true);
+        EntityRegistry.addSpawn(EntityZombieDog.class, 3, 4, 8, EnumCreatureType.monster, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.plains, BiomeGenBase.swampland);
+        LanguageRegistry.instance().addStringLocalization("entity.GraveStone.mod_GraveStone.name", "GSZombieDog");
+        registerEntityEgg(EntityZombieDog.class, 0xffffff, 0x000000);
+
         proxy.registerRenderers();
+    }
+
+    public static int getUniqueEntityId() {
+        do {
+            startEntityId++;
+        } while (EntityList.getStringFromID(startEntityId) != null);
+
+        return startEntityId;
+    }
+
+    public static void registerEntityEgg(Class<? extends Entity> entity, int primaryColor, int secondaryColor) {
+        int id = getUniqueEntityId();
+        EntityList.IDtoClassMapping.put(id, entity);
+        EntityList.entityEggs.put(id, new EntityEggInfo(id, primaryColor, secondaryColor));
     }
 }
