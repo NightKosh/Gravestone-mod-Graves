@@ -2,10 +2,13 @@ package GraveStone.client;
 
 import GraveStone.CommonProxy;
 import GraveStone.GraveStoneConfig;
+import GraveStone.entity.EntityZombieCat;
 import GraveStone.renderer.item.ItemGSGraveStoneRenderer;
 import GraveStone.renderer.item.ItemGSMemorialRenderer;
 import GraveStone.entity.EntityZombieDog;
+import GraveStone.models.entity.ModelZombieCat;
 import GraveStone.models.entity.ModelZombieDog;
+import GraveStone.renderer.entity.RenderZombieCat;
 import GraveStone.renderer.entity.RenderZombieDog;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import GraveStone.renderer.tileentity.TileEntityGSGraveStoneRenderer;
@@ -30,5 +33,8 @@ public class ClientProxy extends CommonProxy {
         
         // zombie dog
         RenderingRegistry.registerEntityRenderingHandler(EntityZombieDog.class, new RenderZombieDog(new ModelZombieDog(), new ModelZombieDog()));
+        
+        // zombie cat
+        RenderingRegistry.registerEntityRenderingHandler(EntityZombieCat.class, new RenderZombieCat(new ModelZombieCat(), 0));
     }
 }
