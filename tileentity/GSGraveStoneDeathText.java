@@ -36,9 +36,9 @@ public class GSGraveStoneDeathText {
         " fell out of the world",
         " tried to swim in lava",
         " drowned",
-        " was blew up by creeper",
+        " was blown up by creeper",
         " was brutally murdered by Herobrine",
-        " was punished capitally",
+        " received a death sentence",
         " was die in cruel tortures"
     };
     private static final String[] DEATH_NAME = {
