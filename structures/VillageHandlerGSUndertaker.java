@@ -22,7 +22,7 @@ public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCrea
                 new ItemStack(mod_GraveStone.chisel, 1, 0)));
         recipeList.add(new MerchantRecipe(
                 new ItemStack(mod_GraveStone.chisel, 1, 0),
-                new ItemStack(Item.emerald, 1)));
+                new ItemStack(Item.ingotGold, 1)));
         
         // graves
         ItemStack stack = new ItemStack(mod_GraveStone.graveStone, 1, 0);
