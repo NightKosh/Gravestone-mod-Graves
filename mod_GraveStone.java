@@ -89,7 +89,7 @@ public class mod_GraveStone {
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", i);
             graveStoneStack.setTagCompound(nbt);
-            LanguageRegistry.addName(graveStoneStack, BlockGSGraveStone.blockNames[i]);
+            LanguageRegistry.addName(graveStoneStack, BlockGSGraveStone.NAMES[i]);
         }
         MinecraftForge.setBlockHarvestLevel(graveStone, "pickaxe", 1);
 
@@ -117,7 +117,7 @@ public class mod_GraveStone {
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", i);
             memorialStack.setTagCompound(nbt);
-            LanguageRegistry.addName(memorialStack, BlockGSMemorial.blockNames[i]);
+            LanguageRegistry.addName(memorialStack, BlockGSMemorial.NAMES[i]);
         }
         MinecraftForge.setBlockHarvestLevel(memorial, "pickaxe", 2);
 

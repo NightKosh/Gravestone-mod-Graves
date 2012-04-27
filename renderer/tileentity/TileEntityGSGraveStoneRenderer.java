@@ -1,6 +1,8 @@
 package GraveStone.renderer.tileentity;
 
+import GraveStone.models.block.ModelCatStatueGraveStone;
 import GraveStone.models.block.ModelCrossGraveStone;
+import GraveStone.models.block.ModelDogStatueGraveStone;
 import GraveStone.models.block.ModelGraveStone;
 import GraveStone.models.block.ModelVerticalPlateGraveStone;
 import GraveStone.models.block.ModelHorisontalPlateGraveStone;
@@ -14,6 +16,8 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
     private static ModelGraveStone verticalPlate = new ModelVerticalPlateGraveStone();
     private static ModelGraveStone cross = new ModelCrossGraveStone();
     private static ModelGraveStone horisontalPlate = new ModelHorisontalPlateGraveStone();
+    private static ModelGraveStone dogStatue = new ModelDogStatueGraveStone();
+    private static ModelGraveStone catStatue = new ModelCatStatueGraveStone();
 
     public void renderAModelAt(TileEntityGSGraveStone tile, double d, double d1, double d2, float f) {
         byte graveType = tile.getGraveType();
@@ -60,6 +64,10 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
                 return cross;
             case 2:
                 return horisontalPlate;
+            case 3:
+                return dogStatue;
+            case 4:
+                return catStatue;
             default:
                 return verticalPlate;
         }
@@ -75,6 +83,12 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
                 break;
             case 2: // STONE_HORISONTAL_PLATE
                 bindTextureByName("/GraveStone/resources/textures/ModelHorisontalPlateGraveStone.png");
+                break;
+            case 3: // DOG_STATUE
+                bindTextureByName("/GraveStone/resources/textures/ModelDogStatueGraveStone.png");
+                break;
+            case 4: // CAT_STATUE
+                bindTextureByName("/GraveStone/resources/textures/ModelCatStatueGraveStone.png");
                 break;
         }
     }

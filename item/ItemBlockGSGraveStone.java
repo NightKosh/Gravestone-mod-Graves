@@ -1,5 +1,6 @@
 package GraveStone.item;
 
+import GraveStone.mod_GraveStone;
 import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -8,10 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class ItemBlockGSGraveStone extends ItemBlock {
-
-    private final static String[] subNames = {
-        "Gravestone", "Cross", "Grave Plate"
-    };
 
     public ItemBlockGSGraveStone(int id) {
         super(id);
@@ -30,7 +27,7 @@ public class ItemBlockGSGraveStone extends ItemBlock {
         if (itemStack.stackTagCompound != null) {
             graveType = itemStack.stackTagCompound.getByte("GraveType");
         }
-        return getUnlocalizedName() + "." + subNames[graveType];
+        return getUnlocalizedName() + "." + mod_GraveStone.graveStone.NAMES[graveType];
     }
 
     public void onCreated(ItemStack stack, World world, EntityPlayer player) {

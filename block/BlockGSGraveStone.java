@@ -29,9 +29,9 @@ import net.minecraftforge.common.ForgeDirection;
 public class BlockGSGraveStone extends BlockContainer {
 
     private static final Random rand = new Random();
-    public static String[] blockNames = {"Gravestone", "Cross", "Grave Plate"};
+    public static final String[] NAMES = {"Gravestone", "Cross", "Grave Plate", "Dog statue", "Cat statue"};
     private static Icon texture;
-    public static final int GRAVE_TYPE_COUNT = 3;
+    public static final int GRAVE_TYPE_COUNT = 5;
 
     public BlockGSGraveStone(int par1) {
         super(par1, Material.rock);
