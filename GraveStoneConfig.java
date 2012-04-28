@@ -48,6 +48,8 @@ public class GraveStoneConfig {
     
     private GraveStoneConfig(Configuration config) {
         this.config = config;
+        
+        getConfigs();
     }
     
     public static GraveStoneConfig getInstance(Configuration config) {

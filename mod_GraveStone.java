@@ -60,7 +60,7 @@ public class mod_GraveStone {
 
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
-        GraveStoneConfig.getInstance(new Configuration(event.getSuggestedConfigurationFile())).getConfigs();
+        GraveStoneConfig.getInstance(new Configuration(event.getSuggestedConfigurationFile()));
     }
 
     @Init
@@ -152,7 +152,7 @@ public class mod_GraveStone {
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 
         // register entitys
-        GraveStoneEntity.getInstance().getEntity();
+        GraveStoneEntity.getInstance();
         
         proxy.registerRenderers();
     }

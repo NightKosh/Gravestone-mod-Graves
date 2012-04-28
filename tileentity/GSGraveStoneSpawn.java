@@ -33,9 +33,15 @@ public class GSGraveStoneSpawn {
     private static final int MAX_NEARBY_ENTITIES = 3;
     /** Range for spawning new entities with gravestone */
     private static final int SPAWN_RANGE = 1;
+    private final boolean canSpawnHellCreatures;
 
     public GSGraveStoneSpawn(TileEntityGSGraveStone tileEntity) {
         this.tileEntity = tileEntity;
+        if (tileEntity.worldObj != null) {
+            canSpawnHellCreatures = (tileEntity.yCoord < 51 && tileEntity.worldObj.getBlockId(tileEntity.xCoord, tileEntity.yCoord - 1, tileEntity.zCoord) == Block.netherBrick.blockID);
+        } else {
+            canSpawnHellCreatures = false;
+        }
     }
 
     /**
@@ -168,30 +174,35 @@ public class GSGraveStoneSpawn {
      * will create the entity from the internalID the first time it is accessed
      */
     public Entity getMobEntity() {
-        String id = this.getMobID();
+        String id;
 
-        if (tileEntity.yCoord < 51 && tileEntity.worldObj.getBlockId(tileEntity.xCoord, tileEntity.yCoord - 1, tileEntity.zCoord) == Block.netherBrick.blockID) {
-            if (rand.nextInt(20) == 0) {
-                if (id.equals("Skeleton")) {
-                    EntitySkeleton entity = (EntitySkeleton) EntityList.createEntityByName(id, tileEntity.worldObj);
-                    entity.setSkeletonType(1);
-                    this.spawnedMob = entity;
-                } else {
-                    if (id.equals("Zombie")) {
-                        id = "PigZombie";
+        switch (tileEntity.graveType) {
+            case 3:
+                id = "GSZombieDog";
+                break;
+            case 4:
+                id = "GSZombieCat";
+                break;
+            default:
+                id = this.getMobID();
+                if (canSpawnHellCreatures) {
+                    if (rand.nextInt(20) == 0) {
+                        if (id.equals("Skeleton")) {
+                            EntitySkeleton entity = (EntitySkeleton) EntityList.createEntityByName(id, tileEntity.worldObj);
+                            entity.setSkeletonType(1);
+                            this.spawnedMob = entity;
+                            return this.spawnedMob;
+                        } else {
+                            if (id.equals("Zombie")) {
+                                id = "PigZombie";
+                            }
+                        }
                     }
-
-                    Entity entity = EntityList.createEntityByName(id, tileEntity.worldObj);
-                    this.spawnedMob = entity;
                 }
-            } else {
-                Entity entity = EntityList.createEntityByName(id, tileEntity.worldObj);
-                this.spawnedMob = entity;
-            }
-        } else {
-            Entity entity = EntityList.createEntityByName(id, tileEntity.worldObj);
-            this.spawnedMob = entity;
         }
+
+        Entity entity = EntityList.createEntityByName(id, tileEntity.worldObj);
+        this.spawnedMob = entity;
 
         return this.spawnedMob;
     }

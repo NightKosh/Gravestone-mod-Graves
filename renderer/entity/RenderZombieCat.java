@@ -12,8 +12,8 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class RenderZombieCat extends RenderLiving {
 
-    public RenderZombieCat(ModelBase par1ModelBase, float par2) {
-        super(par1ModelBase, par2);
+    public RenderZombieCat(ModelBase model, float par2) {
+        super(model, par2);
     }
 
     public void renderLivingZombieCat(EntityZombieCat zombieCat, double par2, double par4, double par6, float par8, float par9) {

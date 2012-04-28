@@ -18,6 +18,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityVillager;
@@ -53,6 +54,7 @@ public class EntityZombieDog extends EntityMob {
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed, false));
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityVillager.class, this.moveSpeed, true));
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityWolf.class, this.moveSpeed, true));
+        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityOcelot.class, this.moveSpeed, true));
         this.tasks.addTask(4, new EntityAIMoveTwardsRestriction(this, this.moveSpeed));
         this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, this.moveSpeed, false));
         this.tasks.addTask(6, new EntityAIWander(this, this.moveSpeed));
@@ -62,6 +64,7 @@ public class EntityZombieDog extends EntityMob {
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 16.0F, 0, true));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 16.0F, 0, false));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWolf.class, 16.0F, 0, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityOcelot.class, 16.0F, 0, false));
         this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntitySheep.class, 16.0F, 0, false));
         this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityCow.class, 16.0F, 0, false));
         this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityPig.class, 16.0F, 0, false));
@@ -360,6 +363,18 @@ public class EntityZombieDog extends EntityMob {
                 }
 
                 this.worldObj.spawnEntityInWorld(entityZombieDog);
+                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+            } else if (entityLiving instanceof EntityOcelot) {
+                EntityZombieCat entityZombieCat = new EntityZombieCat(this.worldObj);
+                entityZombieCat.func_82149_j(entityLiving);
+                this.worldObj.removeEntity(entityLiving);
+                entityZombieCat.initCreature();
+
+                if (entityLiving.isChild()) {
+                    entityZombieCat.setChild(true);
+                }
+
+                this.worldObj.spawnEntityInWorld(entityZombieCat);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             }
         }

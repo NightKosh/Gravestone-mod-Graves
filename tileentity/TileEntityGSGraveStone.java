@@ -1,5 +1,6 @@
 package GraveStone.tileentity;
 
+import java.util.Random;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
@@ -8,16 +9,20 @@ import net.minecraft.world.World;
 public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
     protected GSGraveStoneSpawn gsSpawn;
+    protected Random random = new Random();
 
     public TileEntityGSGraveStone() {
         super();
         gsSpawn = new GSGraveStoneSpawn(this);
         gSItems = new GSGraveStoneItems(this);
     }
-
+    
     public TileEntityGSGraveStone(World world) {
-        this();
+        super();
         this.worldObj = world;
+        random.setSeed(world.getSeed());
+        gsSpawn = new GSGraveStoneSpawn(this);
+        gSItems = new GSGraveStoneItems(this);
     }
 
     /**
