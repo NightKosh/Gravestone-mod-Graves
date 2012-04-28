@@ -53,7 +53,6 @@ public class ItemGSChisel extends ItemTool {
     private boolean setGraveText(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, boolean isMemorial) {
         TileEntityGSGrave tileEntity = (TileEntityGSGrave) world.getBlockTileEntity(x, y, z);
         if (tileEntity != null && tileEntity.isEditable() && tileEntity.getDeathText().equals("")) {
-            //System.out.println("!!!!!!!!!!!!! " + tileEntity.getDeathText());
             player.openGui(mod_GraveStone.instance, 0, world, x, y, z);
 
             if (isMemorial) {

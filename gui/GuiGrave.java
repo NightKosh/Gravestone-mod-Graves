@@ -82,7 +82,7 @@ public class GuiGrave extends GuiScreen {
             graveText.deleteCharAt(graveText.length() - 1);
         }
 
-        if (allowedCharacters.indexOf(key) >= 0 && graveText.length() < 35) {
+        if (allowedCharacters.indexOf(key) >= 0 && graveText.length() < 30) {
             graveText.append(key);
         }
 
