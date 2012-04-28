@@ -212,8 +212,8 @@ abstract class ComponentGSCemeteryCatacombs extends StructureComponent {
         this.placeBlockAtCurrentPosition(world, GraveStoneConfig.graveStoneID, graveMeta, x, y, z, boundingBox);
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
         if (tileEntity != null) {
-            tileEntity.setGraveContent();
             tileEntity.setGraveType(graveType);
+            tileEntity.setGraveContent(random);
         }
     }
 

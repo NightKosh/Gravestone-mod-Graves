@@ -36,7 +36,7 @@ public class ComponentGSCemeteryCatacombsGraveYard extends ComponentGSCemeteryCa
                     positionZ = getZWithOffset(x, z);
                     y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
                     if (!isLiquidUnder(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
-                        graveType = (byte) random.nextInt(mod_GraveStone.graveStone.GRAVE_TYPE_COUNT);
+                        graveType = mod_GraveStone.graveStone.GENERATED_GRAVES[random.nextInt(mod_GraveStone.graveStone.GENERATED_GRAVES.length)];
                         placeGrave(world, random, x, y, z, graveMeta, graveType);
                     }
                 }

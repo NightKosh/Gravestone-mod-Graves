@@ -43,7 +43,7 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
         }
 
         int graveMeta = mod_GraveStone.graveStone.getMetaDirection(this.coordBaseMode);
-        byte graveType = (byte) random.nextInt(mod_GraveStone.graveStone.GRAVE_TYPE_COUNT);
+        byte graveType = mod_GraveStone.graveStone.GENERATED_GRAVES[random.nextInt(mod_GraveStone.graveStone.GENERATED_GRAVES.length)];
         
         int fenceMeta;
         if (this.coordBaseMode == 1 || this.coordBaseMode == 3) {
@@ -99,7 +99,7 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
         if (tileEntity != null) {
             tileEntity.setGraveType(graveType);
-            tileEntity.setGraveContent();
+            tileEntity.setGraveContent(random);
         }
     }
 }
