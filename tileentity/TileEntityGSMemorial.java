@@ -1,14 +1,13 @@
 
 package GraveStone.tileentity;
 
+import java.util.Random;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.world.World;
 
 public class TileEntityGSMemorial extends TileEntityGSGrave {
-    
-    private GSGraveStoneDeathText gSDeathText = new GSGraveStoneDeathText();
     
     public TileEntityGSMemorial() {
         super();
@@ -53,8 +52,8 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
         gSDeathText.saveText(nbtTag);
     }
     
-    public void setMemorialContent() {
-        gSDeathText.setRandomDeathText();
+    public void setMemorialContent(Random random) {
+        gSDeathText.setRandomDeathText(random, graveType, true);
     }
     
     public String getDeathText() {

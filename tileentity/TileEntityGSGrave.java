@@ -18,7 +18,7 @@ public abstract class TileEntityGSGrave extends TileEntity {
     protected int age = -1;
 
     public TileEntityGSGrave() {
-        gSDeathText = new GSGraveStoneDeathText();
+        gSDeathText = new GSGraveStoneDeathText(this);
     }
     
     public void setGraveType(byte graveType) {
@@ -39,9 +39,9 @@ public abstract class TileEntityGSGrave extends TileEntity {
         nbtTag.setByte("GraveType", graveType);
     }
 
-    public void setGraveContent() {
-        gSDeathText.setRandomDeathText();
-        gSItems.setRandomGraveContent();
+    public void setGraveContent(Random random) {
+        gSDeathText.setRandomDeathText(random, graveType, false);
+        gSItems.setRandomGraveContent(random);
         setRandomAge();
     }
 

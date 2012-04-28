@@ -32,6 +32,9 @@ public class BlockGSGraveStone extends BlockContainer {
     public static final String[] NAMES = {"Gravestone", "Cross", "Grave Plate", "Dog statue", "Cat statue"};
     private static Icon texture;
     public static final int GRAVE_TYPE_COUNT = 5;
+    public static final byte[] GENERATED_GRAVES = {0, 1, 2};
+    public static final byte[] PETS_GRAVES = {3, 4};
+            
 
     public BlockGSGraveStone(int par1) {
         super(par1, Material.rock);

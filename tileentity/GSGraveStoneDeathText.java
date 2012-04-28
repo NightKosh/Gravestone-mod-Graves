@@ -7,7 +7,6 @@ import net.minecraft.nbt.NBTTagCompound;
 public class GSGraveStoneDeathText {
     
     // grave text
-    private Random random = new Random();
     private String deathText = "";
     private static final String[] DEATH_TEXT = {
         " was slain by Wolf",
@@ -41,7 +40,7 @@ public class GSGraveStoneDeathText {
         " received a death sentence",
         " was die in cruel tortures"
     };
-    private static final String[] DEATH_NAME = {
+    private static final String[] NAMES = {
         "Steve", "Jeb", "Notch", "Leeroy Jenkins", "Zod",
         "Alex", "Alice", "Alan", "Ashley",
         "Barry", "Bextrix", "Benjamin", "Billy",
@@ -63,7 +62,25 @@ public class GSGraveStoneDeathText {
         "Tad", "Terence", "Toby",
         "Wendy", "Willy"
     };
+    private static final String[] DOG_NAMES = {
+        "Buddy",
+        "Chomper",
+        "Max",
+        "Rex", "Rover", "Rusty",
+        "Spike", "Sparky"
+    };
+    private static final String[] CAT_NAMES = {
+        "Bella",
+        "Max", "Molly",
+        "Oscar",
+        "Sam",
+        "Tiger"
+    };
+    private TileEntityGSGrave tileEntity;
     
+    public GSGraveStoneDeathText(TileEntityGSGrave tileEntity) {
+        this.tileEntity = tileEntity;
+    }
     
     public void readText(NBTTagCompound nbtTag) {
         deathText = nbtTag.getString("DeathText");
@@ -81,7 +98,20 @@ public class GSGraveStoneDeathText {
         deathText = text;
     }
     
-    public void setRandomDeathText() {
-        deathText = DEATH_NAME[random.nextInt(DEATH_NAME.length)] + DEATH_TEXT[random.nextInt(DEATH_TEXT.length)];
+    public void setRandomDeathText(Random random, byte graveType, boolean isMemorial) {
+        if (isMemorial) {
+            return;
+        }
+        switch (graveType) {
+            case 3:
+                deathText = DOG_NAMES[random.nextInt(DOG_NAMES.length)];
+                break;
+            case 4:
+                deathText = CAT_NAMES[random.nextInt(CAT_NAMES.length)];
+                break;
+            default:
+                deathText = NAMES[random.nextInt(NAMES.length)];
+        }
+        deathText += DEATH_TEXT[random.nextInt(DEATH_TEXT.length)];
     }
 }
