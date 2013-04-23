@@ -31,12 +31,15 @@ public class EventHookGSGraveStone {
     }
 
     private void createPlayerGrave(EntityPlayer player, LivingDeathEvent event) {
-        ItemStack[] items = new ItemStack[40];
-        System.arraycopy(player.inventory.mainInventory, 0, items, 0, 36);
-        System.arraycopy(player.inventory.armorInventory, 0, items, 36, 4);
-        player.inventory.clearInventory(-1, -1);
-
-        createGrave(player, event, items);
+        if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
+            ItemStack[] items = new ItemStack[40];
+            System.arraycopy(player.inventory.mainInventory, 0, items, 0, 36);
+            System.arraycopy(player.inventory.armorInventory, 0, items, 36, 4);
+            player.inventory.clearInventory(-1, -1);
+            createGrave(player, event, items);
+        } else {
+            createGrave(player, event, null);
+        }
     }
 
     private void createGrave(Entity entity, LivingDeathEvent event, ItemStack[] items) {
