@@ -59,7 +59,7 @@ public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCrea
     }
 
     public StructureVillagePieceWeight getVillagePieceWeight(Random random, int size) {
-        return new StructureVillagePieceWeight(ComponentGSVillageUndertaker.class, 12, MathHelper.getRandomIntegerInRange(random, 0, 1));
+        return new StructureVillagePieceWeight(ComponentGSVillageUndertaker.class, 3, MathHelper.getRandomIntegerInRange(random, 0, 1));
     }
 
     public Class getComponentClass() {
