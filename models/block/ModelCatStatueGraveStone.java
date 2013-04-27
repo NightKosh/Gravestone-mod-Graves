@@ -96,19 +96,25 @@ public class ModelCatStatueGraveStone extends ModelGraveStone {
         this.ocelotHead.rotateAngleX = par5 / (180F / (float) Math.PI);
         this.ocelotHead.rotateAngleY = par4 / (180F / (float) Math.PI);
 
-        this.ocelotBody.rotateAngleX = ((float) Math.PI / 2F);
-
-        this.ocelotBackLeftLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.0F * par2;
-        if (true) {
-            this.ocelotBackRightLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F + 0.3F) * 1.0F * par2;
-            this.ocelotFrontLeftLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI + 0.3F) * 1.0F * par2;
-            this.ocelotFrontRightLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.0F * par2;
-            this.ocelotTail2.rotateAngleX = 1.7278761F + ((float) Math.PI / 10F) * MathHelper.cos(par1) * par2;
-        } else {
-            this.ocelotBackRightLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.0F * par2;
-            this.ocelotFrontLeftLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.0F * par2;
-            this.ocelotFrontRightLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.0F * par2;
-        }
+        this.ocelotBody.rotateAngleX = ((float) Math.PI / 4F);
+        this.ocelotBody.rotationPointY = 8F;
+        this.ocelotBody.rotationPointZ = -5F;
+        this.ocelotHead.rotationPointY = 11.7F;
+        this.ocelotHead.rotationPointZ = -8F;
+        
+        this.ocelotTail.rotationPointY = 23F;
+        this.ocelotTail.rotationPointZ = 6F;
+        this.ocelotTail2.rotationPointY = 22F;
+        this.ocelotTail2.rotationPointZ = 13.2F;
+        this.ocelotTail.rotateAngleX = 1.7278761F;
+        this.ocelotTail2.rotateAngleX = 2.670354F;
+        
+        this.ocelotFrontLeftLeg.rotateAngleX = this.ocelotFrontRightLeg.rotateAngleX = -0.15707964F;
+        this.ocelotFrontLeftLeg.rotationPointY = this.ocelotFrontRightLeg.rotationPointY = 15.8F;
+        this.ocelotFrontLeftLeg.rotationPointZ = this.ocelotFrontRightLeg.rotationPointZ = -7.0F;
+        this.ocelotBackLeftLeg.rotateAngleX = this.ocelotBackRightLeg.rotateAngleX = -((float) Math.PI / 2F);
+        this.ocelotBackLeftLeg.rotationPointY = this.ocelotBackRightLeg.rotationPointY = 21.0F;
+        this.ocelotBackLeftLeg.rotationPointZ = this.ocelotBackRightLeg.rotationPointZ = 1.0F;
     }
 
     public void renderAll() {
