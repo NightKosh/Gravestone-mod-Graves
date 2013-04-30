@@ -34,6 +34,9 @@ public class GraveStoneConfig {
     public static boolean generateCatacombs;
     public static boolean generateSingleGraves;
     public static boolean generateMemorials;
+    // village generator
+    public static boolean generateCemeteries;
+    public static boolean generateUndertaker;
     // graves for entities
     public static boolean generatePlayerGraves;
     public static boolean generateVillagerGraves;
@@ -58,7 +61,6 @@ public class GraveStoneConfig {
         } else {
             return instance;
         }
-        
     }
 
     public void getConfigs() {
@@ -85,6 +87,8 @@ public class GraveStoneConfig {
         generateCatacombs = config.get(Configuration.CATEGORY_GENERAL, "GenerateCatacombs", true).getBoolean(true);
         generateMemorials = config.get(Configuration.CATEGORY_GENERAL, "GenerateMemorials", true).getBoolean(true);
         generateSingleGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateSingleGraves", true).getBoolean(true);
+        generateCemeteries = config.get(Configuration.CATEGORY_GENERAL, "GenerateCemeteries", true).getBoolean(true);
+        generateUndertaker = config.get(Configuration.CATEGORY_GENERAL, "GenerateUndertaker", true).getBoolean(true);
     }
 
     private static void gravesConfig() {

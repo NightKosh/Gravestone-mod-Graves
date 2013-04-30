@@ -8,9 +8,6 @@ import GraveStone.gui.GuiHandler;
 import GraveStone.item.ItemBlockGSGraveStone;
 import GraveStone.item.ItemBlockGSMemorial;
 import GraveStone.item.ItemGSChisel;
-import GraveStone.structures.GraveStoneWorldGenerator;
-import GraveStone.structures.VillageHandlerGSCemetery;
-import GraveStone.structures.VillageHandlerGSUndertaker;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import GraveStone.tileentity.TileEntityGSMemorial;
 import GraveStone.tileentity.TileEntityGSWitherSpawner;
@@ -25,7 +22,6 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,7 +29,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid = "GraveStone", name = "GraveStone", version = "2.0.0b1")
+@Mod(modid = "GraveStone", name = "GraveStone", version = "2.1.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class mod_GraveStone {
 
@@ -136,21 +132,11 @@ public class mod_GraveStone {
         // register Wither Spawner tile entity
         GameRegistry.registerTileEntity(TileEntityGSWitherSpawner.class, "GSWither Spawner");
 
-        // register cemeteries
-        VillageHandlerGSCemetery villageCemeteryHandler = new VillageHandlerGSCemetery();
-        VillagerRegistry.instance().registerVillageCreationHandler(villageCemeteryHandler);
-
-        // register Undertaker
-        VillageHandlerGSUndertaker villageUndertakerHandler = new VillageHandlerGSUndertaker();
-        VillagerRegistry.instance().registerVillageCreationHandler(villageUndertakerHandler);
-        VillagerRegistry.instance().registerVillagerType(385, "/GraveStone/resources/textures/undertaker.png");
-        VillagerRegistry.instance().registerVillageTradeHandler(385, villageUndertakerHandler);
-
-        // structure generator
-        GameRegistry.registerWorldGenerator(new GraveStoneWorldGenerator());
-
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 
+        // register structures
+        GraveStoneStructures.getInstance();
+        
         // register entitys
         GraveStoneEntity.getInstance();
         
