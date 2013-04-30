@@ -86,7 +86,7 @@ public class BlockGSGraveStone extends BlockContainer {
                     tileEntity.setDeathText(itemStack.stackTagCompound.getString("DeathText"));
                 }
                 if (itemStack.stackTagCompound.hasKey("Age")) {
-                    tileEntity.setDeathText(itemStack.stackTagCompound.getString("Age"));
+                    tileEntity.setAge(itemStack.stackTagCompound.getInteger("Age"));
                 }
             }
         }
