@@ -308,18 +308,19 @@ public class BlockGSGraveStone extends BlockContainer {
      * Called upon block activation (right click on the block.)
      */
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9) {
-        TileEntityGSGraveStone entity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
-        if (entity != null) {
-            String deathText = entity.getDeathText();
+        if (world.isRemote) {
+            TileEntityGSGraveStone entity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
+            if (entity != null) {
+                String deathText = entity.getDeathText();
 
-            if (!deathText.equals("")) {
-                entityPlayer.sendChatToPlayer(deathText);
-                if (entity.getAge() != -1) {
-                    entityPlayer.sendChatToPlayer("Had lived " + entity.getAge() + " days");
+                if (!deathText.equals("")) {
+                    entityPlayer.sendChatToPlayer(deathText);
+                    if (entity.getAge() != -1) {
+                        entityPlayer.sendChatToPlayer("Had lived " + entity.getAge() + " days");
+                    }
                 }
             }
         }
-
         return false;
     }
 
