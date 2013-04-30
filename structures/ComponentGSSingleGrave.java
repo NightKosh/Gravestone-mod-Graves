@@ -9,7 +9,7 @@ public class ComponentGSSingleGrave extends ComponentGSCemeteryCatacombs {
 
     public ComponentGSSingleGrave(int direction, Random random, int x, int z) {
         super(direction);
-        boundingBox = new StructureBoundingBox(x + 7, 0, z + 7, x + 7, 240, z + 7);//getCorrectBox(direction, x + 7, 4, z + 7, 1, 1, 1);
+        boundingBox = new StructureBoundingBox(x + 7, 0, z + 7, x + 7, 240, z + 7);
     }
 
     public boolean addComponentParts(World world, Random random) {

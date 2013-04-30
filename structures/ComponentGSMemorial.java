@@ -6,6 +6,7 @@ import GraveStone.mod_GraveStone;
 import GraveStone.tileentity.TileEntityGSMemorial;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 
 public class ComponentGSMemorial extends ComponentGSCemeteryCatacombs {
 
@@ -27,7 +28,8 @@ public class ComponentGSMemorial extends ComponentGSCemeteryCatacombs {
         this.boundingBox.offset(0, averageGroundLevel - boundingBox.maxY + HEIGHT - 1, 0);
 
         int groundID;
-        if (world.getBiomeGenForCoords(getXWithOffset(0, 0), getZWithOffset(0, 0)).equals("desert")) {
+        BiomeGenBase biom = world.getBiomeGenForCoords(getXWithOffset(0, 0), getZWithOffset(0, 0));
+        if (biom.equals(BiomeGenBase.desert) || biom.equals(BiomeGenBase.desertHills)) {
             groundID = Block.sand.blockID;
         } else {
             groundID = Block.grass.blockID;
