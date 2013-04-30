@@ -34,7 +34,8 @@ public class BlockGSGraveStone extends BlockContainer {
     public static final int GRAVE_TYPE_COUNT = 5;
     public static final byte[] GENERATED_GRAVES = {0, 1, 2};
     public static final byte[] PETS_GRAVES = {3, 4};
-            
+    public static final byte[] DOG_GRAVES = {3};
+    public static final byte[] CAT_GRAVES = {4};
 
     public BlockGSGraveStone(int par1) {
         super(par1, Material.rock);
@@ -68,10 +69,10 @@ public class BlockGSGraveStone extends BlockContainer {
         if (direction < 0) {
             direction = 360 + direction;
         }
-        
+
         int metadata = getMetadataBasedOnRotation(direction);
         world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
-        
+
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
         if (tileEntity != null) {
             if (itemStack.stackTagCompound != null) {
@@ -80,7 +81,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 } else {
                     tileEntity.setGraveType((byte) 0);
                 }
-                
+
                 if (itemStack.stackTagCompound.hasKey("DeathText")) {
                     tileEntity.setDeathText(itemStack.stackTagCompound.getString("DeathText"));
                 }
@@ -120,7 +121,8 @@ public class BlockGSGraveStone extends BlockContainer {
     }
 
     /**
-     * Updates the blocks bounds based on its current state. Args: world, x, y, z
+     * Updates the blocks bounds based on its current state. Args: world, x, y,
+     * z
      */
     public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
         int meta = access.getBlockMetadata(x, y, z);
@@ -241,14 +243,16 @@ public class BlockGSGraveStone extends BlockContainer {
     }
 
     /**
-     * Called when the player destroys a block with an item that can harvest it. (i, j, k) are the coordinates of the
-     * block and l is the block's subtype/damage.
+     * Called when the player destroys a block with an item that can harvest it.
+     * (i, j, k) are the coordinates of the block and l is the block's
+     * subtype/damage.
      */
     public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int metadata) {
     }
 
     /**
-     * Return true if a player with Silk Touch can harvest this block directly, and not its normal drops.
+     * Return true if a player with Silk Touch can harvest this block directly,
+     * and not its normal drops.
      */
     public boolean canSilkHarvest() {
         return GraveStoneConfig.silkTouchForGraves;
@@ -263,22 +267,25 @@ public class BlockGSGraveStone extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     /**
-     * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
+     * only called by clickMiddleMouseButton , and passed to
+     * inventory.setCurrentItem (along with isCreative)
      */
     public int idPicked(World par1World, int par2, int par3, int par4) {
         return blockID;
     }
 
     /**
-     * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
+     * If this block doesn't render as an ordinary block it will return False
+     * (examples: signs, buttons, stairs, etc)
      */
     public boolean renderAsNormalBlock() {
         return false;
     }
 
     /**
-     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
+     * Is this block (a) opaque and (b) a full 1m cube? This determines whether
+     * or not to render the shared face of two adjacent blocks and also whether
+     * the player can attach torches, redstone wire, etc to this block.
      */
     public boolean isOpaqueCube() {
         return false;
@@ -315,7 +322,8 @@ public class BlockGSGraveStone extends BlockContainer {
     }
 
     /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
+     * Returns a new instance of a block's tile entity class. Called on placing
+     * the block.
      */
     public TileEntity createNewTileEntity(World world) {
         return new TileEntityGSGraveStone(world);
@@ -324,7 +332,7 @@ public class BlockGSGraveStone extends BlockContainer {
     /*
      * Create grave on death
      */
-    public void createOnDeath(World world, int x, int y, int z, String deathText, int direction, ItemStack[] items, int age) {
+    public void createOnDeath(World world, int x, int y, int z, String deathText, int direction, ItemStack[] items, int age, byte entityType) {
         if (direction < 0) {
             direction = 360 + direction;
         }
@@ -339,7 +347,17 @@ public class BlockGSGraveStone extends BlockContainer {
         if (tileEntity != null) {
             tileEntity.setDeathText(deathText);
             tileEntity.setItems(items);
-            tileEntity.setGraveType((byte) rand.nextInt(GRAVE_TYPE_COUNT));
+            switch (entityType) {
+                case 0:
+                    tileEntity.setGraveType(GENERATED_GRAVES[rand.nextInt(GENERATED_GRAVES.length)]);
+                    break;
+                case 1:
+                    tileEntity.setGraveType(DOG_GRAVES[rand.nextInt(DOG_GRAVES.length)]);
+                    break;
+                case 2:
+                    tileEntity.setGraveType(CAT_GRAVES[rand.nextInt(CAT_GRAVES.length)]);
+                    break;
+            }
             tileEntity.setAge(age);
         }
     }
@@ -363,7 +381,8 @@ public class BlockGSGraveStone extends BlockContainer {
     }
 
     /**
-     * ejects contained items into the world, and notifies neighbours of an update, as appropriate
+     * ejects contained items into the world, and notifies neighbours of an
+     * update, as appropriate
      */
     public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
         TileEntityGSGraveStone tileEntityGraveStone = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
@@ -394,8 +413,9 @@ public class BlockGSGraveStone extends BlockContainer {
     }
 
     /**
-     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-     * their own) Args: x, y, z, neighbor blockID
+     * Lets the block know when one of its neighbor changes. Doesn't know which
+     * neighbor changed (coordinates passed are their own) Args: x, y, z,
+     * neighbor blockID
      */
     public void onNeighborBlockChange(World world, int x, int y, int z, int id) {
         if (!world.isBlockSolidOnSide(x, y - 1, z, ForgeDirection.DOWN, true)) {
@@ -405,7 +425,8 @@ public class BlockGSGraveStone extends BlockContainer {
     }
 
     /**
-     * Determines the damage on the item the block drops. Used in cloth and wood.
+     * Determines the damage on the item the block drops. Used in cloth and
+     * wood.
      */
     public int damageDropped(int metadata) {
         return 0;
@@ -413,7 +434,8 @@ public class BlockGSGraveStone extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+     * returns a list of blocks with the same ID, but different meta (eg: wood
+     * returns 4 blocks)
      */
     public void getSubBlocks(int id, CreativeTabs tabs, List list) {
         for (byte j = 0; j < GRAVE_TYPE_COUNT; j++) {

@@ -3,8 +3,10 @@ package GraveStone;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
@@ -20,11 +22,11 @@ public class EventHookGSGraveStone {
                 createPlayerGrave((EntityPlayer) event.entity, event);
             } else {
                 if (GraveStoneConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
-                    createGrave(event.entity, event, null, ((EntityVillager) event.entity).getAge());
+                    createGrave(event.entity, event, null, ((EntityVillager) event.entity).getAge(), (byte) 0);
                 }
 
                 if (GraveStoneConfig.generatePetGraves && event.entity instanceof EntityTameable) {
-                    //createPetGrave(event.entity, event);
+                    createPetGrave(event.entity, event);
                 }
             }
         }
@@ -36,24 +38,25 @@ public class EventHookGSGraveStone {
             System.arraycopy(player.inventory.mainInventory, 0, items, 0, 36);
             System.arraycopy(player.inventory.armorInventory, 0, items, 36, 4);
             player.inventory.clearInventory(-1, -1);
-            createGrave(player, event, items, player.getAge());
+            createGrave(player, event, items, player.getAge(), (byte) 0);
         } else {
-            createGrave(player, event, null, player.getAge());
+            createGrave(player, event, null, player.getAge(), (byte) 0);
         }
     }
 
-    private void createGrave(Entity entity, LivingDeathEvent event, ItemStack[] items, int age) {
+    private void createGrave(Entity entity, LivingDeathEvent event, ItemStack[] items, int age, byte entityType) {
         mod_GraveStone.graveStone.createOnDeath(entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
-                event.source.getDeathMessage((EntityLiving) entity), MathHelper.floor_float(entity.rotationYaw), items, age);
+                event.source.getDeathMessage((EntityLiving) entity), MathHelper.floor_float(entity.rotationYaw), items, age, entityType);
     }
 
-    private void createPetGrave(EntityLiving entity, LivingDeathEvent event) {
+    private void createPetGrave(Entity entity, LivingDeathEvent event) {
         EntityTameable pet = (EntityTameable) entity;
         if (pet.isTamed()) {
-            createGrave(entity, event, null, pet.getAge());
-            // Create grave
-//            mod_GraveStone.graveStone.createOnDeath(entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
-//                    event.source.getDeathMessage((EntityLiving) entity), MathHelper.floor_float(entity.rotationYaw), null);
+            if (pet instanceof EntityWolf) {
+                createGrave(entity, event, null, pet.getAge(), (byte) 1);
+            } else if (pet instanceof EntityOcelot) {
+                createGrave(entity, event, null, pet.getAge(), (byte) 2);
+            }
         }
     }
 }
