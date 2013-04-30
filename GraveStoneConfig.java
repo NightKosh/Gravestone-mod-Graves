@@ -41,10 +41,16 @@ public class GraveStoneConfig {
     public static boolean generatePlayerGraves;
     public static boolean generateVillagerGraves;
     public static boolean generatePetGraves;
+    // graves by damage
+    public static boolean generateGravesInLava;
     // saved items count
     public static int graveItemsCount;
+    // spawn rate
+    public static int graveSpawnRate;
     // silk touch for graves
     public static boolean silkTouchForGraves;
+    // allowed ground for graves
+    public static boolean canPlaceGravesEveryWhere;
     // item chisel
     public static int chiselId;
     public static Item chisel;
@@ -93,16 +99,28 @@ public class GraveStoneConfig {
 
     private static void gravesConfig() {
         silkTouchForGraves = config.get(Configuration.CATEGORY_GENERAL, "SilkTouchForGraves", true).getBoolean(true);
+        canPlaceGravesEveryWhere = config.get(Configuration.CATEGORY_GENERAL, "CanPlaceGravesEveryWhere", false).getBoolean(false);
         generatePlayerGraves = config.get(Configuration.CATEGORY_GENERAL, "GeneratePlayerGraves", true).getBoolean(true);
         generateVillagerGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateVillagerGraves", true).getBoolean(true);
         generatePetGraves = config.get(Configuration.CATEGORY_GENERAL, "GeneratePetGraves", true).getBoolean(true);
-
+        generateGravesInLava = config.get(Configuration.CATEGORY_GENERAL, "GenerateGravesInLava", true).getBoolean(true);
+        
+        // store items
         Property graveItemsCountProperty = config.get(Configuration.CATEGORY_GENERAL, "SavedItemsCount", 10);
         graveItemsCountProperty.comment = "This value must be between 0 an 40!";
         
         graveItemsCount = graveItemsCountProperty.getInt();
         if (graveItemsCount > 40 || graveItemsCount < 0) {
             graveItemsCount = 40;
+        }
+        
+        // spawn rate
+        Property graveSpawnRateProperty = config.get(Configuration.CATEGORY_GENERAL, "SpawnRate", 1800);
+        graveSpawnRateProperty.comment = "This value must be bigger than 1800!";
+        
+        graveSpawnRate = graveSpawnRateProperty.getInt();
+        if (graveSpawnRate < 1800) {
+            graveSpawnRate = 1800;
         }
     }
 }

@@ -1,5 +1,6 @@
 package GraveStone.tileentity;
 
+import GraveStone.GraveStoneConfig;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,6 +10,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -20,28 +23,32 @@ public class GSGraveStoneSpawn {
     private TileEntityGSGraveStone tileEntity;
     private static final Random rand = new Random();
     private static final String[] MOB_ID = {"Zombie", "Skeleton"};
+    private static final String[] HELL_MOB_ID = {"PigZombie", "Skeleton"};
     private static final int PLAYER_RANGE = 35;
-    /** The stored delay before a new spawn. */
+    /**
+     * The stored delay before a new spawn.
+     */
     private int delay = 600;
     private static final int MIN_DELAY = 800;
-    private static final int MAX_DELAY = 1800;
     private Entity spawnedMob;
     private List field_92060_e = null;
-    /** The extra NBT data to add to spawned entities */
+    /**
+     * The extra NBT data to add to spawned entities
+     */
     private TileEntityGSGraveStoneSpawnData spawnerTags = null;
-    /** Maximum number of entities for limiting mob spawning */
+    /**
+     * Maximum number of entities for limiting mob spawning
+     */
     private static final int MAX_NEARBY_ENTITIES = 3;
-    /** Range for spawning new entities with gravestone */
+    /**
+     * Range for spawning new entities with gravestone
+     */
     private static final int SPAWN_RANGE = 1;
-    private final boolean canSpawnHellCreatures;
+    private boolean canSpawnHellCreatures;
 
     public GSGraveStoneSpawn(TileEntityGSGraveStone tileEntity) {
         this.tileEntity = tileEntity;
-        if (tileEntity.worldObj != null) {
-            canSpawnHellCreatures = (tileEntity.yCoord < 51 && tileEntity.worldObj.getBlockId(tileEntity.xCoord, tileEntity.yCoord - 1, tileEntity.zCoord) == Block.netherBrick.blockID);
-        } else {
-            canSpawnHellCreatures = false;
-        }
+        canSpawnHellCreatures = false;
     }
 
     /**
@@ -63,8 +70,9 @@ public class GSGraveStoneSpawn {
     }
 
     /**
-     * Allows the entity to update its state. Overridden in most subclasses, e.g. the mob spawner uses this to count
-     * ticks and creates a new spawn inside its implementation.
+     * Allows the entity to update its state. Overridden in most subclasses,
+     * e.g. the mob spawner uses this to count ticks and creates a new spawn
+     * inside its implementation.
      */
     public void updateEntity() {
         if (isNightTime(tileEntity.worldObj) && anyPlayerInRange()) {
@@ -170,10 +178,19 @@ public class GSGraveStoneSpawn {
         }
     }
 
+    private boolean canSpawnHellCreatures() {
+        if (canSpawnHellCreatures) {
+            return true;
+        } else if (tileEntity.worldObj != null) {
+            canSpawnHellCreatures = (tileEntity.yCoord < 51 && tileEntity.worldObj.getBlockId(tileEntity.xCoord, tileEntity.yCoord - 1, tileEntity.zCoord) == Block.netherBrick.blockID);
+        }
+        return canSpawnHellCreatures;
+    }
+
     /**
      * will create the entity from the internalID the first time it is accessed
      */
-    public Entity getMobEntity() {
+    private Entity getMobEntity() {
         String id;
 
         switch (tileEntity.graveType) {
@@ -184,20 +201,21 @@ public class GSGraveStoneSpawn {
                 id = "GSZombieCat";
                 break;
             default:
-                id = this.getMobID();
-                if (canSpawnHellCreatures) {
-                    if (rand.nextInt(20) == 0) {
-                        if (id.equals("Skeleton")) {
-                            EntitySkeleton entity = (EntitySkeleton) EntityList.createEntityByName(id, tileEntity.worldObj);
-                            entity.setSkeletonType(1);
-                            this.spawnedMob = entity;
-                            return this.spawnedMob;
-                        } else {
-                            if (id.equals("Zombie")) {
-                                id = "PigZombie";
-                            }
+                if (canSpawnHellCreatures() && rand.nextInt(20) >= 0) {
+                    id = this.getMobID(true);
+                    if (id.equals("Skeleton")) {
+                        EntitySkeleton entity = (EntitySkeleton) EntityList.createEntityByName(id, tileEntity.worldObj);
+                        entity.setSkeletonType(1);
+                        if (rand.nextInt(2) == 0) {
+                            entity.setCurrentItemOrArmor(0, new ItemStack(Item.swordStone));
                         }
+                        this.spawnedMob = entity;
+                        return this.spawnedMob;
+                    } else {
+                        id = "PigZombie";
                     }
+                } else {
+                    id = this.getMobID(false);
                 }
         }
 
@@ -210,15 +228,16 @@ public class GSGraveStoneSpawn {
     /*
      * return random mob id from list
      */
-    public String getMobID() {
-        return MOB_ID[rand.nextInt(MOB_ID.length)];
+    private static String getMobID(boolean spawnHellCreatures) {
+        return spawnHellCreatures ? HELL_MOB_ID[rand.nextInt(HELL_MOB_ID.length)] : MOB_ID[rand.nextInt(MOB_ID.length)];
     }
 
     /**
-     * Sets the delay before a new spawn (base delay of 200 + random number up to 600).
+     * Sets the delay before a new spawn (base delay of 200 + random number up
+     * to 600).
      */
     private void updateDelay() {
-        delay = MIN_DELAY + tileEntity.worldObj.rand.nextInt(MAX_DELAY - MIN_DELAY);
+        delay = MIN_DELAY + tileEntity.worldObj.rand.nextInt(GraveStoneConfig.graveSpawnRate - MIN_DELAY);
 
         if (this.field_92060_e != null && this.field_92060_e.size() > 0) {
             tileEntity.worldObj.markBlockForUpdate(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
@@ -229,7 +248,7 @@ public class GSGraveStoneSpawn {
     }
 
     public String getEntityId() {
-        return this.spawnerTags == null ? this.getMobID() : this.spawnerTags.field_92033_c;
+        return this.spawnerTags == null ? this.getMobID(false) : this.spawnerTags.field_92033_c;
     }
 
     public void readSpawn(NBTTagCompound nbtTag) {

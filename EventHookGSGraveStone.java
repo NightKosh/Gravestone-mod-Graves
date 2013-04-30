@@ -18,6 +18,9 @@ public class EventHookGSGraveStone {
     @ForgeSubscribe
     public void onEntityLivingDeath(LivingDeathEvent event) {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+            if (!GraveStoneConfig.generateGravesInLava && event.source.damageType.equals("lava")) {
+                return;
+            }
             if (GraveStoneConfig.generatePlayerGraves && event.entityLiving instanceof EntityPlayer) {
                 createPlayerGrave((EntityPlayer) event.entity, event);
             } else {

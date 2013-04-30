@@ -110,7 +110,9 @@ public class BlockGSGraveStone extends BlockContainer {
     }
 
     public boolean canPlaceBlockAt(int blockId) {
-        if (blockId == Block.grass.blockID || blockId == Block.dirt.blockID
+        if (GraveStoneConfig.canPlaceGravesEveryWhere) {
+            return true;
+        } else if (blockId == Block.grass.blockID || blockId == Block.dirt.blockID
                 || blockId == Block.sand.blockID || blockId == Block.gravel.blockID
                 || blockId == Block.slowSand.blockID || blockId == Block.mycelium.blockID
                 || blockId == Block.blockSnow.blockID) {
