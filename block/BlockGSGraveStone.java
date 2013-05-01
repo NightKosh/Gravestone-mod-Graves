@@ -183,7 +183,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case 3: // DOG_STATUE_PLATE
+            case 3: // DOG_STATUE
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.35F, 0.0F, 0.3F, 0.6F, 0.5F, 0.9F);
@@ -199,7 +199,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case 4: // CAT_STATUE_PLATE
+            case 4: // CAT_STATUE
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.43F, 0.0F, 0.3F, 0.57F, 0.5F, 0.75F);

@@ -25,6 +25,8 @@ public class GSGraveStoneSpawn {
     private static final Random rand = new Random();
     private static final String[] MOB_ID = {"Zombie", "Skeleton"};
     private static final String[] HELL_MOB_ID = {"PigZombie", "Skeleton"};
+    private static final String[] DOG_ID = {"GSZombieDog", "GSSkeletonDog"};
+    private static final String[] CAT_ID = {"GSZombieCat", "GSSkeletonCat"};
     private static final int PLAYER_RANGE = 35;
     /**
      * The stored delay before a new spawn.
@@ -193,14 +195,14 @@ public class GSGraveStoneSpawn {
 
         switch (tileEntity.graveType) {
             case 3:
-                id = "GSZombieDog";
+                id = this.getMobID(2);
                 break;
             case 4:
-                id = "GSZombieCat";
+                id = this.getMobID(3);
                 break;
             default:
                 if (canSpawnHellCreatures() && rand.nextInt(20) == 0) {
-                    id = this.getMobID(true);
+                    id = this.getMobID(1);
                     if (id.equals("Skeleton")) {
                         EntitySkeleton entity = (EntitySkeleton) EntityList.createEntityByName(id, tileEntity.worldObj);
                         entity.setSkeletonType(1);
@@ -213,7 +215,7 @@ public class GSGraveStoneSpawn {
                         id = "PigZombie";
                     }
                 } else {
-                    id = this.getMobID(false);
+                    id = this.getMobID(0);
                 }
         }
 
@@ -226,8 +228,19 @@ public class GSGraveStoneSpawn {
     /*
      * return random mob id from list
      */
-    private static String getMobID(boolean spawnHellCreatures) {
-        return spawnHellCreatures ? HELL_MOB_ID[rand.nextInt(HELL_MOB_ID.length)] : MOB_ID[rand.nextInt(MOB_ID.length)];
+    private static String getMobID(int creatureType) {
+        switch (creatureType) {
+            case 0:
+                return MOB_ID[rand.nextInt(MOB_ID.length)];
+            case 1:
+                return HELL_MOB_ID[rand.nextInt(HELL_MOB_ID.length)];
+            case 2:
+                return DOG_ID[rand.nextInt(DOG_ID.length)];
+            case 3:
+                return CAT_ID[rand.nextInt(CAT_ID.length)];
+            default :
+                return MOB_ID[rand.nextInt(MOB_ID.length)];
+        }
     }
 
     /**
@@ -246,7 +259,7 @@ public class GSGraveStoneSpawn {
     }
 
     public String getEntityId() {
-        return this.spawnerTags == null ? this.getMobID(false) : this.spawnerTags.field_92033_c;
+        return this.spawnerTags == null ? this.getMobID(0) : this.spawnerTags.field_92033_c;
     }
 
     public void readSpawn(NBTTagCompound nbtTag) {

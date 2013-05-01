@@ -1,6 +1,6 @@
 package GraveStone.models.entity;
 
-import GraveStone.entity.EntityZombieDog;
+import GraveStone.entity.EntityUndeadDog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
@@ -8,29 +8,44 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.MathHelper;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class ModelZombieDog extends ModelBase {
+public class ModelUndeadDog extends ModelBase {
 
-    /** main box for the wolf head */
+    /**
+     * main box for the wolf head
+     */
     public ModelRenderer wolfHeadMain;
-    /** The wolf's body */
+    /**
+     * The wolf's body
+     */
     public ModelRenderer wolfBody;
-    /** Wolf'se first leg */
+    /**
+     * Wolf'se first leg
+     */
     public ModelRenderer wolfLeg1;
-    /** Wolf's second leg */
+    /**
+     * Wolf's second leg
+     */
     public ModelRenderer wolfLeg2;
-    /** Wolf's third leg */
+    /**
+     * Wolf's third leg
+     */
     public ModelRenderer wolfLeg3;
-    /** Wolf's fourth leg */
+    /**
+     * Wolf's fourth leg
+     */
     public ModelRenderer wolfLeg4;
-    /** The wolf's tail */
+    /**
+     * The wolf's tail
+     */
     ModelRenderer wolfTail;
-    /** The wolf's mane */
+    /**
+     * The wolf's mane
+     */
     ModelRenderer wolfMane;
 
-    public ModelZombieDog() {
+    public ModelUndeadDog() {
         float f = 0.0F;
         float f1 = 13.5F;
         this.wolfHeadMain = new ModelRenderer(this, 0, 0);
@@ -65,45 +80,27 @@ public class ModelZombieDog extends ModelBase {
     /**
      * Sets the models various rotation angles then renders the model.
      */
-    public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7) {
-        super.render(par1Entity, par2, par3, par4, par5, par6, par7);
-        this.setRotationAngles(par2, par3, par4, par5, par6, par7, par1Entity);
+    public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
+        super.render(entity, par2, par3, par4, par5, par6, par7);
+        this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
-        if (this.isChild) {
-            float f6 = 2.0F;
-            GL11.glPushMatrix();
-            GL11.glTranslatef(0.0F, 5.0F * par7, 2.0F * par7);
-            this.wolfHeadMain.renderWithRotation(par7);
-            GL11.glPopMatrix();
-            GL11.glPushMatrix();
-            GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
-            GL11.glTranslatef(0.0F, 24.0F * par7, 0.0F);
-            this.wolfBody.render(par7);
-            this.wolfLeg1.render(par7);
-            this.wolfLeg2.render(par7);
-            this.wolfLeg3.render(par7);
-            this.wolfLeg4.render(par7);
-            this.wolfTail.renderWithRotation(par7);
-            this.wolfMane.render(par7);
-            GL11.glPopMatrix();
-        } else {
-            this.wolfHeadMain.renderWithRotation(par7);
-            this.wolfBody.render(par7);
-            this.wolfLeg1.render(par7);
-            this.wolfLeg2.render(par7);
-            this.wolfLeg3.render(par7);
-            this.wolfLeg4.render(par7);
-            this.wolfTail.renderWithRotation(par7);
-            this.wolfMane.render(par7);
-        }
+        this.wolfHeadMain.renderWithRotation(par7);
+        this.wolfBody.render(par7);
+        this.wolfLeg1.render(par7);
+        this.wolfLeg2.render(par7);
+        this.wolfLeg3.render(par7);
+        this.wolfLeg4.render(par7);
+        this.wolfTail.renderWithRotation(par7);
+        this.wolfMane.render(par7);
     }
 
     /**
-     * Used for easily adding entity-dependent animations. The second and third float params here are the same second
-     * and third as in the setRotationAngles method.
+     * Used for easily adding entity-dependent animations. The second and third
+     * float params here are the same second and third as in the
+     * setRotationAngles method.
      */
-    public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
-        EntityZombieDog entityZombieDog = (EntityZombieDog) par1EntityLiving;
+    public void setLivingAnimations(EntityLiving entityLiving, float par2, float par3, float par4) {
+        EntityUndeadDog undeadDog = (EntityUndeadDog) entityLiving;
 
         this.wolfTail.rotateAngleY = MathHelper.cos(par2 * 0.6662F) * 1.4F * par3;
 
@@ -123,16 +120,17 @@ public class ModelZombieDog extends ModelBase {
         this.wolfLeg4.rotateAngleX = MathHelper.cos(par2 * 0.6662F) * 1.4F * par3;
 
 
-        this.wolfHeadMain.rotateAngleZ = entityZombieDog.getInterestedAngle(par4) + entityZombieDog.getShakeAngle(par4, 0.0F);
-        this.wolfMane.rotateAngleZ = entityZombieDog.getShakeAngle(par4, -0.08F);
-        this.wolfBody.rotateAngleZ = entityZombieDog.getShakeAngle(par4, -0.16F);
-        this.wolfTail.rotateAngleZ = entityZombieDog.getShakeAngle(par4, -0.2F);
+        this.wolfHeadMain.rotateAngleZ = undeadDog.getInterestedAngle(par4) + undeadDog.getShakeAngle(par4, 0.0F);
+        this.wolfMane.rotateAngleZ = undeadDog.getShakeAngle(par4, -0.08F);
+        this.wolfBody.rotateAngleZ = undeadDog.getShakeAngle(par4, -0.16F);
+        this.wolfTail.rotateAngleZ = undeadDog.getShakeAngle(par4, -0.2F);
     }
 
     /**
-     * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
-     * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
-     * "far" arms and legs can swing at most.
+     * Sets the model's various rotation angles. For bipeds, par1 and par2 are
+     * used for animating the movement of arms and legs, where par1 represents
+     * the time(so that arms and legs swing back and forth) and par2 represents
+     * how "far" arms and legs can swing at most.
      */
     public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);

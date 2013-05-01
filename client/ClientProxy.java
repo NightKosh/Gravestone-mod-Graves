@@ -2,14 +2,16 @@ package GraveStone.client;
 
 import GraveStone.CommonProxy;
 import GraveStone.GraveStoneConfig;
+import GraveStone.entity.EntitySkeletonCat;
+import GraveStone.entity.EntitySkeletonDog;
 import GraveStone.entity.EntityZombieCat;
 import GraveStone.renderer.item.ItemGSGraveStoneRenderer;
 import GraveStone.renderer.item.ItemGSMemorialRenderer;
 import GraveStone.entity.EntityZombieDog;
-import GraveStone.models.entity.ModelZombieCat;
-import GraveStone.models.entity.ModelZombieDog;
-import GraveStone.renderer.entity.RenderZombieCat;
-import GraveStone.renderer.entity.RenderZombieDog;
+import GraveStone.models.entity.ModelUndeadCat;
+import GraveStone.models.entity.ModelUndeadDog;
+import GraveStone.renderer.entity.RenderUndeadCat;
+import GraveStone.renderer.entity.RenderUndeadDog;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import GraveStone.renderer.tileentity.TileEntityGSGraveStoneRenderer;
 import GraveStone.tileentity.TileEntityGSMemorial;
@@ -32,9 +34,13 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.memorialID, new ItemGSMemorialRenderer());
         
         // zombie dog
-        RenderingRegistry.registerEntityRenderingHandler(EntityZombieDog.class, new RenderZombieDog(new ModelZombieDog(), new ModelZombieDog()));
-        
+        RenderingRegistry.registerEntityRenderingHandler(EntityZombieDog.class, new RenderUndeadDog(new ModelUndeadDog(), new ModelUndeadDog()));
         // zombie cat
-        RenderingRegistry.registerEntityRenderingHandler(EntityZombieCat.class, new RenderZombieCat(new ModelZombieCat(), 0));
+        RenderingRegistry.registerEntityRenderingHandler(EntityZombieCat.class, new RenderUndeadCat(new ModelUndeadCat(), 0));
+        
+        // skeleton dog
+        RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonDog.class, new RenderUndeadDog(new ModelUndeadDog(), new ModelUndeadDog()));
+        // zombie cat
+        RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonCat.class, new RenderUndeadCat(new ModelUndeadCat(), 0));
     }
 }

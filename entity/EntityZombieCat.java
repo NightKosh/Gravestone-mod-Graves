@@ -2,99 +2,39 @@ package GraveStone.entity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
 import net.minecraft.entity.ai.EntityAIMoveTwardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIOcelotAttack;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityZombieCat extends EntityMob {
-
-    /**
-     * The tempt AI task for this mob, used to prevent taming while it is fleeing.
-     */
-    private EntityAITempt aiTempt;
+public class EntityZombieCat extends EntityUndeadCat {
 
     public EntityZombieCat(World world) {
         super(world);
         this.texture = "/mob/ozelot.png";
-        this.setSize(0.6F, 0.8F);
-        this.getNavigator().setAvoidsWater(true);
-        this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(7, new EntityAILeapAtTarget(this, 0.3F));
-        this.tasks.addTask(8, new EntityAIOcelotAttack(this));
+        this.moveSpeed = 0.5F;
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed, false));
+        this.tasks.addTask(4, new EntityAIMoveTwardsRestriction(this, this.moveSpeed));
+        this.tasks.addTask(6, new EntityAIWander(this, this.moveSpeed));
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityVillager.class, this.moveSpeed, true));
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityWolf.class, this.moveSpeed, true));
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityOcelot.class, this.moveSpeed, true));
-        this.tasks.addTask(4, new EntityAIMoveTwardsRestriction(this, this.moveSpeed));
         this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, this.moveSpeed, false));
-        this.tasks.addTask(6, new EntityAIWander(this, this.moveSpeed));
-        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(7, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 16.0F, 0, true));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 16.0F, 0, false));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWolf.class, 16.0F, 0, false));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityOcelot.class, 16.0F, 0, false));
-    }
-
-    protected void entityInit() {
-        super.entityInit();
-        this.dataWatcher.addObject(18, Byte.valueOf((byte) 0));
-    }
-
-    /**
-     * main AI tick function, replaces updateEntityActionState
-     */
-    public void updateAITick() {
-        if (this.getMoveHelper().isUpdating()) {
-            float f = this.getMoveHelper().getSpeed();
-
-            if (f == 0.18F) {
-                this.setSneaking(true);
-                this.setSprinting(false);
-            } else if (f == 0.4F) {
-                this.setSneaking(false);
-                this.setSprinting(true);
-            } else {
-                this.setSneaking(false);
-                this.setSprinting(false);
-            }
-        } else {
-            this.setSneaking(false);
-            this.setSprinting(false);
-        }
-    }
-
-    /**
-     * Determines if an entity can be despawned, used on idle far away entities
-     */
-    protected boolean canDespawn() {
-        return true;
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityChicken.class, 16.0F, 0, false));
     }
 
     @SideOnly(Side.CLIENT)
@@ -116,21 +56,8 @@ public class EntityZombieCat extends EntityMob {
         }
     }
 
-    /**
-     * Returns true if the newer Entity AI code should be run
-     */
-    public boolean isAIEnabled() {
-        return true;
-    }
-
     public int getMaxHealth() {
         return 10;
-    }
-
-    /**
-     * Called when the mob is falling. Calculates and applies fall damage.
-     */
-    protected void fall(float par1) {
     }
 
     /**
@@ -169,6 +96,12 @@ public class EntityZombieCat extends EntityMob {
     protected String getDeathSound() {
         return "mob.cat.hitt";
     }
+    
+    /**
+     * Plays step sound at given x, y, z for the entity
+     */
+    protected void playStepSound(int par1, int par2, int par3, int par4) {
+    }
 
     /**
      * Returns the volume for the sounds this mob makes.
@@ -184,50 +117,12 @@ public class EntityZombieCat extends EntityMob {
         return Item.rottenFlesh.itemID;
     }
 
-    public boolean attackEntityAsMob(Entity entity) {
-        return entity.attackEntityFrom(DamageSource.causeMobDamage(this), 3);
-    }
-
-    /**
-     * Called when the entity is attacked.
-     */
-    public boolean attackEntityFrom(DamageSource damageSource, int par2) {
-        if (this.isEntityInvulnerable()) {
-            return false;
-        } else {
-            return super.attackEntityFrom(damageSource, par2);
-        }
-    }
-
-    /**
-     * Drop 0-2 items of this living's type. @param par1 - Whether this entity has recently been hit by a player. @param
-     * par2 - Level of Looting used to kill this mob.
-     */
-    protected void dropFewItems(boolean par1, int par2) {
-    }
-
-    /**
-     * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
-     */
-    public EntityZombieCat spawnBabyAnimal(EntityAgeable entityAgeable) {
-        EntityZombieCat entityZombieCat = new EntityZombieCat(this.worldObj);
-
-        return entityZombieCat;
-    }
-
     public int getSkin() {
         return this.dataWatcher.getWatchableObjectByte(18);
     }
 
     public void setSkin(int par1) {
         this.dataWatcher.updateObject(18, Byte.valueOf((byte) par1));
-    }
-
-    /**
-     * Gets the username of the entity.
-     */
-    public String getEntityName() {
-        return this.func_94056_bM() ? this.func_94057_bL() : super.getEntityName();
     }
     
     /**
@@ -270,29 +165,5 @@ public class EntityZombieCat extends EntityMob {
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             }
         }
-    }
-    
-
-    /**
-     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
-     * use this to react to sunlight and start to burn.
-     */
-    public void onLivingUpdate() {
-        if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
-            float f = this.getBrightness(1.0F);
-
-            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ))) {
-                this.setFire(8);
-            }
-        }
-
-        super.onLivingUpdate();
-    }
-
-    /**
-     * Get this Entity's EnumCreatureAttribute
-     */
-    public EnumCreatureAttribute getCreatureAttribute() {
-        return EnumCreatureAttribute.UNDEAD;
     }
 }
