@@ -103,29 +103,10 @@ public class EntityZombieDog extends EntityMob {
     }
 
     /**
-     * This method returns a value to be applied directly to entity speed, this factor is less than 1 when a slowdown
-     * potion effect is applied, more than 1 when a haste potion effect is applied and 2 for fleeing entities.
-     */
-    public float getSpeedModifier() {
-        return super.getSpeedModifier() * (this.isChild() ? 1.5F : 1.0F);
-    }
-
-    /**
-     * Set whether this zombie is a child.
-     */
-    public void setChild(boolean par1) {
-        this.getDataWatcher().updateObject(18, Byte.valueOf((byte) 1));
-    }
-
-    /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeEntityToNBT(par1NBTTagCompound);
-
-        if (this.isChild()) {
-            par1NBTTagCompound.setBoolean("IsBaby", true);
-        }
     }
 
     /**
@@ -133,10 +114,6 @@ public class EntityZombieDog extends EntityMob {
      */
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
-
-        if (par1NBTTagCompound.getBoolean("IsBaby")) {
-            this.setChild(true);
-        }
     }
 
     /**
@@ -193,7 +170,7 @@ public class EntityZombieDog extends EntityMob {
      * use this to react to sunlight and start to burn.
      */
     public void onLivingUpdate() {
-        if (this.worldObj.isDaytime() && !this.worldObj.isRemote && !this.isChild()) {
+        if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
             float f = this.getBrightness(1.0F);
 
             if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ))) {
@@ -358,10 +335,6 @@ public class EntityZombieDog extends EntityMob {
                 entityZombieDog.func_82149_j(entityLiving);
                 this.worldObj.removeEntity(entityLiving);
 
-                if (entityLiving.isChild()) {
-                    entityZombieDog.setChild(true);
-                }
-
                 this.worldObj.spawnEntityInWorld(entityZombieDog);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             } else if (entityLiving instanceof EntityOcelot) {
@@ -369,10 +342,6 @@ public class EntityZombieDog extends EntityMob {
                 entityZombieCat.func_82149_j(entityLiving);
                 this.worldObj.removeEntity(entityLiving);
                 entityZombieCat.initCreature();
-
-                if (entityLiving.isChild()) {
-                    entityZombieCat.setChild(true);
-                }
 
                 this.worldObj.spawnEntityInWorld(entityZombieCat);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);

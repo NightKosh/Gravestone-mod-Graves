@@ -183,6 +183,38 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
+            case 3: // DOG_STATUE_PLATE
+                switch (meta) {
+                    case 0:
+                        this.setBlockBounds(0.35F, 0.0F, 0.3F, 0.6F, 0.5F, 0.9F);
+                        break;
+                    case 1:
+                        this.setBlockBounds(0.35F, 0.0F, 0.7F, 0.6F, 0.5F, 0.1F);
+                        break;
+                    case 2:
+                        this.setBlockBounds(0.3F, 0.0F, 0.35F, 0.9F, 0.5F, 0.6F);
+                        break;
+                    case 3:
+                        this.setBlockBounds(0.7F, 0.0F, 0.35F, 0.1F, 0.5F, 0.6F);
+                        break;
+                }
+                break;
+            case 4: // CAT_STATUE_PLATE
+                switch (meta) {
+                    case 0:
+                        this.setBlockBounds(0.43F, 0.0F, 0.3F, 0.57F, 0.5F, 0.75F);
+                        break;
+                    case 1:
+                        this.setBlockBounds(0.43F, 0.0F, 0.7F, 0.57F, 0.5F, 0.25F);
+                        break;
+                    case 2:
+                        this.setBlockBounds(0.3F, 0.0F, 0.43F, 0.75F, 0.5F, 0.57F);
+                        break;
+                    case 3:
+                        this.setBlockBounds(0.7F, 0.0F, 0.43F, 0.25F, 0.5F, 0.57F);
+                        break;
+                }
+                break;
         }
     }
 

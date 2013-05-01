@@ -224,51 +224,10 @@ public class EntityZombieCat extends EntityMob {
     }
 
     /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
-    public boolean getCanSpawnHere() {
-        if (this.worldObj.rand.nextInt(3) == 0) {
-            return false;
-        } else {
-            if (this.worldObj.checkIfAABBIsClear(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(this.boundingBox)) {
-                int i = MathHelper.floor_double(this.posX);
-                int j = MathHelper.floor_double(this.boundingBox.minY);
-                int k = MathHelper.floor_double(this.posZ);
-
-                if (j < 63) {
-                    return false;
-                }
-
-                int l = this.worldObj.getBlockId(i, j - 1, k);
-                Block block = Block.blocksList[l];
-
-                if (l == Block.grass.blockID || (block != null && block.isLeaves(worldObj, i, j - 1, k))) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-    }
-
-    /**
      * Gets the username of the entity.
      */
     public String getEntityName() {
         return this.func_94056_bM() ? this.func_94057_bL() : super.getEntityName();
-    }
-
-    /**
-     * Initialize this creature.
-     */
-    public void initCreature() {
-        if (this.worldObj.rand.nextInt(7) == 0) {
-            for (int i = 0; i < 2; ++i) {
-                EntityZombieCat entityZombieCat = new EntityZombieCat(this.worldObj);
-                entityZombieCat.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
-                this.worldObj.spawnEntityInWorld(entityZombieCat);
-            }
-        }
     }
     
     /**
@@ -299,10 +258,6 @@ public class EntityZombieCat extends EntityMob {
                 entityZombieDog.func_82149_j(entityLiving);
                 this.worldObj.removeEntity(entityLiving);
 
-                if (entityLiving.isChild()) {
-                    entityZombieDog.setChild(true);
-                }
-
                 this.worldObj.spawnEntityInWorld(entityZombieDog);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             } else if (entityLiving instanceof EntityOcelot) {
@@ -310,10 +265,6 @@ public class EntityZombieCat extends EntityMob {
                 entityZombieCat.func_82149_j(entityLiving);
                 this.worldObj.removeEntity(entityLiving);
                 entityZombieCat.initCreature();
-
-                if (entityLiving.isChild()) {
-                    entityZombieCat.setChild(true);
-                }
 
                 this.worldObj.spawnEntityInWorld(entityZombieCat);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
@@ -327,7 +278,7 @@ public class EntityZombieCat extends EntityMob {
      * use this to react to sunlight and start to burn.
      */
     public void onLivingUpdate() {
-        if (this.worldObj.isDaytime() && !this.worldObj.isRemote && !this.isChild()) {
+        if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
             float f = this.getBrightness(1.0F);
 
             if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ))) {
@@ -343,20 +294,5 @@ public class EntityZombieCat extends EntityMob {
      */
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.UNDEAD;
-    }
-    
-    /**
-     * This method returns a value to be applied directly to entity speed, this factor is less than 1 when a slowdown
-     * potion effect is applied, more than 1 when a haste potion effect is applied and 2 for fleeing entities.
-     */
-    public float getSpeedModifier() {
-        return super.getSpeedModifier() * (this.isChild() ? 1.5F : 1.0F);
-    }
-    
-    /**
-     * Set whether this zombie is a child.
-     */
-    public void setChild(boolean par1) {
-        this.getDataWatcher().updateObject(18, Byte.valueOf((byte) 1));
     }
 }

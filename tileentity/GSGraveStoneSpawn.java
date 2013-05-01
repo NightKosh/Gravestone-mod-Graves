@@ -1,6 +1,7 @@
 package GraveStone.tileentity;
 
 import GraveStone.GraveStoneConfig;
+import GraveStone.entity.EntityZombieCat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -119,31 +120,28 @@ public class GSGraveStoneSpawn {
                     if (livingEntity.getCanSpawnHere()) {
                         canSpawn = true;
                     } else {
-                        if (spawnMob instanceof EntitySkeleton) {
-                            EntitySkeleton witherSkeleton = (EntitySkeleton) spawnMob;
-                            if (witherSkeleton.getSkeletonType() == 1) {
-                                x += 1;
+                        if (spawnMob instanceof EntitySkeleton && ((EntitySkeleton) spawnMob).getSkeletonType() == 1) {
+                            x += 1;
+                            spawnMob.setLocationAndAngles(x, y, z, rotation, 0.0F);
+                            if (livingEntity.getCanSpawnHere()) {
+                                canSpawn = true;
+                            } else {
+                                x -= 1;
+                                z += 1;
                                 spawnMob.setLocationAndAngles(x, y, z, rotation, 0.0F);
                                 if (livingEntity.getCanSpawnHere()) {
                                     canSpawn = true;
                                 } else {
-                                    x -= 1;
-                                    z += 1;
+                                    z -= 2;
                                     spawnMob.setLocationAndAngles(x, y, z, rotation, 0.0F);
                                     if (livingEntity.getCanSpawnHere()) {
                                         canSpawn = true;
                                     } else {
-                                        z -= 2;
+                                        x -= 1;
+                                        z += 1;
                                         spawnMob.setLocationAndAngles(x, y, z, rotation, 0.0F);
                                         if (livingEntity.getCanSpawnHere()) {
                                             canSpawn = true;
-                                        } else {
-                                            x -= 1;
-                                            z += 1;
-                                            spawnMob.setLocationAndAngles(x, y, z, rotation, 0.0F);
-                                            if (livingEntity.getCanSpawnHere()) {
-                                                canSpawn = true;
-                                            }
                                         }
                                     }
                                 }
@@ -201,7 +199,7 @@ public class GSGraveStoneSpawn {
                 id = "GSZombieCat";
                 break;
             default:
-                if (canSpawnHellCreatures() && rand.nextInt(20) >= 0) {
+                if (canSpawnHellCreatures() && rand.nextInt(20) == 0) {
                     id = this.getMobID(true);
                     if (id.equals("Skeleton")) {
                         EntitySkeleton entity = (EntitySkeleton) EntityList.createEntityByName(id, tileEntity.worldObj);
