@@ -2,7 +2,7 @@ package GraveStone.structures;
 
 import java.util.Random;
 import GraveStone.GraveStoneConfig;
-import GraveStone.mod_GraveStone;
+import GraveStone.ModGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
@@ -59,9 +59,9 @@ public class ComponentGSCemeteryCatacombsGraveCorridor extends ComponentGSCemete
         this.fillWithBlocks(world, boundingBox, 5, 1, 4, 5, 3, 4, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
 
         // graves
-        byte graveType = (byte) random.nextInt(mod_GraveStone.graveStone.GRAVE_TYPE_COUNT);
-        int metaLeft = graveType + mod_GraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
-        int metaRight = graveType + mod_GraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
+        byte graveType = (byte) random.nextInt(ModGraveStone.graveStone.GRAVE_TYPE_COUNT);
+        int metaLeft = graveType + ModGraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
+        int metaRight = graveType + ModGraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
 
         this.fillGraves(world, random, 1, 1, 1, 1, 1, 3, metaLeft, graveType);
         this.fillGraves(world, random, 5, 1, 1, 5, 1, 3, metaRight, graveType);

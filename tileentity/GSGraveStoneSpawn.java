@@ -1,7 +1,6 @@
 package GraveStone.tileentity;
 
 import GraveStone.GraveStoneConfig;
-import GraveStone.entity.EntityZombieCat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

@@ -1,5 +1,6 @@
 package GraveStone;
 
+import GraveStone.EventHookGSGraveStone;
 import GraveStone.block.BlockGSGraveStone;
 import GraveStone.block.BlockGSMemorial;
 import GraveStone.block.BlockGSTimeTrap;
@@ -31,12 +32,12 @@ import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = "GraveStone", name = "GraveStone", version = "2.1.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
-public class mod_GraveStone {
+public class ModGraveStone {
 
     @Instance("GraveStone")
-    public static mod_GraveStone instance;
+    public static ModGraveStone instance;
     @SidedProxy(clientSide = "GraveStone.client.ClientProxy", serverSide = "GraveStone.CommonProxy")
-    public static CommonProxy proxy;
+    public static GSCommonProxy proxy;
     // block GraveStone
     public static BlockGSGraveStone graveStone;
     // Block wither spawer
@@ -50,7 +51,7 @@ public class mod_GraveStone {
     // creative tab
     public static CreativeTabs creativeTab;
 
-    public mod_GraveStone() {
+    public ModGraveStone() {
         instance = this;
     }
 
@@ -126,7 +127,7 @@ public class mod_GraveStone {
 
 
         // register GraveStone tile entity
-        GameRegistry.registerTileEntity(TileEntityGSGraveStone.class, "GraveStone");
+        GameRegistry.registerTileEntity(TileEntityGSGraveStone.class, "GraveStoneTE");
         // register Memorial tile entity 
         GameRegistry.registerTileEntity(TileEntityGSMemorial.class, "Memorial");
         // register Wither Spawner tile entity

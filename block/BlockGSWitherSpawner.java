@@ -1,6 +1,6 @@
 package GraveStone.block;
 
-import GraveStone.mod_GraveStone;
+import GraveStone.ModGraveStone;
 import GraveStone.tileentity.TileEntityGSWitherSpawner;
 import net.minecraft.block.BlockMobSpawner;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -19,7 +19,7 @@ public class BlockGSWitherSpawner extends BlockMobSpawner {
         this.setHardness(5.0F);
         this.setStepSound(soundMetalFootstep);
         this.disableStats();
-        this.setCreativeTab(mod_GraveStone.creativeTab);
+        this.setCreativeTab(ModGraveStone.creativeTab);
     }
 
     public void registerIcons(IconRegister iconRegister) {

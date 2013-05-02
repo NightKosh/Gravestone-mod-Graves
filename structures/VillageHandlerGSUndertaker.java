@@ -3,7 +3,7 @@ package GraveStone.structures;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import java.util.List;
 import java.util.Random;
-import GraveStone.mod_GraveStone;
+import GraveStone.ModGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
@@ -21,23 +21,23 @@ public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCrea
         // chisel
         recipeList.add(new MerchantRecipe(
                 new ItemStack(Item.emerald, 1),
-                new ItemStack(mod_GraveStone.chisel, 1, 0)));
+                new ItemStack(ModGraveStone.chisel, 1, 0)));
         recipeList.add(new MerchantRecipe(
-                new ItemStack(mod_GraveStone.chisel, 1, 0),
+                new ItemStack(ModGraveStone.chisel, 1, 0),
                 new ItemStack(Item.ingotGold, 1)));
         
         // graves
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(mod_GraveStone.graveStone, (byte) 0)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(mod_GraveStone.graveStone, (byte) 1)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(mod_GraveStone.graveStone, (byte) 2)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(ModGraveStone.graveStone, (byte) 0)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(ModGraveStone.graveStone, (byte) 1)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(ModGraveStone.graveStone, (byte) 2)));
         
         // pet graves
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 5), getTradeStack(mod_GraveStone.graveStone, (byte) 3)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 5), getTradeStack(mod_GraveStone.graveStone, (byte) 4)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 5), getTradeStack(ModGraveStone.graveStone, (byte) 3)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 5), getTradeStack(ModGraveStone.graveStone, (byte) 4)));
         
         // memorials
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 15), getTradeStack(mod_GraveStone.memorial, (byte) 0)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 15), getTradeStack(mod_GraveStone.memorial, (byte) 1)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 15), getTradeStack(ModGraveStone.memorial, (byte) 0)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 15), getTradeStack(ModGraveStone.memorial, (byte) 1)));
 
     }
 

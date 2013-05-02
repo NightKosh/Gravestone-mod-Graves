@@ -1,7 +1,7 @@
 package GraveStone.block;
 
 import GraveStone.GraveStoneConfig;
-import GraveStone.mod_GraveStone;
+import GraveStone.ModGraveStone;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -46,7 +46,7 @@ public class BlockGSGraveStone extends BlockContainer {
         this.setUnlocalizedName("GraveStone");
         this.setHardness(4.5F);
         this.setResistance(5F);
-        this.setCreativeTab(mod_GraveStone.creativeTab);
+        this.setCreativeTab(ModGraveStone.creativeTab);
     }
 
     public void registerIcons(IconRegister iconRegister) {

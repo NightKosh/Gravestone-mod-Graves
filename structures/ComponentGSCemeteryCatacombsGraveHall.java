@@ -3,7 +3,7 @@ package GraveStone.structures;
 
 import java.util.Random;
 import GraveStone.GraveStoneConfig;
-import GraveStone.mod_GraveStone;
+import GraveStone.ModGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
@@ -147,11 +147,11 @@ public class ComponentGSCemeteryCatacombsGraveHall extends ComponentGSCemeteryCa
         buildColumn(world, 11, 12);
         
         // graves
-        byte graveType = (byte) random.nextInt(mod_GraveStone.graveStone.GRAVE_TYPE_COUNT);
-        int metaLeft = mod_GraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
-        int metaRight = mod_GraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
-        int metaTop = mod_GraveStone.graveStone.getMetaDirection(coordBaseMode);
-        int metaBot = mod_GraveStone.graveStone.getMetaDirection(getInvertDirection(coordBaseMode));
+        byte graveType = (byte) random.nextInt(ModGraveStone.graveStone.GRAVE_TYPE_COUNT);
+        int metaLeft = ModGraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
+        int metaRight = ModGraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
+        int metaTop = ModGraveStone.graveStone.getMetaDirection(coordBaseMode);
+        int metaBot = ModGraveStone.graveStone.getMetaDirection(getInvertDirection(coordBaseMode));
 
         // left wall
         this.placeGrave(world, random, 1, 1, 2, metaLeft, graveType);

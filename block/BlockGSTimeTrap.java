@@ -1,6 +1,6 @@
 package GraveStone.block;
 
-import GraveStone.mod_GraveStone;
+import GraveStone.ModGraveStone;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -21,7 +21,7 @@ public class BlockGSTimeTrap extends Block {
         this.setUnlocalizedName("Time Trap");
         this.setHardness(4.5F);
         this.setResistance(5F);
-        this.setCreativeTab(mod_GraveStone.creativeTab);
+        this.setCreativeTab(ModGraveStone.creativeTab);
     }
     
     public void registerIcons(IconRegister iconRegister) {

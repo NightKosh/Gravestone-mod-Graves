@@ -3,7 +3,7 @@ package GraveStone.structures;
 import java.util.List;
 import java.util.Random;
 import GraveStone.GraveStoneConfig;
-import GraveStone.mod_GraveStone;
+import GraveStone.ModGraveStone;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -42,8 +42,8 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
             this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.maxY + HEIGHT - 2, 0);
         }
 
-        int graveMeta = mod_GraveStone.graveStone.getMetaDirection(this.coordBaseMode);
-        byte graveType = mod_GraveStone.graveStone.GENERATED_GRAVES[random.nextInt(mod_GraveStone.graveStone.GENERATED_GRAVES.length)];
+        int graveMeta = ModGraveStone.graveStone.getMetaDirection(this.coordBaseMode);
+        byte graveType = ModGraveStone.graveStone.GENERATED_GRAVES[random.nextInt(ModGraveStone.graveStone.GENERATED_GRAVES.length)];
         
         int fenceMeta;
         if (this.coordBaseMode == 1 || this.coordBaseMode == 3) {

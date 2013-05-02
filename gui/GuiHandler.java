@@ -19,7 +19,7 @@ public class GuiHandler implements IGuiHandler {
             case 0:
                 TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
                 if (tileEntity != null) {
-                    return new GuiGrave((TileEntityGSGrave) tileEntity);
+                    return new GSGuiGrave((TileEntityGSGrave) tileEntity);
                 } else {
                     return false;
                 }

@@ -1,7 +1,7 @@
 package GraveStone.structures;
 
 import java.util.Random;
-import GraveStone.mod_GraveStone;
+import GraveStone.ModGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
@@ -67,9 +67,9 @@ public class ComponentGSCemeteryCatacombsTreasury extends ComponentGSCemeteryCat
         this.randomlyPlaceBlock(world, boundingBox, random, 0.4F, 2, 3, 6, Block.web.blockID, 0);
         
         // graves
-        byte graveType = (byte) random.nextInt(mod_GraveStone.graveStone.GRAVE_TYPE_COUNT);
-        int metaLeft = mod_GraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
-        int metaRight = mod_GraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
+        byte graveType = (byte) random.nextInt(ModGraveStone.graveStone.GRAVE_TYPE_COUNT);
+        int metaLeft = ModGraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
+        int metaRight = ModGraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
 
         this.placeGrave(world, random, 1, 1, 2, metaLeft, graveType);
         this.placeGrave(world, random, 1, 1, 4, metaLeft, graveType);

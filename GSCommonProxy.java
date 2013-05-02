@@ -1,6 +1,6 @@
 package GraveStone;
 
-public class CommonProxy {
+public class GSCommonProxy {
 
     public void registerRenderers() {
         

@@ -7,22 +7,17 @@ import net.minecraft.util.ChatAllowedCharacters;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-public class GuiGrave extends GuiScreen {
+public class GSGuiGrave extends GuiScreen {
 
-    /**
-     * This String is just a local copy of the characters allowed in text rendering of minecraft.
-     */
     private static final String allowedCharacters = ChatAllowedCharacters.allowedCharacters;
     private GuiButton button;
     
     final int xSizeOfTexture = 192, ySizeOfTexture = 135;
     int posX, posY;
-    //If you want your gui to change based on TileEntity values, reference the tile entity in the constructor
-    //you must pass the tile entity using "return new BlockGuiWindow(world.getBlockTileEntity(x, y, z))" in the GuiHandler
     private TileEntityGSGrave entityGrave;
     private StringBuilder graveText = new StringBuilder();
     
-    public GuiGrave(TileEntityGSGrave tileEntity) {
+    public GSGuiGrave(TileEntityGSGrave tileEntity) {
         entityGrave = tileEntity;
     }
 
@@ -58,8 +53,7 @@ public class GuiGrave extends GuiScreen {
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;
 
-        drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture); //This draws the background
-        //Make sure your background texture is a multiple of 256x256.
+        drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
         this.drawString(fontRenderer, "Set grave text", posX + 20, posY + 31, 16777215);
         this.drawString(fontRenderer, graveText.toString(), posX + 20, posY + 41, 16777215);
         super.drawScreen(x, y, f);
@@ -70,8 +64,8 @@ public class GuiGrave extends GuiScreen {
      */
     public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
-        entityGrave.setEditable(true);
         entityGrave.setDeathText(graveText.toString());
+        entityGrave.setEditable(true);
     }
 
     /**

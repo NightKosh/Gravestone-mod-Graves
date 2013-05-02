@@ -48,7 +48,7 @@ public class EventHookGSGraveStone {
     }
 
     private void createGrave(Entity entity, LivingDeathEvent event, ItemStack[] items, int age, byte entityType) {
-        mod_GraveStone.graveStone.createOnDeath(entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
+        ModGraveStone.graveStone.createOnDeath(entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
                 event.source.getDeathMessage((EntityLiving) entity), MathHelper.floor_float(entity.rotationYaw), items, age, entityType);
     }
 

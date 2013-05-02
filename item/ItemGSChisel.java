@@ -1,7 +1,7 @@
 package GraveStone.item;
 
 import GraveStone.GraveStoneConfig;
-import GraveStone.mod_GraveStone;
+import GraveStone.ModGraveStone;
 import GraveStone.tileentity.TileEntityGSGrave;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -18,7 +18,7 @@ public class ItemGSChisel extends ItemTool {
         super(id, 1, EnumToolMaterial.IRON, new Block[0]);
 
         setMaxStackSize(1);
-        setCreativeTab(mod_GraveStone.creativeTab);
+        setCreativeTab(ModGraveStone.creativeTab);
         setUnlocalizedName("Chisel");
         setMaxDamage(50);
         MinecraftForge.setToolClass(this, "chisel", 1);
@@ -53,7 +53,7 @@ public class ItemGSChisel extends ItemTool {
     private boolean setGraveText(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, boolean isMemorial) {
         TileEntityGSGrave tileEntity = (TileEntityGSGrave) world.getBlockTileEntity(x, y, z);
         if (tileEntity != null && tileEntity.isEditable() && tileEntity.getDeathText().equals("")) {
-            player.openGui(mod_GraveStone.instance, 0, world, x, y, z);
+            player.openGui(ModGraveStone.instance, 0, world, x, y, z);
 
             if (isMemorial) {
                 stack.damageItem(5, player);

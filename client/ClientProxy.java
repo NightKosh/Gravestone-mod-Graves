@@ -1,6 +1,6 @@
 package GraveStone.client;
 
-import GraveStone.CommonProxy;
+import GraveStone.GSCommonProxy;
 import GraveStone.GraveStoneConfig;
 import GraveStone.entity.EntitySkeletonCat;
 import GraveStone.entity.EntitySkeletonDog;
@@ -20,7 +20,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.client.MinecraftForgeClient;
 
-public class ClientProxy extends CommonProxy {
+public class ClientProxy extends GSCommonProxy {
 
     @Override
     public void registerRenderers() {

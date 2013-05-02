@@ -1,7 +1,7 @@
 package GraveStone.structures;
 
 import java.util.Random;
-import GraveStone.mod_GraveStone;
+import GraveStone.ModGraveStone;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
@@ -20,8 +20,8 @@ public class ComponentGSSingleGrave extends ComponentGSCemeteryCatacombs {
         y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
 
         if (!isLiquidUnder(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
-            byte graveType = (byte) random.nextInt(mod_GraveStone.graveStone.GRAVE_TYPE_COUNT);
-            placeGrave(world, random, 0, y, 0, mod_GraveStone.graveStone.getMetaDirection(coordBaseMode), graveType);
+            byte graveType = (byte) random.nextInt(ModGraveStone.graveStone.GRAVE_TYPE_COUNT);
+            placeGrave(world, random, 0, y, 0, ModGraveStone.graveStone.getMetaDirection(coordBaseMode), graveType);
         }
 
         return true;
@@ -33,7 +33,7 @@ public class ComponentGSSingleGrave extends ComponentGSCemeteryCatacombs {
             blockId = world.getBlockId(x, y, z);
 
             blockId = world.getBlockId(x, y, z);
-            if (blockId > 0 && mod_GraveStone.graveStone.canPlaceBlockAt(blockId)) {
+            if (blockId > 0 && ModGraveStone.graveStone.canPlaceBlockAt(blockId)) {
                 return true;
             }
         }
