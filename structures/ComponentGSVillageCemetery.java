@@ -46,6 +46,17 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
         this.fillWithAir(world, structureBoundingBox, 12, 1, 0, 12, 1, 10);
         this.fillWithAir(world, structureBoundingBox, 0, 1, 0, 12, 1, 0);
         this.fillWithAir(world, structureBoundingBox, 0, 1, 10, 12, 1, 10);
+        
+        this.fillWithAir(world, structureBoundingBox, 2, 1, 2, 2, 1, 8);
+        this.fillWithAir(world, structureBoundingBox, 4, 1, 2, 4, 1, 8);
+        this.fillWithAir(world, structureBoundingBox, 6, 1, 2, 6, 1, 8);
+        this.fillWithAir(world, structureBoundingBox, 8, 1, 2, 8, 1, 8);
+        this.fillWithAir(world, structureBoundingBox, 10, 1, 2, 10, 1, 8);
+        
+        this.fillWithAir(world, structureBoundingBox, 3, 1, 2, 9, 1, 2);
+        this.fillWithAir(world, structureBoundingBox, 3, 1, 4, 9, 1, 4);
+        this.fillWithAir(world, structureBoundingBox, 3, 1, 6, 9, 1, 6);
+        this.fillWithAir(world, structureBoundingBox, 3, 1, 8, 9, 1, 8);
 
         int fenceMeta;
         if (this.coordBaseMode == 1 || this.coordBaseMode == 3) {
