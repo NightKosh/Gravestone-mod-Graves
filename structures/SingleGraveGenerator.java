@@ -17,7 +17,7 @@ public class SingleGraveGenerator {
     // chance to generate a structure
     private static final double CHANCE = 0.2D;
     private static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
-    private static final byte RANGE = 70;
+    private static final byte RANGE = 100;
 
     public boolean generate(World world, Random rand, int x, int z, double chance) {
         if (GraveStoneConfig.generateMemorials && canSpawnStructureAtCoords(world, x, z, chance)) {
