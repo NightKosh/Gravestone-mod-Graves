@@ -60,8 +60,8 @@ public class ComponentGSCemeteryCatacombsGraveCorridor extends ComponentGSCemete
 
         // graves
         byte graveType = (byte) random.nextInt(ModGraveStone.graveStone.GRAVE_TYPE_COUNT);
-        int metaLeft = graveType + ModGraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
-        int metaRight = graveType + ModGraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
+        int metaLeft = ModGraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
+        int metaRight = ModGraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
 
         this.fillGraves(world, random, 1, 1, 1, 1, 1, 3, metaLeft, graveType);
         this.fillGraves(world, random, 5, 1, 1, 5, 1, 3, metaRight, graveType);
