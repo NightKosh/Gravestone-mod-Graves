@@ -91,23 +91,28 @@ public class StructureGSCemeteryCatacombsSurface {
         buildGraveYard(world, rand, X + 2, Z - 36);
 
         // fence
-        switch (DIRECTION) {
-            case 0:
-            case 2:
+        if (DIRECTION == 0 || DIRECTION == 2) {
+            if (DIRECTION == 0) {
                 new ComponentGSCemeteryCatacombsFence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z - 38, X + 51, 240, Z - 38), true, true).addComponentParts(world, rand);
                 new ComponentGSCemeteryCatacombsFence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z + 51, X + 51, 240, Z + 51), false, true).addComponentParts(world, rand);
+            } else {
+                new ComponentGSCemeteryCatacombsFence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z - 38, X + 51, 240, Z - 38), false, true).addComponentParts(world, rand);
+                new ComponentGSCemeteryCatacombsFence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z + 51, X + 51, 240, Z + 51), true, true).addComponentParts(world, rand);
+            }
+            new ComponentGSCemeteryCatacombsFence(ComponentGSCemeteryCatacombs.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X - 38, 0, Z - 38, X - 38, 255, Z + 51), false, false).addComponentParts(world, rand);
+            new ComponentGSCemeteryCatacombsFence(ComponentGSCemeteryCatacombs.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X + 51, 0, Z - 38, X + 51, 255, Z + 51), false, false).addComponentParts(world, rand);
 
-                new ComponentGSCemeteryCatacombsFence(ComponentGSCemeteryCatacombs.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X - 38, 0, Z - 38, X - 38, 255, Z + 51), false, false).addComponentParts(world, rand);
-                new ComponentGSCemeteryCatacombsFence(ComponentGSCemeteryCatacombs.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X + 51, 0, Z - 38, X + 51, 255, Z + 51), false, false).addComponentParts(world, rand);
-                break;
-            case 1:
-            case 3:
-                new ComponentGSCemeteryCatacombsFence(ComponentGSCemeteryCatacombs.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X - 38, 0, Z - 38, X + 51, 240, Z - 38), true, true).addComponentParts(world, rand);
-                new ComponentGSCemeteryCatacombsFence(ComponentGSCemeteryCatacombs.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X - 38, 0, Z + 51, X + 51, 240, Z + 51), false, true).addComponentParts(world, rand);
-
+        } else {
+            if (DIRECTION == 1) {
+                new ComponentGSCemeteryCatacombsFence(DIRECTION, rand, new StructureBoundingBox(X + 51, 0, Z - 38, X + 51, 255, Z + 51), true, false).addComponentParts(world, rand);
                 new ComponentGSCemeteryCatacombsFence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z - 38, X - 38, 255, Z + 51), false, false).addComponentParts(world, rand);
+           } else {
                 new ComponentGSCemeteryCatacombsFence(DIRECTION, rand, new StructureBoundingBox(X + 51, 0, Z - 38, X + 51, 255, Z + 51), false, false).addComponentParts(world, rand);
-                break;
+                new ComponentGSCemeteryCatacombsFence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z - 38, X - 38, 255, Z + 51), true, false).addComponentParts(world, rand);
+            }
+            new ComponentGSCemeteryCatacombsFence(ComponentGSCemeteryCatacombs.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X - 38, 0, Z - 38, X + 51, 240, Z - 38), false, true).addComponentParts(world, rand);
+            new ComponentGSCemeteryCatacombsFence(ComponentGSCemeteryCatacombs.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X - 38, 0, Z + 51, X + 51, 240, Z + 51), false, true).addComponentParts(world, rand);
+
         }
     }
 
