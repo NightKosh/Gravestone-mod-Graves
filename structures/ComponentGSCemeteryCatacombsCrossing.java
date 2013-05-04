@@ -9,7 +9,13 @@ public class ComponentGSCemeteryCatacombsCrossing extends ComponentGSCemeteryCat
     public static final int X_LENGTH = 13;
     public static final int HEIGHT = 6;
     public static final int Z_LENGTH = 13;
-    private static final String[] monstersList = {"Skeleton", "Spider", "Zombie"};
+    private static final String[] monstersList = {
+        "Skeleton", "Spider", "Zombie",
+        "Skeleton", "Spider", "Zombie", 
+        "Skeleton", "Spider", "Zombie",
+        "GSZombieDog", "GSZombieCat", 
+        "GSSkeletonDog", "GSSkeletonCat"
+    };
 
     public ComponentGSCemeteryCatacombsCrossing(int direction, Random random, int x, int y, int z) {
         super(direction);
