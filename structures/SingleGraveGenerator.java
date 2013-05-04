@@ -15,7 +15,7 @@ public class SingleGraveGenerator {
     // list of allowed bioms for structure generator
     private static final ArrayList<BiomeGenBase> DISALLOWED_BIOMS = new ArrayList<BiomeGenBase>(Arrays.asList(BiomeGenBase.frozenOcean, BiomeGenBase.frozenRiver, BiomeGenBase.ocean, BiomeGenBase.river));
     // chance to generate a structure
-    private static final double CHANCE = 0.2D;
+    private static final double CHANCE = 0.1D;
     private static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
     private static final byte RANGE = 100;
 
