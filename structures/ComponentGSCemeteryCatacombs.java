@@ -3,7 +3,6 @@ package GraveStone.structures;
 import GraveStone.GraveStoneConfig;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import java.util.Random;
-import GraveStone.structures.StructureGSCemeteryCatacombsStones;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityBat;
@@ -15,6 +14,13 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraftforge.common.ChestGenHooks;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 abstract class ComponentGSCemeteryCatacombs extends StructureComponent {
 
     private static final StructureGSCemeteryCatacombsStones cemeteryCatacombsStones = new StructureGSCemeteryCatacombsStones();

@@ -26,6 +26,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class BlockGSGraveStone extends BlockContainer {
 
     private static final Random rand = new Random();

@@ -8,6 +8,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.gen.structure.ComponentVillageStartPiece;
 import net.minecraft.world.gen.structure.StructureVillagePieceWeight;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class VillageHandlerGSCemetery implements VillagerRegistry.IVillageCreationHandler {
     
     public StructureVillagePieceWeight getVillagePieceWeight(Random random, int size) {

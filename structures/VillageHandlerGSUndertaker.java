@@ -15,6 +15,13 @@ import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.gen.structure.ComponentVillageStartPiece;
 import net.minecraft.world.gen.structure.StructureVillagePieceWeight;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCreationHandler, VillagerRegistry.IVillageTradeHandler {
 
     public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random) {

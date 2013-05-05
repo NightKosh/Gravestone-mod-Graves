@@ -9,6 +9,13 @@ import net.minecraft.item.Item;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class GraveStoneConfig {
 
     private static Configuration config;

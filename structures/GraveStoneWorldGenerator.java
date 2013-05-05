@@ -5,6 +5,13 @@ import java.util.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class GraveStoneWorldGenerator implements IWorldGenerator {
 
     protected static CatacombsGenerator catacombsGen;

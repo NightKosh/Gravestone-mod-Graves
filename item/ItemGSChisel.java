@@ -12,6 +12,13 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class ItemGSChisel extends ItemTool {
 
     public ItemGSChisel(int id) {

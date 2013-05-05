@@ -5,6 +5,13 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.world.World;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
     protected GSGraveStoneSpawn gsSpawn;

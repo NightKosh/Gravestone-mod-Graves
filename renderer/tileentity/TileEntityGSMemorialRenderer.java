@@ -8,6 +8,13 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
 
     protected static ModelGraveStone cross = new ModelMemorialCross();

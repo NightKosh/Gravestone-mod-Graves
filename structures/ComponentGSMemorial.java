@@ -8,6 +8,13 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class ComponentGSMemorial extends ComponentGSCemeteryCatacombs {
 
     public static final int X_LENGTH = 3;

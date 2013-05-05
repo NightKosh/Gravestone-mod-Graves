@@ -1,8 +1,6 @@
 package GraveStone.gui;
 
 import GraveStone.tileentity.TileEntityGSGrave;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.server.FMLServerHandler;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -14,6 +12,13 @@ import net.minecraft.util.ChatAllowedCharacters;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class GSGuiGrave extends GuiScreen {
 
     private static final String allowedCharacters = ChatAllowedCharacters.allowedCharacters;

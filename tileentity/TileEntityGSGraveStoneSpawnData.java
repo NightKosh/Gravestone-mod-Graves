@@ -4,6 +4,13 @@ package GraveStone.tileentity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.WeightedRandomItem;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class TileEntityGSGraveStoneSpawnData extends WeightedRandomItem {
     public final NBTTagCompound field_92032_b;
     public final String field_92033_c;

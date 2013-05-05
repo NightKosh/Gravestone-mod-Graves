@@ -5,6 +5,13 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class ComponentGSCemeteryCatacombsMausoleumEntrance extends ComponentGSCemeteryCatacombs {
 
     private int offsetY;

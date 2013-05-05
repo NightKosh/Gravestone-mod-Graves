@@ -6,6 +6,13 @@ import GraveStone.structures.VillageHandlerGSUndertaker;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class GraveStoneStructures {
 
     private static GraveStoneStructures instance;

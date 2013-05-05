@@ -9,6 +9,13 @@ import net.minecraft.tileentity.TileEntityDispenser;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class ComponentGSCemeteryCatacombsTrapCorridor extends ComponentGSCemeteryCatacombs {
 
     public static final int X_LENGTH = 6;

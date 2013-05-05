@@ -1,6 +1,5 @@
 package GraveStone;
 
-import GraveStone.EventHookGSGraveStone;
 import GraveStone.block.BlockGSGraveStone;
 import GraveStone.block.BlockGSMemorial;
 import GraveStone.block.BlockGSTimeTrap;
@@ -30,6 +29,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 @Mod(modid = "GraveStone", name = "GraveStone", version = "2.1.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, packetHandler = GraveStonePacketHandler.class, channels = {"GSDeathText"})
 public class ModGraveStone {

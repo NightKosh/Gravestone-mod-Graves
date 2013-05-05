@@ -7,6 +7,13 @@ import java.util.LinkedList;
 import java.util.Random;
 import net.minecraft.world.World;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class StructureGSCemeteryCatacombsLevel {
 
     private final int level;

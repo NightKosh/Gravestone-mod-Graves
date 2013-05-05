@@ -3,6 +3,13 @@ package GraveStone.entity;
 
 import net.minecraft.world.World;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public abstract class EntityUndeadCat extends EntityUndeadPet {
     
     public EntityUndeadCat(World world) {

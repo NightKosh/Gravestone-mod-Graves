@@ -4,6 +4,13 @@ package GraveStone.tileentity;
 import java.util.Random;
 import net.minecraft.nbt.NBTTagCompound;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class GSGraveStoneDeathText {
     
     // grave text

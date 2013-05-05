@@ -9,6 +9,13 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class GraveStoneEntity {
 
     private static GraveStoneEntity instance;

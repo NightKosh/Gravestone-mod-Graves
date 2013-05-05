@@ -5,6 +5,13 @@ import GraveStone.ModGraveStone;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
+/**
+ * GraveStone mod
+ *
+ * @author NightKosh
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ *
+ */
 public class ComponentGSSingleGrave extends ComponentGSCemeteryCatacombs {
 
     public ComponentGSSingleGrave(int direction, Random random, int x, int z) {
