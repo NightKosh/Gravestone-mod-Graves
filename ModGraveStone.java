@@ -31,7 +31,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = "GraveStone", name = "GraveStone", version = "2.1.0")
-@NetworkMod(clientSideRequired = true, serverSideRequired = false)
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, packetHandler = GraveStonePacketHandler.class, channels = {"GSDeathText"})
 public class ModGraveStone {
 
     @Instance("GraveStone")
@@ -134,7 +134,7 @@ public class ModGraveStone {
         GameRegistry.registerTileEntity(TileEntityGSWitherSpawner.class, "GSWither Spawner");
 
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
-
+        
         // register structures
         GraveStoneStructures.getInstance();
         
