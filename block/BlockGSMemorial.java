@@ -108,14 +108,16 @@ public class BlockGSMemorial extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     /**
-     * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
+     * only called by clickMiddleMouseButton , and passed to
+     * inventory.setCurrentItem (along with isCreative)
      */
     public int idPicked(World par1World, int par2, int par3, int par4) {
         return blockID;
     }
 
     /**
-     * Updates the blocks bounds based on its current state. Args: world, x, y, z
+     * Updates the blocks bounds based on its current state. Args: world, x, y,
+     * z
      */
     public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
         int meta = access.getBlockMetadata(x, y, z);
@@ -136,7 +138,8 @@ public class BlockGSMemorial extends BlockContainer {
     }
 
     /**
-     * Return true if a player with Silk Touch can harvest this block directly, and not its normal drops.
+     * Return true if a player with Silk Touch can harvest this block directly,
+     * and not its normal drops.
      */
     public boolean canSilkHarvest() {
         return true;
@@ -150,15 +153,17 @@ public class BlockGSMemorial extends BlockContainer {
     }
 
     /**
-     * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
+     * If this block doesn't render as an ordinary block it will return False
+     * (examples: signs, buttons, stairs, etc)
      */
     public boolean renderAsNormalBlock() {
         return false;
     }
 
     /**
-     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
+     * Is this block (a) opaque and (b) a full 1m cube? This determines whether
+     * or not to render the shared face of two adjacent blocks and also whether
+     * the player can attach torches, redstone wire, etc to this block.
      */
     public boolean isOpaqueCube() {
         return false;
@@ -179,20 +184,22 @@ public class BlockGSMemorial extends BlockContainer {
      * Called upon block activation (right click on the block.)
      */
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9) {
-        TileEntityGSMemorial entity = (TileEntityGSMemorial) world.getBlockTileEntity(x, y, z);
-        if (entity != null) {
-            String deathText = entity.getDeathText();
+        if (world.isRemote) {
+            TileEntityGSMemorial entity = (TileEntityGSMemorial) world.getBlockTileEntity(x, y, z);
+            if (entity != null) {
+                String deathText = entity.getDeathText();
 
-            if (!deathText.equals("")) {
-                entityPlayer.sendChatToPlayer(deathText);
+                if (!deathText.equals("")) {
+                    entityPlayer.sendChatToPlayer(deathText);
+                }
             }
         }
-
         return false;
     }
 
     /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
+     * Returns a new instance of a block's tile entity class. Called on placing
+     * the block.
      */
     public TileEntity createNewTileEntity(World world) {
         return new TileEntityGSMemorial(world);
@@ -217,7 +224,8 @@ public class BlockGSMemorial extends BlockContainer {
     }
 
     /**
-     * Determines the damage on the item the block drops. Used in cloth and wood.
+     * Determines the damage on the item the block drops. Used in cloth and
+     * wood.
      */
     public int damageDropped(int metadata) {
         return 0;
@@ -225,7 +233,8 @@ public class BlockGSMemorial extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+     * returns a list of blocks with the same ID, but different meta (eg: wood
+     * returns 4 blocks)
      */
     public void getSubBlocks(int id, CreativeTabs tab, List list) {
         for (byte j = 0; j < MEMORIAL_TYPE_COUNT; j++) {
@@ -268,8 +277,9 @@ public class BlockGSMemorial extends BlockContainer {
     }
 
     /**
-     * Called when the player destroys a block with an item that can harvest it. (i, j, k) are the coordinates of the
-     * block and l is the block's subtype/damage.
+     * Called when the player destroys a block with an item that can harvest it.
+     * (i, j, k) are the coordinates of the block and l is the block's
+     * subtype/damage.
      */
     public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int metadata) {
     }
