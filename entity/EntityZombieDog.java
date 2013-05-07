@@ -29,7 +29,7 @@ public class EntityZombieDog extends EntityUndeadDog {
 
     public EntityZombieDog(World world) {
         super(world);
-        this.texture = "/mob/wolf_angry.png";
+        this.texture = "/mods/GraveStone/textures/entity/ZombieDog.png";
         this.moveSpeed = 0.5F;
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed, false));
         this.tasks.addTask(4, new EntityAIMoveTwardsRestriction(this, this.moveSpeed));

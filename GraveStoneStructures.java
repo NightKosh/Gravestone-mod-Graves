@@ -40,7 +40,7 @@ public class GraveStoneStructures {
         if (GraveStoneConfig.generateUndertaker) {
             VillageHandlerGSUndertaker villageUndertakerHandler = new VillageHandlerGSUndertaker();
             VillagerRegistry.instance().registerVillageCreationHandler(villageUndertakerHandler);
-            VillagerRegistry.instance().registerVillagerType(385, "/GraveStone/resources/textures/undertaker.png");
+            VillagerRegistry.instance().registerVillagerType(385, "/mods/GraveStone/textures/entity/undertaker.png");
             VillagerRegistry.instance().registerVillageTradeHandler(385, villageUndertakerHandler);
         }
 

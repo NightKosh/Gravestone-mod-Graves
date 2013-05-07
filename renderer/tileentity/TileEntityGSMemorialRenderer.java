@@ -77,10 +77,10 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
     private void getMemorialTexture(int memorialType) {
         switch (memorialType) {
             case 0: // CROSS
-                bindTextureByName("/GraveStone/resources/textures/ModelMemorialCross.png");
+                bindTextureByName("/mods/GraveStone/textures/memorials/ModelMemorialCross.png");
                 break;
             case 1: // OBELISK
-                bindTextureByName("/GraveStone/resources/textures/ModelMemorialObelisk.png");
+                bindTextureByName("/mods/GraveStone/textures/memorials/ModelMemorialObelisk.png");
                 break;
         }
     }

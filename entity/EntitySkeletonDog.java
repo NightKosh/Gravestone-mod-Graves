@@ -18,7 +18,7 @@ public class EntitySkeletonDog extends EntityUndeadDog {
 
     public EntitySkeletonDog(World world) {
         super(world);
-        this.texture = "/mob/wolf_angry.png";
+        this.texture = "/mods/GraveStone/textures/entity/SkeletonDog.png";
         this.setSize(0.6F, 0.8F);
         this.moveSpeed = 0.65F;
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed, false));

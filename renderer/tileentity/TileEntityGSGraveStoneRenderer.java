@@ -83,19 +83,19 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
     private void getGraveTexture(byte graveType) {
         switch (graveType) {
             case 0: // STONE_VERTICAL_PLATE
-                bindTextureByName("/GraveStone/resources/textures/ModelVerticalPlateGraveStone.png");
+                bindTextureByName("/mods/GraveStone/textures/graves/ModelVerticalPlateGraveStone.png");
                 break;
             case 1: // STONE_CROSS
-                bindTextureByName("/GraveStone/resources/textures/ModelCrossGraveStone.png");
+                bindTextureByName("/mods/GraveStone/textures/graves/ModelCrossGraveStone.png");
                 break;
             case 2: // STONE_HORISONTAL_PLATE
-                bindTextureByName("/GraveStone/resources/textures/ModelHorisontalPlateGraveStone.png");
+                bindTextureByName("/mods/GraveStone/textures/graves/ModelHorisontalPlateGraveStone.png");
                 break;
             case 3: // DOG_STATUE
-                bindTextureByName("/GraveStone/resources/textures/ModelDogStatueGraveStone.png");
+                bindTextureByName("/mods/GraveStone/textures/graves/ModelDogStatueGraveStone.png");
                 break;
             case 4: // CAT_STATUE
-                bindTextureByName("/GraveStone/resources/textures/ModelCatStatueGraveStone.png");
+                bindTextureByName("/mods/GraveStone/textures/graves/ModelCatStatueGraveStone.png");
                 break;
         }
     }

@@ -29,7 +29,7 @@ public class EntityZombieCat extends EntityUndeadCat {
 
     public EntityZombieCat(World world) {
         super(world);
-        this.texture = "/mob/ozelot.png";
+        this.texture = "/mods/GraveStone/textures/entity/ZombieCat.png";
         this.moveSpeed = 0.5F;
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed, false));
         this.tasks.addTask(4, new EntityAIMoveTwardsRestriction(this, this.moveSpeed));

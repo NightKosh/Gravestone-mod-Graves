@@ -19,7 +19,7 @@ public class EntitySkeletonCat extends EntityUndeadCat {
 
     public EntitySkeletonCat(World world) {
         super(world);
-        this.texture = "/mob/ozelot.png";
+        this.texture = "/mods/GraveStone/textures/entity/SkeletonCat.png";
         this.moveSpeed = 0.8F;
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed, false));
         this.tasks.addTask(4, new EntityAIMoveTwardsRestriction(this, this.moveSpeed));
