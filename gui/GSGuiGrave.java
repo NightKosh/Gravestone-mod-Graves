@@ -59,7 +59,7 @@ public class GSGuiGrave extends GuiScreen {
         drawDefaultBackground();
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.renderEngine.bindTexture("/GraveStone/resources/textures/DeathMessageBackground.png");
+        mc.renderEngine.bindTexture("/mods/GraveStone/textures/gui/DeathMessageBackground.png");
 
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;
