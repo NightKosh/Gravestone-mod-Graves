@@ -29,7 +29,7 @@ public class EntityZombieCat extends EntityUndeadCat {
 
     public EntityZombieCat(World world) {
         super(world);
-        this.texture = "/mods/GraveStone/textures/entity/ZombieCat.png";
+        this.texture = "/mods/GraveStone/textures/entity/ZombieOzelot.png";
         this.moveSpeed = 0.5F;
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed, false));
         this.tasks.addTask(4, new EntityAIMoveTwardsRestriction(this, this.moveSpeed));
@@ -51,13 +51,13 @@ public class EntityZombieCat extends EntityUndeadCat {
     public String getTexture() {
         switch (this.getSkin()) {
             case 0:
-                return "/mob/ozelot.png";
+                return "/mods/GraveStone/textures/entity/ZombieOzelot.png";
             case 1:
-                return "/mob/cat_black.png";
+                return "/mods/GraveStone/textures/entity/ZombieCatBlack.png";
             case 2:
-                return "/mob/cat_red.png";
+                return "/mods/GraveStone/textures/entity/ZombieCatRed.png";
             case 3:
-                return "/mob/cat_siamese.png";
+                return "/mods/GraveStone/textures/entity/ZombieCatSiamese.png";
             default:
                 return super.getTexture();
         }
@@ -165,7 +165,10 @@ public class EntityZombieCat extends EntityUndeadCat {
             } else if (entityLiving instanceof EntityOcelot) {
                 EntityZombieCat entityZombieCat = new EntityZombieCat(this.worldObj);
                 entityZombieCat.func_82149_j(entityLiving);
+                
+                int catType = ((EntityOcelot) entityLiving).getTameSkin();
                 this.worldObj.removeEntity(entityLiving);
+                entityZombieCat.setSkin(catType);
                 entityZombieCat.initCreature();
 
                 this.worldObj.spawnEntityInWorld(entityZombieCat);

@@ -164,7 +164,10 @@ public class EntityZombieDog extends EntityUndeadDog {
             } else if (entityLiving instanceof EntityOcelot) {
                 EntityZombieCat entityZombieCat = new EntityZombieCat(this.worldObj);
                 entityZombieCat.func_82149_j(entityLiving);
+                
+                int catType = ((EntityOcelot) entityLiving).getTameSkin();
                 this.worldObj.removeEntity(entityLiving);
+                entityZombieCat.setSkin(catType);
                 entityZombieCat.initCreature();
 
                 this.worldObj.spawnEntityInWorld(entityZombieCat);
