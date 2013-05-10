@@ -42,7 +42,7 @@ public class ModGraveStone {
 
     @Instance("GraveStone")
     public static ModGraveStone instance;
-    @SidedProxy(clientSide = "GraveStone.client.ClientProxy", serverSide = "GraveStone.CommonProxy")
+    @SidedProxy(clientSide = "GraveStone.client.ClientProxy", serverSide = "GraveStone.GSCommonProxy")
     public static GSCommonProxy proxy;
     // block GraveStone
     public static BlockGSGraveStone graveStone;
