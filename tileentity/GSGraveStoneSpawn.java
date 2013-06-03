@@ -68,11 +68,11 @@ public class GSGraveStoneSpawn {
     }
 
     /*
-     * Check time
+     * Check time and weather
      */
-    private boolean isNightTime(World world) {
+    private boolean canSpawnMobs(World world) {
         long time = world.getWorldTime();
-        if (time > 13500 && time < 22500) {
+        if (time > 13500 && time < 22500 || world.isThundering()) {
             return true;
         }
         return false;
@@ -82,7 +82,7 @@ public class GSGraveStoneSpawn {
      * Update entity s state.
      */
     public void updateEntity() {
-        if (isNightTime(tileEntity.worldObj) && anyPlayerInRange()) {
+        if (canSpawnMobs(tileEntity.worldObj) && anyPlayerInRange()) {
             double x, y, z;
 
             if (tileEntity.worldObj.isRemote) {
@@ -156,12 +156,13 @@ public class GSGraveStoneSpawn {
                     }
 
                     if (canSpawn && rand.nextInt(40) == 13) {
-                        x = tileEntity.xCoord + tileEntity.worldObj.rand.nextFloat();
-                        y = tileEntity.yCoord + tileEntity.worldObj.rand.nextFloat();
-                        z = tileEntity.zCoord + tileEntity.worldObj.rand.nextFloat();
-                        tileEntity.worldObj.spawnParticle("smoke", x, y, z, 0.0D, 0.0D, 0.0D);
-                        tileEntity.worldObj.spawnParticle("flame", x, y, z, 0.0D, 0.0D, 0.0D);
 
+                 x = tileEntity.xCoord + tileEntity.worldObj.rand.nextFloat();
+                 y = tileEntity.yCoord + tileEntity.worldObj.rand.nextFloat();
+                 z = tileEntity.zCoord + tileEntity.worldObj.rand.nextFloat();
+                 tileEntity.worldObj.spawnParticle("largesmoke", x, y + 2, z, 0.0D, 0.0D, 0.0D);
+                 //tileEntity.worldObj.spawnParticle("flame", x, y + 1, z, 0.0D, 0.0D, 0.0D);
+                 
                         this.writeNBTTagsTo(spawnMob);
                         tileEntity.worldObj.spawnEntityInWorld(spawnMob);
                         tileEntity.worldObj.playAuxSFX(2004, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, 0);
@@ -242,7 +243,7 @@ public class GSGraveStoneSpawn {
                 return DOG_ID[rand.nextInt(DOG_ID.length)];
             case 3:
                 return CAT_ID[rand.nextInt(CAT_ID.length)];
-            default :
+            default:
                 return MOB_ID[rand.nextInt(MOB_ID.length)];
         }
     }
