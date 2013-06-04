@@ -4,7 +4,16 @@ import GraveStone.block.BlockGSGraveStone;
 import GraveStone.block.BlockGSMemorial;
 import GraveStone.block.BlockGSTimeTrap;
 import GraveStone.block.BlockGSWitherSpawner;
+import GraveStone.config.GravesDefaultText;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
@@ -14,14 +23,11 @@ import net.minecraftforge.common.Property;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class GraveStoneConfig {
 
     private static Configuration config;
     private static GraveStoneConfig instance;
-
-    
     // block GraveStone
     public static int graveStoneID;
     public static BlockGSGraveStone graveStone;
@@ -61,13 +67,21 @@ public class GraveStoneConfig {
     // item chisel
     public static int chiselId;
     public static Item chisel;
-    
+    // grave names
+    public static ArrayList<String> graveNames;
+    public static ArrayList<String> graveDogsNames;
+    public static ArrayList<String> graveCatsNames;
+    public static ArrayList<String> graveDeathMessages;
+    public static ArrayList<String> memorialText;
+    public static ArrayList<String> dogsMemorialText;
+    public static ArrayList<String> catsMemorialText;
+
     private GraveStoneConfig(Configuration config) {
         this.config = config;
-        
+
         getConfigs();
     }
-    
+
     public static GraveStoneConfig getInstance(Configuration config) {
         if (instance == null) {
             return new GraveStoneConfig(config);
@@ -84,6 +98,8 @@ public class GraveStoneConfig {
         gravesConfig();
 
         config.save();
+
+        getGravesText();
     }
 
     private static void idConfig() {
@@ -111,23 +127,88 @@ public class GraveStoneConfig {
         generateVillagerGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateVillagerGraves", true).getBoolean(true);
         generatePetGraves = config.get(Configuration.CATEGORY_GENERAL, "GeneratePetGraves", true).getBoolean(true);
         generateGravesInLava = config.get(Configuration.CATEGORY_GENERAL, "GenerateGravesInLava", true).getBoolean(true);
-        
+
         // store items
         Property graveItemsCountProperty = config.get(Configuration.CATEGORY_GENERAL, "SavedItemsCount", 10);
         graveItemsCountProperty.comment = "This value must be between 0 an 40!";
-        
+
         graveItemsCount = graveItemsCountProperty.getInt();
         if (graveItemsCount > 40 || graveItemsCount < 0) {
             graveItemsCount = 40;
         }
-        
+
         // spawn rate
         Property graveSpawnRateProperty = config.get(Configuration.CATEGORY_GENERAL, "SpawnRate", 1800);
         graveSpawnRateProperty.comment = "This value must be bigger than 1800!";
-        
+
         graveSpawnRate = graveSpawnRateProperty.getInt();
         if (graveSpawnRate < 1800) {
             graveSpawnRate = 1800;
         }
+    }
+
+    private void getGravesText() {
+        File path = new File("config/GraveStoneMod");
+        if (!path.exists()) {
+            path.mkdirs();
+        }
+
+        graveNames = readStringsFromFile("config/GraveStoneMod/graveNames.txt", GravesDefaultText.NAMES);
+        graveDogsNames = readStringsFromFile("config/GraveStoneMod/graveDogsNames.txt", GravesDefaultText.DOG_NAMES);
+        graveCatsNames = readStringsFromFile("config/GraveStoneMod/graveCatsNames.txt", GravesDefaultText.CAT_NAMES);
+        graveDeathMessages = readStringsFromFile("config/GraveStoneMod/graveDeathMessages.txt", GravesDefaultText.DEATH_TEXT);
+        memorialText = readStringsFromFile("config/GraveStoneMod/memorialText.txt", GravesDefaultText.MEMORIAL_TEXT);
+        dogsMemorialText = readStringsFromFile("config/GraveStoneMod/dogsMemorialText.txt", GravesDefaultText.DOGS_MEMORIAL_TEXT);
+        catsMemorialText = readStringsFromFile("config/GraveStoneMod/catsMemorialText.txt", GravesDefaultText.CATS_MEMORIAL_TEXT);
+    }
+
+    /*
+     * Read text from file if it exist or get default text
+     */
+    private ArrayList<String> readStringsFromFile(String fileName, String[] defaultValues) {
+        ArrayList<String> list = new ArrayList();
+        boolean exception = false;
+
+        File file = new File(fileName);
+        if (file.exists() && file.canRead()) {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    list.add(line);
+                }
+                reader.close();
+            } catch (IOException e) {
+                exception = true;
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (list.isEmpty() || exception) {
+            list = new ArrayList();
+            list.addAll(Arrays.asList(defaultValues));
+
+            if (file.canWrite()) {
+                try {
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+
+                    for (int i = 0; i < list.size(); i++) {
+                        writer.write(list.get(i));
+                        writer.newLine();
+                    }
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        return list;
     }
 }
