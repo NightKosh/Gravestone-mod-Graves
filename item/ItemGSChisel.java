@@ -3,6 +3,8 @@ package GraveStone.item;
 import GraveStone.GraveStoneConfig;
 import GraveStone.ModGraveStone;
 import GraveStone.tileentity.TileEntityGSGrave;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,13 +34,15 @@ public class ItemGSChisel extends ItemTool {
     }
 
     @Override
-    public void updateIcons(IconRegister register) {
-        this.iconIndex = register.registerIcon("GraveStone:chisel");
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister register) {
+        this.itemIcon = register.registerIcon("GraveStone:chisel");
     }
 
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
+    @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
         player.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
         return itemStack;
@@ -48,6 +52,7 @@ public class ItemGSChisel extends ItemTool {
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
      * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
      */
+    @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10) {
         if (world.getBlockId(x, y, z) == GraveStoneConfig.graveStoneID) {
             return setGraveText(stack, player, world, x, y, z, false);

@@ -179,20 +179,20 @@ public class GSGraveStoneItems {
         int armorType = random.nextInt(10);
         if (armorType > 5) { // Iron
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.plateSteel.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.plateIron.itemID, 1, 0));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(4, new ItemStack(Item.legsSteel.itemID, 1, 0));
+                setInventorySlotContents(4, new ItemStack(Item.legsIron.itemID, 1, 0));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(5, new ItemStack(Item.helmetSteel.itemID, 1, 0));
+                setInventorySlotContents(5, new ItemStack(Item.helmetIron.itemID, 1, 0));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(6, new ItemStack(Item.bootsSteel.itemID, 1, 0));
+                setInventorySlotContents(6, new ItemStack(Item.bootsIron.itemID, 1, 0));
             }
 
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.swordSteel.itemID, 1, 0));
+                setInventorySlotContents(7, new ItemStack(Item.swordIron.itemID, 1, 0));
             } else if (random.nextInt(2) == 0) {
                 setInventorySlotContents(7, new ItemStack(Item.bow.itemID, 1, 0));
                 setInventorySlotContents(8, new ItemStack(Item.arrow.itemID, 10 + random.nextInt(54), 0));
@@ -212,7 +212,7 @@ public class GSGraveStoneItems {
             }
 
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.swordSteel.itemID, 1, 0));
+                setInventorySlotContents(7, new ItemStack(Item.swordIron.itemID, 1, 0));
             } else if (random.nextInt(2) == 0) {
                 setInventorySlotContents(7, new ItemStack(Item.bow.itemID, 1, 0));
                 setInventorySlotContents(8, new ItemStack(Item.arrow.itemID, 10 + random.nextInt(54), 0));
@@ -264,7 +264,7 @@ public class GSGraveStoneItems {
         if (random.nextInt(2) == 0) {
             int pickAxeType = random.nextInt(10);
             if (pickAxeType > 3) {
-                setInventorySlotContents(3, new ItemStack(Item.pickaxeSteel.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.pickaxeIron.itemID, 1, 0));
             } else if (pickAxeType > 0) {
                 setInventorySlotContents(3, new ItemStack(Item.pickaxeGold.itemID, 1, 0));
             } else {
@@ -365,9 +365,9 @@ public class GSGraveStoneItems {
         int toolType = random.nextInt(10);
         if (toolType > 3) {
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.axeSteel.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.axeIron.itemID, 1, 0));
             } else {
-                setInventorySlotContents(3, new ItemStack(Item.shovelSteel.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.shovelIron.itemID, 1, 0));
             }
         } else if (toolType > 0) {
             if (random.nextInt(2) == 0) {
