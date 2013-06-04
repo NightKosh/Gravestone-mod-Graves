@@ -42,7 +42,7 @@ public class ModGraveStone {
 
     @Instance("GraveStone")
     public static ModGraveStone instance;
-    @SidedProxy(clientSide = "GraveStone.client.ClientProxy", serverSide = "GraveStone.CommonProxy")
+    @SidedProxy(clientSide = "GraveStone.client.ClientProxy", serverSide = "GraveStone.GSCommonProxy")
     public static GSCommonProxy proxy;
     // block GraveStone
     public static BlockGSGraveStone graveStone;
@@ -107,7 +107,7 @@ public class ModGraveStone {
         // create time trap
         timeTrap = new BlockGSTimeTrap(GraveStoneConfig.timeTrapID);
         GameRegistry.registerBlock(timeTrap, "GSTimeTrap");
-        LanguageRegistry.addName(timeTrap, "Time trap");
+        LanguageRegistry.addName(timeTrap, "Night stone");
         MinecraftForge.setBlockHarvestLevel(timeTrap, "pickaxe", 1);
 
         // create memorial
