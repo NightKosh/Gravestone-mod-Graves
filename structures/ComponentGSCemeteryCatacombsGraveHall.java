@@ -154,7 +154,7 @@ public class ComponentGSCemeteryCatacombsGraveHall extends ComponentGSCemeteryCa
         buildColumn(world, 11, 12);
         
         // graves
-        byte graveType = ModGraveStone.graveStone.GENERATED_GRAVES[random.nextInt(ModGraveStone.graveStone.GENERATED_GRAVES.length)];
+        byte graveType = this.getGraveType(random, 1);
         int metaLeft = ModGraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
         int metaRight = ModGraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
         int metaTop = ModGraveStone.graveStone.getMetaDirection(coordBaseMode);

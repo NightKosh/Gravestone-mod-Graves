@@ -1,6 +1,7 @@
 package GraveStone.structures;
 
 import GraveStone.GraveStoneConfig;
+import GraveStone.ModGraveStone;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -332,6 +333,9 @@ abstract class ComponentGSCemeteryCatacombs extends StructureComponent {
         }
     }
 
+    /*
+     * generate spawner
+     */
     protected void generateSpawner(World world, int xCoord, int yCoord, int zCoord, String spawnerType) {
         int y = this.getYWithOffset(yCoord);
         int x = this.getXWithOffset(xCoord, zCoord);
@@ -364,5 +368,34 @@ abstract class ComponentGSCemeteryCatacombs extends StructureComponent {
     
     protected int getDirection() {
         return coordBaseMode;
+    }
+    
+    /*
+     * return random grave type
+     * @graveType int type of graves
+     * 0 - all graves( 20% for pets graves)
+     * 1 - only player graves
+     * 2 - only pets graves
+     * 3 - only dogs graves
+     * 4 - only cats graves
+     */
+    public static byte getGraveType(Random random, int graveType) {
+        switch (graveType) {
+            default:
+            case 0:
+                if (random.nextFloat() > 0.2) {
+                    return ModGraveStone.graveStone.GENERATED_GRAVES[random.nextInt(ModGraveStone.graveStone.GENERATED_GRAVES.length)];
+            } else {
+                    return ModGraveStone.graveStone.PETS_GRAVES[random.nextInt(ModGraveStone.graveStone.PETS_GRAVES.length)];
+            }
+            case 1:
+                return ModGraveStone.graveStone.GENERATED_GRAVES[random.nextInt(ModGraveStone.graveStone.GENERATED_GRAVES.length)];
+            case 2:
+                return ModGraveStone.graveStone.PETS_GRAVES[random.nextInt(ModGraveStone.graveStone.PETS_GRAVES.length)];
+            case 3:
+                return ModGraveStone.graveStone.DOG_GRAVES[random.nextInt(ModGraveStone.graveStone.DOG_GRAVES.length)];
+            case 4:
+                return ModGraveStone.graveStone.CAT_GRAVES[random.nextInt(ModGraveStone.graveStone.CAT_GRAVES.length)];
+        }
     }
 }

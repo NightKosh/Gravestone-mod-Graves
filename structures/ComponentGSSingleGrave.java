@@ -27,13 +27,7 @@ public class ComponentGSSingleGrave extends ComponentGSCemeteryCatacombs {
         y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
 
         if (!isLiquidUnder(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
-            byte graveType;
-            if (random.nextFloat() > 0.2) {
-                graveType = ModGraveStone.graveStone.GENERATED_GRAVES[random.nextInt(ModGraveStone.graveStone.GENERATED_GRAVES.length)];
-            } else {
-                graveType = ModGraveStone.graveStone.PETS_GRAVES[random.nextInt(ModGraveStone.graveStone.PETS_GRAVES.length)];
-            }
-            placeGrave(world, random, 0, y, 0, ModGraveStone.graveStone.getMetaDirection(coordBaseMode), graveType);
+            placeGrave(world, random, 0, y, 0, ModGraveStone.graveStone.getMetaDirection(coordBaseMode), this.getGraveType(random, 0));
         }
 
         return true;

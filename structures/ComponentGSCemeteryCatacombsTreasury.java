@@ -74,7 +74,7 @@ public class ComponentGSCemeteryCatacombsTreasury extends ComponentGSCemeteryCat
         this.randomlyPlaceBlock(world, boundingBox, random, 0.4F, 2, 3, 6, Block.web.blockID, 0);
         
         // graves
-        byte graveType = (byte) random.nextInt(ModGraveStone.graveStone.GRAVE_TYPE_COUNT);
+        byte graveType = this.getGraveType(random, 0);
         int metaLeft = ModGraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
         int metaRight = ModGraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
 
