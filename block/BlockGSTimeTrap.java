@@ -7,7 +7,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 /**
@@ -18,31 +17,27 @@ import net.minecraft.world.World;
  *
  */
 public class BlockGSTimeTrap extends Block {
-
-    private static Icon texture;
     
     public BlockGSTimeTrap(int par1) {
         super(par1, Material.rock);
 
         this.setStepSound(Block.soundStoneFootstep);
-        this.setUnlocalizedName("Time Trap");
+        this.setUnlocalizedName("Night stone");
         this.setHardness(4.5F);
         this.setResistance(5F);
         this.setCreativeTab(ModGraveStone.creativeTab);
     }
     
+    @Override
     public void registerIcons(IconRegister iconRegister) {
-        texture = iconRegister.registerIcon("netherBrick");
-    }
-
-    public Icon getBlockTextureFromSideAndMetadata(int direction, int meta) {
-        return texture;
+        this.blockIcon = iconRegister.registerIcon("netherBrick");
     }
 
     /**
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return true;
     }
@@ -54,6 +49,7 @@ public class BlockGSTimeTrap extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random random, int par3) {
         return Block.netherBrick.blockID;
     }
@@ -61,6 +57,7 @@ public class BlockGSTimeTrap extends Block {
     /**
      * Return true if a player with Silk Touch can harvest this block directly, and not its normal drops.
      */
+    @Override
     public boolean canSilkHarvest() {
         return true;
     }
@@ -68,6 +65,7 @@ public class BlockGSTimeTrap extends Block {
     /**
      * Called whenever an entity is walking on top of this block. Args: world, x, y, z, entity
      */
+    @Override
     public void onEntityWalking(World world, int par2, int par3, int par4, Entity entity) {
         if (entity instanceof EntityPlayer) {
             long time = world.getWorldTime();

@@ -5,7 +5,6 @@ import GraveStone.tileentity.TileEntityGSWitherSpawner;
 import net.minecraft.block.BlockMobSpawner;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 /**
@@ -17,8 +16,6 @@ import net.minecraft.world.World;
  */
 public class BlockGSWitherSpawner extends BlockMobSpawner {
 
-    private static Icon texture;
-
     public BlockGSWitherSpawner(int par1) {
         super(par1);
 
@@ -29,17 +26,15 @@ public class BlockGSWitherSpawner extends BlockMobSpawner {
         this.setCreativeTab(ModGraveStone.creativeTab);
     }
 
+    @Override
     public void registerIcons(IconRegister iconRegister) {
-        texture = iconRegister.registerIcon("mobSpawner");
-    }
-
-    public Icon getBlockTextureFromSideAndMetadata(int direction, int meta) {
-        return texture;
+        this.blockIcon = iconRegister.registerIcon("mobSpawner");
     }
 
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World par1World) {
         return new TileEntityGSWitherSpawner();
     }

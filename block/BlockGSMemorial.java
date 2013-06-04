@@ -19,7 +19,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -35,7 +34,6 @@ public class BlockGSMemorial extends BlockContainer {
 
     private static final Random rand = new Random();
     public static final String[] NAMES = {"Cross Memorial", "Obelisk"};
-    private static Icon texture;
     public static final int MEMORIAL_TYPE_COUNT = 2;
 
     public BlockGSMemorial(int par1) {
@@ -50,18 +48,15 @@ public class BlockGSMemorial extends BlockContainer {
         this.setCreativeTab(ModGraveStone.creativeTab);
     }
 
+    @Override
     public void registerIcons(IconRegister iconRegister) {
-        texture = iconRegister.registerIcon("stone");
-    }
-
-    @SideOnly(Side.CLIENT)
-    public Icon getBlockTextureFromSideAndMetadata(int direction, int meta) {
-        return texture;
+        this.blockIcon = iconRegister.registerIcon("stone");
     }
 
     /**
      * Called when the block is placed in the world
      */
+    @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving player, ItemStack itemStack) {
         int direction = MathHelper.floor_float(player.rotationYaw);
         if (direction < 0) {
@@ -99,6 +94,7 @@ public class BlockGSMemorial extends BlockContainer {
     }
 
     /* Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z */
+    @Override
     public boolean canPlaceBlockAt(World world, int x, int y, int z) {
         for (byte i = 0; i < 5; i++) {
             for (byte j = -1; j < 2; j++) {
@@ -118,6 +114,7 @@ public class BlockGSMemorial extends BlockContainer {
      * only called by clickMiddleMouseButton , and passed to
      * inventory.setCurrentItem (along with isCreative)
      */
+    @Override
     public int idPicked(World par1World, int par2, int par3, int par4) {
         return blockID;
     }
@@ -126,6 +123,7 @@ public class BlockGSMemorial extends BlockContainer {
      * Updates the blocks bounds based on its current state. Args: world, x, y,
      * z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
         int meta = access.getBlockMetadata(x, y, z);
         byte memorialType = 0;
@@ -140,6 +138,7 @@ public class BlockGSMemorial extends BlockContainer {
         }
     }
 
+    @Override
     public void setBlockBoundsForItemRender() {
         this.setBlockBounds(0, 0, 0, 1, 1, 2);
     }
@@ -148,6 +147,7 @@ public class BlockGSMemorial extends BlockContainer {
      * Return true if a player with Silk Touch can harvest this block directly,
      * and not its normal drops.
      */
+    @Override
     public boolean canSilkHarvest() {
         return true;
     }
@@ -155,6 +155,7 @@ public class BlockGSMemorial extends BlockContainer {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random random, int par3) {
         return 0;
     }
@@ -163,6 +164,7 @@ public class BlockGSMemorial extends BlockContainer {
      * If this block doesn't render as an ordinary block it will return False
      * (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -172,6 +174,7 @@ public class BlockGSMemorial extends BlockContainer {
      * or not to render the shared face of two adjacent blocks and also whether
      * the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -179,6 +182,7 @@ public class BlockGSMemorial extends BlockContainer {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return GraveStoneConfig.memorialRenderID;
     }
@@ -190,6 +194,7 @@ public class BlockGSMemorial extends BlockContainer {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9) {
         if (world.isRemote) {
             TileEntityGSMemorial entity = (TileEntityGSMemorial) world.getBlockTileEntity(x, y, z);
@@ -208,6 +213,7 @@ public class BlockGSMemorial extends BlockContainer {
      * Returns a new instance of a block's tile entity class. Called on placing
      * the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World world) {
         return new TileEntityGSMemorial(world);
     }
@@ -234,6 +240,7 @@ public class BlockGSMemorial extends BlockContainer {
      * Determines the damage on the item the block drops. Used in cloth and
      * wood.
      */
+    @Override
     public int damageDropped(int metadata) {
         return 0;
     }
@@ -243,6 +250,7 @@ public class BlockGSMemorial extends BlockContainer {
      * returns a list of blocks with the same ID, but different meta (eg: wood
      * returns 4 blocks)
      */
+    @Override
     public void getSubBlocks(int id, CreativeTabs tab, List list) {
         for (byte j = 0; j < MEMORIAL_TYPE_COUNT; j++) {
             ItemStack stack = new ItemStack(id, 1, 0);
@@ -256,6 +264,7 @@ public class BlockGSMemorial extends BlockContainer {
     /**
      * Called when the block is attempted to be harvested
      */
+    @Override
     public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player) {
         player.addStat(StatList.mineBlockStatArray[this.blockID], 1);
         player.addExhaustion(0.025F);
@@ -288,6 +297,7 @@ public class BlockGSMemorial extends BlockContainer {
      * (i, j, k) are the coordinates of the block and l is the block's
      * subtype/damage.
      */
+    @Override
     public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int metadata) {
     }
 }
