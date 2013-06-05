@@ -22,7 +22,7 @@ public class MemorialGenerator {
     // list of allowed bioms for structure generator
     private static final ArrayList DISALLOWED_BIOMS = new ArrayList(Arrays.asList(
             BiomeGenBase.frozenOcean.biomeID, BiomeGenBase.frozenRiver.biomeID, BiomeGenBase.ocean.biomeID, 
-            BiomeGenBase.river.biomeID, BiomeGenBase.swampland.biomeID, BiomeGenBase.jungle.biomeID, BiomeGenBase.jungleHills.biomeID));
+            BiomeGenBase.river.biomeID, BiomeGenBase.swampland.biomeID));
     // chance to generate a structure
     private static final double CHANCE = 0.05D;
     private static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
