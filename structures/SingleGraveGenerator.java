@@ -20,7 +20,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 public class SingleGraveGenerator {
     
     // list of allowed bioms for structure generator
-    private static final ArrayList<BiomeGenBase> DISALLOWED_BIOMS = new ArrayList<BiomeGenBase>(Arrays.asList(BiomeGenBase.frozenOcean, BiomeGenBase.frozenRiver, BiomeGenBase.ocean, BiomeGenBase.river));
+    private static final ArrayList DISALLOWED_BIOMS = new ArrayList(Arrays.asList(BiomeGenBase.frozenOcean.biomeID, BiomeGenBase.frozenRiver.biomeID, BiomeGenBase.ocean.biomeID, BiomeGenBase.river.biomeID));
     // chance to generate a structure
     private static final double CHANCE = 0.1D;
     private static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
@@ -37,7 +37,7 @@ public class SingleGraveGenerator {
     }
 
     protected boolean canSpawnStructureAtCoords(World world, int x, int z, double chance) {
-        return chance < CHANCE && !DISALLOWED_BIOMS.contains(world.getBiomeGenForCoords(x, z)) && noAnyInRange(x, z);
+        return chance < CHANCE && !DISALLOWED_BIOMS.contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z);
     }
 
     protected boolean noAnyInRange(int x, int z) {

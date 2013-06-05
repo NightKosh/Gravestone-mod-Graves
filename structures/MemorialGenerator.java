@@ -20,7 +20,9 @@ import net.minecraft.world.biome.BiomeGenBase;
 public class MemorialGenerator {
     
     // list of allowed bioms for structure generator
-    private static final ArrayList<BiomeGenBase> DISALLOWED_BIOMS = new ArrayList<BiomeGenBase>(Arrays.asList(BiomeGenBase.frozenOcean, BiomeGenBase.frozenRiver, BiomeGenBase.ocean, BiomeGenBase.river, BiomeGenBase.swampland, BiomeGenBase.jungle, BiomeGenBase.jungleHills));
+    private static final ArrayList DISALLOWED_BIOMS = new ArrayList(Arrays.asList(
+            BiomeGenBase.frozenOcean.biomeID, BiomeGenBase.frozenRiver.biomeID, BiomeGenBase.ocean.biomeID, 
+            BiomeGenBase.river.biomeID, BiomeGenBase.swampland.biomeID, BiomeGenBase.jungle.biomeID, BiomeGenBase.jungleHills.biomeID));
     // chance to generate a structure
     private static final double CHANCE = 0.05D;
     private static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
@@ -38,7 +40,7 @@ public class MemorialGenerator {
     }
 
     protected boolean canSpawnStructureAtCoords(World world, int x, int z, double chance) {
-        return chance < CHANCE && !DISALLOWED_BIOMS.contains(world.getBiomeGenForCoords(x, z)) && noAnyInRange(x, z);
+        return chance < CHANCE && !DISALLOWED_BIOMS.contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z);
     }
 
     protected boolean noAnyInRange(int x, int z) {

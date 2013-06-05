@@ -2,6 +2,7 @@ package GraveStone.structures;
 
 import java.util.Random;
 import GraveStone.ModGraveStone;
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
@@ -26,21 +27,25 @@ public class ComponentGSSingleGrave extends ComponentGSCemeteryCatacombs {
         positionZ = getZWithOffset(0, 0);
         y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
 
-        if (!isLiquidUnder(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
+            System.out.println("!!!!!!!!!!! " + positionX + "x" + positionZ + " ----- " + (boundingBox.minY + y) + "x" + boundingBox.maxY);
+        if (canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
+            System.out.println("Grave " + positionX + "x" + positionZ);
             placeGrave(world, random, 0, y, 0, ModGraveStone.graveStone.getMetaDirection(coordBaseMode), this.getGraveType(random, 0));
         }
 
         return true;
     }
 
-    private static boolean isLiquidUnder(World world, int x, int minY, int z, int maxY) {
+    private static boolean canPlaceGrave(World world, int x, int minY, int z, int maxY) {
         int blockId;
-        for (int y = maxY; y >= minY; y--) {
+        for (int y = maxY; y >= minY - 1; y--) {
             blockId = world.getBlockId(x, y, z);
-
-            blockId = world.getBlockId(x, y, z);
-            if (blockId > 0 && ModGraveStone.graveStone.canPlaceBlockAt(blockId)) {
-                return true;
+            if (blockId > 0) {
+                if (blockId == Block.waterStill.blockID || blockId == Block.lavaStill.blockID) {
+                    return false;
+                } else if (ModGraveStone.graveStone.canPlaceBlockAt(blockId)) {
+                    return true;
+                }
             }
         }
         return false;
