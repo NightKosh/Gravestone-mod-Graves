@@ -35,29 +35,37 @@ public class GraveStoneEntity {
     public void getEntity() {
         // zombie dog
         EntityRegistry.registerGlobalEntityID(EntityZombieDog.class, "GSZombieDog", EntityRegistry.findGlobalUniqueEntityId(), 14144467, 7969893);
-        EntityRegistry.addSpawn(EntityZombieDog.class, 3, 4, 8, EnumCreatureType.monster, 
-                BiomeGenBase.forest, BiomeGenBase.forestHills, 
-                BiomeGenBase.swampland, BiomeGenBase.taiga, BiomeGenBase.taigaHills);
+        if (GraveStoneConfig.spawnZombieDogs) {
+            EntityRegistry.addSpawn(EntityZombieDog.class, 3, 4, 8, EnumCreatureType.monster,
+                    BiomeGenBase.forest, BiomeGenBase.forestHills,
+                    BiomeGenBase.swampland, BiomeGenBase.taiga, BiomeGenBase.taigaHills);
+        }
         LanguageRegistry.instance().addStringLocalization("entity.GSZombieDog.name", "Zombie Dog");
 
         // zombie cat
         EntityRegistry.registerGlobalEntityID(EntityZombieCat.class, "GSZombieCat", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 7969893);
-        EntityRegistry.addSpawn(EntityZombieCat.class, 3, 4, 8, EnumCreatureType.monster, 
-                BiomeGenBase.jungle, BiomeGenBase.jungleHills);
+        if (GraveStoneConfig.spawnZombieCats) {
+            EntityRegistry.addSpawn(EntityZombieCat.class, 3, 4, 8, EnumCreatureType.monster,
+                    BiomeGenBase.jungle, BiomeGenBase.jungleHills);
+        }
         LanguageRegistry.instance().addStringLocalization("entity.GSZombieCat.name", "Zombie Cat");
-        
-        
+
+
         // skeleton dog
         EntityRegistry.registerGlobalEntityID(EntitySkeletonDog.class, "GSSkeletonDog", EntityRegistry.findGlobalUniqueEntityId(), 14144467, 4802889);
-        EntityRegistry.addSpawn(EntityZombieDog.class, 3, 4, 8, EnumCreatureType.monster, 
-                BiomeGenBase.forest, BiomeGenBase.forestHills, 
-                BiomeGenBase.swampland, BiomeGenBase.taiga, BiomeGenBase.taigaHills);
+        if (GraveStoneConfig.spawnSkeletonDogs) {
+            EntityRegistry.addSpawn(EntityZombieDog.class, 3, 4, 8, EnumCreatureType.monster,
+                    BiomeGenBase.forest, BiomeGenBase.forestHills,
+                    BiomeGenBase.swampland, BiomeGenBase.taiga, BiomeGenBase.taigaHills);
+        }
         LanguageRegistry.instance().addStringLocalization("entity.GSSkeletonDog.name", "Skeleton Dog");
 
         // skeleton cat
         EntityRegistry.registerGlobalEntityID(EntitySkeletonCat.class, "GSSkeletonCat", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
-        EntityRegistry.addSpawn(EntityZombieCat.class, 3, 4, 8, EnumCreatureType.monster, 
-                BiomeGenBase.jungle, BiomeGenBase.jungleHills);
+        if (GraveStoneConfig.spawnSkeletonCats) {
+            EntityRegistry.addSpawn(EntityZombieCat.class, 3, 4, 8, EnumCreatureType.monster,
+                    BiomeGenBase.jungle, BiomeGenBase.jungleHills);
+        }
         LanguageRegistry.instance().addStringLocalization("entity.GSSkeletonCat.name", "Skeleton Cat");
     }
 }

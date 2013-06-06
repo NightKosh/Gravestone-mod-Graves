@@ -75,6 +75,11 @@ public class GraveStoneConfig {
     public static ArrayList<String> memorialText;
     public static ArrayList<String> dogsMemorialText;
     public static ArrayList<String> catsMemorialText;
+    // spawn undead pets in the world
+    public static boolean spawnZombieDogs;
+    public static boolean spawnZombieCats;
+    public static boolean spawnSkeletonDogs;
+    public static boolean spawnSkeletonCats;
 
     private GraveStoneConfig(Configuration config) {
         this.config = config;
@@ -96,6 +101,7 @@ public class GraveStoneConfig {
         idConfig();
         structures();
         gravesConfig();
+        entityConfig();
 
         config.save();
 
@@ -145,6 +151,13 @@ public class GraveStoneConfig {
         if (graveSpawnRate < 1800) {
             graveSpawnRate = 1800;
         }
+    }
+
+    private void entityConfig() {
+        spawnZombieDogs = config.get(Configuration.CATEGORY_GENERAL, "SpawnZombieDogs", true).getBoolean(true);
+        spawnZombieCats = config.get(Configuration.CATEGORY_GENERAL, "SpawnZombieCats", true).getBoolean(true);
+        spawnSkeletonDogs = config.get(Configuration.CATEGORY_GENERAL, "SpawnSkeletonDogs", true).getBoolean(true);
+        spawnSkeletonCats = config.get(Configuration.CATEGORY_GENERAL, "SpawnSkeletonCats", true).getBoolean(true);
     }
 
     private void getGravesText() {
@@ -208,7 +221,7 @@ public class GraveStoneConfig {
                 }
             }
         }
-        
+
         return list;
     }
 }
