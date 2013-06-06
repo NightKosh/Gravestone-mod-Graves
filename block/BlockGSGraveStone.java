@@ -1,6 +1,7 @@
 package GraveStone.block;
 
 import GraveStone.GraveStoneConfig;
+import GraveStone.GraveStoneMobSpawn;
 import GraveStone.ModGraveStone;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import cpw.mods.fml.relauncher.Side;
@@ -14,6 +15,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -58,7 +60,6 @@ public class BlockGSGraveStone extends BlockContainer {
     public void registerIcons(IconRegister iconRegister) {
         this.blockIcon = iconRegister.registerIcon("stone");
     }
-
 
     /**
      * Called when the block is placed in the world
@@ -113,6 +114,9 @@ public class BlockGSGraveStone extends BlockContainer {
         return canPlaceBlockAt(world.getBlockId(x, y - 1, z));
     }
 
+    /*
+     * Check can be grave placed on this type of surface
+     */
     public boolean canPlaceBlockAt(int blockId) {
         if (GraveStoneConfig.canPlaceGravesEveryWhere) {
             return true;
@@ -230,6 +234,8 @@ public class BlockGSGraveStone extends BlockContainer {
     public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player) {
         player.addStat(StatList.mineBlockStatArray[this.blockID], 1);
         player.addExhaustion(0.025F);
+        
+        spawnMob(world, x, y, z);
 
         if (GraveStoneConfig.silkTouchForGraves) {
             if (EnchantmentHelper.getSilkTouchModifier(player)) {
@@ -237,6 +243,16 @@ public class BlockGSGraveStone extends BlockContainer {
             }
         } else {
             dropBlock(world, x, y, z);
+        }
+    }
+    
+    private void spawnMob(World world, int x, int y, int z) {
+        if (GraveStoneMobSpawn.checkChance(world.rand)) {
+            TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
+            if (tileEntity != null) {
+                Entity mob = GraveStoneMobSpawn.getMobEntity(world, tileEntity.getGraveType(), x, y, z);
+                GraveStoneMobSpawn.spawnMob(world, mob, x, y, z);
+            }
         }
     }
 
@@ -276,6 +292,8 @@ public class BlockGSGraveStone extends BlockContainer {
      */
     @Override
     public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune) {
+        spawnMob(world, x, y, z);
+        
         ArrayList<ItemStack> ret = new ArrayList();
         if (!GraveStoneConfig.silkTouchForGraves) {
             ret.add(getBlockItemStack(world, x, y, z));
@@ -285,7 +303,7 @@ public class BlockGSGraveStone extends BlockContainer {
 
     /**
      * Called when the player destroys a block with an item that can harvest it.
-     * (i, j, k) are the coordinates of the block and l is the block's
+     * (x, y, z) are the coordinates of the block and metadata is the block's
      * subtype/damage.
      */
     @Override
@@ -410,6 +428,7 @@ public class BlockGSGraveStone extends BlockContainer {
                     break;
             }
             tileEntity.setAge(age);
+            System.out.println("!!!!!!!!!!!!! " + age);
         }
     }
 
