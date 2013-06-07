@@ -27,7 +27,6 @@ public class ComponentGSSingleGrave extends ComponentGSCemeteryCatacombs {
         positionZ = getZWithOffset(0, 0);
         y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
 
-            System.out.println("!!!!!!!!!!! " + positionX + "x" + positionZ + " ----- " + (boundingBox.minY + y) + "x" + boundingBox.maxY);
         if (canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
             System.out.println("Grave " + positionX + "x" + positionZ);
             placeGrave(world, random, 0, y, 0, ModGraveStone.graveStone.getMetaDirection(coordBaseMode), this.getGraveType(random, 0));
