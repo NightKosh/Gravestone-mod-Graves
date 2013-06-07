@@ -11,12 +11,14 @@ import GraveStone.item.ItemGSChisel;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import GraveStone.tileentity.TileEntityGSMemorial;
 import GraveStone.tileentity.TileEntityGSWitherSpawner;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -35,7 +37,7 @@ import net.minecraftforge.common.MinecraftForge;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
-@Mod(modid = "GraveStone", name = "GraveStone", version = "2.1.0")
+@Mod(modid = "GraveStone", name = "GraveStone", version = "2.2.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, packetHandler = GraveStonePacketHandler.class, channels = {"GSDeathText"})
 public class ModGraveStone {
 
@@ -147,5 +149,16 @@ public class ModGraveStone {
         GraveStoneEntity.getInstance();
         
         proxy.registerRenderers();
+    }
+    
+    @Mod.PostInit
+    public void postInit(FMLPostInitializationEvent event) {
+        // adding foreign mobs
+        if (Loader.isModLoaded("MoCreatures")) {
+            GraveStoneMobSpawn.addMoCreaturesMobs();
+        }
+        if (Loader.isModLoaded("TwilightForest")) {
+            GraveStoneMobSpawn.addTwilightForestMobs();
+        }
     }
 }

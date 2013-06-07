@@ -5,10 +5,8 @@ import GraveStone.GraveStoneMobSpawn;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -25,7 +23,6 @@ import net.minecraft.world.World;
 public class GSGraveStoneSpawn {
 
     private TileEntityGSGraveStone tileEntity;
-    private static final Random rand = new Random();
     private static final int PLAYER_RANGE = 35;
     /**
      * The stored delay before a new spawn.

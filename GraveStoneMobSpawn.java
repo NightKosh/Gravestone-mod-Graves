@@ -1,5 +1,11 @@
 package GraveStone;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -19,10 +25,14 @@ import net.minecraft.world.World;
  */
 public abstract class GraveStoneMobSpawn {
 
-    public static final String[] MOB_ID = {"Zombie", "Skeleton"};
-    public static final String[] DOG_ID = {"GSZombieDog", "GSSkeletonDog"};
-    public static final String[] CAT_ID = {"GSZombieCat", "GSSkeletonCat"};
-    public static final String[] HELL_MOB_ID = {"PigZombie", "Skeleton"};
+    /**
+     * Provides a mapping between entity classes and a string
+     */
+    private static Map mobNameToClassMapping = new HashMap();
+    private static ArrayList<String> MOB_ID = new ArrayList(Arrays.asList("Zombie", "Skeleton"));
+    private static ArrayList<String> DOG_ID = new ArrayList(Arrays.asList("GSZombieDog", "GSSkeletonDog"));
+    private static ArrayList<String> CAT_ID = new ArrayList(Arrays.asList("GSZombieCat", "GSSkeletonCat"));
+    private static ArrayList<String> HELL_MOB_ID = new ArrayList(Arrays.asList("PigZombie", "Skeleton"));
 
     /* 
      * Check can grave spawn hell creature or not
@@ -56,6 +66,8 @@ public abstract class GraveStoneMobSpawn {
                         skeleton.setSkeletonType(1);
                         if (world.rand.nextInt(2) == 0) {
                             skeleton.setCurrentItemOrArmor(0, new ItemStack(Item.swordStone));
+                        } else {
+                            skeleton.setCurrentItemOrArmor(0, new ItemStack(Item.bow));
                         }
                         return skeleton;
                     }
@@ -65,8 +77,32 @@ public abstract class GraveStoneMobSpawn {
         }
 
         Entity entity = EntityList.createEntityByName(id, world);
-
+        if (entity == null) {
+            entity = getForeinMob(world, id);
+        }
         return entity;
+    }
+
+    private static Entity getForeinMob(World world, String mobName) {
+        Entity mob = null;
+
+        try {
+            Class mobClass = Class.forName((String) mobNameToClassMapping.get(mobName));
+            Constructor<Entity> constructor = mobClass.getConstructor(World.class);
+            mob = constructor.newInstance(new Object[]{world});
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        return mob;
     }
 
     /*
@@ -75,21 +111,21 @@ public abstract class GraveStoneMobSpawn {
     public static String getMobID(Random random, int creatureType) {
         switch (creatureType) {
             case 0:
-                return MOB_ID[random.nextInt(MOB_ID.length)];
+                return MOB_ID.get(random.nextInt(MOB_ID.size()));
             case 1:
-                return HELL_MOB_ID[random.nextInt(HELL_MOB_ID.length)];
+                return HELL_MOB_ID.get(random.nextInt(HELL_MOB_ID.size()));
             case 2:
-                return DOG_ID[random.nextInt(DOG_ID.length)];
+                return DOG_ID.get(random.nextInt(DOG_ID.size()));
             case 3:
-                return CAT_ID[random.nextInt(CAT_ID.length)];
+                return CAT_ID.get(random.nextInt(CAT_ID.size()));
             default:
-                return MOB_ID[random.nextInt(MOB_ID.length)];
+                return MOB_ID.get(random.nextInt(MOB_ID.size()));
         }
     }
 
     /**
      * Spawn mob in world
-     * 
+     *
      * @param world World object
      * @param entity Spawned mob
      * @param x X coordinate
@@ -97,6 +133,7 @@ public abstract class GraveStoneMobSpawn {
      * @param z Z coordinate
      */
     public static boolean spawnMob(World world, Entity mob, int x, int y, int z) {
+        System.out.println(mob.getEntityName());
         EntityLiving livingEntity = (EntityLiving) mob;
         float rotation = world.rand.nextFloat() * 360.0F;
         boolean canSpawn = false;
@@ -139,6 +176,7 @@ public abstract class GraveStoneMobSpawn {
         }
 
         if (canSpawn) {
+        System.out.println("!!!!!!!!!!!!!!!!! can spawn");
             xPosition = x + world.rand.nextFloat();
             yPosition = y + world.rand.nextFloat();
             zPosition = z + world.rand.nextFloat();
@@ -147,18 +185,39 @@ public abstract class GraveStoneMobSpawn {
 
             world.spawnEntityInWorld(mob);
             world.playAuxSFX(2004, x, y, z, 0);
-
             return true;
         } else {
+        System.out.println("################ can not spawn");
             return false;
         }
     }
-    
 
     /**
-     * Check spawn mob or 
+     * Check spawn mob or
      */
     public static boolean checkChance(Random random) {
         return random.nextInt(40) == 13;
+    }
+
+    /*
+     * Add Mo'creatures mobs to mob list
+     */
+    public static void addMoCreaturesMobs() {
+        MOB_ID.add("Wraith");
+        mobNameToClassMapping.put("Wraith", "drzhark.mocreatures.entity.monster.MoCEntityWraith");
+
+        HELL_MOB_ID.add("FlameWraith");
+        mobNameToClassMapping.put("FlameWraith", "drzhark.mocreatures.entity.monster.MoCEntityFlameWraith");
+        
+        HELL_MOB_ID.add("SilverSkeleton");
+        mobNameToClassMapping.put("SilverSkeleton", "drzhark.mocreatures.entity.monster.MoCEntitySilverSkeleton");
+    }
+
+    /*
+     * Add Mo'creatures mobs to mob list
+     */
+    public static void addTwilightForestMobs() {
+        MOB_ID.add("Twilight Wraith");
+        mobNameToClassMapping.put("Twilight Wraith", "twilightforest.entity.EntityTFWraith");
     }
 }
