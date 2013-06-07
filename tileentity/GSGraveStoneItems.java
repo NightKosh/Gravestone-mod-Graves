@@ -80,6 +80,10 @@ public class GSGraveStoneItems {
         return 64;
     }
 
+    /**
+     * Set items as grave loot
+     * @param items Saving items
+     */
     public void setItems(ItemStack[] items) {
         if (items != null) {
             switch (GraveStoneConfig.graveItemsCount) {
@@ -111,6 +115,10 @@ public class GSGraveStoneItems {
         }
     }
 
+    /**
+     * Drop item
+     * @param items Dropping item
+     */
     public void dropItem(ItemStack items) {
         if (items != null) {
             Random random = new Random();
@@ -138,16 +146,26 @@ public class GSGraveStoneItems {
         }
     }
 
+    /**
+     * Drop item by slot number
+     * @param slot Item slot number 
+     */
     public void dropItem(int slot) {
         dropItem(graveContents[slot]);
     }
 
+    /*
+     * Drop all holding items 
+     */
     public void dropAllItems() {
         for (int slot = 0; slot < MAX_SLOTS; slot++) {
             dropItem(slot);
         }
     }
 
+    /*
+     * Set random itesm as grave loot
+     */
     public void setRandomGraveContent(Random random) {
         setInventorySlotContents(0, new ItemStack(Item.bone.itemID, 1 + random.nextInt(5), 0));
         setInventorySlotContents(1, new ItemStack(Item.rottenFlesh.itemID, 1 + random.nextInt(5), 0));
@@ -175,100 +193,107 @@ public class GSGraveStoneItems {
         }
     }
 
+    /*
+     * Fill grave with some random warrior stuff
+     */
     private void fillWarriorGrave(Random random) {
         int armorType = random.nextInt(10);
         if (armorType > 5) { // Iron
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.plateIron.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.plateIron.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(4, new ItemStack(Item.legsIron.itemID, 1, 0));
+                setInventorySlotContents(4, new ItemStack(Item.legsIron.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(5, new ItemStack(Item.helmetIron.itemID, 1, 0));
+                setInventorySlotContents(5, new ItemStack(Item.helmetIron.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(6, new ItemStack(Item.bootsIron.itemID, 1, 0));
+                setInventorySlotContents(6, new ItemStack(Item.bootsIron.itemID, 1, getRandomDamage(random)));
             }
 
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.swordIron.itemID, 1, 0));
+                setInventorySlotContents(7, new ItemStack(Item.swordIron.itemID, 1, getRandomDamage(random)));
             } else if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.bow.itemID, 1, 0));
+                setInventorySlotContents(7, new ItemStack(Item.bow.itemID, 1, getRandomDamage(random)));
                 setInventorySlotContents(8, new ItemStack(Item.arrow.itemID, 10 + random.nextInt(54), 0));
             }
         } else if (armorType > 2) {
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.plateChain.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.plateChain.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(4, new ItemStack(Item.legsChain.itemID, 1, 0));
+                setInventorySlotContents(4, new ItemStack(Item.legsChain.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(5, new ItemStack(Item.helmetChain.itemID, 1, 0));
+                setInventorySlotContents(5, new ItemStack(Item.helmetChain.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(6, new ItemStack(Item.bootsChain.itemID, 1, 0));
+                setInventorySlotContents(6, new ItemStack(Item.bootsChain.itemID, 1, getRandomDamage(random)));
             }
 
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.swordIron.itemID, 1, 0));
+                setInventorySlotContents(7, new ItemStack(Item.swordIron.itemID, 1, getRandomDamage(random)));
             } else if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.bow.itemID, 1, 0));
+                setInventorySlotContents(7, new ItemStack(Item.bow.itemID, 1, getRandomDamage(random)));
                 setInventorySlotContents(8, new ItemStack(Item.arrow.itemID, 10 + random.nextInt(54), 0));
             }
         } else if (armorType > 0) {
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.plateGold.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.plateGold.itemID, 1, getRandomDamage(random, 50)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(4, new ItemStack(Item.legsGold.itemID, 1, 0));
+                setInventorySlotContents(4, new ItemStack(Item.legsGold.itemID, 1, getRandomDamage(random, 50)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(5, new ItemStack(Item.helmetGold.itemID, 1, 0));
+                setInventorySlotContents(5, new ItemStack(Item.helmetGold.itemID, 1, getRandomDamage(random, 30)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(6, new ItemStack(Item.bootsGold.itemID, 1, 0));
+                setInventorySlotContents(6, new ItemStack(Item.bootsGold.itemID, 1, getRandomDamage(random, 40)));
             }
 
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.swordGold.itemID, 1, 0));
+                setInventorySlotContents(7, new ItemStack(Item.swordGold.itemID, 1, getRandomDamage(random, 15)));
             } else if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.bow.itemID, 1, 0));
+                setInventorySlotContents(7, new ItemStack(Item.bow.itemID, 1, getRandomDamage(random)));
                 setInventorySlotContents(8, new ItemStack(Item.arrow.itemID, 10 + random.nextInt(54), 0));
             }
         } else {
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.plateDiamond.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.plateDiamond.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(4, new ItemStack(Item.legsDiamond.itemID, 1, 0));
+                setInventorySlotContents(4, new ItemStack(Item.legsDiamond.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(5, new ItemStack(Item.helmetDiamond.itemID, 1, 0));
+                setInventorySlotContents(5, new ItemStack(Item.helmetDiamond.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(6, new ItemStack(Item.bootsDiamond.itemID, 1, 0));
+                setInventorySlotContents(6, new ItemStack(Item.bootsDiamond.itemID, 1, getRandomDamage(random)));
             }
 
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.swordDiamond.itemID, 1, 0));
+                setInventorySlotContents(7, new ItemStack(Item.swordDiamond.itemID, 1, getRandomDamage(random)));
             } else if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.bow.itemID, 1, 0));
+                setInventorySlotContents(7, new ItemStack(Item.bow.itemID, 1, getRandomDamage(random)));
                 setInventorySlotContents(8, new ItemStack(Item.arrow.itemID, 10 + random.nextInt(54), 0));
             }
         }
     }
 
+
+    /*
+     * Fill grave with some random miner stuff
+     */
     private void fillMinerGrave(Random random) {
         if (random.nextInt(2) == 0) {
             int pickAxeType = random.nextInt(10);
             if (pickAxeType > 3) {
-                setInventorySlotContents(3, new ItemStack(Item.pickaxeIron.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.pickaxeIron.itemID, 1, getRandomDamage(random)));
             } else if (pickAxeType > 0) {
-                setInventorySlotContents(3, new ItemStack(Item.pickaxeGold.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.pickaxeGold.itemID, 1, getRandomDamage(random, 15)));
             } else {
-                setInventorySlotContents(3, new ItemStack(Item.pickaxeDiamond.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.pickaxeDiamond.itemID, 1, getRandomDamage(random)));
             }
         }
 
@@ -299,10 +324,13 @@ public class GSGraveStoneItems {
         }
     }
 
+    /*
+     * Fill grave with some random wizard stuff
+     */
     private void fillWizardGrave(Random random) {
         switch (random.nextInt(10)) {
             case 0: // enchanted book
-                EnchantmentData data = new EnchantmentData(Enchantment.field_92090_c[random.nextInt(Enchantment.field_92090_c.length)], 1 + random.nextInt(3));
+                EnchantmentData data = new EnchantmentData(Enchantment.field_92090_c[random.nextInt(Enchantment.field_92090_c.length)], 1 + random.nextInt(5));
                 ItemStack items = Item.enchantedBook.func_92111_a(data);
                 setInventorySlotContents(3, items);
                 break;
@@ -361,25 +389,28 @@ public class GSGraveStoneItems {
 
     }
 
+    /*
+     * Fill grave with some random worker stuff
+     */
     private void fillWorkerGrave(Random random) {
         int toolType = random.nextInt(10);
         if (toolType > 3) {
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.axeIron.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.axeIron.itemID, 1, getRandomDamage(random)));
             } else {
-                setInventorySlotContents(3, new ItemStack(Item.shovelIron.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.shovelIron.itemID, 1, getRandomDamage(random)));
             }
         } else if (toolType > 0) {
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.axeGold.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.axeGold.itemID, 1, getRandomDamage(random, 15)));
             } else {
-                setInventorySlotContents(3, new ItemStack(Item.shovelGold.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.shovelGold.itemID, 1, getRandomDamage(random, 15)));
             }
         } else {
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.axeDiamond.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.axeDiamond.itemID, 1, getRandomDamage(random)));
             } else {
-                setInventorySlotContents(3, new ItemStack(Item.shovelDiamond.itemID, 1, 0));
+                setInventorySlotContents(3, new ItemStack(Item.shovelDiamond.itemID, 1, getRandomDamage(random)));
             }
         }
 
@@ -405,6 +436,9 @@ public class GSGraveStoneItems {
         }
     }
 
+    /*
+     * Fill grave with some random adventurer stuff
+     */
     private void fillAdventureGrave(Random random) {
         switch (random.nextInt(8)) {
             case 0:
@@ -439,6 +473,22 @@ public class GSGraveStoneItems {
         }
     }
 
+    /*
+     * Return random damage values for items
+     */
+    private int getRandomDamage(Random random) {
+        return 20 + random.nextInt(100);
+    }
+    
+    /*
+     * Return random damage values for items with maximum damage value
+     */
+    private int getRandomDamage(Random random, int maxDamage) {
+        return 20 + random.nextInt(maxDamage - 20);
+    }
+    /*
+     * Return random record
+     */
     private ItemStack getRandomRecord(Random random) {
         switch (random.nextInt(12)) {
             case 0:
@@ -470,6 +520,9 @@ public class GSGraveStoneItems {
         }
     }
 
+    /*
+     * Return random egg
+     */
     private ItemStack getRandomEgg(Random random) {
         switch (random.nextInt(10)) {
             case 0:
