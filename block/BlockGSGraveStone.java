@@ -234,7 +234,7 @@ public class BlockGSGraveStone extends BlockContainer {
     public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player) {
         player.addStat(StatList.mineBlockStatArray[this.blockID], 1);
         player.addExhaustion(0.025F);
-        
+
         spawnMob(world, x, y, z);
 
         if (GraveStoneConfig.silkTouchForGraves) {
@@ -245,13 +245,18 @@ public class BlockGSGraveStone extends BlockContainer {
             dropBlock(world, x, y, z);
         }
     }
-    
+
+    /*
+     * Spawn mob
+     */
     private void spawnMob(World world, int x, int y, int z) {
         if (GraveStoneMobSpawn.checkChance(world.rand)) {
             TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
             if (tileEntity != null) {
                 Entity mob = GraveStoneMobSpawn.getMobEntity(world, tileEntity.getGraveType(), x, y, z);
-                GraveStoneMobSpawn.spawnMob(world, mob, x, y, z);
+                if (mob != null) {
+                    GraveStoneMobSpawn.spawnMob(world, mob, x, y, z);
+                }
             }
         }
     }
@@ -293,7 +298,7 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune) {
         spawnMob(world, x, y, z);
-        
+
         ArrayList<ItemStack> ret = new ArrayList();
         if (!GraveStoneConfig.silkTouchForGraves) {
             ret.add(getBlockItemStack(world, x, y, z));
