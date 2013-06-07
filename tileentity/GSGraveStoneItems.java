@@ -484,7 +484,7 @@ public class GSGraveStoneItems {
      * Return random damage values for items with maximum damage value
      */
     private int getRandomDamage(Random random, int maxDamage) {
-        return 20 + random.nextInt(maxDamage - 20);
+        return random.nextInt(maxDamage);
     }
     /*
      * Return random record
