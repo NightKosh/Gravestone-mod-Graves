@@ -28,6 +28,7 @@ public class GraveStoneConfig {
 
     private static Configuration config;
     private static GraveStoneConfig instance;
+    private static String path;
     // block GraveStone
     public static int graveStoneID;
     public static BlockGSGraveStone graveStone;
@@ -81,15 +82,16 @@ public class GraveStoneConfig {
     public static boolean spawnSkeletonDogs;
     public static boolean spawnSkeletonCats;
 
-    private GraveStoneConfig(Configuration config) {
-        this.config = config;
+    private GraveStoneConfig(String path, File configFile) {
+        this.config = new Configuration(configFile);
+        this.path = path;
 
         getConfigs();
     }
 
-    public static GraveStoneConfig getInstance(Configuration config) {
+    public static GraveStoneConfig getInstance(String path, String configFile) {
         if (instance == null) {
-            return new GraveStoneConfig(config);
+            return new GraveStoneConfig(path, new File(path + configFile));
         } else {
             return instance;
         }
@@ -161,18 +163,13 @@ public class GraveStoneConfig {
     }
 
     private void getGravesText() {
-        File path = new File("config/GraveStoneMod");
-        if (!path.exists()) {
-            path.mkdirs();
-        }
-
-        graveNames = readStringsFromFile("config/GraveStoneMod/graveNames.txt", GravesDefaultText.NAMES);
-        graveDogsNames = readStringsFromFile("config/GraveStoneMod/graveDogsNames.txt", GravesDefaultText.DOG_NAMES);
-        graveCatsNames = readStringsFromFile("config/GraveStoneMod/graveCatsNames.txt", GravesDefaultText.CAT_NAMES);
-        graveDeathMessages = readStringsFromFile("config/GraveStoneMod/graveDeathMessages.txt", GravesDefaultText.DEATH_TEXT);
-        memorialText = readStringsFromFile("config/GraveStoneMod/memorialText.txt", GravesDefaultText.MEMORIAL_TEXT);
-        dogsMemorialText = readStringsFromFile("config/GraveStoneMod/dogsMemorialText.txt", GravesDefaultText.DOGS_MEMORIAL_TEXT);
-        catsMemorialText = readStringsFromFile("config/GraveStoneMod/catsMemorialText.txt", GravesDefaultText.CATS_MEMORIAL_TEXT);
+        graveNames = readStringsFromFile(path + "graveNames.txt", GravesDefaultText.NAMES);
+        graveDogsNames = readStringsFromFile(path + "graveDogsNames.txt", GravesDefaultText.DOG_NAMES);
+        graveCatsNames = readStringsFromFile(path + "graveCatsNames.txt", GravesDefaultText.CAT_NAMES);
+        graveDeathMessages = readStringsFromFile(path + "graveDeathMessages.txt", GravesDefaultText.DEATH_TEXT);
+        memorialText = readStringsFromFile(path + "memorialText.txt", GravesDefaultText.MEMORIAL_TEXT);
+        dogsMemorialText = readStringsFromFile(path + "dogsMemorialText.txt", GravesDefaultText.DOGS_MEMORIAL_TEXT);
+        catsMemorialText = readStringsFromFile(path + "catsMemorialText.txt", GravesDefaultText.CATS_MEMORIAL_TEXT);
     }
 
     /*

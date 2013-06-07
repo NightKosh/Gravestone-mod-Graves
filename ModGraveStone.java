@@ -26,7 +26,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 
 /**
@@ -63,7 +62,7 @@ public class ModGraveStone {
 
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
-        GraveStoneConfig.getInstance(new Configuration(event.getSuggestedConfigurationFile()));
+        GraveStoneConfig.getInstance(event.getModConfigurationDirectory().getAbsolutePath() + "/GraveStoneMod/", "GraveStone.cfg");
     }
 
     @Init
