@@ -81,6 +81,8 @@ public class GraveStoneConfig {
     public static boolean spawnZombieCats;
     public static boolean spawnSkeletonDogs;
     public static boolean spawnSkeletonCats;
+    // sword grave
+    public static boolean generateSwordGraves;
 
     private GraveStoneConfig(String path, File configFile) {
         this.config = new Configuration(configFile);
@@ -135,6 +137,7 @@ public class GraveStoneConfig {
         generateVillagerGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateVillagerGraves", true).getBoolean(true);
         generatePetGraves = config.get(Configuration.CATEGORY_GENERAL, "GeneratePetGraves", true).getBoolean(true);
         generateGravesInLava = config.get(Configuration.CATEGORY_GENERAL, "GenerateGravesInLava", true).getBoolean(true);
+        generateSwordGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateSwordGraves", true).getBoolean(true);
 
         // store items
         Property graveItemsCountProperty = config.get(Configuration.CATEGORY_GENERAL, "SavedItemsCount", 10);

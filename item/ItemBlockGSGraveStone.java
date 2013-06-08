@@ -53,5 +53,14 @@ public class ItemBlockGSGraveStone extends ItemBlock {
         if (stack.stackTagCompound.hasKey("Age") && stack.stackTagCompound.getInteger("Age") != -1) {
             list.add("Had lived " + stack.stackTagCompound.getInteger("Age") + " days");
         }
+
+        if (stack.stackTagCompound.hasKey("SwordType") && stack.stackTagCompound.getByte("SwordType") != 0) {
+            if (stack.stackTagCompound.hasKey("SwordName")) {
+                list.add("Sword name - " + stack.stackTagCompound.getString("SwordName"));
+            }
+            if (stack.stackTagCompound.hasKey("SwordDamage")) {
+                list.add("Sword damage - " + stack.stackTagCompound.getInteger("SwordDamage"));
+            }
+        }
     }
 }

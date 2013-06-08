@@ -6,6 +6,7 @@ import GraveStone.models.block.ModelDogStatueGraveStone;
 import GraveStone.models.block.ModelGraveStone;
 import GraveStone.models.block.ModelVerticalPlateGraveStone;
 import GraveStone.models.block.ModelHorisontalPlateGraveStone;
+import GraveStone.models.block.ModelSwordGrave;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -25,6 +26,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
     private static ModelGraveStone horisontalPlate = new ModelHorisontalPlateGraveStone();
     private static ModelGraveStone dogStatue = new ModelDogStatueGraveStone();
     private static ModelGraveStone catStatue = new ModelCatStatueGraveStone();
+    private static ModelGraveStone swordGrave = new ModelSwordGrave();
 
     public void renderAModelAt(TileEntityGSGraveStone tile, double d, double d1, double d2, float f) {
         byte graveType = tile.getGraveType();
@@ -59,6 +61,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
         GL11.glPopMatrix();
     }
 
+    @Override
     public void renderTileEntityAt(TileEntity tileEntity, double d1, double d2, double d3, float par8) {
         this.renderAModelAt((TileEntityGSGraveStone) tileEntity, d1, d2, d3, par8);
     }
@@ -75,6 +78,12 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
                 return dogStatue;
             case 4:
                 return catStatue;
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+                return swordGrave;
             default:
                 return verticalPlate;
         }

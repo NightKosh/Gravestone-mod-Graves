@@ -18,6 +18,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
@@ -37,8 +38,11 @@ import net.minecraftforge.common.ForgeDirection;
 public class BlockGSGraveStone extends BlockContainer {
 
     private static final Random rand = new Random();
-    public static final String[] NAMES = {"Gravestone", "Cross", "Grave Plate", "Dog statue", "Cat statue"};
-    public static final int GRAVE_TYPE_COUNT = 5;
+    public static final String[] NAMES = {
+        "Gravestone", "Cross", "Grave Plate", "Dog statue", "Cat statue",
+        "Wooden sword gravestone", "Stone sword gravestone", "Iron sword gravestone", "Golden sword gravestone", "Diamond sword gravestone"
+    };
+    public static final int GRAVE_TYPE_COUNT = 10;
     public static final byte[] GENERATED_GRAVES = {0, 1, 2};
     public static final byte[] PETS_GRAVES = {3, 4};
     public static final byte[] DOG_GRAVES = {3};
@@ -92,6 +96,22 @@ public class BlockGSGraveStone extends BlockContainer {
                 if (itemStack.stackTagCompound.hasKey("Age")) {
                     tileEntity.setAge(itemStack.stackTagCompound.getInteger("Age"));
                 }
+
+                if (itemStack.stackTagCompound.hasKey("SwordType")) {
+                    byte swordType = itemStack.stackTagCompound.getByte("SwordType");
+                    tileEntity.setSword(swordType);
+                    if (swordType != 0) {
+                        if (itemStack.stackTagCompound.hasKey("SwordDamage")) {
+                            tileEntity.setDamage(itemStack.stackTagCompound.getInteger("SwordDamage"));
+                        }
+                        if (itemStack.stackTagCompound.hasKey("SwordName")) {
+                            tileEntity.setSwordName(itemStack.stackTagCompound.getString("SwordName"));
+                        }
+                        if (itemStack.stackTagCompound.hasKey("SwordNBT")) {
+                            tileEntity.setEnchantment(itemStack.stackTagCompound.getCompoundTag("SwordNBT"));
+                        }
+                    }
+                }
             }
         }
     }
@@ -108,13 +128,16 @@ public class BlockGSGraveStone extends BlockContainer {
         }
     }
 
-    /* Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z */
+    /**
+     * Checks to see if its valid to put this block at the specified
+     * coordinates. Args: world, x, y, z
+     */
     @Override
     public boolean canPlaceBlockAt(World world, int x, int y, int z) {
         return canPlaceBlockAt(world.getBlockId(x, y - 1, z));
     }
 
-    /*
+    /**
      * Check can be grave placed on this type of surface
      */
     public boolean canPlaceBlockAt(int blockId) {
@@ -142,7 +165,7 @@ public class BlockGSGraveStone extends BlockContainer {
         if (tileEntity != null) {
             graveType = tileEntity.getGraveType();
         }
-        //System.out.println("$$$$$$ " + graveType);
+
         switch (graveType) {
             case 0: // STONE_VERTICAL_PLATE
                 switch (meta) {
@@ -224,6 +247,26 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
+            case 5: // Swords
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+                switch (meta) {
+                    case 0:
+                        this.setBlockBounds(0.43F, 0.0F, 0.3F, 0.57F, 0.5F, 0.75F);
+                        break;
+                    case 1:
+                        this.setBlockBounds(0.43F, 0.0F, 0.7F, 0.57F, 0.5F, 0.25F);
+                        break;
+                    case 2:
+                        this.setBlockBounds(0.3F, 0.0F, 0.43F, 0.75F, 0.5F, 0.57F);
+                        break;
+                    case 3:
+                        this.setBlockBounds(0.7F, 0.0F, 0.43F, 0.25F, 0.5F, 0.57F);
+                        break;
+                }
+
         }
     }
 
@@ -240,13 +283,18 @@ public class BlockGSGraveStone extends BlockContainer {
         if (GraveStoneConfig.silkTouchForGraves) {
             if (EnchantmentHelper.getSilkTouchModifier(player)) {
                 dropBlock(world, x, y, z);
+            } else {
+                TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
+                if (tileEntity != null && isSwordGrave(tileEntity)) {
+                    tileEntity.dropSword();
+                }
             }
         } else {
             dropBlock(world, x, y, z);
         }
     }
 
-    /*
+    /**
      * Spawn mob
      */
     private void spawnMob(World world, int x, int y, int z) {
@@ -261,6 +309,9 @@ public class BlockGSGraveStone extends BlockContainer {
         }
     }
 
+    /**
+     * Drop grave as item block
+     */
     private void dropBlock(World world, int x, int y, int z) {
         ItemStack itemStack = getBlockItemStack(world, x, y, z);
 
@@ -269,6 +320,9 @@ public class BlockGSGraveStone extends BlockContainer {
         }
     }
 
+    /**
+     * Get grave block as item block
+     */
     private ItemStack getBlockItemStack(World world, int x, int y, int z) {
         ItemStack itemStack = this.createStackedBlock(0);
 
@@ -278,6 +332,13 @@ public class BlockGSGraveStone extends BlockContainer {
             nbt.setByte("GraveType", tileEntity.getGraveType());
             nbt.setString("DeathText", tileEntity.getDeathText());
             nbt.setInteger("Age", tileEntity.getAge());
+            if (tileEntity.getSword() != 0) {
+                nbt.setByte("SwordType", tileEntity.getSword());
+                nbt.setInteger("SwordDamage", tileEntity.getDamage());
+                nbt.setString("SwordName", tileEntity.getSwordName());
+                nbt.setCompoundTag("SwordNBT", tileEntity.getEnchantment());
+            }
+
             itemStack.setTagCompound(nbt);
         }
 
@@ -302,6 +363,12 @@ public class BlockGSGraveStone extends BlockContainer {
         ArrayList<ItemStack> ret = new ArrayList();
         if (!GraveStoneConfig.silkTouchForGraves) {
             ret.add(getBlockItemStack(world, x, y, z));
+        } else {
+            TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
+
+            if (tileEntity != null && isSwordGrave(tileEntity)) {
+                tileEntity.dropSword();
+            }
         }
         return ret;
     }
@@ -403,7 +470,7 @@ public class BlockGSGraveStone extends BlockContainer {
         return new TileEntityGSGraveStone(world);
     }
 
-    /*
+    /**
      * Create grave on death
      */
     public void createOnDeath(World world, int x, int y, int z, String deathText, int direction, ItemStack[] items, int age, byte entityType) {
@@ -419,11 +486,38 @@ public class BlockGSGraveStone extends BlockContainer {
 
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
         if (tileEntity != null) {
+            byte swordType = 0;
+            if (GraveStoneConfig.generateSwordGraves && world.rand.nextInt(4) == 0 && entityType == 0) {
+                ItemStack sword = checkSword(items);
+                if (sword != null) {
+                    if (sword.itemID == Item.swordDiamond.itemID) {
+                        swordType = 5;
+                    } else if (sword.itemID == Item.swordIron.itemID) {
+                        swordType = 3;
+                    } else if (sword.itemID == Item.swordStone.itemID) {
+                        swordType = 2;
+                    } else if (sword.itemID == Item.swordGold.itemID) {
+                        swordType = 4;
+                    } else {
+                        swordType = 1;
+                    }
+                    tileEntity.setSword(swordType);
+                    tileEntity.setDamage(sword.getItemDamage());
+                    tileEntity.setSwordName(sword.getDisplayName());
+                    if (sword.getEnchantmentTagList() != null && sword.getEnchantmentTagList().tagCount() > 0) {
+                        tileEntity.setEnchantment(sword.getTagCompound());
+                    }
+                }
+            }
             tileEntity.setDeathText(deathText);
             tileEntity.setItems(items);
             switch (entityType) {
                 case 0:
-                    tileEntity.setGraveType(GENERATED_GRAVES[rand.nextInt(GENERATED_GRAVES.length)]);
+                    if (swordType == 0) {
+                        tileEntity.setGraveType(GENERATED_GRAVES[rand.nextInt(GENERATED_GRAVES.length)]);
+                    } else {
+                        tileEntity.setGraveType((byte) (4 + swordType));
+                    }
                     break;
                 case 1:
                     tileEntity.setGraveType(DOG_GRAVES[rand.nextInt(DOG_GRAVES.length)]);
@@ -433,8 +527,24 @@ public class BlockGSGraveStone extends BlockContainer {
                     break;
             }
             tileEntity.setAge(age);
-            System.out.println("!!!!!!!!!!!!! " + age);
+            //System.out.println("!!!!!!!!!!!!! " + age);
         }
+    }
+
+    /**
+     * Check is there sword in your inventory
+     */
+    private static ItemStack checkSword(ItemStack[] items) {
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null && (items[i].itemID == Item.swordDiamond.itemID || items[i].itemID == Item.swordGold.itemID
+                    || items[i].itemID == Item.swordIron.itemID || items[i].itemID == Item.swordStone.itemID
+                    || items[i].itemID == Item.swordWood.itemID)) {
+                ItemStack sword = items[i];
+                items[i] = null;
+                return sword;
+            }
+        }
+        return null;
     }
 
     /**
@@ -446,7 +556,7 @@ public class BlockGSGraveStone extends BlockContainer {
         replaceGround(world, x, y - 1, z);
     }
 
-    /*
+    /**
      * Check ground type and replace it on dirt if it grass or mycelium
      */
     private void replaceGround(World world, int x, int y, int z) {
@@ -462,17 +572,24 @@ public class BlockGSGraveStone extends BlockContainer {
      */
     @Override
     public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
-        TileEntityGSGraveStone tileEntityGraveStone = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
+        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
 
-        if (tileEntityGraveStone != null) {
-            tileEntityGraveStone.dropAllItems();
+        if (tileEntity != null) {
+            tileEntity.dropAllItems();
         }
 
         super.breakBlock(world, x, y, z, par5, par6);
     }
 
-    /*
-     * Return grave metadata by direction 
+    /**
+     * Check is grave - sword grave
+     */
+    private static boolean isSwordGrave(TileEntityGSGraveStone tileEntity) {
+        return tileEntity.getSword() != 0;
+    }
+
+    /**
+     * Return grave metadata by direction
      */
     public static int getMetaDirection(int direction) {
         switch (direction) {
