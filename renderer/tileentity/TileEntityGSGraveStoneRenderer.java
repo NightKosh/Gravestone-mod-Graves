@@ -106,6 +106,21 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
             case 4: // CAT_STATUE
                 bindTextureByName("/mods/GraveStone/textures/graves/ModelCatStatueGraveStone.png");
                 break;
+            case 5: // WOODEN_SWORD_GRAVE
+                bindTextureByName("/mods/GraveStone/textures/graves/WoodenSwordGrave.png");
+                break;
+            case 6: // STONE_SWORD_GRAVE
+                bindTextureByName("/mods/GraveStone/textures/graves/StoneSwordGrave.png");
+                break;
+            case 7: // IRON_SWORD_GRAVE
+                bindTextureByName("/mods/GraveStone/textures/graves/IronSwordGrave.png");
+                break;
+            case 8: // GOLDEN_SWORD_GRAVE
+                bindTextureByName("/mods/GraveStone/textures/graves/GoldenSwordGrave.png");
+                break;
+            case 9: // DIAMOND_SWORD_GRAVE
+                bindTextureByName("/mods/GraveStone/textures/graves/DiamondSwordGrave.png");
+                break;
         }
     }
 

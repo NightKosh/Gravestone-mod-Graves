@@ -93,5 +93,6 @@ public class ModelSwordGrave extends ModelGraveStone {
         Blade3.render(0.0625F);
         Blade4.render(0.0625F);
         Shape3.render(0.0625F);
+        Hilt.render(0.0625F);
     }
 }
