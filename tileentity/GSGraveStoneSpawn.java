@@ -31,6 +31,7 @@ public class GSGraveStoneSpawn {
     private static final int MIN_DELAY = 800;
     private Entity spawnedMob;
     private List field_92060_e = null;
+    private boolean getNewMob = true;
     /**
      * The extra NBT data to add to spawned entities
      */
@@ -85,19 +86,25 @@ public class GSGraveStoneSpawn {
                     return;
                 }
 
-                this.spawnedMob = GraveStoneMobSpawn.getMobEntity(this.tileEntity.worldObj, this.tileEntity.graveType, this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord);
-                if (this.spawnedMob != null) {
-                    int nearbyEntitiesCount = tileEntity.worldObj.getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.getAABBPool().getAABB(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord,
-                            tileEntity.xCoord + 1, tileEntity.yCoord + 1, tileEntity.zCoord + 1).expand(1.0D, 4.0D, SPAWN_RANGE * 2)).size();
-
-                    if (nearbyEntitiesCount >= MAX_NEARBY_ENTITIES) {
-                        this.updateDelay();
+                if (this.getNewMob) {
+                    this.spawnedMob = GraveStoneMobSpawn.getMobEntity(this.tileEntity.worldObj, this.tileEntity.graveType, this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord);
+                    if (this.spawnedMob == null) {
                         return;
                     }
+                    this.getNewMob = false;
+                }
 
-                    if (GraveStoneMobSpawn.checkChance(this.tileEntity.worldObj.rand) && GraveStoneMobSpawn.spawnMob(this.tileEntity.worldObj, this.spawnedMob, this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord)) {
-                        this.updateDelay();
-                    }
+                int nearbyEntitiesCount = tileEntity.worldObj.getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.getAABBPool().getAABB(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord,
+                        tileEntity.xCoord + 1, tileEntity.yCoord + 1, tileEntity.zCoord + 1).expand(1.0D, 4.0D, SPAWN_RANGE * 2)).size();
+
+                if (nearbyEntitiesCount >= MAX_NEARBY_ENTITIES) {
+                    this.updateDelay();
+                    return;
+                }
+
+                if (GraveStoneMobSpawn.checkChance(this.tileEntity.worldObj.rand) && GraveStoneMobSpawn.spawnMob(this.tileEntity.worldObj, this.spawnedMob, this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord)) {
+                    this.updateDelay();
+                    this.getNewMob = true;
                 }
             }
         }
