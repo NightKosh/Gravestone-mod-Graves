@@ -97,10 +97,10 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
                 bindTextureByName("/mods/GraveStone/textures/memorials/ModelMemorialObelisk.png");
                 break;
             case 2: // VILLAGER_STATUE
-                bindTextureByName("/mods/GraveStone/textures/memorials/ModelDogStatueMemorialfgfgf.png");
+                bindTextureByName("/mods/GraveStone/textures/memorials/ModelVillagerStatueMemorial.png");
                 break;
             case 3: // ANGEL_STAUTE
-                bindTextureByName("/mods/GraveStone/textures/memorials/ModelCatStatueMemorialfgfgf.png");
+                bindTextureByName("/mods/GraveStone/textures/memorials/ModelAngelStatueMemorial.png");
                 break;
             case 4: // DOG_STATUE
                 bindTextureByName("/mods/GraveStone/textures/memorials/ModelDogStatueMemorial.png");
