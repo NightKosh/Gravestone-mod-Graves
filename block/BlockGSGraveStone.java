@@ -200,48 +200,48 @@ public class BlockGSGraveStone extends BlockContainer {
             case 2: // STONE_HORISONTAL_PLATE
                 switch (meta) {
                     case 0:
-                        this.setBlockBounds(0.09375F, 0.0F, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
+                        this.setBlockBounds(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
                         break;
                     case 1:
-                        this.setBlockBounds(0.09375F, 0.0F, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
+                        this.setBlockBounds(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
                         break;
                     case 2:
-                        this.setBlockBounds(0.0625F, 0.0F, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
+                        this.setBlockBounds(0.0625F, 0, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
                         break;
                     case 3:
-                        this.setBlockBounds(0.0625F, 0.0F, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
+                        this.setBlockBounds(0.0625F, 0, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
                         break;
                 }
                 break;
             case 3: // DOG_STATUE
                 switch (meta) {
                     case 0:
-                        this.setBlockBounds(0.35F, 0.0F, 0.3F, 0.6F, 0.5F, 0.9F);
+                        this.setBlockBounds(0.35F, 0, 0.3F, 0.6F, 0.5F, 0.9F);
                         break;
                     case 1:
-                        this.setBlockBounds(0.35F, 0.0F, 0.7F, 0.6F, 0.5F, 0.1F);
+                        this.setBlockBounds(0.35F, 0, 0.7F, 0.6F, 0.5F, 0.1F);
                         break;
                     case 2:
-                        this.setBlockBounds(0.3F, 0.0F, 0.35F, 0.9F, 0.5F, 0.6F);
+                        this.setBlockBounds(0.3F, 0, 0.35F, 0.9F, 0.5F, 0.6F);
                         break;
                     case 3:
-                        this.setBlockBounds(0.7F, 0.0F, 0.35F, 0.1F, 0.5F, 0.6F);
+                        this.setBlockBounds(0.7F, 0, 0.35F, 0.1F, 0.5F, 0.6F);
                         break;
                 }
                 break;
             case 4: // CAT_STATUE
                 switch (meta) {
                     case 0:
-                        this.setBlockBounds(0.43F, 0.0F, 0.3F, 0.57F, 0.5F, 0.75F);
+                        this.setBlockBounds(0.43F, 0, 0.3F, 0.57F, 0.5F, 0.75F);
                         break;
                     case 1:
-                        this.setBlockBounds(0.43F, 0.0F, 0.7F, 0.57F, 0.5F, 0.25F);
+                        this.setBlockBounds(0.43F, 0, 0.7F, 0.57F, 0.5F, 0.25F);
                         break;
                     case 2:
-                        this.setBlockBounds(0.3F, 0.0F, 0.43F, 0.75F, 0.5F, 0.57F);
+                        this.setBlockBounds(0.3F, 0, 0.43F, 0.75F, 0.5F, 0.57F);
                         break;
                     case 3:
-                        this.setBlockBounds(0.7F, 0.0F, 0.43F, 0.25F, 0.5F, 0.57F);
+                        this.setBlockBounds(0.7F, 0, 0.43F, 0.25F, 0.5F, 0.57F);
                         break;
                 }
                 break;
@@ -252,16 +252,16 @@ public class BlockGSGraveStone extends BlockContainer {
             case 9:
                 switch (meta) {
                     case 0:
-                        this.setBlockBounds(0.43F, 0.0F, 0.3F, 0.57F, 0.5F, 0.75F);
+                        this.setBlockBounds(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
                         break;
                     case 1:
-                        this.setBlockBounds(0.43F, 0.0F, 0.7F, 0.57F, 0.5F, 0.25F);
+                        this.setBlockBounds(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
                         break;
                     case 2:
-                        this.setBlockBounds(0.3F, 0.0F, 0.43F, 0.75F, 0.5F, 0.57F);
+                        this.setBlockBounds(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
                         break;
                     case 3:
-                        this.setBlockBounds(0.7F, 0.0F, 0.43F, 0.25F, 0.5F, 0.57F);
+                        this.setBlockBounds(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
                         break;
                 }
 

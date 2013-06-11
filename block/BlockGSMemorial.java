@@ -127,7 +127,6 @@ public class BlockGSMemorial extends BlockContainer {
      */
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
-        int meta = access.getBlockMetadata(x, y, z);
         byte memorialType = 0;
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) access.getBlockTileEntity(x, y, z);
         if (tileEntity != null) {
@@ -137,6 +136,22 @@ public class BlockGSMemorial extends BlockContainer {
             case 0: // STONE_CROSS
                 this.setBlockBounds(-1, 0, -1, 2, 5, 2);
                 break;
+            case 1: // STONE_CROSS
+                this.setBlockBounds(-1, 0, -1, 2, 5, 2);
+                break;
+            case 2: // STEVE_STATUE
+            case 3: // VILLAGER_STATUE
+            case 4: // ANGEL_STATUE
+                this.setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 2.5F, 0.9375F);
+                break;
+            case 5: // DOG_STATUE
+            case 6: // CAT_STAUTE
+                this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 2, 0.875F);
+                break;
+            case 7: // CREEPER_STATUE
+                this.setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 2, 0.9375F);
+                break;
+                
         }
     }
 
