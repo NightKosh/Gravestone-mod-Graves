@@ -1,8 +1,11 @@
 package GraveStone.renderer.tileentity;
 
+import GraveStone.models.block.ModelCatStatueMemorial;
+import GraveStone.models.block.ModelDogStatueMemorial;
 import GraveStone.models.block.ModelGraveStone;
 import GraveStone.models.block.ModelMemorialCross;
 import GraveStone.models.block.ModelMemorialObelisk;
+import GraveStone.models.block.ModelVillagerMemorial;
 import GraveStone.tileentity.TileEntityGSMemorial;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -19,6 +22,9 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
 
     protected static ModelGraveStone cross = new ModelMemorialCross();
     protected static ModelGraveStone obelisk = new ModelMemorialObelisk();
+    protected static ModelGraveStone dogStatue = new ModelDogStatueMemorial();
+    protected static ModelGraveStone catStatue = new ModelCatStatueMemorial();
+    protected static ModelGraveStone villagerStatue = new ModelVillagerMemorial();
     
     public void renderAModelAt(TileEntityGSMemorial tile, double d, double d1, double d2, float f) {
         byte memorialType = tile.getGraveType();
@@ -59,16 +65,24 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
         GL11.glPopMatrix();
     }
 
+    @Override
     public void renderTileEntityAt(TileEntity tileEntity, double par2, double par4, double par6, float par8) {
         this.renderAModelAt((TileEntityGSMemorial) tileEntity, par2, par4, par6, par8);
     }
 
     private ModelGraveStone getMemorialModel(int memorialType) {
         switch (memorialType) {
-            case 0:
-                return cross;
             case 1:
                 return obelisk;
+            case 2:
+                return villagerStatue;
+            case 3:
+                return villagerStatue;
+            case 4:
+                return dogStatue;
+            case 5:
+                return catStatue;
+            case 0:
             default:
                 return cross;
         }
@@ -81,6 +95,18 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
                 break;
             case 1: // OBELISK
                 bindTextureByName("/mods/GraveStone/textures/memorials/ModelMemorialObelisk.png");
+                break;
+            case 2: // VILLAGER_STATUE
+                bindTextureByName("/mods/GraveStone/textures/memorials/ModelDogStatueMemorialfgfgf.png");
+                break;
+            case 3: // ANGEL_STAUTE
+                bindTextureByName("/mods/GraveStone/textures/memorials/ModelCatStatueMemorialfgfgf.png");
+                break;
+            case 4: // DOG_STATUE
+                bindTextureByName("/mods/GraveStone/textures/memorials/ModelDogStatueMemorial.png");
+                break;
+            case 5: // CAT_STAUTE
+                bindTextureByName("/mods/GraveStone/textures/memorials/ModelCatStatueMemorial.png");
                 break;
         }
     }

@@ -32,9 +32,8 @@ import net.minecraft.world.World;
  */
 public class BlockGSMemorial extends BlockContainer {
 
-    private static final Random rand = new Random();
-    public static final String[] NAMES = {"Cross Memorial", "Obelisk"};
-    public static final int MEMORIAL_TYPE_COUNT = 2;
+    public static final String[] NAMES = {"Cross Memorial", "Obelisk", "Dog statue", "Cat statue"};
+    public static final int MEMORIAL_TYPE_COUNT = 4;
 
     public BlockGSMemorial(int par1) {
         super(par1, Material.rock);
