@@ -12,6 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -146,7 +147,7 @@ public abstract class GraveStoneMobSpawn {
         if (livingEntity.getCanSpawnHere()) {
             canSpawn = true;
         } else {
-            if (mob instanceof EntitySkeleton && ((EntitySkeleton) mob).getSkeletonType() == 1) {
+            if (!(mob instanceof EntityZombie)) {
                 xPosition += 1;
                 mob.setLocationAndAngles(xPosition, yPosition, zPosition, rotation, 0.0F);
                 if (livingEntity.getCanSpawnHere()) {
@@ -176,7 +177,6 @@ public abstract class GraveStoneMobSpawn {
         }
 
         if (canSpawn) {
-        System.out.println("!!!!!!!!!!!!!!!!! can spawn");
             xPosition = x + world.rand.nextFloat();
             yPosition = y + world.rand.nextFloat();
             zPosition = z + world.rand.nextFloat();
@@ -187,7 +187,6 @@ public abstract class GraveStoneMobSpawn {
             world.playAuxSFX(2004, x, y, z, 0);
             return true;
         } else {
-        System.out.println("################ can not spawn");
             return false;
         }
     }
@@ -203,14 +202,14 @@ public abstract class GraveStoneMobSpawn {
      * Add Mo'creatures mobs to mob list
      */
     public static void addMoCreaturesMobs() {
+        MOB_ID.add("SilverSkeleton");
+        mobNameToClassMapping.put("SilverSkeleton", "drzhark.mocreatures.entity.monster.MoCEntitySilverSkeleton");
+        
         MOB_ID.add("Wraith");
         mobNameToClassMapping.put("Wraith", "drzhark.mocreatures.entity.monster.MoCEntityWraith");
 
         HELL_MOB_ID.add("FlameWraith");
         mobNameToClassMapping.put("FlameWraith", "drzhark.mocreatures.entity.monster.MoCEntityFlameWraith");
-        
-        HELL_MOB_ID.add("SilverSkeleton");
-        mobNameToClassMapping.put("SilverSkeleton", "drzhark.mocreatures.entity.monster.MoCEntitySilverSkeleton");
     }
 
     /*
