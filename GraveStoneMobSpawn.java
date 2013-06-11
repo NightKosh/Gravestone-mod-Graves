@@ -22,7 +22,6 @@ import net.minecraft.world.World;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public abstract class GraveStoneMobSpawn {
 
@@ -34,6 +33,13 @@ public abstract class GraveStoneMobSpawn {
     private static ArrayList<String> DOG_ID = new ArrayList(Arrays.asList("GSZombieDog", "GSSkeletonDog"));
     private static ArrayList<String> CAT_ID = new ArrayList(Arrays.asList("GSZombieCat", "GSSkeletonCat"));
     private static ArrayList<String> HELL_MOB_ID = new ArrayList(Arrays.asList("PigZombie", "Skeleton"));
+    // catacombs spawner mobs
+    public static ArrayList<String> catacombsSpawnerMobs = new ArrayList(Arrays.asList(
+            "Skeleton", "Spider", "Zombie",
+            "Skeleton", "Spider", "Zombie",
+            "Skeleton", "Spider", "Zombie",
+            "GSZombieDog", "GSZombieCat",
+            "GSSkeletonDog", "GSSkeletonCat"));
 
     /* 
      * Check can grave spawn hell creature or not
@@ -134,7 +140,6 @@ public abstract class GraveStoneMobSpawn {
      * @param z Z coordinate
      */
     public static boolean spawnMob(World world, Entity mob, int x, int y, int z) {
-        System.out.println(mob.getEntityName());
         EntityLiving livingEntity = (EntityLiving) mob;
         float rotation = world.rand.nextFloat() * 360.0F;
         boolean canSpawn = false;
@@ -204,9 +209,11 @@ public abstract class GraveStoneMobSpawn {
     public static void addMoCreaturesMobs() {
         MOB_ID.add("SilverSkeleton");
         mobNameToClassMapping.put("SilverSkeleton", "drzhark.mocreatures.entity.monster.MoCEntitySilverSkeleton");
+        catacombsSpawnerMobs.add("SilverSkeleton");
         
         MOB_ID.add("Wraith");
         mobNameToClassMapping.put("Wraith", "drzhark.mocreatures.entity.monster.MoCEntityWraith");
+        catacombsSpawnerMobs.add("Wraith");
 
         HELL_MOB_ID.add("FlameWraith");
         mobNameToClassMapping.put("FlameWraith", "drzhark.mocreatures.entity.monster.MoCEntityFlameWraith");
@@ -218,5 +225,13 @@ public abstract class GraveStoneMobSpawn {
     public static void addTwilightForestMobs() {
         MOB_ID.add("Twilight Wraith");
         mobNameToClassMapping.put("Twilight Wraith", "twilightforest.entity.EntityTFWraith");
+        catacombsSpawnerMobs.add("Twilight Wraith");
+    }
+    
+    /**
+     * Return random mob for spawner
+     */
+    public static String getMobForSpawner(Random random) {
+        return catacombsSpawnerMobs.get(random.nextInt(catacombsSpawnerMobs.size()));
     }
 }

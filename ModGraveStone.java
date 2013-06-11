@@ -157,10 +157,8 @@ public class ModGraveStone {
         if (Loader.isModLoaded("MoCreatures")) {
             GraveStoneMobSpawn.addMoCreaturesMobs();
         }
-        /*
         if (Loader.isModLoaded("TwilightForest")) {
             GraveStoneMobSpawn.addTwilightForestMobs();
         }
-        */
     }
 }

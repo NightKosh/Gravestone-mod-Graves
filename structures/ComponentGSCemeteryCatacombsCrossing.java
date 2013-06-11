@@ -1,5 +1,6 @@
 package GraveStone.structures;
 
+import GraveStone.GraveStoneMobSpawn;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -9,20 +10,12 @@ import net.minecraft.world.World;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class ComponentGSCemeteryCatacombsCrossing extends ComponentGSCemeteryCatacombs {
 
     public static final int X_LENGTH = 13;
     public static final int HEIGHT = 6;
     public static final int Z_LENGTH = 13;
-    private static final String[] monstersList = {
-        "Skeleton", "Spider", "Zombie",
-        "Skeleton", "Spider", "Zombie", 
-        "Skeleton", "Spider", "Zombie",
-        "GSZombieDog", "GSZombieCat", 
-        "GSSkeletonDog", "GSSkeletonCat"
-    };
 
     public ComponentGSCemeteryCatacombsCrossing(int direction, Random random, int x, int y, int z) {
         super(direction);
@@ -68,6 +61,7 @@ public class ComponentGSCemeteryCatacombsCrossing extends ComponentGSCemeteryCat
      * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at
      * the end, it adds Fences...
      */
+    @Override
     public boolean addComponentParts(World world, Random random) {
         int metaTop = this.getMetadataWithOffset(Block.stairsNetherBrick.blockID, 2);
         int metaBot = this.getMetadataWithOffset(Block.stairsNetherBrick.blockID, 3);
@@ -198,12 +192,13 @@ public class ComponentGSCemeteryCatacombsCrossing extends ComponentGSCemeteryCat
         this.fillWithAir(world, boundingBox, 5, 1, 0, 7, 3, 0);
         
         // spawner
-        generateSpawner(world, 6, 1, 6, monstersList[random.nextInt(monstersList.length)]);
+        generateSpawner(world, 6, 1, 6, GraveStoneMobSpawn.getMobForSpawner(random));
         
         return true;
     }
     
     
+    @Override
     public boolean canGoOnlyTop() {
         return false;
     }
