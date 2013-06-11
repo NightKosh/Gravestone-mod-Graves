@@ -88,7 +88,7 @@ public class ModGraveStone {
         // create gravestone
         graveStone = new BlockGSGraveStone(GraveStoneConfig.graveStoneID);
         GameRegistry.registerBlock(graveStone, ItemBlockGSGraveStone.class);
-        for (byte i = 0; i < BlockGSGraveStone.GRAVE_TYPE_COUNT; i++) {
+        for (byte i = 0; i < BlockGSGraveStone.NAMES.length; i++) {
             ItemStack graveStoneStack = new ItemStack(graveStone, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", i);
@@ -116,7 +116,7 @@ public class ModGraveStone {
         GameRegistry.registerBlock(memorial, "GSMemorial");
         LanguageRegistry.addName(memorial, "Memorial");
         GameRegistry.registerBlock(memorial, ItemBlockGSMemorial.class);
-        for (byte i = 0; i < BlockGSMemorial.MEMORIAL_TYPE_COUNT; i++) {
+        for (byte i = 0; i < BlockGSMemorial.NAMES.length; i++) {
             ItemStack memorialStack = new ItemStack(memorial, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", i);

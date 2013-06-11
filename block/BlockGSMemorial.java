@@ -34,10 +34,9 @@ public class BlockGSMemorial extends BlockContainer {
 
     public static final String[] NAMES = {
         "Cross Memorial", "Obelisk", 
-        "Villager statue", "Angel statue", 
+        "Steve statue", "Villager statue", "Angel statue", 
         "Dog statue", "Cat statue"
     };
-    public static final int MEMORIAL_TYPE_COUNT = 6;
 
     public BlockGSMemorial(int par1) {
         super(par1, Material.rock);
@@ -255,7 +254,7 @@ public class BlockGSMemorial extends BlockContainer {
      */
     @Override
     public void getSubBlocks(int id, CreativeTabs tab, List list) {
-        for (byte j = 0; j < MEMORIAL_TYPE_COUNT; j++) {
+        for (byte j = 0; j < NAMES.length; j++) {
             ItemStack stack = new ItemStack(id, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", j);

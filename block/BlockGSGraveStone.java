@@ -42,7 +42,6 @@ public class BlockGSGraveStone extends BlockContainer {
         "Gravestone", "Cross", "Grave Plate", "Dog statue", "Cat statue",
         "Wooden sword gravestone", "Stone sword gravestone", "Iron sword gravestone", "Golden sword gravestone", "Diamond sword gravestone"
     };
-    public static final int GRAVE_TYPE_COUNT = 10;
     public static final byte[] GENERATED_GRAVES = {0, 1, 2};
     public static final byte[] PETS_GRAVES = {3, 4};
     public static final byte[] DOG_GRAVES = {3};
@@ -634,7 +633,7 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(int id, CreativeTabs tabs, List list) {
-        for (byte j = 0; j < GRAVE_TYPE_COUNT; j++) {
+        for (byte j = 0; j < NAMES.length; j++) {
             ItemStack stack = new ItemStack(id, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", j);
