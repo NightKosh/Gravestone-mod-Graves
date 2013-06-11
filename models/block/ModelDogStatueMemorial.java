@@ -179,12 +179,6 @@ public class ModelDogStatueMemorial extends ModelGraveStone {
         this.wolfTail.rotateAngleX = 1.7278761F;
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z) {
-        model.rotateAngleX = x;
-        model.rotateAngleY = y;
-        model.rotateAngleZ = z;
-    }
-
     @Override
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F);

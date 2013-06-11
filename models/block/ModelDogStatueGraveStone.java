@@ -71,6 +71,7 @@ public class ModelDogStatueGraveStone extends ModelGraveStone {
     /**
      * Sets the models various rotation angles then renders the model.
      */
+    @Override
     public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         super.render(entity, par2, par3, par4, par5, par6, par7);
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
@@ -118,6 +119,7 @@ public class ModelDogStatueGraveStone extends ModelGraveStone {
         this.wolfTail.rotateAngleX = 1.7278761F;
     }
 
+    @Override
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F);
         float par7 = 0.0625F;

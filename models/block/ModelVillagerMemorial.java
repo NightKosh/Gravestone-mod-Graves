@@ -119,12 +119,6 @@ public class ModelVillagerMemorial extends ModelGraveStone {
         this.leftVillagerLeg.rotateAngleY = 0.0F;
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z) {
-        model.rotateAngleX = x;
-        model.rotateAngleY = y;
-        model.rotateAngleZ = z;
-    }
-
     @Override
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F);
