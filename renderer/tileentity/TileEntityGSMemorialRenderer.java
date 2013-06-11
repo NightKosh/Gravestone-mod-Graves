@@ -1,14 +1,20 @@
 package GraveStone.renderer.tileentity;
 
 import GraveStone.models.block.ModelCatStatueMemorial;
+import GraveStone.models.block.ModelCreeperStatueMemorial;
 import GraveStone.models.block.ModelDogStatueMemorial;
 import GraveStone.models.block.ModelGraveStone;
 import GraveStone.models.block.ModelMemorialCross;
 import GraveStone.models.block.ModelMemorialObelisk;
+import GraveStone.models.block.ModelSteveStatueMemorial;
 import GraveStone.models.block.ModelVillagerMemorial;
 import GraveStone.tileentity.TileEntityGSMemorial;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.client.ForgeHooksClient;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -22,10 +28,14 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
 
     protected static ModelGraveStone cross = new ModelMemorialCross();
     protected static ModelGraveStone obelisk = new ModelMemorialObelisk();
+    protected static ModelGraveStone steveStatue = new ModelSteveStatueMemorial();
+    protected static ModelGraveStone villagerStatue = new ModelVillagerMemorial();
+    protected static ModelGraveStone angelStatue = new ModelVillagerMemorial();
     protected static ModelGraveStone dogStatue = new ModelDogStatueMemorial();
     protected static ModelGraveStone catStatue = new ModelCatStatueMemorial();
-    protected static ModelGraveStone villagerStatue = new ModelVillagerMemorial();
-    
+    protected static ModelCreeperStatueMemorial creeperStatue = new ModelCreeperStatueMemorial();
+    protected static ModelBiped modelArmorChestplate = ForgeHooksClient.getArmorModel(null, new ItemStack(Item.plateDiamond, 0, 0), 0, null);
+
     public void renderAModelAt(TileEntityGSMemorial tile, double d, double d1, double d2, float f) {
         byte memorialType = tile.getGraveType();
         int meta;
@@ -61,6 +71,7 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
                 GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
                 break;
         }
+
         getMemorialModel(memorialType).renderAll();
         GL11.glPopMatrix();
     }
@@ -75,13 +86,17 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
             case 1:
                 return obelisk;
             case 2:
-                return villagerStatue;
+                return steveStatue;
             case 3:
                 return villagerStatue;
             case 4:
-                return dogStatue;
+                return angelStatue;
             case 5:
+                return dogStatue;
+            case 6:
                 return catStatue;
+            case 7:
+                return creeperStatue;
             case 0:
             default:
                 return cross;
@@ -96,17 +111,23 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
             case 1: // OBELISK
                 bindTextureByName("/mods/GraveStone/textures/memorials/ModelMemorialObelisk.png");
                 break;
-            case 2: // VILLAGER_STATUE
+            case 2: // PLAYER_STATUE
+                bindTextureByName("/mods/GraveStone/textures/memorials/ModelSteveStatueMemorial.png");
+                break;
+            case 3: // VILLAGER_STATUE
                 bindTextureByName("/mods/GraveStone/textures/memorials/ModelVillagerStatueMemorial.png");
                 break;
-            case 3: // ANGEL_STAUTE
+            case 4: // ANGEL_STAUTE
                 bindTextureByName("/mods/GraveStone/textures/memorials/ModelAngelStatueMemorial.png");
                 break;
-            case 4: // DOG_STATUE
+            case 5: // DOG_STATUE
                 bindTextureByName("/mods/GraveStone/textures/memorials/ModelDogStatueMemorial.png");
                 break;
-            case 5: // CAT_STAUTE
+            case 6: // CAT_STAUTE
                 bindTextureByName("/mods/GraveStone/textures/memorials/ModelCatStatueMemorial.png");
+                break;
+            case 7: //CREEPER_STATUE
+                bindTextureByName("/mods/GraveStone/textures/memorials/ModelCreeperStatueMemorial.png");
                 break;
         }
     }
@@ -128,4 +149,14 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
                 return 2;
         }
     }
+/*
+    protected int setArmorModel() {
+        //ItemArmor itemArmor = (ItemArmor) item;
+        //bindTextureByName("/mods/GraveStone/textures/memorials/ModelAngelStatueMemorial.png");
+        //ModelBiped modelbiped = this.modelArmorChestplate;
+        //this.setRenderPassModel(modelArmorChestplate);
+
+        //new ItemStack(Item.swordDiamond, 0, 0)
+        return 1;
+    }*/
 }

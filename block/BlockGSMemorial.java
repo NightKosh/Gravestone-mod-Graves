@@ -35,7 +35,7 @@ public class BlockGSMemorial extends BlockContainer {
     public static final String[] NAMES = {
         "Cross Memorial", "Obelisk", 
         "Steve statue", "Villager statue", "Angel statue", 
-        "Dog statue", "Cat statue"
+        "Dog statue", "Cat statue", "Creeper Statue"
     };
 
     public BlockGSMemorial(int par1) {
