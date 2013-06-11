@@ -72,7 +72,6 @@ public class BlockGSGraveStone extends BlockContainer {
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving player, ItemStack itemStack) {
         replaceGround(world, x, y - 1, z);
 
-        //System.out.println("onBlockPlacedBy");
         int direction = MathHelper.floor_float(player.rotationYaw);
         if (direction < 0) {
             direction = 360 + direction;
@@ -584,7 +583,7 @@ public class BlockGSGraveStone extends BlockContainer {
     /**
      * Check is grave - sword grave
      */
-    private static boolean isSwordGrave(TileEntityGSGraveStone tileEntity) {
+    public static boolean isSwordGrave(TileEntityGSGraveStone tileEntity) {
         return tileEntity.getSword() != 0;
     }
 
