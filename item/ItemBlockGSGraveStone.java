@@ -1,6 +1,6 @@
 package GraveStone.item;
 
-import GraveStone.ModGraveStone;
+import GraveStone.block.BlockGSGraveStone;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
@@ -8,7 +8,6 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
@@ -39,7 +38,7 @@ public class ItemBlockGSGraveStone extends ItemBlock {
         if (itemStack.stackTagCompound != null) {
             graveType = itemStack.stackTagCompound.getByte("GraveType");
         }
-        return getUnlocalizedName() + "." + ModGraveStone.graveStone.NAMES[graveType];
+        return getUnlocalizedName() + "." + BlockGSGraveStone.NAMES[graveType];
     }
 
     @Override
@@ -62,10 +61,10 @@ public class ItemBlockGSGraveStone extends ItemBlock {
             }
 
             if (stack.stackTagCompound.hasKey("SwordType") && stack.stackTagCompound.getByte("SwordType") != 0) {
-                if (stack.stackTagCompound.hasKey("SwordName")) {
+                if (stack.stackTagCompound.hasKey("SwordName") && !stack.stackTagCompound.getString("SwordName").isEmpty()) {
                     list.add("Sword name - " + stack.stackTagCompound.getString("SwordName"));
                 }
-                if (stack.stackTagCompound.hasKey("SwordDamage")) {
+                if (stack.stackTagCompound.hasKey("SwordDamage") && stack.stackTagCompound.getInteger("SwordDamage") != 0) {
                     list.add("Sword damage - " + stack.stackTagCompound.getInteger("SwordDamage"));
                 }
                 if (stack.stackTagCompound.hasKey("SwordNBT")) {
