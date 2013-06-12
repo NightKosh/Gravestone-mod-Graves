@@ -324,8 +324,8 @@ public class BlockGSMemorial extends BlockContainer {
     }
 
     /**
-     * Return random grave type
-     * @param memorialTypetype of graves
+     * Return random memorial type
+     * memorialTypetype - type of memorial
      * 0 - all graves( 20% for pets graves)
      * 1 - only pets memorials
      * 2 - only dogs memorials
@@ -345,5 +345,19 @@ public class BlockGSMemorial extends BlockContainer {
             case 4:
                 return CREEPER_MEMORIALS[random.nextInt(CREEPER_MEMORIALS.length)];
         }
+    }
+
+    /*
+     * Drop sword as item
+     */
+    public void dropCreeperMemorial(World world, int x, int y, int z) {
+        byte memorialType = BlockGSMemorial.getMemorialType(new Random(), 4);
+        ItemStack itemStack = new ItemStack(ModGraveStone.memorial);
+
+        NBTTagCompound nbt = new NBTTagCompound();
+        nbt.setByte("GraveType", memorialType);
+
+        itemStack.setTagCompound(nbt);
+        this.dropBlockAsItem_do(world, x, y, z, itemStack);
     }
 }

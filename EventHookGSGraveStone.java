@@ -1,8 +1,10 @@
 package GraveStone;
 
+import GraveStone.block.BlockGSGraveStone;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
@@ -39,6 +41,11 @@ public class EventHookGSGraveStone {
                     createPetGrave(event.entity, event);
                 }
             }
+            // drop creeper statue if entity is a charged creeper
+            if (event.entity instanceof EntityCreeper && ((EntityCreeper) event.entity).getPowered()) {
+                ModGraveStone.memorial.dropCreeperMemorial(event.entity.worldObj, (int) event.entity.posX,
+                        (int) event.entity.posY, (int) event.entity.posZ);
+            }
         }
     }
 
@@ -55,7 +62,7 @@ public class EventHookGSGraveStone {
     }
 
     private void createGrave(Entity entity, LivingDeathEvent event, ItemStack[] items, int age, byte entityType) {
-        ModGraveStone.graveStone.createOnDeath(entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
+        BlockGSGraveStone.createOnDeath(entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
                 event.source.getDeathMessage((EntityLiving) entity), MathHelper.floor_float(entity.rotationYaw), items, age, entityType);
     }
 

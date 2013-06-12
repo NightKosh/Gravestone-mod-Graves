@@ -1,7 +1,6 @@
-
 package GraveStone.item;
 
-import GraveStone.ModGraveStone;
+import GraveStone.block.BlockGSMemorial;
 import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -35,15 +34,17 @@ public class ItemBlockGSMemorial extends ItemBlock {
         if (itemStack.stackTagCompound != null) {
             graveType = itemStack.stackTagCompound.getByte("GraveType");
         }
-        return getUnlocalizedName() + "." + ModGraveStone.memorial.NAMES[graveType];
+        return getUnlocalizedName() + "." + BlockGSMemorial.NAMES[graveType];
     }
 
+    @Override
     public void onCreated(ItemStack stack, World world, EntityPlayer player) {
         if (stack.stackTagCompound == null) {
             stack.setTagCompound(new NBTTagCompound());
         }
     }
 
+    @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
         if (stack.stackTagCompound == null) {
             stack.setTagCompound(new NBTTagCompound());
