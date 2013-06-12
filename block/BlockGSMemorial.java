@@ -33,10 +33,15 @@ import net.minecraft.world.World;
 public class BlockGSMemorial extends BlockContainer {
 
     public static final String[] NAMES = {
-        "Cross Memorial", "Obelisk", 
-        "Steve statue", "Villager statue", "Angel statue", 
+        "Cross Memorial", "Obelisk",
+        "Steve statue", "Villager statue", "Angel statue",
         "Dog statue", "Cat statue", "Creeper Statue"
     };
+    public static final byte[] GENERATED_MEMORIALS = {0, 1, 2, 3, 4, 5, 6};
+    public static final byte[] PETS_MEMORIALS = {5, 6};
+    public static final byte[] DOG_MEMORIALS = {5};
+    public static final byte[] CAT_MEMORIALS = {6};
+    public static final byte[] CREEPER_MEMORIALS = {7};
 
     public BlockGSMemorial(int par1) {
         super(par1, Material.rock);
@@ -151,7 +156,7 @@ public class BlockGSMemorial extends BlockContainer {
             case 7: // CREEPER_STATUE
                 this.setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 2, 0.9375F);
                 break;
-                
+
         }
     }
 
@@ -316,5 +321,29 @@ public class BlockGSMemorial extends BlockContainer {
      */
     @Override
     public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int metadata) {
+    }
+
+    /**
+     * Return random grave type
+     * @param memorialTypetype of graves
+     * 0 - all graves( 20% for pets graves)
+     * 1 - only pets memorials
+     * 2 - only dogs memorials
+     * 3 - only cats memorials
+     */
+    public static byte getMemorialType(Random random, int memorialType) {
+        switch (memorialType) {
+            default:
+            case 0:
+                return GENERATED_MEMORIALS[random.nextInt(GENERATED_MEMORIALS.length)];
+            case 1:
+                return PETS_MEMORIALS[random.nextInt(PETS_MEMORIALS.length)];
+            case 2:
+                return DOG_MEMORIALS[random.nextInt(DOG_MEMORIALS.length)];
+            case 3:
+                return CAT_MEMORIALS[random.nextInt(CAT_MEMORIALS.length)];
+            case 4:
+                return CREEPER_MEMORIALS[random.nextInt(CREEPER_MEMORIALS.length)];
+        }
     }
 }

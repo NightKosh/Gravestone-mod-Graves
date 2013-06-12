@@ -2,7 +2,7 @@ package GraveStone.structures;
 
 import java.util.Random;
 import GraveStone.GraveStoneConfig;
-import GraveStone.ModGraveStone;
+import GraveStone.block.BlockGSMemorial;
 import GraveStone.tileentity.TileEntityGSMemorial;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -26,6 +26,7 @@ public class ComponentGSMemorial extends ComponentGSCemeteryCatacombs {
         boundingBox = getCorrectBox(direction, x + (16 - X_LENGTH) / 2, 64, z + (16 - Z_LENGTH) / 2, X_LENGTH, HEIGHT, Z_LENGTH);
     }
 
+    @Override
     public boolean addComponentParts(World world, Random random) {
         int averageGroundLevel = this.getAverageGroundLevel(world, boundingBox);
         if (averageGroundLevel < 0) {
@@ -45,8 +46,8 @@ public class ComponentGSMemorial extends ComponentGSCemeteryCatacombs {
         this.fillWithAir(world, boundingBox, 0, 0, 2, 0, 6, 2);
         this.fillWithBlocks(world, boundingBox, 0, 0, 0, 2, 0, 2, groundID, Block.grass.blockID, false);
         
-        byte memorialType = (byte) random.nextInt(ModGraveStone.memorial.NAMES.length);
-        placeMemorial(world, random, 1, 1, 1, ModGraveStone.memorial.getMetaDirection(coordBaseMode), memorialType);
+        byte memorialType = BlockGSMemorial.getMemorialType(random, 0);
+        placeMemorial(world, random, 1, 1, 1, BlockGSMemorial.getMetaDirection(coordBaseMode), memorialType);
         
         for (int x = 0; x < 3; x++) {
             for (int z = 0; z < 3; z++) {
