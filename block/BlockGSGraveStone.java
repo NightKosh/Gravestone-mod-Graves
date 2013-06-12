@@ -580,22 +580,28 @@ public class BlockGSGraveStone extends BlockContainer {
 
     /**
      * Check is grave - sword grave
+     *
      * @param tileEntity Grave tile entity
      */
     public static boolean isSwordGrave(TileEntityGSGraveStone tileEntity) {
         return tileEntity.getSword() != 0;
     }
-    
+
     /**
      * Check is grave - sword grave
+     *
      * @param graveType Grave type
      */
     public static boolean isSwordGrave(byte graveType) {
         return Arrays.binarySearch(SWORD_GRAVES, graveType) != -1;
     }
-    
+
     public static byte graveTypeToSwordType(byte graveType) {
         return (byte) (graveType - 4);
+    }
+
+    public static byte swordGraveTypeToGraveType(byte swordGraveType) {
+        return (byte) (swordGraveType + 4);
     }
 
     /**
@@ -656,7 +662,7 @@ public class BlockGSGraveStone extends BlockContainer {
             list.add(stack);
         }
     }
-    
+
     /*
      * return random grave type
      * @graveType int type of graves
@@ -671,7 +677,7 @@ public class BlockGSGraveStone extends BlockContainer {
             default:
             case 0:
                 if (random.nextFloat() > 0.2) {
-                    if (random.nextFloat() > 0.4) {
+                    if (random.nextFloat() > 0.1) {
                         return GENERATED_GRAVES[random.nextInt(GENERATED_GRAVES.length)];
                     } else {
                         return GENERATED_SWORD_GRAVES[random.nextInt(GENERATED_SWORD_GRAVES.length)];
@@ -680,7 +686,11 @@ public class BlockGSGraveStone extends BlockContainer {
                     return PETS_GRAVES[random.nextInt(PETS_GRAVES.length)];
                 }
             case 1:
-                return GENERATED_GRAVES[random.nextInt(GENERATED_GRAVES.length)];
+                if (random.nextFloat() > 0.1) {
+                    return GENERATED_GRAVES[random.nextInt(GENERATED_GRAVES.length)];
+                } else {
+                    return GENERATED_SWORD_GRAVES[random.nextInt(GENERATED_SWORD_GRAVES.length)];
+                }
             case 2:
                 return PETS_GRAVES[random.nextInt(PETS_GRAVES.length)];
             case 3:

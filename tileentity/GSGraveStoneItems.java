@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 import GraveStone.GraveStoneConfig;
+import GraveStone.block.BlockGSGraveStone;
+import GraveStone.item.ItemBlockGSGraveStone;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.item.EntityItem;
@@ -63,7 +65,8 @@ public class GSGraveStoneItems {
     }
 
     /**
-     * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
+     * Sets the given item stack to the specified slot in the inventory (can be
+     * crafting or armor sections).
      */
     public void setInventorySlotContents(int slot, ItemStack itemStack) {
         graveContents[slot] = itemStack;
@@ -73,8 +76,8 @@ public class GSGraveStoneItems {
     }
 
     /**
-     * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended. *Isn't
-     * this more of a set than a get?*
+     * Returns the maximum stack size for a inventory slot. Seems to always be
+     * 64, possibly will be extended. *Isn't this more of a set than a get?*
      */
     public int getInventoryStackLimit() {
         return 64;
@@ -82,6 +85,7 @@ public class GSGraveStoneItems {
 
     /**
      * Set items as grave loot
+     *
      * @param items Saving items
      */
     public void setItems(ItemStack[] items) {
@@ -117,6 +121,7 @@ public class GSGraveStoneItems {
 
     /**
      * Drop item
+     *
      * @param items Dropping item
      */
     public void dropItem(ItemStack items) {
@@ -148,7 +153,8 @@ public class GSGraveStoneItems {
 
     /**
      * Drop item by slot number
-     * @param slot Item slot number 
+     *
+     * @param slot Item slot number
      */
     public void dropItem(int slot) {
         dropItem(graveContents[slot]);
@@ -179,7 +185,9 @@ public class GSGraveStoneItems {
             }
 
             int graveType = random.nextInt(40);
-            if (graveType < 4) {
+            if (tileEntity.swordType != 0 && graveType > 5) {
+                fillWarriorGrave(random, true);
+            } else if (graveType < 4) {
                 fillAdventureGrave(random);
             } else if (graveType < 7) {
                 fillWorkerGrave(random);
@@ -188,7 +196,7 @@ public class GSGraveStoneItems {
             } else if (graveType < 12) {
                 fillMinerGrave(random);
             } else if (graveType == 13) {
-                fillWarriorGrave(random);
+                fillWarriorGrave(random, false);
             }
         }
     }
@@ -196,7 +204,22 @@ public class GSGraveStoneItems {
     /*
      * Fill grave with some random warrior stuff
      */
-    private void fillWarriorGrave(Random random) {
+    private void fillWarriorGrave(Random random, boolean isSwordGrave) {
+        if (isSwordGrave) {
+            if (random.nextInt(2) == 0) {
+                setInventorySlotContents(3, new ItemStack(Item.plateLeather.itemID, 1, getRandomDamage(random, 30)));
+            }
+            if (random.nextInt(2) == 0) {
+                setInventorySlotContents(4, new ItemStack(Item.legsLeather.itemID, 1, getRandomDamage(random, 30)));
+            }
+            if (random.nextInt(2) == 0) {
+                setInventorySlotContents(5, new ItemStack(Item.helmetLeather.itemID, 1, getRandomDamage(random, 30)));
+            }
+            if (random.nextInt(2) == 0) {
+                setInventorySlotContents(6, new ItemStack(Item.bootsLeather.itemID, 1, getRandomDamage(random, 30)));
+            }
+            return;
+        }
         int armorType = random.nextInt(10);
         if (armorType > 5) { // Iron
             if (random.nextInt(2) == 0) {
@@ -211,13 +234,7 @@ public class GSGraveStoneItems {
             if (random.nextInt(2) == 0) {
                 setInventorySlotContents(6, new ItemStack(Item.bootsIron.itemID, 1, getRandomDamage(random)));
             }
-
-            if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.swordIron.itemID, 1, getRandomDamage(random)));
-            } else if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.bow.itemID, 1, getRandomDamage(random)));
-                setInventorySlotContents(8, new ItemStack(Item.arrow.itemID, 10 + random.nextInt(54), 0));
-            }
+            changeGraveTypeToSword(Item.swordIron.itemID, getRandomDamage(random));
         } else if (armorType > 2) {
             if (random.nextInt(2) == 0) {
                 setInventorySlotContents(3, new ItemStack(Item.plateChain.itemID, 1, getRandomDamage(random)));
@@ -231,13 +248,7 @@ public class GSGraveStoneItems {
             if (random.nextInt(2) == 0) {
                 setInventorySlotContents(6, new ItemStack(Item.bootsChain.itemID, 1, getRandomDamage(random)));
             }
-
-            if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.swordIron.itemID, 1, getRandomDamage(random)));
-            } else if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.bow.itemID, 1, getRandomDamage(random)));
-                setInventorySlotContents(8, new ItemStack(Item.arrow.itemID, 10 + random.nextInt(54), 0));
-            }
+            changeGraveTypeToSword(Item.swordIron.itemID, getRandomDamage(random));
         } else if (armorType > 0) {
             if (random.nextInt(2) == 0) {
                 setInventorySlotContents(3, new ItemStack(Item.plateGold.itemID, 1, getRandomDamage(random, 50)));
@@ -251,13 +262,7 @@ public class GSGraveStoneItems {
             if (random.nextInt(2) == 0) {
                 setInventorySlotContents(6, new ItemStack(Item.bootsGold.itemID, 1, getRandomDamage(random, 40)));
             }
-
-            if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.swordGold.itemID, 1, getRandomDamage(random, 15)));
-            } else if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.bow.itemID, 1, getRandomDamage(random)));
-                setInventorySlotContents(8, new ItemStack(Item.arrow.itemID, 10 + random.nextInt(54), 0));
-            }
+            changeGraveTypeToSword(Item.swordGold.itemID, getRandomDamage(random, 15));
         } else {
             if (random.nextInt(2) == 0) {
                 setInventorySlotContents(3, new ItemStack(Item.plateDiamond.itemID, 1, getRandomDamage(random)));
@@ -271,14 +276,27 @@ public class GSGraveStoneItems {
             if (random.nextInt(2) == 0) {
                 setInventorySlotContents(6, new ItemStack(Item.bootsDiamond.itemID, 1, getRandomDamage(random)));
             }
-
-            if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.swordDiamond.itemID, 1, getRandomDamage(random)));
-            } else if (random.nextInt(2) == 0) {
-                setInventorySlotContents(7, new ItemStack(Item.bow.itemID, 1, getRandomDamage(random)));
-                setInventorySlotContents(8, new ItemStack(Item.arrow.itemID, 10 + random.nextInt(54), 0));
-            }
+            changeGraveTypeToSword(Item.swordDiamond.itemID, getRandomDamage(random));
         }
+
+        if (random.nextInt(3) == 0) {
+            setInventorySlotContents(7, new ItemStack(Item.bow.itemID, 1, getRandomDamage(random)));
+            setInventorySlotContents(8, new ItemStack(Item.arrow.itemID, 10 + random.nextInt(54), 0));
+        }
+    }
+
+    /**
+     * Change grave type to swordGrave if this is a warrior grave
+     *
+     * @param isSwordGrave
+     * @param swordId
+     * @param swordDamage
+     */
+    private void changeGraveTypeToSword(int swordId, int swordDamage) {
+        byte swordGraveType = ItemBlockGSGraveStone.swordIdtoSwordGraveType(swordId);
+        tileEntity.setGraveType(BlockGSGraveStone.swordGraveTypeToGraveType(swordGraveType));
+        tileEntity.setSword(swordGraveType);
+        tileEntity.setDamage(swordDamage);
     }
 
 
@@ -476,19 +494,20 @@ public class GSGraveStoneItems {
     /*
      * Return random damage values for items
      */
-    private int getRandomDamage(Random random) {
+    public static int getRandomDamage(Random random) {
         return 20 + random.nextInt(100);
     }
-    
+
     /*
      * Return random damage values for items with maximum damage value
      */
-    private int getRandomDamage(Random random, int maxDamage) {
+    public static int getRandomDamage(Random random, int maxDamage) {
         return random.nextInt(maxDamage);
     }
     /*
      * Return random record
      */
+
     private ItemStack getRandomRecord(Random random) {
         switch (random.nextInt(12)) {
             case 0:

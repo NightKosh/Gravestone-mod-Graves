@@ -6,6 +6,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -93,5 +94,24 @@ public class ItemBlockGSGraveStone extends ItemBlock {
             }
         }
         return false;
+    }
+    
+    /**
+     * Return sword type for sword grave
+     * @param swordId Sword item id
+     */
+    public static byte swordIdtoSwordGraveType(int swordId) {
+        if (swordId == Item.swordDiamond.itemID) {
+            return 5;
+        } else if (swordId == Item.swordIron.itemID) {
+            return 3;
+        } else if (swordId == Item.swordGold.itemID) {
+            return 4;
+        } else if (swordId == Item.swordStone.itemID) {
+            return 2;
+        } else if (swordId == Item.swordWood.itemID) {
+            return 1;
+        }
+        return 0;
     }
 }

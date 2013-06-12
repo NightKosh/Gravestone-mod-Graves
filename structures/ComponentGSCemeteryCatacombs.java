@@ -2,6 +2,7 @@ package GraveStone.structures;
 
 import GraveStone.GraveStoneConfig;
 import GraveStone.block.BlockGSGraveStone;
+import GraveStone.tileentity.GSGraveStoneItems;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -221,11 +222,12 @@ abstract class ComponentGSCemeteryCatacombs extends StructureComponent {
         this.placeBlockAtCurrentPosition(world, GraveStoneConfig.graveStoneID, graveMeta, x, y, z, boundingBox);
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
         if (tileEntity != null) {
-            tileEntity.setGraveType(graveType);
-            tileEntity.setGraveContent(random);
             if (BlockGSGraveStone.isSwordGrave(graveType)) {
                 tileEntity.setSword(BlockGSGraveStone.graveTypeToSwordType(graveType));
+                tileEntity.setDamage(GSGraveStoneItems.getRandomDamage(random, 50));
             }
+            tileEntity.setGraveType(graveType);
+            tileEntity.setGraveContent(random);
         }
     }
 
