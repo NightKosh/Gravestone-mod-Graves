@@ -74,7 +74,6 @@ public class ModGraveStone {
 
         // creative tab
         creativeTab = new CreativeTabs("tabGraveStone") {
-
             public ItemStack getIconItemStack() {
                 ItemStack stack = new ItemStack(graveStone, 1, 0);
                 NBTTagCompound nbt = new NBTTagCompound();
@@ -92,6 +91,9 @@ public class ModGraveStone {
             ItemStack graveStoneStack = new ItemStack(graveStone, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", i);
+            if (BlockGSGraveStone.isSwordGrave(i)) {
+                nbt.setByte("SwordType", BlockGSGraveStone.graveTypeToSwordType(i));
+            }
             graveStoneStack.setTagCompound(nbt);
             LanguageRegistry.addName(graveStoneStack, BlockGSGraveStone.NAMES[i]);
         }
@@ -141,16 +143,16 @@ public class ModGraveStone {
         GameRegistry.registerTileEntity(TileEntityGSWitherSpawner.class, "GSWither Spawner");
 
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
-        
+
         // register structures
         GraveStoneStructures.getInstance();
-        
+
         // register entitys
         GraveStoneEntity.getInstance();
-        
+
         proxy.registerRenderers();
     }
-    
+
     @Mod.PostInit
     public void postInit(FMLPostInitializationEvent event) {
         // adding foreign mobs

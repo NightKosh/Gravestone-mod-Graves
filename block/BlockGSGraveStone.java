@@ -595,7 +595,7 @@ public class BlockGSGraveStone extends BlockContainer {
     }
     
     public static byte graveTypeToSwordType(byte graveType) {
-        return (byte) (graveType - 5);
+        return (byte) (graveType - 4);
     }
 
     /**
@@ -645,10 +645,13 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(int id, CreativeTabs tabs, List list) {
-        for (byte j = 0; j < NAMES.length; j++) {
+        for (byte i = 0; i < NAMES.length; i++) {
             ItemStack stack = new ItemStack(id, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("GraveType", j);
+            nbt.setByte("GraveType", i);
+            if (BlockGSGraveStone.isSwordGrave(i)) {
+                nbt.setByte("SwordType", graveTypeToSwordType(i));
+            }
             stack.setTagCompound(nbt);
             list.add(stack);
         }
