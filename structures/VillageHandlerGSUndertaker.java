@@ -24,6 +24,7 @@ import net.minecraft.world.gen.structure.StructureVillagePieceWeight;
  */
 public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCreationHandler, VillagerRegistry.IVillageTradeHandler {
 
+    @Override
     public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random) {
         // chisel
         recipeList.add(new MerchantRecipe(
@@ -45,17 +46,24 @@ public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCrea
         // memorials
         recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 15), getTradeStack(ModGraveStone.memorial, (byte) 0)));
         recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 15), getTradeStack(ModGraveStone.memorial, (byte) 1)));
-
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 25), getTradeStack(ModGraveStone.memorial, (byte) 2)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 25), getTradeStack(ModGraveStone.memorial, (byte) 3)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 25), getTradeStack(ModGraveStone.memorial, (byte) 4)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 20), getTradeStack(ModGraveStone.memorial, (byte) 5)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 20), getTradeStack(ModGraveStone.memorial, (byte) 6)));
     }
 
+    @Override
     public StructureVillagePieceWeight getVillagePieceWeight(Random random, int size) {
         return new StructureVillagePieceWeight(ComponentGSVillageUndertaker.class, 3, MathHelper.getRandomIntegerInRange(random, 0, 1));
     }
 
+    @Override
     public Class getComponentClass() {
         return ComponentGSVillageUndertaker.class;
     }
 
+    @Override
     public Object buildComponent(StructureVillagePieceWeight villagePiece, ComponentVillageStartPiece startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5) {
         return ComponentGSVillageUndertaker.buildComponent(startPiece, pieces, random, p1, p2, p3, p4, p5);
     }
