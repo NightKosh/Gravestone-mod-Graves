@@ -1,7 +1,7 @@
 package GraveStone.structures;
 
 import java.util.Random;
-import GraveStone.ModGraveStone;
+import GraveStone.block.BlockGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
@@ -20,6 +20,7 @@ public class ComponentGSSingleGrave extends ComponentGSCemeteryCatacombs {
         boundingBox = new StructureBoundingBox(x + 7, 0, z + 7, x + 7, 240, z + 7);
     }
 
+    @Override
     public boolean addComponentParts(World world, Random random) {
         int positionX, positionZ, y;
 
@@ -29,7 +30,7 @@ public class ComponentGSSingleGrave extends ComponentGSCemeteryCatacombs {
 
         if (canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
             System.out.println("Grave " + positionX + "x" + positionZ);
-            placeGrave(world, random, 0, y, 0, ModGraveStone.graveStone.getMetaDirection(coordBaseMode), this.getGraveType(random, 0));
+            placeGrave(world, random, 0, y, 0, BlockGSGraveStone.getMetaDirection(coordBaseMode), BlockGSGraveStone.getGraveType(random, 0));
         }
 
         return true;
@@ -42,7 +43,7 @@ public class ComponentGSSingleGrave extends ComponentGSCemeteryCatacombs {
             if (blockId > 0) {
                 if (blockId == Block.waterStill.blockID || blockId == Block.lavaStill.blockID) {
                     return false;
-                } else if (ModGraveStone.graveStone.canPlaceBlockAt(blockId)) {
+                } else if (BlockGSGraveStone.canPlaceBlockAt(blockId)) {
                     return true;
                 }
             }

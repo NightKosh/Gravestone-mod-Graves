@@ -7,6 +7,7 @@ import GraveStone.tileentity.TileEntityGSGraveStone;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -46,6 +47,8 @@ public class BlockGSGraveStone extends BlockContainer {
     public static final byte[] PETS_GRAVES = {3, 4};
     public static final byte[] DOG_GRAVES = {3};
     public static final byte[] CAT_GRAVES = {4};
+    public static final byte[] SWORD_GRAVES = {5, 6, 7, 8, 9};
+    public static final byte[] GENERATED_SWORD_GRAVES = {5, 6};
 
     public BlockGSGraveStone(int par1) {
         super(par1, Material.rock);
@@ -114,7 +117,7 @@ public class BlockGSGraveStone extends BlockContainer {
         }
     }
 
-    private int getMetadataBasedOnRotation(int rotation) {
+    private static int getMetadataBasedOnRotation(int rotation) {
         if (rotation >= 315 || rotation < 45) {
             return 1;
         } else if (rotation >= 45 && rotation < 135) {
@@ -138,7 +141,7 @@ public class BlockGSGraveStone extends BlockContainer {
     /**
      * Check can be grave placed on this type of surface
      */
-    public boolean canPlaceBlockAt(int blockId) {
+    public static boolean canPlaceBlockAt(int blockId) {
         if (GraveStoneConfig.canPlaceGravesEveryWhere) {
             return true;
         } else if (blockId == Block.grass.blockID || blockId == Block.dirt.blockID
@@ -295,7 +298,7 @@ public class BlockGSGraveStone extends BlockContainer {
     /**
      * Spawn mob
      */
-    private void spawnMob(World world, int x, int y, int z) {
+    private static void spawnMob(World world, int x, int y, int z) {
         if (GraveStoneMobSpawn.checkChance(world.rand)) {
             TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
             if (tileEntity != null) {
@@ -434,10 +437,6 @@ public class BlockGSGraveStone extends BlockContainer {
         return GraveStoneConfig.graveRenderID;
     }
 
-    public int quantityDropped(int par1) {
-        return 1;
-    }
-
     /**
      * Called upon block activation (right click on the block.)
      */
@@ -471,7 +470,7 @@ public class BlockGSGraveStone extends BlockContainer {
     /**
      * Create grave on death
      */
-    public void createOnDeath(World world, int x, int y, int z, String deathText, int direction, ItemStack[] items, int age, byte entityType) {
+    public static void createOnDeath(World world, int x, int y, int z, String deathText, int direction, ItemStack[] items, int age, byte entityType) {
         if (direction < 0) {
             direction = 360 + direction;
         }
@@ -557,7 +556,7 @@ public class BlockGSGraveStone extends BlockContainer {
     /**
      * Check ground type and replace it on dirt if it grass or mycelium
      */
-    private void replaceGround(World world, int x, int y, int z) {
+    private static void replaceGround(World world, int x, int y, int z) {
         int botBlockID = world.getBlockId(x, y, z);
         if (botBlockID == 2 || botBlockID == 110) {
             world.setBlock(x, y, z, Block.dirt.blockID);
@@ -581,9 +580,22 @@ public class BlockGSGraveStone extends BlockContainer {
 
     /**
      * Check is grave - sword grave
+     * @param tileEntity Grave tile entity
      */
     public static boolean isSwordGrave(TileEntityGSGraveStone tileEntity) {
         return tileEntity.getSword() != 0;
+    }
+    
+    /**
+     * Check is grave - sword grave
+     * @param graveType Grave type
+     */
+    public static boolean isSwordGrave(byte graveType) {
+        return Arrays.binarySearch(SWORD_GRAVES, graveType) != -1;
+    }
+    
+    public static byte graveTypeToSwordType(byte graveType) {
+        return (byte) (graveType - 5);
     }
 
     /**
@@ -639,6 +651,39 @@ public class BlockGSGraveStone extends BlockContainer {
             nbt.setByte("GraveType", j);
             stack.setTagCompound(nbt);
             list.add(stack);
+        }
+    }
+    
+    /*
+     * return random grave type
+     * @graveType int type of graves
+     * 0 - all graves( 20% for pets graves)
+     * 1 - only player graves
+     * 2 - only pets graves
+     * 3 - only dogs graves
+     * 4 - only cats graves
+     */
+    public static byte getGraveType(Random random, int graveType) {
+        switch (graveType) {
+            default:
+            case 0:
+                if (random.nextFloat() > 0.2) {
+                    if (random.nextFloat() > 0.4) {
+                        return GENERATED_GRAVES[random.nextInt(GENERATED_GRAVES.length)];
+                    } else {
+                        return GENERATED_SWORD_GRAVES[random.nextInt(GENERATED_SWORD_GRAVES.length)];
+                    }
+                } else {
+                    return PETS_GRAVES[random.nextInt(PETS_GRAVES.length)];
+                }
+            case 1:
+                return GENERATED_GRAVES[random.nextInt(GENERATED_GRAVES.length)];
+            case 2:
+                return PETS_GRAVES[random.nextInt(PETS_GRAVES.length)];
+            case 3:
+                return DOG_GRAVES[random.nextInt(DOG_GRAVES.length)];
+            case 4:
+                return CAT_GRAVES[random.nextInt(CAT_GRAVES.length)];
         }
     }
 }

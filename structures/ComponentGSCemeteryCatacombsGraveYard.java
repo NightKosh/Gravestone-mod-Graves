@@ -1,7 +1,7 @@
 package GraveStone.structures;
 
 import java.util.Random;
-import GraveStone.ModGraveStone;
+import GraveStone.block.BlockGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
@@ -24,8 +24,9 @@ public class ComponentGSCemeteryCatacombsGraveYard extends ComponentGSCemeteryCa
      * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at
      * the end, it adds Fences...
      */
+    @Override
     public boolean addComponentParts(World world, Random random) {
-        int graveMeta = ModGraveStone.graveStone.getMetaDirection(this.coordBaseMode);
+        int graveMeta = BlockGSGraveStone.getMetaDirection(this.coordBaseMode);
         int positionX, positionZ, y;
 
         for (int x = 0; x < 11; x += 2) {
@@ -42,7 +43,7 @@ public class ComponentGSCemeteryCatacombsGraveYard extends ComponentGSCemeteryCa
                     positionZ = getZWithOffset(x, z);
                     y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
                     if (!isLiquidUnder(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
-                        placeGrave(world, random, x, y, z, graveMeta, this.getGraveType(random, 1));
+                        placeGrave(world, random, x, y, z, graveMeta, BlockGSGraveStone.getGraveType(random, 1));
                     }
                 }
             }
@@ -55,9 +56,7 @@ public class ComponentGSCemeteryCatacombsGraveYard extends ComponentGSCemeteryCa
         int blockId;
         for (int y = maxY; y >= minY; y--) {
             blockId = world.getBlockId(x, y, z);
-
-            blockId = world.getBlockId(x, y, z);
-            if (blockId > 0 && ModGraveStone.graveStone.canPlaceBlockAt(blockId)) {
+            if (blockId > 0 && BlockGSGraveStone.canPlaceBlockAt(blockId)) {
                 return true;
             }
         }

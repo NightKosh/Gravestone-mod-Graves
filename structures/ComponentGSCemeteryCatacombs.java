@@ -1,7 +1,7 @@
 package GraveStone.structures;
 
 import GraveStone.GraveStoneConfig;
-import GraveStone.ModGraveStone;
+import GraveStone.block.BlockGSGraveStone;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -43,6 +43,7 @@ abstract class ComponentGSCemeteryCatacombs extends StructureComponent {
         coordBaseMode = direction;
     }
 
+    @Override
     public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBoundingBox) {
         return true;
     }
@@ -50,7 +51,7 @@ abstract class ComponentGSCemeteryCatacombs extends StructureComponent {
     public boolean addComponentParts(World world, Random random) {
         return true;
     }
-    
+
     /*
      * return bounding Box for structure component
      */
@@ -98,8 +99,9 @@ abstract class ComponentGSCemeteryCatacombs extends StructureComponent {
     }
 
     /**
-     * Discover the y coordinate that will serve as the ground level of the supplied BoundingBox. (A median of all the
-     * levels in the BB's horizontal rectangle).
+     * Discover the y coordinate that will serve as the ground level of the
+     * supplied BoundingBox. (A median of all the levels in the BB's horizontal
+     * rectangle).
      */
     protected int getAverageGroundLevel(World world, StructureBoundingBox structureBoundingBox) {
         int height = 0;
@@ -221,6 +223,9 @@ abstract class ComponentGSCemeteryCatacombs extends StructureComponent {
         if (tileEntity != null) {
             tileEntity.setGraveType(graveType);
             tileEntity.setGraveContent(random);
+            if (BlockGSGraveStone.isSwordGrave(graveType)) {
+                tileEntity.setSword(BlockGSGraveStone.graveTypeToSwordType(graveType));
+            }
         }
     }
 
@@ -312,7 +317,8 @@ abstract class ComponentGSCemeteryCatacombs extends StructureComponent {
     }
 
     /**
-     * Used to generate chests with items in it. ex: Temple Chests, Village Blacksmith Chests, Mineshaft Chests.
+     * Used to generate chests with items in it. ex: Temple Chests, Village
+     * Blacksmith Chests, Mineshaft Chests.
      */
     protected boolean generateTrappedChestContents(World world, StructureBoundingBox boundingBox, Random random, int xCoord, int yCoord, int zCoord, WeightedRandomChestContent[] par7ArrayOfWeightedRandomChestContent, int par8) {
         int x = this.getXWithOffset(xCoord, zCoord);
@@ -352,7 +358,8 @@ abstract class ComponentGSCemeteryCatacombs extends StructureComponent {
     }
 
     /**
-     * Overwrites air and liquids from selected position downwards, stops at hitting anything else.
+     * Overwrites air and liquids from selected position downwards, stops at
+     * hitting anything else.
      */
     @Override
     protected void fillCurrentPositionBlocksDownwards(World world, int blockId, int metadata, int xCoord, int yCoord, int zCoord, StructureBoundingBox boundingBox) {
@@ -365,37 +372,8 @@ abstract class ComponentGSCemeteryCatacombs extends StructureComponent {
             --y;
         }
     }
-    
+
     protected int getDirection() {
         return coordBaseMode;
-    }
-    
-    /*
-     * return random grave type
-     * @graveType int type of graves
-     * 0 - all graves( 20% for pets graves)
-     * 1 - only player graves
-     * 2 - only pets graves
-     * 3 - only dogs graves
-     * 4 - only cats graves
-     */
-    public static byte getGraveType(Random random, int graveType) {
-        switch (graveType) {
-            default:
-            case 0:
-                if (random.nextFloat() > 0.2) {
-                    return ModGraveStone.graveStone.GENERATED_GRAVES[random.nextInt(ModGraveStone.graveStone.GENERATED_GRAVES.length)];
-            } else {
-                    return ModGraveStone.graveStone.PETS_GRAVES[random.nextInt(ModGraveStone.graveStone.PETS_GRAVES.length)];
-            }
-            case 1:
-                return ModGraveStone.graveStone.GENERATED_GRAVES[random.nextInt(ModGraveStone.graveStone.GENERATED_GRAVES.length)];
-            case 2:
-                return ModGraveStone.graveStone.PETS_GRAVES[random.nextInt(ModGraveStone.graveStone.PETS_GRAVES.length)];
-            case 3:
-                return ModGraveStone.graveStone.DOG_GRAVES[random.nextInt(ModGraveStone.graveStone.DOG_GRAVES.length)];
-            case 4:
-                return ModGraveStone.graveStone.CAT_GRAVES[random.nextInt(ModGraveStone.graveStone.CAT_GRAVES.length)];
-        }
     }
 }

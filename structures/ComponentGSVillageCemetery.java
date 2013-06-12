@@ -3,7 +3,7 @@ package GraveStone.structures;
 import java.util.List;
 import java.util.Random;
 import GraveStone.GraveStoneConfig;
-import GraveStone.ModGraveStone;
+import GraveStone.block.BlockGSGraveStone;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -39,6 +39,7 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
      * second Part of Structure generating, this for example places Spiderwebs,
      * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
      */
+    @Override
     public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBoundingBox) {
         if (this.averageGroundLevel < 0) {
             this.averageGroundLevel = this.getAverageGroundLevel(world, structureBoundingBox);
@@ -99,8 +100,8 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
 
 
 
-        int graveMeta = ModGraveStone.graveStone.getMetaDirection(this.coordBaseMode);
-        byte graveType = ModGraveStone.graveStone.GENERATED_GRAVES[random.nextInt(ModGraveStone.graveStone.GENERATED_GRAVES.length)];
+        int graveMeta = BlockGSGraveStone.getMetaDirection(this.coordBaseMode);
+        byte graveType = BlockGSGraveStone.GENERATED_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_GRAVES.length)];
         for (int x = 3; x < 11; x += 2) {
             for (int z = 3; z < 9; z += 2) {
                 placeGrave(world, random, x, 1, z, graveMeta, graveType, structureBoundingBox);

@@ -3,7 +3,7 @@ package GraveStone.structures;
 
 import java.util.Random;
 import GraveStone.GraveStoneConfig;
-import GraveStone.ModGraveStone;
+import GraveStone.block.BlockGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
@@ -35,6 +35,7 @@ public class ComponentGSCemeteryCatacombsGraveHall extends ComponentGSCemeteryCa
      * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at
      * the end, it adds Fences...
      */
+    @Override
     public boolean addComponentParts(World world, Random random) {
         //printCoord();
 
@@ -154,11 +155,11 @@ public class ComponentGSCemeteryCatacombsGraveHall extends ComponentGSCemeteryCa
         buildColumn(world, 11, 12);
         
         // graves
-        byte graveType = this.getGraveType(random, 1);
-        int metaLeft = ModGraveStone.graveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
-        int metaRight = ModGraveStone.graveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
-        int metaTop = ModGraveStone.graveStone.getMetaDirection(coordBaseMode);
-        int metaBot = ModGraveStone.graveStone.getMetaDirection(getInvertDirection(coordBaseMode));
+        byte graveType = BlockGSGraveStone.getGraveType(random, 1);
+        int metaLeft = BlockGSGraveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
+        int metaRight = BlockGSGraveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
+        int metaTop = BlockGSGraveStone.getMetaDirection(coordBaseMode);
+        int metaBot = BlockGSGraveStone.getMetaDirection(getInvertDirection(coordBaseMode));
 
         // left wall
         this.placeGrave(world, random, 1, 1, 2, metaLeft, graveType);
