@@ -2,6 +2,7 @@ package GraveStone;
 
 import GraveStone.structures.GraveStoneWorldGenerator;
 import GraveStone.structures.VillageHandlerGSCemetery;
+import GraveStone.structures.VillageHandlerGSMemorial;
 import GraveStone.structures.VillageHandlerGSUndertaker;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
@@ -34,6 +35,12 @@ public class GraveStoneStructures {
         if (GraveStoneConfig.generateCemeteries) {
             VillageHandlerGSCemetery villageCemeteryHandler = new VillageHandlerGSCemetery();
             VillagerRegistry.instance().registerVillageCreationHandler(villageCemeteryHandler);
+        }
+        
+        // register memorials
+        if (GraveStoneConfig.generateVillageMemorials) {
+            VillageHandlerGSMemorial villageMemorialHandler = new VillageHandlerGSMemorial();
+            VillagerRegistry.instance().registerVillageCreationHandler(villageMemorialHandler);
         }
 
         // register Undertaker

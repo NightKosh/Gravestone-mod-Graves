@@ -310,7 +310,7 @@ public class BlockGSMemorial extends BlockContainer {
     /**
      * Return random memorial type
      * memorialTypetype - type of memorial
-     * 0 - all graves( 20% for pets graves)
+     * 0 - all memorials(20% for pets graves), except creeper
      * 1 - only pets memorials
      * 2 - only dogs memorials
      * 3 - only cats memorials

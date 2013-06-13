@@ -50,6 +50,7 @@ public class GraveStoneConfig {
     public static boolean generateMemorials;
     // village generator
     public static boolean generateCemeteries;
+    public static boolean generateVillageMemorials;
     public static boolean generateUndertaker;
     // graves for entities
     public static boolean generatePlayerGraves;
@@ -99,7 +100,7 @@ public class GraveStoneConfig {
         }
     }
 
-    public void getConfigs() {
+    public final void getConfigs() {
         config.load();
 
         idConfig();
@@ -127,6 +128,7 @@ public class GraveStoneConfig {
         generateMemorials = config.get(Configuration.CATEGORY_GENERAL, "GenerateMemorials", true).getBoolean(true);
         generateSingleGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateSingleGraves", true).getBoolean(true);
         generateCemeteries = config.get(Configuration.CATEGORY_GENERAL, "GenerateCemeteries", true).getBoolean(true);
+        generateVillageMemorials = config.get(Configuration.CATEGORY_GENERAL, "GenerateVillageMemorials", true).getBoolean(true);
         generateUndertaker = config.get(Configuration.CATEGORY_GENERAL, "GenerateUndertaker", true).getBoolean(true);
     }
 
@@ -158,7 +160,7 @@ public class GraveStoneConfig {
         }
     }
 
-    private void entityConfig() {
+    private static void entityConfig() {
         spawnZombieDogs = config.get(Configuration.CATEGORY_GENERAL, "SpawnZombieDogs", true).getBoolean(true);
         spawnZombieCats = config.get(Configuration.CATEGORY_GENERAL, "SpawnZombieCats", true).getBoolean(true);
         spawnSkeletonDogs = config.get(Configuration.CATEGORY_GENERAL, "SpawnSkeletonDogs", true).getBoolean(true);
@@ -178,7 +180,7 @@ public class GraveStoneConfig {
     /*
      * Read text from file if it exist or get default text
      */
-    private ArrayList<String> readStringsFromFile(String fileName, String[] defaultValues) {
+    private static ArrayList<String> readStringsFromFile(String fileName, String[] defaultValues) {
         ArrayList<String> list = new ArrayList();
         boolean exception = false;
 
