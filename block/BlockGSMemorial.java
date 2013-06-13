@@ -100,28 +100,12 @@ public class BlockGSMemorial extends BlockContainer {
         }
     }
 
-    /* Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z */
-    @Override
-    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-        for (byte i = 0; i < 5; i++) {
-            for (byte j = -1; j < 2; j++) {
-                for (byte k = -1; k < 2; k++) {
-                    if (world.getBlockId(x + k, y + i, z + j) != 0) {
-                        return false;
-                    }
-                }
-            }
-        }
-
-        return true;
-    }
-
-    @SideOnly(Side.CLIENT)
     /**
      * only called by clickMiddleMouseButton , and passed to
      * inventory.setCurrentItem (along with isCreative)
      */
     @Override
+    @SideOnly(Side.CLIENT)
     public int idPicked(World par1World, int par2, int par3, int par4) {
         return blockID;
     }
@@ -160,6 +144,10 @@ public class BlockGSMemorial extends BlockContainer {
         }
     }
 
+
+    /**
+     * Sets the block's bounds for rendering it as an item
+     */
     @Override
     public void setBlockBoundsForItemRender() {
         this.setBlockBounds(0, 0, 0, 1, 1, 2);
@@ -207,10 +195,6 @@ public class BlockGSMemorial extends BlockContainer {
     @Override
     public int getRenderType() {
         return GraveStoneConfig.memorialRenderID;
-    }
-
-    public int quantityDropped(int par1) {
-        return 1;
     }
 
     /**
@@ -267,12 +251,12 @@ public class BlockGSMemorial extends BlockContainer {
         return 0;
     }
 
-    @SideOnly(Side.CLIENT)
     /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood
+     * Returns a list of blocks with the same ID, but different meta (eg: wood
      * returns 4 blocks)
      */
     @Override
+    @SideOnly(Side.CLIENT)
     public void getSubBlocks(int id, CreativeTabs tab, List list) {
         for (byte j = 0; j < NAMES.length; j++) {
             ItemStack stack = new ItemStack(id, 1, 0);
