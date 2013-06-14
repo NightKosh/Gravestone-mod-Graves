@@ -450,7 +450,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 if (!deathText.equals("")) {
                     entityPlayer.sendChatToPlayer(deathText);
                     if (entity.getAge() != -1) {
-                        entityPlayer.sendChatToPlayer("Had lived " + entity.getAge() + " days");
+                        //entityPlayer.sendChatToPlayer("Had lived " + entity.getAge() + " days");
                     }
                 }
             }

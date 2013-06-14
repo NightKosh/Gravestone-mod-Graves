@@ -1,6 +1,10 @@
 package GraveStone.models.block;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
@@ -79,7 +83,6 @@ public class ModelSwordGrave extends ModelGraveStone {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
     }
 
-
     @Override
     public void renderAll() {
         Blade1.render(0.0625F);
@@ -88,5 +91,46 @@ public class ModelSwordGrave extends ModelGraveStone {
         Blade4.render(0.0625F);
         Shape3.render(0.0625F);
         Hilt.render(0.0625F);
+    }
+
+    @Override
+    public void customRender() {
+        renderAll();
+        renderEnchantment();
+    }
+
+    private void renderEnchantment() {
+        float tickModifier = (float) (Minecraft.getSystemTime() % 3000L) / 3000.0F * 48.0F;
+
+        TileEntityRenderer.instance.renderEngine.bindTexture("%blur%/misc/glint.png");
+        GL11.glEnable(GL11.GL_BLEND);
+        float var20 = 0.5F;
+        GL11.glColor4f(var20, var20, var20, 1.0F);
+        GL11.glDepthFunc(GL11.GL_EQUAL);
+        GL11.glDepthMask(false);
+        for (int var21 = 0; var21 < 2; ++var21) {
+            GL11.glDisable(GL11.GL_LIGHTING);
+            float var22 = 0.76F;
+            GL11.glColor4f(0.5F * var22, 0.25F * var22, 0.8F * var22, 1.0F);
+            GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
+            GL11.glMatrixMode(GL11.GL_TEXTURE);
+            GL11.glLoadIdentity();
+            float var23 = tickModifier * (0.001F + (float) var21 * 0.003F) * 20.0F;
+            float var24 = 0.33333334F;
+            GL11.glScalef(var24, var24, var24);
+            GL11.glRotatef(30.0F - (float) var21 * 60.0F, 0.0F, 0.0F, 1.0F);
+            GL11.glTranslatef(0.0F, var23, 0.0F);
+            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+
+            renderAll();
+        }
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glMatrixMode(GL11.GL_TEXTURE);
+        GL11.glDepthMask(true);
+        GL11.glLoadIdentity();
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDepthFunc(GL11.GL_LEQUAL);
     }
 }

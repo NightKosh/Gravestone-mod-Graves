@@ -20,4 +20,8 @@ public abstract class ModelGraveStone extends ModelBase  {
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
+    
+    public void customRender() {
+        renderAll();
+    };
 }

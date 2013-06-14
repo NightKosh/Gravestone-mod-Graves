@@ -72,7 +72,11 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
                 break;
         }
 
-        getMemorialModel(memorialType).renderAll();
+        if (memorialType == 7 || memorialType == 2) {
+            getMemorialModel(memorialType).customRender();
+        } else {
+            getMemorialModel(memorialType).renderAll();
+        }
         GL11.glPopMatrix();
     }
 
@@ -149,14 +153,4 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
                 return 2;
         }
     }
-/*
-    protected int setArmorModel() {
-        //ItemArmor itemArmor = (ItemArmor) item;
-        //bindTextureByName("/mods/GraveStone/textures/memorials/ModelAngelStatueMemorial.png");
-        //ModelBiped modelbiped = this.modelArmorChestplate;
-        //this.setRenderPassModel(modelArmorChestplate);
-
-        //new ItemStack(Item.swordDiamond, 0, 0)
-        return 1;
-    }*/
 }

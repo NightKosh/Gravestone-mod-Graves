@@ -2,7 +2,9 @@ package GraveStone.models.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
@@ -24,14 +26,13 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
     public ModelRenderer leg2;
     public ModelRenderer leg3;
     public ModelRenderer leg4;
-
     ModelRenderer Pedestal;
     ModelRenderer Pedestal2;
-    
+
     public ModelCreeperStatueMemorial() {
         textureWidth = 64;
         textureHeight = 64;
-        
+
         float par1 = 0;
         byte b0 = 4;
         this.head = new ModelRenderer(this, 0, 0);
@@ -55,8 +56,8 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
         this.leg4 = new ModelRenderer(this, 0, 16);
         this.leg4.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, par1);
         this.leg4.setRotationPoint(2.0F, (float) (12 + b0), -4.0F);
-        
-        
+
+
         Pedestal = new ModelRenderer(this, 0, 32);
         Pedestal.addBox(0F, 0F, 0F, 16, 4, 16);
         Pedestal.setRotationPoint(-8F, 20F, -8F);
@@ -99,17 +100,28 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
         this.leg3.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2;
         this.leg4.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
     }
-    
 
     @Override
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F);
         float par7 = 0.0625F;
-        
+
         Pedestal.render(par7);
         Pedestal2.render(par7);
 
         GL11.glTranslated(0, -0.3, 0);
+
+        renderCreeper();
+    }
+
+    @Override
+    public void customRender() {
+        renderAll();
+        renderCreeperCharging();
+    }
+
+    private void renderCreeper() {
+        float par7 = 0.0625F;
 
         this.head.render(par7);
         this.body.render(par7);
@@ -117,39 +129,38 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
         this.leg2.render(par7);
         this.leg3.render(par7);
         this.leg4.render(par7);
-        
-        //renderCreeperPassModel(par7);
-    }
-    
 
-    /**
-     * A method used to render a creeper's powered form as a pass model.
-     */
-    protected void renderCreeperPassModel(float par3) {
-        int par2 = 1;
-        if (par2 == 1) {
-            float f1 = par3;//(float) par1EntityCreeper.ticksExisted + par3;
-            //bindTextureByName("/armor/power.png");//this.loadTexture("/armor/power.png");
-            GL11.glMatrixMode(GL11.GL_TEXTURE);
-            GL11.glLoadIdentity();
-            float f2 = f1 * 0.01F;
-            float f3 = f1 * 0.01F;
-            GL11.glTranslatef(f2, f3, 0.0F);
-            //this.setRenderPassModel(creeperStatue);
-            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-            GL11.glEnable(GL11.GL_BLEND);
+    }
+
+    private void renderCreeperCharging() {
+        GL11.glTranslated(0, 0.29, 0);
+        float tickModifier = (float) (Minecraft.getSystemTime() % 3000L) / 3000.0F * 48.0F;
+
+        float scale = 1.2F;
+        GL11.glScalef(scale, scale, scale);
+        
+        TileEntityRenderer.instance.renderEngine.bindTexture("/armor/power.png");
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glDepthMask(true);
+        GL11.glMatrixMode(GL11.GL_TEXTURE);
+        for (int var21 = 0; var21 < 2; ++var21) {
             float f4 = 0.5F;
             GL11.glColor4f(f4, f4, f4, 1.0F);
-            GL11.glDisable(GL11.GL_LIGHTING);
-            GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
-        }
-
-        if (par2 == 2) {
+            GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
             GL11.glMatrixMode(GL11.GL_TEXTURE);
             GL11.glLoadIdentity();
-            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-            GL11.glEnable(GL11.GL_LIGHTING);
-            GL11.glDisable(GL11.GL_BLEND);
+            float var23 = tickModifier * (0.001F + (float) var21 * 0.003F) * 20.0F;
+            GL11.glTranslatef(0, var23, 0);
+
+            renderCreeper();
         }
+
+        GL11.glMatrixMode(GL11.GL_TEXTURE);
+        GL11.glLoadIdentity();
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDepthFunc(GL11.GL_LEQUAL);
+        GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
     }
 }

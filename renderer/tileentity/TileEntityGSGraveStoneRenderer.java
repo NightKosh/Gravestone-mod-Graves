@@ -1,5 +1,6 @@
 package GraveStone.renderer.tileentity;
 
+import GraveStone.block.BlockGSGraveStone;
 import GraveStone.models.block.ModelCatStatueGraveStone;
 import GraveStone.models.block.ModelCrossGraveStone;
 import GraveStone.models.block.ModelDogStatueGraveStone;
@@ -28,11 +29,11 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
     private static ModelGraveStone catStatue = new ModelCatStatueGraveStone();
     private static ModelGraveStone swordGrave = new ModelSwordGrave();
 
-    public void renderAModelAt(TileEntityGSGraveStone tile, double d, double d1, double d2, float f) {
-        byte graveType = tile.getGraveType();
+    public void renderAModelAt(TileEntityGSGraveStone tileEntity, double d, double d1, double d2, float f) {
+        byte graveType = tileEntity.getGraveType();
         int meta;
-        if (tile.worldObj != null) {
-            meta = tile.getBlockMetadata();
+        if (tileEntity.worldObj != null) {
+            meta = tileEntity.getBlockMetadata();
         } else {
             meta = 0;
         }
@@ -57,7 +58,12 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
                 GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
                 break;
         }
-        getGraveModel(graveType).renderAll();
+        if (BlockGSGraveStone.isSwordGrave(tileEntity) && tileEntity.isEnchanted()) {
+            getGraveModel(graveType).customRender();
+        } else {
+            getGraveModel(graveType).renderAll();
+        }
+        
         GL11.glPopMatrix();
     }
 
@@ -68,8 +74,6 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
 
     private ModelGraveStone getGraveModel(byte graveType) {
         switch (graveType) {
-            case 0:
-                return verticalPlate;
             case 1:
                 return cross;
             case 2:
@@ -84,6 +88,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
             case 8:
             case 9:
                 return swordGrave;
+            case 0:
             default:
                 return verticalPlate;
         }
