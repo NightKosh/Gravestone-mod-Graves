@@ -3,6 +3,7 @@ package GraveStone.models.block;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
@@ -24,7 +25,6 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
     public ModelRenderer bipedLeftArm;
     public ModelRenderer bipedRightLeg;
     public ModelRenderer bipedLeftLeg;
-    public ModelRenderer bipedCloak;
     /**
      * Records whether the model should be rendered holding an item in the left
      * hand, and if that item is a block.
@@ -46,11 +46,9 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
         float par2 = 0;
         textureWidth = 64;
         textureHeight = 64;
-        
+
         this.heldItemLeft = 0;
         this.heldItemRight = 0;
-        this.bipedCloak = new ModelRenderer(this, 0, 0);
-        this.bipedCloak.addBox(-5.0F, 0.0F, -1.0F, 10, 16, 1, par1);
         this.bipedHead = new ModelRenderer(this, 0, 0);
         this.bipedHead.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, par1);
         this.bipedHead.setRotationPoint(0.0F, 0.0F + par2, 0.0F);
@@ -74,8 +72,8 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
         this.bipedLeftLeg.mirror = true;
         this.bipedLeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, par1);
         this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F + par2, 0.0F);
-        
-        
+
+
         Pedestal = new ModelRenderer(this, 0, 32);
         Pedestal.addBox(0F, 0F, 0F, 16, 4, 16);
         Pedestal.setRotationPoint(-8F, 20F, -8F);
@@ -137,30 +135,6 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
 
         this.bipedRightArm.rotateAngleY = 0.0F;
         this.bipedLeftArm.rotateAngleY = 0.0F;
-        float f6;
-        float f7;
-
-        if (this.onGround > -9990.0F) {
-            f6 = this.onGround;
-            this.bipedBody.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float) Math.PI * 2.0F) * 0.2F;
-            this.bipedRightArm.rotationPointZ = MathHelper.sin(this.bipedBody.rotateAngleY) * 5.0F;
-            this.bipedRightArm.rotationPointX = -MathHelper.cos(this.bipedBody.rotateAngleY) * 5.0F;
-            this.bipedLeftArm.rotationPointZ = -MathHelper.sin(this.bipedBody.rotateAngleY) * 5.0F;
-            this.bipedLeftArm.rotationPointX = MathHelper.cos(this.bipedBody.rotateAngleY) * 5.0F;
-            this.bipedRightArm.rotateAngleY += this.bipedBody.rotateAngleY;
-            this.bipedLeftArm.rotateAngleY += this.bipedBody.rotateAngleY;
-            this.bipedLeftArm.rotateAngleX += this.bipedBody.rotateAngleY;
-            f6 = 1.0F - this.onGround;
-            f6 *= f6;
-            f6 *= f6;
-            f6 = 1.0F - f6;
-            f7 = MathHelper.sin(f6 * (float) Math.PI);
-            float f8 = MathHelper.sin(this.onGround * (float) Math.PI) * -(this.bipedHead.rotateAngleX - 0.7F) * 0.75F;
-            this.bipedRightArm.rotateAngleX = (float) ((double) this.bipedRightArm.rotateAngleX - ((double) f7 * 1.2D + (double) f8));
-            this.bipedRightArm.rotateAngleY += this.bipedBody.rotateAngleY * 2.0F;
-            this.bipedRightArm.rotateAngleZ = MathHelper.sin(this.onGround * (float) Math.PI) * -0.4F;
-        }
-
         this.bipedBody.rotateAngleX = 0.0F;
         this.bipedRightLeg.rotationPointZ = 0.1F;
         this.bipedLeftLeg.rotationPointZ = 0.1F;
@@ -175,29 +149,43 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
         this.bipedLeftArm.rotateAngleX -= MathHelper.sin(par3 * 0.067F) * 0.05F;
     }
 
-    /**
-     * Renders the cloak of the current biped (in most cases, it's a player)
-     */
-    public void renderCloak(float par1) {
-        this.bipedCloak.render(par1);
-    }
-
     @Override
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F);
         float par7 = 0.0625F;
-        
+
         Pedestal.render(par7);
         Pedestal2.render(par7);
 
         GL11.glTranslated(0, -0.5, 0);
-
+        renderSteve();
+        renderSteveLegs();
+    }
+    
+    private void renderSteve() {
+        float par7 = 0.0625F;
         this.bipedHead.render(par7);
         this.bipedBody.render(par7);
         this.bipedRightArm.render(par7);
         this.bipedLeftArm.render(par7);
+    }
+    
+    private void renderSteveLegs() {
+        float par7 = 0.0625F;
         this.bipedRightLeg.render(par7);
         this.bipedLeftLeg.render(par7);
-        this.bipedHeadwear.render(par7);
+    }
+    
+    @Override
+    public void customRender() {
+        renderAll();
+        renderArmor();
+    }
+    private void renderArmor() {
+        float scale = 1.1F;
+        GL11.glScalef(scale, scale, scale);
+        
+        TileEntityRenderer.instance.renderEngine.bindTexture("/mods/GraveStone/textures/memorials/ModelSteveStatueMemorialArmor.png");
+        renderSteve();
     }
 }

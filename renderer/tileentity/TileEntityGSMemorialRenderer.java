@@ -77,6 +77,7 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
         } else {
             getMemorialModel(memorialType).renderAll();
         }
+
         GL11.glPopMatrix();
     }
 
