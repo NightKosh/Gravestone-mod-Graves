@@ -12,6 +12,7 @@ import net.minecraft.client.model.ModelRenderer;
  */
 public abstract class ModelGraveStone extends ModelBase  {
         
+    
     public abstract void renderAll();
     
     protected void setRotation(ModelRenderer model, float x, float y, float z) {

@@ -9,7 +9,6 @@ import GraveStone.models.block.ModelVerticalPlateGraveStone;
 import GraveStone.models.block.ModelHorisontalPlateGraveStone;
 import GraveStone.models.block.ModelSwordGrave;
 import GraveStone.tileentity.TileEntityGSGraveStone;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
@@ -20,14 +19,14 @@ import org.lwjgl.opengl.GL11;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  *
  */
-public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
+public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
 
     private static ModelGraveStone verticalPlate = new ModelVerticalPlateGraveStone();
     private static ModelGraveStone cross = new ModelCrossGraveStone();
     private static ModelGraveStone horisontalPlate = new ModelHorisontalPlateGraveStone();
     private static ModelGraveStone dogStatue = new ModelDogStatueGraveStone();
     private static ModelGraveStone catStatue = new ModelCatStatueGraveStone();
-    private static ModelGraveStone swordGrave = new ModelSwordGrave();
+    private ModelGraveStone swordGrave;// = new ModelSwordGrave();
 
     public void renderAModelAt(TileEntityGSGraveStone tileEntity, double d, double d1, double d2, float f) {
         byte graveType = tileEntity.getGraveType();
@@ -87,7 +86,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntitySpecialRenderer {
             case 7:
             case 8:
             case 9:
-                return swordGrave;
+                return new ModelSwordGrave(this);//swordGrave;
             case 0:
             default:
                 return verticalPlate;

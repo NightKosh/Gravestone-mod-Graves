@@ -1,10 +1,8 @@
 package GraveStone.models.block;
 
+import GraveStone.renderer.tileentity.TileEntityGSRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
@@ -23,8 +21,10 @@ public class ModelSwordGrave extends ModelGraveStone {
     ModelRenderer Blade4;
     ModelRenderer Shape3;
     ModelRenderer Hilt;
+    TileEntityGSRenderer renderer;
 
-    public ModelSwordGrave() {
+    public ModelSwordGrave(TileEntityGSRenderer renderer) {
+        this.renderer = renderer;
         textureWidth = 32;
         textureHeight = 32;
 
@@ -102,7 +102,8 @@ public class ModelSwordGrave extends ModelGraveStone {
     private void renderEnchantment() {
         float tickModifier = (float) (Minecraft.getSystemTime() % 3000L) / 3000.0F * 48.0F;
 
-        TileEntityRenderer.instance.renderEngine.bindTexture("%blur%/misc/glint.png");
+        
+        renderer.bindTextureByName("%blur%/misc/glint.png");
         GL11.glEnable(GL11.GL_BLEND);
         float var20 = 0.5F;
         GL11.glColor4f(var20, var20, var20, 1.0F);

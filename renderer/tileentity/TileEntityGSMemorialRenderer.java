@@ -10,12 +10,7 @@ import GraveStone.models.block.ModelMemorialObelisk;
 import GraveStone.models.block.ModelSteveStatueMemorial;
 import GraveStone.models.block.ModelVillagerMemorial;
 import GraveStone.tileentity.TileEntityGSMemorial;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.client.ForgeHooksClient;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -23,20 +18,18 @@ import org.lwjgl.opengl.GL11;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
-public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
+public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
 
     protected static ModelGraveStone cross = new ModelMemorialCross();
     protected static ModelGraveStone obelisk = new ModelMemorialObelisk();
-    protected static ModelGraveStone steveStatue = new ModelSteveStatueMemorial();
-    protected static ModelGraveStone villagerStatue = new ModelVillagerMemorial();
-    protected static ModelGraveStone angelStatue = new ModelAngelStatueMemorial();
+    protected ModelGraveStone steveStatue;// = new ModelSteveStatueMemorial(this);
+    protected ModelGraveStone villagerStatue;// = new ModelVillagerMemorial(this);
+    protected ModelGraveStone angelStatue;// = new ModelAngelStatueMemorial(this);
     protected static ModelGraveStone dogStatue = new ModelDogStatueMemorial();
     protected static ModelGraveStone catStatue = new ModelCatStatueMemorial();
-    protected static ModelCreeperStatueMemorial creeperStatue = new ModelCreeperStatueMemorial();
-    protected static ModelBiped modelArmorChestplate = ForgeHooksClient.getArmorModel(null, new ItemStack(Item.plateDiamond, 0, 0), 0, null);
-
+    protected ModelCreeperStatueMemorial creeperStatue;// = new ModelCreeperStatueMemorial(this);
+    
     public void renderAModelAt(TileEntityGSMemorial tile, double d, double d1, double d2, float f) {
         byte memorialType = tile.getGraveType();
         int meta;
@@ -92,17 +85,17 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
             case 1:
                 return obelisk;
             case 2:
-                return steveStatue;
+                return new ModelSteveStatueMemorial(this);//steveStatue
             case 3:
-                return villagerStatue;
+                return new ModelVillagerMemorial(this);//villagerStatue;
             case 4:
-                return angelStatue;
+                return new ModelAngelStatueMemorial(this);//angelStatue;
             case 5:
                 return dogStatue;
             case 6:
                 return catStatue;
             case 7:
-                return creeperStatue;
+                return new ModelCreeperStatueMemorial(this);//creeperStatue;
             case 0:
             default:
                 return cross;

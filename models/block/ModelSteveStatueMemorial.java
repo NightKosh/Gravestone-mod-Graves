@@ -1,5 +1,6 @@
 package GraveStone.models.block;
 
+import GraveStone.renderer.tileentity.TileEntityGSRenderer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
@@ -24,6 +25,7 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
     public ModelRenderer bipedLeftArm;
     public ModelRenderer bipedRightLeg;
     public ModelRenderer bipedLeftLeg;
+    TileEntityGSRenderer renderer;
     /**
      * Records whether the model should be rendered holding an item in the left
      * hand, and if that item is a block.
@@ -36,11 +38,9 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
     public int heldItemRight;
     ModelSmallPedestal pedestal;
 
-    public ModelSteveStatueMemorial() {
-        this(0.0F);
-    }
-
-    public ModelSteveStatueMemorial(float par1) {
+    public ModelSteveStatueMemorial(TileEntityGSRenderer renderer) {
+        this.renderer = renderer;
+        float par1 = 0;
         float par2 = 0;
         textureWidth = 64;
         textureHeight = 32;
@@ -72,7 +72,7 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
         this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F + par2, 0.0F);
 
 
-        pedestal = new ModelSmallPedestal();
+        pedestal = new ModelSmallPedestal(renderer);
     }
 
     /**
@@ -173,7 +173,7 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
         float scale = 1.1F;
         GL11.glScalef(scale, scale, scale);
         
-        TileEntityRenderer.instance.renderEngine.bindTexture("/mods/GraveStone/textures/memorials/ModelSteveStatueMemorialArmor.png");
+        renderer.bindTextureByName("/mods/GraveStone/textures/memorials/ModelSteveStatueMemorialArmor.png");
         renderSteve();
     }
 }

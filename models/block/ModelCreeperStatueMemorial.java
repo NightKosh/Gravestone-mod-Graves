@@ -1,10 +1,10 @@
 package GraveStone.models.block;
 
+import GraveStone.renderer.tileentity.TileEntityGSRenderer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
@@ -26,8 +26,10 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
     public ModelRenderer leg3;
     public ModelRenderer leg4;
     ModelSmallPedestal pedestal;
+    TileEntityGSRenderer renderer;
 
-    public ModelCreeperStatueMemorial() {
+    public ModelCreeperStatueMemorial(TileEntityGSRenderer renderer) {
+        this.renderer = renderer;
         textureWidth = 64;
         textureHeight = 32;
 
@@ -55,7 +57,7 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
         this.leg4.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, par1);
         this.leg4.setRotationPoint(2.0F, (float) (12 + b0), -4.0F);
 
-        pedestal = new ModelSmallPedestal();
+        pedestal = new ModelSmallPedestal(renderer);
     }
 
     /**
@@ -126,7 +128,7 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
         float scale = 1.2F;
         GL11.glScalef(scale, scale, scale);
         
-        TileEntityRenderer.instance.renderEngine.bindTexture("/armor/power.png");
+        renderer.bindTextureByName("/armor/power.png");
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDepthMask(true);
         GL11.glMatrixMode(GL11.GL_TEXTURE);

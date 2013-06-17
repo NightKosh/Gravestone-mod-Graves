@@ -1,8 +1,10 @@
 package GraveStone.models.block;
 
+import GraveStone.renderer.tileentity.TileEntityGSRenderer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 
 /**
@@ -26,8 +28,10 @@ public class ModelAngelStatueMemorial extends ModelGraveStone {
     ModelRenderer LeftWing;
     ModelRenderer LeftWing2;
     ModelSmallPedestal pedestal;
+    TileEntityGSRenderer renderer;
 
-    public ModelAngelStatueMemorial() {
+    public ModelAngelStatueMemorial(TileEntityGSRenderer renderer) {
+        this.renderer = renderer;
         textureWidth = 64;
         textureHeight = 64;
 
@@ -99,7 +103,7 @@ public class ModelAngelStatueMemorial extends ModelGraveStone {
         setRotation(LeftWing2, -1.082104F, -0.1745329F, -0.3839724F);
 
 
-        pedestal = new ModelSmallPedestal();
+        pedestal = new ModelSmallPedestal(renderer);
     }
 
     @Override

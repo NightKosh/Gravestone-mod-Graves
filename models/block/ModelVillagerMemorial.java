@@ -1,5 +1,6 @@
 package GraveStone.models.block;
 
+import GraveStone.renderer.tileentity.TileEntityGSRenderer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
@@ -37,12 +38,14 @@ public class ModelVillagerMemorial extends ModelGraveStone {
     public ModelRenderer leftVillagerLeg;
     public ModelRenderer field_82898_f;
     ModelSmallPedestal pedestal;
+    TileEntityGSRenderer renderer;
 
-    public ModelVillagerMemorial() {
-        this(0, 0.0F, 64, 64);
-    }
-
-    public ModelVillagerMemorial(float par1, float par2, int par3, int par4) {
+    public ModelVillagerMemorial(TileEntityGSRenderer renderer) {
+        float par1 = 0;
+        float par2 = 0;
+        int par3 = 64;
+        int par4 = 64;
+        this.renderer = renderer;
         textureWidth = 64;
         textureHeight = 64;
         
@@ -71,7 +74,7 @@ public class ModelVillagerMemorial extends ModelGraveStone {
         this.leftVillagerLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, par1);
         
 
-        pedestal = new ModelSmallPedestal();
+        pedestal = new ModelSmallPedestal(renderer);
     }
 
     /**
