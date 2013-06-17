@@ -4,6 +4,7 @@ import GraveStone.GraveStoneConfig;
 import GraveStone.block.BlockGSGraveStone;
 import GraveStone.tileentity.GSGraveStoneItems;
 import GraveStone.tileentity.TileEntityGSGraveStone;
+import GraveStone.tileentity.TileEntityGSMemorial;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
@@ -216,6 +217,15 @@ abstract class ComponentGSCemeteryCatacombs extends StructureComponent {
             }
         }
         return direction;
+    }
+
+    protected void placeMemorial(World world, Random random, int x, int y, int z, int memorialMeta, byte memorialType) {
+        this.placeBlockAtCurrentPosition(world, GraveStoneConfig.memorialID, memorialMeta, x, y, z, boundingBox);
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getBlockTileEntity(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
+        if (tileEntity != null) {
+            tileEntity.setGraveType(memorialType);
+            tileEntity.setMemorialContent(random);
+        }
     }
 
     protected void placeGrave(World world, Random random, int x, int y, int z, int graveMeta, byte graveType) {

@@ -258,7 +258,7 @@ public class StructureGSCemeteryCatacombsLevel {
                     if (componentClass == ComponentGSCemeteryCatacombsCrossing.class) {
                         return getCorridorType();
                     } else {
-                        return ComponentGSCemeteryCatacombsCrossing.class;
+                        return getCrossingType();
                     }
                 } else if (chance >= 5) {
                     if (componentClass == ComponentGSCemeteryCatacombsSpidersCorridor.class) {
@@ -280,7 +280,7 @@ public class StructureGSCemeteryCatacombsLevel {
                     if (componentClass == ComponentGSCemeteryCatacombsCrossing.class) {
                         return getCorridorType();
                     } else {
-                        return ComponentGSCemeteryCatacombsCrossing.class;
+                        return getCrossingType();
                     }
                 } else if (chance >= 30) {
                     if (componentClass == ComponentGSCemeteryCatacombsSpidersCorridor.class) {
@@ -308,9 +308,12 @@ public class StructureGSCemeteryCatacombsLevel {
         }
     }
 
+    /**
+     * Return ranfom class of corridor component 
+     */
     private Class getCorridorType() {
         int corridorChance = random.nextInt(100);
-        if (corridorChance >= 65) {
+        if (corridorChance >= 50) {
             return ComponentGSCemeteryCatacombsCorridor.class;
         } else if (corridorChance >= 5) {
             return ComponentGSCemeteryCatacombsGraveCorridor.class;
@@ -319,6 +322,20 @@ public class StructureGSCemeteryCatacombsLevel {
         }
     }
 
+    /**
+     * Return ranfom class of crossing component 
+     */
+    private Class getCrossingType() {
+        if (random.nextInt(100) >= 10) {
+            return ComponentGSCemeteryCatacombsCrossing.class;
+        } else {
+            return ComponentGSCemeteryCatacombsCreeper.class;
+        }
+    }
+
+    /**
+     * Generate level
+     */
     public void generateLevel() {
         ComponentGSCemeteryCatacombs component;
         Iterator<ComponentGSCemeteryCatacombs> it = levelComponents.iterator();
@@ -328,6 +345,9 @@ public class StructureGSCemeteryCatacombsLevel {
         }
     }
 
+    /**
+     * Return end parts of level 
+     */
     public LinkedList getEndParts() {
         return endComponents;
     }
