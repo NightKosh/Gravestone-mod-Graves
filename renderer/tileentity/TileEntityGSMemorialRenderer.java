@@ -1,5 +1,6 @@
 package GraveStone.renderer.tileentity;
 
+import GraveStone.models.block.ModelAngelStatueMemorial;
 import GraveStone.models.block.ModelCatStatueMemorial;
 import GraveStone.models.block.ModelCreeperStatueMemorial;
 import GraveStone.models.block.ModelDogStatueMemorial;
@@ -30,7 +31,7 @@ public class TileEntityGSMemorialRenderer extends TileEntitySpecialRenderer {
     protected static ModelGraveStone obelisk = new ModelMemorialObelisk();
     protected static ModelGraveStone steveStatue = new ModelSteveStatueMemorial();
     protected static ModelGraveStone villagerStatue = new ModelVillagerMemorial();
-    protected static ModelGraveStone angelStatue = new ModelVillagerMemorial();
+    protected static ModelGraveStone angelStatue = new ModelAngelStatueMemorial();
     protected static ModelGraveStone dogStatue = new ModelDogStatueMemorial();
     protected static ModelGraveStone catStatue = new ModelCatStatueMemorial();
     protected static ModelCreeperStatueMemorial creeperStatue = new ModelCreeperStatueMemorial();

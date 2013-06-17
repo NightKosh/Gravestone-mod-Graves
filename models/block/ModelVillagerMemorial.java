@@ -1,17 +1,18 @@
 package GraveStone.models.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-import org.lwjgl.opengl.GL11;
 
 /**
  * GraveStone mod
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
+@SideOnly(Side.CLIENT)
 public class ModelVillagerMemorial extends ModelGraveStone {
 
     /**
@@ -35,16 +36,15 @@ public class ModelVillagerMemorial extends ModelGraveStone {
      */
     public ModelRenderer leftVillagerLeg;
     public ModelRenderer field_82898_f;
-    ModelRenderer Pedestal;
-    ModelRenderer Pedestal2;
+    ModelSmallPedestal pedestal;
 
     public ModelVillagerMemorial() {
-        this(0, 0.0F, 64, 128);
+        this(0, 0.0F, 64, 64);
     }
 
     public ModelVillagerMemorial(float par1, float par2, int par3, int par4) {
         textureWidth = 64;
-        textureHeight = 128;
+        textureHeight = 64;
         
         this.villagerHead = (new ModelRenderer(this)).setTextureSize(par3, par4);
         this.villagerHead.setRotationPoint(0.0F, 0.0F + par2, 0.0F);
@@ -71,18 +71,7 @@ public class ModelVillagerMemorial extends ModelGraveStone {
         this.leftVillagerLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, par1);
         
 
-        Pedestal = new ModelRenderer(this, 0, 64);
-        Pedestal.addBox(0F, 0F, 0F, 16, 4, 16);
-        Pedestal.setRotationPoint(-8F, 20F, -8F);
-        Pedestal.setTextureSize(64, 128);
-        Pedestal.mirror = true;
-        setRotation(Pedestal, 0F, 0F, 0F);
-        Pedestal2 = new ModelRenderer(this, 2, 66);
-        Pedestal2.addBox(0F, 0F, 0F, 14, 4, 14);
-        Pedestal2.setRotationPoint(-7F, 16F, -7F);
-        Pedestal2.setTextureSize(64, 128);
-        Pedestal2.mirror = true;
-        setRotation(Pedestal2, 0F, 0F, 0F);
+        pedestal = new ModelSmallPedestal();
     }
 
     /**
@@ -91,14 +80,17 @@ public class ModelVillagerMemorial extends ModelGraveStone {
     @Override
     public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7);
+        
+        ModelSmallPedestal.shiftModel();
+        
         this.villagerHead.render(par7);
         this.villagerBody.render(par7);
         this.rightVillagerLeg.render(par7);
         this.leftVillagerLeg.render(par7);
         this.villagerArms.render(par7);
         
-        Pedestal.render(par7);
-        Pedestal2.render(par7);
+        
+        pedestal.renderAll();
     }
 
     /**
@@ -124,15 +116,14 @@ public class ModelVillagerMemorial extends ModelGraveStone {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F);
         float par7 = 0.0625F;
         
-        Pedestal.render(par7);
-        Pedestal2.render(par7);
-
-        GL11.glTranslated(0, -0.5, 0);
-
+        ModelSmallPedestal.shiftModel();
+        
         this.villagerHead.render(par7);
         this.villagerBody.render(par7);
         this.rightVillagerLeg.render(par7);
         this.leftVillagerLeg.render(par7);
         this.villagerArms.render(par7);
+        
+        pedestal.renderAll();
     }
 }

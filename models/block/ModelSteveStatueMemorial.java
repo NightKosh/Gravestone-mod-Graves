@@ -13,7 +13,6 @@ import org.lwjgl.opengl.GL11;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 @SideOnly(Side.CLIENT)
 public class ModelSteveStatueMemorial extends ModelGraveStone {
@@ -35,8 +34,7 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
      * hand, and if that item is a block.
      */
     public int heldItemRight;
-    ModelRenderer Pedestal;
-    ModelRenderer Pedestal2;
+    ModelSmallPedestal pedestal;
 
     public ModelSteveStatueMemorial() {
         this(0.0F);
@@ -45,7 +43,7 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
     public ModelSteveStatueMemorial(float par1) {
         float par2 = 0;
         textureWidth = 64;
-        textureHeight = 64;
+        textureHeight = 32;
 
         this.heldItemLeft = 0;
         this.heldItemRight = 0;
@@ -74,18 +72,7 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
         this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F + par2, 0.0F);
 
 
-        Pedestal = new ModelRenderer(this, 0, 32);
-        Pedestal.addBox(0F, 0F, 0F, 16, 4, 16);
-        Pedestal.setRotationPoint(-8F, 20F, -8F);
-        Pedestal.setTextureSize(64, 64);
-        Pedestal.mirror = true;
-        setRotation(Pedestal, 0F, 0F, 0F);
-        Pedestal2 = new ModelRenderer(this, 2, 34);
-        Pedestal2.addBox(0F, 0F, 0F, 14, 4, 14);
-        Pedestal2.setRotationPoint(-7F, 16F, -7F);
-        Pedestal2.setTextureSize(64, 64);
-        Pedestal2.mirror = true;
-        setRotation(Pedestal2, 0F, 0F, 0F);
+        pedestal = new ModelSmallPedestal();
     }
 
     /**
@@ -152,14 +139,13 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
     @Override
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F);
-        float par7 = 0.0625F;
-
-        Pedestal.render(par7);
-        Pedestal2.render(par7);
-
-        GL11.glTranslated(0, -0.5, 0);
+        
+        ModelSmallPedestal.shiftModel();
+        
         renderSteve();
         renderSteveLegs();
+        
+        pedestal.renderAll();
     }
     
     private void renderSteve() {
@@ -181,7 +167,9 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
         renderAll();
         renderArmor();
     }
+    
     private void renderArmor() {
+        ModelSmallPedestal.shiftModel();
         float scale = 1.1F;
         GL11.glScalef(scale, scale, scale);
         
