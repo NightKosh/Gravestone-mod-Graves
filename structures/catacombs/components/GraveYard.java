@@ -13,9 +13,9 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSCemeteryCatacombsGraveYard extends ComponentGSCemeteryCatacombs {
+public class GraveYard extends CatacombsBaseComponent {
 
-    public ComponentGSCemeteryCatacombsGraveYard(int direction, Random random, StructureBoundingBox structureBoundingBox) {
+    public GraveYard(int direction, Random random, StructureBoundingBox structureBoundingBox) {
         super(direction);
         boundingBox = structureBoundingBox;
     }

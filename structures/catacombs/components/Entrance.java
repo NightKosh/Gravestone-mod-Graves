@@ -12,14 +12,14 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSCemeteryCatacombsEntrance extends ComponentGSCemeteryCatacombs {
+public class Entrance extends CatacombsBaseComponent {
 
     private int stairsLength;
     private int corridorLength;
     
     public static final int X_LENGTH = 4;
 
-    public ComponentGSCemeteryCatacombsEntrance(int direction, Random random, int x, int y, int z) {
+    public Entrance(int direction, Random random, int x, int y, int z) {
         super(direction);
         stairsLength = 4 + random.nextInt(4);
         corridorLength = 2 + random.nextInt(2);

@@ -2,7 +2,7 @@ package GraveStone.structures.catacombs.components;
 
 import GraveStone.GraveStoneStructures;
 import GraveStone.structures.ComponentGraveStone;
-import GraveStone.structures.catacombs.StructureGSCemeteryCatacombsStones;
+import GraveStone.structures.catacombs.CatacombsStones;
 import java.util.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
@@ -13,9 +13,9 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public abstract class ComponentGSCemeteryCatacombs extends ComponentGraveStone {
+public abstract class CatacombsBaseComponent extends ComponentGraveStone {
 
-    private static final StructureGSCemeteryCatacombsStones cemeteryCatacombsStones = new StructureGSCemeteryCatacombsStones();
+    private static final CatacombsStones cemeteryCatacombsStones = new CatacombsStones();
     protected int leftXEnd = 0;
     protected int rightXEnd = 0;
     protected int topXEnd = 0;
@@ -26,10 +26,10 @@ public abstract class ComponentGSCemeteryCatacombs extends ComponentGraveStone {
     protected int xShift = 0;
     protected int zShift = 0;
     public boolean goTop = true;
-    protected ComponentGSCemeteryCatacombs prevComponent;
-    protected ComponentGSCemeteryCatacombs[] nextComponents;
+    protected CatacombsBaseComponent prevComponent;
+    protected CatacombsBaseComponent[] nextComponents;
 
-    protected ComponentGSCemeteryCatacombs(int direction) {
+    protected CatacombsBaseComponent(int direction) {
         super(direction);
         coordBaseMode = direction;
     }
@@ -172,7 +172,7 @@ public abstract class ComponentGSCemeteryCatacombs extends ComponentGraveStone {
     /**
      * Return StructureGSCemeteryCatacombsStones instance
      */
-    public static StructureGSCemeteryCatacombsStones getCemeteryCatacombsStones() {
+    public static CatacombsStones getCemeteryCatacombsStones() {
         return cemeteryCatacombsStones;
     }
 

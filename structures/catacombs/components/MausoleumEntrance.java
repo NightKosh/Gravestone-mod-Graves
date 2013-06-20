@@ -12,11 +12,11 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSCemeteryCatacombsMausoleumEntrance extends ComponentGSCemeteryCatacombs {
+public class MausoleumEntrance extends CatacombsBaseComponent {
 
     private int offsetY;
 
-    public ComponentGSCemeteryCatacombsMausoleumEntrance(int direction, Random random, StructureBoundingBox structureBoundingBox, int offsetY) {
+    public MausoleumEntrance(int direction, Random random, StructureBoundingBox structureBoundingBox, int offsetY) {
         super(direction);
         this.boundingBox = structureBoundingBox;
         this.offsetY = offsetY;

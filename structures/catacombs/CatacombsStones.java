@@ -11,8 +11,8 @@ import net.minecraft.world.gen.structure.StructurePieceBlockSelector;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class StructureGSCemeteryCatacombsStones extends StructurePieceBlockSelector {
-    public StructureGSCemeteryCatacombsStones() {}
+public class CatacombsStones extends StructurePieceBlockSelector {
+    public CatacombsStones() {}
 
     /**
      * Picks Block Ids and Metadata (Silverfish)

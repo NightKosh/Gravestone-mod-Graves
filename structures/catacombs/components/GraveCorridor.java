@@ -16,13 +16,13 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSCemeteryCatacombsGraveCorridor extends ComponentGSCemeteryCatacombs {
+public class GraveCorridor extends CatacombsBaseComponent {
 
     public static final int X_LENGTH = 7;
     public static final int HEIGHT = 5;
     public static final int Z_LENGTH = 5;
 
-    public ComponentGSCemeteryCatacombsGraveCorridor(int direction, Random random, int x, int y, int z) {
+    public GraveCorridor(int direction, Random random, int x, int y, int z) {
         super(direction);
 
         xShift = 1;

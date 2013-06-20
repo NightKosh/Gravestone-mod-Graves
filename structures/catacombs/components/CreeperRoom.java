@@ -15,13 +15,13 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public  class ComponentGSCemeteryCatacombsCreeper extends ComponentGSCemeteryCatacombs {
+public  class CreeperRoom extends CatacombsBaseComponent {
 
     public static final int X_LENGTH = 11;
     public static final int HEIGHT = 14;
     public static final int Z_LENGTH = 11;
 
-    public ComponentGSCemeteryCatacombsCreeper(int direction, Random random, int x, int y, int z) {
+    public CreeperRoom(int direction, Random random, int x, int y, int z) {
         super(direction);
         xShift = 3;
         y = y - HEIGHT + 6;

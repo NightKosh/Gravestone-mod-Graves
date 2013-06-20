@@ -14,13 +14,13 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSCemeteryCatacombsTreasury extends ComponentGSCemeteryCatacombs {
+public class Treasury extends CatacombsBaseComponent {
 
     public static final int X_LENGTH = 6;
     public static final int HEIGHT = 5;
     public static final int Z_LENGTH = 7;
     
-    public ComponentGSCemeteryCatacombsTreasury(int direction, Random random, int x, int y, int z) {
+    public Treasury(int direction, Random random, int x, int y, int z) {
         super(direction);
         xShift = 1;
         boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);

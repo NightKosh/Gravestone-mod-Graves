@@ -11,13 +11,13 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSCemeteryCatacombsStairs extends ComponentGSCemeteryCatacombs {
+public class Stairs extends CatacombsBaseComponent {
 
     public static final int X_LENGTH = 5;
     public static final int HEIGHT = 16;
     public static final int Z_LENGTH = 13;
 
-    public ComponentGSCemeteryCatacombsStairs(int direction, Random random, int x, int y, int z) {
+    public Stairs(int direction, Random random, int x, int y, int z) {
         super(direction);
         y = y - HEIGHT + 4;
         boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);

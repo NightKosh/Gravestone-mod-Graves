@@ -15,14 +15,14 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSCemeteryCatacombsEnderHall extends ComponentGSCemeteryCatacombs {
+public class EnderHall extends CatacombsBaseComponent {
 
     public static final int X_LENGTH = 12;
     public static final int HEIGHT = 5;
     public static final int Z_LENGTH = 18;
     
 
-    public ComponentGSCemeteryCatacombsEnderHall(int direction, Random random, int x, int y, int z) {
+    public EnderHall(int direction, Random random, int x, int y, int z) {
         super(direction);
         xShift = 4;
         boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);

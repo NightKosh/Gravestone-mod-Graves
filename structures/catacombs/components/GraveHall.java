@@ -16,13 +16,13 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSCemeteryCatacombsGraveHall extends ComponentGSCemeteryCatacombs {
+public class GraveHall extends CatacombsBaseComponent {
 
     public static final int X_LENGTH = 16;
     public static final int HEIGHT = 6;
     public static final int Z_LENGTH = 18;
 
-    public ComponentGSCemeteryCatacombsGraveHall(int direction, Random random, int x, int y, int z) {
+    public GraveHall(int direction, Random random, int x, int y, int z) {
         super(direction);
         
         xShift = 6;

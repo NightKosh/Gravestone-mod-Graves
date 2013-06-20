@@ -12,7 +12,7 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSCemeteryCatacombsFence extends ComponentGSCemeteryCatacombs {
+public class Fence extends CatacombsBaseComponent {
 
     private static enum FENCE_DIRECTION {
 
@@ -22,7 +22,7 @@ public class ComponentGSCemeteryCatacombsFence extends ComponentGSCemeteryCataco
     private final boolean haveEntrance;
     private final boolean haveCorners;
 
-    public ComponentGSCemeteryCatacombsFence(int direction, Random random, StructureBoundingBox structureBoundingBox, boolean haveEntrance, boolean haveCorners) {
+    public Fence(int direction, Random random, StructureBoundingBox structureBoundingBox, boolean haveEntrance, boolean haveCorners) {
         super(direction);
         boundingBox = structureBoundingBox;
         this.haveEntrance = haveEntrance;

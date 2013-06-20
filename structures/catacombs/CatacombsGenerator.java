@@ -27,11 +27,11 @@ public class CatacombsGenerator {
     public boolean generate(World world, Random rand, int x, int z, double chance) {
         if (GraveStoneConfig.generateCatacombs && canSpawnStructureAtCoords(world, x, z, chance)) {
             int direction = rand.nextInt(4);
-            StructureGSCemeteryCatacombsSurface surface = new StructureGSCemeteryCatacombsSurface(world, rand, x, z, direction);
+            CatacombsSurface surface = new CatacombsSurface(world, rand, x, z, direction);
             System.out.println("Catacombs " + x + "x" + z);
             
             if (surface.getMausoleumY() > 55) {
-                new StructureGSCemeteryCatacombsUnderground(world, rand, direction, surface.getMausoleumX(), surface.getMausoleumY(), surface.getMausoleumZ());
+                new CatacombsUnderground(world, rand, direction, surface.getMausoleumX(), surface.getMausoleumY(), surface.getMausoleumZ());
             }
             
             structuresList.add(new ChunkCoordIntPair(x, z));

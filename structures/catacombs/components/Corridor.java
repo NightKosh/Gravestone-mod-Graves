@@ -13,13 +13,13 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSCemeteryCatacombsCorridor extends ComponentGSCemeteryCatacombs {
+public class Corridor extends CatacombsBaseComponent {
 
     public static final int X_LENGTH = 5;
     public static final int HEIGHT = 5;
     public static final int Z_LENGTH = 5;
 
-    public ComponentGSCemeteryCatacombsCorridor(int direction, Random random, int x, int y, int z) {
+    public Corridor(int direction, Random random, int x, int y, int z) {
         super(direction);
         boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
 

@@ -15,13 +15,13 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSCemeteryCatacombsTrapCorridor extends ComponentGSCemeteryCatacombs {
+public class TrapCorridor extends CatacombsBaseComponent {
 
     public static final int X_LENGTH = 6;
     public static final int HEIGHT = 5;
     public static final int Z_LENGTH = 5;
 
-    public ComponentGSCemeteryCatacombsTrapCorridor(int direction, Random random, int x, int y, int z) {
+    public TrapCorridor(int direction, Random random, int x, int y, int z) {
         super(direction);
         xShift = 1;
         boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);

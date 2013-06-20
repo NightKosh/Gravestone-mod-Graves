@@ -13,13 +13,13 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSCemeteryCatacombsCrossing extends ComponentGSCemeteryCatacombs {
+public class Crossing extends CatacombsBaseComponent {
 
     public static final int X_LENGTH = 13;
     public static final int HEIGHT = 6;
     public static final int Z_LENGTH = 13;
 
-    public ComponentGSCemeteryCatacombsCrossing(int direction, Random random, int x, int y, int z) {
+    public Crossing(int direction, Random random, int x, int y, int z) {
         super(direction);
         xShift = 4;
 

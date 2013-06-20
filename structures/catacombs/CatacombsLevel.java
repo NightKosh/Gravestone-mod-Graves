@@ -1,18 +1,18 @@
 package GraveStone.structures.catacombs;
 
-import GraveStone.structures.catacombs.components.ComponentGSCemeteryCatacombs;
-import GraveStone.structures.catacombs.components.ComponentGSCemeteryCatacombsCreeper;
-import GraveStone.structures.catacombs.components.ComponentGSCemeteryCatacombsCrossing;
-import GraveStone.structures.catacombs.components.ComponentGSCemeteryCatacombsTrapCorridor;
-import GraveStone.structures.catacombs.components.ComponentGSCemeteryCatacombsTreasury;
-import GraveStone.structures.catacombs.components.ComponentGSCemeteryCatacombsBridge;
-import GraveStone.structures.catacombs.components.ComponentGSCemeteryCatacombsStairs;
-import GraveStone.structures.catacombs.components.ComponentGSCemeteryCatacombsEnderHall;
-import GraveStone.structures.catacombs.components.ComponentGSCemeteryCatacombsGraveHall;
-import GraveStone.structures.catacombs.components.ComponentGSCemeteryCatacombsCorridor;
-import GraveStone.structures.catacombs.components.ComponentGSCemeteryCatacombsGraveCorridor;
-import GraveStone.structures.catacombs.components.ComponentGSCemeteryCatacombsWither;
-import GraveStone.structures.catacombs.components.ComponentGSCemeteryCatacombsSpidersCorridor;
+import GraveStone.structures.catacombs.components.CatacombsBaseComponent;
+import GraveStone.structures.catacombs.components.CreeperRoom;
+import GraveStone.structures.catacombs.components.Crossing;
+import GraveStone.structures.catacombs.components.TrapCorridor;
+import GraveStone.structures.catacombs.components.Treasury;
+import GraveStone.structures.catacombs.components.Bridge;
+import GraveStone.structures.catacombs.components.Stairs;
+import GraveStone.structures.catacombs.components.EnderHall;
+import GraveStone.structures.catacombs.components.GraveHall;
+import GraveStone.structures.catacombs.components.Corridor;
+import GraveStone.structures.catacombs.components.GraveCorridor;
+import GraveStone.structures.catacombs.components.WitherHall;
+import GraveStone.structures.catacombs.components.SpidersCorridor;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
@@ -26,7 +26,7 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class StructureGSCemeteryCatacombsLevel {
+public class CatacombsLevel {
 
     private final int level;
     private Random random;
@@ -43,7 +43,7 @@ public class StructureGSCemeteryCatacombsLevel {
         RIGHT
     }
 
-    public StructureGSCemeteryCatacombsLevel(LinkedList<ComponentGSCemeteryCatacombs> startComponents, int level, World world, Random random) {
+    public CatacombsLevel(LinkedList<CatacombsBaseComponent> startComponents, int level, World world, Random random) {
         levelComponents = startComponents;
 
         this.random = random;
@@ -77,13 +77,13 @@ public class StructureGSCemeteryCatacombsLevel {
     /*
      * Prepare Level pieces
      */
-    public final void prepareLevel(LinkedList<ComponentGSCemeteryCatacombs> currentComponents) {
-        LinkedList<ComponentGSCemeteryCatacombs> newComponents = new LinkedList();
+    public final void prepareLevel(LinkedList<CatacombsBaseComponent> currentComponents) {
+        LinkedList<CatacombsBaseComponent> newComponents = new LinkedList();
 
-        ComponentGSCemeteryCatacombs[] components = new ComponentGSCemeteryCatacombs[0];
+        CatacombsBaseComponent[] components = new CatacombsBaseComponent[0];
         components = currentComponents.toArray(components);
 
-        ComponentGSCemeteryCatacombs component;
+        CatacombsBaseComponent component;
         int resultComponentsCount = 0;
 
         if (totalComponentsCount > componentsCount) {
@@ -115,8 +115,8 @@ public class StructureGSCemeteryCatacombsLevel {
     /*
      * Create and add new component if it available
      */
-    private int addComponent(LinkedList<ComponentGSCemeteryCatacombs> newComponents, ComponentGSCemeteryCatacombs component, int direction, COMPONENT_SIDE componentSide) {
-        ComponentGSCemeteryCatacombs newComponent = tryCreateComponent(component, direction, componentSide);
+    private int addComponent(LinkedList<CatacombsBaseComponent> newComponents, CatacombsBaseComponent component, int direction, COMPONENT_SIDE componentSide) {
+        CatacombsBaseComponent newComponent = tryCreateComponent(component, direction, componentSide);
         if (newComponent != null) {
             newComponents.add(newComponent);
             return 1;
@@ -128,18 +128,18 @@ public class StructureGSCemeteryCatacombsLevel {
     /*
      * Create level end components
      */
-    private void createEnd(LinkedList<ComponentGSCemeteryCatacombs> currentComponents) {
-        LinkedList<ComponentGSCemeteryCatacombs> components = currentComponents;
-        ComponentGSCemeteryCatacombs component, newComponent;
+    private void createEnd(LinkedList<CatacombsBaseComponent> currentComponents) {
+        LinkedList<CatacombsBaseComponent> components = currentComponents;
+        CatacombsBaseComponent component, newComponent;
         Class componentClass;
         int ends = 1 + random.nextInt(components.size() - 1);
         int endsCount = 0;
 
         if (level == 4) {
-            componentClass = ComponentGSCemeteryCatacombsWither.class;
+            componentClass = WitherHall.class;
             ends = 1;
         } else {
-            componentClass = ComponentGSCemeteryCatacombsStairs.class;
+            componentClass = Stairs.class;
         }
 
         for (int i = 0; i < ends; i++) {
@@ -185,11 +185,11 @@ public class StructureGSCemeteryCatacombsLevel {
 
     }
 
-    private ComponentGSCemeteryCatacombs tryCreateComponent(ComponentGSCemeteryCatacombs component, Class componentClass, int direction, COMPONENT_SIDE componentSide) {
-        if (componentsCount < 30 && componentClass == ComponentGSCemeteryCatacombsTreasury.class) {
+    private CatacombsBaseComponent tryCreateComponent(CatacombsBaseComponent component, Class componentClass, int direction, COMPONENT_SIDE componentSide) {
+        if (componentsCount < 30 && componentClass == Treasury.class) {
             componentClass = getCorridorType();
         }
-        ComponentGSCemeteryCatacombs newComponent = createComponent(component, direction, componentClass, componentSide);
+        CatacombsBaseComponent newComponent = createComponent(component, direction, componentClass, componentSide);
 
         if (canBePlaced(newComponent)) {
             levelComponents.add(newComponent);
@@ -199,13 +199,13 @@ public class StructureGSCemeteryCatacombsLevel {
         }
     }
 
-    private ComponentGSCemeteryCatacombs tryCreateComponent(ComponentGSCemeteryCatacombs component, int direction, COMPONENT_SIDE componentSide) {
+    private CatacombsBaseComponent tryCreateComponent(CatacombsBaseComponent component, int direction, COMPONENT_SIDE componentSide) {
         return tryCreateComponent(component, getNextComponent(component.getClass(), componentSide), direction, componentSide);
     }
 
-    private boolean canBePlaced(ComponentGSCemeteryCatacombs component) {
-        Iterator<ComponentGSCemeteryCatacombs> it = levelComponents.iterator();
-        ComponentGSCemeteryCatacombs xz;
+    private boolean canBePlaced(CatacombsBaseComponent component) {
+        Iterator<CatacombsBaseComponent> it = levelComponents.iterator();
+        CatacombsBaseComponent xz;
         while (it.hasNext()) {
             xz = it.next();
             if (component.canBePlacedHere(xz.getBoundingBox())) {
@@ -216,7 +216,7 @@ public class StructureGSCemeteryCatacombsLevel {
         return true;
     }
 
-    private ComponentGSCemeteryCatacombs createComponent(ComponentGSCemeteryCatacombs component, int direction, Class buildComponent, COMPONENT_SIDE componentSide) {
+    private CatacombsBaseComponent createComponent(CatacombsBaseComponent component, int direction, Class buildComponent, COMPONENT_SIDE componentSide) {
         if (component != null) {
             int x, y, z;
             y = component.getYEnd();
@@ -232,7 +232,7 @@ public class StructureGSCemeteryCatacombsLevel {
             }
 
             try {
-                Constructor<ComponentGSCemeteryCatacombs> constructor = buildComponent.getConstructor(int.class, Random.class, int.class, int.class, int.class);
+                Constructor<CatacombsBaseComponent> constructor = buildComponent.getConstructor(int.class, Random.class, int.class, int.class, int.class);
                 component = constructor.newInstance(direction, random, x, y, z);
                 return component;
             } catch (NoSuchMethodException e) {
@@ -253,9 +253,9 @@ public class StructureGSCemeteryCatacombsLevel {
             return getNextComponentForLevel(componentClass);
         } else {
             if (level == 1 || random.nextInt(100) >= 5) {
-                return ComponentGSCemeteryCatacombsCorridor.class;
+                return Corridor.class;
             } else {
-                return ComponentGSCemeteryCatacombsTreasury.class;
+                return Treasury.class;
             }
         }
     }
@@ -267,55 +267,55 @@ public class StructureGSCemeteryCatacombsLevel {
                 if (chance >= 25) {
                     return getCorridorType();
                 } else if (chance >= 10) {
-                    if (componentClass == ComponentGSCemeteryCatacombsCrossing.class) {
+                    if (componentClass == Crossing.class) {
                         return getCorridorType();
                     } else {
                         return getCrossingType();
                     }
                 } else if (chance >= 5) {
-                    if (componentClass == ComponentGSCemeteryCatacombsSpidersCorridor.class) {
+                    if (componentClass == SpidersCorridor.class) {
                         return getCorridorType();
                     } else {
-                        return ComponentGSCemeteryCatacombsSpidersCorridor.class;
+                        return SpidersCorridor.class;
                     }
                 } else {
-                    if (componentClass == ComponentGSCemeteryCatacombsEnderHall.class) {
+                    if (componentClass == EnderHall.class) {
                         return getCorridorType();
                     } else {
-                        return ComponentGSCemeteryCatacombsEnderHall.class;
+                        return EnderHall.class;
                     }
                 }
             default:
                 if (chance >= 55) {
                     return getCorridorType();
                 } else if (chance >= 40) {
-                    if (componentClass == ComponentGSCemeteryCatacombsCrossing.class) {
+                    if (componentClass == Crossing.class) {
                         return getCorridorType();
                     } else {
                         return getCrossingType();
                     }
                 } else if (chance >= 30) {
-                    if (componentClass == ComponentGSCemeteryCatacombsSpidersCorridor.class) {
+                    if (componentClass == SpidersCorridor.class) {
                         return getCorridorType();
                     } else {
-                        return ComponentGSCemeteryCatacombsSpidersCorridor.class;
+                        return SpidersCorridor.class;
                     }
                 } else if (chance >= 20) {
-                    if (componentClass == ComponentGSCemeteryCatacombsEnderHall.class) {
+                    if (componentClass == EnderHall.class) {
                         return getCorridorType();
                     } else {
-                        return ComponentGSCemeteryCatacombsEnderHall.class;
+                        return EnderHall.class;
                     }
                 } else if (chance >= 10) {
-                    return ComponentGSCemeteryCatacombsGraveHall.class;
+                    return GraveHall.class;
                 } else if (chance >= 5) {
-                    if (componentClass == ComponentGSCemeteryCatacombsBridge.class) {
+                    if (componentClass == Bridge.class) {
                         return getCorridorType();
                     } else {
-                        return ComponentGSCemeteryCatacombsBridge.class;
+                        return Bridge.class;
                     }
                 } else {
-                    return ComponentGSCemeteryCatacombsTreasury.class;
+                    return Treasury.class;
                 }
         }
     }
@@ -326,11 +326,11 @@ public class StructureGSCemeteryCatacombsLevel {
     private Class getCorridorType() {
         int corridorChance = random.nextInt(100);
         if (corridorChance >= 50) {
-            return ComponentGSCemeteryCatacombsCorridor.class;
+            return Corridor.class;
         } else if (corridorChance >= 5) {
-            return ComponentGSCemeteryCatacombsGraveCorridor.class;
+            return GraveCorridor.class;
         } else {
-            return ComponentGSCemeteryCatacombsTrapCorridor.class;
+            return TrapCorridor.class;
         }
     }
 
@@ -339,9 +339,9 @@ public class StructureGSCemeteryCatacombsLevel {
      */
     private Class getCrossingType() {
         if (random.nextInt(100) >= 10) {
-            return ComponentGSCemeteryCatacombsCrossing.class;
+            return Crossing.class;
         } else {
-            return ComponentGSCemeteryCatacombsCreeper.class;
+            return CreeperRoom.class;
         }
     }
 
@@ -349,8 +349,8 @@ public class StructureGSCemeteryCatacombsLevel {
      * Generate level
      */
     public final void generateLevel() {
-        ComponentGSCemeteryCatacombs component;
-        Iterator<ComponentGSCemeteryCatacombs> it = levelComponents.iterator();
+        CatacombsBaseComponent component;
+        Iterator<CatacombsBaseComponent> it = levelComponents.iterator();
         while (it.hasNext()) {
             component = it.next();
             component.addComponentParts(world, random);

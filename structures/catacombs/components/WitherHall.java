@@ -14,7 +14,7 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSCemeteryCatacombsWither extends ComponentGSCemeteryCatacombs {
+public class WitherHall extends CatacombsBaseComponent {
 
     public static final int X_LENGTH = 23;
     public static final int HEIGHT = 10;
@@ -22,7 +22,7 @@ public class ComponentGSCemeteryCatacombsWither extends ComponentGSCemeteryCatac
     
     private int metaTop, metaBot, metaRight, metaLeft;
     
-    public ComponentGSCemeteryCatacombsWither(int direction, Random random, int x, int y, int z) {
+    public WitherHall(int direction, Random random, int x, int y, int z) {
         super(direction);
         xShift = 9;
         

@@ -15,14 +15,14 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSCemeteryCatacombsBridge extends ComponentGSCemeteryCatacombs {
+public class Bridge extends CatacombsBaseComponent {
 
     public static final int X_LENGTH = 13;
     public static final int HEIGHT = 14;
     public static final int Z_LENGTH = 7;
     
 
-    public ComponentGSCemeteryCatacombsBridge(int direction, Random random, int x, int y, int z) {
+    public Bridge(int direction, Random random, int x, int y, int z) {
         super(direction);
         xShift = 4;
         y = y - HEIGHT + 6;
