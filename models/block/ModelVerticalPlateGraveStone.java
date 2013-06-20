@@ -2,7 +2,6 @@
 package GraveStone.models.block;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
 /**
  * GraveStone mod
@@ -25,18 +24,6 @@ public class ModelVerticalPlateGraveStone extends ModelGraveStone {
         Plate.setTextureSize(32, 32);
         Plate.mirror = true;
         setRotation(Plate, 0F, 0F, 0F);
-    }
-
-    @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        super.render(entity, f, f1, f2, f3, f4, f5);
-        setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-        Plate.render(f5);
-    }
-
-    @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
     }
 
     @Override

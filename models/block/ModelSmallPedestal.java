@@ -1,8 +1,7 @@
 package GraveStone.models.block;
 
-import GraveStone.renderer.tileentity.TileEntityGSRenderer;
+import GraveStone.renderer.tileentity.TileEntityGSMemorialRenderer;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -15,10 +14,8 @@ public class ModelSmallPedestal extends ModelGraveStone {
 
     protected ModelRenderer Pedestal;
     protected ModelRenderer Pedestal2;
-    TileEntityGSRenderer renderer;
 
-    public ModelSmallPedestal(TileEntityGSRenderer renderer) {
-        this.renderer = renderer;
+    public ModelSmallPedestal() {
         textureWidth = 64;
         textureHeight = 32;
 
@@ -37,20 +34,11 @@ public class ModelSmallPedestal extends ModelGraveStone {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        super.render(entity, f, f1, f2, f3, f4, f5);
-
-
-        Pedestal.render(f5);
-        Pedestal2.render(f5);
-    }
-
-    @Override
     public void renderAll() {
         unshiftModel();
 
         float par7 = 0.0625F;
-        renderer.bindTextureByName("/mods/GraveStone/textures/memorials/ModelSmallPedestal.png");
+        TileEntityGSMemorialRenderer.instance.bindTextureByName("/mods/GraveStone/textures/memorials/ModelSmallPedestal.png");
 
         Pedestal.render(par7);
         Pedestal2.render(par7);

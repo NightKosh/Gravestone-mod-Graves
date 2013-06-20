@@ -3,7 +3,6 @@ package GraveStone.models.block;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -125,31 +124,6 @@ public class ModelDogStatueMemorial extends ModelGraveStone {
         Sign.setTextureSize(64, 64);
         Sign.mirror = true;
         setRotation(Sign, 0F, 0F, 0F);
-    }
-
-    /**
-     * Sets the models various rotation angles then renders the model.
-     */
-    @Override
-    public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
-        super.render(entity, par2, par3, par4, par5, par6, par7);
-        this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
-
-        this.wolfHeadMain.renderWithRotation(par7);
-        this.wolfBody.render(par7);
-        this.wolfLeg1.render(par7);
-        this.wolfLeg2.render(par7);
-        this.wolfLeg3.render(par7);
-        this.wolfLeg4.render(par7);
-        this.wolfTail.renderWithRotation(par7);
-        this.wolfMane.render(par7);
-
-        Pedestal1.render(par7);
-        Pedestal2.render(par7);
-        Pedestal3.render(par7);
-        Pedestal4.render(par7);
-        Pedestal5.render(par7);
-        Sign.render(par7);
     }
 
     /**

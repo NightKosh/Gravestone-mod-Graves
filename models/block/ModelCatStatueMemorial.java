@@ -3,7 +3,6 @@ package GraveStone.models.block;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -128,30 +127,6 @@ public class ModelCatStatueMemorial extends ModelGraveStone {
         Sign.setTextureSize(64, 64);
         Sign.mirror = true;
         setRotation(Sign, 0F, 0F, 0F);
-    }
-
-    /**
-     * Sets the models various rotation angles then renders the model.
-     */
-    @Override
-    public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7) {
-        this.setRotationAngles(par2, par3, par4, par5, par6, par7, par1Entity);
-
-        this.ocelotHead.render(par7);
-        this.ocelotBody.render(par7);
-        this.ocelotTail.render(par7);
-        this.ocelotTail2.render(par7);
-        this.ocelotBackLeftLeg.render(par7);
-        this.ocelotBackRightLeg.render(par7);
-        this.ocelotFrontLeftLeg.render(par7);
-        this.ocelotFrontRightLeg.render(par7);
-
-        Pedestal1.render(par7);
-        Pedestal2.render(par7);
-        Pedestal3.render(par7);
-        Pedestal4.render(par7);
-        Pedestal5.render(par7);
-        Sign.render(par7);
     }
 
     /**

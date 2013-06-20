@@ -23,18 +23,25 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
 
     protected static ModelGraveStone cross = new ModelMemorialCross();
     protected static ModelGraveStone obelisk = new ModelMemorialObelisk();
-    protected ModelGraveStone steveStatue;// = new ModelSteveStatueMemorial(this);
-    protected ModelGraveStone villagerStatue;// = new ModelVillagerMemorial(this);
-    protected ModelGraveStone angelStatue;// = new ModelAngelStatueMemorial(this);
+    protected static ModelGraveStone steveStatue = new ModelSteveStatueMemorial();
+    protected static ModelGraveStone villagerStatue = new ModelVillagerMemorial();
+    protected static ModelGraveStone angelStatue = new ModelAngelStatueMemorial();
     protected static ModelGraveStone dogStatue = new ModelDogStatueMemorial();
     protected static ModelGraveStone catStatue = new ModelCatStatueMemorial();
-    protected ModelCreeperStatueMemorial creeperStatue;// = new ModelCreeperStatueMemorial(this);
-    
-    public void renderAModelAt(TileEntityGSMemorial tile, double d, double d1, double d2, float f) {
-        byte memorialType = tile.getGraveType();
+    protected static ModelCreeperStatueMemorial creeperStatue = new ModelCreeperStatueMemorial();
+    public static TileEntityGSMemorialRenderer instance;
+
+    public TileEntityGSMemorialRenderer() {
+        instance = this;
+    }
+
+    @Override
+    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f) {
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) te;
+        byte memorialType = tileEntity.getGraveType();
         int meta;
-        if (tile.worldObj != null) {
-            meta = tile.getBlockMetadata();
+        if (tileEntity.worldObj != null) {
+            meta = tileEntity.getBlockMetadata();
         } else {
             meta = 0;
         }
@@ -43,12 +50,17 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
         //texture
         GL11.glPushMatrix();
 
-        if (tile.worldObj != null) {
-            GL11.glTranslatef((float) d + 0.5F, (float) d1 + 1.5F, (float) d2 + 0.5F);
+        if (tileEntity.worldObj != null) {
+            GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
             GL11.glScalef(1F, -1F, -1F);
         } else {
-            GL11.glTranslatef((float) d + 0.5F, (float) d1 + 0.5F, (float) d2 + 0.5F);
-            GL11.glScalef(0.4F, -0.4F, -0.4F);
+            if (memorialType == 0 || memorialType == 1) {
+            GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
+                GL11.glScalef(0.4F, -0.4F, -0.4F);
+            } else {
+            GL11.glTranslatef((float) x + 0.5F, (float) y + 0.8F, (float) z + 0.5F);
+                GL11.glScalef(0.7F, -0.7F, -0.7F);
+            }
         }
 
         switch (getMemorialDirection(meta)) {
@@ -75,27 +87,22 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
         GL11.glPopMatrix();
     }
 
-    @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double par2, double par4, double par6, float par8) {
-        this.renderAModelAt((TileEntityGSMemorial) tileEntity, par2, par4, par6, par8);
-    }
-
     private ModelGraveStone getMemorialModel(int memorialType) {
         switch (memorialType) {
             case 1:
                 return obelisk;
             case 2:
-                return new ModelSteveStatueMemorial(this);//steveStatue
+                return steveStatue;
             case 3:
-                return new ModelVillagerMemorial(this);//villagerStatue;
+                return villagerStatue;
             case 4:
-                return new ModelAngelStatueMemorial(this);//angelStatue;
+                return angelStatue;
             case 5:
                 return dogStatue;
             case 6:
                 return catStatue;
             case 7:
-                return new ModelCreeperStatueMemorial(this);//creeperStatue;
+                return creeperStatue;
             case 0:
             default:
                 return cross;
@@ -131,7 +138,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
         }
     }
 
-    /*
+    /**
      * Return grave direction by metadata
      */
     private static int getMemorialDirection(int meta) {

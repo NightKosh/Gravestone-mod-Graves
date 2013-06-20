@@ -1,9 +1,8 @@
 package GraveStone.models.block;
 
-import GraveStone.renderer.tileentity.TileEntityGSRenderer;
+import GraveStone.renderer.tileentity.TileEntityGSGraveStoneRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -21,10 +20,8 @@ public class ModelSwordGrave extends ModelGraveStone {
     ModelRenderer Blade4;
     ModelRenderer Shape3;
     ModelRenderer Hilt;
-    TileEntityGSRenderer renderer;
 
-    public ModelSwordGrave(TileEntityGSRenderer renderer) {
-        this.renderer = renderer;
+    public ModelSwordGrave() {
         textureWidth = 32;
         textureHeight = 32;
 
@@ -67,23 +64,6 @@ public class ModelSwordGrave extends ModelGraveStone {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        super.render(entity, f, f1, f2, f3, f4, f5);
-        setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-        Blade1.render(f5);
-        Blade2.render(f5);
-        Blade3.render(f5);
-        Blade4.render(f5);
-        Shape3.render(f5);
-        Hilt.render(f5);
-    }
-
-    @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-    }
-
-    @Override
     public void renderAll() {
         Blade1.render(0.0625F);
         Blade2.render(0.0625F);
@@ -103,7 +83,7 @@ public class ModelSwordGrave extends ModelGraveStone {
         float tickModifier = (float) (Minecraft.getSystemTime() % 3000L) / 3000.0F * 48.0F;
 
         
-        renderer.bindTextureByName("%blur%/misc/glint.png");
+        TileEntityGSGraveStoneRenderer.instance.bindTextureByName("%blur%/misc/glint.png");
         GL11.glEnable(GL11.GL_BLEND);
         float var20 = 0.5F;
         GL11.glColor4f(var20, var20, var20, 1.0F);

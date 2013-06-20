@@ -1,11 +1,10 @@
 package GraveStone.models.block;
 
-import GraveStone.renderer.tileentity.TileEntityGSRenderer;
+import GraveStone.renderer.tileentity.TileEntityGSMemorialRenderer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
@@ -26,10 +25,8 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
     public ModelRenderer leg3;
     public ModelRenderer leg4;
     ModelSmallPedestal pedestal;
-    TileEntityGSRenderer renderer;
 
-    public ModelCreeperStatueMemorial(TileEntityGSRenderer renderer) {
-        this.renderer = renderer;
+    public ModelCreeperStatueMemorial() {
         textureWidth = 64;
         textureHeight = 32;
 
@@ -57,21 +54,7 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
         this.leg4.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, par1);
         this.leg4.setRotationPoint(2.0F, (float) (12 + b0), -4.0F);
 
-        pedestal = new ModelSmallPedestal(renderer);
-    }
-
-    /**
-     * Sets the models various rotation angles then renders the model.
-     */
-    @Override
-    public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7) {
-        this.setRotationAngles(par2, par3, par4, par5, par6, par7);
-        this.head.render(par7);
-        this.body.render(par7);
-        this.leg1.render(par7);
-        this.leg2.render(par7);
-        this.leg3.render(par7);
-        this.leg4.render(par7);
+        pedestal = new ModelSmallPedestal();
     }
 
     /**
@@ -93,13 +76,11 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F);
         
-        //ModelSmallPedestal.shiftModel();
         GL11.glTranslated(0, -0.3, 0);
         
         renderCreeper();
         
         GL11.glTranslated(0, -0.19, 0);
-        //pedestal.unshiftModel();
         pedestal.renderAll();
     }
 
@@ -122,13 +103,12 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
     }
 
     private void renderCreeperCharging() {
-        //GL11.glTranslated(0, 0.29, 0);
         float tickModifier = (float) (Minecraft.getSystemTime() % 3000L) / 3000.0F * 48.0F;
 
         float scale = 1.2F;
         GL11.glScalef(scale, scale, scale);
         
-        renderer.bindTextureByName("/armor/power.png");
+        TileEntityGSMemorialRenderer.instance.bindTextureByName("/armor/power.png");
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDepthMask(true);
         GL11.glMatrixMode(GL11.GL_TEXTURE);

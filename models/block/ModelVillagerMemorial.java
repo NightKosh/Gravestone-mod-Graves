@@ -1,10 +1,8 @@
 package GraveStone.models.block;
 
-import GraveStone.renderer.tileentity.TileEntityGSRenderer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
 /**
@@ -38,14 +36,12 @@ public class ModelVillagerMemorial extends ModelGraveStone {
     public ModelRenderer leftVillagerLeg;
     public ModelRenderer field_82898_f;
     ModelSmallPedestal pedestal;
-    TileEntityGSRenderer renderer;
 
-    public ModelVillagerMemorial(TileEntityGSRenderer renderer) {
+    public ModelVillagerMemorial() {
         float par1 = 0;
         float par2 = 0;
         int par3 = 64;
         int par4 = 64;
-        this.renderer = renderer;
         textureWidth = 64;
         textureHeight = 64;
         
@@ -74,26 +70,7 @@ public class ModelVillagerMemorial extends ModelGraveStone {
         this.leftVillagerLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, par1);
         
 
-        pedestal = new ModelSmallPedestal(renderer);
-    }
-
-    /**
-     * Sets the models various rotation angles then renders the model.
-     */
-    @Override
-    public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7) {
-        this.setRotationAngles(par2, par3, par4, par5, par6, par7);
-        
-        ModelSmallPedestal.shiftModel();
-        
-        this.villagerHead.render(par7);
-        this.villagerBody.render(par7);
-        this.rightVillagerLeg.render(par7);
-        this.leftVillagerLeg.render(par7);
-        this.villagerArms.render(par7);
-        
-        
-        pedestal.renderAll();
+        pedestal = new ModelSmallPedestal();
     }
 
     /**

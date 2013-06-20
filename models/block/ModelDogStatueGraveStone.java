@@ -3,7 +3,6 @@ package GraveStone.models.block;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -66,31 +65,6 @@ public class ModelDogStatueGraveStone extends ModelGraveStone {
         this.wolfHeadMain.setTextureOffset(16, 14).addBox(-3.0F, -5.0F, 0.0F, 2, 2, 1, f);
         this.wolfHeadMain.setTextureOffset(16, 14).addBox(1.0F, -5.0F, 0.0F, 2, 2, 1, f);
         this.wolfHeadMain.setTextureOffset(0, 10).addBox(-1.5F, 0.0F, -5.0F, 3, 3, 4, f);
-    }
-
-    /**
-     * Sets the models various rotation angles then renders the model.
-     */
-    @Override
-    public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
-        super.render(entity, par2, par3, par4, par5, par6, par7);
-        this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
-
-        GL11.glPushMatrix();
-        GL11.glTranslatef(0.0F, 5.0F * par7, 2.0F * par7);
-        this.wolfHeadMain.renderWithRotation(par7);
-        GL11.glPopMatrix();
-        GL11.glPushMatrix();
-        GL11.glScalef(0.5F, 0.5F, 0.5F);
-        GL11.glTranslatef(0.0F, 24.0F * par7, 0.0F);
-        this.wolfBody.render(par7);
-        this.wolfLeg1.render(par7);
-        this.wolfLeg2.render(par7);
-        this.wolfLeg3.render(par7);
-        this.wolfLeg4.render(par7);
-            this.wolfTail.renderWithRotation(par7);
-        this.wolfMane.render(par7);
-        GL11.glPopMatrix();
     }
 
     /**

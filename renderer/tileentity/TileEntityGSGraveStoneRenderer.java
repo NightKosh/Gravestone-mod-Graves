@@ -26,9 +26,17 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
     private static ModelGraveStone horisontalPlate = new ModelHorisontalPlateGraveStone();
     private static ModelGraveStone dogStatue = new ModelDogStatueGraveStone();
     private static ModelGraveStone catStatue = new ModelCatStatueGraveStone();
-    private ModelGraveStone swordGrave;// = new ModelSwordGrave();
+    private static ModelGraveStone swordGrave = new ModelSwordGrave();
 
-    public void renderAModelAt(TileEntityGSGraveStone tileEntity, double d, double d1, double d2, float f) {
+    public static TileEntityGSGraveStoneRenderer instance;
+    
+    public TileEntityGSGraveStoneRenderer() {
+        instance = this;
+    }
+    
+    @Override
+    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f) {
+        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) te;
         byte graveType = tileEntity.getGraveType();
         int meta;
         if (tileEntity.worldObj != null) {
@@ -40,7 +48,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
 
         //texture
         GL11.glPushMatrix();
-        GL11.glTranslatef((float) d + 0.5F, (float) d1 + 1.5F, (float) d2 + 0.5F);
+        GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
         GL11.glScalef(1.0F, -1F, -1F);
 
         switch (getGraveDirection(meta)) {
@@ -66,11 +74,6 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         GL11.glPopMatrix();
     }
 
-    @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double d1, double d2, double d3, float par8) {
-        this.renderAModelAt((TileEntityGSGraveStone) tileEntity, d1, d2, d3, par8);
-    }
-
     private ModelGraveStone getGraveModel(byte graveType) {
         switch (graveType) {
             case 1:
@@ -86,7 +89,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
             case 7:
             case 8:
             case 9:
-                return new ModelSwordGrave(this);//swordGrave;
+                return swordGrave;
             case 0:
             default:
                 return verticalPlate;
@@ -128,7 +131,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         }
     }
 
-    /*
+    /**
      * Return grave direction by metadata
      */
     private static int getGraveDirection(int meta) {

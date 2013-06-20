@@ -2,14 +2,12 @@
 package GraveStone.models.block;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
 /**
  * GraveStone mod
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class ModelMemorialObelisk extends ModelGraveStone {
 
@@ -53,22 +51,6 @@ public class ModelMemorialObelisk extends ModelGraveStone {
         Pillar3.setTextureSize(256, 128);
         Pillar3.mirror = true;
         setRotation(Pillar3, 0F, 0F, 0F);
-    }
-
-    @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        super.render(entity, f, f1, f2, f3, f4, f5);
-        setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-        Plate1.render(f5);
-        Plate2.render(f5);
-        Pillar1.render(f5);
-        Pillar2.render(f5);
-        Pillar3.render(f5);
-    }
-
-    @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
     }
 
     @Override

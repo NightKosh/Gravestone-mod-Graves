@@ -1,11 +1,8 @@
 package GraveStone.models.block;
 
-import GraveStone.renderer.tileentity.TileEntityGSRenderer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
 
 /**
  * GraveStone mod
@@ -28,10 +25,8 @@ public class ModelAngelStatueMemorial extends ModelGraveStone {
     ModelRenderer LeftWing;
     ModelRenderer LeftWing2;
     ModelSmallPedestal pedestal;
-    TileEntityGSRenderer renderer;
 
-    public ModelAngelStatueMemorial(TileEntityGSRenderer renderer) {
-        this.renderer = renderer;
+    public ModelAngelStatueMemorial() {
         textureWidth = 64;
         textureHeight = 64;
 
@@ -103,33 +98,7 @@ public class ModelAngelStatueMemorial extends ModelGraveStone {
         setRotation(LeftWing2, -1.082104F, -0.1745329F, -0.3839724F);
 
 
-        pedestal = new ModelSmallPedestal(renderer);
-    }
-
-    @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        super.render(entity, f, f1, f2, f3, f4, f5);
-        setRotationAngles(f, f1, f2, f3, f4, f5);
-        
-        ModelSmallPedestal.shiftModel();
-        
-        Legs.render(f5);
-        Body.render(f5);
-        Head.render(f5);
-        RightArm.render(f5);
-        RightArm2.render(f5);
-        LeftArm.render(f5);
-        LeftArm2.render(f5);
-        RightWing.render(f5);
-        RightWing2.render(f5);
-        LeftWing.render(f5);
-        LeftWing2.render(f5);
-        
-        pedestal.renderAll();
-    }
-
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
-        //super.setRotationAngles(f, f1, f2, f3, f4, f5);
+        pedestal = new ModelSmallPedestal();
     }
 
     @Override

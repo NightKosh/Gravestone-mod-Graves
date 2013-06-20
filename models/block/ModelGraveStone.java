@@ -3,6 +3,7 @@ package GraveStone.models.block;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
 
 /**
  * GraveStone mod
@@ -21,7 +22,17 @@ public abstract class ModelGraveStone extends ModelBase  {
         model.rotateAngleZ = z;
     }
     
+    /**
+     * Custom render
+     */
     public void customRender() {
         renderAll();
-    };
+    }
+
+    /**
+     * Sets the models various rotation angles then renders the model.
+     */
+    @Override
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    }
 }

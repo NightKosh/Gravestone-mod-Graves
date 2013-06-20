@@ -26,7 +26,7 @@ public class TileEntityGSRenderer extends TileEntitySpecialRenderer {
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity tileentity, double d0, double d1, double d2, float f) {
+    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f) {
         
     }
 }
