@@ -1,22 +1,29 @@
 package GraveStone;
 
 import GraveStone.structures.GraveStoneWorldGenerator;
-import GraveStone.structures.VillageHandlerGSCemetery;
-import GraveStone.structures.VillageHandlerGSMemorial;
-import GraveStone.structures.VillageHandlerGSUndertaker;
+import GraveStone.structures.village.VillageHandlerGSCemetery;
+import GraveStone.structures.village.VillageHandlerGSMemorial;
+import GraveStone.structures.village.VillageHandlerGSUndertaker;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import net.minecraft.block.Block;
 
 /**
  * GraveStone mod
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class GraveStoneStructures {
 
     private static GraveStoneStructures instance;
+    
+    public static final int[] VALUEBLE_BLOCKS = {
+        Block.blockGold.blockID, Block.blockLapis.blockID, Block.blockRedstone.blockID,
+        Block.blockGold.blockID, Block.blockLapis.blockID, Block.blockRedstone.blockID,
+        Block.blockDiamond.blockID, Block.blockEmerald.blockID
+    };
+
 
     private GraveStoneStructures() {
         generateStructures();

@@ -1,5 +1,8 @@
 package GraveStone.structures;
 
+import GraveStone.structures.memorials.MemorialGenerator;
+import GraveStone.structures.graves.SingleGraveGenerator;
+import GraveStone.structures.catacombs.CatacombsGenerator;
 import cpw.mods.fml.common.IWorldGenerator;
 import java.util.Random;
 import net.minecraft.world.World;
@@ -10,14 +13,13 @@ import net.minecraft.world.chunk.IChunkProvider;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class GraveStoneWorldGenerator implements IWorldGenerator {
 
     protected static CatacombsGenerator catacombsGen;
     protected static MemorialGenerator memorialGen;
     protected static SingleGraveGenerator graveGen;
-    protected static final byte CATACOMBS_RANGE = 100;
+    public static final byte CATACOMBS_RANGE = 100;
 
     public GraveStoneWorldGenerator() {
         catacombsGen = new CatacombsGenerator();
