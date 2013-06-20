@@ -86,21 +86,21 @@ public class ModelSwordGrave extends ModelGraveStone {
         TileEntityGSGraveStoneRenderer.instance.bindTextureByName("%blur%/misc/glint.png");
         GL11.glEnable(GL11.GL_BLEND);
         float var20 = 0.5F;
-        GL11.glColor4f(var20, var20, var20, 1.0F);
+        GL11.glColor4f(var20, var20, var20, 1);
         GL11.glDepthFunc(GL11.GL_EQUAL);
         GL11.glDepthMask(false);
-        for (int var21 = 0; var21 < 2; ++var21) {
+        for (int var21 = 0; var21 < 2; var21++) {
             GL11.glDisable(GL11.GL_LIGHTING);
             float var22 = 0.76F;
             GL11.glColor4f(0.5F * var22, 0.25F * var22, 0.8F * var22, 1.0F);
             GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
             GL11.glMatrixMode(GL11.GL_TEXTURE);
             GL11.glLoadIdentity();
-            float var23 = tickModifier * (0.001F + (float) var21 * 0.003F) * 20.0F;
+            float var23 = tickModifier * (0.001F + (float) var21 * 0.003F) * 20;
             float var24 = 0.33333334F;
             GL11.glScalef(var24, var24, var24);
-            GL11.glRotatef(30.0F - (float) var21 * 60.0F, 0.0F, 0.0F, 1.0F);
-            GL11.glTranslatef(0.0F, var23, 0.0F);
+            GL11.glRotatef(30 - (float) var21 * 60, 0, 0, 1);
+            GL11.glTranslatef(0, var23, 0);
             GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
             renderAll();

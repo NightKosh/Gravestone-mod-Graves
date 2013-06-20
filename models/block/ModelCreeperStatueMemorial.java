@@ -114,11 +114,11 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
         GL11.glMatrixMode(GL11.GL_TEXTURE);
         for (int var21 = 0; var21 < 2; ++var21) {
             float f4 = 0.5F;
-            GL11.glColor4f(f4, f4, f4, 1.0F);
+            GL11.glColor4f(f4, f4, f4, 1);
             GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
             GL11.glMatrixMode(GL11.GL_TEXTURE);
             GL11.glLoadIdentity();
-            float var23 = tickModifier * (0.001F + (float) var21 * 0.003F) * 20.0F;
+            float var23 = tickModifier * (0.001F + (float) var21 * 0.003F) * 15;
             GL11.glTranslatef(0, var23, 0);
 
             renderCreeper();
