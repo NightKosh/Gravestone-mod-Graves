@@ -133,7 +133,7 @@ public class ModGraveStone {
         LanguageRegistry.addName(chisel, "Chisel");
 
         // chisel reciep
-        GameRegistry.addRecipe(new ItemStack(chisel), "y", "x", 'x', Item.stick, 'y', Item.ingotIron);
+        GameRegistry.addRecipe(new ItemStack(chisel), "   ", "y  ", "x  ", 'x', Item.stick, 'y', Item.ingotIron);
 
 
         // register GraveStone tile entity
