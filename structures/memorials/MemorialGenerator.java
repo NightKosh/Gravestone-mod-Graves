@@ -2,15 +2,13 @@
 package GraveStone.structures.memorials;
 
 import GraveStone.structures.catacombs.CatacombsGenerator;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Random;
 import GraveStone.GraveStoneConfig;
+import GraveStone.GraveStoneStructures;
 import GraveStone.structures.GraveStoneWorldGenerator;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 
 /**
  * GraveStone mod
@@ -20,10 +18,6 @@ import net.minecraft.world.biome.BiomeGenBase;
  */
 public class MemorialGenerator {
     
-    // list of allowed bioms for structure generator
-    public static final ArrayList DISALLOWED_BIOMS = new ArrayList(Arrays.asList(
-            BiomeGenBase.frozenOcean.biomeID, BiomeGenBase.frozenRiver.biomeID, BiomeGenBase.ocean.biomeID, 
-            BiomeGenBase.river.biomeID, BiomeGenBase.swampland.biomeID));
     // chance to generate a structure
     public static final double CHANCE = 0.05D;
     public static final short RANGE = 300;
@@ -41,7 +35,7 @@ public class MemorialGenerator {
     }
 
     protected boolean canSpawnStructureAtCoords(World world, int x, int z, double chance) {
-        return chance < CHANCE && !DISALLOWED_BIOMS.contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z);
+        return chance < CHANCE && !GraveStoneStructures.getMemorialBioms().contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z);
     }
 
     protected boolean noAnyInRange(int x, int z) {

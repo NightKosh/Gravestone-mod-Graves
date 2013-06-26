@@ -1,13 +1,11 @@
 package GraveStone.structures.catacombs;
 
 import GraveStone.GraveStoneConfig;
-import java.util.ArrayList;
-import java.util.Arrays;
+import GraveStone.GraveStoneStructures;
 import java.util.LinkedList;
 import java.util.Random;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 
 /**
  * GraveStone mod
@@ -17,9 +15,6 @@ import net.minecraft.world.biome.BiomeGenBase;
  */
 public class CatacombsGenerator {
 
-    // list of allowed bioms for structure generator
-    private static final ArrayList ALLOWED_BIOMS = new ArrayList(Arrays.asList(
-            BiomeGenBase.plains.biomeID, BiomeGenBase.forest.biomeID, BiomeGenBase.taiga.biomeID, BiomeGenBase.icePlains.biomeID));
     // chance to generate a structure
     private static final double CHANCE = 0.0005D;
     protected static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
@@ -41,7 +36,7 @@ public class CatacombsGenerator {
     }
 
     protected boolean canSpawnStructureAtCoords(World world, int x, int z, double chance) {
-        return chance < CHANCE && ALLOWED_BIOMS.contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z, 700);
+        return chance < CHANCE && GraveStoneStructures.getCatacombsBioms().contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z, 700);
     }
 
     protected boolean noAnyInRange(int x, int z, int range) {
