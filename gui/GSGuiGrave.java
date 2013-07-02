@@ -17,7 +17,6 @@ import org.lwjgl.opengl.GL11;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class GSGuiGrave extends GuiScreen {
 
@@ -35,6 +34,7 @@ public class GSGuiGrave extends GuiScreen {
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
+    @Override
     public void initGui() {
         this.buttonList.clear();
 
@@ -46,6 +46,7 @@ public class GSGuiGrave extends GuiScreen {
         entityGrave.setEditable(false);
     }
 
+    @Override
     public void actionPerformed(GuiButton button) {
         switch (button.id) {
             case 0:
@@ -74,6 +75,7 @@ public class GSGuiGrave extends GuiScreen {
      * Called when the screen is unloaded. Used to disable keyboard repeat
      * events
      */
+    @Override
     public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
 
@@ -105,6 +107,7 @@ public class GSGuiGrave extends GuiScreen {
      * Fired when a key is typed. This is the equivalent of
      * KeyListener.keyTyped(KeyEvent e).
      */
+    @Override
     protected void keyTyped(char key, int keyCode) {
         if (keyCode == 14 && graveText.length() > 0) {
             graveText.deleteCharAt(graveText.length() - 1);

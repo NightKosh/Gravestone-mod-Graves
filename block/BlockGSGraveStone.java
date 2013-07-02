@@ -532,13 +532,15 @@ public class BlockGSGraveStone extends BlockContainer {
      * Check is there sword in your inventory
      */
     private static ItemStack checkSword(ItemStack[] items) {
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] != null && (items[i].itemID == Item.swordDiamond.itemID || items[i].itemID == Item.swordGold.itemID
-                    || items[i].itemID == Item.swordIron.itemID || items[i].itemID == Item.swordStone.itemID
-                    || items[i].itemID == Item.swordWood.itemID)) {
-                ItemStack sword = items[i];
-                items[i] = null;
-                return sword;
+        if (items != null) {
+            for (int i = 0; i < items.length; i++) {
+                if (items[i] != null && (items[i].itemID == Item.swordDiamond.itemID || items[i].itemID == Item.swordGold.itemID
+                        || items[i].itemID == Item.swordIron.itemID || items[i].itemID == Item.swordStone.itemID
+                        || items[i].itemID == Item.swordWood.itemID)) {
+                    ItemStack sword = items[i];
+                    items[i] = null;
+                    return sword;
+                }
             }
         }
         return null;
