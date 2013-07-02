@@ -73,12 +73,12 @@ public class GraveStoneStructures {
     }
 
     public static void addHighlandsBioms() {
-        /*
-        CATACOMBS_BIOMS.addAll(Arrays.asList(
-                151, 153, 160, 161, 164, 165, 169, 170, 172, 176, 191));
+        if (GraveStoneConfig.useHighlandsBiomes) {
+            CATACOMBS_BIOMS.addAll(Arrays.asList(
+                    151, 153, 160, 164, 165, 169, 170, 176, 193));
 
-        MEMORIAL_BIOMS.add(Arrays.asList(157, 158, 175));
-        * */
+            MEMORIAL_BIOMS.add(Arrays.asList(157, 158, 175));
+        }
     }
 
     public static void addBiomsOPlentyBioms() {
@@ -112,9 +112,8 @@ public class GraveStoneStructures {
                 biomesoplenty.api.Biomes.shrubland.get().biomeID,
                 biomesoplenty.api.Biomes.steppe.get().biomeID,
                 biomesoplenty.api.Biomes.thicket.get().biomeID,
-                biomesoplenty.api.Biomes.woodland.get().biomeID
-        ));
-                                                                                                        
+                biomesoplenty.api.Biomes.woodland.get().biomeID));
+
         MEMORIAL_BIOMS.add(Arrays.asList(
                 biomesoplenty.api.Biomes.deadlands.get().biomeID,
                 biomesoplenty.api.Biomes.beachGravel.get().biomeID,
@@ -122,36 +121,32 @@ public class GraveStoneStructures {
                 biomesoplenty.api.Biomes.marsh.get().biomeID,
                 biomesoplenty.api.Biomes.polar.get().biomeID,
                 biomesoplenty.api.Biomes.volcano.get().biomeID,
-                biomesoplenty.api.Biomes.wasteland.get().biomeID
-        ));
+                biomesoplenty.api.Biomes.wasteland.get().biomeID));
     }
 
     public static void addExtrabiomsXLBioms() {
         CATACOMBS_BIOMS.addAll(Arrays.asList(
-                Biomes.getBiome("Autumn Woods").get().biomeID,
-                Biomes.getBiome("Birch Forest").get().biomeID,
-                Biomes.getBiome("Forested Hills").get().biomeID,
-                Biomes.getBiome("Ice Wasteland").get().biomeID,
+                Biomes.getBiome("AutumnWoods").get().biomeID,
+                Biomes.getBiome("BirchForest").get().biomeID,
+                Biomes.getBiome("ForestedHills").get().biomeID,
+                Biomes.getBiome("IceWasteland").get().biomeID,
                 Biomes.getBiome("Meadow").get().biomeID,
-                Biomes.getBiome("Pine Forest").get().biomeID,
+                Biomes.getBiome("PineForest").get().biomeID,
                 Biomes.getBiome("Savanna").get().biomeID,
                 Biomes.getBiome("Shrubland").get().biomeID,
-                Biomes.getBiome("Snow Forest").get().biomeID,
+                Biomes.getBiome("SnowyForest").get().biomeID,
                 Biomes.getBiome("Tundra").get().biomeID,
-                Biomes.getBiome("Woodlands").get().biomeID
-        ));
-        
+                Biomes.getBiome("Woodlands").get().biomeID));
+
         MEMORIAL_BIOMS.add(Arrays.asList(
                 Biomes.getBiome("Marsh").get().biomeID,
-                Biomes.getBiome("Wasteland").get().biomeID
-        ));
-        
+                Biomes.getBiome("Wasteland").get().biomeID));
     }
 
     public static ArrayList getCatacombsBioms() {
         return CATACOMBS_BIOMS;
     }
-    
+
     public static ArrayList getMemorialBioms() {
         return MEMORIAL_BIOMS;
     }

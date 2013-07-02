@@ -24,7 +24,6 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import extrabiomes.api.Api;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -36,7 +35,6 @@ import net.minecraftforge.common.MinecraftForge;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 @Mod(modid = "GraveStone", name = "GraveStone", version = "2.3.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, packetHandler = GraveStonePacketHandler.class, channels = {"GSDeathText"})
@@ -171,9 +169,14 @@ public class ModGraveStone {
         if (Loader.isModLoaded("BiomesOPlenty")) {
             GraveStoneStructures.addBiomsOPlentyBioms();
         }
-        if (Api.isExtrabiomesXLActive()) {
+        if (Loader.isModLoaded("ExtrabiomesXL")) {
             GraveStoneStructures.addExtrabiomsXLBioms();
         }
-        
+        /*
+        // adding Thaumcraft aspects
+        if (Loader.isModLoaded("ExtrabiomesXL")) {
+            GSThaumcraft.addAspects();
+        }
+        * */
     }
 }
