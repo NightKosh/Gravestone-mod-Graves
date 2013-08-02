@@ -1,5 +1,6 @@
 package GraveStone.gui;
 
+import GraveStone.Resources;
 import GraveStone.tileentity.TileEntityGSGrave;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -60,7 +61,7 @@ public class GSGuiGrave extends GuiScreen {
         drawDefaultBackground();
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.renderEngine.bindTexture("/mods/GraveStone/textures/gui/DeathMessageBackground.png");
+        mc.renderEngine.func_110577_a(Resources.GRAVE_GUI);
 
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;

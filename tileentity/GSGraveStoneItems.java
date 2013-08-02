@@ -169,39 +169,43 @@ public class GSGraveStoneItems {
         }
     }
 
-    /*
+    /**
      * Set random itesm as grave loot
      */
-    public void setRandomGraveContent(Random random) {
+    public void setRandomGraveContent(Random random, boolean isPetGrave) {
         setInventorySlotContents(0, new ItemStack(Item.bone.itemID, 1 + random.nextInt(5), 0));
         setInventorySlotContents(1, new ItemStack(Item.rottenFlesh.itemID, 1 + random.nextInt(5), 0));
-        if (tileEntity.graveType != 3 && tileEntity.graveType != 4) {
-            if (random.nextInt(50) == 0) {
-                if (random.nextInt(2) == 0) {
-                    setInventorySlotContents(2, new ItemStack(Item.skull.itemID, 1, 0));
-                } else {
-                    setInventorySlotContents(2, new ItemStack(Item.skull.itemID, 1, 2));
+        if (isPetGrave) {
+            fillPetGrave(random);
+        } else {
+            if (tileEntity.graveType != 3 && tileEntity.graveType != 4) {
+                if (random.nextInt(50) == 0) {
+                    if (random.nextInt(2) == 0) {
+                        setInventorySlotContents(2, new ItemStack(Item.skull.itemID, 1, 0));
+                    } else {
+                        setInventorySlotContents(2, new ItemStack(Item.skull.itemID, 1, 2));
+                    }
                 }
-            }
 
-            int graveType = random.nextInt(40);
-            if (tileEntity.swordType != 0 && graveType > 5) {
-                fillWarriorGrave(random, true);
-            } else if (graveType < 4) {
-                fillAdventureGrave(random);
-            } else if (graveType < 7) {
-                fillWorkerGrave(random);
-            } else if (graveType < 10) {
-                fillWizardGrave(random);
-            } else if (graveType < 12) {
-                fillMinerGrave(random);
-            } else if (graveType == 13) {
-                fillWarriorGrave(random, false);
+                int graveType = random.nextInt(40);
+                if (tileEntity.swordType != 0 && graveType > 5) {
+                    fillWarriorGrave(random, true);
+                } else if (graveType < 4) {
+                    fillAdventureGrave(random);
+                } else if (graveType < 7) {
+                    fillWorkerGrave(random);
+                } else if (graveType < 10) {
+                    fillWizardGrave(random);
+                } else if (graveType < 12) {
+                    fillMinerGrave(random);
+                } else if (graveType == 13) {
+                    fillWarriorGrave(random, false);
+                }
             }
         }
     }
 
-    /*
+    /**
      * Fill grave with some random warrior stuff
      */
     private void fillWarriorGrave(Random random, boolean isSwordGrave) {
@@ -299,8 +303,7 @@ public class GSGraveStoneItems {
         tileEntity.setDamage(swordDamage);
     }
 
-
-    /*
+    /**
      * Fill grave with some random miner stuff
      */
     private void fillMinerGrave(Random random) {
@@ -342,14 +345,14 @@ public class GSGraveStoneItems {
         }
     }
 
-    /*
+    /**
      * Fill grave with some random wizard stuff
      */
     private void fillWizardGrave(Random random) {
         switch (random.nextInt(10)) {
             case 0: // enchanted book
-                EnchantmentData data = new EnchantmentData(Enchantment.field_92090_c[random.nextInt(Enchantment.field_92090_c.length)], 1 + random.nextInt(5));
-                ItemStack items = Item.enchantedBook.func_92111_a(data);
+                EnchantmentData data = new EnchantmentData(Enchantment.enchantmentsBookList[random.nextInt(Enchantment.enchantmentsBookList.length)], 1 + random.nextInt(5));
+                ItemStack items = Item.enchantedBook.getEnchantedItemStack(data);
                 setInventorySlotContents(3, items);
                 break;
             case 1:
@@ -368,7 +371,8 @@ public class GSGraveStoneItems {
                 setInventorySlotContents(4, new ItemStack(Item.blazePowder.itemID, 1, 0));
                 break;
             case 2:
-                setInventorySlotContents(4, new ItemStack(Item.lightStoneDust.itemID, 3 + random.nextInt(8), 0));
+                //setInventorySlotContents(4, new ItemStack(Item.lightStoneDust.itemID, 3 + random.nextInt(8), 0));
+                setInventorySlotContents(4, new ItemStack(Item.glowstone.itemID, 3 + random.nextInt(8), 0));
                 break;
         }
         switch (random.nextInt(6)) {
@@ -407,7 +411,7 @@ public class GSGraveStoneItems {
 
     }
 
-    /*
+    /**
      * Fill grave with some random worker stuff
      */
     private void fillWorkerGrave(Random random) {
@@ -454,7 +458,7 @@ public class GSGraveStoneItems {
         }
     }
 
-    /*
+    /**
      * Fill grave with some random adventurer stuff
      */
     private void fillAdventureGrave(Random random) {
@@ -491,23 +495,38 @@ public class GSGraveStoneItems {
         }
     }
 
-    /*
+    /**
+     * Fill pet grave
+     */
+    private void fillPetGrave(Random random) {
+        if (random.nextInt(10) == 0) {
+            setInventorySlotContents(3, new ItemStack(Item.field_111212_ci.itemID, 1, 0));
+        }
+        if (random.nextInt(10) == 0) {
+            setInventorySlotContents(4, new ItemStack(Item.field_111214_ch.itemID, 1, 0));
+        }
+    }
+
+    /**
      * Return random damage values for items
      */
     public static int getRandomDamage(Random random) {
         return 20 + random.nextInt(100);
     }
 
-    /*
+    /**
      * Return random damage values for items with maximum damage value
+     *
+     * @param random
+     * @param maxDamage Max item damage
      */
     public static int getRandomDamage(Random random, int maxDamage) {
         return random.nextInt(maxDamage);
     }
-    /*
+
+    /**
      * Return random record
      */
-
     private ItemStack getRandomRecord(Random random) {
         switch (random.nextInt(12)) {
             case 0:
@@ -539,7 +558,7 @@ public class GSGraveStoneItems {
         }
     }
 
-    /*
+    /**
      * Return random egg
      */
     private ItemStack getRandomEgg(Random random) {

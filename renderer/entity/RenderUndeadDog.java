@@ -1,9 +1,13 @@
 package GraveStone.renderer.entity;
 
 import GraveStone.entity.EntityUndeadDog;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -11,10 +15,10 @@ import org.lwjgl.opengl.GL11;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
+@SideOnly(Side.CLIENT)
 public class RenderUndeadDog extends RenderLiving {
-    
+
     public RenderUndeadDog(ModelBase model, ModelBase model2) {
         super(model, 0.5F);
         this.setRenderPassModel(model2);
@@ -25,11 +29,9 @@ public class RenderUndeadDog extends RenderLiving {
     }
 
     protected int func_82447_a(EntityUndeadDog undeadDog, int par2, float par3) {
-        float f1;
-
         if (par2 == 0 && undeadDog.getWolfShaking()) {
-            f1 = undeadDog.getBrightness(par3) * undeadDog.getShadingWhileShaking(par3);
-            this.loadTexture(undeadDog.getTexture());
+            float f1 = undeadDog.getBrightness(par3) * undeadDog.getShadingWhileShaking(par3);
+            this.func_110776_a(undeadDog.getTexture());
             GL11.glColor3f(f1, f1, f1);
             return 1;
         } else {
@@ -40,14 +42,21 @@ public class RenderUndeadDog extends RenderLiving {
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntityLiving entityLiving, int par2, float par3) {
+    @Override
+    protected int shouldRenderPass(EntityLivingBase entityLiving, int par2, float par3) {
         return this.func_82447_a((EntityUndeadDog) entityLiving, par2, par3);
     }
 
     /**
      * Defines what float the third param in setRotationAngles of ModelBase is
      */
-    protected float handleRotationFloat(EntityLiving entityLiving, float par2) {
+    @Override
+    protected float handleRotationFloat(EntityLivingBase entityLiving, float par2) {
         return this.getTailRotation((EntityUndeadDog) entityLiving, par2);
+    }
+
+    @Override
+    protected ResourceLocation func_110775_a(Entity entity) {
+        return ((EntityUndeadDog) entity).getTexture();
     }
 }

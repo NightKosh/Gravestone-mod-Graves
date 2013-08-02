@@ -1,5 +1,6 @@
 package GraveStone.renderer.tileentity;
 
+import GraveStone.Resources;
 import GraveStone.models.block.ModelAngelStatueMemorial;
 import GraveStone.models.block.ModelCatStatueMemorial;
 import GraveStone.models.block.ModelCreeperStatueMemorial;
@@ -10,6 +11,8 @@ import GraveStone.models.block.ModelMemorialObelisk;
 import GraveStone.models.block.ModelSteveStatueMemorial;
 import GraveStone.models.block.ModelVillagerMemorial;
 import GraveStone.tileentity.TileEntityGSMemorial;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
@@ -19,6 +22,7 @@ import org.lwjgl.opengl.GL11;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
+@SideOnly(Side.CLIENT)
 public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
 
     protected static ModelGraveStone cross = new ModelMemorialCross();
@@ -111,29 +115,29 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
 
     private void getMemorialTexture(int memorialType) {
         switch (memorialType) {
-            case 0: // CROSS
-                bindTextureByName("/mods/GraveStone/textures/memorials/ModelMemorialCross.png");
+            case 0: // MEMORIAL_CROSS
+                bindTextureByName(Resources.MEMORIAL_CROSS);
                 break;
-            case 1: // OBELISK
-                bindTextureByName("/mods/GraveStone/textures/memorials/ModelMemorialObelisk.png");
+            case 1: // MEMORIAL_OBELISK
+                bindTextureByName(Resources.MEMORIAL_OBELISK);
                 break;
-            case 2: // PLAYER_STATUE
-                bindTextureByName("/mods/GraveStone/textures/memorials/ModelSteveStatueMemorial.png");
+            case 2: // STEVE_STATUE_MEMORIAL
+                bindTextureByName(Resources.STEVE_STATUE_MEMORIAL);
                 break;
-            case 3: // VILLAGER_STATUE
-                bindTextureByName("/mods/GraveStone/textures/memorials/ModelVillagerStatueMemorial.png");
+            case 3: // VILLAGER_STATUE_MEMORIAL
+                bindTextureByName(Resources.VILLAGER_STATUE_MEMORIAL);
                 break;
-            case 4: // ANGEL_STAUTE
-                bindTextureByName("/mods/GraveStone/textures/memorials/ModelAngelStatueMemorial.png");
+            case 4: // ANGEL_STAUTE_MEMORIAL
+                bindTextureByName(Resources.ANGEL_STAUTE_MEMORIAL);
                 break;
-            case 5: // DOG_STATUE
-                bindTextureByName("/mods/GraveStone/textures/memorials/ModelDogStatueMemorial.png");
+            case 5: // DOG_STATUE_MEMORIAL
+                bindTextureByName(Resources.DOG_STATUE_MEMORIAL);
                 break;
-            case 6: // CAT_STAUTE
-                bindTextureByName("/mods/GraveStone/textures/memorials/ModelCatStatueMemorial.png");
+            case 6: // CAT_STAUTE_MEMORIAL
+                bindTextureByName(Resources.CAT_STAUTE_MEMORIAL);
                 break;
-            case 7: //CREEPER_STATUE
-                bindTextureByName("/mods/GraveStone/textures/memorials/ModelCreeperStatueMemorial.png");
+            case 7: // CREEPER_STATUE_MEMORIAL
+                bindTextureByName(Resources.CREEPER_STATUE_MEMORIAL);
                 break;
         }
     }

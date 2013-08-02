@@ -14,7 +14,11 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public abstract class GraveGenerationHelper {
+public class GraveGenerationHelper {
+    
+    private GraveGenerationHelper() {
+        
+    }
     
     /**
      * Place component
@@ -36,7 +40,7 @@ public abstract class GraveGenerationHelper {
                 tileEntity.setDamage(GSGraveStoneItems.getRandomDamage(random, 50));
             }
             tileEntity.setGraveType(graveType);
-            tileEntity.setGraveContent(random);
+            tileEntity.setGraveContent(random, BlockGSGraveStone.isPetGrave(graveType));
         }
     }
 

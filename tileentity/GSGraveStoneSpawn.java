@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingData;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -18,7 +19,6 @@ import net.minecraft.world.World;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class GSGraveStoneSpawn {
 
@@ -187,7 +187,8 @@ public class GSGraveStoneSpawn {
 
             entity.readFromNBT(nbt);
         } else if (entity instanceof EntityLiving && entity.worldObj != null) {
-            ((EntityLiving) entity).initCreature();
+            //((EntityLiving) entity).initCreature();
+            ((EntityLiving) entity).func_110161_a((EntityLivingData) null);
         }
     }
 

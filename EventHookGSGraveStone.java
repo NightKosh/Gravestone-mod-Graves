@@ -3,7 +3,7 @@ package GraveStone;
 import GraveStone.block.BlockGSGraveStone;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityTameable;
@@ -20,7 +20,6 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class EventHookGSGraveStone {
 
@@ -63,7 +62,8 @@ public class EventHookGSGraveStone {
 
     private void createGrave(Entity entity, LivingDeathEvent event, ItemStack[] items, int age, byte entityType) {
         BlockGSGraveStone.createOnDeath(entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
-                event.source.getDeathMessage((EntityLiving) entity), MathHelper.floor_float(entity.rotationYaw), items, age, entityType);
+                //event.source.getDeathMessage((EntityLivingBase) entity), MathHelper.floor_float(entity.rotationYaw), items, age, entityType);
+                event.source.getDeathMessage((EntityLivingBase) entity).toString(), MathHelper.floor_float(entity.rotationYaw), items, age, entityType);
     }
 
     private void createPetGrave(Entity entity, LivingDeathEvent event) {

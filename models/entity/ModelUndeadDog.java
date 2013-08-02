@@ -6,7 +6,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 /**
@@ -14,7 +14,6 @@ import net.minecraft.util.MathHelper;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 @SideOnly(Side.CLIENT)
 public class ModelUndeadDog extends ModelBase {
@@ -87,6 +86,7 @@ public class ModelUndeadDog extends ModelBase {
     /**
      * Sets the models various rotation angles then renders the model.
      */
+    @Override
     public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         super.render(entity, par2, par3, par4, par5, par6, par7);
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
@@ -106,7 +106,8 @@ public class ModelUndeadDog extends ModelBase {
      * float params here are the same second and third as in the
      * setRotationAngles method.
      */
-    public void setLivingAnimations(EntityLiving entityLiving, float par2, float par3, float par4) {
+    @Override
+    public void setLivingAnimations(EntityLivingBase entityLiving, float par2, float par3, float par4) {
         EntityUndeadDog undeadDog = (EntityUndeadDog) entityLiving;
 
         this.wolfTail.rotateAngleY = MathHelper.cos(par2 * 0.6662F) * 1.4F * par3;
@@ -139,8 +140,9 @@ public class ModelUndeadDog extends ModelBase {
      * the time(so that arms and legs swing back and forth) and par2 represents
      * how "far" arms and legs can swing at most.
      */
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
-        super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
+    @Override
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity) {
+        super.setRotationAngles(par1, par2, par3, par4, par5, par6, entity);
         this.wolfHeadMain.rotateAngleX = par5 / (180F / (float) Math.PI);
         this.wolfHeadMain.rotateAngleY = par4 / (180F / (float) Math.PI);
         this.wolfTail.rotateAngleX = par3;

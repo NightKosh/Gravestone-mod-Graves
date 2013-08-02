@@ -2,7 +2,6 @@
 package GraveStone.structures.village;
 
 import GraveStone.GraveStoneConfig;
-import GraveStone.block.BlockGSGraveStone;
 import GraveStone.block.BlockGSMemorial;
 import GraveStone.tileentity.TileEntityGSMemorial;
 import java.util.List;

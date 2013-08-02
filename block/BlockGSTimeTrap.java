@@ -1,10 +1,10 @@
 package GraveStone.block;
 
 import GraveStone.ModGraveStone;
+import GraveStone.Resources;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -14,7 +14,6 @@ import net.minecraft.world.World;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class BlockGSTimeTrap extends Block {
     
@@ -26,11 +25,7 @@ public class BlockGSTimeTrap extends Block {
         this.setHardness(4.5F);
         this.setResistance(5F);
         this.setCreativeTab(ModGraveStone.creativeTab);
-    }
-    
-    @Override
-    public void registerIcons(IconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("netherBrick");
+        this.func_111022_d(Resources.TIME_TRAP);
     }
 
     /**

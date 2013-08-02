@@ -46,9 +46,9 @@ public abstract class TileEntityGSGrave extends TileEntity {
         nbtTag.setByte("GraveType", graveType);
     }
 
-    public void setGraveContent(Random random) {
+    public void setGraveContent(Random random, boolean isPetGrave) {
         gSDeathText.setRandomDeathText(random, graveType, false);
-        gSItems.setRandomGraveContent(random);
+        gSItems.setRandomGraveContent(random, isPetGrave);
         setRandomAge();
     }
 

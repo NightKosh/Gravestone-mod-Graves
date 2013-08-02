@@ -17,13 +17,14 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -34,7 +35,6 @@ import net.minecraftforge.common.ForgeDirection;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class BlockGSGraveStone extends BlockContainer {
 
@@ -60,18 +60,14 @@ public class BlockGSGraveStone extends BlockContainer {
         this.setHardness(4.5F);
         this.setResistance(5F);
         this.setCreativeTab(ModGraveStone.creativeTab);
-    }
-
-    @Override
-    public void registerIcons(IconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("stone");
+        this.func_111022_d("stone");
     }
 
     /**
      * Called when the block is placed in the world
      */
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving player, ItemStack itemStack) {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack itemStack) {
         replaceGround(world, x, y - 1, z);
 
         int direction = MathHelper.floor_float(player.rotationYaw);
@@ -448,7 +444,8 @@ public class BlockGSGraveStone extends BlockContainer {
                 String deathText = entity.getDeathText();
 
                 if (!deathText.equals("")) {
-                    entityPlayer.sendChatToPlayer(deathText);
+                    entityPlayer.sendChatToPlayer(ChatMessageComponent.func_111066_d(deathText));
+                    //entityPlayer.sendChatToPlayer(deathText);
                     if (entity.getAge() != -1) {
                         //entityPlayer.sendChatToPlayer("Had lived " + entity.getAge() + " days");
                     }
@@ -596,6 +593,15 @@ public class BlockGSGraveStone extends BlockContainer {
      */
     public static boolean isSwordGrave(byte graveType) {
         return Arrays.binarySearch(SWORD_GRAVES, graveType) != -1;
+    }
+    
+    /**
+     * Check is grave - pet grave
+     *
+     * @param graveType Grave type
+     */
+    public static boolean isPetGrave(byte graveType) {
+        return Arrays.binarySearch(PETS_GRAVES, graveType) != -1;
     }
 
     public static byte graveTypeToSwordType(byte graveType) {

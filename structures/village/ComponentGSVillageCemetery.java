@@ -17,7 +17,6 @@ import net.minecraft.world.gen.structure.StructureComponent;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class ComponentGSVillageCemetery extends ComponentVillage {
 
@@ -126,7 +125,7 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
             TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(xCoord, yCoord, zCoord);
             if (tileEntity != null) {
                 tileEntity.setGraveType(graveType);
-                tileEntity.setGraveContent(random);
+                tileEntity.setGraveContent(random, false);
             }
         }
     }

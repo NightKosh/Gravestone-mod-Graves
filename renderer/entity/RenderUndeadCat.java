@@ -7,6 +7,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -14,10 +15,9 @@ import org.lwjgl.opengl.GL11;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 @SideOnly(Side.CLIENT)
-public class RenderUndeadCat extends RenderLiving {
+public class RenderUndeadCat extends RenderLiving {    
 
     public RenderUndeadCat(ModelBase model, float par2) {
         super(model, par2);
@@ -44,6 +44,7 @@ public class RenderUndeadCat extends RenderLiving {
         this.preRenderUndeadCat((EntityUndeadCat) entityLiving, par2);
     }
 
+    @Override
     public void doRenderLiving(EntityLiving entityLiving, double par2, double par4, double par6, float par8, float par9) {
         this.renderLivingUndeadCat((EntityUndeadCat) entityLiving, par2, par4, par6, par8, par9);
     }
@@ -54,7 +55,13 @@ public class RenderUndeadCat extends RenderLiving {
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
+    @Override
     public void doRender(Entity entity, double par2, double par4, double par6, float par8, float par9) {
         this.renderLivingUndeadCat((EntityUndeadCat) entity, par2, par4, par6, par8, par9);
+    }
+
+    @Override
+    protected ResourceLocation func_110775_a(Entity entity) {
+        return ((EntityUndeadCat) entity).getTexture();
     }
 }

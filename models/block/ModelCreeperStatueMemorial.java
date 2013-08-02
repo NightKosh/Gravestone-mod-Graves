@@ -1,5 +1,6 @@
 package GraveStone.models.block;
 
+import GraveStone.Resources;
 import GraveStone.renderer.tileentity.TileEntityGSMemorialRenderer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -108,7 +109,7 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
         float scale = 1.2F;
         GL11.glScalef(scale, scale, scale);
         
-        TileEntityGSMemorialRenderer.instance.bindTextureByName("/armor/power.png");
+        TileEntityGSMemorialRenderer.instance.bindTextureByName(Resources.CREEPER_AURA);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDepthMask(true);
         GL11.glMatrixMode(GL11.GL_TEXTURE);

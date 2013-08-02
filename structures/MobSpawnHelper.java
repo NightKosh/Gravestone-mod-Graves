@@ -12,8 +12,12 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public abstract class MobSpawnHelper {
+public class MobSpawnHelper {
 
+    private MobSpawnHelper() {
+        
+    }
+    
     /**
      * Spawn bats
      * @param world World object

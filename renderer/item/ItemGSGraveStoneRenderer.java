@@ -1,6 +1,8 @@
 package GraveStone.renderer.item;
 
 import GraveStone.tileentity.TileEntityGSGraveStone;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
@@ -12,8 +14,8 @@ import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
+@SideOnly(Side.CLIENT)
 public class ItemGSGraveStoneRenderer implements IItemRenderer {
 
     public ItemGSGraveStoneRenderer() {

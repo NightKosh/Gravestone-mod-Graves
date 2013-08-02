@@ -16,7 +16,6 @@ import net.minecraft.world.gen.structure.StructureComponent;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class ComponentGSVillageUndertaker extends ComponentVillage {
 
@@ -37,6 +36,7 @@ public class ComponentGSVillageUndertaker extends ComponentVillage {
      * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at
      * the end, it adds Fences...
      */
+    @Override
     public boolean addComponentParts(World world, Random random, StructureBoundingBox boundingBox) {
         if (this.averageGroundLevel < 0) {
             this.averageGroundLevel = this.getAverageGroundLevel(world, boundingBox);
@@ -118,6 +118,7 @@ public class ComponentGSVillageUndertaker extends ComponentVillage {
     /**
      * Returns the villager type to spawn in this component, based on the number of villagers already spawned.
      */
+    @Override
     protected int getVillagerType(int par1) {
         return 385;
     }

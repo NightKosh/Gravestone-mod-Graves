@@ -15,6 +15,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 /**
@@ -22,10 +23,11 @@ import net.minecraft.world.World;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public abstract class EntityUndeadPet extends EntityMob {
 
+    protected ResourceLocation texture = null;
+    
     public EntityUndeadPet(World world) {
         super(world);
         this.getNavigator().setAvoidsWater(true);
@@ -34,20 +36,21 @@ public abstract class EntityUndeadPet extends EntityMob {
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 16.0F, 0, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
     }
 
-    @SideOnly(Side.CLIENT)
     /**
      * Returns the texture's file path as a String.
      */
-    public String getTexture() {
-        return this.texture;
+    @SideOnly(Side.CLIENT)
+    public ResourceLocation getTexture() {
+        return texture;
     }
     
     /**
      * Determines if an entity can be despawned, used on idle far away entities
      */
+    @Override
     protected boolean canDespawn() {
         return true;
     }
@@ -55,10 +58,12 @@ public abstract class EntityUndeadPet extends EntityMob {
     /**
      * Returns true if the newer Entity AI code should be run
      */
+    @Override
     public boolean isAIEnabled() {
         return true;
     }
 
+    @Override
     public boolean attackEntityAsMob(Entity entity) {
         return entity.attackEntityFrom(DamageSource.causeMobDamage(this), 3);
     }
@@ -67,6 +72,7 @@ public abstract class EntityUndeadPet extends EntityMob {
      * Drop 0-2 items of this living's type. @param par1 - Whether this entity has recently been hit by a player. @param
      * par2 - Level of Looting used to kill this mob.
      */
+    @Override
     protected void dropFewItems(boolean par1, int par2) {
     }
 
@@ -74,6 +80,7 @@ public abstract class EntityUndeadPet extends EntityMob {
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate() {
         if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
             float f = this.getBrightness(1.0F);
@@ -89,6 +96,7 @@ public abstract class EntityUndeadPet extends EntityMob {
     /**
      * Get this Entity's EnumCreatureAttribute
      */
+    @Override
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.UNDEAD;
     }

@@ -14,7 +14,6 @@ import net.minecraft.world.biome.BiomeGenBase;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class GraveStoneEntity {
 

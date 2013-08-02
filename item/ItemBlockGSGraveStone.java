@@ -18,7 +18,6 @@ import net.minecraft.world.World;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class ItemBlockGSGraveStone extends ItemBlock {
 
@@ -30,7 +29,7 @@ public class ItemBlockGSGraveStone extends ItemBlock {
 
     @Override
     public int getMetadata(int damageValue) {
-        return 0;//damageValue;
+        return 0;
     }
 
     @Override

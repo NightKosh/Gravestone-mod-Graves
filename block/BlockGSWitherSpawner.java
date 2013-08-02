@@ -1,9 +1,9 @@
 package GraveStone.block;
 
 import GraveStone.ModGraveStone;
+import GraveStone.Resources;
 import GraveStone.tileentity.TileEntityGSWitherSpawner;
 import net.minecraft.block.BlockMobSpawner;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -12,7 +12,6 @@ import net.minecraft.world.World;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class BlockGSWitherSpawner extends BlockMobSpawner {
 
@@ -24,11 +23,7 @@ public class BlockGSWitherSpawner extends BlockMobSpawner {
         this.setStepSound(soundMetalFootstep);
         this.disableStats();
         this.setCreativeTab(ModGraveStone.creativeTab);
-    }
-
-    @Override
-    public void registerIcons(IconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("mobSpawner");
+        this.func_111022_d(Resources.WITHER_SPAWNER);
     }
 
     /**

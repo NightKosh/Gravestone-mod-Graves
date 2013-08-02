@@ -1,6 +1,9 @@
 package GraveStone.models.block;
 
+import GraveStone.Resources;
 import GraveStone.renderer.tileentity.TileEntityGSGraveStoneRenderer;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import org.lwjgl.opengl.GL11;
@@ -10,8 +13,8 @@ import org.lwjgl.opengl.GL11;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
+@SideOnly(Side.CLIENT)
 public class ModelSwordGrave extends ModelGraveStone {
 
     ModelRenderer Blade1;
@@ -83,7 +86,7 @@ public class ModelSwordGrave extends ModelGraveStone {
         float tickModifier = (float) (Minecraft.getSystemTime() % 3000L) / 3000.0F * 48.0F;
 
         
-        TileEntityGSGraveStoneRenderer.instance.bindTextureByName("%blur%/misc/glint.png");
+        TileEntityGSGraveStoneRenderer.instance.bindTextureByName(Resources.SWORD_AURA);
         GL11.glEnable(GL11.GL_BLEND);
         float var20 = 0.5F;
         GL11.glColor4f(var20, var20, var20, 1);

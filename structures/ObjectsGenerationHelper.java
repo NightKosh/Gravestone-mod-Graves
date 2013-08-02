@@ -18,7 +18,11 @@ import net.minecraftforge.common.ChestGenHooks;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public abstract class ObjectsGenerationHelper {
+public class ObjectsGenerationHelper {
+    
+    private ObjectsGenerationHelper() {
+        
+    }
     
     private static final int[] POTIONS = {32764, 32692};
     
@@ -121,7 +125,7 @@ public abstract class ObjectsGenerationHelper {
             TileEntityMobSpawner tileEntity = (TileEntityMobSpawner) world.getBlockTileEntity(x, y, z);
 
             if (tileEntity != null) {
-                tileEntity.func_98049_a().setMobID(spawnerType);
+                tileEntity.getSpawnerLogic().setMobID(spawnerType);
             }
         }
     }

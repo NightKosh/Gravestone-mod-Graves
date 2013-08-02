@@ -1,5 +1,6 @@
 package GraveStone.models.block;
 
+import GraveStone.Resources;
 import GraveStone.renderer.tileentity.TileEntityGSMemorialRenderer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -146,7 +147,7 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
         float scale = 1.1F;
         GL11.glScalef(scale, scale, scale);
         
-        TileEntityGSMemorialRenderer.instance.bindTextureByName("/mods/GraveStone/textures/memorials/ModelSteveStatueMemorialArmor.png");
+        TileEntityGSMemorialRenderer.instance.bindTextureByName(Resources.STEVE_ARMOR);
         renderSteve();
     }
 }

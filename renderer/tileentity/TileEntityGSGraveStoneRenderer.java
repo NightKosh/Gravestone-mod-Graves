@@ -1,5 +1,6 @@
 package GraveStone.renderer.tileentity;
 
+import GraveStone.Resources;
 import GraveStone.block.BlockGSGraveStone;
 import GraveStone.models.block.ModelCatStatueGraveStone;
 import GraveStone.models.block.ModelCrossGraveStone;
@@ -9,6 +10,8 @@ import GraveStone.models.block.ModelVerticalPlateGraveStone;
 import GraveStone.models.block.ModelHorisontalPlateGraveStone;
 import GraveStone.models.block.ModelSwordGrave;
 import GraveStone.tileentity.TileEntityGSGraveStone;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
@@ -17,8 +20,8 @@ import org.lwjgl.opengl.GL11;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
+@SideOnly(Side.CLIENT)
 public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
 
     private static ModelGraveStone verticalPlate = new ModelVerticalPlateGraveStone();
@@ -99,34 +102,34 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
     private void getGraveTexture(byte graveType) {
         switch (graveType) {
             case 0: // STONE_VERTICAL_PLATE
-                bindTextureByName("/mods/GraveStone/textures/graves/ModelVerticalPlateGraveStone.png");
+                bindTextureByName(Resources.GRAVE_VERTICAL_PLATE);
                 break;
             case 1: // STONE_CROSS
-                bindTextureByName("/mods/GraveStone/textures/graves/ModelCrossGraveStone.png");
+                bindTextureByName(Resources.GRAVE_CROSS);
                 break;
             case 2: // STONE_HORISONTAL_PLATE
-                bindTextureByName("/mods/GraveStone/textures/graves/ModelHorisontalPlateGraveStone.png");
+                bindTextureByName(Resources.GRAVE_HORISONTAL_PLATE);
                 break;
             case 3: // DOG_STATUE
-                bindTextureByName("/mods/GraveStone/textures/graves/ModelDogStatueGraveStone.png");
+                bindTextureByName(Resources.DOG_STATUE_GRAVE);
                 break;
             case 4: // CAT_STATUE
-                bindTextureByName("/mods/GraveStone/textures/graves/ModelCatStatueGraveStone.png");
+                bindTextureByName(Resources.CAT_STATUE_GRAVE);
                 break;
             case 5: // WOODEN_SWORD_GRAVE
-                bindTextureByName("/mods/GraveStone/textures/graves/WoodenSwordGrave.png");
+                bindTextureByName(Resources.WOODEN_SWORD_GRAVE);
                 break;
             case 6: // STONE_SWORD_GRAVE
-                bindTextureByName("/mods/GraveStone/textures/graves/StoneSwordGrave.png");
+                bindTextureByName(Resources.STONE_SWORD_GRAVE);
                 break;
             case 7: // IRON_SWORD_GRAVE
-                bindTextureByName("/mods/GraveStone/textures/graves/IronSwordGrave.png");
+                bindTextureByName(Resources.IRON_SWORD_GRAVE);
                 break;
             case 8: // GOLDEN_SWORD_GRAVE
-                bindTextureByName("/mods/GraveStone/textures/graves/GoldenSwordGrave.png");
+                bindTextureByName(Resources.GOLDEN_SWORD_GRAVE);
                 break;
             case 9: // DIAMOND_SWORD_GRAVE
-                bindTextureByName("/mods/GraveStone/textures/graves/DiamondSwordGrave.png");
+                bindTextureByName(Resources.DIAMOND_SWORD_GRAVE);
                 break;
         }
     }

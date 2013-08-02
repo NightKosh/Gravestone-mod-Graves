@@ -11,7 +11,6 @@ import net.minecraft.world.World;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public abstract class EntityUndeadDog extends EntityUndeadPet  {
 
@@ -29,17 +28,19 @@ public abstract class EntityUndeadDog extends EntityUndeadPet  {
     public EntityUndeadDog(World world) {
         super(world);
     }
-
+    
     /**
      * main AI tick function, replaces updateEntityActionState
      */
+    @Override
     protected void updateAITick() {
-        this.dataWatcher.updateObject(18, Integer.valueOf(this.getHealth()));
+        this.dataWatcher.updateObject(18, Float.valueOf(this.func_110143_aJ()));
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(18, new Integer(this.getHealth()));
+        this.dataWatcher.addObject(18, new Float(this.func_110143_aJ()));
         this.dataWatcher.addObject(19, new Byte((byte) 0));
     }
     
@@ -48,6 +49,7 @@ public abstract class EntityUndeadDog extends EntityUndeadPet  {
      * required. For example, zombies and skeletons use this to react to
      * sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
@@ -62,6 +64,7 @@ public abstract class EntityUndeadDog extends EntityUndeadPet  {
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         super.onUpdate();
         this.field_70924_f = this.field_70926_e;
@@ -82,11 +85,11 @@ public abstract class EntityUndeadDog extends EntityUndeadPet  {
         return this.isShaking;
     }
 
-    @SideOnly(Side.CLIENT)
     /**
      * Used when calculating the amount of shading to apply while the wolf is
      * shaking.
      */
+    @SideOnly(Side.CLIENT)
     public float getShadingWhileShaking(float par1) {
         return 0.75F + (this.prevTimeWolfIsShaking + (this.timeWolfIsShaking - this.prevTimeWolfIsShaking) * par1) / 2.0F * 0.25F;
     }
@@ -109,10 +112,12 @@ public abstract class EntityUndeadDog extends EntityUndeadPet  {
         return (this.field_70924_f + (this.field_70926_e - this.field_70924_f) * par1) * 0.15F * (float) Math.PI;
     }
 
+    @Override
     public float getEyeHeight() {
         return this.height * 0.8F;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void handleHealthUpdate(byte par1) {
         if (par1 == 8) {
@@ -126,12 +131,10 @@ public abstract class EntityUndeadDog extends EntityUndeadPet  {
 
     @SideOnly(Side.CLIENT)
     public float getTailRotation() {
-        return (0.55F - (float) (20 - this.dataWatcher.getWatchableObjectInt(18)) * 0.02F) * (float) Math.PI;
+        return (0.55F - (float) (20 - this.dataWatcher.func_111145_d(18)) * 0.02F) * (float) Math.PI;
     }
 
     public void func_70918_i(boolean par1) {
-        byte b0 = this.dataWatcher.getWatchableObjectByte(19);
-
         if (par1) {
             this.dataWatcher.updateObject(19, Byte.valueOf((byte) 1));
         } else {

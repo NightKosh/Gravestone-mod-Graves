@@ -36,7 +36,7 @@ import net.minecraftforge.common.MinecraftForge;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-@Mod(modid = "GraveStone", name = "GraveStone", version = "2.3.0")
+@Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, packetHandler = GraveStonePacketHandler.class, channels = {"GSDeathText"})
 public class ModGraveStone {
 
@@ -83,7 +83,7 @@ public class ModGraveStone {
         };
         LanguageRegistry.instance().addStringLocalization("itemGroup.tabGraveStone", "en_US", "Gravestone");
 
-        // create gravestone
+        // gravestone
         graveStone = new BlockGSGraveStone(GraveStoneConfig.graveStoneID);
         GameRegistry.registerBlock(graveStone, ItemBlockGSGraveStone.class);
         for (byte i = 0; i < BlockGSGraveStone.NAMES.length; i++) {
@@ -99,20 +99,20 @@ public class ModGraveStone {
         MinecraftForge.setBlockHarvestLevel(graveStone, "pickaxe", 1);
 
 
-        // create wither spawner
+        // wither spawner
         witherSpawner = new BlockGSWitherSpawner(GraveStoneConfig.witherSpawnerID);
         GameRegistry.registerBlock(witherSpawner, "GSWitherSpawner");
         LanguageRegistry.addName(witherSpawner, "Wither spawner");
         MinecraftForge.setBlockHarvestLevel(witherSpawner, "pickaxe", 1);
 
 
-        // create time trap
+        // time trap
         timeTrap = new BlockGSTimeTrap(GraveStoneConfig.timeTrapID);
         GameRegistry.registerBlock(timeTrap, "GSTimeTrap");
         LanguageRegistry.addName(timeTrap, "Night stone");
         MinecraftForge.setBlockHarvestLevel(timeTrap, "pickaxe", 1);
 
-        // create memorial
+        // memorials
         memorial = new BlockGSMemorial(GraveStoneConfig.memorialID);
         GameRegistry.registerBlock(memorial, "GSMemorial");
         LanguageRegistry.addName(memorial, "Memorial");
@@ -126,7 +126,7 @@ public class ModGraveStone {
         }
         MinecraftForge.setBlockHarvestLevel(memorial, "pickaxe", 2);
 
-        // create chisel
+        // chisel
         chisel = new ItemGSChisel(GraveStoneConfig.chiselId);
         LanguageRegistry.addName(chisel, "Chisel");
 

@@ -10,7 +10,11 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public abstract class BoundingBoxHelper {
+public class BoundingBoxHelper {
+    
+    private BoundingBoxHelper() {
+        
+    }
     
     /**
      * Return bounding Box for structure component

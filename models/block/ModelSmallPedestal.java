@@ -1,6 +1,9 @@
 package GraveStone.models.block;
 
+import GraveStone.Resources;
 import GraveStone.renderer.tileentity.TileEntityGSMemorialRenderer;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
 import org.lwjgl.opengl.GL11;
 
@@ -10,6 +13,7 @@ import org.lwjgl.opengl.GL11;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
+@SideOnly(Side.CLIENT)
 public class ModelSmallPedestal extends ModelGraveStone {
 
     protected ModelRenderer Pedestal;
@@ -38,7 +42,7 @@ public class ModelSmallPedestal extends ModelGraveStone {
         unshiftModel();
 
         float par7 = 0.0625F;
-        TileEntityGSMemorialRenderer.instance.bindTextureByName("/mods/GraveStone/textures/memorials/ModelSmallPedestal.png");
+        TileEntityGSMemorialRenderer.instance.bindTextureByName(Resources.SMALL_PEDESTAL);
 
         Pedestal.render(par7);
         Pedestal2.render(par7);

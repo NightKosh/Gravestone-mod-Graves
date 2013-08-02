@@ -8,7 +8,6 @@ import net.minecraft.world.World;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public abstract class EntityUndeadCat extends EntityUndeadPet {
     
@@ -17,6 +16,7 @@ public abstract class EntityUndeadCat extends EntityUndeadPet {
         this.setSize(0.6F, 0.8F);
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(18, Byte.valueOf((byte) 0));
@@ -25,9 +25,10 @@ public abstract class EntityUndeadCat extends EntityUndeadPet {
     /**
      * main AI tick function, replaces updateEntityActionState
      */
+    @Override
     public void updateAITick() {
         if (this.getMoveHelper().isUpdating()) {
-            float f = this.getMoveHelper().getSpeed();
+            double f = this.getMoveHelper().getSpeed();
 
             if (f == 0.18F) {
                 this.setSneaking(true);
@@ -48,6 +49,7 @@ public abstract class EntityUndeadCat extends EntityUndeadPet {
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
+    @Override
     protected void fall(float par1) {
     }
 }

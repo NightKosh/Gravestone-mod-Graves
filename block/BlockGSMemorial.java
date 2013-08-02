@@ -13,12 +13,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -28,7 +29,6 @@ import net.minecraft.world.World;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class BlockGSMemorial extends BlockContainer {
 
@@ -53,18 +53,14 @@ public class BlockGSMemorial extends BlockContainer {
         this.setHardness(4.5F);
         this.setResistance(5F);
         this.setCreativeTab(ModGraveStone.creativeTab);
-    }
-
-    @Override
-    public void registerIcons(IconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("stone");
+        this.func_111022_d("stone");
     }
 
     /**
      * Called when the block is placed in the world
      */
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving player, ItemStack itemStack) {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack itemStack) {
         int direction = MathHelper.floor_float(player.rotationYaw);
         if (direction < 0) {
             direction = 360 + direction;
@@ -208,7 +204,8 @@ public class BlockGSMemorial extends BlockContainer {
                 String deathText = entity.getDeathText();
 
                 if (!deathText.equals("")) {
-                    entityPlayer.sendChatToPlayer(deathText);
+                    entityPlayer.sendChatToPlayer(ChatMessageComponent.func_111066_d(deathText));
+                    //entityPlayer.sendChatToPlayer(deathText);
                 }
             }
         }

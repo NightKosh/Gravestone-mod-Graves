@@ -2,6 +2,7 @@ package GraveStone.item;
 
 import GraveStone.GraveStoneConfig;
 import GraveStone.ModGraveStone;
+import GraveStone.Resources;
 import GraveStone.tileentity.TileEntityGSGrave;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -19,7 +20,6 @@ import net.minecraftforge.common.MinecraftForge;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class ItemGSChisel extends ItemTool {
 
@@ -31,14 +31,9 @@ public class ItemGSChisel extends ItemTool {
         setUnlocalizedName("Chisel");
         setMaxDamage(50);
         MinecraftForge.setToolClass(this, "chisel", 1);
+        this.func_111206_d(Resources.CHISEL);
     }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister register) {
-        this.itemIcon = register.registerIcon("GraveStone:chisel");
-    }
-
+    
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */

@@ -1,6 +1,8 @@
 
 package GraveStone.models.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelRenderer;
 
 /**
@@ -8,8 +10,8 @@ import net.minecraft.client.model.ModelRenderer;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
+@SideOnly(Side.CLIENT)
 public class ModelMemorialCross extends ModelGraveStone {
 
     ModelRenderer BottomPlate;
