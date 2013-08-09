@@ -40,7 +40,7 @@ public class ComponentGSMemorial extends ComponentGraveStone {
 
         int groundID;
         BiomeGenBase biom = world.getBiomeGenForCoords(getXWithOffset(0, 0), getZWithOffset(0, 0));
-        if (biom.equals(BiomeGenBase.desert) || biom.equals(BiomeGenBase.desertHills)) {
+        if (biom.biomeID == BiomeGenBase.desert.biomeID || biom.biomeID == BiomeGenBase.desertHills.biomeID || biom.biomeID == BiomeGenBase.beach.biomeID) {
             groundID = Block.sand.blockID;
         } else {
             groundID = Block.grass.blockID;
