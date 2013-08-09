@@ -10,7 +10,6 @@ import extrabiomes.api.Biomes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import net.minecraft.block.Block;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 
 /**
@@ -65,6 +64,7 @@ public class GraveStoneStructures {
         if (GraveStoneConfig.generateUndertaker) {
             VillageHandlerGSUndertaker villageUndertakerHandler = new VillageHandlerGSUndertaker();
             VillagerRegistry.instance().registerVillageCreationHandler(villageUndertakerHandler);
+            VillagerRegistry.instance().registerVillagerId(385);
             VillagerRegistry.instance().registerVillagerSkin(385, Resources.UNDARTAKER);
             VillagerRegistry.instance().registerVillageTradeHandler(385, villageUndertakerHandler);
         }

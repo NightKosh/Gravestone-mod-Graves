@@ -6,6 +6,7 @@ import GraveStone.block.BlockGSGraveStone;
 import GraveStone.tileentity.GSGraveStoneItems;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import java.util.Random;
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
 /**
@@ -66,5 +67,28 @@ public class GraveGenerationHelper {
                 }
             }
         }
+    }
+
+    /**
+     * Check can be grave placed here
+     * @param world World object
+     * @param x X coord
+     * @param minY Min y coord
+     * @param z Z coord
+     * @param maxY Max y coord
+     */
+    public static boolean canPlaceGrave(World world, int x, int minY, int z, int maxY) {
+        int blockId;
+        for (int y = maxY; y >= minY - 1; y--) {
+            blockId = world.getBlockId(x, y, z);
+            if (blockId > 0) {
+                if (blockId == Block.waterStill.blockID || blockId == Block.lavaStill.blockID) {
+                    return false;
+                } else if (BlockGSGraveStone.canPlaceBlockAt(blockId)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

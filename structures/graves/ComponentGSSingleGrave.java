@@ -4,7 +4,6 @@ import java.util.Random;
 import GraveStone.block.BlockGSGraveStone;
 import GraveStone.structures.ComponentGraveStone;
 import GraveStone.structures.GraveGenerationHelper;
-import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
@@ -32,34 +31,11 @@ public class ComponentGSSingleGrave extends ComponentGraveStone {
         positionZ = getZWithOffset(0, 0);
         y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
 
-        if (canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
+        if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
             System.out.println("Grave " + positionX + "x" + positionZ);
             GraveGenerationHelper.placeGrave(this, world, random, 0, y, 0, BlockGSGraveStone.getMetaDirection(coordBaseMode), BlockGSGraveStone.getGraveType(random, 0));
         }
 
         return true;
-    }
-
-    /**
-     * Check can be grave placed here
-     * @param world World object
-     * @param x X coord
-     * @param minY Min y coord
-     * @param z Z coord
-     * @param maxY Max y coord
-     */
-    private static boolean canPlaceGrave(World world, int x, int minY, int z, int maxY) {
-        int blockId;
-        for (int y = maxY; y >= minY - 1; y--) {
-            blockId = world.getBlockId(x, y, z);
-            if (blockId > 0) {
-                if (blockId == Block.waterStill.blockID || blockId == Block.lavaStill.blockID) {
-                    return false;
-                } else if (BlockGSGraveStone.canPlaceBlockAt(blockId)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

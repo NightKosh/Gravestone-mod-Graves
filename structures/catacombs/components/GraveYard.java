@@ -41,7 +41,7 @@ public class GraveYard extends CatacombsBaseComponent {
                     positionX = getXWithOffset(x, z);
                     positionZ = getZWithOffset(x, z);
                     y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
-                    if (!isLiquidUnder(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
+                    if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
                         GraveGenerationHelper.placeGrave(this, world, random, x, y, z, graveMeta, BlockGSGraveStone.getGraveType(random, 1));
                     }
                 }
@@ -49,16 +49,5 @@ public class GraveYard extends CatacombsBaseComponent {
         }
 
         return true;
-    }
-
-    private static boolean isLiquidUnder(World world, int x, int minY, int z, int maxY) {
-        int blockId;
-        for (int y = maxY; y >= minY; y--) {
-            blockId = world.getBlockId(x, y, z);
-            if (blockId > 0 && BlockGSGraveStone.canPlaceBlockAt(blockId)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
