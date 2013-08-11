@@ -65,7 +65,7 @@ public class GraveStoneStructures {
             VillageHandlerGSUndertaker villageUndertakerHandler = new VillageHandlerGSUndertaker();
             VillagerRegistry.instance().registerVillageCreationHandler(villageUndertakerHandler);
             VillagerRegistry.instance().registerVillagerId(385);
-            VillagerRegistry.instance().registerVillagerSkin(385, Resources.UNDARTAKER);
+            ModGraveStone.proxy.registerVillagers();
             VillagerRegistry.instance().registerVillageTradeHandler(385, villageUndertakerHandler);
         }
 
