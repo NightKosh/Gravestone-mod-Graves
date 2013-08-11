@@ -13,6 +13,7 @@ import GraveStone.structures.catacombs.components.Corridor;
 import GraveStone.structures.catacombs.components.GraveCorridor;
 import GraveStone.structures.catacombs.components.WitherHall;
 import GraveStone.structures.catacombs.components.SpidersCorridor;
+import GraveStone.structures.catacombs.components.StatuesHall;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
@@ -307,7 +308,7 @@ public class CatacombsLevel {
                         return EnderHall.class;
                     }
                 } else if (chance >= 10) {
-                    return GraveHall.class;
+                    return getHallType();
                 } else if (chance >= 5) {
                     if (componentClass == Bridge.class) {
                         return getCorridorType();
@@ -320,6 +321,15 @@ public class CatacombsLevel {
         }
     }
 
+    private Class getHallType() {
+        int hallChance = random.nextInt(10);
+        if (hallChance >= 2) {
+            return GraveHall.class;
+        } else {
+            return StatuesHall.class;
+        }
+    }
+    
     /**
      * Return ranfom class of corridor component 
      */

@@ -42,6 +42,7 @@ public class BlockGSMemorial extends BlockContainer {
     public static final byte[] DOG_MEMORIALS = {5};
     public static final byte[] CAT_MEMORIALS = {6};
     public static final byte[] CREEPER_MEMORIALS = {7};
+    public static final byte[] STATUES_MEMORIALS = {2, 3, 4};
 
     public BlockGSMemorial(int par1) {
         super(par1, Material.rock);
@@ -205,7 +206,6 @@ public class BlockGSMemorial extends BlockContainer {
 
                 if (!deathText.equals("")) {
                     entityPlayer.sendChatToPlayer(ChatMessageComponent.func_111066_d(deathText));
-                    //entityPlayer.sendChatToPlayer(deathText);
                 }
             }
         }
@@ -311,6 +311,8 @@ public class BlockGSMemorial extends BlockContainer {
      * 1 - only pets memorials
      * 2 - only dogs memorials
      * 3 - only cats memorials
+     * 4 - creeper memorials
+     * 5 - only statues memorials(steve, villager, angel)
      */
     public static byte getMemorialType(Random random, int memorialType) {
         switch (memorialType) {
@@ -325,6 +327,8 @@ public class BlockGSMemorial extends BlockContainer {
                 return CAT_MEMORIALS[random.nextInt(CAT_MEMORIALS.length)];
             case 4:
                 return CREEPER_MEMORIALS[random.nextInt(CREEPER_MEMORIALS.length)];
+            case 5:
+                return STATUES_MEMORIALS[random.nextInt(STATUES_MEMORIALS.length)];
         }
     }
 

@@ -11,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.item.Item;
@@ -41,6 +42,9 @@ public abstract class GraveStoneMobSpawn {
             "GSZombieDog", "GSZombieCat",
             "GSSkeletonDog", "GSSkeletonCat"));
 
+    // catacombs spawner mobs
+    public static ArrayList<String> catacombsStatuesMobs = new ArrayList(Arrays.asList(
+            "Skeleton", "Zombie"));
     /* 
      * Check can grave spawn hell creature or not
      */
@@ -72,9 +76,9 @@ public abstract class GraveStoneMobSpawn {
                         EntitySkeleton skeleton = (EntitySkeleton) EntityList.createEntityByName(id, world);
                         skeleton.setSkeletonType(1);
                         if (world.rand.nextInt(2) == 0) {
-                            skeleton.setCurrentItemOrArmor(0, new ItemStack(Item.swordStone));
+                            skeleton.setCurrentItemOrArmor(0, new ItemStack(Item.swordStone.itemID, 1, 0));
                         } else {
-                            skeleton.setCurrentItemOrArmor(0, new ItemStack(Item.bow));
+                            skeleton.setCurrentItemOrArmor(0, new ItemStack(Item.bow.itemID, 1, 0));
                         }
                         return skeleton;
                     }
@@ -83,14 +87,17 @@ public abstract class GraveStoneMobSpawn {
                 }
         }
 
-        Entity entity = EntityList.createEntityByName(id, world);
+        EntityLiving entity = (EntityLiving) EntityList.createEntityByName(id, world);
         if (entity == null) {
             entity = getForeinMob(world, id);
+        } else {
+            entity.func_110161_a((EntityLivingData) null);
         }
+        
         return entity;
     }
 
-    private static Entity getForeinMob(World world, String mobName) {
+    private static EntityLiving getForeinMob(World world, String mobName) {
         Entity mob = null;
 
         try {
@@ -109,7 +116,7 @@ public abstract class GraveStoneMobSpawn {
             e.printStackTrace();
         }
 
-        return mob;
+        return (EntityLiving) mob;
     }
 
     /*
@@ -210,13 +217,16 @@ public abstract class GraveStoneMobSpawn {
         MOB_ID.add("SilverSkeleton");
         mobNameToClassMapping.put("SilverSkeleton", "drzhark.mocreatures.entity.monster.MoCEntitySilverSkeleton");
         catacombsSpawnerMobs.add("SilverSkeleton");
+        catacombsStatuesMobs.add("SilverSkeleton");
         
         MOB_ID.add("Wraith");
         mobNameToClassMapping.put("Wraith", "drzhark.mocreatures.entity.monster.MoCEntityWraith");
         catacombsSpawnerMobs.add("Wraith");
+        catacombsStatuesMobs.add("Wraith");
 
         HELL_MOB_ID.add("FlameWraith");
         mobNameToClassMapping.put("FlameWraith", "drzhark.mocreatures.entity.monster.MoCEntityFlameWraith");
+        catacombsStatuesMobs.add("FlameWraith");
     }
 
     /*
@@ -226,6 +236,7 @@ public abstract class GraveStoneMobSpawn {
         MOB_ID.add("Twilight Wraith");
         mobNameToClassMapping.put("Twilight Wraith", "twilightforest.entity.EntityTFWraith");
         catacombsSpawnerMobs.add("Twilight Wraith");
+        catacombsStatuesMobs.add("Twilight Wraith");
     }
     
     /**
@@ -233,5 +244,12 @@ public abstract class GraveStoneMobSpawn {
      */
     public static String getMobForSpawner(Random random) {
         return catacombsSpawnerMobs.get(random.nextInt(catacombsSpawnerMobs.size()));
+    }
+    
+    /**
+     * Return random mob for spawner
+     */
+    public static String getMobForStatueSpawner(Random random) {
+        return catacombsStatuesMobs.get(random.nextInt(catacombsStatuesMobs.size()));
     }
 }
