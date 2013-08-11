@@ -172,7 +172,7 @@ public class GSGraveStoneItems {
     /**
      * Set random itesm as grave loot
      */
-    public void setRandomGraveContent(Random random, boolean isPetGrave) {
+    public void setRandomGraveContent(Random random, boolean isPetGrave, boolean allLoot) {
         setInventorySlotContents(0, new ItemStack(Item.bone.itemID, 1 + random.nextInt(5), 0));
         setInventorySlotContents(1, new ItemStack(Item.rottenFlesh.itemID, 1 + random.nextInt(5), 0));
         if (isPetGrave) {
@@ -187,19 +187,25 @@ public class GSGraveStoneItems {
                     }
                 }
 
-                int graveType = random.nextInt(40);
-                if (tileEntity.swordType != 0 && graveType > 5) {
-                    fillWarriorGrave(random, true);
-                } else if (graveType < 4) {
-                    fillAdventureGrave(random);
-                } else if (graveType < 7) {
-                    fillWorkerGrave(random);
-                } else if (graveType < 10) {
-                    fillWizardGrave(random);
-                } else if (graveType < 12) {
-                    fillMinerGrave(random);
-                } else if (graveType == 13) {
-                    fillWarriorGrave(random, false);
+                    int graveType = random.nextInt(40);
+                if (allLoot) {
+                    if (tileEntity.swordType != 0 && graveType > 5) {
+                        fillWarriorGrave(random, true);
+                    } else if (graveType < 4) {
+                        fillAdventureGrave(random);
+                    } else if (graveType < 7) {
+                        fillWorkerGrave(random);
+                    } else if (graveType < 10) {
+                        fillWizardGrave(random);
+                    } else if (graveType < 12) {
+                        fillMinerGrave(random);
+                    } else if (graveType == 13) {
+                        fillWarriorGrave(random, false);
+                    }
+                } else {
+                    if (graveType < 3) {
+                        fillWorkerGrave(random);
+                    }
                 }
             }
         }
@@ -371,7 +377,6 @@ public class GSGraveStoneItems {
                 setInventorySlotContents(4, new ItemStack(Item.blazePowder.itemID, 1, 0));
                 break;
             case 2:
-                //setInventorySlotContents(4, new ItemStack(Item.lightStoneDust.itemID, 3 + random.nextInt(8), 0));
                 setInventorySlotContents(4, new ItemStack(Item.glowstone.itemID, 3 + random.nextInt(8), 0));
                 break;
         }

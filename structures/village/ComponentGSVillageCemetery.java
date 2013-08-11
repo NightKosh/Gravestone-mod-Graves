@@ -125,7 +125,7 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
             TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(xCoord, yCoord, zCoord);
             if (tileEntity != null) {
                 tileEntity.setGraveType(graveType);
-                tileEntity.setGraveContent(random, false);
+                tileEntity.setGraveContent(random, false, true);
             }
         }
     }

@@ -32,7 +32,7 @@ public class GraveGenerationHelper {
      * @param graveMeta Grave metadata
      * @param graveType Grave type
      */
-    public static void placeGrave(ComponentGraveStone component, World world, Random random, int x, int y, int z, int graveMeta, byte graveType) {
+    public static void placeGrave(ComponentGraveStone component, World world, Random random, int x, int y, int z, int graveMeta, byte graveType, boolean allLoot) {
         component.placeBlockAtCurrentPosition(world, GraveStoneConfig.graveStoneID, graveMeta, x, y, z, component.getBoundingBox());
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z));
         if (tileEntity != null) {
@@ -41,7 +41,7 @@ public class GraveGenerationHelper {
                 tileEntity.setDamage(GSGraveStoneItems.getRandomDamage(random, 50));
             }
             tileEntity.setGraveType(graveType);
-            tileEntity.setGraveContent(random, BlockGSGraveStone.isPetGrave(graveType));
+            tileEntity.setGraveContent(random, BlockGSGraveStone.isPetGrave(graveType), allLoot);
         }
     }
 
@@ -59,11 +59,11 @@ public class GraveGenerationHelper {
      * @param graveMeta Grave metadata
      * @param graveType Grave type
      */
-    public static void fillGraves(ComponentGraveStone component, World world, Random random, int xStart, int yStart, int zStart, int xEnd, int yEnd, int zEnd, int graveMeta, byte graveType) {
+    public static void fillGraves(ComponentGraveStone component, World world, Random random, int xStart, int yStart, int zStart, int xEnd, int yEnd, int zEnd, int graveMeta, byte graveType, boolean allLoot) {
         for (int y = yStart; y <= yEnd; ++y) {
             for (int x = xStart; x <= xEnd; ++x) {
                 for (int z = zStart; z <= zEnd; ++z) {
-                    placeGrave(component, world, random, x, y, z, graveMeta, graveType);
+                    placeGrave(component, world, random, x, y, z, graveMeta, graveType, allLoot);
                 }
             }
         }

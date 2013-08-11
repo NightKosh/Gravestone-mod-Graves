@@ -75,13 +75,13 @@ public class Treasury extends CatacombsBaseComponent {
         int metaLeft = BlockGSGraveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
         int metaRight = BlockGSGraveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
 
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 2, metaLeft, graveType);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 4, metaLeft, graveType);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 6, metaLeft, graveType);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 2, metaLeft, graveType, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 4, metaLeft, graveType, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 6, metaLeft, graveType, true);
 
-        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 2, metaRight, graveType);
-        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 4, metaRight, graveType);
-        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 6, metaRight, graveType);
+        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 2, metaRight, graveType, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 4, metaRight, graveType, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 6, metaRight, graveType, true);
         
         // TNT
         this.fillWithBlocks(world, boundingBox, 0, 0, 3, 1, 0, 3, Block.tnt.blockID, Block.tnt.blockID, false);

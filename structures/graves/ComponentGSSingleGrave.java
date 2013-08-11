@@ -33,7 +33,7 @@ public class ComponentGSSingleGrave extends ComponentGraveStone {
 
         if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
             System.out.println("Grave " + positionX + "x" + positionZ);
-            GraveGenerationHelper.placeGrave(this, world, random, 0, y, 0, BlockGSGraveStone.getMetaDirection(coordBaseMode), BlockGSGraveStone.getGraveType(random, 0));
+            GraveGenerationHelper.placeGrave(this, world, random, 0, y, 0, BlockGSGraveStone.getMetaDirection(coordBaseMode), BlockGSGraveStone.getGraveType(random, 0), true);
         }
 
         return true;

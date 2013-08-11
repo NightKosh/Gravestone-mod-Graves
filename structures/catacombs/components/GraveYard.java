@@ -42,7 +42,7 @@ public class GraveYard extends CatacombsBaseComponent {
                     positionZ = getZWithOffset(x, z);
                     y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
                     if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
-                        GraveGenerationHelper.placeGrave(this, world, random, x, y, z, graveMeta, BlockGSGraveStone.getGraveType(random, 1));
+                        GraveGenerationHelper.placeGrave(this, world, random, x, y, z, graveMeta, BlockGSGraveStone.getGraveType(random, 1), false);
                     }
                 }
             }
