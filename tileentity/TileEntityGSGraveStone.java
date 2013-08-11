@@ -224,7 +224,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         ItemStack sword = new ItemStack(id, 1, swordDamage);
         sword.setItemName(swordName);
         sword.setTagCompound(swordNBT);
-        this.gSItems.dropItem(sword);
+        this.gSItems.dropItem(sword, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
     }
 
     /**

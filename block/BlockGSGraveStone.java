@@ -3,6 +3,7 @@ package GraveStone.block;
 import GraveStone.GraveStoneConfig;
 import GraveStone.GraveStoneMobSpawn;
 import GraveStone.ModGraveStone;
+import GraveStone.tileentity.GSGraveStoneItems;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -445,7 +446,6 @@ public class BlockGSGraveStone extends BlockContainer {
 
                 if (!deathText.equals("")) {
                     entityPlayer.sendChatToPlayer(ChatMessageComponent.func_111066_d(deathText));
-                    //entityPlayer.sendChatToPlayer(deathText);
                     if (entity.getAge() != -1) {
                         //entityPlayer.sendChatToPlayer("Had lived " + entity.getAge() + " days");
                     }
@@ -467,7 +467,7 @@ public class BlockGSGraveStone extends BlockContainer {
     /**
      * Create grave on death
      */
-    public static void createOnDeath(World world, int x, int y, int z, String deathText, int direction, ItemStack[] items, int age, byte entityType) {
+    public void createOnDeath(World world, int x, int y, int z, String deathText, int direction, ItemStack[] items, int age, byte entityType) {
         if (direction < 0) {
             direction = 360 + direction;
         }
@@ -476,25 +476,46 @@ public class BlockGSGraveStone extends BlockContainer {
             y--;
         }
 
-        world.setBlock(x, y, z, GraveStoneConfig.graveStoneID, getMetadataBasedOnRotation(direction), 0x02);
+        byte graveType = 0;
+        byte swordType = 0;
+        ItemStack sword = null;
+        if (GraveStoneConfig.generateSwordGraves && world.rand.nextInt(4) == 0 && entityType == 0) {
+            sword = checkSword(items);
+            if (sword != null) {
+                if (sword.itemID == Item.swordDiamond.itemID) {
+                    swordType = 5;
+                } else if (sword.itemID == Item.swordIron.itemID) {
+                    swordType = 3;
+                } else if (sword.itemID == Item.swordStone.itemID) {
+                    swordType = 2;
+                } else if (sword.itemID == Item.swordGold.itemID) {
+                    swordType = 4;
+                } else {
+                    swordType = 1;
+                }
+            }
+        }
+        switch (entityType) {
+            case 0:
+                if (swordType == 0) {
+                    graveType = GENERATED_GRAVES[rand.nextInt(GENERATED_GRAVES.length)];
+                } else {
+                    graveType = (byte) (4 + swordType);
+                }
+                break;
+            case 1:
+                graveType = DOG_GRAVES[rand.nextInt(DOG_GRAVES.length)];
+                break;
+            case 2:
+                graveType = CAT_GRAVES[rand.nextInt(CAT_GRAVES.length)];
+                break;
+        }
+        if (world.isAirBlock(x, y, z) || world.getBlockMaterial(x, y, z).isLiquid() || world.getBlockMaterial(x, y, z).isReplaceable()) {
+            world.setBlock(x, y, z, GraveStoneConfig.graveStoneID, getMetadataBasedOnRotation(direction), 0x02);
 
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
-        if (tileEntity != null) {
-            byte swordType = 0;
-            if (GraveStoneConfig.generateSwordGraves && world.rand.nextInt(4) == 0 && entityType == 0) {
-                ItemStack sword = checkSword(items);
+            TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
+            if (tileEntity != null) {
                 if (sword != null) {
-                    if (sword.itemID == Item.swordDiamond.itemID) {
-                        swordType = 5;
-                    } else if (sword.itemID == Item.swordIron.itemID) {
-                        swordType = 3;
-                    } else if (sword.itemID == Item.swordStone.itemID) {
-                        swordType = 2;
-                    } else if (sword.itemID == Item.swordGold.itemID) {
-                        swordType = 4;
-                    } else {
-                        swordType = 1;
-                    }
                     tileEntity.setSword(swordType);
                     tileEntity.setDamage(sword.getItemDamage());
                     tileEntity.setSwordName(sword.getDisplayName());
@@ -502,26 +523,40 @@ public class BlockGSGraveStone extends BlockContainer {
                         tileEntity.setEnchantment(sword.getTagCompound());
                     }
                 }
+
+                tileEntity.setDeathText(deathText);
+                tileEntity.setItems(items);
+                tileEntity.setGraveType(graveType);
+                tileEntity.setAge(age);
+                //System.out.println("!!!!!!!!!!!!! " + age);
             }
-            tileEntity.setDeathText(deathText);
-            tileEntity.setItems(items);
-            switch (entityType) {
-                case 0:
-                    if (swordType == 0) {
-                        tileEntity.setGraveType(GENERATED_GRAVES[rand.nextInt(GENERATED_GRAVES.length)]);
-                    } else {
-                        tileEntity.setGraveType((byte) (4 + swordType));
+        } else {
+            if (!GraveStoneConfig.silkTouchForGraves) {
+                ItemStack itemStack = this.createStackedBlock(0);
+
+                NBTTagCompound nbt = new NBTTagCompound();
+                nbt.setByte("GraveType", graveType);
+                nbt.setString("DeathText", deathText);
+                nbt.setInteger("Age", age);
+                if (swordType != 0) {
+                    nbt.setByte("SwordType", swordType);
+                    nbt.setInteger("SwordDamage", sword.getItemDamage());
+                    nbt.setString("SwordName", sword.getDisplayName());
+                    if (sword.getEnchantmentTagList() != null && sword.getEnchantmentTagList().tagCount() > 0) {
+                        nbt.setCompoundTag("SwordNBT", sword.getTagCompound());
                     }
-                    break;
-                case 1:
-                    tileEntity.setGraveType(DOG_GRAVES[rand.nextInt(DOG_GRAVES.length)]);
-                    break;
-                case 2:
-                    tileEntity.setGraveType(CAT_GRAVES[rand.nextInt(CAT_GRAVES.length)]);
-                    break;
+                }
+
+                itemStack.setTagCompound(nbt);
+                this.dropBlockAsItem_do(world, x, y, z, itemStack);
             }
-            tileEntity.setAge(age);
-            //System.out.println("!!!!!!!!!!!!! " + age);
+            if (items != null) {
+                for (int i = 0; i < items.length; i++) {
+                    if (items[i] != null) {
+                        GSGraveStoneItems.dropItem(items[i], world, x, y, z);
+                    }
+                }
+            }
         }
     }
 
@@ -594,7 +629,7 @@ public class BlockGSGraveStone extends BlockContainer {
     public static boolean isSwordGrave(byte graveType) {
         return Arrays.binarySearch(SWORD_GRAVES, graveType) != -1;
     }
-    
+
     /**
      * Check is grave - pet grave
      *
