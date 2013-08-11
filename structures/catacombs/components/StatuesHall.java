@@ -103,6 +103,11 @@ public class StatuesHall extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 10, 1, 15, 10, 4, 15, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 10, 1, 18, 10, 4, 18, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         
+        
+        this.fillWithBlocks(world, boundingBox, 3, 1, 0, 3, 4, 0, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        this.fillWithBlocks(world, boundingBox, 7, 1, 0, 7, 4, 0, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        this.fillWithBlocks(world, boundingBox, 3, 4, 0, 7, 4, 0, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         this.fillWithBlocks(world, boundingBox, 3, 1, 18, 3, 4, 18, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 7, 1, 18, 7, 4, 18, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 3, 4, 18, 7, 4, 18, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
