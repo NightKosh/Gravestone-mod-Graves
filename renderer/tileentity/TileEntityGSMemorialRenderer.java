@@ -42,7 +42,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f) {
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) te;
-        byte memorialType = tileEntity.getGraveType();
+        byte memorialType = tileEntity.getGraveTypeNum();
         int meta;
         if (tileEntity.worldObj != null) {
             meta = tileEntity.getBlockMetadata();

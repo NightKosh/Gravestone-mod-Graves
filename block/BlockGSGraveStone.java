@@ -14,7 +14,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -40,10 +39,6 @@ import net.minecraftforge.common.ForgeDirection;
 public class BlockGSGraveStone extends BlockContainer {
 
     private static final Random rand = new Random();
-    public static final String[] NAMES = {
-        "Gravestone", "Cross", "Grave Plate", "Dog statue", "Cat statue",
-        "Wooden sword gravestone", "Stone sword gravestone", "Iron sword gravestone", "Golden sword gravestone", "Diamond sword gravestone"
-    };
     public static final byte[] GENERATED_GRAVES = {0, 1, 2};
     public static final byte[] PETS_GRAVES = {3, 4};
     public static final byte[] DOG_GRAVES = {3};
@@ -152,20 +147,21 @@ public class BlockGSGraveStone extends BlockContainer {
     }
 
     /**
-     * Updates the blocks bounds based on its current state. Args: world, x, y,
-     * z
+     * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
         int meta = access.getBlockMetadata(x, y, z);
-        byte graveType = 0;
+        EnumGravesType graveType;
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) access.getBlockTileEntity(x, y, z);
         if (tileEntity != null) {
             graveType = tileEntity.getGraveType();
+        } else {
+            graveType = EnumGravesType.VERTICAL_PLATE;
         }
 
         switch (graveType) {
-            case 0: // STONE_VERTICAL_PLATE
+            case VERTICAL_PLATE:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.125F, 0, 0.0625F, 0.875F, 0.9375F, 0.1875F);
@@ -181,7 +177,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case 1: // STONE_CROSS
+            case CROSS:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.125F, 0, 0.0625F, 0.875F, 1, 0.1875F);
@@ -197,7 +193,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case 2: // STONE_HORISONTAL_PLATE
+            case HORISONTAL_PLATE:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
@@ -213,7 +209,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case 3: // DOG_STATUE
+            case DOG_STATUE:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.35F, 0, 0.3F, 0.6F, 0.5F, 0.9F);
@@ -229,7 +225,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case 4: // CAT_STATUE
+            case CAT_STATUE:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.43F, 0, 0.3F, 0.57F, 0.5F, 0.75F);
@@ -245,11 +241,11 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case 5: // Swords
-            case 6:
-            case 7:
-            case 8:
-            case 9:
+            case WOODEN_SWORD:
+            case STONE_SWORD:
+            case IRON_SWORD:
+            case GOLDEN_SWORD:
+            case DIAMOND_SWORD:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
@@ -327,7 +323,7 @@ public class BlockGSGraveStone extends BlockContainer {
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
         if (tileEntity != null) {
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("GraveType", tileEntity.getGraveType());
+            nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
             nbt.setString("DeathText", tileEntity.getDeathText());
             nbt.setInteger("Age", tileEntity.getAge());
             if (tileEntity.getSword() != 0) {
@@ -694,7 +690,7 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(int id, CreativeTabs tabs, List list) {
-        for (byte i = 0; i < NAMES.length; i++) {
+        for (byte i = 0; i < EnumGravesType.GRAVES_COUNT; i++) {
             ItemStack stack = new ItemStack(id, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", i);

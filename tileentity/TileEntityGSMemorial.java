@@ -1,6 +1,7 @@
 
 package GraveStone.tileentity;
 
+import GraveStone.block.EnumMemorialsType;
 import java.util.Random;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
@@ -28,6 +29,7 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
     /**
      * Called when a client event is received with the event number and argument, see World.sendClientEvent
      */
+    @Override
     public boolean receiveClientEvent(int par1, int par2) {
         return true;
     }
@@ -35,6 +37,7 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
     /**
      * Reads a tile entity from NBT.
      */
+    @Override
     public void readFromNBT(NBTTagCompound nbtTag) {
         super.readFromNBT(nbtTag);
 
@@ -49,6 +52,7 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
     /**
      * Writes a tile entity to NBT.
      */
+    @Override
     public void writeToNBT(NBTTagCompound nbtTag) {
         super.writeToNBT(nbtTag);
 
@@ -63,17 +67,24 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
         gSDeathText.setRandomDeathText(random, graveType, true);
     }
     
+    @Override
     public String getDeathText() {
         return gSDeathText.getDeathText();
     }
     
+    @Override
     public void setDeathText(String text) {
         gSDeathText.setDeathText(text);
+    }
+
+    public EnumMemorialsType getMemorialType() {
+        return EnumMemorialsType.getByID(graveType);
     }
 
     /**
      * Overriden in a sign to provide the text.
      */
+    @Override
     public Packet getDescriptionPacket() {
         NBTTagCompound nbtTag = new NBTTagCompound();
         this.writeToNBT(nbtTag);

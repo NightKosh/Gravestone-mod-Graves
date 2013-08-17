@@ -2,6 +2,7 @@ package GraveStone.renderer.tileentity;
 
 import GraveStone.Resources;
 import GraveStone.block.BlockGSGraveStone;
+import GraveStone.block.EnumGravesType;
 import GraveStone.models.block.ModelCatStatueGraveStone;
 import GraveStone.models.block.ModelCrossGraveStone;
 import GraveStone.models.block.ModelDogStatueGraveStone;
@@ -40,7 +41,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f) {
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) te;
-        byte graveType = tileEntity.getGraveType();
+        EnumGravesType graveType = tileEntity.getGraveType();
         int meta;
         if (tileEntity.worldObj != null) {
             meta = tileEntity.getBlockMetadata();
@@ -77,58 +78,58 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         GL11.glPopMatrix();
     }
 
-    private ModelGraveStone getGraveModel(byte graveType) {
+    private ModelGraveStone getGraveModel(EnumGravesType graveType) {
         switch (graveType) {
-            case 1:
+            case CROSS:
                 return cross;
-            case 2:
+            case HORISONTAL_PLATE:
                 return horisontalPlate;
-            case 3:
+            case DOG_STATUE:
                 return dogStatue;
-            case 4:
+            case CAT_STATUE:
                 return catStatue;
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
+            case WOODEN_SWORD:
+            case STONE_SWORD:
+            case IRON_SWORD:
+            case GOLDEN_SWORD:
+            case DIAMOND_SWORD:
                 return swordGrave;
-            case 0:
+            case VERTICAL_PLATE:
             default:
                 return verticalPlate;
         }
     }
 
-    private void getGraveTexture(byte graveType) {
+    private void getGraveTexture(EnumGravesType graveType) {
         switch (graveType) {
-            case 0: // STONE_VERTICAL_PLATE
+            case VERTICAL_PLATE:
                 bindTextureByName(Resources.GRAVE_VERTICAL_PLATE);
                 break;
-            case 1: // STONE_CROSS
+            case CROSS:
                 bindTextureByName(Resources.GRAVE_CROSS);
                 break;
-            case 2: // STONE_HORISONTAL_PLATE
+            case HORISONTAL_PLATE:
                 bindTextureByName(Resources.GRAVE_HORISONTAL_PLATE);
                 break;
-            case 3: // DOG_STATUE
+            case DOG_STATUE:
                 bindTextureByName(Resources.DOG_STATUE_GRAVE);
                 break;
-            case 4: // CAT_STATUE
+            case CAT_STATUE:
                 bindTextureByName(Resources.CAT_STATUE_GRAVE);
                 break;
-            case 5: // WOODEN_SWORD_GRAVE
+            case WOODEN_SWORD:
                 bindTextureByName(Resources.WOODEN_SWORD_GRAVE);
                 break;
-            case 6: // STONE_SWORD_GRAVE
+            case STONE_SWORD:
                 bindTextureByName(Resources.STONE_SWORD_GRAVE);
                 break;
-            case 7: // IRON_SWORD_GRAVE
+            case IRON_SWORD:
                 bindTextureByName(Resources.IRON_SWORD_GRAVE);
                 break;
-            case 8: // GOLDEN_SWORD_GRAVE
+            case GOLDEN_SWORD:
                 bindTextureByName(Resources.GOLDEN_SWORD_GRAVE);
                 break;
-            case 9: // DIAMOND_SWORD_GRAVE
+            case DIAMOND_SWORD:
                 bindTextureByName(Resources.DIAMOND_SWORD_GRAVE);
                 break;
         }

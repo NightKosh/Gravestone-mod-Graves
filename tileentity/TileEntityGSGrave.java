@@ -32,7 +32,7 @@ public abstract class TileEntityGSGrave extends TileEntity {
         this.graveType = graveType;
     }
 
-    public byte getGraveType() {
+    public byte getGraveTypeNum() {
         return graveType;
     }
 

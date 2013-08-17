@@ -1,6 +1,7 @@
 package GraveStone.item;
 
 import GraveStone.block.BlockGSMemorial;
+import GraveStone.block.EnumMemorialsType;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
@@ -31,11 +32,13 @@ public class ItemBlockGSMemorial extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
-        byte graveType = 0;
+        EnumMemorialsType memorialType;
         if (itemStack.stackTagCompound != null && itemStack.stackTagCompound.hasKey("GraveType")) {
-            graveType = itemStack.stackTagCompound.getByte("GraveType");
+            memorialType = EnumMemorialsType.getByID(itemStack.stackTagCompound.getByte("GraveType"));
+        } else {
+            memorialType = EnumMemorialsType.getByID(0);
         }
-        return getUnlocalizedName() + "." + BlockGSMemorial.NAMES[graveType];
+        return getUnlocalizedName() + "." + memorialType.getName();
     }
 
     @Override

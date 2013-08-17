@@ -10,7 +10,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,6 +22,7 @@ import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 /**
  * GraveStone mod
@@ -32,11 +32,6 @@ import net.minecraft.world.World;
  */
 public class BlockGSMemorial extends BlockContainer {
 
-    public static final String[] NAMES = {
-        "Cross Memorial", "Obelisk",
-        "Steve statue", "Villager statue", "Angel statue",
-        "Dog statue", "Cat statue", "Creeper Statue"
-    };
     public static final byte[] GENERATED_MEMORIALS = {0, 1, 2, 3, 4, 5, 6};
     public static final byte[] PETS_MEMORIALS = {5, 6};
     public static final byte[] DOG_MEMORIALS = {5};
@@ -113,28 +108,30 @@ public class BlockGSMemorial extends BlockContainer {
      */
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
-        byte memorialType = 0;
+        EnumMemorialsType memorialType;
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) access.getBlockTileEntity(x, y, z);
         if (tileEntity != null) {
-            memorialType = tileEntity.getGraveType();
+            memorialType = tileEntity.getMemorialType();
+        } else {
+            memorialType = EnumMemorialsType.STONE_CROSS;
         }
         switch (memorialType) {
-            case 0: // STONE_CROSS
+            case STONE_CROSS:
                 this.setBlockBounds(-1, 0, -1, 2, 5, 2);
                 break;
-            case 1: // STONE_CROSS
+            case OBELISK:
                 this.setBlockBounds(-1, 0, -1, 2, 5, 2);
                 break;
-            case 2: // STEVE_STATUE
-            case 3: // VILLAGER_STATUE
-            case 4: // ANGEL_STATUE
+            case STEVE_STATUE:
+            case VILLAGER_STATUE:
+            case ANGEL_STATUE:
                 this.setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 2.5F, 0.9375F);
                 break;
-            case 5: // DOG_STATUE
-            case 6: // CAT_STAUTE
+            case DOG_STATUE:
+            case CAT_STAUTE:
                 this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 2, 0.875F);
                 break;
-            case 7: // CREEPER_STATUE
+            case CREEPER_STATUE:
                 this.setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 2, 0.9375F);
                 break;
 
@@ -255,7 +252,7 @@ public class BlockGSMemorial extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(int id, CreativeTabs tab, List list) {
-        for (byte j = 0; j < NAMES.length; j++) {
+        for (byte j = 0; j < EnumMemorialsType.MEMORIALS_COUNT; j++) {
             ItemStack stack = new ItemStack(id, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", j);
@@ -288,7 +285,7 @@ public class BlockGSMemorial extends BlockContainer {
         if (tileEntity != null) {
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setString("DeathText", tileEntity.getDeathText());
-            nbt.setByte("GraveType", tileEntity.getGraveType());
+            nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
             itemStack.setTagCompound(nbt);
         }
 

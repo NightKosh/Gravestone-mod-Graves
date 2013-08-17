@@ -1,6 +1,7 @@
 package GraveStone.item;
 
 import GraveStone.block.BlockGSGraveStone;
+import GraveStone.block.EnumGravesType;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
@@ -34,11 +35,13 @@ public class ItemBlockGSGraveStone extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
-        byte graveType = 0;
+        EnumGravesType graveType;
         if (itemStack.stackTagCompound != null) {
-            graveType = itemStack.stackTagCompound.getByte("GraveType");
+            graveType = EnumGravesType.getByID(itemStack.stackTagCompound.getByte("GraveType"));
+        } else {
+            graveType = EnumGravesType.getByID(0);
         }
-        return getUnlocalizedName() + "." + BlockGSGraveStone.NAMES[graveType];
+        return getUnlocalizedName() + "." + graveType.getName();
     }
 
     @Override

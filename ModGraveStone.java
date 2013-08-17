@@ -4,6 +4,9 @@ import GraveStone.block.BlockGSGraveStone;
 import GraveStone.block.BlockGSMemorial;
 import GraveStone.block.BlockGSTimeTrap;
 import GraveStone.block.BlockGSWitherSpawner;
+import GraveStone.block.EnumGravesType;
+import GraveStone.block.EnumMemorialsType;
+import GraveStone.client.ClientProxy;
 import GraveStone.gui.GuiHandler;
 import GraveStone.item.ItemBlockGSGraveStone;
 import GraveStone.item.ItemBlockGSMemorial;
@@ -24,6 +27,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import java.util.logging.Level;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -63,6 +67,7 @@ public class ModGraveStone {
 
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
+        GraveStoneLogger.preinit();
         GraveStoneConfig.getInstance(event.getModConfigurationDirectory().getAbsolutePath() + "/GraveStoneMod/", "GraveStone.cfg");
     }
 
@@ -86,7 +91,7 @@ public class ModGraveStone {
         // gravestone
         graveStone = new BlockGSGraveStone(GraveStoneConfig.graveStoneID);
         GameRegistry.registerBlock(graveStone, ItemBlockGSGraveStone.class);
-        for (byte i = 0; i < BlockGSGraveStone.NAMES.length; i++) {
+        for (byte i = 0; i < EnumGravesType.GRAVES_COUNT; i++) {
             ItemStack graveStoneStack = new ItemStack(graveStone, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", i);
@@ -94,7 +99,7 @@ public class ModGraveStone {
                 nbt.setByte("SwordType", BlockGSGraveStone.graveTypeToSwordType(i));
             }
             graveStoneStack.setTagCompound(nbt);
-            LanguageRegistry.addName(graveStoneStack, BlockGSGraveStone.NAMES[i]);
+            LanguageRegistry.addName(graveStoneStack, EnumGravesType.getByID(i).getName());
         }
         MinecraftForge.setBlockHarvestLevel(graveStone, "pickaxe", 1);
 
@@ -117,12 +122,12 @@ public class ModGraveStone {
         GameRegistry.registerBlock(memorial, "GSMemorial");
         LanguageRegistry.addName(memorial, "Memorial");
         GameRegistry.registerBlock(memorial, ItemBlockGSMemorial.class);
-        for (byte i = 0; i < BlockGSMemorial.NAMES.length; i++) {
+        for (byte i = 0; i < EnumMemorialsType.MEMORIALS_COUNT; i++) {
             ItemStack memorialStack = new ItemStack(memorial, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", i);
             memorialStack.setTagCompound(nbt);
-            LanguageRegistry.addName(memorialStack, BlockGSMemorial.NAMES[i]);
+            LanguageRegistry.addName(memorialStack, EnumMemorialsType.getByID(i).getName());
         }
         MinecraftForge.setBlockHarvestLevel(memorial, "pickaxe", 2);
 
@@ -178,5 +183,6 @@ public class ModGraveStone {
             GSThaumcraft.addAspects();
         }
         * */
+        GraveStoneLogger.logInfo(ModInfo.NAME + " has loaded successfully.");
     }
 }

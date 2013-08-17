@@ -1,5 +1,6 @@
 package GraveStone;
 
+import GraveStone.block.EnumGravesType;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -59,14 +60,14 @@ public abstract class GraveStoneMobSpawn {
     /**
      * will create the entity from the internalID the first time it is accessed
      */
-    public static Entity getMobEntity(World world, byte graveType, int x, int y, int z) {
+    public static Entity getMobEntity(World world, EnumGravesType graveType, int x, int y, int z) {
         String id;
 
         switch (graveType) {
-            case 3:
+            case DOG_STATUE:
                 id = getMobID(world.rand, 2);
                 break;
-            case 4:
+            case CAT_STATUE:
                 id = getMobID(world.rand, 3);
                 break;
             default:
@@ -90,19 +91,22 @@ public abstract class GraveStoneMobSpawn {
         EntityLiving entity = (EntityLiving) EntityList.createEntityByName(id, world);
         if (entity == null) {
             entity = getForeinMob(world, id);
-        } else {
+        }
+        try {
             entity.func_110161_a((EntityLivingData) null);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         
         return entity;
     }
 
     private static EntityLiving getForeinMob(World world, String mobName) {
-        Entity mob = null;
+        EntityLiving mob = null;
 
         try {
             Class mobClass = Class.forName((String) mobNameToClassMapping.get(mobName));
-            Constructor<Entity> constructor = mobClass.getConstructor(World.class);
+            Constructor<EntityLiving> constructor = mobClass.getConstructor(World.class);
             mob = constructor.newInstance(new Object[]{world});
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -113,10 +117,10 @@ public abstract class GraveStoneMobSpawn {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            e.getCause().printStackTrace();
         }
 
-        return (EntityLiving) mob;
+        return mob;
     }
 
     /*

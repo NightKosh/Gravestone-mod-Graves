@@ -2,6 +2,7 @@ package GraveStone.tileentity;
 
 import GraveStone.GraveStoneConfig;
 import GraveStone.GraveStoneMobSpawn;
+import GraveStone.block.EnumGravesType;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -87,7 +88,7 @@ public class GSGraveStoneSpawn {
                 }
 
                 if (this.getNewMob) {
-                    this.spawnedMob = GraveStoneMobSpawn.getMobEntity(this.tileEntity.worldObj, this.tileEntity.graveType, this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord);
+                    this.spawnedMob = GraveStoneMobSpawn.getMobEntity(this.tileEntity.worldObj, EnumGravesType.getByID(this.tileEntity.graveType), this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord);
                     if (this.spawnedMob == null) {
                         return;
                     }
