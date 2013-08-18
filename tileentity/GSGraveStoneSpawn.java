@@ -127,7 +127,7 @@ public class GSGraveStoneSpawn {
     }
 
     public String getEntityId() {
-        return this.spawnerTags == null ? GraveStoneMobSpawn.getMobID(this.tileEntity.worldObj.rand, 0) : this.spawnerTags.field_92033_c;
+        return this.spawnerTags == null ? GraveStoneMobSpawn.getMobID(this.tileEntity.worldObj.rand, GraveStoneMobSpawn.EnumMobType.DEFAULT_MOBS) : this.spawnerTags.field_92033_c;
     }
 
     public void readSpawn(NBTTagCompound nbtTag) {

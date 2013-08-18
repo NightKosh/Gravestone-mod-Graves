@@ -1,6 +1,5 @@
 package GraveStone.item;
 
-import GraveStone.block.BlockGSMemorial;
 import GraveStone.block.EnumMemorials;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

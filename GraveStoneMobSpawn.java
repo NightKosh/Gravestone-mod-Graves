@@ -35,6 +35,14 @@ public abstract class GraveStoneMobSpawn {
     private static ArrayList<String> DOG_ID = new ArrayList(Arrays.asList("GSZombieDog", "GSSkeletonDog"));
     private static ArrayList<String> CAT_ID = new ArrayList(Arrays.asList("GSZombieCat", "GSSkeletonCat"));
     private static ArrayList<String> HELL_MOB_ID = new ArrayList(Arrays.asList("PigZombie", "Skeleton"));
+    
+    public enum EnumMobType {
+        DEFAULT_MOBS,
+        HELL_MOBS,
+        UNDEAD_DOGS,
+        UNDEAD_CATS
+    }
+    
     // catacombs spawner mobs
     public static ArrayList<String> catacombsSpawnerMobs = new ArrayList(Arrays.asList(
             "Skeleton", "Spider", "Zombie",
@@ -65,14 +73,14 @@ public abstract class GraveStoneMobSpawn {
 
         switch (graveType) {
             case DOG_STATUE:
-                id = getMobID(world.rand, 2);
+                id = getMobID(world.rand, EnumMobType.UNDEAD_DOGS);
                 break;
             case CAT_STATUE:
-                id = getMobID(world.rand, 3);
+                id = getMobID(world.rand, EnumMobType.UNDEAD_CATS);
                 break;
             default:
                 if (canSpawnHellCreatures(world, x, y, z) && world.rand.nextInt(20) == 0) {
-                    id = getMobID(world.rand, 1);
+                    id = getMobID(world.rand, EnumMobType.HELL_MOBS);
                     if (id.equals("Skeleton")) {
                         EntitySkeleton skeleton = (EntitySkeleton) EntityList.createEntityByName(id, world);
                         skeleton.setSkeletonType(1);
@@ -84,7 +92,7 @@ public abstract class GraveStoneMobSpawn {
                         return skeleton;
                     }
                 } else {
-                    id = getMobID(world.rand, 0);
+                    id = getMobID(world.rand, EnumMobType.DEFAULT_MOBS);
                 }
         }
 
@@ -126,16 +134,15 @@ public abstract class GraveStoneMobSpawn {
     /*
      * return random mob id from list
      */
-    public static String getMobID(Random random, int creatureType) {
-        switch (creatureType) {
-            case 0:
-                return MOB_ID.get(random.nextInt(MOB_ID.size()));
-            case 1:
+    public static String getMobID(Random random, EnumMobType mobType) {
+        switch (mobType) {
+            case HELL_MOBS:
                 return HELL_MOB_ID.get(random.nextInt(HELL_MOB_ID.size()));
-            case 2:
+            case UNDEAD_DOGS:
                 return DOG_ID.get(random.nextInt(DOG_ID.size()));
-            case 3:
+            case UNDEAD_CATS:
                 return CAT_ID.get(random.nextInt(CAT_ID.size()));
+            case DEFAULT_MOBS:
             default:
                 return MOB_ID.get(random.nextInt(MOB_ID.size()));
         }
