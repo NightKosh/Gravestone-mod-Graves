@@ -2,7 +2,7 @@ package GraveStone.renderer.tileentity;
 
 import GraveStone.Resources;
 import GraveStone.block.BlockGSGraveStone;
-import GraveStone.block.EnumGravesType;
+import GraveStone.block.EnumGraves;
 import GraveStone.models.block.ModelCatStatueGraveStone;
 import GraveStone.models.block.ModelCrossGraveStone;
 import GraveStone.models.block.ModelDogStatueGraveStone;
@@ -41,7 +41,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f) {
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) te;
-        EnumGravesType graveType = tileEntity.getGraveType();
+        EnumGraves graveType = tileEntity.getGraveType();
         int meta;
         if (tileEntity.worldObj != null) {
             meta = tileEntity.getBlockMetadata();
@@ -78,7 +78,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         GL11.glPopMatrix();
     }
 
-    private ModelGraveStone getGraveModel(EnumGravesType graveType) {
+    private ModelGraveStone getGraveModel(EnumGraves graveType) {
         switch (graveType) {
             case CROSS:
                 return cross;
@@ -100,7 +100,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         }
     }
 
-    private void getGraveTexture(EnumGravesType graveType) {
+    private void getGraveTexture(EnumGraves graveType) {
         switch (graveType) {
             case VERTICAL_PLATE:
                 bindTextureByName(Resources.GRAVE_VERTICAL_PLATE);

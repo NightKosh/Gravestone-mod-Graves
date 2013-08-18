@@ -4,8 +4,8 @@ import GraveStone.block.BlockGSGraveStone;
 import GraveStone.block.BlockGSMemorial;
 import GraveStone.block.BlockGSTimeTrap;
 import GraveStone.block.BlockGSWitherSpawner;
-import GraveStone.block.EnumGravesType;
-import GraveStone.block.EnumMemorialsType;
+import GraveStone.block.EnumGraves;
+import GraveStone.block.EnumMemorials;
 import GraveStone.client.ClientProxy;
 import GraveStone.gui.GuiHandler;
 import GraveStone.item.ItemBlockGSGraveStone;
@@ -91,7 +91,7 @@ public class ModGraveStone {
         // gravestone
         graveStone = new BlockGSGraveStone(GraveStoneConfig.graveStoneID);
         GameRegistry.registerBlock(graveStone, ItemBlockGSGraveStone.class);
-        for (byte i = 0; i < EnumGravesType.GRAVES_COUNT; i++) {
+        for (byte i = 0; i < EnumGraves.GRAVES_COUNT; i++) {
             ItemStack graveStoneStack = new ItemStack(graveStone, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", i);
@@ -99,7 +99,7 @@ public class ModGraveStone {
                 nbt.setByte("SwordType", BlockGSGraveStone.graveTypeToSwordType(i));
             }
             graveStoneStack.setTagCompound(nbt);
-            LanguageRegistry.addName(graveStoneStack, EnumGravesType.getByID(i).getName());
+            LanguageRegistry.addName(graveStoneStack, EnumGraves.getByID(i).getName());
         }
         MinecraftForge.setBlockHarvestLevel(graveStone, "pickaxe", 1);
 
@@ -122,12 +122,12 @@ public class ModGraveStone {
         GameRegistry.registerBlock(memorial, "GSMemorial");
         LanguageRegistry.addName(memorial, "Memorial");
         GameRegistry.registerBlock(memorial, ItemBlockGSMemorial.class);
-        for (byte i = 0; i < EnumMemorialsType.MEMORIALS_COUNT; i++) {
+        for (byte i = 0; i < EnumMemorials.MEMORIALS_COUNT; i++) {
             ItemStack memorialStack = new ItemStack(memorial, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", i);
             memorialStack.setTagCompound(nbt);
-            LanguageRegistry.addName(memorialStack, EnumMemorialsType.getByID(i).getName());
+            LanguageRegistry.addName(memorialStack, EnumMemorials.getByID(i).getName());
         }
         MinecraftForge.setBlockHarvestLevel(memorial, "pickaxe", 2);
 

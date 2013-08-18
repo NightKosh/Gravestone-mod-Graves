@@ -152,12 +152,12 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
         int meta = access.getBlockMetadata(x, y, z);
-        EnumGravesType graveType;
+        EnumGraves graveType;
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) access.getBlockTileEntity(x, y, z);
         if (tileEntity != null) {
             graveType = tileEntity.getGraveType();
         } else {
-            graveType = EnumGravesType.VERTICAL_PLATE;
+            graveType = EnumGraves.VERTICAL_PLATE;
         }
 
         switch (graveType) {
@@ -690,7 +690,7 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(int id, CreativeTabs tabs, List list) {
-        for (byte i = 0; i < EnumGravesType.GRAVES_COUNT; i++) {
+        for (byte i = 0; i < EnumGraves.GRAVES_COUNT; i++) {
             ItemStack stack = new ItemStack(id, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", i);

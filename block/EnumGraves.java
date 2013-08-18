@@ -7,7 +7,7 @@ package GraveStone.block;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public enum EnumGravesType {
+public enum EnumGraves {
 
     VERTICAL_PLATE((byte) 0, "Gravestone"),
     CROSS((byte) 1, "Cross"),
@@ -23,7 +23,7 @@ public enum EnumGravesType {
     private String name;
     public static final byte GRAVES_COUNT = 10;
 
-    private EnumGravesType(byte id, String name) {
+    private EnumGraves(byte id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -41,11 +41,11 @@ public enum EnumGravesType {
      * 
      * @param id Grave Id
      */
-    public static EnumGravesType getByID(int id) {
-        EnumGravesType[] graveTypes = values();
+    public static EnumGraves getByID(int id) {
+        EnumGraves[] graveTypes = values();
 
         for (int k = 0; k < graveTypes.length; ++k) {
-            EnumGravesType graveType = graveTypes[k];
+            EnumGraves graveType = graveTypes[k];
 
             if (graveType.id == id) {
                 return graveType;

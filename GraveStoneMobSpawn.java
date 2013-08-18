@@ -1,6 +1,6 @@
 package GraveStone;
 
-import GraveStone.block.EnumGravesType;
+import GraveStone.block.EnumGraves;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public abstract class GraveStoneMobSpawn {
     /**
      * will create the entity from the internalID the first time it is accessed
      */
-    public static Entity getMobEntity(World world, EnumGravesType graveType, int x, int y, int z) {
+    public static Entity getMobEntity(World world, EnumGraves graveType, int x, int y, int z) {
         String id;
 
         switch (graveType) {

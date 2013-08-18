@@ -1,7 +1,7 @@
 
 package GraveStone.tileentity;
 
-import GraveStone.block.EnumMemorialsType;
+import GraveStone.block.EnumMemorials;
 import java.util.Random;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
@@ -77,8 +77,8 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
         gSDeathText.setDeathText(text);
     }
 
-    public EnumMemorialsType getMemorialType() {
-        return EnumMemorialsType.getByID(graveType);
+    public EnumMemorials getMemorialType() {
+        return EnumMemorials.getByID(graveType);
     }
 
     /**

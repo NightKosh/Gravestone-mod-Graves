@@ -108,12 +108,12 @@ public class BlockGSMemorial extends BlockContainer {
      */
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
-        EnumMemorialsType memorialType;
+        EnumMemorials memorialType;
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) access.getBlockTileEntity(x, y, z);
         if (tileEntity != null) {
             memorialType = tileEntity.getMemorialType();
         } else {
-            memorialType = EnumMemorialsType.STONE_CROSS;
+            memorialType = EnumMemorials.STONE_CROSS;
         }
         switch (memorialType) {
             case STONE_CROSS:
@@ -252,7 +252,7 @@ public class BlockGSMemorial extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(int id, CreativeTabs tab, List list) {
-        for (byte j = 0; j < EnumMemorialsType.MEMORIALS_COUNT; j++) {
+        for (byte j = 0; j < EnumMemorials.MEMORIALS_COUNT; j++) {
             ItemStack stack = new ItemStack(id, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", j);

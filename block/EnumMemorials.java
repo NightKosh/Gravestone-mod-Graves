@@ -7,7 +7,7 @@ package GraveStone.block;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public enum EnumMemorialsType {
+public enum EnumMemorials {
 
     STONE_CROSS((byte) 0, "Cross Memorial"),
     OBELISK((byte) 1, "Obelisk"),
@@ -21,7 +21,7 @@ public enum EnumMemorialsType {
     private String name;
     public static final byte MEMORIALS_COUNT = 8;
 
-    private EnumMemorialsType(byte id, String name) {
+    private EnumMemorials(byte id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -39,11 +39,11 @@ public enum EnumMemorialsType {
      * 
      * @param id Grave Id
      */
-    public static EnumMemorialsType getByID(int id) {
-        EnumMemorialsType[] memorialTypes = values();
+    public static EnumMemorials getByID(int id) {
+        EnumMemorials[] memorialTypes = values();
 
         for (int k = 0; k < memorialTypes.length; ++k) {
-            EnumMemorialsType memorialType = memorialTypes[k];
+            EnumMemorials memorialType = memorialTypes[k];
 
             if (memorialType.id == id) {
                 return memorialType;

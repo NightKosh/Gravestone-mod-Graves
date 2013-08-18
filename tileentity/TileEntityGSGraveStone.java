@@ -1,6 +1,6 @@
 package GraveStone.tileentity;
 
-import GraveStone.block.EnumGravesType;
+import GraveStone.block.EnumGraves;
 import java.util.ArrayList;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -228,8 +228,8 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         this.gSItems.dropItem(sword, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
     }
 
-    public EnumGravesType getGraveType() {
-        return EnumGravesType.getByID(graveType);
+    public EnumGraves getGraveType() {
+        return EnumGraves.getByID(graveType);
     }
 
     /**
