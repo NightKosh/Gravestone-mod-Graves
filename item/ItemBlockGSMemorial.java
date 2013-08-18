@@ -21,7 +21,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
     public ItemBlockGSMemorial(int id) {
         super(id);
         setHasSubtypes(true);
-        setUnlocalizedName("multiBlock");
+        setUnlocalizedName("Memorial");
     }
 
     @Override

@@ -46,6 +46,15 @@ public class BlockGSGraveStone extends BlockContainer {
     public static final byte[] SWORD_GRAVES = {5, 6, 7, 8, 9};
     public static final byte[] GENERATED_SWORD_GRAVES = {5, 6};
 
+    public enum EnumGraveType {
+
+        ALL_GRAVES,
+        PLAYER_GRAVES,
+        PETS_GRAVES,
+        DOGS_GRAVES,
+        CATS_GRAVES
+    }
+
     public BlockGSGraveStone(int par1) {
         super(par1, Material.rock);
 
@@ -147,7 +156,8 @@ public class BlockGSGraveStone extends BlockContainer {
     }
 
     /**
-     * Updates the blocks bounds based on its current state. Args: world, x, y, z
+     * Updates the blocks bounds based on its current state. Args: world, x, y,
+     * z
      */
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
@@ -711,10 +721,22 @@ public class BlockGSGraveStone extends BlockContainer {
      * 3 - only dogs graves
      * 4 - only cats graves
      */
-    public static byte getGraveType(Random random, int graveType) {
+    public static byte getGraveType(Random random, EnumGraveType graveType) {
         switch (graveType) {
+            case PLAYER_GRAVES:
+                if (random.nextFloat() > 0.1) {
+                    return GENERATED_GRAVES[random.nextInt(GENERATED_GRAVES.length)];
+                } else {
+                    return GENERATED_SWORD_GRAVES[random.nextInt(GENERATED_SWORD_GRAVES.length)];
+                }
+            case PETS_GRAVES:
+                return PETS_GRAVES[random.nextInt(PETS_GRAVES.length)];
+            case DOGS_GRAVES:
+                return DOG_GRAVES[random.nextInt(DOG_GRAVES.length)];
+            case CATS_GRAVES:
+                return CAT_GRAVES[random.nextInt(CAT_GRAVES.length)];
             default:
-            case 0:
+            case ALL_GRAVES:
                 if (random.nextFloat() > 0.2) {
                     if (random.nextFloat() > 0.1) {
                         return GENERATED_GRAVES[random.nextInt(GENERATED_GRAVES.length)];
@@ -724,18 +746,6 @@ public class BlockGSGraveStone extends BlockContainer {
                 } else {
                     return PETS_GRAVES[random.nextInt(PETS_GRAVES.length)];
                 }
-            case 1:
-                if (random.nextFloat() > 0.1) {
-                    return GENERATED_GRAVES[random.nextInt(GENERATED_GRAVES.length)];
-                } else {
-                    return GENERATED_SWORD_GRAVES[random.nextInt(GENERATED_SWORD_GRAVES.length)];
-                }
-            case 2:
-                return PETS_GRAVES[random.nextInt(PETS_GRAVES.length)];
-            case 3:
-                return DOG_GRAVES[random.nextInt(DOG_GRAVES.length)];
-            case 4:
-                return CAT_GRAVES[random.nextInt(CAT_GRAVES.length)];
         }
     }
 }

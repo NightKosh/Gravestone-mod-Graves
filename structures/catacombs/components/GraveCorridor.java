@@ -3,6 +3,7 @@ package GraveStone.structures.catacombs.components;
 import java.util.Random;
 import GraveStone.GraveStoneConfig;
 import GraveStone.block.BlockGSGraveStone;
+import GraveStone.block.BlockGSGraveStone.EnumGraveType;
 import GraveStone.structures.BoundingBoxHelper;
 import GraveStone.structures.GraveGenerationHelper;
 import GraveStone.structures.MobSpawnHelper;
@@ -69,7 +70,7 @@ public class GraveCorridor extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 5, 1, 4, 5, 3, 4, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
 
         // graves
-        byte graveType = BlockGSGraveStone.getGraveType(random, 0);
+        byte graveType = BlockGSGraveStone.getGraveType(random, EnumGraveType.ALL_GRAVES);
         int metaLeft = BlockGSGraveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
         int metaRight = BlockGSGraveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
 

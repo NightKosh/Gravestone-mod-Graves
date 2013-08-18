@@ -71,7 +71,7 @@ public class Treasury extends CatacombsBaseComponent {
         this.randomlyPlaceBlock(world, boundingBox, random, 0.4F, 2, 3, 6, Block.web.blockID, 0);
         
         // graves
-        byte graveType = BlockGSGraveStone.getGraveType(random, 0);
+        byte graveType = BlockGSGraveStone.getGraveType(random, BlockGSGraveStone.EnumGraveType.ALL_GRAVES);
         int metaLeft = BlockGSGraveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
         int metaRight = BlockGSGraveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
 

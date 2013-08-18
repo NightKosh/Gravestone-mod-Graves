@@ -23,19 +23,14 @@ public class GraveStonePacketHandler implements IPacketHandler {
     @Override
     public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
         if (packet.channel.equals("GSDeathText")) {
-            //System.out.println("!!!!!!!!!!!!!!!!");
             World world = ((EntityPlayer) player).worldObj;
             if (world != null) {
-                //System.out.println("world != null ");
                 DataInputStream InputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
                 try {
-                    //System.out.println(((EntityPlayer) player).posX + " " + ((EntityPlayer) player).posZ + " ");
                     TileEntity tileEntity = world.getBlockTileEntity(InputStream.readInt(), InputStream.readInt(), InputStream.readInt());
                     if (tileEntity != null) {
                         String str = InputStream.readUTF();
                         ((TileEntityGSGrave) tileEntity).setDeathText(str);
-                        //System.out.println("te != null ");
-                        //System.out.println(str);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

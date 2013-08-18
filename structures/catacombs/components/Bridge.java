@@ -2,6 +2,7 @@
 package GraveStone.structures.catacombs.components;
 
 import GraveStone.block.BlockGSGraveStone;
+import GraveStone.block.BlockGSGraveStone.EnumGraveType;
 import GraveStone.structures.BoundingBoxHelper;
 import GraveStone.structures.GraveGenerationHelper;
 import GraveStone.structures.MobSpawnHelper;
@@ -81,7 +82,7 @@ public class Bridge extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 10, 9, 7, 11, 10, 7, false, random, getCemeteryCatacombsStones());
         
         // graves
-        byte graveType = BlockGSGraveStone.getGraveType(random, 1);
+        byte graveType = BlockGSGraveStone.getGraveType(random, EnumGraveType.PLAYER_GRAVES);
         int metaLeft = BlockGSGraveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
         int metaRight = BlockGSGraveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
 
