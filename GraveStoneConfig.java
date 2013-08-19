@@ -84,9 +84,6 @@ public class GraveStoneConfig {
     public static boolean spawnSkeletonCats;
     // sword grave
     public static boolean generateSwordGraves;
-    
-    // Hightlands
-    public static boolean useHighlandsBiomes;
 
     private GraveStoneConfig(String path, File configFile) {
         this.config = new Configuration(configFile);
@@ -110,7 +107,6 @@ public class GraveStoneConfig {
         structures();
         gravesConfig();
         entityConfig();
-        biomesConfig();
 
         config.save();
 
@@ -169,13 +165,6 @@ public class GraveStoneConfig {
         spawnZombieCats = config.get(Configuration.CATEGORY_GENERAL, "SpawnZombieCats", true).getBoolean(true);
         spawnSkeletonDogs = config.get(Configuration.CATEGORY_GENERAL, "SpawnSkeletonDogs", true).getBoolean(true);
         spawnSkeletonCats = config.get(Configuration.CATEGORY_GENERAL, "SpawnSkeletonCats", true).getBoolean(true);
-    }
-    
-    private static void biomesConfig() {                
-        Property highlandsBiomes = config.get(Configuration.CATEGORY_GENERAL, "UseHighlandsBiomes", false);
-        highlandsBiomes.comment = "Set \"true\" only if you didn't change any Highlands configurations.";
-
-        useHighlandsBiomes = highlandsBiomes.getBoolean(false);
     }
 
     private void getGravesText() {

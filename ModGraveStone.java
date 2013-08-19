@@ -6,7 +6,6 @@ import GraveStone.block.BlockGSTimeTrap;
 import GraveStone.block.BlockGSWitherSpawner;
 import GraveStone.block.EnumGraves;
 import GraveStone.block.EnumMemorials;
-import GraveStone.client.ClientProxy;
 import GraveStone.gui.GuiHandler;
 import GraveStone.item.ItemBlockGSGraveStone;
 import GraveStone.item.ItemBlockGSMemorial;
@@ -27,7 +26,6 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import java.util.logging.Level;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -169,13 +167,13 @@ public class ModGraveStone {
         
         // adding foreign bioms
         if (Loader.isModLoaded("Highlands")) {
-            GraveStoneStructures.addHighlandsBioms();
+            GraveStoneBiomes.addHighlandsBiomes();
         }
         if (Loader.isModLoaded("BiomesOPlenty")) {
-            GraveStoneStructures.addBiomsOPlentyBioms();
+            GraveStoneBiomes.addBiomsOPlentyBiomes();
         }
         if (Loader.isModLoaded("ExtrabiomesXL")) {
-            GraveStoneStructures.addExtrabiomsXLBioms();
+            GraveStoneBiomes.addExtrabiomsXLBiomes();
         }
         /*
         // adding Thaumcraft aspects

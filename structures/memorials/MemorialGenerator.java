@@ -1,11 +1,11 @@
 
 package GraveStone.structures.memorials;
 
+import GraveStone.GraveStoneBiomes;
 import GraveStone.structures.catacombs.CatacombsGenerator;
 import java.util.LinkedList;
 import java.util.Random;
 import GraveStone.GraveStoneConfig;
-import GraveStone.GraveStoneStructures;
 import GraveStone.structures.GraveStoneWorldGenerator;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
@@ -35,7 +35,7 @@ public class MemorialGenerator {
     }
 
     protected boolean canSpawnStructureAtCoords(World world, int x, int z, double chance) {
-        return chance < CHANCE && !GraveStoneStructures.getMemorialBioms().contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z);
+        return chance < CHANCE && !GraveStoneBiomes.getMemorialBiomes().contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z);
     }
 
     protected boolean noAnyInRange(int x, int z) {
