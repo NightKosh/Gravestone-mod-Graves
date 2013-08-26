@@ -24,7 +24,7 @@ public class ItemGSChisel extends ItemTool {
         super(id, 1, EnumToolMaterial.IRON, new Block[0]);
         setMaxStackSize(1);
         setCreativeTab(ModGraveStone.creativeTab);
-        setUnlocalizedName("Chisel");
+        setUnlocalizedName("chisel");
         setMaxDamage(50);
         MinecraftForge.setToolClass(this, "chisel", 1);
         this.func_111206_d(Resources.CHISEL);

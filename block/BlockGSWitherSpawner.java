@@ -17,7 +17,7 @@ public class BlockGSWitherSpawner extends BlockMobSpawner {
 
     public BlockGSWitherSpawner(int par1) {
         super(par1);
-        this.setUnlocalizedName("Wither Spawner");
+        this.setUnlocalizedName("spawner.wither");
         this.setHardness(5.0F);
         this.setStepSound(soundMetalFootstep);
         this.disableStats();

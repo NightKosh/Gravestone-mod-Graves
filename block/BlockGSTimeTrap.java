@@ -2,11 +2,13 @@ package GraveStone.block;
 
 import GraveStone.ModGraveStone;
 import GraveStone.Resources;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.world.World;
 
 /**
@@ -20,7 +22,7 @@ public class BlockGSTimeTrap extends Block {
     public BlockGSTimeTrap(int par1) {
         super(par1, Material.rock);
         this.setStepSound(Block.soundStoneFootstep);
-        this.setUnlocalizedName("Night stone");
+        this.setUnlocalizedName("trap.night");
         this.setHardness(4.5F);
         this.setResistance(5F);
         this.setCreativeTab(ModGraveStone.creativeTab);
@@ -70,6 +72,7 @@ public class BlockGSTimeTrap extends Block {
             if (time < 12000 || time > 22500) {
                 world.setWorldTime(12000);
             } else if (time > 20000 && time < 22500) {
+                ((EntityPlayer) entity).sendChatToPlayer(ChatMessageComponent.func_111066_d(LanguageRegistry.instance().getStringLocalization("block.trap.curse")));
                 world.setWorldTime(14000);
             }
         }
