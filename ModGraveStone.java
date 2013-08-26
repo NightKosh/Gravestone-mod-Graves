@@ -1,5 +1,6 @@
 package GraveStone;
 
+import GraveStone.core.proxy.CommonProxy;
 import GraveStone.block.BlockGSGraveStone;
 import GraveStone.block.BlockGSMemorial;
 import GraveStone.block.BlockGSTimeTrap;
@@ -45,8 +46,8 @@ public class ModGraveStone {
 
     @Instance("GraveStone")
     public static ModGraveStone instance;
-    @SidedProxy(clientSide = "GraveStone.client.ClientProxy", serverSide = "GraveStone.GSCommonProxy")
-    public static GSCommonProxy proxy;
+    @SidedProxy(clientSide = "GraveStone.core.proxy.ClientProxy", serverSide = "GraveStone.core.proxy.CommonProxy")
+    public static CommonProxy proxy;
     // block GraveStone
     public static BlockGSGraveStone graveStone;
     // Block wither spawer
@@ -77,6 +78,7 @@ public class ModGraveStone {
         MinecraftForge.EVENT_BUS.register(new EventHookGSGraveStone());
         // creative tab
         creativeTab = new CreativeTabs("tabGraveStone") {
+            @Override
             public ItemStack getIconItemStack() {
                 ItemStack stack = new ItemStack(graveStone, 1, 0);
                 NBTTagCompound nbt = new NBTTagCompound();

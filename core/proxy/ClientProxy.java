@@ -1,6 +1,5 @@
-package GraveStone.client;
+package GraveStone.core.proxy;
 
-import GraveStone.GSCommonProxy;
 import GraveStone.GraveStoneConfig;
 import GraveStone.Resources;
 import GraveStone.entity.EntitySkeletonCat;
@@ -28,7 +27,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ClientProxy extends GSCommonProxy {
+public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerRenderers() {
