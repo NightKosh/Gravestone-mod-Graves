@@ -1,5 +1,6 @@
-
 package GraveStone.block;
+
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
  * GraveStone mod
@@ -9,16 +10,16 @@ package GraveStone.block;
  */
 public enum EnumGraves {
 
-    VERTICAL_PLATE((byte) 0, "Gravestone"),
-    CROSS((byte) 1, "Cross"),
-    HORISONTAL_PLATE((byte) 2, "Grave Plate"),
-    DOG_STATUE((byte) 3, "Dog statue"),
-    CAT_STATUE((byte) 4, "Cat statue"),
-    WOODEN_SWORD((byte) 5, "Wooden sword gravestone"),
-    STONE_SWORD((byte) 6, "Stone sword gravestone"),
-    IRON_SWORD((byte) 7, "Iron sword gravestone"),
-    GOLDEN_SWORD((byte) 8, "Golden sword gravestone"),
-    DIAMOND_SWORD((byte) 9, "Diamond sword gravestone");
+    VERTICAL_PLATE((byte) 0, "block.gravestone.gravestone"),
+    CROSS((byte) 1, "block.gravestone.cross"),
+    HORISONTAL_PLATE((byte) 2, "block.gravestone.plate"),
+    DOG_STATUE((byte) 3, "block.gravestone.dog_statue"),
+    CAT_STATUE((byte) 4, "block.gravestone.cat_statue"),
+    WOODEN_SWORD((byte) 5, "block.gravestone.wooden_sword"),
+    STONE_SWORD((byte) 6, "block.gravestone.stone_sword"),
+    IRON_SWORD((byte) 7, "block.gravestone.iron_sword"),
+    GOLDEN_SWORD((byte) 8, "block.gravestone.golden_sword"),
+    DIAMOND_SWORD((byte) 9, "block.gravestone.diamond_sword");
     private byte id;
     private String name;
     public static final byte GRAVES_COUNT = 10;
@@ -33,12 +34,13 @@ public enum EnumGraves {
     }
 
     public String getName() {
-        return this.name;
+        return LanguageRegistry.instance().getStringLocalization(this.name);
     }
 
     /**
-     * Returns the grave type with the specified ID, or VERTICAL_PLATE if none found.
-     * 
+     * Returns the grave type with the specified ID, or VERTICAL_PLATE if none
+     * found.
+     *
      * @param id Grave Id
      */
     public static EnumGraves getByID(int id) {

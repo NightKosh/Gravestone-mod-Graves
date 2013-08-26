@@ -1,5 +1,6 @@
-
 package GraveStone.block;
+
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
  * GraveStone mod
@@ -9,14 +10,14 @@ package GraveStone.block;
  */
 public enum EnumMemorials {
 
-    STONE_CROSS((byte) 0, "Cross Memorial"),
-    OBELISK((byte) 1, "Obelisk"),
-    STEVE_STATUE((byte) 2, "Steve statue"),
-    VILLAGER_STATUE((byte) 3, "Villager statue"),
-    ANGEL_STATUE((byte) 4, "Angel statue"),
-    DOG_STATUE((byte) 5, "Dog statue"),
-    CAT_STAUTE((byte) 6, "Cat statue"),
-    CREEPER_STATUE((byte) 7, "Creeper Statue");
+    STONE_CROSS((byte) 0, "block.memorial.cross"),
+    OBELISK((byte) 1, "block.memorial.obelisk"),
+    STEVE_STATUE((byte) 2, "block.memorial.steve_statue"),
+    VILLAGER_STATUE((byte) 3, "block.memorial.villager_statue"),
+    ANGEL_STATUE((byte) 4, "block.memorial.angel_statue"),
+    DOG_STATUE((byte) 5, "block.memorial.dog_statue"),
+    CAT_STAUTE((byte) 6, "block.memorial.cat_statue"),
+    CREEPER_STATUE((byte) 7, "block.memorial.creeper_statue");
     private byte id;
     private String name;
     public static final byte MEMORIALS_COUNT = 8;
@@ -31,12 +32,13 @@ public enum EnumMemorials {
     }
 
     public String getName() {
-        return this.name;
+        return LanguageRegistry.instance().getStringLocalization(this.name);
     }
 
     /**
-     * Returns the grave type with the specified ID, or VERTICAL_PLATE if none found.
-     * 
+     * Returns the grave type with the specified ID, or VERTICAL_PLATE if none
+     * found.
+     *
      * @param id Grave Id
      */
     public static EnumMemorials getByID(int id) {

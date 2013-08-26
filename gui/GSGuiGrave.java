@@ -2,6 +2,7 @@ package GraveStone.gui;
 
 import GraveStone.Resources;
 import GraveStone.tileentity.TileEntityGSGrave;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -38,10 +39,8 @@ public class GSGuiGrave extends GuiScreen {
     @Override
     public void initGui() {
         this.buttonList.clear();
-
         posX = (this.width - xSizeOfTexture) / 2;
         posY = (this.height - ySizeOfTexture) / 2;
-
         Keyboard.enableRepeatEvents(true);
         this.buttonList.add(button = new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120, "Done"));
         entityGrave.setEditable(false);
@@ -59,15 +58,12 @@ public class GSGuiGrave extends GuiScreen {
     @Override
     public void drawScreen(int x, int y, float f) {
         drawDefaultBackground();
-
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.renderEngine.func_110577_a(Resources.GRAVE_GUI);
-
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;
-
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
-        this.drawString(fontRenderer, "Set grave text", posX + 20, posY + 31, 16777215);
+        this.drawString(fontRenderer, LanguageRegistry.instance().getStringLocalization("gui.edit_grave"), posX + 20, posY + 31, 16777215);
         this.drawString(fontRenderer, graveText.toString(), posX + 20, posY + 41, 16777215);
         super.drawScreen(x, y, f);
     }
@@ -79,10 +75,10 @@ public class GSGuiGrave extends GuiScreen {
     @Override
     public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
-
         Packet250CustomPayload packet = new Packet250CustomPayload();
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         DataOutputStream data = new DataOutputStream(bytes);
+
         try {
             data.writeInt(entityGrave.xCoord);
             data.writeInt(entityGrave.yCoord);
@@ -91,16 +87,12 @@ public class GSGuiGrave extends GuiScreen {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         packet.channel = "GSDeathText";
         packet.data = bytes.toByteArray();
         packet.length = packet.data.length;
         ModLoader.getMinecraftInstance().getNetHandler().addToSendQueue(packet);
-        
-        //ModLoader.getMinecraftServerInstance().getConfigurationManager().sendPacketToAllPlayers(packet);
-        entityGrave.setDeathText(graveText.toString());
-
-
+        entityGrave.getDeathTextComponent().setDeathText(graveText.toString());
         entityGrave.setEditable(true);
     }
 

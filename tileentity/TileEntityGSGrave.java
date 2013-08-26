@@ -14,7 +14,6 @@ import net.minecraft.tileentity.TileEntity;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public abstract class TileEntityGSGrave extends TileEntity {
 
@@ -27,7 +26,7 @@ public abstract class TileEntityGSGrave extends TileEntity {
     public TileEntityGSGrave() {
         gSDeathText = new GSGraveStoneDeathText(this);
     }
-    
+
     public void setGraveType(byte graveType) {
         this.graveType = graveType;
     }
@@ -47,13 +46,14 @@ public abstract class TileEntityGSGrave extends TileEntity {
     }
 
     public void setGraveContent(Random random, boolean isPetGrave, boolean allLoot) {
-        gSDeathText.setRandomDeathText(random, graveType, false);
+        gSDeathText.setRandomDeathTextAndName(random, graveType, false);
         gSItems.setRandomGraveContent(random, isPetGrave, allLoot);
         setRandomAge();
     }
 
     /**
-     * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
+     * Sets the given item stack to the specified slot in the inventory (can be
+     * crafting or armor sections).
      */
     public void setInventorySlotContents(int slot, ItemStack itemStack) {
         gSItems.setInventorySlotContents(slot, itemStack);
@@ -74,16 +74,11 @@ public abstract class TileEntityGSGrave extends TileEntity {
         gSItems.dropAllItems();
     }
 
-    public String getDeathText() {
-        return gSDeathText.getDeathText();
+    public GSGraveStoneDeathText getDeathTextComponent() {
+        return gSDeathText;
     }
 
-    public void setDeathText(String text) {
-        gSDeathText.setDeathText(text);
-        
-        this.onInventoryChanged();
-    }
-
+    //this.onInventoryChanged();
     public int getAge() {
         return age;
     }
@@ -94,28 +89,30 @@ public abstract class TileEntityGSGrave extends TileEntity {
 
     protected void setRandomAge() {
         age = 10 + (new Random()).nextInt(100);
-}
+    }
+
     public boolean isEditable() {
         return isEditable;
     }
 
-    @SideOnly(Side.CLIENT)
     /**
      * Sets the grave's isEditable flag to the specified parameter.
      */
-    public void setEditable(boolean par1) {
-        isEditable = par1;
+    @SideOnly(Side.CLIENT)
+    public void setEditable(boolean isEditable) {
+        this.isEditable = isEditable;
     }
 
     /**
      * Called when you receive a TileEntityData packet for the location this
      * TileEntity is currently in. On the client, the NetworkManager will always
-     * be the remote server. On the server, it will be whomever is responsible for
-     * sending the packet.
+     * be the remote server. On the server, it will be whomever is responsible
+     * for sending the packet.
      *
      * @param net The NetworkManager the packet originated from
      * @param pkt The data packet
      */
+    @Override
     public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
         readFromNBT(packet.customParam1);
     }

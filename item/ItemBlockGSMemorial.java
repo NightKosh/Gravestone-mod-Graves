@@ -32,11 +32,13 @@ public class ItemBlockGSMemorial extends ItemBlock {
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
         EnumMemorials memorialType;
+
         if (itemStack.stackTagCompound != null && itemStack.stackTagCompound.hasKey("GraveType")) {
             memorialType = EnumMemorials.getByID(itemStack.stackTagCompound.getByte("GraveType"));
         } else {
             memorialType = EnumMemorials.getByID(0);
         }
+
         return getUnlocalizedName() + "." + memorialType.getName();
     }
 
@@ -52,7 +54,8 @@ public class ItemBlockGSMemorial extends ItemBlock {
         if (stack.stackTagCompound == null) {
             stack.setTagCompound(new NBTTagCompound());
         }
-        if (stack.stackTagCompound.hasKey("DeathText") && !stack.stackTagCompound.getString("DeathText").equals("")) {
+
+        if (stack.stackTagCompound.hasKey("DeathText") && stack.stackTagCompound.getString("DeathText").length() != 0) {
             list.add(stack.stackTagCompound.getString("DeathText"));
         }
     }
@@ -65,22 +68,26 @@ public class ItemBlockGSMemorial extends ItemBlock {
     @SideOnly(Side.CLIENT)
     public boolean canPlaceItemBlockOnSide(World world, int x, int y, int z, int side, EntityPlayer player, ItemStack stack) {
         if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("GraveType")) {
-
             switch (side) {
                 case 0:
                     return false;
+
                 case 1:
                     y++;
                     break;
+
                 case 2:
                     z--;
                     break;
+
                 case 3:
                     z++;
                     break;
+
                 case 4:
                     x--;
                     break;
+
                 case 5:
                     x++;
                     break;
@@ -92,6 +99,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
             byte maxZ = 1;
             byte startX = 0;
             byte startZ = 0;
+
             switch (memorialType) {
                 case 0:
                 case 1:
@@ -101,10 +109,12 @@ public class ItemBlockGSMemorial extends ItemBlock {
                     startX = -1;
                     startZ = -1;
                     break;
+
                 case 5:
                 case 6:
                     maxY = 2;
                     break;
+
                 default:
                     maxY = 3;
                     break;
@@ -120,6 +130,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
                 }
             }
         }
+
         return true;
     }
 }

@@ -10,7 +10,9 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
@@ -28,6 +30,7 @@ public class EventHookGSGraveStone {
             if (!GraveStoneConfig.generateGravesInLava && event.source.damageType.equals("lava")) {
                 return;
             }
+
             if (GraveStoneConfig.generatePlayerGraves && event.entityLiving instanceof EntityPlayer) {
                 createPlayerGrave((EntityPlayer) event.entity, event);
             } else {
@@ -39,6 +42,7 @@ public class EventHookGSGraveStone {
                     createPetGrave(event.entity, event);
                 }
             }
+
             // drop creeper statue if entity is a charged creeper
             if (event.entity instanceof EntityCreeper && ((EntityCreeper) event.entity).getPowered()) {
                 ModGraveStone.memorial.dropCreeperMemorial(event.entity.worldObj, (int) event.entity.posX,
@@ -60,18 +64,33 @@ public class EventHookGSGraveStone {
     }
 
     private void createGrave(Entity entity, LivingDeathEvent event, ItemStack[] items, int age, byte entityType) {
-       ModGraveStone.graveStone.createOnDeath(entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
-                event.source.getDeathMessage((EntityLivingBase) entity).toString(), MathHelper.floor_float(entity.rotationYaw), items, age, entityType);
+        ModGraveStone.graveStone.createOnDeath(entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
+                getDeathMessage((EntityLivingBase) entity, event.source.damageType),
+                MathHelper.floor_float(entity.rotationYaw), items, age, entityType);
     }
 
     private void createPetGrave(Entity entity, LivingDeathEvent event) {
         EntityTameable pet = (EntityTameable) entity;
+
         if (pet.isTamed()) {
             if (pet instanceof EntityWolf) {
                 createGrave(entity, event, null, pet.getAge(), (byte) 1);
             } else if (pet instanceof EntityOcelot) {
                 createGrave(entity, event, null, pet.getAge(), (byte) 2);
             }
+        }
+    }
+
+    private String[] getDeathMessage(EntityLivingBase entity, String damageType) {
+        EntityLivingBase killer = entity.func_94060_bK();
+        String shortString = "death.attack." + damageType;
+        String fullString = shortString + ".player";
+        
+            System.out.println("!!! " + ChatMessageComponent.func_111082_b(fullString, new Object[] {entity.getTranslatedEntityName(), killer.getTranslatedEntityName()}).toString());
+        if (killer != null && StatCollector.func_94522_b(fullString)) {
+            return new String[] {entity.getTranslatedEntityName(), fullString, killer.getTranslatedEntityName()};
+        } else {
+            return new String[] {entity.getTranslatedEntityName(), shortString, ""};
         }
     }
 }

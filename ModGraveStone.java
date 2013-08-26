@@ -6,6 +6,7 @@ import GraveStone.block.BlockGSTimeTrap;
 import GraveStone.block.BlockGSWitherSpawner;
 import GraveStone.block.EnumGraves;
 import GraveStone.block.EnumMemorials;
+import GraveStone.core.localization.GraveStoneLocalizationHandler;
 import GraveStone.gui.GuiHandler;
 import GraveStone.item.ItemBlockGSGraveStone;
 import GraveStone.item.ItemBlockGSMemorial;
@@ -67,13 +68,13 @@ public class ModGraveStone {
     public void preInit(FMLPreInitializationEvent event) {
         GraveStoneLogger.preinit();
         GraveStoneConfig.getInstance(event.getModConfigurationDirectory().getAbsolutePath() + "/GraveStoneMod/", "GraveStone.cfg");
+        GraveStoneLocalizationHandler.init();
     }
 
     @Init
     public void load(FMLInitializationEvent event) {
         // register death event
         MinecraftForge.EVENT_BUS.register(new EventHookGSGraveStone());
-
         // creative tab
         creativeTab = new CreativeTabs("tabGraveStone") {
             public ItemStack getIconItemStack() {
@@ -85,41 +86,40 @@ public class ModGraveStone {
             }
         };
         LanguageRegistry.instance().addStringLocalization("itemGroup.tabGraveStone", "en_US", "Gravestone");
-
         // gravestone
         graveStone = new BlockGSGraveStone(GraveStoneConfig.graveStoneID);
         GameRegistry.registerBlock(graveStone, ItemBlockGSGraveStone.class);
+
         for (byte i = 0; i < EnumGraves.GRAVES_COUNT; i++) {
             ItemStack graveStoneStack = new ItemStack(graveStone, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", i);
+
             if (BlockGSGraveStone.isSwordGrave(i)) {
                 nbt.setByte("SwordType", BlockGSGraveStone.graveTypeToSwordType(i));
             }
+
             graveStoneStack.setTagCompound(nbt);
             LanguageRegistry.addName(graveStoneStack, EnumGraves.getByID(i).getName());
         }
+
         MinecraftForge.setBlockHarvestLevel(graveStone, "pickaxe", 1);
-
-
         // wither spawner
         witherSpawner = new BlockGSWitherSpawner(GraveStoneConfig.witherSpawnerID);
         GameRegistry.registerBlock(witherSpawner, "GSWitherSpawner");
         LanguageRegistry.addName(witherSpawner, "Wither spawner");
         MinecraftForge.setBlockHarvestLevel(witherSpawner, "pickaxe", 1);
-
-
         // time trap
         timeTrap = new BlockGSTimeTrap(GraveStoneConfig.timeTrapID);
         GameRegistry.registerBlock(timeTrap, "GSTimeTrap");
         LanguageRegistry.addName(timeTrap, "Night stone");
         MinecraftForge.setBlockHarvestLevel(timeTrap, "pickaxe", 1);
-
         // memorials
         memorial = new BlockGSMemorial(GraveStoneConfig.memorialID);
         GameRegistry.registerBlock(memorial, "GSMemorial");
         LanguageRegistry.addName(memorial, "Memorial");
         GameRegistry.registerBlock(memorial, ItemBlockGSMemorial.class);
+
         for (byte i = 0; i < EnumMemorials.MEMORIALS_COUNT; i++) {
             ItemStack memorialStack = new ItemStack(memorial, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
@@ -127,31 +127,24 @@ public class ModGraveStone {
             memorialStack.setTagCompound(nbt);
             LanguageRegistry.addName(memorialStack, EnumMemorials.getByID(i).getName());
         }
-        MinecraftForge.setBlockHarvestLevel(memorial, "pickaxe", 2);
 
+        MinecraftForge.setBlockHarvestLevel(memorial, "pickaxe", 2);
         // chisel
         chisel = new ItemGSChisel(GraveStoneConfig.chiselId);
         LanguageRegistry.addName(chisel, "Chisel");
-
         // chisel reciep
         GameRegistry.addRecipe(new ItemStack(chisel), "   ", "y  ", "x  ", 'x', Item.stick, 'y', Item.ingotIron);
-
-
         // register GraveStone tile entity
         GameRegistry.registerTileEntity(TileEntityGSGraveStone.class, "GraveStoneTE");
-        // register Memorial tile entity 
+        // register Memorial tile entity
         GameRegistry.registerTileEntity(TileEntityGSMemorial.class, "Memorial");
         // register Wither Spawner tile entity
         GameRegistry.registerTileEntity(TileEntityGSWitherSpawner.class, "GSWither Spawner");
-
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
-
         // register structures
         GraveStoneStructures.getInstance();
-
         // register entitys
         GraveStoneEntity.getInstance();
-
         proxy.registerRenderers();
     }
 
@@ -161,26 +154,30 @@ public class ModGraveStone {
         if (Loader.isModLoaded("MoCreatures")) {
             GraveStoneMobSpawn.addMoCreaturesMobs();
         }
+
         if (Loader.isModLoaded("TwilightForest")) {
             GraveStoneMobSpawn.addTwilightForestMobs();
         }
-        
+
         // adding foreign bioms
         if (Loader.isModLoaded("Highlands")) {
             GraveStoneBiomes.addHighlandsBiomes();
         }
+
         if (Loader.isModLoaded("BiomesOPlenty")) {
             GraveStoneBiomes.addBiomsOPlentyBiomes();
         }
+
         if (Loader.isModLoaded("ExtrabiomesXL")) {
             GraveStoneBiomes.addExtrabiomsXLBiomes();
         }
+
         /*
-        // adding Thaumcraft aspects
-        if (Loader.isModLoaded("ExtrabiomesXL")) {
-            GSThaumcraft.addAspects();
-        }
-        * */
+         // adding Thaumcraft aspects
+         if (Loader.isModLoaded("ExtrabiomesXL")) {
+         GSThaumcraft.addAspects();
+         }
+         * */
         GraveStoneLogger.logInfo(ModInfo.NAME + " has loaded successfully.");
     }
 }

@@ -1,0 +1,41 @@
+# blocks
+## graves
+block.gravestone.gravestone=Gravestone
+block.gravestone.cross=Cross
+block.gravestone.plate=Grave Plate
+block.gravestone.dog_statue=Dog statue
+block.gravestone.cat_statue=Cat statue
+block.gravestone.wooden_sword=Wooden sword gravestone
+block.gravestone.stone_sword=Stone sword gravestone
+block.gravestone.iron_sword=Iron sword gravestone
+block.gravestone.golden_sword=Golden sword gravestone
+block.gravestone.diamond_sword=Diamond sword gravestone
+## memorials
+block.memorial.cross=Cross Memorial
+block.memorial.obelisk=Obelisk
+block.memorial.steve_statue=Steve statue
+block.memorial.villager_statue=Villager statue
+block.memorial.angel_statue=Angel statue
+block.memorial.dog_statue=Dog statue
+block.memorial.cat_statue=Cat statue
+block.memorial.creeper_statue=Creeper statue
+
+
+# items
+item.chisel.name=Chisel
+## graves
+item.grave.age=Had lived
+item.grave.days=days
+item.grave.sword_name=Sword name
+item.grave.sword_damage=Sword damage
+
+
+# gui
+gui.edit_grave=Set grave text
+
+
+# entity
+entity.GSZombieDog.name=Zombie Dog
+entity.GSSkeletonDog.name=Skeleton Dog
+entity.GSZombieCat.name=Zombie Cat
+entity.GSSkeletonCat.name=Skeleton Cat

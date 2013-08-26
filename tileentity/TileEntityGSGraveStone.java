@@ -15,7 +15,6 @@ import net.minecraft.world.World;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
@@ -58,6 +57,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         if (par1 == 1 && this.worldObj.isRemote) {
             gsSpawn.setMinDelay();
         }
+
         return true;
     }
 
@@ -67,16 +67,12 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
     @Override
     public void readFromNBT(NBTTagCompound nbtTag) {
         super.readFromNBT(nbtTag);
-
         // grave type
         readType(nbtTag);
-
         // grave spawn
         gsSpawn.readSpawn(nbtTag);
-
         // grave loot
         gSItems.readItems(nbtTag);
-
         // death text
         gSDeathText.readText(nbtTag);
 
@@ -97,19 +93,14 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
     @Override
     public void writeToNBT(NBTTagCompound nbtTag) {
         super.writeToNBT(nbtTag);
-
         // grave type
         saveType(nbtTag);
-
         // grave spawn
         gsSpawn.saveSpawn(nbtTag);
-
         // grave loot
         gSItems.saveItems(nbtTag);
-
         // death text
         gSDeathText.saveText(nbtTag);
-
         // age
         nbtTag.setInteger("Age", age);
 
@@ -157,11 +148,10 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
     /*
      * Set sword enchantment
      */
-    
     public NBTTagCompound getEnchantment() {
         return this.swordNBT;
     }
-    
+
     /*
      * Set sword type
      */
@@ -186,11 +176,10 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
     /*
      * Set sword enchantment
      */
-    
     public void setEnchantment(NBTTagCompound swordNBT) {
         this.swordNBT = swordNBT;
     }
-    
+
     /**
      * Check is sword have enchantments
      */
@@ -198,30 +187,37 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         if (this.swordNBT != null && this.swordNBT.hasKey("ench")) {
             return this.swordNBT.getTagList("ench").tagCount() != 0;
         }
+
         return false;
     }
-    
+
     /*
      * Drop sword as item
      */
     public void dropSword() {
         int id;
+
         switch (swordType) {
             case 5:
                 id = Item.swordDiamond.itemID;
                 break;
+
             case 3:
                 id = Item.swordIron.itemID;
                 break;
+
             case 2:
                 id = Item.swordStone.itemID;
                 break;
+
             case 4:
                 id = Item.swordGold.itemID;
                 break;
+
             default:
                 id = Item.swordWood.itemID;
         }
+
         ItemStack sword = new ItemStack(id, 1, swordDamage);
         sword.setItemName(swordName);
         sword.setTagCompound(swordNBT);
