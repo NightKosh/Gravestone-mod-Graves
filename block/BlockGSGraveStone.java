@@ -348,7 +348,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 Entity mob = GraveStoneMobSpawn.getMobEntity(world, tileEntity.getGraveType(), x, y, z);
 
                 if (mob != null) {
-                    GraveStoneMobSpawn.spawnMob(world, mob, x, y, z);
+                    GraveStoneMobSpawn.spawnMob(world, mob, x, y, z, false);
                 }
             }
         }
@@ -411,7 +411,6 @@ public class BlockGSGraveStone extends BlockContainer {
      */
     @Override
     public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune) {
-        spawnMob(world, x, y, z);
         ArrayList<ItemStack> ret = new ArrayList();
 
         if (!GraveStoneConfig.silkTouchForGraves) {
@@ -420,7 +419,7 @@ public class BlockGSGraveStone extends BlockContainer {
             TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
 
             if (tileEntity != null && isSwordGrave(tileEntity)) {
-                tileEntity.dropSword();
+                ret.add(tileEntity.getSwordItem());
             }
         }
 
@@ -488,6 +487,15 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     public int getRenderType() {
         return GraveStoneConfig.graveRenderID;
+    }
+    
+    
+    /**
+     * Called right before the block is destroyed by a player.  Args: world, x, y, z, metaData
+     */
+    @Override
+    public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
+        spawnMob(world, x, y, z);
     }
 
     /**

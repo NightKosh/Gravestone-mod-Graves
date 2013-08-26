@@ -107,7 +107,7 @@ public class GSGraveStoneSpawn {
                     return;
                 }
 
-                if (GraveStoneMobSpawn.checkChance(this.tileEntity.worldObj.rand) && GraveStoneMobSpawn.spawnMob(this.tileEntity.worldObj, this.spawnedMob, this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord)) {
+                if (GraveStoneMobSpawn.checkChance(this.tileEntity.worldObj.rand) && GraveStoneMobSpawn.spawnMob(this.tileEntity.worldObj, this.spawnedMob, this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord, true)) {
                     this.updateDelay();
                     this.getNewMob = true;
                 }

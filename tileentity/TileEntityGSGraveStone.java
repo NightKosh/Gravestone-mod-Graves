@@ -195,6 +195,14 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
      * Drop sword as item
      */
     public void dropSword() {
+        ItemStack sword = getSwordItem();
+        this.gSItems.dropItem(sword, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+    }
+    
+    /**
+     * Return sword as ItemStack
+     */
+    public ItemStack getSwordItem() {
         int id;
 
         switch (swordType) {
@@ -221,7 +229,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         ItemStack sword = new ItemStack(id, 1, swordDamage);
         sword.setItemName(swordName);
         sword.setTagCompound(swordNBT);
-        this.gSItems.dropItem(sword, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+        return sword;
     }
 
     public EnumGraves getGraveType() {
