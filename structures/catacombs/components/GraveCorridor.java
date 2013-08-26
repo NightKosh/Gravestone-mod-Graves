@@ -2,8 +2,8 @@ package GraveStone.structures.catacombs.components;
 
 import java.util.Random;
 import GraveStone.GraveStoneConfig;
-import GraveStone.block.BlockGSGraveStone;
 import GraveStone.block.BlockGSGraveStone.EnumGraveType;
+import GraveStone.block.GraveStoneHelper;
 import GraveStone.structures.BoundingBoxHelper;
 import GraveStone.structures.GraveGenerationHelper;
 import GraveStone.structures.MobSpawnHelper;
@@ -37,32 +37,38 @@ public class GraveCorridor extends CatacombsBaseComponent {
      */
     @Override
     public boolean addComponentParts(World world, Random random) {
-        //printCoord();
         this.fillWithAir(world, boundingBox, 1, 1, 1, 5, 3, 3);
         this.fillWithAir(world, boundingBox, 2, 1, 0, 4, 3, 0);
+        
         // block floor
         this.fillWithRandomizedBlocks(world, boundingBox, 2, 0, 1, 4, 0, 3, false, random, getCemeteryCatacombsStones());
+        
         // trap floor
         this.fillWithBlocks(world, boundingBox, 1, 0, 0, 5, 0, 0, GraveStoneConfig.timeTrapID, GraveStoneConfig.timeTrapID, false);
+        
         // neter floor
         this.fillWithBlocks(world, boundingBox, 1, 0, 4, 5, 0, 4, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 1, 0, 1, 1, 0, 3, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 5, 0, 1, 5, 0, 3, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // neter ceiling
         this.fillWithBlocks(world, boundingBox, 1, 4, 0, 5, 4, 4, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // block walls
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 0, 1, 0, 4, 3, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 6, 0, 1, 6, 4, 3, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 2, 0, 4, 4, 4, 4, false, random, getCemeteryCatacombsStones());
+        
         // nether walls
         this.fillWithBlocks(world, boundingBox, 1, 1, 0, 1, 3, 0, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 1, 1, 4, 1, 3, 4, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 5, 1, 0, 5, 3, 0, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 5, 1, 4, 5, 3, 4, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // graves
-        byte graveType = BlockGSGraveStone.getGraveType(random, EnumGraveType.ALL_GRAVES);
-        int metaLeft = BlockGSGraveStone.getMetaDirection(getLeftItemDirection(coordBaseMode));
-        int metaRight = BlockGSGraveStone.getMetaDirection(getRightItemDirection(coordBaseMode));
+        byte graveType = GraveStoneHelper.getGraveType(random, EnumGraveType.ALL_GRAVES);
+        int metaLeft = GraveStoneHelper.getMetaDirection(getLeftItemDirection(coordBaseMode));
+        int metaRight = GraveStoneHelper.getMetaDirection(getRightItemDirection(coordBaseMode));
         GraveGenerationHelper.fillGraves(this, world, random, 1, 1, 1, 1, 1, 3, metaLeft, graveType, true);
         GraveGenerationHelper.fillGraves(this, world, random, 5, 1, 1, 5, 1, 3, metaRight, graveType, true);
 
@@ -73,10 +79,12 @@ public class GraveCorridor extends CatacombsBaseComponent {
 
         // spawn bats
         MobSpawnHelper.spawnBats(world, random, boundingBox);
+        
         // web
         this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 2, 2, 1, Block.web.blockID, 0);
         this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 4, 1, 2, Block.web.blockID, 0);
         this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 3, 3, 3, Block.web.blockID, 0);
+        
         return true;
     }
 }

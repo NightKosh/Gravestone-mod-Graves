@@ -39,9 +39,11 @@ public class StatuesHall extends CatacombsBaseComponent {
     public boolean addComponentParts(World world, Random random) {
         this.fillWithAir(world, boundingBox, 1, 1, 1, 9, 4, 17);
         this.fillWithAir(world, boundingBox, 4, 1, 0, 6, 3, 0);
+        
         // blocks floor and ceiling
         this.fillWithRandomizedBlocks(world, boundingBox, 1, 0, 1, 9, 0, 17, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 1, 5, 1, 9, 5, 17, false, random, getCemeteryCatacombsStones());
+        
         // blocks wall
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 1, 1, 0, 4, 17, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 10, 1, 1, 10, 4, 17, false, random, getCemeteryCatacombsStones());
@@ -49,6 +51,7 @@ public class StatuesHall extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 8, 1, 0, 9, 4, 0, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 18, 2, 4, 18, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 8, 1, 18, 9, 4, 18, false, random, getCemeteryCatacombsStones());
+        
         // nether floor and ceiling
         this.fillWithBlocks(world, boundingBox, 0, 0, 0, 0, 0, 18, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 3, 0, 0, 3, 0, 18, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
@@ -72,6 +75,7 @@ public class StatuesHall extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 1, 5, 12, 9, 5, 12, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 1, 5, 15, 9, 5, 15, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 1, 5, 18, 9, 5, 18, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // nether wall
         this.fillWithBlocks(world, boundingBox, 0, 1, 0, 0, 4, 0, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 0, 1, 3, 0, 4, 3, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
@@ -93,6 +97,7 @@ public class StatuesHall extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 3, 1, 18, 3, 4, 18, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 7, 1, 18, 7, 4, 18, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 3, 4, 18, 7, 4, 18, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // spawners
         ObjectsGenerationHelper.generateSpawner(this, world, 3, 0, 3, GraveStoneMobSpawn.getMobForStatueSpawner(random));
         ObjectsGenerationHelper.generateSpawner(this, world, 3, 0, 9, GraveStoneMobSpawn.getMobForStatueSpawner(random));
@@ -100,11 +105,13 @@ public class StatuesHall extends CatacombsBaseComponent {
         ObjectsGenerationHelper.generateSpawner(this, world, 7, 0, 3, GraveStoneMobSpawn.getMobForStatueSpawner(random));
         ObjectsGenerationHelper.generateSpawner(this, world, 7, 0, 9, GraveStoneMobSpawn.getMobForStatueSpawner(random));
         ObjectsGenerationHelper.generateSpawner(this, world, 7, 0, 15, GraveStoneMobSpawn.getMobForStatueSpawner(random));
+        
         // loot chests
         ObjectsGenerationHelper.generateChest(this, world, random, 3, 0, 6, false);
         ObjectsGenerationHelper.generateChest(this, world, random, 3, 0, 12, false);
         ObjectsGenerationHelper.generateChest(this, world, random, 7, 0, 6, false);
         ObjectsGenerationHelper.generateChest(this, world, random, 7, 0, 12, false);
+        
         // statues
         byte memorialType = BlockGSMemorial.getMemorialType(random, 5);
         int metaLeft = BlockGSMemorial.getMetaDirection(getLeftItemDirection(coordBaseMode));
@@ -119,7 +126,9 @@ public class StatuesHall extends CatacombsBaseComponent {
         MemorialGenerationHelper.placeMemorial(this, world, random, 7, 1, 9, metaRight, memorialType);
         MemorialGenerationHelper.placeMemorial(this, world, random, 7, 1, 12, metaRight, memorialType);
         MemorialGenerationHelper.placeMemorial(this, world, random, 7, 1, 15, metaRight, memorialType);
+        
         this.fillWithAir(world, boundingBox, 4, 1, 18, 6, 3, 18);
+        
         // spawn bats
         MobSpawnHelper.spawnBats(world, random, boundingBox);
         return true;

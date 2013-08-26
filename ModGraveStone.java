@@ -7,6 +7,7 @@ import GraveStone.block.BlockGSTimeTrap;
 import GraveStone.block.BlockGSWitherSpawner;
 import GraveStone.block.EnumGraves;
 import GraveStone.block.EnumMemorials;
+import GraveStone.block.GraveStoneHelper;
 import GraveStone.core.localization.GraveStoneLocalizationHandler;
 import GraveStone.gui.GuiHandler;
 import GraveStone.item.ItemBlockGSGraveStone;
@@ -97,8 +98,8 @@ public class ModGraveStone {
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", i);
 
-            if (BlockGSGraveStone.isSwordGrave(i)) {
-                nbt.setByte("SwordType", BlockGSGraveStone.graveTypeToSwordType(i));
+            if (GraveStoneHelper.isSwordGrave(i)) {
+                nbt.setByte("SwordType", GraveStoneHelper.graveTypeToSwordType(i));
             }
 
             graveStoneStack.setTagCompound(nbt);

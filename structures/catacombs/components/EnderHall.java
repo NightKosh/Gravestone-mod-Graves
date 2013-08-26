@@ -34,10 +34,11 @@ public class EnderHall extends CatacombsBaseComponent {
      */
     @Override
     public boolean addComponentParts(World world, Random random) {
-        //printCoord();
         this.fillWithAir(world, boundingBox, 1, 1, 1, 11, 3, 17);
+        
         // block floor
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 0, 0, 12, 0, 18, false, random, getCemeteryCatacombsStones());
+        
         // neter floor
         this.fillWithBlocks(world, boundingBox, 0, 0, 3, 12, 0, 3, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 0, 0, 6, 12, 0, 6, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
@@ -47,8 +48,10 @@ public class EnderHall extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 3, 0, 1, 3, 0, 17, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 6, 0, 1, 6, 0, 17, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 9, 0, 1, 9, 0, 17, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // neter ceiling
         this.fillWithBlocks(world, boundingBox, 0, 4, 0, 12, 4, 18, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // block walls
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 1, 0, 0, 3, 18, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 12, 1, 0, 12, 3, 18, false, random, getCemeteryCatacombsStones());
@@ -56,6 +59,7 @@ public class EnderHall extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 10, 1, 0, 11, 3, 0, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 18, 2, 3, 18, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 10, 1, 18, 11, 3, 18, false, random, getCemeteryCatacombsStones());
+        
         // nether walls
         this.fillWithBlocks(world, boundingBox, 3, 0, 0, 9, 3, 0, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 3, 0, 18, 9, 3, 18, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
@@ -69,6 +73,7 @@ public class EnderHall extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 12, 1, 9, 12, 3, 9, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 12, 1, 12, 12, 3, 12, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 12, 1, 15, 12, 3, 15, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // nether columns
         this.fillWithBlocks(world, boundingBox, 3, 1, 3, 3, 3, 3, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 3, 1, 6, 3, 3, 6, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
@@ -85,20 +90,25 @@ public class EnderHall extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 9, 1, 9, 9, 3, 9, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 9, 1, 12, 9, 3, 12, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 9, 1, 15, 9, 3, 15, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // trap floor
         this.fillWithBlocks(world, boundingBox, 4, 0, 3, 8, 0, 3, GraveStoneConfig.timeTrapID, GraveStoneConfig.timeTrapID, false);
         this.fillWithBlocks(world, boundingBox, 4, 0, 15, 8, 0, 15, GraveStoneConfig.timeTrapID, GraveStoneConfig.timeTrapID, false);
+        
         // spawner
         ObjectsGenerationHelper.generateSpawner(this, world, 3, 0, 3, "Enderman");
         ObjectsGenerationHelper.generateSpawner(this, world, 9, 0, 3, "Enderman");
         ObjectsGenerationHelper.generateSpawner(this, world, 6, 0, 9, "Enderman");
         ObjectsGenerationHelper.generateSpawner(this, world, 3, 0, 15, "Enderman");
         ObjectsGenerationHelper.generateSpawner(this, world, 9, 0, 15, "Enderman");
+        
         // fiil exit
         this.fillWithRandomizedBlocks(world, boundingBox, 5, 1, 18, 7, 3, 18, false, random, getCemeteryCatacombsStones());
         this.fillWithAir(world, boundingBox, 5, 1, 0, 7, 3, 0);
+        
         // spawn bats
         MobSpawnHelper.spawnBats(world, random, boundingBox);
+        
         // web
         this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 1, 2, 1, Block.web.blockID, 0);
         this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 2, 3, 1, Block.web.blockID, 0);
@@ -129,6 +139,7 @@ public class EnderHall extends CatacombsBaseComponent {
         this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 2, 2, 17, Block.web.blockID, 0);
         this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 8, 1, 17, Block.web.blockID, 0);
         this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 11, 3, 17, Block.web.blockID, 0);
+        
         return true;
     }
 }

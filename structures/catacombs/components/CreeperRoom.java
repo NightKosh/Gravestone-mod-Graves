@@ -35,21 +35,18 @@ public class CreeperRoom extends CatacombsBaseComponent {
                 rightXEnd = 0;
                 rightZEnd = 3;
                 break;
-
             case 1:
                 leftXEnd = 10;
                 leftZEnd = 7;
                 rightXEnd = 0;
                 rightZEnd = 7;
                 break;
-
             case 2:
                 leftXEnd = 0;
                 leftZEnd = 7;
                 rightXEnd = 10;
                 rightZEnd = 7;
                 break;
-
             case 3:
                 leftXEnd = 0;
                 leftZEnd = 3;
@@ -67,20 +64,25 @@ public class CreeperRoom extends CatacombsBaseComponent {
     public boolean addComponentParts(World world, Random random) {
         this.fillWithAir(world, boundingBox, 1, 1, 1, 9, 12, 9);
         buildTopPart(world, random, 8);
+        
         // columns
         this.fillWithBlocks(world, boundingBox, 4, 1, 4, 4, 8, 4, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 4, 1, 6, 4, 8, 6, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 6, 1, 4, 6, 8, 4, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 6, 1, 6, 6, 8, 6, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // bottom
         this.fillWithBlocks(world, boundingBox, 0, 0, 0, 10, 0, 10, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // lava
         this.fillWithBlocks(world, boundingBox, 1, 1, 1, 9, 2, 9, Block.lavaStill.blockID, Block.lavaStill.blockID, false);
+        
         // bottom walls
         this.fillWithBlocks(world, boundingBox, 0, 1, 0, 10, 8, 0, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 0, 1, 10, 10, 8, 10, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 0, 1, 1, 0, 8, 9, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 10, 1, 1, 10, 8, 9, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         return true;
     }
 
@@ -94,6 +96,7 @@ public class CreeperRoom extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 7, yStart, 4, 9, yStart, 4, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 1, yStart, 6, 3, yStart, 6, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 7, yStart, 6, 9, yStart, 6, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // stoneBrick floor
         this.fillWithRandomizedBlocks(world, boundingBox, 5, yStart, 1, 5, yStart, 4, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 5, yStart, 6, 5, yStart, 9, false, random, getCemeteryCatacombsStones());
@@ -107,8 +110,10 @@ public class CreeperRoom extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 7, yStart, 9, 9, yStart, 9, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 1, yStart, 7, 1, yStart, 8, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 9, yStart, 7, 9, yStart, 8, false, random, getCemeteryCatacombsStones());
+        
         // spawner
         ObjectsGenerationHelper.generateSpawner(this, world, 5, yStart, 5, "Creeper");
+        
         // nether ceiling
         int ceilingLevel = yStart + 5;
         this.fillWithBlocks(world, boundingBox, 4, ceilingLevel, 1, 4, ceilingLevel, 4, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
@@ -123,6 +128,7 @@ public class CreeperRoom extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 0, ceilingLevel, 10, 10, ceilingLevel, 10, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 1, ceilingLevel, 0, 9, ceilingLevel, 0, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 1, ceilingLevel, 10, 9, ceilingLevel, 10, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // stoneBrick ceiling
         this.fillWithRandomizedBlocks(world, boundingBox, 5, ceilingLevel, 1, 5, ceilingLevel, 4, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 5, ceilingLevel, 6, 5, ceilingLevel, 9, false, random, getCemeteryCatacombsStones());
@@ -132,14 +138,17 @@ public class CreeperRoom extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 7, ceilingLevel, 1, 9, ceilingLevel, 3, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 1, ceilingLevel, 7, 3, ceilingLevel, 9, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 7, ceilingLevel, 7, 9, ceilingLevel, 9, false, random, getCemeteryCatacombsStones());
+        
         // valueable block
         int valueableBlock = getValuableBlock(random);
         this.placeBlockAtCurrentPosition(world, valueableBlock, 0, 5, ceilingLevel, 5, boundingBox);
+        
         // nether walls
         this.fillWithBlocks(world, boundingBox, 0, yStart + 1, 0, 0, yStart + 4, 0, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 10, yStart + 1, 0, 10, yStart + 4, 0, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 0, yStart + 1, 10, 0, yStart + 4, 10, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 10, yStart + 1, 10, 10, yStart + 4, 10, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // stoneBrick walls
         this.fillWithRandomizedBlocks(world, boundingBox, 1, yStart + 1, 0, 2, yStart + 4, 0, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 8, yStart + 1, 0, 9, yStart + 4, 0, false, random, getCemeteryCatacombsStones());
@@ -149,6 +158,7 @@ public class CreeperRoom extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 0, yStart + 1, 8, 0, yStart + 4, 9, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 10, yStart + 1, 1, 10, yStart + 4, 2, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 10, yStart + 1, 8, 10, yStart + 4, 9, false, random, getCemeteryCatacombsStones());
+        
         // doors
         this.fillWithBlocks(world, boundingBox, 3, yStart + 1, 0, 7, yStart + 4, 0, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 3, yStart + 1, 10, 7, yStart + 4, 10, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
@@ -157,12 +167,15 @@ public class CreeperRoom extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 4, yStart + 1, 10, 6, yStart + 3, 10, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 0, yStart + 1, 4, 0, yStart + 3, 6, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 10, yStart + 1, 4, 10, yStart + 3, 6, false, random, getCemeteryCatacombsStones());
+        
         // fill exit
         this.fillWithRandomizedBlocks(world, boundingBox, 5, yStart + 1, 12, 7, yStart + 3, 12, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 0, yStart + 1, 5, 0, yStart + 3, 7, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 12, yStart + 1, 5, 12, yStart + 3, 7, false, random, getCemeteryCatacombsStones());
+        
         // creeper statue
         MemorialGenerationHelper.placeMemorial(this, world, random, 5, yStart + 1, 5, BlockGSMemorial.getMetaDirection(coordBaseMode), BlockGSMemorial.getMemorialType(random, 4));
+        
         // clear enter
         this.fillWithAir(world, boundingBox, 4, yStart + 1, 0, 6, yStart + 3, 0);
     }

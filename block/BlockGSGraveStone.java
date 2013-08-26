@@ -1,14 +1,13 @@
 package GraveStone.block;
 
 import GraveStone.GraveStoneConfig;
-import GraveStone.GraveStoneMobSpawn;
 import GraveStone.ModGraveStone;
+import static GraveStone.block.GraveStoneHelper.getMetadataBasedOnRotation;
 import GraveStone.tileentity.GSGraveStoneItems;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -16,7 +15,6 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -71,7 +69,7 @@ public class BlockGSGraveStone extends BlockContainer {
      */
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack itemStack) {
-        replaceGround(world, x, y - 1, z);
+        GraveStoneHelper.replaceGround(world, x, y - 1, z);
         int direction = MathHelper.floor_float(player.rotationYaw);
 
         if (direction < 0) {
@@ -129,41 +127,13 @@ public class BlockGSGraveStone extends BlockContainer {
         }
     }
 
-    private static int getMetadataBasedOnRotation(int rotation) {
-        if (rotation >= 315 || rotation < 45) {
-            return 1;
-        } else if (rotation >= 45 && rotation < 135) {
-            return 2;
-        } else if (rotation >= 135 && rotation < 225) {
-            return 0;
-        } else {
-            return 3;
-        }
-    }
-
     /**
      * Checks to see if its valid to put this block at the specified
      * coordinates. Args: world, x, y, z
      */
     @Override
     public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-        return canPlaceBlockAt(world.getBlockId(x, y - 1, z));
-    }
-
-    /**
-     * Check can be grave placed on this type of surface
-     */
-    public static boolean canPlaceBlockAt(int blockId) {
-        if (GraveStoneConfig.canPlaceGravesEveryWhere) {
-            return true;
-        } else if (blockId == Block.grass.blockID || blockId == Block.dirt.blockID
-                || blockId == Block.sand.blockID || blockId == Block.gravel.blockID
-                || blockId == Block.slowSand.blockID || blockId == Block.mycelium.blockID
-                || blockId == Block.blockSnow.blockID) {
-            return true;
-        } else {
-            return false;
-        }
+        return GraveStoneHelper.canPlaceBlockAt(world.getBlockId(x, y - 1, z));
     }
 
     /**
@@ -188,106 +158,81 @@ public class BlockGSGraveStone extends BlockContainer {
                     case 0:
                         this.setBlockBounds(0.125F, 0, 0.0625F, 0.875F, 0.9375F, 0.1875F);
                         break;
-
                     case 1:
                         this.setBlockBounds(0.125F, 0, 0.8125F, 0.875F, 0.9375F, 0.9375F);
                         break;
-
                     case 2:
                         this.setBlockBounds(0.0625F, 0, 0.125F, 0.1875F, 0.9375F, 0.875F);
                         break;
-
                     case 3:
                         this.setBlockBounds(0.8125F, 0, 0.125F, 0.9375F, 0.9375F, 0.875F);
                         break;
                 }
-
                 break;
-
             case CROSS:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.125F, 0, 0.0625F, 0.875F, 1, 0.1875F);
                         break;
-
                     case 1:
                         this.setBlockBounds(0.125F, 0, 0.8125F, 0.875F, 1, 0.9375F);
                         break;
-
                     case 2:
                         this.setBlockBounds(0.0625F, 0, 0.125F, 0.1875F, 1, 0.875F);
                         break;
-
                     case 3:
                         this.setBlockBounds(0.8125F, 0, 0.125F, 0.9375F, 1, 0.875F);
                         break;
                 }
-
                 break;
-
             case HORISONTAL_PLATE:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
                         break;
-
                     case 1:
                         this.setBlockBounds(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
                         break;
-
                     case 2:
                         this.setBlockBounds(0.0625F, 0, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
                         break;
-
                     case 3:
                         this.setBlockBounds(0.0625F, 0, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
                         break;
                 }
-
                 break;
-
             case DOG_STATUE:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.35F, 0, 0.3F, 0.6F, 0.5F, 0.9F);
                         break;
-
                     case 1:
                         this.setBlockBounds(0.35F, 0, 0.7F, 0.6F, 0.5F, 0.1F);
                         break;
-
                     case 2:
                         this.setBlockBounds(0.3F, 0, 0.35F, 0.9F, 0.5F, 0.6F);
                         break;
-
                     case 3:
                         this.setBlockBounds(0.7F, 0, 0.35F, 0.1F, 0.5F, 0.6F);
                         break;
                 }
-
                 break;
-
             case CAT_STATUE:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.43F, 0, 0.3F, 0.57F, 0.5F, 0.75F);
                         break;
-
                     case 1:
                         this.setBlockBounds(0.43F, 0, 0.7F, 0.57F, 0.5F, 0.25F);
                         break;
-
                     case 2:
                         this.setBlockBounds(0.3F, 0, 0.43F, 0.75F, 0.5F, 0.57F);
                         break;
-
                     case 3:
                         this.setBlockBounds(0.7F, 0, 0.43F, 0.25F, 0.5F, 0.57F);
                         break;
                 }
-
                 break;
-
             case WOODEN_SWORD:
             case STONE_SWORD:
             case IRON_SWORD:
@@ -297,15 +242,12 @@ public class BlockGSGraveStone extends BlockContainer {
                     case 0:
                         this.setBlockBounds(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
                         break;
-
                     case 1:
                         this.setBlockBounds(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
                         break;
-
                     case 2:
                         this.setBlockBounds(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
                         break;
-
                     case 3:
                         this.setBlockBounds(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
                         break;
@@ -320,7 +262,7 @@ public class BlockGSGraveStone extends BlockContainer {
     public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player) {
         player.addStat(StatList.mineBlockStatArray[this.blockID], 1);
         player.addExhaustion(0.025F);
-        spawnMob(world, x, y, z);
+        GraveStoneHelper.spawnMob(world, x, y, z);
 
         if (GraveStoneConfig.silkTouchForGraves) {
             if (EnchantmentHelper.getSilkTouchModifier(player)) {
@@ -328,74 +270,13 @@ public class BlockGSGraveStone extends BlockContainer {
             } else {
                 TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
 
-                if (tileEntity != null && isSwordGrave(tileEntity)) {
+                if (tileEntity != null && GraveStoneHelper.isSwordGrave(tileEntity)) {
                     tileEntity.dropSword();
                 }
             }
         } else {
             dropBlock(world, x, y, z);
         }
-    }
-
-    /**
-     * Spawn mob
-     */
-    private static void spawnMob(World world, int x, int y, int z) {
-        if (GraveStoneMobSpawn.checkChance(world.rand)) {
-            TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
-
-            if (tileEntity != null) {
-                Entity mob = GraveStoneMobSpawn.getMobEntity(world, tileEntity.getGraveType(), x, y, z);
-
-                if (mob != null) {
-                    GraveStoneMobSpawn.spawnMob(world, mob, x, y, z, false);
-                }
-            }
-        }
-    }
-
-    /**
-     * Drop grave as item block
-     */
-    private void dropBlock(World world, int x, int y, int z) {
-        ItemStack itemStack = getBlockItemStack(world, x, y, z);
-
-        if (itemStack != null) {
-            this.dropBlockAsItem_do(world, x, y, z, itemStack);
-        }
-    }
-
-    /**
-     * Get grave block as item block
-     */
-    private ItemStack getBlockItemStack(World world, int x, int y, int z) {
-        ItemStack itemStack = this.createStackedBlock(0);
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
-
-        if (tileEntity != null) {
-            NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
-
-            if (tileEntity.getDeathTextComponent().isLocalized()) {
-                nbt.setBoolean("isLocalized", true);
-                nbt.setString("name", tileEntity.getDeathTextComponent().getName());
-                nbt.setString("KillerName", tileEntity.getDeathTextComponent().getKillerName());
-            }
-
-            nbt.setString("DeathText", tileEntity.getDeathTextComponent().getDeathText());
-            nbt.setInteger("Age", tileEntity.getAge());
-
-            if (tileEntity.getSword() != 0) {
-                nbt.setByte("SwordType", tileEntity.getSword());
-                nbt.setInteger("SwordDamage", tileEntity.getDamage());
-                nbt.setString("SwordName", tileEntity.getSwordName());
-                nbt.setCompoundTag("SwordNBT", tileEntity.getEnchantment());
-            }
-
-            itemStack.setTagCompound(nbt);
-        }
-
-        return itemStack;
     }
 
     /**
@@ -418,7 +299,7 @@ public class BlockGSGraveStone extends BlockContainer {
         } else {
             TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
 
-            if (tileEntity != null && isSwordGrave(tileEntity)) {
+            if (tileEntity != null && GraveStoneHelper.isSwordGrave(tileEntity)) {
                 ret.add(tileEntity.getSwordItem());
             }
         }
@@ -495,7 +376,7 @@ public class BlockGSGraveStone extends BlockContainer {
      */
     @Override
     public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
-        spawnMob(world, x, y, z);
+        GraveStoneHelper.spawnMob(world, x, y, z);
     }
 
     /**
@@ -551,6 +432,117 @@ public class BlockGSGraveStone extends BlockContainer {
     }
 
     /**
+     * Called whenever the block is added into the world. Args: world, x, y, z
+     */
+    @Override
+    public void onBlockAdded(World world, int x, int y, int z) {
+        super.onBlockAdded(world, x, y, z);
+        GraveStoneHelper.replaceGround(world, x, y - 1, z);
+    }
+
+    /**
+     * ejects contained items into the world, and notifies neighbours of an
+     * update, as appropriate
+     */
+    @Override
+    public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
+        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
+
+        if (tileEntity != null) {
+            tileEntity.dropAllItems();
+        }
+
+        super.breakBlock(world, x, y, z, par5, par6);
+    }
+
+    /**
+     * Lets the block know when one of its neighbor changes. Doesn't know which
+     * neighbor changed (coordinates passed are their own) Args: x, y, z,
+     * neighbor blockID
+     */
+    @Override
+    public void onNeighborBlockChange(World world, int x, int y, int z, int id) {
+        if (!world.isBlockSolidOnSide(x, y - 1, z, ForgeDirection.DOWN, true)) {
+            this.dropBlockAsItem(world, x, y, z, 0, 0);
+            world.setBlock(x, y, z, 0, 0, 2);
+        }
+    }
+
+    /**
+     * Determines the damage on the item the block drops. Used in cloth and
+     * wood.
+     */
+    @Override
+    public int damageDropped(int metadata) {
+        return 0;
+    }
+
+    /**
+     * returns a list of blocks with the same ID, but different meta (eg: wood
+     * returns 4 blocks)
+     */
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(int id, CreativeTabs tabs, List list) {
+        for (byte i = 0; i < EnumGraves.GRAVES_COUNT; i++) {
+            ItemStack stack = new ItemStack(id, 1, 0);
+            NBTTagCompound nbt = new NBTTagCompound();
+            nbt.setByte("GraveType", i);
+
+            if (GraveStoneHelper.isSwordGrave(i)) {
+                nbt.setByte("SwordType", GraveStoneHelper.graveTypeToSwordType(i));
+            }
+
+            stack.setTagCompound(nbt);
+            list.add(stack);
+        }
+    }
+
+    /**
+     * Drop grave as item block
+     */
+    private void dropBlock(World world, int x, int y, int z) {
+        ItemStack itemStack = getBlockItemStack(world, x, y, z);
+
+        if (itemStack != null) {
+            this.dropBlockAsItem_do(world, x, y, z, itemStack);
+        }
+    }
+
+    /**
+     * Get grave block as item block
+     */
+    private ItemStack getBlockItemStack(World world, int x, int y, int z) {
+        ItemStack itemStack = this.createStackedBlock(0);
+        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
+
+        if (tileEntity != null) {
+            NBTTagCompound nbt = new NBTTagCompound();
+            nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
+
+            if (tileEntity.getDeathTextComponent().isLocalized()) {
+                nbt.setBoolean("isLocalized", true);
+                nbt.setString("name", tileEntity.getDeathTextComponent().getName());
+                nbt.setString("KillerName", tileEntity.getDeathTextComponent().getKillerName());
+            }
+
+            nbt.setString("DeathText", tileEntity.getDeathTextComponent().getDeathText());
+            nbt.setInteger("Age", tileEntity.getAge());
+
+            if (tileEntity.getSword() != 0) {
+                nbt.setByte("SwordType", tileEntity.getSword());
+                nbt.setInteger("SwordDamage", tileEntity.getDamage());
+                nbt.setString("SwordName", tileEntity.getSwordName());
+                nbt.setCompoundTag("SwordNBT", tileEntity.getEnchantment());
+            }
+
+            itemStack.setTagCompound(nbt);
+        }
+
+        return itemStack;
+    }
+
+    /**
      * Create grave on death
      */
     public void createOnDeath(World world, int x, int y, int z, String[] deathInfo, int direction, ItemStack[] items, int age, byte entityType) {
@@ -567,7 +559,7 @@ public class BlockGSGraveStone extends BlockContainer {
         ItemStack sword = null;
 
         if (GraveStoneConfig.generateSwordGraves && world.rand.nextInt(4) == 0 && entityType == 0) {
-            sword = checkSword(items);
+            sword = GraveStoneHelper.checkSword(items);
 
             if (sword != null) {
                 if (sword.itemID == Item.swordDiamond.itemID) {
@@ -591,13 +583,10 @@ public class BlockGSGraveStone extends BlockContainer {
                 } else {
                     graveType = (byte) (4 + swordType);
                 }
-
                 break;
-
             case 1:
                 graveType = DOG_GRAVES[rand.nextInt(DOG_GRAVES.length)];
                 break;
-
             case 2:
                 graveType = CAT_GRAVES[rand.nextInt(CAT_GRAVES.length)];
                 break;
@@ -663,198 +652,6 @@ public class BlockGSGraveStone extends BlockContainer {
                     }
                 }
             }
-        }
-    }
-
-    /**
-     * Check is there sword in your inventory
-     */
-    private static ItemStack checkSword(ItemStack[] items) {
-        if (items != null) {
-            for (int i = 0; i < items.length; i++) {
-                if (items[i] != null && (items[i].itemID == Item.swordDiamond.itemID || items[i].itemID == Item.swordGold.itemID
-                        || items[i].itemID == Item.swordIron.itemID || items[i].itemID == Item.swordStone.itemID
-                        || items[i].itemID == Item.swordWood.itemID)) {
-                    ItemStack sword = items[i];
-                    items[i] = null;
-                    return sword;
-                }
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Called whenever the block is added into the world. Args: world, x, y, z
-     */
-    @Override
-    public void onBlockAdded(World world, int x, int y, int z) {
-        super.onBlockAdded(world, x, y, z);
-        replaceGround(world, x, y - 1, z);
-    }
-
-    /**
-     * Check ground type and replace it on dirt if it grass or mycelium
-     */
-    private static void replaceGround(World world, int x, int y, int z) {
-        int botBlockID = world.getBlockId(x, y, z);
-
-        if (botBlockID == 2 || botBlockID == 110) {
-            world.setBlock(x, y, z, Block.dirt.blockID);
-        }
-    }
-
-    /**
-     * ejects contained items into the world, and notifies neighbours of an
-     * update, as appropriate
-     */
-    @Override
-    public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
-
-        if (tileEntity != null) {
-            tileEntity.dropAllItems();
-        }
-
-        super.breakBlock(world, x, y, z, par5, par6);
-    }
-
-    /**
-     * Check is grave - sword grave
-     *
-     * @param tileEntity Grave tile entity
-     */
-    public static boolean isSwordGrave(TileEntityGSGraveStone tileEntity) {
-        return tileEntity.getSword() != 0;
-    }
-
-    /**
-     * Check is grave - sword grave
-     *
-     * @param graveType Grave type
-     */
-    public static boolean isSwordGrave(byte graveType) {
-        return Arrays.binarySearch(SWORD_GRAVES, graveType) != -1;
-    }
-
-    /**
-     * Check is grave - pet grave
-     *
-     * @param graveType Grave type
-     */
-    public static boolean isPetGrave(byte graveType) {
-        return Arrays.binarySearch(PETS_GRAVES, graveType) != -1;
-    }
-
-    public static byte graveTypeToSwordType(byte graveType) {
-        return (byte) (graveType - 4);
-    }
-
-    public static byte swordGraveTypeToGraveType(byte swordGraveType) {
-        return (byte) (swordGraveType + 4);
-    }
-
-    /**
-     * Return grave metadata by direction
-     */
-    public static int getMetaDirection(int direction) {
-        switch (direction) {
-            case 0: // S
-                return 1;
-
-            case 1: // W
-                return 2;
-
-            case 2: // N
-                return 0;
-
-            case 3: // E
-                return 3;
-
-            default:
-                return 0;
-        }
-    }
-
-    /**
-     * Lets the block know when one of its neighbor changes. Doesn't know which
-     * neighbor changed (coordinates passed are their own) Args: x, y, z,
-     * neighbor blockID
-     */
-    @Override
-    public void onNeighborBlockChange(World world, int x, int y, int z, int id) {
-        if (!world.isBlockSolidOnSide(x, y - 1, z, ForgeDirection.DOWN, true)) {
-            this.dropBlockAsItem(world, x, y, z, 0, 0);
-            world.setBlock(x, y, z, 0, 0, 2);
-        }
-    }
-
-    /**
-     * Determines the damage on the item the block drops. Used in cloth and
-     * wood.
-     */
-    @Override
-    public int damageDropped(int metadata) {
-        return 0;
-    }
-
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood
-     * returns 4 blocks)
-     */
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(int id, CreativeTabs tabs, List list) {
-        for (byte i = 0; i < EnumGraves.GRAVES_COUNT; i++) {
-            ItemStack stack = new ItemStack(id, 1, 0);
-            NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("GraveType", i);
-
-            if (BlockGSGraveStone.isSwordGrave(i)) {
-                nbt.setByte("SwordType", graveTypeToSwordType(i));
-            }
-
-            stack.setTagCompound(nbt);
-            list.add(stack);
-        }
-    }
-
-    /**
-     * Return random grave type
-     *
-     * @param random
-     * @param graveType
-     */
-    public static byte getGraveType(Random random, EnumGraveType graveType) {
-        switch (graveType) {
-            case PLAYER_GRAVES:
-                if (random.nextFloat() > 0.1) {
-                    return GENERATED_GRAVES[random.nextInt(GENERATED_GRAVES.length)];
-                } else {
-                    return GENERATED_SWORD_GRAVES[random.nextInt(GENERATED_SWORD_GRAVES.length)];
-                }
-
-            case PETS_GRAVES:
-                return PETS_GRAVES[random.nextInt(PETS_GRAVES.length)];
-
-            case DOGS_GRAVES:
-                return DOG_GRAVES[random.nextInt(DOG_GRAVES.length)];
-
-            case CATS_GRAVES:
-                return CAT_GRAVES[random.nextInt(CAT_GRAVES.length)];
-
-            default:
-            case ALL_GRAVES:
-                if (random.nextFloat() > 0.2) {
-                    if (random.nextFloat() > 0.1) {
-                        return GENERATED_GRAVES[random.nextInt(GENERATED_GRAVES.length)];
-                    } else {
-                        return GENERATED_SWORD_GRAVES[random.nextInt(GENERATED_SWORD_GRAVES.length)];
-                    }
-                } else {
-                    return PETS_GRAVES[random.nextInt(PETS_GRAVES.length)];
-                }
         }
     }
 }

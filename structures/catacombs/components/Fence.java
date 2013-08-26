@@ -69,9 +69,7 @@ public class Fence extends CatacombsBaseComponent {
                 if (checkGround(world, x - 3, y)) {
                     this.fillWithRandomizedBlocks(world, boundingBox, x - 3, y, 0, x - 3, y + 3, 0, false, random, getCemeteryCatacombsStones());
                 }
-
                 break;
-
             case RIGHT:
                 createGrate(world, x);
                 createGrate(world, x + 1);
@@ -81,7 +79,6 @@ public class Fence extends CatacombsBaseComponent {
                 if (checkGround(world, x + 3, y)) {
                     this.fillWithRandomizedBlocks(world, boundingBox, x + 3, y, 0, x + 3, y + 3, 0, false, random, getCemeteryCatacombsStones());
                 }
-
                 break;
         }
     }
@@ -167,10 +164,12 @@ public class Fence extends CatacombsBaseComponent {
             this.fillWithRandomizedBlocks(world, boundingBox, 47, y, 0, 47, y + 3, 0, false, random, getCemeteryCatacombsStones());
             this.fillWithRandomizedBlocks(world, boundingBox, 43, y + 4, 0, 43, y + 4, 0, false, random, getCemeteryCatacombsStones());
             this.fillWithRandomizedBlocks(world, boundingBox, 46, y + 4, 0, 46, y + 4, 0, false, random, getCemeteryCatacombsStones());
+            
             // fence
             this.fillWithBlocks(world, boundingBox, 43, y, 0, 43, y + 3, 0, Block.fenceIron.blockID, 0, false);
             this.fillWithBlocks(world, boundingBox, 46, y, 0, 46, y + 3, 0, Block.fenceIron.blockID, 0, false);
             this.fillWithBlocks(world, boundingBox, 44, y + 3, 0, 45, y + 4, 0, Block.fenceIron.blockID, 0, false);
+            
             // slabs
             this.fillWithMetadataBlocks(world, boundingBox, 44, y + 5, 0, 45, y + 5, 0, Block.stoneSingleSlab.blockID, 5, Block.stoneSingleSlab.blockID, 5, false);
             this.placeBlockAtCurrentPosition(world, Block.stoneSingleSlab.blockID, 5, 42, y + 4, 0, boundingBox);

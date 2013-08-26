@@ -44,9 +44,11 @@ public class MausoleumEntrance extends CatacombsBaseComponent {
         int metaRight = this.getMetadataWithOffset(Block.stairsNetherBrick.blockID, 1);
         int metaLeft = this.getMetadataWithOffset(Block.stairsNetherBrick.blockID, 0);
         this.fillWithAir(world, boundingBox, 0, 0, 6, 13, 5, 13);
+        
         // fire
         this.placeBlockAtCurrentPosition(world, Block.netherrack.blockID, 0, 4, 0, 9, boundingBox);
         this.placeBlockAtCurrentPosition(world, Block.fire.blockID, 0, 4, 1, 9, boundingBox);
+        
         // fire stairs
         this.placeBlockAtCurrentPosition(world, Block.stairsNetherBrick.blockID, metaBot, 3, 0, 8, boundingBox);
         this.placeBlockAtCurrentPosition(world, Block.stairsNetherBrick.blockID, metaBot, 4, 0, 8, boundingBox);
@@ -66,6 +68,7 @@ public class MausoleumEntrance extends CatacombsBaseComponent {
         // fire
         this.placeBlockAtCurrentPosition(world, Block.netherrack.blockID, 0, 9, 0, 9, boundingBox);
         this.placeBlockAtCurrentPosition(world, Block.fire.blockID, 0, 9, 1, 9, boundingBox);
+        
         // fire stairs
         this.placeBlockAtCurrentPosition(world, Block.stairsNetherBrick.blockID, metaBot, 8, 0, 8, boundingBox);
         this.placeBlockAtCurrentPosition(world, Block.stairsNetherBrick.blockID, metaBot, 9, 0, 8, boundingBox);

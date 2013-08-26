@@ -45,9 +45,11 @@ public class Stairs extends CatacombsBaseComponent {
             this.fillWithAir(world, boundingBox, 1, shiftY - 5, shiftZ + 1, 3, shiftY - 2, shiftZ + 2);
             this.fillWithAir(world, boundingBox, 1, shiftY - 6, shiftZ + 2, 3, shiftY - 3, shiftZ + 3);
             this.fillWithAir(world, boundingBox, 1, shiftY - 7, shiftZ + 3, 3, shiftY - 4, shiftZ + 4);
+            
             // nether walls
             this.fillWithBlocks(world, boundingBox, 0, shiftY - 4, shiftZ, 0, shiftY, shiftZ, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
             this.fillWithBlocks(world, boundingBox, 4, shiftY - 4, shiftZ, 4, shiftY, shiftZ, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+            
             // block walls
             this.fillWithRandomizedBlocks(world, boundingBox, 0, shiftY - 5, shiftZ + 1, 0, shiftY - 1, shiftZ + 1, false, random, getCemeteryCatacombsStones());
             this.fillWithRandomizedBlocks(world, boundingBox, 4, shiftY - 5, shiftZ + 1, 4, shiftY - 1, shiftZ + 1, false, random, getCemeteryCatacombsStones());
@@ -55,16 +57,19 @@ public class Stairs extends CatacombsBaseComponent {
             this.fillWithRandomizedBlocks(world, boundingBox, 4, shiftY - 6, shiftZ + 2, 4, shiftY - 2, shiftZ + 2, false, random, getCemeteryCatacombsStones());
             this.fillWithRandomizedBlocks(world, boundingBox, 0, shiftY - 7, shiftZ + 3, 0, shiftY - 3, shiftZ + 3, false, random, getCemeteryCatacombsStones());
             this.fillWithRandomizedBlocks(world, boundingBox, 4, shiftY - 7, shiftZ + 3, 4, shiftY - 3, shiftZ + 3, false, random, getCemeteryCatacombsStones());
+            
             // nether stairs
             this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 4, shiftZ, 3, shiftY - 4, shiftZ, Block.stairsNetherBrick.blockID, metaBot, Block.stairsNetherBrick.blockID, metaBot, false);
             this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 5, shiftZ + 1, 3, shiftY - 5, shiftZ + 1, Block.stairsNetherBrick.blockID, metaBot, Block.stairsNetherBrick.blockID, metaBot, false);
             this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 6, shiftZ + 2, 3, shiftY - 6, shiftZ + 2, Block.stairsNetherBrick.blockID, metaBot, Block.stairsNetherBrick.blockID, metaBot, false);
             this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 7, shiftZ + 3, 3, shiftY - 7, shiftZ + 3, Block.stairsNetherBrick.blockID, metaBot, Block.stairsNetherBrick.blockID, metaBot, false);
+            
             // block stairs
             this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 1, shiftZ + 1, 3, shiftY - 1, shiftZ + 1, Block.stairsStoneBrick.blockID, metaTop, Block.stairsStoneBrick.blockID, metaTop, false);
             this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 2, shiftZ + 2, 3, shiftY - 2, shiftZ + 2, Block.stairsStoneBrick.blockID, metaTop, Block.stairsStoneBrick.blockID, metaTop, false);
             this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 3, shiftZ + 3, 3, shiftY - 3, shiftZ + 3, Block.stairsStoneBrick.blockID, metaTop, Block.stairsStoneBrick.blockID, metaTop, false);
             this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 4, shiftZ + 4, 3, shiftY - 4, shiftZ + 4, Block.stairsStoneBrick.blockID, metaTop, Block.stairsStoneBrick.blockID, metaTop, false);
+            
             // web
             this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 1, shiftY - 3, shiftZ, Block.web.blockID, 0);
             this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 3, shiftY - 3, shiftZ + 1, Block.web.blockID, 0);

@@ -1,8 +1,8 @@
 package GraveStone.renderer.tileentity;
 
 import GraveStone.Resources;
-import GraveStone.block.BlockGSGraveStone;
 import GraveStone.block.EnumGraves;
+import GraveStone.block.GraveStoneHelper;
 import GraveStone.models.block.ModelCatStatueGraveStone;
 import GraveStone.models.block.ModelCrossGraveStone;
 import GraveStone.models.block.ModelDogStatueGraveStone;
@@ -73,7 +73,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
                 break;
         }
 
-        if (BlockGSGraveStone.isSwordGrave(tileEntity) && tileEntity.isEnchanted()) {
+        if (GraveStoneHelper.isSwordGrave(tileEntity) && tileEntity.isEnchanted()) {
             getGraveModel(graveType).customRender();
         } else {
             getGraveModel(graveType).renderAll();

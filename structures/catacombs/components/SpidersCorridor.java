@@ -37,21 +37,27 @@ public class SpidersCorridor extends CatacombsBaseComponent {
 
         for (int i = 0; i < 3; i++) {
             int z = i * 4;
+            
             // block floor
             this.fillWithRandomizedBlocks(world, boundingBox, 0, 0, 1 + z, 4, 0, 3 + z, false, random, getCemeteryCatacombsStones());
+            
             // neter ceiling
             this.fillWithBlocks(world, boundingBox, 0, 4, 0 + z, 4, 4, 3 + z, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+            
             // trap floor
             this.fillWithBlocks(world, boundingBox, 0, 0, 0 + z, 4, 0, 0 + z, GraveStoneConfig.timeTrapID, GraveStoneConfig.timeTrapID, false);
+            
             // block walls
             this.fillWithRandomizedBlocks(world, boundingBox, 0, 1, 1 + z, 0, 3, 3 + z, false, random, getCemeteryCatacombsStones());
             this.fillWithRandomizedBlocks(world, boundingBox, 4, 1, 1 + z, 4, 3, 3 + z, false, random, getCemeteryCatacombsStones());
+            
             // nether walls
             this.fillWithBlocks(world, boundingBox, 0, 1, 0 + z, 0, 3, 0 + z, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
             this.fillWithBlocks(world, boundingBox, 4, 1, 0 + z, 4, 3, 0 + z, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         }
 
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 0, 12, 4, 4, 12, false, random, getCemeteryCatacombsStones());
+        
         // spawner
         ObjectsGenerationHelper.generateSpawner(this, world, 2, 1, 6, "CaveSpider");
         return true;

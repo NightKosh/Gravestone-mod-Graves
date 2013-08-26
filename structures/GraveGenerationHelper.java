@@ -1,7 +1,7 @@
 package GraveStone.structures;
 
 import GraveStone.GraveStoneConfig;
-import GraveStone.block.BlockGSGraveStone;
+import GraveStone.block.GraveStoneHelper;
 import GraveStone.tileentity.GSGraveStoneItems;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import java.util.Random;
@@ -36,13 +36,13 @@ public class GraveGenerationHelper {
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z));
 
         if (tileEntity != null) {
-            if (BlockGSGraveStone.isSwordGrave(graveType)) {
-                tileEntity.setSword(BlockGSGraveStone.graveTypeToSwordType(graveType));
+            if (GraveStoneHelper.isSwordGrave(graveType)) {
+                tileEntity.setSword(GraveStoneHelper.graveTypeToSwordType(graveType));
                 tileEntity.setDamage(GSGraveStoneItems.getRandomDamage(random, 50));
             }
 
             tileEntity.setGraveType(graveType);
-            tileEntity.setGraveContent(random, BlockGSGraveStone.isPetGrave(graveType), allLoot);
+            tileEntity.setGraveContent(random, GraveStoneHelper.isPetGrave(graveType), allLoot);
         }
     }
 
@@ -89,7 +89,7 @@ public class GraveGenerationHelper {
             if (blockId > 0) {
                 if (blockId == Block.waterStill.blockID || blockId == Block.lavaStill.blockID) {
                     return false;
-                } else if (BlockGSGraveStone.canPlaceBlockAt(blockId)) {
+                } else if (GraveStoneHelper.canPlaceBlockAt(blockId)) {
                     return true;
                 }
             }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 import GraveStone.GraveStoneConfig;
 import GraveStone.block.BlockGSGraveStone;
+import GraveStone.block.GraveStoneHelper;
 import GraveStone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -97,7 +98,7 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
 
         this.placeBlockAtCurrentPosition(world, Block.fenceGate.blockID, fenceMeta, 6, 1, 1, structureBoundingBox);
         this.placeBlockAtCurrentPosition(world, Block.fenceGate.blockID, fenceMeta, 6, 1, 9, structureBoundingBox);
-        int graveMeta = BlockGSGraveStone.getMetaDirection(this.coordBaseMode);
+        int graveMeta = GraveStoneHelper.getMetaDirection(this.coordBaseMode);
         byte graveType = BlockGSGraveStone.GENERATED_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_GRAVES.length)];
 
         for (int x = 3; x < 11; x += 2) {

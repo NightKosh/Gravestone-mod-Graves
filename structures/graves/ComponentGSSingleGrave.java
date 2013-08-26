@@ -1,8 +1,8 @@
 package GraveStone.structures.graves;
 
 import java.util.Random;
-import GraveStone.block.BlockGSGraveStone;
 import GraveStone.block.BlockGSGraveStone.EnumGraveType;
+import GraveStone.block.GraveStoneHelper;
 import GraveStone.structures.ComponentGraveStone;
 import GraveStone.structures.GraveGenerationHelper;
 import net.minecraft.world.World;
@@ -33,7 +33,7 @@ public class ComponentGSSingleGrave extends ComponentGraveStone {
 
         if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
             System.out.println("Grave " + positionX + "x" + positionZ);
-            GraveGenerationHelper.placeGrave(this, world, random, 0, y, 0, BlockGSGraveStone.getMetaDirection(coordBaseMode), BlockGSGraveStone.getGraveType(random, EnumGraveType.ALL_GRAVES), true);
+            GraveGenerationHelper.placeGrave(this, world, random, 0, y, 0, GraveStoneHelper.getMetaDirection(coordBaseMode), GraveStoneHelper.getGraveType(random, EnumGraveType.ALL_GRAVES), true);
         }
 
         return true;

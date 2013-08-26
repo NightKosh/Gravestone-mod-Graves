@@ -3,7 +3,7 @@ package GraveStone.structures.village;
 import java.util.List;
 import java.util.Random;
 import GraveStone.GraveStoneConfig;
-import GraveStone.ModGraveStone;
+import GraveStone.block.GraveStoneHelper;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.ComponentVillage;
@@ -78,7 +78,7 @@ public class ComponentGSVillageUndertaker extends ComponentVillage {
         // door
         this.placeDoorAtCurrentPosition(world, boundingBox, random, 3, 1, 1, this.getMetadataWithOffset(Block.doorWood.blockID, 2));
         // graves
-        int graveMeta = ModGraveStone.graveStone.getMetaDirection(this.coordBaseMode);
+        int graveMeta = GraveStoneHelper.getMetaDirection(this.coordBaseMode);
         this.fillWithMetadataBlocks(world, boundingBox, 6, 1, 5, 8, 1, 5, GraveStoneConfig.graveStoneID, graveMeta, GraveStoneConfig.graveStoneID, graveMeta, false);
         this.placeBlockAtCurrentPosition(world, Block.thinGlass.blockID, 0, 0, 2, 2, boundingBox);
         this.placeBlockAtCurrentPosition(world, Block.thinGlass.blockID, 0, 0, 2, 4, boundingBox);

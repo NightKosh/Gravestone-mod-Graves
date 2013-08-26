@@ -38,8 +38,10 @@ public class Mausoleum extends CatacombsBaseComponent {
         this.fillWithAir(world, boundingBox, 2, 1, 2, 11, 5, 11);
         this.fillWithAir(world, boundingBox, 1, 1, 0, 12, 5, 1);
         this.fillWithAir(world, boundingBox, 6, 0, 6, 7, 0, 8);
+        
         // brick floor
         this.fillWithRandomizedBlocks(world, boundingBox, 3, 0, 3, 10, 0, 10, false, random, getCemeteryCatacombsStones());
+        
         // nether floor
         this.fillWithBlocks(world, boundingBox, 5, 0, 3, 5, 0, 10, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 8, 0, 3, 8, 0, 10, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
@@ -47,6 +49,7 @@ public class Mausoleum extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 8, 0, 5, 10, 0, 5, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 3, 0, 8, 5, 0, 8, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 8, 0, 8, 10, 0, 8, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // nether walls
         this.fillWithBlocks(world, boundingBox, 2, 0, 1, 2, 4, 2, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 1, 0, 2, 1, 4, 2, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
@@ -64,6 +67,7 @@ public class Mausoleum extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 11, 0, 5, 12, 4, 5, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 1, 0, 8, 2, 4, 8, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 11, 0, 8, 12, 4, 8, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // brick walls
         this.fillWithRandomizedBlocks(world, boundingBox, 3, 0, 2, 4, 4, 2, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 6, 3, 2, 7, 4, 2, false, random, getCemeteryCatacombsStones());
@@ -77,13 +81,16 @@ public class Mausoleum extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 11, 0, 3, 11, 4, 4, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 11, 0, 6, 11, 4, 7, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 11, 0, 9, 11, 4, 10, false, random, getCemeteryCatacombsStones());
+        
         // trap floor
         this.fillWithBlocks(world, boundingBox, 6, 0, 2, 7, 0, 2, GraveStoneConfig.timeTrapID, GraveStoneConfig.timeTrapID, false);
+        
         // brick columns
         this.fillWithRandomizedBlocks(world, boundingBox, 5, 1, 5, 5, 4, 5, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 8, 1, 5, 8, 4, 5, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 5, 1, 8, 5, 4, 8, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 8, 1, 8, 8, 4, 8, false, random, getCemeteryCatacombsStones());
+        
         // roof 1
         this.fillWithMetadataBlocks(world, boundingBox, 0, 5, 0, 0, 5, 13, Block.stoneSingleSlab.blockID, 6, Block.stoneSingleSlab.blockID, 6, false);
         this.fillWithMetadataBlocks(world, boundingBox, 13, 5, 0, 13, 5, 13, Block.stoneSingleSlab.blockID, 6, Block.stoneSingleSlab.blockID, 6, false);
@@ -94,6 +101,7 @@ public class Mausoleum extends CatacombsBaseComponent {
         this.placeBlockAtCurrentPosition(world, Block.netherBrick.blockID, 0, 12, 5, 0, boundingBox);
         this.placeBlockAtCurrentPosition(world, Block.netherBrick.blockID, 0, 1, 5, 13, boundingBox);
         this.placeBlockAtCurrentPosition(world, Block.netherBrick.blockID, 0, 12, 5, 13, boundingBox);
+        
         // roof 2
         this.fillWithMetadataBlocks(world, boundingBox, 2, 6, 0, 2, 6, 13, Block.stoneSingleSlab.blockID, 6, Block.stoneSingleSlab.blockID, 6, false);
         this.fillWithMetadataBlocks(world, boundingBox, 11, 6, 0, 11, 6, 13, Block.stoneSingleSlab.blockID, 6, Block.stoneSingleSlab.blockID, 6, false);
@@ -101,6 +109,7 @@ public class Mausoleum extends CatacombsBaseComponent {
         this.fillWithMetadataBlocks(world, boundingBox, 10, 6, 0, 10, 6, 13, Block.stoneSingleSlab.blockID, 14, Block.stoneSingleSlab.blockID, 14, false);
         this.fillWithBlocks(world, boundingBox, 3, 6, 1, 10, 6, 1, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 3, 6, 12, 10, 6, 12, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // roof 3
         this.fillWithMetadataBlocks(world, boundingBox, 4, 7, 0, 4, 7, 13, Block.stoneSingleSlab.blockID, 6, Block.stoneSingleSlab.blockID, 6, false);
         this.fillWithMetadataBlocks(world, boundingBox, 9, 7, 0, 9, 7, 13, Block.stoneSingleSlab.blockID, 6, Block.stoneSingleSlab.blockID, 6, false);
@@ -108,6 +117,7 @@ public class Mausoleum extends CatacombsBaseComponent {
         this.fillWithMetadataBlocks(world, boundingBox, 8, 7, 0, 8, 7, 13, Block.stoneSingleSlab.blockID, 14, Block.stoneSingleSlab.blockID, 14, false);
         this.fillWithBlocks(world, boundingBox, 5, 7, 1, 8, 7, 1, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         this.fillWithBlocks(world, boundingBox, 5, 7, 12, 8, 7, 12, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        
         // roof 4
         this.fillWithMetadataBlocks(world, boundingBox, 6, 8, 0, 7, 8, 13, Block.stoneSingleSlab.blockID, 6, Block.stoneSingleSlab.blockID, 6, false);
 
@@ -133,8 +143,10 @@ public class Mausoleum extends CatacombsBaseComponent {
         this.fillCurrentPositionBlocksDownwards(world, Block.netherBrick.blockID, 0, 12, -1, 5, boundingBox);
         this.fillCurrentPositionBlocksDownwards(world, Block.netherBrick.blockID, 0, 12, -1, 8, boundingBox);
         this.fillCurrentPositionBlocksDownwards(world, Block.netherBrick.blockID, 0, 12, -1, 11, boundingBox);
+        
         // spawn bats
         MobSpawnHelper.spawnBats(world, random, boundingBox);
+        
         // web
         this.randomlyPlaceBlock(world, boundingBox, random, 0.3F, 6, 3, 3, Block.web.blockID, 0);
         this.randomlyPlaceBlock(world, boundingBox, random, 0.3F, 5, 4, 6, Block.web.blockID, 0);
@@ -145,6 +157,7 @@ public class Mausoleum extends CatacombsBaseComponent {
         this.randomlyPlaceBlock(world, boundingBox, random, 0.3F, 10, 2, 3, Block.web.blockID, 0);
         this.randomlyPlaceBlock(world, boundingBox, random, 0.3F, 9, 3, 4, Block.web.blockID, 0);
         this.randomlyPlaceBlock(world, boundingBox, random, 0.3F, 3, 2, 4, Block.web.blockID, 0);
+        
         return true;
     }
 }

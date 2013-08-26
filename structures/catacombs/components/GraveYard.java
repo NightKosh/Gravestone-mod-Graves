@@ -2,6 +2,7 @@ package GraveStone.structures.catacombs.components;
 
 import java.util.Random;
 import GraveStone.block.BlockGSGraveStone;
+import GraveStone.block.GraveStoneHelper;
 import GraveStone.structures.GraveGenerationHelper;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -25,7 +26,7 @@ public class GraveYard extends CatacombsBaseComponent {
      */
     @Override
     public boolean addComponentParts(World world, Random random) {
-        int graveMeta = BlockGSGraveStone.getMetaDirection(this.coordBaseMode);
+        int graveMeta = GraveStoneHelper.getMetaDirection(this.coordBaseMode);
         int positionX, positionZ, y;
 
         for (int x = 0; x < 11; x += 2) {
@@ -43,7 +44,7 @@ public class GraveYard extends CatacombsBaseComponent {
                     y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
 
                     if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
-                        GraveGenerationHelper.placeGrave(this, world, random, x, y, z, graveMeta, BlockGSGraveStone.getGraveType(random, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES), false);
+                        GraveGenerationHelper.placeGrave(this, world, random, x, y, z, graveMeta, GraveStoneHelper.getGraveType(random, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES), false);
                     }
                 }
             }
