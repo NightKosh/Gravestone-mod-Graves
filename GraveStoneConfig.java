@@ -88,7 +88,6 @@ public class GraveStoneConfig {
     private GraveStoneConfig(String path, File configFile) {
         this.config = new Configuration(configFile);
         this.path = path;
-
         getConfigs();
     }
 
@@ -102,14 +101,11 @@ public class GraveStoneConfig {
 
     public final void getConfigs() {
         config.load();
-
         idConfig();
         structures();
         gravesConfig();
         entityConfig();
-
         config.save();
-
         getGravesText();
     }
 
@@ -140,12 +136,11 @@ public class GraveStoneConfig {
         generatePetGraves = config.get(Configuration.CATEGORY_GENERAL, "GeneratePetGraves", true).getBoolean(true);
         generateGravesInLava = config.get(Configuration.CATEGORY_GENERAL, "GenerateGravesInLava", true).getBoolean(true);
         generateSwordGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateSwordGraves", true).getBoolean(true);
-
         // store items
         Property graveItemsCountProperty = config.get(Configuration.CATEGORY_GENERAL, "SavedItemsCount", 10);
         graveItemsCountProperty.comment = "This value must be between 0 an 40!";
-
         graveItemsCount = graveItemsCountProperty.getInt();
+
         if (graveItemsCount > 40 || graveItemsCount < 0) {
             graveItemsCount = 40;
         }
@@ -153,8 +148,8 @@ public class GraveStoneConfig {
         // spawn rate
         Property graveSpawnRateProperty = config.get(Configuration.CATEGORY_GENERAL, "SpawnRate", 1800);
         graveSpawnRateProperty.comment = "This value must be bigger than 1800!";
-
         graveSpawnRate = graveSpawnRateProperty.getInt();
+
         if (graveSpawnRate < 1800) {
             graveSpawnRate = 1800;
         }
@@ -183,15 +178,17 @@ public class GraveStoneConfig {
     private static ArrayList<String> readStringsFromFile(String fileName, String[] defaultValues) {
         ArrayList<String> list = new ArrayList();
         boolean exception = false;
-
         File file = new File(fileName);
+
         if (file.exists() && file.canRead()) {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(file));
                 String line;
+
                 while ((line = reader.readLine()) != null) {
                     list.add(line);
                 }
+
                 reader.close();
             } catch (IOException e) {
                 exception = true;
@@ -217,6 +214,7 @@ public class GraveStoneConfig {
                         writer.write(list.get(i));
                         writer.newLine();
                     }
+
                     writer.close();
                 } catch (IOException e) {
                     e.printStackTrace();

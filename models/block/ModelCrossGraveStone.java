@@ -1,4 +1,3 @@
-
 package GraveStone.models.block;
 
 import cpw.mods.fml.relauncher.Side;
@@ -21,7 +20,6 @@ public class ModelCrossGraveStone extends ModelGraveStone {
     public ModelCrossGraveStone() {
         textureWidth = 32;
         textureHeight = 32;
-
         VerticalPart = new ModelRenderer(this, 0, 0);
         VerticalPart.addBox(0F, 0F, 0F, 2, 16, 2);
         VerticalPart.setRotationPoint(-1F, 8F, 5F);

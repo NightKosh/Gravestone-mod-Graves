@@ -27,7 +27,6 @@ public class ModelSwordGrave extends ModelGraveStone {
     public ModelSwordGrave() {
         textureWidth = 32;
         textureHeight = 32;
-
         Blade1 = new ModelRenderer(this, 0, 0);
         Blade1.addBox(0F, 0F, 0F, 1, 10, 0);
         Blade1.setRotationPoint(-1F, 14F, 0F);
@@ -84,14 +83,13 @@ public class ModelSwordGrave extends ModelGraveStone {
 
     private void renderEnchantment() {
         float tickModifier = (float) (Minecraft.getSystemTime() % 3000L) / 3000.0F * 48.0F;
-
-        
         TileEntityGSGraveStoneRenderer.instance.bindTextureByName(Resources.SWORD_AURA);
         GL11.glEnable(GL11.GL_BLEND);
         float var20 = 0.5F;
         GL11.glColor4f(var20, var20, var20, 1);
         GL11.glDepthFunc(GL11.GL_EQUAL);
         GL11.glDepthMask(false);
+
         for (int var21 = 0; var21 < 2; var21++) {
             GL11.glDisable(GL11.GL_LIGHTING);
             float var22 = 0.76F;
@@ -105,9 +103,9 @@ public class ModelSwordGrave extends ModelGraveStone {
             GL11.glRotatef(30 - (float) var21 * 60, 0, 0, 1);
             GL11.glTranslatef(0, var23, 0);
             GL11.glMatrixMode(GL11.GL_MODELVIEW);
-
             renderAll();
         }
+
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glMatrixMode(GL11.GL_TEXTURE);
         GL11.glDepthMask(true);

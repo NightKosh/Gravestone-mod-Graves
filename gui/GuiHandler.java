@@ -24,11 +24,13 @@ public class GuiHandler implements IGuiHandler {
         switch (id) {
             case 0:
                 TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+
                 if (tileEntity != null) {
                     return new GSGuiGrave((TileEntityGSGrave) tileEntity);
                 } else {
                     return false;
                 }
+
             default:
                 return null;
         }

@@ -22,7 +22,6 @@ public class ModelSmallPedestal extends ModelGraveStone {
     public ModelSmallPedestal() {
         textureWidth = 64;
         textureHeight = 32;
-
         Pedestal = new ModelRenderer(this, 0, 0);
         Pedestal.addBox(0F, 0F, 0F, 16, 4, 16);
         Pedestal.setRotationPoint(-8F, 20F, -8F);
@@ -40,10 +39,8 @@ public class ModelSmallPedestal extends ModelGraveStone {
     @Override
     public void renderAll() {
         unshiftModel();
-
         float par7 = 0.0625F;
         TileEntityGSMemorialRenderer.instance.bindTextureByName(Resources.SMALL_PEDESTAL);
-
         Pedestal.render(par7);
         Pedestal2.render(par7);
     }

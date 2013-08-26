@@ -17,7 +17,6 @@ public class BlockGSWitherSpawner extends BlockMobSpawner {
 
     public BlockGSWitherSpawner(int par1) {
         super(par1);
-
         this.setUnlocalizedName("Wither Spawner");
         this.setHardness(5.0F);
         this.setStepSound(soundMetalFootstep);
@@ -27,7 +26,8 @@ public class BlockGSWitherSpawner extends BlockMobSpawner {
     }
 
     /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
+     * Returns a new instance of a block's tile entity class. Called on placing
+     * the block.
      */
     @Override
     public TileEntity createNewTileEntity(World par1World) {

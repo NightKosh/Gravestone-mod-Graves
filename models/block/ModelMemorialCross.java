@@ -1,4 +1,3 @@
-
 package GraveStone.models.block;
 
 import cpw.mods.fml.relauncher.Side;
@@ -23,7 +22,6 @@ public class ModelMemorialCross extends ModelGraveStone {
     public ModelMemorialCross() {
         textureWidth = 256;
         textureHeight = 128;
-
         BottomPlate = new ModelRenderer(this, 0, 0);
         BottomPlate.addBox(0F, 0F, 0F, 48, 6, 48);
         BottomPlate.setRotationPoint(-24F, 18F, -24F);

@@ -32,16 +32,13 @@ public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCrea
         recipeList.add(new MerchantRecipe(
                 new ItemStack(ModGraveStone.chisel, 1, 0),
                 new ItemStack(Item.ingotGold, 1)));
-        
         // graves
         recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(ModGraveStone.graveStone, (byte) 0)));
         recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(ModGraveStone.graveStone, (byte) 1)));
         recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(ModGraveStone.graveStone, (byte) 2)));
-        
         // pet graves
         recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 5), getTradeStack(ModGraveStone.graveStone, (byte) 3)));
         recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 5), getTradeStack(ModGraveStone.graveStone, (byte) 4)));
-        
         // memorials
         recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 15), getTradeStack(ModGraveStone.memorial, (byte) 0)));
         recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 15), getTradeStack(ModGraveStone.memorial, (byte) 1)));
@@ -66,7 +63,7 @@ public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCrea
     public Object buildComponent(StructureVillagePieceWeight villagePiece, ComponentVillageStartPiece startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5) {
         return ComponentGSVillageUndertaker.buildComponent(startPiece, pieces, random, p1, p2, p3, p4, p5);
     }
-    
+
     private ItemStack getTradeStack(Block block, byte graveType) {
         ItemStack stack = new ItemStack(block, 1, 0);
         NBTTagCompound nbt = new NBTTagCompound();

@@ -45,7 +45,6 @@ public class Fence extends CatacombsBaseComponent {
             createPartOfFence(world, random, FENCE_DIRECTION.LEFT, 41 - i * 4);
         }
 
-
         createGrate(world, 1);
         createGrate(world, 88);
 
@@ -59,32 +58,37 @@ public class Fence extends CatacombsBaseComponent {
 
     private void createPartOfFence(World world, Random random, FENCE_DIRECTION direction, int x) {
         int y;
+
         switch (direction) {
             case LEFT:
                 createGrate(world, x);
                 createGrate(world, x - 1);
                 createGrate(world, x - 2);
-
                 y = getGroundY(world, x - 3);
+
                 if (checkGround(world, x - 3, y)) {
                     this.fillWithRandomizedBlocks(world, boundingBox, x - 3, y, 0, x - 3, y + 3, 0, false, random, getCemeteryCatacombsStones());
                 }
+
                 break;
+
             case RIGHT:
                 createGrate(world, x);
                 createGrate(world, x + 1);
                 createGrate(world, x + 2);
-
                 y = getGroundY(world, x + 3);
+
                 if (checkGround(world, x + 3, y)) {
                     this.fillWithRandomizedBlocks(world, boundingBox, x + 3, y, 0, x + 3, y + 3, 0, false, random, getCemeteryCatacombsStones());
                 }
+
                 break;
         }
     }
 
     private void createCenterFence(World world, Random random) {
         int y = getGroundY(world, 42);
+
         if (checkGround(world, 42, y)) {
             fillWithRandomizedBlocks(world, boundingBox, 42, y, 0, 42, y + 3, 0, false, random, getCemeteryCatacombsStones());
         }
@@ -93,8 +97,8 @@ public class Fence extends CatacombsBaseComponent {
         createGrate(world, 44);
         createGrate(world, 45);
         createGrate(world, 46);
-
         y = getGroundY(world, 47);
+
         if (checkGround(world, 47, y)) {
             fillWithRandomizedBlocks(world, boundingBox, 47, y, 0, 47, y + 3, 0, false, random, getCemeteryCatacombsStones());
         }
@@ -102,6 +106,7 @@ public class Fence extends CatacombsBaseComponent {
 
     private void createCornerFence(World world, Random random, boolean left) {
         byte x;
+
         if (left) {
             x = 89;
         } else {
@@ -109,6 +114,7 @@ public class Fence extends CatacombsBaseComponent {
         }
 
         int y = getGroundY(world, x);
+
         if (checkGround(world, x, y)) {
             fillWithRandomizedBlocks(world, boundingBox, x, y, 0, x, y + 3, 0, false, random, getCemeteryCatacombsStones());
         }
@@ -120,6 +126,7 @@ public class Fence extends CatacombsBaseComponent {
 
     private boolean checkGround(World world, int x, int y) {
         int blockId = world.getBlockId(getXWithOffset(x, 0), y, getZWithOffset(x, 0));
+
         if (blockId > 0) {
             return (blockId != Block.waterStill.blockID && blockId != Block.lavaStill.blockID);
         } else {
@@ -129,14 +136,17 @@ public class Fence extends CatacombsBaseComponent {
 
     private boolean checkGround(World world, int startX, int endX, int y) {
         int blockId;
+
         for (int x = startX; x <= endX; x++) {
             blockId = world.getBlockId(getXWithOffset(x, 0), y, getZWithOffset(x, 0));
+
             if (blockId > 0) {
                 if (blockId == Block.waterStill.blockID || blockId == Block.lavaStill.blockID) {
                     return false;
                 }
             }
         }
+
         return true;
     }
 
@@ -155,19 +165,14 @@ public class Fence extends CatacombsBaseComponent {
             // blocks
             this.fillWithRandomizedBlocks(world, boundingBox, 42, y, 0, 42, y + 3, 0, false, random, getCemeteryCatacombsStones());
             this.fillWithRandomizedBlocks(world, boundingBox, 47, y, 0, 47, y + 3, 0, false, random, getCemeteryCatacombsStones());
-
             this.fillWithRandomizedBlocks(world, boundingBox, 43, y + 4, 0, 43, y + 4, 0, false, random, getCemeteryCatacombsStones());
             this.fillWithRandomizedBlocks(world, boundingBox, 46, y + 4, 0, 46, y + 4, 0, false, random, getCemeteryCatacombsStones());
-
             // fence
             this.fillWithBlocks(world, boundingBox, 43, y, 0, 43, y + 3, 0, Block.fenceIron.blockID, 0, false);
             this.fillWithBlocks(world, boundingBox, 46, y, 0, 46, y + 3, 0, Block.fenceIron.blockID, 0, false);
-
             this.fillWithBlocks(world, boundingBox, 44, y + 3, 0, 45, y + 4, 0, Block.fenceIron.blockID, 0, false);
-
             // slabs
             this.fillWithMetadataBlocks(world, boundingBox, 44, y + 5, 0, 45, y + 5, 0, Block.stoneSingleSlab.blockID, 5, Block.stoneSingleSlab.blockID, 5, false);
-
             this.placeBlockAtCurrentPosition(world, Block.stoneSingleSlab.blockID, 5, 42, y + 4, 0, boundingBox);
             this.placeBlockAtCurrentPosition(world, Block.stoneSingleSlab.blockID, 5, 47, y + 4, 0, boundingBox);
         }
@@ -184,6 +189,7 @@ public class Fence extends CatacombsBaseComponent {
 
         for (int x = boundingBox.minX; x <= boundingBox.maxX; x++) {
             curHeight += Math.max(world.getTopSolidOrLiquidBlock(x, 0), world.provider.getAverageGroundLevel());
+
             if (curHeight < height) {
                 height = curHeight;
             }

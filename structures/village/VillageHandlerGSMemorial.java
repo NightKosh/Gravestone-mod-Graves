@@ -1,4 +1,3 @@
-
 package GraveStone.structures.village;
 
 import cpw.mods.fml.common.registry.VillagerRegistry;
@@ -15,7 +14,7 @@ import net.minecraft.world.gen.structure.StructureVillagePieceWeight;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class VillageHandlerGSMemorial implements VillagerRegistry.IVillageCreationHandler {
-    
+
     @Override
     public StructureVillagePieceWeight getVillagePieceWeight(Random random, int size) {
         return new StructureVillagePieceWeight(ComponentGSVillageMemorial.class, 3, MathHelper.getRandomIntegerInRange(random, 0, 1));
@@ -25,7 +24,7 @@ public class VillageHandlerGSMemorial implements VillagerRegistry.IVillageCreati
     public Class getComponentClass() {
         return ComponentGSVillageMemorial.class;
     }
-  
+
     @Override
     public Object buildComponent(StructureVillagePieceWeight villagePiece, ComponentVillageStartPiece startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5) {
         return ComponentGSVillageMemorial.buildComponent(startPiece, pieces, random, p1, p2, p3, p4, p5);

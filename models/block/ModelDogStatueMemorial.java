@@ -56,7 +56,6 @@ public class ModelDogStatueMemorial extends ModelGraveStone {
     public ModelDogStatueMemorial() {
         textureWidth = 64;
         textureHeight = 64;
-        
         float f = 0.0F;
         float f1 = 13.5F;
         this.wolfHeadMain = new ModelRenderer(this, 0, 0);
@@ -86,7 +85,6 @@ public class ModelDogStatueMemorial extends ModelGraveStone {
         this.wolfHeadMain.setTextureOffset(16, 14).addBox(-3.0F, -5.0F, 0.0F, 2, 2, 1, f);
         this.wolfHeadMain.setTextureOffset(16, 14).addBox(1.0F, -5.0F, 0.0F, 2, 2, 1, f);
         this.wolfHeadMain.setTextureOffset(0, 10).addBox(-1.5F, 0.0F, -5.0F, 3, 3, 4, f);
-
         Pedestal1 = new ModelRenderer(this, 0, 32);
         Pedestal1.addBox(0F, 0F, 0F, 16, 1, 16);
         Pedestal1.setRotationPoint(-8F, 23F, -8F);
@@ -133,7 +131,6 @@ public class ModelDogStatueMemorial extends ModelGraveStone {
      */
     public void setRotationAngles(float par2, float par3, float par4, float par5) {
         this.wolfHeadMain.rotateAngleX = -0.08F;
-
         this.wolfMane.setRotationPoint(-1.0F, 16.0F, -3.0F);
         this.wolfMane.rotateAngleX = ((float) Math.PI * 2F / 5F);
         this.wolfMane.rotateAngleY = 0.0F;
@@ -147,7 +144,6 @@ public class ModelDogStatueMemorial extends ModelGraveStone {
         this.wolfLeg3.setRotationPoint(-2.49F, 17.0F, -4.0F);
         this.wolfLeg4.rotateAngleX = 5.811947F;
         this.wolfLeg4.setRotationPoint(0.51F, 17.0F, -4.0F);
-
         this.wolfTail.setRotationPoint(-1.0F, 21.0F, 6.0F);
         this.wolfTail.rotateAngleX = 1.7278761F;
     }
@@ -156,16 +152,13 @@ public class ModelDogStatueMemorial extends ModelGraveStone {
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F);
         float par7 = 0.0625F;
-
         Pedestal1.render(par7);
         Pedestal2.render(par7);
         Pedestal3.render(par7);
         Pedestal4.render(par7);
         Pedestal5.render(par7);
         Sign.render(par7);
-
         GL11.glTranslated(0, -1, 0.1);
-
         this.wolfHeadMain.renderWithRotation(par7);
         this.wolfBody.render(par7);
         this.wolfLeg1.render(par7);

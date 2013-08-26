@@ -23,7 +23,6 @@ public class ItemGSGraveStoneRenderer implements IItemRenderer {
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-
         return true;
     }
 
@@ -35,6 +34,7 @@ public class ItemGSGraveStoneRenderer implements IItemRenderer {
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         TileEntityGSGraveStone entity = new TileEntityGSGraveStone();
+
         if (item.stackTagCompound != null) {
             entity.setGraveType(item.stackTagCompound.getByte("GraveType"));
         }

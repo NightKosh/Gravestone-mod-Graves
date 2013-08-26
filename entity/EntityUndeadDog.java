@@ -1,4 +1,3 @@
-
 package GraveStone.entity;
 
 import cpw.mods.fml.relauncher.Side;
@@ -12,11 +11,13 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public abstract class EntityUndeadDog extends EntityUndeadPet  {
+public abstract class EntityUndeadDog extends EntityUndeadPet {
 
     protected float field_70926_e;
     protected float field_70924_f;
-    /** true is the wolf is wet else false */
+    /**
+     * true is the wolf is wet else false
+     */
     protected boolean isShaking;
     protected boolean field_70928_h;
     /**
@@ -28,7 +29,7 @@ public abstract class EntityUndeadDog extends EntityUndeadPet  {
     public EntityUndeadDog(World world) {
         super(world);
     }
-    
+
     /**
      * main AI tick function, replaces updateEntityActionState
      */
@@ -43,7 +44,7 @@ public abstract class EntityUndeadDog extends EntityUndeadPet  {
         this.dataWatcher.addObject(18, new Float(this.func_110143_aJ()));
         this.dataWatcher.addObject(19, new Byte((byte) 0));
     }
-    
+
     /**
      * Called frequently so the entity can update its state every tick as
      * required. For example, zombies and skeletons use this to react to
@@ -60,7 +61,7 @@ public abstract class EntityUndeadDog extends EntityUndeadPet  {
             this.worldObj.setEntityState(this, (byte) 8);
         }
     }
-    
+
     /**
      * Called to update the entity's position/logic.
      */
@@ -79,7 +80,7 @@ public abstract class EntityUndeadDog extends EntityUndeadPet  {
             this.numTicksToChaseTarget = 10;
         }
     }
-    
+
     @SideOnly(Side.CLIENT)
     public boolean getWolfShaking() {
         return this.isShaking;

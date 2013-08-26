@@ -16,10 +16,9 @@ import net.minecraft.world.World;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class BlockGSTimeTrap extends Block {
-    
+
     public BlockGSTimeTrap(int par1) {
         super(par1, Material.rock);
-
         this.setStepSound(Block.soundStoneFootstep);
         this.setUnlocalizedName("Night stone");
         this.setHardness(4.5F);
@@ -29,8 +28,9 @@ public class BlockGSTimeTrap extends Block {
     }
 
     /**
-     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
+     * Is this block (a) opaque and (b) a full 1m cube? This determines whether
+     * or not to render the shared face of two adjacent blocks and also whether
+     * the player can attach torches, redstone wire, etc to this block.
      */
     @Override
     public boolean isOpaqueCube() {
@@ -50,7 +50,8 @@ public class BlockGSTimeTrap extends Block {
     }
 
     /**
-     * Return true if a player with Silk Touch can harvest this block directly, and not its normal drops.
+     * Return true if a player with Silk Touch can harvest this block directly,
+     * and not its normal drops.
      */
     @Override
     public boolean canSilkHarvest() {
@@ -58,12 +59,14 @@ public class BlockGSTimeTrap extends Block {
     }
 
     /**
-     * Called whenever an entity is walking on top of this block. Args: world, x, y, z, entity
+     * Called whenever an entity is walking on top of this block. Args: world,
+     * x, y, z, entity
      */
     @Override
     public void onEntityWalking(World world, int par2, int par3, int par4, Entity entity) {
         if (entity instanceof EntityPlayer) {
             long time = world.getWorldTime();
+
             if (time < 12000 || time > 22500) {
                 world.setWorldTime(12000);
             } else if (time > 20000 && time < 22500) {

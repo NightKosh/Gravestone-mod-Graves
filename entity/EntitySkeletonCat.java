@@ -21,12 +21,10 @@ public class EntitySkeletonCat extends EntityUndeadCat {
     public EntitySkeletonCat(World world) {
         super(world);
         texture = Resources.SKELETON_CAT;
-        
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1, false));
         this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1));
         this.tasks.addTask(6, new EntityAIWander(this, 1));
         this.tasks.addTask(8, new EntityAIOcelotAttack(this));
-
     }
 
     @Override
@@ -60,7 +58,7 @@ public class EntitySkeletonCat extends EntityUndeadCat {
     protected String getDeathSound() {
         return "mob.skeleton.death";
     }
-    
+
     /**
      * Plays step sound at given x, y, z for the entity
      */

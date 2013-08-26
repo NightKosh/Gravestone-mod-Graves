@@ -90,7 +90,6 @@ public class ModelUndeadDog extends ModelBase {
     public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         super.render(entity, par2, par3, par4, par5, par6, par7);
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
-
         this.wolfHeadMain.renderWithRotation(par7);
         this.wolfBody.render(par7);
         this.wolfLeg1.render(par7);
@@ -109,10 +108,7 @@ public class ModelUndeadDog extends ModelBase {
     @Override
     public void setLivingAnimations(EntityLivingBase entityLiving, float par2, float par3, float par4) {
         EntityUndeadDog undeadDog = (EntityUndeadDog) entityLiving;
-
         this.wolfTail.rotateAngleY = MathHelper.cos(par2 * 0.6662F) * 1.4F * par3;
-
-
         this.wolfBody.setRotationPoint(0.0F, 14.0F, 2.0F);
         this.wolfBody.rotateAngleX = ((float) Math.PI / 2F);
         this.wolfMane.setRotationPoint(-1.0F, 14.0F, -3.0F);
@@ -126,8 +122,6 @@ public class ModelUndeadDog extends ModelBase {
         this.wolfLeg2.rotateAngleX = MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 1.4F * par3;
         this.wolfLeg3.rotateAngleX = MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 1.4F * par3;
         this.wolfLeg4.rotateAngleX = MathHelper.cos(par2 * 0.6662F) * 1.4F * par3;
-
-
         this.wolfHeadMain.rotateAngleZ = undeadDog.getInterestedAngle(par4) + undeadDog.getShakeAngle(par4, 0.0F);
         this.wolfMane.rotateAngleZ = undeadDog.getShakeAngle(par4, -0.08F);
         this.wolfBody.rotateAngleZ = undeadDog.getShakeAngle(par4, -0.16F);

@@ -40,7 +40,6 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
         float par2 = 0;
         textureWidth = 64;
         textureHeight = 32;
-
         this.heldItemLeft = 0;
         this.heldItemRight = 0;
         this.bipedHead = new ModelRenderer(this, 0, 0);
@@ -63,8 +62,6 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
         this.bipedLeftLeg.mirror = true;
         this.bipedLeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, par1);
         this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F + par2, 0.0F);
-
-
         pedestal = new ModelSmallPedestal();
     }
 
@@ -86,7 +83,6 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
         this.bipedRightLeg.rotateAngleY = 0.0F;
         this.bipedLeftLeg.rotateAngleY = 0.0F;
 
-
         if (this.heldItemLeft != 0) {
             this.bipedLeftArm.rotateAngleX = this.bipedLeftArm.rotateAngleX * 0.5F - ((float) Math.PI / 10F) * (float) this.heldItemLeft;
         }
@@ -103,7 +99,6 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
         this.bipedRightLeg.rotationPointY = 12.0F;
         this.bipedLeftLeg.rotationPointY = 12.0F;
         this.bipedHead.rotationPointY = 0.0F;
-
         this.bipedRightArm.rotateAngleZ += MathHelper.cos(par3 * 0.09F) * 0.05F + 0.05F;
         this.bipedLeftArm.rotateAngleZ -= MathHelper.cos(par3 * 0.09F) * 0.05F + 0.05F;
         this.bipedRightArm.rotateAngleX += MathHelper.sin(par3 * 0.067F) * 0.05F;
@@ -113,15 +108,12 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
     @Override
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F);
-        
         ModelSmallPedestal.shiftModel();
-        
         renderSteve();
         renderSteveLegs();
-        
         pedestal.renderAll();
     }
-    
+
     private void renderSteve() {
         float par7 = 0.0625F;
         this.bipedHead.render(par7);
@@ -129,24 +121,23 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
         this.bipedRightArm.render(par7);
         this.bipedLeftArm.render(par7);
     }
-    
+
     private void renderSteveLegs() {
         float par7 = 0.0625F;
         this.bipedRightLeg.render(par7);
         this.bipedLeftLeg.render(par7);
     }
-    
+
     @Override
     public void customRender() {
         renderAll();
         renderArmor();
     }
-    
+
     private void renderArmor() {
         ModelSmallPedestal.shiftModel();
         float scale = 1.1F;
         GL11.glScalef(scale, scale, scale);
-        
         TileEntityGSMemorialRenderer.instance.bindTextureByName(Resources.STEVE_ARMOR);
         renderSteve();
     }

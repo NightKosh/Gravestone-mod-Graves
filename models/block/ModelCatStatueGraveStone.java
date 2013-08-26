@@ -14,21 +14,37 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class ModelCatStatueGraveStone extends ModelGraveStone {
 
-    /** The back left leg model for the Ocelot. */
+    /**
+     * The back left leg model for the Ocelot.
+     */
     ModelRenderer ocelotBackLeftLeg;
-    /** The back right leg model for the Ocelot. */
+    /**
+     * The back right leg model for the Ocelot.
+     */
     ModelRenderer ocelotBackRightLeg;
-    /** The front left leg model for the Ocelot. */
+    /**
+     * The front left leg model for the Ocelot.
+     */
     ModelRenderer ocelotFrontLeftLeg;
-    /** The front right leg model for the Ocelot. */
+    /**
+     * The front right leg model for the Ocelot.
+     */
     ModelRenderer ocelotFrontRightLeg;
-    /** The head model for the Ocelot. */
+    /**
+     * The head model for the Ocelot.
+     */
     ModelRenderer ocelotHead;
-    /** The body model for the Ocelot. */
+    /**
+     * The body model for the Ocelot.
+     */
     ModelRenderer ocelotBody;
-    /** The tail model for the Ocelot. */
+    /**
+     * The tail model for the Ocelot.
+     */
     ModelRenderer ocelotTail;
-    /** The second part of tail model for the Ocelot. */
+    /**
+     * The second part of tail model for the Ocelot.
+     */
     ModelRenderer ocelotTail2;
 
     public ModelCatStatueGraveStone() {
@@ -67,27 +83,25 @@ public class ModelCatStatueGraveStone extends ModelGraveStone {
     }
 
     /**
-     * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
-     * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
-     * "far" arms and legs can swing at most.
+     * Sets the model's various rotation angles. For bipeds, par1 and par2 are
+     * used for animating the movement of arms and legs, where par1 represents
+     * the time(so that arms and legs swing back and forth) and par2 represents
+     * how "far" arms and legs can swing at most.
      */
     public void setRotationAngles(float par1, float par2, float par4, float par5) {
         this.ocelotHead.rotateAngleX = par5 / (180F / (float) Math.PI);
         this.ocelotHead.rotateAngleY = par4 / (180F / (float) Math.PI);
-
         this.ocelotBody.rotateAngleX = ((float) Math.PI / 4F);
         this.ocelotBody.rotationPointY = 8F;
         this.ocelotBody.rotationPointZ = -5F;
         this.ocelotHead.rotationPointY = 11.7F;
         this.ocelotHead.rotationPointZ = -8F;
-        
         this.ocelotTail.rotationPointY = 23F;
         this.ocelotTail.rotationPointZ = 6F;
         this.ocelotTail2.rotationPointY = 22F;
         this.ocelotTail2.rotationPointZ = 13.2F;
         this.ocelotTail.rotateAngleX = 1.7278761F;
         this.ocelotTail2.rotateAngleX = 2.670354F;
-        
         this.ocelotFrontLeftLeg.rotateAngleX = this.ocelotFrontRightLeg.rotateAngleX = -0.15707964F;
         this.ocelotFrontLeftLeg.rotationPointY = this.ocelotFrontRightLeg.rotationPointY = 15.8F;
         this.ocelotFrontLeftLeg.rotationPointZ = this.ocelotFrontRightLeg.rotationPointZ = -7.0F;
@@ -100,7 +114,6 @@ public class ModelCatStatueGraveStone extends ModelGraveStone {
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F);
         float par7 = 0.0625F;
-
         float f6 = 2.0F;
         GL11.glPushMatrix();
         GL11.glScalef(1.5F / f6, 1.5F / f6, 1.5F / f6);
@@ -118,6 +131,5 @@ public class ModelCatStatueGraveStone extends ModelGraveStone {
         this.ocelotTail.render(par7);
         this.ocelotTail2.render(par7);
         GL11.glPopMatrix();
-
     }
 }

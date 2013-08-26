@@ -1,4 +1,3 @@
-
 package GraveStone.models.block;
 
 import cpw.mods.fml.relauncher.Side;
@@ -23,7 +22,6 @@ public class ModelMemorialObelisk extends ModelGraveStone {
     public ModelMemorialObelisk() {
         textureWidth = 256;
         textureHeight = 128;
-
         Plate1 = new ModelRenderer(this, 0, 0);
         Plate1.addBox(0F, 0F, 0F, 48, 8, 48);
         Plate1.setRotationPoint(-24F, 16F, -24F);

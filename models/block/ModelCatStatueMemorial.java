@@ -56,7 +56,6 @@ public class ModelCatStatueMemorial extends ModelGraveStone {
     public ModelCatStatueMemorial() {
         textureWidth = 64;
         textureHeight = 64;
-        
         this.setTextureOffset("head.main", 0, 0);
         this.setTextureOffset("head.nose", 0, 24);
         this.setTextureOffset("head.ear1", 0, 10);
@@ -89,7 +88,6 @@ public class ModelCatStatueMemorial extends ModelGraveStone {
         this.ocelotFrontRightLeg = new ModelRenderer(this, 40, 0);
         this.ocelotFrontRightLeg.addBox(-1.0F, 0.0F, 0.0F, 2, 10, 2);
         this.ocelotFrontRightLeg.setRotationPoint(-1.2F, 13.8F, -5.0F);
-
         Pedestal1 = new ModelRenderer(this, 0, 32);
         Pedestal1.addBox(0F, 0F, 0F, 16, 1, 16);
         Pedestal1.setRotationPoint(-8F, 23F, -8F);
@@ -137,20 +135,17 @@ public class ModelCatStatueMemorial extends ModelGraveStone {
     public void setRotationAngles(float par1, float par2, float par4, float par5) {
         this.ocelotHead.rotateAngleX = par5 / (180F / (float) Math.PI);
         this.ocelotHead.rotateAngleY = par4 / (180F / (float) Math.PI);
-
         this.ocelotBody.rotateAngleX = ((float) Math.PI / 4F);
         this.ocelotBody.rotationPointY = 8F;
         this.ocelotBody.rotationPointZ = -5F;
         this.ocelotHead.rotationPointY = 11.7F;
         this.ocelotHead.rotationPointZ = -8F;
-
         this.ocelotTail.rotationPointY = 23F;
         this.ocelotTail.rotationPointZ = 6F;
         this.ocelotTail2.rotationPointY = 22F;
         this.ocelotTail2.rotationPointZ = 13.2F;
         this.ocelotTail.rotateAngleX = 1.7278761F;
         this.ocelotTail2.rotateAngleX = 2.670354F;
-
         this.ocelotFrontLeftLeg.rotateAngleX = this.ocelotFrontRightLeg.rotateAngleX = -0.15707964F;
         this.ocelotFrontLeftLeg.rotationPointY = this.ocelotFrontRightLeg.rotationPointY = 15.8F;
         this.ocelotFrontLeftLeg.rotationPointZ = this.ocelotFrontRightLeg.rotationPointZ = -7.0F;
@@ -163,16 +158,13 @@ public class ModelCatStatueMemorial extends ModelGraveStone {
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F);
         float par7 = 0.0625F;
-
         Pedestal1.render(par7);
         Pedestal2.render(par7);
         Pedestal3.render(par7);
         Pedestal4.render(par7);
         Pedestal5.render(par7);
         Sign.render(par7);
-
         GL11.glTranslated(0, -1, 0.1);
-        
         this.ocelotHead.render(par7);
         this.ocelotBody.render(par7);
         this.ocelotBackLeftLeg.render(par7);

@@ -33,8 +33,8 @@ public class ComponentGSVillageUndertaker extends ComponentVillage {
     }
 
     /**
-     * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at
-     * the end, it adds Fences...
+     * second Part of Structure generating, this for example places Spiderwebs,
+     * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
      */
     @Override
     public boolean addComponentParts(World world, Random random, StructureBoundingBox boundingBox) {
@@ -63,29 +63,23 @@ public class ComponentGSVillageUndertaker extends ComponentVillage {
         this.fillWithBlocks(world, boundingBox, 0, 1, 1, 0, 3, 5, Block.planks.blockID, Block.planks.blockID, false);
         this.fillWithBlocks(world, boundingBox, 1, 1, 6, 5, 3, 6, Block.planks.blockID, Block.planks.blockID, false);
         this.fillWithBlocks(world, boundingBox, 5, 1, 0, 5, 3, 0, Block.fence.blockID, Block.fence.blockID, false);
-        
         this.fillWithBlocks(world, boundingBox, 5, 1, 4, 5, 3, 5, Block.planks.blockID, Block.planks.blockID, false);
         this.fillWithBlocks(world, boundingBox, 5, 1, 3, 5, 3, 3, Block.wood.blockID, Block.wood.blockID, false);
         this.fillWithBlocks(world, boundingBox, 5, 1, 6, 5, 4, 6, Block.wood.blockID, Block.wood.blockID, false);
-        
         // fence
         this.fillWithBlocks(world, boundingBox, 9, 1, 0, 9, 3, 0, Block.fence.blockID, Block.fence.blockID, false);
         this.fillWithBlocks(world, boundingBox, 9, 1, 6, 9, 3, 6, Block.fence.blockID, Block.fence.blockID, false);
         this.fillWithBlocks(world, boundingBox, 9, 1, 1, 9, 1, 5, Block.fence.blockID, Block.fence.blockID, false);
         this.fillWithBlocks(world, boundingBox, 6, 1, 6, 8, 1, 6, Block.fence.blockID, Block.fence.blockID, false);
-        
         // torch
         this.placeBlockAtCurrentPosition(world, Block.torchWood.blockID, 0, 9, 2, 1, boundingBox);
         this.placeBlockAtCurrentPosition(world, Block.torchWood.blockID, 0, 9, 2, 5, boundingBox);
         this.placeBlockAtCurrentPosition(world, Block.torchWood.blockID, 0, 1, 3, 4, boundingBox);
-        
         // door
         this.placeDoorAtCurrentPosition(world, boundingBox, random, 3, 1, 1, this.getMetadataWithOffset(Block.doorWood.blockID, 2));
-        
         // graves
         int graveMeta = ModGraveStone.graveStone.getMetaDirection(this.coordBaseMode);
         this.fillWithMetadataBlocks(world, boundingBox, 6, 1, 5, 8, 1, 5, GraveStoneConfig.graveStoneID, graveMeta, GraveStoneConfig.graveStoneID, graveMeta, false);
-        
         this.placeBlockAtCurrentPosition(world, Block.thinGlass.blockID, 0, 0, 2, 2, boundingBox);
         this.placeBlockAtCurrentPosition(world, Block.thinGlass.blockID, 0, 0, 2, 4, boundingBox);
         this.placeBlockAtCurrentPosition(world, Block.thinGlass.blockID, 0, 2, 2, 6, boundingBox);
@@ -114,27 +108,31 @@ public class ComponentGSVillageUndertaker extends ComponentVillage {
         this.spawnVillagers(world, boundingBox, 7, 1, 1, 1);
         return true;
     }
-    
+
     /**
-     * Returns the villager type to spawn in this component, based on the number of villagers already spawned.
+     * Returns the villager type to spawn in this component, based on the number
+     * of villagers already spawned.
      */
     @Override
     protected int getVillagerType(int par1) {
         return 385;
     }
-    
+
     public static int getLeftItemDirection(int direction) {
         if (direction == 0 || direction == 1) {
             direction -= 1;
+
             if (direction < 0) {
                 direction = 3;
             }
         } else {
             direction += 1;
+
             if (direction > 3) {
                 direction = 0;
             }
         }
+
         return direction;
     }
 }

@@ -32,11 +32,9 @@ public class EntityZombieDog extends EntityUndeadDog {
     public EntityZombieDog(World world) {
         super(world);
         texture = Resources.ZOMBIE_DOG;
-        
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1, false));
         this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1));
         this.tasks.addTask(6, new EntityAIWander(this, 1));
-
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityVillager.class, 1, true));
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityWolf.class, 1, true));
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityOcelot.class, 1, true));
@@ -111,6 +109,7 @@ public class EntityZombieDog extends EntityUndeadDog {
     @Override
     public void onUpdate() {
         super.onUpdate();
+
         if (this.isWet()) {
             this.isShaking = true;
             this.field_70928_h = false;
@@ -155,6 +154,7 @@ public class EntityZombieDog extends EntityUndeadDog {
             if (this.worldObj.difficultySetting == 2 && this.rand.nextBoolean()) {
                 return;
             }
+
             if (entityLiving instanceof EntityVillager) {
                 EntityZombie entityZombie = new EntityZombie(this.worldObj);
                 //entityzombie.func_82149_j(entityLiving);
@@ -175,20 +175,17 @@ public class EntityZombieDog extends EntityUndeadDog {
                 //entityZombieDog.func_82149_j(entityLiving);
                 entityZombieDog.copyLocationAndAnglesFrom(entityLiving);
                 this.worldObj.removeEntity(entityLiving);
-
                 this.worldObj.spawnEntityInWorld(entityZombieDog);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             } else if (entityLiving instanceof EntityOcelot) {
                 EntityZombieCat entityZombieCat = new EntityZombieCat(this.worldObj);
                 //entityZombieCat.func_82149_j(entityLiving);
                 entityZombieCat.copyLocationAndAnglesFrom(entityLiving);
-
                 int catType = ((EntityOcelot) entityLiving).getTameSkin();
                 this.worldObj.removeEntity(entityLiving);
                 entityZombieCat.setSkin(catType);
                 //entityZombieCat.initCreature();
                 entityZombieCat.func_110161_a((EntityLivingData) null);
-
                 this.worldObj.spawnEntityInWorld(entityZombieCat);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             }

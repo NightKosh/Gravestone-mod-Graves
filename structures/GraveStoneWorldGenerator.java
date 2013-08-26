@@ -36,6 +36,7 @@ public class GraveStoneWorldGenerator implements IWorldGenerator {
 
     public void generateSurface(World world, Random rand, int x, int z) {
         double chance = rand.nextDouble();
+
         if (!catacombsGen.generate(world, rand, x, z, chance)) {
             if (!memorialGen.generate(world, rand, x, z, chance)) {
                 graveGen.generate(world, rand, x, z, chance);

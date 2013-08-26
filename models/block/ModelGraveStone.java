@@ -1,4 +1,3 @@
-
 package GraveStone.models.block;
 
 import cpw.mods.fml.relauncher.Side;
@@ -14,17 +13,16 @@ import net.minecraft.entity.Entity;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
-public abstract class ModelGraveStone extends ModelBase  {
-        
-    
+public abstract class ModelGraveStone extends ModelBase {
+
     public abstract void renderAll();
-    
+
     protected void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-    
+
     /**
      * Custom render
      */

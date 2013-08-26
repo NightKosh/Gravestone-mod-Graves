@@ -1,4 +1,3 @@
-
 package GraveStone.models.block;
 
 import cpw.mods.fml.relauncher.Side;
@@ -19,7 +18,6 @@ public class ModelHorisontalPlateGraveStone extends ModelGraveStone {
     public ModelHorisontalPlateGraveStone() {
         textureWidth = 64;
         textureHeight = 32;
-
         Plate = new ModelRenderer(this, 0, 0);
         Plate.addBox(0F, 0F, 0F, 12, 1, 14);
         Plate.setRotationPoint(-6F, 23F, -7F);

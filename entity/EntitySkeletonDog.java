@@ -21,7 +21,6 @@ public class EntitySkeletonDog extends EntityUndeadDog {
         super(world);
         this.setSize(0.6F, 0.8F);
         texture = Resources.SKELETON_DOG;
-        
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1, false));
         this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1));
         this.tasks.addTask(6, new EntityAIWander(this, 1));
@@ -65,7 +64,7 @@ public class EntitySkeletonDog extends EntityUndeadDog {
     protected void playStepSound(int par1, int par2, int par3, int par4) {
         this.playSound("mob.skeleton.step", 0.15F, 1.0F);
     }
-    
+
     /**
      * Returns the item ID for the item the mob drops on death.
      */

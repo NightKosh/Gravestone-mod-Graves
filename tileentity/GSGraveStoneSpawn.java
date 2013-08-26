@@ -62,9 +62,11 @@ public class GSGraveStoneSpawn {
      */
     private boolean canSpawnMobs(World world) {
         long time = world.getWorldTime();
+
         if (time > 13500 && time < 22500 || world.isThundering()) {
             return true;
         }
+
         return false;
     }
 
@@ -89,9 +91,11 @@ public class GSGraveStoneSpawn {
 
                 if (this.getNewMob) {
                     this.spawnedMob = GraveStoneMobSpawn.getMobEntity(this.tileEntity.worldObj, EnumGraves.getByID(this.tileEntity.graveType), this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord);
+
                     if (this.spawnedMob == null) {
                         return;
                     }
+
                     this.getNewMob = false;
                 }
 
@@ -143,7 +147,6 @@ public class GSGraveStoneSpawn {
         } else {
             this.field_92060_e = null;
         }
-
 
         if (tileEntity.worldObj != null && tileEntity.worldObj.isRemote) {
             spawnedMob = null;

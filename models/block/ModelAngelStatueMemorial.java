@@ -29,7 +29,6 @@ public class ModelAngelStatueMemorial extends ModelGraveStone {
     public ModelAngelStatueMemorial() {
         textureWidth = 64;
         textureHeight = 64;
-
         Legs = new ModelRenderer(this, 0, 16);
         Legs.addBox(0F, 0F, 0F, 6, 11, 3);
         Legs.setRotationPoint(-3F, 13F, 0F);
@@ -96,17 +95,13 @@ public class ModelAngelStatueMemorial extends ModelGraveStone {
         LeftWing2.setTextureSize(64, 64);
         LeftWing2.mirror = true;
         setRotation(LeftWing2, -1.082104F, -0.1745329F, -0.3839724F);
-
-
         pedestal = new ModelSmallPedestal();
     }
 
     @Override
     public void renderAll() {
         float par7 = 0.0625F;
-        
         ModelSmallPedestal.shiftModel();
-        
         Legs.render(par7);
         Body.render(par7);
         Head.render(par7);
@@ -118,7 +113,6 @@ public class ModelAngelStatueMemorial extends ModelGraveStone {
         RightWing2.render(par7);
         LeftWing.render(par7);
         LeftWing2.render(par7);
-        
         pedestal.renderAll();
     }
 }

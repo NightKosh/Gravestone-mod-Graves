@@ -14,23 +14,38 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class ModelDogStatueGraveStone extends ModelGraveStone {
 
-    /** main box for the wolf head */
+    /**
+     * main box for the wolf head
+     */
     private ModelRenderer wolfHeadMain;
-    /** The wolf's body */
+    /**
+     * The wolf's body
+     */
     private ModelRenderer wolfBody;
-    /** Wolf'se first leg */
+    /**
+     * Wolf'se first leg
+     */
     private ModelRenderer wolfLeg1;
-    /** Wolf's second leg */
+    /**
+     * Wolf's second leg
+     */
     private ModelRenderer wolfLeg2;
-    /** Wolf's third leg */
+    /**
+     * Wolf's third leg
+     */
     private ModelRenderer wolfLeg3;
-    /** Wolf's fourth leg */
+    /**
+     * Wolf's fourth leg
+     */
     private ModelRenderer wolfLeg4;
-    /** The wolf's mane */
+    /**
+     * The wolf's mane
+     */
     private ModelRenderer wolfMane;
-    /** The wolf's tail */
+    /**
+     * The wolf's tail
+     */
     ModelRenderer wolfTail;
-    
     private ModelRenderer bottom;
     private static final float RAD = 180F / (float) Math.PI;
 
@@ -67,13 +82,13 @@ public class ModelDogStatueGraveStone extends ModelGraveStone {
     }
 
     /**
-     * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
-     * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
-     * "far" arms and legs can swing at most.
+     * Sets the model's various rotation angles. For bipeds, par1 and par2 are
+     * used for animating the movement of arms and legs, where par1 represents
+     * the time(so that arms and legs swing back and forth) and par2 represents
+     * how "far" arms and legs can swing at most.
      */
     public void setRotationAngles(float par2, float par3, float par4, float par5) {
         this.wolfHeadMain.rotateAngleX = -0.08F;
-
         this.wolfMane.setRotationPoint(-1.0F, 16.0F, -3.0F);
         this.wolfMane.rotateAngleX = ((float) Math.PI * 2F / 5F);
         this.wolfMane.rotateAngleY = 0.0F;
@@ -87,7 +102,6 @@ public class ModelDogStatueGraveStone extends ModelGraveStone {
         this.wolfLeg3.setRotationPoint(-2.49F, 17.0F, -4.0F);
         this.wolfLeg4.rotateAngleX = 5.811947F;
         this.wolfLeg4.setRotationPoint(0.51F, 17.0F, -4.0F);
-        
         this.wolfTail.setRotationPoint(-1.0F, 21.0F, 6.0F);
         this.wolfTail.rotateAngleX = 1.7278761F;
     }
@@ -96,7 +110,6 @@ public class ModelDogStatueGraveStone extends ModelGraveStone {
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F);
         float par7 = 0.0625F;
-
         GL11.glPushMatrix();
         GL11.glTranslatef(0.0F, 5.0F * par7, 2.0F * par7);
         this.wolfHeadMain.renderWithRotation(par7);
@@ -112,6 +125,5 @@ public class ModelDogStatueGraveStone extends ModelGraveStone {
         this.wolfMane.render(par7);
         this.wolfTail.render(par7);
         GL11.glPopMatrix();
-
     }
 }

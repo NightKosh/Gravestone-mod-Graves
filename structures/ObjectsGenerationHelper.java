@@ -1,4 +1,3 @@
-
 package GraveStone.structures;
 
 import java.util.Random;
@@ -19,15 +18,14 @@ import net.minecraftforge.common.ChestGenHooks;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class ObjectsGenerationHelper {
-    
+
     private ObjectsGenerationHelper() {
-        
     }
-    
     private static final int[] POTIONS = {32764, 32692};
-    
+
     /**
      * Generate chest with random loot type
+     *
      * @param component Component instance
      * @param world World object
      * @param random
@@ -43,31 +41,40 @@ public class ObjectsGenerationHelper {
 
         if (component.getBoundingBox().isVecInside(x, y, z)) {
             ChestGenHooks chest;
+
             switch (random.nextInt(8)) {
                 case 1:
                     chest = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
                     break;
+
                 case 2:
                     chest = ChestGenHooks.getInfo(ChestGenHooks.MINESHAFT_CORRIDOR);
                     break;
+
                 case 3:
                     chest = ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_DESERT_CHEST);
                     break;
+
                 case 4:
                     chest = ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_JUNGLE_CHEST);
                     break;
+
                 case 5:
                     chest = ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING);
                     break;
+
                 case 6:
                     chest = ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_LIBRARY);
                     break;
+
                 case 7:
                     chest = ChestGenHooks.getInfo(ChestGenHooks.VILLAGE_BLACKSMITH);
                     break;
+
                 default:
                     chest = ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR);
             }
+
             if (defaultChest) {
                 component.generateStructureChestContents(world, component.getBoundingBox(), random, xCoord, yCoord, zCoord, chest.getItems(random), chest.getCount(random));
             } else {
@@ -78,6 +85,7 @@ public class ObjectsGenerationHelper {
 
     /**
      * Generate trapped chests with items.
+     *
      * @param component Component instatnce
      * @param world World object
      * @param random
@@ -108,6 +116,7 @@ public class ObjectsGenerationHelper {
 
     /**
      * Generate mob spawner
+     *
      * @param component Component instatnce
      * @param world World object
      * @param xCoord X coord
@@ -129,7 +138,7 @@ public class ObjectsGenerationHelper {
             }
         }
     }
-    
+
     /**
      * Generates dispenser contents.
      */
@@ -141,7 +150,7 @@ public class ObjectsGenerationHelper {
     }
 
     /**
-     * Return random potions 
+     * Return random potions
      */
     private static int getRandomCount(Random random) {
         return 10 + random.nextInt(64);
@@ -149,23 +158,27 @@ public class ObjectsGenerationHelper {
 
     /**
      * Set dispenser metadata
+     *
      * @param world World object
      * @param x X coorf
      * @param y Y coord
      * @param z Z coord
-     * @param direction Direction 
+     * @param direction Direction
      */
     public static void setDispenserMeta(World world, int x, int y, int z, int direction) {
         switch (direction) {
             case 0:
                 world.setBlockMetadataWithNotify(x, y, z, 2, 2);
                 break;
+
             case 1:
                 world.setBlockMetadataWithNotify(x, y, z, 5, 2);
                 break;
+
             case 2:
                 world.setBlockMetadataWithNotify(x, y, z, 3, 2);
                 break;
+
             case 3:
                 world.setBlockMetadataWithNotify(x, y, z, 4, 2);
                 break;

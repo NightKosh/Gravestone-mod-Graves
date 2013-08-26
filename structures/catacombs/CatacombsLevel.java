@@ -46,7 +46,6 @@ public class CatacombsLevel {
 
     public CatacombsLevel(LinkedList<CatacombsBaseComponent> startComponents, int level, World world, Random random) {
         levelComponents = startComponents;
-
         this.random = random;
         this.world = world;
         this.level = level;
@@ -55,22 +54,25 @@ public class CatacombsLevel {
             case 1:
                 totalComponentsCount = 30 + random.nextInt(30);
                 break;
+
             case 2:
                 totalComponentsCount = 60 + random.nextInt(60);
                 break;
+
             case 3:
                 totalComponentsCount = 90 + random.nextInt(90);
                 break;
+
             case 4:
                 totalComponentsCount = 120 + random.nextInt(120);
                 break;
+
             default:
                 totalComponentsCount = 150 + random.nextInt(150);
                 break;
         }
 
         componentsCount = 0;
-
         prepareLevel(levelComponents);
         generateLevel();
     }
@@ -80,10 +82,8 @@ public class CatacombsLevel {
      */
     public final void prepareLevel(LinkedList<CatacombsBaseComponent> currentComponents) {
         LinkedList<CatacombsBaseComponent> newComponents = new LinkedList();
-
         CatacombsBaseComponent[] components = new CatacombsBaseComponent[0];
         components = currentComponents.toArray(components);
-
         CatacombsBaseComponent component;
         int resultComponentsCount = 0;
 
@@ -106,6 +106,7 @@ public class CatacombsLevel {
         } else if (endComponents.isEmpty()) {
             createEnd(currentComponents);
         }
+
         componentsCount += resultComponentsCount;
 
         if (resultComponentsCount != 0) {
@@ -118,6 +119,7 @@ public class CatacombsLevel {
      */
     private int addComponent(LinkedList<CatacombsBaseComponent> newComponents, CatacombsBaseComponent component, int direction, COMPONENT_SIDE componentSide) {
         CatacombsBaseComponent newComponent = tryCreateComponent(component, direction, componentSide);
+
         if (newComponent != null) {
             newComponents.add(newComponent);
             return 1;
@@ -148,10 +150,13 @@ public class CatacombsLevel {
                 int j = random.nextInt(components.size());
                 component = components.get(j);
                 newComponent = tryCreateComponent(component, componentClass, component.getDirection(), COMPONENT_SIDE.TOP);
+
                 if (newComponent == null) {
                     newComponent = tryCreateComponent(component, componentClass, component.getLeftDirection(component.getDirection()), COMPONENT_SIDE.LEFT);
+
                     if (newComponent == null) {
                         newComponent = tryCreateComponent(component, componentClass, component.getLeftDirection(component.getDirection()), COMPONENT_SIDE.LEFT);
+
                         if (newComponent != null) {
                             levelComponents.add(newComponent);
                             endComponents.add(newComponent);
@@ -183,13 +188,13 @@ public class CatacombsLevel {
             levelComponents.add(newComponent);
             endComponents.add(newComponent);
         }
-
     }
 
     private CatacombsBaseComponent tryCreateComponent(CatacombsBaseComponent component, Class componentClass, int direction, COMPONENT_SIDE componentSide) {
         if (componentsCount < 30 && componentClass == Treasury.class) {
             componentClass = getCorridorType();
         }
+
         CatacombsBaseComponent newComponent = createComponent(component, direction, componentClass, componentSide);
 
         if (canBePlaced(newComponent)) {
@@ -207,8 +212,10 @@ public class CatacombsLevel {
     private boolean canBePlaced(CatacombsBaseComponent component) {
         Iterator<CatacombsBaseComponent> it = levelComponents.iterator();
         CatacombsBaseComponent xz;
+
         while (it.hasNext()) {
             xz = it.next();
+
             if (component.canBePlacedHere(xz.getBoundingBox())) {
                 return false;
             }
@@ -221,6 +228,7 @@ public class CatacombsLevel {
         if (component != null) {
             int x, y, z;
             y = component.getYEnd();
+
             if (componentSide == COMPONENT_SIDE.TOP) {
                 x = component.getTopXEnd();
                 z = component.getTopZEnd();
@@ -246,6 +254,7 @@ public class CatacombsLevel {
                 e.printStackTrace();
             }
         }
+
         return null;
     }
 
@@ -263,6 +272,7 @@ public class CatacombsLevel {
 
     private Class getNextComponentForLevel(Class componentClass) {
         int chance = random.nextInt(100);
+
         switch (level) {
             case 1:
                 if (chance >= 25) {
@@ -286,6 +296,7 @@ public class CatacombsLevel {
                         return EnderHall.class;
                     }
                 }
+
             default:
                 if (chance >= 55) {
                     return getCorridorType();
@@ -323,18 +334,20 @@ public class CatacombsLevel {
 
     private Class getHallType() {
         int hallChance = random.nextInt(10);
+
         if (hallChance >= 2) {
             return GraveHall.class;
         } else {
             return StatuesHall.class;
         }
     }
-    
+
     /**
-     * Return ranfom class of corridor component 
+     * Return ranfom class of corridor component
      */
     private Class getCorridorType() {
         int corridorChance = random.nextInt(100);
+
         if (corridorChance >= 50) {
             return Corridor.class;
         } else if (corridorChance >= 5) {
@@ -345,7 +358,7 @@ public class CatacombsLevel {
     }
 
     /**
-     * Return ranfom class of crossing component 
+     * Return ranfom class of crossing component
      */
     private Class getCrossingType() {
         if (random.nextInt(100) >= 10) {
@@ -361,6 +374,7 @@ public class CatacombsLevel {
     public final void generateLevel() {
         CatacombsBaseComponent component;
         Iterator<CatacombsBaseComponent> it = levelComponents.iterator();
+
         while (it.hasNext()) {
             component = it.next();
             component.addComponentParts(world, random);
@@ -368,7 +382,7 @@ public class CatacombsLevel {
     }
 
     /**
-     * Return end parts of level 
+     * Return end parts of level
      */
     public LinkedList getEndParts() {
         return endComponents;

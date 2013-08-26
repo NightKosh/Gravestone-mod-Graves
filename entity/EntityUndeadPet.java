@@ -1,4 +1,3 @@
-
 package GraveStone.entity;
 
 import cpw.mods.fml.relauncher.Side;
@@ -27,7 +26,7 @@ import net.minecraft.world.World;
 public abstract class EntityUndeadPet extends EntityMob {
 
     protected ResourceLocation texture = null;
-    
+
     public EntityUndeadPet(World world) {
         super(world);
         this.getNavigator().setAvoidsWater(true);
@@ -46,7 +45,7 @@ public abstract class EntityUndeadPet extends EntityMob {
     public ResourceLocation getTexture() {
         return texture;
     }
-    
+
     /**
      * Determines if an entity can be despawned, used on idle far away entities
      */
@@ -69,16 +68,19 @@ public abstract class EntityUndeadPet extends EntityMob {
     }
 
     /**
-     * Drop 0-2 items of this living's type. @param par1 - Whether this entity has recently been hit by a player. @param
-     * par2 - Level of Looting used to kill this mob.
+     * Drop 0-2 items of this living's type.
+     *
+     * @param par1 - Whether this entity has recently been hit by a player.
+     * @param par2 - Level of Looting used to kill this mob.
      */
     @Override
     protected void dropFewItems(boolean par1, int par2) {
     }
 
     /**
-     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
-     * use this to react to sunlight and start to burn.
+     * Called frequently so the entity can update its state every tick as
+     * required. For example, zombies and skeletons use this to react to
+     * sunlight and start to burn.
      */
     @Override
     public void onLivingUpdate() {

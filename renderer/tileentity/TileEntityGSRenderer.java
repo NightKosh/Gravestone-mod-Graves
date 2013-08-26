@@ -18,16 +18,6 @@ public class TileEntityGSRenderer extends TileEntitySpecialRenderer {
     /**
      * Binds a texture to the renderEngine given a filename from the JAR.
      */
-    /*
-     @Override
-     public void bindTextureByName(String par1Str) {
-     RenderEngine renderengine = this.tileEntityRenderer.renderEngine;
-
-     if (renderengine != null) {
-     renderengine.bindTexture(par1Str);
-     }
-     }
-     */
     public void bindTextureByName(ResourceLocation texture) {
         func_110628_a(texture);
     }

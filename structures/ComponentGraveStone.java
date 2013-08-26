@@ -21,8 +21,8 @@ public class ComponentGraveStone extends StructureComponent {
 
     /**
      * second Part of Structure generating, this for example places Spiderwebs,
-     * Mob Spawners, it closes Mineshafts at the end, it adds Fences...
-     * not used!!!
+     * Mob Spawners, it closes Mineshafts at the end, it adds Fences... not
+     * used!!!
      */
     @Override
     public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBoundingBox) {
@@ -46,6 +46,7 @@ public class ComponentGraveStone extends StructureComponent {
 
     /**
      * Return world X coord
+     *
      * @param x Bounding box X coord
      * @param z Bounding box Z coord
      */
@@ -56,6 +57,7 @@ public class ComponentGraveStone extends StructureComponent {
 
     /**
      * Return world y coord
+     *
      * @param y Bounding box Y coord
      */
     @Override
@@ -65,6 +67,7 @@ public class ComponentGraveStone extends StructureComponent {
 
     /**
      * Return world Z coord
+     *
      * @param x Bounding box X coord
      * @param z Bounding box Z coord
      */
@@ -72,13 +75,13 @@ public class ComponentGraveStone extends StructureComponent {
     public int getZWithOffset(int x, int z) {
         return super.getZWithOffset(x, z);
     }
-    
+
     /**
-     * Used to generate chests with items in it. ex: Temple Chests, Village Blacksmith Chests, Mineshaft Chests.
+     * Used to generate chests with items in it. ex: Temple Chests, Village
+     * Blacksmith Chests, Mineshaft Chests.
      */
     @Override
     public boolean generateStructureChestContents(World world, StructureBoundingBox boundingBox, Random random, int x, int y, int z, WeightedRandomChestContent[] chestContent, int par8) {
         return super.generateStructureChestContents(world, boundingBox, random, x, y, z, chestContent, par8);
     }
 }
-    

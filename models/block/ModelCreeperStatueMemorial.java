@@ -30,7 +30,6 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
     public ModelCreeperStatueMemorial() {
         textureWidth = 64;
         textureHeight = 32;
-
         float par1 = 0;
         byte b0 = 4;
         this.head = new ModelRenderer(this, 0, 0);
@@ -54,7 +53,6 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
         this.leg4 = new ModelRenderer(this, 0, 16);
         this.leg4.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, par1);
         this.leg4.setRotationPoint(2.0F, (float) (12 + b0), -4.0F);
-
         pedestal = new ModelSmallPedestal();
     }
 
@@ -76,11 +74,8 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
     @Override
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F);
-        
         GL11.glTranslated(0, -0.3, 0);
-        
         renderCreeper();
-        
         GL11.glTranslated(0, -0.19, 0);
         pedestal.renderAll();
     }
@@ -93,26 +88,23 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
 
     private void renderCreeper() {
         float par7 = 0.0625F;
-
         this.head.render(par7);
         this.body.render(par7);
         this.leg1.render(par7);
         this.leg2.render(par7);
         this.leg3.render(par7);
         this.leg4.render(par7);
-
     }
 
     private void renderCreeperCharging() {
         float tickModifier = (float) (Minecraft.getSystemTime() % 3000L) / 3000.0F * 48.0F;
-
         float scale = 1.2F;
         GL11.glScalef(scale, scale, scale);
-        
         TileEntityGSMemorialRenderer.instance.bindTextureByName(Resources.CREEPER_AURA);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDepthMask(true);
         GL11.glMatrixMode(GL11.GL_TEXTURE);
+
         for (int var21 = 0; var21 < 2; ++var21) {
             float f4 = 0.5F;
             GL11.glColor4f(f4, f4, f4, 1);
@@ -121,7 +113,6 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
             GL11.glLoadIdentity();
             float var23 = tickModifier * (0.001F + (float) var21 * 0.003F) * 15;
             GL11.glTranslatef(0, var23, 0);
-
             renderCreeper();
         }
 

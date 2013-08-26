@@ -42,6 +42,7 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
     public boolean addComponentParts(World world, Random random, StructureBoundingBox structureBoundingBox) {
         if (this.averageGroundLevel < 0) {
             this.averageGroundLevel = this.getAverageGroundLevel(world, structureBoundingBox);
+
             if (this.averageGroundLevel < 0) {
                 return true;
             }
@@ -53,19 +54,17 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
         this.fillWithAir(world, structureBoundingBox, 12, 1, 0, 12, 1, 10);
         this.fillWithAir(world, structureBoundingBox, 0, 1, 0, 12, 1, 0);
         this.fillWithAir(world, structureBoundingBox, 0, 1, 10, 12, 1, 10);
-        
         this.fillWithAir(world, structureBoundingBox, 2, 1, 2, 2, 1, 8);
         this.fillWithAir(world, structureBoundingBox, 4, 1, 2, 4, 1, 8);
         this.fillWithAir(world, structureBoundingBox, 6, 1, 2, 6, 1, 8);
         this.fillWithAir(world, structureBoundingBox, 8, 1, 2, 8, 1, 8);
         this.fillWithAir(world, structureBoundingBox, 10, 1, 2, 10, 1, 8);
-        
         this.fillWithAir(world, structureBoundingBox, 3, 1, 2, 9, 1, 2);
         this.fillWithAir(world, structureBoundingBox, 3, 1, 4, 9, 1, 4);
         this.fillWithAir(world, structureBoundingBox, 3, 1, 6, 9, 1, 6);
         this.fillWithAir(world, structureBoundingBox, 3, 1, 8, 9, 1, 8);
-
         int fenceMeta;
+
         if (this.coordBaseMode == 1 || this.coordBaseMode == 3) {
             fenceMeta = 1;
         } else {
@@ -75,6 +74,7 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
         int wallID = Block.cobblestoneWall.blockID;
         int wallMeta;
         int groundID;
+
         if (this.startPiece.inDesert) {
             wallMeta = 0;
             groundID = Block.sand.blockID;
@@ -89,6 +89,7 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
             this.placeBlockAtCurrentPosition(world, wallID, wallMeta, x, 1, 1, structureBoundingBox);
             this.placeBlockAtCurrentPosition(world, wallID, wallMeta, x, 1, 9, structureBoundingBox);
         }
+
         for (int z = 1; z < 10; z++) {
             this.placeBlockAtCurrentPosition(world, wallID, wallMeta, 1, 1, z, structureBoundingBox);
             this.placeBlockAtCurrentPosition(world, wallID, wallMeta, 11, 1, z, structureBoundingBox);
@@ -96,16 +97,15 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
 
         this.placeBlockAtCurrentPosition(world, Block.fenceGate.blockID, fenceMeta, 6, 1, 1, structureBoundingBox);
         this.placeBlockAtCurrentPosition(world, Block.fenceGate.blockID, fenceMeta, 6, 1, 9, structureBoundingBox);
-
-
-
         int graveMeta = BlockGSGraveStone.getMetaDirection(this.coordBaseMode);
         byte graveType = BlockGSGraveStone.GENERATED_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_GRAVES.length)];
+
         for (int x = 3; x < 11; x += 2) {
             for (int z = 3; z < 9; z += 2) {
                 placeGrave(world, random, x, 1, z, graveMeta, graveType, structureBoundingBox);
             }
         }
+
         for (int x = 0; x < 11; x++) {
             for (int z = 0; z < 9; z++) {
                 this.clearCurrentPositionBlocksUpwards(world, x, HEIGHT, z, structureBoundingBox);
@@ -120,9 +120,11 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
         int xCoord = this.getXWithOffset(x, z);
         int yCoord = this.getYWithOffset(y);
         int zCoord = this.getZWithOffset(x, z);
+
         if (world.getBlockId(xCoord, yCoord, zCoord) != GraveStoneConfig.graveStoneID) {
             this.placeBlockAtCurrentPosition(world, GraveStoneConfig.graveStoneID, graveMeta, x, y, z, boundingBox);
             TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(xCoord, yCoord, zCoord);
+
             if (tileEntity != null) {
                 tileEntity.setGraveType(graveType);
                 tileEntity.setGraveContent(random, false, true);

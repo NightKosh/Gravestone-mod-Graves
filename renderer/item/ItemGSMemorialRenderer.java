@@ -23,7 +23,6 @@ public class ItemGSMemorialRenderer implements IItemRenderer {
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-
         return true;
     }
 
@@ -35,10 +34,11 @@ public class ItemGSMemorialRenderer implements IItemRenderer {
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         TileEntityGSMemorial entity = new TileEntityGSMemorial();
+
         if (item.stackTagCompound != null) {
             entity.setGraveType(item.stackTagCompound.getByte("GraveType"));
         }
-        
+
         TileEntityRenderer.instance.renderTileEntityAt(entity, 0.0D, 0.0D, 0.0D, 0.0F);
     }
 }

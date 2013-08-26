@@ -42,7 +42,6 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
     }
 
     protected int invertDirection(int direction) {
-
         return 0;
     }
 
@@ -97,75 +96,92 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
 
     /**
      * Return left direction
+     *
      * @param direction Component direction
      */
     public static int getLeftDirection(int direction) {
         direction -= 1;
+
         if (direction < 0) {
             direction = 3;
         }
+
         return direction;
     }
 
     /**
      * Return right direction
+     *
      * @param direction Component direction
      */
     public static int getRightDirection(int direction) {
         direction += 1;
+
         if (direction > 3) {
             direction = 0;
         }
+
         return direction;
     }
 
     /**
      * Return Inverted direction
+     *
      * @param direction Component direction
      */
     public static int getInvertDirection(int direction) {
         direction += 2;
+
         if (direction > 3) {
             direction -= 4;
         }
+
         return direction;
     }
 
     /**
      * Return left direction for items
+     *
      * @param direction Component direction
      */
     public static int getLeftItemDirection(int direction) {
         if (direction == 0 || direction == 1) {
             direction += 1;
+
             if (direction > 3) {
                 direction = 0;
             }
         } else {
             direction -= 1;
+
             if (direction < 0) {
                 direction = 3;
             }
         }
+
         return direction;
     }
 
     /**
      * Return right direction for items
+     *
      * @param direction Component direction
      */
     public static int getRightItemDirection(int direction) {
         if (direction == 0 || direction == 1) {
             direction -= 1;
+
             if (direction < 0) {
                 direction = 3;
             }
         } else {
             direction += 1;
+
             if (direction > 3) {
                 direction = 0;
             }
         }
+
         return direction;
     }
 
@@ -178,6 +194,7 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
 
     /**
      * Is component can be places here
+     *
      * @param boundingBox Component bounding box
      */
     public boolean canBePlacedHere(StructureBoundingBox boundingBox) {
@@ -219,7 +236,7 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
     public int getDirection() {
         return coordBaseMode;
     }
-    
+
     /**
      * Return valuable block
      */

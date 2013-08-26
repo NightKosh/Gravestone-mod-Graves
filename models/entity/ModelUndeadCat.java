@@ -18,21 +18,37 @@ import net.minecraft.util.MathHelper;
 @SideOnly(Side.CLIENT)
 public class ModelUndeadCat extends ModelBase {
 
-    /** The back left leg model for the UndeadCat. */
+    /**
+     * The back left leg model for the UndeadCat.
+     */
     ModelRenderer undeadCatBackLeftLeg;
-    /** The back right leg model for the UndeadCat. */
+    /**
+     * The back right leg model for the UndeadCat.
+     */
     ModelRenderer undeadCatBackRightLeg;
-    /** The front left leg model for the UndeadCat. */
+    /**
+     * The front left leg model for the UndeadCat.
+     */
     ModelRenderer undeadCatFrontLeftLeg;
-    /** The front right leg model for the UndeadCat. */
+    /**
+     * The front right leg model for the UndeadCat.
+     */
     ModelRenderer undeadCatFrontRightLeg;
-    /** The tail model for the UndeadCat. */
+    /**
+     * The tail model for the UndeadCat.
+     */
     ModelRenderer undeadCatTail;
-    /** The second part of tail model for the UndeadCat. */
+    /**
+     * The second part of tail model for the UndeadCat.
+     */
     ModelRenderer undeadCatTail2;
-    /** The head model for the UndeadCat. */
+    /**
+     * The head model for the UndeadCat.
+     */
     ModelRenderer undeadCatHead;
-    /** The body model for the UndeadCat. */
+    /**
+     * The body model for the UndeadCat.
+     */
     ModelRenderer undeadCatBody;
     int field_78163_i = 1;
 
@@ -77,21 +93,21 @@ public class ModelUndeadCat extends ModelBase {
     @Override
     public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, par1Entity);
-
-            this.undeadCatHead.render(par7);
-            this.undeadCatBody.render(par7);
-            this.undeadCatTail.render(par7);
-            this.undeadCatTail2.render(par7);
-            this.undeadCatBackLeftLeg.render(par7);
-            this.undeadCatBackRightLeg.render(par7);
-            this.undeadCatFrontLeftLeg.render(par7);
-            this.undeadCatFrontRightLeg.render(par7);
+        this.undeadCatHead.render(par7);
+        this.undeadCatBody.render(par7);
+        this.undeadCatTail.render(par7);
+        this.undeadCatTail2.render(par7);
+        this.undeadCatBackLeftLeg.render(par7);
+        this.undeadCatBackRightLeg.render(par7);
+        this.undeadCatFrontLeftLeg.render(par7);
+        this.undeadCatFrontRightLeg.render(par7);
     }
 
     /**
-     * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
-     * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
-     * "far" arms and legs can swing at most.
+     * Sets the model's various rotation angles. For bipeds, par1 and par2 are
+     * used for animating the movement of arms and legs, where par1 represents
+     * the time(so that arms and legs swing back and forth) and par2 represents
+     * how "far" arms and legs can swing at most.
      */
     @Override
     public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
@@ -123,8 +139,9 @@ public class ModelUndeadCat extends ModelBase {
     }
 
     /**
-     * Used for easily adding entity-dependent animations. The second and third float params here are the same second
-     * and third as in the setRotationAngles method.
+     * Used for easily adding entity-dependent animations. The second and third
+     * float params here are the same second and third as in the
+     * setRotationAngles method.
      */
     public void setLivingAnimations(EntityLiving entityLiving, float par2, float par3, float par4) {
         EntityUndeadCat undeadCat = (EntityUndeadCat) entityLiving;

@@ -44,13 +44,14 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) te;
         byte memorialType = tileEntity.getGraveTypeNum();
         int meta;
+
         if (tileEntity.worldObj != null) {
             meta = tileEntity.getBlockMetadata();
         } else {
             meta = 0;
         }
-        getMemorialTexture(memorialType);
 
+        getMemorialTexture(memorialType);
         //texture
         GL11.glPushMatrix();
 
@@ -59,10 +60,10 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
             GL11.glScalef(1F, -1F, -1F);
         } else {
             if (memorialType == 0 || memorialType == 1) {
-            GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
+                GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
                 GL11.glScalef(0.4F, -0.4F, -0.4F);
             } else {
-            GL11.glTranslatef((float) x + 0.5F, (float) y + 0.8F, (float) z + 0.5F);
+                GL11.glTranslatef((float) x + 0.5F, (float) y + 0.8F, (float) z + 0.5F);
                 GL11.glScalef(0.7F, -0.7F, -0.7F);
             }
         }
@@ -71,12 +72,15 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
             case 0:
                 GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
                 break;
+
             case 1:
                 GL11.glRotatef(90, 0.0F, 1.0F, 0.0F);
                 break;
+
             case 2:
                 GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
                 break;
+
             case 3:
                 GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
                 break;

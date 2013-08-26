@@ -33,7 +33,6 @@ public class EntityZombieCat extends EntityUndeadCat {
     public EntityZombieCat(World world) {
         super(world);
         texture = Resources.ZOMBIE_OZELOT;
-        
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1, false));
         this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1));
         this.tasks.addTask(6, new EntityAIWander(this, 1));
@@ -41,13 +40,11 @@ public class EntityZombieCat extends EntityUndeadCat {
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityWolf.class, 1, true));
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityOcelot.class, 1, true));
         this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, 1, false));
-        
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, false));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWolf.class, 0, false));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityOcelot.class, 0, false));
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityChicken.class, 0, false));
     }
-
 
     @Override
     protected void func_110147_ax() {
@@ -55,7 +52,7 @@ public class EntityZombieCat extends EntityUndeadCat {
         this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(10); // max health
         this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.5D); // movespeed
     }
-    
+
     /**
      * Returns the texture's file path as a String.
      */
@@ -65,10 +62,13 @@ public class EntityZombieCat extends EntityUndeadCat {
         switch (this.getSkin()) {
             case 1:
                 return Resources.ZOMBIE_CAT_BLACK;
+
             case 2:
                 return Resources.ZOMBIE_CAT_RED;
+
             case 3:
                 return Resources.ZOMBIE_CAT_SIAMESE;
+
             case 0:
             default:
                 return Resources.ZOMBIE_OZELOT;
@@ -116,7 +116,7 @@ public class EntityZombieCat extends EntityUndeadCat {
     protected String getDeathSound() {
         return "mob.cat.hitt";
     }
-    
+
     /**
      * Plays step sound at given x, y, z for the entity
      */
@@ -147,7 +147,7 @@ public class EntityZombieCat extends EntityUndeadCat {
     public void setSkin(int par1) {
         this.dataWatcher.updateObject(18, Byte.valueOf((byte) par1));
     }
-    
+
     /**
      * This method gets called when the entity kills another one.
      */
@@ -159,6 +159,7 @@ public class EntityZombieCat extends EntityUndeadCat {
             if (this.worldObj.difficultySetting == 2 && this.rand.nextBoolean()) {
                 return;
             }
+
             if (entityLiving instanceof EntityVillager) {
                 EntityZombie entityZombie = new EntityZombie(this.worldObj);
                 //entityZombie.func_82149_j(entityLiving);
@@ -179,20 +180,17 @@ public class EntityZombieCat extends EntityUndeadCat {
                 //entityZombieDog.func_82149_j(entityLiving);
                 entityZombieDog.copyLocationAndAnglesFrom(entityLiving);
                 this.worldObj.removeEntity(entityLiving);
-
                 this.worldObj.spawnEntityInWorld(entityZombieDog);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             } else if (entityLiving instanceof EntityOcelot) {
                 EntityZombieCat entityZombieCat = new EntityZombieCat(this.worldObj);
                 //entityZombieCat.func_82149_j(entityLiving);
                 entityZombieCat.copyLocationAndAnglesFrom(entityLiving);
-                
                 int catType = ((EntityOcelot) entityLiving).getTameSkin();
                 this.worldObj.removeEntity(entityLiving);
                 entityZombieCat.setSkin(catType);
                 //entityZombieCat.initCreature();
                 entityZombieCat.func_110161_a((EntityLivingData) null);
-
                 this.worldObj.spawnEntityInWorld(entityZombieCat);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             }

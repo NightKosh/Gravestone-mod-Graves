@@ -16,14 +16,18 @@ public class GraveStoneBiomes {
 
     private GraveStoneBiomes() {
     }
-    // list of allowed bioms for catacombs generator
+    // list of allowed biomes for catacombs generator
     private static ArrayList CATACOMBS_BIOMES = new ArrayList(Arrays.asList(
             BiomeGenBase.plains.biomeID, BiomeGenBase.forest.biomeID,
             BiomeGenBase.taiga.biomeID, BiomeGenBase.icePlains.biomeID));
-    // list of disallowed bioms for memorials generator
+    // list of disallowed biomes for memorials generator
     private static final ArrayList MEMORIAL_BIOMES = new ArrayList(Arrays.asList(
             BiomeGenBase.frozenOcean.biomeID, BiomeGenBase.frozenRiver.biomeID, BiomeGenBase.ocean.biomeID,
             BiomeGenBase.river.biomeID, BiomeGenBase.swampland.biomeID));
+    // list of disallowed biomes for single graves generator
+    private static final ArrayList GRAVES_BIOMES = new ArrayList(Arrays.asList(
+            BiomeGenBase.frozenOcean.biomeID, BiomeGenBase.frozenRiver.biomeID,
+            BiomeGenBase.ocean.biomeID, BiomeGenBase.river.biomeID));
 
     public static void addHighlandsBiomes() {
         CATACOMBS_BIOMES.addAll(Arrays.asList(
@@ -36,12 +40,13 @@ public class GraveStoneBiomes {
                 HighlandsBiomes.savannah.biomeID,
                 HighlandsBiomes.tundra.biomeID,
                 HighlandsBiomes.shrubland.biomeID));
-
         MEMORIAL_BIOMES.add(Arrays.asList(
                 HighlandsBiomes.bog.biomeID,
                 HighlandsBiomes.dunes.biomeID,
                 HighlandsBiomes.estuary.biomeID,
                 HighlandsBiomes.tropicalIslands.biomeID,
+                HighlandsBiomes.lake.biomeID));
+        GRAVES_BIOMES.add(Arrays.asList(
                 HighlandsBiomes.lake.biomeID));
     }
 
@@ -77,7 +82,6 @@ public class GraveStoneBiomes {
                 biomesoplenty.api.Biomes.steppe.get().biomeID,
                 biomesoplenty.api.Biomes.thicket.get().biomeID,
                 biomesoplenty.api.Biomes.woodland.get().biomeID));
-
         MEMORIAL_BIOMES.add(Arrays.asList(
                 biomesoplenty.api.Biomes.deadlands.get().biomeID,
                 biomesoplenty.api.Biomes.beachGravel.get().biomeID,
@@ -86,6 +90,8 @@ public class GraveStoneBiomes {
                 biomesoplenty.api.Biomes.polar.get().biomeID,
                 biomesoplenty.api.Biomes.volcano.get().biomeID,
                 biomesoplenty.api.Biomes.wasteland.get().biomeID));
+        GRAVES_BIOMES.add(Arrays.asList(
+                biomesoplenty.api.Biomes.mangrove.get().biomeID));
     }
 
     public static void addExtrabiomsXLBiomes() {
@@ -101,10 +107,11 @@ public class GraveStoneBiomes {
                 Biomes.getBiome("SnowyForest").get().biomeID,
                 Biomes.getBiome("Tundra").get().biomeID,
                 Biomes.getBiome("Woodlands").get().biomeID));
-
         MEMORIAL_BIOMES.add(Arrays.asList(
                 Biomes.getBiome("Marsh").get().biomeID,
                 Biomes.getBiome("Wasteland").get().biomeID));
+        GRAVES_BIOMES.add(Arrays.asList(
+                Biomes.getBiome("Marsh").get().biomeID));
     }
 
     public static ArrayList getCatacombsBiomes() {
@@ -113,5 +120,9 @@ public class GraveStoneBiomes {
 
     public static ArrayList getMemorialBiomes() {
         return MEMORIAL_BIOMES;
+    }
+
+    public static ArrayList getGravesBiomes() {
+        return GRAVES_BIOMES;
     }
 }

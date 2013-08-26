@@ -1,4 +1,3 @@
-
 package GraveStone.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,25 +8,24 @@ import net.minecraft.util.WeightedRandomItem;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class TileEntityGSGraveStoneSpawnData extends WeightedRandomItem {
+
     public final NBTTagCompound field_92032_b;
     public final String field_92033_c;
-
     final TileEntityGSGraveStone field_92031_d;
 
-    public TileEntityGSGraveStoneSpawnData(TileEntityGSGraveStone par1TileEntityGraveStone, NBTTagCompound par2NBTTagCompound) {
-        super(par2NBTTagCompound.getInteger("Weight"));
-        this.field_92031_d = par1TileEntityGraveStone;
-        this.field_92032_b = par2NBTTagCompound.getCompoundTag("Properties");
-        this.field_92033_c = par2NBTTagCompound.getString("Type");
+    public TileEntityGSGraveStoneSpawnData(TileEntityGSGraveStone tileEntity, NBTTagCompound nbtTag) {
+        super(nbtTag.getInteger("Weight"));
+        this.field_92031_d = tileEntity;
+        this.field_92032_b = nbtTag.getCompoundTag("Properties");
+        this.field_92033_c = nbtTag.getString("Type");
     }
 
-    public TileEntityGSGraveStoneSpawnData(TileEntityGSGraveStone par1TileEntityGraveStone, NBTTagCompound par2NBTTagCompound, String par3Str) {
+    public TileEntityGSGraveStoneSpawnData(TileEntityGSGraveStone tileEntity, NBTTagCompound nbtTag, String par3Str) {
         super(1);
-        this.field_92031_d = par1TileEntityGraveStone;
-        this.field_92032_b = par2NBTTagCompound;
+        this.field_92031_d = tileEntity;
+        this.field_92032_b = nbtTag;
         this.field_92033_c = par3Str;
     }
 

@@ -1,4 +1,3 @@
-
 package GraveStone.config;
 
 /**
@@ -8,6 +7,7 @@ package GraveStone.config;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public abstract class GravesDefaultText {
+
     public static final String[] DEATH_TEXT = {
         " was slain by Wolf",
         " was slain by Spider",
@@ -41,17 +41,16 @@ public abstract class GravesDefaultText {
         " was die in cruel tortures"
     };
     public static final String[] MEMORIAL_TEXT = {
-      "Earth has no sorrow that Heaven cannot heal",
-      "See, I am sending an angel ahead of you to guard you along the way and to bring you to the place I have prepared",
-      "It's like we are awake here and asleep in heaven until we die, then we are asleep here and awake there",
-      "What we have once enjoyed and deeply loved we can never lose, for all that we love deeply becomes a part of us"
+        "Earth has no sorrow that Heaven cannot heal",
+        "See, I am sending an angel ahead of you to guard you along the way and to bring you to the place I have prepared",
+        "It's like we are awake here and asleep in heaven until we die, then we are asleep here and awake there",
+        "What we have once enjoyed and deeply loved we can never lose, for all that we love deeply becomes a part of us"
     };
     public static final String[] DOGS_MEMORIAL_TEXT = {
         "Everybody is born so that they can learn how to live a good life and love others - dogs already know how to do that so they don't have to stay as long",
         "Dog's lives are too short. Their only fault, really"
     };
-    public static final String[] CATS_MEMORIAL_TEXT = {
-    };
+    public static final String[] CATS_MEMORIAL_TEXT = {};
     public static final String[] NAMES = {
         "Steve", "Jeb", "Notch", "Leeroy Jenkins", "Zod",
         "Alex", "Alice", "Alan", "Ashley",

@@ -15,11 +15,11 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 public class MobSpawnHelper {
 
     private MobSpawnHelper() {
-        
     }
-    
+
     /**
      * Spawn bats
+     *
      * @param world World object
      * @param random
      * @param boundingBox Bounding box
@@ -28,12 +28,13 @@ public class MobSpawnHelper {
         EntityBat bat;
         EntityLiving livingEntity;
         int batsCount = 3 + random.nextInt(8);
+
         for (byte i = 0; i < batsCount; i++) {
             bat = new EntityBat(world);
             bat.setLocationAndAngles(boundingBox.getCenterX() - 1.5 + random.nextInt(5), boundingBox.getCenterY(),
                     boundingBox.getCenterZ() - 1.5 + random.nextInt(5), 0.0F, 0.0F);
-
             livingEntity = (EntityLiving) bat;
+
             if (livingEntity.getCanSpawnHere()) {
                 world.spawnEntityInWorld(bat);
             }

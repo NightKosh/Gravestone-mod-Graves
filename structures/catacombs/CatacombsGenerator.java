@@ -14,8 +14,8 @@ import net.minecraft.world.World;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class CatacombsGenerator {
-
     // chance to generate a structure
+
     private static final double CHANCE = 0.0005D;
     protected static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
 
@@ -24,14 +24,15 @@ public class CatacombsGenerator {
             int direction = rand.nextInt(4);
             CatacombsSurface surface = new CatacombsSurface(world, rand, x, z, direction);
             System.out.println("Catacombs " + x + "x" + z);
-            
+
             if (surface.getMausoleumY() > 55) {
                 new CatacombsUnderground(world, rand, direction, surface.getMausoleumX(), surface.getMausoleumY(), surface.getMausoleumZ());
             }
-            
+
             structuresList.add(new ChunkCoordIntPair(x, z));
             return true;
         }
+
         return false;
     }
 
@@ -49,7 +50,7 @@ public class CatacombsGenerator {
 
         return true;
     }
-    
+
     public static LinkedList<ChunkCoordIntPair> getStructuresList() {
         return structuresList;
     }

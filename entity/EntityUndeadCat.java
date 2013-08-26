@@ -1,4 +1,3 @@
-
 package GraveStone.entity;
 
 import net.minecraft.world.World;
@@ -10,7 +9,7 @@ import net.minecraft.world.World;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public abstract class EntityUndeadCat extends EntityUndeadPet {
-    
+
     public EntityUndeadCat(World world) {
         super(world);
         this.setSize(0.6F, 0.8F);

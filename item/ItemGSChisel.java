@@ -22,7 +22,6 @@ public class ItemGSChisel extends ItemTool {
 
     public ItemGSChisel(int id) {
         super(id, 1, EnumToolMaterial.IRON, new Block[0]);
-
         setMaxStackSize(1);
         setCreativeTab(ModGraveStone.creativeTab);
         setUnlocalizedName("Chisel");
@@ -30,9 +29,10 @@ public class ItemGSChisel extends ItemTool {
         MinecraftForge.setToolClass(this, "chisel", 1);
         this.func_111206_d(Resources.CHISEL);
     }
-    
+
     /**
-     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+     * Called whenever this item is equipped and the right mouse button is
+     * pressed. Args: itemStack, world, entityPlayer
      */
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
@@ -41,8 +41,9 @@ public class ItemGSChisel extends ItemTool {
     }
 
     /**
-     * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
-     * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
+     * Callback for item usage. If the item does something special on right
+     * clicking, he will have one of those. Return True if something happen and
+     * false if it don't. This is for ITEMS, not BLOCKS
      */
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10) {
@@ -51,12 +52,14 @@ public class ItemGSChisel extends ItemTool {
         } else if (world.getBlockId(x, y, z) == GraveStoneConfig.memorialID) {
             return setGraveText(stack, player, world, x, y, z, true);
         }
+
         return false;
     }
 
     private boolean setGraveText(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, boolean isMemorial) {
         TileEntityGSGrave tileEntity = (TileEntityGSGrave) world.getBlockTileEntity(x, y, z);
-        if (tileEntity != null && tileEntity.isEditable() && tileEntity.getDeathText().equals("")) {
+
+        if (tileEntity != null && tileEntity.isEditable() && tileEntity.getDeathTextComponent().getDeathText().length() == 0) {
             player.openGui(ModGraveStone.instance, 0, world, x, y, z);
 
             if (isMemorial) {
@@ -64,8 +67,10 @@ public class ItemGSChisel extends ItemTool {
             } else {
                 stack.damageItem(2, player);
             }
+
             return true;
         }
+
         return false;
     }
 }

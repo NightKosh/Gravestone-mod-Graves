@@ -87,12 +87,15 @@ public abstract class GraveStoneMobSpawn {
             case DOG_STATUE:
                 id = getMobID(world.rand, EnumMobType.UNDEAD_DOGS);
                 break;
+
             case CAT_STATUE:
                 id = getMobID(world.rand, EnumMobType.UNDEAD_CATS);
                 break;
+
             default:
                 if (canSpawnHellCreatures(world, x, y, z) && world.rand.nextInt(20) == 0) {
                     id = getMobID(world.rand, EnumMobType.HELL_MOBS);
+
                     if (id.equals("Skeleton")) {
                         EntitySkeleton skeleton = getSkeleton(world);
                         skeleton.setSkeletonType(1);
@@ -100,6 +103,7 @@ public abstract class GraveStoneMobSpawn {
                     }
                 } else {
                     id = getMobID(world.rand, EnumMobType.DEFAULT_MOBS);
+
                     if (id.equals("Skeleton")) {
                         return getSkeleton(world);
                     }
@@ -107,9 +111,11 @@ public abstract class GraveStoneMobSpawn {
         }
 
         EntityLiving entity = (EntityLiving) EntityList.createEntityByName(id, world);
+
         if (entity == null) {
             entity = getForeinMob(world, id);
         }
+
         try {
             entity.func_110161_a((EntityLivingData) null);
         } catch (Exception e) {
@@ -121,25 +127,30 @@ public abstract class GraveStoneMobSpawn {
 
     /**
      * Return Skeleton with bow/sword
+     *
      * @param world
-     * @return 
+     * @return
      */
     private static EntitySkeleton getSkeleton(World world) {
         EntitySkeleton skeleton = (EntitySkeleton) EntityList.createEntityByName("Skeleton", world);
+
         if (world.rand.nextInt(2) == 0) {
             skeleton.setCurrentItemOrArmor(0, new ItemStack(Item.swordStone.itemID, 1, 0));
         } else {
             skeleton.setCurrentItemOrArmor(0, new ItemStack(Item.bow.itemID, 1, 0));
         }
+
         return skeleton;
     }
 
     /**
      * Return constructor for forein mobs classes based on class path
+     *
      * @param path Class Path with name
      */
     private static Constructor getForeinMobConstructor(String path) {
         Constructor<EntityLiving> constructor = null;
+
         try {
             Class mobClass = Class.forName(path);
             constructor = mobClass.getConstructor(World.class);
@@ -154,6 +165,7 @@ public abstract class GraveStoneMobSpawn {
 
     /**
      * Create and return instance for forein mobs
+     *
      * @param world
      * @param mobName
      */
@@ -183,10 +195,13 @@ public abstract class GraveStoneMobSpawn {
         switch (mobType) {
             case HELL_MOBS:
                 return HELL_MOB_ID.get(random.nextInt(HELL_MOB_ID.size()));
+
             case UNDEAD_DOGS:
                 return DOG_ID.get(random.nextInt(DOG_ID.size()));
+
             case UNDEAD_CATS:
                 return CAT_ID.get(random.nextInt(CAT_ID.size()));
+
             case DEFAULT_MOBS:
             default:
                 return MOB_ID.get(random.nextInt(MOB_ID.size()));
@@ -206,35 +221,38 @@ public abstract class GraveStoneMobSpawn {
         EntityLiving livingEntity = (EntityLiving) mob;
         float rotation = world.rand.nextFloat() * 360.0F;
         boolean canSpawn = false;
-
         double xPosition = x + 0.5;
         double yPosition = y;
         double zPosition = z + 0.5;
-
         mob.setLocationAndAngles(xPosition, yPosition, zPosition, rotation, 0.0F);
+
         if (livingEntity.getCanSpawnHere()) {
             canSpawn = true;
         } else {
             if (!(mob instanceof EntityZombie)) {
                 xPosition += 1;
                 mob.setLocationAndAngles(xPosition, yPosition, zPosition, rotation, 0.0F);
+
                 if (livingEntity.getCanSpawnHere()) {
                     canSpawn = true;
                 } else {
                     xPosition -= 1;
                     zPosition += 1;
                     mob.setLocationAndAngles(xPosition, yPosition, zPosition, rotation, 0.0F);
+
                     if (livingEntity.getCanSpawnHere()) {
                         canSpawn = true;
                     } else {
                         zPosition -= 2;
                         mob.setLocationAndAngles(xPosition, yPosition, zPosition, rotation, 0.0F);
+
                         if (livingEntity.getCanSpawnHere()) {
                             canSpawn = true;
                         } else {
                             xPosition -= 1;
                             zPosition += 1;
                             mob.setLocationAndAngles(xPosition, yPosition, zPosition, rotation, 0.0F);
+
                             if (livingEntity.getCanSpawnHere()) {
                                 canSpawn = true;
                             }
@@ -250,7 +268,6 @@ public abstract class GraveStoneMobSpawn {
             zPosition = z + world.rand.nextFloat();
             world.spawnParticle("largesmoke", xPosition, yPosition + 2, zPosition, 0.0D, 0.0D, 0.0D);
             world.spawnParticle("flame", xPosition, yPosition + 1, zPosition, 0.0D, 0.0D, 0.0D);
-
             world.spawnEntityInWorld(mob);
             world.playAuxSFX(2004, x, y, z, 0);
             return true;
@@ -280,6 +297,7 @@ public abstract class GraveStoneMobSpawn {
         }
 
         constructor = getForeinMobConstructor(MO_CREATURES_WRAITH);
+
         if (constructor != null) {
             MOB_ID.add("Wraith");
             mobNameToClassMapping.put("Wraith", constructor);
@@ -288,6 +306,7 @@ public abstract class GraveStoneMobSpawn {
         }
 
         constructor = getForeinMobConstructor(MO_CREATURES_F_WRAITH);
+
         if (constructor != null) {
             HELL_MOB_ID.add("FlameWraith");
             mobNameToClassMapping.put("FlameWraith", constructor);
@@ -304,6 +323,7 @@ public abstract class GraveStoneMobSpawn {
      */
     public static void addTwilightForestMobs() {
         Constructor<EntityLiving> constructor = getForeinMobConstructor(TWILIGHT_WRAITH);
+
         if (constructor != null) {
             MOB_ID.add("Twilight Wraith");
             mobNameToClassMapping.put("Twilight Wraith", constructor);
