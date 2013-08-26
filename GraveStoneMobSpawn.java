@@ -127,9 +127,6 @@ public abstract class GraveStoneMobSpawn {
 
     /**
      * Return Skeleton with bow/sword
-     *
-     * @param world
-     * @return
      */
     private static EntitySkeleton getSkeleton(World world) {
         EntitySkeleton skeleton = (EntitySkeleton) EntityList.createEntityByName("Skeleton", world);
@@ -217,7 +214,7 @@ public abstract class GraveStoneMobSpawn {
      * @param y Y coordinate
      * @param z Z coordinate
      */
-    public static boolean spawnMob(World world, Entity mob, int x, int y, int z) {
+    public static boolean spawnMob(World world, Entity mob, int x, int y, int z, boolean checkSpawn) {
         EntityLiving livingEntity = (EntityLiving) mob;
         float rotation = world.rand.nextFloat() * 360.0F;
         boolean canSpawn = false;
@@ -226,7 +223,7 @@ public abstract class GraveStoneMobSpawn {
         double zPosition = z + 0.5;
         mob.setLocationAndAngles(xPosition, yPosition, zPosition, rotation, 0.0F);
 
-        if (livingEntity.getCanSpawnHere()) {
+        if (!checkSpawn || livingEntity.getCanSpawnHere()) {
             canSpawn = true;
         } else {
             if (!(mob instanceof EntityZombie)) {
