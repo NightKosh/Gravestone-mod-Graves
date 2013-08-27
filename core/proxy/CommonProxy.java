@@ -13,4 +13,8 @@ public class CommonProxy {
 
     public void registerVillagers() {
     }
+    
+    public String getLocalizedString(String str) {
+        return str;
+    }
 }

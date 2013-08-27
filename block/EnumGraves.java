@@ -1,6 +1,6 @@
 package GraveStone.block;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
+import GraveStone.ModGraveStone;
 
 /**
  * GraveStone mod
@@ -34,7 +34,7 @@ public enum EnumGraves {
     }
 
     public String getName() {
-        return LanguageRegistry.instance().getStringLocalization(this.name);
+        return ModGraveStone.proxy.getLocalizedString(this.name);
     }
 
     /**

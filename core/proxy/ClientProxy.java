@@ -18,6 +18,7 @@ import GraveStone.tileentity.TileEntityGSMemorial;
 import GraveStone.renderer.tileentity.TileEntityGSMemorialRenderer;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -47,7 +48,13 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonCat.class, new RenderUndeadCat(new ModelUndeadCat(), 0));
     }
 
+    @Override
     public void registerVillagers() {
         VillagerRegistry.instance().registerVillagerSkin(385, Resources.UNDARTAKER);
+    }
+    
+    @Override
+    public String getLocalizedString(String str) {
+        return LanguageRegistry.instance().getStringLocalization(str);
     }
 }

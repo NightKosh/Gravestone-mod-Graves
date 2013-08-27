@@ -1,8 +1,8 @@
 package GraveStone.gui;
 
+import GraveStone.ModGraveStone;
 import GraveStone.Resources;
 import GraveStone.tileentity.TileEntityGSGrave;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -63,7 +63,7 @@ public class GSGuiGrave extends GuiScreen {
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
-        this.drawString(fontRenderer, LanguageRegistry.instance().getStringLocalization("gui.edit_grave"), posX + 20, posY + 31, 16777215);
+        this.drawString(fontRenderer, ModGraveStone.proxy.getLocalizedString("gui.edit_grave"), posX + 20, posY + 31, 16777215);
         this.drawString(fontRenderer, graveText.toString(), posX + 20, posY + 41, 16777215);
         super.drawScreen(x, y, f);
     }
