@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
 /**
  * GraveStone mod
@@ -29,14 +28,7 @@ public class RenderUndeadDog extends RenderLiving {
     }
 
     protected int func_82447_a(EntityUndeadDog undeadDog, int par2, float par3) {
-        if (par2 == 0 && undeadDog.getWolfShaking()) {
-            float f1 = undeadDog.getBrightness(par3) * undeadDog.getShadingWhileShaking(par3);
-            this.func_110776_a(undeadDog.getTexture());
-            GL11.glColor3f(f1, f1, f1);
-            return 1;
-        } else {
-            return -1;
-        }
+        return -1;
     }
 
     /**

@@ -18,7 +18,6 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 /**
@@ -104,46 +103,6 @@ public class EntityZombieDog extends EntityUndeadDog {
     }
 
     /**
-     * Called to update the entity's position/logic.
-     */
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-
-        if (this.isWet()) {
-            this.isShaking = true;
-            this.field_70928_h = false;
-            this.timeWolfIsShaking = 0.0F;
-            this.prevTimeWolfIsShaking = 0.0F;
-        } else if ((this.isShaking || this.field_70928_h) && this.field_70928_h) {
-            if (this.timeWolfIsShaking == 0.0F) {
-                this.playSound("mob.wolf.shake", this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            }
-
-            this.prevTimeWolfIsShaking = this.timeWolfIsShaking;
-            this.timeWolfIsShaking += 0.05F;
-
-            if (this.prevTimeWolfIsShaking >= 2.0F) {
-                this.isShaking = false;
-                this.field_70928_h = false;
-                this.prevTimeWolfIsShaking = 0.0F;
-                this.timeWolfIsShaking = 0.0F;
-            }
-
-            if (this.timeWolfIsShaking > 0.4F) {
-                float f = (float) this.boundingBox.minY;
-                int i = (int) (MathHelper.sin((this.timeWolfIsShaking - 0.4F) * (float) Math.PI) * 7.0F);
-
-                for (int j = 0; j < i; ++j) {
-                    float f1 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width * 0.5F;
-                    float f2 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width * 0.5F;
-                    this.worldObj.spawnParticle("splash", this.posX + (double) f1, (double) (f + 0.8F), this.posZ + (double) f2, this.motionX, this.motionY, this.motionZ);
-                }
-            }
-        }
-    }
-
-    /**
      * This method gets called when the entity kills another one.
      */
     @Override
@@ -157,10 +116,8 @@ public class EntityZombieDog extends EntityUndeadDog {
 
             if (entityLiving instanceof EntityVillager) {
                 EntityZombie entityZombie = new EntityZombie(this.worldObj);
-                //entityzombie.func_82149_j(entityLiving);
                 entityZombie.copyLocationAndAnglesFrom(entityLiving);
                 this.worldObj.removeEntity(entityLiving);
-                //entityzombie.initCreature();
                 entityZombie.func_110161_a((EntityLivingData) null);
                 entityZombie.setVillager(true);
 
@@ -172,19 +129,16 @@ public class EntityZombieDog extends EntityUndeadDog {
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             } else if (entityLiving instanceof EntityWolf) {
                 EntityZombieDog entityZombieDog = new EntityZombieDog(this.worldObj);
-                //entityZombieDog.func_82149_j(entityLiving);
                 entityZombieDog.copyLocationAndAnglesFrom(entityLiving);
                 this.worldObj.removeEntity(entityLiving);
                 this.worldObj.spawnEntityInWorld(entityZombieDog);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             } else if (entityLiving instanceof EntityOcelot) {
                 EntityZombieCat entityZombieCat = new EntityZombieCat(this.worldObj);
-                //entityZombieCat.func_82149_j(entityLiving);
                 entityZombieCat.copyLocationAndAnglesFrom(entityLiving);
                 int catType = ((EntityOcelot) entityLiving).getTameSkin();
                 this.worldObj.removeEntity(entityLiving);
                 entityZombieCat.setSkin(catType);
-                //entityZombieCat.initCreature();
                 entityZombieCat.func_110161_a((EntityLivingData) null);
                 this.worldObj.spawnEntityInWorld(entityZombieCat);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);

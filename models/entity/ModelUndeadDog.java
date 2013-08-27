@@ -122,10 +122,6 @@ public class ModelUndeadDog extends ModelBase {
         this.wolfLeg2.rotateAngleX = MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 1.4F * par3;
         this.wolfLeg3.rotateAngleX = MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 1.4F * par3;
         this.wolfLeg4.rotateAngleX = MathHelper.cos(par2 * 0.6662F) * 1.4F * par3;
-        this.wolfHeadMain.rotateAngleZ = undeadDog.getInterestedAngle(par4) + undeadDog.getShakeAngle(par4, 0.0F);
-        this.wolfMane.rotateAngleZ = undeadDog.getShakeAngle(par4, -0.08F);
-        this.wolfBody.rotateAngleZ = undeadDog.getShakeAngle(par4, -0.16F);
-        this.wolfTail.rotateAngleZ = undeadDog.getShakeAngle(par4, -0.2F);
     }
 
     /**

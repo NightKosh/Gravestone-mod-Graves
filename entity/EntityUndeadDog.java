@@ -2,7 +2,6 @@ package GraveStone.entity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 /**
@@ -15,16 +14,6 @@ public abstract class EntityUndeadDog extends EntityUndeadPet {
 
     protected float field_70926_e;
     protected float field_70924_f;
-    /**
-     * true is the wolf is wet else false
-     */
-    protected boolean isShaking;
-    protected boolean field_70928_h;
-    /**
-     * This time increases while wolf is shaking and emitting water particles.
-     */
-    protected float timeWolfIsShaking;
-    protected float prevTimeWolfIsShaking;
 
     public EntityUndeadDog(World world) {
         super(world);
@@ -43,23 +32,6 @@ public abstract class EntityUndeadDog extends EntityUndeadPet {
         super.entityInit();
         this.dataWatcher.addObject(18, new Float(this.func_110143_aJ()));
         this.dataWatcher.addObject(19, new Byte((byte) 0));
-    }
-
-    /**
-     * Called frequently so the entity can update its state every tick as
-     * required. For example, zombies and skeletons use this to react to
-     * sunlight and start to burn.
-     */
-    @Override
-    public void onLivingUpdate() {
-        super.onLivingUpdate();
-
-        if (!this.worldObj.isRemote && this.isShaking && !this.field_70928_h && !this.hasPath() && this.onGround) {
-            this.field_70928_h = true;
-            this.timeWolfIsShaking = 0.0F;
-            this.prevTimeWolfIsShaking = 0.0F;
-            this.worldObj.setEntityState(this, (byte) 8);
-        }
     }
 
     /**
@@ -82,33 +54,6 @@ public abstract class EntityUndeadDog extends EntityUndeadPet {
     }
 
     @SideOnly(Side.CLIENT)
-    public boolean getWolfShaking() {
-        return this.isShaking;
-    }
-
-    /**
-     * Used when calculating the amount of shading to apply while the wolf is
-     * shaking.
-     */
-    @SideOnly(Side.CLIENT)
-    public float getShadingWhileShaking(float par1) {
-        return 0.75F + (this.prevTimeWolfIsShaking + (this.timeWolfIsShaking - this.prevTimeWolfIsShaking) * par1) / 2.0F * 0.25F;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public float getShakeAngle(float par1, float par2) {
-        float f2 = (this.prevTimeWolfIsShaking + (this.timeWolfIsShaking - this.prevTimeWolfIsShaking) * par1 + par2) / 1.8F;
-
-        if (f2 < 0.0F) {
-            f2 = 0.0F;
-        } else if (f2 > 1.0F) {
-            f2 = 1.0F;
-        }
-
-        return MathHelper.sin(f2 * (float) Math.PI) * MathHelper.sin(f2 * (float) Math.PI * 11.0F) * 0.15F * (float) Math.PI;
-    }
-
-    @SideOnly(Side.CLIENT)
     public float getInterestedAngle(float par1) {
         return (this.field_70924_f + (this.field_70926_e - this.field_70924_f) * par1) * 0.15F * (float) Math.PI;
     }
@@ -121,13 +66,7 @@ public abstract class EntityUndeadDog extends EntityUndeadPet {
     @Override
     @SideOnly(Side.CLIENT)
     public void handleHealthUpdate(byte par1) {
-        if (par1 == 8) {
-            this.field_70928_h = true;
-            this.timeWolfIsShaking = 0.0F;
-            this.prevTimeWolfIsShaking = 0.0F;
-        } else {
-            super.handleHealthUpdate(par1);
-        }
+        super.handleHealthUpdate(par1);
     }
 
     @SideOnly(Side.CLIENT)
