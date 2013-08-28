@@ -2,7 +2,7 @@ package GraveStone;
 
 import GraveStone.block.BlockGSGraveStone;
 import GraveStone.block.BlockGSMemorial;
-import GraveStone.block.BlockGSTimeTrap;
+import GraveStone.block.BlockGSTrap;
 import GraveStone.block.BlockGSWitherSpawner;
 import GraveStone.config.GravesDefaultText;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -37,7 +37,7 @@ public class GraveStoneConfig {
     public static BlockGSWitherSpawner witherSpawner;
     // Block Time Trap
     public static int timeTrapID;
-    public static BlockGSTimeTrap timeTrap;
+    public static BlockGSTrap timeTrap;
     // block memorial
     public static int memorialID;
     public static BlockGSMemorial memorial;

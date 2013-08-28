@@ -3,7 +3,7 @@ package GraveStone;
 import GraveStone.core.proxy.CommonProxy;
 import GraveStone.block.BlockGSGraveStone;
 import GraveStone.block.BlockGSMemorial;
-import GraveStone.block.BlockGSTimeTrap;
+import GraveStone.block.BlockGSTrap;
 import GraveStone.block.BlockGSWitherSpawner;
 import GraveStone.block.EnumGraves;
 import GraveStone.block.EnumMemorials;
@@ -54,7 +54,7 @@ public class ModGraveStone {
     // Block wither spawer
     public static BlockGSWitherSpawner witherSpawner;
     // Block Time Trap
-    public static BlockGSTimeTrap timeTrap;
+    public static BlockGSTrap trap;
     // block memorial
     public static BlockGSMemorial memorial;
     // item chisel
@@ -77,6 +77,7 @@ public class ModGraveStone {
     public void load(FMLInitializationEvent event) {
         // register death event
         MinecraftForge.EVENT_BUS.register(new EventHookGSGraveStone());
+        
         // creative tab
         creativeTab = new CreativeTabs("tabGraveStone") {
             @Override
@@ -89,6 +90,7 @@ public class ModGraveStone {
             }
         };
         LanguageRegistry.instance().addStringLocalization("itemGroup.tabGraveStone", "en_US", "Gravestone");
+        
         // gravestone
         graveStone = new BlockGSGraveStone(GraveStoneConfig.graveStoneID);
         GameRegistry.registerBlock(graveStone, ItemBlockGSGraveStone.class);
@@ -107,16 +109,19 @@ public class ModGraveStone {
         }
 
         MinecraftForge.setBlockHarvestLevel(graveStone, "pickaxe", 1);
+        
         // wither spawner
         witherSpawner = new BlockGSWitherSpawner(GraveStoneConfig.witherSpawnerID);
         GameRegistry.registerBlock(witherSpawner, "GSWitherSpawner");
         LanguageRegistry.addName(witherSpawner, "Wither spawner");
         MinecraftForge.setBlockHarvestLevel(witherSpawner, "pickaxe", 1);
-        // time trap
-        timeTrap = new BlockGSTimeTrap(GraveStoneConfig.timeTrapID);
-        GameRegistry.registerBlock(timeTrap, "GSTimeTrap");
-        LanguageRegistry.addName(timeTrap, "Night stone");
-        MinecraftForge.setBlockHarvestLevel(timeTrap, "pickaxe", 1);
+        
+        // trap
+        trap = new BlockGSTrap(GraveStoneConfig.timeTrapID);
+        GameRegistry.registerBlock(trap, "GSTimeTrap");
+        LanguageRegistry.addName(trap, "Night stone");
+        MinecraftForge.setBlockHarvestLevel(trap, "pickaxe", 1);
+        
         // memorials
         memorial = new BlockGSMemorial(GraveStoneConfig.memorialID);
         GameRegistry.registerBlock(memorial, "GSMemorial");
@@ -132,20 +137,27 @@ public class ModGraveStone {
         }
 
         MinecraftForge.setBlockHarvestLevel(memorial, "pickaxe", 2);
+        
         // chisel
         chisel = new ItemGSChisel(GraveStoneConfig.chiselId);
         LanguageRegistry.addName(chisel, "Chisel");
+        
         // chisel reciep
         GameRegistry.addRecipe(new ItemStack(chisel), "   ", "y  ", "x  ", 'x', Item.stick, 'y', Item.ingotIron);
+        
         // register GraveStone tile entity
         GameRegistry.registerTileEntity(TileEntityGSGraveStone.class, "GraveStoneTE");
+        
         // register Memorial tile entity
         GameRegistry.registerTileEntity(TileEntityGSMemorial.class, "Memorial");
+        
         // register Wither Spawner tile entity
         GameRegistry.registerTileEntity(TileEntityGSWitherSpawner.class, "GSWither Spawner");
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+        
         // register structures
         GraveStoneStructures.getInstance();
+        
         // register entitys
         GraveStoneEntity.getInstance();
         proxy.registerRenderers();
@@ -181,6 +193,6 @@ public class ModGraveStone {
          GSThaumcraft.addAspects();
          }
          * */
-        GraveStoneLogger.logInfo(ModInfo.NAME + " has loaded successfully.");
+        //GraveStoneLogger.logInfo(ModInfo.NAME + " has loaded successfully.");
     }
 }

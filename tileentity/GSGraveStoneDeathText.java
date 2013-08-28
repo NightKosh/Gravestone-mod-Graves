@@ -1,6 +1,7 @@
 package GraveStone.tileentity;
 
 import GraveStone.GraveStoneConfig;
+import GraveStone.block.EnumMemorials;
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,7 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class GSGraveStoneDeathText {
-    
+
     // grave text
     private String name = "";
     private String deathText = "";
@@ -86,29 +87,33 @@ public class GSGraveStoneDeathText {
         isLocalized = true;
 
         if (isMemorial) {
-            if (random.nextInt(5) > 2) {
-                switch (graveType) {
-                    case 5:
-                        deathText = this.getValue(random, GraveStoneConfig.dogsMemorialText);
-                        break;
-                    case 6:
-                        deathText = this.getValue(random, GraveStoneConfig.catsMemorialText);
-                        break;
-                    default:
-                        deathText = this.getValue(random, GraveStoneConfig.memorialText);
-                }
+            if (graveType == EnumMemorials.CREEPER_STATUE.getId()) {
+                deathText = "Sssssssssssssss...";
             } else {
-                switch (graveType) {
-                    case 5:
-                        name = this.getValue(random, GraveStoneConfig.graveDogsNames);
-                        break;
-                    case 6:
-                        name = this.getValue(random, GraveStoneConfig.graveCatsNames);
-                        break;
-                    default:
-                        name = this.getValue(random, GraveStoneConfig.graveNames);
+                if (random.nextInt(5) > 2) {
+                    switch (graveType) {
+                        case 5:
+                            deathText = this.getValue(random, GraveStoneConfig.dogsMemorialText);
+                            break;
+                        case 6:
+                            deathText = this.getValue(random, GraveStoneConfig.catsMemorialText);
+                            break;
+                        default:
+                            deathText = this.getValue(random, GraveStoneConfig.memorialText);
+                    }
+                } else {
+                    switch (graveType) {
+                        case 5:
+                            name = this.getValue(random, GraveStoneConfig.graveDogsNames);
+                            break;
+                        case 6:
+                            name = this.getValue(random, GraveStoneConfig.graveCatsNames);
+                            break;
+                        default:
+                            name = this.getValue(random, GraveStoneConfig.graveNames);
+                    }
+                    deathText = this.getValue(random, GraveStoneConfig.graveDeathMessages);
                 }
-                deathText = this.getValue(random, GraveStoneConfig.graveDeathMessages);
             }
         } else {
             switch (graveType) {

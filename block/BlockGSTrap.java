@@ -17,9 +17,9 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class BlockGSTimeTrap extends Block {
+public class BlockGSTrap extends Block {
 
-    public BlockGSTimeTrap(int par1) {
+    public BlockGSTrap(int par1) {
         super(par1, Material.rock);
         this.setStepSound(Block.soundStoneFootstep);
         this.setUnlocalizedName("trap.night");
