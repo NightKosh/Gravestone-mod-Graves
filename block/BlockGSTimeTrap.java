@@ -1,8 +1,8 @@
 package GraveStone.block;
 
+import GraveStone.GraveStoneConfig;
 import GraveStone.ModGraveStone;
 import GraveStone.Resources;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -61,19 +61,20 @@ public class BlockGSTimeTrap extends Block {
     }
 
     /**
-     * Called whenever an entity is walking on top of this block. Args: world,
-     * x, y, z, entity
+     * Called whenever an entity is walking on top of this block. Args: world, x, y, z, entity
      */
     @Override
-    public void onEntityWalking(World world, int par2, int par3, int par4, Entity entity) {
+    public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
         if (entity instanceof EntityPlayer) {
             long time = world.getWorldTime();
 
-            if (time < 12000 || time > 22500) {
-                world.setWorldTime(12000);
-            } else if (time > 20000 && time < 22500) {
-                ((EntityPlayer) entity).sendChatToPlayer(ChatMessageComponent.func_111066_d(LanguageRegistry.instance().getStringLocalization("block.trap.curse")));
-                world.setWorldTime(14000);
+            if (GraveStoneConfig.enableNightStone) {
+                if (time < 12000 || time > 22500) {
+                    world.setWorldTime(12000);
+                    ((EntityPlayer) entity).sendChatToPlayer(ChatMessageComponent.func_111066_d(ModGraveStone.proxy.getLocalizedString("block.trap.curse")));
+                } else if (time > 20000 && time < 22500) {
+                    world.setWorldTime(14000);
+                }
             }
         }
     }

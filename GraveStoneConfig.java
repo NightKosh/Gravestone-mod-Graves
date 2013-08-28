@@ -66,6 +66,8 @@ public class GraveStoneConfig {
     public static boolean silkTouchForGraves;
     // allowed ground for graves
     public static boolean canPlaceGravesEveryWhere;
+    // disable/enable time changing by night stone
+    public static boolean enableNightStone;
     // item chisel
     public static int chiselId;
     public static Item chisel;
@@ -153,6 +155,8 @@ public class GraveStoneConfig {
         if (graveSpawnRate < 1800) {
             graveSpawnRate = 1800;
         }
+        
+        enableNightStone = config.get(Configuration.CATEGORY_GENERAL, "EnableNightStone", true).getBoolean(true);
     }
 
     private static void entityConfig() {
