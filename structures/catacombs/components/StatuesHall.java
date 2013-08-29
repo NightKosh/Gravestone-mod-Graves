@@ -126,10 +126,28 @@ public class StatuesHall extends CatacombsBaseComponent {
         MemorialGenerationHelper.placeMemorial(this, world, random, 7, 1, 12, metaRight, memorialType);
         MemorialGenerationHelper.placeMemorial(this, world, random, 7, 1, 15, metaRight, memorialType);
         
-        this.fillWithAir(world, boundingBox, 4, 1, 18, 6, 3, 18);
+        // fill exit with random blocks
+        this.fillWithRandomizedBlocks(world, boundingBox, 4, 1, 18, 6, 3, 18, false, random, getCemeteryCatacombsStones());
         
         // spawn bats
         MobSpawnHelper.spawnBats(world, random, boundingBox);
+        
+        // web
+        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 6, 1, 1, Block.web.blockID, 0);
+        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 9, 3, 1, Block.web.blockID, 0);
+        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 4, 2, 2, Block.web.blockID, 0);
+        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 1, 1, 5, Block.web.blockID, 0);
+        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 5, 3, 5, Block.web.blockID, 0);
+        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 9, 2, 5, Block.web.blockID, 0);
+        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 8, 1, 7, Block.web.blockID, 0);
+        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 2, 2, 10, Block.web.blockID, 0);
+        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 6, 1, 11, Block.web.blockID, 0);
+        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 4, 3, 13, Block.web.blockID, 0);
+        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 9, 1, 14, Block.web.blockID, 0);
+        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 5, 2, 16, Block.web.blockID, 0);
+        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 2, 3, 17, Block.web.blockID, 0);
+        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 6, 1, 17, Block.web.blockID, 0);
+        
         return true;
     }
 }
