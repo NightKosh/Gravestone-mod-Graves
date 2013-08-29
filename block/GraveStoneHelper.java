@@ -119,7 +119,7 @@ public class GraveStoneHelper {
      * @param graveType Grave type
      */
     public static boolean isPetGrave(byte graveType) {
-        return Arrays.binarySearch(BlockGSGraveStone.PETS_GRAVES, graveType) != -1;
+        return Arrays.binarySearch(BlockGSGraveStone.PETS_GRAVES, graveType) >= 0;
     }
 
     public static byte graveTypeToSwordType(byte graveType) {
