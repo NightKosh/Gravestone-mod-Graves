@@ -1,10 +1,9 @@
-package GraveStone.block;
+package gravestone.block;
 
-import GraveStone.GraveStoneConfig;
-import GraveStone.ModGraveStone;
-import static GraveStone.block.GraveStoneHelper.getMetadataBasedOnRotation;
-import GraveStone.tileentity.GSGraveStoneItems;
-import GraveStone.tileentity.TileEntityGSGraveStone;
+import gravestone.GraveStoneConfig;
+import gravestone.ModGraveStone;
+import gravestone.tileentity.GSGraveStoneItems;
+import gravestone.tileentity.TileEntityGSGraveStone;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.ArrayList;
@@ -76,7 +75,7 @@ public class BlockGSGraveStone extends BlockContainer {
             direction = 360 + direction;
         }
 
-        int metadata = getMetadataBasedOnRotation(direction);
+        int metadata = GraveStoneHelper.getMetadataBasedOnRotation(direction);
         world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
 
@@ -597,7 +596,7 @@ public class BlockGSGraveStone extends BlockContainer {
         String killerName = deathInfo[2];
 
         if (world.isAirBlock(x, y, z) || world.getBlockMaterial(x, y, z).isLiquid() || world.getBlockMaterial(x, y, z).isReplaceable()) {
-            world.setBlock(x, y, z, GraveStoneConfig.graveStoneID, getMetadataBasedOnRotation(direction), 0x02);
+            world.setBlock(x, y, z, GraveStoneConfig.graveStoneID, GraveStoneHelper.getMetadataBasedOnRotation(direction), 0x02);
             TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
 
             if (tileEntity != null) {

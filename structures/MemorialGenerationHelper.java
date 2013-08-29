@@ -1,7 +1,7 @@
-package GraveStone.structures;
+package gravestone.structures;
 
-import GraveStone.GraveStoneConfig;
-import GraveStone.tileentity.TileEntityGSMemorial;
+import gravestone.GraveStoneConfig;
+import gravestone.tileentity.TileEntityGSMemorial;
 import java.util.Random;
 import net.minecraft.world.World;
 

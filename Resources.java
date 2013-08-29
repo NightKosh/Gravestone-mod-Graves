@@ -1,4 +1,4 @@
-package GraveStone;
+package gravestone;
 
 import net.minecraft.util.ResourceLocation;
 

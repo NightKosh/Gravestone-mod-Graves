@@ -1,11 +1,11 @@
-package GraveStone.tileentity;
+package gravestone.tileentity;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
-import GraveStone.GraveStoneConfig;
-import GraveStone.block.GraveStoneHelper;
-import GraveStone.item.ItemBlockGSGraveStone;
+import gravestone.GraveStoneConfig;
+import gravestone.block.GraveStoneHelper;
+import gravestone.item.ItemBlockGSGraveStone;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.item.EntityItem;

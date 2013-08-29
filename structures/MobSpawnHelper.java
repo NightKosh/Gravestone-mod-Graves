@@ -1,4 +1,4 @@
-package GraveStone.structures;
+package gravestone.structures;
 
 import java.util.Random;
 import net.minecraft.entity.EntityLiving;

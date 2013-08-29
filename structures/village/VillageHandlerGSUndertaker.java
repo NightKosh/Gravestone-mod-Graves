@@ -1,9 +1,9 @@
-package GraveStone.structures.village;
+package gravestone.structures.village;
 
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import java.util.List;
 import java.util.Random;
-import GraveStone.ModGraveStone;
+import gravestone.ModGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;

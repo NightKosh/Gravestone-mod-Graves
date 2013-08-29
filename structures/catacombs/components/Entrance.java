@@ -1,8 +1,8 @@
-package GraveStone.structures.catacombs.components;
+package gravestone.structures.catacombs.components;
 
 import java.util.Random;
-import GraveStone.GraveStoneConfig;
-import GraveStone.structures.BoundingBoxHelper;
+import gravestone.GraveStoneConfig;
+import gravestone.structures.BoundingBoxHelper;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 

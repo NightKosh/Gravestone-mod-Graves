@@ -1,4 +1,4 @@
-package GraveStone.models.block;
+package gravestone.models.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

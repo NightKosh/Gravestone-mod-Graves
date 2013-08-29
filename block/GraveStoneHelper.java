@@ -1,19 +1,9 @@
 
-package GraveStone.block;
+package gravestone.block;
 
-import GraveStone.GraveStoneConfig;
-import GraveStone.GraveStoneMobSpawn;
-import static GraveStone.block.BlockGSGraveStone.CAT_GRAVES;
-import static GraveStone.block.BlockGSGraveStone.DOG_GRAVES;
-import static GraveStone.block.BlockGSGraveStone.EnumGraveType.ALL_GRAVES;
-import static GraveStone.block.BlockGSGraveStone.EnumGraveType.CATS_GRAVES;
-import static GraveStone.block.BlockGSGraveStone.EnumGraveType.DOGS_GRAVES;
-import static GraveStone.block.BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES;
-import static GraveStone.block.BlockGSGraveStone.GENERATED_GRAVES;
-import static GraveStone.block.BlockGSGraveStone.GENERATED_SWORD_GRAVES;
-import static GraveStone.block.BlockGSGraveStone.PETS_GRAVES;
-import static GraveStone.block.BlockGSGraveStone.SWORD_GRAVES;
-import GraveStone.tileentity.TileEntityGSGraveStone;
+import gravestone.GraveStoneConfig;
+import gravestone.GraveStoneMobSpawn;
+import gravestone.tileentity.TileEntityGSGraveStone;
 import java.util.Arrays;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -68,7 +58,7 @@ public class GraveStoneHelper {
      * @param graveType Grave type
      */
     public static boolean isSwordGrave(byte graveType) {
-        return Arrays.binarySearch(SWORD_GRAVES, graveType) != -1;
+        return Arrays.binarySearch(BlockGSGraveStone.SWORD_GRAVES, graveType) != -1;
     }
 
     /**
@@ -81,26 +71,26 @@ public class GraveStoneHelper {
         switch (graveType) {
             case PLAYER_GRAVES:
                 if (random.nextFloat() > 0.1) {
-                    return GENERATED_GRAVES[random.nextInt(GENERATED_GRAVES.length)];
+                    return BlockGSGraveStone.GENERATED_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_GRAVES.length)];
                 } else {
-                    return GENERATED_SWORD_GRAVES[random.nextInt(GENERATED_SWORD_GRAVES.length)];
+                    return BlockGSGraveStone.GENERATED_SWORD_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_SWORD_GRAVES.length)];
                 }
             case PETS_GRAVES:
-                return PETS_GRAVES[random.nextInt(PETS_GRAVES.length)];
+                return BlockGSGraveStone.PETS_GRAVES[random.nextInt(BlockGSGraveStone.PETS_GRAVES.length)];
             case DOGS_GRAVES:
-                return DOG_GRAVES[random.nextInt(DOG_GRAVES.length)];
+                return BlockGSGraveStone.DOG_GRAVES[random.nextInt(BlockGSGraveStone.DOG_GRAVES.length)];
             case CATS_GRAVES:
-                return CAT_GRAVES[random.nextInt(CAT_GRAVES.length)];
+                return BlockGSGraveStone.CAT_GRAVES[random.nextInt(BlockGSGraveStone.CAT_GRAVES.length)];
             case ALL_GRAVES:
             default:
                 if (random.nextFloat() > 0.2) {
                     if (random.nextFloat() > 0.1) {
-                        return GENERATED_GRAVES[random.nextInt(GENERATED_GRAVES.length)];
+                        return BlockGSGraveStone.GENERATED_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_GRAVES.length)];
                     } else {
-                        return GENERATED_SWORD_GRAVES[random.nextInt(GENERATED_SWORD_GRAVES.length)];
+                        return BlockGSGraveStone.GENERATED_SWORD_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_SWORD_GRAVES.length)];
                     }
                 } else {
-                    return PETS_GRAVES[random.nextInt(PETS_GRAVES.length)];
+                    return BlockGSGraveStone.PETS_GRAVES[random.nextInt(BlockGSGraveStone.PETS_GRAVES.length)];
                 }
         }
     }
@@ -129,7 +119,7 @@ public class GraveStoneHelper {
      * @param graveType Grave type
      */
     public static boolean isPetGrave(byte graveType) {
-        return Arrays.binarySearch(PETS_GRAVES, graveType) != -1;
+        return Arrays.binarySearch(BlockGSGraveStone.PETS_GRAVES, graveType) != -1;
     }
 
     public static byte graveTypeToSwordType(byte graveType) {

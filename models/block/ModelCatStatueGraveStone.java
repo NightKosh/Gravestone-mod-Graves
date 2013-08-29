@@ -1,4 +1,4 @@
-package GraveStone.models.block;
+package gravestone.models.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,37 +14,21 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class ModelCatStatueGraveStone extends ModelGraveStone {
 
-    /**
-     * The back left leg model for the Ocelot.
-     */
+    // The back left leg model for the Ocelot.
     ModelRenderer ocelotBackLeftLeg;
-    /**
-     * The back right leg model for the Ocelot.
-     */
+    // The back right leg model for the Ocelot.
     ModelRenderer ocelotBackRightLeg;
-    /**
-     * The front left leg model for the Ocelot.
-     */
+    // The front left leg model for the Ocelot.
     ModelRenderer ocelotFrontLeftLeg;
-    /**
-     * The front right leg model for the Ocelot.
-     */
+    // The front right leg model for the Ocelot.
     ModelRenderer ocelotFrontRightLeg;
-    /**
-     * The head model for the Ocelot.
-     */
+    // The head model for the Ocelot.
     ModelRenderer ocelotHead;
-    /**
-     * The body model for the Ocelot.
-     */
+    // The body model for the Ocelot.
     ModelRenderer ocelotBody;
-    /**
-     * The tail model for the Ocelot.
-     */
+    // The tail model for the Ocelot.
     ModelRenderer ocelotTail;
-    /**
-     * The second part of tail model for the Ocelot.
-     */
+    // The second part of tail model for the Ocelot.
     ModelRenderer ocelotTail2;
 
     public ModelCatStatueGraveStone() {

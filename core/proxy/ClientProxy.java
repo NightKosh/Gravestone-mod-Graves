@@ -1,21 +1,21 @@
-package GraveStone.core.proxy;
+package gravestone.core.proxy;
 
-import GraveStone.GraveStoneConfig;
-import GraveStone.Resources;
-import GraveStone.entity.EntitySkeletonCat;
-import GraveStone.entity.EntitySkeletonDog;
-import GraveStone.entity.EntityZombieCat;
-import GraveStone.renderer.item.ItemGSGraveStoneRenderer;
-import GraveStone.renderer.item.ItemGSMemorialRenderer;
-import GraveStone.entity.EntityZombieDog;
-import GraveStone.models.entity.ModelUndeadCat;
-import GraveStone.models.entity.ModelUndeadDog;
-import GraveStone.renderer.entity.RenderUndeadCat;
-import GraveStone.renderer.entity.RenderUndeadDog;
-import GraveStone.tileentity.TileEntityGSGraveStone;
-import GraveStone.renderer.tileentity.TileEntityGSGraveStoneRenderer;
-import GraveStone.tileentity.TileEntityGSMemorial;
-import GraveStone.renderer.tileentity.TileEntityGSMemorialRenderer;
+import gravestone.GraveStoneConfig;
+import gravestone.Resources;
+import gravestone.entity.EntitySkeletonCat;
+import gravestone.entity.EntitySkeletonDog;
+import gravestone.entity.EntityZombieCat;
+import gravestone.renderer.item.ItemGSGraveStoneRenderer;
+import gravestone.renderer.item.ItemGSMemorialRenderer;
+import gravestone.entity.EntityZombieDog;
+import gravestone.models.entity.ModelUndeadCat;
+import gravestone.models.entity.ModelUndeadDog;
+import gravestone.renderer.entity.RenderUndeadCat;
+import gravestone.renderer.entity.RenderUndeadDog;
+import gravestone.tileentity.TileEntityGSGraveStone;
+import gravestone.renderer.tileentity.TileEntityGSGraveStoneRenderer;
+import gravestone.tileentity.TileEntityGSMemorial;
+import gravestone.renderer.tileentity.TileEntityGSMemorialRenderer;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -35,15 +35,20 @@ public class ClientProxy extends CommonProxy {
         // register GraveStone renderer
         ClientRegistry.registerTileEntity(TileEntityGSGraveStone.class, "GSGraveStone", new TileEntityGSGraveStoneRenderer());
         MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.graveStoneID, new ItemGSGraveStoneRenderer());
+        
         // register GraveStone renderer
         ClientRegistry.registerTileEntity(TileEntityGSMemorial.class, "GSMemorial", new TileEntityGSMemorialRenderer());
         MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.memorialID, new ItemGSMemorialRenderer());
+        
         // zombie dog
         RenderingRegistry.registerEntityRenderingHandler(EntityZombieDog.class, new RenderUndeadDog(new ModelUndeadDog(), new ModelUndeadDog()));
+        
         // zombie cat
         RenderingRegistry.registerEntityRenderingHandler(EntityZombieCat.class, new RenderUndeadCat(new ModelUndeadCat(), 0));
+        
         // skeleton dog
         RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonDog.class, new RenderUndeadDog(new ModelUndeadDog(), new ModelUndeadDog()));
+        
         // zombie cat
         RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonCat.class, new RenderUndeadCat(new ModelUndeadCat(), 0));
     }

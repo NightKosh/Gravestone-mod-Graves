@@ -1,6 +1,6 @@
-package GraveStone.renderer.item;
+package gravestone.renderer.item;
 
-import GraveStone.tileentity.TileEntityGSMemorial;
+import gravestone.tileentity.TileEntityGSMemorial;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;

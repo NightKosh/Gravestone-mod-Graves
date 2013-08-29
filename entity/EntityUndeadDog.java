@@ -1,4 +1,4 @@
-package GraveStone.entity;
+package gravestone.entity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

@@ -1,4 +1,4 @@
-package GraveStone.core.proxy;
+package gravestone.core.proxy;
 
 /**
  * GraveStone mod

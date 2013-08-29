@@ -1,11 +1,11 @@
-package GraveStone;
+package gravestone;
 
-import GraveStone.block.BlockGSGraveStone;
-import GraveStone.block.BlockGSMemorial;
-import GraveStone.block.BlockGSTrap;
-import GraveStone.block.BlockGSWitherSpawner;
-import GraveStone.config.GravesDefaultText;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import gravestone.block.BlockGSGraveStone;
+import gravestone.block.BlockGSMemorial;
+import gravestone.block.BlockGSTrap;
+import gravestone.block.BlockGSWitherSpawner;
+import gravestone.config.GravesDefaultText;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;

@@ -1,8 +1,8 @@
-package GraveStone.structures.village;
+package gravestone.structures.village;
 
-import GraveStone.GraveStoneConfig;
-import GraveStone.block.BlockGSMemorial;
-import GraveStone.tileentity.TileEntityGSMemorial;
+import gravestone.GraveStoneConfig;
+import gravestone.block.BlockGSMemorial;
+import gravestone.tileentity.TileEntityGSMemorial;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;

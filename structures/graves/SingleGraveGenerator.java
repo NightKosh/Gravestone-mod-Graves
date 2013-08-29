@@ -1,11 +1,11 @@
-package GraveStone.structures.graves;
+package gravestone.structures.graves;
 
-import GraveStone.GraveStoneBiomes;
-import GraveStone.structures.catacombs.CatacombsGenerator;
 import java.util.LinkedList;
 import java.util.Random;
-import GraveStone.GraveStoneConfig;
-import GraveStone.structures.GraveStoneWorldGenerator;
+import gravestone.GraveStoneBiomes;
+import gravestone.GraveStoneConfig;
+import gravestone.structures.GraveStoneWorldGenerator;
+import gravestone.structures.catacombs.CatacombsGenerator;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 

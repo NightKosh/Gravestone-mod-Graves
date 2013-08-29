@@ -1,11 +1,11 @@
-package GraveStone.structures.village;
+package gravestone.structures.village;
 
 import java.util.List;
 import java.util.Random;
-import GraveStone.GraveStoneConfig;
-import GraveStone.block.BlockGSGraveStone;
-import GraveStone.block.GraveStoneHelper;
-import GraveStone.tileentity.TileEntityGSGraveStone;
+import gravestone.GraveStoneConfig;
+import gravestone.block.BlockGSGraveStone;
+import gravestone.block.GraveStoneHelper;
+import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.ComponentVillage;

@@ -1,10 +1,10 @@
-package GraveStone.structures.catacombs;
+package gravestone.structures.catacombs;
 
-import GraveStone.structures.catacombs.components.CatacombsBaseComponent;
-import GraveStone.structures.catacombs.components.MausoleumEntrance;
-import GraveStone.structures.catacombs.components.Fence;
-import GraveStone.structures.catacombs.components.GraveYard;
-import GraveStone.structures.catacombs.components.Mausoleum;
+import gravestone.structures.catacombs.components.CatacombsBaseComponent;
+import gravestone.structures.catacombs.components.Fence;
+import gravestone.structures.catacombs.components.GraveYard;
+import gravestone.structures.catacombs.components.Mausoleum;
+import gravestone.structures.catacombs.components.MausoleumEntrance;
 import java.util.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;

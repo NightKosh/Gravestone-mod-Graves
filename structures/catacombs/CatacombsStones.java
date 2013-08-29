@@ -1,4 +1,4 @@
-package GraveStone.structures.catacombs;
+package gravestone.structures.catacombs;
 
 import java.util.Random;
 import net.minecraft.block.Block;

@@ -1,10 +1,10 @@
-package GraveStone.structures.graves;
+package gravestone.structures.graves;
 
 import java.util.Random;
-import GraveStone.block.BlockGSGraveStone.EnumGraveType;
-import GraveStone.block.GraveStoneHelper;
-import GraveStone.structures.ComponentGraveStone;
-import GraveStone.structures.GraveGenerationHelper;
+import gravestone.block.BlockGSGraveStone.EnumGraveType;
+import gravestone.block.GraveStoneHelper;
+import gravestone.structures.ComponentGraveStone;
+import gravestone.structures.GraveGenerationHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 

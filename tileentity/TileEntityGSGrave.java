@@ -1,4 +1,4 @@
-package GraveStone.tileentity;
+package gravestone.tileentity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

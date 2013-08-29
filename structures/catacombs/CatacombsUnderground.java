@@ -1,7 +1,7 @@
-package GraveStone.structures.catacombs;
+package gravestone.structures.catacombs;
 
-import GraveStone.structures.catacombs.components.CatacombsBaseComponent;
-import GraveStone.structures.catacombs.components.Entrance;
+import gravestone.structures.catacombs.components.CatacombsBaseComponent;
+import gravestone.structures.catacombs.components.Entrance;
 import java.util.LinkedList;
 import java.util.Random;
 import net.minecraft.world.World;

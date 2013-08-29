@@ -1,6 +1,6 @@
-package GraveStone;
+package gravestone;
 
-import GraveStone.tileentity.TileEntityGSGrave;
+import gravestone.tileentity.TileEntityGSGrave;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import java.io.ByteArrayInputStream;

@@ -1,8 +1,8 @@
-package GraveStone.structures;
+package gravestone.structures;
 
-import GraveStone.structures.memorials.MemorialGenerator;
-import GraveStone.structures.graves.SingleGraveGenerator;
-import GraveStone.structures.catacombs.CatacombsGenerator;
+import gravestone.structures.memorials.MemorialGenerator;
+import gravestone.structures.graves.SingleGraveGenerator;
+import gravestone.structures.catacombs.CatacombsGenerator;
 import cpw.mods.fml.common.IWorldGenerator;
 import java.util.Random;
 import net.minecraft.world.World;

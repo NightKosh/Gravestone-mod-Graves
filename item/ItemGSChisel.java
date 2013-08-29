@@ -1,9 +1,9 @@
-package GraveStone.item;
+package gravestone.item;
 
-import GraveStone.GraveStoneConfig;
-import GraveStone.ModGraveStone;
-import GraveStone.Resources;
-import GraveStone.tileentity.TileEntityGSGrave;
+import gravestone.GraveStoneConfig;
+import gravestone.ModGraveStone;
+import gravestone.Resources;
+import gravestone.tileentity.TileEntityGSGrave;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;

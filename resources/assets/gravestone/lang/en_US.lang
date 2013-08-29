@@ -1,5 +1,6 @@
 # blocks
 ## graves
+block.gravestone.name=Gravestone
 block.gravestone.gravestone=Gravestone
 block.gravestone.cross=Cross
 block.gravestone.plate=Grave Plate
@@ -19,6 +20,10 @@ block.memorial.angel_statue=Angel statue
 block.memorial.dog_statue=Dog statue
 block.memorial.cat_statue=Cat statue
 block.memorial.creeper_statue=Creeper statue
+## trap
+bloc.trap.night.name="Night stone"
+## spawner
+bloc.spawner.wither.name="Wither Spawner"
 
 
 # items

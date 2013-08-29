@@ -1,6 +1,6 @@
-package GraveStone.tileentity;
+package gravestone.tileentity;
 
-import GraveStone.block.EnumGraves;
+import gravestone.block.EnumGraves;
 import java.util.ArrayList;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -209,19 +209,15 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
             case 5:
                 id = Item.swordDiamond.itemID;
                 break;
-
             case 3:
                 id = Item.swordIron.itemID;
                 break;
-
             case 2:
                 id = Item.swordStone.itemID;
                 break;
-
             case 4:
                 id = Item.swordGold.itemID;
                 break;
-
             default:
                 id = Item.swordWood.itemID;
         }

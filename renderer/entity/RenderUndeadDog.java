@@ -1,6 +1,6 @@
-package GraveStone.renderer.entity;
+package gravestone.renderer.entity;
 
-import GraveStone.entity.EntityUndeadDog;
+import gravestone.entity.EntityUndeadDog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;

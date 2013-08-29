@@ -1,6 +1,6 @@
-package GraveStone.item;
+package gravestone.item;
 
-import GraveStone.block.EnumMemorials;
+import gravestone.block.EnumMemorials;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
@@ -71,29 +71,24 @@ public class ItemBlockGSMemorial extends ItemBlock {
             switch (side) {
                 case 0:
                     return false;
-
                 case 1:
                     y++;
                     break;
-
                 case 2:
                     z--;
                     break;
-
                 case 3:
                     z++;
                     break;
-
                 case 4:
                     x--;
                     break;
-
                 case 5:
                     x++;
                     break;
             }
 
-            byte memorialType = stack.stackTagCompound.getByte("GraveType");
+            EnumMemorials memorialType = EnumMemorials.getByID(stack.stackTagCompound.getByte("GraveType"));
             byte maxY;
             byte maxX = 1;
             byte maxZ = 1;
@@ -101,25 +96,23 @@ public class ItemBlockGSMemorial extends ItemBlock {
             byte startZ = 0;
 
             switch (memorialType) {
-                case 0:
-                case 1:
+                case STONE_CROSS:
+                case OBELISK:
                     maxY = 5;
                     maxX = 2;
                     maxZ = 2;
                     startX = -1;
                     startZ = -1;
                     break;
-
-                case 5:
-                case 6:
+                case DOG_STATUE:
+                case CAT_STAUTE:
                     maxY = 2;
                     break;
-
                 default:
                     maxY = 3;
                     break;
             }
-
+            
             for (byte shiftY = 0; shiftY < maxY; shiftY++) {
                 for (byte shiftZ = startZ; shiftZ < maxZ; shiftZ++) {
                     for (byte shiftX = startX; shiftX < maxX; shiftX++) {

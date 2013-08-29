@@ -1,10 +1,10 @@
-package GraveStone;
+package gravestone;
 
-import GraveStone.entity.EntitySkeletonCat;
-import GraveStone.entity.EntitySkeletonDog;
-import GraveStone.entity.EntityZombieCat;
-import GraveStone.entity.EntityZombieDog;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import gravestone.entity.EntitySkeletonCat;
+import gravestone.entity.EntitySkeletonDog;
+import gravestone.entity.EntityZombieCat;
+import gravestone.entity.EntityZombieDog;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 

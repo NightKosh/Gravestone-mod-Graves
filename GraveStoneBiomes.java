@@ -1,4 +1,4 @@
-package GraveStone;
+package gravestone;
 
 import extrabiomes.api.Biomes;
 import highlands.api.HighlandsBiomes;

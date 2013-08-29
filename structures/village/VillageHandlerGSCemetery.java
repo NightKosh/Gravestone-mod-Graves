@@ -1,4 +1,4 @@
-package GraveStone.structures.village;
+package gravestone.structures.village;
 
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import java.util.List;

@@ -1,10 +1,10 @@
-package GraveStone.block;
+package gravestone.block;
 
-import GraveStone.GraveStoneConfig;
-import GraveStone.ModGraveStone;
-import GraveStone.tileentity.TileEntityGSMemorial;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gravestone.GraveStoneConfig;
+import gravestone.ModGraveStone;
+import gravestone.tileentity.TileEntityGSMemorial;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -120,22 +120,18 @@ public class BlockGSMemorial extends BlockContainer {
             case STONE_CROSS:
                 this.setBlockBounds(-1, 0, -1, 2, 5, 2);
                 break;
-
             case OBELISK:
                 this.setBlockBounds(-1, 0, -1, 2, 5, 2);
                 break;
-
             case STEVE_STATUE:
             case VILLAGER_STATUE:
             case ANGEL_STATUE:
                 this.setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 2.5F, 0.9375F);
                 break;
-
             case DOG_STATUE:
             case CAT_STAUTE:
                 this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 2, 0.875F);
                 break;
-
             case CREEPER_STATUE:
                 this.setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 2, 0.9375F);
                 break;
@@ -230,16 +226,12 @@ public class BlockGSMemorial extends BlockContainer {
         switch (direction) {
             case 0: // S
                 return 1;
-
             case 1: // W
                 return 2;
-
             case 2: // N
                 return 0;
-
             case 3: // E
                 return 3;
-
             default:
                 return 0;
         }
@@ -321,19 +313,14 @@ public class BlockGSMemorial extends BlockContainer {
             default:
             case 0:
                 return GENERATED_MEMORIALS[random.nextInt(GENERATED_MEMORIALS.length)];
-
             case 1:
                 return PETS_MEMORIALS[random.nextInt(PETS_MEMORIALS.length)];
-
             case 2:
                 return DOG_MEMORIALS[random.nextInt(DOG_MEMORIALS.length)];
-
             case 3:
                 return CAT_MEMORIALS[random.nextInt(CAT_MEMORIALS.length)];
-
             case 4:
                 return CREEPER_MEMORIALS[random.nextInt(CREEPER_MEMORIALS.length)];
-
             case 5:
                 return STATUES_MEMORIALS[random.nextInt(STATUES_MEMORIALS.length)];
         }

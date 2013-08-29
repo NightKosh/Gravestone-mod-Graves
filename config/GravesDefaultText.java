@@ -1,4 +1,4 @@
-package GraveStone.config;
+package gravestone.config;
 
 /**
  * GraveStone mod

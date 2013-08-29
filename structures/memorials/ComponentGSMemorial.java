@@ -1,10 +1,10 @@
-package GraveStone.structures.memorials;
+package gravestone.structures.memorials;
 
 import java.util.Random;
-import GraveStone.block.BlockGSMemorial;
-import GraveStone.structures.BoundingBoxHelper;
-import GraveStone.structures.ComponentGraveStone;
-import GraveStone.structures.MemorialGenerationHelper;
+import gravestone.block.BlockGSMemorial;
+import gravestone.structures.BoundingBoxHelper;
+import gravestone.structures.ComponentGraveStone;
+import gravestone.structures.MemorialGenerationHelper;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;

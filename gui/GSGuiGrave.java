@@ -1,8 +1,8 @@
-package GraveStone.gui;
+package gravestone.gui;
 
-import GraveStone.ModGraveStone;
-import GraveStone.Resources;
-import GraveStone.tileentity.TileEntityGSGrave;
+import gravestone.ModGraveStone;
+import gravestone.Resources;
+import gravestone.tileentity.TileEntityGSGrave;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;

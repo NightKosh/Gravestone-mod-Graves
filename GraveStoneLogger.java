@@ -1,4 +1,4 @@
-package GraveStone;
+package gravestone;
 
 import cpw.mods.fml.common.FMLLog;
 import java.util.logging.Level;

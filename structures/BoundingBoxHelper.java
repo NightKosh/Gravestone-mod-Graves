@@ -1,4 +1,4 @@
-package GraveStone.structures;
+package gravestone.structures;
 
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;

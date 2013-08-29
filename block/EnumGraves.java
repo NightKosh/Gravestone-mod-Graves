@@ -1,6 +1,6 @@
-package GraveStone.block;
+package gravestone.block;
 
-import GraveStone.ModGraveStone;
+import gravestone.ModGraveStone;
 
 /**
  * GraveStone mod

@@ -1,21 +1,21 @@
-package GraveStone;
+package gravestone;
 
-import GraveStone.core.proxy.CommonProxy;
-import GraveStone.block.BlockGSGraveStone;
-import GraveStone.block.BlockGSMemorial;
-import GraveStone.block.BlockGSTrap;
-import GraveStone.block.BlockGSWitherSpawner;
-import GraveStone.block.EnumGraves;
-import GraveStone.block.EnumMemorials;
-import GraveStone.block.GraveStoneHelper;
-import GraveStone.core.localization.GraveStoneLocalizationHandler;
-import GraveStone.gui.GuiHandler;
-import GraveStone.item.ItemBlockGSGraveStone;
-import GraveStone.item.ItemBlockGSMemorial;
-import GraveStone.item.ItemGSChisel;
-import GraveStone.tileentity.TileEntityGSGraveStone;
-import GraveStone.tileentity.TileEntityGSMemorial;
-import GraveStone.tileentity.TileEntityGSWitherSpawner;
+import gravestone.core.proxy.CommonProxy;
+import gravestone.block.BlockGSGraveStone;
+import gravestone.block.BlockGSMemorial;
+import gravestone.block.BlockGSTrap;
+import gravestone.block.BlockGSWitherSpawner;
+import gravestone.block.EnumGraves;
+import gravestone.block.EnumMemorials;
+import gravestone.block.GraveStoneHelper;
+import gravestone.core.localization.GraveStoneLocalizationHandler;
+import gravestone.gui.GuiHandler;
+import gravestone.item.ItemBlockGSGraveStone;
+import gravestone.item.ItemBlockGSMemorial;
+import gravestone.item.ItemGSChisel;
+import gravestone.tileentity.TileEntityGSGraveStone;
+import gravestone.tileentity.TileEntityGSMemorial;
+import gravestone.tileentity.TileEntityGSWitherSpawner;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -47,7 +47,7 @@ public class ModGraveStone {
 
     @Instance("GraveStone")
     public static ModGraveStone instance;
-    @SidedProxy(clientSide = "GraveStone.core.proxy.ClientProxy", serverSide = "GraveStone.core.proxy.CommonProxy")
+    @SidedProxy(clientSide = "gravestone.core.proxy.ClientProxy", serverSide = "gravestone.core.proxy.CommonProxy")
     public static CommonProxy proxy;
     // block GraveStone
     public static BlockGSGraveStone graveStone;

@@ -1,6 +1,7 @@
-package GraveStone;
+package gravestone;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import gravestone.ModGraveStone;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;

@@ -1,4 +1,4 @@
-package GraveStone.entity;
+package gravestone.entity;
 
 import net.minecraft.world.World;
 

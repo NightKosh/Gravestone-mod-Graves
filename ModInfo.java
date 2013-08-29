@@ -1,4 +1,4 @@
-package GraveStone;
+package gravestone;
 
 /**
  * GraveStone mod

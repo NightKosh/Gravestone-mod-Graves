@@ -1,4 +1,4 @@
-package GraveStone.tileentity;
+package gravestone.tileentity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -22,6 +22,7 @@ public class TileEntityGSWitherSpawner extends TileEntity {
         delay = 50;
     }
 
+    @Override
     public void updateEntity() {
         if (anyPlayerInRange()) {
             delay--;
