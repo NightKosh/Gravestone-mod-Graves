@@ -54,19 +54,15 @@ public class CatacombsLevel {
             case 1:
                 totalComponentsCount = 30 + random.nextInt(30);
                 break;
-
             case 2:
                 totalComponentsCount = 60 + random.nextInt(60);
                 break;
-
             case 3:
                 totalComponentsCount = 90 + random.nextInt(90);
                 break;
-
             case 4:
                 totalComponentsCount = 120 + random.nextInt(120);
                 break;
-
             default:
                 totalComponentsCount = 150 + random.nextInt(150);
                 break;
@@ -209,6 +205,9 @@ public class CatacombsLevel {
         return tryCreateComponent(component, getNextComponent(component.getClass(), componentSide), direction, componentSide);
     }
 
+    /**
+     * Check is this place availiable for this component
+     */
     private boolean canBePlaced(CatacombsBaseComponent component) {
         Iterator<CatacombsBaseComponent> it = levelComponents.iterator();
         CatacombsBaseComponent xz;
@@ -224,6 +223,13 @@ public class CatacombsLevel {
         return true;
     }
 
+    /**
+     * Create component
+     * @param component previouse component
+     * @param direction component direction
+     * @param buildComponent component class
+     * @param componentSide 
+     */
     private CatacombsBaseComponent createComponent(CatacombsBaseComponent component, int direction, Class buildComponent, COMPONENT_SIDE componentSide) {
         if (component != null) {
             int x, y, z;
@@ -270,6 +276,9 @@ public class CatacombsLevel {
         }
     }
 
+    /**
+     * Return next component for current level
+     */
     private Class getNextComponentForLevel(Class componentClass) {
         int chance = random.nextInt(100);
 
@@ -296,7 +305,6 @@ public class CatacombsLevel {
                         return EnderHall.class;
                     }
                 }
-
             default:
                 if (chance >= 55) {
                     return getCorridorType();
@@ -348,9 +356,9 @@ public class CatacombsLevel {
     private Class getCorridorType() {
         int corridorChance = random.nextInt(100);
 
-        if (corridorChance >= 50) {
+        if (corridorChance >= 65) {
             return Corridor.class;
-        } else if (corridorChance >= 5) {
+        } else if (corridorChance >= 10) {
             return GraveCorridor.class;
         } else {
             return TrapCorridor.class;

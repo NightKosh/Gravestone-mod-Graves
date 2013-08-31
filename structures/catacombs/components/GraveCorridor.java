@@ -73,7 +73,7 @@ public class GraveCorridor extends CatacombsBaseComponent {
         GraveGenerationHelper.fillGraves(this, world, random, 5, 1, 1, 5, 1, 3, metaRight, graveType, true);
 
         // chest
-        if (random.nextInt(100) < 20) {
+        if (random.nextInt(5) < 2) {
             ObjectsGenerationHelper.generateChest(this, world, random, 3, 1, 2, true);
         }
 
