@@ -1,4 +1,3 @@
-
 package gravestone.block;
 
 import gravestone.GraveStoneConfig;
@@ -19,11 +18,10 @@ import net.minecraft.world.World;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class GraveStoneHelper {
-    
+
     private GraveStoneHelper() {
-        
     }
-    
+
     /**
      * Check is there sword in your inventory
      */
@@ -129,7 +127,6 @@ public class GraveStoneHelper {
     public static byte swordGraveTypeToGraveType(byte swordGraveType) {
         return (byte) (swordGraveType + 4);
     }
-    
 
     /**
      * Check ground type and replace it on dirt if it grass or mycelium
@@ -146,7 +143,7 @@ public class GraveStoneHelper {
      * Spawn mob
      */
     public static void spawnMob(World world, int x, int y, int z) {
-        if (GraveStoneMobSpawn.checkChance(world.rand)) {
+        if (world.rand.nextInt(10) == 0) {
             TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
 
             if (tileEntity != null) {
@@ -158,7 +155,7 @@ public class GraveStoneHelper {
             }
         }
     }
-    
+
     /**
      * Check can be grave placed on this type of surface
      */
@@ -174,7 +171,7 @@ public class GraveStoneHelper {
             return false;
         }
     }
-    
+
     public static int getMetadataBasedOnRotation(int rotation) {
         if (rotation >= 315 || rotation < 45) {
             return 1;

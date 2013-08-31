@@ -368,10 +368,10 @@ public class BlockGSGraveStone extends BlockContainer {
     public int getRenderType() {
         return GraveStoneConfig.graveRenderID;
     }
-    
-    
+
     /**
-     * Called right before the block is destroyed by a player.  Args: world, x, y, z, metaData
+     * Called right before the block is destroyed by a player. Args: world, x,
+     * y, z, metaData
      */
     @Override
     public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
@@ -620,29 +620,27 @@ public class BlockGSGraveStone extends BlockContainer {
                 //System.out.println("!!!!!!!!!!!!! " + age);
             }
         } else {
-            if (!GraveStoneConfig.silkTouchForGraves) {
-                ItemStack itemStack = this.createStackedBlock(0);
-                NBTTagCompound nbt = new NBTTagCompound();
-                nbt.setByte("GraveType", graveType);
-                nbt.setBoolean("isLocalized", true);
-                nbt.setString("name", name);
-                nbt.setString("DeathText", deathText);
-                nbt.setString("KillerName", killerName);
-                nbt.setInteger("Age", age);
+            ItemStack itemStack = this.createStackedBlock(0);
+            NBTTagCompound nbt = new NBTTagCompound();
+            nbt.setByte("GraveType", graveType);
+            nbt.setBoolean("isLocalized", true);
+            nbt.setString("name", name);
+            nbt.setString("DeathText", deathText);
+            nbt.setString("KillerName", killerName);
+            nbt.setInteger("Age", age);
 
-                if (swordType != 0) {
-                    nbt.setByte("SwordType", swordType);
-                    nbt.setInteger("SwordDamage", sword.getItemDamage());
-                    nbt.setString("SwordName", sword.getDisplayName());
+            if (swordType != 0) {
+                nbt.setByte("SwordType", swordType);
+                nbt.setInteger("SwordDamage", sword.getItemDamage());
+                nbt.setString("SwordName", sword.getDisplayName());
 
-                    if (sword.getEnchantmentTagList() != null && sword.getEnchantmentTagList().tagCount() > 0) {
-                        nbt.setCompoundTag("SwordNBT", sword.getTagCompound());
-                    }
+                if (sword.getEnchantmentTagList() != null && sword.getEnchantmentTagList().tagCount() > 0) {
+                    nbt.setCompoundTag("SwordNBT", sword.getTagCompound());
                 }
-
-                itemStack.setTagCompound(nbt);
-                this.dropBlockAsItem_do(world, x, y, z, itemStack);
             }
+
+            itemStack.setTagCompound(nbt);
+            this.dropBlockAsItem_do(world, x, y, z, itemStack);
 
             if (items != null) {
                 for (int i = 0; i < items.length; i++) {

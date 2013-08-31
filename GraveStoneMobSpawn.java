@@ -280,7 +280,7 @@ public class GraveStoneMobSpawn {
      * Check spawn mob or
      */
     public static boolean checkChance(Random random) {
-        return random.nextInt(5) == 0;
+        return random.nextFloat() < 0.8;
     }
 
     /**

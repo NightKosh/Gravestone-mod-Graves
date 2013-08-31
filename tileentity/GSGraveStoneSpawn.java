@@ -33,6 +33,8 @@ public class GSGraveStoneSpawn {
     private Entity spawnedMob;
     private List field_92060_e = null;
     private boolean getNewMob = true;
+    private static final int START_TIME = 13500;
+    private static final int END_TIME = 22500;
     /**
      * The extra NBT data to add to spawned entities
      */
@@ -63,7 +65,7 @@ public class GSGraveStoneSpawn {
     private boolean canSpawnMobs(World world) {
         long time = world.getWorldTime();
 
-        if (time > 13500 && time < 22500 || world.isThundering()) {
+        if (time > START_TIME && time < END_TIME || world.isThundering()) {
             return true;
         }
 
