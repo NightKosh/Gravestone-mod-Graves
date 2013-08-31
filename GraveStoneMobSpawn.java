@@ -25,7 +25,7 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public abstract class GraveStoneMobSpawn {
+public class GraveStoneMobSpawn {
 
     /**
      * Provides a mapping between entity classes and a string
@@ -60,7 +60,13 @@ public abstract class GraveStoneMobSpawn {
     private static final String MO_CREATURES_SCORPIONS = "drzhark.mocreatures.entity.monster.MoCEntityScorpion";
     // twilight forest mobs classes
     private static final String TWILIGHT_WRAITH = "twilightforest.entity.EntityTFWraith";
+    //
+    private static final int HELL_HEIGHT = 51;
 
+    private GraveStoneMobSpawn() {
+        
+    }
+    
     /**
      * Check can grave spawn hell creature or not
      *
@@ -71,7 +77,7 @@ public abstract class GraveStoneMobSpawn {
      */
     private static boolean canSpawnHellCreatures(World world, int x, int y, int z) {
         if (world != null) {
-            return y < 51 && world.getBlockId(x, y - 1, z) == Block.netherBrick.blockID;
+            return y < HELL_HEIGHT && world.getBlockId(x, y - 1, z) == Block.netherBrick.blockID;
         } else {
             return false;
         }
@@ -192,13 +198,10 @@ public abstract class GraveStoneMobSpawn {
         switch (mobType) {
             case HELL_MOBS:
                 return HELL_MOB_ID.get(random.nextInt(HELL_MOB_ID.size()));
-
             case UNDEAD_DOGS:
                 return DOG_ID.get(random.nextInt(DOG_ID.size()));
-
             case UNDEAD_CATS:
                 return CAT_ID.get(random.nextInt(CAT_ID.size()));
-
             case DEFAULT_MOBS:
             default:
                 return MOB_ID.get(random.nextInt(MOB_ID.size()));
@@ -277,7 +280,7 @@ public abstract class GraveStoneMobSpawn {
      * Check spawn mob or
      */
     public static boolean checkChance(Random random) {
-        return random.nextInt(40) == 13;
+        return random.nextInt(5) == 0;
     }
 
     /**

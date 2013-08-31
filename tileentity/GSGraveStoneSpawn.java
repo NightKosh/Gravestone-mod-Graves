@@ -108,16 +108,15 @@ public class GSGraveStoneSpawn {
                 }
 
                 if (GraveStoneMobSpawn.checkChance(this.tileEntity.worldObj.rand) && GraveStoneMobSpawn.spawnMob(this.tileEntity.worldObj, this.spawnedMob, this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord, true)) {
-                    this.updateDelay();
                     this.getNewMob = true;
                 }
+                this.updateDelay();
             }
         }
     }
 
     /**
-     * Sets the delay before a new spawn (base delay of 200 + random number up
-     * to 600).
+     * Sets the delay before a new spawn.
      */
     private void updateDelay() {
         delay = MIN_DELAY + tileEntity.worldObj.rand.nextInt(GraveStoneConfig.graveSpawnRate - MIN_DELAY);
