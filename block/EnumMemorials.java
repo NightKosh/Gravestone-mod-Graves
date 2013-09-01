@@ -16,7 +16,7 @@ public enum EnumMemorials {
     VILLAGER_STATUE((byte) 3, "block.memorial.villager_statue"),
     ANGEL_STATUE((byte) 4, "block.memorial.angel_statue"),
     DOG_STATUE((byte) 5, "block.memorial.dog_statue"),
-    CAT_STAUTE((byte) 6, "block.memorial.cat_statue"),
+    CAT_STATUE((byte) 6, "block.memorial.cat_statue"),
     CREEPER_STATUE((byte) 7, "block.memorial.creeper_statue");
     private byte id;
     private String name;

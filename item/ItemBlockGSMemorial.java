@@ -105,7 +105,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
                     startZ = -1;
                     break;
                 case DOG_STATUE:
-                case CAT_STAUTE:
+                case CAT_STATUE:
                     maxY = 2;
                     break;
                 default:

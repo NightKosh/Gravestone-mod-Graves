@@ -6,6 +6,7 @@ import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gravestone.tileentity.DeathMessageInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -395,17 +396,12 @@ public class BlockGSGraveStone extends BlockContainer {
                 if (deathText.length() != 0) {
                     if (entity.getDeathTextComponent().isLocalized()) {
                         name = entity.getDeathTextComponent().getName();
-                        killerName = entity.getDeathTextComponent().getKillerName();
-                        System.out.println(name);
-                        System.out.println(killerName);
-                        System.out.println(deathText);
+                        killerName = ModGraveStone.proxy.getLocalizedEntityName(entity.getDeathTextComponent().getKillerName());
 
                         if (killerName.length() == 0) {
                             player.sendChatToPlayer(ChatMessageComponent.func_111082_b(deathText, new Object[]{name}));
-                            player.sendChatToPlayer(ChatMessageComponent.func_111066_d("!!!!!!!!!!!"));
                         } else {
                             player.sendChatToPlayer(ChatMessageComponent.func_111082_b(deathText, new Object[]{name, killerName}));
-                            player.sendChatToPlayer(ChatMessageComponent.func_111066_d("$$$$$$$$"));
                         }
                     } else {
                         player.sendChatToPlayer(ChatMessageComponent.func_111066_d(deathText));
@@ -544,7 +540,7 @@ public class BlockGSGraveStone extends BlockContainer {
     /**
      * Create grave on death
      */
-    public void createOnDeath(World world, int x, int y, int z, String[] deathInfo, int direction, ItemStack[] items, int age, byte entityType) {
+    public void createOnDeath(World world, int x, int y, int z, DeathMessageInfo deathInfo, int direction, ItemStack[] items, int age, byte entityType) {
         if (direction < 0) {
             direction = 360 + direction;
         }
@@ -591,9 +587,6 @@ public class BlockGSGraveStone extends BlockContainer {
                 break;
         }
 
-        String name = deathInfo[0];
-        String deathText = deathInfo[1];
-        String killerName = deathInfo[2];
 
         if (world.isAirBlock(x, y, z) || world.getBlockMaterial(x, y, z).isLiquid() || world.getBlockMaterial(x, y, z).isReplaceable()) {
             world.setBlock(x, y, z, GraveStoneConfig.graveStoneID, GraveStoneHelper.getMetadataBasedOnRotation(direction), 0x02);
@@ -611,9 +604,9 @@ public class BlockGSGraveStone extends BlockContainer {
                 }
 
                 tileEntity.getDeathTextComponent().setLocalized();
-                tileEntity.getDeathTextComponent().setName(name);
-                tileEntity.getDeathTextComponent().setDeathText(deathText);
-                tileEntity.getDeathTextComponent().setKillerName(killerName);
+                tileEntity.getDeathTextComponent().setName(deathInfo.getName());
+                tileEntity.getDeathTextComponent().setDeathText(deathInfo.getDeathMessage());
+                tileEntity.getDeathTextComponent().setKillerName(deathInfo.getKillerName());
                 tileEntity.setItems(items);
                 tileEntity.setGraveType(graveType);
                 tileEntity.setAge(age);
@@ -624,9 +617,9 @@ public class BlockGSGraveStone extends BlockContainer {
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", graveType);
             nbt.setBoolean("isLocalized", true);
-            nbt.setString("name", name);
-            nbt.setString("DeathText", deathText);
-            nbt.setString("KillerName", killerName);
+            nbt.setString("name", deathInfo.getName());
+            nbt.setString("DeathText", deathInfo.getDeathMessage());
+            nbt.setString("KillerName", deathInfo.getKillerNameForTE());
             nbt.setInteger("Age", age);
 
             if (swordType != 0) {

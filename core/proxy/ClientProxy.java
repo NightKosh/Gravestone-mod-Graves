@@ -20,6 +20,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 /**
@@ -35,20 +36,20 @@ public class ClientProxy extends CommonProxy {
         // register GraveStone renderer
         ClientRegistry.registerTileEntity(TileEntityGSGraveStone.class, "GSGraveStone", new TileEntityGSGraveStoneRenderer());
         MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.graveStoneID, new ItemGSGraveStoneRenderer());
-        
+
         // register GraveStone renderer
         ClientRegistry.registerTileEntity(TileEntityGSMemorial.class, "GSMemorial", new TileEntityGSMemorialRenderer());
         MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.memorialID, new ItemGSMemorialRenderer());
-        
+
         // zombie dog
         RenderingRegistry.registerEntityRenderingHandler(EntityZombieDog.class, new RenderUndeadDog(new ModelUndeadDog(), new ModelUndeadDog()));
-        
+
         // zombie cat
         RenderingRegistry.registerEntityRenderingHandler(EntityZombieCat.class, new RenderUndeadCat(new ModelUndeadCat(), 0));
-        
+
         // skeleton dog
         RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonDog.class, new RenderUndeadDog(new ModelUndeadDog(), new ModelUndeadDog()));
-        
+
         // zombie cat
         RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonCat.class, new RenderUndeadCat(new ModelUndeadCat(), 0));
     }
@@ -57,9 +58,14 @@ public class ClientProxy extends CommonProxy {
     public void registerVillagers() {
         VillagerRegistry.instance().registerVillagerSkin(385, Resources.UNDARTAKER);
     }
-    
+
     @Override
     public String getLocalizedString(String str) {
         return LanguageRegistry.instance().getStringLocalization(str);
+    }
+
+    @Override
+    public String getLocalizedEntityName(String name) {
+        return StatCollector.translateToLocal(name);
     }
 }

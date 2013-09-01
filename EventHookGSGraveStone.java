@@ -1,8 +1,9 @@
 package gravestone;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import gravestone.ModGraveStone;
+import gravestone.tileentity.DeathMessageInfo;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.passive.EntityOcelot;
@@ -11,7 +12,6 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -82,16 +82,25 @@ public class EventHookGSGraveStone {
         }
     }
 
-    private String[] getDeathMessage(EntityLivingBase entity, String damageType) {
+    private DeathMessageInfo getDeathMessage(EntityLivingBase entity, String damageType) {
         EntityLivingBase killer = entity.func_94060_bK();
         String shortString = "death.attack." + damageType;
         String fullString = shortString + ".player";
-        
-            System.out.println("!!! " + ChatMessageComponent.func_111082_b(fullString, new Object[] {entity.getTranslatedEntityName(), killer.getTranslatedEntityName()}).toString());
-        if (killer != null && StatCollector.func_94522_b(fullString)) {
-            return new String[] {entity.getTranslatedEntityName(), fullString, killer.getTranslatedEntityName()};
+
+        if (killer != null) {
+            String killerName = EntityList.getEntityString(killer);
+            if (killerName == null) {
+                killerName = "entity.generic.name";
+            } else {
+                killerName = "entity." + killerName + ".name";
+            }
+            if (StatCollector.func_94522_b(fullString)) {
+                return new DeathMessageInfo(entity.getTranslatedEntityName(), fullString, killerName);
+            } else {
+                return new DeathMessageInfo(entity.getTranslatedEntityName(), shortString, killerName);
+            }
         } else {
-            return new String[] {entity.getTranslatedEntityName(), shortString, ""};
+            return new DeathMessageInfo(entity.getTranslatedEntityName(), shortString, null);
         }
     }
 }

@@ -1,6 +1,7 @@
 package gravestone.tileentity;
 
 import gravestone.GraveStoneConfig;
+import gravestone.block.EnumGraves;
 import gravestone.block.EnumMemorials;
 import java.util.ArrayList;
 import java.util.Random;
@@ -72,63 +73,64 @@ public class GSGraveStoneDeathText {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = (name == null) ? "" : name;
     }
 
     public void setDeathText(String text) {
-        deathText = text;
+        deathText = (text == null) ? "" : text;
     }
 
     public void setKillerName(String name) {
-        killerName = name;
+        killerName = (name == null) ? "" : name;
     }
 
-    public void setRandomDeathTextAndName(Random random, byte graveType, boolean isMemorial) {
+    public void setRandomDeathTextAndName(Random random, byte grave, boolean isMemorial) {
         isLocalized = true;
+        EnumGraves graveType = EnumGraves.getByID(grave);
+        EnumMemorials memorialType = EnumMemorials.getByID(grave);
 
         if (isMemorial) {
-            if (graveType == EnumMemorials.CREEPER_STATUE.getId()) {
-                deathText = "Sssssssssssssss...";
-            } else {
-                if (random.nextInt(5) > 2) {
-                    switch (graveType) {
-                        case 5:
-                            deathText = this.getValue(random, GraveStoneConfig.dogsMemorialText);
-                            break;
-                        case 6:
-                            deathText = this.getValue(random, GraveStoneConfig.catsMemorialText);
-                            break;
-                        default:
-                            deathText = this.getValue(random, GraveStoneConfig.memorialText);
-                    }
-                } else {
-                    switch (graveType) {
-                        case 5:
-                            name = this.getValue(random, GraveStoneConfig.graveDogsNames);
-                            break;
-                        case 6:
-                            name = this.getValue(random, GraveStoneConfig.graveCatsNames);
-                            break;
-                        default:
-                            name = this.getValue(random, GraveStoneConfig.graveNames);
-                    }
-                    deathText = this.getValue(random, GraveStoneConfig.graveDeathMessages);
-                }
+            switch (memorialType) {
+                case DOG_STATUE:
+                    getRandomMemorialContent(random, GraveStoneConfig.graveDogsNames, GraveStoneConfig.dogsMemorialText);
+                    break;
+                case CAT_STATUE:
+                    getRandomMemorialContent(random, GraveStoneConfig.graveCatsNames, GraveStoneConfig.catsMemorialText);
+                    break;
+                case CREEPER_STATUE:
+                    deathText = "Sssssssssssssss...";
+                default:
+                    getRandomMemorialContent(random, GraveStoneConfig.graveNames, GraveStoneConfig.memorialText);
             }
         } else {
             switch (graveType) {
-                case 3:
+                case DOG_STATUE:
                     name = this.getValue(random, GraveStoneConfig.graveDogsNames);
                     break;
-                case 4:
+                case CAT_STATUE:
                     name = this.getValue(random, GraveStoneConfig.graveCatsNames);
                     break;
                 default:
                     name = this.getValue(random, GraveStoneConfig.graveNames);
             }
 
-            deathText = this.getValue(random, GraveStoneConfig.graveDeathMessages);
+            getDeathMessage(random);
         }
+    }
+
+    private void getRandomMemorialContent(Random random, ArrayList<String> nameList, ArrayList<String> textList) {
+        if (random.nextInt(5) > 2) {
+            deathText = this.getValue(random, textList);
+        } else {
+            name = this.getValue(random, nameList);
+            getDeathMessage(random);
+        }
+    }
+
+    private void getDeathMessage(Random random) {
+        DeathMessageInfo deathMessageInfo = DeathMessageInfo.getRandomDeathMessage(random);
+        deathText = deathMessageInfo.getDeathMessage();
+        killerName = deathMessageInfo.getKillerNameForTE();
     }
 
     private String getValue(Random random, ArrayList<String> list) {

@@ -129,7 +129,7 @@ public class BlockGSMemorial extends BlockContainer {
                 this.setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 2.5F, 0.9375F);
                 break;
             case DOG_STATUE:
-            case CAT_STAUTE:
+            case CAT_STATUE:
                 this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 2, 0.875F);
                 break;
             case CREEPER_STATUE:
