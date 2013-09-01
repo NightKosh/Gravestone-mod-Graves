@@ -99,7 +99,7 @@ public class GraveStoneMobSpawn {
                 break;
 
             default:
-                if (canSpawnHellCreatures(world, x, y, z) && world.rand.nextInt(20) == 0) {
+                if (canSpawnHellCreatures(world, x, y, z) && world.rand.nextInt(10) == 0) {
                     id = getMobID(world.rand, EnumMobType.HELL_MOBS);
 
                     if (id.equals("Skeleton")) {
