@@ -24,6 +24,12 @@ public class ObjectsGenerationHelper {
     private static final int[] POTIONS = {32764, 32692};
     private static final WeightedRandomChestContent[] NETHER_CHEST_CONTENT = new WeightedRandomChestContent[]{new WeightedRandomChestContent(Item.diamond.itemID, 0, 1, 3, 5), new WeightedRandomChestContent(Item.ingotIron.itemID, 0, 1, 5, 5), new WeightedRandomChestContent(Item.ingotGold.itemID, 0, 1, 3, 15), new WeightedRandomChestContent(Item.swordGold.itemID, 0, 1, 1, 5), new WeightedRandomChestContent(Item.plateGold.itemID, 0, 1, 1, 5), new WeightedRandomChestContent(Item.flintAndSteel.itemID, 0, 1, 1, 5), new WeightedRandomChestContent(Item.netherStalkSeeds.itemID, 0, 3, 7, 5), new WeightedRandomChestContent(Item.saddle.itemID, 0, 1, 1, 10), new WeightedRandomChestContent(Item.field_111216_cf.itemID, 0, 1, 1, 8), new WeightedRandomChestContent(Item.field_111215_ce.itemID, 0, 1, 1, 5), new WeightedRandomChestContent(Item.field_111213_cg.itemID, 0, 1, 1, 3)};
 
+    public enum EnumChestTypes {
+
+        ALL_CHESTS,
+        VALUABLE_CHESTS
+    }
+
     /**
      * Generate chest with random loot type
      *
@@ -35,46 +41,15 @@ public class ObjectsGenerationHelper {
      * @param zCoord Z coord
      * @param defaultChest Is chest - default chest or trapped chest
      */
-    public static void generateChest(ComponentGraveStone component, World world, Random random, int xCoord, int yCoord, int zCoord, boolean defaultChest) {
+    public static void generateChest(ComponentGraveStone component, World world, Random random, int xCoord, int yCoord, int zCoord, boolean defaultChest, EnumChestTypes chestType) {
         int y = component.getYWithOffset(yCoord);
         int x = component.getXWithOffset(xCoord, zCoord);
         int z = component.getZWithOffset(xCoord, zCoord);
 
         if (component.getBoundingBox().isVecInside(x, y, z)) {
-            ChestGenHooks chest = null;
-            boolean b = false; // временный костыль для "адских" сундуков 
+            ChestGenHooks chest = getChest(random, chestType);
 
-            switch (random.nextInt(9)) {
-                case 1:
-                    chest = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
-                    break;
-                case 2:
-                    chest = ChestGenHooks.getInfo(ChestGenHooks.MINESHAFT_CORRIDOR);
-                    break;
-                case 3:
-                    chest = ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_DESERT_CHEST);
-                    break;
-                case 4:
-                    chest = ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_JUNGLE_CHEST);
-                    break;
-                case 5:
-                    chest = ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING);
-                    break;
-                case 6:
-                    chest = ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_LIBRARY);
-                    break;
-                case 7:
-                    chest = ChestGenHooks.getInfo(ChestGenHooks.VILLAGE_BLACKSMITH);
-                    break;
-                case 8:
-                    b = true;
-                    break;
-                case 0:
-                default:
-                    chest = ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR);
-            }
-
-            if (b) {
+            if (chest == null) { // временный костыль для "адских" сундуков 
                 if (defaultChest) {
                     component.generateStructureChestContents(world, component.getBoundingBox(), random, xCoord, yCoord, zCoord, NETHER_CHEST_CONTENT, 2 + random.nextInt(4));
                 } else {
@@ -87,6 +62,52 @@ public class ObjectsGenerationHelper {
                     generateTrappedChestContents(component, world, random, xCoord, yCoord, zCoord, chest.getItems(random), chest.getCount(random));
                 }
             }
+        }
+    }
+
+    private static ChestGenHooks getChest(Random random, EnumChestTypes chestType) {
+        switch (chestType) {
+            case VALUABLE_CHESTS:
+                switch (random.nextInt(7)) {
+                    case 1:
+                        return ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
+                    case 2:
+                        return ChestGenHooks.getInfo(ChestGenHooks.MINESHAFT_CORRIDOR);
+                    case 3:
+                        return ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_DESERT_CHEST);
+                    case 4:
+                        return ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING);
+                    case 5:
+                        return ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_LIBRARY);
+                    case 6:
+                        return null;
+                    case 0:
+                    default:
+                        return ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR);
+                }
+            case ALL_CHESTS:
+            default:
+                switch (random.nextInt(9)) {
+                    case 1:
+                        return ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
+                    case 2:
+                        return ChestGenHooks.getInfo(ChestGenHooks.MINESHAFT_CORRIDOR);
+                    case 3:
+                        return ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_DESERT_CHEST);
+                    case 4:
+                        return ChestGenHooks.getInfo(ChestGenHooks.PYRAMID_JUNGLE_CHEST);
+                    case 5:
+                        return ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING);
+                    case 6:
+                        return ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_LIBRARY);
+                    case 7:
+                        return ChestGenHooks.getInfo(ChestGenHooks.VILLAGE_BLACKSMITH);
+                    case 8:
+                        return null;
+                    case 0:
+                    default:
+                        return ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR);
+                }
         }
     }
 

@@ -88,11 +88,11 @@ public class Treasury extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 3, 0, 6, 3, 0, 7, Block.tnt.blockID, Block.tnt.blockID, false);
         
         // treasury chests
-        ObjectsGenerationHelper.generateChest(this, world, random, 1, 1, 3, false);
-        ObjectsGenerationHelper.generateChest(this, world, random, 1, 1, 5, false);
-        ObjectsGenerationHelper.generateChest(this, world, random, 5, 1, 3, false);
-        ObjectsGenerationHelper.generateChest(this, world, random, 5, 1, 5, false);
-        ObjectsGenerationHelper.generateChest(this, world, random, 3, 1, 6, false);
+        ObjectsGenerationHelper.generateChest(this, world, random, 1, 1, 3, false, ObjectsGenerationHelper.EnumChestTypes.VALUABLE_CHESTS);
+        ObjectsGenerationHelper.generateChest(this, world, random, 1, 1, 5, false, ObjectsGenerationHelper.EnumChestTypes.VALUABLE_CHESTS);
+        ObjectsGenerationHelper.generateChest(this, world, random, 5, 1, 3, false, ObjectsGenerationHelper.EnumChestTypes.VALUABLE_CHESTS);
+        ObjectsGenerationHelper.generateChest(this, world, random, 5, 1, 5, false, ObjectsGenerationHelper.EnumChestTypes.VALUABLE_CHESTS);
+        ObjectsGenerationHelper.generateChest(this, world, random, 3, 1, 6, false, ObjectsGenerationHelper.EnumChestTypes.VALUABLE_CHESTS);
         
         // treasury column
         int blockId = getValuableBlock(random);

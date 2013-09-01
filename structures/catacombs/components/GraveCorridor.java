@@ -74,7 +74,7 @@ public class GraveCorridor extends CatacombsBaseComponent {
 
         // chest
         if (random.nextInt(5) < 2) {
-            ObjectsGenerationHelper.generateChest(this, world, random, 3, 1, 2, true);
+            ObjectsGenerationHelper.generateChest(this, world, random, 3, 1, 2, true, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);
         }
 
         // spawn bats

@@ -106,10 +106,10 @@ public class StatuesHall extends CatacombsBaseComponent {
         ObjectsGenerationHelper.generateSpawner(this, world, 7, 0, 15, GraveStoneMobSpawn.getMobForStatueSpawner(random));
         
         // loot chests
-        ObjectsGenerationHelper.generateChest(this, world, random, 3, 0, 6, false);
-        ObjectsGenerationHelper.generateChest(this, world, random, 3, 0, 12, false);
-        ObjectsGenerationHelper.generateChest(this, world, random, 7, 0, 6, false);
-        ObjectsGenerationHelper.generateChest(this, world, random, 7, 0, 12, false);
+        ObjectsGenerationHelper.generateChest(this, world, random, 3, 0, 6, false, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);
+        ObjectsGenerationHelper.generateChest(this, world, random, 3, 0, 12, false, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);
+        ObjectsGenerationHelper.generateChest(this, world, random, 7, 0, 6, false, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);
+        ObjectsGenerationHelper.generateChest(this, world, random, 7, 0, 12, false, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);
         
         // statues
         byte memorialType = BlockGSMemorial.getMemorialType(random, 5);
