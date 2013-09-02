@@ -13,6 +13,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
@@ -39,11 +40,13 @@ public class EntityZombieCat extends EntityUndeadCat {
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityVillager.class, 1, true));
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityWolf.class, 1, true));
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityOcelot.class, 1, true));
+        this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityHorse.class, 1, false));
         this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, 1, false));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, false));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWolf.class, 0, false));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityOcelot.class, 0, false));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityChicken.class, 0, false));
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityChicken.class, 0, false));
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityHorse.class, 0, false));
     }
 
     @Override
@@ -62,13 +65,10 @@ public class EntityZombieCat extends EntityUndeadCat {
         switch (this.getSkin()) {
             case 1:
                 return Resources.ZOMBIE_CAT_BLACK;
-
             case 2:
                 return Resources.ZOMBIE_CAT_RED;
-
             case 3:
                 return Resources.ZOMBIE_CAT_SIAMESE;
-
             case 0:
             default:
                 return Resources.ZOMBIE_OZELOT;
@@ -162,10 +162,8 @@ public class EntityZombieCat extends EntityUndeadCat {
 
             if (entityLiving instanceof EntityVillager) {
                 EntityZombie entityZombie = new EntityZombie(this.worldObj);
-                //entityZombie.func_82149_j(entityLiving);
                 entityZombie.copyLocationAndAnglesFrom(entityLiving);
                 this.worldObj.removeEntity(entityLiving);
-                //entityZombie.initCreature();
                 entityZombie.func_110161_a((EntityLivingData) null);
                 entityZombie.setVillager(true);
 
@@ -177,21 +175,25 @@ public class EntityZombieCat extends EntityUndeadCat {
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             } else if (entityLiving instanceof EntityWolf) {
                 EntityZombieDog entityZombieDog = new EntityZombieDog(this.worldObj);
-                //entityZombieDog.func_82149_j(entityLiving);
                 entityZombieDog.copyLocationAndAnglesFrom(entityLiving);
                 this.worldObj.removeEntity(entityLiving);
                 this.worldObj.spawnEntityInWorld(entityZombieDog);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             } else if (entityLiving instanceof EntityOcelot) {
                 EntityZombieCat entityZombieCat = new EntityZombieCat(this.worldObj);
-                //entityZombieCat.func_82149_j(entityLiving);
                 entityZombieCat.copyLocationAndAnglesFrom(entityLiving);
                 int catType = ((EntityOcelot) entityLiving).getTameSkin();
                 this.worldObj.removeEntity(entityLiving);
                 entityZombieCat.setSkin(catType);
-                //entityZombieCat.initCreature();
                 entityZombieCat.func_110161_a((EntityLivingData) null);
                 this.worldObj.spawnEntityInWorld(entityZombieCat);
+                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+            } else if (entityLiving instanceof EntityHorse) {
+                EntityHorse horse = new EntityHorse(this.worldObj);
+                horse.copyLocationAndAnglesFrom(entityLiving);
+                horse.func_110214_p(3);
+                this.worldObj.removeEntity(entityLiving);
+                this.worldObj.spawnEntityInWorld(horse);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             }
         }
