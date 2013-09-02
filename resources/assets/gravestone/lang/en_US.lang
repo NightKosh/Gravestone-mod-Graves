@@ -1,6 +1,5 @@
 # blocks
 ## graves
-block.gravestone.name=Gravestone
 block.gravestone.gravestone=Gravestone
 block.gravestone.cross=Cross
 block.gravestone.plate=Grave Plate
@@ -21,9 +20,10 @@ block.memorial.dog_statue=Dog statue
 block.memorial.cat_statue=Cat statue
 block.memorial.creeper_statue=Creeper statue
 ## trap
-bloc.trap.night.name="Night stone"
+tile.trap.night.name=Night stone
+block.trap.curse=Darkness is coming!
 ## spawner
-bloc.spawner.wither.name="Wither Spawner"
+tile.spawner.wither.name=Wither Spawner
 
 
 # items
@@ -44,3 +44,9 @@ entity.GSZombieDog.name=Zombie Dog
 entity.GSSkeletonDog.name=Skeleton Dog
 entity.GSZombieCat.name=Zombie Cat
 entity.GSSkeletonCat.name=Skeleton Cat
+
+
+# death messages
+death.GS.Herobrine=%1$s was brutally murdered by Herobrine
+death.GS.death_sentence=%1$s received a death sentence
+death.GS.tortures=%1$s was die in cruel tortures

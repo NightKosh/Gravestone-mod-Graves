@@ -8,11 +8,7 @@ package gravestone.config;
  */
 public abstract class GravesDefaultText {
 
-    public static final String[] DEATH_TEXT = {
-        " was brutally murdered by Herobrine",
-        " received a death sentence",
-        " was die in cruel tortures"
-    };
+    public static final String[] DEATH_TEXT = {};
     public static final String[] MEMORIAL_TEXT = {
         "Earth has no sorrow that Heaven cannot heal",
         "See, I am sending an angel ahead of you to guard you along the way and to bring you to the place I have prepared",

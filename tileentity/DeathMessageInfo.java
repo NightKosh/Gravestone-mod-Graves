@@ -50,7 +50,10 @@ public class DeathMessageInfo {
         new DeathMessageInfo("", "death.fell.accident.water", null),
         new DeathMessageInfo("", "death.fell.assist", ""),
         new DeathMessageInfo("", "death.fell.finish", ""),
-        new DeathMessageInfo("", "death.fell.killer", null)
+        new DeathMessageInfo("", "death.fell.killer", null),
+        new DeathMessageInfo("", "death.GS.Herobrine", null),
+        new DeathMessageInfo("", "death.GS.death_sentence", null),
+        new DeathMessageInfo("", "death.GS.tortures", null)
     };
     
     public static final String[] LOCALIZED_KILLER_NAMES = {
@@ -74,7 +77,11 @@ public class DeathMessageInfo {
         "entity.Wolf.name",
         "entity.Zombie.name",
         "entity.skeletonhorse.name",
-        "entity.zombiehorse.name"
+        "entity.zombiehorse.name",
+        "entity.GSZombieDog.name",
+        "entity.GSZombieCat.name",
+        "entity.GSSkeletonDog.name",
+        "entity.GSSkeletonCat.name"
     };
     
     public DeathMessageInfo(String name, String deathMessage, String killerName) {
