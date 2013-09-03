@@ -103,34 +103,46 @@ public class GSGraveStoneDeathText {
                     getRandomMemorialContent(random, GraveStoneConfig.graveNames, GraveStoneConfig.memorialText);
             }
         } else {
-            switch (graveType) {
-                case DOG_STATUE:
-                    name = this.getValue(random, GraveStoneConfig.graveDogsNames);
-                    break;
-                case CAT_STATUE:
-                    name = this.getValue(random, GraveStoneConfig.graveCatsNames);
-                    break;
-                default:
-                    name = this.getValue(random, GraveStoneConfig.graveNames);
+            if (getDeathMessage(random)) {
+                switch (graveType) {
+                    case DOG_STATUE:
+                        name = this.getValue(random, GraveStoneConfig.graveDogsNames);
+                        break;
+                    case CAT_STATUE:
+                        name = this.getValue(random, GraveStoneConfig.graveCatsNames);
+                        break;
+                    default:
+                        name = this.getValue(random, GraveStoneConfig.graveNames);
+                }
             }
-
-            getDeathMessage(random);
         }
     }
 
+    /**
+     * Get memorial epitaph or death message for memorial block
+     */
     private void getRandomMemorialContent(Random random, ArrayList<String> nameList, ArrayList<String> textList) {
-        if (random.nextInt(5) > 2) {
-            deathText = this.getValue(random, textList);
-        } else {
-            name = this.getValue(random, nameList);
-            getDeathMessage(random);
-        }
+        //if (random.nextInt(5) > 2) {
+        //    deathText = this.getValue(random, textList);
+        //} else {
+            if (getDeathMessage(random)) {
+                name = this.getValue(random, nameList);
+            }
+        //}
     }
 
-    private void getDeathMessage(Random random) {
+    /**
+     * Get death message
+     */
+    private boolean getDeathMessage(Random random) {
         DeathMessageInfo deathMessageInfo = DeathMessageInfo.getRandomDeathMessage(random);
         deathText = deathMessageInfo.getDeathMessage();
         killerName = deathMessageInfo.getKillerNameForTE();
+        if (deathMessageInfo.getName().length() != 0) {
+            name = deathMessageInfo.getName();
+            return false;
+        }
+        return true;
     }
 
     private String getValue(Random random, ArrayList<String> list) {

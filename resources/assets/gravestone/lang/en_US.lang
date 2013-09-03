@@ -10,6 +10,7 @@ block.gravestone.stone_sword=Stone sword gravestone
 block.gravestone.iron_sword=Iron sword gravestone
 block.gravestone.golden_sword=Golden sword gravestone
 block.gravestone.diamond_sword=Diamond sword gravestone
+
 ## memorials
 block.memorial.cross=Cross Memorial
 block.memorial.obelisk=Obelisk
