@@ -86,6 +86,8 @@ public class GraveStoneConfig {
     public static boolean spawnSkeletonCats;
     // sword grave
     public static boolean generateSwordGraves;
+    // spawn chance
+    public static int spawnChance;
 
     private GraveStoneConfig(String path, File configFile) {
         this.config = new Configuration(configFile);
@@ -156,6 +158,7 @@ public class GraveStoneConfig {
             graveSpawnRate = 1800;
         }
         
+        spawnChance = config.get(Configuration.CATEGORY_GENERAL, "SpawnChance", 80).getInt();
         enableNightStone = config.get(Configuration.CATEGORY_GENERAL, "EnableNightStone", true).getBoolean(true);
     }
 
@@ -183,7 +186,7 @@ public class GraveStoneConfig {
         ArrayList<String> list = new ArrayList();
         boolean exception = false;
         File file = new File(fileName);
-
+/*
         if (file.exists() && file.canRead()) {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -225,6 +228,8 @@ public class GraveStoneConfig {
                 }
             }
         }
+        */
+            list.addAll(Arrays.asList(defaultValues));
 
         return list;
     }
