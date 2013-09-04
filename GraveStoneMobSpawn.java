@@ -292,8 +292,8 @@ public class GraveStoneMobSpawn {
         if (constructor != null) {
             MOB_ID.add("SilverSkeleton");
             mobNameToClassMapping.put("SilverSkeleton", constructor);
-            catacombsSpawnerMobs.add("SilverSkeleton");
-            catacombsStatuesMobs.add("SilverSkeleton");
+            //catacombsSpawnerMobs.add("SilverSkeleton");
+            //catacombsStatuesMobs.add("SilverSkeleton");
         }
 
         constructor = getForeinMobConstructor(MO_CREATURES_WRAITH);
@@ -302,7 +302,7 @@ public class GraveStoneMobSpawn {
             MOB_ID.add("Wraith");
             mobNameToClassMapping.put("Wraith", constructor);
             catacombsSpawnerMobs.add("Wraith");
-            catacombsStatuesMobs.add("Wraith");
+            //catacombsStatuesMobs.add("Wraith");
         }
 
         constructor = getForeinMobConstructor(MO_CREATURES_F_WRAITH);
@@ -310,11 +310,11 @@ public class GraveStoneMobSpawn {
         if (constructor != null) {
             HELL_MOB_ID.add("FlameWraith");
             mobNameToClassMapping.put("FlameWraith", constructor);
-            catacombsStatuesMobs.add("FlameWraith");
+            //catacombsStatuesMobs.add("FlameWraith");
         }
 
         if (getForeinMobConstructor(MO_CREATURES_SCORPIONS) != null) {
-            catacombsSpawnerMobs.add("Scorpion");
+            //catacombsSpawnerMobs.add("Scorpion");
         }
     }
 
@@ -327,8 +327,8 @@ public class GraveStoneMobSpawn {
         if (constructor != null) {
             MOB_ID.add("Twilight Wraith");
             mobNameToClassMapping.put("Twilight Wraith", constructor);
-            catacombsSpawnerMobs.add("Twilight Wraith");
-            catacombsStatuesMobs.add("Twilight Wraith");
+            //catacombsSpawnerMobs.add("Twilight Wraith");
+            //catacombsStatuesMobs.add("Twilight Wraith");
         }
     }
 
