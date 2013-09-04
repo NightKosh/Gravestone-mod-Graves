@@ -194,15 +194,32 @@ public class BlockGSMemorial extends BlockContainer {
      * Called upon block activation (right click on the block.)
      */
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
         if (world.isRemote) {
             TileEntityGSMemorial entity = (TileEntityGSMemorial) world.getBlockTileEntity(x, y, z);
 
             if (entity != null) {
+                String name;
+                String killerName;
                 String deathText = entity.getDeathTextComponent().getDeathText();
 
-                if (!deathText.equals("")) {
-                    entityPlayer.sendChatToPlayer(ChatMessageComponent.func_111066_d(deathText));
+                if (deathText.length() != 0) {
+                    //entityPlayer.sendChatToPlayer(ChatMessageComponent.func_111066_d(deathText));
+
+                    if (entity.getDeathTextComponent().isLocalized()) {
+                        name = entity.getDeathTextComponent().getName();
+                        if (name.length() != 0) {
+                            killerName = ModGraveStone.proxy.getLocalizedEntityName(entity.getDeathTextComponent().getKillerName());
+
+                            if (killerName.length() == 0) {
+                                player.sendChatToPlayer(ChatMessageComponent.func_111082_b(deathText, new Object[]{name}));
+                            } else {
+                                player.sendChatToPlayer(ChatMessageComponent.func_111082_b(deathText, new Object[]{name, killerName}));
+                            }
+                            return false;
+                        }
+                    }
+                    player.sendChatToPlayer(ChatMessageComponent.func_111066_d(deathText));
                 }
             }
         }
