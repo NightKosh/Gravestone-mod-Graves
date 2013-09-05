@@ -17,7 +17,8 @@ public class GraveStoneLocalizationHandler {
     private static String[] localeFiles = {
         Resources.LOCALIZATION_LOCATION + "en_US.lang",
         Resources.LOCALIZATION_LOCATION + "ru_RU.lang",
-        Resources.LOCALIZATION_LOCATION + "de_DE.lang"
+        Resources.LOCALIZATION_LOCATION + "de_DE.lang",
+        Resources.LOCALIZATION_LOCATION + "fr_FR.lang"
     };
 
     /**
