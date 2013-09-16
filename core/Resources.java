@@ -1,5 +1,6 @@
-package gravestone;
+package gravestone.core;
 
+import gravestone.core.ModInfo;
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -60,4 +61,8 @@ public class Resources {
     public static final ResourceLocation SWORD_AURA = new ResourceLocation("textures/misc/enchanted_item_glint.png");
     public static final ResourceLocation SMALL_PEDESTAL = new ResourceLocation(MEMORIALS_LOCATION + "ModelSmallPedestal.png");
     public static final ResourceLocation STEVE_ARMOR = new ResourceLocation(MEMORIALS_LOCATION + "ModelSteveStatueMemorialArmor.png");
+    
+    // ghostly chest
+    public static final ResourceLocation CHRISTMAS_CHEST = new ResourceLocation("textures/entity/chest/christmas.png");
+    public static final ResourceLocation DEFAULT_CHEST = new ResourceLocation("textures/entity/chest/normal.png");
 }

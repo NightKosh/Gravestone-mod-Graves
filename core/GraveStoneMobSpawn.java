@@ -1,6 +1,7 @@
-package gravestone;
+package gravestone.core;
 
-import gravestone.block.EnumGraves;
+import gravestone.config.GraveStoneConfig;
+import gravestone.block.enums.EnumGraves;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -142,6 +143,21 @@ public class GraveStoneMobSpawn {
             skeleton.setCurrentItemOrArmor(0, new ItemStack(Item.swordStone.itemID, 1, 0));
         } else {
             skeleton.setCurrentItemOrArmor(0, new ItemStack(Item.bow.itemID, 1, 0));
+        }
+
+        return skeleton;
+    }
+
+    /**
+     * Return Skeleton with bow/sword
+     */
+    public static EntitySkeleton getSkeleton(World world, byte skeletonType) {
+        EntitySkeleton skeleton = (EntitySkeleton) EntityList.createEntityByName("Skeleton", world);
+
+        if (skeletonType == 0) {
+            skeleton.setCurrentItemOrArmor(0, new ItemStack(Item.bow.itemID, 1, 0));
+        } else {
+            skeleton.setCurrentItemOrArmor(0, new ItemStack(Item.swordStone.itemID, 1, 0));
         }
 
         return skeleton;

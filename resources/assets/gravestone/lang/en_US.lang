@@ -1,3 +1,7 @@
+# tabs
+itemGroup.tabGraveStone=Gravestone
+
+
 # blocks
 ## graves
 block.gravestone.gravestone=Gravestone
@@ -20,15 +24,23 @@ block.memorial.angel_statue=Angel statue
 block.memorial.dog_statue=Dog statue
 block.memorial.cat_statue=Cat statue
 block.memorial.creeper_statue=Creeper statue
+
 ## trap
 tile.trap.night.name=Night stone
 block.trap.curse=Darkness is coming!
+
 ## spawner
 tile.spawner.wither.name=Wither Spawner
 
+## chests
+block.ghostly_chest.bats_chest=Chest with bats
+block.ghostly_chest.skeleton_chest=Chest with skeleton
+
 
 # items
+## chisel
 item.chisel.name=Chisel
+
 ## graves
 item.grave.age=Had lived
 item.grave.days=days
