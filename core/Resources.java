@@ -1,5 +1,6 @@
 package gravestone.core;
 
+import gravestone.core.ModInfo;
 import net.minecraft.util.ResourceLocation;
 
 /**
