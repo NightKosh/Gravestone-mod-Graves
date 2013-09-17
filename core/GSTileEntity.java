@@ -6,6 +6,8 @@ import gravestone.tileentity.TileEntityGSGhostlyChest;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import gravestone.tileentity.TileEntityGSMemorial;
 import gravestone.tileentity.TileEntityGSSkullCandle;
+import gravestone.tileentity.TileEntityGSGraveStone;
+import gravestone.tileentity.TileEntityGSMemorial;
 import gravestone.tileentity.TileEntityGSWitherSpawner;
 
 /**

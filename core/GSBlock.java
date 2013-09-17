@@ -20,6 +20,8 @@ import gravestone.block.enums.IBlockEnum;
 import gravestone.item.ItemBlockGSGraveStone;
 import gravestone.item.ItemBlockGSMemorial;
 import net.minecraft.block.Block;
+import gravestone.item.ItemBlockGSGraveStone;
+import gravestone.item.ItemBlockGSMemorial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
@@ -34,6 +36,7 @@ public class GSBlock {
 
     private GSBlock() {
     }
+    
     // block GraveStone
     public static BlockGSGraveStone graveStone;
     // Block wither spawer
@@ -56,6 +59,7 @@ public class GSBlock {
         graveStone = new BlockGSGraveStone(GraveStoneConfig.graveStoneID);
         simpleBlockRegistration(graveStone, "GSGraveStone", "GraveStone", "pickaxe", 1);
         GameRegistry.registerBlock(graveStone, ItemBlockGSGraveStone.class);
+        
         for (byte i = 0; i < EnumGraves.values().length; i++) {
             ItemStack graveStoneStack = new ItemStack(graveStone, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
@@ -116,6 +120,6 @@ public class GSBlock {
 
             stack.setTagCompound(nbt);
             LanguageRegistry.addName(stack, blockEnums[i].getName());
-        }    
+        }
     }
 }
