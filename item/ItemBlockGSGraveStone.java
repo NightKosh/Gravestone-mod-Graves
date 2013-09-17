@@ -1,6 +1,6 @@
 package gravestone.item;
 
-import gravestone.block.EnumGraves;
+import gravestone.block.enums.EnumGraves;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

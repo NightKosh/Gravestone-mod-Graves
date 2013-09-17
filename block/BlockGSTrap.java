@@ -1,8 +1,8 @@
 package gravestone.block;
 
-import gravestone.GraveStoneConfig;
+import gravestone.config.GraveStoneConfig;
 import gravestone.ModGraveStone;
-import gravestone.Resources;
+import gravestone.core.Resources;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

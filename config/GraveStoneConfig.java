@@ -1,4 +1,4 @@
-package gravestone;
+package gravestone.config;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import gravestone.block.BlockGSGraveStone;
@@ -68,9 +68,9 @@ public class GraveStoneConfig {
     public static boolean canPlaceGravesEveryWhere;
     // disable/enable time changing by night stone
     public static boolean enableNightStone;
-    // item chisel
+    // item
     public static int chiselId;
-    public static Item chisel;
+    public static int ghostlyItemId;
     // grave names
     public static ArrayList<String> graveNames;
     public static ArrayList<String> graveDogsNames;
@@ -121,6 +121,7 @@ public class GraveStoneConfig {
         memorialID = config.getBlock("Memorial", 1554).getInt();
         // items
         chiselId = config.getItem("Chisel", 9001 - 256).getInt();
+        ghostlyItemId = config.getItem("GhostlyItems", 9002 - 256).getInt();
     }
 
     private static void structures() {

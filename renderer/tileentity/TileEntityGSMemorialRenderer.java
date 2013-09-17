@@ -1,6 +1,6 @@
 package gravestone.renderer.tileentity;
 
-import gravestone.Resources;
+import gravestone.core.Resources;
 import gravestone.models.block.ModelAngelStatueMemorial;
 import gravestone.models.block.ModelCatStatueMemorial;
 import gravestone.models.block.ModelCreeperStatueMemorial;

@@ -1,4 +1,4 @@
-package gravestone;
+package gravestone.core;
 
 import gravestone.tileentity.TileEntityGSGrave;
 import cpw.mods.fml.common.network.IPacketHandler;

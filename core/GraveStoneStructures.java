@@ -1,4 +1,4 @@
-package gravestone;
+package gravestone.core;
 
 import gravestone.structures.GraveStoneWorldGenerator;
 import gravestone.structures.village.VillageHandlerGSCemetery;
@@ -9,6 +9,10 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import gravestone.structures.village.ComponentGSVillageCemetery;
 import gravestone.structures.village.ComponentGSVillageMemorial;
 import gravestone.structures.village.ComponentGSVillageUndertaker;
+import gravestone.config.GraveStoneConfig;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
+import gravestone.ModGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 

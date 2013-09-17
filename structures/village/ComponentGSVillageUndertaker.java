@@ -2,7 +2,7 @@ package gravestone.structures.village;
 
 import java.util.List;
 import java.util.Random;
-import gravestone.GraveStoneConfig;
+import gravestone.config.GraveStoneConfig;
 import gravestone.block.GraveStoneHelper;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;

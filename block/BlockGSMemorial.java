@@ -1,8 +1,9 @@
 package gravestone.block;
 
+import gravestone.block.enums.EnumMemorials;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.GraveStoneConfig;
+import gravestone.config.GraveStoneConfig;
 import gravestone.ModGraveStone;
 import gravestone.tileentity.TileEntityGSMemorial;
 import java.util.List;
@@ -270,7 +271,7 @@ public class BlockGSMemorial extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(int id, CreativeTabs tab, List list) {
-        for (byte j = 0; j < EnumMemorials.MEMORIALS_COUNT; j++) {
+        for (byte j = 0; j < EnumMemorials.values().length; j++) {
             ItemStack stack = new ItemStack(id, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", j);
@@ -348,7 +349,7 @@ public class BlockGSMemorial extends BlockContainer {
      */
     public void dropCreeperMemorial(World world, int x, int y, int z) {
         byte memorialType = BlockGSMemorial.getMemorialType(new Random(), 4);
-        ItemStack itemStack = new ItemStack(ModGraveStone.memorial);
+        ItemStack itemStack = new ItemStack(this);
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setByte("GraveType", memorialType);
         itemStack.setTagCompound(nbt);

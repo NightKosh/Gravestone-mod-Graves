@@ -1,10 +1,14 @@
-package gravestone;
+package gravestone.core;
 
+import gravestone.config.GraveStoneConfig;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import gravestone.entity.EntityLostSoul;
 import gravestone.entity.EntitySkeletonCat;
 import gravestone.entity.EntitySkeletonDog;
+import gravestone.entity.EntityVengefulSpirit;
 import gravestone.entity.EntityZombieCat;
 import gravestone.entity.EntityZombieDog;
+import gravestone.entity.item.EntityGhostlyChest;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 
@@ -64,5 +68,17 @@ public class GraveStoneEntity {
             EntityRegistry.addSpawn(EntityZombieCat.class, 3, 1, 3, EnumCreatureType.monster,
                     BiomeGenBase.jungle, BiomeGenBase.jungleHills);
         }
+        
+        // ghosts
+        // LostSoul
+        EntityRegistry.registerGlobalEntityID(EntityLostSoul.class, "GSLostSoul", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
+        //EntityRegistry.addSpawn(EntityLostSoul.class, 3, 1, 3, EnumCreatureType.monster, BiomeGenBase.jungle, BiomeGenBase.jungleHills);
+        
+        // VengefulSpirit
+        EntityRegistry.registerGlobalEntityID(EntityVengefulSpirit.class, "GSVengefulSpirit", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
+        //EntityRegistry.addSpawn(EntityVengefulSpirit.class, 3, 1, 3, EnumCreatureType.monster, BiomeGenBase.jungle, BiomeGenBase.jungleHills);
+        
+        // Ghostly Entities
+        EntityRegistry.registerGlobalEntityID(EntityGhostlyChest.class, "GSGhostlyChest", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
     }
 }

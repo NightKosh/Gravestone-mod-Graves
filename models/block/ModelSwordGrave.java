@@ -1,6 +1,6 @@
 package gravestone.models.block;
 
-import gravestone.Resources;
+import gravestone.core.Resources;
 import gravestone.renderer.tileentity.TileEntityGSGraveStoneRenderer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

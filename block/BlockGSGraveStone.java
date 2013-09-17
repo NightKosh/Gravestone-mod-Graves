@@ -1,6 +1,7 @@
 package gravestone.block;
 
-import gravestone.GraveStoneConfig;
+import gravestone.block.enums.EnumGraves;
+import gravestone.config.GraveStoneConfig;
 import gravestone.ModGraveStone;
 import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSGraveStone;
@@ -480,7 +481,7 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(int id, CreativeTabs tabs, List list) {
-        for (byte i = 0; i < EnumGraves.GRAVES_COUNT; i++) {
+        for (byte i = 0; i < EnumGraves.values().length; i++) {
             ItemStack stack = new ItemStack(id, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", i);

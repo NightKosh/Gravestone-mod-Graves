@@ -1,9 +1,10 @@
 package gravestone.structures.village;
 
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import gravestone.core.GSBlock;
+import gravestone.core.GSItem;
 import java.util.List;
 import java.util.Random;
-import gravestone.ModGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
@@ -26,23 +27,23 @@ public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCrea
     @Override
     public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random) {
         // chisel
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 1), new ItemStack(ModGraveStone.chisel, 1, 0)));
-        recipeList.add(new MerchantRecipe(new ItemStack(ModGraveStone.chisel, 1, 0), new ItemStack(Item.ingotGold, 1)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 1), new ItemStack(GSItem.chisel, 1, 0)));
+        recipeList.add(new MerchantRecipe(new ItemStack(GSItem.chisel, 1, 0), new ItemStack(Item.ingotGold, 1)));
         // graves
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(ModGraveStone.graveStone, (byte) 0)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(ModGraveStone.graveStone, (byte) 1)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(ModGraveStone.graveStone, (byte) 2)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(GSBlock.graveStone, (byte) 0)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(GSBlock.graveStone, (byte) 1)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(GSBlock.graveStone, (byte) 2)));
         // pet graves
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 5), getTradeStack(ModGraveStone.graveStone, (byte) 3)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 5), getTradeStack(ModGraveStone.graveStone, (byte) 4)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 5), getTradeStack(GSBlock.graveStone, (byte) 3)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 5), getTradeStack(GSBlock.graveStone, (byte) 4)));
         // memorials
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 15), getTradeStack(ModGraveStone.memorial, (byte) 0)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 15), getTradeStack(ModGraveStone.memorial, (byte) 1)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 25), getTradeStack(ModGraveStone.memorial, (byte) 2)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 25), getTradeStack(ModGraveStone.memorial, (byte) 3)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 25), getTradeStack(ModGraveStone.memorial, (byte) 4)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 20), getTradeStack(ModGraveStone.memorial, (byte) 5)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 20), getTradeStack(ModGraveStone.memorial, (byte) 6)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 15), getTradeStack(GSBlock.memorial, (byte) 0)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 15), getTradeStack(GSBlock.memorial, (byte) 1)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 25), getTradeStack(GSBlock.memorial, (byte) 2)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 25), getTradeStack(GSBlock.memorial, (byte) 3)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 25), getTradeStack(GSBlock.memorial, (byte) 4)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 20), getTradeStack(GSBlock.memorial, (byte) 5)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 20), getTradeStack(GSBlock.memorial, (byte) 6)));
     }
 
     @Override

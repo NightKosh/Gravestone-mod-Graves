@@ -1,7 +1,7 @@
 package gravestone.gui;
 
 import gravestone.ModGraveStone;
-import gravestone.Resources;
+import gravestone.core.Resources;
 import gravestone.tileentity.TileEntityGSGrave;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;

@@ -2,7 +2,7 @@ package gravestone.entity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.Resources;
+import gravestone.core.Resources;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;

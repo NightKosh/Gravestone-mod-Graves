@@ -1,6 +1,6 @@
 package gravestone.structures;
 
-import gravestone.GraveStoneConfig;
+import gravestone.config.GraveStoneConfig;
 import gravestone.block.GraveStoneHelper;
 import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSGraveStone;

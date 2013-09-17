@@ -1,6 +1,6 @@
 package gravestone.tileentity;
 
-import gravestone.block.EnumMemorials;
+import gravestone.block.enums.EnumMemorials;
 import java.util.Random;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;

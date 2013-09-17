@@ -1,7 +1,7 @@
 package gravestone.structures.catacombs.components;
 
 import java.util.Random;
-import gravestone.GraveStoneConfig;
+import gravestone.config.GraveStoneConfig;
 import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.block.GraveStoneHelper;
 import gravestone.structures.BoundingBoxHelper;

@@ -1,6 +1,6 @@
 package gravestone.structures.village;
 
-import gravestone.GraveStoneConfig;
+import gravestone.config.GraveStoneConfig;
 import gravestone.block.BlockGSMemorial;
 import gravestone.tileentity.TileEntityGSMemorial;
 import java.util.List;

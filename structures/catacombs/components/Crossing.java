@@ -1,6 +1,6 @@
 package gravestone.structures.catacombs.components;
 
-import gravestone.GraveStoneMobSpawn;
+import gravestone.core.GraveStoneMobSpawn;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.ObjectsGenerationHelper;
 import java.util.Random;

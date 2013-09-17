@@ -1,6 +1,6 @@
 package gravestone.tileentity;
 
-import gravestone.block.EnumGraves;
+import gravestone.block.enums.EnumGraves;
 import java.util.ArrayList;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

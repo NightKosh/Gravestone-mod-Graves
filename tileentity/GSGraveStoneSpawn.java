@@ -1,8 +1,8 @@
 package gravestone.tileentity;
 
-import gravestone.GraveStoneConfig;
-import gravestone.GraveStoneMobSpawn;
-import gravestone.block.EnumGraves;
+import gravestone.config.GraveStoneConfig;
+import gravestone.core.GraveStoneMobSpawn;
+import gravestone.block.enums.EnumGraves;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

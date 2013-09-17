@@ -1,6 +1,6 @@
 package gravestone.core.localization;
 
-import gravestone.Resources;
+import gravestone.core.Resources;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**

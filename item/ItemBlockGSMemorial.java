@@ -1,6 +1,6 @@
 package gravestone.item;
 
-import gravestone.block.EnumMemorials;
+import gravestone.block.enums.EnumMemorials;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;

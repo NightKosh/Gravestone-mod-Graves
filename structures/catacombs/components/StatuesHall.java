@@ -1,6 +1,6 @@
 package gravestone.structures.catacombs.components;
 
-import gravestone.GraveStoneMobSpawn;
+import gravestone.core.GraveStoneMobSpawn;
 import gravestone.block.BlockGSMemorial;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.MemorialGenerationHelper;

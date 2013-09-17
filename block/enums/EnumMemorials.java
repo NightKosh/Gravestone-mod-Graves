@@ -1,4 +1,4 @@
-package gravestone.block;
+package gravestone.block.enums;
 
 import gravestone.ModGraveStone;
 
@@ -20,7 +20,6 @@ public enum EnumMemorials {
     CREEPER_STATUE((byte) 7, "block.memorial.creeper_statue");
     private byte id;
     private String name;
-    public static final byte MEMORIALS_COUNT = 8;
 
     private EnumMemorials(byte id, String name) {
         this.id = id;

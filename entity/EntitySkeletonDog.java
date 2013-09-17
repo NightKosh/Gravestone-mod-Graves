@@ -1,6 +1,6 @@
 package gravestone.entity;
 
-import gravestone.Resources;
+import gravestone.core.Resources;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;

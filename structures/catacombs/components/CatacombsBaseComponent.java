@@ -1,6 +1,6 @@
 package gravestone.structures.catacombs.components;
 
-import gravestone.GraveStoneStructures;
+import gravestone.core.GraveStoneStructures;
 import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.catacombs.CatacombsStones;
 import java.util.Random;

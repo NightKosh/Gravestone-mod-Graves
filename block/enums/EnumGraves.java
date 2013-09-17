@@ -1,4 +1,4 @@
-package gravestone.block;
+package gravestone.block.enums;
 
 import gravestone.ModGraveStone;
 
@@ -22,7 +22,6 @@ public enum EnumGraves {
     DIAMOND_SWORD((byte) 9, "block.gravestone.diamond_sword");
     private byte id;
     private String name;
-    public static final byte GRAVES_COUNT = 10;
 
     private EnumGraves(byte id, String name) {
         this.id = id;
@@ -38,8 +37,7 @@ public enum EnumGraves {
     }
 
     /**
-     * Returns the grave type with the specified ID, or VERTICAL_PLATE if none
-     * found.
+     * Returns the grave type with the specified ID, or VERTICAL_PLATE if none found.
      *
      * @param id Grave Id
      */

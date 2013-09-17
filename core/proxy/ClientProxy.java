@@ -1,7 +1,7 @@
 package gravestone.core.proxy;
 
-import gravestone.GraveStoneConfig;
-import gravestone.Resources;
+import gravestone.config.GraveStoneConfig;
+import gravestone.core.Resources;
 import gravestone.entity.EntitySkeletonCat;
 import gravestone.entity.EntitySkeletonDog;
 import gravestone.entity.EntityZombieCat;
@@ -20,6 +20,8 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import gravestone.renderer.tileentity.TileEntityGSGhostlyChestRenderer;
+import gravestone.tileentity.TileEntityGSGhostlyChest;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -52,6 +54,9 @@ public class ClientProxy extends CommonProxy {
 
         // zombie cat
         RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonCat.class, new RenderUndeadCat(new ModelUndeadCat(), 0));
+        
+        // register GhostlyChest renderer
+        ClientRegistry.registerTileEntity(TileEntityGSGhostlyChest.class, "GSGhostlyChest", new TileEntityGSGhostlyChestRenderer());
     }
 
     @Override

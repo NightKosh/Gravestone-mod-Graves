@@ -3,7 +3,7 @@ package gravestone.tileentity;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
-import gravestone.GraveStoneConfig;
+import gravestone.config.GraveStoneConfig;
 import gravestone.block.GraveStoneHelper;
 import gravestone.item.ItemBlockGSGraveStone;
 import net.minecraft.enchantment.Enchantment;

@@ -1,8 +1,8 @@
 package gravestone.item;
 
-import gravestone.GraveStoneConfig;
+import gravestone.config.GraveStoneConfig;
 import gravestone.ModGraveStone;
-import gravestone.Resources;
+import gravestone.core.Resources;
 import gravestone.tileentity.TileEntityGSGrave;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

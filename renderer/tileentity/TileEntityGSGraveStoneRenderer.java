@@ -1,7 +1,7 @@
 package gravestone.renderer.tileentity;
 
-import gravestone.Resources;
-import gravestone.block.EnumGraves;
+import gravestone.core.Resources;
+import gravestone.block.enums.EnumGraves;
 import gravestone.block.GraveStoneHelper;
 import gravestone.models.block.ModelCatStatueGraveStone;
 import gravestone.models.block.ModelCrossGraveStone;

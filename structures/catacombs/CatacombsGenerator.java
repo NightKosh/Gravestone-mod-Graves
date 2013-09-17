@@ -1,8 +1,8 @@
 package gravestone.structures.catacombs;
 
-import gravestone.GraveStoneBiomes;
-import gravestone.GraveStoneConfig;
 import gravestone.GraveStoneLogger;
+import gravestone.core.GraveStoneBiomes;
+import gravestone.config.GraveStoneConfig;
 import java.util.LinkedList;
 import java.util.Random;
 import net.minecraft.world.ChunkCoordIntPair;

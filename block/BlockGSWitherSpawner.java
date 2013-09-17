@@ -1,7 +1,7 @@
 package gravestone.block;
 
 import gravestone.ModGraveStone;
-import gravestone.Resources;
+import gravestone.core.Resources;
 import gravestone.tileentity.TileEntityGSWitherSpawner;
 import net.minecraft.block.BlockMobSpawner;
 import net.minecraft.tileentity.TileEntity;

@@ -1,6 +1,7 @@
 package gravestone;
 
 import cpw.mods.fml.common.FMLLog;
+import gravestone.core.ModInfo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

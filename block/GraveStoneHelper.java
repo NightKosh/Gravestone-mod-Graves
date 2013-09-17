@@ -1,7 +1,7 @@
 package gravestone.block;
 
-import gravestone.GraveStoneConfig;
-import gravestone.GraveStoneMobSpawn;
+import gravestone.config.GraveStoneConfig;
+import gravestone.core.GraveStoneMobSpawn;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import java.util.Arrays;
 import java.util.Random;
