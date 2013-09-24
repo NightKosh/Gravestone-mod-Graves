@@ -49,7 +49,6 @@ public class GSBlock {
     public static BlockGSBoneBlock boneBlock;
     public static BlockGSBoneSlab boneSlab;
     public static BlockGSBoneStairs boneStairs;
-    public static BlockGSBoneStep boneStep;
     // GhostlyChest
     public static BlockGSGhostlyChest ghostlyChest;
     // skull candle
