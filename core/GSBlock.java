@@ -22,6 +22,7 @@ import gravestone.item.ItemBlockGSMemorial;
 import net.minecraft.block.Block;
 import gravestone.item.ItemBlockGSGraveStone;
 import gravestone.item.ItemBlockGSMemorial;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
@@ -36,7 +37,6 @@ public class GSBlock {
 
     private GSBlock() {
     }
-    
     // block GraveStone
     public static BlockGSGraveStone graveStone;
     // Block wither spawer
@@ -49,6 +49,7 @@ public class GSBlock {
     public static BlockGSBoneBlock boneBlock;
     public static BlockGSBoneSlab boneSlab;
     public static BlockGSBoneStairs boneStairs;
+    public static BlockGSBoneStep boneStep;
     // GhostlyChest
     public static BlockGSGhostlyChest ghostlyChest;
     // skull candle
@@ -59,7 +60,6 @@ public class GSBlock {
         graveStone = new BlockGSGraveStone(GraveStoneConfig.graveStoneID);
         simpleBlockRegistration(graveStone, "GSGraveStone", "GraveStone", "pickaxe", 1);
         GameRegistry.registerBlock(graveStone, ItemBlockGSGraveStone.class);
-        
         for (byte i = 0; i < EnumGraves.values().length; i++) {
             ItemStack graveStoneStack = new ItemStack(graveStone, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();

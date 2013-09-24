@@ -34,7 +34,6 @@ public enum EnumChestTypes implements IBlockEnum {
         if (id < values().length) {
             return values()[id];
         }
-
         return BATS_CHEST;
     }
 }
