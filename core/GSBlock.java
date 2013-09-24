@@ -4,7 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import gravestone.block.BlockGSBoneBlock;
 import gravestone.block.BlockGSBoneSlab;
-import gravestone.block.BlockGSBoneStep;
+import gravestone.block.BlockGSBoneStairs;
 import gravestone.block.BlockGSGhostlyChest;
 import gravestone.config.GraveStoneConfig;
 import gravestone.block.BlockGSGraveStone;
@@ -45,7 +45,7 @@ public class GSBlock {
     // bone blocks
     public static BlockGSBoneBlock boneBlock;
     public static BlockGSBoneSlab boneSlab;
-    public static BlockGSBoneStep boneStep;
+    public static BlockGSBoneStairs boneStairs;
     // GhostlyChest
     public static BlockGSGhostlyChest ghostlyChest;
     // skull candle
@@ -89,8 +89,8 @@ public class GSBlock {
         boneSlab = new BlockGSBoneSlab(GraveStoneConfig.boneSlabID);
         simpleBlockRegistration(boneSlab, "GSBoneSlab", "Bone slab", "pickaxe", 1);
         // bone step
-        boneStep = new BlockGSBoneStep(GraveStoneConfig.boneStepID);
-        simpleBlockRegistration(boneStep, "GSBoneStep", "Bone step", "pickaxe", 1);
+        boneStairs = new BlockGSBoneStairs(GraveStoneConfig.boneStairsID);
+        simpleBlockRegistration(boneStairs, "GSBoneStairs", "Bone stairs", "pickaxe", 1);
         
         // ghostChest
         ghostlyChest = new BlockGSGhostlyChest(GraveStoneConfig.ghostlyChestID);
@@ -110,7 +110,7 @@ public class GSBlock {
     private static void advancedBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel, IBlockEnum[] blockEnums, String nbtName) {
         simpleBlockRegistration(block, registerName, name, tool, harvestLevel);
         for (byte i = 0; i < blockEnums.length; i++) {
-            ItemStack stack = new ItemStack(ghostlyChest, 1, 0);
+            ItemStack stack = new ItemStack(block, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte(nbtName, i);
 

@@ -38,7 +38,7 @@ public class GraveStoneConfig {
     // bones blocks
     public static int boneBlockID;
     public static int boneSlabID;
-    public static int boneStepID;
+    public static int boneStairsID;
     // ghostly chest
     public static int ghostlyChestID;
     // candle
@@ -123,7 +123,7 @@ public class GraveStoneConfig {
         memorialID = config.getBlock("Memorial", 1554).getInt();
         boneBlockID = config.getBlock("BonesBlock", 1555).getInt();
         boneSlabID = config.getBlock("BonesSlab", 1556).getInt();
-        boneStepID = config.getBlock("BonesStep", 1557).getInt();
+        boneStairsID = config.getBlock("BonesStairs", 1557).getInt();
         ghostlyChestID = config.getBlock("GhostlyChest", 1558).getInt();
         skullCandleID = config.getBlock("SkullCandle", 1559).getInt();
         // items

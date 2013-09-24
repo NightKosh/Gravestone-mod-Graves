@@ -18,11 +18,15 @@ public class Resources {
     private static final String ENTITY_LOCATION = MOD_NAME + ":textures/entities/";
     private static final String GRAVES_LOCATION = MOD_NAME + ":textures/graves/";
     private static final String MEMORIALS_LOCATION = MOD_NAME + ":textures/memorials/";
+    private static final String FURNITURE_LOCATION = MOD_NAME + ":textures/furniture/";
     // localization path
     public static final String LOCALIZATION_LOCATION = "/assets/" + MOD_NAME + "/lang/";
     // blocks
     public static final String TIME_TRAP = "nether_brick";
     public static final String WITHER_SPAWNER = "mob_spawner";
+    public static final String BONE_BLOCK = "bone_block";
+    public static final String BONE_SLAB = "bone_slab";
+    public static final String BONE_STAIRS = "bone_stairs";
     // items
     public static final String CHISEL = MOD_NAME + ":chisel";
     // gui
@@ -65,4 +69,8 @@ public class Resources {
     // ghostly chest
     public static final ResourceLocation CHRISTMAS_CHEST = new ResourceLocation("textures/entity/chest/christmas.png");
     public static final ResourceLocation DEFAULT_CHEST = new ResourceLocation("textures/entity/chest/normal.png");
+    
+    // skull candle
+    public static final ResourceLocation SKELETON_SKULL = new ResourceLocation("textures/entity/skeleton/skeleton.png");
+    public static final ResourceLocation SKULL_CANDLE = new ResourceLocation(FURNITURE_LOCATION + "SkullCandle.png");
 }
