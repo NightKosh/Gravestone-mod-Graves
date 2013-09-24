@@ -8,7 +8,7 @@ import gravestone.ModGraveStone;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public enum EnumChestTypes {
+public enum EnumChestTypes implements IBlockEnum {
 
     BATS_CHEST((byte) 0, "block.ghostly_chest.bats_chest"),
     SKELETON_CHEST((byte) 1, "block.ghostly_chest.skeleton_chest");
@@ -20,24 +20,20 @@ public enum EnumChestTypes {
         this.name = name;
     }
 
+    @Override
     public byte getId() {
         return id;
     }
 
+    @Override
     public String getName() {
         return ModGraveStone.proxy.getLocalizedString(this.name);
     }
 
     public static EnumChestTypes getById(byte id) {
-        EnumChestTypes[] chestTypes = values();
-        for (int k = 0; k < chestTypes.length; ++k) {
-            EnumChestTypes chestType = chestTypes[k];
-
-            if (chestType.id == id) {
-                return chestType;
-            }
+        if (id < values().length) {
+            return values()[id];
         }
-
         return BATS_CHEST;
     }
 }

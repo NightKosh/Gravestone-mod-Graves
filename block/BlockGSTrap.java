@@ -30,20 +30,6 @@ public class BlockGSTrap extends Block {
     }
 
     /**
-     * Is this block (a) opaque and (b) a full 1m cube? This determines whether
-     * or not to render the shared face of two adjacent blocks and also whether
-     * the player can attach torches, redstone wire, etc to this block.
-     */
-    @Override
-    public boolean isOpaqueCube() {
-        return true;
-    }
-
-    public int quantityDropped(int par1) {
-        return 1;
-    }
-
-    /**
      * Returns the ID of the items to drop on destruction.
      */
     @Override

@@ -21,7 +21,9 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import gravestone.renderer.tileentity.TileEntityGSGhostlyChestRenderer;
+import gravestone.renderer.tileentity.TileEntityGSSkullCandleRenderer;
 import gravestone.tileentity.TileEntityGSGhostlyChest;
+import gravestone.tileentity.TileEntityGSSkullCandle;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -57,6 +59,9 @@ public class ClientProxy extends CommonProxy {
         
         // register GhostlyChest renderer
         ClientRegistry.registerTileEntity(TileEntityGSGhostlyChest.class, "GSGhostlyChest", new TileEntityGSGhostlyChestRenderer());
+        
+        // register GhostlyChest renderer
+        ClientRegistry.registerTileEntity(TileEntityGSSkullCandle.class, "GSSkullCandle", new TileEntityGSSkullCandleRenderer());
     }
 
     @Override

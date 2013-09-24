@@ -8,7 +8,7 @@ import gravestone.ModGraveStone;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public enum EnumGraves {
+public enum EnumGraves implements IBlockEnum {
 
     VERTICAL_PLATE((byte) 0, "block.gravestone.gravestone"),
     CROSS((byte) 1, "block.gravestone.cross"),
@@ -28,10 +28,12 @@ public enum EnumGraves {
         this.name = name;
     }
 
+    @Override
     public byte getId() {
         return this.id;
     }
 
+    @Override
     public String getName() {
         return ModGraveStone.proxy.getLocalizedString(this.name);
     }
@@ -42,16 +44,9 @@ public enum EnumGraves {
      * @param id Grave Id
      */
     public static EnumGraves getByID(int id) {
-        EnumGraves[] graveTypes = values();
-
-        for (int k = 0; k < graveTypes.length; ++k) {
-            EnumGraves graveType = graveTypes[k];
-
-            if (graveType.id == id) {
-                return graveType;
-            }
+        if (id < values().length) {
+            return values()[id];
         }
-
         return VERTICAL_PLATE;
     }
 }

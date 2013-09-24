@@ -5,16 +5,9 @@ import gravestone.block.BlockGSGraveStone;
 import gravestone.block.BlockGSMemorial;
 import gravestone.block.BlockGSTrap;
 import gravestone.block.BlockGSWitherSpawner;
-import gravestone.config.GravesDefaultText;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import net.minecraft.item.Item;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 
@@ -29,6 +22,7 @@ public class GraveStoneConfig {
     private static Configuration config;
     private static GraveStoneConfig instance;
     private static String path;
+    // Blocks
     // block GraveStone
     public static int graveStoneID;
     public static BlockGSGraveStone graveStone;
@@ -41,6 +35,14 @@ public class GraveStoneConfig {
     // block memorial
     public static int memorialID;
     public static BlockGSMemorial memorial;
+    // bones blocks
+    public static int boneBlockID;
+    public static int boneSlabID;
+    public static int boneStepID;
+    // ghostly chest
+    public static int ghostlyChestID;
+    // candle
+    public static int skullCandleID;
     // renderer Id
     public static int graveRenderID = RenderingRegistry.getNextAvailableRenderId();
     public static int memorialRenderID = RenderingRegistry.getNextAvailableRenderId();
@@ -119,6 +121,11 @@ public class GraveStoneConfig {
         witherSpawnerID = config.getBlock("WitherSpawner", 1552).getInt();
         timeTrapID = config.getBlock("TimeTrap", 1553).getInt();
         memorialID = config.getBlock("Memorial", 1554).getInt();
+        boneBlockID = config.getBlock("BonesBlock", 1555).getInt();
+        boneSlabID = config.getBlock("BonesSlab", 1556).getInt();
+        boneStepID = config.getBlock("BonesStep", 1557).getInt();
+        ghostlyChestID = config.getBlock("GhostlyChest", 1558).getInt();
+        skullCandleID = config.getBlock("SkullCandle", 1559).getInt();
         // items
         chiselId = config.getItem("Chisel", 9001 - 256).getInt();
         ghostlyItemId = config.getItem("GhostlyItems", 9002 - 256).getInt();
@@ -158,7 +165,7 @@ public class GraveStoneConfig {
         if (graveSpawnRate < 1800) {
             graveSpawnRate = 1800;
         }
-        
+
         spawnChance = config.get(Configuration.CATEGORY_GENERAL, "SpawnChance", 80).getInt();
         enableNightStone = config.get(Configuration.CATEGORY_GENERAL, "EnableNightStone", true).getBoolean(true);
     }
@@ -185,52 +192,52 @@ public class GraveStoneConfig {
      */
     private static ArrayList<String> readStringsFromFile(String fileName, String[] defaultValues) {
         ArrayList<String> list = new ArrayList();
-        boolean exception = false;
-        File file = new File(fileName);
-/*
-        if (file.exists() && file.canRead()) {
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(file));
-                String line;
+        /*boolean exception = false;
+         File file = new File(fileName);
 
-                while ((line = reader.readLine()) != null) {
-                    list.add(line);
-                }
+         if (file.exists() && file.canRead()) {
+         try {
+         BufferedReader reader = new BufferedReader(new FileReader(file));
+         String line;
 
-                reader.close();
-            } catch (IOException e) {
-                exception = true;
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+         while ((line = reader.readLine()) != null) {
+         list.add(line);
+         }
 
-        if (list.isEmpty() || exception) {
-            list = new ArrayList();
-            list.addAll(Arrays.asList(defaultValues));
+         reader.close();
+         } catch (IOException e) {
+         exception = true;
+         e.printStackTrace();
+         }
+         } else {
+         try {
+         file.createNewFile();
+         } catch (IOException e) {
+         e.printStackTrace();
+         }
+         }
 
-            if (file.canWrite()) {
-                try {
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+         if (list.isEmpty() || exception) {
+         list = new ArrayList();
+         list.addAll(Arrays.asList(defaultValues));
 
-                    for (int i = 0; i < list.size(); i++) {
-                        writer.write(list.get(i));
-                        writer.newLine();
-                    }
+         if (file.canWrite()) {
+         try {
+         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
-                    writer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        */
-            list.addAll(Arrays.asList(defaultValues));
+         for (int i = 0; i < list.size(); i++) {
+         writer.write(list.get(i));
+         writer.newLine();
+         }
+
+         writer.close();
+         } catch (IOException e) {
+         e.printStackTrace();
+         }
+         }
+         }
+         */
+        list.addAll(Arrays.asList(defaultValues));
 
         return list;
     }
