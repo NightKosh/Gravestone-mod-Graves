@@ -1,4 +1,4 @@
-package gravestone.entity;
+package gravestone.entity.monster;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

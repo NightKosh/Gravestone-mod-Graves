@@ -2,8 +2,10 @@
 package gravestone.core;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import gravestone.tileentity.TileEntityGSGhostlyChest;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import gravestone.tileentity.TileEntityGSMemorial;
+import gravestone.tileentity.TileEntityGSSkullCandle;
 import gravestone.tileentity.TileEntityGSWitherSpawner;
 
 /**
@@ -27,5 +29,11 @@ public class GSTileEntity {
         
         // register Wither Spawner tile entity
         GameRegistry.registerTileEntity(TileEntityGSWitherSpawner.class, "GSWither Spawner");
+        
+        // register Wither Spawner tile entity
+        GameRegistry.registerTileEntity(TileEntityGSGhostlyChest.class, "GSGhostly Chest");
+        
+        // register Wither Spawner tile entity
+        GameRegistry.registerTileEntity(TileEntityGSSkullCandle.class, "GSSkull Candle");
     }
 }

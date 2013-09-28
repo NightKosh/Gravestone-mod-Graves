@@ -2,12 +2,12 @@ package gravestone.core.proxy;
 
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.Resources;
-import gravestone.entity.EntitySkeletonCat;
-import gravestone.entity.EntitySkeletonDog;
-import gravestone.entity.EntityZombieCat;
+import gravestone.entity.monster.EntitySkeletonCat;
+import gravestone.entity.monster.EntitySkeletonDog;
+import gravestone.entity.monster.EntityZombieCat;
 import gravestone.renderer.item.ItemGSGraveStoneRenderer;
 import gravestone.renderer.item.ItemGSMemorialRenderer;
-import gravestone.entity.EntityZombieDog;
+import gravestone.entity.monster.EntityZombieDog;
 import gravestone.models.entity.ModelUndeadCat;
 import gravestone.models.entity.ModelUndeadDog;
 import gravestone.renderer.entity.RenderUndeadCat;

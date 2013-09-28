@@ -1,4 +1,4 @@
-package gravestone.entity;
+package gravestone.entity.monster;
 
 import gravestone.core.Resources;
 import net.minecraft.entity.SharedMonsterAttributes;

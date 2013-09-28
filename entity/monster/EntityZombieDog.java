@@ -1,8 +1,8 @@
-package gravestone.entity;
+package gravestone.entity.monster;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.core.Resources;
+import gravestone.entity.ai.EntityAIBreakBlock;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -12,15 +12,13 @@ import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 /**
@@ -29,11 +27,12 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class EntityZombieCat extends EntityUndeadCat {
+public class EntityZombieDog extends EntityUndeadDog {
 
-    public EntityZombieCat(World world) {
+    public EntityZombieDog(World world) {
         super(world);
-        texture = Resources.ZOMBIE_OZELOT;
+        texture = Resources.ZOMBIE_DOG;
+        
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1, false));
         this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1));
         this.tasks.addTask(6, new EntityAIWander(this, 1));
@@ -41,56 +40,21 @@ public class EntityZombieCat extends EntityUndeadCat {
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityWolf.class, 1, true));
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityOcelot.class, 1, true));
         this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityHorse.class, 1, false));
+        this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntitySheep.class, 1, false));
         this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, 1, false));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, false));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWolf.class, 0, false));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityOcelot.class, 0, false));
-        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityChicken.class, 0, false));
         this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityHorse.class, 0, false));
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntitySheep.class, 0, false));
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(10); // max health
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D); // movespeed
-    }
-
-    /**
-     * Returns the texture's file path as a String.
-     */
-    @Override
-    @SideOnly(Side.CLIENT)
-    public ResourceLocation getTexture() {
-        switch (this.getSkin()) {
-            case 1:
-                return Resources.ZOMBIE_CAT_BLACK;
-            case 2:
-                return Resources.ZOMBIE_CAT_RED;
-            case 3:
-                return Resources.ZOMBIE_CAT_SIAMESE;
-            case 0:
-            default:
-                return Resources.ZOMBIE_OZELOT;
-        }
-    }
-
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
-    @Override
-    public void writeEntityToNBT(NBTTagCompound nbt) {
-        super.writeEntityToNBT(nbt);
-        nbt.setInteger("ZombieCatType", this.getSkin());
-    }
-
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    @Override
-    public void readEntityFromNBT(NBTTagCompound nbt) {
-        super.readEntityFromNBT(nbt);
-        this.setSkin(nbt.getInteger("ZombieCatType"));
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20); // max health
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.3); // movespeed
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(3); // attack damage
     }
 
     /**
@@ -98,7 +62,7 @@ public class EntityZombieCat extends EntityUndeadCat {
      */
     @Override
     protected String getLivingSound() {
-        return (this.rand.nextInt(4) == 0) ? "mob.cat.purreow" : "mob.cat.meow";
+        return (this.rand.nextInt(3) == 0) ? "mob.wolf.bark" : "mob.wolf.growl";
     }
 
     /**
@@ -106,7 +70,7 @@ public class EntityZombieCat extends EntityUndeadCat {
      */
     @Override
     protected String getHurtSound() {
-        return "mob.cat.hitt";
+        return "mob.wolf.hurt";
     }
 
     /**
@@ -114,7 +78,7 @@ public class EntityZombieCat extends EntityUndeadCat {
      */
     @Override
     protected String getDeathSound() {
-        return "mob.cat.hitt";
+        return "mob.wolf.death";
     }
 
     /**
@@ -122,6 +86,7 @@ public class EntityZombieCat extends EntityUndeadCat {
      */
     @Override
     protected void playStepSound(int par1, int par2, int par3, int par4) {
+        this.playSound("mob.wolf.step", 0.15F, 1.0F);
     }
 
     /**
@@ -138,14 +103,6 @@ public class EntityZombieCat extends EntityUndeadCat {
     @Override
     protected int getDropItemId() {
         return Item.rottenFlesh.itemID;
-    }
-
-    public int getSkin() {
-        return this.dataWatcher.getWatchableObjectByte(18);
-    }
-
-    public void setSkin(int par1) {
-        this.dataWatcher.updateObject(18, Byte.valueOf((byte) par1));
     }
 
     /**
