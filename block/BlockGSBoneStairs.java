@@ -18,6 +18,5 @@ public class BlockGSBoneStairs extends BlockStairs {
         super(id, GSBlock.boneBlock, 0);
         this.setUnlocalizedName("Bone stairs");
         this.setCreativeTab(ModGraveStone.creativeTab);
-        this.func_111022_d(Resources.BONE_STAIRS);
     }
 }

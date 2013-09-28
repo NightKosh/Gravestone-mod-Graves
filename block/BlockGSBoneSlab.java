@@ -21,7 +21,7 @@ public class BlockGSBoneSlab extends BlockHalfSlab {
         this.setHardness(2F);
         this.setResistance(2F);
         this.setCreativeTab(ModGraveStone.creativeTab);
-        this.func_111022_d(Resources.BONE_SLAB);
+        this.func_111022_d(Resources.BONE_BLOCK);
     }
 
     /**
