@@ -8,7 +8,6 @@ import gravestone.entity.monster.EntitySkeletonDog;
 import gravestone.entity.EntityVengefulSpirit;
 import gravestone.entity.monster.EntityZombieCat;
 import gravestone.entity.monster.EntityZombieDog;
-import gravestone.entity.EntityVengefulSpirit;
 import gravestone.entity.item.EntityGhostlyChest;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
