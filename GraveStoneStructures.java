@@ -4,7 +4,6 @@ import gravestone.structures.GraveStoneWorldGenerator;
 import gravestone.structures.village.VillageHandlerGSCemetery;
 import gravestone.structures.village.VillageHandlerGSMemorial;
 import gravestone.structures.village.VillageHandlerGSUndertaker;
-import gravestone.GraveStoneConfig;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraft.block.Block;

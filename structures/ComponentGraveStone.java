@@ -1,6 +1,7 @@
 package gravestone.structures;
 
 import java.util.Random;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
@@ -83,5 +84,15 @@ public class ComponentGraveStone extends StructureComponent {
     @Override
     public boolean generateStructureChestContents(World world, StructureBoundingBox boundingBox, Random random, int x, int y, int z, WeightedRandomChestContent[] chestContent, int par8) {
         return super.generateStructureChestContents(world, boundingBox, random, x, y, z, chestContent, par8);
+    }
+
+    @Override
+    protected void func_143012_a(NBTTagCompound nbttagcompound) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void func_143011_b(NBTTagCompound nbttagcompound) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

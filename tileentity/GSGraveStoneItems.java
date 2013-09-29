@@ -520,11 +520,11 @@ public class GSGraveStoneItems {
      */
     private void fillPetGrave(Random random) {
         if (random.nextInt(10) == 0) {
-            setInventorySlotContents(3, new ItemStack(Item.field_111212_ci.itemID, 1, 0));
+            setInventorySlotContents(3, new ItemStack(Item.nameTag.itemID, 1, 0));
         }
 
         if (random.nextInt(10) == 0) {
-            setInventorySlotContents(4, new ItemStack(Item.field_111214_ch.itemID, 1, 0));
+            setInventorySlotContents(4, new ItemStack(Item.leash.itemID, 1, 0));
         }
     }
 

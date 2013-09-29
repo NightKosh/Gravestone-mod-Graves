@@ -24,13 +24,13 @@ public abstract class EntityUndeadDog extends EntityUndeadPet {
      */
     @Override
     protected void updateAITick() {
-        this.dataWatcher.updateObject(18, Float.valueOf(this.func_110143_aJ()));
+        this.dataWatcher.updateObject(18, Float.valueOf(this.getHealth()));
     }
 
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(18, new Float(this.func_110143_aJ()));
+        this.dataWatcher.addObject(18, new Float(this.getHealth()));
         this.dataWatcher.addObject(19, new Byte((byte) 0));
     }
 
@@ -71,7 +71,7 @@ public abstract class EntityUndeadDog extends EntityUndeadPet {
 
     @SideOnly(Side.CLIENT)
     public float getTailRotation() {
-        return (0.55F - (float) (20 - this.dataWatcher.func_111145_d(18)) * 0.02F) * (float) Math.PI;
+        return (0.55F - (float) (20 - this.dataWatcher.getWatchableObjectFloat(18)) * 0.02F) * (float) Math.PI;
     }
 
     public void func_70918_i(boolean par1) {

@@ -123,7 +123,7 @@ public class GraveStoneMobSpawn {
         }
 
         try {
-            entity.func_110161_a((EntityLivingData) null);
+            entity.onSpawnWithEgg((EntityLivingData) null);
         } catch (Exception e) {
             e.printStackTrace();
         }

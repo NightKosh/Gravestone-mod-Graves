@@ -50,10 +50,10 @@ public class EntityZombieCat extends EntityUndeadCat {
     }
 
     @Override
-    protected void func_110147_ax() {
-        super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(10); // max health
-        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.5D); // movespeed
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(10); // max health
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D); // movespeed
     }
 
     /**
@@ -164,7 +164,7 @@ public class EntityZombieCat extends EntityUndeadCat {
                 EntityZombie entityZombie = new EntityZombie(this.worldObj);
                 entityZombie.copyLocationAndAnglesFrom(entityLiving);
                 this.worldObj.removeEntity(entityLiving);
-                entityZombie.func_110161_a((EntityLivingData) null);
+                entityZombie.onSpawnWithEgg((EntityLivingData) null);
                 entityZombie.setVillager(true);
 
                 if (entityLiving.isChild()) {
@@ -185,13 +185,13 @@ public class EntityZombieCat extends EntityUndeadCat {
                 int catType = ((EntityOcelot) entityLiving).getTameSkin();
                 this.worldObj.removeEntity(entityLiving);
                 entityZombieCat.setSkin(catType);
-                entityZombieCat.func_110161_a((EntityLivingData) null);
+                entityZombieCat.onSpawnWithEgg((EntityLivingData) null);
                 this.worldObj.spawnEntityInWorld(entityZombieCat);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             } else if (entityLiving instanceof EntityHorse) {
                 EntityHorse horse = new EntityHorse(this.worldObj);
                 horse.copyLocationAndAnglesFrom(entityLiving);
-                horse.func_110214_p(3);
+                horse.setHorseType(3);
                 this.worldObj.removeEntity(entityLiving);
                 this.worldObj.spawnEntityInWorld(horse);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);

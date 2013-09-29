@@ -71,9 +71,9 @@ public class ItemBlockGSGraveStone extends ItemBlock {
                     String killerName = stack.stackTagCompound.getString("KillerName");
 
                     if (killerName.length() != 0) {
-                        list.add(ChatMessageComponent.func_111082_b(deathText, new Object[]{name, killerName}).toString());
+                        list.add(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name, killerName}).toString());
                     } else {
-                        list.add(ChatMessageComponent.func_111082_b(deathText, new Object[]{name}).toString());
+                        list.add(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name}).toString());
                     }
                 }
             } else {

@@ -8,7 +8,7 @@ import gravestone.block.GraveStoneHelper;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.structure.ComponentVillage;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.ComponentVillageStartPiece;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
@@ -19,7 +19,7 @@ import net.minecraft.world.gen.structure.StructureComponent;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSVillageCemetery extends ComponentVillage {
+public class ComponentGSVillageCemetery extends ComponentGSVillage {
 
     private int averageGroundLevel = -1;
     private static final int HEIGHT = 2;
@@ -28,6 +28,7 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
         super(componentVillageStartPiece, componentType);
         this.coordBaseMode = direction;
         this.boundingBox = structureBoundingBox;
+        this.setStructureId("GSVCemetery");
     }
 
     public static ComponentGSVillageCemetery buildComponent(ComponentVillageStartPiece startPiece, List list, Random random, int par3, int par4, int par5, int direction, int componentType) {
@@ -76,7 +77,8 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
         int wallMeta;
         int groundID;
 
-        if (this.startPiece.inDesert) {
+        int biomeId = world.getBiomeGenForCoords(this.getXWithOffset(0, 0), this.getZWithOffset(0, 0)).biomeID;
+        if (biomeId == BiomeGenBase.desert.biomeID || biomeId == BiomeGenBase.desertHills.biomeID) {
             wallMeta = 0;
             groundID = Block.sand.blockID;
         } else {

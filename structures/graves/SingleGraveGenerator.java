@@ -21,7 +21,7 @@ public class SingleGraveGenerator {
     public static final double CHANCE = 0.1D;
     public static final byte RANGE = 100;
     private static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
-
+    
     public boolean generate(World world, Random rand, int x, int z, double chance) {
         if (GraveStoneConfig.generateSingleGraves && canSpawnStructureAtCoords(world, x, z, chance)) {
             new ComponentGSSingleGrave(rand.nextInt(4), rand, x, z).addComponentParts(world, rand);

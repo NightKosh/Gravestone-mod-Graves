@@ -22,7 +22,7 @@ public class BlockGSWitherSpawner extends BlockMobSpawner {
         this.setStepSound(soundMetalFootstep);
         this.disableStats();
         this.setCreativeTab(ModGraveStone.creativeTab);
-        this.func_111022_d(Resources.WITHER_SPAWNER);
+        this.setTextureName(Resources.WITHER_SPAWNER);
     }
 
     /**

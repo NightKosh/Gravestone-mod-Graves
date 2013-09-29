@@ -28,11 +28,11 @@ public class EntitySkeletonCat extends EntityUndeadCat {
     }
 
     @Override
-    protected void func_110147_ax() {
-        super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(5); // max health
-        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.7); // movespeed
-        this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(1); // attack damage
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(5); // max health
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7); // movespeed
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1); // attack damage
     }
 
     /**

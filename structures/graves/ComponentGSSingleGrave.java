@@ -5,6 +5,7 @@ import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.block.GraveStoneHelper;
 import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.GraveGenerationHelper;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
@@ -37,5 +38,16 @@ public class ComponentGSSingleGrave extends ComponentGraveStone {
         }
 
         return true;
+    }
+
+    @Override
+    public NBTTagCompound func_143010_b() {
+        NBTTagCompound nbttagcompound = new NBTTagCompound();
+        nbttagcompound.setString("id", "GSSingleGrave");
+        nbttagcompound.setTag("BB", this.boundingBox.func_143047_a("BB"));
+        nbttagcompound.setInteger("O", this.coordBaseMode);
+        nbttagcompound.setInteger("GD", this.componentType);
+        this.func_143012_a(nbttagcompound);
+        return nbttagcompound;
     }
 }

@@ -21,7 +21,7 @@ public class MemorialGenerator {
     public static final double CHANCE = 0.05D;
     public static final short RANGE = 400;
     private static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
-
+    
     public boolean generate(World world, Random rand, int x, int z, double chance) {
         if (GraveStoneConfig.generateMemorials && canSpawnStructureAtCoords(world, x, z, chance)) {
             new ComponentGSMemorial(rand.nextInt(4), rand, x, z).addComponentParts(world, rand);

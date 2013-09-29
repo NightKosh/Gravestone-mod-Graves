@@ -27,7 +27,7 @@ public class ItemGSChisel extends ItemTool {
         setUnlocalizedName("chisel");
         setMaxDamage(50);
         MinecraftForge.setToolClass(this, "chisel", 1);
-        this.func_111206_d(Resources.CHISEL);
+        this.setTextureName(Resources.CHISEL);
     }
 
     /**

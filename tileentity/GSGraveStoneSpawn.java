@@ -180,21 +180,7 @@ public class GSGraveStoneSpawn {
     }
 
     public void writeNBTTagsTo(Entity entity) {
-        if (spawnerTags != null) {
-            NBTTagCompound nbt = new NBTTagCompound();
-            entity.addEntityID(nbt);
-            Iterator it = spawnerTags.field_92032_b.getTags().iterator();
-
-            while (it.hasNext()) {
-                NBTBase nbtBase = (NBTBase) it.next();
-                nbt.setTag(nbtBase.getName(), nbtBase.copy());
-            }
-
-            entity.readFromNBT(nbt);
-        } else if (entity instanceof EntityLiving && entity.worldObj != null) {
-            //((EntityLiving) entity).initCreature();
-            ((EntityLiving) entity).func_110161_a((EntityLivingData) null);
-        }
+            ((EntityLiving) entity).onSpawnWithEgg((EntityLivingData) null);
     }
 
     public void setMinDelay() {

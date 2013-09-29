@@ -60,9 +60,9 @@ public class RenderUndeadCat extends RenderLiving {
     public void doRender(Entity entity, double par2, double par4, double par6, float par8, float par9) {
         this.renderLivingUndeadCat((EntityUndeadCat) entity, par2, par4, par6, par8, par9);
     }
-
+    
     @Override
-    protected ResourceLocation func_110775_a(Entity entity) {
+    protected ResourceLocation getEntityTexture(Entity entity) {
         return ((EntityUndeadCat) entity).getTexture();
     }
 }

@@ -10,10 +10,8 @@ import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityOcelot;
-import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
@@ -49,11 +47,11 @@ public class EntityZombieDog extends EntityUndeadDog {
     }
 
     @Override
-    protected void func_110147_ax() {
-        super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(20); // max health
-        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.3); // movespeed
-        this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(3); // attack damage
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20); // max health
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.3); // movespeed
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(3); // attack damage
     }
 
     /**
@@ -120,7 +118,7 @@ public class EntityZombieDog extends EntityUndeadDog {
                 EntityZombie entityZombie = new EntityZombie(this.worldObj);
                 entityZombie.copyLocationAndAnglesFrom(entityLiving);
                 this.worldObj.removeEntity(entityLiving);
-                entityZombie.func_110161_a((EntityLivingData) null);
+                entityZombie.onSpawnWithEgg((EntityLivingData) null);
                 entityZombie.setVillager(true);
 
                 if (entityLiving.isChild()) {
@@ -141,13 +139,13 @@ public class EntityZombieDog extends EntityUndeadDog {
                 int catType = ((EntityOcelot) entityLiving).getTameSkin();
                 this.worldObj.removeEntity(entityLiving);
                 entityZombieCat.setSkin(catType);
-                entityZombieCat.func_110161_a((EntityLivingData) null);
+                entityZombieCat.onSpawnWithEgg((EntityLivingData) null);
                 this.worldObj.spawnEntityInWorld(entityZombieCat);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             } else if (entityLiving instanceof EntityHorse) {
                 EntityHorse horse = new EntityHorse(this.worldObj);
                 horse.copyLocationAndAnglesFrom(entityLiving);
-                horse.func_110214_p(3);
+                horse.setHorseType(3);
                 this.worldObj.removeEntity(entityLiving);
                 this.worldObj.spawnEntityInWorld(horse);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);

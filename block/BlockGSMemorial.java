@@ -46,7 +46,7 @@ public class BlockGSMemorial extends BlockContainer {
         this.setHardness(4.5F);
         this.setResistance(5F);
         this.setCreativeTab(ModGraveStone.creativeTab);
-        this.func_111022_d("stone");
+        this.setTextureName("stone");
     }
 
     /**
@@ -212,14 +212,14 @@ public class BlockGSMemorial extends BlockContainer {
                             killerName = ModGraveStone.proxy.getLocalizedEntityName(entity.getDeathTextComponent().getKillerName());
 
                             if (killerName.length() == 0) {
-                                player.sendChatToPlayer(ChatMessageComponent.func_111082_b(deathText, new Object[]{name}));
+                                player.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name}));
                             } else {
-                                player.sendChatToPlayer(ChatMessageComponent.func_111082_b(deathText, new Object[]{name, killerName}));
+                                player.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name, killerName}));
                             }
                             return false;
                         }
                     }
-                    player.sendChatToPlayer(ChatMessageComponent.func_111066_d(deathText));
+                    player.sendChatToPlayer(ChatMessageComponent.createFromText(deathText));
                 }
             }
         }

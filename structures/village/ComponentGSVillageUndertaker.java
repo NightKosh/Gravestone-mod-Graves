@@ -6,7 +6,6 @@ import gravestone.GraveStoneConfig;
 import gravestone.block.GraveStoneHelper;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.structure.ComponentVillage;
 import net.minecraft.world.gen.structure.ComponentVillageStartPiece;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
@@ -17,7 +16,7 @@ import net.minecraft.world.gen.structure.StructureComponent;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSVillageUndertaker extends ComponentVillage {
+public class ComponentGSVillageUndertaker extends ComponentGSVillage {
 
     private int averageGroundLevel = -1;
 
@@ -25,6 +24,7 @@ public class ComponentGSVillageUndertaker extends ComponentVillage {
         super(componentVillageStartPiece, componentType);
         this.coordBaseMode = direction;
         this.boundingBox = structureBoundingBox;
+        this.setStructureId("GSVUndertaker");
     }
 
     public static ComponentGSVillageUndertaker buildComponent(ComponentVillageStartPiece startPiece, List list, Random random, int par3, int par4, int par5, int par6, int par7) {

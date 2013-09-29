@@ -59,7 +59,7 @@ public class GSGuiGrave extends GuiScreen {
     public void drawScreen(int x, int y, float f) {
         drawDefaultBackground();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.renderEngine.func_110577_a(Resources.GRAVE_GUI);
+        mc.renderEngine.bindTexture(Resources.GRAVE_GUI);
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);

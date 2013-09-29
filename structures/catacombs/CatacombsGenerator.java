@@ -18,7 +18,7 @@ public class CatacombsGenerator {
 
     private static final double CHANCE = 0.0005D;
     protected static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
-
+    
     public boolean generate(World world, Random rand, int x, int z, double chance) {
         if (GraveStoneConfig.generateCatacombs && canSpawnStructureAtCoords(world, x, z, chance)) {
             int direction = rand.nextInt(4);
@@ -54,4 +54,27 @@ public class CatacombsGenerator {
     public static LinkedList<ChunkCoordIntPair> getStructuresList() {
         return structuresList;
     }
+    /*
+    private void componentRegistration() {
+        MapGenStructureIO.func_143034_b(Bridge.class, "GSCMausoleum");
+        MapGenStructureIO.func_143031_a(Bridge.class, "GSCBridge");
+        MapGenStructureIO.func_143031_a(Corridor.class, "GSCCorridor");
+        MapGenStructureIO.func_143031_a(CreeperRoom.class, "GSCCreeperRoom");
+        MapGenStructureIO.func_143031_a(Crossing.class, "GSCCrossing");
+        MapGenStructureIO.func_143031_a(EnderHall.class, "GSCEnderHall");
+        MapGenStructureIO.func_143031_a(Entrance.class, "GSCEntrance");
+        MapGenStructureIO.func_143031_a(Fence.class, "GSCFence");
+        MapGenStructureIO.func_143031_a(GraveCorridor.class, "GSCGraveCorridor");
+        MapGenStructureIO.func_143031_a(GraveHall.class, "GSCGraveHall");
+        MapGenStructureIO.func_143031_a(GraveYard.class, "GSCGraveYard");
+        //MapGenStructureIO.func_143031_a(Mausoleum.class, "GSCMausoleum");
+        MapGenStructureIO.func_143031_a(MausoleumEntrance.class, "GSCMausoleumEntrance");
+        MapGenStructureIO.func_143031_a(SpidersCorridor.class, "GSCSpidersCorridor");
+        MapGenStructureIO.func_143031_a(Stairs.class, "GSCStairs");
+        MapGenStructureIO.func_143031_a(StatuesHall.class, "GSCStatuesHall");
+        MapGenStructureIO.func_143031_a(TrapCorridor.class, "GSCTrapCorridor");
+        MapGenStructureIO.func_143031_a(Treasury.class, "GSCTreasury");
+        MapGenStructureIO.func_143031_a(WitherHall.class, "GSCWitherHall");
+    }
+    */
 }

@@ -26,7 +26,7 @@ public class BlockGSTrap extends Block {
         this.setHardness(4.5F);
         this.setResistance(5F);
         this.setCreativeTab(ModGraveStone.creativeTab);
-        this.func_111022_d(Resources.TIME_TRAP);
+        this.setTextureName(Resources.TIME_TRAP);
     }
 
     /**
@@ -71,7 +71,7 @@ public class BlockGSTrap extends Block {
             if (GraveStoneConfig.enableNightStone) {
                 if (time < 12000 || time > 22500) {
                     world.setWorldTime(12000);
-                    ((EntityPlayer) entity).sendChatToPlayer(ChatMessageComponent.func_111066_d(ModGraveStone.proxy.getLocalizedString("block.trap.curse")));
+                    ((EntityPlayer) entity).sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(ModGraveStone.proxy.getLocalizedString("block.trap.curse")));
                 } else if (time > 20000 && time < 22500) {
                     world.setWorldTime(14000);
                 }
