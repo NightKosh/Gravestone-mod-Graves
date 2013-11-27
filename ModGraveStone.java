@@ -144,7 +144,7 @@ public class ModGraveStone {
         LanguageRegistry.addName(chisel, "Chisel");
         
         // chisel reciep
-        GameRegistry.addRecipe(new ItemStack(chisel), "   ", "y  ", "x  ", 'x', Item.stick, 'y', Item.ingotIron);
+        GameRegistry.addRecipe(new ItemStack(chisel), "   ", "s  ", " i ", 's', Item.stick, 'i', Item.ingotIron);
         
         // register GraveStone tile entity
         GameRegistry.registerTileEntity(TileEntityGSGraveStone.class, "GraveStoneTE");
@@ -177,10 +177,12 @@ public class ModGraveStone {
 
         // adding foreign bioms
         if (Loader.isModLoaded("Highlands")) {
+            GraveStoneBiomes.loadHighlandsBiomes();
             GraveStoneBiomes.addHighlandsBiomes();
         }
 
         if (Loader.isModLoaded("BiomesOPlenty")) {
+            GraveStoneBiomes.loadBiomsOPlentyBiomes();
             GraveStoneBiomes.addBiomsOPlentyBiomes();
         }
 
