@@ -26,12 +26,8 @@ public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCrea
     @Override
     public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random) {
         // chisel
-        recipeList.add(new MerchantRecipe(
-                new ItemStack(Item.emerald, 1),
-                new ItemStack(ModGraveStone.chisel, 1, 0)));
-        recipeList.add(new MerchantRecipe(
-                new ItemStack(ModGraveStone.chisel, 1, 0),
-                new ItemStack(Item.ingotGold, 1)));
+        recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 1), new ItemStack(ModGraveStone.chisel, 1, 0)));
+        recipeList.add(new MerchantRecipe(new ItemStack(ModGraveStone.chisel, 1, 0), new ItemStack(Item.ingotGold, 1)));
         // graves
         recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(ModGraveStone.graveStone, (byte) 0)));
         recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), getTradeStack(ModGraveStone.graveStone, (byte) 1)));

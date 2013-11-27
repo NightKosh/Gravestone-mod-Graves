@@ -6,7 +6,11 @@ import gravestone.structures.village.VillageHandlerGSMemorial;
 import gravestone.structures.village.VillageHandlerGSUndertaker;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import gravestone.structures.village.ComponentGSVillageCemetery;
+import gravestone.structures.village.ComponentGSVillageMemorial;
+import gravestone.structures.village.ComponentGSVillageUndertaker;
 import net.minecraft.block.Block;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
 
 /**
  * GraveStone mod
@@ -59,5 +63,33 @@ public class GraveStoneStructures {
 
         // structure generator
         GameRegistry.registerWorldGenerator(new GraveStoneWorldGenerator());
+    }
+
+    public static void preInit() {
+        if (GraveStoneConfig.generateCemeteries) {
+            try {
+                MapGenStructureIO.func_143031_a(ComponentGSVillageCemetery.class, "GSVillageCemetery");
+            } catch (Throwable e) {
+                System.out.println("Can not register ComponentGSVillageCemetery");
+            }
+        }
+
+        // register memorials
+        if (GraveStoneConfig.generateVillageMemorials) {
+            try {
+                MapGenStructureIO.func_143031_a(ComponentGSVillageMemorial.class, "GSVillageMemorial");
+            } catch (Throwable e) {
+                System.out.println("Can not register ComponentGSVillageMemorial");
+            }
+        }
+
+        // register Undertaker
+        if (GraveStoneConfig.generateUndertaker) {
+            try {
+                MapGenStructureIO.func_143031_a(ComponentGSVillageUndertaker.class, "GSUndertakerHouse");
+            } catch (Throwable e) {
+                System.out.println("Can not register ComponentGSVillageUndertaker");
+            }
+        }
     }
 }

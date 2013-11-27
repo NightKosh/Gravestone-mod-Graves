@@ -14,7 +14,7 @@ import net.minecraft.world.gen.structure.StructureVillagePieceWeight;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class VillageHandlerGSCemetery implements VillagerRegistry.IVillageCreationHandler {
-
+    
     @Override
     public StructureVillagePieceWeight getVillagePieceWeight(Random random, int size) {
         return new StructureVillagePieceWeight(ComponentGSVillageCemetery.class, 4, MathHelper.getRandomIntegerInRange(random, 0, 1));
