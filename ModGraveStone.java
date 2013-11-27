@@ -71,6 +71,7 @@ public class ModGraveStone {
         GraveStoneLogger.preinit();
         GraveStoneConfig.getInstance(event.getModConfigurationDirectory().getAbsolutePath() + "/GraveStoneMod/", "GraveStone.cfg");
         GraveStoneLocalizationHandler.init();
+        GraveStoneStructures.preInit();
     }
 
     @Init

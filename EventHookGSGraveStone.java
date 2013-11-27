@@ -53,7 +53,7 @@ public class EventHookGSGraveStone {
     }
 
     private void createPlayerGrave(EntityPlayer player, LivingDeathEvent event) {
-        if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
+        if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GraveStoneConfig.graveItemsCount > 0) {
             ItemStack[] items = new ItemStack[40];
             System.arraycopy(player.inventory.mainInventory, 0, items, 0, 36);
             System.arraycopy(player.inventory.armorInventory, 0, items, 36, 4);
