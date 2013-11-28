@@ -25,6 +25,10 @@ public class GraveStoneLogger {
     public static void logInfo(String message) {
         logger.log(Level.INFO, message);
     }
+    
+    public static void logError(String message) {
+        logger.log(Level.SEVERE, message);
+    }
 
     public static void logDebug(String... message) {
         System.out.print("Debugging... ");

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Random;
 import gravestone.GraveStoneBiomes;
 import gravestone.GraveStoneConfig;
+import gravestone.GraveStoneLogger;
 import gravestone.structures.GraveStoneWorldGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
 import net.minecraft.world.ChunkCoordIntPair;
@@ -25,7 +26,7 @@ public class MemorialGenerator {
     public boolean generate(World world, Random rand, int x, int z, double chance) {
         if (GraveStoneConfig.generateMemorials && canSpawnStructureAtCoords(world, x, z, chance)) {
             new ComponentGSMemorial(rand.nextInt(4), rand, x, z).addComponentParts(world, rand);
-            System.out.println("Memorial " + x + "x" + z);
+            GraveStoneLogger.logInfo("Memorial " + x + "x" + z);
             structuresList.add(new ChunkCoordIntPair(x, z));
             return true;
         }

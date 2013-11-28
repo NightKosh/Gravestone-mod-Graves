@@ -2,6 +2,7 @@ package gravestone.structures.catacombs;
 
 import gravestone.GraveStoneBiomes;
 import gravestone.GraveStoneConfig;
+import gravestone.GraveStoneLogger;
 import java.util.LinkedList;
 import java.util.Random;
 import net.minecraft.world.ChunkCoordIntPair;
@@ -23,7 +24,7 @@ public class CatacombsGenerator {
         if (GraveStoneConfig.generateCatacombs && canSpawnStructureAtCoords(world, x, z, chance)) {
             int direction = rand.nextInt(4);
             CatacombsSurface surface = new CatacombsSurface(world, rand, x, z, direction);
-            System.out.println("Catacombs " + x + "x" + z);
+            GraveStoneLogger.logInfo("Catacombs " + x + "x" + z);
 
             if (surface.getMausoleumY() > 55) {
                 new CatacombsUnderground(world, rand, direction, surface.getMausoleumX(), surface.getMausoleumY(), surface.getMausoleumZ());

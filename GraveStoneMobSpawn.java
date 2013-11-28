@@ -125,6 +125,7 @@ public class GraveStoneMobSpawn {
         try {
             entity.onSpawnWithEgg((EntityLivingData) null);
         } catch (Exception e) {
+            GraveStoneLogger.logError("getMobEntity exception with onSpawnWithEgg");
             e.printStackTrace();
         }
 
@@ -158,8 +159,10 @@ public class GraveStoneMobSpawn {
             Class mobClass = Class.forName(path);
             constructor = mobClass.getConstructor(World.class);
         } catch (ClassNotFoundException e) {
+            GraveStoneLogger.logError("getForeinMobConstructor ClassNotFoundException. class path " + path);
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
+            GraveStoneLogger.logError("getForeinMobConstructor NoSuchMethodException. class path " + path);
             e.printStackTrace();
         }
 
@@ -178,10 +181,13 @@ public class GraveStoneMobSpawn {
         try {
             mob = mobNameToClassMapping.get(mobName).newInstance(new Object[]{world});
         } catch (InstantiationException e) {
+            GraveStoneLogger.logError("getForeinMob InstantiationException. mob name " + mobName);
             e.printStackTrace();
         } catch (IllegalAccessException e) {
+            GraveStoneLogger.logError("getForeinMob IllegalAccessException. mob name " + mobName);
             e.printStackTrace();
         } catch (InvocationTargetException e) {
+            GraveStoneLogger.logError("getForeinMob InvocationTargetException. mob name " + mobName);
             e.getCause().printStackTrace();
         }
 
