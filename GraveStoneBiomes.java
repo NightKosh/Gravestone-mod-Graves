@@ -34,18 +34,23 @@ public class GraveStoneBiomes {
     private static BiomeGenBase[] HIGHLANDS_GRAVES_BIOMES;
 
     public static void loadHighlandsBiomes() {
-        HIGHLANDS_CATACOMBS_BIOMES = new BiomeGenBase[]{
-            HighlandsBiomes.autumnForest, HighlandsBiomes.birchHills, HighlandsBiomes.glacier,
-            HighlandsBiomes.outback, HighlandsBiomes.pinelands, HighlandsBiomes.sahel,
-            HighlandsBiomes.savannah, HighlandsBiomes.tundra, HighlandsBiomes.shrubland
-        };
-        HIGHLANDS_MEMORIAL_BIOMES = new BiomeGenBase[]{
-            HighlandsBiomes.bog, HighlandsBiomes.dunes, HighlandsBiomes.estuary,
-            HighlandsBiomes.tropicalIslands, HighlandsBiomes.lake
-        };
-        HIGHLANDS_GRAVES_BIOMES = new BiomeGenBase[]{
-            HighlandsBiomes.lake
-        };
+        try {
+            HIGHLANDS_CATACOMBS_BIOMES = new BiomeGenBase[]{
+                HighlandsBiomes.autumnForest, HighlandsBiomes.birchHills, HighlandsBiomes.glacier,
+                HighlandsBiomes.outback, HighlandsBiomes.pinelands, HighlandsBiomes.sahel,
+                HighlandsBiomes.savannah, HighlandsBiomes.tundra, HighlandsBiomes.shrubland
+            };
+            HIGHLANDS_MEMORIAL_BIOMES = new BiomeGenBase[]{
+                HighlandsBiomes.bog, HighlandsBiomes.dunes, HighlandsBiomes.estuary,
+                HighlandsBiomes.tropicalIslands, HighlandsBiomes.lake
+            };
+            HIGHLANDS_GRAVES_BIOMES = new BiomeGenBase[]{
+                HighlandsBiomes.lake
+            };
+        } catch (Exception e) {
+            GraveStoneLogger.logError("Can't load Highlands biomes");
+            e.printStackTrace();
+        }
     }
 
     public static void addHighlandsBiomes() {
@@ -79,50 +84,55 @@ public class GraveStoneBiomes {
     private static BiomeGenBase[] BIOMES_OPLENTY_GRAVES_BIOMES;
 
     public static void loadBiomsOPlentyBiomes() {
-        BIOMES_OPLENTY_CATACOMBS_BIOMES = new BiomeGenBase[]{
-            biomesoplenty.api.Biomes.arctic.get(),
-            biomesoplenty.api.Biomes.bambooForest.get(),
-            biomesoplenty.api.Biomes.birchForest.get(),
-            biomesoplenty.api.Biomes.borealForest.get(),
-            biomesoplenty.api.Biomes.brushland.get(),
-            biomesoplenty.api.Biomes.chaparral.get(),
-            biomesoplenty.api.Biomes.cherryBlossomGrove.get(),
-            biomesoplenty.api.Biomes.deadForest.get(),
-            biomesoplenty.api.Biomes.deadForestSnow.get(),
-            biomesoplenty.api.Biomes.deciduousForest.get(),
-            biomesoplenty.api.Biomes.dunes.get(),
-            biomesoplenty.api.Biomes.fen.get(),
-            biomesoplenty.api.Biomes.field.get(),
-            biomesoplenty.api.Biomes.frostForest.get(),
-            biomesoplenty.api.Biomes.grove.get(),
-            biomesoplenty.api.Biomes.heathland.get(),
-            biomesoplenty.api.Biomes.mapleWoods.get(),
-            biomesoplenty.api.Biomes.meadow.get(),
-            biomesoplenty.api.Biomes.mysticGrove.get(),
-            biomesoplenty.api.Biomes.ominousWoods.get(),
-            biomesoplenty.api.Biomes.orchard.get(),
-            biomesoplenty.api.Biomes.originValley.get(),
-            biomesoplenty.api.Biomes.prairie.get(),
-            biomesoplenty.api.Biomes.savanna.get(),
-            biomesoplenty.api.Biomes.scrubland.get(),
-            biomesoplenty.api.Biomes.seasonalForest.get(),
-            biomesoplenty.api.Biomes.shrubland.get(),
-            biomesoplenty.api.Biomes.steppe.get(),
-            biomesoplenty.api.Biomes.thicket.get(),
-            biomesoplenty.api.Biomes.woodland.get()
-        };
-        BIOMES_OPLENTY_MEMORIAL_BIOMES = new BiomeGenBase[]{
-            biomesoplenty.api.Biomes.deadlands.get(),
-            biomesoplenty.api.Biomes.beachGravel.get(),
-            biomesoplenty.api.Biomes.mangrove.get(),
-            biomesoplenty.api.Biomes.marsh.get(),
-            biomesoplenty.api.Biomes.polar.get(),
-            biomesoplenty.api.Biomes.volcano.get(),
-            biomesoplenty.api.Biomes.wasteland.get()
-        };
-        BIOMES_OPLENTY_GRAVES_BIOMES = new BiomeGenBase[]{
-            biomesoplenty.api.Biomes.mangrove.get()
-        };
+        try {
+            BIOMES_OPLENTY_CATACOMBS_BIOMES = new BiomeGenBase[]{
+                biomesoplenty.api.Biomes.arctic.get(),
+                biomesoplenty.api.Biomes.bambooForest.get(),
+                biomesoplenty.api.Biomes.birchForest.get(),
+                biomesoplenty.api.Biomes.borealForest.get(),
+                biomesoplenty.api.Biomes.brushland.get(),
+                biomesoplenty.api.Biomes.chaparral.get(),
+                biomesoplenty.api.Biomes.cherryBlossomGrove.get(),
+                biomesoplenty.api.Biomes.deadForest.get(),
+                biomesoplenty.api.Biomes.deadForestSnow.get(),
+                biomesoplenty.api.Biomes.deciduousForest.get(),
+                biomesoplenty.api.Biomes.dunes.get(),
+                biomesoplenty.api.Biomes.fen.get(),
+                biomesoplenty.api.Biomes.field.get(),
+                biomesoplenty.api.Biomes.frostForest.get(),
+                biomesoplenty.api.Biomes.grove.get(),
+                biomesoplenty.api.Biomes.heathland.get(),
+                biomesoplenty.api.Biomes.mapleWoods.get(),
+                biomesoplenty.api.Biomes.meadow.get(),
+                biomesoplenty.api.Biomes.mysticGrove.get(),
+                biomesoplenty.api.Biomes.ominousWoods.get(),
+                biomesoplenty.api.Biomes.orchard.get(),
+                biomesoplenty.api.Biomes.originValley.get(),
+                biomesoplenty.api.Biomes.prairie.get(),
+                biomesoplenty.api.Biomes.savanna.get(),
+                biomesoplenty.api.Biomes.scrubland.get(),
+                biomesoplenty.api.Biomes.seasonalForest.get(),
+                biomesoplenty.api.Biomes.shrubland.get(),
+                biomesoplenty.api.Biomes.steppe.get(),
+                biomesoplenty.api.Biomes.thicket.get(),
+                biomesoplenty.api.Biomes.woodland.get()
+            };
+            BIOMES_OPLENTY_MEMORIAL_BIOMES = new BiomeGenBase[]{
+                biomesoplenty.api.Biomes.deadlands.get(),
+                biomesoplenty.api.Biomes.beachGravel.get(),
+                biomesoplenty.api.Biomes.mangrove.get(),
+                biomesoplenty.api.Biomes.marsh.get(),
+                biomesoplenty.api.Biomes.polar.get(),
+                biomesoplenty.api.Biomes.volcano.get(),
+                biomesoplenty.api.Biomes.wasteland.get()
+            };
+            BIOMES_OPLENTY_GRAVES_BIOMES = new BiomeGenBase[]{
+                biomesoplenty.api.Biomes.mangrove.get()
+            };
+        } catch (Exception e) {
+            GraveStoneLogger.logError("Can't load Bioms O Plenty biomes");
+            e.printStackTrace();
+        }
     }
 
     public static void addBiomsOPlentyBiomes() {

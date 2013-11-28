@@ -293,6 +293,7 @@ public class GraveStoneMobSpawn {
      * Add Mo'creatures mobs to mob list
      */
     public static void addMoCreaturesMobs() {
+        GraveStoneLogger.logInfo("start load Mo'Creatures mobs");
         Constructor<EntityLiving> constructor = getForeinMobConstructor(MO_CREATURES_S_SKELETON);
 
         if (constructor != null) {
@@ -322,12 +323,14 @@ public class GraveStoneMobSpawn {
         if (getForeinMobConstructor(MO_CREATURES_SCORPIONS) != null) {
             //catacombsSpawnerMobs.add("Scorpion");
         }
+        GraveStoneLogger.logInfo("end load Mo'Creatures mobs");
     }
 
     /**
      * Add Mo'creatures mobs to mob list
      */
     public static void addTwilightForestMobs() {
+        GraveStoneLogger.logInfo("start load Twilight Forest mobs");
         Constructor<EntityLiving> constructor = getForeinMobConstructor(TWILIGHT_WRAITH);
 
         if (constructor != null) {
@@ -336,6 +339,7 @@ public class GraveStoneMobSpawn {
             //catacombsSpawnerMobs.add("Twilight Wraith");
             //catacombsStatuesMobs.add("Twilight Wraith");
         }
+        GraveStoneLogger.logInfo("end load Twilight Forest mobs");
     }
 
     /**

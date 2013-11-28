@@ -6,6 +6,7 @@ import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gravestone.GraveStoneLogger;
 import gravestone.tileentity.DeathMessageInfo;
 import java.util.ArrayList;
 import java.util.List;
@@ -642,6 +643,7 @@ public class BlockGSGraveStone extends BlockContainer {
                     }
                 }
             }
+            GraveStoneLogger.logInfo("Can not create grave at " + x + "x" + y + "x" + z);
         }
     }
 }
