@@ -53,7 +53,7 @@ public class EntityLostSoul extends EntityGhost {
 
     @Override
     public boolean attackEntityAsMob(Entity entity) {
-        float f = (float) this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111126_e();
+        float f = (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
         int i = 0;
 
         if (entity instanceof EntityLivingBase) {

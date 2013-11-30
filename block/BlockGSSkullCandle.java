@@ -8,7 +8,6 @@ import gravestone.tileentity.TileEntityGSSkullCandle;
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.block.Block;
-import static net.minecraft.block.Block.soundStoneFootstep;
 import net.minecraft.block.BlockSkull;
 import net.minecraft.item.ItemSkull;
 import net.minecraft.item.ItemStack;
@@ -32,7 +31,7 @@ public class BlockGSSkullCandle extends BlockSkull {
         this.setUnlocalizedName("skull_candle");
         this.setHardness(1.0F);
         this.setResistance(5F);
-        this.func_111022_d("skull");
+        this.setTextureName("skull");
         this.setCreativeTab(ModGraveStone.creativeTab);
     }
 
@@ -117,6 +116,6 @@ public class BlockGSSkullCandle extends BlockSkull {
     @Override
     @SideOnly(Side.CLIENT)
     public String getItemIconName() {
-        return this.func_111023_E() + "_" + ItemSkull.field_94587_a[0];
+        return this.getTextureName() + "_" + ItemSkull.field_94587_a[0];
     }
 }

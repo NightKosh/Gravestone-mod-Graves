@@ -71,7 +71,7 @@ public class EntityGhostlyChest extends Entity {
     }
 
     @Override
-    public boolean func_130002_c(EntityPlayer layer) {
+    public boolean interactFirst(EntityPlayer layer) {
         spawnBats();
         return true;
     }

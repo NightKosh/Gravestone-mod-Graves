@@ -37,7 +37,7 @@ public class BlockGSGhostlyChest extends BlockContainer {
         this.setUnlocalizedName("GhostlyChest");
         this.setHardness(2.5F);
         this.setCreativeTab(ModGraveStone.creativeTab);
-        this.func_111022_d("planks_oak");
+        this.setTextureName("planks_oak");
     }
 
     /**

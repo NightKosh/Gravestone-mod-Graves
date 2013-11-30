@@ -1,6 +1,7 @@
 package gravestone.core;
 
 import extrabiomes.api.Biomes;
+import gravestone.GraveStoneLogger;
 import highlands.api.HighlandsBiomes;
 import java.util.ArrayList;
 import java.util.Arrays;

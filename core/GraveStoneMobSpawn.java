@@ -1,5 +1,6 @@
 package gravestone.core;
 
+import gravestone.GraveStoneLogger;
 import gravestone.config.GraveStoneConfig;
 import gravestone.block.enums.EnumGraves;
 import java.lang.reflect.Constructor;

@@ -21,6 +21,6 @@ public class BlockGSBoneBlock extends Block {
         this.setHardness(2F);
         this.setResistance(2F);
         this.setCreativeTab(ModGraveStone.creativeTab);
-        this.func_111022_d(Resources.BONE_BLOCK);
+        this.setTextureName(Resources.BONE_BLOCK);
     }
 }
