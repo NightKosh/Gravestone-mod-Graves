@@ -613,6 +613,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 tileEntity.setAge(age);
                 //System.out.println("!!!!!!!!!!!!! " + age);
             }
+            GraveStoneLogger.logInfo("Create " + deathInfo.getName() + "'s grave at " + x + "x" + y + "x" + z);
         } else {
             ItemStack itemStack = this.createStackedBlock(0);
             NBTTagCompound nbt = new NBTTagCompound();
@@ -643,7 +644,7 @@ public class BlockGSGraveStone extends BlockContainer {
                     }
                 }
             }
-            GraveStoneLogger.logInfo("Can not create grave at " + x + "x" + y + "x" + z);
+            GraveStoneLogger.logInfo("Can not create " + deathInfo.getName() + "'s grave at " + x + "x" + y + "x" + z);
         }
     }
 }
