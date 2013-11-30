@@ -56,9 +56,9 @@ public class TileEntityGSSkullCandleRenderer extends TileEntitySpecialRenderer {
         GL11.glScalef(-1.0F, -1.0F, 1.0F);
         GL11.glEnable(GL11.GL_ALPHA_TEST);
         
-        this.func_110628_a(Resources.SKELETON_SKULL);
+        this.bindTexture(Resources.SKELETON_SKULL);
         skeletonSkullModel.render((Entity) null, 0.0F, 0.0F, 0.0F, rotation, 0.0F, f4);
-        this.func_110628_a(Resources.SKULL_CANDLE);
+        this.bindTexture(Resources.SKULL_CANDLE);
         skullCandleModel.render((Entity) null, 0.0F, 0.0F, 0.0F, rotation, 0.0F, f4);
         GL11.glPopMatrix();
     }

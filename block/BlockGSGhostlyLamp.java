@@ -25,12 +25,12 @@ public class BlockGSGhostlyLamp extends BlockContainer {
         this.setHardness(1F);
         this.setResistance(1F);
         this.setCreativeTab(ModGraveStone.creativeTab);
-        this.func_111022_d("stone");
+        this.setTextureName("stone");
     }
     
     @Override
     public TileEntity createNewTileEntity(World world) {
-        return new TileEntityGSGhostlyLamp();
+        return new TileEntity();//TileEntityGSGhostlyLamp();
     }
 
 }

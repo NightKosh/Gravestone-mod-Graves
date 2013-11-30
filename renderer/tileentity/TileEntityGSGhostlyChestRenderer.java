@@ -48,9 +48,9 @@ public class TileEntityGSGhostlyChestRenderer extends TileEntitySpecialRenderer 
         ModelChest modelchest = this.chestModel;
 
         if (this.isChristmas) {
-            this.func_110628_a(Resources.CHRISTMAS_CHEST);
+            this.bindTexture(Resources.CHRISTMAS_CHEST);
         } else {
-            this.func_110628_a(Resources.DEFAULT_CHEST);
+            this.bindTexture(Resources.DEFAULT_CHEST);
         }
 
         GL11.glPushMatrix();
