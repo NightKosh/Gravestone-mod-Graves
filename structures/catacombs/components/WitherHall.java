@@ -1,5 +1,6 @@
 package gravestone.structures.catacombs.components;
 
+import gravestone.GraveStoneLogger;
 import java.util.Random;
 import gravestone.config.GraveStoneConfig;
 import gravestone.structures.BoundingBoxHelper;
@@ -32,6 +33,8 @@ public class WitherHall extends CatacombsBaseComponent {
      */
     @Override
     public boolean addComponentParts(World world, Random random) {
+        GraveStoneLogger.logInfo("Generate Wither hall at " + boundingBox.getCenterX() + "x" + boundingBox.getCenterY() + "x" + boundingBox.getCenterZ());
+        
         metaTop = this.getMetadataWithOffset(Block.stairsNetherBrick.blockID, 2);
         metaBot = this.getMetadataWithOffset(Block.stairsNetherBrick.blockID, 3);
         metaRight = this.getMetadataWithOffset(Block.stairsNetherBrick.blockID, 1);
