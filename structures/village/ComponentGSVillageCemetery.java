@@ -25,6 +25,9 @@ public class ComponentGSVillageCemetery extends ComponentVillage {
     private int averageGroundLevel = -1;
     private static final int HEIGHT = 2;
 
+    public ComponentGSVillageCemetery() {
+    }
+
     public ComponentGSVillageCemetery(ComponentVillageStartPiece componentVillageStartPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int direction) {
         super(componentVillageStartPiece, componentType);
         this.coordBaseMode = direction;

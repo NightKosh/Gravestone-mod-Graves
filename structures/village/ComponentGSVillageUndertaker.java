@@ -21,6 +21,9 @@ public class ComponentGSVillageUndertaker extends ComponentVillage {
 
     private int averageGroundLevel = -1;
 
+    public ComponentGSVillageUndertaker() {
+    }
+
     public ComponentGSVillageUndertaker(ComponentVillageStartPiece componentVillageStartPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int direction) {
         super(componentVillageStartPiece, componentType);
         this.coordBaseMode = direction;
