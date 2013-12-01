@@ -74,6 +74,7 @@ public class GraveStoneStructures {
                 MapGenStructureIO.func_143031_a(ComponentGSVillageCemetery.class, "GSVillageCemetery");
             } catch (Throwable e) {
                 GraveStoneLogger.logError("Can not register ComponentGSVillageCemetery");
+                e.printStackTrace();
             }
         }
 
@@ -83,6 +84,7 @@ public class GraveStoneStructures {
                 MapGenStructureIO.func_143031_a(ComponentGSVillageMemorial.class, "GSVillageMemorial");
             } catch (Throwable e) {
                 GraveStoneLogger.logError("Can not register ComponentGSVillageMemorial");
+                e.printStackTrace();
             }
         }
 
@@ -92,6 +94,7 @@ public class GraveStoneStructures {
                 MapGenStructureIO.func_143031_a(ComponentGSVillageUndertaker.class, "GSUndertakerHouse");
             } catch (Throwable e) {
                 GraveStoneLogger.logError("Can not register ComponentGSVillageUndertaker");
+                e.printStackTrace();
             }
         }
     }

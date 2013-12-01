@@ -71,14 +71,14 @@ public class GraveStoneEntity {
         
         // ghosts
         // LostSoul
-        EntityRegistry.registerGlobalEntityID(EntityLostSoul.class, "GSLostSoul", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
+        //EntityRegistry.registerGlobalEntityID(EntityLostSoul.class, "GSLostSoul", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
         //EntityRegistry.addSpawn(EntityLostSoul.class, 3, 1, 3, EnumCreatureType.monster, BiomeGenBase.jungle, BiomeGenBase.jungleHills);
         
         // VengefulSpirit
-        EntityRegistry.registerGlobalEntityID(EntityVengefulSpirit.class, "GSVengefulSpirit", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
+        //EntityRegistry.registerGlobalEntityID(EntityVengefulSpirit.class, "GSVengefulSpirit", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
         //EntityRegistry.addSpawn(EntityVengefulSpirit.class, 3, 1, 3, EnumCreatureType.monster, BiomeGenBase.jungle, BiomeGenBase.jungleHills);
         
         // Ghostly Entities
-        EntityRegistry.registerGlobalEntityID(EntityGhostlyChest.class, "GSGhostlyChest", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
+        //EntityRegistry.registerGlobalEntityID(EntityGhostlyChest.class, "GSGhostlyChest", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
     }
 }

@@ -27,7 +27,7 @@ public class GSItem {
         chisel = new ItemGSChisel(GraveStoneConfig.chiselId);
         LanguageRegistry.addName(chisel, "Chisel");
         
-        ghostlyItem = new ItemGhostly(GraveStoneConfig.ghostlyItemId);
+        //ghostlyItem = new ItemGhostly(GraveStoneConfig.ghostlyItemId);
         //LanguageRegistry.addName(chisel, "Chisel");
     }
 }

@@ -21,9 +21,9 @@ public class GSReciepes {
         // chisel reciep
         GameRegistry.addRecipe(new ItemStack(GSItem.chisel), "   ", "s  ", " i ", 's', Item.stick, 'i', Item.ingotIron);
         // bone blocks
-        GameRegistry.addRecipe(new ItemStack(GSBlock.boneBlock), "xxx", "xxx", "xxx", 'x', Item.bone);
+        /*GameRegistry.addRecipe(new ItemStack(GSBlock.boneBlock), "xxx", "xxx", "xxx", 'x', Item.bone);
         GameRegistry.addRecipe(new ItemStack(GSBlock.boneBlock), "x", "x", 'x', GSBlock.boneSlab);
         GameRegistry.addRecipe(new ItemStack(GSBlock.boneSlab, 6), "xxx", 'x', GSBlock.boneBlock);
-        GameRegistry.addRecipe(new ItemStack(GSBlock.boneStairs, 4), "x  ", "xx ", "xxx", 'x', GSBlock.boneBlock);
+        GameRegistry.addRecipe(new ItemStack(GSBlock.boneStairs, 4), "x  ", "xx ", "xxx", 'x', GSBlock.boneBlock);*/
     }
 }

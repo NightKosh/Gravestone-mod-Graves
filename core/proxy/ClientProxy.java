@@ -58,10 +58,10 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonCat.class, new RenderUndeadCat(new ModelUndeadCat(), 0));
         
         // register GhostlyChest renderer
-        ClientRegistry.registerTileEntity(TileEntityGSGhostlyChest.class, "GSGhostlyChest", new TileEntityGSGhostlyChestRenderer());
+        //ClientRegistry.registerTileEntity(TileEntityGSGhostlyChest.class, "GSGhostlyChest", new TileEntityGSGhostlyChestRenderer());
         
         // register GhostlyChest renderer
-        ClientRegistry.registerTileEntity(TileEntityGSSkullCandle.class, "GSSkullCandle", new TileEntityGSSkullCandleRenderer());
+        //ClientRegistry.registerTileEntity(TileEntityGSSkullCandle.class, "GSSkullCandle", new TileEntityGSSkullCandleRenderer());
     }
 
     @Override

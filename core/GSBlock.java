@@ -74,8 +74,7 @@ public class GSBlock {
 
         // memorials
         memorial = new BlockGSMemorial(GraveStoneConfig.memorialID);
-        advancedBlockRegistration(memorial, "GSMemorial", "Memorial", "pickaxe", 2, EnumMemorials.values(), "GraveType");
-        GameRegistry.registerBlock(memorial, ItemBlockGSMemorial.class);
+        advancedBlockRegistration(memorial, "GSMemorial", "Memorial", "pickaxe", 2, EnumMemorials.values(), "GraveType", ItemBlockGSMemorial.class);
         
         // wither spawner
         witherSpawner = new BlockGSWitherSpawner(GraveStoneConfig.witherSpawnerID);
@@ -84,7 +83,7 @@ public class GSBlock {
         // trap
         trap = new BlockGSTrap(GraveStoneConfig.timeTrapID);
         simpleBlockRegistration(trap, "GSTimeTrap", "Night stone", "pickaxe", 1);
-
+/*
         // bone block
         boneBlock = new BlockGSBoneBlock(GraveStoneConfig.boneBlockID);
         simpleBlockRegistration(boneBlock, "GSBoneBlock", "Bone block", "pickaxe", 1);
@@ -102,6 +101,7 @@ public class GSBlock {
         // skull candle
         skullCandle = new BlockGSSkullCandle(GraveStoneConfig.skullCandleID);
         simpleBlockRegistration(skullCandle, "GSSkullCandle", "Skull candle", "pickaxe", 1);
+        * */
     }
 
     private static void simpleBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel) {
@@ -112,11 +112,20 @@ public class GSBlock {
     
     private static void advancedBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel, IBlockEnum[] blockEnums, String nbtName) {
         simpleBlockRegistration(block, registerName, name, tool, harvestLevel);
+        subBlocksRegistration(block, blockEnums, nbtName);
+    }
+    
+    private static void advancedBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel, IBlockEnum[] blockEnums, String nbtName, Class itemClass) {
+        simpleBlockRegistration(block, registerName, name, tool, harvestLevel);
+        GameRegistry.registerBlock(memorial, itemClass);
+        subBlocksRegistration(block, blockEnums, nbtName);
+    }
+    
+    private static void subBlocksRegistration(Block block, IBlockEnum[] blockEnums, String nbtName) {
         for (byte i = 0; i < blockEnums.length; i++) {
             ItemStack stack = new ItemStack(block, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte(nbtName, i);
-
             stack.setTagCompound(nbt);
             LanguageRegistry.addName(stack, blockEnums[i].getName());
         }
