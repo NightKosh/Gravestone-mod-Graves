@@ -2,7 +2,6 @@ package gravestone.core.event;
 
 import gravestone.config.GraveStoneConfig;
 import cpw.mods.fml.common.FMLCommonHandler;
-import gravestone.GraveStoneLogger;
 import gravestone.core.GSBlock;
 import gravestone.core.compatibility.GSCompatibility;
 import gravestone.tileentity.DeathMessageInfo;
@@ -15,7 +14,6 @@ import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
@@ -60,19 +58,38 @@ public class EventHookGSGraveStone {
     private void createPlayerGrave(EntityPlayer player, LivingDeathEvent event) {
         if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GraveStoneConfig.graveItemsCount > 0) {
             ItemStack[] items = new ItemStack[46];
-            
-            System.arraycopy(player.inventory.mainInventory, 0, items, 0, 36);
-            System.arraycopy(player.inventory.armorInventory, 0, items, 36, 4);
-            if (GSCompatibility.isBattlegearInstalled()) {
-                items[40] = player.inventory.getStackInSlot(150);
-                items[41] = player.inventory.getStackInSlot(151);
-                items[42] = player.inventory.getStackInSlot(152);
-                items[43] = player.inventory.getStackInSlot(153);
-                items[44] = player.inventory.getStackInSlot(154);
-                items[45] = player.inventory.getStackInSlot(155);
+
+            if (GSCompatibility.isArsMagicaInstalled()) {
+                int itemNumber = 0;
+                for (int slot = 0; slot < player.inventory.getSizeInventory(); slot++) {
+                    ItemStack stack = player.inventory.getStackInSlot(slot);
+                    if (stack == null || GSCompatibility.hasSoulbound(stack)) {
+                        continue;
+                    }
+                    items[itemNumber] = stack.copy();
+                    itemNumber++;
+                    player.inventory.setInventorySlotContents(slot, null);
+                }
+                if (GSCompatibility.isBattlegearInstalled()) {
+                    for (int slot = GSCompatibility.BATTLEGEAR_FIRST_SLOT; slot <= GSCompatibility.BATTLEGEAR_LAST_SLOT; slot++) {
+                        items[itemNumber] = player.inventory.getStackInSlot(slot);
+                        itemNumber++;
+                        player.inventory.setInventorySlotContents(slot, null);
+                    }
+                }
+            } else {
+                System.arraycopy(player.inventory.mainInventory, 0, items, 0, 36);
+                System.arraycopy(player.inventory.armorInventory, 0, items, 36, 4);
+                if (GSCompatibility.isBattlegearInstalled()) {
+                    int itemSlot = 40;
+                    for (int slot = GSCompatibility.BATTLEGEAR_FIRST_SLOT; slot <= GSCompatibility.BATTLEGEAR_LAST_SLOT; slot++) {
+                        items[itemSlot] = player.inventory.getStackInSlot(slot);
+                        itemSlot++;
+                    }
+                }
+                player.inventory.clearInventory(-1, -1);
             }
-            
-            player.inventory.clearInventory(-1, -1);
+
             createGrave(player, event, items, player.getAge(), (byte) 0);
         } else {
             createGrave(player, event, null, player.getAge(), (byte) 0);
