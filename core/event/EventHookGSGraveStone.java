@@ -1,7 +1,10 @@
-package gravestone.core;
+package gravestone.core.event;
 
 import gravestone.config.GraveStoneConfig;
 import cpw.mods.fml.common.FMLCommonHandler;
+import gravestone.GraveStoneLogger;
+import gravestone.core.GSBlock;
+import gravestone.core.compatibility.GSCompatibility;
 import gravestone.tileentity.DeathMessageInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -12,6 +15,7 @@ import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
@@ -55,9 +59,19 @@ public class EventHookGSGraveStone {
 
     private void createPlayerGrave(EntityPlayer player, LivingDeathEvent event) {
         if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GraveStoneConfig.graveItemsCount > 0) {
-            ItemStack[] items = new ItemStack[40];
+            ItemStack[] items = new ItemStack[46];
+            
             System.arraycopy(player.inventory.mainInventory, 0, items, 0, 36);
             System.arraycopy(player.inventory.armorInventory, 0, items, 36, 4);
+            if (GSCompatibility.isBattlegearInstalled()) {
+                items[40] = player.inventory.getStackInSlot(150);
+                items[41] = player.inventory.getStackInSlot(151);
+                items[42] = player.inventory.getStackInSlot(152);
+                items[43] = player.inventory.getStackInSlot(153);
+                items[44] = player.inventory.getStackInSlot(154);
+                items[45] = player.inventory.getStackInSlot(155);
+            }
+            
             player.inventory.clearInventory(-1, -1);
             createGrave(player, event, items, player.getAge(), (byte) 0);
         } else {

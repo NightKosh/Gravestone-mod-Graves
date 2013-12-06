@@ -26,7 +26,7 @@ public class GSGraveStoneItems {
 
     private TileEntityGSGraveStone tileEntity;
     // grave max loot stacks
-    public static final byte MAX_SLOTS = 40;
+    public static final byte MAX_SLOTS = 127;
     // grave loot holder
     private static final int[] POTION_LIST = {16273, 16307, 16341, 16310, 16281, 16318,
         32657, 32658, 32659, 32725, 32694, 32665, 32702
@@ -95,12 +95,12 @@ public class GSGraveStoneItems {
         if (items != null) {
             switch (GraveStoneConfig.graveItemsCount) {
                 case 0:
-                    for (int i = 0; i < items.length; i++) {
+                    for (byte i = 0; i < items.length; i++) {
                         dropItem(items[i], tileEntity.worldObj, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
                     }
                     break;
                 case 40:
-                    for (int i = 0; i < items.length; i++) {
+                    for (byte i = 0; i < items.length; i++) {
                         setInventorySlotContents(i, items[i]);
                     }
                     break;
@@ -108,7 +108,7 @@ public class GSGraveStoneItems {
                     int savedItems = GraveStoneConfig.graveItemsCount;
                     Collections.shuffle(Arrays.asList(items.length), new Random());
 
-                    for (int i = 0; i < items.length; i++) {
+                    for (byte i = 0; i < items.length; i++) {
                         if (items[i] != null && savedItems > 0) {
                             setInventorySlotContents(i, items[i]);
                             savedItems--;
@@ -119,6 +119,30 @@ public class GSGraveStoneItems {
                     break;
             }
         }
+    }
+
+    public void setAdditionalItems(ItemStack[] items) {
+        if (items != null) {
+            byte emptySlot = getEmptySlotNumber();
+            if (emptySlot != -1) {
+                for (short i = 0; i < items.length; i++) {
+                    setInventorySlotContents(emptySlot + i, items[i]);
+                }
+            } else {
+                for (byte i = 0; i < items.length; i++) {
+                    dropItem(items[i], tileEntity.worldObj, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+                }
+            }
+        }
+    }
+
+    private byte getEmptySlotNumber() {
+        for (byte i = 0; i < MAX_SLOTS; i++) {
+            if (graveContents[i] == null) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**

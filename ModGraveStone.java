@@ -1,17 +1,14 @@
 package gravestone;
 
 import gravestone.core.GraveStoneEntity;
-import gravestone.core.EventHookGSGraveStone;
+import gravestone.core.event.EventHookGSGraveStone;
 import gravestone.core.ModInfo;
 import gravestone.core.GraveStonePacketHandler;
 import gravestone.core.GraveStoneStructures;
-import gravestone.core.GraveStoneBiomes;
 import gravestone.config.GraveStoneConfig;
-import gravestone.core.GraveStoneMobSpawn;
 import gravestone.core.GSItem;
 import gravestone.core.proxy.CommonProxy;
 import gravestone.core.localization.GraveStoneLocalizationHandler;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -25,6 +22,7 @@ import gravestone.core.GSBlock;
 import gravestone.core.GSGui;
 import gravestone.core.GSReciepes;
 import gravestone.core.GSTileEntity;
+import gravestone.core.compatibility.GSCompatibility;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -101,36 +99,8 @@ public class ModGraveStone {
 
     @Mod.PostInit
     public void postInit(FMLPostInitializationEvent event) {
-        // adding foreign mobs
-        if (Loader.isModLoaded("MoCreatures")) {
-            GraveStoneMobSpawn.addMoCreaturesMobs();
-        }
-
-        if (Loader.isModLoaded("TwilightForest")) {
-            GraveStoneMobSpawn.addTwilightForestMobs();
-        }
-
-        // adding foreign bioms
-        if (Loader.isModLoaded("Highlands")) {
-            GraveStoneBiomes.loadHighlandsBiomes();
-            GraveStoneBiomes.addHighlandsBiomes();
-        }
-
-        if (Loader.isModLoaded("BiomesOPlenty")) {
-            GraveStoneBiomes.loadBiomsOPlentyBiomes();
-            GraveStoneBiomes.addBiomsOPlentyBiomes();
-        }
-
-        if (Loader.isModLoaded("ExtrabiomesXL")) {
-            GraveStoneBiomes.addExtrabiomsXLBiomes();
-        }
-
-        /*
-         // adding Thaumcraft aspects
-         if (Loader.isModLoaded("ExtrabiomesXL")) {
-         GSThaumcraft.addAspects();
-         }
-         * */
+        
+        GSCompatibility.getInstance().checkMods();
         //GraveStoneLogger.logInfo(ModInfo.NAME + " has loaded successfully.");
     }
 }

@@ -69,6 +69,10 @@ public abstract class TileEntityGSGrave extends TileEntity {
     public void setItems(ItemStack[] items) {
         gSItems.setItems(items);
     }
+    
+    public void setAdditionalItems(ItemStack[] items) {
+        gSItems.setAdditionalItems(items);
+    }
 
     public void dropAllItems() {
         gSItems.dropAllItems();
