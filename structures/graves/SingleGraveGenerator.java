@@ -2,7 +2,7 @@ package gravestone.structures.graves;
 
 import java.util.LinkedList;
 import java.util.Random;
-import gravestone.core.GraveStoneBiomes;
+import gravestone.core.GSBiomes;
 import gravestone.config.GraveStoneConfig;
 import gravestone.structures.GraveStoneWorldGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
@@ -33,7 +33,7 @@ public class SingleGraveGenerator {
     }
 
     protected boolean canSpawnStructureAtCoords(World world, int x, int z, double chance) {
-        return chance < CHANCE && !GraveStoneBiomes.getGravesBiomes().contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z);
+        return chance < CHANCE && !GSBiomes.getGravesBiomes().contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z);
     }
 
     protected boolean noAnyInRange(int x, int z) {

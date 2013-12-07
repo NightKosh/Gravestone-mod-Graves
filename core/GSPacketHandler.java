@@ -18,7 +18,7 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GraveStonePacketHandler implements IPacketHandler {
+public class GSPacketHandler implements IPacketHandler {
 
     @Override
     public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {

@@ -18,25 +18,32 @@ import net.minecraft.world.biome.BiomeGenBase;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GraveStoneEntity {
+public class GSEntity {
 
-    private static GraveStoneEntity instance;
+    private static GSEntity instance;
 
-    private GraveStoneEntity() {
+    private GSEntity() {
+        instance = this;
         getEntity();
     }
 
-    public static GraveStoneEntity getInstance() {
+    public static GSEntity getInstance() {
         if (instance == null) {
-            return new GraveStoneEntity();
+            return new GSEntity();
         } else {
             return instance;
         }
     }
+    
+    public static final String ZOMBIE_DOG_NAME = "GSZombieDog";
+    public static final String ZOMBIE_CAT_NAME = "GSZombieCat";
+    public static final String SKEKETON_DOG_NAME = "GSSkeletonDog";
+    public static final String SKEKETON_CAT_NAME = "GSSkeletonCat";
+    
 
     public void getEntity() {
         // zombie dog
-        EntityRegistry.registerGlobalEntityID(EntityZombieDog.class, "GSZombieDog", EntityRegistry.findGlobalUniqueEntityId(), 14144467, 7969893);
+        EntityRegistry.registerGlobalEntityID(EntityZombieDog.class, ZOMBIE_DOG_NAME, EntityRegistry.findGlobalUniqueEntityId(), 14144467, 7969893);
 
         if (GraveStoneConfig.spawnZombieDogs) {
             EntityRegistry.addSpawn(EntityZombieDog.class, 3, 1, 3, EnumCreatureType.monster,
@@ -45,7 +52,7 @@ public class GraveStoneEntity {
         }
 
         // zombie cat
-        EntityRegistry.registerGlobalEntityID(EntityZombieCat.class, "GSZombieCat", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 7969893);
+        EntityRegistry.registerGlobalEntityID(EntityZombieCat.class, ZOMBIE_CAT_NAME, EntityRegistry.findGlobalUniqueEntityId(), 15720061, 7969893);
 
         if (GraveStoneConfig.spawnZombieCats) {
             EntityRegistry.addSpawn(EntityZombieCat.class, 3, 1, 3, EnumCreatureType.monster,
@@ -53,7 +60,7 @@ public class GraveStoneEntity {
         }
 
         // skeleton dog
-        EntityRegistry.registerGlobalEntityID(EntitySkeletonDog.class, "GSSkeletonDog", EntityRegistry.findGlobalUniqueEntityId(), 14144467, 4802889);
+        EntityRegistry.registerGlobalEntityID(EntitySkeletonDog.class, SKEKETON_DOG_NAME, EntityRegistry.findGlobalUniqueEntityId(), 14144467, 4802889);
 
         if (GraveStoneConfig.spawnSkeletonDogs) {
             EntityRegistry.addSpawn(EntityZombieDog.class, 3, 1, 3, EnumCreatureType.monster,
@@ -62,7 +69,7 @@ public class GraveStoneEntity {
         }
 
         // skeleton cat
-        EntityRegistry.registerGlobalEntityID(EntitySkeletonCat.class, "GSSkeletonCat", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
+        EntityRegistry.registerGlobalEntityID(EntitySkeletonCat.class, SKEKETON_CAT_NAME, EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
 
         if (GraveStoneConfig.spawnSkeletonCats) {
             EntityRegistry.addSpawn(EntityZombieCat.class, 3, 1, 3, EnumCreatureType.monster,

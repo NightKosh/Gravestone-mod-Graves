@@ -21,22 +21,22 @@ import net.minecraft.world.gen.structure.MapGenStructureIO;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GraveStoneStructures {
+public class GSStructures {
 
-    private static GraveStoneStructures instance;
+    private static GSStructures instance;
     public static final int[] VALUEBLE_BLOCKS = {
         Block.blockGold.blockID, Block.blockLapis.blockID, Block.blockRedstone.blockID,
         Block.blockGold.blockID, Block.blockLapis.blockID, Block.blockRedstone.blockID,
         Block.blockDiamond.blockID, Block.blockEmerald.blockID
     };
 
-    private GraveStoneStructures() {
+    private GSStructures() {
         generateStructures();
     }
 
-    public static GraveStoneStructures getInstance() {
+    public static GSStructures getInstance() {
         if (instance == null) {
-            return new GraveStoneStructures();
+            return new GSStructures();
         } else {
             return instance;
         }

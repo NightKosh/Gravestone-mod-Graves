@@ -1,10 +1,10 @@
 package gravestone;
 
-import gravestone.core.GraveStoneEntity;
+import gravestone.core.GSEntity;
 import gravestone.core.event.EventHookGSGraveStone;
 import gravestone.core.ModInfo;
-import gravestone.core.GraveStonePacketHandler;
-import gravestone.core.GraveStoneStructures;
+import gravestone.core.GSPacketHandler;
+import gravestone.core.GSStructures;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSItem;
 import gravestone.core.proxy.CommonProxy;
@@ -35,7 +35,7 @@ import net.minecraftforge.common.MinecraftForge;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION)
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, packetHandler = GraveStonePacketHandler.class, channels = {"GSDeathText"})
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, packetHandler = GSPacketHandler.class, channels = {"GSDeathText"})
 public class ModGraveStone {
 
     @Instance("GraveStone")
@@ -54,7 +54,7 @@ public class ModGraveStone {
         GraveStoneLogger.preinit();
         GraveStoneConfig.getInstance(event.getModConfigurationDirectory().getAbsolutePath() + "/GraveStoneMod/", "GraveStone.cfg");
         GraveStoneLocalizationHandler.init();
-        GraveStoneStructures.preInit();
+        GSStructures.preInit();
     }
 
     @Init
@@ -90,10 +90,10 @@ public class ModGraveStone {
         GSGui.registration();
         
         // register structures
-        GraveStoneStructures.getInstance();
+        GSStructures.getInstance();
         
         // register entitys
-        GraveStoneEntity.getInstance();
+        GSEntity.getInstance();
         proxy.registerRenderers();
     }
 

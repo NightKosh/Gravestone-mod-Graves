@@ -1,7 +1,7 @@
 package gravestone.block;
 
 import gravestone.config.GraveStoneConfig;
-import gravestone.core.GraveStoneMobSpawn;
+import gravestone.core.GSMobSpawn;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import java.util.Arrays;
 import java.util.Random;
@@ -147,10 +147,10 @@ public class GraveStoneHelper {
             TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
 
             if (tileEntity != null) {
-                Entity mob = GraveStoneMobSpawn.getMobEntity(world, tileEntity.getGraveType(), x, y, z);
+                Entity mob = GSMobSpawn.getMobEntity(world, tileEntity.getGraveType(), x, y, z);
 
                 if (mob != null) {
-                    GraveStoneMobSpawn.spawnMob(world, mob, x, y, z, false);
+                    GSMobSpawn.spawnMob(world, mob, x, y, z, false);
                 }
             }
         }

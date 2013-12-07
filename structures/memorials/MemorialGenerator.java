@@ -3,7 +3,7 @@ package gravestone.structures.memorials;
 import java.util.LinkedList;
 import java.util.Random;
 import gravestone.GraveStoneLogger;
-import gravestone.core.GraveStoneBiomes;
+import gravestone.core.GSBiomes;
 import gravestone.config.GraveStoneConfig;
 import gravestone.structures.GraveStoneWorldGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
@@ -35,7 +35,7 @@ public class MemorialGenerator {
     }
 
     protected boolean canSpawnStructureAtCoords(World world, int x, int z, double chance) {
-        return chance < CHANCE && !GraveStoneBiomes.getMemorialBiomes().contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z);
+        return chance < CHANCE && !GSBiomes.getMemorialBiomes().contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z);
     }
 
     protected boolean noAnyInRange(int x, int z) {

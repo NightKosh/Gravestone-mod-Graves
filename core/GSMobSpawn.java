@@ -27,7 +27,7 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GraveStoneMobSpawn {
+public class GSMobSpawn {
 
     /**
      * Provides a mapping between entity classes and a string
@@ -65,7 +65,7 @@ public class GraveStoneMobSpawn {
     //
     private static final int HELL_HEIGHT = 51;
 
-    private GraveStoneMobSpawn() {
+    private GSMobSpawn() {
         
     }
     

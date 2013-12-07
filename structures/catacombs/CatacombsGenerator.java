@@ -1,7 +1,7 @@
 package gravestone.structures.catacombs;
 
 import gravestone.GraveStoneLogger;
-import gravestone.core.GraveStoneBiomes;
+import gravestone.core.GSBiomes;
 import gravestone.config.GraveStoneConfig;
 import java.util.LinkedList;
 import java.util.Random;
@@ -38,7 +38,7 @@ public class CatacombsGenerator {
     }
 
     protected boolean canSpawnStructureAtCoords(World world, int x, int z, double chance) {
-        return chance < CHANCE && GraveStoneBiomes.getCatacombsBiomes().contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z, 700);
+        return chance < CHANCE && GSBiomes.getCatacombsBiomes().contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z, 700);
     }
 
     protected boolean noAnyInRange(int x, int z, int range) {

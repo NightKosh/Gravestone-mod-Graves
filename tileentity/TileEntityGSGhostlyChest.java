@@ -1,7 +1,7 @@
 package gravestone.tileentity;
 
 import gravestone.block.enums.EnumChestTypes;
-import gravestone.core.GraveStoneMobSpawn;
+import gravestone.core.GSMobSpawn;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.nbt.NBTTagCompound;
@@ -122,7 +122,7 @@ public class TileEntityGSGhostlyChest extends TileEntity {
     public void spawnMobs(World world) {
         switch (getChestType()) {
             case SKELETON_CHEST:
-                EntitySkeleton skeleton = GraveStoneMobSpawn.getSkeleton(world, (byte) 1);
+                EntitySkeleton skeleton = GSMobSpawn.getSkeleton(world, (byte) 1);
                 skeleton.setLocationAndAngles(this.xCoord + 0.5, this.yCoord, this.zCoord + 0.5, 0.0F, 0.0F);
                 world.spawnEntityInWorld(skeleton);
                 break;

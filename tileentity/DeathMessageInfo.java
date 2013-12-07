@@ -67,7 +67,9 @@ public class DeathMessageInfo {
         new DeathMessageInfo("Notch", "death.GS.Herobrine", null),
         new DeathMessageInfo("Steve", "death.GS.Herobrine", null),
         new DeathMessageInfo("Jeb", "death.GS.Herobrine", null),
-        new DeathMessageInfo("Leeroy Jenkins", "death.attack.onFire.player", "entity.EnderDragon.name")
+        new DeathMessageInfo("Leeroy Jenkins", "death.attack.onFire.player", "entity.EnderDragon.name"),
+        new DeathMessageInfo("Wilson", "death.attack.starve", null),
+        new DeathMessageInfo("Guide", "death.attack.lava", null)
     };
     public static final String[] ALL_KILLER_NAMES = {
         "entity.Blaze.name",

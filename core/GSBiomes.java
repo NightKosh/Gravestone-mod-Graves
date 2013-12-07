@@ -13,9 +13,9 @@ import net.minecraft.world.biome.BiomeGenBase;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GraveStoneBiomes {
+public class GSBiomes {
 
-    private GraveStoneBiomes() {
+    private GSBiomes() {
     }
     // list of allowed biomes for catacombs generator
     private static ArrayList CATACOMBS_BIOMES = new ArrayList(Arrays.asList(

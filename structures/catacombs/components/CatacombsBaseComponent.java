@@ -1,6 +1,6 @@
 package gravestone.structures.catacombs.components;
 
-import gravestone.core.GraveStoneStructures;
+import gravestone.core.GSStructures;
 import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.catacombs.CatacombsStones;
 import java.util.Random;
@@ -241,6 +241,6 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      * Return valuable block
      */
     public static int getValuableBlock(Random random) {
-        return GraveStoneStructures.VALUEBLE_BLOCKS[random.nextInt(GraveStoneStructures.VALUEBLE_BLOCKS.length)];
+        return GSStructures.VALUEBLE_BLOCKS[random.nextInt(GSStructures.VALUEBLE_BLOCKS.length)];
     }
 }

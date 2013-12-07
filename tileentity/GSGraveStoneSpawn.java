@@ -1,7 +1,7 @@
 package gravestone.tileentity;
 
 import gravestone.config.GraveStoneConfig;
-import gravestone.core.GraveStoneMobSpawn;
+import gravestone.core.GSMobSpawn;
 import gravestone.block.enums.EnumGraves;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -92,7 +92,7 @@ public class GSGraveStoneSpawn {
                 }
 
                 if (this.getNewMob) {
-                    this.spawnedMob = GraveStoneMobSpawn.getMobEntity(this.tileEntity.worldObj, EnumGraves.getByID(this.tileEntity.graveType), this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord);
+                    this.spawnedMob = GSMobSpawn.getMobEntity(this.tileEntity.worldObj, EnumGraves.getByID(this.tileEntity.graveType), this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord);
 
                     if (this.spawnedMob == null) {
                         return;
@@ -109,7 +109,7 @@ public class GSGraveStoneSpawn {
                     return;
                 }
 
-                if (GraveStoneMobSpawn.checkChance(this.tileEntity.worldObj.rand) && GraveStoneMobSpawn.spawnMob(this.tileEntity.worldObj, this.spawnedMob, this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord, true)) {
+                if (GSMobSpawn.checkChance(this.tileEntity.worldObj.rand) && GSMobSpawn.spawnMob(this.tileEntity.worldObj, this.spawnedMob, this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord, true)) {
                     this.getNewMob = true;
                 }
                 this.updateDelay();
@@ -132,7 +132,7 @@ public class GSGraveStoneSpawn {
     }
 
     public String getEntityId() {
-        return this.spawnerTags == null ? GraveStoneMobSpawn.getMobID(this.tileEntity.worldObj.rand, GraveStoneMobSpawn.EnumMobType.DEFAULT_MOBS) : this.spawnerTags.field_92033_c;
+        return this.spawnerTags == null ? GSMobSpawn.getMobID(this.tileEntity.worldObj.rand, GSMobSpawn.EnumMobType.DEFAULT_MOBS) : this.spawnerTags.field_92033_c;
     }
 
     public void readSpawn(NBTTagCompound nbtTag) {
