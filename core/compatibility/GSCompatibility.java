@@ -5,12 +5,19 @@
 package gravestone.core.compatibility;
 
 import cpw.mods.fml.common.Loader;
-import gravestone.core.GraveStoneBiomes;
-import gravestone.core.GraveStoneMobSpawn;
+import gravestone.GraveStoneLogger;
+import gravestone.core.GSBlock;
+import gravestone.core.GSBiomes;
+import gravestone.core.GSEntity;
+import gravestone.core.GSItem;
+import gravestone.core.GSMobSpawn;
 import java.util.Map;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
+import thaumcraft.api.ThaumcraftApi;
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
 
 /**
  * GraveStone mod
@@ -31,7 +38,6 @@ public class GSCompatibility {
     }
     public static final short BATTLEGEAR_FIRST_SLOT = 150;
     public static final short BATTLEGEAR_LAST_SLOT = 155;
-    
     private static boolean isMoCreaturesInstalled = false;
     private static boolean isTwilightForestInstalled = false;
     private static boolean isHighlandsInstalled = false;
@@ -73,30 +79,30 @@ public class GSCompatibility {
         // adding foreign mobs
         if (Loader.isModLoaded("MoCreatures")) {
             isMoCreaturesInstalled = true;
-            GraveStoneMobSpawn.addMoCreaturesMobs();
+            GSMobSpawn.addMoCreaturesMobs();
         }
 
         if (Loader.isModLoaded("TwilightForest")) {
             isTwilightForestInstalled = true;
-            GraveStoneMobSpawn.addTwilightForestMobs();
+            GSMobSpawn.addTwilightForestMobs();
         }
 
         // adding foreign bioms
         if (Loader.isModLoaded("Highlands")) {
             isHighlandsInstalled = true;
-            GraveStoneBiomes.loadHighlandsBiomes();
-            GraveStoneBiomes.addHighlandsBiomes();
+            GSBiomes.loadHighlandsBiomes();
+            GSBiomes.addHighlandsBiomes();
         }
 
         if (Loader.isModLoaded("BiomesOPlenty")) {
             isBiomesOPlentyInstalled = true;
-            GraveStoneBiomes.loadBiomsOPlentyBiomes();
-            GraveStoneBiomes.addBiomsOPlentyBiomes();
+            GSBiomes.loadBiomsOPlentyBiomes();
+            GSBiomes.addBiomsOPlentyBiomes();
         }
 
         if (Loader.isModLoaded("ExtrabiomesXL")) {
             isExtrabiomesXLInstalled = true;
-            GraveStoneBiomes.addExtrabiomsXLBiomes();
+            GSBiomes.addExtrabiomsXLBiomes();
         }
 
         if (Loader.isModLoaded("battlegear2")) {
@@ -106,11 +112,11 @@ public class GSCompatibility {
         if (Loader.isModLoaded("arsmagica2")) {
             isArsMagicaInstalled = true;
         }
-        /*
-         // adding Thaumcraft aspects
-         if (Loader.isModLoaded("Thaumcraft")) {
-         initThaumCraft();
-         }*/
+
+        // adding Thaumcraft aspects
+        if (Loader.isModLoaded("Thaumcraft")) {
+            initThaumCraft();
+        }
 
     }
 
@@ -124,31 +130,28 @@ public class GSCompatibility {
         }
         return false;
     }
-    /*
-     private void initThaumCraft() {
-     try {
-     ThaumcraftApi.registerObjectTag(GSBlock.graveStone.blockID, 0, new AspectList().add(Aspect.SOUL, 1).add(Aspect.STONE, 1));
-     ThaumcraftApi.registerObjectTag(GSBlock.graveStone.blockID, 1, new AspectList().add(Aspect.SOUL, 1).add(Aspect.STONE, 1));
-     ThaumcraftApi.registerObjectTag(GSBlock.graveStone.blockID, 2, new AspectList().add(Aspect.SOUL, 1).add(Aspect.STONE, 1));
 
-     ThaumcraftApi.registerObjectTag(GSBlock.graveStone.blockID, 3, new AspectList().add(Aspect.SOUL, 1).add(Aspect.STONE, 1)
-     .add(Aspect.BEAST, 1));
-     ThaumcraftApi.registerObjectTag(GSBlock.graveStone.blockID, 4, new AspectList().add(Aspect.SOUL, 1).add(Aspect.STONE, 1)
-     .add(Aspect.BEAST, 1));
+    private void initThaumCraft() {
+        try {
+            ThaumcraftApi.registerObjectTag(GSBlock.graveStone.blockID, -1, new AspectList().add(Aspect.SOUL, 1).add(Aspect.DEATH, 1));
+            ThaumcraftApi.registerObjectTag(GSBlock.memorial.blockID, -1, new AspectList().add(Aspect.SOUL, 4).add(Aspect.DEATH, 4));
+            ThaumcraftApi.registerObjectTag(GSBlock.trap.blockID, 0, new AspectList().add(Aspect.FIRE, 1).add(Aspect.STONE, 2)
+                    .add(Aspect.MECHANISM, 2).add(Aspect.DARKNESS, 4).add(Aspect.SOUL, 3));
+            ThaumcraftApi.registerObjectTag(GSBlock.witherSpawner.blockID, 0, new AspectList().add(Aspect.BEAST, 4).add(Aspect.UNDEAD, 4)
+                    .add(Aspect.MAGIC, 4).add(Aspect.TRAVEL, 4));
+            ThaumcraftApi.registerObjectTag(GSItem.chisel.itemID, 0, new AspectList().add(Aspect.TOOL, 2));
 
-     ThaumcraftApi.registerObjectTag(GSBlock.graveStone.blockID, 5, new AspectList().add(Aspect.SOUL, 1).add(Aspect.WEAPON, 4));
-     ThaumcraftApi.registerObjectTag(GSBlock.graveStone.blockID, 6, new AspectList().add(Aspect.SOUL, 1).add(Aspect.WEAPON, 6)
-     .add(Aspect.STONE, 1));
-     ThaumcraftApi.registerObjectTag(GSBlock.graveStone.blockID, 7, new AspectList().add(Aspect.SOUL, 1).add(Aspect.WEAPON, 8)
-     .add(Aspect.METAL, 13));
-     ThaumcraftApi.registerObjectTag(GSBlock.graveStone.blockID, 8, new AspectList().add(Aspect.SOUL, 1).add(Aspect.WEAPON, 4)
-     .add(Aspect.GREED, 6).add(Aspect.METAL, 13));
-     ThaumcraftApi.registerObjectTag(GSBlock.graveStone.blockID, 9, new AspectList().add(Aspect.SOUL, 1).add(Aspect.WEAPON, 10)
-     .add(Aspect.GREED, 6));
-
-     } catch (Exception e) {
-     GraveStoneLogger.logError("Error during thaumcraft integration");
-     e.printStackTrace();
-     }
-     }*/
+            ThaumcraftApi.registerEntityTag(GSEntity.ZOMBIE_DOG_NAME, new AspectList().add(Aspect.BEAST, 2)
+                    .add(Aspect.UNDEAD, 2).add(Aspect.EARTH, 2));
+            ThaumcraftApi.registerEntityTag(GSEntity.ZOMBIE_CAT_NAME, new AspectList().add(Aspect.BEAST, 2)
+                    .add(Aspect.UNDEAD, 2).add(Aspect.ENTROPY, 1));
+            ThaumcraftApi.registerEntityTag(GSEntity.SKEKETON_DOG_NAME, new AspectList().add(Aspect.BEAST, 1)
+                    .add(Aspect.UNDEAD, 3).add(Aspect.EARTH, 1));
+            ThaumcraftApi.registerEntityTag(GSEntity.SKEKETON_CAT_NAME, new AspectList().add(Aspect.BEAST, 1)
+                    .add(Aspect.UNDEAD, 3).add(Aspect.ENTROPY, 1));
+        } catch (Exception e) {
+            GraveStoneLogger.logError("Error in thaumcraft integration");
+            e.printStackTrace();
+        }
+    }
 }
