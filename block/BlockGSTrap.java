@@ -1,5 +1,6 @@
 package gravestone.block;
 
+import gravestone.GraveStoneLogger;
 import gravestone.config.GraveStoneConfig;
 import gravestone.ModGraveStone;
 import gravestone.core.Resources;
@@ -19,6 +20,9 @@ import net.minecraft.world.World;
  */
 public class BlockGSTrap extends Block {
 
+    private static final int PRE_NIGHT = 12000;
+    private static final int NIGHT = 14000;
+    private static final int PRE_MORNING = 22500;
     public BlockGSTrap(int par1) {
         super(par1, Material.rock);
         this.setStepSound(Block.soundStoneFootstep);
@@ -52,14 +56,16 @@ public class BlockGSTrap extends Block {
     @Override
     public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
         if (entity instanceof EntityPlayer) {
-            long time = world.getWorldTime();
-
             if (GraveStoneConfig.enableNightStone) {
-                if (time < 12000 || time > 22500) {
-                    world.setWorldTime(12000);
+                long time = world.getWorldTime();
+                long dayTime = time % 24000;
+                if (dayTime < PRE_NIGHT || dayTime > PRE_MORNING) {
+                    time = time - time % 24000 + PRE_NIGHT;
+                    world.setWorldTime(time);
                     ((EntityPlayer) entity).sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(ModGraveStone.proxy.getLocalizedString("block.trap.curse")));
-                } else if (time > 20000 && time < 22500) {
-                    world.setWorldTime(14000);
+                } else if (dayTime > 20000 && dayTime < PRE_MORNING) {
+                    time = time - time % 24000 + NIGHT;
+                    world.setWorldTime(time);
                 }
             }
         }
