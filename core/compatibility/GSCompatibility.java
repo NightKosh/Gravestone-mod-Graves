@@ -133,12 +133,14 @@ public class GSCompatibility {
 
     private void initThaumCraft() {
         try {
-            ThaumcraftApi.registerObjectTag(GSBlock.graveStone.blockID, -1, new AspectList().add(Aspect.SOUL, 1).add(Aspect.DEATH, 1));
-            ThaumcraftApi.registerObjectTag(GSBlock.memorial.blockID, -1, new AspectList().add(Aspect.SOUL, 4).add(Aspect.DEATH, 4));
+            ThaumcraftApi.registerObjectTag(GSBlock.graveStone.blockID, -1, new AspectList().add(Aspect.SOUL, 5)
+                    .add(Aspect.DEATH, 5).add(Aspect.UNDEAD, 5));
+            ThaumcraftApi.registerObjectTag(GSBlock.memorial.blockID, -1, new AspectList().add(Aspect.SOUL, 20)
+                    .add(Aspect.DEATH, 20).add(Aspect.UNDEAD, 20));
             ThaumcraftApi.registerObjectTag(GSBlock.trap.blockID, 0, new AspectList().add(Aspect.FIRE, 1).add(Aspect.STONE, 2)
-                    .add(Aspect.MECHANISM, 2).add(Aspect.DARKNESS, 4).add(Aspect.SOUL, 3));
-            ThaumcraftApi.registerObjectTag(GSBlock.witherSpawner.blockID, 0, new AspectList().add(Aspect.BEAST, 4).add(Aspect.UNDEAD, 4)
-                    .add(Aspect.MAGIC, 4).add(Aspect.TRAVEL, 4));
+                    .add(Aspect.MECHANISM, 5).add(Aspect.DARKNESS, 5).add(Aspect.SOUL, 5).add(Aspect.MAGIC, 5));
+            ThaumcraftApi.registerObjectTag(GSBlock.witherSpawner.blockID, 0, new AspectList().add(Aspect.MAGIC, 40)
+                    .add(Aspect.UNDEAD, 40).add(Aspect.SOUL, 40).add(Aspect.DARKNESS, 40).add(Aspect.ELDRITCH, 40));
             ThaumcraftApi.registerObjectTag(GSItem.chisel.itemID, 0, new AspectList().add(Aspect.TOOL, 2));
 
             ThaumcraftApi.registerEntityTag(GSEntity.ZOMBIE_DOG_NAME, new AspectList().add(Aspect.BEAST, 2)
