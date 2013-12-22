@@ -34,7 +34,7 @@ public class ComponentGSSingleGrave extends ComponentGraveStone {
         y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
 
         if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
-            GraveStoneLogger.logInfo("Grave " + positionX + "x" + positionZ);
+            GraveStoneLogger.logInfo("Generate grave at " + positionX + "x" + positionZ);
             GraveGenerationHelper.placeGrave(this, world, random, 0, y, 0, GraveStoneHelper.getMetaDirection(coordBaseMode), GraveStoneHelper.getGraveType(random, EnumGraveType.ALL_GRAVES), true);
         }
 

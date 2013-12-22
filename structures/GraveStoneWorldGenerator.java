@@ -16,15 +16,7 @@ import net.minecraft.world.chunk.IChunkProvider;
  */
 public class GraveStoneWorldGenerator implements IWorldGenerator {
 
-    protected static CatacombsGenerator catacombsGen;
-    protected static MemorialGenerator memorialGen;
-    protected static SingleGraveGenerator graveGen;
-    public static final byte CATACOMBS_RANGE = 100;
-
     public GraveStoneWorldGenerator() {
-        catacombsGen = new CatacombsGenerator();
-        memorialGen = new MemorialGenerator();
-        graveGen = new SingleGraveGenerator();
     }
 
     @Override
@@ -37,9 +29,9 @@ public class GraveStoneWorldGenerator implements IWorldGenerator {
     public void generateSurface(World world, Random rand, int x, int z) {
         double chance = rand.nextDouble();
 
-        if (!catacombsGen.generate(world, rand, x, z, chance)) {
-            if (!memorialGen.generate(world, rand, x, z, chance)) {
-                graveGen.generate(world, rand, x, z, chance);
+        if (!CatacombsGenerator.getInstance().generate(world, rand, x, z, chance, false)) {
+            if (!MemorialGenerator.getInstance().generate(world, rand, x, z, chance, false)) {
+                SingleGraveGenerator.getInstance().generate(world, rand, x, z, chance, false);
             }
         }
     }
