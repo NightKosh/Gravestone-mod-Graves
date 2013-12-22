@@ -131,58 +131,6 @@ public class GSGraveStoneSpawn {
         tileEntity.worldObj.addBlockEvent(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, block, 1, 0);
     }
 
-    public String getEntityId() {
-        return this.spawnerTags == null ? GSMobSpawn.getMobID(this.tileEntity.worldObj.rand, GSMobSpawn.EnumMobType.DEFAULT_MOBS) : this.spawnerTags.field_92033_c;
-    }
-
-    public void readSpawn(NBTTagCompound nbtTag) {
-        delay = nbtTag.getShort("Delay");
-
-        if (nbtTag.hasKey("SpawnPotentials")) {
-            field_92060_e = new ArrayList();
-            NBTTagList ntbList = nbtTag.getTagList("SpawnPotentials");
-
-            for (int i = 0; i < ntbList.tagCount(); ++i) {
-                field_92060_e.add(new TileEntityGSGraveStoneSpawnData(tileEntity, (NBTTagCompound) ntbList.tagAt(i)));
-            }
-        } else {
-            this.field_92060_e = null;
-        }
-
-        if (tileEntity.worldObj != null && tileEntity.worldObj.isRemote) {
-            spawnedMob = null;
-        }
-    }
-
-    public void saveSpawn(NBTTagCompound nbtTag) {
-        nbtTag.setShort("Delay", (short) delay);
-
-        if (spawnerTags != null) {
-            nbtTag.setCompoundTag("SpawnData", (NBTTagCompound) spawnerTags.field_92032_b.copy());
-        }
-
-        if (spawnerTags != null || field_92060_e != null && field_92060_e.size() > 0) {
-            NBTTagList nbtList = new NBTTagList();
-
-            if (field_92060_e != null && field_92060_e.size() > 0) {
-                Iterator it = field_92060_e.iterator();
-
-                while (it.hasNext()) {
-                    TileEntityGSGraveStoneSpawnData tileEntityData = (TileEntityGSGraveStoneSpawnData) it.next();
-                    nbtList.appendTag(tileEntityData.func_92030_a());
-                }
-            } else {
-                nbtList.appendTag(spawnerTags.func_92030_a());
-            }
-
-            nbtTag.setTag("SpawnPotentials", nbtList);
-        }
-    }
-
-    public void writeNBTTagsTo(Entity entity) {
-            ((EntityLiving) entity).onSpawnWithEgg((EntityLivingData) null);
-    }
-
     public void setMinDelay() {
         delay = MIN_DELAY;
     }

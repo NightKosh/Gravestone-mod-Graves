@@ -69,8 +69,6 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         super.readFromNBT(nbtTag);
         // grave type
         readType(nbtTag);
-        // grave spawn
-        gsSpawn.readSpawn(nbtTag);
         // grave loot
         gSItems.readItems(nbtTag);
         // death text
@@ -95,8 +93,6 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         super.writeToNBT(nbtTag);
         // grave type
         saveType(nbtTag);
-        // grave spawn
-        gsSpawn.saveSpawn(nbtTag);
         // grave loot
         gSItems.saveItems(nbtTag);
         // death text
@@ -239,7 +235,6 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
     public Packet getDescriptionPacket() {
         NBTTagCompound nbtTag = new NBTTagCompound();
         this.writeToNBT(nbtTag);
-        nbtTag.removeTag("SpawnPotentials");
         return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
     }
 }
