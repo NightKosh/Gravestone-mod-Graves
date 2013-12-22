@@ -10,18 +10,18 @@ import gravestone.core.GSItem;
 import gravestone.core.proxy.CommonProxy;
 import gravestone.core.localization.GraveStoneLocalizationHandler;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import gravestone.core.GSBlock;
 import gravestone.core.GSGui;
 import gravestone.core.GSReciepes;
 import gravestone.core.GSTileEntity;
+import gravestone.core.commands.GSCommands;
 import gravestone.core.compatibility.GSCompatibility;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -49,7 +49,7 @@ public class ModGraveStone {
         instance = this;
     }
 
-    @PreInit
+    @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         GraveStoneLogger.preinit();
         GraveStoneConfig.getInstance(event.getModConfigurationDirectory().getAbsolutePath() + "/GraveStoneMod/", "GraveStone.cfg");
@@ -57,7 +57,7 @@ public class ModGraveStone {
         GSStructures.preInit();
     }
 
-    @Init
+    @Mod.EventHandler
     public void load(FMLInitializationEvent event) {
         // register death event
         MinecraftForge.EVENT_BUS.register(new EventHookGSGraveStone());
@@ -97,10 +97,15 @@ public class ModGraveStone {
         proxy.registerRenderers();
     }
 
-    @Mod.PostInit
+    @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         
         GSCompatibility.getInstance().checkMods();
         //GraveStoneLogger.logInfo(ModInfo.NAME + " has loaded successfully.");
+    }
+    
+    @Mod.EventHandler
+    public void serverStarting(FMLServerStartingEvent event) {
+        GSCommands.getInstance(event);
     }
 }
