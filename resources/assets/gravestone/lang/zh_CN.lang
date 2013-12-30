@@ -1,0 +1,65 @@
+# tabs
+itemGroup.tabGraveStone=墓碑
+
+
+# blocks
+## graves
+block.gravestone.gravestone=墓碑
+block.gravestone.cross=十字架
+block.gravestone.plate=墓碑板
+block.gravestone.dog_statue=狗雕像
+block.gravestone.cat_statue=猫雕像
+block.gravestone.wooden_sword=木剑墓碑
+block.gravestone.stone_sword=石剑墓碑
+block.gravestone.iron_sword=铁剑墓碑
+block.gravestone.golden_sword=金剑墓碑
+block.gravestone.diamond_sword=钻石剑墓碑
+
+## memorials
+block.memorial.cross=十字纪念碑
+block.memorial.obelisk=方尖碑
+block.memorial.steve_statue=玩家纪念碑
+block.memorial.villager_statue=村民纪念碑
+block.memorial.angel_statue=天使纪念碑
+block.memorial.dog_statue=狗纪念碑
+block.memorial.cat_statue=猫纪念碑
+block.memorial.creeper_statue=爬行者纪念碑
+
+## trap
+tile.trap.night.name=午夜石
+block.trap.curse=黑夜正在接近！
+
+## spawner
+tile.spawner.wither.name=凋灵刷怪笼
+
+## chests
+block.ghostly_chest.bats_chest=带着蝙蝠的箱子
+block.ghostly_chest.skeleton_chest=带着骷髅的箱子
+
+
+# items
+## chisel
+item.chisel.name=凿子
+
+## graves
+item.grave.age=已生活了
+item.grave.days=天
+item.grave.sword_name=剑的名字
+item.grave.sword_damage=剑的耐久值
+
+
+# gui
+gui.edit_grave=更改墓碑文字
+
+
+# entity
+entity.GSZombieDog.name=僵尸狗
+entity.GSSkeletonDog.name=骷髅狗
+entity.GSZombieCat.name=僵尸猫
+entity.GSSkeletonCat.name=骷髅猫
+
+
+# death messages
+death.GS.Herobrine=%1$s 惨遭Herobrine杀害！
+death.GS.death_sentence=%1$s 受到死刑判决！
+death.GS.tortures=%1$s 死在残酷的折磨下！
