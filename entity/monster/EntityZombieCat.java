@@ -3,6 +3,7 @@ package gravestone.entity.monster;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.core.Resources;
+import java.util.Random;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -31,6 +32,8 @@ import net.minecraft.world.World;
  */
 public class EntityZombieCat extends EntityUndeadCat {
 
+    private static final byte CAT_TYPES = 4;
+    
     public EntityZombieCat(World world) {
         super(world);
         texture = Resources.ZOMBIE_OZELOT;
@@ -197,5 +200,11 @@ public class EntityZombieCat extends EntityUndeadCat {
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             }
         }
+    }
+
+    @Override
+    public EntityLivingData onSpawnWithEgg(EntityLivingData data) {
+        this.setSkin(new Random().nextInt(CAT_TYPES));
+        return super.onSpawnWithEgg(data);
     }
 }
