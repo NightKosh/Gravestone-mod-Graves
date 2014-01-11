@@ -86,6 +86,8 @@ public class GraveStoneConfig {
     public static boolean spawnZombieCats;
     public static boolean spawnSkeletonDogs;
     public static boolean spawnSkeletonCats;
+    //foreign mobs spawn
+    public static boolean spawnMoCreaturesMobs;
     // sword grave
     public static boolean generateSwordGraves;
     // spawn chance
@@ -148,9 +150,10 @@ public class GraveStoneConfig {
         generatePetGraves = config.get(Configuration.CATEGORY_GENERAL, "GeneratePetGraves", true).getBoolean(true);
         generateGravesInLava = config.get(Configuration.CATEGORY_GENERAL, "GenerateGravesInLava", true).getBoolean(true);
         generateSwordGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateSwordGraves", true).getBoolean(true);
+        
         // store items
-        Property graveItemsCountProperty = config.get(Configuration.CATEGORY_GENERAL, "SavedItemsCount", 10);
-        graveItemsCountProperty.comment = "This value must be between 0 an 40!";
+        Property graveItemsCountProperty = config.get(Configuration.CATEGORY_GENERAL, "SavedItemsCount", 40);
+        graveItemsCountProperty.comment = "This value must be between 0 an 40(in this case all items will be stored)!";
         graveItemsCount = graveItemsCountProperty.getInt();
 
         if (graveItemsCount > 40 || graveItemsCount < 0) {
@@ -158,15 +161,19 @@ public class GraveStoneConfig {
         }
 
         // spawn rate
-        Property graveSpawnRateProperty = config.get(Configuration.CATEGORY_GENERAL, "SpawnRate", 1800);
-        graveSpawnRateProperty.comment = "This value must be bigger than 1800!";
+        Property graveSpawnRateProperty = config.get(Configuration.CATEGORY_GENERAL, "SpawnRate", 1000);
+        graveSpawnRateProperty.comment = "This value must be bigger than 600!";
         graveSpawnRate = graveSpawnRateProperty.getInt();
 
-        if (graveSpawnRate < 1800) {
-            graveSpawnRate = 1800;
+        if (graveSpawnRate < 600) {
+            graveSpawnRate = 600;
         }
 
         spawnChance = config.get(Configuration.CATEGORY_GENERAL, "SpawnChance", 80).getInt();
+        
+        // spawned creatures
+        spawnMoCreaturesMobs = config.get(Configuration.CATEGORY_GENERAL, "SpawnMoCreaturesMobsByGraves", true).getBoolean(true);
+        
         enableNightStone = config.get(Configuration.CATEGORY_GENERAL, "EnableNightStone", true).getBoolean(true);
     }
 

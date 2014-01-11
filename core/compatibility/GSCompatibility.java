@@ -6,6 +6,7 @@ package gravestone.core.compatibility;
 
 import cpw.mods.fml.common.Loader;
 import gravestone.GraveStoneLogger;
+import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSBiomes;
 import gravestone.core.GSEntity;
@@ -39,19 +40,19 @@ public class GSCompatibility {
     public static final short BATTLEGEAR_FIRST_SLOT = 150;
     public static final short BATTLEGEAR_LAST_SLOT = 155;
     private static boolean isMoCreaturesInstalled = false;
-    private static boolean isTwilightForestInstalled = false;
     private static boolean isHighlandsInstalled = false;
     private static boolean isBiomesOPlentyInstalled = false;
     private static boolean isExtrabiomesXLInstalled = false;
     private static boolean isBattlegearInstalled = false;
     private static boolean isArsMagicaInstalled = false;
+    // mo_creatures mobs classes
+    public static final String MO_CREATURES_S_SKELETON = "drzhark.mocreatures.entity.monster.MoCEntitySilverSkeleton";
+    public static final String MO_CREATURES_WRAITH = "drzhark.mocreatures.entity.monster.MoCEntityWraith";
+    public static final String MO_CREATURES_F_WRAITH = "drzhark.mocreatures.entity.monster.MoCEntityFlameWraith";
+    public static final String MO_CREATURES_SCORPIONS = "drzhark.mocreatures.entity.monster.MoCEntityScorpion";
 
     public static boolean isMoCreaturesInstalled() {
         return isMoCreaturesInstalled;
-    }
-
-    public static boolean isTwilightForestInstalled() {
-        return isTwilightForestInstalled;
     }
 
     public static boolean isHighlandsInstalled() {
@@ -79,13 +80,14 @@ public class GSCompatibility {
         // adding foreign mobs
         if (Loader.isModLoaded("MoCreatures")) {
             isMoCreaturesInstalled = true;
-            GSMobSpawn.addMoCreaturesMobs();
+            if (GraveStoneConfig.spawnMoCreaturesMobs) {
+                GSMobSpawn.addMoCreaturesMobs();
+            }
         }
 
-        if (Loader.isModLoaded("TwilightForest")) {
-            isTwilightForestInstalled = true;
-            GSMobSpawn.addTwilightForestMobs();
-        }
+        //if (Loader.isModLoaded("TwilightForest")) {
+            //isTwilightForestInstalled = true;
+        //}
 
         // adding foreign bioms
         if (Loader.isModLoaded("Highlands")) {

@@ -3,15 +3,8 @@ package gravestone.tileentity;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSMobSpawn;
 import gravestone.block.enums.EnumGraves;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingData;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -29,7 +22,7 @@ public class GSGraveStoneSpawn {
      * The stored delay before a new spawn.
      */
     private int delay = 600;
-    private static final int MIN_DELAY = 800;
+    private static final int MIN_DELAY = 600;
     private Entity spawnedMob;
     private List field_92060_e = null;
     private boolean getNewMob = true;
@@ -73,7 +66,7 @@ public class GSGraveStoneSpawn {
     }
 
     /**
-     * Update entity s state.
+     * Update entity state.
      */
     public void updateEntity() {
         if (canSpawnMobs(tileEntity.worldObj) && anyPlayerInRange()) {

@@ -3,6 +3,7 @@ package gravestone.core;
 import gravestone.GraveStoneLogger;
 import gravestone.config.GraveStoneConfig;
 import gravestone.block.enums.EnumGraves;
+import gravestone.core.compatibility.GSCompatibility;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -55,13 +56,6 @@ public class GSMobSpawn {
     // catacombs statues mobs
     public static ArrayList<String> catacombsStatuesMobs = new ArrayList(Arrays.asList(
             "Skeleton", "Zombie"));
-    // mo_creatures mobs classes
-    private static final String MO_CREATURES_S_SKELETON = "drzhark.mocreatures.entity.monster.MoCEntitySilverSkeleton";
-    private static final String MO_CREATURES_WRAITH = "drzhark.mocreatures.entity.monster.MoCEntityWraith";
-    private static final String MO_CREATURES_F_WRAITH = "drzhark.mocreatures.entity.monster.MoCEntityFlameWraith";
-    private static final String MO_CREATURES_SCORPIONS = "drzhark.mocreatures.entity.monster.MoCEntityScorpion";
-    // twilight forest mobs classes
-    private static final String TWILIGHT_WRAITH = "twilightforest.entity.EntityTFWraith";
     //
     private static final int HELL_HEIGHT = 51;
 
@@ -311,53 +305,21 @@ public class GSMobSpawn {
      */
     public static void addMoCreaturesMobs() {
         GraveStoneLogger.logInfo("start load Mo'Creatures mobs");
-        Constructor<EntityLiving> constructor = getForeinMobConstructor(MO_CREATURES_S_SKELETON);
 
-        if (constructor != null) {
-            MOB_ID.add("SilverSkeleton");
-            mobNameToClassMapping.put("SilverSkeleton", constructor);
-            //catacombsSpawnerMobs.add("SilverSkeleton");
-            //catacombsStatuesMobs.add("SilverSkeleton");
-        }
+        addMobToList(MOB_ID, "SilverSkeleton", getForeinMobConstructor(GSCompatibility.MO_CREATURES_S_SKELETON));
+        addMobToList(MOB_ID, "Wraith", getForeinMobConstructor(GSCompatibility.MO_CREATURES_WRAITH));
+        addMobToList(HELL_MOB_ID, "FlameWraith", getForeinMobConstructor(GSCompatibility.MO_CREATURES_F_WRAITH));
 
-        constructor = getForeinMobConstructor(MO_CREATURES_WRAITH);
-
-        if (constructor != null) {
-            MOB_ID.add("Wraith");
-            mobNameToClassMapping.put("Wraith", constructor);
-            catacombsSpawnerMobs.add("Wraith");
-            //catacombsStatuesMobs.add("Wraith");
-        }
-
-        constructor = getForeinMobConstructor(MO_CREATURES_F_WRAITH);
-
-        if (constructor != null) {
-            HELL_MOB_ID.add("FlameWraith");
-            mobNameToClassMapping.put("FlameWraith", constructor);
-            //catacombsStatuesMobs.add("FlameWraith");
-        }
-
-        if (getForeinMobConstructor(MO_CREATURES_SCORPIONS) != null) {
-            //catacombsSpawnerMobs.add("Scorpion");
-        }
         GraveStoneLogger.logInfo("end load Mo'Creatures mobs");
     }
-
-    /**
-     * Add Mo'creatures mobs to mob list
-     */
-    public static void addTwilightForestMobs() {
-        GraveStoneLogger.logInfo("start load Twilight Forest mobs");
-        Constructor<EntityLiving> constructor = getForeinMobConstructor(TWILIGHT_WRAITH);
-
+    
+    private static void addMobToList(ArrayList<String> MOB_ID, String mobName, Constructor<EntityLiving> constructor) {
         if (constructor != null) {
-            MOB_ID.add("Twilight Wraith");
-            mobNameToClassMapping.put("Twilight Wraith", constructor);
-            //catacombsSpawnerMobs.add("Twilight Wraith");
-            //catacombsStatuesMobs.add("Twilight Wraith");
-        }
-        GraveStoneLogger.logInfo("end load Twilight Forest mobs");
+            MOB_ID.add(mobName);
+            mobNameToClassMapping.put(mobName, constructor);
+        }    
     }
+        
 
     /**
      * Return random mob for spawner
