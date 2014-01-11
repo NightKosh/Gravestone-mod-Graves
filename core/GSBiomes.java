@@ -15,8 +15,7 @@ import net.minecraft.world.biome.BiomeGenBase;
  */
 public class GSBiomes {
 
-    private GSBiomes() {
-    }
+    private GSBiomes() {}
     // list of allowed biomes for catacombs generator
     private static ArrayList CATACOMBS_BIOMES = new ArrayList(Arrays.asList(
             BiomeGenBase.plains.biomeID, BiomeGenBase.forest.biomeID,
@@ -29,10 +28,26 @@ public class GSBiomes {
     private static final ArrayList GRAVES_BIOMES = new ArrayList(Arrays.asList(
             BiomeGenBase.frozenOcean.biomeID, BiomeGenBase.frozenRiver.biomeID,
             BiomeGenBase.ocean.biomeID, BiomeGenBase.river.biomeID));
+    // entity biomes
+    private static ArrayList<BiomeGenBase> zombieDogBiomes = new ArrayList(Arrays.asList(
+            BiomeGenBase.forest, BiomeGenBase.forestHills,
+            BiomeGenBase.swampland, BiomeGenBase.taiga, BiomeGenBase.taigaHills));
+    private static ArrayList<BiomeGenBase> zombieCatBiomes = new ArrayList(Arrays.asList(
+            BiomeGenBase.jungle, BiomeGenBase.jungleHills));
+    private static ArrayList<BiomeGenBase> skeletonDogBiomes = new ArrayList(Arrays.asList(
+            BiomeGenBase.forest, BiomeGenBase.forestHills,
+            BiomeGenBase.swampland, BiomeGenBase.taiga, BiomeGenBase.taigaHills));
+    private static ArrayList<BiomeGenBase> skeletonCatBiomes = new ArrayList(Arrays.asList(
+            BiomeGenBase.jungle, BiomeGenBase.jungleHills));
+    
+    // highlands
     private static final String HIGHLANDS_NAME = "Highlands";
     private static BiomeGenBase[] HIGHLANDS_CATACOMBS_BIOMES;
     private static BiomeGenBase[] HIGHLANDS_MEMORIAL_BIOMES;
     private static BiomeGenBase[] HIGHLANDS_GRAVES_BIOMES;
+    
+    private static BiomeGenBase[] HIGHLANDS_UNDEAD_DOGS_BIOMES;
+    private static BiomeGenBase[] HIGHLANDS_UNDEAD_CATS_BIOMES;
 
     public static void loadHighlandsBiomes() {
         try {
@@ -47,6 +62,14 @@ public class GSBiomes {
             };
             HIGHLANDS_GRAVES_BIOMES = new BiomeGenBase[]{
                 HighlandsBiomes.lake
+            };
+            HIGHLANDS_UNDEAD_DOGS_BIOMES = new BiomeGenBase[] {
+                HighlandsBiomes.autumnForest, HighlandsBiomes.birchHills,
+                HighlandsBiomes.lowlands, HighlandsBiomes.rainforest,
+                HighlandsBiomes.tallPineForest, HighlandsBiomes.woodlands
+            };
+            HIGHLANDS_UNDEAD_CATS_BIOMES = new BiomeGenBase[] {
+                HighlandsBiomes.tropics, HighlandsBiomes.savannah
             };
         } catch (Exception e) {
             GraveStoneLogger.logError("Can't load Highlands biomes");
@@ -78,11 +101,33 @@ public class GSBiomes {
                 unNamedBiomeError(HIGHLANDS_NAME, i);
             }
         }
+
+        for (int i = 0; i < HIGHLANDS_UNDEAD_DOGS_BIOMES.length; i++) {
+            if (HIGHLANDS_UNDEAD_DOGS_BIOMES[i] != null) {
+                zombieDogBiomes.add(HIGHLANDS_UNDEAD_DOGS_BIOMES[i]);
+                skeletonDogBiomes.add(HIGHLANDS_UNDEAD_DOGS_BIOMES[i]);
+            } else {
+                unNamedBiomeError(HIGHLANDS_NAME, i);
+            }
+        }
+
+        for (int i = 0; i < HIGHLANDS_UNDEAD_CATS_BIOMES.length; i++) {
+            if (HIGHLANDS_UNDEAD_CATS_BIOMES[i] != null) {
+                zombieCatBiomes.add(HIGHLANDS_UNDEAD_CATS_BIOMES[i]);
+                skeletonCatBiomes.add(HIGHLANDS_UNDEAD_CATS_BIOMES[i]);
+            } else {
+                unNamedBiomeError(HIGHLANDS_NAME, i);
+            }
+        }
     }
+    
+    // Biomes o plenty
     private static final String BIOMES_OPLENTY_NAME = "Biomes o plenty";
     private static BiomeGenBase[] BIOMES_OPLENTY_CATACOMBS_BIOMES;
     private static BiomeGenBase[] BIOMES_OPLENTY_MEMORIAL_BIOMES;
     private static BiomeGenBase[] BIOMES_OPLENTY_GRAVES_BIOMES;
+    private static BiomeGenBase[] BIOMES_OPLENTY_UNDEAD_DOGS_BIOMES;
+    private static BiomeGenBase[] BIOMES_OPLENTY_UNDEAD_CATS_BIOMES;
 
     public static void loadBiomsOPlentyBiomes() {
         try {
@@ -129,6 +174,19 @@ public class GSBiomes {
             };
             BIOMES_OPLENTY_GRAVES_BIOMES = new BiomeGenBase[]{
                 biomesoplenty.api.Biomes.mangrove.get()
+            };   
+            BIOMES_OPLENTY_UNDEAD_DOGS_BIOMES = new BiomeGenBase[]{
+                biomesoplenty.api.Biomes.deadForest.get(),
+                biomesoplenty.api.Biomes.deadForestSnow.get(),
+                biomesoplenty.api.Biomes.birchForest.get(),
+                biomesoplenty.api.Biomes.borealForest.get(),
+                biomesoplenty.api.Biomes.ominousWoods.get(),
+                biomesoplenty.api.Biomes.frostForest.get(),
+            };
+            BIOMES_OPLENTY_UNDEAD_CATS_BIOMES = new BiomeGenBase[]{
+                biomesoplenty.api.Biomes.savanna.get(),
+                biomesoplenty.api.Biomes.tropics.get()
+                
             };
         } catch (Exception e) {
             GraveStoneLogger.logError("Can't load Bioms O Plenty biomes");
@@ -160,7 +218,27 @@ public class GSBiomes {
                 unNamedBiomeError(BIOMES_OPLENTY_NAME, i);
             }
         }
+
+        for (int i = 0; i < BIOMES_OPLENTY_UNDEAD_DOGS_BIOMES.length; i++) {
+            if (BIOMES_OPLENTY_UNDEAD_DOGS_BIOMES[i] != null) {
+                zombieDogBiomes.add(BIOMES_OPLENTY_UNDEAD_DOGS_BIOMES[i]);
+                skeletonDogBiomes.add(BIOMES_OPLENTY_UNDEAD_DOGS_BIOMES[i]);
+            } else {
+                unNamedBiomeError(BIOMES_OPLENTY_NAME, i);
+            }
+        }
+
+        for (int i = 0; i < BIOMES_OPLENTY_UNDEAD_CATS_BIOMES.length; i++) {
+            if (BIOMES_OPLENTY_UNDEAD_CATS_BIOMES[i] != null) {
+                zombieCatBiomes.add(BIOMES_OPLENTY_UNDEAD_CATS_BIOMES[i]);
+                skeletonCatBiomes.add(BIOMES_OPLENTY_UNDEAD_CATS_BIOMES[i]);
+            } else {
+                unNamedBiomeError(BIOMES_OPLENTY_NAME, i);
+            }
+        }
     }
+    
+    // ExtrabiomsXL
     private static final String EXTRABIOMES_XL_NAME = "ExtrabiomsXL";
     private static final String[] EXTRABIOMES_XL_CATACOMBS_BIOMES = {
         "AutumnWoods", "BirchForest", "ForestedHills", "IceWasteland",
@@ -172,6 +250,12 @@ public class GSBiomes {
     };
     private static final String[] EXTRABIOMES_XL_GRAVES_BIOMES = {
         "Marsh"
+    };
+    private static final String[] EXTRABIOMES_XL_UNDEAD_DOGS_BIOMES = {
+        "AutumnWoods", "BirchForest", "ForestedHills", "SnowyForest", "Woodlands"
+    };
+    private static final String[] EXTRABIOMES_XL_UNDEAD_CATS_BIOMES = {
+        "Savanna"
     };
 
     public static void addExtrabiomsXLBiomes() {
@@ -204,6 +288,28 @@ public class GSBiomes {
                 }
             }
         }
+
+        for (int i = 0; i < EXTRABIOMES_XL_UNDEAD_DOGS_BIOMES.length; i++) {
+            if (Biomes.getBiome(EXTRABIOMES_XL_UNDEAD_DOGS_BIOMES[i]).isPresent()) {
+                if (Biomes.getBiome(EXTRABIOMES_XL_UNDEAD_DOGS_BIOMES[i]).get() != null) {
+                    zombieDogBiomes.add(Biomes.getBiome(EXTRABIOMES_XL_UNDEAD_DOGS_BIOMES[i]).get());
+                    skeletonDogBiomes.add(Biomes.getBiome(EXTRABIOMES_XL_UNDEAD_DOGS_BIOMES[i]).get());
+                } else {
+                    namedBiomeError(EXTRABIOMES_XL_NAME, EXTRABIOMES_XL_UNDEAD_DOGS_BIOMES[i]);
+                }
+            }
+        }
+
+        for (int i = 0; i < EXTRABIOMES_XL_UNDEAD_CATS_BIOMES.length; i++) {
+            if (Biomes.getBiome(EXTRABIOMES_XL_UNDEAD_CATS_BIOMES[i]).isPresent()) {
+                if (Biomes.getBiome(EXTRABIOMES_XL_UNDEAD_CATS_BIOMES[i]).get() != null) {
+                    zombieCatBiomes.add(Biomes.getBiome(EXTRABIOMES_XL_UNDEAD_CATS_BIOMES[i]).get());
+                    skeletonCatBiomes.add(Biomes.getBiome(EXTRABIOMES_XL_UNDEAD_CATS_BIOMES[i]).get());
+                } else {
+                    namedBiomeError(EXTRABIOMES_XL_NAME, EXTRABIOMES_XL_UNDEAD_CATS_BIOMES[i]);
+                }
+            }
+        }
     }
 
     public static ArrayList getCatacombsBiomes() {
@@ -216,6 +322,22 @@ public class GSBiomes {
 
     public static ArrayList getGravesBiomes() {
         return GRAVES_BIOMES;
+    }
+    
+    public static BiomeGenBase[] getZombieDogsBiomes() {
+        return zombieDogBiomes.toArray(new BiomeGenBase[zombieDogBiomes.size()]);
+    }
+    
+    public static BiomeGenBase[] getZombieCatsBiomes() {
+        return zombieCatBiomes.toArray(new BiomeGenBase[zombieCatBiomes.size()]);
+    }
+    
+    public static BiomeGenBase[] getSkeletonDogsBiomes() {
+        return skeletonDogBiomes.toArray(new BiomeGenBase[skeletonDogBiomes.size()]);
+    }
+    
+    public static BiomeGenBase[] getSkeletonCatsBiomes() {
+        return skeletonCatBiomes.toArray(new BiomeGenBase[skeletonCatBiomes.size()]);
     }
 
     private static void unNamedBiomeError(String modName, int biomeNum) {
