@@ -38,7 +38,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
     
     @Override
     public boolean generate(World world, Random rand, int x, int z, double chance, boolean isCommand) {
-        if (isCommand || (GraveStoneConfig.generateCatacombs && canSpawnStructureAtCoords(world, x, z, chance))) {
+        if (isCommand || (GraveStoneConfig.generateCatacombs && canSpawnStructureAtCoords(world, x, z, chance) && isHeightAcceptable(world, x, z))) {
             int direction = rand.nextInt(4);
             CatacombsSurface surface = new CatacombsSurface(world, rand, x, z, direction);
             GraveStoneLogger.logInfo("Generate catacombs at " + x + "x" + z);
@@ -81,5 +81,18 @@ public class CatacombsGenerator implements GSStructureGenerator {
 
     public static LinkedList<ChunkCoordIntPair> getStructuresList() {
         return structuresList;
+    }
+    
+    private static boolean isHeightAcceptable(World world, int x, int z) {
+        int height = 0;
+        int count = 0;
+        for (int xPos = x - 16; xPos < x + 16; x++) {
+            for (int zPos = z - 16; zPos < z + 16; z++) {
+                height += world.getTopSolidOrLiquidBlock(x, z);
+                count++;
+            }
+        }
+
+        return (height / count) < 75;
     }
 }
