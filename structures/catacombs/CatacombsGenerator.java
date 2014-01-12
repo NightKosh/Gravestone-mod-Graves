@@ -6,6 +6,8 @@ import gravestone.config.GraveStoneConfig;
 import gravestone.structures.GSStructureGenerator;
 import java.util.LinkedList;
 import java.util.Random;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.village.Village;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 
@@ -29,6 +31,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
         }
     }
     
+    private static final int VILLAGE_RANGE = 200; 
     public static final byte CATACOMBS_RANGE = 100;
     private static final double CHANCE = 0.0005D;
     protected static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
@@ -52,15 +55,25 @@ public class CatacombsGenerator implements GSStructureGenerator {
     }
 
     protected static boolean canSpawnStructureAtCoords(World world, int x, int z, double chance) {
-        return chance < CHANCE && GSBiomes.getCatacombsBiomes().contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z, 700);
+        return chance < CHANCE && GSBiomes.getCatacombsBiomes().contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z, 700, world);
     }
 
-    protected static boolean noAnyInRange(int x, int z, int range) {
+    protected static boolean noAnyInRange(int x, int z, int range, World world) {
         for (ChunkCoordIntPair position : structuresList) {
             if (position.chunkXPos > x - range && position.chunkXPos < x + range
                     && position.chunkZPos > z - range && position.chunkZPos < z + range) {
                 return false;
             }
+        }
+        
+        for (Object villageObj : world.villageCollectionObj.getVillageList()) {
+            ChunkCoordinates villageCenter = ((Village) villageObj).getCenter();
+            
+            if (villageCenter.posX > x - VILLAGE_RANGE && villageCenter.posX < x + VILLAGE_RANGE
+                    && villageCenter.posZ > z - VILLAGE_RANGE && villageCenter.posZ < z + VILLAGE_RANGE) {
+                return false;
+            }
+            
         }
 
         return true;
