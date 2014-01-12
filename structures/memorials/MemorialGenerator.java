@@ -7,6 +7,7 @@ import gravestone.core.GSBiomes;
 import gravestone.config.GraveStoneConfig;
 import gravestone.structures.GSStructureGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
+import net.minecraft.block.material.Material;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 
@@ -17,12 +18,13 @@ import net.minecraft.world.World;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class MemorialGenerator implements GSStructureGenerator {
-    
+
     private static MemorialGenerator instance;
+
     private MemorialGenerator() {
         instance = this;
     }
-    
+
     public static MemorialGenerator getInstance() {
         if (instance == null) {
             return new MemorialGenerator();
@@ -30,14 +32,17 @@ public class MemorialGenerator implements GSStructureGenerator {
             return instance;
         }
     }
-
     public static final double CHANCE = 0.05D;
     public static final short RANGE = 400;
     private static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
 
     @Override
     public boolean generate(World world, Random rand, int x, int z, double chance, boolean isCommand) {
-        if (isCommand || (GraveStoneConfig.generateMemorials && canSpawnStructureAtCoords(world, x, z, chance))) {
+        if (!isCommand) {
+            x = x + (16 - ComponentGSMemorial.X_LENGTH) / 2;
+            z = z + (16 - ComponentGSMemorial.Z_LENGTH) / 2;
+        }
+        if (isCommand || (GraveStoneConfig.generateMemorials && canSpawnStructureAtCoords(world, x, z, chance) && isNoWarterUnder(world, x, z))) {
             new ComponentGSMemorial(rand.nextInt(4), rand, x, z).addComponentParts(world, rand);
             GraveStoneLogger.logInfo("Generate memorial at " + x + "x" + z);
             structuresList.add(new ChunkCoordIntPair(x, z));
@@ -71,5 +76,10 @@ public class MemorialGenerator implements GSStructureGenerator {
 
     public static LinkedList<ChunkCoordIntPair> getStructuresList() {
         return structuresList;
+    }
+
+    private static boolean isNoWarterUnder(World world, int x, int z) {
+        int y = world.getTopSolidOrLiquidBlock(x, z);
+        return !world.getBlockMaterial(x, y, z).equals(Material.water);
     }
 }

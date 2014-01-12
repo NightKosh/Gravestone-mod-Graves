@@ -23,7 +23,7 @@ public class ComponentGSMemorial extends ComponentGraveStone {
 
     public ComponentGSMemorial(int direction, Random random, int x, int z) {
         super(direction);
-        boundingBox = BoundingBoxHelper.getCorrectBox(direction, x + (16 - X_LENGTH) / 2, 64, z + (16 - Z_LENGTH) / 2, X_LENGTH, HEIGHT, Z_LENGTH, 0);
+        boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, 64, z, X_LENGTH, HEIGHT, Z_LENGTH, 0);
     }
 
     /**
