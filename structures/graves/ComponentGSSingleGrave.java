@@ -20,7 +20,7 @@ public class ComponentGSSingleGrave extends ComponentGraveStone {
 
     public ComponentGSSingleGrave(int direction, Random random, int x, int z) {
         super(direction);
-        boundingBox = new StructureBoundingBox(x + 7, 0, z + 7, x + 7, 240, z + 7);
+        boundingBox = new StructureBoundingBox(x, 0, z, x, 240, z);
     }
 
     /**

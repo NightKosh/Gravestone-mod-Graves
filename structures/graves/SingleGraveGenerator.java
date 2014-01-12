@@ -37,6 +37,10 @@ public class SingleGraveGenerator implements GSStructureGenerator {
     @Override
     public boolean generate(World world, Random rand, int x, int z, double chance, boolean isCommand) {
         if (isCommand || (GraveStoneConfig.generateSingleGraves && canSpawnStructureAtCoords(world, x, z, chance))) {
+            if (!isCommand) {
+                x += 7;
+                z += 7;
+            }
             new ComponentGSSingleGrave(rand.nextInt(4), rand, x, z).addComponentParts(world, rand);
             structuresList.add(new ChunkCoordIntPair(x, z));
             return true;

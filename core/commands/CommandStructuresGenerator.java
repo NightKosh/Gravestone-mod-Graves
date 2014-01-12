@@ -33,7 +33,7 @@ public class CommandStructuresGenerator extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender icommandsender, String[] commandStr) {
-        GraveStoneLogger.logInfo("Catacombs generation command recieved");
+        GraveStoneLogger.logInfo("Structure generation command recieved");
 
         if (commandStr[0].equals("catacombs")) {
             generateStructure(icommandsender.getEntityWorld(), commandStr[1], commandStr[2], CatacombsGenerator.getInstance());
