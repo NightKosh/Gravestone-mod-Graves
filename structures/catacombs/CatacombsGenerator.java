@@ -59,6 +59,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
     }
 
     protected static boolean noAnyInRange(int x, int z, int range, World world) {
+        GraveStoneLogger.logInfo("Catacombs generation - Begin Checking area for another catacombs or villages");
         for (ChunkCoordIntPair position : structuresList) {
             if (position.chunkXPos > x - range && position.chunkXPos < x + range
                     && position.chunkZPos > z - range && position.chunkZPos < z + range) {
@@ -66,16 +67,19 @@ public class CatacombsGenerator implements GSStructureGenerator {
             }
         }
         
-        for (Object villageObj : world.villageCollectionObj.getVillageList()) {
-            ChunkCoordinates villageCenter = ((Village) villageObj).getCenter();
-            
-            if (villageCenter.posX > x - VILLAGE_RANGE && villageCenter.posX < x + VILLAGE_RANGE
-                    && villageCenter.posZ > z - VILLAGE_RANGE && villageCenter.posZ < z + VILLAGE_RANGE) {
-                return false;
+        if (world.villageCollectionObj != null && world.villageCollectionObj.getVillageList() != null) {
+            for (Object villageObj : world.villageCollectionObj.getVillageList()) {
+                ChunkCoordinates villageCenter = ((Village) villageObj).getCenter();
+
+                if (villageCenter.posX > x - VILLAGE_RANGE && villageCenter.posX < x + VILLAGE_RANGE
+                        && villageCenter.posZ > z - VILLAGE_RANGE && villageCenter.posZ < z + VILLAGE_RANGE) {
+                    return false;
+                }
+
             }
-            
         }
 
+        GraveStoneLogger.logInfo("Catacombs generation - End Checking area for another catacombs or villages");
         return true;
     }
 
@@ -84,15 +88,17 @@ public class CatacombsGenerator implements GSStructureGenerator {
     }
     
     private static boolean isHeightAcceptable(World world, int x, int z) {
+        GraveStoneLogger.logInfo("Catacombs generation - Begin Checking area height");
         int height = 0;
         int count = 0;
-        for (int xPos = x - 16; xPos < x + 16; x++) {
-            for (int zPos = z - 16; zPos < z + 16; z++) {
-                height += world.getTopSolidOrLiquidBlock(x, z);
+        for (int xPos = x; xPos < x + 16; xPos++) {
+            for (int zPos = z; zPos < z + 16; zPos++) {
+                height += world.getTopSolidOrLiquidBlock(xPos, zPos);
                 count++;
             }
         }
 
+        GraveStoneLogger.logInfo("Catacombs generation - End Checking area height");
         return (height / count) < 75;
     }
 }
