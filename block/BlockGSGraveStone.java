@@ -542,7 +542,7 @@ public class BlockGSGraveStone extends BlockContainer {
     /**
      * Create grave on death
      */
-    public void createOnDeath(World world, int x, int y, int z, DeathMessageInfo deathInfo, int direction, ItemStack[] items, int age, byte entityType) {
+    public void createOnDeath(World world, int x, int y, int z, DeathMessageInfo deathInfo, int direction, ItemStack[] items, int age, EnumGraveType entityType) {
         if (direction < 0) {
             direction = 360 + direction;
         }
@@ -555,7 +555,7 @@ public class BlockGSGraveStone extends BlockContainer {
         byte swordType = 0;
         ItemStack sword = null;
 
-        if (GraveStoneConfig.generateSwordGraves && world.rand.nextInt(4) == 0 && entityType == 0) {
+        if (GraveStoneConfig.generateSwordGraves && world.rand.nextInt(4) == 0 && entityType.equals(EnumGraveType.PLAYER_GRAVES)) {
             sword = GraveStoneHelper.checkSword(items);
 
             if (sword != null) {
@@ -572,19 +572,18 @@ public class BlockGSGraveStone extends BlockContainer {
                 }
             }
         }
-
         switch (entityType) {
-            case 0:
+            case PLAYER_GRAVES:
                 if (swordType == 0) {
                     graveType = GENERATED_GRAVES[rand.nextInt(GENERATED_GRAVES.length)];
                 } else {
                     graveType = (byte) (4 + swordType);
                 }
                 break;
-            case 1:
+            case DOGS_GRAVES:
                 graveType = DOG_GRAVES[rand.nextInt(DOG_GRAVES.length)];
                 break;
-            case 2:
+            case CATS_GRAVES:
                 graveType = CAT_GRAVES[rand.nextInt(CAT_GRAVES.length)];
                 break;
         }

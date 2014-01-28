@@ -3,6 +3,7 @@ package gravestone.core.event;
 import gravestone.config.GraveStoneConfig;
 import cpw.mods.fml.common.FMLCommonHandler;
 import gravestone.GraveStoneLogger;
+import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.core.GSBlock;
 import gravestone.core.compatibility.GSCompatibility;
 import gravestone.tileentity.DeathMessageInfo;
@@ -40,7 +41,7 @@ public class EventHookGSGraveStone {
                 createPlayerGrave((EntityPlayer) event.entity, event);
             } else {
                 if (GraveStoneConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
-                    createGrave(event.entity, event, null, ((EntityVillager) event.entity).getAge(), (byte) 0, false);
+                    createGrave(event.entity, event, null, ((EntityVillager) event.entity).getAge(), EnumGraveType.PLAYER_GRAVES, true);
                 }
 
                 if (GraveStoneConfig.generatePetGraves && event.entity instanceof EntityTameable) {
@@ -91,13 +92,13 @@ public class EventHookGSGraveStone {
                 player.inventory.clearInventory(-1, -1);
             }
 
-            createGrave(player, event, items, player.getAge(), (byte) 0, false);
+            createGrave(player, event, items, player.getAge(), EnumGraveType.PLAYER_GRAVES, false);
         } else {
-            createGrave(player, event, null, player.getAge(), (byte) 0, false);
+            createGrave(player, event, null, player.getAge(), EnumGraveType.PLAYER_GRAVES, false);
         }
     }
 
-    private void createGrave(Entity entity, LivingDeathEvent event, ItemStack[] items, int age, byte entityType, boolean isVillager) {
+    private void createGrave(Entity entity, LivingDeathEvent event, ItemStack[] items, int age, EnumGraveType entityType, boolean isVillager) {
         GSBlock.graveStone.createOnDeath(entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
                 getDeathMessage((EntityLivingBase) entity, event.source.damageType, isVillager),
                 MathHelper.floor_float(entity.rotationYaw), items, age, entityType);
@@ -108,9 +109,9 @@ public class EventHookGSGraveStone {
 
         if (pet.isTamed()) {
             if (pet instanceof EntityWolf) {
-                createGrave(entity, event, null, pet.getAge(), (byte) 1, false);
+                createGrave(entity, event, null, pet.getAge(), EnumGraveType.DOGS_GRAVES, false);
             } else if (pet instanceof EntityOcelot) {
-                createGrave(entity, event, null, pet.getAge(), (byte) 2, false);
+                createGrave(entity, event, null, pet.getAge(), EnumGraveType.CATS_GRAVES, false);
             }
         }
     }
