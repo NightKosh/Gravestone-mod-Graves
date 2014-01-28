@@ -2,6 +2,7 @@ package gravestone.core.event;
 
 import gravestone.config.GraveStoneConfig;
 import cpw.mods.fml.common.FMLCommonHandler;
+import gravestone.GraveStoneLogger;
 import gravestone.core.GSBlock;
 import gravestone.core.compatibility.GSCompatibility;
 import gravestone.tileentity.DeathMessageInfo;
@@ -34,12 +35,12 @@ public class EventHookGSGraveStone {
             if (!GraveStoneConfig.generateGravesInLava && event.source.damageType.equals("lava")) {
                 return;
             }
-
+                
             if (GraveStoneConfig.generatePlayerGraves && event.entityLiving instanceof EntityPlayer) {
                 createPlayerGrave((EntityPlayer) event.entity, event);
             } else {
                 if (GraveStoneConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
-                    createGrave(event.entity, event, null, ((EntityVillager) event.entity).getAge(), (byte) 0);
+                    createGrave(event.entity, event, null, ((EntityVillager) event.entity).getAge(), (byte) 0, false);
                 }
 
                 if (GraveStoneConfig.generatePetGraves && event.entity instanceof EntityTameable) {
@@ -90,15 +91,15 @@ public class EventHookGSGraveStone {
                 player.inventory.clearInventory(-1, -1);
             }
 
-            createGrave(player, event, items, player.getAge(), (byte) 0);
+            createGrave(player, event, items, player.getAge(), (byte) 0, false);
         } else {
-            createGrave(player, event, null, player.getAge(), (byte) 0);
+            createGrave(player, event, null, player.getAge(), (byte) 0, false);
         }
     }
 
-    private void createGrave(Entity entity, LivingDeathEvent event, ItemStack[] items, int age, byte entityType) {
+    private void createGrave(Entity entity, LivingDeathEvent event, ItemStack[] items, int age, byte entityType, boolean isVillager) {
         GSBlock.graveStone.createOnDeath(entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
-                getDeathMessage((EntityLivingBase) entity, event.source.damageType),
+                getDeathMessage((EntityLivingBase) entity, event.source.damageType, isVillager),
                 MathHelper.floor_float(entity.rotationYaw), items, age, entityType);
     }
 
@@ -107,24 +108,32 @@ public class EventHookGSGraveStone {
 
         if (pet.isTamed()) {
             if (pet instanceof EntityWolf) {
-                createGrave(entity, event, null, pet.getAge(), (byte) 1);
+                createGrave(entity, event, null, pet.getAge(), (byte) 1, false);
             } else if (pet instanceof EntityOcelot) {
-                createGrave(entity, event, null, pet.getAge(), (byte) 2);
+                createGrave(entity, event, null, pet.getAge(), (byte) 2, false);
             }
         }
     }
 
-    private DeathMessageInfo getDeathMessage(EntityLivingBase entity, String damageType) {
+    private DeathMessageInfo getDeathMessage(EntityLivingBase entity, String damageType, boolean isVillager) {
         EntityLivingBase killer = entity.func_94060_bK();
         String shortString = "death.attack." + damageType;
         String fullString = shortString + ".player";
 
         if (killer != null) {
-            String killerName = EntityList.getEntityString(killer);
-            if (killerName == null) {
-                killerName = "entity.generic.name";
+            String killerName;
+            if (killer instanceof EntityPlayer) {
+                killerName = ((EntityPlayer) killer).username;
+                if (isVillager) {
+                    GraveStoneLogger.logInfo("Villager was killed by " + killerName);
+                }
             } else {
-                killerName = "entity." + killerName + ".name";
+                killerName = EntityList.getEntityString(killer);
+                if (killerName == null) {
+                    killerName = "entity.generic.name";
+                } else {
+                    killerName = "entity." + killerName + ".name";
+                }
             }
             if (StatCollector.func_94522_b(fullString)) {
                 return new DeathMessageInfo(entity.getTranslatedEntityName(), fullString, killerName);
