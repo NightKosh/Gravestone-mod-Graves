@@ -4,6 +4,7 @@ import gravestone.block.enums.EnumGraves;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gravestone.ModGraveStone;
 import java.util.List;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
@@ -68,12 +69,11 @@ public class ItemBlockGSGraveStone extends ItemBlock {
             if (stack.stackTagCompound.hasKey("isLocalized") && stack.stackTagCompound.getBoolean("isLocalized")) {
                 if (stack.stackTagCompound.hasKey("name")) {
                     String name = stack.stackTagCompound.getString("name");
-                    String killerName = stack.stackTagCompound.getString("KillerName");
-
-                    if (killerName.length() != 0) {
-                        list.add(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name, killerName}).toString());
-                    } else {
+                    String killerName = ModGraveStone.proxy.getLocalizedEntityName(stack.stackTagCompound.getString("KillerName"));
+                    if (killerName.length() == 0) {
                         list.add(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name}).toString());
+                    } else {
+                        list.add(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name, killerName.toLowerCase()}).toString());
                     }
                 }
             } else {
