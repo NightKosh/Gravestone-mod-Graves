@@ -17,7 +17,7 @@ public class BlockGSBoneSlab extends BlockHalfSlab {
     public BlockGSBoneSlab(int id) {
         super(id, false, Material.rock);
         this.setStepSound(Block.soundStoneFootstep);
-        this.setUnlocalizedName("Bone slab");
+        this.setUnlocalizedName("bone_slab");
         this.setHardness(2F);
         this.setResistance(2F);
         this.setCreativeTab(ModGraveStone.creativeTab);

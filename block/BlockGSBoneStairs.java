@@ -16,7 +16,7 @@ public class BlockGSBoneStairs extends BlockStairs {
 
     public BlockGSBoneStairs(int id) {
         super(id, GSBlock.boneBlock, 0);
-        this.setUnlocalizedName("Bone stairs");
+        this.setUnlocalizedName("bone_stairs");
         this.setCreativeTab(ModGraveStone.creativeTab);
         this.setTextureName(Resources.BONE_BLOCK);
     }

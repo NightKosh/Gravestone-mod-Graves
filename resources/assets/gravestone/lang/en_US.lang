@@ -32,6 +32,12 @@ block.trap.curse=Darkness is coming!
 ## spawner
 tile.spawner.wither.name=Wither Spawner
 
+# bone blocks
+tile.bone_block.name=Bone block
+tile.skull_bone_block.name=Bone block with skull
+tile.bone_slab.name=Bone slab
+tile.bone_stairs.name=Bone stairs
+
 ## chests
 block.ghostly_chest.bats_chest=Chest with bats
 block.ghostly_chest.skeleton_chest=Chest with skeleton
@@ -57,6 +63,7 @@ entity.GSZombieDog.name=Zombie Dog
 entity.GSSkeletonDog.name=Skeleton Dog
 entity.GSZombieCat.name=Zombie Cat
 entity.GSSkeletonCat.name=Skeleton Cat
+entity.GSSkullCrawler=Skull Crawler
 
 
 # death messages

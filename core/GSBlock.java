@@ -15,8 +15,10 @@ import gravestone.block.BlockGSWitherSpawner;
 import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.block.GraveStoneHelper;
+import gravestone.block.enums.EnumBoneBlock;
 import gravestone.block.enums.EnumChestTypes;
 import gravestone.block.enums.IBlockEnum;
+import gravestone.item.ItemBlockGSBoneBlock;
 import gravestone.item.ItemBlockGSGraveStone;
 import gravestone.item.ItemBlockGSMemorial;
 import net.minecraft.block.Block;
@@ -83,17 +85,17 @@ public class GSBlock {
         // trap
         trap = new BlockGSTrap(GraveStoneConfig.timeTrapID);
         simpleBlockRegistration(trap, "GSTimeTrap", "Night stone", "pickaxe", 1);
-/*
+
         // bone block
         boneBlock = new BlockGSBoneBlock(GraveStoneConfig.boneBlockID);
-        simpleBlockRegistration(boneBlock, "GSBoneBlock", "Bone block", "pickaxe", 1);
+        advancedBlockRegistration(boneBlock, "GSBoneBlock", "Bone block", "pickaxe", 0, EnumBoneBlock.values(), ItemBlockGSBoneBlock.class);
         // bone slab
         boneSlab = new BlockGSBoneSlab(GraveStoneConfig.boneSlabID);
-        simpleBlockRegistration(boneSlab, "GSBoneSlab", "Bone slab", "pickaxe", 1);
+        simpleBlockRegistration(boneSlab, "GSBoneSlab", "Bone slab", "pickaxe", 0);
         // bone step
         boneStairs = new BlockGSBoneStairs(GraveStoneConfig.boneStairsID);
-        simpleBlockRegistration(boneStairs, "GSBoneStairs", "Bone stairs", "pickaxe", 1);
-        
+        simpleBlockRegistration(boneStairs, "GSBoneStairs", "Bone stairs", "pickaxe", 0);
+        /* WTF   "ChestType"  ????????
         // ghostChest
         ghostlyChest = new BlockGSGhostlyChest(GraveStoneConfig.ghostlyChestID);
         advancedBlockRegistration(ghostlyChest, "GSGhostlyChest", "Ghostly chest", "axe", 1, EnumChestTypes.values(), "ChestType");
@@ -110,6 +112,12 @@ public class GSBlock {
         MinecraftForge.setBlockHarvestLevel(block, tool, harvestLevel);
     }
     
+    private static void advancedBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel, IBlockEnum[] blockEnums, Class itemClass) {
+ 	GameRegistry.registerBlock(block, itemClass);
+        MinecraftForge.setBlockHarvestLevel(block, tool, harvestLevel);
+        subBlocksRegistration(block, blockEnums);
+    }
+    
     private static void advancedBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel, IBlockEnum[] blockEnums, String nbtName) {
         simpleBlockRegistration(block, registerName, name, tool, harvestLevel);
         subBlocksRegistration(block, blockEnums, nbtName);
@@ -119,6 +127,12 @@ public class GSBlock {
         simpleBlockRegistration(block, registerName, name, tool, harvestLevel);
         GameRegistry.registerBlock(memorial, itemClass);
         subBlocksRegistration(block, blockEnums, nbtName);
+    }
+    
+    private static void subBlocksRegistration(Block block, IBlockEnum[] blockEnums) {
+        for (byte meta = 0; meta < blockEnums.length; meta++) {
+            LanguageRegistry.addName(new ItemStack(block, 1, meta), blockEnums[meta].getName());
+        }
     }
     
     private static void subBlocksRegistration(Block block, IBlockEnum[] blockEnums, String nbtName) {

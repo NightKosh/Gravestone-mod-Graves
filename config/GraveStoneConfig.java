@@ -123,9 +123,10 @@ public class GraveStoneConfig {
         witherSpawnerID = config.getBlock("WitherSpawner", 1552).getInt();
         timeTrapID = config.getBlock("TimeTrap", 1553).getInt();
         memorialID = config.getBlock("Memorial", 1554).getInt();
-        /*boneBlockID = config.getBlock("BonesBlock", 1555).getInt();
+        boneBlockID = config.getBlock("BonesBlock", 1555).getInt();
         boneSlabID = config.getBlock("BonesSlab", 1556).getInt();
         boneStairsID = config.getBlock("BonesStairs", 1557).getInt();
+        /*
         ghostlyChestID = config.getBlock("GhostlyChest", 1558).getInt();
         skullCandleID = config.getBlock("SkullCandle", 1559).getInt();*/
         // items
