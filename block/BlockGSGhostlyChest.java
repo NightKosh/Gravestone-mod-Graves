@@ -209,7 +209,7 @@ public class BlockGSGhostlyChest extends BlockContainer {
 
         if (tileEntity != null) {
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("ChestType", tileEntity.getChestType().getId());
+            nbt.setByte("ChestType", (byte) tileEntity.getChestType().ordinal());
 
             itemStack.setTagCompound(nbt);
         }

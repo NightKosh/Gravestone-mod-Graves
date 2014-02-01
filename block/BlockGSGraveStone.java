@@ -17,6 +17,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -26,6 +27,7 @@ import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -381,6 +383,20 @@ public class BlockGSGraveStone extends BlockContainer {
         GraveStoneHelper.spawnMob(world, x, y, z);
     }
 
+    
+    @Override
+    public float getExplosionResistance(Entity par1Entity, World world, int x, int y, int z, double explosionX, double explosionY, double explosionZ) {
+        return getExplosionResistance(par1Entity);
+    }
+
+    @Override
+    public float getExplosionResistance(Entity par1Entity) {
+        return 18000000F;
+    }
+
+    public void onBlockExploded(World world, int x, int y, int z, Explosion explosion) {
+    }
+    
     /**
      * Called upon block activation (right click on the block.)
      */

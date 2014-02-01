@@ -10,19 +10,12 @@ import gravestone.ModGraveStone;
  */
 public enum EnumChestTypes implements IBlockEnum {
 
-    BATS_CHEST((byte) 0, "block.ghostly_chest.bats_chest"),
-    SKELETON_CHEST((byte) 1, "block.ghostly_chest.skeleton_chest");
-    private byte id;
+    BATS_CHEST("block.ghostly_chest.bats_chest"),
+    SKELETON_CHEST("block.ghostly_chest.skeleton_chest");
     private String name;
 
-    private EnumChestTypes(byte id, String name) {
-        this.id = id;
+    private EnumChestTypes(String name) {
         this.name = name;
-    }
-
-    @Override
-    public byte getId() {
-        return id;
     }
 
     @Override

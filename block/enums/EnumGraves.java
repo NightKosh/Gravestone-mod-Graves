@@ -29,11 +29,6 @@ public enum EnumGraves implements IBlockEnum {
     }
 
     @Override
-    public byte getId() {
-        return this.id;
-    }
-
-    @Override
     public String getName() {
         return ModGraveStone.proxy.getLocalizedString(this.name);
     }

@@ -10,5 +10,4 @@ package gravestone.block.enums;
 public interface IBlockEnum {
 
     public String getName();
-    public byte getId();
 }

@@ -116,7 +116,7 @@ public class TileEntityGSGhostlyChest extends TileEntity {
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
 
-        nbt.setByte("ChestType", chestType.getId());
+        nbt.setByte("ChestType", (byte) chestType.ordinal());
     }
 
     public void spawnMobs(World world) {
