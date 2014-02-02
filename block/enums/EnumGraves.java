@@ -10,21 +10,19 @@ import gravestone.ModGraveStone;
  */
 public enum EnumGraves implements IBlockEnum {
 
-    VERTICAL_PLATE((byte) 0, "block.gravestone.gravestone"),
-    CROSS((byte) 1, "block.gravestone.cross"),
-    HORISONTAL_PLATE((byte) 2, "block.gravestone.plate"),
-    DOG_STATUE((byte) 3, "block.gravestone.dog_statue"),
-    CAT_STATUE((byte) 4, "block.gravestone.cat_statue"),
-    WOODEN_SWORD((byte) 5, "block.gravestone.wooden_sword"),
-    STONE_SWORD((byte) 6, "block.gravestone.stone_sword"),
-    IRON_SWORD((byte) 7, "block.gravestone.iron_sword"),
-    GOLDEN_SWORD((byte) 8, "block.gravestone.golden_sword"),
-    DIAMOND_SWORD((byte) 9, "block.gravestone.diamond_sword");
-    private byte id;
+    VERTICAL_PLATE("block.gravestone.gravestone"),
+    CROSS("block.gravestone.cross"),
+    HORISONTAL_PLATE("block.gravestone.plate"),
+    DOG_STATUE("block.gravestone.dog_statue"),
+    CAT_STATUE("block.gravestone.cat_statue"),
+    WOODEN_SWORD("block.gravestone.wooden_sword"),
+    STONE_SWORD("block.gravestone.stone_sword"),
+    IRON_SWORD("block.gravestone.iron_sword"),
+    GOLDEN_SWORD("block.gravestone.golden_sword"),
+    DIAMOND_SWORD("block.gravestone.diamond_sword");
     private String name;
 
-    private EnumGraves(byte id, String name) {
-        this.id = id;
+    private EnumGraves(String name) {
         this.name = name;
     }
 

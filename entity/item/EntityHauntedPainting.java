@@ -9,13 +9,13 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class EntityGhostPainting extends EntityPainting {
+public class EntityHauntedPainting extends EntityPainting {
 
-    public EntityGhostPainting(World world) {
+    public EntityHauntedPainting(World world) {
         super(world);
     }
 
-    public EntityGhostPainting(World world, int par2, int par3, int par4, int par5) {
+    public EntityHauntedPainting(World world, int par2, int par3, int par4, int par5) {
         super(world, par2, par3, par4, par5);
     }
 }

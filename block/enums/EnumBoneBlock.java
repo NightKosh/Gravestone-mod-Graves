@@ -16,7 +16,9 @@ import gravestone.ModGraveStone;
 public enum EnumBoneBlock implements IBlockEnum {
 
     BONE_BLOCK("tile.bone_block.name"),
-    SKULL_BONE_BLOCK("tile.skull_bone_block.name");
+    SKULL_BONE_BLOCK("tile.bone_block.skull_name");
+    //CRAWLER_BONE_BLOCK("tile.bone_block.crawler_name"),
+    //CRAWLER_SKULL_BONE_BLOCK("tile.bone_block.crawler_skull_name");
     private String name;
 
     private EnumBoneBlock(String name) {
