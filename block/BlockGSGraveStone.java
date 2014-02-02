@@ -21,6 +21,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
@@ -383,7 +384,6 @@ public class BlockGSGraveStone extends BlockContainer {
         GraveStoneHelper.spawnMob(world, x, y, z);
     }
 
-    
     @Override
     public float getExplosionResistance(Entity par1Entity, World world, int x, int y, int z, double explosionX, double explosionY, double explosionZ) {
         return getExplosionResistance(par1Entity);
@@ -396,38 +396,45 @@ public class BlockGSGraveStone extends BlockContainer {
 
     public void onBlockExploded(World world, int x, int y, int z, Explosion explosion) {
     }
-    
+
     /**
      * Called upon block activation (right click on the block.)
      */
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-        if (world.isRemote) {
-            TileEntityGSGraveStone entity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
+        TileEntityGSGraveStone te = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
 
-            if (entity != null) {
-                String name;
-                String deathText;
-                String killerName;
-                deathText = entity.getDeathTextComponent().getDeathText();
+        if (te != null) {
+            if (world.isRemote) {
+                if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemSpade) {
+                } else {
+                    String name;
+                    String deathText;
+                    String killerName;
+                    deathText = te.getDeathTextComponent().getDeathText();
 
-                if (deathText.length() != 0) {
-                    if (entity.getDeathTextComponent().isLocalized()) {
-                        name = entity.getDeathTextComponent().getName();
-                        killerName = ModGraveStone.proxy.getLocalizedEntityName(entity.getDeathTextComponent().getKillerName());
+                    if (deathText.length() != 0) {
+                        if (te.getDeathTextComponent().isLocalized()) {
+                            name = te.getDeathTextComponent().getName();
+                            killerName = ModGraveStone.proxy.getLocalizedEntityName(te.getDeathTextComponent().getKillerName());
 
-                        if (killerName.length() == 0) {
-                            player.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name}));
+                            if (killerName.length() == 0) {
+                                player.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name}));
+                            } else {
+                                player.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name, killerName}));
+                            }
                         } else {
-                            player.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name, killerName}));
+                            player.sendChatToPlayer(ChatMessageComponent.createFromText(deathText));
                         }
-                    } else {
-                        player.sendChatToPlayer(ChatMessageComponent.createFromText(deathText));
-                    }
 
-                    if (entity.getAge() != -1) {
-                        //entityPlayer.sendChatToPlayer("Had lived " + entity.getAge() + " days");
+                        if (te.getAge() != -1) {
+                            //entityPlayer.sendChatToPlayer("Had lived " + entity.getAge() + " days");
+                        }
                     }
+                }
+            } else {
+                if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemSpade) {
+                    te.dropAllItems();
                 }
             }
         }
