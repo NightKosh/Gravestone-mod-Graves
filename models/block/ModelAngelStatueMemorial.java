@@ -13,18 +13,18 @@ import net.minecraft.client.model.ModelRenderer;
 @SideOnly(Side.CLIENT)
 public class ModelAngelStatueMemorial extends ModelGraveStone {
 
-    ModelRenderer Legs;
-    ModelRenderer Body;
-    ModelRenderer Head;
-    ModelRenderer RightArm;
-    ModelRenderer RightArm2;
-    ModelRenderer LeftArm;
-    ModelRenderer LeftArm2;
-    ModelRenderer RightWing;
-    ModelRenderer RightWing2;
-    ModelRenderer LeftWing;
-    ModelRenderer LeftWing2;
-    ModelSmallPedestal pedestal;
+    private ModelRenderer Legs;
+    private ModelRenderer Body;
+    private ModelRenderer Head;
+    private ModelRenderer RightArm;
+    private ModelRenderer RightArm2;
+    private ModelRenderer LeftArm;
+    private ModelRenderer LeftArm2;
+    private ModelRenderer RightWing;
+    private ModelRenderer RightWing2;
+    private ModelRenderer LeftWing;
+    private ModelRenderer LeftWing2;
+    private ModelBigPedestal pedestal;
 
     public ModelAngelStatueMemorial() {
         textureWidth = 64;
@@ -95,13 +95,13 @@ public class ModelAngelStatueMemorial extends ModelGraveStone {
         LeftWing2.setTextureSize(64, 64);
         LeftWing2.mirror = true;
         setRotation(LeftWing2, -1.082104F, -0.1745329F, -0.3839724F);
-        pedestal = new ModelSmallPedestal();
+        pedestal = new ModelBigPedestal();
     }
 
     @Override
     public void renderAll() {
         float par7 = 0.0625F;
-        ModelSmallPedestal.shiftModel();
+        pedestal.shiftModel();
         Legs.render(par7);
         Body.render(par7);
         Head.render(par7);

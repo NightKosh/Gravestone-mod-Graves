@@ -62,6 +62,7 @@ public class Resources {
     public static final ResourceLocation CREEPER_AURA = new ResourceLocation("textures/entity/creeper/creeper_armor.png");
     public static final ResourceLocation SWORD_AURA = new ResourceLocation("textures/misc/enchanted_item_glint.png");
     public static final ResourceLocation SMALL_PEDESTAL = new ResourceLocation(MEMORIALS_LOCATION + "ModelSmallPedestal.png");
+    public static final ResourceLocation BIG_PEDESTAL = new ResourceLocation(MEMORIALS_LOCATION + "ModelBigPedestal.png");
     public static final ResourceLocation STEVE_ARMOR = new ResourceLocation(MEMORIALS_LOCATION + "ModelSteveStatueMemorialArmor.png");
     
     // ghostly chest

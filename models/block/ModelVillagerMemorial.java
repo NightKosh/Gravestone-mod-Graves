@@ -14,28 +14,13 @@ import net.minecraft.util.MathHelper;
 @SideOnly(Side.CLIENT)
 public class ModelVillagerMemorial extends ModelGraveStone {
 
-    /**
-     * The head box of the VillagerModel
-     */
     public ModelRenderer villagerHead;
-    /**
-     * The body of the VillagerModel
-     */
     public ModelRenderer villagerBody;
-    /**
-     * The arms of the VillagerModel
-     */
     public ModelRenderer villagerArms;
-    /**
-     * The right leg of the VillagerModel
-     */
     public ModelRenderer rightVillagerLeg;
-    /**
-     * The left leg of the VillagerModel
-     */
     public ModelRenderer leftVillagerLeg;
     public ModelRenderer field_82898_f;
-    ModelSmallPedestal pedestal;
+    ModelBigPedestal pedestal;
 
     public ModelVillagerMemorial() {
         float par1 = 0;
@@ -67,7 +52,7 @@ public class ModelVillagerMemorial extends ModelGraveStone {
         this.leftVillagerLeg.mirror = true;
         this.leftVillagerLeg.setRotationPoint(2.0F, 12.0F + par2, 0.0F);
         this.leftVillagerLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, par1);
-        pedestal = new ModelSmallPedestal();
+        pedestal = new ModelBigPedestal();
     }
 
     /**
@@ -92,7 +77,7 @@ public class ModelVillagerMemorial extends ModelGraveStone {
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F);
         float par7 = 0.0625F;
-        ModelSmallPedestal.shiftModel();
+        pedestal.shiftModel();
         this.villagerHead.render(par7);
         this.villagerBody.render(par7);
         this.rightVillagerLeg.render(par7);

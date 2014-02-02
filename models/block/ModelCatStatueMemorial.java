@@ -14,48 +14,20 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class ModelCatStatueMemorial extends ModelGraveStone {
 
-    /**
-     * The back left leg model for the Ocelot.
-     */
-    ModelRenderer ocelotBackLeftLeg;
-    /**
-     * The back right leg model for the Ocelot.
-     */
-    ModelRenderer ocelotBackRightLeg;
-    /**
-     * The front left leg model for the Ocelot.
-     */
-    ModelRenderer ocelotFrontLeftLeg;
-    /**
-     * The front right leg model for the Ocelot.
-     */
-    ModelRenderer ocelotFrontRightLeg;
-    /**
-     * The head model for the Ocelot.
-     */
-    ModelRenderer ocelotHead;
-    /**
-     * The body model for the Ocelot.
-     */
-    ModelRenderer ocelotBody;
-    /**
-     * The tail model for the Ocelot.
-     */
-    ModelRenderer ocelotTail;
-    /**
-     * The second part of tail model for the Ocelot.
-     */
-    ModelRenderer ocelotTail2;
-    ModelRenderer Pedestal1;
-    ModelRenderer Pedestal2;
-    ModelRenderer Pedestal3;
-    ModelRenderer Pedestal4;
-    ModelRenderer Pedestal5;
-    ModelRenderer Sign;
+    private ModelRenderer ocelotBackLeftLeg;
+    private ModelRenderer ocelotBackRightLeg;
+    private ModelRenderer ocelotFrontLeftLeg;
+    private ModelRenderer ocelotFrontRightLeg;
+    private ModelRenderer ocelotHead;
+    private ModelRenderer ocelotBody;
+    private ModelRenderer ocelotTail;
+    private ModelRenderer ocelotTail2;
+    
+    private ModelBigPedestal pedestal;
 
     public ModelCatStatueMemorial() {
         textureWidth = 64;
-        textureHeight = 64;
+        textureHeight = 32;
         this.setTextureOffset("head.main", 0, 0);
         this.setTextureOffset("head.nose", 0, 24);
         this.setTextureOffset("head.ear1", 0, 10);
@@ -88,42 +60,7 @@ public class ModelCatStatueMemorial extends ModelGraveStone {
         this.ocelotFrontRightLeg = new ModelRenderer(this, 40, 0);
         this.ocelotFrontRightLeg.addBox(-1.0F, 0.0F, 0.0F, 2, 10, 2);
         this.ocelotFrontRightLeg.setRotationPoint(-1.2F, 13.8F, -5.0F);
-        Pedestal1 = new ModelRenderer(this, 0, 32);
-        Pedestal1.addBox(0F, 0F, 0F, 16, 1, 16);
-        Pedestal1.setRotationPoint(-8F, 23F, -8F);
-        Pedestal1.setTextureSize(64, 64);
-        Pedestal1.mirror = true;
-        setRotation(Pedestal1, 0F, 0F, 0F);
-        Pedestal2 = new ModelRenderer(this, 0, 32);
-        Pedestal2.addBox(0F, 0F, 0F, 16, 1, 16);
-        Pedestal2.setRotationPoint(-8F, 8F, -8F);
-        Pedestal2.setTextureSize(64, 64);
-        Pedestal2.mirror = true;
-        setRotation(Pedestal2, 0F, 0F, 0F);
-        Pedestal3 = new ModelRenderer(this, 0, 32);
-        Pedestal3.addBox(0F, 0F, 0F, 14, 1, 14);
-        Pedestal3.setRotationPoint(-7F, 22F, -7F);
-        Pedestal3.setTextureSize(64, 64);
-        Pedestal3.mirror = true;
-        setRotation(Pedestal3, 0F, 0F, 0F);
-        Pedestal4 = new ModelRenderer(this, 0, 32);
-        Pedestal4.addBox(0F, 0F, 0F, 14, 1, 14);
-        Pedestal4.setRotationPoint(-7F, 9F, -7F);
-        Pedestal4.setTextureSize(64, 64);
-        Pedestal4.mirror = true;
-        setRotation(Pedestal4, 0F, 0F, 0F);
-        Pedestal5 = new ModelRenderer(this, 0, 32);
-        Pedestal5.addBox(0F, 0F, 0F, 12, 12, 12);
-        Pedestal5.setRotationPoint(-6F, 10F, -6F);
-        Pedestal5.setTextureSize(64, 64);
-        Pedestal5.mirror = true;
-        setRotation(Pedestal5, 0F, 0F, 0F);
-        Sign = new ModelRenderer(this, 0, 56);
-        Sign.addBox(0F, 0F, 0F, 10, 5, 1);
-        Sign.setRotationPoint(-5F, 13F, -6.5F);
-        Sign.setTextureSize(64, 64);
-        Sign.mirror = true;
-        setRotation(Sign, 0F, 0F, 0F);
+        pedestal = new ModelBigPedestal();
     }
 
     /**
@@ -158,13 +95,7 @@ public class ModelCatStatueMemorial extends ModelGraveStone {
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F);
         float par7 = 0.0625F;
-        Pedestal1.render(par7);
-        Pedestal2.render(par7);
-        Pedestal3.render(par7);
-        Pedestal4.render(par7);
-        Pedestal5.render(par7);
-        Sign.render(par7);
-        GL11.glTranslated(0, -1, 0.1);
+        pedestal.shiftModel();
         this.ocelotHead.render(par7);
         this.ocelotBody.render(par7);
         this.ocelotBackLeftLeg.render(par7);
@@ -173,5 +104,6 @@ public class ModelCatStatueMemorial extends ModelGraveStone {
         this.ocelotFrontRightLeg.render(par7);
         this.ocelotTail.render(par7);
         this.ocelotTail2.render(par7);
+        pedestal.renderAll();
     }
 }

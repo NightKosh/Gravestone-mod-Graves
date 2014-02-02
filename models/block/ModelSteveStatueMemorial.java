@@ -33,7 +33,7 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
      * hand, and if that item is a block.
      */
     public int heldItemRight;
-    ModelSmallPedestal pedestal;
+    ModelBigPedestal pedestal;
 
     public ModelSteveStatueMemorial() {
         float par1 = 0;
@@ -62,7 +62,7 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
         this.bipedLeftLeg.mirror = true;
         this.bipedLeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, par1);
         this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F + par2, 0.0F);
-        pedestal = new ModelSmallPedestal();
+        pedestal = new ModelBigPedestal();
     }
 
     /**
@@ -83,14 +83,6 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
         this.bipedRightLeg.rotateAngleY = 0.0F;
         this.bipedLeftLeg.rotateAngleY = 0.0F;
 
-        if (this.heldItemLeft != 0) {
-            this.bipedLeftArm.rotateAngleX = this.bipedLeftArm.rotateAngleX * 0.5F - ((float) Math.PI / 10F) * (float) this.heldItemLeft;
-        }
-
-        if (this.heldItemRight != 0) {
-            this.bipedRightArm.rotateAngleX = this.bipedRightArm.rotateAngleX * 0.5F - ((float) Math.PI / 10F) * (float) this.heldItemRight;
-        }
-
         this.bipedRightArm.rotateAngleY = 0.0F;
         this.bipedLeftArm.rotateAngleY = 0.0F;
         this.bipedBody.rotateAngleX = 0.0F;
@@ -108,7 +100,7 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
     @Override
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F);
-        ModelSmallPedestal.shiftModel();
+        pedestal.shiftModel();
         renderSteve();
         renderSteveLegs();
         pedestal.renderAll();
@@ -135,7 +127,7 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
     }
 
     private void renderArmor() {
-        ModelSmallPedestal.shiftModel();
+        pedestal.shiftModel();
         float scale = 1.1F;
         GL11.glScalef(scale, scale, scale);
         TileEntityGSMemorialRenderer.instance.bindTextureByName(Resources.STEVE_ARMOR);

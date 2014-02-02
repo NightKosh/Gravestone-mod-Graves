@@ -25,7 +25,7 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
     public ModelRenderer leg2;
     public ModelRenderer leg3;
     public ModelRenderer leg4;
-    ModelSmallPedestal pedestal;
+    ModelBigPedestal pedestal;
 
     public ModelCreeperStatueMemorial() {
         textureWidth = 64;
@@ -53,7 +53,7 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
         this.leg4 = new ModelRenderer(this, 0, 16);
         this.leg4.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, par1);
         this.leg4.setRotationPoint(2.0F, (float) (12 + b0), -4.0F);
-        pedestal = new ModelSmallPedestal();
+        pedestal = new ModelBigPedestal();
     }
 
     /**
@@ -74,7 +74,7 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
     @Override
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F, 0.0625F);
-        GL11.glTranslated(0, -0.3, 0);
+        GL11.glTranslated(0, -0.8, 0);
         renderCreeper();
         GL11.glTranslated(0, -0.19, 0);
         pedestal.renderAll();
