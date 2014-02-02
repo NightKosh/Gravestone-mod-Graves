@@ -44,7 +44,7 @@ public class GraveCorridor extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 2, 0, 1, 4, 0, 3, false, random, getCemeteryCatacombsStones());
         
         // trap floor
-        this.fillWithBlocks(world, boundingBox, 1, 0, 0, 5, 0, 0, GraveStoneConfig.timeTrapID, GraveStoneConfig.timeTrapID, false);
+        this.fillWithBlocks(world, boundingBox, 1, 0, 0, 5, 0, 0, GraveStoneConfig.trapID, GraveStoneConfig.trapID, false);
         
         // neter floor
         this.fillWithBlocks(world, boundingBox, 1, 0, 4, 5, 0, 4, Block.netherBrick.blockID, Block.netherBrick.blockID, false);

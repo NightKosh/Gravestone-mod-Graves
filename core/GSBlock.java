@@ -17,11 +17,13 @@ import gravestone.block.enums.EnumMemorials;
 import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumBoneBlock;
 import gravestone.block.enums.EnumHauntedChest;
+import gravestone.block.enums.EnumTrap;
 import gravestone.block.enums.IBlockEnum;
 import gravestone.item.ItemBlockGSBoneBlock;
 import gravestone.item.ItemBlockGSGraveStone;
 import gravestone.item.ItemBlockGSHauntedChest;
 import gravestone.item.ItemBlockGSMemorial;
+import gravestone.item.ItemBlockGSTrap;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -81,8 +83,8 @@ public class GSBlock {
         simpleBlockRegistration(witherSpawner, "GSWitherSpawner", "Wither spawner", "pickaxe", 1);
 
         // trap
-        trap = new BlockGSTrap(GraveStoneConfig.timeTrapID);
-        simpleBlockRegistration(trap, "GSTimeTrap", "Night stone", "pickaxe", 1);
+        trap = new BlockGSTrap(GraveStoneConfig.trapID);
+        advancedMetaBlockRegistration(trap, "GSTimeTrap", "Night stone", "pickaxe", 1, EnumTrap.values(), ItemBlockGSTrap.class);
 
         // bone block
         boneBlock = new BlockGSBoneBlock(GraveStoneConfig.boneBlockID);

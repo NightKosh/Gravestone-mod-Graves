@@ -92,8 +92,8 @@ public class EnderHall extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 9, 1, 15, 9, 3, 15, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         
         // trap floor
-        this.fillWithBlocks(world, boundingBox, 4, 0, 3, 8, 0, 3, GraveStoneConfig.timeTrapID, GraveStoneConfig.timeTrapID, false);
-        this.fillWithBlocks(world, boundingBox, 4, 0, 15, 8, 0, 15, GraveStoneConfig.timeTrapID, GraveStoneConfig.timeTrapID, false);
+        this.fillWithBlocks(world, boundingBox, 4, 0, 3, 8, 0, 3, GraveStoneConfig.trapID, GraveStoneConfig.trapID, false);
+        this.fillWithBlocks(world, boundingBox, 4, 0, 15, 8, 0, 15, GraveStoneConfig.trapID, GraveStoneConfig.trapID, false);
         
         // spawner
         ObjectsGenerationHelper.generateSpawner(this, world, 3, 0, 3, "Enderman");

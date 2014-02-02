@@ -101,7 +101,7 @@ public class Entrance extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 0, shiftY, shiftZ + 1, 3, shiftY, shiftZ + zLength + 4, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         
         // trap floor
-        this.fillWithBlocks(world, boundingBox, 0, shiftY - 4, shiftZ, 3, shiftY - 4, shiftZ + zLength + 4, GraveStoneConfig.timeTrapID, GraveStoneConfig.timeTrapID, false);
+        this.fillWithBlocks(world, boundingBox, 0, shiftY - 4, shiftZ, 3, shiftY - 4, shiftZ + zLength + 4, GraveStoneConfig.trapID, GraveStoneConfig.trapID, false);
 
         for (int j = 0; j < corridorLength; j++) {
             // nether walls

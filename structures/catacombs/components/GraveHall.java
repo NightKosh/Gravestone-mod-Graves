@@ -183,8 +183,8 @@ public class GraveHall extends CatacombsBaseComponent {
         GraveGenerationHelper.placeGrave(this, world, random, 13, 4, 1, metaBot, graveType, true);
         
         // trap floor
-        this.fillWithBlocks(world, boundingBox, 7, 0, 6, 9, 0, 6, GraveStoneConfig.timeTrapID, GraveStoneConfig.timeTrapID, false);
-        this.fillWithBlocks(world, boundingBox, 7, 0, 12, 9, 0, 12, GraveStoneConfig.timeTrapID, GraveStoneConfig.timeTrapID, false);
+        this.fillWithBlocks(world, boundingBox, 7, 0, 6, 9, 0, 6, GraveStoneConfig.trapID, GraveStoneConfig.trapID, false);
+        this.fillWithBlocks(world, boundingBox, 7, 0, 12, 9, 0, 12, GraveStoneConfig.trapID, GraveStoneConfig.trapID, false);
         
         // spawn bats
         MobSpawnHelper.spawnBats(world, random, boundingBox);

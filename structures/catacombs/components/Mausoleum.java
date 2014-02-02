@@ -83,7 +83,7 @@ public class Mausoleum extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 11, 0, 9, 11, 4, 10, false, random, getCemeteryCatacombsStones());
         
         // trap floor
-        this.fillWithBlocks(world, boundingBox, 6, 0, 2, 7, 0, 2, GraveStoneConfig.timeTrapID, GraveStoneConfig.timeTrapID, false);
+        this.fillWithBlocks(world, boundingBox, 6, 0, 2, 7, 0, 2, GraveStoneConfig.trapID, GraveStoneConfig.trapID, false);
         
         // brick columns
         this.fillWithRandomizedBlocks(world, boundingBox, 5, 1, 5, 5, 4, 5, false, random, getCemeteryCatacombsStones());

@@ -27,6 +27,7 @@ block.memorial.creeper_statue=Creeper statue
 
 ## trap
 tile.trap.night.name=Night stone
+tile.trap.thunder.name=Thunder stone
 block.trap.curse=Darkness is coming!
 
 ## spawner

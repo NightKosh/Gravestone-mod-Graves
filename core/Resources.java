@@ -21,7 +21,8 @@ public class Resources {
     // localization path
     public static final String LOCALIZATION_LOCATION = "/assets/" + MOD_NAME + "/lang/";
     // blocks
-    public static final String TIME_TRAP        = "nether_brick";
+    public static final String NIGHT_STONE      = "nether_brick";
+    public static final String THUNDER_STONE    = "stonebrick";
     public static final String WITHER_SPAWNER   = "mob_spawner";
     public static final String BONE_BLOCK       = MOD_NAME  + ":bone_block";
     public static final String SKULL_BONE_BLOCK = MOD_NAME  + ":skull_bone_block";

@@ -45,7 +45,7 @@ public class SpidersCorridor extends CatacombsBaseComponent {
             this.fillWithBlocks(world, boundingBox, 0, 4, 0 + z, 4, 4, 3 + z, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
             
             // trap floor
-            this.fillWithBlocks(world, boundingBox, 0, 0, 0 + z, 4, 0, 0 + z, GraveStoneConfig.timeTrapID, GraveStoneConfig.timeTrapID, false);
+            this.fillWithBlocks(world, boundingBox, 0, 0, 0 + z, 4, 0, 0 + z, GraveStoneConfig.trapID, GraveStoneConfig.trapID, false);
             
             // block walls
             this.fillWithRandomizedBlocks(world, boundingBox, 0, 1, 1 + z, 0, 3, 3 + z, false, random, getCemeteryCatacombsStones());

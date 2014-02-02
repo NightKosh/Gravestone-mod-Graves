@@ -40,7 +40,7 @@ public class TrapCorridor extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 1, 0, 1, 5, 0, 3, false, random, getCemeteryCatacombsStones());
         
         // trap floor
-        this.fillWithBlocks(world, boundingBox, 1, 0, 0, 5, 0, 0, GraveStoneConfig.timeTrapID, GraveStoneConfig.timeTrapID, false);
+        this.fillWithBlocks(world, boundingBox, 1, 0, 0, 5, 0, 0, GraveStoneConfig.trapID, GraveStoneConfig.trapID, false);
         
         // neter ceiling
         this.fillWithBlocks(world, boundingBox, 1, 4, 0, 5, 4, 3, Block.netherBrick.blockID, Block.netherBrick.blockID, false);

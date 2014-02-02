@@ -27,6 +27,7 @@ block.memorial.creeper_statue=爬行者纪念碑
 
 ## trap
 tile.trap.night.name=午夜石
+tile.trap.thunder.name=Thunder stone
 block.trap.curse=黑夜正在接近！
 
 ## spawner

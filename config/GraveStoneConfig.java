@@ -30,8 +30,8 @@ public class GraveStoneConfig {
     public static int witherSpawnerID;
     public static BlockGSWitherSpawner witherSpawner;
     // Block Time Trap
-    public static int timeTrapID;
-    public static BlockGSTrap timeTrap;
+    public static int trapID;
+    public static BlockGSTrap trap;
     // block memorial
     public static int memorialID;
     public static BlockGSMemorial memorial;
@@ -70,6 +70,7 @@ public class GraveStoneConfig {
     public static boolean canPlaceGravesEveryWhere;
     // disable/enable time changing by night stone
     public static boolean enableNightStone;
+    public static boolean enableThunderStone;
     // item
     public static int chiselId;
     // grave names
@@ -120,7 +121,7 @@ public class GraveStoneConfig {
         // blocks
         graveStoneID = config.getBlock("GraveStone", 1551).getInt();
         witherSpawnerID = config.getBlock("WitherSpawner", 1552).getInt();
-        timeTrapID = config.getBlock("TimeTrap", 1553).getInt();
+        trapID = config.getBlock("TimeTrap", 1553).getInt();
         memorialID = config.getBlock("Memorial", 1554).getInt();
         boneBlockID = config.getBlock("BonesBlock", 1555).getInt();
         boneSlabID = config.getBlock("BonesSlab", 1556).getInt();
@@ -173,7 +174,8 @@ public class GraveStoneConfig {
         // spawned creatures
         spawnMoCreaturesMobs = config.get(Configuration.CATEGORY_GENERAL, "SpawnMoCreaturesMobsByGraves", true).getBoolean(true);
         
-        enableNightStone = config.get(Configuration.CATEGORY_GENERAL, "EnableNightStone", true).getBoolean(true);
+        enableNightStone   = config.get(Configuration.CATEGORY_GENERAL, "EnableNightStone", true).getBoolean(true);
+        enableThunderStone = config.get(Configuration.CATEGORY_GENERAL, "EnableThunderStone", true).getBoolean(true);
     }
 
     private static void entityConfig() {
