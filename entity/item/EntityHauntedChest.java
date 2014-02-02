@@ -14,13 +14,13 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class EntityGhostlyChest extends Entity {
+public class EntityHauntedChest extends Entity {
 
-    public EntityGhostlyChest(World world) {
+    public EntityHauntedChest(World world) {
         super(world);
     }
 
-    public EntityGhostlyChest(World world, double x, double y, double z) {
+    public EntityHauntedChest(World world, double x, double y, double z) {
         super(world);
         this.posX = x;
         this.posY = y;

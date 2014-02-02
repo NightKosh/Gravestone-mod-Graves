@@ -1,6 +1,6 @@
 package gravestone.tileentity;
 
-import gravestone.block.enums.EnumChestTypes;
+import gravestone.block.enums.EnumHauntedChest;
 import gravestone.core.GSMobSpawn;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntityBat;
@@ -14,7 +14,7 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class TileEntityGSGhostlyChest extends TileEntity {
+public class TileEntityGSHauntedChest extends TileEntity {
 
     /**
      * The number of players currently using this chest
@@ -28,10 +28,10 @@ public class TileEntityGSGhostlyChest extends TileEntity {
      * The angle of the lid last tick
      */
     public float prevLidAngle;
-    private EnumChestTypes chestType;
+    private EnumHauntedChest chestType;
 
-    public TileEntityGSGhostlyChest() {
-        chestType = EnumChestTypes.BATS_CHEST;
+    public TileEntityGSHauntedChest() {
+        chestType = EnumHauntedChest.BATS_CHEST;
     }
 
     /**
@@ -91,11 +91,11 @@ public class TileEntityGSGhostlyChest extends TileEntity {
         this.openTicks = 50;
     }
 
-    public EnumChestTypes getChestType() {
+    public EnumHauntedChest getChestType() {
         return chestType;
     }
 
-    public void setChestType(EnumChestTypes chestType) {
+    public void setChestType(EnumHauntedChest chestType) {
         this.chestType = chestType;
     }
 
@@ -106,7 +106,7 @@ public class TileEntityGSGhostlyChest extends TileEntity {
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
 
-        chestType = EnumChestTypes.getById(nbt.getByte("ChestType"));
+        chestType = EnumHauntedChest.getById(nbt.getByte("ChestType"));
     }
 
     /**

@@ -1,7 +1,7 @@
 package gravestone.renderer.tileentity;
 
 import gravestone.core.Resources;
-import gravestone.tileentity.TileEntityGSGhostlyChest;
+import gravestone.tileentity.TileEntityGSHauntedChest;
 import java.util.Calendar;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -15,7 +15,7 @@ import org.lwjgl.opengl.GL12;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class TileEntityGSGhostlyChestRenderer extends TileEntitySpecialRenderer {
+public class TileEntityGSHauntedChestRenderer extends TileEntitySpecialRenderer {
 
     /**
      * The normal small chest model.
@@ -26,7 +26,7 @@ public class TileEntityGSGhostlyChestRenderer extends TileEntitySpecialRenderer 
      */
     private boolean isChristmas;
 
-    public TileEntityGSGhostlyChestRenderer() {
+    public TileEntityGSHauntedChestRenderer() {
         Calendar calendar = Calendar.getInstance();
 
         if (calendar.get(2) + 1 == 12 && calendar.get(5) >= 24 && calendar.get(5) <= 26) {
@@ -37,7 +37,7 @@ public class TileEntityGSGhostlyChestRenderer extends TileEntitySpecialRenderer 
     /**
      * Renders the TileEntity for the chest at a position.
      */
-    public void renderTileEntityChestAt(TileEntityGSGhostlyChest te, double par2, double par4, double par6, float par8) {
+    public void renderTileEntityChestAt(TileEntityGSHauntedChest te, double par2, double par4, double par6, float par8) {
         int metadata = 0;
 
         if (te.hasWorldObj()) {
@@ -91,6 +91,6 @@ public class TileEntityGSGhostlyChestRenderer extends TileEntitySpecialRenderer 
 
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float par8) {
-        this.renderTileEntityChestAt((TileEntityGSGhostlyChest) te, x, y, z, par8);
+        this.renderTileEntityChestAt((TileEntityGSHauntedChest) te, x, y, z, par8);
     }
 }

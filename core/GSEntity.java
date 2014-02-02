@@ -2,6 +2,7 @@ package gravestone.core;
 
 import gravestone.config.GraveStoneConfig;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import gravestone.entity.item.EntityHauntedChest;
 import gravestone.entity.monster.EntitySkeletonCat;
 import gravestone.entity.monster.EntitySkeletonDog;
 import gravestone.entity.monster.EntityZombieCat;
@@ -71,6 +72,6 @@ public class GSEntity {
         //EntityRegistry.addSpawn(EntityVengefulSpirit.class, 3, 1, 3, EnumCreatureType.monster, BiomeGenBase.jungle, BiomeGenBase.jungleHills);
 
         // Ghostly Entities
-        //EntityRegistry.registerGlobalEntityID(EntityGhostlyChest.class, "GSGhostlyChest", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
+        EntityRegistry.registerGlobalEntityID(EntityHauntedChest.class, "GSHauntedChest", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
     }
 }

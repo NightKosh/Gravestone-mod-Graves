@@ -34,13 +34,16 @@ tile.spawner.wither.name=Wither Spawner
 
 # bone blocks
 tile.bone_block.name=Bone block
-tile.skull_bone_block.name=Bone block with skull
+tile.bone_block.skull_name=Bone block with skull
+tile.bone_block.crawler_name=
+tile.bone_block.crawler_skull_name=
 tile.bone_slab.name=Bone slab
 tile.bone_stairs.name=Bone stairs
 
 ## chests
-block.ghostly_chest.bats_chest=Chest with bats
-block.ghostly_chest.skeleton_chest=Chest with skeleton
+block.haunted_chest.bats_chest=Chest with bats
+block.haunted_chest.skeleton_chest=Chest with skeleton
+block.haunted_chest.raven_chest=Chest with ravens
 
 
 # items

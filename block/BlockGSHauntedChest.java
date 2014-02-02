@@ -3,8 +3,8 @@ package gravestone.block;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
-import gravestone.block.enums.EnumChestTypes;
-import gravestone.tileentity.TileEntityGSGhostlyChest;
+import gravestone.block.enums.EnumHauntedChest;
+import gravestone.tileentity.TileEntityGSHauntedChest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -29,12 +29,12 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class BlockGSGhostlyChest extends BlockContainer {
+public class BlockGSHauntedChest extends BlockContainer {
 
-    public BlockGSGhostlyChest(int id) {
+    public BlockGSHauntedChest(int id) {
         super(id, Material.wood);
         this.setStepSound(Block.soundWoodFootstep);
-        this.setUnlocalizedName("GhostlyChest");
+        this.setUnlocalizedName("HauntedChest");
         this.setHardness(2.5F);
         this.setCreativeTab(ModGraveStone.creativeTab);
         this.setTextureName("planks_oak");
@@ -105,7 +105,7 @@ public class BlockGSGhostlyChest extends BlockContainer {
      */
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-        TileEntityGSGhostlyChest te = (TileEntityGSGhostlyChest) world.getBlockTileEntity(x, y, z);
+        TileEntityGSHauntedChest te = (TileEntityGSHauntedChest) world.getBlockTileEntity(x, y, z);
         if (te != null) {
             if (!world.isRemote) {
                 te.spawnMobs(world);
@@ -117,15 +117,15 @@ public class BlockGSGhostlyChest extends BlockContainer {
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        return new TileEntityGSGhostlyChest();
+        return new TileEntityGSHauntedChest();
     }
 
     /**
      * Called when the block is placed in the world.
      */
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase par5EntityLivingBase, ItemStack stack) {
-        int direction = MathHelper.floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack stack) {
+        int direction = MathHelper.floor_double((double) (entityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
         int metadata;
         switch (direction) {
             case 0:
@@ -145,11 +145,11 @@ public class BlockGSGhostlyChest extends BlockContainer {
 
         world.setBlockMetadataWithNotify(x, y, z, metadata, 3);
         
-        TileEntityGSGhostlyChest tileEntity = (TileEntityGSGhostlyChest) world.getBlockTileEntity(x, y, z);
+        TileEntityGSHauntedChest tileEntity = (TileEntityGSHauntedChest) world.getBlockTileEntity(x, y, z);
 
         if (tileEntity != null) {
             if (stack.stackTagCompound != null) {
-                tileEntity.setChestType(EnumChestTypes.getById(stack.stackTagCompound.getByte("ChestType")));
+                tileEntity.setChestType(EnumHauntedChest.getById(stack.stackTagCompound.getByte("ChestType")));
             }
         }
     }
@@ -205,7 +205,7 @@ public class BlockGSGhostlyChest extends BlockContainer {
      */
     private ItemStack getBlockItemStack(World world, int x, int y, int z) {
         ItemStack itemStack = this.createStackedBlock(0);
-        TileEntityGSGhostlyChest tileEntity = (TileEntityGSGhostlyChest) world.getBlockTileEntity(x, y, z);
+        TileEntityGSHauntedChest tileEntity = (TileEntityGSHauntedChest) world.getBlockTileEntity(x, y, z);
 
         if (tileEntity != null) {
             NBTTagCompound nbt = new NBTTagCompound();
@@ -223,7 +223,7 @@ public class BlockGSGhostlyChest extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(int id, CreativeTabs tabs, List list) {
-        for (byte i = 0; i < EnumChestTypes.values().length; i++) {
+        for (byte i = 0; i < EnumHauntedChest.values().length; i++) {
             ItemStack stack = new ItemStack(id, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("ChestType", i);

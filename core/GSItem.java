@@ -4,7 +4,6 @@ package gravestone.core;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import gravestone.config.GraveStoneConfig;
 import gravestone.item.ItemGSChisel;
-import gravestone.item.ItemGhostly;
 import net.minecraft.item.Item;
 
 /**
@@ -26,8 +25,5 @@ public class GSItem {
         // chisel
         chisel = new ItemGSChisel(GraveStoneConfig.chiselId);
         LanguageRegistry.addName(chisel, "Chisel");
-        
-        //ghostlyItem = new ItemGhostly(GraveStoneConfig.ghostlyItemId);
-        //LanguageRegistry.addName(chisel, "Chisel");
     }
 }

@@ -5,7 +5,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import gravestone.block.BlockGSBoneBlock;
 import gravestone.block.BlockGSBoneSlab;
 import gravestone.block.BlockGSBoneStairs;
-import gravestone.block.BlockGSGhostlyChest;
+import gravestone.block.BlockGSHauntedChest;
 import gravestone.config.GraveStoneConfig;
 import gravestone.block.BlockGSGraveStone;
 import gravestone.block.BlockGSMemorial;
@@ -16,13 +16,11 @@ import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumBoneBlock;
-import gravestone.block.enums.EnumChestTypes;
+import gravestone.block.enums.EnumHauntedChest;
 import gravestone.block.enums.IBlockEnum;
 import gravestone.item.ItemBlockGSBoneBlock;
 import gravestone.item.ItemBlockGSGraveStone;
-import gravestone.item.ItemBlockGSMemorial;
-import net.minecraft.block.Block;
-import gravestone.item.ItemBlockGSGraveStone;
+import gravestone.item.ItemBlockGSHauntedChest;
 import gravestone.item.ItemBlockGSMemorial;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -52,7 +50,7 @@ public class GSBlock {
     public static BlockGSBoneSlab boneSlab;
     public static BlockGSBoneStairs boneStairs;
     // GhostlyChest
-    public static BlockGSGhostlyChest ghostlyChest;
+    public static BlockGSHauntedChest hauntedChest;
     // skull candle
     public static BlockGSSkullCandle skullCandle;
 
@@ -76,7 +74,7 @@ public class GSBlock {
 
         // memorials
         memorial = new BlockGSMemorial(GraveStoneConfig.memorialID);
-        advancedBlockRegistration(memorial, "GSMemorial", "Memorial", "pickaxe", 2, EnumMemorials.values(), "GraveType", ItemBlockGSMemorial.class);
+        advancedNTBBlockRegistration(memorial, "GSMemorial", "Memorial", "pickaxe", 2, EnumMemorials.values(), "GraveType", ItemBlockGSMemorial.class);
         
         // wither spawner
         witherSpawner = new BlockGSWitherSpawner(GraveStoneConfig.witherSpawnerID);
@@ -88,18 +86,18 @@ public class GSBlock {
 
         // bone block
         boneBlock = new BlockGSBoneBlock(GraveStoneConfig.boneBlockID);
-        advancedBlockRegistration(boneBlock, "GSBoneBlock", "Bone block", "pickaxe", 0, EnumBoneBlock.values(), ItemBlockGSBoneBlock.class);
+        advancedMetaBlockRegistration(boneBlock, "GSBoneBlock", "Bone block", "pickaxe", 0, EnumBoneBlock.values(), ItemBlockGSBoneBlock.class);
         // bone slab
         boneSlab = new BlockGSBoneSlab(GraveStoneConfig.boneSlabID);
         simpleBlockRegistration(boneSlab, "GSBoneSlab", "Bone slab", "pickaxe", 0);
         // bone step
         boneStairs = new BlockGSBoneStairs(GraveStoneConfig.boneStairsID);
         simpleBlockRegistration(boneStairs, "GSBoneStairs", "Bone stairs", "pickaxe", 0);
-        /* WTF   "ChestType"  ????????
-        // ghostChest
-        ghostlyChest = new BlockGSGhostlyChest(GraveStoneConfig.ghostlyChestID);
-        advancedBlockRegistration(ghostlyChest, "GSGhostlyChest", "Ghostly chest", "axe", 1, EnumChestTypes.values(), "ChestType");
+        // hauntedChest
+        hauntedChest = new BlockGSHauntedChest(GraveStoneConfig.hauntedChestID);
+        advancedNTBBlockRegistration(hauntedChest, "GSHauntedChest", "Haunted chest", "axe", 0, EnumHauntedChest.values(), "ChestType", ItemBlockGSHauntedChest.class);
 
+        /*
         // skull candle
         skullCandle = new BlockGSSkullCandle(GraveStoneConfig.skullCandleID);
         simpleBlockRegistration(skullCandle, "GSSkullCandle", "Skull candle", "pickaxe", 1);
@@ -112,30 +110,30 @@ public class GSBlock {
         MinecraftForge.setBlockHarvestLevel(block, tool, harvestLevel);
     }
     
-    private static void advancedBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel, IBlockEnum[] blockEnums, Class itemClass) {
+    private static void advancedMetaBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel, IBlockEnum[] blockEnums, Class itemClass) {
  	GameRegistry.registerBlock(block, itemClass);
         MinecraftForge.setBlockHarvestLevel(block, tool, harvestLevel);
-        subBlocksRegistration(block, blockEnums);
+        subMetaBlocksRegistration(block, blockEnums);
     }
     
-    private static void advancedBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel, IBlockEnum[] blockEnums, String nbtName) {
+    private static void advancedNTBBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel, IBlockEnum[] blockEnums, String nbtName) {
         simpleBlockRegistration(block, registerName, name, tool, harvestLevel);
-        subBlocksRegistration(block, blockEnums, nbtName);
+        subNTBBlocksRegistration(block, blockEnums, nbtName);
     }
     
-    private static void advancedBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel, IBlockEnum[] blockEnums, String nbtName, Class itemClass) {
+    private static void advancedNTBBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel, IBlockEnum[] blockEnums, String nbtName, Class itemClass) {
         simpleBlockRegistration(block, registerName, name, tool, harvestLevel);
-        GameRegistry.registerBlock(memorial, itemClass);
-        subBlocksRegistration(block, blockEnums, nbtName);
+        GameRegistry.registerBlock(block, itemClass);
+        subNTBBlocksRegistration(block, blockEnums, nbtName);
     }
     
-    private static void subBlocksRegistration(Block block, IBlockEnum[] blockEnums) {
+    private static void subMetaBlocksRegistration(Block block, IBlockEnum[] blockEnums) {
         for (byte meta = 0; meta < blockEnums.length; meta++) {
             LanguageRegistry.addName(new ItemStack(block, 1, meta), blockEnums[meta].getName());
         }
     }
     
-    private static void subBlocksRegistration(Block block, IBlockEnum[] blockEnums, String nbtName) {
+    private static void subNTBBlocksRegistration(Block block, IBlockEnum[] blockEnums, String nbtName) {
         for (byte i = 0; i < blockEnums.length; i++) {
             ItemStack stack = new ItemStack(block, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();

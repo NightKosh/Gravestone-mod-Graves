@@ -39,8 +39,8 @@ public class GraveStoneConfig {
     public static int boneBlockID;
     public static int boneSlabID;
     public static int boneStairsID;
-    // ghostly chest
-    public static int ghostlyChestID;
+    // haunted chest
+    public static int hauntedChestID;
     // candle
     public static int skullCandleID;
     // renderer Id
@@ -72,7 +72,6 @@ public class GraveStoneConfig {
     public static boolean enableNightStone;
     // item
     public static int chiselId;
-    public static int ghostlyItemId;
     // grave names
     public static ArrayList<String> graveNames;
     public static ArrayList<String> graveDogsNames;
@@ -126,12 +125,11 @@ public class GraveStoneConfig {
         boneBlockID = config.getBlock("BonesBlock", 1555).getInt();
         boneSlabID = config.getBlock("BonesSlab", 1556).getInt();
         boneStairsID = config.getBlock("BonesStairs", 1557).getInt();
-        /*
-        ghostlyChestID = config.getBlock("GhostlyChest", 1558).getInt();
-        skullCandleID = config.getBlock("SkullCandle", 1559).getInt();*/
+        
+        hauntedChestID = config.getBlock("GhostlyChest", 1558).getInt();
+        //skullCandleID = config.getBlock("SkullCandle", 1559).getInt();
         // items
         chiselId = config.getItem("Chisel", 9001 - 256).getInt();
-        //ghostlyItemId = config.getItem("GhostlyItems", 9002 - 256).getInt();
     }
 
     private static void structures() {
