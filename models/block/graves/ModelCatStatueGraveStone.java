@@ -1,7 +1,8 @@
-package gravestone.models.block;
+package gravestone.models.block.graves;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gravestone.models.block.ModelGraveStone;
 import net.minecraft.client.model.ModelRenderer;
 import org.lwjgl.opengl.GL11;
 
@@ -12,22 +13,26 @@ import org.lwjgl.opengl.GL11;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
-public class ModelCatStatueMemorial extends ModelGraveStone {
+public class ModelCatStatueGraveStone extends ModelGraveStone {
 
-    private ModelRenderer ocelotBackLeftLeg;
-    private ModelRenderer ocelotBackRightLeg;
-    private ModelRenderer ocelotFrontLeftLeg;
-    private ModelRenderer ocelotFrontRightLeg;
-    private ModelRenderer ocelotHead;
-    private ModelRenderer ocelotBody;
-    private ModelRenderer ocelotTail;
-    private ModelRenderer ocelotTail2;
-    
-    private ModelBigPedestal pedestal;
+    // The back left leg model for the Ocelot.
+    ModelRenderer ocelotBackLeftLeg;
+    // The back right leg model for the Ocelot.
+    ModelRenderer ocelotBackRightLeg;
+    // The front left leg model for the Ocelot.
+    ModelRenderer ocelotFrontLeftLeg;
+    // The front right leg model for the Ocelot.
+    ModelRenderer ocelotFrontRightLeg;
+    // The head model for the Ocelot.
+    ModelRenderer ocelotHead;
+    // The body model for the Ocelot.
+    ModelRenderer ocelotBody;
+    // The tail model for the Ocelot.
+    ModelRenderer ocelotTail;
+    // The second part of tail model for the Ocelot.
+    ModelRenderer ocelotTail2;
 
-    public ModelCatStatueMemorial() {
-        textureWidth = 64;
-        textureHeight = 32;
+    public ModelCatStatueGraveStone() {
         this.setTextureOffset("head.main", 0, 0);
         this.setTextureOffset("head.nose", 0, 24);
         this.setTextureOffset("head.ear1", 0, 10);
@@ -60,7 +65,6 @@ public class ModelCatStatueMemorial extends ModelGraveStone {
         this.ocelotFrontRightLeg = new ModelRenderer(this, 40, 0);
         this.ocelotFrontRightLeg.addBox(-1.0F, 0.0F, 0.0F, 2, 10, 2);
         this.ocelotFrontRightLeg.setRotationPoint(-1.2F, 13.8F, -5.0F);
-        pedestal = new ModelBigPedestal();
     }
 
     /**
@@ -95,8 +99,15 @@ public class ModelCatStatueMemorial extends ModelGraveStone {
     public void renderAll() {
         this.setRotationAngles(0.0625F, 0.0625F, 0.0625F, 0.0625F);
         float par7 = 0.0625F;
-        pedestal.shiftModel();
+        float f6 = 2.0F;
+        GL11.glPushMatrix();
+        GL11.glScalef(1.5F / f6, 1.5F / f6, 1.5F / f6);
+        GL11.glTranslatef(0.0F, 10.0F * par7, 4.0F * par7);
         this.ocelotHead.render(par7);
+        GL11.glPopMatrix();
+        GL11.glPushMatrix();
+        GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
+        GL11.glTranslatef(0.0F, 24.0F * par7, 0.0F);
         this.ocelotBody.render(par7);
         this.ocelotBackLeftLeg.render(par7);
         this.ocelotBackRightLeg.render(par7);
@@ -104,6 +115,6 @@ public class ModelCatStatueMemorial extends ModelGraveStone {
         this.ocelotFrontRightLeg.render(par7);
         this.ocelotTail.render(par7);
         this.ocelotTail2.render(par7);
-        pedestal.renderAll();
+        GL11.glPopMatrix();
     }
 }

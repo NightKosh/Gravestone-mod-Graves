@@ -1,9 +1,10 @@
-package gravestone.models.block;
+package gravestone.models.block.memorials;
 
 import gravestone.core.Resources;
 import gravestone.renderer.tileentity.TileEntityGSMemorialRenderer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gravestone.models.block.ModelGraveStone;
 import net.minecraft.client.model.ModelRenderer;
 import org.lwjgl.opengl.GL11;
 

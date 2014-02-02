@@ -1,15 +1,15 @@
 package gravestone.renderer.tileentity;
 
 import gravestone.core.Resources;
-import gravestone.models.block.ModelAngelStatueMemorial;
-import gravestone.models.block.ModelCatStatueMemorial;
-import gravestone.models.block.ModelCreeperStatueMemorial;
-import gravestone.models.block.ModelDogStatueMemorial;
+import gravestone.models.block.memorials.ModelAngelStatueMemorial;
+import gravestone.models.block.memorials.ModelCatStatueMemorial;
+import gravestone.models.block.memorials.ModelCreeperStatueMemorial;
+import gravestone.models.block.memorials.ModelDogStatueMemorial;
 import gravestone.models.block.ModelGraveStone;
-import gravestone.models.block.ModelMemorialCross;
-import gravestone.models.block.ModelMemorialObelisk;
-import gravestone.models.block.ModelSteveStatueMemorial;
-import gravestone.models.block.ModelVillagerMemorial;
+import gravestone.models.block.memorials.ModelMemorialCross;
+import gravestone.models.block.memorials.ModelMemorialObelisk;
+import gravestone.models.block.memorials.ModelSteveStatueMemorial;
+import gravestone.models.block.memorials.ModelVillagerMemorial;
 import gravestone.tileentity.TileEntityGSMemorial;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

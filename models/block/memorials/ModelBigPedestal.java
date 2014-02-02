@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package gravestone.models.block;
+package gravestone.models.block.memorials;
 
 import gravestone.core.Resources;
+import gravestone.models.block.ModelGraveStone;
 import gravestone.renderer.tileentity.TileEntityGSMemorialRenderer;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
