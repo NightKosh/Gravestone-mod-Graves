@@ -36,6 +36,8 @@ tile.spawner.wither.name=凋灵刷怪笼
 # bone blocks
 tile.bone_block.name=Bone block
 tile.bone_block.skull_name=Bone block with skull
+tile.bone_block.crawler_name=Skull crawler's bone block 
+tile.bone_block.crawler_skull_name=Skull crawler's bone block with skull
 tile.bone_slab.name=Bone slab
 tile.bone_stairs.name=Bone stairs
 
