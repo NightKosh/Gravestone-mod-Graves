@@ -50,6 +50,7 @@ public class GraveStoneConfig {
     public static boolean generateCatacombs;
     public static boolean generateSingleGraves;
     public static boolean generateMemorials;
+    public static int maxCatacombsHeight;
     // village generator
     public static boolean generateCemeteries;
     public static boolean generateVillageMemorials;
@@ -135,6 +136,7 @@ public class GraveStoneConfig {
 
     private static void structures() {
         generateCatacombs = config.get(Configuration.CATEGORY_GENERAL, "GenerateCatacombs", true).getBoolean(true);
+        maxCatacombsHeight = config.get(Configuration.CATEGORY_GENERAL, "MaximumCatacombsGenerationHeight", 75).getInt();
         generateMemorials = config.get(Configuration.CATEGORY_GENERAL, "GenerateMemorials", true).getBoolean(true);
         generateSingleGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateSingleGraves", true).getBoolean(true);
         generateCemeteries = config.get(Configuration.CATEGORY_GENERAL, "GenerateCemeteries", true).getBoolean(true);

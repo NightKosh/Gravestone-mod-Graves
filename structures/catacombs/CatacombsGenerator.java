@@ -3,6 +3,7 @@ package gravestone.structures.catacombs;
 import gravestone.GraveStoneLogger;
 import gravestone.core.GSBiomes;
 import gravestone.config.GraveStoneConfig;
+import static gravestone.config.GraveStoneConfig.maxCatacombsHeight;
 import gravestone.structures.GSStructureGenerator;
 import java.util.LinkedList;
 import java.util.Random;
@@ -99,6 +100,6 @@ public class CatacombsGenerator implements GSStructureGenerator {
         }
 
         GraveStoneLogger.logInfo("Catacombs generation - End Checking area height");
-        return (height / count) < 75;
+        return (height / count) < GraveStoneConfig.maxCatacombsHeight;
     }
 }
