@@ -153,6 +153,9 @@ public class GSCompatibility {
                     .add(Aspect.UNDEAD, 9).add(Aspect.SOUL, 9));
             ThaumcraftApi.registerObjectTag(GSBlock.boneSlab.blockID, -1, new AspectList().add(Aspect.DEATH, 4).add(Aspect.FLESH, 4));
             ThaumcraftApi.registerObjectTag(GSBlock.boneStairs.blockID, -1, new AspectList().add(Aspect.DEATH, 6).add(Aspect.FLESH, 6));
+            // haunted chest
+            ThaumcraftApi.registerObjectTag(GSBlock.hauntedChest.blockID, -1, new AspectList().add(Aspect.SOUL, 5).add(Aspect.MAGIC, 5)
+                    .add(Aspect.TREE, 3).add(Aspect.VOID, 4));
             // items
             ThaumcraftApi.registerObjectTag(GSItem.chisel.itemID, 0, new AspectList().add(Aspect.TOOL, 2));
             
