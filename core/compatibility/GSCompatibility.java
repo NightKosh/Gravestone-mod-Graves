@@ -139,18 +139,24 @@ public class GSCompatibility {
                     .add(Aspect.DEATH, 5).add(Aspect.UNDEAD, 5));
             ThaumcraftApi.registerObjectTag(GSBlock.memorial.blockID, -1, new AspectList().add(Aspect.SOUL, 20)
                     .add(Aspect.DEATH, 20).add(Aspect.UNDEAD, 20));
+            // trap
             ThaumcraftApi.registerObjectTag(GSBlock.trap.blockID, 0, new AspectList().add(Aspect.FIRE, 1).add(Aspect.STONE, 2)
                     .add(Aspect.MECHANISM, 5).add(Aspect.DARKNESS, 5).add(Aspect.SOUL, 5).add(Aspect.MAGIC, 5));
+            ThaumcraftApi.registerObjectTag(GSBlock.trap.blockID, 1, new AspectList().add(Aspect.STONE, 2).add(Aspect.MECHANISM, 5)
+                    .add(Aspect.WEATHER, 5).add(Aspect.SOUL, 5).add(Aspect.MAGIC, 5));
+            // spawner
             ThaumcraftApi.registerObjectTag(GSBlock.witherSpawner.blockID, 0, new AspectList().add(Aspect.MAGIC, 40)
                     .add(Aspect.UNDEAD, 40).add(Aspect.SOUL, 40).add(Aspect.DARKNESS, 40).add(Aspect.ELDRITCH, 40));
+            // bone blocks
             ThaumcraftApi.registerObjectTag(GSBlock.boneBlock.blockID, 0, new AspectList().add(Aspect.DEATH, 9).add(Aspect.FLESH, 9));
             ThaumcraftApi.registerObjectTag(GSBlock.boneBlock.blockID, 1, new AspectList().add(Aspect.DEATH, 9).add(Aspect.FLESH, 9)
                     .add(Aspect.UNDEAD, 9).add(Aspect.SOUL, 9));
             ThaumcraftApi.registerObjectTag(GSBlock.boneSlab.blockID, -1, new AspectList().add(Aspect.DEATH, 4).add(Aspect.FLESH, 4));
             ThaumcraftApi.registerObjectTag(GSBlock.boneStairs.blockID, -1, new AspectList().add(Aspect.DEATH, 6).add(Aspect.FLESH, 6));
+            // items
             ThaumcraftApi.registerObjectTag(GSItem.chisel.itemID, 0, new AspectList().add(Aspect.TOOL, 2));
             
-
+            // entity
             ThaumcraftApi.registerEntityTag(GSEntity.ZOMBIE_DOG_NAME, new AspectList().add(Aspect.BEAST, 2)
                     .add(Aspect.UNDEAD, 2).add(Aspect.EARTH, 2));
             ThaumcraftApi.registerEntityTag(GSEntity.ZOMBIE_CAT_NAME, new AspectList().add(Aspect.BEAST, 2)
