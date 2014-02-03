@@ -23,26 +23,16 @@ public class GraveStoneConfig {
     private static GraveStoneConfig instance;
     private static String path;
     // Blocks
-    // block GraveStone
     public static int graveStoneID;
-    public static BlockGSGraveStone graveStone;
-    // Block wither spawer
     public static int witherSpawnerID;
-    public static BlockGSWitherSpawner witherSpawner;
-    // Block Time Trap
     public static int trapID;
-    public static BlockGSTrap trap;
-    // block memorial
     public static int memorialID;
-    public static BlockGSMemorial memorial;
+    public static int hauntedChestID;
+    public static int skullCandleID;
     // bones blocks
     public static int boneBlockID;
     public static int boneSlabID;
     public static int boneStairsID;
-    // haunted chest
-    public static int hauntedChestID;
-    // candle
-    public static int skullCandleID;
     // renderer Id
     public static int graveRenderID = RenderingRegistry.getNextAvailableRenderId();
     public static int memorialRenderID = RenderingRegistry.getNextAvailableRenderId();
