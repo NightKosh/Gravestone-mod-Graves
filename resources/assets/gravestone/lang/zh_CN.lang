@@ -48,6 +48,11 @@ block.haunted_chest.skeleton_chest=带着骷髅的箱子
 block.haunted_chest.raven_chest=Chest with ravens
 block.haunted_chest.ghost_chest=Chest with ghost
 
+##candles
+block.skull_candle.skeleton.name=Skull candle
+block.skull_candle.wither_skeleton.name=Wither skull candle
+block.skull_candle.zombie.name=Zombie skull candle
+
 
 # items
 ## chisel
