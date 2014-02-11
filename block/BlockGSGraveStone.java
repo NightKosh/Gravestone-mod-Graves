@@ -570,10 +570,6 @@ public class BlockGSGraveStone extends BlockContainer {
             direction = 360 + direction;
         }
 
-        while ((world.isAirBlock(x, y - 1, z) || world.getBlockMaterial(x, y - 1, z).isLiquid() || world.getBlockMaterial(x, y - 1, z).isReplaceable()) && y > 1) {
-            y--;
-        }
-
         byte graveType = 0;
         byte swordType = 0;
         ItemStack sword = null;
@@ -611,8 +607,29 @@ public class BlockGSGraveStone extends BlockContainer {
                 break;
         }
 
+        boolean canGenerateGrave = false;
+        while ((world.isAirBlock(x, y - 1, z) || world.getBlockMaterial(x, y - 1, z).isLiquid() || world.getBlockMaterial(x, y - 1, z).isReplaceable()) && y > 1) {
+            y--;
+        }
+        if (canGenerateGraveAtCoordinates(world, x, y, z)) {
+            canGenerateGrave = true;
+        } else {
+            for (byte xShift = -5; xShift < 6; xShift++) {
+                for (byte zShift = -5; zShift < 6; zShift++) {
+                    if (canGenerateGraveAtCoordinates(world, x + xShift, y, z + zShift)) {
+                        x += xShift;
+                        z += zShift;
+                        canGenerateGrave = true;
+                        break;
+                    }
+                }
+                if (canGenerateGrave) {
+                    break;
+                }
+            }
+        }
 
-        if (world.isAirBlock(x, y, z) || world.getBlockMaterial(x, y, z).isLiquid() || world.getBlockMaterial(x, y, z).isReplaceable()) {
+        if (canGenerateGrave) {
             world.setBlock(x, y, z, GraveStoneConfig.graveStoneID, GraveStoneHelper.getMetadataBasedOnRotation(direction), 0x02);
             TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
 
@@ -669,5 +686,9 @@ public class BlockGSGraveStone extends BlockContainer {
             }
             GraveStoneLogger.logInfo("Can not create " + deathInfo.getName() + "'s grave at " + x + "x" + y + "x" + z);
         }
+    }
+
+    private boolean canGenerateGraveAtCoordinates(World world, int x, int y, int z) {
+        return (world.isAirBlock(x, y, z) || world.getBlockMaterial(x, y, z).isLiquid() || world.getBlockMaterial(x, y, z).isReplaceable());
     }
 }
