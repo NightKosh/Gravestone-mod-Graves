@@ -24,6 +24,7 @@ block.memorial.angel_statue=天使纪念碑
 block.memorial.dog_statue=狗纪念碑
 block.memorial.cat_statue=猫纪念碑
 block.memorial.creeper_statue=爬行者纪念碑
+block.memorial.celtic_cross=Celtic cross
 
 ## trap
 tile.trap.night.name=午夜石
@@ -45,6 +46,7 @@ tile.bone_stairs.name=Bone stairs
 block.haunted_chest.bats_chest=带着蝙蝠的箱子
 block.haunted_chest.skeleton_chest=带着骷髅的箱子
 block.haunted_chest.raven_chest=Chest with ravens
+block.haunted_chest.ghost_chest=Chest with ghost
 
 
 # items
@@ -67,7 +69,10 @@ entity.GSZombieDog.name=僵尸狗
 entity.GSSkeletonDog.name=骷髅狗
 entity.GSZombieCat.name=僵尸猫
 entity.GSSkeletonCat.name=骷髅猫
-entity.GSSkullCrawler=Skull Crawler
+entity.GSSkullCrawler.name=Skull Crawler
+entity.GSWitherSkullCrawler.name=Wither Skull Crawler
+entity.GSZombieSkullCrawler.name=Zombie Skull Crawler
+entity.GSRaven.name=Raven
 
 
 # death messages
