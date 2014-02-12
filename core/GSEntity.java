@@ -5,8 +5,10 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import gravestone.entity.monster.EntitySkullCrawler;
 import gravestone.entity.monster.EntitySkeletonCat;
 import gravestone.entity.monster.EntitySkeletonDog;
+import gravestone.entity.monster.EntityWitherSkullCrawler;
 import gravestone.entity.monster.EntityZombieCat;
 import gravestone.entity.monster.EntityZombieDog;
+import gravestone.entity.monster.EntityZombieSkullCrawler;
 import net.minecraft.entity.EnumCreatureType;
 
 /**
@@ -37,6 +39,8 @@ public class GSEntity {
     public static final String SKEKETON_DOG_NAME = "GSSkeletonDog";
     public static final String SKEKETON_CAT_NAME = "GSSkeletonCat";
     public static final String SKULL_CRAWLER_NAME = "GSSkullCrawler";
+    public static final String WITHER_SKULL_CRAWLER_NAME = "GSWitherSkullCrawler";
+    public static final String ZOMBIE_SKULL_CRAWLER_NAME = "GSZombieSkullCrawler";
     
     public void getEntity() {
         // zombie dog
@@ -64,9 +68,14 @@ public class GSEntity {
         }
 
         // skullcrawler
-        EntityRegistry.registerGlobalEntityID(EntitySkullCrawler.class, SKULL_CRAWLER_NAME, EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
-        EntityRegistry.addSpawn(EntitySkullCrawler.class, 1, 0, 0, EnumCreatureType.monster);
-        //EntityRegistry.addSpawn(EntityZombieCat.class, 2, 1, 1, EnumCreatureType.monster, GSBiomes.getSkeletonCatsBiomes());
+        EntityRegistry.registerGlobalEntityID(EntitySkullCrawler.class, SKULL_CRAWLER_NAME, EntityRegistry.findGlobalUniqueEntityId(), 12698049, 11013646);
+        EntityRegistry.addSpawn(EntitySkullCrawler.class, 1, 0, 1, EnumCreatureType.monster);
+        // wither
+        EntityRegistry.registerGlobalEntityID(EntityWitherSkullCrawler.class, WITHER_SKULL_CRAWLER_NAME, EntityRegistry.findGlobalUniqueEntityId(), 0, 11013646);
+        EntityRegistry.addSpawn(EntityWitherSkullCrawler.class, 1, 0, 1, EnumCreatureType.monster);
+        // zombie
+        EntityRegistry.registerGlobalEntityID(EntityZombieSkullCrawler.class, ZOMBIE_SKULL_CRAWLER_NAME, EntityRegistry.findGlobalUniqueEntityId(), 44975, 11013646);
+        EntityRegistry.addSpawn(EntityZombieSkullCrawler.class, 1, 0, 1, EnumCreatureType.monster);
         
         // ghosts
         // LostSoul

@@ -21,6 +21,9 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import gravestone.entity.monster.EntitySkullCrawler;
+import gravestone.entity.monster.EntitySkullCrawler.SkullCrawlerType;
+import gravestone.entity.monster.EntityWitherSkullCrawler;
+import gravestone.entity.monster.EntityZombieSkullCrawler;
 import gravestone.renderer.entity.RenderSkullCrawler;
 import gravestone.renderer.tileentity.TileEntityGSHauntedChestRenderer;
 import gravestone.tileentity.TileEntityGSHauntedChest;
@@ -74,7 +77,9 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonCat.class, new RenderUndeadCat(new ModelUndeadCat(), 0));
 
         // skull crawler
-        RenderingRegistry.registerEntityRenderingHandler(EntitySkullCrawler.class, new RenderSkullCrawler());
+        RenderingRegistry.registerEntityRenderingHandler(EntitySkullCrawler.class, new RenderSkullCrawler(SkullCrawlerType.skeleton));
+        RenderingRegistry.registerEntityRenderingHandler(EntityWitherSkullCrawler.class, new RenderSkullCrawler(SkullCrawlerType.wither));
+        RenderingRegistry.registerEntityRenderingHandler(EntityZombieSkullCrawler.class, new RenderSkullCrawler(SkullCrawlerType.zombie));
     }
 
     @Override

@@ -1,13 +1,21 @@
 package gravestone.entity.monster;
 
+import gravestone.core.GSBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSilverfish;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -19,6 +27,14 @@ import net.minecraft.world.World;
  */
 public class EntitySkullCrawler extends EntityMob {
 
+    public enum SkullCrawlerType {
+
+        skeleton,
+        wither,
+        zombie
+    }
+    protected int allySummonCooldown;
+
     public EntitySkullCrawler(World world) {
         super(world);
         this.setSize(0.8F, 0.8F);
@@ -28,6 +44,15 @@ public class EntitySkullCrawler extends EntityMob {
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(16, new Byte((byte) 0));
+    }
+
+    /**
+     * returns if this entity triggers Block.onEntityWalking on the blocks they
+     * walk on. used for spiders and wolves to prevent them from trampling crops
+     */
+    @Override
+    protected boolean canTriggerWalking() {
+        return false;
     }
 
     /**
@@ -45,8 +70,9 @@ public class EntitySkullCrawler extends EntityMob {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(10.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(8.0D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.9D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.5);
     }
 
     /**
@@ -112,6 +138,31 @@ public class EntitySkullCrawler extends EntityMob {
     }
 
     /**
+     * Called when the entity is attacked.
+     */
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float par2) {
+        if (this.isEntityInvulnerable()) {
+            return false;
+        } else {
+            if (this.allySummonCooldown <= 0 && (source instanceof EntityDamageSource || source == DamageSource.magic)) {
+                this.allySummonCooldown = 20;
+            }
+
+            return super.attackEntityFrom(source, par2);
+        }
+    }
+
+    /**
+     * Takes a coordinate in and returns a weight to determine how likely this
+     * creature will try to path to the block. Args: x, y, z
+     */
+    @Override
+    public float getBlockPathWeight(int x, int y, int z) {
+        return this.worldObj.getBlockId(x, y - 1, z) == Block.stone.blockID ? 10.0F : super.getBlockPathWeight(x, y, z);
+    }
+
+    /**
      * Returns the item ID for the item the mob drops on death.
      */
     @Override
@@ -119,20 +170,9 @@ public class EntitySkullCrawler extends EntityMob {
         return Item.bone.itemID;
     }
 
-    /**
-     * Drop 0-2 items of this living's type.
-     *
-     * @param hitByPlayer - Whether this entity has recently been hit by a
-     * player.
-     * @param lootLevel - Level of Looting used to kill this mob.
-     */
     @Override
-    protected void dropFewItems(boolean hitByPlayer, int lootLevel) {
-        super.dropFewItems(hitByPlayer, lootLevel);
-
-        if (hitByPlayer && (this.rand.nextInt(10) == 0 || (lootLevel > 0 && this.rand.nextInt(6 - lootLevel) == 0))) {
-            this.dropItem(Item.skull.itemID, 1);
-        }
+    protected void dropRareDrop(int par1) {
+        this.entityDropItem(new ItemStack(Item.skull.itemID, 1, 0), 0);
     }
 
     /**
@@ -156,11 +196,6 @@ public class EntitySkullCrawler extends EntityMob {
     @Override
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.UNDEAD;
-    }
-
-    @Override
-    public boolean isPotionApplicable(PotionEffect par1PotionEffect) {
-        return par1PotionEffect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(par1PotionEffect);
     }
 
     /**
@@ -188,8 +223,43 @@ public class EntitySkullCrawler extends EntityMob {
     }
 
     @Override
+    public boolean attackEntityAsMob(Entity entity) {
+        if (super.attackEntityAsMob(entity)) {
+            if (entity instanceof EntityLivingBase) {
+                ((EntityLivingBase) entity).addPotionEffect(getPotionEffect());
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    protected PotionEffect getPotionEffect() {
+        return new PotionEffect(Potion.poison.id, 100);
+    }
+
+    /**
+     * Called frequently so the entity can update its state every tick as
+     * required. For example, zombies and skeletons use this to react to
+     * sunlight and start to burn.
+     */
+    @Override
+    public void onLivingUpdate() {
+        if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
+            float f = this.getBrightness(1.0F);
+
+            if (!this.isImmuneToFire && f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && 
+                    this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ))) {
+                this.setFire(8);
+            }
+        }
+
+        super.onLivingUpdate();
+    }
+
+    @Override
     public EntityLivingData onSpawnWithEgg(EntityLivingData data) {
-        Object par1EntityLivingData1 = super.onSpawnWithEgg(data);
+        EntityLivingData entityData = super.onSpawnWithEgg(data);
 
         /*
          if (par1EntityLivingData1 == null) {
@@ -208,6 +278,69 @@ public class EntitySkullCrawler extends EntityMob {
          }
          }*/
 
-        return (EntityLivingData) par1EntityLivingData1;
+        return entityData;
     }
+    /*
+     @Override
+     protected void updateEntityActionState() {
+     super.updateEntityActionState();
+
+     if (!this.worldObj.isRemote) {
+     int x;
+     int y;
+     int z;
+     int l;
+
+     if (this.allySummonCooldown > 0) {
+     --this.allySummonCooldown;
+
+     if (this.allySummonCooldown == 0) {
+     x = MathHelper.floor_double(this.posX);
+     y = MathHelper.floor_double(this.posY);
+     z = MathHelper.floor_double(this.posZ);
+     boolean flag = false;
+
+     for (l = 0; !flag && l <= 5 && l >= -5; l = l <= 0 ? 1 - l : 0 - l) {
+     for (int i1 = 0; !flag && i1 <= 10 && i1 >= -10; i1 = i1 <= 0 ? 1 - i1 : 0 - i1) {
+     for (int j1 = 0; !flag && j1 <= 10 && j1 >= -10; j1 = j1 <= 0 ? 1 - j1 : 0 - j1) {
+     int blockID = this.worldObj.getBlockId(x + i1, y + l, z + j1);
+     int blockMeta = this.worldObj.getBlockMetadata(x + i1, y + l, z + j1);
+
+     if (blockID == GSBlock.boneBlock.blockID && GSBlock.boneBlock.isSkullCrawlerBlock(blockMeta)) {
+     this.worldObj.destroyBlock(x + i1, y + l, z + j1, false);
+
+     GSBlock.boneBlock.onBlockDestroyedByPlayer(this.worldObj, x + i1, y + l, z + j1, 0);
+     //Block.silverfish.onBlockDestroyedByPlayer(this.worldObj, x + i1, y + l, z + j1, 0);
+
+     if (this.rand.nextBoolean()) {
+     flag = true;
+     break;
+     }
+     }
+     }
+     }
+     }
+     }
+     }
+
+     if (this.entityToAttack == null && !this.hasPath()) {
+     x = MathHelper.floor_double(this.posX);
+     y = MathHelper.floor_double(this.posY + 0.5D);
+     z = MathHelper.floor_double(this.posZ);
+     int i2 = this.rand.nextInt(6);
+     l = this.worldObj.getBlockId(x + Facing.offsetsXForSide[i2], y + Facing.offsetsYForSide[i2], z + Facing.offsetsZForSide[i2]);
+
+     if (BlockSilverfish.getPosingIdByMetadata(l)) {
+     this.worldObj.setBlock(x + Facing.offsetsXForSide[i2], y + Facing.offsetsYForSide[i2], z + Facing.offsetsZForSide[i2], Block.silverfish.blockID, BlockSilverfish.getMetadataForBlockType(l), 3);
+     this.spawnExplosionParticle();
+     this.setDead();
+     } else {
+     this.updateWanderPath();
+     }
+     } else if (this.entityToAttack != null && !this.hasPath()) {
+     this.entityToAttack = null;
+     }
+     }
+     }
+     */
 }
