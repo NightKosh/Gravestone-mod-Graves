@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumBoneBlock;
 import gravestone.core.Resources;
+import gravestone.entity.monster.EntitySkullCrawler;
 import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -12,6 +13,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 
 /**
  * GraveStone mod
@@ -57,8 +59,7 @@ public class BlockGSBoneBlock extends Block {
     }
 
     /**
-     * Returns a list of blocks with the same ID, but different meta (eg: wood
-     * returns 4 blocks)
+     * Returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
     @Override
     @SideOnly(Side.CLIENT)
@@ -69,11 +70,32 @@ public class BlockGSBoneBlock extends Block {
     }
 
     /**
-     * Determines the damage on the item the block drops. Used in cloth and
-     * wood.
+     * Determines the damage on the item the block drops. Used in cloth and wood.
      */
     @Override
     public int damageDropped(int metadata) {
+        if (isSkullCrawlerBlock(metadata)) {
+            metadata -= 2;
+        }
         return metadata;
+    }
+
+    public boolean isSkullCrawlerBlock(int metadata) {
+        return metadata == 2 || metadata == 3;
+    }
+
+    /**
+     * Called right before the block is destroyed by a player. Args: world, x, y, z, metaData
+     */
+    @Override
+    public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int metadata) {
+        if (!world.isRemote && isSkullCrawlerBlock(metadata)) {
+            EntitySkullCrawler skullCrawler = new EntitySkullCrawler(world);
+            skullCrawler.setLocationAndAngles((double) x + 0.5D, (double) y, (double) z + 0.5D, 0.0F, 0.0F);
+            world.spawnEntityInWorld(skullCrawler);
+            skullCrawler.spawnExplosionParticle();
+        }
+
+        super.onBlockDestroyedByPlayer(world, x, y, z, metadata);
     }
 }
