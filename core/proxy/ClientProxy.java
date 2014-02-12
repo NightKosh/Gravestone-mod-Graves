@@ -20,6 +20,8 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import gravestone.entity.monster.EntitySkullCrawler;
+import gravestone.renderer.entity.RenderSkullCrawler;
 import gravestone.renderer.tileentity.TileEntityGSHauntedChestRenderer;
 import gravestone.tileentity.TileEntityGSHauntedChest;
 import net.minecraft.util.StatCollector;
@@ -37,11 +39,11 @@ public class ClientProxy extends CommonProxy {
     public void registerRenderers() {
         // blocks renderers
         registerBlocksRenderers();
-        
+
         // Mobs renderers
         registerMobsRenderers();
     }
-    
+
     private void registerBlocksRenderers() {
         // register GraveStone renderer
         ClientRegistry.registerTileEntity(TileEntityGSGraveStone.class, "GSGraveStone", new TileEntityGSGraveStoneRenderer());
@@ -50,14 +52,14 @@ public class ClientProxy extends CommonProxy {
         // register GraveStone renderer
         ClientRegistry.registerTileEntity(TileEntityGSMemorial.class, "GSMemorial", new TileEntityGSMemorialRenderer());
         MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.memorialID, new ItemGSMemorialRenderer());
-        
+
         // register HauntedChest renderer
         ClientRegistry.registerTileEntity(TileEntityGSHauntedChest.class, "GSHauntedChest", new TileEntityGSHauntedChestRenderer());
-        
+
         // register SkullCandle renderer
         //ClientRegistry.registerTileEntity(TileEntityGSSkullCandle.class, "GSSkullCandle", new TileEntityGSSkullCandleRenderer());
     }
-    
+
     private void registerMobsRenderers() {
         // zombie dog
         RenderingRegistry.registerEntityRenderingHandler(EntityZombieDog.class, new RenderUndeadDog(new ModelUndeadDog(), new ModelUndeadDog()));
@@ -70,6 +72,9 @@ public class ClientProxy extends CommonProxy {
 
         // zombie cat
         RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonCat.class, new RenderUndeadCat(new ModelUndeadCat(), 0));
+
+        // skull crawler
+        RenderingRegistry.registerEntityRenderingHandler(EntitySkullCrawler.class, new RenderSkullCrawler());
     }
 
     @Override

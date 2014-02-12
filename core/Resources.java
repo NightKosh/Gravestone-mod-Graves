@@ -39,6 +39,9 @@ public class Resources {
     public static final ResourceLocation ZOMBIE_CAT_SIAMESE = new ResourceLocation(ENTITY_LOCATION + "ZombieCatSiamese.png");
     public static final ResourceLocation SKELETON_DOG = new ResourceLocation(ENTITY_LOCATION + "SkeletonDog.png");
     public static final ResourceLocation SKELETON_CAT = new ResourceLocation(ENTITY_LOCATION + "SkeletonCat.png");
+    public static final ResourceLocation SKULL_CRAWLER = new ResourceLocation(ENTITY_LOCATION + "SkullCrawler.png");
+    public static final ResourceLocation WITHER_SKULL_CRAWLER = new ResourceLocation(ENTITY_LOCATION + "WitherSkullCrawler.png");
+    public static final ResourceLocation ZOMBIE_SKULL_CRAWLER = new ResourceLocation(ENTITY_LOCATION + "ZombieSkullCrawler.png");
     // models - graves
     public static final ResourceLocation GRAVE_VERTICAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "ModelVerticalPlateGraveStone.png");
     public static final ResourceLocation GRAVE_CROSS = new ResourceLocation(GRAVES_LOCATION + "ModelCrossGraveStone.png");

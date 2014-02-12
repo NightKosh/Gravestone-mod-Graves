@@ -2,6 +2,7 @@ package gravestone.core;
 
 import gravestone.config.GraveStoneConfig;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import gravestone.entity.monster.EntitySkullCrawler;
 import gravestone.entity.monster.EntitySkeletonCat;
 import gravestone.entity.monster.EntitySkeletonDog;
 import gravestone.entity.monster.EntityZombieCat;
@@ -35,6 +36,7 @@ public class GSEntity {
     public static final String ZOMBIE_CAT_NAME = "GSZombieCat";
     public static final String SKEKETON_DOG_NAME = "GSSkeletonDog";
     public static final String SKEKETON_CAT_NAME = "GSSkeletonCat";
+    public static final String SKULL_CRAWLER_NAME = "GSSkullCrawler";
     
     public void getEntity() {
         // zombie dog
@@ -61,6 +63,11 @@ public class GSEntity {
             EntityRegistry.addSpawn(EntityZombieCat.class, 2, 1, 1, EnumCreatureType.monster, GSBiomes.getSkeletonCatsBiomes());
         }
 
+        // skullcrawler
+        EntityRegistry.registerGlobalEntityID(EntitySkullCrawler.class, SKULL_CRAWLER_NAME, EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
+        EntityRegistry.addSpawn(EntitySkullCrawler.class, 1, 0, 0, EnumCreatureType.monster);
+        //EntityRegistry.addSpawn(EntityZombieCat.class, 2, 1, 1, EnumCreatureType.monster, GSBiomes.getSkeletonCatsBiomes());
+        
         // ghosts
         // LostSoul
         //EntityRegistry.registerGlobalEntityID(EntityLostSoul.class, "GSLostSoul", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
