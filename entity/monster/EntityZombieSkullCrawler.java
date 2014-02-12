@@ -1,4 +1,3 @@
-
 package gravestone.entity.monster;
 
 import net.minecraft.item.Item;
@@ -18,7 +17,31 @@ public class EntityZombieSkullCrawler extends EntitySkullCrawler {
     public EntityZombieSkullCrawler(World world) {
         super(world);
     }
-    
+
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    @Override
+    protected String getLivingSound() {
+        return "mob.zombie.say";
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound() {
+        return "mob.zombie.hurt";
+    }
+
+    /**
+     * Returns the sound this mob makes on death.
+     */
+    @Override
+    protected String getDeathSound() {
+        return "mob.zombie.death";
+    }
+
     /**
      * Returns the item ID for the item the mob drops on death.
      */
@@ -26,12 +49,12 @@ public class EntityZombieSkullCrawler extends EntitySkullCrawler {
     protected int getDropItemId() {
         return Item.rottenFlesh.itemID;
     }
-    
+
     @Override
     protected void dropRareDrop(int par1) {
         this.entityDropItem(new ItemStack(Item.skull.itemID, 1, 2), 0);
     }
-    
+
     @Override
     protected PotionEffect getPotionEffect() {
         return new PotionEffect(Potion.hunger.id, 200);
