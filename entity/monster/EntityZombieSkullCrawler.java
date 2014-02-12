@@ -59,4 +59,8 @@ public class EntityZombieSkullCrawler extends EntitySkullCrawler {
     protected PotionEffect getPotionEffect() {
         return new PotionEffect(Potion.hunger.id, 200);
     }
+    
+    @Override
+    protected void silverfishBehaviour() {
+    }
 }

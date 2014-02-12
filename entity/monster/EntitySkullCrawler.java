@@ -248,8 +248,8 @@ public class EntitySkullCrawler extends EntityMob {
         if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
             float f = this.getBrightness(1.0F);
 
-            if (!this.isImmuneToFire && f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && 
-                    this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ))) {
+            if (!this.isImmuneToFire && f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F
+                    && this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ))) {
                 this.setFire(8);
             }
         }
@@ -280,67 +280,65 @@ public class EntitySkullCrawler extends EntityMob {
 
         return entityData;
     }
-    /*
-     @Override
-     protected void updateEntityActionState() {
-     super.updateEntityActionState();
 
-     if (!this.worldObj.isRemote) {
-     int x;
-     int y;
-     int z;
-     int l;
+    @Override
+    protected void updateEntityActionState() {
+        super.updateEntityActionState();
 
-     if (this.allySummonCooldown > 0) {
-     --this.allySummonCooldown;
+        silverfishBehaviour();
+    }
+    
+    protected void silverfishBehaviour() {
+        if (!this.worldObj.isRemote) {
+            int x = MathHelper.floor_double(this.posX);
+            int y = MathHelper.floor_double(this.posY);
+            int z = MathHelper.floor_double(this.posZ);
+            if (this.allySummonCooldown > 0) {
+                --this.allySummonCooldown;
 
-     if (this.allySummonCooldown == 0) {
-     x = MathHelper.floor_double(this.posX);
-     y = MathHelper.floor_double(this.posY);
-     z = MathHelper.floor_double(this.posZ);
-     boolean flag = false;
+                if (this.allySummonCooldown == 0) {
+                    boolean flag = false;
 
-     for (l = 0; !flag && l <= 5 && l >= -5; l = l <= 0 ? 1 - l : 0 - l) {
-     for (int i1 = 0; !flag && i1 <= 10 && i1 >= -10; i1 = i1 <= 0 ? 1 - i1 : 0 - i1) {
-     for (int j1 = 0; !flag && j1 <= 10 && j1 >= -10; j1 = j1 <= 0 ? 1 - j1 : 0 - j1) {
-     int blockID = this.worldObj.getBlockId(x + i1, y + l, z + j1);
-     int blockMeta = this.worldObj.getBlockMetadata(x + i1, y + l, z + j1);
+                    for (int shiftY = 0; !flag && shiftY <= 5 && shiftY >= -5; shiftY = shiftY <= 0 ? 1 - shiftY : 0 - shiftY) {
+                        for (int shiftX = 0; !flag && shiftX <= 10 && shiftX >= -10; shiftX = shiftX <= 0 ? 1 - shiftX : 0 - shiftX) {
+                            for (int ShiftZ = 0; !flag && ShiftZ <= 10 && ShiftZ >= -10; ShiftZ = ShiftZ <= 0 ? 1 - ShiftZ : 0 - ShiftZ) {
+                                int blockID = this.worldObj.getBlockId(x + shiftX, y + shiftY, z + ShiftZ);
+                                int blockMeta = this.worldObj.getBlockMetadata(x + shiftX, y + shiftY, z + ShiftZ);
 
-     if (blockID == GSBlock.boneBlock.blockID && GSBlock.boneBlock.isSkullCrawlerBlock(blockMeta)) {
-     this.worldObj.destroyBlock(x + i1, y + l, z + j1, false);
+                                if (blockID == GSBlock.boneBlock.blockID && GSBlock.boneBlock.isSkullCrawlerBlock(blockMeta)) {
+                                    this.worldObj.destroyBlock(x + shiftX, y + shiftY, z + ShiftZ, false);
+                                    GSBlock.boneBlock.onBlockDestroyedByPlayer(this.worldObj, x + shiftX, y + shiftY, z + ShiftZ, blockMeta);
 
-     GSBlock.boneBlock.onBlockDestroyedByPlayer(this.worldObj, x + i1, y + l, z + j1, 0);
-     //Block.silverfish.onBlockDestroyedByPlayer(this.worldObj, x + i1, y + l, z + j1, 0);
+                                    if (this.rand.nextBoolean()) {
+                                        flag = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
-     if (this.rand.nextBoolean()) {
-     flag = true;
-     break;
-     }
-     }
-     }
-     }
-     }
-     }
-     }
+            if (this.entityToAttack == null && !this.hasPath()) {
+                int offset = this.rand.nextInt(6);
+                x += Facing.offsetsXForSide[offset];
+                y = MathHelper.floor_double(this.posY + 0.5D) + Facing.offsetsYForSide[offset];
+                z += Facing.offsetsZForSide[offset];
+                
+                int blockId = this.worldObj.getBlockId(x, y, z);
+                int metadata = this.worldObj.getBlockMetadata(x, y, z);
 
-     if (this.entityToAttack == null && !this.hasPath()) {
-     x = MathHelper.floor_double(this.posX);
-     y = MathHelper.floor_double(this.posY + 0.5D);
-     z = MathHelper.floor_double(this.posZ);
-     int i2 = this.rand.nextInt(6);
-     l = this.worldObj.getBlockId(x + Facing.offsetsXForSide[i2], y + Facing.offsetsYForSide[i2], z + Facing.offsetsZForSide[i2]);
-
-     if (BlockSilverfish.getPosingIdByMetadata(l)) {
-     this.worldObj.setBlock(x + Facing.offsetsXForSide[i2], y + Facing.offsetsYForSide[i2], z + Facing.offsetsZForSide[i2], Block.silverfish.blockID, BlockSilverfish.getMetadataForBlockType(l), 3);
-     this.spawnExplosionParticle();
-     this.setDead();
-     } else {
-     this.updateWanderPath();
-     }
-     } else if (this.entityToAttack != null && !this.hasPath()) {
-     this.entityToAttack = null;
-     }
-     }
-     }
-     */
+                if (GSBlock.boneBlock.blockID == blockId && !GSBlock.boneBlock.isSkullCrawlerBlock(metadata)) {
+                    this.worldObj.setBlock(x, y, z, GSBlock.boneBlock.blockID, metadata + 2, 3);
+                    this.spawnExplosionParticle();
+                    this.setDead();
+                } else {
+                    this.updateWanderPath();
+                }
+            } else if (this.entityToAttack != null && !this.hasPath()) {
+                this.entityToAttack = null;
+            }
+        }
+    }
 }

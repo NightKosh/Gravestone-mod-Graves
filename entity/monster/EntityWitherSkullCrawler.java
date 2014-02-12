@@ -37,4 +37,8 @@ public class EntityWitherSkullCrawler extends EntitySkullCrawler {
     protected PotionEffect getPotionEffect() {
         return new PotionEffect(Potion.wither.id, 100);
     }
+    
+    @Override
+    protected void silverfishBehaviour() {
+    }
 }
