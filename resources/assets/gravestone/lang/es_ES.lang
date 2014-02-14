@@ -1,0 +1,86 @@
+# tabs
+itemGroup.tabGraveStone=Gravestone
+
+
+# blocks
+## graves
+block.gravestone.gravestone=Gravestone
+block.gravestone.cross=Cross
+block.gravestone.plate=Grave Plate
+block.gravestone.dog_statue=Dog statue
+block.gravestone.cat_statue=Cat statue
+block.gravestone.wooden_sword=Wooden sword gravestone
+block.gravestone.stone_sword=Stone sword gravestone
+block.gravestone.iron_sword=Iron sword gravestone
+block.gravestone.golden_sword=Golden sword gravestone
+block.gravestone.diamond_sword=Diamond sword gravestone
+
+## memorials
+block.memorial.cross=Cross Memorial
+block.memorial.obelisk=Obelisk
+block.memorial.steve_statue=Steve statue
+block.memorial.villager_statue=Villager statue
+block.memorial.angel_statue=Angel statue
+block.memorial.dog_statue=Dog statue
+block.memorial.cat_statue=Cat statue
+block.memorial.creeper_statue=Creeper statue
+block.memorial.celtic_cross=Celtic cross
+
+## trap
+tile.trap.night.name=Night stone
+tile.trap.thunder.name=Thunder stone
+block.trap.curse=Darkness is coming!
+
+## spawner
+tile.spawner.wither.name=Wither Spawner
+
+# bone blocks
+tile.bone_block.name=Bone block
+tile.bone_block.skull_name=Bone block with skull
+tile.bone_block.crawler_name=Skull crawler's bone block 
+tile.bone_block.crawler_skull_name=Skull crawler's bone block with skull
+tile.bone_slab.name=Bone slab
+tile.bone_stairs.name=Bone stairs
+
+## chests
+block.haunted_chest.bats_chest=Cofre con Murciélagos
+block.haunted_chest.skeleton_chest=Cofre con Esqueletos
+block.haunted_chest.raven_chest=Cofre con uervos
+block.haunted_chest.ghost_chest=Cofre con Fantasmas
+
+##candles
+block.skull_candle.skeleton.name=Vela en Cráneo
+block.skull_candle.wither_skeleton.name=Vela en Cráneo de Wither
+block.skull_candle.zombie.name=Vela en Cabeza de Zombi
+
+
+# items
+## chisel
+item.chisel.name=Cincel
+
+## graves
+item.grave.age=Vivió
+item.grave.days=dias
+item.grave.sword_name=Nombre
+item.grave.sword_damage=Daño
+
+
+# gui
+gui.edit_grave=Ponga nombre a la lapida
+
+
+# entity
+entity.GSZombieDog.name=Perro Zombi
+entity.GSSkeletonDog.name=Perro Esqueleto
+entity.GSZombieCat.name=Gato Zombi
+entity.GSSkeletonCat.name=Gato Esqueleto
+entity.GSSkullCrawler.name=Arranca cráneos
+entity.GSWitherSkullCrawler.name=Arranca Cráneos Wither
+entity.GSZombieSkullCrawler.name=Arranca Cráneos Zombi
+entity.GSRaven.name=Cuervo
+
+
+# death messages
+death.GS.Herobrine=%1$s fue brutalmente asesinado por Herobrine.
+death.GS.death_sentence=%1$s recibió una sentencia de muerte.
+death.GS.tortures=%1$s murio a causa de terribles torturas.
