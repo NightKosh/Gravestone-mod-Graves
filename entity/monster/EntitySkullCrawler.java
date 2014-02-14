@@ -1,11 +1,10 @@
 package gravestone.entity.monster;
 
 import gravestone.core.GSBlock;
+import java.util.List;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSilverfish;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
@@ -13,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.Facing;
@@ -34,6 +34,7 @@ public class EntitySkullCrawler extends EntityMob {
         zombie
     }
     protected int allySummonCooldown;
+    protected int defaultSummonCooldown = 10;
 
     public EntitySkullCrawler(World world) {
         super(world);
@@ -82,7 +83,7 @@ public class EntitySkullCrawler extends EntityMob {
      */
     @Override
     protected Entity findPlayerToAttack() {
-        return this.worldObj.getClosestVulnerablePlayerToEntity(this, 2);
+        return this.worldObj.getClosestVulnerablePlayerToEntity(this, 10);
     }
 
     /**
@@ -146,7 +147,7 @@ public class EntitySkullCrawler extends EntityMob {
             return false;
         } else {
             if (this.allySummonCooldown <= 0 && (source instanceof EntityDamageSource || source == DamageSource.magic)) {
-                this.allySummonCooldown = 20;
+                this.allySummonCooldown = defaultSummonCooldown;
             }
 
             return super.attackEntityFrom(source, par2);
@@ -197,7 +198,7 @@ public class EntitySkullCrawler extends EntityMob {
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.UNDEAD;
     }
-
+    
     /**
      * Returns true if the WatchableObject (Byte) is 0x01 otherwise returns
      * false. The WatchableObject is updated using setBesideClimableBlock.
@@ -258,37 +259,13 @@ public class EntitySkullCrawler extends EntityMob {
     }
 
     @Override
-    public EntityLivingData onSpawnWithEgg(EntityLivingData data) {
-        EntityLivingData entityData = super.onSpawnWithEgg(data);
-
-        /*
-         if (par1EntityLivingData1 == null) {
-         par1EntityLivingData1 = new SpiderEffectsGroupData();
-
-         if (this.worldObj.difficultySetting > 2 && this.worldObj.rand.nextFloat() < 0.1F * this.worldObj.getLocationTensionFactor(this.posX, this.posY, this.posZ)) {
-         ((SpiderEffectsGroupData) par1EntityLivingData1).func_111104_a(this.worldObj.rand);
-         }
-         }
-
-         if (par1EntityLivingData1 instanceof SpiderEffectsGroupData) {
-         int i = ((SpiderEffectsGroupData) par1EntityLivingData1).field_111105_a;
-
-         if (i > 0 && Potion.potionTypes[i] != null) {
-         this.addPotionEffect(new PotionEffect(i, Integer.MAX_VALUE));
-         }
-         }*/
-
-        return entityData;
-    }
-
-    @Override
     protected void updateEntityActionState() {
         super.updateEntityActionState();
 
-        silverfishBehaviour();
+        silverfishLikeBehaviour();
     }
     
-    protected void silverfishBehaviour() {
+    protected void silverfishLikeBehaviour() {
         if (!this.worldObj.isRemote) {
             int x = MathHelper.floor_double(this.posX);
             int y = MathHelper.floor_double(this.posY);

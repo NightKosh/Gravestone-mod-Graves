@@ -61,6 +61,6 @@ public class EntityZombieSkullCrawler extends EntitySkullCrawler {
     }
     
     @Override
-    protected void silverfishBehaviour() {
+    protected void silverfishLikeBehaviour() {
     }
 }
