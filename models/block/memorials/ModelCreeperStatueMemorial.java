@@ -101,20 +101,18 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
         float tickModifier = (float) (Minecraft.getSystemTime() % 3000L) / 3000.0F * 48.0F;
         float scale = 1.2F;
         float f4 = 0.5F;
-        
+
         GL11.glTranslated(0, -0.5, 0);
         GL11.glScalef(scale, scale, scale);
         TileEntityGSMemorialRenderer.instance.bindTextureByName(Resources.CREEPER_AURA);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDepthMask(true);
+        GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
         GL11.glMatrixMode(GL11.GL_TEXTURE);
 
-        for (int var21 = 0; var21 < 2; ++var21) {
-            GL11.glColor4f(f4, f4, f4, 1);
-            GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
-            GL11.glMatrixMode(GL11.GL_TEXTURE);
+        for (int var21 = 0; var21 < 3; ++var21) {
             GL11.glLoadIdentity();
-            float var23 = tickModifier * (0.001F + (float) var21 * 0.003F) * 15;
+            float var23 = tickModifier * (0.001F + (float) var21 * 0.0015F) * 15;
             GL11.glTranslatef(0, var23, 0);
             renderCreeper();
         }
@@ -126,8 +124,8 @@ public class ModelCreeperStatueMemorial extends ModelGraveStone {
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glDepthFunc(GL11.GL_LEQUAL);
         GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
-        
-        
+
+
         GL11.glTranslated(0, -0.19, 0);
     }
 }
