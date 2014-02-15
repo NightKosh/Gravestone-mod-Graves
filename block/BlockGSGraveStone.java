@@ -434,6 +434,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 }
             } else {
                 if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemSpade) {
+                    GraveStoneLogger.logInfo(player.username + " loot grave at " + x +"/" + y + "/" + z);
                     te.dropAllItems();
                 }
             }
