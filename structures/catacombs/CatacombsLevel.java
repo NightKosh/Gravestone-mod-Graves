@@ -1,21 +1,9 @@
 package gravestone.structures.catacombs;
 
 import gravestone.structures.catacombs.components.CatacombsBaseComponent;
-import gravestone.structures.catacombs.components.CreeperRoom;
-import gravestone.structures.catacombs.components.Crossing;
-import gravestone.structures.catacombs.components.TrapCorridor;
 import gravestone.structures.catacombs.components.Treasury;
-import gravestone.structures.catacombs.components.Bridge;
-import gravestone.structures.catacombs.components.Corridor;
-import gravestone.structures.catacombs.components.EnderHall;
-import gravestone.structures.catacombs.components.GraveCorridor;
-import gravestone.structures.catacombs.components.GraveHall;
-import gravestone.structures.catacombs.components.SpidersCorridor;
 import gravestone.structures.catacombs.components.Stairs;
-import gravestone.structures.catacombs.components.StatuesHall;
 import gravestone.structures.catacombs.components.WitherHall;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
@@ -37,7 +25,7 @@ public class CatacombsLevel {
     private LinkedList levelComponents = new LinkedList();
     private LinkedList endComponents = new LinkedList();
 
-    private static enum COMPONENT_SIDE {
+    protected static enum COMPONENT_SIDE {
 
         TOP,
         LEFT,
@@ -180,7 +168,7 @@ public class CatacombsLevel {
 
         if (endsCount == 0) {
             component = currentComponents.get(random.nextInt(components.size()));
-            newComponent = createComponent(component, component.getDirection(), componentClass, COMPONENT_SIDE.TOP);
+            newComponent = CatacombsComponentsFactory.createComponent(component, random, component.getDirection(), componentClass, COMPONENT_SIDE.TOP);
             levelComponents.add(newComponent);
             endComponents.add(newComponent);
         }
@@ -188,10 +176,10 @@ public class CatacombsLevel {
 
     private CatacombsBaseComponent tryCreateComponent(CatacombsBaseComponent component, Class componentClass, int direction, COMPONENT_SIDE componentSide) {
         if (componentsCount < 30 && componentClass == Treasury.class) {
-            componentClass = getCorridorType();
+            componentClass = CatacombsComponentsFactory.getCorridorType(random);
         }
 
-        CatacombsBaseComponent newComponent = createComponent(component, direction, componentClass, componentSide);
+        CatacombsBaseComponent newComponent = CatacombsComponentsFactory.createComponent(component, random, direction, componentClass, componentSide);
 
         if (canBePlaced(newComponent)) {
             levelComponents.add(newComponent);
@@ -202,7 +190,7 @@ public class CatacombsLevel {
     }
 
     private CatacombsBaseComponent tryCreateComponent(CatacombsBaseComponent component, int direction, COMPONENT_SIDE componentSide) {
-        return tryCreateComponent(component, getNextComponent(component.getClass(), componentSide), direction, componentSide);
+        return tryCreateComponent(component, CatacombsComponentsFactory.getNextComponent(component.getClass(), componentSide, random, level), direction, componentSide);
     }
 
     /**
@@ -221,159 +209,6 @@ public class CatacombsLevel {
         }
 
         return true;
-    }
-
-    /**
-     * Create component
-     * @param component previouse component
-     * @param direction component direction
-     * @param buildComponent component class
-     * @param componentSide 
-     */
-    private CatacombsBaseComponent createComponent(CatacombsBaseComponent component, int direction, Class buildComponent, COMPONENT_SIDE componentSide) {
-        if (component != null) {
-            int x, y, z;
-            y = component.getYEnd();
-
-            if (componentSide == COMPONENT_SIDE.TOP) {
-                x = component.getTopXEnd();
-                z = component.getTopZEnd();
-            } else if (componentSide == COMPONENT_SIDE.LEFT) {
-                x = component.getLeftXEnd();
-                z = component.getLeftZEnd();
-            } else {
-                x = component.getRightXEnd();
-                z = component.getRightZEnd();
-            }
-
-            try {
-                Constructor<CatacombsBaseComponent> constructor = buildComponent.getConstructor(int.class, Random.class, int.class, int.class, int.class);
-                component = constructor.newInstance(direction, random, x, y, z);
-                return component;
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return null;
-    }
-
-    private Class getNextComponent(Class componentClass, COMPONENT_SIDE componentSide) {
-        if (componentSide == COMPONENT_SIDE.TOP) {
-            return getNextComponentForLevel(componentClass);
-        } else {
-            if (level == 1 || random.nextInt(100) >= 5) {
-                return Corridor.class;
-            } else {
-                return Treasury.class;
-            }
-        }
-    }
-
-    /**
-     * Return next component for current level
-     */
-    private Class getNextComponentForLevel(Class componentClass) {
-        int chance = random.nextInt(100);
-
-        switch (level) {
-            case 1:
-                if (chance >= 25) {
-                    return getCorridorType();
-                } else if (chance >= 10) {
-                    if (componentClass == Crossing.class) {
-                        return getCorridorType();
-                    } else {
-                        return getCrossingType();
-                    }
-                } else if (chance >= 5) {
-                    if (componentClass == SpidersCorridor.class) {
-                        return getCorridorType();
-                    } else {
-                        return SpidersCorridor.class;
-                    }
-                } else {
-                    if (componentClass == EnderHall.class) {
-                        return getCorridorType();
-                    } else {
-                        return EnderHall.class;
-                    }
-                }
-            default:
-                if (chance >= 55) {
-                    return getCorridorType();
-                } else if (chance >= 40) {
-                    if (componentClass == Crossing.class) {
-                        return getCorridorType();
-                    } else {
-                        return getCrossingType();
-                    }
-                } else if (chance >= 30) {
-                    if (componentClass == SpidersCorridor.class) {
-                        return getCorridorType();
-                    } else {
-                        return SpidersCorridor.class;
-                    }
-                } else if (chance >= 20) {
-                    if (componentClass == EnderHall.class) {
-                        return getCorridorType();
-                    } else {
-                        return EnderHall.class;
-                    }
-                } else if (chance >= 10) {
-                    return getHallType();
-                } else if (chance >= 5) {
-                    if (componentClass == Bridge.class) {
-                        return getCorridorType();
-                    } else {
-                        return Bridge.class;
-                    }
-                } else {
-                    return Treasury.class;
-                }
-        }
-    }
-
-    private Class getHallType() {
-        int hallChance = random.nextInt(10);
-
-        if (hallChance >= 2) {
-            return GraveHall.class;
-        } else {
-            return StatuesHall.class;
-        }
-    }
-
-    /**
-     * Return ranfom class of corridor component
-     */
-    private Class getCorridorType() {
-        int corridorChance = random.nextInt(100);
-
-        if (corridorChance >= 65) {
-            return Corridor.class;
-        } else if (corridorChance >= 10) {
-            return GraveCorridor.class;
-        } else {
-            return TrapCorridor.class;
-        }
-    }
-
-    /**
-     * Return ranfom class of crossing component
-     */
-    private Class getCrossingType() {
-        if (random.nextInt(100) >= 10) {
-            return Crossing.class;
-        } else {
-            return CreeperRoom.class;
-        }
     }
 
     /**
