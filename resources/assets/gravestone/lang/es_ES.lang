@@ -1,51 +1,51 @@
 # tabs
-itemGroup.tabGraveStone=Gravestone
+itemGroup.tabGraveStone=Lapida
 
 
 # blocks
 ## graves
-block.gravestone.gravestone=Gravestone
-block.gravestone.cross=Cross
-block.gravestone.plate=Grave Plate
-block.gravestone.dog_statue=Dog statue
-block.gravestone.cat_statue=Cat statue
-block.gravestone.wooden_sword=Wooden sword gravestone
-block.gravestone.stone_sword=Stone sword gravestone
-block.gravestone.iron_sword=Iron sword gravestone
-block.gravestone.golden_sword=Golden sword gravestone
-block.gravestone.diamond_sword=Diamond sword gravestone
+block.gravestone.gravestone=Lapida
+block.gravestone.cross=Cruz
+block.gravestone.plate=Placa
+block.gravestone.dog_statue=Estatua de perro
+block.gravestone.cat_statue=Estatua de gato
+block.gravestone.wooden_sword=Lapida de espada de Madera
+block.gravestone.stone_sword=Lapida de espada de Piedra
+block.gravestone.iron_sword=Lapida de espada de Hierro
+block.gravestone.golden_sword=Lapida de espada de Oro
+block.gravestone.diamond_sword=Lapida de espada de Diamante
 
 ## memorials
-block.memorial.cross=Cross Memorial
-block.memorial.obelisk=Obelisk
-block.memorial.steve_statue=Steve statue
-block.memorial.villager_statue=Villager statue
-block.memorial.angel_statue=Angel statue
-block.memorial.dog_statue=Dog statue
-block.memorial.cat_statue=Cat statue
-block.memorial.creeper_statue=Creeper statue
-block.memorial.celtic_cross=Celtic cross
+block.memorial.cross=Memorial Cruz
+block.memorial.obelisk=Obelisco
+block.memorial.steve_statue=Estatua de Steve
+block.memorial.villager_statue=Estatua de aldeano
+block.memorial.angel_statue=Estatua de angel
+block.memorial.dog_statue=Estatua de perro
+block.memorial.cat_statue=Estatua de gato
+block.memorial.creeper_statue=Estatua de creeper
+block.memorial.celtic_cross=Cruz céltica
 
 ## trap
-tile.trap.night.name=Night stone
-tile.trap.thunder.name=Thunder stone
-block.trap.curse=Darkness is coming!
+tile.trap.night.name=Piedra nocturna
+tile.trap.thunder.name=Piedra del trueno
+block.trap.curse=¡La oscuridad de aproxima!
 
 ## spawner
-tile.spawner.wither.name=Wither Spawner
+tile.spawner.wither.name=Engendrador de wither
 
 # bone blocks
-tile.bone_block.name=Bone block
-tile.bone_block.skull_name=Bone block with skull
-tile.bone_block.crawler_name=Skull crawler's bone block 
-tile.bone_block.crawler_skull_name=Skull crawler's bone block with skull
-tile.bone_slab.name=Bone slab
-tile.bone_stairs.name=Bone stairs
+tile.bone_block.name=Bloque de hueso
+tile.bone_block.skull_name=Bloque de hueso con craneo
+tile.bone_block.crawler_name=Bloque de hueso con craneo del arranca craneos
+tile.bone_block.crawler_skull_name=Bloque de hueso con craneo de
+tile.bone_slab.name=Losa de hueso
+tile.bone_stairs.name=Escaleras de hueso
 
 ## chests
 block.haunted_chest.bats_chest=Cofre con Murciélagos
 block.haunted_chest.skeleton_chest=Cofre con Esqueletos
-block.haunted_chest.raven_chest=Cofre con uervos
+block.haunted_chest.raven_chest=Cofre con Cuervos
 block.haunted_chest.ghost_chest=Cofre con Fantasmas
 
 ##candles
@@ -83,4 +83,4 @@ entity.GSRaven.name=Cuervo
 # death messages
 death.GS.Herobrine=%1$s fue brutalmente asesinado por Herobrine.
 death.GS.death_sentence=%1$s recibió una sentencia de muerte.
-death.GS.tortures=%1$s murio a causa de terribles torturas.
+death.GS.tortures=%1$s murió a causa de terribles torturas.
