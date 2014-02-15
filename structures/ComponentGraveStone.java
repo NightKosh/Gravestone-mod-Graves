@@ -88,11 +88,9 @@ public class ComponentGraveStone extends StructureComponent {
 
     @Override
     protected void func_143012_a(NBTTagCompound nbttagcompound) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     protected void func_143011_b(NBTTagCompound nbttagcompound) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
