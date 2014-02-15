@@ -20,8 +20,8 @@ public class CreeperRoom extends CatacombsBaseComponent {
     public static final int HEIGHT = 14;
     public static final int Z_LENGTH = 11;
 
-    public CreeperRoom(int direction, Random random, int x, int y, int z) {
-        super(direction);
+    public CreeperRoom(int direction, int level, Random random, int x, int y, int z) {
+        super(direction, level);
         xShift = 3;
         y = y - HEIGHT + 6;
         yEnd = 8;

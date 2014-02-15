@@ -19,8 +19,8 @@ public class SpidersCorridor extends CatacombsBaseComponent {
     public static final int HEIGHT = 5;
     public static final int Z_LENGTH = 13;
 
-    public SpidersCorridor(int direction, Random random, int x, int y, int z) {
-        super(direction);
+    public SpidersCorridor(int direction, int level, Random random, int x, int y, int z) {
+        super(direction, level);
         boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
         topXEnd = 0;
         topZEnd = Z_LENGTH - 1;

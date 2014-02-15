@@ -149,7 +149,7 @@ public class CatacombsComponentsFactory {
      * @param buildComponent component class
      * @param componentSide 
      */
-    public static CatacombsBaseComponent createComponent(CatacombsBaseComponent component, Random random, int direction, Class buildComponent, CatacombsLevel.COMPONENT_SIDE componentSide) {
+    public static CatacombsBaseComponent createComponent(CatacombsBaseComponent component, Random random, int direction, int level, Class buildComponent, CatacombsLevel.COMPONENT_SIDE componentSide) {
         if (component != null) {
             int x, y, z;
             y = component.getYEnd();
@@ -166,8 +166,8 @@ public class CatacombsComponentsFactory {
             }
 
             try {
-                Constructor<CatacombsBaseComponent> constructor = buildComponent.getConstructor(int.class, Random.class, int.class, int.class, int.class);
-                component = constructor.newInstance(direction, random, x, y, z);
+                Constructor<CatacombsBaseComponent> constructor = buildComponent.getConstructor(int.class, int.class, Random.class, int.class, int.class, int.class);
+                component = constructor.newInstance(direction, level, random, x, y, z);
                 return component;
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();

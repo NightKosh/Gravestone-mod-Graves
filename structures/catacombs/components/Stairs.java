@@ -1,6 +1,7 @@
 package gravestone.structures.catacombs.components;
 
 import gravestone.structures.BoundingBoxHelper;
+import gravestone.structures.catacombs.CatacombsLevel;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -17,8 +18,8 @@ public class Stairs extends CatacombsBaseComponent {
     public static final int HEIGHT = 16;
     public static final int Z_LENGTH = 13;
 
-    public Stairs(int direction, Random random, int x, int y, int z) {
-        super(direction);
+    public Stairs(int direction, int level, Random random, int x, int y, int z) {
+        super(direction, level);
         y = y - HEIGHT + 4;
         boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
         goTop = true;
@@ -64,11 +65,13 @@ public class Stairs extends CatacombsBaseComponent {
             this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 6, shiftZ + 2, 3, shiftY - 6, shiftZ + 2, Block.stairsNetherBrick.blockID, metaBot, Block.stairsNetherBrick.blockID, metaBot, false);
             this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 7, shiftZ + 3, 3, shiftY - 7, shiftZ + 3, Block.stairsNetherBrick.blockID, metaBot, Block.stairsNetherBrick.blockID, metaBot, false);
             
+            int stairsBlockId = CatacombsLevel.getCatacombsStairsId(this.level);
+            
             // block stairs
-            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 1, shiftZ + 1, 3, shiftY - 1, shiftZ + 1, Block.stairsStoneBrick.blockID, metaTop, Block.stairsStoneBrick.blockID, metaTop, false);
-            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 2, shiftZ + 2, 3, shiftY - 2, shiftZ + 2, Block.stairsStoneBrick.blockID, metaTop, Block.stairsStoneBrick.blockID, metaTop, false);
-            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 3, shiftZ + 3, 3, shiftY - 3, shiftZ + 3, Block.stairsStoneBrick.blockID, metaTop, Block.stairsStoneBrick.blockID, metaTop, false);
-            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 4, shiftZ + 4, 3, shiftY - 4, shiftZ + 4, Block.stairsStoneBrick.blockID, metaTop, Block.stairsStoneBrick.blockID, metaTop, false);
+            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 1, shiftZ + 1, 3, shiftY - 1, shiftZ + 1, stairsBlockId, metaTop, stairsBlockId, metaTop, false);
+            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 2, shiftZ + 2, 3, shiftY - 2, shiftZ + 2, stairsBlockId, metaTop, stairsBlockId, metaTop, false);
+            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 3, shiftZ + 3, 3, shiftY - 3, shiftZ + 3, stairsBlockId, metaTop, stairsBlockId, metaTop, false);
+            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 4, shiftZ + 4, 3, shiftY - 4, shiftZ + 4, stairsBlockId, metaTop, stairsBlockId, metaTop, false);
             
             // web
             this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 1, shiftY - 3, shiftZ, Block.web.blockID, 0);

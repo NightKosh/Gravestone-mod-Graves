@@ -2,10 +2,11 @@ package gravestone.structures.catacombs.components;
 
 import gravestone.core.GSStructures;
 import gravestone.structures.ComponentGraveStone;
-import gravestone.structures.catacombs.CatacombsStones;
+import gravestone.structures.catacombs.CatacombsLevel;
 import java.util.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
+import net.minecraft.world.gen.structure.StructurePieceBlockSelector;
 
 /**
  * GraveStone mod
@@ -15,7 +16,6 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
  */
 public abstract class CatacombsBaseComponent extends ComponentGraveStone {
 
-    private static final CatacombsStones cemeteryCatacombsStones = new CatacombsStones();
     protected int leftXEnd = 0;
     protected int rightXEnd = 0;
     protected int topXEnd = 0;
@@ -25,13 +25,19 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
     protected int yEnd = 0;
     protected int xShift = 0;
     protected int zShift = 0;
+    protected int level = 0;
     public boolean goTop = true;
     protected CatacombsBaseComponent prevComponent;
     protected CatacombsBaseComponent[] nextComponents;
 
     protected CatacombsBaseComponent(int direction) {
+        this(direction, 0);
+    }
+    
+    protected CatacombsBaseComponent(int direction, int level) {
         super(direction);
-        coordBaseMode = direction;
+        this.coordBaseMode = direction;
+        this.level = level;
     }
 
     /*
@@ -188,8 +194,8 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
     /**
      * Return StructureGSCemeteryCatacombsStones instance
      */
-    public static CatacombsStones getCemeteryCatacombsStones() {
-        return cemeteryCatacombsStones;
+    public StructurePieceBlockSelector getCemeteryCatacombsStones() {
+        return CatacombsLevel.getCatacombsStones(this.level);
     }
 
     /**

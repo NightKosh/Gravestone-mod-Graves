@@ -21,8 +21,8 @@ public class Treasury extends CatacombsBaseComponent {
     public static final int HEIGHT = 5;
     public static final int Z_LENGTH = 7;
 
-    public Treasury(int direction, Random random, int x, int y, int z) {
-        super(direction);
+    public Treasury(int direction, int level, Random random, int x, int y, int z) {
+        super(direction, level);
         xShift = 1;
         boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
         goTop = false;

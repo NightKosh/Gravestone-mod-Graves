@@ -20,8 +20,8 @@ public class EnderHall extends CatacombsBaseComponent {
     public static final int HEIGHT = 5;
     public static final int Z_LENGTH = 18;
 
-    public EnderHall(int direction, Random random, int x, int y, int z) {
-        super(direction);
+    public EnderHall(int direction, int level, Random random, int x, int y, int z) {
+        super(direction, level);
         xShift = 4;
         boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
         topXEnd = 4;

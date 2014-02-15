@@ -19,8 +19,8 @@ public class Corridor extends CatacombsBaseComponent {
     public static final int HEIGHT = 5;
     public static final int Z_LENGTH = 5;
 
-    public Corridor(int direction, Random random, int x, int y, int z) {
-        super(direction);
+    public Corridor(int direction, int level, Random random, int x, int y, int z) {
+        super(direction, level);
         boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
         topXEnd = 0;
         topZEnd = Z_LENGTH - 1;

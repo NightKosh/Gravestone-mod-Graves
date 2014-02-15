@@ -19,8 +19,8 @@ public class Crossing extends CatacombsBaseComponent {
     public static final int HEIGHT = 6;
     public static final int Z_LENGTH = 13;
 
-    public Crossing(int direction, Random random, int x, int y, int z) {
-        super(direction);
+    public Crossing(int direction, int level, Random random, int x, int y, int z) {
+        super(direction, level);
         xShift = 4;
         topXEnd = 4;
         topZEnd = 12;

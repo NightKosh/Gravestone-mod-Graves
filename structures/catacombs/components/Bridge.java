@@ -21,8 +21,8 @@ public class Bridge extends CatacombsBaseComponent {
     public static final int HEIGHT = 14;
     public static final int Z_LENGTH = 7;
 
-    public Bridge(int direction, Random random, int x, int y, int z) {
-        super(direction);
+    public Bridge(int direction, int level, Random random, int x, int y, int z) {
+        super(direction, level);
         xShift = 4;
         y = y - HEIGHT + 6;
         boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);

@@ -10,9 +10,9 @@ import net.minecraft.world.gen.structure.StructurePieceBlockSelector;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class CatacombsStones extends StructurePieceBlockSelector {
+public class CatacombsStonesBlocks extends StructurePieceBlockSelector {
 
-    public CatacombsStones() {
+    public CatacombsStonesBlocks() {
     }
 
     /**

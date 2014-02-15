@@ -22,8 +22,8 @@ public class StatuesHall extends CatacombsBaseComponent {
     public static final int HEIGHT = 6;
     public static final int Z_LENGTH = 19;
 
-    public StatuesHall(int direction, Random random, int x, int y, int z) {
-        super(direction);
+    public StatuesHall(int direction, int level, Random random, int x, int y, int z) {
+        super(direction, level);
         xShift = 3;
         boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
         topXEnd = 3;

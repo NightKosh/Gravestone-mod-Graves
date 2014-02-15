@@ -21,8 +21,8 @@ public class WitherHall extends CatacombsBaseComponent {
     public static final int Z_LENGTH = 24;
     private int metaTop, metaBot, metaRight, metaLeft;
 
-    public WitherHall(int direction, Random random, int x, int y, int z) {
-        super(direction);
+    public WitherHall(int direction, int level, Random random, int x, int y, int z) {
+        super(direction, level);
         xShift = 9;
         boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
         goTop = false;
