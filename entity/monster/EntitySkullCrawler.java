@@ -236,7 +236,7 @@ public class EntitySkullCrawler extends EntityMob {
     }
 
     protected PotionEffect getPotionEffect() {
-        return new PotionEffect(Potion.poison.id, 100);
+        return new PotionEffect(Potion.moveSlowdown.id, 200);
     }
 
     /**
