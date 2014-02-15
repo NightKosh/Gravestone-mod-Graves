@@ -5,12 +5,18 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import gravestone.GraveStoneLogger;
 import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.core.GSBlock;
+import gravestone.core.GSMobSpawn;
 import gravestone.core.compatibility.GSCompatibility;
+import gravestone.entity.monster.EntitySkullCrawler;
+import gravestone.entity.monster.EntityWitherSkullCrawler;
+import gravestone.entity.monster.EntityZombieSkullCrawler;
 import gravestone.tileentity.DeathMessageInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
@@ -36,21 +42,33 @@ public class EventHookGSGraveStone {
             if (!GraveStoneConfig.generateGravesInLava && event.source.damageType.equals("lava")) {
                 return;
             }
-                
+
             if (GraveStoneConfig.generatePlayerGraves && event.entityLiving instanceof EntityPlayer) {
                 createPlayerGrave((EntityPlayer) event.entity, event);
             } else {
                 if (GraveStoneConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
                     createGrave(event.entity, event, null, ((EntityVillager) event.entity).getAge(), EnumGraveType.PLAYER_GRAVES, true);
+                    return;
                 }
 
                 if (GraveStoneConfig.generatePetGraves && event.entity instanceof EntityTameable) {
                     createPetGrave(event.entity, event);
+                    return;
                 }
             }
 
-            // drop creeper statue if entity is a charged creeper
-            if (event.entity instanceof EntityCreeper && ((EntityCreeper) event.entity).getPowered()) {
+            if (event.entity instanceof EntitySkeleton) {
+                EntitySkullCrawler crawler;
+                if (GSMobSpawn.isWitherSkeleton((EntitySkeleton) event.entity)) {
+                    crawler = new EntityWitherSkullCrawler(event.entity.worldObj);
+                } else {
+                    crawler = new EntitySkullCrawler(event.entity.worldObj);
+                }
+                spawnCrawler(event.entity, crawler);
+            } else if (event.entity instanceof EntityZombie) {
+                spawnCrawler(event.entity, new EntityZombieSkullCrawler(event.entity.worldObj));
+            } else if (event.entity instanceof EntityCreeper && ((EntityCreeper) event.entity).getPowered()) {
+                // drop creeper statue if entity is a charged creeper
                 GSBlock.memorial.dropCreeperMemorial(event.entity.worldObj, (int) event.entity.posX,
                         (int) event.entity.posY, (int) event.entity.posZ);
             }
@@ -143,6 +161,14 @@ public class EventHookGSGraveStone {
             }
         } else {
             return new DeathMessageInfo(entity.getTranslatedEntityName(), shortString, null);
+        }
+    }
+
+    private void spawnCrawler(Entity entity, EntitySkullCrawler crawler) {
+        if (entity.worldObj.rand.nextInt(10) == 0) {
+            GSMobSpawn.spawnMob(entity.worldObj, crawler,
+                    (int) Math.floor(entity.posX), entity.posY + 1.5, (int) Math.floor(entity.posZ),
+                    entity.rotationYaw, false);
         }
     }
 }

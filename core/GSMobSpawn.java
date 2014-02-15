@@ -157,6 +157,10 @@ public class GSMobSpawn {
 
         return skeleton;
     }
+    
+    public static boolean isWitherSkeleton(EntitySkeleton skeleton) {
+        return skeleton.getSkeletonType() == 1;
+    }
 
     /**
      * Return constructor for forein mobs classes based on class path
@@ -225,6 +229,12 @@ public class GSMobSpawn {
         }
     }
 
+    
+    public static boolean spawnMob(World world, Entity mob, double x, double y, double z, boolean checkSpawn) {
+        float rotation = world.rand.nextFloat() * 360.0F;
+        return spawnMob(world, mob, x, y, z, rotation, checkSpawn);
+    }
+    
     /**
      * Spawn mob in world
      *
@@ -234,9 +244,8 @@ public class GSMobSpawn {
      * @param y Y coordinate
      * @param z Z coordinate
      */
-    public static boolean spawnMob(World world, Entity mob, int x, int y, int z, boolean checkSpawn) {
+    public static boolean spawnMob(World world, Entity mob, double x, double y, double z, float rotation, boolean checkSpawn) {
         EntityLiving livingEntity = (EntityLiving) mob;
-        float rotation = world.rand.nextFloat() * 360.0F;
         boolean canSpawn = false;
         double xPosition = x + 0.5;
         double yPosition = y;
@@ -286,7 +295,7 @@ public class GSMobSpawn {
             world.spawnParticle("largesmoke", xPosition, yPosition + 2, zPosition, 0.0D, 0.0D, 0.0D);
             world.spawnParticle("flame", xPosition, yPosition + 1, zPosition, 0.0D, 0.0D, 0.0D);
             world.spawnEntityInWorld(mob);
-            world.playAuxSFX(2004, x, y, z, 0);
+            world.playAuxSFX(2004, (int) x, (int) y, (int) z, 0);
             return true;
         } else {
             return false;
