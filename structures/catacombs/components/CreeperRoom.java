@@ -168,10 +168,6 @@ public class CreeperRoom extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 0, yStart + 1, 4, 0, yStart + 3, 6, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 10, yStart + 1, 4, 10, yStart + 3, 6, false, random, getCemeteryCatacombsStones());
         
-        // fill exit
-        this.fillWithRandomizedBlocks(world, boundingBox, 5, yStart + 1, 12, 7, yStart + 3, 12, false, random, getCemeteryCatacombsStones());
-        this.fillWithRandomizedBlocks(world, boundingBox, 0, yStart + 1, 5, 0, yStart + 3, 7, false, random, getCemeteryCatacombsStones());
-        this.fillWithRandomizedBlocks(world, boundingBox, 12, yStart + 1, 5, 12, yStart + 3, 7, false, random, getCemeteryCatacombsStones());
         
         // creeper statue
         MemorialGenerationHelper.placeMemorial(this, world, random, 5, yStart + 1, 5, BlockGSMemorial.getMetaDirection(coordBaseMode), BlockGSMemorial.getMemorialType(random, 4));
