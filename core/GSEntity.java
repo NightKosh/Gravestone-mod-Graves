@@ -10,6 +10,7 @@ import gravestone.entity.monster.EntityZombieCat;
 import gravestone.entity.monster.EntityZombieDog;
 import gravestone.entity.monster.EntityZombieSkullCrawler;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraftforge.common.BiomeDictionary;
 
 /**
  * GraveStone mod
@@ -69,13 +70,11 @@ public class GSEntity {
 
         // skullcrawler
         EntityRegistry.registerGlobalEntityID(EntitySkullCrawler.class, SKULL_CRAWLER_NAME, EntityRegistry.findGlobalUniqueEntityId(), 12698049, 11013646);
-        EntityRegistry.addSpawn(EntitySkullCrawler.class, 1, 0, 1, EnumCreatureType.monster);
         // wither
         EntityRegistry.registerGlobalEntityID(EntityWitherSkullCrawler.class, WITHER_SKULL_CRAWLER_NAME, EntityRegistry.findGlobalUniqueEntityId(), 0, 11013646);
-        EntityRegistry.addSpawn(EntityWitherSkullCrawler.class, 1, 0, 1, EnumCreatureType.monster);
+        EntityRegistry.addSpawn(EntityWitherSkullCrawler.class, 3, 1, 4, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.NETHER));
         // zombie
         EntityRegistry.registerGlobalEntityID(EntityZombieSkullCrawler.class, ZOMBIE_SKULL_CRAWLER_NAME, EntityRegistry.findGlobalUniqueEntityId(), 44975, 11013646);
-        EntityRegistry.addSpawn(EntityZombieSkullCrawler.class, 1, 0, 1, EnumCreatureType.monster);
         
         // ghosts
         // LostSoul
