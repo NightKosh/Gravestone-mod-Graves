@@ -14,10 +14,10 @@ public class Resources {
     }
     private static final String MOD_NAME = ModInfo.ID.toLowerCase();
     private static final String GUI_LOCATION = MOD_NAME + ":textures/gui/";
+    private static final String BLOCK_LOCATION = MOD_NAME + ":textures/blocks/";
     private static final String ENTITY_LOCATION = MOD_NAME + ":textures/entities/";
     private static final String GRAVES_LOCATION = MOD_NAME + ":textures/graves/";
     private static final String MEMORIALS_LOCATION = MOD_NAME + ":textures/memorials/";
-    private static final String FURNITURE_LOCATION = MOD_NAME + ":textures/furniture/";
     // localization path
     public static final String LOCALIZATION_LOCATION = "/assets/" + MOD_NAME + "/lang/";
     // blocks
@@ -69,11 +69,12 @@ public class Resources {
     public static final ResourceLocation BIG_PEDESTAL = new ResourceLocation(MEMORIALS_LOCATION + "ModelBigPedestal.png");
     public static final ResourceLocation STEVE_ARMOR = new ResourceLocation(MEMORIALS_LOCATION + "ModelSteveStatueMemorialArmor.png");
     
-    // ghostly chest
+    // haunted chest
     public static final ResourceLocation CHRISTMAS_CHEST = new ResourceLocation("textures/entity/chest/christmas.png");
     public static final ResourceLocation DEFAULT_CHEST = new ResourceLocation("textures/entity/chest/normal.png");
     
     // skull candle
-    public static final ResourceLocation SKELETON_SKULL = new ResourceLocation("textures/entity/skeleton/skeleton.png");
-    public static final ResourceLocation SKULL_CANDLE = new ResourceLocation(FURNITURE_LOCATION + "SkullCandle.png");
+    public static final ResourceLocation SKELETON_SKULL_CANDLE = new ResourceLocation(BLOCK_LOCATION + "SkeletonSkullCandle.png");
+    public static final ResourceLocation WITHER_SKULL_CANDLE = new ResourceLocation(BLOCK_LOCATION + "WitherSkullCandle.png");
+    public static final ResourceLocation ZOMBIE_SKULL_CANDLE = new ResourceLocation(BLOCK_LOCATION + "ZombieSkullCandle.png");
 }

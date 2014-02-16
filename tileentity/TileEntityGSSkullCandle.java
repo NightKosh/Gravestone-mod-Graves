@@ -1,7 +1,5 @@
 package gravestone.tileentity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
@@ -15,27 +13,24 @@ import net.minecraft.tileentity.TileEntity;
  */
 public class TileEntityGSSkullCandle extends TileEntity {
 
-    /**
-     * The skull's rotation.
-     */
-    private int skullRotation;
+    private byte skullType;
 
     /**
      * Writes a tile entity to NBT.
      */
     @Override
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
-        super.writeToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setByte("Rot", (byte) (this.skullRotation & 255));
+    public void writeToNBT(NBTTagCompound nbt) {
+        super.writeToNBT(nbt);
+        nbt.setByte("SkullType", this.skullType);
     }
 
     /**
      * Reads a tile entity from NBT.
      */
     @Override
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
-        super.readFromNBT(par1NBTTagCompound);
-        this.skullRotation = par1NBTTagCompound.getByte("Rot");
+    public void readFromNBT(NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+        this.skullType = nbt.getByte("SkullType");
     }
 
     /**
@@ -43,20 +38,20 @@ public class TileEntityGSSkullCandle extends TileEntity {
      */
     @Override
     public Packet getDescriptionPacket() {
-        NBTTagCompound nbttagcompound = new NBTTagCompound();
-        this.writeToNBT(nbttagcompound);
-        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 4, nbttagcompound);
+        NBTTagCompound nbt = new NBTTagCompound();
+        this.writeToNBT(nbt);
+        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 4, nbt);
     }
 
     /**
-     * Set the skull's rotation
+     * Get the entity type for the skull
      */
-    public void setSkullRotation(int par1) {
-        this.skullRotation = par1;
+    public byte getSkullType() {
+        return this.skullType;
     }
-
-    @SideOnly(Side.CLIENT)
-    public int getRotation() {
-        return this.skullRotation;
+    
+    
+    public void setSkullType(byte skullType) {
+        this.skullType = skullType;
     }
 }

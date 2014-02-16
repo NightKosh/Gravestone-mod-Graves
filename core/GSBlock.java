@@ -17,12 +17,14 @@ import gravestone.block.enums.EnumMemorials;
 import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumBoneBlock;
 import gravestone.block.enums.EnumHauntedChest;
+import gravestone.block.enums.EnumSkullCandle;
 import gravestone.block.enums.EnumTrap;
 import gravestone.block.enums.IBlockEnum;
 import gravestone.item.ItemBlockGSBoneBlock;
 import gravestone.item.ItemBlockGSGraveStone;
 import gravestone.item.ItemBlockGSHauntedChest;
 import gravestone.item.ItemBlockGSMemorial;
+import gravestone.item.ItemBlockGSSkullCandle;
 import gravestone.item.ItemBlockGSTrap;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -99,11 +101,9 @@ public class GSBlock {
         hauntedChest = new BlockGSHauntedChest(GraveStoneConfig.hauntedChestID);
         advancedNTBBlockRegistration(hauntedChest, "GSHauntedChest", "Haunted chest", "axe", 0, EnumHauntedChest.values(), "ChestType", ItemBlockGSHauntedChest.class);
 
-        /*
         // skull candle
         skullCandle = new BlockGSSkullCandle(GraveStoneConfig.skullCandleID);
-        simpleBlockRegistration(skullCandle, "GSSkullCandle", "Skull candle", "pickaxe", 1);
-        * */
+        advancedNTBBlockRegistration(skullCandle, "GSSkullCandle", "Skull candle", "pickaxe", 1, EnumSkullCandle.values(), "SkullType", ItemBlockGSSkullCandle.class);
     }
 
     private static void simpleBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel) {
