@@ -36,7 +36,7 @@ public class BlockGSSkullCandle extends BlockContainer {
         this.setUnlocalizedName("Skull Candle");
         this.setHardness(1.0F);
         this.setResistance(5F);
-        this.setLightValue(15);
+        this.setLightValue(1);
         this.setTextureName("skull");
         this.setCreativeTab(ModGraveStone.creativeTab);
     }
@@ -92,8 +92,8 @@ public class BlockGSSkullCandle extends BlockContainer {
         int rotation = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
         world.setBlockMetadataWithNotify(x, y, z, rotation, 2);
         System.out.println("Rotation " + rotation);
-        
-        
+
+
         TileEntityGSSkullCandle tileEntity = (TileEntityGSSkullCandle) world.getBlockTileEntity(x, y, z);
 
         if (tileEntity != null) {
@@ -173,5 +173,25 @@ public class BlockGSSkullCandle extends BlockContainer {
             stack.setTagCompound(nbt);
             list.add(stack);
         }
+    }
+
+    /**
+     * A randomly called display update to be able to add particles or other items for display
+     */
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+        double xPos = (double) ((float) x + 0.5F);
+        double yPos = (double) ((float) y + 0.85F);
+        double zPos = (double) ((float) z + 0.5F);
+        double dx;
+        double dz;
+        double d = 0.07;
+        switch (world.getBlockMetadata(x, y, z)) {
+            
+        }
+        
+            world.spawnParticle("smoke", xPos, yPos, zPos, 0.0D, 0.0D, 0.0D);
+            world.spawnParticle("flame", xPos, yPos, zPos + d, 0.0D, 0.0D, 0.0D);
     }
 }
