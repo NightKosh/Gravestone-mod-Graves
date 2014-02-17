@@ -1,6 +1,7 @@
 package gravestone.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
@@ -41,6 +42,11 @@ public class TileEntityGSSkullCandle extends TileEntity {
         NBTTagCompound nbt = new NBTTagCompound();
         this.writeToNBT(nbt);
         return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 4, nbt);
+    }
+    
+    @Override
+    public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
+        readFromNBT(packet.data);
     }
 
     /**
