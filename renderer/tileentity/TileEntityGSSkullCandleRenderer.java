@@ -25,8 +25,8 @@ public class TileEntityGSSkullCandleRenderer extends TileEntitySpecialRenderer {
         float rotation = 0;
         EnumSkullCandle skullType = EnumSkullCandle.getByID(tileEntity.getSkullType());
         if (tileEntity.worldObj != null) {
-            int meta = tileEntity.getBlockMetadata() & 7;
-            rotation = (float) (meta * 360) / 16.0F;
+            int meta = tileEntity.getBlockMetadata();
+            rotation = (float) (meta * 360) / 8F;
         }
 
         bindSkullCandleTexture(skullType);

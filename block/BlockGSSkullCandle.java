@@ -16,9 +16,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 /**
@@ -37,15 +37,8 @@ public class BlockGSSkullCandle extends BlockContainer {
         this.setHardness(1.0F);
         this.setResistance(5F);
         this.setLightValue(1);
-        this.setTextureName("skull");
+        this.setTextureName("snow");
         this.setCreativeTab(ModGraveStone.creativeTab);
-    }
-
-    /**
-     * Updates the blocks bounds based on its current state.
-     */
-    @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
         this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.5F, 0.75F);
     }
 
@@ -89,10 +82,12 @@ public class BlockGSSkullCandle extends BlockContainer {
      */
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
-        int rotation = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+        float skullRotation = entity.rotationYaw - 180 - 22.5F;
+        if (skullRotation < 0) {
+            skullRotation = 360 + skullRotation;
+        }
+        int rotation = MathHelper.ceiling_double_int(skullRotation * 8 / 360.0F);
         world.setBlockMetadataWithNotify(x, y, z, rotation, 2);
-        System.out.println("Rotation " + rotation);
-
 
         TileEntityGSSkullCandle tileEntity = (TileEntityGSSkullCandle) world.getBlockTileEntity(x, y, z);
 
@@ -108,54 +103,11 @@ public class BlockGSSkullCandle extends BlockContainer {
     }
 
     /**
-     * only called by clickMiddleMouseButton , and passed to
-     * inventory.setCurrentItem (along with isCreative)
-     */
-    @Override
-    public int idPicked(World world, int x, int y, int z) {
-        return GraveStoneConfig.skullCandleID;
-    }
-
-    /**
      * Determines the damage on the item the block drops. Used in cloth and
      * wood.
      */
     @Override
     public int damageDropped(int damage) {
-        return 0;
-    }
-
-    /**
-     * Called when the block is attempted to be harvested
-     */
-    @Override
-    public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player) {
-        ItemStack itemStack = getBlockItemStack(world, x, y, z);
-        if (itemStack != null) {
-            this.dropBlockAsItem_do(world, x, y, z, itemStack);
-        }
-
-        super.onBlockHarvested(world, x, y, z, metadata, player);
-    }
-
-    private ItemStack getBlockItemStack(World world, int x, int y, int z) {
-        ItemStack itemStack = this.createStackedBlock(0);
-        TileEntityGSSkullCandle tileEntity = (TileEntityGSSkullCandle) world.getBlockTileEntity(x, y, z);
-
-        if (tileEntity != null) {
-            NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("SkullType", tileEntity.getSkullType());
-            itemStack.setTagCompound(nbt);
-        }
-
-        return itemStack;
-    }
-
-    /**
-     * Returns the ID of the items to drop on destruction.
-     */
-    @Override
-    public int idDropped(int par1, Random random, int par3) {
         return 0;
     }
 
@@ -176,22 +128,62 @@ public class BlockGSSkullCandle extends BlockContainer {
     }
 
     /**
-     * A randomly called display update to be able to add particles or other items for display
+     * A randomly called display update to be able to add particles or other
+     * items for display
      */
     @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-        double xPos = (double) ((float) x + 0.5F);
-        double yPos = (double) ((float) y + 0.85F);
-        double zPos = (double) ((float) z + 0.5F);
-        double dx;
-        double dz;
+        double xPos = x + 0.5F;
+        double yPos = y + 0.85;
+        double zPos = z + 0.5F;
+
+        float rotation = world.getBlockMetadata(x, y, z) * 360 / 8F;
         double d = 0.07;
-        switch (world.getBlockMetadata(x, y, z)) {
-            
-        }
+        double dx = -Math.sin(Math.toRadians(rotation)) * d;
+        double dz = Math.cos(Math.toRadians(rotation)) * d;
+
+        world.spawnParticle("smoke", xPos + dx, yPos, zPos + dz, 0.0D, 0.0D, 0.0D);
+        world.spawnParticle("flame", xPos + dx, yPos, zPos + dz, 0.0D, 0.0D, 0.0D);
+    }
+
+    /**
+     * Called when the player destroys a block with an item that can harvest it.
+     * (x, y, z) are the coordinates of the block and metadata is the block's
+     * subtype/damage.
+     */
+    @Override
+    public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int metadata) {
+    }
+
+    /**
+     * Called when the block is attempted to be harvested
+     */
+    @Override
+    public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player) {
+        player.addStat(StatList.mineBlockStatArray[this.blockID], 1);
+        player.addExhaustion(0.025F);
+        ItemStack itemStack = getBlockItemStack(world, x, y, z);
         
-            world.spawnParticle("smoke", xPos, yPos, zPos, 0.0D, 0.0D, 0.0D);
-            world.spawnParticle("flame", xPos, yPos, zPos + d, 0.0D, 0.0D, 0.0D);
+        if (itemStack != null) {
+            this.dropBlockAsItem_do(world, x, y, z, itemStack);
+        }
+    }
+
+    /**
+     * Get chest block as item block
+     */
+    private ItemStack getBlockItemStack(World world, int x, int y, int z) {
+        ItemStack itemStack = this.createStackedBlock(0);
+        TileEntityGSSkullCandle tileEntity = (TileEntityGSSkullCandle) world.getBlockTileEntity(x, y, z);
+
+        if (tileEntity != null) {
+            NBTTagCompound nbt = new NBTTagCompound();
+            nbt.setByte("SkullType", tileEntity.getSkullType());
+
+            itemStack.setTagCompound(nbt);
+        }
+
+        return itemStack;
     }
 }

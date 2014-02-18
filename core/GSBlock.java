@@ -103,7 +103,7 @@ public class GSBlock {
 
         // skull candle
         skullCandle = new BlockGSSkullCandle(GraveStoneConfig.skullCandleID);
-        advancedNTBBlockRegistration(skullCandle, "GSSkullCandle", "Skull candle", "pickaxe", 1, EnumSkullCandle.values(), "SkullType", ItemBlockGSSkullCandle.class);
+        advancedNTBBlockRegistration(skullCandle, "GSSkullCandle", "Skull candle", "pickaxe", 0, EnumSkullCandle.values(), "SkullType", ItemBlockGSSkullCandle.class);
     }
 
     private static void simpleBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel) {
