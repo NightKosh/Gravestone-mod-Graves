@@ -12,10 +12,12 @@ import gravestone.core.GSBiomes;
 import gravestone.core.GSEntity;
 import gravestone.core.GSItem;
 import gravestone.core.GSMobSpawn;
+import gravestone.core.GSReciepes;
 import java.util.Map;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
+import thaumcraft.api.ItemApi;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -118,6 +120,7 @@ public class GSCompatibility {
         // adding Thaumcraft aspects
         if (Loader.isModLoaded("Thaumcraft")) {
             initThaumCraft();
+            GSReciepes.addSkullCandleReciepes(ItemApi.getBlock("blockCandle", 0));
         }
 
     }

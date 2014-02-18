@@ -3,6 +3,8 @@ package gravestone.core;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import gravestone.block.GraveStoneHelper;
+import gravestone.block.enums.EnumGraves;
+import gravestone.block.enums.EnumSkullCandle;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,18 +35,18 @@ public class GSReciepes {
         GameRegistry.addRecipe(new ItemStack(Item.bone, 9), "x", 'x', GSBlock.boneBlock);
         
         // graves
-        GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) 0, "GraveType"), "sc", 's', Block.stone, 'c', GSItem.chisel);
-        GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) 1, "GraveType"), " c", "s ", 's', Block.stone, 'c', GSItem.chisel);
-        GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) 2, "GraveType"), "c", "s", 's', Block.stone, 'c', GSItem.chisel);
+        GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.VERTICAL_PLATE.ordinal(), "GraveType"), "sc", 's', Block.stone, 'c', GSItem.chisel);
+        GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.CROSS.ordinal(), "GraveType"), " c", "s ", 's', Block.stone, 'c', GSItem.chisel);
+        GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.HORISONTAL_PLATE.ordinal(), "GraveType"), "c", "s", 's', Block.stone, 'c', GSItem.chisel);
         // pet graves
-        GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) 3, "GraveType"), " c", "  ", "s ", 's', Block.stone, 'c', GSItem.chisel);
-        GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) 4, "GraveType"), " c", "  ", " s", 's', Block.stone, 'c', GSItem.chisel);
+        GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.DOG_STATUE.ordinal(), "GraveType"), " c", "  ", "s ", 's', Block.stone, 'c', GSItem.chisel);
+        GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.CAT_STATUE.ordinal(), "GraveType"), " c", "  ", " s", 's', Block.stone, 'c', GSItem.chisel);
         // sword graves
-        GameRegistry.addRecipe(getSwordGravestone(GSBlock.graveStone, (byte) 5), "sc", 's', Item.swordWood, 'c', GSItem.chisel);
-        GameRegistry.addRecipe(getSwordGravestone(GSBlock.graveStone, (byte) 6), "sc", 's', Item.swordStone, 'c', GSItem.chisel);
-        GameRegistry.addRecipe(getSwordGravestone(GSBlock.graveStone, (byte) 7), "sc", 's', Item.swordIron, 'c', GSItem.chisel);
-        GameRegistry.addRecipe(getSwordGravestone(GSBlock.graveStone, (byte) 8), "sc", 's', Item.swordGold, 'c', GSItem.chisel);
-        GameRegistry.addRecipe(getSwordGravestone(GSBlock.graveStone, (byte) 9), "sc", 's', Item.swordDiamond, 'c', GSItem.chisel);
+        GameRegistry.addRecipe(getSwordGravestone(GSBlock.graveStone, (byte) EnumGraves.WOODEN_SWORD.ordinal()), "sc", 's', Item.swordWood, 'c', GSItem.chisel);
+        GameRegistry.addRecipe(getSwordGravestone(GSBlock.graveStone, (byte) EnumGraves.STONE_SWORD.ordinal()), "sc", 's', Item.swordStone, 'c', GSItem.chisel);
+        GameRegistry.addRecipe(getSwordGravestone(GSBlock.graveStone, (byte) EnumGraves.IRON_SWORD.ordinal()), "sc", 's', Item.swordIron, 'c', GSItem.chisel);
+        GameRegistry.addRecipe(getSwordGravestone(GSBlock.graveStone, (byte) EnumGraves.GOLDEN_SWORD.ordinal()), "sc", 's', Item.swordGold, 'c', GSItem.chisel);
+        GameRegistry.addRecipe(getSwordGravestone(GSBlock.graveStone, (byte) EnumGraves.DIAMOND_SWORD.ordinal()), "sc", 's', Item.swordDiamond, 'c', GSItem.chisel);
     }
     
     private static ItemStack getStackWithNTB(Block block, byte graveType, String ntbName) {
@@ -60,6 +62,20 @@ public class GSReciepes {
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setByte("GraveType", graveType);
         nbt.setByte("SwordType", GraveStoneHelper.graveTypeToSwordType(graveType));
+        stack.setTagCompound(nbt);
+        return stack;
+    }
+    
+    public static void addSkullCandleReciepes(ItemStack candle) {
+        GameRegistry.addRecipe(getSkullCandle(GSBlock.skullCandle, (byte) EnumSkullCandle.SKELETON_SKULL.ordinal()), "c", "s", 's', new ItemStack(Item.skull, 1, 0), 'c', candle);
+        GameRegistry.addRecipe(getSkullCandle(GSBlock.skullCandle, (byte) EnumSkullCandle.WITHER_SKULL.ordinal()), "c", "s", 's', new ItemStack(Item.skull, 1, 1), 'c', candle);
+        GameRegistry.addRecipe(getSkullCandle(GSBlock.skullCandle, (byte) EnumSkullCandle.ZOMBIE_SKULL.ordinal()), "c", "s", 's', new ItemStack(Item.skull, 1, 2), 'c', candle);
+    }
+    
+    private static ItemStack getSkullCandle(Block block, byte skullType) {
+        ItemStack stack = new ItemStack(block, 1, 0);
+        NBTTagCompound nbt = new NBTTagCompound();
+        nbt.setByte("SkullType", skullType);
         stack.setTagCompound(nbt);
         return stack;
     }
