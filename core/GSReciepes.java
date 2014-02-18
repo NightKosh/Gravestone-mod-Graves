@@ -47,6 +47,11 @@ public class GSReciepes {
         GameRegistry.addRecipe(getSwordGravestone(GSBlock.graveStone, (byte) EnumGraves.IRON_SWORD.ordinal()), "sc", 's', Item.swordIron, 'c', GSItem.chisel);
         GameRegistry.addRecipe(getSwordGravestone(GSBlock.graveStone, (byte) EnumGraves.GOLDEN_SWORD.ordinal()), "sc", 's', Item.swordGold, 'c', GSItem.chisel);
         GameRegistry.addRecipe(getSwordGravestone(GSBlock.graveStone, (byte) EnumGraves.DIAMOND_SWORD.ordinal()), "sc", 's', Item.swordDiamond, 'c', GSItem.chisel);
+    
+        // candles
+        GameRegistry.addRecipe(new ItemStack(Item.skull, 1, 0), "c", 'c', getSkullCandle(GSBlock.skullCandle, (byte) EnumSkullCandle.SKELETON_SKULL.ordinal()));
+        GameRegistry.addRecipe(new ItemStack(Item.skull, 1, 1), "c", 'c', getSkullCandle(GSBlock.skullCandle, (byte) EnumSkullCandle.WITHER_SKULL.ordinal()));
+        GameRegistry.addRecipe(new ItemStack(Item.skull, 1, 2), "c", 'c', getSkullCandle(GSBlock.skullCandle, (byte) EnumSkullCandle.ZOMBIE_SKULL.ordinal()));
     }
     
     private static ItemStack getStackWithNTB(Block block, byte graveType, String ntbName) {

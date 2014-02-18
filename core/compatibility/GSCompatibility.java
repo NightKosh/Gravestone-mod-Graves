@@ -5,6 +5,7 @@
 package gravestone.core.compatibility;
 
 import cpw.mods.fml.common.Loader;
+import forestry.api.core.BlockInterface;
 import gravestone.GraveStoneLogger;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
@@ -117,12 +118,14 @@ public class GSCompatibility {
             isArsMagicaInstalled = true;
         }
 
-        // adding Thaumcraft aspects
         if (Loader.isModLoaded("Thaumcraft")) {
             initThaumCraft();
             GSReciepes.addSkullCandleReciepes(ItemApi.getBlock("blockCandle", 0));
         }
-
+        
+        if (Loader.isModLoaded("Forestry")) {
+            GSReciepes.addSkullCandleReciepes(BlockInterface.getBlock("candle"));
+        }
     }
 
     public static boolean hasSoulbound(ItemStack stack) {
