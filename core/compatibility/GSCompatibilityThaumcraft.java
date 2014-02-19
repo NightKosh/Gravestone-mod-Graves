@@ -60,12 +60,10 @@ public class GSCompatibilityThaumcraft {
             ThaumcraftApi.registerEntityTag(GSEntity.SKEKETON_CAT_NAME, new AspectList().add(Aspect.BEAST, 1)
                     .add(Aspect.UNDEAD, 3).add(Aspect.ENTROPY, 1));
             // Crawlers
-            ThaumcraftApi.registerEntityTag(GSEntity.SKULL_CRAWLER_NAME, new AspectList().add(Aspect.SOUL, 4).add(Aspect.DEATH, 4)
-                    .add(Aspect.UNDEAD, 4));
-            ThaumcraftApi.registerEntityTag(GSEntity.WITHER_SKULL_CRAWLER_NAME, new AspectList().add(Aspect.SOUL, 4).add(Aspect.DEATH, 4)
-                    .add(Aspect.UNDEAD, 4).add(Aspect.DARKNESS, 4));
-            ThaumcraftApi.registerEntityTag(GSEntity.ZOMBIE_SKULL_CRAWLER_NAME, new AspectList().add(Aspect.SOUL, 4).add(Aspect.DEATH, 4)
-                    .add(Aspect.UNDEAD, 4).add(Aspect.FLESH, 4));
+            ThaumcraftApi.registerEntityTag(GSEntity.SKULL_CRAWLER_NAME, new AspectList().add(Aspect.DEATH, 2).add(Aspect.UNDEAD, 2));
+            ThaumcraftApi.registerEntityTag(GSEntity.WITHER_SKULL_CRAWLER_NAME, new AspectList().add(Aspect.DEATH, 2)
+                    .add(Aspect.UNDEAD, 2).add(Aspect.DARKNESS, 2));
+            ThaumcraftApi.registerEntityTag(GSEntity.ZOMBIE_SKULL_CRAWLER_NAME, new AspectList().add(Aspect.DEATH, 2).add(Aspect.UNDEAD, 2));
         } catch (Exception e) {
             GraveStoneLogger.logError("Error in thaumcraft integration");
             e.printStackTrace();
