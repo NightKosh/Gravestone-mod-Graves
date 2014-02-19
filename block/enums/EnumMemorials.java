@@ -17,7 +17,8 @@ public enum EnumMemorials implements IBlockEnum {
     ANGEL_STATUE("block.memorial.angel_statue"),
     DOG_STATUE("block.memorial.dog_statue"),
     CAT_STATUE("block.memorial.cat_statue"),
-    CREEPER_STATUE("block.memorial.creeper_statue");
+    CREEPER_STATUE("block.memorial.creeper_statue");//,
+    //CELTIC_CROSS("block.memorial.celtic_cross");
     private String name;
 
     private EnumMemorials(String name) {

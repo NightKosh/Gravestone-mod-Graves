@@ -20,7 +20,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -384,11 +383,10 @@ public class BlockGSGraveStone extends BlockContainer {
         return 18000000F;
     }
 
-
     /**
-     * Called when the block is destroyed by an explosion.
-     * Useful for allowing the block to take into account tile entities,
-     * metadata, etc. when exploded, before it is removed.
+     * Called when the block is destroyed by an explosion. Useful for allowing
+     * the block to take into account tile entities, metadata, etc. when
+     * exploded, before it is removed.
      */
     @Override
     public void onBlockExploded(World world, int x, int y, int z, Explosion explosion) {
@@ -431,7 +429,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 }
             } else {
                 if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemSpade) {
-                    GraveStoneLogger.logInfo(player.username + " loot grave at " + x +"/" + y + "/" + z);
+                    GraveStoneLogger.logInfo(player.username + " loot grave at " + x + "/" + y + "/" + z);
                     te.dropAllItems();
                 }
             }
@@ -574,19 +572,8 @@ public class BlockGSGraveStone extends BlockContainer {
 
         if (GraveStoneConfig.generateSwordGraves && world.rand.nextInt(4) == 0 && entityType.equals(EnumGraveType.PLAYER_GRAVES)) {
             sword = GraveStoneHelper.checkSword(items);
-
             if (sword != null) {
-                if (sword.itemID == Item.swordDiamond.itemID) {
-                    swordType = 5;
-                } else if (sword.itemID == Item.swordIron.itemID) {
-                    swordType = 3;
-                } else if (sword.itemID == Item.swordStone.itemID) {
-                    swordType = 2;
-                } else if (sword.itemID == Item.swordGold.itemID) {
-                    swordType = 4;
-                } else {
-                    swordType = 1;
-                }
+                swordType = GraveStoneHelper.getSwordType(sword.itemID);
             }
         }
         switch (entityType) {

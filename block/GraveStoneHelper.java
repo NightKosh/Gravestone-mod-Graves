@@ -4,6 +4,7 @@ import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSMobSpawn;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -21,6 +22,12 @@ public class GraveStoneHelper {
 
     private GraveStoneHelper() {
     }
+    private static final List<Integer> swordsList = Arrays.asList(
+            Item.swordDiamond.itemID, Item.swordGold.itemID, Item.swordIron.itemID,
+            Item.swordStone.itemID, Item.swordWood.itemID);
+    private static final List<Integer> gravestoneGround = Arrays.asList(
+            Block.grass.blockID, Block.dirt.blockID, Block.sand.blockID, Block.gravel.blockID,
+            Block.slowSand.blockID, Block.mycelium.blockID, Block.blockSnow.blockID);
 
     /**
      * Check is there sword in your inventory
@@ -28,9 +35,7 @@ public class GraveStoneHelper {
     public static ItemStack checkSword(ItemStack[] items) {
         if (items != null) {
             for (int i = 0; i < items.length; i++) {
-                if (items[i] != null && (items[i].itemID == Item.swordDiamond.itemID || items[i].itemID == Item.swordGold.itemID
-                        || items[i].itemID == Item.swordIron.itemID || items[i].itemID == Item.swordStone.itemID
-                        || items[i].itemID == Item.swordWood.itemID)) {
+                if (items[i] != null && swordsList.contains(items[i].itemID)) {
                     ItemStack sword = items[i];
                     items[i] = null;
                     return sword;
@@ -128,6 +133,20 @@ public class GraveStoneHelper {
         return (byte) (swordGraveType + 4);
     }
 
+    public static byte getSwordType(int itemId) {
+        if (itemId == Item.swordDiamond.itemID) {
+            return 5;
+        } else if (itemId == Item.swordIron.itemID) {
+            return 3;
+        } else if (itemId == Item.swordStone.itemID) {
+            return 2;
+        } else if (itemId == Item.swordGold.itemID) {
+            return 4;
+        } else {
+            return 1;
+        }
+    }
+
     /**
      * Check ground type and replace it on dirt if it grass or mycelium
      */
@@ -160,16 +179,7 @@ public class GraveStoneHelper {
      * Check can be grave placed on this type of surface
      */
     public static boolean canPlaceBlockAt(int blockId) {
-        if (GraveStoneConfig.canPlaceGravesEveryWhere) {
-            return true;
-        } else if (blockId == Block.grass.blockID || blockId == Block.dirt.blockID
-                || blockId == Block.sand.blockID || blockId == Block.gravel.blockID
-                || blockId == Block.slowSand.blockID || blockId == Block.mycelium.blockID
-                || blockId == Block.blockSnow.blockID) {
-            return true;
-        } else {
-            return false;
-        }
+        return GraveStoneConfig.canPlaceGravesEveryWhere || gravestoneGround.contains(blockId);
     }
 
     public static int getMetadataBasedOnRotation(int rotation) {
