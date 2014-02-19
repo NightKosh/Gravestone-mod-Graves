@@ -339,16 +339,6 @@ public class BlockGSGraveStone extends BlockContainer {
     }
 
     /**
-     * only called by clickMiddleMouseButton , and passed to
-     * inventory.setCurrentItem (along with isCreative)
-     */
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int idPicked(World par1World, int par2, int par3, int par4) {
-        return blockID;
-    }
-
-    /**
      * If this block doesn't render as an ordinary block it will return False
      * (examples: signs, buttons, stairs, etc)
      */
@@ -394,6 +384,13 @@ public class BlockGSGraveStone extends BlockContainer {
         return 18000000F;
     }
 
+
+    /**
+     * Called when the block is destroyed by an explosion.
+     * Useful for allowing the block to take into account tile entities,
+     * metadata, etc. when exploded, before it is removed.
+     */
+    @Override
     public void onBlockExploded(World world, int x, int y, int z, Explosion explosion) {
     }
 

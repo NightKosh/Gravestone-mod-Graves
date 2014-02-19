@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumSkullCandle;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSBlock;
 import gravestone.tileentity.TileEntityGSSkullCandle;
 import java.util.List;
 import java.util.Random;
@@ -185,5 +186,13 @@ public class BlockGSSkullCandle extends BlockContainer {
         }
 
         return itemStack;
+    }
+    
+    public static ItemStack getSkullCandle(EnumSkullCandle skullType) {
+        ItemStack stack = new ItemStack(GSBlock.skullCandle, 1, 0);
+        NBTTagCompound nbt = new NBTTagCompound();
+        nbt.setByte("SkullType", (byte) skullType.ordinal());
+        stack.setTagCompound(nbt);
+        return stack;
     }
 }
