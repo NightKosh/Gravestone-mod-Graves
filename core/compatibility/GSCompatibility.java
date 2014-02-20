@@ -33,14 +33,10 @@ public class GSCompatibility {
     public static GSCompatibility getInstance() {
         return (instance == null) ? new GSCompatibility() : instance;
     }
-    public static final short BATTLEGEAR_FIRST_SLOT = 150;
-    public static final short BATTLEGEAR_LAST_SLOT = 155;
     private static boolean isMoCreaturesInstalled = false;
     private static boolean isHighlandsInstalled = false;
     private static boolean isBiomesOPlentyInstalled = false;
     private static boolean isExtrabiomesXLInstalled = false;
-    private static boolean isBattlegearInstalled = false;
-    private static boolean isArsMagicaInstalled = false;
     // mo_creatures mobs classes
     public static final String MO_CREATURES_S_SKELETON = "drzhark.mocreatures.entity.monster.MoCEntitySilverSkeleton";
     public static final String MO_CREATURES_WRAITH = "drzhark.mocreatures.entity.monster.MoCEntityWraith";
@@ -61,14 +57,6 @@ public class GSCompatibility {
 
     public static boolean isExtrabiomesXLInstalled() {
         return isExtrabiomesXLInstalled;
-    }
-
-    public static boolean isBattlegearInstalled() {
-        return isBattlegearInstalled;
-    }
-
-    public static boolean isArsMagicaInstalled() {
-        return isArsMagicaInstalled;
     }
 
     public void checkMods() {
@@ -104,11 +92,15 @@ public class GSCompatibility {
         }
 
         if (Loader.isModLoaded("battlegear2")) {
-            isBattlegearInstalled = true;
+            GSCompatibilityBattlegear.isBattlegearInstalled = true;
+        }
+
+        if (Loader.isModLoaded("camping")) {
+            GSCompatibilityTheCampingMod.isTheCampingModInstalled = true;
         }
 
         if (Loader.isModLoaded("arsmagica2")) {
-            isArsMagicaInstalled = true;
+            GSCompatibilityisArsMagica.isArsMagicaInstalled = true;
         }
 
         if (Loader.isModLoaded("Thaumcraft")) {
@@ -119,16 +111,5 @@ public class GSCompatibility {
         if (Loader.isModLoaded("Forestry")) {
             GSReciepes.addSkullCandleReciepes(BlockInterface.getBlock("candle"));
         }
-    }
-
-    public static boolean hasSoulbound(ItemStack stack) {
-        Map enchantments = EnchantmentHelper.getEnchantments(stack);
-        for (Object id : enchantments.keySet()) {
-            Enchantment ench = Enchantment.enchantmentsList[((Integer) id).shortValue()];
-            if (ench.getClass().getName().equals("am2.enchantments.EnchantmentSoulbound")) {
-                return true;
-            }
-        }
-        return false;
     }
 }

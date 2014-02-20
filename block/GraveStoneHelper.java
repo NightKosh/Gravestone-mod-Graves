@@ -4,6 +4,7 @@ import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSMobSpawn;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -32,13 +33,14 @@ public class GraveStoneHelper {
     /**
      * Check is there sword in your inventory
      */
-    public static ItemStack checkSword(ItemStack[] items) {
+    public static ItemStack checkSword(List<ItemStack> items) {
         if (items != null) {
-            for (int i = 0; i < items.length; i++) {
-                if (items[i] != null && swordsList.contains(items[i].itemID)) {
-                    ItemStack sword = items[i];
-                    items[i] = null;
-                    return sword;
+            Iterator<ItemStack> it = items.iterator();
+            while (it.hasNext()) {
+                ItemStack item = it.next().copy();
+                if (item != null && swordsList.contains(item.itemID)) {
+                    it.remove();
+                    return item;
                 }
             }
         }

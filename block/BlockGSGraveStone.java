@@ -561,7 +561,7 @@ public class BlockGSGraveStone extends BlockContainer {
     /**
      * Create grave on death
      */
-    public void createOnDeath(World world, int x, int y, int z, DeathMessageInfo deathInfo, int direction, ItemStack[] items, int age, EnumGraveType entityType) {
+    public void createOnDeath(World world, int x, int y, int z, DeathMessageInfo deathInfo, int direction, List<ItemStack> items, int age, EnumGraveType entityType) {
         if (direction < 0) {
             direction = 360 + direction;
         }
@@ -663,9 +663,9 @@ public class BlockGSGraveStone extends BlockContainer {
             this.dropBlockAsItem_do(world, x, y, z, itemStack);
 
             if (items != null) {
-                for (int i = 0; i < items.length; i++) {
-                    if (items[i] != null) {
-                        GSGraveStoneItems.dropItem(items[i], world, x, y, z);
+                for (int i = 0; i < items.size(); i++) {
+                    if (items.get(i) != null) {
+                        GSGraveStoneItems.dropItem(items.get(i), world, x, y, z);
                     }
                 }
             }

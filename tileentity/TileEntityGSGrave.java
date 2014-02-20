@@ -2,6 +2,7 @@ package gravestone.tileentity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 import java.util.Random;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -66,7 +67,7 @@ public abstract class TileEntityGSGrave extends TileEntity {
         return "container.gravestone";
     }
 
-    public void setItems(ItemStack[] items) {
+    public void setItems(List<ItemStack> items) {
         gSItems.setItems(items);
     }
     

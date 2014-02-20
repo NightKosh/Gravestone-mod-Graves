@@ -6,6 +6,7 @@ import java.util.Random;
 import gravestone.config.GraveStoneConfig;
 import gravestone.block.GraveStoneHelper;
 import gravestone.item.ItemBlockGSGraveStone;
+import java.util.List;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.item.EntityItem;
@@ -91,29 +92,29 @@ public class GSGraveStoneItems {
      *
      * @param items Saving items
      */
-    public void setItems(ItemStack[] items) {
+    public void setItems(List<ItemStack> items) {
         if (items != null) {
             switch (GraveStoneConfig.graveItemsCount) {
                 case 0:
-                    for (byte i = 0; i < items.length; i++) {
-                        dropItem(items[i], tileEntity.worldObj, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+                    for (byte i = 0; i < items.size(); i++) {
+                        dropItem(items.get(i), tileEntity.worldObj, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
                     }
                     break;
                 case 40:
-                    for (byte i = 0; i < items.length; i++) {
-                        setInventorySlotContents(i, items[i]);
+                    for (byte i = 0; i < items.size(); i++) {
+                        setInventorySlotContents(i, items.get(i));
                     }
                     break;
                 default:
                     int savedItems = GraveStoneConfig.graveItemsCount;
-                    Collections.shuffle(Arrays.asList(items.length), new Random());
+                    Collections.shuffle(Arrays.asList(items.size()), new Random());
 
-                    for (byte i = 0; i < items.length; i++) {
-                        if (items[i] != null && savedItems > 0) {
-                            setInventorySlotContents(i, items[i]);
+                    for (byte i = 0; i < items.size(); i++) {
+                        if (items.get(i) != null && savedItems > 0) {
+                            setInventorySlotContents(i, items.get(i));
                             savedItems--;
                         } else {
-                            dropItem(items[i], tileEntity.worldObj, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+                            dropItem(items.get(i), tileEntity.worldObj, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
                         }
                     }
                     break;
