@@ -1,7 +1,6 @@
 package gravestone.entity.monster;
 
 import gravestone.core.GSBlock;
-import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,7 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.Facing;
@@ -71,7 +69,7 @@ public class EntitySkullCrawler extends EntityMob {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(8.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(12);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.9D);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.5);
     }

@@ -1,5 +1,6 @@
 package gravestone.entity.monster;
 
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -16,6 +17,12 @@ public class EntityZombieSkullCrawler extends EntitySkullCrawler {
 
     public EntityZombieSkullCrawler(World world) {
         super(world);
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(2);
     }
 
     /**
@@ -59,7 +66,7 @@ public class EntityZombieSkullCrawler extends EntitySkullCrawler {
     protected PotionEffect getPotionEffect() {
         return new PotionEffect(Potion.hunger.id, 200);
     }
-    
+
     @Override
     protected void silverfishLikeBehaviour() {
     }

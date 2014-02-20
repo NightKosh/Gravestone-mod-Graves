@@ -24,7 +24,6 @@ public class EntityWitherSkullCrawler extends EntitySkullCrawler {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(10.0D);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(2);
     }
 
