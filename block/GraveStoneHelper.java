@@ -1,17 +1,33 @@
 package gravestone.block;
 
+import gravestone.GraveStoneLogger;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
+import gravestone.core.compatibility.GSCompatibilityBackpacksMod;
+import gravestone.core.compatibility.GSCompatibilityBattlegear;
+import gravestone.core.compatibility.GSCompatibilityTheCampingMod;
+import gravestone.core.compatibility.GSCompatibilityisArsMagica;
+import gravestone.tileentity.DeathMessageInfo;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import java.util.Arrays;
-import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.passive.EntityWolf;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 /**
  * GraveStone mod
@@ -35,12 +51,11 @@ public class GraveStoneHelper {
      */
     public static ItemStack checkSword(List<ItemStack> items) {
         if (items != null) {
-            Iterator<ItemStack> it = items.iterator();
-            while (it.hasNext()) {
-                ItemStack item = it.next().copy();
-                if (item != null && swordsList.contains(item.itemID)) {
-                    it.remove();
-                    return item;
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i) != null && swordsList.contains(items.get(i).itemID)) {
+                    ItemStack sword = items.get(i).copy();
+                    items.remove(i);
+                    return sword;
                 }
             }
         }
@@ -193,6 +208,74 @@ public class GraveStoneHelper {
             return 0;
         } else {
             return 3;
+        }
+    }
+    
+    public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event) {
+        if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GraveStoneConfig.graveItemsCount > 0) {
+            List<ItemStack> items = new LinkedList<ItemStack>();
+            
+            items.addAll(Arrays.asList(player.inventory.mainInventory));
+            items.addAll(Arrays.asList(player.inventory.armorInventory));
+            
+            GSCompatibilityBattlegear.addItems(items, player);
+            GSCompatibilityTheCampingMod.addItems(items, player);
+            //GSCompatibilityBackpacksMod.addItems(items, player);
+            player.inventory.clearInventory(-1, -1);
+            
+            GSCompatibilityisArsMagica.getSoulboundItemsBack(items, player);
+            
+            GraveStoneHelper.createGrave(player, event, items, player.getAge(), BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES, false);
+        } else {
+            GraveStoneHelper.createGrave(player, event, null, player.getAge(), BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES, false);
+        }
+    }
+    
+    public static void createGrave(Entity entity, LivingDeathEvent event, List<ItemStack> items, int age, BlockGSGraveStone.EnumGraveType entityType, boolean isVillager) {
+        GSBlock.graveStone.createOnDeath(entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
+                getDeathMessage((EntityLivingBase) entity, event.source.damageType, isVillager),
+                MathHelper.floor_float(entity.rotationYaw), items, age, entityType);
+    }
+    
+    public static void createPetGrave(Entity entity, LivingDeathEvent event) {
+        EntityTameable pet = (EntityTameable) entity;
+        
+        if (pet.isTamed()) {
+            if (pet instanceof EntityWolf) {
+                createGrave(entity, event, null, pet.getAge(), BlockGSGraveStone.EnumGraveType.DOGS_GRAVES, false);
+            } else if (pet instanceof EntityOcelot) {
+                createGrave(entity, event, null, pet.getAge(), BlockGSGraveStone.EnumGraveType.CATS_GRAVES, false);
+            }
+        }
+    }
+    
+    private static DeathMessageInfo getDeathMessage(EntityLivingBase entity, String damageType, boolean isVillager) {
+        EntityLivingBase killer = entity.func_94060_bK();
+        String shortString = "death.attack." + damageType;
+        String fullString = shortString + ".player";
+        
+        if (killer != null) {
+            String killerName;
+            if (killer instanceof EntityPlayer) {
+                killerName = ((EntityPlayer) killer).username;
+                if (isVillager) {
+                    GraveStoneLogger.logInfo("Villager was killed by " + killerName);
+                }
+            } else {
+                killerName = EntityList.getEntityString(killer);
+                if (killerName == null) {
+                    killerName = "entity.generic.name";
+                } else {
+                    killerName = "entity." + killerName + ".name";
+                }
+            }
+            if (StatCollector.func_94522_b(fullString)) {
+                return new DeathMessageInfo(entity.getTranslatedEntityName(), fullString, killerName);
+            } else {
+                return new DeathMessageInfo(entity.getTranslatedEntityName(), shortString, killerName);
+            }
+        } else {
+            return new DeathMessageInfo(entity.getTranslatedEntityName(), shortString, null);
         }
     }
 }

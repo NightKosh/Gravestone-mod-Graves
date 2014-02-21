@@ -5,6 +5,7 @@ import gravestone.GraveStoneLogger;
 import highlands.api.HighlandsBiomes;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import net.minecraft.world.biome.BiomeGenBase;
 
 /**
@@ -17,15 +18,15 @@ public class GSBiomes {
 
     private GSBiomes() {}
     // list of allowed biomes for catacombs generator
-    private static ArrayList CATACOMBS_BIOMES = new ArrayList(Arrays.asList(
+    private static List<Integer> CATACOMBS_BIOMES = new ArrayList(Arrays.asList(
             BiomeGenBase.plains.biomeID, BiomeGenBase.forest.biomeID,
             BiomeGenBase.taiga.biomeID, BiomeGenBase.icePlains.biomeID));
     // list of disallowed biomes for memorials generator
-    private static final ArrayList MEMORIAL_BIOMES = new ArrayList(Arrays.asList(
+    private static List<Integer> MEMORIAL_BIOMES = new ArrayList(Arrays.asList(
             BiomeGenBase.frozenOcean.biomeID, BiomeGenBase.frozenRiver.biomeID, BiomeGenBase.ocean.biomeID,
             BiomeGenBase.river.biomeID, BiomeGenBase.swampland.biomeID));
     // list of disallowed biomes for single graves generator
-    private static final ArrayList GRAVES_BIOMES = new ArrayList(Arrays.asList(
+    private static List<Integer> GRAVES_BIOMES = new ArrayList(Arrays.asList(
             BiomeGenBase.frozenOcean.biomeID, BiomeGenBase.frozenRiver.biomeID,
             BiomeGenBase.ocean.biomeID, BiomeGenBase.river.biomeID));
     
@@ -211,15 +212,15 @@ public class GSBiomes {
         }
     }
 
-    public static ArrayList getCatacombsBiomes() {
+    public static List getCatacombsBiomes() {
         return CATACOMBS_BIOMES;
     }
 
-    public static ArrayList getMemorialBiomes() {
+    public static List getMemorialBiomes() {
         return MEMORIAL_BIOMES;
     }
 
-    public static ArrayList getGravesBiomes() {
+    public static List getGravesBiomes() {
         return GRAVES_BIOMES;
     }
 

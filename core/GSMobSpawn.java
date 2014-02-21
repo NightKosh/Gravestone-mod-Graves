@@ -4,11 +4,12 @@ import gravestone.GraveStoneLogger;
 import gravestone.config.GraveStoneConfig;
 import gravestone.block.enums.EnumGraves;
 import gravestone.core.compatibility.GSCompatibility;
+import gravestone.entity.monster.EntitySkullCrawler;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -34,10 +35,10 @@ public class GSMobSpawn {
      * Provides a mapping between entity classes and a string
      */
     private static Map<String, Constructor<EntityLiving>> mobNameToClassMapping = new HashMap();
-    private static ArrayList<String> MOB_ID = new ArrayList(Arrays.asList("Zombie", "Skeleton"));
-    private static ArrayList<String> DOG_ID = new ArrayList(Arrays.asList("GSZombieDog", "GSSkeletonDog"));
-    private static ArrayList<String> CAT_ID = new ArrayList(Arrays.asList("GSZombieCat", "GSSkeletonCat"));
-    private static ArrayList<String> HELL_MOB_ID = new ArrayList(Arrays.asList("PigZombie", "Skeleton"));
+    private static List<String> MOB_ID = Arrays.asList("Zombie", "Skeleton");
+    private static List<String> DOG_ID = Arrays.asList("GSZombieDog", "GSSkeletonDog");
+    private static List<String> CAT_ID = Arrays.asList("GSZombieCat", "GSSkeletonCat");
+    private static List<String> HELL_MOB_ID = Arrays.asList("PigZombie", "Skeleton");
 
     public enum EnumMobType {
 
@@ -47,22 +48,21 @@ public class GSMobSpawn {
         UNDEAD_CATS
     }
     // catacombs spawner mobs
-    public static ArrayList<String> catacombsSpawnerMobs = new ArrayList(Arrays.asList(
+    public static List<String> catacombsSpawnerMobs = Arrays.asList(
             "Skeleton", "Spider", "Zombie",
             "Skeleton", "Spider", "Zombie",
             "Skeleton", "Spider", "Zombie",
             "GSZombieDog", "GSZombieCat",
-            "GSSkeletonDog", "GSSkeletonCat"));
+            "GSSkeletonDog", "GSSkeletonCat");
     // catacombs statues mobs
-    public static ArrayList<String> catacombsStatuesMobs = new ArrayList(Arrays.asList(
-            "Skeleton", "Zombie"));
+    public static List<String> catacombsStatuesMobs = Arrays.asList(
+            "Skeleton", "Zombie");
     //
     private static final int HELL_HEIGHT = 51;
 
     private GSMobSpawn() {
-        
     }
-    
+
     /**
      * Check can grave spawn hell creature or not
      *
@@ -157,7 +157,7 @@ public class GSMobSpawn {
 
         return skeleton;
     }
-    
+
     public static boolean isWitherSkeleton(EntitySkeleton skeleton) {
         return skeleton.getSkeletonType() == 1;
     }
@@ -229,12 +229,11 @@ public class GSMobSpawn {
         }
     }
 
-    
     public static boolean spawnMob(World world, Entity mob, double x, double y, double z, boolean checkSpawn) {
         float rotation = world.rand.nextFloat() * 360.0F;
         return spawnMob(world, mob, x, y, z, rotation, checkSpawn);
     }
-    
+
     /**
      * Spawn mob in world
      *
@@ -321,14 +320,13 @@ public class GSMobSpawn {
 
         GraveStoneLogger.logInfo("end load Mo'Creatures mobs");
     }
-    
-    private static void addMobToList(ArrayList<String> MOB_ID, String mobName, Constructor<EntityLiving> constructor) {
+
+    private static void addMobToList(List<String> MOB_ID, String mobName, Constructor<EntityLiving> constructor) {
         if (constructor != null) {
             MOB_ID.add(mobName);
             mobNameToClassMapping.put(mobName, constructor);
-        }    
+        }
     }
-        
 
     /**
      * Return random mob for spawner
@@ -342,5 +340,13 @@ public class GSMobSpawn {
      */
     public static String getMobForStatueSpawner(Random random) {
         return catacombsStatuesMobs.get(random.nextInt(catacombsStatuesMobs.size()));
+    }
+
+    public static void spawnCrawler(Entity entity, EntitySkullCrawler crawler) {
+        if (entity.worldObj.rand.nextInt(10) == 0) {
+            GSMobSpawn.spawnMob(entity.worldObj, crawler,
+                    (int) Math.floor(entity.posX), entity.posY + 1.5, (int) Math.floor(entity.posZ),
+                    entity.rotationYaw, false);
+        }
     }
 }

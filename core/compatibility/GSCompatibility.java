@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package gravestone.core.compatibility;
 
 import cpw.mods.fml.common.Loader;
@@ -10,10 +7,6 @@ import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBiomes;
 import gravestone.core.GSMobSpawn;
 import gravestone.core.GSReciepes;
-import java.util.Map;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.item.ItemStack;
 import thaumcraft.api.ItemApi;
 
 /**
@@ -101,6 +94,10 @@ public class GSCompatibility {
 
         if (Loader.isModLoaded("arsmagica2")) {
             GSCompatibilityisArsMagica.isArsMagicaInstalled = true;
+        }
+        
+        if (Loader.isModLoaded("Backpack")) {
+            GSCompatibilityBackpacksMod.isBackpacksModInstalled = true;
         }
 
         if (Loader.isModLoaded("Thaumcraft")) {
