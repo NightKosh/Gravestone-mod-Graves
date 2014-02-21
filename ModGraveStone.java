@@ -1,7 +1,7 @@
 package gravestone;
 
 import gravestone.core.GSEntity;
-import gravestone.core.event.EventHookGSGraveStone;
+import gravestone.core.event.GSEventsHook;
 import gravestone.core.ModInfo;
 import gravestone.core.GSPacketHandler;
 import gravestone.core.GSStructures;
@@ -60,7 +60,7 @@ public class ModGraveStone {
     @Mod.EventHandler
     public void load(FMLInitializationEvent event) {
         // register death event
-        MinecraftForge.EVENT_BUS.register(new EventHookGSGraveStone());
+        MinecraftForge.EVENT_BUS.register(new GSEventsHook());
         
         // creative tab
         creativeTab = new CreativeTabs("tabGraveStone") {

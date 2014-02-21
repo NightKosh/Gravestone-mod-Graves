@@ -24,7 +24,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class EventHookGSGraveStone {
+public class GSEventsHook {
 
     @ForgeSubscribe
     public void onEntityLivingDeath(LivingDeathEvent event) {
