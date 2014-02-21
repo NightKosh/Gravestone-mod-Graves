@@ -16,7 +16,7 @@ import net.minecraft.item.ItemStack;
  */
 public class GSCompatibilityisArsMagica {
 
-    protected static boolean isArsMagicaInstalled = false;
+    protected static boolean isInstalled = false;
 
     private GSCompatibilityisArsMagica() {
     }
@@ -46,6 +46,6 @@ public class GSCompatibilityisArsMagica {
     }
 
     public static boolean isInstalled() {
-        return isArsMagicaInstalled;
+        return isInstalled;
     }
 }

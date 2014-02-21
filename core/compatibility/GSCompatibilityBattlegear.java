@@ -15,7 +15,7 @@ public class GSCompatibilityBattlegear {
 
     private static final short FIRST_SLOT = 150;
     private static final short LAST_SLOT = 155;
-    protected static boolean isBattlegearInstalled = false;
+    protected static boolean isInstalled = false;
     
     private GSCompatibilityBattlegear() {
     }
@@ -29,6 +29,6 @@ public class GSCompatibilityBattlegear {
     }
 
     public static boolean isInstalled() {
-        return isBattlegearInstalled;
+        return isInstalled;
     }
 }

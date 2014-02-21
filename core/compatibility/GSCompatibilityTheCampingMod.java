@@ -15,7 +15,7 @@ import net.minecraft.nbt.NBTTagList;
  */
 public class GSCompatibilityTheCampingMod {
 
-    protected static boolean isTheCampingModInstalled = false;
+    protected static boolean isInstalled = false;
 
     private GSCompatibilityTheCampingMod() {
     }
@@ -49,6 +49,6 @@ public class GSCompatibilityTheCampingMod {
     }
 
     public static boolean isInstalled() {
-        return isTheCampingModInstalled;
+        return isInstalled;
     }
 }

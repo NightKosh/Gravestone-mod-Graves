@@ -13,7 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public class GSCompatibilityBackpacksMod {
 
-    protected static boolean isBackpacksModInstalled = false;
+    protected static boolean isInstalled = false;
 
     private GSCompatibilityBackpacksMod() {
     }
@@ -34,6 +34,6 @@ public class GSCompatibilityBackpacksMod {
     }
 
     public static boolean isLoaded() {
-        return isBackpacksModInstalled;
+        return isInstalled;
     }
 }

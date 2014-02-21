@@ -27,9 +27,6 @@ public class GSCompatibility {
         return (instance == null) ? new GSCompatibility() : instance;
     }
     private static boolean isMoCreaturesInstalled = false;
-    private static boolean isHighlandsInstalled = false;
-    private static boolean isBiomesOPlentyInstalled = false;
-    private static boolean isExtrabiomesXLInstalled = false;
     // mo_creatures mobs classes
     public static final String MO_CREATURES_S_SKELETON = "drzhark.mocreatures.entity.monster.MoCEntitySilverSkeleton";
     public static final String MO_CREATURES_WRAITH = "drzhark.mocreatures.entity.monster.MoCEntityWraith";
@@ -40,21 +37,8 @@ public class GSCompatibility {
         return isMoCreaturesInstalled;
     }
 
-    public static boolean isHighlandsInstalled() {
-        return isHighlandsInstalled;
-    }
-
-    public static boolean isBiomesOPlentyInstalled() {
-        return isBiomesOPlentyInstalled;
-    }
-
-    public static boolean isExtrabiomesXLInstalled() {
-        return isExtrabiomesXLInstalled;
-    }
-
     public void checkMods() {
 
-        // adding foreign mobs
         if (Loader.isModLoaded("MoCreatures")) {
             isMoCreaturesInstalled = true;
             if (GraveStoneConfig.spawnMoCreaturesMobs) {
@@ -62,42 +46,37 @@ public class GSCompatibility {
             }
         }
 
-        //if (Loader.isModLoaded("TwilightForest")) {
-            //isTwilightForestInstalled = true;
-        //}
-
-        // adding foreign bioms
         if (Loader.isModLoaded("Highlands")) {
-            isHighlandsInstalled = true;
-            GSBiomes.loadHighlandsBiomes();
-            GSBiomes.addHighlandsBiomes();
+            GSCompatibilityHighland.isInstalled = true;
+            GSCompatibilityHighland.loadBiomes();
+            GSCompatibilityHighland.addBiomes();
         }
 
         if (Loader.isModLoaded("BiomesOPlenty")) {
-            isBiomesOPlentyInstalled = true;
-            GSBiomes.loadBiomsOPlentyBiomes();
-            GSBiomes.addBiomsOPlentyBiomes();
+            GSCompatibilityBiomesOPlenty.isInstalled = true;
+            GSCompatibilityBiomesOPlenty.loadBiomes();
+            GSCompatibilityBiomesOPlenty.addBiomes();
         }
 
         if (Loader.isModLoaded("ExtrabiomesXL")) {
-            isExtrabiomesXLInstalled = true;
-            GSBiomes.addExtrabiomsXLBiomes();
+            GSCompatibilityExtraBiomesXL.isInstalled = true;
+            GSCompatibilityExtraBiomesXL.addBiomes();
         }
 
         if (Loader.isModLoaded("battlegear2")) {
-            GSCompatibilityBattlegear.isBattlegearInstalled = true;
+            GSCompatibilityBattlegear.isInstalled = true;
         }
 
         if (Loader.isModLoaded("camping")) {
-            GSCompatibilityTheCampingMod.isTheCampingModInstalled = true;
+            GSCompatibilityTheCampingMod.isInstalled = true;
         }
 
         if (Loader.isModLoaded("arsmagica2")) {
-            GSCompatibilityisArsMagica.isArsMagicaInstalled = true;
+            GSCompatibilityisArsMagica.isInstalled = true;
         }
         
         if (Loader.isModLoaded("Backpack")) {
-            GSCompatibilityBackpacksMod.isBackpacksModInstalled = true;
+            GSCompatibilityBackpacksMod.isInstalled = true;
         }
 
         if (Loader.isModLoaded("Thaumcraft")) {
