@@ -4,7 +4,6 @@ package gravestone.core.compatibility;
 import cpw.mods.fml.common.Loader;
 import forestry.api.core.BlockInterface;
 import gravestone.config.GraveStoneConfig;
-import gravestone.core.GSBiomes;
 import gravestone.core.GSMobSpawn;
 import gravestone.core.GSReciepes;
 import thaumcraft.api.ItemApi;
@@ -38,7 +37,6 @@ public class GSCompatibility {
     }
 
     public void checkMods() {
-
         if (Loader.isModLoaded("MoCreatures")) {
             isMoCreaturesInstalled = true;
             if (GraveStoneConfig.spawnMoCreaturesMobs) {

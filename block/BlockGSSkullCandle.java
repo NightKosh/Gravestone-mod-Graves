@@ -139,10 +139,10 @@ public class BlockGSSkullCandle extends BlockContainer {
         double yPos = y + 0.85;
         double zPos = z + 0.5F;
 
-        float rotation = world.getBlockMetadata(x, y, z) * 360 / 8F;
+        double rotation = Math.toRadians(world.getBlockMetadata(x, y, z) * 360 / 8F);
         double d = 0.07;
-        double dx = -Math.sin(Math.toRadians(rotation)) * d;
-        double dz = Math.cos(Math.toRadians(rotation)) * d;
+        double dx = -Math.sin(rotation) * d;
+        double dz = Math.cos(rotation) * d;
 
         world.spawnParticle("smoke", xPos + dx, yPos, zPos + dz, 0.0D, 0.0D, 0.0D);
         world.spawnParticle("flame", xPos + dx, yPos, zPos + dz, 0.0D, 0.0D, 0.0D);
