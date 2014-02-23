@@ -14,7 +14,7 @@ import net.minecraft.tileentity.TileEntity;
  */
 public class TileEntityGSSkullCandle extends TileEntity {
 
-    private byte skullType;
+    private byte rotation;
 
     /**
      * Writes a tile entity to NBT.
@@ -22,7 +22,7 @@ public class TileEntityGSSkullCandle extends TileEntity {
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
-        nbt.setByte("SkullType", this.skullType);
+        nbt.setByte("Rotation", this.rotation);
     }
 
     /**
@@ -31,7 +31,7 @@ public class TileEntityGSSkullCandle extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        this.skullType = nbt.getByte("SkullType");
+        this.rotation = nbt.getByte("Rotation");
     }
 
     /**
@@ -52,12 +52,12 @@ public class TileEntityGSSkullCandle extends TileEntity {
     /**
      * Get the entity type for the skull
      */
-    public byte getSkullType() {
-        return this.skullType;
+    public byte getRotation() {
+        return this.rotation;
     }
     
     
-    public void setSkullType(byte skullType) {
-        this.skullType = skullType;
+    public void setRotation(byte rotation) {
+        this.rotation = rotation;
     }
 }

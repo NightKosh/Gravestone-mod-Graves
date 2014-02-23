@@ -1,12 +1,10 @@
 package gravestone.core;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import gravestone.block.BlockGSSkullCandle;
 import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumSkullCandle;
 import gravestone.config.GraveStoneConfig;
-import static gravestone.config.GraveStoneConfig.enableWitherSpawnerCraftingRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -51,14 +49,14 @@ public class GSReciepes {
 
         // spawners
         if (GraveStoneConfig.enableWitherSpawnerCraftingRecipe) {
-            GameRegistry.addRecipe(new ItemStack(GSBlock.witherSpawner, 1, 0), "bcb", "cec", "cbc", 'c', BlockGSSkullCandle.getSkullCandle(EnumSkullCandle.WITHER_SKULL),
+            GameRegistry.addRecipe(new ItemStack(GSBlock.witherSpawner, 1, 0), "bcb", "cec", "cbc", 'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.WITHER_SKULL.ordinal()),
                     'b', new ItemStack(Item.dyePowder, 1, 15), 'e', Item.eyeOfEnder);
         }
 
         // candles
-//        GameRegistry.addRecipe(new ItemStack(Item.skull, 1, 0), "c", 'c', BlockGSSkullCandle.getSkullCandle(EnumSkullCandle.SKELETON_SKULL));
-//        GameRegistry.addRecipe(new ItemStack(Item.skull, 1, 1), "c", 'c', BlockGSSkullCandle.getSkullCandle(EnumSkullCandle.WITHER_SKULL));
-//        GameRegistry.addRecipe(new ItemStack(Item.skull, 1, 2), "c", 'c', BlockGSSkullCandle.getSkullCandle(EnumSkullCandle.ZOMBIE_SKULL));
+        GameRegistry.addRecipe(new ItemStack(Item.skull, 1, 0), "c", 'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.SKELETON_SKULL.ordinal()));
+        GameRegistry.addRecipe(new ItemStack(Item.skull, 1, 1), "c", 'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.WITHER_SKULL.ordinal()));
+        GameRegistry.addRecipe(new ItemStack(Item.skull, 1, 2), "c", 'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.ZOMBIE_SKULL.ordinal()));
     }
 
     private static ItemStack getStackWithNTB(Block block, byte graveType, String ntbName) {
@@ -79,8 +77,8 @@ public class GSReciepes {
     }
 
     public static void addSkullCandleReciepes(ItemStack candle) {
-        GameRegistry.addRecipe(BlockGSSkullCandle.getSkullCandle(EnumSkullCandle.SKELETON_SKULL), "c", "s", 's', new ItemStack(Item.skull, 1, 0), 'c', candle);
-        GameRegistry.addRecipe(BlockGSSkullCandle.getSkullCandle(EnumSkullCandle.WITHER_SKULL), "c", "s", 's', new ItemStack(Item.skull, 1, 1), 'c', candle);
-        GameRegistry.addRecipe(BlockGSSkullCandle.getSkullCandle(EnumSkullCandle.ZOMBIE_SKULL), "c", "s", 's', new ItemStack(Item.skull, 1, 2), 'c', candle);
+        GameRegistry.addRecipe(new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.SKELETON_SKULL.ordinal()), "c", "s", 's', new ItemStack(Item.skull, 1, 0), 'c', candle);
+        GameRegistry.addRecipe(new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.WITHER_SKULL.ordinal()), "c", "s", 's', new ItemStack(Item.skull, 1, 1), 'c', candle);
+        GameRegistry.addRecipe(new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.ZOMBIE_SKULL.ordinal()), "c", "s", 's', new ItemStack(Item.skull, 1, 2), 'c', candle);
     }
 }

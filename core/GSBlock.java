@@ -103,13 +103,18 @@ public class GSBlock {
 
         // skull candle
         skullCandle = new BlockGSSkullCandle(GraveStoneConfig.skullCandleID);
-        advancedNTBBlockRegistration(skullCandle, "GSSkullCandle", "Skull candle", "pickaxe", 0, EnumSkullCandle.values(), "SkullType", ItemBlockGSSkullCandle.class);
+        advancedMetaBlockRegistration(skullCandle, "GSSkullCandle", "Skull candle", EnumSkullCandle.values(), ItemBlockGSSkullCandle.class);
     }
 
     private static void simpleBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel) {
         GameRegistry.registerBlock(block, registerName);
         LanguageRegistry.addName(block, name);
         MinecraftForge.setBlockHarvestLevel(block, tool, harvestLevel);
+    }
+    
+    private static void advancedMetaBlockRegistration(Block block, String registerName, String name, IBlockEnum[] blockEnums, Class itemClass) {
+ 	GameRegistry.registerBlock(block, itemClass);
+        subMetaBlocksRegistration(block, blockEnums);
     }
     
     private static void advancedMetaBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel, IBlockEnum[] blockEnums, Class itemClass) {

@@ -31,13 +31,9 @@ public class ItemGSSkullCandleRenderer implements IItemRenderer {
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-        TileEntityGSSkullCandle tileEntity = new TileEntityGSSkullCandle();
-
-        if (item.stackTagCompound != null) {
-            tileEntity.setSkullType(item.stackTagCompound.getByte("SkullType"));
-        }
-
-        TileEntityRenderer.instance.renderTileEntityAt(tileEntity, 0.0D, 0.0D, 0.0D, 0.0F);
+        TileEntityGSSkullCandle te = new TileEntityGSSkullCandle();
+        te.blockMetadata = item.getItemDamage();
+        TileEntityRenderer.instance.renderTileEntityAt(te, 0.0D, 0.0D, 0.0D, 0.0F);
     }
 
 }
