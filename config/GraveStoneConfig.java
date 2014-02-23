@@ -36,6 +36,7 @@ public class GraveStoneConfig {
     // renderer Id
     public static int graveRenderID = RenderingRegistry.getNextAvailableRenderId();
     public static int memorialRenderID = RenderingRegistry.getNextAvailableRenderId();
+    public static int spawnerRenderID = RenderingRegistry.getNextAvailableRenderId();
     public static int skullCandleRenderID = RenderingRegistry.getNextAvailableRenderId();
     // world generator
     public static boolean generateCatacombs;
@@ -63,6 +64,8 @@ public class GraveStoneConfig {
     // disable/enable time changing by night stone
     public static boolean enableNightStone;
     public static boolean enableThunderStone;
+    // spawner reciepes
+    public static boolean enableWitherSpawnerCraftingRecipe;
     // item
     public static int chiselId;
     // grave names
@@ -169,6 +172,9 @@ public class GraveStoneConfig {
         
         enableNightStone   = config.get(Configuration.CATEGORY_GENERAL, "EnableNightStone", true).getBoolean(true);
         enableThunderStone = config.get(Configuration.CATEGORY_GENERAL, "EnableThunderStone", true).getBoolean(true);
+        
+        // wither spawner
+        enableWitherSpawnerCraftingRecipe = config.get(Configuration.CATEGORY_GENERAL, "EnableWitherSpawnerCraftingRecipe", true).getBoolean(true);
     }
 
     private static void entityConfig() {

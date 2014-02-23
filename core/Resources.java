@@ -23,9 +23,10 @@ public class Resources {
     // blocks
     public static final String NIGHT_STONE      = "nether_brick";
     public static final String THUNDER_STONE    = "stonebrick";
-    public static final String WITHER_SPAWNER   = "mob_spawner";
     public static final String BONE_BLOCK       = MOD_NAME  + ":bone_block";
     public static final String SKULL_BONE_BLOCK = MOD_NAME  + ":skull_bone_block";
+    public static final String PENTAGRAM_ICO    = MOD_NAME  + ":pentagram";
+    public static final ResourceLocation PENTAGRAM = new ResourceLocation(BLOCK_LOCATION  + "pentagram.png");
     // items
     public static final String CHISEL = MOD_NAME + ":chisel";
     // gui
