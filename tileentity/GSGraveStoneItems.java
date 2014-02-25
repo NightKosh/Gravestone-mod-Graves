@@ -574,7 +574,7 @@ public class GSGraveStoneItems {
      * Return random record
      */
     private ItemStack getRandomRecord(Random random) {
-        switch (random.nextInt(12)) {
+        switch (random.nextInt(13)) {
             case 1:
                 return new ItemStack(Item.recordCat.itemID, 1, 0);
             case 2:
@@ -597,35 +597,49 @@ public class GSGraveStoneItems {
                 return new ItemStack(Item.record11.itemID, 1, 0);
             case 11:
                 return new ItemStack(Item.recordWait.itemID, 1, 0);
+            case 12:
+                return new ItemStack(Item.record13.itemID, 1, 0);
             case 0:
             default:
                 return new ItemStack(Item.recordCat.itemID, 1, 0);
         }
     }
 
+    private static final int EGG_PIG = 90;
+    private static final int EGG_SHEEP = 91;
+    private static final int EGG_COW = 92;
+    private static final int EGG_CHICKEN = 93;
+    private static final int EGG_SQUID = 94;
+    private static final int EGG_WOLF = 95;
+    private static final int EGG_MUSHROOM_COW = 96;
+    private static final int EGG_CAT = 98;
+    private static final int EGG_HORSE = 100;
+    private static final int EGG_VILLAGER = 120;
     /**
      * Return random egg
      */
     private ItemStack getRandomEgg(Random random) {
-        switch (random.nextInt(10)) {
+        switch (random.nextInt(11)) {
             case 1:
-                return new ItemStack(Item.monsterPlacer.itemID, 1, 90);
+                return new ItemStack(Item.monsterPlacer.itemID, 1, EGG_PIG);
             case 2:
-                return new ItemStack(Item.monsterPlacer.itemID, 1, 91);
+                return new ItemStack(Item.monsterPlacer.itemID, 1, EGG_SHEEP);
             case 3:
-                return new ItemStack(Item.monsterPlacer.itemID, 1, 92);
+                return new ItemStack(Item.monsterPlacer.itemID, 1, EGG_COW);
             case 4:
-                return new ItemStack(Item.monsterPlacer.itemID, 1, 93);
+                return new ItemStack(Item.monsterPlacer.itemID, 1, EGG_CHICKEN);
             case 5:
-                return new ItemStack(Item.monsterPlacer.itemID, 1, 94);
+                return new ItemStack(Item.monsterPlacer.itemID, 1, EGG_SQUID);
             case 6:
-                return new ItemStack(Item.monsterPlacer.itemID, 1, 95);
+                return new ItemStack(Item.monsterPlacer.itemID, 1, EGG_WOLF);
             case 7:
-                return new ItemStack(Item.monsterPlacer.itemID, 1, 96);
+                return new ItemStack(Item.monsterPlacer.itemID, 1, EGG_MUSHROOM_COW);
             case 8:
-                return new ItemStack(Item.monsterPlacer.itemID, 1, 98);
+                return new ItemStack(Item.monsterPlacer.itemID, 1, EGG_CAT);
             case 9:
-                return new ItemStack(Item.monsterPlacer.itemID, 1, 120);
+                return new ItemStack(Item.monsterPlacer.itemID, 1, EGG_HORSE);
+            case 10:
+                return new ItemStack(Item.monsterPlacer.itemID, 1, EGG_VILLAGER);
             case 0:
             default:
                 return new ItemStack(Item.monsterPlacer.itemID, 1, 120);
