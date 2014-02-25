@@ -45,8 +45,13 @@ public class GSCompatibilityThaumcraft {
             ThaumcraftApi.registerObjectTag(GSBlock.hauntedChest.blockID, -1, new AspectList().add(Aspect.SOUL, 5).add(Aspect.MAGIC, 5)
                     .add(Aspect.TREE, 3).add(Aspect.VOID, 4));
             // skull candle
-            ThaumcraftApi.registerObjectTag(GSBlock.skullCandle.blockID, -1, new AspectList().add(Aspect.SOUL, 4).add(Aspect.DEATH, 4)
+            ThaumcraftApi.registerObjectTag(GSBlock.skullCandle.blockID, 0, new AspectList().add(Aspect.SOUL, 4).add(Aspect.DEATH, 4)
                     .add(Aspect.UNDEAD, 4).add(Aspect.LIGHT, 4));
+            ThaumcraftApi.registerObjectTag(GSBlock.skullCandle.blockID, 1, new AspectList().add(Aspect.SOUL, 4).add(Aspect.DEATH, 4)
+                    .add(Aspect.UNDEAD, 4).add(Aspect.LIGHT, 4).add(Aspect.POISON, 4));
+            ThaumcraftApi.registerObjectTag(GSBlock.skullCandle.blockID, 2, new AspectList().add(Aspect.SOUL, 4).add(Aspect.DEATH, 4)
+                    .add(Aspect.FLESH, 4).add(Aspect.LIGHT, 4));
+            
             // items
             ThaumcraftApi.registerObjectTag(GSItem.chisel.itemID, 0, new AspectList().add(Aspect.TOOL, 2));
             
