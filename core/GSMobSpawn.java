@@ -3,10 +3,10 @@ package gravestone.core;
 import gravestone.GraveStoneLogger;
 import gravestone.config.GraveStoneConfig;
 import gravestone.block.enums.EnumGraves;
-import gravestone.core.compatibility.GSCompatibility;
 import gravestone.entity.monster.EntitySkullCrawler;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -34,11 +34,11 @@ public class GSMobSpawn {
     /**
      * Provides a mapping between entity classes and a string
      */
-    private static Map<String, Constructor<EntityLiving>> mobNameToClassMapping = new HashMap();
-    private static List<String> MOB_ID = Arrays.asList("Zombie", "Skeleton");
-    private static List<String> DOG_ID = Arrays.asList("GSZombieDog", "GSSkeletonDog");
-    private static List<String> CAT_ID = Arrays.asList("GSZombieCat", "GSSkeletonCat");
-    private static List<String> HELL_MOB_ID = Arrays.asList("PigZombie", "Skeleton");
+    public static Map<String, Constructor<EntityLiving>> mobNameToClassMapping = new HashMap();
+    public static List<String> MOB_ID = new ArrayList(Arrays.asList("Zombie", "Skeleton"));
+    public static List<String> DOG_ID = new ArrayList(Arrays.asList("GSZombieDog", "GSSkeletonDog"));
+    public static List<String> CAT_ID = new ArrayList(Arrays.asList("GSZombieCat", "GSSkeletonCat"));
+    public static List<String> HELL_MOB_ID = new ArrayList(Arrays.asList("PigZombie", "Skeleton"));
 
     public enum EnumMobType {
 
@@ -48,18 +48,18 @@ public class GSMobSpawn {
         UNDEAD_CATS
     }
     // catacombs spawner mobs
-    public static List<String> catacombsSpawnerMobs = Arrays.asList(
+    public static List<String> catacombsSpawnerMobs = new ArrayList(Arrays.asList(
             "Skeleton", "Spider", "Zombie",
             "Skeleton", "Spider", "Zombie",
             "Skeleton", "Spider", "Zombie",
             "GSZombieDog", "GSZombieCat",
-            "GSSkeletonDog", "GSSkeletonCat");
+            "GSSkeletonDog", "GSSkeletonCat"));
     // catacombs statues mobs
-    public static List<String> catacombsStatuesMobs = Arrays.asList(
-            "Skeleton", "Zombie");
+    public static List<String> catacombsStatuesMobs = new ArrayList(Arrays.asList(
+            "Skeleton", "Zombie"));
     //
     private static final int HELL_HEIGHT = 51;
-
+    
     private GSMobSpawn() {
     }
 
@@ -160,28 +160,6 @@ public class GSMobSpawn {
 
     public static boolean isWitherSkeleton(EntitySkeleton skeleton) {
         return skeleton.getSkeletonType() == 1;
-    }
-
-    /**
-     * Return constructor for forein mobs classes based on class path
-     *
-     * @param path Class Path with name
-     */
-    private static Constructor getForeinMobConstructor(String path) {
-        Constructor<EntityLiving> constructor = null;
-
-        try {
-            Class mobClass = Class.forName(path);
-            constructor = mobClass.getConstructor(World.class);
-        } catch (ClassNotFoundException e) {
-            GraveStoneLogger.logError("getForeinMobConstructor ClassNotFoundException. class path " + path);
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            GraveStoneLogger.logError("getForeinMobConstructor NoSuchMethodException. class path " + path);
-            e.printStackTrace();
-        }
-
-        return constructor;
     }
 
     /**
@@ -306,26 +284,6 @@ public class GSMobSpawn {
      */
     public static boolean checkChance(Random random) {
         return random.nextInt(100) < GraveStoneConfig.spawnChance;
-    }
-
-    /**
-     * Add Mo'creatures mobs to mob list
-     */
-    public static void addMoCreaturesMobs() {
-        GraveStoneLogger.logInfo("start load Mo'Creatures mobs");
-
-        addMobToList(MOB_ID, "SilverSkeleton", getForeinMobConstructor(GSCompatibility.MO_CREATURES_S_SKELETON));
-        addMobToList(MOB_ID, "Wraith", getForeinMobConstructor(GSCompatibility.MO_CREATURES_WRAITH));
-        addMobToList(HELL_MOB_ID, "FlameWraith", getForeinMobConstructor(GSCompatibility.MO_CREATURES_F_WRAITH));
-
-        GraveStoneLogger.logInfo("end load Mo'Creatures mobs");
-    }
-
-    private static void addMobToList(List<String> MOB_ID, String mobName, Constructor<EntityLiving> constructor) {
-        if (constructor != null) {
-            MOB_ID.add(mobName);
-            mobNameToClassMapping.put(mobName, constructor);
-        }
     }
 
     /**

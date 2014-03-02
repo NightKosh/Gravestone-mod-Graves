@@ -3,8 +3,6 @@ package gravestone.core.compatibility;
 
 import cpw.mods.fml.common.Loader;
 import forestry.api.core.BlockInterface;
-import gravestone.config.GraveStoneConfig;
-import gravestone.core.GSMobSpawn;
 import gravestone.core.GSReciepes;
 import thaumcraft.api.ItemApi;
 
@@ -25,23 +23,11 @@ public class GSCompatibility {
     public static GSCompatibility getInstance() {
         return (instance == null) ? new GSCompatibility() : instance;
     }
-    private static boolean isMoCreaturesInstalled = false;
-    // mo_creatures mobs classes
-    public static final String MO_CREATURES_S_SKELETON = "drzhark.mocreatures.entity.monster.MoCEntitySilverSkeleton";
-    public static final String MO_CREATURES_WRAITH = "drzhark.mocreatures.entity.monster.MoCEntityWraith";
-    public static final String MO_CREATURES_F_WRAITH = "drzhark.mocreatures.entity.monster.MoCEntityFlameWraith";
-    public static final String MO_CREATURES_SCORPIONS = "drzhark.mocreatures.entity.monster.MoCEntityScorpion";
-
-    public static boolean isMoCreaturesInstalled() {
-        return isMoCreaturesInstalled;
-    }
 
     public void checkMods() {
         if (Loader.isModLoaded("MoCreatures")) {
-            isMoCreaturesInstalled = true;
-            if (GraveStoneConfig.spawnMoCreaturesMobs) {
-                GSMobSpawn.addMoCreaturesMobs();
-            }
+            GSCompatibilityMoCreatures.isInstalled = true;
+            GSCompatibilityMoCreatures.addMobs();
         }
 
         if (Loader.isModLoaded("Highlands")) {
