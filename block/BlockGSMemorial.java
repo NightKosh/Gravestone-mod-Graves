@@ -119,22 +119,20 @@ public class BlockGSMemorial extends BlockContainer {
 
         switch (memorialType) {
             case STONE_CROSS:
-                this.setBlockBounds(-1, 0, -1, 2, 5, 2);
-                break;
             case OBELISK:
                 this.setBlockBounds(-1, 0, -1, 2, 5, 2);
                 break;
             case STEVE_STATUE:
             case VILLAGER_STATUE:
             case ANGEL_STATUE:
-                this.setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 3F, 0.9375F);
+                this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 3F, 0.875F);
                 break;
             case DOG_STATUE:
             case CAT_STATUE:
                 this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 2, 0.875F);
                 break;
             case CREEPER_STATUE:
-                this.setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 2.5F, 0.9375F);
+                this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 2.5F, 0.875F);
                 break;
         }
     }

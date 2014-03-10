@@ -14,6 +14,8 @@ import gravestone.tileentity.TileEntityGSMemorial;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.client.model.AdvancedModelLoader;
+import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -33,6 +35,10 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
     protected static ModelGraveStone dogStatue = new ModelDogStatueMemorial();
     protected static ModelGraveStone catStatue = new ModelCatStatueMemorial();
     protected static ModelCreeperStatueMemorial creeperStatue = new ModelCreeperStatueMemorial();
+    
+    private static IModelCustom celticCross = AdvancedModelLoader.loadModel("/assets/gravestone/obj_models/CelticCross.obj");
+    //private ResourceLocation casinoTexture = new ResourceLocation("modid", "textures/casinoTexture.png");
+    
     public static TileEntityGSMemorialRenderer instance;
 
     public TileEntityGSMemorialRenderer() {
@@ -85,8 +91,10 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
                 GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
                 break;
         }
-
-        if (memorialType == 7 || memorialType == 2) {
+        
+        if (memorialType == 9) {
+            celticCross.renderAll();
+        } else if (memorialType == 7 || memorialType == 2) {
             getMemorialModel(memorialType).customRender();
         } else {
             getMemorialModel(memorialType).renderAll();
