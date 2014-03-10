@@ -23,6 +23,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatMessageComponent;
@@ -512,6 +513,23 @@ public class BlockGSGraveStone extends BlockContainer {
             stack.setTagCompound(nbt);
             list.add(stack);
         }
+        
+        // enchanted swords
+        for (byte i = (byte) EnumGraves.WOODEN_SWORD.ordinal(); i <= EnumGraves.DIAMOND_SWORD.ordinal(); i++) {
+            ItemStack graveStoneStack = new ItemStack(id, 1, 0);
+            NBTTagCompound nbt = new NBTTagCompound();
+            nbt.setByte("GraveType", i);
+
+            if (GraveStoneHelper.isSwordGrave(i)) {
+                nbt.setByte("SwordType", GraveStoneHelper.graveTypeToSwordType(i));
+                NBTTagCompound enchantmentTags = new NBTTagCompound();
+                enchantmentTags.setTag("ench", new NBTTagList());
+                nbt.setCompoundTag("SwordNBT", enchantmentTags);
+            }
+
+            graveStoneStack.setTagCompound(nbt);
+            list.add(graveStoneStack);
+        }
     }
 
     /**
@@ -647,7 +665,7 @@ public class BlockGSGraveStone extends BlockContainer {
             nbt.setString("name", deathInfo.getName());
             nbt.setString("DeathText", deathInfo.getDeathMessage());
             nbt.setString("KillerName", deathInfo.getKillerNameForTE());
-            nbt.setInteger("Age", age);
+//            nbt.setInteger("Age", age);
 
             if (swordType != 0) {
                 nbt.setByte("SwordType", swordType);

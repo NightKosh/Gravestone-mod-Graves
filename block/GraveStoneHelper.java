@@ -4,10 +4,10 @@ import gravestone.GraveStoneLogger;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
-import gravestone.core.compatibility.GSCompatibilityBackpacksMod;
 import gravestone.core.compatibility.GSCompatibilityBattlegear;
 import gravestone.core.compatibility.GSCompatibilityTheCampingMod;
 import gravestone.core.compatibility.GSCompatibilityisArsMagica;
+import gravestone.item.ItemGSCorpse;
 import gravestone.tileentity.DeathMessageInfo;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import java.util.Arrays;
@@ -242,9 +242,9 @@ public class GraveStoneHelper {
         
         if (pet.isTamed()) {
             if (pet instanceof EntityWolf) {
-                createGrave(entity, event, null, pet.getAge(), BlockGSGraveStone.EnumGraveType.DOGS_GRAVES, false);
+                createGrave(entity, event, ItemGSCorpse.getCorpse(entity, ItemGSCorpse.CORPSE_TYPE.DOG), pet.getAge(), BlockGSGraveStone.EnumGraveType.DOGS_GRAVES, false);
             } else if (pet instanceof EntityOcelot) {
-                createGrave(entity, event, null, pet.getAge(), BlockGSGraveStone.EnumGraveType.CATS_GRAVES, false);
+                createGrave(entity, event, ItemGSCorpse.getCorpse(entity, ItemGSCorpse.CORPSE_TYPE.CAT), pet.getAge(), BlockGSGraveStone.EnumGraveType.CATS_GRAVES, false);
             }
         }
     }

@@ -180,11 +180,12 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
      * Check is sword have enchantments
      */
     public boolean isEnchanted() {
-        if (this.swordNBT != null && this.swordNBT.hasKey("ench")) {
-            return this.swordNBT.getTagList("ench").tagCount() != 0;
-        }
-
-        return false;
+        return this.swordNBT != null && this.swordNBT.hasKey("ench");
+//        if (this.swordNBT != null && this.swordNBT.hasKey("ench")) {
+//            return this.swordNBT.getTagList("ench").tagCount() != 0;
+//        }
+//
+//        return false;
     }
 
     /*
