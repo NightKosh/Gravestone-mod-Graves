@@ -13,6 +13,7 @@ import gravestone.models.block.graves.ModelSwordGrave;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gravestone.models.block.graves.ModelHorseGraveStone;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
@@ -30,6 +31,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
     private static ModelGraveStone horisontalPlate = new ModelHorisontalPlateGraveStone();
     private static ModelGraveStone dogStatue = new ModelDogStatueGraveStone();
     private static ModelGraveStone catStatue = new ModelCatStatueGraveStone();
+    private static ModelGraveStone horseStatue = new ModelHorseGraveStone();
     private static ModelGraveStone swordGrave = new ModelSwordGrave();
     public static TileEntityGSGraveStoneRenderer instance;
 
@@ -50,8 +52,6 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         getGraveTexture(graveType);
         //texture
         GL11.glPushMatrix();
-//        GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-//        GL11.glScalef(1.0F, -1F, -1F);
 
         if (tileEntity.worldObj == null && GraveStoneHelper.isSwordGrave(tileEntity)) {
             GL11.glTranslatef((float) x + 0.5F, (float) y + 2, (float) z + 0.5F);
@@ -60,7 +60,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
             GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
             GL11.glScalef(1.0F, -1F, -1F);
         }
-        
+
         switch (getGraveDirection(meta)) {
             case 0:
                 GL11.glRotatef(0, 0, 1, 0);
@@ -75,7 +75,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
                 GL11.glRotatef(270, 0, 1, 0);
                 break;
         }
-        
+
         if (GraveStoneHelper.isSwordGrave(tileEntity) && tileEntity.isEnchanted()) {
             getGraveModel(graveType).customRender();
         } else {
@@ -95,6 +95,8 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
                 return dogStatue;
             case CAT_STATUE:
                 return catStatue;
+            case HORSE_STATUE:
+                return horseStatue;
             case WOODEN_SWORD:
             case STONE_SWORD:
             case IRON_SWORD:
@@ -123,6 +125,9 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
                 break;
             case CAT_STATUE:
                 bindTextureByName(Resources.CAT_STATUE_GRAVE);
+                break;
+            case HORSE_STATUE:
+                bindTextureByName(Resources.HORSE_STATUE_GRAVE);
                 break;
             case WOODEN_SWORD:
                 bindTextureByName(Resources.WOODEN_SWORD_GRAVE);

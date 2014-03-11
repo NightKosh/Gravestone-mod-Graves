@@ -29,6 +29,7 @@ public class Resources {
     public static final ResourceLocation PENTAGRAM = new ResourceLocation(BLOCK_LOCATION  + "pentagram.png");
     // items
     public static final String CHISEL = MOD_NAME + ":chisel";
+    public static final String CORPSE = MOD_NAME + ":corpse";
     // gui
     public static final ResourceLocation GRAVE_GUI = new ResourceLocation(GUI_LOCATION + "DeathMessageBackground.png");
     // entities
@@ -49,6 +50,7 @@ public class Resources {
     public static final ResourceLocation GRAVE_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "ModelHorisontalPlateGraveStone.png");
     public static final ResourceLocation DOG_STATUE_GRAVE = new ResourceLocation(GRAVES_LOCATION + "ModelDogStatueGraveStone.png");
     public static final ResourceLocation CAT_STATUE_GRAVE = new ResourceLocation(GRAVES_LOCATION + "ModelCatStatueGraveStone.png");
+    public static final ResourceLocation HORSE_STATUE_GRAVE = new ResourceLocation(GRAVES_LOCATION + "ModelHorseStatueGraveStone.png");
     public static final ResourceLocation WOODEN_SWORD_GRAVE = new ResourceLocation(GRAVES_LOCATION + "WoodenSwordGrave.png");
     public static final ResourceLocation STONE_SWORD_GRAVE = new ResourceLocation(GRAVES_LOCATION + "StoneSwordGrave.png");
     public static final ResourceLocation IRON_SWORD_GRAVE = new ResourceLocation(GRAVES_LOCATION + "IronSwordGrave.png");

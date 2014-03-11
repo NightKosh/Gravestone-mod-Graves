@@ -19,7 +19,8 @@ public enum EnumGraves implements IBlockEnum {
     STONE_SWORD("block.gravestone.stone_sword"),
     IRON_SWORD("block.gravestone.iron_sword"),
     GOLDEN_SWORD("block.gravestone.golden_sword"),
-    DIAMOND_SWORD("block.gravestone.diamond_sword");
+    DIAMOND_SWORD("block.gravestone.diamond_sword"),
+    HORSE_STATUE("block.gravestone.horse_statue");
     private String name;
 
     private EnumGraves(String name) {

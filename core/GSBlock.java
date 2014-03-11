@@ -2,6 +2,7 @@ package gravestone.core;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import gravestone.block.BlockGSAltar;
 import gravestone.block.BlockGSBoneBlock;
 import gravestone.block.BlockGSBoneSlab;
 import gravestone.block.BlockGSBoneStairs;
@@ -57,6 +58,8 @@ public class GSBlock {
     public static BlockGSHauntedChest hauntedChest;
     // skull candle
     public static BlockGSSkullCandle skullCandle;
+    // altar
+    public static BlockGSAltar altar;
 
     public static void registration() {
         // gravestone
@@ -104,6 +107,10 @@ public class GSBlock {
         // skull candle
         skullCandle = new BlockGSSkullCandle(GraveStoneConfig.skullCandleID);
         advancedMetaBlockRegistration(skullCandle, "GSSkullCandle", "Skull candle", EnumSkullCandle.values(), ItemBlockGSSkullCandle.class);
+        
+        // altar candle
+        altar = new BlockGSAltar(GraveStoneConfig.altarID);
+        simpleBlockRegistration(altar, "GSAltar", "Altar", "pickaxe", 2);
     }
 
     private static void simpleBlockRegistration(Block block, String registerName, String name, String tool, int harvestLevel) {

@@ -1,10 +1,6 @@
 package gravestone.config;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import gravestone.block.BlockGSGraveStone;
-import gravestone.block.BlockGSMemorial;
-import gravestone.block.BlockGSTrap;
-import gravestone.block.BlockGSWitherSpawner;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +25,8 @@ public class GraveStoneConfig {
     public static int memorialID;
     public static int hauntedChestID;
     public static int skullCandleID;
+    public static int spawnerID;
+    public static int altarID;
     // bones blocks
     public static int boneBlockID;
     public static int boneSlabID;
@@ -68,6 +66,7 @@ public class GraveStoneConfig {
     public static boolean enableWitherSpawnerCraftingRecipe;
     // item
     public static int chiselId;
+    public static int corpseId;
     // grave names
     public static ArrayList<String> graveNames;
     public static ArrayList<String> graveDogsNames;
@@ -124,8 +123,12 @@ public class GraveStoneConfig {
         
         hauntedChestID = config.getBlock("HauntedChest", 1558).getInt();
         skullCandleID = config.getBlock("SkullCandle", 1559).getInt();
+        spawnerID = config.getBlock("Spawner", 1560).getInt();
+        altarID = config.getBlock("Altar", 1561).getInt();
+        
         // items
         chiselId = config.getItem("Chisel", 9001 - 256).getInt();
+        corpseId = config.getItem("Corpse", 9002 - 256).getInt();
     }
 
     private static void structures() {
