@@ -257,6 +257,24 @@ public class BlockGSGraveStone extends BlockContainer {
                         this.setBlockBounds(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
                         break;
                 }
+                break;
+            case HORSE_STATUE:
+                switch (meta) {
+                    case 0:
+                        this.setBlockBounds(0.375F, 0, 0.275F, 0.625F, 0.85F, 0.725F);
+                        break;
+                    case 1:
+                        this.setBlockBounds(0.375F, 0, 0.275F, 0.625F, 0.85F, 0.725F);
+                        break;
+                    case 2:
+                        this.setBlockBounds(0.275F, 0, 0.375F, 0.725F, 0.85F, 0.625F);
+                        break;
+                    case 3:
+                        this.setBlockBounds(0.275F, 0, 0.375F, 0.725F, 0.85F, 0.625F);
+                        break;
+                }
+                break;
+                
         }
     }
 
@@ -501,8 +519,29 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(int id, CreativeTabs tabs, List list) {
-        for (byte i = 0; i < EnumGraves.values().length; i++) {
+        for (byte i = 0; i < EnumGraves.WOODEN_SWORD.ordinal(); i++) {
             ItemStack stack = new ItemStack(id, 1, 0);
+            NBTTagCompound nbt = new NBTTagCompound();
+            nbt.setByte("GraveType", i);
+
+            stack.setTagCompound(nbt);
+            list.add(stack);
+        }
+        
+        // horse graves
+        {
+            ItemStack stack = new ItemStack(id, 1, 0);
+            NBTTagCompound nbt = new NBTTagCompound();
+            nbt.setByte("GraveType", (byte) EnumGraves.HORSE_STATUE.ordinal());
+
+            stack.setTagCompound(nbt);
+            list.add(stack);
+        }
+        
+        
+        // swords 
+        for (byte i = (byte) EnumGraves.WOODEN_SWORD.ordinal(); i <= EnumGraves.DIAMOND_SWORD.ordinal(); i++) {
+            ItemStack graveStoneStack = new ItemStack(id, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", i);
 
@@ -510,10 +549,9 @@ public class BlockGSGraveStone extends BlockContainer {
                 nbt.setByte("SwordType", GraveStoneHelper.graveTypeToSwordType(i));
             }
 
-            stack.setTagCompound(nbt);
-            list.add(stack);
+            graveStoneStack.setTagCompound(nbt);
+            list.add(graveStoneStack);
         }
-        
         // enchanted swords
         for (byte i = (byte) EnumGraves.WOODEN_SWORD.ordinal(); i <= EnumGraves.DIAMOND_SWORD.ordinal(); i++) {
             ItemStack graveStoneStack = new ItemStack(id, 1, 0);
