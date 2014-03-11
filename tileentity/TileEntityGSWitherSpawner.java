@@ -22,7 +22,7 @@ public class TileEntityGSWitherSpawner extends TileEntity {
 
     @Override
     public void updateEntity() {
-        if (anyPlayerInRange()) {
+        if (worldObj.difficultySetting != 0 && anyPlayerInRange()) {
             delay--;
             if (delay <= 20) {
                 if (worldObj.isRemote) {

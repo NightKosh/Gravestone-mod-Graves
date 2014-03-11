@@ -63,8 +63,9 @@ public class ModelSkullCandle extends ModelBase {
         Teeth.render(0.0625F);
         Candle.render(0.0625F);
         
+        GL11.glPushMatrix();
         GL11.glScalef(0.5F, 1, 0.5F);
         Thread.render(0.0625F);
-        GL11.glScalef(2, 1, 2);
+        GL11.glPopMatrix();
     }
 }
