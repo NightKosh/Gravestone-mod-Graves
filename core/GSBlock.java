@@ -12,13 +12,14 @@ import gravestone.block.BlockGSGraveStone;
 import gravestone.block.BlockGSMemorial;
 import gravestone.block.BlockGSSkullCandle;
 import gravestone.block.BlockGSTrap;
-import gravestone.block.BlockGSWitherSpawner;
+import gravestone.block.BlockGSSpawner;
 import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumBoneBlock;
 import gravestone.block.enums.EnumHauntedChest;
 import gravestone.block.enums.EnumSkullCandle;
+import gravestone.block.enums.EnumSpawner;
 import gravestone.block.enums.EnumTrap;
 import gravestone.block.enums.IBlockEnum;
 import gravestone.item.ItemBlockGSBoneBlock;
@@ -26,6 +27,7 @@ import gravestone.item.ItemBlockGSGraveStone;
 import gravestone.item.ItemBlockGSHauntedChest;
 import gravestone.item.ItemBlockGSMemorial;
 import gravestone.item.ItemBlockGSSkullCandle;
+import gravestone.item.ItemBlockGSSpawner;
 import gravestone.item.ItemBlockGSTrap;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -42,11 +44,11 @@ public class GSBlock {
 
     private GSBlock() {
     }
-    // block GraveStone
+    // GraveStone
     public static BlockGSGraveStone graveStone;
-    // Block wither spawer
-    public static BlockGSWitherSpawner witherSpawner;
-    // Block Time Trap
+    // boss spawer
+    public static BlockGSSpawner spawner;
+    // Trap stones
     public static BlockGSTrap trap;
     // block memorial
     public static BlockGSMemorial memorial;
@@ -54,7 +56,7 @@ public class GSBlock {
     public static BlockGSBoneBlock boneBlock;
     public static BlockGSBoneSlab boneSlab;
     public static BlockGSBoneStairs boneStairs;
-    // GhostlyChest
+    // Haunted Chest
     public static BlockGSHauntedChest hauntedChest;
     // skull candle
     public static BlockGSSkullCandle skullCandle;
@@ -84,8 +86,8 @@ public class GSBlock {
         advancedNTBBlockRegistration(memorial, "GSMemorial", "Memorial", "pickaxe", 2, EnumMemorials.values(), "GraveType", ItemBlockGSMemorial.class);
         
         // wither spawner
-        witherSpawner = new BlockGSWitherSpawner(GraveStoneConfig.witherSpawnerID);
-        simpleBlockRegistration(witherSpawner, "GSWitherSpawner", "Wither spawner", "pickaxe", 1);
+        spawner = new BlockGSSpawner(GraveStoneConfig.spawnerID);
+        advancedMetaBlockRegistration(spawner, "GSSpawner", "Spawner", "pickaxe", 1, EnumSpawner.values(), ItemBlockGSSpawner.class);
 
         // trap
         trap = new BlockGSTrap(GraveStoneConfig.trapID);
@@ -107,7 +109,7 @@ public class GSBlock {
         // skull candle
         skullCandle = new BlockGSSkullCandle(GraveStoneConfig.skullCandleID);
         advancedMetaBlockRegistration(skullCandle, "GSSkullCandle", "Skull candle", EnumSkullCandle.values(), ItemBlockGSSkullCandle.class);
-        
+                
         // altar candle
         altar = new BlockGSAltar(GraveStoneConfig.altarID);
         simpleBlockRegistration(altar, "GSAltar", "Altar", "pickaxe", 2);

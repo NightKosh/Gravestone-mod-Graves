@@ -33,7 +33,7 @@ public class GSCompatibilityThaumcraft {
             ThaumcraftApi.registerObjectTag(GSBlock.trap.blockID, 1, new AspectList().add(Aspect.STONE, 2).add(Aspect.MECHANISM, 5)
                     .add(Aspect.WEATHER, 5).add(Aspect.SOUL, 5).add(Aspect.MAGIC, 5));
             // spawner
-            ThaumcraftApi.registerObjectTag(GSBlock.witherSpawner.blockID, 0, new AspectList().add(Aspect.MAGIC, 20)
+            ThaumcraftApi.registerObjectTag(GSBlock.spawner.blockID, 0, new AspectList().add(Aspect.MAGIC, 20)
                     .add(Aspect.UNDEAD, 20).add(Aspect.SOUL, 20).add(Aspect.DARKNESS, 20).add(Aspect.ELDRITCH, 20));
             // bone blocks
             ThaumcraftApi.registerObjectTag(GSBlock.boneBlock.blockID, 0, new AspectList().add(Aspect.DEATH, 9).add(Aspect.FLESH, 9));

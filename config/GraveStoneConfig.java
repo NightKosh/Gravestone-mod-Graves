@@ -20,12 +20,11 @@ public class GraveStoneConfig {
     private static String path;
     // Blocks
     public static int graveStoneID;
-    public static int witherSpawnerID;
+    public static int spawnerID;
     public static int trapID;
     public static int memorialID;
     public static int hauntedChestID;
     public static int skullCandleID;
-    public static int spawnerID;
     public static int altarID;
     // bones blocks
     public static int boneBlockID;
@@ -63,7 +62,8 @@ public class GraveStoneConfig {
     public static boolean enableNightStone;
     public static boolean enableThunderStone;
     // spawner reciepes
-    public static boolean enableWitherSpawnerCraftingRecipe;
+    public static boolean enableBossSpawnerCraftingRecipe;
+    public static boolean enableSpawnerCraftingRecipe;
     // item
     public static int chiselId;
     public static int corpseId;
@@ -114,7 +114,7 @@ public class GraveStoneConfig {
     private static void idConfig() {
         // blocks
         graveStoneID = config.getBlock("GraveStone", 1551).getInt();
-        witherSpawnerID = config.getBlock("WitherSpawner", 1552).getInt();
+        spawnerID = config.getBlock("Spawner", 1552).getInt();
         trapID = config.getBlock("TimeTrap", 1553).getInt();
         memorialID = config.getBlock("Memorial", 1554).getInt();
         boneBlockID = config.getBlock("BonesBlock", 1555).getInt();
@@ -123,8 +123,7 @@ public class GraveStoneConfig {
         
         hauntedChestID = config.getBlock("HauntedChest", 1558).getInt();
         skullCandleID = config.getBlock("SkullCandle", 1559).getInt();
-        spawnerID = config.getBlock("Spawner", 1560).getInt();
-        altarID = config.getBlock("Altar", 1561).getInt();
+        altarID = config.getBlock("Altar", 1560).getInt();
         
         // items
         chiselId = config.getItem("Chisel", 9001 - 256).getInt();
@@ -176,8 +175,9 @@ public class GraveStoneConfig {
         enableNightStone   = config.get(Configuration.CATEGORY_GENERAL, "EnableNightStone", true).getBoolean(true);
         enableThunderStone = config.get(Configuration.CATEGORY_GENERAL, "EnableThunderStone", true).getBoolean(true);
         
-        // wither spawner
-        enableWitherSpawnerCraftingRecipe = config.get(Configuration.CATEGORY_GENERAL, "EnableWitherSpawnerCraftingRecipe", true).getBoolean(true);
+        // spawners recipes
+        enableBossSpawnerCraftingRecipe = config.get(Configuration.CATEGORY_GENERAL, "EnableBossSpawnerCraftingRecipe", true).getBoolean(true);
+        enableSpawnerCraftingRecipe = config.get(Configuration.CATEGORY_GENERAL, "EnableMonsterSpawnerCraftingRecipe", true).getBoolean(true);
     }
 
     private static void entityConfig() {

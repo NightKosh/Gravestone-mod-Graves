@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumSkullCandle;
+import gravestone.block.enums.EnumSpawner;
 import gravestone.config.GraveStoneConfig;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -48,8 +49,14 @@ public class GSReciepes {
         GameRegistry.addRecipe(getSwordGravestone(GSBlock.graveStone, (byte) EnumGraves.DIAMOND_SWORD.ordinal()), "sc", 's', Item.swordDiamond, 'c', GSItem.chisel);
 
         // spawners
-        if (GraveStoneConfig.enableWitherSpawnerCraftingRecipe) {
-            GameRegistry.addRecipe(new ItemStack(GSBlock.witherSpawner, 1, 0), "bcb", "cec", "cbc", 'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.WITHER_SKULL.ordinal()),
+        if (GraveStoneConfig.enableBossSpawnerCraftingRecipe) {
+            GameRegistry.addRecipe(new ItemStack(GSBlock.spawner, 1, EnumSpawner.WITHER_SPAWNER.ordinal()), "bcb", "cec", "cbc", 'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.WITHER_SKULL.ordinal()),
+                    'b', new ItemStack(Item.dyePowder, 1, 15), 'e', Item.eyeOfEnder);
+        }
+        if (GraveStoneConfig.enableSpawnerCraftingRecipe) {
+            GameRegistry.addRecipe(new ItemStack(GSBlock.spawner, 1, EnumSpawner.SKELETON_SPAWNER.ordinal()), "bcb", "cec", "cbc", 'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.SKELETON_SKULL.ordinal()),
+                    'b', new ItemStack(Item.dyePowder, 1, 15), 'e', Item.eyeOfEnder);
+            GameRegistry.addRecipe(new ItemStack(GSBlock.spawner, 1, EnumSpawner.ZOMBIE_SPAWNER.ordinal()), "bcb", "cec", "cbc", 'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.ZOMBIE_SKULL.ordinal()),
                     'b', new ItemStack(Item.dyePowder, 1, 15), 'e', Item.eyeOfEnder);
         }
 

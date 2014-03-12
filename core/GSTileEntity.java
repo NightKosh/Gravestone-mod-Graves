@@ -6,7 +6,7 @@ import gravestone.tileentity.TileEntityGSHauntedChest;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import gravestone.tileentity.TileEntityGSMemorial;
 import gravestone.tileentity.TileEntityGSSkullCandle;
-import gravestone.tileentity.TileEntityGSWitherSpawner;
+import gravestone.tileentity.TileEntityGSSpawner;
 
 /**
  * GraveStone mod
@@ -25,7 +25,7 @@ public class GSTileEntity {
         
         GameRegistry.registerTileEntity(TileEntityGSMemorial.class, "Memorial");
         
-        GameRegistry.registerTileEntity(TileEntityGSWitherSpawner.class, "GSWither Spawner");
+        GameRegistry.registerTileEntity(TileEntityGSSpawner.class, "GS Spawner");
         
         GameRegistry.registerTileEntity(TileEntityGSHauntedChest.class, "GSHaunted Chest");
         

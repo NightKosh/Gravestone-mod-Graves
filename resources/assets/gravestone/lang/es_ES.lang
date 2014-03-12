@@ -32,7 +32,9 @@ tile.trap.thunder.name=Piedra del trueno
 block.trap.curse=¡La oscuridad de aproxima!
 
 ## spawner
-tile.spawner.wither.name=Engendrador de wither
+block.spawner.wither=Engendrador de wither
+block.spawner.skeleton=Skeleton Spawner
+block.spawner.zombie=Zombie Spawner
 
 # bone blocks
 tile.bone_block.name=Bloque de hueso

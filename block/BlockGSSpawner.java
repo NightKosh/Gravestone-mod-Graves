@@ -3,11 +3,15 @@ package gravestone.block;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
+import gravestone.block.enums.EnumSpawner;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.Resources;
-import gravestone.tileentity.TileEntityGSWitherSpawner;
+import gravestone.tileentity.TileEntityGSSpawner;
+import java.util.List;
 import java.util.Random;
 import net.minecraft.block.BlockMobSpawner;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -17,11 +21,19 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class BlockGSWitherSpawner extends BlockMobSpawner {
+public class BlockGSSpawner extends BlockMobSpawner {
+    
+    private static final byte[] MobSpawners = {
+        (byte) EnumSpawner.SKELETON_SPAWNER.ordinal(),
+        (byte) EnumSpawner.ZOMBIE_SPAWNER.ordinal()
+    };
+    private static final byte[] BossSpawners = {
+        (byte) EnumSpawner.WITHER_SPAWNER.ordinal()
+    };
 
-    public BlockGSWitherSpawner(int id) {
+    public BlockGSSpawner(int id) {
         super(id);
-        this.setUnlocalizedName("spawner.wither");
+        this.setUnlocalizedName("Spawner");
         this.setHardness(5.0F);
         this.setLightValue(0.45F);
         this.setStepSound(soundMetalFootstep);
@@ -37,7 +49,7 @@ public class BlockGSWitherSpawner extends BlockMobSpawner {
      */
     @Override
     public TileEntity createNewTileEntity(World world) {
-        return new TileEntityGSWitherSpawner();
+        return new TileEntityGSSpawner();
     }
 
     /**
@@ -64,13 +76,26 @@ public class BlockGSWitherSpawner extends BlockMobSpawner {
         double dx;
         double dz;
 
-
         for (int i = 0; i < 5; i++) {
             dx = -Math.sin(rotation) * d;
             dz = Math.cos(rotation) * d;
             world.spawnParticle("smoke", xPos + dx, yPos, zPos + dz, 0.0D, 0.0D, 0.0D);
             world.spawnParticle("flame", xPos + dx, yPos, zPos + dz, 0.0D, 0.0D, 0.0D);
             rotation += dRotation;
+        }
+    }
+
+    /**
+     * Returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+     */
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(int id, CreativeTabs tab, List list) {
+        for (byte meta : MobSpawners) {
+            list.add(new ItemStack(id, 1, meta));
+        }
+        for (byte meta : BossSpawners) {
+            list.add(new ItemStack(id, 1, meta));
         }
     }
 }

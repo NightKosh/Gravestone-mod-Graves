@@ -136,7 +136,7 @@ public class WitherHall extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 10, 4, 22, 12, 6, 22, Block.portal.blockID, Block.portal.blockID, false);
         
         // spawner
-        this.placeBlockAtCurrentPosition(world, GraveStoneConfig.witherSpawnerID, 0, 11, 4, 18, boundingBox);
+        this.placeBlockAtCurrentPosition(world, GraveStoneConfig.spawnerID, 0, 11, 4, 18, boundingBox);
         
         // treasure
         this.fillWithBlocks(world, boundingBox, 10, 3, 17, 12, 3, 19, Block.blockDiamond.blockID, Block.blockDiamond.blockID, false);

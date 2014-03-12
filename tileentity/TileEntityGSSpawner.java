@@ -10,13 +10,13 @@ import net.minecraft.tileentity.TileEntity;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class TileEntityGSWitherSpawner extends TileEntity {
+public class TileEntityGSSpawner extends TileEntity {
 
     private static final String MOB_ID = "WitherBoss";
     private static final int RANGE = 8;
     private int delay;
 
-    public TileEntityGSWitherSpawner() {
+    public TileEntityGSSpawner() {
         delay = 60;
     }
 

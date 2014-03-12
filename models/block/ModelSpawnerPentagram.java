@@ -4,6 +4,7 @@ import gravestone.core.Resources;
 import gravestone.renderer.tileentity.TileEntityGSMemorialRenderer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -20,8 +21,10 @@ public class ModelSpawnerPentagram extends ModelBase {
     private ModelSkullCandle candle3;
     private ModelSkullCandle candle4;
     private ModelSkullCandle candle5;
+    private ResourceLocation candleTexture;
 
-    public ModelSpawnerPentagram() {
+    public ModelSpawnerPentagram(ResourceLocation candleTexture) {
+        this.candleTexture = candleTexture;
         textureWidth = 32;
         textureHeight = 32;
 
@@ -45,7 +48,7 @@ public class ModelSpawnerPentagram extends ModelBase {
     public void renderAll() {
         pentagram.render(0.0625F);
         
-        TileEntityGSMemorialRenderer.instance.bindTextureByName(Resources.WITHER_SKULL_CANDLE);
+        TileEntityGSMemorialRenderer.instance.bindTextureByName(candleTexture);
         
         GL11.glPushMatrix();
         GL11.glTranslated(0, 0, 1);

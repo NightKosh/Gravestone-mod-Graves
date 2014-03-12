@@ -32,7 +32,9 @@ tile.trap.thunder.name=Thunder stone
 block.trap.curse=Darkness is coming!
 
 ## spawner
-tile.spawner.wither.name=Wither Spawner
+block.spawner.wither=Wither Spawner
+block.spawner.skeleton=Skeleton Spawner
+block.spawner.zombie=Zombie Spawner
 
 # bone blocks
 tile.bone_block.name=Bone block

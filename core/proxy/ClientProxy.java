@@ -26,12 +26,13 @@ import gravestone.entity.monster.EntityWitherSkullCrawler;
 import gravestone.entity.monster.EntityZombieSkullCrawler;
 import gravestone.renderer.entity.RenderSkullCrawler;
 import gravestone.renderer.item.ItemGSSkullCandleRenderer;
+import gravestone.renderer.item.ItemGSSpawnerRenderer;
 import gravestone.renderer.tileentity.TileEntityGSHauntedChestRenderer;
 import gravestone.renderer.tileentity.TileEntityGSSkullCandleRenderer;
 import gravestone.renderer.tileentity.TileEntityGSSpawnerRenderer;
 import gravestone.tileentity.TileEntityGSHauntedChest;
 import gravestone.tileentity.TileEntityGSSkullCandle;
-import gravestone.tileentity.TileEntityGSWitherSpawner;
+import gravestone.tileentity.TileEntityGSSpawner;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -62,7 +63,8 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.memorialID, new ItemGSMemorialRenderer());
 
         // spawner renderer
-        ClientRegistry.registerTileEntity(TileEntityGSWitherSpawner.class, "GSWitherSpawner", new TileEntityGSSpawnerRenderer());
+        ClientRegistry.registerTileEntity(TileEntityGSSpawner.class, "GSSpawner", new TileEntityGSSpawnerRenderer());
+        MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.spawnerID, new ItemGSSpawnerRenderer());
         
         // register HauntedChest renderer
         ClientRegistry.registerTileEntity(TileEntityGSHauntedChest.class, "GSHauntedChest", new TileEntityGSHauntedChestRenderer());

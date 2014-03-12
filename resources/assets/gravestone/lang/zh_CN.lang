@@ -32,7 +32,9 @@ tile.trap.thunder.name=Thunder stone
 block.trap.curse=黑夜正在接近！
 
 ## spawner
-tile.spawner.wither.name=凋灵刷怪笼
+block.spawner.wither=凋灵刷怪笼
+block.spawner.skeleton=Skeleton Spawner
+block.spawner.zombie=Zombie Spawner
 
 # bone blocks
 tile.bone_block.name=Bone block
