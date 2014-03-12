@@ -22,9 +22,8 @@ public class GSGraveStoneSpawn {
      * The stored delay before a new spawn.
      */
     private int delay = 600;
-    private static final int MIN_DELAY = 600;
+    private static final int MIN_DELAY = 500;
     private Entity spawnedMob;
-    private List field_92060_e = null;
     private boolean getNewMob = true;
     private static final int START_TIME = 13500;
     private static final int END_TIME = 22500;
@@ -115,10 +114,6 @@ public class GSGraveStoneSpawn {
      */
     private void updateDelay() {
         delay = MIN_DELAY + tileEntity.worldObj.rand.nextInt(GraveStoneConfig.graveSpawnRate - MIN_DELAY);
-
-        if (this.field_92060_e != null && this.field_92060_e.size() > 0) {
-            tileEntity.worldObj.markBlockForUpdate(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
-        }
 
         int block = tileEntity.getBlockType().blockID;
         tileEntity.worldObj.addBlockEvent(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, block, 1, 0);
