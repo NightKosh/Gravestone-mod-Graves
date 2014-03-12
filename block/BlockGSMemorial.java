@@ -32,12 +32,27 @@ import net.minecraft.world.World;
  */
 public class BlockGSMemorial extends BlockContainer {
 
-    public static final byte[] GENERATED_MEMORIALS = {0, 1, 2, 3, 4, 5, 6};
-    public static final byte[] PETS_MEMORIALS = {5, 6};
-    public static final byte[] DOG_MEMORIALS = {5};
-    public static final byte[] CAT_MEMORIALS = {6};
-    public static final byte[] CREEPER_MEMORIALS = {7};
-    public static final byte[] STATUES_MEMORIALS = {2, 3, 4};
+    public static final byte[] GENERATED_MEMORIALS = {
+        (byte) EnumMemorials.STONE_CROSS.ordinal(), 
+        (byte) EnumMemorials.OBELISK.ordinal(), 
+        (byte) EnumMemorials.STEVE_STATUE.ordinal(),
+        (byte) EnumMemorials.VILLAGER_STATUE.ordinal(),
+        (byte) EnumMemorials.ANGEL_STATUE.ordinal(),
+        (byte) EnumMemorials.DOG_STATUE.ordinal(),
+        (byte) EnumMemorials.CAT_STATUE.ordinal()
+    };
+    public static final byte[] PETS_MEMORIALS = {
+        (byte) EnumMemorials.DOG_STATUE.ordinal(),
+        (byte) EnumMemorials.CAT_STATUE.ordinal()
+    };
+    public static final byte[] DOG_MEMORIALS = {(byte) EnumMemorials.DOG_STATUE.ordinal()};
+    public static final byte[] CAT_MEMORIALS = {(byte) EnumMemorials.CAT_STATUE.ordinal()};
+    public static final byte[] CREEPER_MEMORIALS = {(byte) EnumMemorials.CREEPER_STATUE.ordinal()};
+    public static final byte[] STATUES_MEMORIALS = {
+        (byte) EnumMemorials.STEVE_STATUE.ordinal(),
+        (byte) EnumMemorials.VILLAGER_STATUE.ordinal(), 
+        (byte) EnumMemorials.ANGEL_STATUE.ordinal()
+    };
 
     public BlockGSMemorial(int par1) {
         super(par1, Material.rock);
