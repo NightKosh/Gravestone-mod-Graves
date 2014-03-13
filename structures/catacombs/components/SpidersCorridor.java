@@ -59,7 +59,7 @@ public class SpidersCorridor extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 0, 12, 4, 4, 12, false, random, getCemeteryCatacombsStones());
         
         // spawner
-        ObjectsGenerationHelper.generateSpawner(this, world, 2, 1, 6, "CaveSpider");
+        ObjectsGenerationHelper.generateMinecraftSpawner(this, world, 2, 1, 6, "CaveSpider");
         return true;
     }
 }

@@ -1,6 +1,5 @@
 package gravestone.structures.catacombs.components;
 
-import gravestone.core.GSMobSpawn;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.ObjectsGenerationHelper;
 import java.util.Random;
@@ -168,7 +167,7 @@ public class Crossing extends CatacombsBaseComponent {
         this.fillWithAir(world, boundingBox, 5, 1, 0, 7, 3, 0);
         
         // spawner
-        ObjectsGenerationHelper.generateSpawner(this, world, 6, 1, 6, GSMobSpawn.getMobForSpawner(random));
+        ObjectsGenerationHelper.generateSpawner(this, world, random, 6, 1, 6);
         
         return true;
     }

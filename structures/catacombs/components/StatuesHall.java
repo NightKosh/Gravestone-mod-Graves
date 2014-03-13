@@ -98,12 +98,12 @@ public class StatuesHall extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 3, 4, 18, 7, 4, 18, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
         
         // spawners
-        ObjectsGenerationHelper.generateSpawner(this, world, 3, 0, 3, GSMobSpawn.getMobForStatueSpawner(random));
-        ObjectsGenerationHelper.generateSpawner(this, world, 3, 0, 9, GSMobSpawn.getMobForStatueSpawner(random));
-        ObjectsGenerationHelper.generateSpawner(this, world, 3, 0, 15, GSMobSpawn.getMobForStatueSpawner(random));
-        ObjectsGenerationHelper.generateSpawner(this, world, 7, 0, 3, GSMobSpawn.getMobForStatueSpawner(random));
-        ObjectsGenerationHelper.generateSpawner(this, world, 7, 0, 9, GSMobSpawn.getMobForStatueSpawner(random));
-        ObjectsGenerationHelper.generateSpawner(this, world, 7, 0, 15, GSMobSpawn.getMobForStatueSpawner(random));
+        ObjectsGenerationHelper.generateMinecraftSpawner(this, world, 3, 0, 3, GSMobSpawn.getMobForStatueSpawner(random));
+        ObjectsGenerationHelper.generateMinecraftSpawner(this, world, 3, 0, 9, GSMobSpawn.getMobForStatueSpawner(random));
+        ObjectsGenerationHelper.generateMinecraftSpawner(this, world, 3, 0, 15, GSMobSpawn.getMobForStatueSpawner(random));
+        ObjectsGenerationHelper.generateMinecraftSpawner(this, world, 7, 0, 3, GSMobSpawn.getMobForStatueSpawner(random));
+        ObjectsGenerationHelper.generateMinecraftSpawner(this, world, 7, 0, 9, GSMobSpawn.getMobForStatueSpawner(random));
+        ObjectsGenerationHelper.generateMinecraftSpawner(this, world, 7, 0, 15, GSMobSpawn.getMobForStatueSpawner(random));
         
         // loot chests
         ObjectsGenerationHelper.generateChest(this, world, random, 3, 0, 6, false, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);

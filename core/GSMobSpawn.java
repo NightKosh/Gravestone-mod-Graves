@@ -47,16 +47,19 @@ public class GSMobSpawn {
         UNDEAD_DOGS,
         UNDEAD_CATS
     }
-    // catacombs spawner mobs
-    public static List<String> catacombsSpawnerMobs = new ArrayList(Arrays.asList(
-            "Skeleton", "Spider", "Zombie",
-            "Skeleton", "Spider", "Zombie",
-            "Skeleton", "Spider", "Zombie",
-            "GSZombieDog", "GSZombieCat",
-            "GSSkeletonDog", "GSSkeletonCat"));
+    // spawner mobs
+    public static List<String> skeletonSpawnerMobs = new ArrayList(Arrays.asList(
+            "Skeleton",
+            "GSSkeletonDog",
+            "GSSkeletonCat"));
+    public static List<String> zombieSpawnerMobs = new ArrayList(Arrays.asList(
+            "Zombie",
+            "GSZombieDog",
+            "GSZombieCat"));
     // catacombs statues mobs
     public static List<String> catacombsStatuesMobs = new ArrayList(Arrays.asList(
             "Skeleton", "Zombie"));
+    public static final String WITHER_ID = "WitherBoss";
     //
     private static final int HELL_HEIGHT = 51;
     
@@ -89,11 +92,11 @@ public class GSMobSpawn {
             case DOG_STATUE:
                 id = getMobID(world.rand, EnumMobType.UNDEAD_DOGS);
                 break;
-
             case CAT_STATUE:
                 id = getMobID(world.rand, EnumMobType.UNDEAD_CATS);
                 break;
-
+            case HORSE_STATUE:
+                return null;
             default:
                 if (canSpawnHellCreatures(world, x, y, z) && world.rand.nextInt(10) == 0) {
                     id = getMobID(world.rand, EnumMobType.HELL_MOBS);
@@ -289,8 +292,12 @@ public class GSMobSpawn {
     /**
      * Return random mob for spawner
      */
-    public static String getMobForSpawner(Random random) {
-        return catacombsSpawnerMobs.get(random.nextInt(catacombsSpawnerMobs.size()));
+    public static String getMobForSkeletonSpawner(Random random) {
+        return skeletonSpawnerMobs.get(random.nextInt(skeletonSpawnerMobs.size()));
+    }
+    
+    public static String getMobForZombieSpawner(Random random) {
+        return zombieSpawnerMobs.get(random.nextInt(zombieSpawnerMobs.size()));
     }
 
     /**

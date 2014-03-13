@@ -7,6 +7,8 @@ import gravestone.block.enums.EnumSpawner;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.Resources;
 import gravestone.tileentity.TileEntityGSSpawner;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.BlockMobSpawner;
@@ -23,13 +25,13 @@ import net.minecraft.world.World;
  */
 public class BlockGSSpawner extends BlockMobSpawner {
     
-    private static final byte[] MobSpawners = {
+    public static final List<Byte> MOB_SPAWNERS = new ArrayList<Byte>(Arrays.asList(
         (byte) EnumSpawner.SKELETON_SPAWNER.ordinal(),
         (byte) EnumSpawner.ZOMBIE_SPAWNER.ordinal()
-    };
-    private static final byte[] BossSpawners = {
+    ));
+    public static final List<Byte> BOSS_SPAWNERS = new ArrayList<Byte>(Arrays.asList(
         (byte) EnumSpawner.WITHER_SPAWNER.ordinal()
-    };
+    ));
 
     public BlockGSSpawner(int id) {
         super(id);
@@ -61,6 +63,16 @@ public class BlockGSSpawner extends BlockMobSpawner {
     }
 
     /**
+     * Is this block (a) opaque and (b) a full 1m cube? This determines whether
+     * or not to render the shared face of two adjacent blocks and also whether
+     * the player can attach torches, redstone wire, etc to this block.
+     */
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
+    
+    /**
      * A randomly called display update to be able to add particles or other
      * items for display
      */
@@ -91,10 +103,10 @@ public class BlockGSSpawner extends BlockMobSpawner {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(int id, CreativeTabs tab, List list) {
-        for (byte meta : MobSpawners) {
+        for (byte meta : MOB_SPAWNERS) {
             list.add(new ItemStack(id, 1, meta));
         }
-        for (byte meta : BossSpawners) {
+        for (byte meta : BOSS_SPAWNERS) {
             list.add(new ItemStack(id, 1, meta));
         }
     }

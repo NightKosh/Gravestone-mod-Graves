@@ -1,7 +1,5 @@
 package gravestone.tileentity;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraft.tileentity.TileEntity;
 
 /**
@@ -12,47 +10,19 @@ import net.minecraft.tileentity.TileEntity;
  */
 public class TileEntityGSSpawner extends TileEntity {
 
-    private static final String MOB_ID = "WitherBoss";
-    private static final int RANGE = 8;
-    private int delay;
+    protected GSMobSpawner spawner;
 
     public TileEntityGSSpawner() {
-        delay = 60;
+        spawner = new GSMobSpawner(this);
     }
 
+    /**
+     * Allows the entity to update its state. Overridden in most subclasses,
+     * e.g. the mob spawner uses this to count ticks and creates a new spawn
+     * inside its implementation.
+     */
     @Override
     public void updateEntity() {
-        if (worldObj.difficultySetting != 0 && anyPlayerInRange()) {
-            delay--;
-            if (delay <= 20) {
-                if (worldObj.isRemote) {
-                    double x = xCoord + worldObj.rand.nextFloat();
-                    double y = yCoord + worldObj.rand.nextFloat();
-                    double z = zCoord + worldObj.rand.nextFloat();
-                    worldObj.spawnParticle("largesmoke", x, y, z, 0.0D, 0.0D, 0.0D);
-                    worldObj.spawnParticle("portal", x, y, z, 0.0D, 0.0D, 0.0D);
-                    worldObj.spawnParticle("spell", x, y, z, 0.0D, 0.0D, 0.0D);
-                    worldObj.spawnParticle("witchMagic", x, y, z, 0.0D, 0.0D, 0.0D);
-                    worldObj.spawnParticle("lava", x, y, z, 0.0D, 0.0D, 0.0D);
-                    worldObj.spawnParticle("flame", x, y, z, 0.0D, 0.0D, 0.0D);
-                } else {
-                    if (delay <= 0) {
-                        Entity entity = EntityList.createEntityByName(MOB_ID, worldObj);
-                        double x = xCoord + 0.5D;
-                        double y = yCoord + 0.5D;
-                        double z = zCoord + 0.5D;
-                        entity.setLocationAndAngles(x, y, z, worldObj.rand.nextFloat() * 360.0F, 0.0F);
-                        worldObj.spawnEntityInWorld(entity);
-                        worldObj.playAuxSFX(2004, xCoord, yCoord, zCoord, 0);
-                        worldObj.removeBlockTileEntity(xCoord, yCoord, zCoord);
-                        worldObj.setBlock(xCoord, yCoord, zCoord, 0);
-                    }
-                }
-            }
-        }
-    }
-
-    public boolean anyPlayerInRange() {
-        return worldObj.getClosestPlayer(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, RANGE) != null;
+        spawner.updateEntity();
     }
 }

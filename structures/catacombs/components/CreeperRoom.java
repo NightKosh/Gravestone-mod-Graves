@@ -112,7 +112,7 @@ public class CreeperRoom extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 9, yStart, 7, 9, yStart, 8, false, random, getCemeteryCatacombsStones());
         
         // spawner
-        ObjectsGenerationHelper.generateSpawner(this, world, 5, yStart, 5, "Creeper");
+        ObjectsGenerationHelper.generateMinecraftSpawner(this, world, 5, yStart, 5, "Creeper");
         
         // nether ceiling
         int ceilingLevel = yStart + 5;

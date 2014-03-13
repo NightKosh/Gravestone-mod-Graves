@@ -1,8 +1,10 @@
 package gravestone.structures;
 
+import gravestone.block.BlockGSSpawner;
 import gravestone.block.enums.EnumHauntedChest;
 import gravestone.core.GSBlock;
 import gravestone.tileentity.TileEntityGSHauntedChest;
+import gravestone.tileentity.TileEntityGSSpawner;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -161,7 +163,27 @@ public class ObjectsGenerationHelper {
      * @param zCoord Z coord
      * @param spawnerType Spawned mob name
      */
-    public static void generateSpawner(ComponentGraveStone component, World world, int xCoord, int yCoord, int zCoord, String spawnerType) {
+    public static void generateSpawner(ComponentGraveStone component, World world, Random random, int xCoord, int yCoord, int zCoord) {
+        int y = component.getYWithOffset(yCoord);
+        int x = component.getXWithOffset(xCoord, zCoord);
+        int z = component.getZWithOffset(xCoord, zCoord);
+
+        if (component.getBoundingBox().isVecInside(x, y, z)) {
+            world.setBlock(x, y, z, GSBlock.spawner.blockID, random.nextInt(BlockGSSpawner.MOB_SPAWNERS.size()), 2);
+        }
+    }
+    
+    /**
+     * Generate mob spawner
+     *
+     * @param component Component instatnce
+     * @param world World object
+     * @param xCoord X coord
+     * @param yCoord Y coord
+     * @param zCoord Z coord
+     * @param spawnerType Spawned mob name
+     */
+    public static void generateMinecraftSpawner(ComponentGraveStone component, World world, int xCoord, int yCoord, int zCoord, String spawnerType) {
         int y = component.getYWithOffset(yCoord);
         int x = component.getXWithOffset(xCoord, zCoord);
         int z = component.getZWithOffset(xCoord, zCoord);

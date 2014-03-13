@@ -96,11 +96,11 @@ public class EnderHall extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 4, 0, 15, 8, 0, 15, GraveStoneConfig.trapID, GraveStoneConfig.trapID, false);
         
         // spawner
-        ObjectsGenerationHelper.generateSpawner(this, world, 3, 0, 3, "Enderman");
-        ObjectsGenerationHelper.generateSpawner(this, world, 9, 0, 3, "Enderman");
-        ObjectsGenerationHelper.generateSpawner(this, world, 6, 0, 9, "Enderman");
-        ObjectsGenerationHelper.generateSpawner(this, world, 3, 0, 15, "Enderman");
-        ObjectsGenerationHelper.generateSpawner(this, world, 9, 0, 15, "Enderman");
+        ObjectsGenerationHelper.generateMinecraftSpawner(this, world, 3, 0, 3, "Enderman");
+        ObjectsGenerationHelper.generateMinecraftSpawner(this, world, 9, 0, 3, "Enderman");
+        ObjectsGenerationHelper.generateMinecraftSpawner(this, world, 6, 0, 9, "Enderman");
+        ObjectsGenerationHelper.generateMinecraftSpawner(this, world, 3, 0, 15, "Enderman");
+        ObjectsGenerationHelper.generateMinecraftSpawner(this, world, 9, 0, 15, "Enderman");
         
         // fiil exit
         this.fillWithRandomizedBlocks(world, boundingBox, 5, 1, 18, 7, 3, 18, false, random, getCemeteryCatacombsStones());
