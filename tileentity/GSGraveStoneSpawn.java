@@ -37,9 +37,6 @@ public class GSGraveStoneSpawn extends GSSpawner {
 
     @Override
     protected void clientUpdateLogic() {
-        if (this.delay > 0) {
-            --this.delay;
-        }
     }
 
     @Override
@@ -82,7 +79,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
      */
     @Override
     protected boolean canSpawnMobs(World world) {
-        long time = world.getWorldTime();
+        long time = world.getWorldTime() % 24000;
 
         if (time > START_TIME && time < END_TIME || world.isThundering()) {
             return true;
