@@ -3,6 +3,7 @@ package gravestone.core;
 import gravestone.GraveStoneLogger;
 import gravestone.config.GraveStoneConfig;
 import gravestone.block.enums.EnumGraves;
+import gravestone.block.enums.EnumSpawner;
 import gravestone.entity.monster.EntitySkullCrawler;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -49,11 +50,11 @@ public class GSMobSpawn {
     }
     // spawner mobs
     public static List<String> skeletonSpawnerMobs = new ArrayList(Arrays.asList(
-            "Skeleton",
+            "Skeleton", "Skeleton", "Skeleton", "Skeleton",
             "GSSkeletonDog",
             "GSSkeletonCat"));
     public static List<String> zombieSpawnerMobs = new ArrayList(Arrays.asList(
-            "Zombie",
+            "Zombie", "Zombie", "Zombie", "Zombie",
             "GSZombieDog",
             "GSZombieCat"));
     // catacombs statues mobs
@@ -62,7 +63,7 @@ public class GSMobSpawn {
     public static final String WITHER_ID = "WitherBoss";
     //
     private static final int HELL_HEIGHT = 51;
-    
+
     private GSMobSpawn() {
     }
 
@@ -119,6 +120,47 @@ public class GSMobSpawn {
 
         if (entity == null) {
             entity = getForeinMob(world, id);
+        }
+
+        try {
+            entity.onSpawnWithEgg((EntityLivingData) null);
+        } catch (Exception e) {
+            GraveStoneLogger.logError("getMobEntity exception with onSpawnWithEgg");
+            e.printStackTrace();
+        }
+
+        return entity;
+    }
+
+    /**
+     * will create the entity from the internalID the first time it is accessed
+     */
+    public static Entity getMobEntityForSpawner(World world, EnumSpawner spawnerType, int x, int y, int z) {
+        String mobId;
+
+        switch (spawnerType) {
+            case WITHER_SPAWNER:
+                mobId = GSMobSpawn.WITHER_ID;
+                break;
+            case SKELETON_SPAWNER:
+                mobId = skeletonSpawnerMobs.get(world.rand.nextInt(skeletonSpawnerMobs.size()));
+
+                if (mobId.equals("Skeleton") && world.rand.nextInt(10) == 0) {
+                    EntitySkeleton skeleton = getSkeleton(world);
+                    skeleton.setSkeletonType(1);
+                    return skeleton;
+                }
+                break;
+            case ZOMBIE_SPAWNER:
+            default:
+                mobId = zombieSpawnerMobs.get(world.rand.nextInt(zombieSpawnerMobs.size()));
+                break;
+        }
+
+        EntityLiving entity = (EntityLiving) EntityList.createEntityByName(mobId, world);
+
+        if (entity == null) {
+            entity = getForeinMob(world, mobId);
         }
 
         try {
@@ -295,7 +337,7 @@ public class GSMobSpawn {
     public static String getMobForSkeletonSpawner(Random random) {
         return skeletonSpawnerMobs.get(random.nextInt(skeletonSpawnerMobs.size()));
     }
-    
+
     public static String getMobForZombieSpawner(Random random) {
         return zombieSpawnerMobs.get(random.nextInt(zombieSpawnerMobs.size()));
     }

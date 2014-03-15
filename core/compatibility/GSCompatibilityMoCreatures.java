@@ -34,6 +34,9 @@ public class GSCompatibilityMoCreatures {
         addMobToList(GSMobSpawn.MOB_ID, "SilverSkeleton", getForeinMobConstructor(GSCompatibilityMoCreatures.MO_CREATURES_S_SKELETON));
         addMobToList(GSMobSpawn.MOB_ID, "Wraith", getForeinMobConstructor(GSCompatibilityMoCreatures.MO_CREATURES_WRAITH));
         addMobToList(GSMobSpawn.HELL_MOB_ID, "FlameWraith", getForeinMobConstructor(GSCompatibilityMoCreatures.MO_CREATURES_F_WRAITH));
+        
+        
+        addMobToList(GSMobSpawn.skeletonSpawnerMobs, "SilverSkeleton", getForeinMobConstructor(GSCompatibilityMoCreatures.MO_CREATURES_S_SKELETON));
 
         GraveStoneLogger.logInfo("end Mo'Creatures mobs loading");
         }

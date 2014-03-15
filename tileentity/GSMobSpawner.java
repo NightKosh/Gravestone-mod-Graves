@@ -5,7 +5,6 @@ import gravestone.block.BlockGSSpawner;
 import gravestone.block.enums.EnumSpawner;
 import gravestone.core.GSMobSpawn;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -42,9 +41,6 @@ public class GSMobSpawner extends GSSpawner {
             tileEntity.worldObj.spawnParticle("witchMagic", x, y, z, 0.0D, 0.0D, 0.0D);
             tileEntity.worldObj.spawnParticle("lava", x, y, z, 0.0D, 0.0D, 0.0D);
             tileEntity.worldObj.spawnParticle("flame", x, y, z, 0.0D, 0.0D, 0.0D);
-            if (delay <= 0) {
-                this.updateDelay();
-            }
         }
     }
 
@@ -101,21 +97,8 @@ public class GSMobSpawner extends GSSpawner {
 
     @Override
     protected Entity getMob() {
-        String mobId;
-        switch (getSpawnerType()) {
-            case WITHER_SPAWNER:
-                mobId = GSMobSpawn.WITHER_ID;
-                break;
-            case SKELETON_SPAWNER:
-                mobId = GSMobSpawn.skeletonSpawnerMobs.get(tileEntity.worldObj.rand.nextInt(GSMobSpawn.skeletonSpawnerMobs.size()));
-                break;
-            case ZOMBIE_SPAWNER:
-            default:
-                mobId = GSMobSpawn.zombieSpawnerMobs.get(tileEntity.worldObj.rand.nextInt(GSMobSpawn.zombieSpawnerMobs.size()));
-                break;
-        }
-
-        return EntityList.createEntityByName(mobId, tileEntity.worldObj);
+        return GSMobSpawn.getMobEntityForSpawner(this.tileEntity.worldObj, getSpawnerType(), 
+                this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord);
     }
 
     @Override
