@@ -1,7 +1,6 @@
 package gravestone.item;
 
 import gravestone.block.enums.EnumGraves;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
@@ -81,16 +80,16 @@ public class ItemBlockGSGraveStone extends ItemBlock {
             }
 
             if (stack.stackTagCompound.hasKey("Age") && stack.stackTagCompound.getInteger("Age") != -1) {
-                list.add(LanguageRegistry.instance().getStringLocalization("item.grave.age") + " " + stack.stackTagCompound.getInteger("Age") + " " + LanguageRegistry.instance().getStringLocalization("item.grave.days"));
+                list.add(ModGraveStone.proxy.getLocalizedString("item.grave.age") + " " + stack.stackTagCompound.getInteger("Age") + " " + ModGraveStone.proxy.getLocalizedString("item.grave.days"));
             }
 
             if (stack.stackTagCompound.hasKey("SwordType") && stack.stackTagCompound.getByte("SwordType") != 0) {
                 if (stack.stackTagCompound.hasKey("SwordName") && !stack.stackTagCompound.getString("SwordName").isEmpty()) {
-                    list.add(LanguageRegistry.instance().getStringLocalization("item.grave.sword_name") + " - " + stack.stackTagCompound.getString("SwordName"));
+                    list.add(ModGraveStone.proxy.getLocalizedString("item.grave.sword_name") + " - " + stack.stackTagCompound.getString("SwordName"));
                 }
 
                 if (stack.stackTagCompound.hasKey("SwordDamage") && stack.stackTagCompound.getInteger("SwordDamage") != 0) {
-                    list.add(LanguageRegistry.instance().getStringLocalization("item.grave.sword_damage") + " - " + stack.stackTagCompound.getInteger("SwordDamage"));
+                    list.add(ModGraveStone.proxy.getLocalizedString("item.grave.sword_damage") + " - " + stack.stackTagCompound.getInteger("SwordDamage"));
                 }
 
                 if (stack.stackTagCompound.hasKey("SwordNBT")) {
