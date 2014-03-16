@@ -66,6 +66,20 @@ item.grave.days=days
 item.grave.sword_name=Sword name
 item.grave.sword_damage=Sword damage
 
+## corpse
+item.corpse.villager=Villager corpse
+item.corpse.horse=Horse corpse
+item.corpse.dog=Dog corpse
+item.corpse.cat=Cat corpse
+item.corpse.entity_name=Name
+item.corpse.villager_type=Profession
+item.corpse.horse_type=Horse type
+item.corpse.health=Max health
+item.corpse.speed=Speed
+item.corpse.jump_power=Jump power
+item.corpse.collar=Collar
+item.corpse.cat_type=Cat type
+
 
 # gui
 gui.edit_grave=Set grave text
