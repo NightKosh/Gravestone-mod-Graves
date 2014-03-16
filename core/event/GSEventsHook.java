@@ -9,9 +9,12 @@ import gravestone.core.GSMobSpawn;
 import gravestone.entity.monster.EntitySkullCrawler;
 import gravestone.entity.monster.EntityWitherSkullCrawler;
 import gravestone.entity.monster.EntityZombieSkullCrawler;
+import gravestone.item.ItemGSCorpse;
+import gravestone.item.ItemGSCorpse.CORPSE_TYPE;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,7 +40,7 @@ public class GSEventsHook {
                 GraveStoneHelper.createPlayerGrave((EntityPlayer) event.entity, event);
             } else {
                 if (GraveStoneConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
-                    GraveStoneHelper.createGrave(event.entity, event, null, ((EntityVillager) event.entity).getAge(), EnumGraveType.PLAYER_GRAVES, true);
+                    GraveStoneHelper.createGrave(event.entity, event, ItemGSCorpse.getCorpse(event.entity, CORPSE_TYPE.VILLAGER), ((EntityVillager) event.entity).getAge(), EnumGraveType.PLAYER_GRAVES, true);
                     return;
                 }
 
@@ -57,6 +60,9 @@ public class GSEventsHook {
                 GSMobSpawn.spawnCrawler(event.entity, crawler);
             } else if (event.entity instanceof EntityZombie) {
                 GSMobSpawn.spawnCrawler(event.entity, new EntityZombieSkullCrawler(event.entity.worldObj));
+            } else if (event.entity instanceof EntityHorse) {
+                GraveStoneHelper.createHorseGrave((EntityHorse) event.entity, event);
+                return;
             } else if (event.entity instanceof EntityCreeper && ((EntityCreeper) event.entity).getPowered()) {
                 // drop creeper statue if entity is a charged creeper
                 GSBlock.memorial.dropCreeperMemorial(event.entity.worldObj, (int) event.entity.posX,
