@@ -2,18 +2,15 @@ package gravestone.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.GraveStoneLogger;
 import gravestone.ModGraveStone;
 import gravestone.core.GSItem;
 import gravestone.core.Resources;
 import gravestone.item.enums.EnumCorpse;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityVillager;
@@ -22,7 +19,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.World;
 
 /**
@@ -61,76 +57,20 @@ public class ItemGSCorpse extends Item {
         if (stack.stackTagCompound == null) {
             stack.setTagCompound(new NBTTagCompound());
         } else {
-            addName(stack, list);
             switch (CORPSE_TYPE.values()[stack.getItemDamage()]) {
                 case VILLAGER:
-                    addVillagerType(stack, list);
-                    addVillagerTrade(stack, list);
+                    VillagerCorpseHelper.addInfo(list, stack.stackTagCompound);
                     break;
                 case HORSE:
-                    addHorseType(stack, list);
-                    addHP(stack, list);
-                    addSpeed(stack, list);
-                    addJumpPower(stack, list);
+                    HorseCorpseHelper.addInfo(list, stack.stackTagCompound);
                     break;
                 case DOG:
-                    addCollar(stack, list);
+                    DogCorpseHelper.addInfo(list, stack.stackTagCompound);
                     break;
                 case CAT:
-                    addCatType(stack, list);
+                    CatCorpseHelper.addInfo(list, stack.stackTagCompound);
                     break;
             }
-        }
-    }
-
-    private static void addName(ItemStack stack, List list) {
-        if (stack.stackTagCompound.hasKey("Name") && stack.stackTagCompound.getString("Name").length() != 0) {
-            list.add(ModGraveStone.proxy.getLocalizedString("item.corpse.entity_name") + " " + stack.stackTagCompound.getString("Name"));
-        }
-    }
-
-    private static void addVillagerType(ItemStack stack, List list) {
-        if (stack.stackTagCompound.hasKey("VillagerType")) {
-            list.add(ModGraveStone.proxy.getLocalizedString("item.corpse.villager_type") + " " + getVillagerType(stack));
-        }
-    }
-
-    private static void addVillagerTrade(ItemStack stack, List list) {
-    }
-
-    private static void addHorseType(ItemStack stack, List list) {
-        if (stack.stackTagCompound.hasKey("HorseType")) {
-            list.add(ModGraveStone.proxy.getLocalizedString("item.corpse.horse_type") + " " + stack.stackTagCompound.getByte("HorseType"));
-        }
-    }
-
-    private static void addHP(ItemStack stack, List list) {
-        if (stack.stackTagCompound.hasKey("Health")) {
-            list.add(ModGraveStone.proxy.getLocalizedString("item.corpse.health") + " " + stack.stackTagCompound.getByte("Health"));
-        }
-    }
-
-    private static void addSpeed(ItemStack stack, List list) {
-        if (stack.stackTagCompound.hasKey("Speed")) {
-            list.add(ModGraveStone.proxy.getLocalizedString("item.corpse.speed") + " " + stack.stackTagCompound.getByte("Speed"));
-        }
-    }
-
-    private static void addJumpPower(ItemStack stack, List list) {
-        if (stack.stackTagCompound.hasKey("JumpPower")) {
-            list.add(ModGraveStone.proxy.getLocalizedString("item.corpse.jump_power") + " " + stack.stackTagCompound.getByte("JumpPower"));
-        }
-    }
-
-    private static void addCollar(ItemStack stack, List list) {
-        if (stack.stackTagCompound.hasKey("Collar")) {
-            list.add(ModGraveStone.proxy.getLocalizedString("item.corpse.collar") + " " + stack.stackTagCompound.getByte("Collar"));
-        }
-    }
-
-    private static void addCatType(ItemStack stack, List list) {
-        if (stack.stackTagCompound.hasKey("CatType")) {
-            list.add(ModGraveStone.proxy.getLocalizedString("item.corpse.cat_type") + " " + stack.stackTagCompound.getByte("CatType"));
         }
     }
 
@@ -142,26 +82,16 @@ public class ItemGSCorpse extends Item {
         }
         switch (type) {
             case VILLAGER:
-                EntityVillager villager = (EntityVillager) entity;
-                nbt.setInteger("VillagerType", villager.getProfession());
-                nbt.setTag("Recipes", villager.getRecipes(null).getRecipiesAsTags().getTagList("Recipes"));
+                VillagerCorpseHelper.setNbt((EntityVillager) entity, nbt);
                 break;
             case HORSE:
-                EntityHorse horse = (EntityHorse) entity;
-
-                nbt.setByte("Speed", (byte) horse.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue());
-                nbt.setByte("Speed", (byte) horse.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
-                getPrivateByte(nbt, "Health", horse, "jumpPower");
-                //getPrivateByte(nbt, "HorseType", horse, "");
-                //                nbt.setInt("HorseType", entity.getH);
+                HorseCorpseHelper.setNbt((EntityHorse) entity, nbt);
                 break;
             case DOG:
-                EntityWolf dog = (EntityWolf) entity;
-                nbt.setByte("Collar", (byte) dog.getCollarColor());
+                DogCorpseHelper.setNbt((EntityWolf) entity, nbt);
                 break;
             case CAT:
-                EntityOcelot cat = (EntityOcelot) entity;
-                nbt.setByte("CatType", (byte) cat.getTameSkin());
+                CatCorpseHelper.setNbt((EntityOcelot) entity, nbt);
                 break;
         }
         List<ItemStack> corpse = new ArrayList<ItemStack>();
@@ -171,23 +101,7 @@ public class ItemGSCorpse extends Item {
 
         return corpse;
     }
-
-    private static void getPrivateByte(NBTTagCompound nbt, String nbtName, EntityLiving entity, String fieldName) {
-        try {
-            Field field = entity.getClass().getDeclaredField(fieldName);
-            field.setAccessible(true);
-            float value = (Float) field.get(entity);
-
-            nbt.setByte(nbtName, (byte) value);
-        } catch (NoSuchFieldException e) {
-            GraveStoneLogger.logError("Can't gat access to " + entity.getEntityName() + " " + fieldName);
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            GraveStoneLogger.logError("Can't gat access to " + entity.getEntityName() + " " + fieldName);
-            e.printStackTrace();
-        }
-    }
-
+    
     /**
      * Callback for item usage. If the item does something special on right
      * clicking, he will have one of those. Return True if something happen and
@@ -198,54 +112,22 @@ public class ItemGSCorpse extends Item {
         if (!world.isRemote) {
             switch (CORPSE_TYPE.values()[stack.getItemDamage()]) {
                 case VILLAGER:
-                    EntityVillager villager = new EntityVillager(world, getVillagerType(stack));
-
-                    if (stack.stackTagCompound.hasKey("Name") && stack.stackTagCompound.getString("Name").length() != 0) {
-                        villager.setCustomNameTag(stack.stackTagCompound.getString("Name"));
-                    }
-                    NBTTagCompound nbt = new NBTTagCompound();
-                    nbt.setTag("Recipes", stack.getTagCompound().getTag("Recipes"));
-                    MerchantRecipeList list = new MerchantRecipeList();
-                    list.readRecipiesFromTags(nbt);
-                    ((EntityVillager) villager).setRecipes(list);
-                    villager.setPosition(x, y + 1, z);
-                    world.spawnEntityInWorld(villager);
+                    VillagerCorpseHelper.spawnVillager(world, x, y, z, stack.stackTagCompound);
                     break;
                 case HORSE:
+                    HorseCorpseHelper.spawnHorse(world, x, y, z, stack.stackTagCompound);
                     break;
                 case DOG:
-                    EntityWolf wolf = new EntityWolf(world);
-                    if (stack.stackTagCompound.hasKey("Name") && stack.stackTagCompound.getString("Name").length() != 0) {
-                        wolf.setCustomNameTag(stack.stackTagCompound.getString("Name"));
-                    }
-                    wolf.setTamed(true);
-                    wolf.setHealth(20);
-                    wolf.setOwner(player.getCommandSenderName());
-                    wolf.setCollarColor(stack.stackTagCompound.getByte("Collar"));
-                    world.setEntityState(wolf, (byte) 7);
-                    wolf.setPosition(x, y + 1, z);
-                    world.spawnEntityInWorld(wolf);
+                    DogCorpseHelper.spawnDog(world, x, y, z, stack.stackTagCompound, player);
                     break;
                 case CAT:
-                    EntityOcelot cat = new EntityOcelot(world);
-                    if (stack.stackTagCompound.hasKey("Name") && stack.stackTagCompound.getString("Name").length() != 0) {
-                        cat.setCustomNameTag(stack.stackTagCompound.getString("Name"));
-                    }
-                    cat.setTamed(true);
-                    cat.setTameSkin(stack.stackTagCompound.getByte("CatType"));
-                    cat.setOwner(player.getCommandSenderName());
-                    world.setEntityState(cat, (byte) 7);
-                    cat.setPosition(x, y + 1, z);
-                    world.spawnEntityInWorld(cat);
+                    CatCorpseHelper.spawnCat(world, x, y, z, stack.stackTagCompound, player);
                     break;
             }
         }
         return false;
     }
-
-    private static int getVillagerType(ItemStack stack) {
-        return stack.stackTagCompound.getInteger("VillagerType");
-    }
+    
     /**
      * returns a list of items with the same ID, but different meta (eg: dye
      * returns 16 items)
