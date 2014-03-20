@@ -20,6 +20,7 @@ public class VillagerCorpseHelper extends CorpseHelper {
     }
 
     public static void setNbt(EntityVillager villager, NBTTagCompound nbt) {
+        setName(villager, nbt);
         nbt.setInteger("VillagerType", villager.getProfession());
         nbt.setCompoundTag("Offers", villager.getRecipes(null).getRecipiesAsTags());
     }

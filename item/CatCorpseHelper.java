@@ -19,6 +19,7 @@ public class CatCorpseHelper extends CorpseHelper {
     }
 
     public static void setNbt(EntityOcelot cat, NBTTagCompound nbt) {
+        setName(cat, nbt);
         nbt.setByte("CatType", (byte) cat.getTameSkin());
     }
 

@@ -19,6 +19,7 @@ public class DogCorpseHelper extends CorpseHelper {
     }
 
     public static void setNbt(EntityWolf dog, NBTTagCompound nbt) {
+        setName(dog, nbt);
         nbt.setByte("Collar", (byte) dog.getCollarColor());
     }
 

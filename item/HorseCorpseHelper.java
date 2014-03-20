@@ -23,6 +23,8 @@ public class HorseCorpseHelper extends CorpseHelper {
     }
 
     public static void setNbt(EntityHorse horse, NBTTagCompound nbt) {
+        setName(horse, nbt);
+        
         NBTTagCompound horseNBT = new NBTTagCompound();
         horse.writeEntityToNBT(horseNBT);
 
