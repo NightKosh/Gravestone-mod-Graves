@@ -100,7 +100,12 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public String getLocalizedString(String str) {
-        return LanguageRegistry.instance().getStringLocalization(str);
+        String localizedString = LanguageRegistry.instance().getStringLocalization(str);
+        if (localizedString.length() == 0) {
+            return LanguageRegistry.instance().getStringLocalization(str, "en_US");
+        } else {
+            return localizedString;
+        }
     }
 
     @Override
