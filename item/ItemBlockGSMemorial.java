@@ -3,11 +3,13 @@ package gravestone.item;
 import gravestone.block.enums.EnumMemorials;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gravestone.ModGraveStone;
 import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.world.World;
 
 /**
@@ -55,8 +57,23 @@ public class ItemBlockGSMemorial extends ItemBlock {
             stack.setTagCompound(new NBTTagCompound());
         }
 
+        String deathText = "";
         if (stack.stackTagCompound.hasKey("DeathText") && stack.stackTagCompound.getString("DeathText").length() != 0) {
-            list.add(stack.stackTagCompound.getString("DeathText"));
+            deathText = stack.stackTagCompound.getString("DeathText");
+        }
+
+        if (stack.stackTagCompound.hasKey("isLocalized") && stack.stackTagCompound.getBoolean("isLocalized")) {
+            if (stack.stackTagCompound.hasKey("name")) {
+                String name = stack.stackTagCompound.getString("name");
+                String killerName = ModGraveStone.proxy.getLocalizedEntityName(stack.stackTagCompound.getString("KillerName"));
+                if (killerName.length() == 0) {
+                    list.add(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name}).toString());
+                } else {
+                    list.add(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name, killerName.toLowerCase()}).toString());
+                }
+            }
+        } else {
+            list.add(deathText);
         }
     }
 
@@ -112,7 +129,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
                     maxY = 3;
                     break;
             }
-            
+
             for (byte shiftY = 0; shiftY < maxY; shiftY++) {
                 for (byte shiftZ = startZ; shiftZ < maxZ; shiftZ++) {
                     for (byte shiftX = startX; shiftX < maxX; shiftX++) {

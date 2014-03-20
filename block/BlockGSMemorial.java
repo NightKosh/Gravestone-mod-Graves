@@ -82,6 +82,15 @@ public class BlockGSMemorial extends BlockContainer {
 
         if (tileEntity != null) {
             if (itemStack.stackTagCompound != null) {
+                if (itemStack.stackTagCompound.hasKey("isLocalized") && itemStack.stackTagCompound.getBoolean("isLocalized")) {
+                    tileEntity.getDeathTextComponent().setLocalized();
+
+                    if (itemStack.stackTagCompound.hasKey("name") && itemStack.stackTagCompound.hasKey("KillerName")) {
+                        tileEntity.getDeathTextComponent().setName(itemStack.stackTagCompound.getString("name"));
+                        tileEntity.getDeathTextComponent().setKillerName(itemStack.stackTagCompound.getString("KillerName"));
+                    }
+                }
+
                 if (itemStack.stackTagCompound.hasKey("DeathText")) {
                     tileEntity.getDeathTextComponent().setDeathText(itemStack.stackTagCompound.getString("DeathText"));
                 }
@@ -316,6 +325,11 @@ public class BlockGSMemorial extends BlockContainer {
 
         if (tileEntity != null) {
             NBTTagCompound nbt = new NBTTagCompound();
+            if (tileEntity.getDeathTextComponent().isLocalized()) {
+                nbt.setBoolean("isLocalized", true);
+                nbt.setString("name", tileEntity.getDeathTextComponent().getName());
+                nbt.setString("KillerName", tileEntity.getDeathTextComponent().getKillerName());
+            }
             nbt.setString("DeathText", tileEntity.getDeathTextComponent().getDeathText());
             nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
             itemStack.setTagCompound(nbt);
