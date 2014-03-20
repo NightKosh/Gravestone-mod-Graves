@@ -46,6 +46,20 @@ public class CatCorpseHelper extends CorpseHelper {
     }
 
     private static String getType(NBTTagCompound nbtTag) {
-        return ModGraveStone.proxy.getLocalizedString("item.corpse.cat_type") + " " + nbtTag.getByte("CatType");
+        return ModGraveStone.proxy.getLocalizedString("item.corpse.cat_type") + " " + 
+                ModGraveStone.proxy.getLocalizedString(getCatType(nbtTag.getByte("CatType")));
+    }
+    
+    private static String getCatType(int type) {
+        switch (type) {
+            case 1:
+                return "item.corpse.cat_type.black";
+            case 2:
+                return "item.corpse.cat_type.red";
+            case 3:
+                return "item.corpse.cat_type.siamese";
+            default:
+                return "item.corpse.cat_type.unknown";
+        }
     }
 }

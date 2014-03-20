@@ -46,6 +46,46 @@ public class DogCorpseHelper extends CorpseHelper {
     }
 
     private static String getCollarStr(NBTTagCompound nbtTag) {
-        return ModGraveStone.proxy.getLocalizedString("item.corpse.collar") + " " + nbtTag.getByte("Collar");
+        return ModGraveStone.proxy.getLocalizedString("item.corpse.collar") + " " + 
+                ModGraveStone.proxy.getLocalizedString(getCollar(nbtTag.getByte("Collar")));
+    }
+    
+    private static String getCollar(int type) {
+        switch (type) {
+            case 0:
+                return "item.corpse.collar.white";
+            case 1:
+                return "item.corpse.collar.orange";
+            case 2:
+                return "item.corpse.collar.purple";
+            case 3:
+                return "item.corpse.collar.azure";
+            case 4:
+                return "item.corpse.collar.yellow";
+            case 5:
+                return "item.corpse.collar.lime";
+            case 6:
+                return "item.corpse.collar.pink";
+            case 7:
+                return "item.corpse.collar.grey";
+            case 8:
+                return "item.corpse.collar.light_grey";
+            case 9:
+                return "item.corpse.collar.turquoise";//бирюзовый
+            case 10:
+                return "item.corpse.collar.violet";
+            case 11:
+                return "item.corpse.collar.blue";
+            case 12:
+                return "item.corpse.collar.brown";
+            case 13:
+                return "item.corpse.collar.green";
+            case 14:
+                return "item.corpse.collar.red";
+            case 15:
+                return "item.corpse.collar.black";
+            default:
+                return "item.corpse.collar.unknown";
+        }
     }
 }

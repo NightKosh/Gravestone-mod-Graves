@@ -58,7 +58,35 @@ public class VillagerCorpseHelper extends CorpseHelper {
     }
 
     private static String getType(NBTTagCompound nbtTag) {
-        return ModGraveStone.proxy.getLocalizedString("item.corpse.villager_type") + " " + getVillagerType(nbtTag);
+        return ModGraveStone.proxy.getLocalizedString("item.corpse.villager_type") + " " + 
+                ModGraveStone.proxy.getLocalizedString(getVillagerProfession(getVillagerType(nbtTag)));
+    }
+    
+    private static String getVillagerProfession(int type) {
+        switch (type) {
+            case 0:
+                return "item.corpse.villager_type.farmer";
+            case 1:
+                return "item.corpse.villager_type.librarian";
+            case 2:
+                return "item.corpse.villager_type.priest";
+            case 3:
+                return "item.corpse.villager_type.smith";
+            case 4:
+                return "item.corpse.villager_type.butcher";
+            case 385:
+                return "item.corpse.villager_type.undertacker";
+            case 10:
+                return "item.corpse.villager_type.brewer";
+            case 206:
+                return "item.corpse.villager_type.thaumaturge";
+            case 80:
+                return "item.corpse.villager_type.beekeeper";
+            case 81:
+                return "item.corpse.villager_type.lumberjack";
+            default:
+                return "item.corpse.villager_type.unknown";
+        }
     }
 
     private static boolean hasTrades(NBTTagCompound nbtTag) {

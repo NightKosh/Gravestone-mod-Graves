@@ -88,7 +88,25 @@ public class HorseCorpseHelper extends CorpseHelper {
     }
 
     private static String getType(NBTTagCompound nbtTag) {
-        return ModGraveStone.proxy.getLocalizedString("item.corpse.horse_type") + " " + nbtTag.getInteger("HorseType");
+        return ModGraveStone.proxy.getLocalizedString("item.corpse.horse_type") + " " + 
+                ModGraveStone.proxy.getLocalizedString(getHorseType(nbtTag.getInteger("HorseType")));
+    }
+    
+    private static String getHorseType(int type) {
+        switch (type) {
+            case 0:
+                return "item.corpse.horse_type.horse";
+            case 1:
+                return "item.corpse.horse_type.donkey";
+            case 2:
+                return "item.corpse.horse_type.mule";
+            case 3:
+                return "item.corpse.horse_type.zombie";
+            case 4:
+                return "item.corpse.horse_type.skeleton";
+            default:
+                return "item.corpse.horse_type.unknown";
+        }
     }
 
     private static boolean hasVariant(NBTTagCompound nbtTag) {
