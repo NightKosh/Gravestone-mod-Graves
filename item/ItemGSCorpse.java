@@ -3,14 +3,15 @@ package gravestone.item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
-import gravestone.core.Resources;
 import gravestone.item.enums.EnumCorpse;
 import java.util.List;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 /**
@@ -20,13 +21,14 @@ import net.minecraft.world.World;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class ItemGSCorpse extends Item {
-
+    
+    private static Icon[] icons;
+    
     public ItemGSCorpse(int id) {
         super(id);
         setCreativeTab(ModGraveStone.creativeTab);
         setUnlocalizedName("Corpse");
         this.setHasSubtypes(true);
-        this.setTextureName(Resources.CORPSE);
     }
 
     @Override
@@ -44,7 +46,7 @@ public class ItemGSCorpse extends Item {
             CorpseHelper.addInfo(stack.getItemDamage(), list, stack.stackTagCompound);
         }
     }
-    
+
     /**
      * Callback for item usage. If the item does something special on right
      * clicking, he will have one of those. Return True if something happen and
@@ -57,7 +59,7 @@ public class ItemGSCorpse extends Item {
         }
         return false;
     }
-    
+
     /**
      * returns a list of items with the same ID, but different meta (eg: dye
      * returns 16 items)
@@ -77,31 +79,31 @@ public class ItemGSCorpse extends Item {
     public int getMetadata(int metadata) {
         return metadata;
     }
-
-//    /**
-//     * Gets an icon index based on an item's damage value
-//     */
-//    @Override
-//    @SideOnly(Side.CLIENT)
-//    public Icon getIconFromDamage(int damage) {
-//        if (damage < 0 || damage >= skullTypes.length) {
-//            damage = 0;
-//        }
-//
-//        return this.field_94586_c[damage];
-//    }
     @Override
     public String getItemDisplayName(ItemStack itemStack) {
         return EnumCorpse.getById((byte) itemStack.getItemDamage()).getName();
     }
-//    @SideOnly(Side.CLIENT)
-//    public void registerIcons(IconRegister par1IconRegister)
-//    {
-//        this.field_94586_c = new Icon[field_94587_a.length];
-//
-//        for (int i = 0; i < field_94587_a.length; ++i)
-//        {
-//            this.field_94586_c[i] = par1IconRegister.registerIcon(this.getIconString() + "_" + field_94587_a[i]);
-//        }
-//    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister register) {
+        this.icons = new Icon[EnumCorpse.values().length];
+
+        for (int i = 0; i < EnumCorpse.values().length; ++i) {
+            this.icons[i] = register.registerIcon(EnumCorpse.values()[i].getIcon());
+        }
+    }
+
+    /**
+     * Gets an icon index based on an item's damage value
+     */
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Icon getIconFromDamage(int damage) {
+        if (damage < 0 || damage >= EnumCorpse.values().length) {
+            damage = 0;
+        }
+
+        return this.icons[damage];
+    }
 }

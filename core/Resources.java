@@ -29,7 +29,10 @@ public class Resources {
     public static final ResourceLocation PENTAGRAM = new ResourceLocation(BLOCK_LOCATION  + "pentagram.png");
     // items
     public static final String CHISEL = MOD_NAME + ":chisel";
-    public static final String CORPSE = MOD_NAME + ":corpse";
+    public static final String CORPSE_VILLAGER = MOD_NAME + ":villager_corpse";
+    public static final String CORPSE_DOG = MOD_NAME + ":dog_corpse";
+    public static final String CORPSE_CAT = MOD_NAME + ":cat_corpse";
+    public static final String CORPSE_HORSE = MOD_NAME + ":horse_corpse";
     // gui
     public static final ResourceLocation GRAVE_GUI = new ResourceLocation(GUI_LOCATION + "DeathMessageBackground.png");
     // entities
