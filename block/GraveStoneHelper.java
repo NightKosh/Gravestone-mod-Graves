@@ -8,6 +8,7 @@ import gravestone.core.compatibility.GSCompatibilityBattlegear;
 import gravestone.core.compatibility.GSCompatibilityTheCampingMod;
 import gravestone.core.compatibility.GSCompatibilityisArsMagica;
 import gravestone.item.CorpseHelper;
+import gravestone.item.enums.EnumCorpse;
 import gravestone.tileentity.DeathMessageInfo;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import java.util.ArrayList;
@@ -244,39 +245,18 @@ public class GraveStoneHelper {
         
         if (pet.isTamed()) {
             if (pet instanceof EntityWolf) {
-                createGrave(entity, event, CorpseHelper.getCorpse(entity, CorpseHelper.CORPSE_TYPE.DOG), pet.getAge(), BlockGSGraveStone.EnumGraveType.DOGS_GRAVES, false);
+                createGrave(entity, event, CorpseHelper.getCorpse(entity, EnumCorpse.DOG), pet.getAge(), BlockGSGraveStone.EnumGraveType.DOGS_GRAVES, false);
             } else if (pet instanceof EntityOcelot) {
-                createGrave(entity, event, CorpseHelper.getCorpse(entity, CorpseHelper.CORPSE_TYPE.CAT), pet.getAge(), BlockGSGraveStone.EnumGraveType.CATS_GRAVES, false);
+                createGrave(entity, event, CorpseHelper.getCorpse(entity, EnumCorpse.CAT), pet.getAge(), BlockGSGraveStone.EnumGraveType.CATS_GRAVES, false);
             }
         }
     }
     
     public static void createHorseGrave(EntityHorse horse, LivingDeathEvent event) {
-        if (true){//horse.isTame()) {
+        if (horse.isTame()) {
             List<ItemStack> items = new ArrayList<ItemStack>();
-            items.addAll(CorpseHelper.getCorpse(horse, CorpseHelper.CORPSE_TYPE.HORSE));
+            items.addAll(CorpseHelper.getCorpse(horse, EnumCorpse.HORSE));
             
-//            try {
-//                Field field = EntityHorse.class.getDeclaredField("horseChest");
-//                field.setAccessible(true);
-//                AnimalChest chest = (AnimalChest) field.get(horse);
-//                for (int slot = 0; slot < chest.getSizeInventory(); slot++) {
-//                    items.add(chest.getStackInSlot(slot));
-//                }
-//            } catch (NoSuchFieldException e) {
-//                GraveStoneLogger.logError("Can't get access to horse chest");
-//                e.printStackTrace();
-//            } catch (IllegalAccessException e) {
-//                GraveStoneLogger.logError("Can't get access to horse chest");
-//                e.printStackTrace();
-//            }
-//            
-//            horse.setHorseSaddled(false);
-//            horse.func_110242_l(false);
-//            if (horse.isChested()) {
-//                items.add(new ItemStack(Block.chest, 1));
-//                horse.setChested(false);
-//            }
             createGrave(horse, event, items, horse.getAge(), BlockGSGraveStone.EnumGraveType.HORSE_GRAVES, false);
         }
     }

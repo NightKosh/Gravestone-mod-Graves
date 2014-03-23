@@ -14,7 +14,7 @@ import gravestone.core.Resources;
 public enum EnumCorpse implements IBlockEnum {
     VILLAGER("item.corpse.villager", Resources.CORPSE_VILLAGER),
     DOG("item.corpse.dog", Resources.CORPSE_DOG),
-    COT("item.corpse.cat", Resources.CORPSE_CAT),
+    CAT("item.corpse.cat", Resources.CORPSE_CAT),
     HORSE("item.corpse.horse", Resources.CORPSE_HORSE);
     private String name;
     private String icon;

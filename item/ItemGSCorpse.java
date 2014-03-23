@@ -52,13 +52,15 @@ public class ItemGSCorpse extends Item {
      * clicking, he will have one of those. Return True if something happen and
      * false if it don't. This is for ITEMS, not BLOCKS
      */
-    @Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10) {
-        if (!world.isRemote) {
-            CorpseHelper.spawnMob(stack.getItemDamage(), world, x, y, z, stack.stackTagCompound, player);
-        }
-        return false;
-    }
+//    @Override
+//    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10) {
+//        if (!world.isRemote && world.getBlockId(x, y, z) == GraveStoneConfig.altarID && CorpseHelper.canSpawnMob(player, stack.getItemDamage())) {
+//            CorpseHelper.spawnMob(stack.getItemDamage(), world, x, y, z, stack.stackTagCompound, player);
+//            CorpseHelper.getExperience(player, stack.getItemDamage());
+//            return true;
+//        }
+//        return false;
+//    }
 
     /**
      * returns a list of items with the same ID, but different meta (eg: dye

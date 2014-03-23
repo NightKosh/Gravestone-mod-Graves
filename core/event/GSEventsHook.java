@@ -10,7 +10,7 @@ import gravestone.entity.monster.EntitySkullCrawler;
 import gravestone.entity.monster.EntityWitherSkullCrawler;
 import gravestone.entity.monster.EntityZombieSkullCrawler;
 import gravestone.item.CorpseHelper;
-import gravestone.item.CorpseHelper.CORPSE_TYPE;
+import gravestone.item.enums.EnumCorpse;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
@@ -40,7 +40,7 @@ public class GSEventsHook {
                 GraveStoneHelper.createPlayerGrave((EntityPlayer) event.entity, event);
             } else {
                 if (GraveStoneConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
-                    GraveStoneHelper.createGrave(event.entity, event, CorpseHelper.getCorpse(event.entity, CORPSE_TYPE.VILLAGER), ((EntityVillager) event.entity).getAge(), EnumGraveType.PLAYER_GRAVES, true);
+                    GraveStoneHelper.createGrave(event.entity, event, CorpseHelper.getCorpse(event.entity, EnumCorpse.VILLAGER), ((EntityVillager) event.entity).getAge(), EnumGraveType.PLAYER_GRAVES, true);
                     return;
                 }
 
