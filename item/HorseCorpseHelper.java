@@ -3,12 +3,10 @@ package gravestone.item;
 import gravestone.ModGraveStone;
 import static gravestone.item.CorpseHelper.setMobName;
 import java.util.List;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.BaseAttributeMap;
 import net.minecraft.entity.passive.EntityHorse;
-import net.minecraft.nbt.NBTBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagDouble;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
 /**
@@ -25,41 +23,30 @@ public class HorseCorpseHelper extends CorpseHelper {
     public static void setNbt(EntityHorse horse, NBTTagCompound nbt) {
         setName(horse, nbt);
         
-        NBTTagCompound horseNBT = new NBTTagCompound();
-        horse.writeEntityToNBT(horseNBT);
-
-        nbt.setInteger("HorseType", horseNBT.getInteger("Type"));
-        nbt.setInteger("Variant", horseNBT.getInteger("Variant"));
-
-        nbt.setDouble("Max Health", horse.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue());
-        nbt.setDouble("Movement Speed", horse.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
-        nbt.setDouble("Jump Strength", horse.getHorseJumpStrength());
+        nbt.setInteger("HorseType", horse.getHorseType());
+        nbt.setInteger("Variant", horse.getHorseVariant());
+        
+        BaseAttributeMap attrMap = horse.getAttributeMap();        
+        nbt.setDouble("Max Health", attrMap.getAttributeInstanceByName("Max Health").getAttributeValue());
+        nbt.setDouble("Movement Speed", attrMap.getAttributeInstanceByName("Movement Speed").getAttributeValue());
+        nbt.setDouble("Jump Strength", attrMap.getAttributeInstanceByName("Jump Strength").getAttributeValue());
+        
+        
     }
 
-    public static void spawnHorse(World world, int x, int y, int z, NBTTagCompound nbtTag) {
+    public static void spawnHorse(World world, int x, int y, int z, NBTTagCompound nbtTag, EntityPlayer player) {
         EntityHorse horse = new EntityHorse(world);
         setMobName(horse, nbtTag);
-
-        NBTTagCompound horseNBT = new NBTTagCompound();
-        horse.writeEntityToNBT(horseNBT);
-
-        horseNBT.setInteger("HorseType", nbtTag.getInteger("HorseType"));
-        horseNBT.setInteger("Variant", nbtTag.getInteger("Variant"));
-
-        NBTTagList attrs = (NBTTagList) horseNBT.getTag("Attributes");
-        for (int i = 0; i < attrs.tagCount(); i++) {
-            NBTBase tag = attrs.tagAt(i);
-            if (tag.getName().equals("Max Health")) {
-                ((NBTTagDouble) tag).data = nbtTag.getDouble("Max Health");
-            } else if (tag.getName().equals("Movement Speed")) {
-                ((NBTTagDouble) tag).data = nbtTag.getDouble("Movement Speed");
-            } else if (tag.getName().equals("Jump Strength")) {
-                ((NBTTagDouble) tag).data = nbtTag.getDouble("Jump Strength");
-            }
-        }
-        horseNBT.setTag("Attributes", attrs);
-
-        horse.readEntityFromNBT(horseNBT);
+        
+        horse.setHorseType(nbtTag.getInteger("HorseType"));
+        horse.setHorseVariant(nbtTag.getInteger("Variant"));
+        
+        BaseAttributeMap attrMap = horse.getAttributeMap();
+        attrMap.getAttributeInstanceByName("Max Health").setAttribute(nbtTag.getDouble("Max Health"));
+        attrMap.getAttributeInstanceByName("Movement Speed").setAttribute(nbtTag.getDouble("Movement Speed"));
+        attrMap.getAttributeInstanceByName("Jump Strength").setAttribute(nbtTag.getDouble("Jump Strength"));
+        
+        horse.setTamedBy(player);
 
         spawnMob(horse, world, x, y, z);
     }
