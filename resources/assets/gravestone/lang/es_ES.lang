@@ -14,6 +14,7 @@ block.gravestone.stone_sword=Lapida de espada de Piedra
 block.gravestone.iron_sword=Lapida de espada de Hierro
 block.gravestone.golden_sword=Lapida de espada de Oro
 block.gravestone.diamond_sword=Lapida de espada de Diamante
+block.gravestone.horse_statue=Horse statue
 
 ## memorials
 block.memorial.cross=Memorial Cruz

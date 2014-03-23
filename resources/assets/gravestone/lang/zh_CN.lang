@@ -14,6 +14,7 @@ block.gravestone.stone_sword=石剑墓碑
 block.gravestone.iron_sword=铁剑墓碑
 block.gravestone.golden_sword=金剑墓碑
 block.gravestone.diamond_sword=钻石剑墓碑
+block.gravestone.horse_statue=Horse statue
 
 ## memorials
 block.memorial.cross=十字纪念碑

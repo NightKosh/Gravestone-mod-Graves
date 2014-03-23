@@ -25,11 +25,14 @@ import gravestone.entity.monster.EntitySkullCrawler.SkullCrawlerType;
 import gravestone.entity.monster.EntityWitherSkullCrawler;
 import gravestone.entity.monster.EntityZombieSkullCrawler;
 import gravestone.renderer.entity.RenderSkullCrawler;
+import gravestone.renderer.item.ItemGSCandleRenderer;
 import gravestone.renderer.item.ItemGSSkullCandleRenderer;
 import gravestone.renderer.item.ItemGSSpawnerRenderer;
+import gravestone.renderer.tileentity.TileEntityGSCandleRenderer;
 import gravestone.renderer.tileentity.TileEntityGSHauntedChestRenderer;
 import gravestone.renderer.tileentity.TileEntityGSSkullCandleRenderer;
 import gravestone.renderer.tileentity.TileEntityGSSpawnerRenderer;
+import gravestone.tileentity.TileEntityGSCandle;
 import gravestone.tileentity.TileEntityGSHauntedChest;
 import gravestone.tileentity.TileEntityGSSkullCandle;
 import gravestone.tileentity.TileEntityGSSpawner;
@@ -72,6 +75,10 @@ public class ClientProxy extends CommonProxy {
         // register SkullCandle renderer
         ClientRegistry.registerTileEntity(TileEntityGSSkullCandle.class, "GSSkullCandle", new TileEntityGSSkullCandleRenderer());
         MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.skullCandleID, new ItemGSSkullCandleRenderer());
+    
+        // candle
+        ClientRegistry.registerTileEntity(TileEntityGSCandle.class, "GSCandle", new TileEntityGSCandleRenderer());
+        MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.candleID, new ItemGSCandleRenderer());
     }
 
     private void registerMobsRenderers() {

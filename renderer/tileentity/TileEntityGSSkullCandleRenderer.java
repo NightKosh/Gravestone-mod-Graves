@@ -34,9 +34,9 @@ public class TileEntityGSSkullCandleRenderer extends TileEntitySpecialRenderer {
         bindSkullCandleTexture(EnumSkullCandle.values()[meta]);
 
         GL11.glPushMatrix();
-        GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-        GL11.glScalef(1.0F, -1F, -1F);
-        GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
+        GL11.glTranslatef(x + 0.5F, y + 2.2F, z + 0.5F);
+        GL11.glScalef(1.5F, -1.5F, -1.5F);
+        GL11.glRotatef(rotation, 0, 1, 0);
 
         skullCandleModel.renderAll();
         GL11.glPopMatrix();

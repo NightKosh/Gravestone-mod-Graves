@@ -24,6 +24,7 @@ public class GraveStoneConfig {
     public static int trapID;
     public static int memorialID;
     public static int hauntedChestID;
+    public static int candleID;
     public static int skullCandleID;
     public static int altarID;
     // bones blocks
@@ -35,6 +36,7 @@ public class GraveStoneConfig {
     public static int memorialRenderID = RenderingRegistry.getNextAvailableRenderId();
     public static int spawnerRenderID = RenderingRegistry.getNextAvailableRenderId();
     public static int skullCandleRenderID = RenderingRegistry.getNextAvailableRenderId();
+    public static int candleRenderID = RenderingRegistry.getNextAvailableRenderId();
     // world generator
     public static boolean generateCatacombs;
     public static boolean generateSingleGraves;
@@ -124,6 +126,7 @@ public class GraveStoneConfig {
         hauntedChestID = config.getBlock("HauntedChest", 1558).getInt();
         skullCandleID = config.getBlock("SkullCandle", 1559).getInt();
         altarID = config.getBlock("Altar", 1560).getInt();
+        candleID = config.getBlock("Candle", 1561).getInt();
         
         // items
         chiselId = config.getItem("Chisel", 9001 - 256).getInt();

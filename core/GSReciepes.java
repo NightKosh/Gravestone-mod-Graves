@@ -61,13 +61,16 @@ public class GSReciepes {
         }
 
         // candles
+        GameRegistry.addRecipe(new ItemStack(GSBlock.candle, 1, 0), "t", "m", "s", 't', Item.silk, 'm', new ItemStack(Item.dyePowder, 1, 15), 's', Item.slimeBall);
+        addSkullCandleReciepes(new ItemStack(GSBlock.candle, 1, 0));
+        
         GameRegistry.addRecipe(new ItemStack(Item.skull, 1, 0), "c", 'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.SKELETON_SKULL.ordinal()));
         GameRegistry.addRecipe(new ItemStack(Item.skull, 1, 1), "c", 'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.WITHER_SKULL.ordinal()));
         GameRegistry.addRecipe(new ItemStack(Item.skull, 1, 2), "c", 'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.ZOMBIE_SKULL.ordinal()));
     
         // altar
-        GameRegistry.addRecipe(new ItemStack(GSBlock.altar), " h ", "sos", "ono", 
-                'h', Item.netherStar, 's', new ItemStack(Item.skull, 1, 0), 'o', Block.obsidian, 'n', new ItemStack(GSBlock.trap, 1, 0));
+        GameRegistry.addRecipe(new ItemStack(GSBlock.altar), " h ", "sns", "ooo", 
+                'h', Item.netherStar, 's', new ItemStack(Item.skull, 1, 0), 'n', new ItemStack(GSBlock.trap, 1, 0), 'o', Block.obsidian);
     }
 
     private static ItemStack getStackWithNTB(Block block, byte graveType, String ntbName) {
