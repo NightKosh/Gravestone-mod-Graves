@@ -5,6 +5,7 @@ import gravestone.block.BlockGSSpawner;
 import gravestone.block.enums.EnumSpawner;
 import gravestone.core.GSMobSpawn;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -22,6 +23,7 @@ public class GSMobSpawner extends GSSpawner {
     private static final int BOSS_PLAYER_RANGE = 8;
     private static final int MOB_PLAYER_RANGE = 16;
     private static final int SPAWN_EFFECTS_DELAY = 20;
+    private static final float MAX_LIGHT_VALUE = 0.46F;
     private EnumSpawner spawnerType = null;
 
     public GSMobSpawner(TileEntity tileEntity) {
@@ -30,40 +32,41 @@ public class GSMobSpawner extends GSSpawner {
 
     @Override
     protected void clientUpdateLogic() {
-        delay--;
-        if (delay <= SPAWN_EFFECTS_DELAY) {
-            double x = tileEntity.xCoord + tileEntity.worldObj.rand.nextFloat();
-            double y = tileEntity.yCoord + tileEntity.worldObj.rand.nextFloat();
-            double z = tileEntity.zCoord + tileEntity.worldObj.rand.nextFloat();
-            tileEntity.worldObj.spawnParticle("largesmoke", x, y, z, 0.0D, 0.0D, 0.0D);
-            tileEntity.worldObj.spawnParticle("portal", x, y, z, 0.0D, 0.0D, 0.0D);
-            tileEntity.worldObj.spawnParticle("spell", x, y, z, 0.0D, 0.0D, 0.0D);
-            tileEntity.worldObj.spawnParticle("witchMagic", x, y, z, 0.0D, 0.0D, 0.0D);
-            tileEntity.worldObj.spawnParticle("lava", x, y, z, 0.0D, 0.0D, 0.0D);
-            tileEntity.worldObj.spawnParticle("flame", x, y, z, 0.0D, 0.0D, 0.0D);
-        }
+//        delay--;
+//        if (delay <= SPAWN_EFFECTS_DELAY) {
+//            double x = tileEntity.xCoord + tileEntity.worldObj.rand.nextFloat();
+//            double y = tileEntity.yCoord + tileEntity.worldObj.rand.nextFloat();
+//            double z = tileEntity.zCoord + tileEntity.worldObj.rand.nextFloat();
+//            tileEntity.worldObj.spawnParticle("largesmoke", x, y, z, 0.0D, 0.0D, 0.0D);
+//            tileEntity.worldObj.spawnParticle("portal", x, y, z, 0.0D, 0.0D, 0.0D);
+//            tileEntity.worldObj.spawnParticle("spell", x, y, z, 0.0D, 0.0D, 0.0D);
+//            tileEntity.worldObj.spawnParticle("witchMagic", x, y, z, 0.0D, 0.0D, 0.0D);
+//            tileEntity.worldObj.spawnParticle("lava", x, y, z, 0.0D, 0.0D, 0.0D);
+//            tileEntity.worldObj.spawnParticle("flame", x, y, z, 0.0D, 0.0D, 0.0D);
+//        }
     }
 
     @Override
     protected void serverUpdateLogic() {
         delay--;
         if (delay <= 0) {
-            Entity entity = getMob();
+            EntityLiving entity = (EntityLiving) getMob();
             if (entity == null) {
                 GraveStoneLogger.logError("Spanwer mob get 'null' as mob!!!");
             } else {
-                double x = tileEntity.xCoord + 0.5D;
-                double y = tileEntity.yCoord + 0.5D;
-                double z = tileEntity.zCoord + 0.5D;
-                entity.setLocationAndAngles(x, y, z, tileEntity.worldObj.rand.nextFloat() * 360.0F, 0.0F);
-                tileEntity.worldObj.spawnEntityInWorld(entity);
+                double x = tileEntity.xCoord + 0.5;
+                double y = tileEntity.yCoord;
+                double z = tileEntity.zCoord + 0.5;
+                entity.setLocationAndAngles(x, y, z, tileEntity.worldObj.rand.nextFloat() * 360, 0);
+                if (isBossSpawner()) {
+                    tileEntity.worldObj.removeBlockTileEntity(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+                    tileEntity.worldObj.setBlock(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, 0);
+                    tileEntity.worldObj.spawnEntityInWorld(entity);
+                } else if (tileEntity.worldObj.getLightBrightness(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord) <= MAX_LIGHT_VALUE){
+                    tileEntity.worldObj.spawnEntityInWorld(entity);
+                }
             }
-            if (isBossSpawner()) {
-                tileEntity.worldObj.removeBlockTileEntity(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
-                tileEntity.worldObj.setBlock(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, 0);
-            } else {
-                this.updateDelay();
-            }
+            this.updateDelay();
         }
     }
 
@@ -97,7 +100,7 @@ public class GSMobSpawner extends GSSpawner {
 
     @Override
     protected Entity getMob() {
-        return GSMobSpawn.getMobEntityForSpawner(this.tileEntity.worldObj, getSpawnerType(), 
+        return GSMobSpawn.getMobEntityForSpawner(this.tileEntity.worldObj, getSpawnerType(),
                 this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord);
     }
 

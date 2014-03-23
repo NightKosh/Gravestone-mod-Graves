@@ -24,14 +24,12 @@ import net.minecraft.world.World;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class BlockGSSpawner extends BlockMobSpawner {
-    
+
     public static final List<Byte> MOB_SPAWNERS = new ArrayList<Byte>(Arrays.asList(
-        (byte) EnumSpawner.SKELETON_SPAWNER.ordinal(),
-        (byte) EnumSpawner.ZOMBIE_SPAWNER.ordinal()
-    ));
+            (byte) EnumSpawner.SKELETON_SPAWNER.ordinal(),
+            (byte) EnumSpawner.ZOMBIE_SPAWNER.ordinal()));
     public static final List<Byte> BOSS_SPAWNERS = new ArrayList<Byte>(Arrays.asList(
-        (byte) EnumSpawner.WITHER_SPAWNER.ordinal()
-    ));
+            (byte) EnumSpawner.WITHER_SPAWNER.ordinal()));
 
     public BlockGSSpawner(int id) {
         super(id);
@@ -42,7 +40,7 @@ public class BlockGSSpawner extends BlockMobSpawner {
         this.disableStats();
         this.setCreativeTab(ModGraveStone.creativeTab);
         this.setTextureName(Resources.PENTAGRAM_ICO);
-        this.setBlockBounds(-0.5F, 0, -0.5F, 1.5F, 0.1F, 1.5F);
+        this.setBlockBounds(-0.5F, 0, -0.5F, 1.5F, 0.05F, 1.5F);
     }
 
     /**
@@ -71,7 +69,7 @@ public class BlockGSSpawner extends BlockMobSpawner {
     public boolean isOpaqueCube() {
         return false;
     }
-    
+
     /**
      * A randomly called display update to be able to add particles or other
      * items for display
@@ -98,7 +96,8 @@ public class BlockGSSpawner extends BlockMobSpawner {
     }
 
     /**
-     * Returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+     * Returns a list of blocks with the same ID, but different meta (eg: wood
+     * returns 4 blocks)
      */
     @Override
     @SideOnly(Side.CLIENT)
