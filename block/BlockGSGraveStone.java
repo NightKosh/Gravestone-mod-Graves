@@ -42,12 +42,29 @@ import net.minecraftforge.common.ForgeDirection;
 public class BlockGSGraveStone extends BlockContainer {
 
     private static final Random rand = new Random();
-    public static final byte[] GENERATED_GRAVES = {0, 1, 2};
-    public static final byte[] PETS_GRAVES = {3, 4};
-    public static final byte[] DOG_GRAVES = {3};
-    public static final byte[] CAT_GRAVES = {4};
-    public static final byte[] SWORD_GRAVES = {5, 6, 7, 8, 9};
-    public static final byte[] GENERATED_SWORD_GRAVES = {5, 6};
+    public static final byte[] GENERATED_GRAVES = {
+        (byte) EnumGraves.VERTICAL_PLATE.ordinal(),
+        (byte) EnumGraves.CROSS.ordinal(),
+        (byte) EnumGraves.HORISONTAL_PLATE.ordinal()
+    };
+    public static final byte[] PETS_GRAVES = {
+        (byte) EnumGraves.DOG_STATUE.ordinal(),
+        (byte) EnumGraves.CAT_STATUE.ordinal()
+    };
+    public static final byte[] DOG_GRAVES = {(byte) EnumGraves.DOG_STATUE.ordinal()};
+    public static final byte[] CAT_GRAVES = {(byte) EnumGraves.CAT_STATUE.ordinal()};
+    public static final byte[] HORSE_GRAVES = {(byte) EnumGraves.HORSE_STATUE.ordinal()};
+    public static final byte[] SWORD_GRAVES = {
+        (byte) EnumGraves.WOODEN_SWORD.ordinal(),
+        (byte) EnumGraves.STONE_SWORD.ordinal(),
+        (byte) EnumGraves.IRON_SWORD.ordinal(),
+        (byte) EnumGraves.GOLDEN_SWORD.ordinal(),
+        (byte) EnumGraves.DIAMOND_SWORD.ordinal()
+    };
+    public static final byte[] GENERATED_SWORD_GRAVES = {
+        (byte) EnumGraves.WOODEN_SWORD.ordinal(),
+        (byte) EnumGraves.STONE_SWORD.ordinal()
+    };
 
     public enum EnumGraveType {
 
@@ -55,7 +72,8 @@ public class BlockGSGraveStone extends BlockContainer {
         PLAYER_GRAVES,
         PETS_GRAVES,
         DOGS_GRAVES,
-        CATS_GRAVES
+        CATS_GRAVES,
+        HORSE_GRAVES
     }
 
     public BlockGSGraveStone(int par1) {
@@ -645,6 +663,9 @@ public class BlockGSGraveStone extends BlockContainer {
                 break;
             case CATS_GRAVES:
                 graveType = CAT_GRAVES[rand.nextInt(CAT_GRAVES.length)];
+                break;
+            case HORSE_GRAVES:
+                graveType = HORSE_GRAVES[rand.nextInt(HORSE_GRAVES.length)];
                 break;
         }
 

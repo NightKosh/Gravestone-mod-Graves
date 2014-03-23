@@ -35,7 +35,7 @@ import net.minecraftforge.common.MinecraftForge;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION)
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, packetHandler = GSPacketHandler.class, channels = {"GSDeathText"})
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, packetHandler = GSPacketHandler.class, channels = {"GSDeathText", "GSResurrection"})
 public class ModGraveStone {
 
     @Instance("GraveStone")
