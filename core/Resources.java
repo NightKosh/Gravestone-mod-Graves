@@ -27,6 +27,9 @@ public class Resources {
     public static final String SKULL_BONE_BLOCK = MOD_NAME  + ":skull_bone_block";
     public static final String PENTAGRAM_ICO    = MOD_NAME  + ":pentagram";
     public static final ResourceLocation PENTAGRAM = new ResourceLocation(BLOCK_LOCATION  + "pentagram.png");
+    public static final String ALTAR_BOTTOM = MOD_NAME  + ":altar_bottom";
+    public static final String ALTAR_TOP = MOD_NAME  + ":altar_top";
+    public static final String ALTAR_SIDE = MOD_NAME  + ":altar_side";
     // items
     public static final String CHISEL = MOD_NAME + ":chisel";
     public static final String CORPSE_VILLAGER = MOD_NAME + ":villager_corpse";

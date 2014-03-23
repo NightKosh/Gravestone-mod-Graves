@@ -110,7 +110,7 @@ public class GSBlock {
         skullCandle = new BlockGSSkullCandle(GraveStoneConfig.skullCandleID);
         advancedMetaBlockRegistration(skullCandle, "GSSkullCandle", "Skull candle", EnumSkullCandle.values(), ItemBlockGSSkullCandle.class);
                 
-        // altar candle
+        // altar
         altar = new BlockGSAltar(GraveStoneConfig.altarID);
         simpleBlockRegistration(altar, "GSAltar", "Altar", "pickaxe", 2);
     }
