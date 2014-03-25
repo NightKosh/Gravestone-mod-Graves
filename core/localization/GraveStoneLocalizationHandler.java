@@ -20,7 +20,8 @@ public class GraveStoneLocalizationHandler {
         Resources.LOCALIZATION_LOCATION + "de_DE.lang",
         Resources.LOCALIZATION_LOCATION + "fr_FR.lang",
         Resources.LOCALIZATION_LOCATION + "es_ES.lang",
-        Resources.LOCALIZATION_LOCATION + "zh_CN.lang"
+        Resources.LOCALIZATION_LOCATION + "zh_CN.lang",
+        Resources.LOCALIZATION_LOCATION + "cs_CZ.lang"
     };
 
     /**
