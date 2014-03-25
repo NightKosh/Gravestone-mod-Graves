@@ -53,14 +53,6 @@ public abstract class TileEntityGSGrave extends TileEntity {
     }
 
     /**
-     * Sets the given item stack to the specified slot in the inventory (can be
-     * crafting or armor sections).
-     */
-    public void setInventorySlotContents(int slot, ItemStack itemStack) {
-        gSItems.setInventorySlotContents(slot, itemStack);
-    }
-
-    /**
      * Returns the name of the inventory.
      */
     public String getInvName() {
@@ -77,6 +69,10 @@ public abstract class TileEntityGSGrave extends TileEntity {
 
     public void dropAllItems() {
         gSItems.dropAllItems();
+    }
+    
+    public void clearInventory() {
+        gSItems.graveContents.clear();
     }
 
     public GSGraveStoneDeathText getDeathTextComponent() {

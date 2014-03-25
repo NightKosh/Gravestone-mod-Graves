@@ -84,6 +84,7 @@ public class BlockGSGraveStone extends BlockContainer {
         this.setHardness(4.5F);
         this.setResistance(5F);
         this.setCreativeTab(ModGraveStone.creativeTab);
+        this.setTickRandomly(GraveStoneConfig.removeEmptyGraves);
         this.setTextureName("stone");
     }
 
@@ -292,7 +293,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-                
+
         }
     }
 
@@ -545,7 +546,7 @@ public class BlockGSGraveStone extends BlockContainer {
             stack.setTagCompound(nbt);
             list.add(stack);
         }
-        
+
         // horse graves
         {
             ItemStack stack = new ItemStack(id, 1, 0);
@@ -555,8 +556,8 @@ public class BlockGSGraveStone extends BlockContainer {
             stack.setTagCompound(nbt);
             list.add(stack);
         }
-        
-        
+
+
         // swords 
         for (byte i = (byte) EnumGraves.WOODEN_SWORD.ordinal(); i <= EnumGraves.DIAMOND_SWORD.ordinal(); i++) {
             ItemStack graveStoneStack = new ItemStack(id, 1, 0);
@@ -752,5 +753,27 @@ public class BlockGSGraveStone extends BlockContainer {
 
     private boolean canGenerateGraveAtCoordinates(World world, int x, int y, int z) {
         return (world.isAirBlock(x, y, z) || world.getBlockMaterial(x, y, z).isLiquid() || world.getBlockMaterial(x, y, z).isReplaceable());
+    }
+
+    /**
+     * A randomly called display update to be able to add particles or other
+     * items for display
+     */
+    @Override
+    public void updateTick(World world, int x, int y, int z, Random random) {
+        if (GraveStoneConfig.removeEmptyGraves) {
+            if (!world.isRemote) {
+                TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(x, y, z);
+                if (tileEntity != null) {
+                    if (tileEntity.getSword() == 0 && tileEntity.isEmpty()) {
+                        GraveStoneLogger.logInfo("Remove empty grave at "
+                                + x + "/" + y + "/" + z);
+
+                        world.removeBlockTileEntity(x, y, z);
+                        world.setBlock(x, y, z, 0, 0, 2);
+                    }
+                }
+            }
+        }
     }
 }

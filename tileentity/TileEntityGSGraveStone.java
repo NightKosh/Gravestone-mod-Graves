@@ -181,11 +181,6 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
      */
     public boolean isEnchanted() {
         return this.swordNBT != null && this.swordNBT.hasKey("ench");
-//        if (this.swordNBT != null && this.swordNBT.hasKey("ench")) {
-//            return this.swordNBT.getTagList("ench").tagCount() != 0;
-//        }
-//
-//        return false;
     }
 
     /*
@@ -195,7 +190,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         ItemStack sword = getSwordItem();
         this.gSItems.dropItem(sword, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
     }
-    
+
     /**
      * Return sword as ItemStack
      */
@@ -237,5 +232,9 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         NBTTagCompound nbtTag = new NBTTagCompound();
         this.writeToNBT(nbtTag);
         return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+    }
+    
+    public boolean isEmpty() {
+        return gSItems.graveContents.isEmpty();
     }
 }

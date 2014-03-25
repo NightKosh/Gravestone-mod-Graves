@@ -6,6 +6,7 @@ import java.util.Random;
 import gravestone.config.GraveStoneConfig;
 import gravestone.block.GraveStoneHelper;
 import gravestone.item.ItemBlockGSGraveStone;
+import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
@@ -21,18 +22,15 @@ import net.minecraft.world.World;
  *
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- *
  */
 public class GSGraveStoneItems {
 
     private TileEntityGSGraveStone tileEntity;
-    // grave max loot stacks
-    public static final byte MAX_SLOTS = 127;
     // grave loot holder
     private static final int[] POTION_LIST = {16273, 16307, 16341, 16310, 16281, 16318,
         32657, 32658, 32659, 32725, 32694, 32665, 32702
     };
-    protected ItemStack[] graveContents = new ItemStack[MAX_SLOTS];
+    protected List<ItemStack> graveContents = new ArrayList<ItemStack>();
 
     public GSGraveStoneItems(TileEntityGSGraveStone tileEntity) {
         this.tileEntity = tileEntity;
@@ -40,14 +38,13 @@ public class GSGraveStoneItems {
 
     public void readItems(NBTTagCompound nbtTag) {
         NBTTagList ntbItemsList = nbtTag.getTagList("Items");
-        graveContents = new ItemStack[MAX_SLOTS];
+        graveContents = new ArrayList<ItemStack>();
 
         for (int i = 0; i < ntbItemsList.tagCount(); ++i) {
-            NBTTagCompound var4 = (NBTTagCompound) ntbItemsList.tagAt(i);
-            int var5 = var4.getByte("Slot") & 255;
-
-            if (var5 >= 0 && var5 < graveContents.length) {
-                graveContents[var5] = ItemStack.loadItemStackFromNBT(var4);
+            NBTTagCompound nbt = (NBTTagCompound) ntbItemsList.tagAt(i);
+            ItemStack stack = ItemStack.loadItemStackFromNBT(nbt);
+            if (stack != null) {
+                graveContents.add(stack);
             }
         }
     }
@@ -55,12 +52,11 @@ public class GSGraveStoneItems {
     public void saveItems(NBTTagCompound nbtTag) {
         NBTTagList ntbList = new NBTTagList();
 
-        for (int i = 0; i < graveContents.length; ++i) {
-            if (graveContents[i] != null) {
-                NBTTagCompound var4 = new NBTTagCompound();
-                var4.setByte("Slot", (byte) i);
-                graveContents[i].writeToNBT(var4);
-                ntbList.appendTag(var4);
+        for (ItemStack stack : graveContents) {
+            if (stack != null) {
+                NBTTagCompound nbt = new NBTTagCompound();
+                stack.writeToNBT(nbt);
+                ntbList.appendTag(nbt);
             }
         }
 
@@ -71,19 +67,20 @@ public class GSGraveStoneItems {
      * Sets the given item stack to the specified slot in the inventory (can be
      * crafting or armor sections).
      */
-    public void setInventorySlotContents(int slot, ItemStack itemStack) {
-        graveContents[slot] = itemStack;
+    public void addInventoryContent(ItemStack itemStack) {
+        if (itemStack != null) {
+            graveContents.add(itemStack);
 
-        if (itemStack != null && itemStack.stackSize > getInventoryStackLimit()) {
-            itemStack.stackSize = getInventoryStackLimit();
+            if (itemStack != null && itemStack.stackSize > getInventoryStackLimit()) {
+                itemStack.stackSize = getInventoryStackLimit();
+            }
         }
     }
 
     /**
-     * Returns the maximum stack size for a inventory slot. Seems to always be
-     * 64, possibly will be extended. *Isn't this more of a set than a get?*
+     * Returns the maximum stack size for a inventory slot.
      */
-    public int getInventoryStackLimit() {
+    public static int getInventoryStackLimit() {
         return 64;
     }
 
@@ -102,7 +99,7 @@ public class GSGraveStoneItems {
                     break;
                 case 40:
                     for (byte i = 0; i < items.size(); i++) {
-                        setInventorySlotContents(i, items.get(i));
+                        addInventoryContent(items.get(i));
                     }
                     break;
                 default:
@@ -111,7 +108,7 @@ public class GSGraveStoneItems {
 
                     for (byte i = 0; i < items.size(); i++) {
                         if (items.get(i) != null && savedItems > 0) {
-                            setInventorySlotContents(i, items.get(i));
+                            addInventoryContent(items.get(i));
                             savedItems--;
                         } else {
                             dropItem(items.get(i), tileEntity.worldObj, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
@@ -124,26 +121,10 @@ public class GSGraveStoneItems {
 
     public void setAdditionalItems(ItemStack[] items) {
         if (items != null) {
-            byte emptySlot = getEmptySlotNumber();
-            if (emptySlot != -1) {
-                for (short i = 0; i < items.length; i++) {
-                    setInventorySlotContents(emptySlot + i, items[i]);
-                }
-            } else {
-                for (byte i = 0; i < items.length; i++) {
-                    dropItem(items[i], tileEntity.worldObj, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
-                }
+            for (short i = 0; i < items.length; i++) {
+                addInventoryContent(items[i]);
             }
         }
-    }
-
-    private byte getEmptySlotNumber() {
-        for (byte i = 0; i < MAX_SLOTS; i++) {
-            if (graveContents[i] == null) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     /**
@@ -184,24 +165,29 @@ public class GSGraveStoneItems {
      * @param slot Item slot number
      */
     public void dropItem(int slot) {
-        dropItem(graveContents[slot], tileEntity.worldObj, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+        dropItem(graveContents.get(slot), tileEntity.worldObj, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+    }
+
+    public void dropItem(ItemStack stack) {
+        dropItem(stack, tileEntity.worldObj, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
     }
 
     /*
      * Drop all holding items
      */
     public void dropAllItems() {
-        for (int slot = 0; slot < MAX_SLOTS; slot++) {
-            dropItem(slot);
+        for (ItemStack stack : graveContents) {
+            dropItem(stack);
         }
+        graveContents.clear();
     }
 
     /**
      * Set random itesm as grave loot
      */
     public void setRandomGraveContent(Random random, boolean isPetGrave, boolean allLoot) {
-        setInventorySlotContents(0, new ItemStack(Item.bone.itemID, 1 + random.nextInt(5), 0));
-        setInventorySlotContents(1, new ItemStack(Item.rottenFlesh.itemID, 1 + random.nextInt(5), 0));
+        addInventoryContent(new ItemStack(Item.bone.itemID, 1 + random.nextInt(5), 0));
+        addInventoryContent(new ItemStack(Item.rottenFlesh.itemID, 1 + random.nextInt(5), 0));
 
         if (isPetGrave) {
             fillPetGrave(random);
@@ -209,9 +195,9 @@ public class GSGraveStoneItems {
             if (tileEntity.graveType != 3 && tileEntity.graveType != 4) {
                 if (random.nextInt(50) == 0) {
                     if (random.nextInt(2) == 0) {
-                        setInventorySlotContents(2, new ItemStack(Item.skull.itemID, 1, 0));
+                        addInventoryContent(new ItemStack(Item.skull.itemID, 1, 0));
                     } else {
-                        setInventorySlotContents(2, new ItemStack(Item.skull.itemID, 1, 2));
+                        addInventoryContent(new ItemStack(Item.skull.itemID, 1, 2));
                     }
                 }
 
@@ -246,16 +232,16 @@ public class GSGraveStoneItems {
     private void fillWarriorGrave(Random random, boolean isSwordGrave) {
         if (isSwordGrave) {
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.plateLeather.itemID, 1, getRandomDamage(random, 30)));
+                addInventoryContent(new ItemStack(Item.plateLeather.itemID, 1, getRandomDamage(random, 30)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(4, new ItemStack(Item.legsLeather.itemID, 1, getRandomDamage(random, 30)));
+                addInventoryContent(new ItemStack(Item.legsLeather.itemID, 1, getRandomDamage(random, 30)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(5, new ItemStack(Item.helmetLeather.itemID, 1, getRandomDamage(random, 30)));
+                addInventoryContent(new ItemStack(Item.helmetLeather.itemID, 1, getRandomDamage(random, 30)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(6, new ItemStack(Item.bootsLeather.itemID, 1, getRandomDamage(random, 30)));
+                addInventoryContent(new ItemStack(Item.bootsLeather.itemID, 1, getRandomDamage(random, 30)));
             }
 
             return;
@@ -265,68 +251,68 @@ public class GSGraveStoneItems {
 
         if (armorType > 5) { // Iron
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.plateIron.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.plateIron.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(4, new ItemStack(Item.legsIron.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.legsIron.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(5, new ItemStack(Item.helmetIron.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.helmetIron.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(6, new ItemStack(Item.bootsIron.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.bootsIron.itemID, 1, getRandomDamage(random)));
             }
 
             changeGraveTypeToSword(Item.swordIron.itemID, getRandomDamage(random));
         } else if (armorType > 2) {
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.plateChain.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.plateChain.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(4, new ItemStack(Item.legsChain.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.legsChain.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(5, new ItemStack(Item.helmetChain.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.helmetChain.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(6, new ItemStack(Item.bootsChain.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.bootsChain.itemID, 1, getRandomDamage(random)));
             }
 
             changeGraveTypeToSword(Item.swordIron.itemID, getRandomDamage(random));
         } else if (armorType > 0) {
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.plateGold.itemID, 1, getRandomDamage(random, 50)));
+                addInventoryContent(new ItemStack(Item.plateGold.itemID, 1, getRandomDamage(random, 50)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(4, new ItemStack(Item.legsGold.itemID, 1, getRandomDamage(random, 50)));
+                addInventoryContent(new ItemStack(Item.legsGold.itemID, 1, getRandomDamage(random, 50)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(5, new ItemStack(Item.helmetGold.itemID, 1, getRandomDamage(random, 30)));
+                addInventoryContent(new ItemStack(Item.helmetGold.itemID, 1, getRandomDamage(random, 30)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(6, new ItemStack(Item.bootsGold.itemID, 1, getRandomDamage(random, 40)));
+                addInventoryContent(new ItemStack(Item.bootsGold.itemID, 1, getRandomDamage(random, 40)));
             }
 
             changeGraveTypeToSword(Item.swordGold.itemID, getRandomDamage(random, 15));
         } else {
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.plateDiamond.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.plateDiamond.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(4, new ItemStack(Item.legsDiamond.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.legsDiamond.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(5, new ItemStack(Item.helmetDiamond.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.helmetDiamond.itemID, 1, getRandomDamage(random)));
             }
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(6, new ItemStack(Item.bootsDiamond.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.bootsDiamond.itemID, 1, getRandomDamage(random)));
             }
             changeGraveTypeToSword(Item.swordDiamond.itemID, getRandomDamage(random));
         }
 
         if (random.nextInt(3) == 0) {
-            setInventorySlotContents(7, new ItemStack(Item.bow.itemID, 1, getRandomDamage(random)));
-            setInventorySlotContents(8, new ItemStack(Item.arrow.itemID, 10 + random.nextInt(54), 0));
+            addInventoryContent(new ItemStack(Item.bow.itemID, 1, getRandomDamage(random)));
+            addInventoryContent(new ItemStack(Item.arrow.itemID, 10 + random.nextInt(54), 0));
         }
     }
 
@@ -352,37 +338,37 @@ public class GSGraveStoneItems {
             int pickAxeType = random.nextInt(10);
 
             if (pickAxeType > 3) {
-                setInventorySlotContents(3, new ItemStack(Item.pickaxeIron.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.pickaxeIron.itemID, 1, getRandomDamage(random)));
             } else if (pickAxeType > 0) {
-                setInventorySlotContents(3, new ItemStack(Item.pickaxeGold.itemID, 1, getRandomDamage(random, 15)));
+                addInventoryContent(new ItemStack(Item.pickaxeGold.itemID, 1, getRandomDamage(random, 15)));
             } else {
-                setInventorySlotContents(3, new ItemStack(Item.pickaxeDiamond.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.pickaxeDiamond.itemID, 1, getRandomDamage(random)));
             }
         }
 
         switch (random.nextInt(10)) {
             case 0:
-                setInventorySlotContents(4, new ItemStack(Item.diamond.itemID, 1 + random.nextInt(3), 0));
+                addInventoryContent(new ItemStack(Item.diamond.itemID, 1 + random.nextInt(3), 0));
                 break;
             case 1:
-                setInventorySlotContents(4, new ItemStack(Item.emerald.itemID, 1 + random.nextInt(3), 0));
+                addInventoryContent(new ItemStack(Item.emerald.itemID, 1 + random.nextInt(3), 0));
                 break;
         }
         switch (random.nextInt(5)) {
             case 0:
-                setInventorySlotContents(5, new ItemStack(Item.ingotGold.itemID, 3 + random.nextInt(5), 0));
+                addInventoryContent(new ItemStack(Item.ingotGold.itemID, 3 + random.nextInt(5), 0));
                 break;
             case 1:
             case 2:
-                setInventorySlotContents(5, new ItemStack(Item.ingotIron.itemID, 3 + random.nextInt(5), 0));
+                addInventoryContent(new ItemStack(Item.ingotIron.itemID, 3 + random.nextInt(5), 0));
                 break;
         }
         switch (random.nextInt(5)) {
             case 0:
-                setInventorySlotContents(6, new ItemStack(Item.redstone.itemID, 3 + random.nextInt(8), 0));
+                addInventoryContent(new ItemStack(Item.redstone.itemID, 3 + random.nextInt(8), 0));
                 break;
             case 1:
-                setInventorySlotContents(6, new ItemStack(Item.dyePowder.itemID, 3 + random.nextInt(8), 4));
+                addInventoryContent(new ItemStack(Item.dyePowder.itemID, 3 + random.nextInt(8), 4));
                 break;
         }
     }
@@ -395,57 +381,57 @@ public class GSGraveStoneItems {
             case 0: // enchanted book
                 EnchantmentData data = new EnchantmentData(Enchantment.enchantmentsBookList[random.nextInt(Enchantment.enchantmentsBookList.length)], 1 + random.nextInt(5));
                 ItemStack items = Item.enchantedBook.getEnchantedItemStack(data);
-                setInventorySlotContents(3, items);
+                addInventoryContent(items);
                 break;
             case 1:
-                setInventorySlotContents(3, new ItemStack(Item.potion.itemID, 1 + random.nextInt(5), POTION_LIST[random.nextInt(POTION_LIST.length)]));
+                addInventoryContent(new ItemStack(Item.potion.itemID, 1 + random.nextInt(5), POTION_LIST[random.nextInt(POTION_LIST.length)]));
                 break;
             case 2:
             case 3:
-                setInventorySlotContents(3, new ItemStack(Item.book.itemID, 3 + random.nextInt(8), 0));
+                addInventoryContent(new ItemStack(Item.book.itemID, 3 + random.nextInt(8), 0));
                 break;
         }
         switch (random.nextInt(15)) {
             case 0:
-                setInventorySlotContents(4, new ItemStack(Item.enderPearl.itemID, 1, 0));
+                addInventoryContent(new ItemStack(Item.enderPearl.itemID, 1, 0));
                 break;
             case 1:
-                setInventorySlotContents(4, new ItemStack(Item.blazePowder.itemID, 1, 0));
+                addInventoryContent(new ItemStack(Item.blazePowder.itemID, 1, 0));
                 break;
             case 2:
-                setInventorySlotContents(4, new ItemStack(Item.glowstone.itemID, 3 + random.nextInt(8), 0));
+                addInventoryContent(new ItemStack(Item.glowstone.itemID, 3 + random.nextInt(8), 0));
                 break;
         }
         switch (random.nextInt(6)) {
             case 0:
-                setInventorySlotContents(5, new ItemStack(Item.magmaCream.itemID, 1, 0));
+                addInventoryContent(new ItemStack(Item.magmaCream.itemID, 1, 0));
                 break;
             case 1:
-                setInventorySlotContents(5, new ItemStack(Item.gunpowder.itemID, 1, 0));
+                addInventoryContent(new ItemStack(Item.gunpowder.itemID, 1, 0));
                 break;
         }
         switch (random.nextInt(10)) {
             case 0:
-                setInventorySlotContents(6, new ItemStack(Item.ghastTear.itemID, 1, 0));
+                addInventoryContent(new ItemStack(Item.ghastTear.itemID, 1, 0));
                 break;
             case 1:
-                setInventorySlotContents(6, new ItemStack(Item.netherStalkSeeds.itemID, 1, 0));
+                addInventoryContent(new ItemStack(Item.netherStalkSeeds.itemID, 1, 0));
                 break;
         }
         switch (random.nextInt(5)) {
             case 0:
-                setInventorySlotContents(7, new ItemStack(Item.spiderEye.itemID, 1, 0));
+                addInventoryContent(new ItemStack(Item.spiderEye.itemID, 1, 0));
                 break;
             case 1:
-                setInventorySlotContents(7, new ItemStack(Item.fermentedSpiderEye.itemID, 1, 0));
+                addInventoryContent(new ItemStack(Item.fermentedSpiderEye.itemID, 1, 0));
                 break;
         }
         switch (random.nextInt(8)) {
             case 0:
-                setInventorySlotContents(8, new ItemStack(Item.goldenCarrot.itemID, 1, 0));
+                addInventoryContent(new ItemStack(Item.goldenCarrot.itemID, 1, 0));
                 break;
             case 1:
-                setInventorySlotContents(8, new ItemStack(Item.speckledMelon.itemID, 1, 0));
+                addInventoryContent(new ItemStack(Item.speckledMelon.itemID, 1, 0));
                 break;
         }
     }
@@ -458,44 +444,44 @@ public class GSGraveStoneItems {
 
         if (toolType > 3) {
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.axeIron.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.axeIron.itemID, 1, getRandomDamage(random)));
             } else {
-                setInventorySlotContents(3, new ItemStack(Item.shovelIron.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.shovelIron.itemID, 1, getRandomDamage(random)));
             }
         } else if (toolType > 0) {
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.axeGold.itemID, 1, getRandomDamage(random, 15)));
+                addInventoryContent(new ItemStack(Item.axeGold.itemID, 1, getRandomDamage(random, 15)));
             } else {
-                setInventorySlotContents(3, new ItemStack(Item.shovelGold.itemID, 1, getRandomDamage(random, 15)));
+                addInventoryContent(new ItemStack(Item.shovelGold.itemID, 1, getRandomDamage(random, 15)));
             }
         } else {
             if (random.nextInt(2) == 0) {
-                setInventorySlotContents(3, new ItemStack(Item.axeDiamond.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.axeDiamond.itemID, 1, getRandomDamage(random)));
             } else {
-                setInventorySlotContents(3, new ItemStack(Item.shovelDiamond.itemID, 1, getRandomDamage(random)));
+                addInventoryContent(new ItemStack(Item.shovelDiamond.itemID, 1, getRandomDamage(random)));
             }
         }
 
         switch (random.nextInt(6)) {
             case 0:
-                setInventorySlotContents(4, new ItemStack(Item.clay.itemID, 1 + random.nextInt(8), 0));
+                addInventoryContent(new ItemStack(Item.clay.itemID, 1 + random.nextInt(8), 0));
                 break;
             case 1:
-                setInventorySlotContents(4, new ItemStack(Item.brick.itemID, 3 + random.nextInt(5), 0));
+                addInventoryContent(new ItemStack(Item.brick.itemID, 3 + random.nextInt(5), 0));
                 break;
         }
 
         switch (random.nextInt(6)) {
             case 0:
-                setInventorySlotContents(5, new ItemStack(Item.leather.itemID, 1 + random.nextInt(5), 0));
+                addInventoryContent(new ItemStack(Item.leather.itemID, 1 + random.nextInt(5), 0));
                 break;
             case 1:
-                setInventorySlotContents(5, new ItemStack(Item.bucketEmpty.itemID, 1, 0));
+                addInventoryContent(new ItemStack(Item.bucketEmpty.itemID, 1, 0));
                 break;
         }
 
         if (random.nextInt(8) == 0) {
-            setInventorySlotContents(6, new ItemStack(Item.saddle.itemID, 1, 0));
+            addInventoryContent(new ItemStack(Item.saddle.itemID, 1, 0));
         }
     }
 
@@ -505,38 +491,38 @@ public class GSGraveStoneItems {
     private void fillAdventureGrave(Random random) {
         switch (random.nextInt(8)) {
             case 0:
-                setInventorySlotContents(3, new ItemStack(Item.compass.itemID, 1, 0));
+                addInventoryContent(new ItemStack(Item.compass.itemID, 1, 0));
                 break;
             case 1:
-                setInventorySlotContents(3, new ItemStack(Item.pocketSundial.itemID, 1, 0));
+                addInventoryContent(new ItemStack(Item.pocketSundial.itemID, 1, 0));
                 break;
             case 2:
-                setInventorySlotContents(3, new ItemStack(Item.emptyMap.itemID, 1, 0));
+                addInventoryContent(new ItemStack(Item.emptyMap.itemID, 1, 0));
                 break;
         }
 
         switch (random.nextInt(10)) {
             case 0:
-                setInventorySlotContents(4, new ItemStack(Item.painting.itemID, 1 + random.nextInt(5), 0));
+                addInventoryContent(new ItemStack(Item.painting.itemID, 1 + random.nextInt(5), 0));
                 break;
             case 1:
-                setInventorySlotContents(4, getRandomRecord(random));
+                addInventoryContent(getRandomRecord(random));
                 break;
             case 2:
-                setInventorySlotContents(4, new ItemStack(Item.writableBook.itemID, 1, 0));
+                addInventoryContent(new ItemStack(Item.writableBook.itemID, 1, 0));
                 break;
         }
 
         if (random.nextInt(4) == 0) {
-            setInventorySlotContents(5, new ItemStack(Item.stick.itemID, 3 + random.nextInt(9), 0));
+            addInventoryContent(new ItemStack(Item.stick.itemID, 3 + random.nextInt(9), 0));
         }
 
         if (random.nextInt(5) == 0) {
-            setInventorySlotContents(6, new ItemStack(Item.cookie.itemID, 3 + random.nextInt(5), 0));
+            addInventoryContent(new ItemStack(Item.cookie.itemID, 3 + random.nextInt(5), 0));
         }
 
         if (random.nextInt(15) == 0) {
-            setInventorySlotContents(7, getRandomEgg(random));
+            addInventoryContent(getRandomEgg(random));
         }
     }
 
@@ -545,11 +531,11 @@ public class GSGraveStoneItems {
      */
     private void fillPetGrave(Random random) {
         if (random.nextInt(10) == 0) {
-            setInventorySlotContents(3, new ItemStack(Item.nameTag.itemID, 1, 0));
+            addInventoryContent(new ItemStack(Item.nameTag.itemID, 1, 0));
         }
 
         if (random.nextInt(10) == 0) {
-            setInventorySlotContents(4, new ItemStack(Item.leash.itemID, 1, 0));
+            addInventoryContent(new ItemStack(Item.leash.itemID, 1, 0));
         }
     }
 
@@ -604,7 +590,6 @@ public class GSGraveStoneItems {
                 return new ItemStack(Item.recordCat.itemID, 1, 0);
         }
     }
-
     private static final int EGG_PIG = 90;
     private static final int EGG_SHEEP = 91;
     private static final int EGG_COW = 92;
@@ -615,6 +600,7 @@ public class GSGraveStoneItems {
     private static final int EGG_CAT = 98;
     private static final int EGG_HORSE = 100;
     private static final int EGG_VILLAGER = 120;
+
     /**
      * Return random egg
      */

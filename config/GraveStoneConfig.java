@@ -88,6 +88,7 @@ public class GraveStoneConfig {
     public static boolean generateSwordGraves;
     // spawn chance
     public static int spawnChance;
+    public static boolean removeEmptyGraves;
 
     private GraveStoneConfig(String path, File configFile) {
         this.config = new Configuration(configFile);
@@ -181,6 +182,8 @@ public class GraveStoneConfig {
         // spawners recipes
         enableBossSpawnerCraftingRecipe = config.get(Configuration.CATEGORY_GENERAL, "EnableBossSpawnerCraftingRecipe", true).getBoolean(true);
         enableSpawnerCraftingRecipe = config.get(Configuration.CATEGORY_GENERAL, "EnableMonsterSpawnerCraftingRecipe", true).getBoolean(true);
+    
+        removeEmptyGraves = config.get(Configuration.CATEGORY_GENERAL, "RemoveEmptyGraves", false).getBoolean(false);
     }
 
     private static void entityConfig() {
