@@ -169,7 +169,7 @@ public class ObjectsGenerationHelper {
         int z = component.getZWithOffset(xCoord, zCoord);
 
         if (component.getBoundingBox().isVecInside(x, y, z)) {
-            world.setBlock(x, y, z, GSBlock.spawner.blockID, random.nextInt(BlockGSSpawner.MOB_SPAWNERS.size()), 2);
+            world.setBlock(x, y, z, GSBlock.spawner.blockID, BlockGSSpawner.MOB_SPAWNERS.get(random.nextInt(BlockGSSpawner.MOB_SPAWNERS.size())), 2);
         }
     }
     
