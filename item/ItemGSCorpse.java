@@ -48,29 +48,14 @@ public class ItemGSCorpse extends Item {
     }
 
     /**
-     * Callback for item usage. If the item does something special on right
-     * clicking, he will have one of those. Return True if something happen and
-     * false if it don't. This is for ITEMS, not BLOCKS
-     */
-//    @Override
-//    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10) {
-//        if (!world.isRemote && world.getBlockId(x, y, z) == GraveStoneConfig.altarID && CorpseHelper.canSpawnMob(player, stack.getItemDamage())) {
-//            CorpseHelper.spawnMob(stack.getItemDamage(), world, x, y, z, stack.stackTagCompound, player);
-//            CorpseHelper.getExperience(player, stack.getItemDamage());
-//            return true;
-//        }
-//        return false;
-//    }
-
-    /**
      * returns a list of items with the same ID, but different meta (eg: dye
      * returns 16 items)
      */
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(int id, CreativeTabs tab, List list) {
-        for (int j = 0; j < EnumCorpse.values().length; ++j) {
-            list.add(new ItemStack(id, 1, j));
+        for (int damage = 0; damage < EnumCorpse.values().length; ++damage) {
+            list.add(CorpseHelper.getDefaultCorpse(id, damage));
         }
     }
 

@@ -4,6 +4,7 @@ import gravestone.ModGraveStone;
 import java.util.List;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
@@ -16,6 +17,16 @@ import net.minecraft.world.World;
 public class CatCorpseHelper extends CorpseHelper {
 
     private CatCorpseHelper() {
+    }
+    
+    public static ItemStack getDefaultCorpse(int id, int type) {
+        ItemStack corpse = new ItemStack(id, 1, type);
+        NBTTagCompound nbtTag = new NBTTagCompound();
+        
+        nbtTag.setByte("CatType", (byte) 1);
+        
+        corpse.setTagCompound(nbtTag);
+        return corpse;
     }
 
     public static void setNbt(EntityOcelot cat, NBTTagCompound nbt) {

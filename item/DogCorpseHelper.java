@@ -4,6 +4,7 @@ import gravestone.ModGraveStone;
 import java.util.List;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
@@ -17,7 +18,17 @@ public class DogCorpseHelper extends CorpseHelper {
 
     private DogCorpseHelper() {
     }
-
+    
+    public static ItemStack getDefaultCorpse(int id, int type) {
+        ItemStack corpse = new ItemStack(id, 1, type);
+        NBTTagCompound nbtTag = new NBTTagCompound();
+        
+        nbtTag.setByte("Collar", (byte) 14);
+        
+        corpse.setTagCompound(nbtTag);
+        return corpse;
+    }
+    
     public static void setNbt(EntityWolf dog, NBTTagCompound nbt) {
         setName(dog, nbt);
         nbt.setByte("Collar", (byte) dog.getCollarColor());

@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.entity.ai.attributes.BaseAttributeMap;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
@@ -19,6 +20,21 @@ public class HorseCorpseHelper extends CorpseHelper {
 
     private HorseCorpseHelper() {
     }
+    
+    public static ItemStack getDefaultCorpse(int id, int type) {
+        ItemStack corpse = new ItemStack(id, 1, type);
+        NBTTagCompound nbtTag = new NBTTagCompound();
+        
+        nbtTag.setInteger("HorseType", 0);
+        nbtTag.setInteger("Variant", 0);
+        
+        nbtTag.setDouble("Max Health", 25);
+        nbtTag.setDouble("Movement Speed", 0.3);
+        nbtTag.setDouble("Jump Strength", 0.7);
+        
+        corpse.setTagCompound(nbtTag);
+        return corpse;
+    }
 
     public static void setNbt(EntityHorse horse, NBTTagCompound nbt) {
         setName(horse, nbt);
@@ -30,8 +46,6 @@ public class HorseCorpseHelper extends CorpseHelper {
         nbt.setDouble("Max Health", attrMap.getAttributeInstanceByName("Max Health").getAttributeValue());
         nbt.setDouble("Movement Speed", attrMap.getAttributeInstanceByName("Movement Speed").getAttributeValue());
         nbt.setDouble("Jump Strength", attrMap.getAttributeInstanceByName("Jump Strength").getAttributeValue());
-        
-        
     }
 
     public static void spawnHorse(World world, int x, int y, int z, NBTTagCompound nbtTag, EntityPlayer player) {

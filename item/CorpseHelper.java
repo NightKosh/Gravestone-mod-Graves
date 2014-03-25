@@ -68,6 +68,20 @@ public abstract class CorpseHelper {
         }
     }
 
+    public static ItemStack getDefaultCorpse(int id, int type) {
+        switch (EnumCorpse.values()[type]) {
+            case HORSE:
+                return HorseCorpseHelper.getDefaultCorpse(id, type);
+            case DOG:
+                return DogCorpseHelper.getDefaultCorpse(id, type);
+            case CAT:
+                return CatCorpseHelper.getDefaultCorpse(id, type);
+            case VILLAGER:
+            default:
+                return VillagerCorpseHelper.getDefaultCorpse(id, type);
+        }
+    }
+
     public static List<ItemStack> getCorpse(Entity entity, EnumCorpse type) {
         NBTTagCompound nbtTag = new NBTTagCompound();
         switch (type) {
@@ -117,7 +131,7 @@ public abstract class CorpseHelper {
         } else {
             switch (EnumCorpse.getById((byte) damage)) {
                 case VILLAGER:
-                    return player.experienceLevel < 20;
+                    return player.experienceLevel >= 20;
                 case DOG:
                 case CAT:
                     return player.experienceLevel >= 7;

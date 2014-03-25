@@ -3,6 +3,7 @@ package gravestone.item;
 import gravestone.ModGraveStone;
 import java.util.List;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
@@ -18,11 +19,32 @@ public class VillagerCorpseHelper extends CorpseHelper {
 
     private VillagerCorpseHelper() {
     }
+    
+    public static ItemStack getDefaultCorpse(int id, int type) {
+        ItemStack corpse = new ItemStack(id, 1, type);
+        NBTTagCompound nbtTag = new NBTTagCompound();
+        
+        nbtTag.setInteger("VillagerType", 0);
+        
+        corpse.setTagCompound(nbtTag);
+        return corpse;
+    }
 
     public static void setNbt(EntityVillager villager, NBTTagCompound nbt) {
         setName(villager, nbt);
         nbt.setInteger("VillagerType", villager.getProfession());
-        nbt.setCompoundTag("Offers", villager.getRecipes(null).getRecipiesAsTags());
+        
+        MerchantRecipeList recipes = villager.getRecipes(null);
+        MerchantRecipe recipe;
+        NBTTagCompound recipeTag;
+        for (int i = 0; i < recipes.size(); i++) {
+            recipe = (MerchantRecipe) recipes.get(i);
+            recipeTag = recipe.writeToTags();
+            recipeTag.setInteger("uses", 0);
+            recipeTag.setInteger("maxUses", 7);
+            recipe.readFromTags(recipeTag);
+        }
+        nbt.setCompoundTag("Offers", recipes.getRecipiesAsTags());
     }
 
     public static void spawnVillager(World world, int x, int y, int z, NBTTagCompound nbtTag) {

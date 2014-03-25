@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.core.Resources;
 import gravestone.item.CorpseHelper;
+import gravestone.item.ItemGSCorpse;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -25,7 +26,7 @@ public class BlockGSAltar extends Block {
     private Icon topTexture;
     @SideOnly(Side.CLIENT)
     private Icon bottomTexture;
-    
+
     public BlockGSAltar(int id) {
         super(id, Material.rock);
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
@@ -40,9 +41,10 @@ public class BlockGSAltar extends Block {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
         ItemStack stack = player.getCurrentEquippedItem();
-        if (CorpseHelper.canSpawnMob(player, stack.getItemDamage())) {
+        if (stack != null && stack.getItem() instanceof ItemGSCorpse && CorpseHelper.canSpawnMob(player, stack.getItemDamage())) {
             CorpseHelper.spawnMob(stack.getItemDamage(), world, x, y, z, stack.stackTagCompound, player);
             CorpseHelper.getExperience(player, stack.getItemDamage());
+            player.destroyCurrentEquippedItem();
             return true;
         }
         return false;
