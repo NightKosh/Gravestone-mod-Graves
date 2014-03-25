@@ -24,4 +24,11 @@ public enum EnumSkullCandle implements IBlockEnum {
     public String getName() {
         return ModGraveStone.proxy.getLocalizedString(this.name);
     }
+    
+    public static EnumSkullCandle getByID(int id) {
+        if (id < values().length) {
+            return values()[id];
+        }
+        return SKELETON_SKULL;
+    }
 }
