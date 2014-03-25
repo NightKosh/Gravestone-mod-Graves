@@ -1,0 +1,143 @@
+# tabs
+itemGroup.tabGraveStone=Gravestone
+
+
+# blocks
+## graves
+block.gravestone.gravestone=Náhrobek
+block.gravestone.cross=Kříž
+block.gravestone.plate=Náhrobní kámenk
+block.gravestone.dog_statue=Socha psa
+block.gravestone.cat_statue=Socha kočky
+block.gravestone.wooden_sword=Náhrobek z dřevěného meče
+block.gravestone.stone_sword=Náhrobek z kamenného meče
+block.gravestone.iron_sword=Náhrobek ze železného meče
+block.gravestone.golden_sword=Náhrobek ze zlatého meče
+block.gravestone.diamond_sword=Náhrobek z diamantového meče
+block.gravestone.horse_statue=Socha koně
+
+## memorials
+block.memorial.cross=Křížový památník
+block.memorial.obelisk=Obelisk
+block.memorial.steve_statue=Socha Steva
+block.memorial.villager_statue=Socha vesničana
+block.memorial.angel_statue=Socha anděla
+block.memorial.dog_statue=Socha psa
+block.memorial.cat_statue=Socha kočky
+block.memorial.creeper_statue=Socha Creepera
+block.memorial.celtic_cross=Keltský kříž
+
+## trap
+tile.trap.night.name=Noční kámen
+tile.trap.thunder.name=Bleskový kámen
+block.trap.curse=Temnota přichází!
+
+## spawner
+block.spawner.wither=Spawner na withera
+block.spawner.skeleton=Spawner na kostlivce
+block.spawner.zombie=Spawner na zombie
+
+# bone blocks
+tile.bone_block.name=Kostěnný blok
+tile.bone_block.skull_name=Kostěnný blok s lebkou
+tile.bone_block.crawler_name=Kostěnný blok a s krabem uvnitř
+tile.bone_block.crawler_skull_name=Kostěnný blok s lebkou a krabem uvnitř
+tile.bone_slab.name=Kostěnný půlblok
+tile.bone_stairs.name=Kostěnné schody
+
+## chests
+block.haunted_chest.bats_chest=Bedna s netopýry
+block.haunted_chest.skeleton_chest=Bedna s kostlivcem
+block.haunted_chest.raven_chest=Bedna s havrany
+block.haunted_chest.ghost_chest=Bedna s duchem
+
+##candles
+tile.candle.name=Svíčka
+block.skull_candle.skeleton.name=Lebka se svíčkou
+block.skull_candle.wither_skeleton.name=Lebka withera se svíčkou
+block.skull_candle.zombie.name=Zombie hlava se svíčkou
+
+
+# items
+## chisel
+item.chisel.name=Dláto
+
+## graves
+item.grave.age=Žil
+item.grave.days=dní
+item.grave.sword_name=Jméno meče
+item.grave.sword_damage=Poškození meče
+
+## corpse
+item.corpse.villager=Mrtvola vesničana
+item.corpse.horse=Mrtvola koně
+item.corpse.dog=Mrtvola psa
+item.corpse.cat=Mrtvola kočky
+item.corpse.entity_name=Jméno
+item.corpse.villager_type=Profese
+item.corpse.villager_type.farmer=Farmář
+item.corpse.villager_type.librarian=Knihovník
+item.corpse.villager_type.priest=Kněz
+item.corpse.villager_type.smith=Kovář
+item.corpse.villager_type.butcher=Pekař
+item.corpse.villager_type.undertacker=Hrobař
+item.corpse.villager_type.brewer=Sládek
+item.corpse.villager_type.thaumaturge=Divotvůrce
+item.corpse.villager_type.beekeeper=Včelař
+item.corpse.villager_type.lumberjack=Dřevorubec
+item.corpse.villager_type.Unknown=neznámý
+item.corpse.horse_type=Typ koně
+item.corpse.horse_type.horse=Kůň
+item.corpse.horse_type.donkey=Osel
+item.corpse.horse_type.mule=Mula
+item.corpse.horse_type.zombie=Zombie kůň
+item.corpse.horse_type.skeleton=Kostlivý kůň
+item.corpse.horse_type.unknown=Neznámý
+item.corpse.horse_variant=Typy koní
+item.corpse.health=Maximum života
+item.corpse.speed=Rychlost
+item.corpse.jump_strength=Síla skoku
+item.corpse.collar=Obojek
+item.corpse.collar.white=Bílý
+item.corpse.collar.orange=Oranžový
+item.corpse.collar.purple=Purpurový
+item.corpse.collar.azure=Azurový
+item.corpse.collar.yellow=Žlutý
+item.corpse.collar.lime=Limetkový
+item.corpse.collar.pink=Růžový
+item.corpse.collar.grey=Šedý
+item.corpse.collar.light_grey=Světle šedý
+item.corpse.collar.turquoise=Tyrkysový
+item.corpse.collar.violet=Fialový
+item.corpse.collar.blue=Modrý
+item.corpse.collar.brown=Hnědý
+item.corpse.collar.green=Zelený
+item.corpse.collar.red=Červený
+item.corpse.collar.black=Černý
+item.corpse.collar.unknown=Neznámý
+item.corpse.cat_type=Typ kočky
+item.corpse.cat_type.black=Černá
+item.corpse.cat_type.red=Červená
+item.corpse.cat_type.siamese=Siamská
+item.corpse.cat_type.unknown=Neznámá
+
+
+# gui
+gui.edit_grave=Nastav text náhrobku
+
+
+# entity
+entity.GSZombieDog.name=Zombie pes
+entity.GSSkeletonDog.name=Kostlivý pes
+entity.GSZombieCat.name=Zombie kočka
+entity.GSSkeletonCat.name=Kostlivá kočka
+entity.GSSkullCrawler.name=Lebkokrab
+entity.GSWitherSkullCrawler.name=Witherský lebkokrab
+entity.GSZombieSkullCrawler.name=Zombie lebkokrab
+entity.GSRaven.name=Havran
+
+
+# death messages
+death.GS.Herobrine=%1$s byl brutálně zavražděn Herobrinem
+death.GS.death_sentence=%1$s obdržel rozsudek smrti
+death.GS.tortures=%1$s zemřel v krutých bolestech
