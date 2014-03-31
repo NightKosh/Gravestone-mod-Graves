@@ -40,7 +40,7 @@ block.spawner.zombie=Zombie Spawner
 # bone blocks
 tile.bone_block.name=Bone block
 tile.bone_block.skull_name=Bone block with skull
-tile.bone_block.crawler_name=Skull crawler's bone block 
+tile.bone_block.crawler_name=Skull crawler's bone block
 tile.bone_block.crawler_skull_name=Skull crawler's bone block with skull
 tile.bone_slab.name=Bone slab
 tile.bone_stairs.name=Bone stairs
@@ -52,7 +52,7 @@ block.haunted_chest.raven_chest=Chest with ravens
 block.haunted_chest.ghost_chest=Chest with ghost
 
 ##candles
-tile.candle.name=Сandle
+tile.candle.name=Candle
 block.skull_candle.skeleton.name=Skull candle
 block.skull_candle.wither_skeleton.name=Wither skull candle
 block.skull_candle.zombie.name=Zombie skull candle
