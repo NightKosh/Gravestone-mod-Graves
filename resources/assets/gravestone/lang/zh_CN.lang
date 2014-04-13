@@ -52,7 +52,7 @@ block.haunted_chest.raven_chest=Chest with ravens
 block.haunted_chest.ghost_chest=Chest with ghost
 
 ##candles
-tile.candle.name=Сandle
+tile.candle.name=Candle
 block.skull_candle.skeleton.name=Skull candle
 block.skull_candle.wither_skeleton.name=Wither skull candle
 block.skull_candle.zombie.name=Zombie skull candle
