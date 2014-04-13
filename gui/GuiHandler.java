@@ -16,7 +16,13 @@ public class GuiHandler implements IGuiHandler {
 
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        return null;
+        switch (id) {
+            case 1:
+                return null;//return new ContainerEnchantment(player.inventory, world, x, y, z);
+            case 0:
+            default:
+                return null;
+        }
     }
 
     @Override
@@ -30,7 +36,6 @@ public class GuiHandler implements IGuiHandler {
                 } else {
                     return false;
                 }
-
             default:
                 return null;
         }

@@ -2,7 +2,6 @@
 package gravestone.item;
 
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 
 /**
  * GraveStone mod
@@ -15,10 +14,5 @@ public class ItemBlockGSCandle extends ItemBlock {
     public ItemBlockGSCandle(int id) {
         super(id);
         setUnlocalizedName("Candle");
-    }
-
-    @Override
-    public String getUnlocalizedName(ItemStack itemStack) {
-        return "candle";
     }
 }
