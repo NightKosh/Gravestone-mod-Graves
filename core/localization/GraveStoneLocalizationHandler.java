@@ -2,6 +2,11 @@ package gravestone.core.localization;
 
 import gravestone.core.Resources;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import gravestone.GraveStoneLogger;
+import java.io.File;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 /**
  * GraveStone mod
@@ -11,37 +16,46 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
  */
 public class GraveStoneLocalizationHandler {
 
-    /**
-     * Array of which localization files have to be loaded.
-     */
-    private static String[] localeFiles = {
-        Resources.LOCALIZATION_LOCATION + "en_US.lang",
-        Resources.LOCALIZATION_LOCATION + "ru_RU.lang",
-        Resources.LOCALIZATION_LOCATION + "de_DE.lang",
-        Resources.LOCALIZATION_LOCATION + "fr_FR.lang",
-        Resources.LOCALIZATION_LOCATION + "es_ES.lang",
-        Resources.LOCALIZATION_LOCATION + "zh_CN.lang",
-        Resources.LOCALIZATION_LOCATION + "cs_CZ.lang"
+    private static String[] localeNames = {
+        "en_US",
+        "ru_RU",
+        "de_DE",
+        "fr_FR",
+        "es_ES",
+        "zh_CN",
+        "cs_CZ"
     };
 
-    /**
-     * Gets the language from filename. EG. en_US.xml will return en_US
-     *
-     * @param Name of the file which needs to be checked.
-     * @return Language substring.
-     */
-    private static String getLocaleFromFileName(String fileName) {
-        return fileName.substring(fileName.lastIndexOf("/") + 1, fileName.lastIndexOf("."));
+    public static void init() {
+        
+//        URL urlResource = GraveStoneLocalizationHandler.class.getResource(Resources.LOCALIZATION_LOCATION);
+//        try {
+//            if (urlResource != null) {
+//                GraveStoneLogger.logInfo(urlResource.getPath());
+//                GraveStoneLogger.logInfo(URLEncoder.encode(urlResource.getPath(), "UTF-8"));
+//                GraveStoneLogger.logInfo(URLDecoder.decode(urlResource.getPath(), "UTF-8"));
+//                
+//                File folder = new File(URLDecoder.decode(urlResource.getPath(), "UTF-8"));
+//
+//                GraveStoneLogger.logInfo("dfdf!!! " + folder.exists());
+//                for (final File file : folder.listFiles()) {
+//                    if (file.isFile() && file.getName().endsWith(".lang")) {
+//                        GraveStoneLogger.logInfo(file.getName());
+////                        LanguageRegistry.instance().loadLocalization(Resources.LOCALIZATION_LOCATION + file.getName(),
+//                                //getFileName(file.getName()), false);
+//                    }
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        
+        for (String localeName : localeNames) {
+            LanguageRegistry.instance().loadLocalization(Resources.LOCALIZATION_LOCATION + localeName + ".lang", localeName, false);
+        }
     }
 
-    public static void init() {
-        /**
-         * For all files registered in Localizations.java, add them to the
-         * Localization Library. This way we can use this file to add
-         * localizations (names).
-         */
-        for (String localeFile : localeFiles) {
-            LanguageRegistry.instance().loadLocalization(localeFile, getLocaleFromFileName(localeFile), false);
-        }
+    private static String getFileName(String name) {
+        return name.substring(0, name.indexOf(".lang"));
     }
 }
