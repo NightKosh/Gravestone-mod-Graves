@@ -1,8 +1,9 @@
 package gravestone.structures.catacombs;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.world.gen.structure.StructureComponent;
+
 import java.util.Random;
-import net.minecraft.block.Block;
-import net.minecraft.world.gen.structure.StructurePieceBlockSelector;
 
 /**
  * GraveStone mod
@@ -10,7 +11,7 @@ import net.minecraft.world.gen.structure.StructurePieceBlockSelector;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class CatacombsStonesBlocks extends StructurePieceBlockSelector {
+public class CatacombsStonesBlocks extends StructureComponent.BlockSelector {
 
     public CatacombsStonesBlocks() {
     }
@@ -21,7 +22,7 @@ public class CatacombsStonesBlocks extends StructurePieceBlockSelector {
     @Override
     public void selectBlocks(Random random, int par2, int par3, int par4, boolean par5) {
         if (par5) {
-            this.selectedBlockId = Block.stoneBrick.blockID;
+            this.field_151562_a = Blocks.stonebrick;
             float randFloat = random.nextFloat();
 
             if (randFloat < 0.2F) {
@@ -29,13 +30,13 @@ public class CatacombsStonesBlocks extends StructurePieceBlockSelector {
             } else if (randFloat < 0.4F) {
                 this.selectedBlockMetaData = 0;
             } else if (randFloat < 0.45F) {
-                this.selectedBlockId = Block.silverfish.blockID;
+                this.field_151562_a = Blocks.monster_egg;
                 this.selectedBlockMetaData = 2;
             } else {
                 this.selectedBlockMetaData = 1;
             }
         } else {
-            this.selectedBlockId = 0;
+            this.field_151562_a = Blocks.air;
             this.selectedBlockMetaData = 0;
         }
     }

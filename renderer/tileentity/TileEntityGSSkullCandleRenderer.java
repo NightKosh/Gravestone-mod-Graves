@@ -24,7 +24,7 @@ public class TileEntityGSSkullCandleRenderer extends TileEntitySpecialRenderer {
     public void renderTileEntitySkullAt(TileEntityGSSkullCandle tileEntity, float x, float y, float z, float par8) {
         float rotation = 0;
         byte meta;
-        if (tileEntity.worldObj != null) {
+        if (tileEntity.getWorldObj() != null) {
             rotation = (float) (tileEntity.getRotation() * 360) / 8F;
             meta = (byte) tileEntity.getBlockMetadata();
         } else {
@@ -34,7 +34,7 @@ public class TileEntityGSSkullCandleRenderer extends TileEntitySpecialRenderer {
         bindSkullCandleTexture(EnumSkullCandle.getByID(meta));
 
         GL11.glPushMatrix();
-        if (tileEntity.worldObj == null) {
+        if (tileEntity.getWorldObj() == null) {
             GL11.glTranslatef(x + 0.5F, y + 2.2F, z + 0.5F);
             GL11.glScalef(1.5F, -1.5F, -1.5F);
         } else {

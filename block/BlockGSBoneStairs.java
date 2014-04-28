@@ -14,10 +14,11 @@ import net.minecraft.block.BlockStairs;
  */
 public class BlockGSBoneStairs extends BlockStairs {
 
-    public BlockGSBoneStairs(int id) {
-        super(id, GSBlock.boneBlock, 0);
-        this.setUnlocalizedName("bone_stairs");
+    public BlockGSBoneStairs() {
+        super(GSBlock.boneBlock, 0);
+        this.setBlockName("bone_stairs");
         this.setCreativeTab(ModGraveStone.creativeTab);
-        this.setTextureName(Resources.BONE_BLOCK);
+        this.setBlockTextureName(Resources.BONE_BLOCK);
+        this.setHarvestLevel("pickaxe", 0);
     }
 }

@@ -2,15 +2,17 @@ package gravestone.structures.catacombs;
 
 import gravestone.core.GSBlock;
 import gravestone.structures.catacombs.components.CatacombsBaseComponent;
-import gravestone.structures.catacombs.components.Treasury;
 import gravestone.structures.catacombs.components.Stairs;
+import gravestone.structures.catacombs.components.Treasury;
 import gravestone.structures.catacombs.components.WitherHall;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.structure.StructureComponent;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
-import net.minecraft.block.Block;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.structure.StructurePieceBlockSelector;
 
 /**
  * GraveStone mod
@@ -20,6 +22,8 @@ import net.minecraft.world.gen.structure.StructurePieceBlockSelector;
  */
 public class CatacombsLevel {
 
+    private static final StructureComponent.BlockSelector catacombsStoneBlocks = new CatacombsStonesBlocks();
+    private static final StructureComponent.BlockSelector catacombsBoneBlocks = new CatacombsBoneBlocks();
     private final int level;
     private Random random;
     private World world;
@@ -27,17 +31,6 @@ public class CatacombsLevel {
     private int componentsCount;
     private LinkedList levelComponents = new LinkedList();
     private LinkedList endComponents = new LinkedList();
-    
-    
-    private static final StructurePieceBlockSelector catacombsStoneBlocks = new CatacombsStonesBlocks();
-    private static final StructurePieceBlockSelector catacombsBoneBlocks = new CatacombsBoneBlocks();
-
-    protected static enum COMPONENT_SIDE {
-
-        TOP,
-        LEFT,
-        RIGHT
-    }
 
     public CatacombsLevel(LinkedList<CatacombsBaseComponent> startComponents, int level, World world, Random random) {
         levelComponents = startComponents;
@@ -66,6 +59,17 @@ public class CatacombsLevel {
         componentsCount = 0;
         prepareLevel(levelComponents);
         generateLevel();
+    }
+
+    /**
+     * Return StructureGSCemeteryCatacombsStones instance
+     */
+    public static StructureComponent.BlockSelector getCatacombsStones(int level) {
+        return (level < 3) ? catacombsStoneBlocks : catacombsBoneBlocks;
+    }
+
+    public static Block getCatacombsStairsId(int level) {
+        return (level < 3) ? Blocks.stone_brick_stairs : GSBlock.boneStairs;
     }
 
     /*
@@ -238,14 +242,10 @@ public class CatacombsLevel {
         return endComponents;
     }
 
-    /**
-     * Return StructureGSCemeteryCatacombsStones instance
-     */
-    public static StructurePieceBlockSelector getCatacombsStones(int level) {
-        return (level < 3) ? catacombsStoneBlocks : catacombsBoneBlocks;
-    }
-    
-    public static int getCatacombsStairsId(int level) {
-        return (level < 3) ?  Block.stairsStoneBrick.blockID : GSBlock.boneStairs.blockID;
+    protected static enum COMPONENT_SIDE {
+
+        TOP,
+        LEFT,
+        RIGHT
     }
 }

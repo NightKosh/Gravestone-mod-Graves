@@ -28,7 +28,7 @@ public class TileEntityGSSpawnerRenderer extends TileEntitySpecialRenderer {
         this.bindTexture(Resources.PENTAGRAM);
 
         GL11.glPushMatrix();
-        if (tileEntity.worldObj != null) {
+        if (tileEntity.getWorldObj() != null) {
             GL11.glTranslatef(x + 0.5F, y + 1.5F, z + 0.5F);
             GL11.glScalef(1.0F, -1F, -1F);
         } else {

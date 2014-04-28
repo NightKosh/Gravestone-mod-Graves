@@ -2,6 +2,7 @@
 package gravestone.item;
 
 import gravestone.block.enums.EnumSkullCandle;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
@@ -13,8 +14,8 @@ import net.minecraft.item.ItemStack;
  */
 public class ItemBlockGSSkullCandle extends ItemBlock {
 
-    public ItemBlockGSSkullCandle(int id) {
-        super(id);
+    public ItemBlockGSSkullCandle(Block block) {
+        super(block);
         setHasSubtypes(true);
         setUnlocalizedName("Skull Candle");
     }

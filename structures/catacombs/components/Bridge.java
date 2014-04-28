@@ -5,9 +5,10 @@ import gravestone.block.GraveStoneHelper;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.GraveGenerationHelper;
 import gravestone.structures.MobSpawnHelper;
-import java.util.Random;
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -41,11 +42,11 @@ public class Bridge extends CatacombsBaseComponent {
         this.fillWithAir(world, boundingBox, 1, 9, 1, 2, 10, 6);
         this.fillWithAir(world, boundingBox, 10, 9, 1, 11, 10, 6);
         // neter floor and ceiling
-        this.fillWithBlocks(world, boundingBox, 2, 0, 0, 10, 0, 7, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
-        this.fillWithBlocks(world, boundingBox, 2, 13, 0, 10, 13, 7, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        this.fillWithBlocks(world, boundingBox, 2, 0, 0, 10, 0, 7, Blocks.nether_brick, Blocks.nether_brick, false);
+        this.fillWithBlocks(world, boundingBox, 2, 13, 0, 10, 13, 7, Blocks.nether_brick, Blocks.nether_brick, false);
         // nether walls
-        this.fillWithBlocks(world, boundingBox, 3, 1, 0, 9, 12, 0, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
-        this.fillWithBlocks(world, boundingBox, 3, 1, 7, 9, 12, 7, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
+        this.fillWithBlocks(world, boundingBox, 3, 1, 0, 9, 12, 0, Blocks.nether_brick, Blocks.nether_brick, false);
+        this.fillWithBlocks(world, boundingBox, 3, 1, 7, 9, 12, 7, Blocks.nether_brick, Blocks.nether_brick, false);
         // block walls
         this.fillWithRandomizedBlocks(world, boundingBox, 2, 1, 0, 2, 8, 7, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 2, 11, 0, 2, 12, 7, false, random, getCemeteryCatacombsStones());
@@ -74,12 +75,12 @@ public class Bridge extends CatacombsBaseComponent {
         GraveGenerationHelper.fillGraves(this, world, random, 1, 9, 1, 1, 9, 6, metaLeft, graveType, true);
         GraveGenerationHelper.fillGraves(this, world, random, 11, 9, 1, 11, 9, 6, metaRight, graveType, true);
         // lava
-        this.fillWithBlocks(world, boundingBox, 3, 1, 1, 9, 2, 6, Block.lavaStill.blockID, Block.lavaStill.blockID, false);
+        this.fillWithBlocks(world, boundingBox, 3, 1, 1, 9, 2, 6, Blocks.lava, Blocks.lava, false);
         // bridge
-        this.fillWithMetadataBlocks(world, boundingBox, 6, 8, 1, 6, 8, 6, Block.stoneSingleSlab.blockID, 14, Block.stoneSingleSlab.blockID, 14, false);
+        this.fillWithMetadataBlocks(world, boundingBox, 6, 8, 1, 6, 8, 6, Blocks.stone_slab, 14, Blocks.stone_slab, 14, false);
 
         if (random.nextInt(10) < 4) {
-            this.placeBlockAtCurrentPosition(world, 0, 0, 6, 8, 5, boundingBox);
+            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 6, 8, 5, boundingBox);
         }
 
         // block exit wall

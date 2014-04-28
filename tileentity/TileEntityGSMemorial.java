@@ -1,11 +1,10 @@
 package gravestone.tileentity;
 
 import gravestone.block.enums.EnumMemorials;
-import java.util.Random;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -68,15 +67,5 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
 
     public EnumMemorials getMemorialType() {
         return EnumMemorials.getByID(graveType);
-    }
-
-    /**
-     * Overriden in a sign to provide the text.
-     */
-    @Override
-    public Packet getDescriptionPacket() {
-        NBTTagCompound nbtTag = new NBTTagCompound();
-        this.writeToNBT(nbtTag);
-        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
     }
 }

@@ -1,13 +1,11 @@
 package gravestone.block;
 
-import gravestone.block.enums.EnumMemorials;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.config.GraveStoneConfig;
 import gravestone.ModGraveStone;
+import gravestone.block.enums.EnumMemorials;
+import gravestone.config.GraveStoneConfig;
 import gravestone.tileentity.TileEntityGSMemorial;
-import java.util.List;
-import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -15,14 +13,17 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatMessageComponent;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -33,36 +34,79 @@ import net.minecraft.world.World;
 public class BlockGSMemorial extends BlockContainer {
 
     public static final byte[] GENERATED_MEMORIALS = {
-        (byte) EnumMemorials.STONE_CROSS.ordinal(), 
-        (byte) EnumMemorials.OBELISK.ordinal(), 
-        (byte) EnumMemorials.STEVE_STATUE.ordinal(),
-        (byte) EnumMemorials.VILLAGER_STATUE.ordinal(),
-        (byte) EnumMemorials.ANGEL_STATUE.ordinal(),
-        (byte) EnumMemorials.DOG_STATUE.ordinal(),
-        (byte) EnumMemorials.CAT_STATUE.ordinal()
+            (byte) EnumMemorials.STONE_CROSS.ordinal(),
+            (byte) EnumMemorials.OBELISK.ordinal(),
+            (byte) EnumMemorials.STEVE_STATUE.ordinal(),
+            (byte) EnumMemorials.VILLAGER_STATUE.ordinal(),
+            (byte) EnumMemorials.ANGEL_STATUE.ordinal(),
+            (byte) EnumMemorials.DOG_STATUE.ordinal(),
+            (byte) EnumMemorials.CAT_STATUE.ordinal()
     };
     public static final byte[] PETS_MEMORIALS = {
-        (byte) EnumMemorials.DOG_STATUE.ordinal(),
-        (byte) EnumMemorials.CAT_STATUE.ordinal()
+            (byte) EnumMemorials.DOG_STATUE.ordinal(),
+            (byte) EnumMemorials.CAT_STATUE.ordinal()
     };
     public static final byte[] DOG_MEMORIALS = {(byte) EnumMemorials.DOG_STATUE.ordinal()};
     public static final byte[] CAT_MEMORIALS = {(byte) EnumMemorials.CAT_STATUE.ordinal()};
     public static final byte[] CREEPER_MEMORIALS = {(byte) EnumMemorials.CREEPER_STATUE.ordinal()};
     public static final byte[] STATUES_MEMORIALS = {
-        (byte) EnumMemorials.STEVE_STATUE.ordinal(),
-        (byte) EnumMemorials.VILLAGER_STATUE.ordinal(), 
-        (byte) EnumMemorials.ANGEL_STATUE.ordinal()
+            (byte) EnumMemorials.STEVE_STATUE.ordinal(),
+            (byte) EnumMemorials.VILLAGER_STATUE.ordinal(),
+            (byte) EnumMemorials.ANGEL_STATUE.ordinal()
     };
 
-    public BlockGSMemorial(int par1) {
-        super(par1, Material.rock);
+    public BlockGSMemorial() {
+        super(Material.rock);
         this.isBlockContainer = true;
-        this.setStepSound(Block.soundStoneFootstep);
-        this.setUnlocalizedName("Memorial");
+        this.setStepSound(Block.soundTypeStone);
+        this.setBlockName("Memorial");
         this.setHardness(4.5F);
         this.setResistance(5F);
         this.setCreativeTab(ModGraveStone.creativeTab);
-        this.setTextureName("stone");
+        this.setBlockTextureName("stone");
+        this.setHarvestLevel("pickaxe", 2);
+    }
+
+    /*
+     * Return memorial metadata by direction
+     */
+    public static int getMetaDirection(int direction) {
+        switch (direction) {
+            case 0: // S
+                return 1;
+            case 1: // W
+                return 2;
+            case 2: // N
+                return 0;
+            case 3: // E
+                return 3;
+            default:
+                return 0;
+        }
+    }
+
+    /**
+     * Return random memorial type memorialTypetype - type of memorial 0 - all
+     * memorials(20% for pets graves), except creeper 1 - only pets memorials 2
+     * - only dogs memorials 3 - only cats memorials 4 - creeper memorials 5 -
+     * only statues memorials(steve, villager, angel)
+     */
+    public static byte getMemorialType(Random random, int memorialType) {
+        switch (memorialType) {
+            default:
+            case 0:
+                return GENERATED_MEMORIALS[random.nextInt(GENERATED_MEMORIALS.length)];
+            case 1:
+                return PETS_MEMORIALS[random.nextInt(PETS_MEMORIALS.length)];
+            case 2:
+                return DOG_MEMORIALS[random.nextInt(DOG_MEMORIALS.length)];
+            case 3:
+                return CAT_MEMORIALS[random.nextInt(CAT_MEMORIALS.length)];
+            case 4:
+                return CREEPER_MEMORIALS[random.nextInt(CREEPER_MEMORIALS.length)];
+            case 5:
+                return STATUES_MEMORIALS[random.nextInt(STATUES_MEMORIALS.length)];
+        }
     }
 
     /**
@@ -78,7 +122,7 @@ public class BlockGSMemorial extends BlockContainer {
 
         int metadata = getMetadataBasedOnRotation(direction);
         world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
-        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getBlockTileEntity(x, y, z);
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
 
         if (tileEntity != null) {
             if (itemStack.stackTagCompound != null) {
@@ -117,23 +161,13 @@ public class BlockGSMemorial extends BlockContainer {
     }
 
     /**
-     * only called by clickMiddleMouseButton , and passed to
-     * inventory.setCurrentItem (along with isCreative)
-     */
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int idPicked(World par1World, int par2, int par3, int par4) {
-        return blockID;
-    }
-
-    /**
      * Updates the blocks bounds based on its current state. Args: world, x, y,
      * z
      */
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
         EnumMemorials memorialType;
-        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) access.getBlockTileEntity(x, y, z);
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) access.getTileEntity(x, y, z);
 
         if (tileEntity != null) {
             memorialType = tileEntity.getMemorialType();
@@ -182,8 +216,8 @@ public class BlockGSMemorial extends BlockContainer {
      * Returns the ID of the items to drop on destruction.
      */
     @Override
-    public int idDropped(int par1, Random random, int par3) {
-        return 0;
+    public Item getItemDropped(int par1, Random random, int par3) {
+        return null;
     }
 
     /**
@@ -219,7 +253,7 @@ public class BlockGSMemorial extends BlockContainer {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
         if (world.isRemote) {
-            TileEntityGSMemorial entity = (TileEntityGSMemorial) world.getBlockTileEntity(x, y, z);
+            TileEntityGSMemorial entity = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
 
             if (entity != null) {
                 String name;
@@ -235,14 +269,14 @@ public class BlockGSMemorial extends BlockContainer {
                             killerName = ModGraveStone.proxy.getLocalizedEntityName(entity.getDeathTextComponent().getKillerName());
 
                             if (killerName.length() == 0) {
-                                player.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name}));
+                                player.addChatComponentMessage(new ChatComponentTranslation(deathText, new Object[]{name}));
                             } else {
-                                player.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name, killerName}));
+                                player.addChatComponentMessage(new ChatComponentTranslation(deathText, new Object[]{name, killerName}));
                             }
                             return false;
                         }
                     }
-                    player.sendChatToPlayer(ChatMessageComponent.createFromText(deathText));
+                    player.addChatComponentMessage(new ChatComponentTranslation(deathText));
                 }
             }
         }
@@ -255,26 +289,8 @@ public class BlockGSMemorial extends BlockContainer {
      * the block.
      */
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int var2) {
         return new TileEntityGSMemorial(world);
-    }
-
-    /*
-     * Return memorial metadata by direction
-     */
-    public static int getMetaDirection(int direction) {
-        switch (direction) {
-            case 0: // S
-                return 1;
-            case 1: // W
-                return 2;
-            case 2: // N
-                return 0;
-            case 3: // E
-                return 3;
-            default:
-                return 0;
-        }
     }
 
     /**
@@ -292,9 +308,9 @@ public class BlockGSMemorial extends BlockContainer {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(int id, CreativeTabs tab, List list) {
+    public void getSubBlocks(Item item, CreativeTabs tab, List list) {
         for (byte j = 0; j < EnumMemorials.values().length; j++) {
-            ItemStack stack = new ItemStack(id, 1, 0);
+            ItemStack stack = new ItemStack(item, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", j);
             stack.setTagCompound(nbt);
@@ -307,21 +323,20 @@ public class BlockGSMemorial extends BlockContainer {
      */
     @Override
     public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player) {
-        player.addStat(StatList.mineBlockStatArray[this.blockID], 1);
         player.addExhaustion(0.025F);
 
         if (EnchantmentHelper.getSilkTouchModifier(player)) {
             ItemStack itemStack = getBlockItemStack(world, x, y, z);
 
             if (itemStack != null) {
-                this.dropBlockAsItem_do(world, x, y, z, itemStack);
+                this.dropBlockAsItem(world, x, y, z, itemStack);
             }
         }
     }
 
     private ItemStack getBlockItemStack(World world, int x, int y, int z) {
         ItemStack itemStack = this.createStackedBlock(0);
-        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getBlockTileEntity(x, y, z);
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
 
         if (tileEntity != null) {
             NBTTagCompound nbt = new NBTTagCompound();
@@ -347,30 +362,6 @@ public class BlockGSMemorial extends BlockContainer {
     public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int metadata) {
     }
 
-    /**
-     * Return random memorial type memorialTypetype - type of memorial 0 - all
-     * memorials(20% for pets graves), except creeper 1 - only pets memorials 2
-     * - only dogs memorials 3 - only cats memorials 4 - creeper memorials 5 -
-     * only statues memorials(steve, villager, angel)
-     */
-    public static byte getMemorialType(Random random, int memorialType) {
-        switch (memorialType) {
-            default:
-            case 0:
-                return GENERATED_MEMORIALS[random.nextInt(GENERATED_MEMORIALS.length)];
-            case 1:
-                return PETS_MEMORIALS[random.nextInt(PETS_MEMORIALS.length)];
-            case 2:
-                return DOG_MEMORIALS[random.nextInt(DOG_MEMORIALS.length)];
-            case 3:
-                return CAT_MEMORIALS[random.nextInt(CAT_MEMORIALS.length)];
-            case 4:
-                return CREEPER_MEMORIALS[random.nextInt(CREEPER_MEMORIALS.length)];
-            case 5:
-                return STATUES_MEMORIALS[random.nextInt(STATUES_MEMORIALS.length)];
-        }
-    }
-
     /*
      * Drop sword as item
      */
@@ -380,6 +371,6 @@ public class BlockGSMemorial extends BlockContainer {
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setByte("GraveType", memorialType);
         itemStack.setTagCompound(nbt);
-        this.dropBlockAsItem_do(world, x, y, z, itemStack);
+        this.dropBlockAsItem(world, x, y, z, itemStack);
     }
 }

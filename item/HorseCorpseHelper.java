@@ -1,14 +1,15 @@
 package gravestone.item;
 
 import gravestone.ModGraveStone;
-import static gravestone.item.CorpseHelper.setMobName;
-import java.util.List;
 import net.minecraft.entity.ai.attributes.BaseAttributeMap;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 /**
  * GraveStone mod
@@ -20,29 +21,29 @@ public class HorseCorpseHelper extends CorpseHelper {
 
     private HorseCorpseHelper() {
     }
-    
-    public static ItemStack getDefaultCorpse(int id, int type) {
-        ItemStack corpse = new ItemStack(id, 1, type);
+
+    public static ItemStack getDefaultCorpse(Item item, int type) {
+        ItemStack corpse = new ItemStack(item, 1, type);
         NBTTagCompound nbtTag = new NBTTagCompound();
-        
+
         nbtTag.setInteger("HorseType", 0);
         nbtTag.setInteger("Variant", 0);
-        
+
         nbtTag.setDouble("Max Health", 25);
         nbtTag.setDouble("Movement Speed", 0.3);
         nbtTag.setDouble("Jump Strength", 0.7);
-        
+
         corpse.setTagCompound(nbtTag);
         return corpse;
     }
 
     public static void setNbt(EntityHorse horse, NBTTagCompound nbt) {
         setName(horse, nbt);
-        
+
         nbt.setInteger("HorseType", horse.getHorseType());
         nbt.setInteger("Variant", horse.getHorseVariant());
-        
-        BaseAttributeMap attrMap = horse.getAttributeMap();        
+
+        BaseAttributeMap attrMap = horse.getAttributeMap();
         nbt.setDouble("Max Health", attrMap.getAttributeInstanceByName("Max Health").getAttributeValue());
         nbt.setDouble("Movement Speed", attrMap.getAttributeInstanceByName("Movement Speed").getAttributeValue());
         nbt.setDouble("Jump Strength", attrMap.getAttributeInstanceByName("Jump Strength").getAttributeValue());
@@ -51,15 +52,15 @@ public class HorseCorpseHelper extends CorpseHelper {
     public static void spawnHorse(World world, int x, int y, int z, NBTTagCompound nbtTag, EntityPlayer player) {
         EntityHorse horse = new EntityHorse(world);
         setMobName(horse, nbtTag);
-        
+
         horse.setHorseType(nbtTag.getInteger("HorseType"));
         horse.setHorseVariant(nbtTag.getInteger("Variant"));
-        
+
         BaseAttributeMap attrMap = horse.getAttributeMap();
-        attrMap.getAttributeInstanceByName("Max Health").setAttribute(nbtTag.getDouble("Max Health"));
-        attrMap.getAttributeInstanceByName("Movement Speed").setAttribute(nbtTag.getDouble("Movement Speed"));
-        attrMap.getAttributeInstanceByName("Jump Strength").setAttribute(nbtTag.getDouble("Jump Strength"));
-        
+        attrMap.getAttributeInstanceByName("Max Health").setBaseValue(nbtTag.getDouble("Max Health"));
+        attrMap.getAttributeInstanceByName("Movement Speed").setBaseValue(nbtTag.getDouble("Movement Speed"));
+        attrMap.getAttributeInstanceByName("Jump Strength").setBaseValue(nbtTag.getDouble("Jump Strength"));
+
         horse.setTamedBy(player);
 
         spawnMob(horse, world, x, y, z);
@@ -89,10 +90,10 @@ public class HorseCorpseHelper extends CorpseHelper {
     }
 
     private static String getType(NBTTagCompound nbtTag) {
-        return ModGraveStone.proxy.getLocalizedString("item.corpse.horse_type") + " " + 
+        return ModGraveStone.proxy.getLocalizedString("item.corpse.horse_type") + " " +
                 ModGraveStone.proxy.getLocalizedString(getHorseType(nbtTag.getInteger("HorseType")));
     }
-    
+
     private static String getHorseType(int type) {
         switch (type) {
             case 0:

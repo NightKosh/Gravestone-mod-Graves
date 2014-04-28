@@ -2,6 +2,7 @@
 package gravestone.item;
 
 import gravestone.block.enums.EnumSpawner;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
@@ -13,8 +14,8 @@ import net.minecraft.item.ItemStack;
  */
 public class ItemBlockGSSpawner extends ItemBlock {
 
-    public ItemBlockGSSpawner(int id) {
-        super(id);
+    public ItemBlockGSSpawner(Block block) {
+        super(block);
         setHasSubtypes(true);
     }
 

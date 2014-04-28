@@ -5,9 +5,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumHauntedChest;
 import gravestone.tileentity.TileEntityGSHauntedChest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -15,13 +12,18 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -31,13 +33,14 @@ import net.minecraft.world.World;
  */
 public class BlockGSHauntedChest extends BlockContainer {
 
-    public BlockGSHauntedChest(int id) {
-        super(id, Material.wood);
-        this.setStepSound(Block.soundWoodFootstep);
-        this.setUnlocalizedName("HauntedChest");
+    public BlockGSHauntedChest() {
+        super(Material.wood);
+        this.setStepSound(Block.soundTypeWood);
+        this.setBlockName("HauntedChest");
         this.setHardness(2.5F);
         this.setCreativeTab(ModGraveStone.creativeTab);
-        this.setTextureName("planks_oak");
+        this.setBlockTextureName("planks_oak");
+        this.setHarvestLevel("axe", 0);
     }
 
     /**
@@ -79,8 +82,8 @@ public class BlockGSHauntedChest extends BlockContainer {
      * Returns the ID of the items to drop on destruction.
      */
     @Override
-    public int idDropped(int par1, Random random, int par3) {
-        return 0;
+    public Item getItemDropped(int par1, Random random, int par3) {
+        return null;
     }
 
     /**
@@ -105,7 +108,7 @@ public class BlockGSHauntedChest extends BlockContainer {
      */
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-        TileEntityGSHauntedChest te = (TileEntityGSHauntedChest) world.getBlockTileEntity(x, y, z);
+        TileEntityGSHauntedChest te = (TileEntityGSHauntedChest) world.getTileEntity(x, y, z);
         if (te != null) {
             if (!world.isRemote) {
                 te.spawnMobs(world);
@@ -116,7 +119,7 @@ public class BlockGSHauntedChest extends BlockContainer {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int var2) {
         return new TileEntityGSHauntedChest();
     }
 
@@ -144,8 +147,8 @@ public class BlockGSHauntedChest extends BlockContainer {
         }
 
         world.setBlockMetadataWithNotify(x, y, z, metadata, 3);
-        
-        TileEntityGSHauntedChest tileEntity = (TileEntityGSHauntedChest) world.getBlockTileEntity(x, y, z);
+
+        TileEntityGSHauntedChest tileEntity = (TileEntityGSHauntedChest) world.getTileEntity(x, y, z);
 
         if (tileEntity != null) {
             if (stack.stackTagCompound != null) {
@@ -167,35 +170,34 @@ public class BlockGSHauntedChest extends BlockContainer {
      */
     @Override
     public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player) {
-        player.addStat(StatList.mineBlockStatArray[this.blockID], 1);
         player.addExhaustion(0.025F);
         ItemStack itemStack;
         if (EnchantmentHelper.getSilkTouchModifier(player)) {
             itemStack = getBlockItemStack(world, x, y, z);
         } else {
-            itemStack = new ItemStack(Block.chest.blockID, 1, 0);
+            itemStack = new ItemStack(Blocks.chest, 1, 0);
         }
-        
+
         if (itemStack != null) {
-            this.dropBlockAsItem_do(world, x, y, z, itemStack);
+            this.dropBlockAsItem(world, x, y, z, itemStack);
         }
     }
 
     /**
      * This returns a complete list of items dropped from this block.
      *
-     * @param world The current world
-     * @param x X Position
-     * @param y Y Position
-     * @param z Z Position
+     * @param world    The current world
+     * @param x        X Position
+     * @param y        Y Position
+     * @param z        Z Position
      * @param metadata Current metadata
-     * @param fortune Breakers fortune level
+     * @param fortune  Breakers fortune level
      * @return A ArrayList containing all items this block drops
      */
     @Override
-    public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune) {
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
         ArrayList<ItemStack> ret = new ArrayList();
-        ret.add(new ItemStack(Block.chest.blockID, 1, 0));
+        ret.add(new ItemStack(Blocks.chest, 1, 0));
 
         return ret;
     }
@@ -205,7 +207,7 @@ public class BlockGSHauntedChest extends BlockContainer {
      */
     private ItemStack getBlockItemStack(World world, int x, int y, int z) {
         ItemStack itemStack = this.createStackedBlock(0);
-        TileEntityGSHauntedChest tileEntity = (TileEntityGSHauntedChest) world.getBlockTileEntity(x, y, z);
+        TileEntityGSHauntedChest tileEntity = (TileEntityGSHauntedChest) world.getTileEntity(x, y, z);
 
         if (tileEntity != null) {
             NBTTagCompound nbt = new NBTTagCompound();
@@ -222,9 +224,9 @@ public class BlockGSHauntedChest extends BlockContainer {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(int id, CreativeTabs tabs, List list) {
+    public void getSubBlocks(Item item, CreativeTabs tabs, List list) {
         for (byte i = 0; i < EnumHauntedChest.values().length; i++) {
-            ItemStack stack = new ItemStack(id, 1, 0);
+            ItemStack stack = new ItemStack(item, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("ChestType", i);
 

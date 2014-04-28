@@ -3,8 +3,7 @@ package gravestone.block;
 import gravestone.ModGraveStone;
 import gravestone.core.Resources;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHalfSlab;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.BlockStoneSlab;
 
 /**
  * GraveStone mod
@@ -12,23 +11,24 @@ import net.minecraft.block.material.Material;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class BlockGSBoneSlab extends BlockHalfSlab {
+public class BlockGSBoneSlab extends BlockStoneSlab {
 
-    public BlockGSBoneSlab(int id) {
-        super(id, false, Material.rock);
-        this.setStepSound(Block.soundStoneFootstep);
-        this.setUnlocalizedName("bone_slab");
+    public BlockGSBoneSlab() {
+        super(false);
+        this.setStepSound(Block.soundTypeStone);
+        this.setBlockName("bone_slab");
         this.setHardness(2F);
         this.setResistance(2F);
         this.setCreativeTab(ModGraveStone.creativeTab);
-        this.setTextureName(Resources.BONE_BLOCK);
+        this.setBlockTextureName(Resources.BONE_BLOCK);
+        this.setHarvestLevel("pickaxe", 0);
     }
 
     /**
      * Returns the slab block name with step type.
      */
     @Override
-    public String getFullSlabName(int par1) {
+    public String func_150002_b(int par1) {
         return getUnlocalizedName();
     }
 }

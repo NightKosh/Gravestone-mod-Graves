@@ -4,8 +4,8 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 
 /**
  * GraveStone mod
@@ -18,19 +18,6 @@ public class GraveStoneConfig {
     private static Configuration config;
     private static GraveStoneConfig instance;
     private static String path;
-    // Blocks
-    public static int graveStoneID;
-    public static int spawnerID;
-    public static int trapID;
-    public static int memorialID;
-    public static int hauntedChestID;
-    public static int candleID;
-    public static int skullCandleID;
-    public static int altarID;
-    // bones blocks
-    public static int boneBlockID;
-    public static int boneSlabID;
-    public static int boneStairsID;
     // renderer Id
     public static int graveRenderID = RenderingRegistry.getNextAvailableRenderId();
     public static int memorialRenderID = RenderingRegistry.getNextAvailableRenderId();
@@ -66,9 +53,6 @@ public class GraveStoneConfig {
     // spawner reciepes
     public static boolean enableBossSpawnerCraftingRecipe;
     public static boolean enableSpawnerCraftingRecipe;
-    // item
-    public static int chiselId;
-    public static int corpseId;
     // grave names
     public static ArrayList<String> graveNames;
     public static ArrayList<String> graveDogsNames;
@@ -106,32 +90,11 @@ public class GraveStoneConfig {
 
     public final void getConfigs() {
         config.load();
-        idConfig();
         structures();
         gravesConfig();
         entityConfig();
         config.save();
         getGravesText();
-    }
-
-    private static void idConfig() {
-        // blocks
-        graveStoneID = config.getBlock("GraveStone", 1551).getInt();
-        spawnerID = config.getBlock("Spawner", 1552).getInt();
-        trapID = config.getBlock("TimeTrap", 1553).getInt();
-        memorialID = config.getBlock("Memorial", 1554).getInt();
-        boneBlockID = config.getBlock("BonesBlock", 1555).getInt();
-        boneSlabID = config.getBlock("BonesSlab", 1556).getInt();
-        boneStairsID = config.getBlock("BonesStairs", 1557).getInt();
-        
-        hauntedChestID = config.getBlock("HauntedChest", 1558).getInt();
-        skullCandleID = config.getBlock("SkullCandle", 1559).getInt();
-        altarID = config.getBlock("Altar", 1560).getInt();
-        candleID = config.getBlock("Candle", 1561).getInt();
-        
-        // items
-        chiselId = config.getItem("Chisel", 9001 - 256).getInt();
-        corpseId = config.getItem("Corpse", 9002 - 256).getInt();
     }
 
     private static void structures() {

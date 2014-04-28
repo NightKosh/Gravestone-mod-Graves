@@ -1,12 +1,10 @@
 package gravestone.item;
 
-import gravestone.config.GraveStoneConfig;
 import gravestone.ModGraveStone;
+import gravestone.core.GSBlock;
 import gravestone.core.Resources;
 import gravestone.tileentity.TileEntityGSGrave;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
@@ -20,13 +18,13 @@ import net.minecraftforge.common.MinecraftForge;
  */
 public class ItemGSChisel extends ItemTool {
 
-    public ItemGSChisel(int id) {
-        super(id, 1, EnumToolMaterial.IRON, new Block[0]);
+    public ItemGSChisel() {
+        super(1, ToolMaterial.IRON, null);
         setMaxStackSize(1);
         setCreativeTab(ModGraveStone.creativeTab);
         setUnlocalizedName("chisel");
         setMaxDamage(50);
-        MinecraftForge.setToolClass(this, "chisel", 1);
+        //MinecraftForge.setToolClass(this, "chisel", 1);
         this.setTextureName(Resources.CHISEL);
     }
 
@@ -47,9 +45,9 @@ public class ItemGSChisel extends ItemTool {
      */
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10) {
-        if (world.getBlockId(x, y, z) == GraveStoneConfig.graveStoneID) {
+        if (world.getBlock(x, y, z).equals(GSBlock.graveStone)) {
             return setGraveText(stack, player, world, x, y, z, false);
-        } else if (world.getBlockId(x, y, z) == GraveStoneConfig.memorialID) {
+        } else if (world.getBlock(x, y, z).equals(GSBlock.memorial)) {
             return setGraveText(stack, player, world, x, y, z, true);
         }
 
@@ -57,7 +55,7 @@ public class ItemGSChisel extends ItemTool {
     }
 
     private boolean setGraveText(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, boolean isMemorial) {
-        TileEntityGSGrave tileEntity = (TileEntityGSGrave) world.getBlockTileEntity(x, y, z);
+        TileEntityGSGrave tileEntity = (TileEntityGSGrave) world.getTileEntity(x, y, z);
 
         if (tileEntity != null && tileEntity.isEditable() && tileEntity.getDeathTextComponent().getDeathText().length() == 0) {
             player.openGui(ModGraveStone.instance, 0, world, x, y, z);

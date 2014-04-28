@@ -1,11 +1,13 @@
 package gravestone.entity.monster;
 
 import gravestone.core.Resources;
+import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
@@ -29,8 +31,8 @@ public class EntitySkeletonDog extends EntityUndeadDog {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(8); // max health
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5); // movespeed
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8); // max health
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5); // movespeed
     }
 
     /**
@@ -61,7 +63,7 @@ public class EntitySkeletonDog extends EntityUndeadDog {
      * Plays step sound at given x, y, z for the entity
      */
     @Override
-    protected void playStepSound(int par1, int par2, int par3, int par4) {
+    protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_) {
         this.playSound("mob.skeleton.step", 0.15F, 1.0F);
     }
 
@@ -69,7 +71,7 @@ public class EntitySkeletonDog extends EntityUndeadDog {
      * Returns the item ID for the item the mob drops on death.
      */
     @Override
-    protected int getDropItemId() {
-        return Item.bone.itemID;
+    protected Item getDropItem() {
+        return Items.bone;
     }
 }

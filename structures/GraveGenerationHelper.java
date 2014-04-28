@@ -1,12 +1,14 @@
 package gravestone.structures;
 
-import gravestone.config.GraveStoneConfig;
 import gravestone.block.GraveStoneHelper;
+import gravestone.core.GSBlock;
 import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSGraveStone;
-import java.util.Random;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -23,17 +25,17 @@ public class GraveGenerationHelper {
      * Place component
      *
      * @param component Component instance
-     * @param world World object
+     * @param world     World object
      * @param random
-     * @param x X coord
-     * @param y Y coord
-     * @param z Z coord
+     * @param x         X coord
+     * @param y         Y coord
+     * @param z         Z coord
      * @param graveMeta Grave metadata
      * @param graveType Grave type
      */
     public static void placeGrave(ComponentGraveStone component, World world, Random random, int x, int y, int z, int graveMeta, byte graveType, boolean allLoot) {
-        component.placeBlockAtCurrentPosition(world, GraveStoneConfig.graveStoneID, graveMeta, x, y, z, component.getBoundingBox());
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getBlockTileEntity(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z));
+        component.placeBlockAtCurrentPosition(world, GSBlock.graveStone, graveMeta, x, y, z, component.getBoundingBox());
+        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z));
 
         if (tileEntity != null) {
             if (GraveStoneHelper.isSwordGrave(graveType)) {
@@ -50,14 +52,14 @@ public class GraveGenerationHelper {
      * Fill squer with graves
      *
      * @param component Component instance
-     * @param world World object
+     * @param world     World object
      * @param random
-     * @param xStart Start X coord
-     * @param yStart Start Y coord
-     * @param zStart Start Z coord
-     * @param xEnd End X coord
-     * @param yEnd End Y coord
-     * @param zEnd End Z coord
+     * @param xStart    Start X coord
+     * @param yStart    Start Y coord
+     * @param zStart    Start Z coord
+     * @param xEnd      End X coord
+     * @param yEnd      End Y coord
+     * @param zEnd      End Z coord
      * @param graveMeta Grave metadata
      * @param graveType Grave type
      */
@@ -75,21 +77,21 @@ public class GraveGenerationHelper {
      * Check can be grave placed here
      *
      * @param world World object
-     * @param x X coord
-     * @param minY Min y coord
-     * @param z Z coord
-     * @param maxY Max y coord
+     * @param x     X coord
+     * @param minY  Min y coord
+     * @param z     Z coord
+     * @param maxY  Max y coord
      */
     public static boolean canPlaceGrave(World world, int x, int minY, int z, int maxY) {
-        int blockId;
+        Block block;
 
         for (int y = maxY; y >= minY - 1; y--) {
-            blockId = world.getBlockId(x, y, z);
+            block = world.getBlock(x, y, z);
 
-            if (blockId > 0) {
-                if (blockId == Block.waterStill.blockID || blockId == Block.lavaStill.blockID) {
+            if (block != null) {
+                if (block.equals(Blocks.water) || block.equals(Blocks.lava)) {
                     return false;
-                } else if (GraveStoneHelper.canPlaceBlockAt(blockId)) {
+                } else if (GraveStoneHelper.canPlaceBlockAt(block)) {
                     return true;
                 }
             }

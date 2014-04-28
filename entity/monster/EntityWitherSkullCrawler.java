@@ -2,7 +2,7 @@
 package gravestone.entity.monster;
 
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -24,12 +24,12 @@ public class EntityWitherSkullCrawler extends EntitySkullCrawler {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(2);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2);
     }
 
     @Override
     protected void dropRareDrop(int par1) {
-        this.entityDropItem(new ItemStack(Item.skull.itemID, 1, 1), 0);
+        this.entityDropItem(new ItemStack(Items.skull, 1, 1), 0);
     }
     
     @Override

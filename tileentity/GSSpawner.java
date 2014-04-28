@@ -3,6 +3,7 @@ package gravestone.tileentity;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 /**
@@ -26,8 +27,8 @@ public abstract class GSSpawner {
      * Update entity state.
      */
     public void updateEntity() {
-        if (canSpawnMobs(tileEntity.worldObj) && tileEntity.worldObj.difficultySetting != 0 && anyPlayerInRange()) {
-            if (tileEntity.worldObj.isRemote) {
+        if (canSpawnMobs(tileEntity.getWorldObj()) && !tileEntity.getWorldObj().difficultySetting.equals(EnumDifficulty.PEACEFUL) && anyPlayerInRange()) {
+            if (tileEntity.getWorldObj().isRemote) {
                 clientUpdateLogic();
             } else {
                 serverUpdateLogic();
@@ -39,7 +40,7 @@ public abstract class GSSpawner {
      * Sets the delay before a new spawn.
      */
     protected void updateDelay() {
-        delay = getMinDelay() + tileEntity.worldObj.rand.nextInt(getMaxDelay() - getMinDelay());
+        delay = getMinDelay() + tileEntity.getWorldObj().rand.nextInt(getMaxDelay() - getMinDelay());
     }
 
     protected void setMinDelay() {
@@ -47,12 +48,12 @@ public abstract class GSSpawner {
     }
 
     protected int getNearbyMobsCount() {
-        return tileEntity.worldObj.getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.getAABBPool().getAABB(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord,
+        return tileEntity.getWorldObj().getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.getAABBPool().getAABB(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord,
                 tileEntity.xCoord + 1, tileEntity.yCoord + 1, tileEntity.zCoord + 1).expand(1.0D, 4.0D, getSpawnRange() * 2)).size();
     }
 
     protected boolean anyPlayerInRange() {
-        return tileEntity.worldObj.getClosestPlayer(tileEntity.xCoord + 0.5D, tileEntity.yCoord + 0.5D, tileEntity.zCoord + 0.5D, getPlayerRange()) != null;
+        return tileEntity.getWorldObj().getClosestPlayer(tileEntity.xCoord + 0.5D, tileEntity.yCoord + 0.5D, tileEntity.zCoord + 0.5D, getPlayerRange()) != null;
     }
 
     abstract protected boolean canSpawnMobs(World world);

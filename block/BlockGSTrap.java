@@ -2,22 +2,25 @@ package gravestone.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.config.GraveStoneConfig;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumTrap;
+import gravestone.config.GraveStoneConfig;
 import gravestone.core.Resources;
-import java.util.List;
-import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatMessageComponent;
-import net.minecraft.util.Icon;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -30,17 +33,18 @@ public class BlockGSTrap extends Block {
     private static final int PRE_NIGHT = 12000;
     private static final int NIGHT = 14000;
     private static final int PRE_MORNING = 22500;
-    
+
     @SideOnly(Side.CLIENT)
-    private Icon thunderStoneIcon;
-    
-    public BlockGSTrap(int par1) {
-        super(par1, Material.rock);
-        this.setStepSound(Block.soundStoneFootstep);
-        this.setUnlocalizedName("trap.night");
+    private IIcon thunderStoneIcon;
+
+    public BlockGSTrap() {
+        super(Material.rock);
+        this.setStepSound(Block.soundTypeStone);
+        this.setBlockName("trap.night");
         this.setHardness(4.5F);
         this.setResistance(5F);
         this.setCreativeTab(ModGraveStone.creativeTab);
+        this.setHarvestLevel("pickaxe", 1);
     }
 
 
@@ -50,8 +54,8 @@ public class BlockGSTrap extends Block {
      * register icons.
      */
     @Override
-    public void registerIcons(IconRegister iconRegister) {
-        this.blockIcon        = iconRegister.registerIcon(Resources.NIGHT_STONE);
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        this.blockIcon = iconRegister.registerIcon(Resources.NIGHT_STONE);
         this.thunderStoneIcon = iconRegister.registerIcon(Resources.THUNDER_STONE);
     }
 
@@ -59,7 +63,7 @@ public class BlockGSTrap extends Block {
      * From the specified side and block metadata retrieves the blocks texture.
      */
     @Override
-    public Icon getIcon(int side, int metadata) {
+    public IIcon getIcon(int side, int metadata) {
         switch (metadata) {
             case 1:
                 return thunderStoneIcon;
@@ -68,18 +72,18 @@ public class BlockGSTrap extends Block {
                 return blockIcon;
         }
     }
-    
+
     /**
      * Returns the ID of the items to drop on destruction.
      */
     @Override
-    public int idDropped(int par1, Random random, int metadata) {
+    public Item getItemDropped(int par1, Random random, int metadata) {
         switch (metadata) {
             case 1:
-                return Block.stoneBrick.blockID;
+                return Item.getItemFromBlock(Blocks.stonebrick);
             case 0:
             default:
-                return Block.netherBrick.blockID;
+                return Item.getItemFromBlock(Blocks.nether_brick);
         }
     }
 
@@ -115,7 +119,7 @@ public class BlockGSTrap extends Block {
                     if (dayTime < PRE_NIGHT || dayTime > PRE_MORNING) {
                         time = time - time % 24000 + PRE_NIGHT;
                         world.setWorldTime(time);
-                        ((EntityPlayer) entity).sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(ModGraveStone.proxy.getLocalizedString("block.trap.curse")));
+                        ((EntityPlayer) entity).addChatComponentMessage(new ChatComponentTranslation(ModGraveStone.proxy.getLocalizedString("block.trap.curse")));
                     } else if (dayTime > 20000 && dayTime < PRE_MORNING) {
                         time = time - time % 24000 + NIGHT;
                         world.setWorldTime(time);
@@ -140,9 +144,9 @@ public class BlockGSTrap extends Block {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(int id, CreativeTabs tab, List list) {
+    public void getSubBlocks(Item item, CreativeTabs tab, List list) {
         for (byte meta = 0; meta < EnumTrap.values().length; meta++) {
-            list.add(new ItemStack(id, 1, meta));
+            list.add(new ItemStack(item, 1, meta));
         }
     }
 }

@@ -1,28 +1,24 @@
 package gravestone.core;
 
 import gravestone.GraveStoneLogger;
-import gravestone.config.GraveStoneConfig;
 import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumSpawner;
+import gravestone.config.GraveStoneConfig;
 import gravestone.entity.monster.EntitySkullCrawler;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingData;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 
 /**
  * GraveStone mod
@@ -32,6 +28,9 @@ import net.minecraft.world.World;
  */
 public class GSMobSpawn {
 
+    public static final String WITHER_ID = "WitherBoss";
+    //
+    private static final int HELL_HEIGHT = 51;
     /**
      * Provides a mapping between entity classes and a string
      */
@@ -40,14 +39,6 @@ public class GSMobSpawn {
     public static List<String> DOG_ID = new ArrayList(Arrays.asList("GSZombieDog", "GSSkeletonDog"));
     public static List<String> CAT_ID = new ArrayList(Arrays.asList("GSZombieCat", "GSSkeletonCat"));
     public static List<String> HELL_MOB_ID = new ArrayList(Arrays.asList("PigZombie", "Skeleton"));
-
-    public enum EnumMobType {
-
-        DEFAULT_MOBS,
-        HELL_MOBS,
-        UNDEAD_DOGS,
-        UNDEAD_CATS
-    }
     // spawner mobs
     public static List<String> skeletonSpawnerMobs = new ArrayList(Arrays.asList(
             "Skeleton", "Skeleton", "Skeleton", "Skeleton",
@@ -60,9 +51,6 @@ public class GSMobSpawn {
     // catacombs statues mobs
     public static List<String> catacombsStatuesMobs = new ArrayList(Arrays.asList(
             "Skeleton", "Zombie"));
-    public static final String WITHER_ID = "WitherBoss";
-    //
-    private static final int HELL_HEIGHT = 51;
 
     private GSMobSpawn() {
     }
@@ -71,13 +59,13 @@ public class GSMobSpawn {
      * Check can grave spawn hell creature or not
      *
      * @param world
-     * @param x X coordinate
-     * @param y Y coordinate
-     * @param z Z coordinate
+     * @param x     X coordinate
+     * @param y     Y coordinate
+     * @param z     Z coordinate
      */
     private static boolean canSpawnHellCreatures(World world, int x, int y, int z) {
         if (world != null) {
-            return y < HELL_HEIGHT && world.getBlockId(x, y - 1, z) == Block.netherBrick.blockID;
+            return y < HELL_HEIGHT && world.getBlock(x, y - 1, z).equals(Blocks.nether_brick);
         } else {
             return false;
         }
@@ -123,7 +111,7 @@ public class GSMobSpawn {
         }
 
         try {
-            entity.onSpawnWithEgg((EntityLivingData) null);
+            entity.onSpawnWithEgg((IEntityLivingData) null);
         } catch (Exception e) {
             GraveStoneLogger.logError("getMobEntity exception with onSpawnWithEgg");
             e.printStackTrace();
@@ -164,7 +152,7 @@ public class GSMobSpawn {
         }
 
         try {
-            entity.onSpawnWithEgg((EntityLivingData) null);
+            entity.onSpawnWithEgg((IEntityLivingData) null);
         } catch (Exception e) {
             GraveStoneLogger.logError("getMobEntity exception with onSpawnWithEgg");
             e.printStackTrace();
@@ -180,9 +168,9 @@ public class GSMobSpawn {
         EntitySkeleton skeleton = (EntitySkeleton) EntityList.createEntityByName("Skeleton", world);
 
         if (world.rand.nextInt(2) == 0) {
-            skeleton.setCurrentItemOrArmor(0, new ItemStack(Item.swordStone.itemID, 1, 0));
+            skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.stone_sword, 1, 0));
         } else {
-            skeleton.setCurrentItemOrArmor(0, new ItemStack(Item.bow.itemID, 1, 0));
+            skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.bow, 1, 0));
         }
 
         return skeleton;
@@ -195,9 +183,9 @@ public class GSMobSpawn {
         EntitySkeleton skeleton = (EntitySkeleton) EntityList.createEntityByName("Skeleton", world);
 
         if (skeletonType == 0) {
-            skeleton.setCurrentItemOrArmor(0, new ItemStack(Item.bow.itemID, 1, 0));
+            skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.bow, 1, 0));
         } else {
-            skeleton.setCurrentItemOrArmor(0, new ItemStack(Item.swordStone.itemID, 1, 0));
+            skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.stone_sword, 1, 0));
         }
 
         return skeleton;
@@ -261,10 +249,10 @@ public class GSMobSpawn {
      * Spawn mob in world
      *
      * @param world World object
-     * @param entity Spawned mob
-     * @param x X coordinate
-     * @param y Y coordinate
-     * @param z Z coordinate
+     * @param mob   Spawned mob
+     * @param x     X coordinate
+     * @param y     Y coordinate
+     * @param z     Z coordinate
      */
     public static boolean spawnMob(World world, Entity mob, double x, double y, double z, float rotation, boolean checkSpawn) {
         EntityLiving livingEntity = (EntityLiving) mob;
@@ -355,5 +343,13 @@ public class GSMobSpawn {
                     (int) Math.floor(entity.posX), entity.posY + 1.5, (int) Math.floor(entity.posZ),
                     entity.rotationYaw, false);
         }
+    }
+
+    public enum EnumMobType {
+
+        DEFAULT_MOBS,
+        HELL_MOBS,
+        UNDEAD_DOGS,
+        UNDEAD_CATS
     }
 }

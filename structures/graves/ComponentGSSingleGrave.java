@@ -45,7 +45,7 @@ public class ComponentGSSingleGrave extends ComponentGraveStone {
     public NBTTagCompound func_143010_b() {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
         nbttagcompound.setString("id", "GSSingleGrave");
-        nbttagcompound.setTag("BB", this.boundingBox.func_143047_a("BB"));
+        nbttagcompound.setTag("BB", this.boundingBox.func_151535_h());
         nbttagcompound.setInteger("O", this.coordBaseMode);
         nbttagcompound.setInteger("GD", this.componentType);
         this.func_143012_a(nbttagcompound);

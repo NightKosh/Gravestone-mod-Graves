@@ -1,12 +1,13 @@
 package gravestone.structures.catacombs.components;
 
-import java.util.Random;
 import gravestone.block.BlockGSGraveStone;
 import gravestone.block.GraveStoneHelper;
 import gravestone.structures.GraveGenerationHelper;
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
+
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -35,7 +36,7 @@ public class GraveYard extends CatacombsBaseComponent {
                     positionX = getXWithOffset(x + 1, z + 1);
                     positionZ = getZWithOffset(x + 1, z + 1);
                     y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
-                    this.placeBlockAtCurrentPosition(world, Block.deadBush.blockID, 0, x + 1, y, z + 1, boundingBox);
+                    this.placeBlockAtCurrentPosition(world, Blocks.deadbush, 0, x + 1, y, z + 1, boundingBox);
                 }
 
                 if (random.nextInt(5) < 2) {

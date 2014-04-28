@@ -8,10 +8,10 @@ import gravestone.item.CorpseHelper;
 import gravestone.item.ItemGSCorpse;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 /**
@@ -23,16 +23,17 @@ import net.minecraft.world.World;
 public class BlockGSAltar extends Block {
 
     @SideOnly(Side.CLIENT)
-    private Icon topTexture;
+    private IIcon topTexture;
     @SideOnly(Side.CLIENT)
-    private Icon bottomTexture;
+    private IIcon bottomTexture;
 
-    public BlockGSAltar(int id) {
-        super(id, Material.rock);
+    public BlockGSAltar() {
+        super(Material.rock);
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
         this.setLightOpacity(0);
-        this.setUnlocalizedName("Altar");
+        this.setBlockName("Altar");
         this.setCreativeTab(ModGraveStone.creativeTab);
+        this.setHarvestLevel("pickaxe", 2);
     }
 
     /**
@@ -74,7 +75,7 @@ public class BlockGSAltar extends Block {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getIcon(int side, int metadata) {
+    public IIcon getIcon(int side, int metadata) {
         return side == 0 ? this.bottomTexture : (side == 1 ? this.topTexture : this.blockIcon);
     }
 
@@ -85,7 +86,7 @@ public class BlockGSAltar extends Block {
      * register icons.
      */
     @Override
-    public void registerIcons(IconRegister register) {
+    public void registerBlockIcons(IIconRegister register) {
         this.blockIcon = register.registerIcon(Resources.ALTAR_SIDE);
         this.topTexture = register.registerIcon(Resources.ALTAR_TOP);
         this.bottomTexture = register.registerIcon(Resources.ALTAR_BOTTOM);

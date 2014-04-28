@@ -1,6 +1,7 @@
 
 package gravestone.item;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 
 /**
@@ -11,8 +12,8 @@ import net.minecraft.item.ItemBlock;
  */
 public class ItemBlockGSCandle extends ItemBlock {
 
-    public ItemBlockGSCandle(int id) {
-        super(id);
+    public ItemBlockGSCandle(Block block) {
+        super(block);
         setUnlocalizedName("Candle");
     }
 }

@@ -2,7 +2,6 @@
 package gravestone.core.compatibility;
 
 import cpw.mods.fml.common.Loader;
-import forestry.api.core.BlockInterface;
 import gravestone.core.GSReciepes;
 import thaumcraft.api.ItemApi;
 
@@ -36,11 +35,11 @@ public class GSCompatibility {
             GSCompatibilityHighland.addBiomes();
         }
 
-        if (Loader.isModLoaded("BiomesOPlenty")) {
-            GSCompatibilityBiomesOPlenty.isInstalled = true;
-            GSCompatibilityBiomesOPlenty.loadBiomes();
-            GSCompatibilityBiomesOPlenty.addBiomes();
-        }
+//        if (Loader.isModLoaded("BiomesOPlenty")) {
+//            GSCompatibilityBiomesOPlenty.isInstalled = true;
+//            GSCompatibilityBiomesOPlenty.loadBiomes();
+//            GSCompatibilityBiomesOPlenty.addBiomes();
+//        }
 
         if (Loader.isModLoaded("ExtrabiomesXL")) {
             GSCompatibilityExtraBiomesXL.isInstalled = true;
@@ -69,7 +68,7 @@ public class GSCompatibility {
         }
         
         if (Loader.isModLoaded("Forestry")) {
-            GSReciepes.addSkullCandleReciepes(BlockInterface.getBlock("candle"));
+//            GSReciepes.addSkullCandleReciepes(BlockInterface.getBlock("candle"));
         }
     }
 }

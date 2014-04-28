@@ -3,8 +3,6 @@ package gravestone.item;
 import gravestone.ModGraveStone;
 import gravestone.core.GSItem;
 import gravestone.item.enums.EnumCorpse;
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityHorse;
@@ -12,12 +10,16 @@ import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.world.EnumGameType;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldSettings;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * GraveStone mod
@@ -68,17 +70,17 @@ public abstract class CorpseHelper {
         }
     }
 
-    public static ItemStack getDefaultCorpse(int id, int type) {
+    public static ItemStack getDefaultCorpse(Item item, int type) {
         switch (EnumCorpse.values()[type]) {
             case HORSE:
-                return HorseCorpseHelper.getDefaultCorpse(id, type);
+                return HorseCorpseHelper.getDefaultCorpse(item, type);
             case DOG:
-                return DogCorpseHelper.getDefaultCorpse(id, type);
+                return DogCorpseHelper.getDefaultCorpse(item, type);
             case CAT:
-                return CatCorpseHelper.getDefaultCorpse(id, type);
+                return CatCorpseHelper.getDefaultCorpse(item, type);
             case VILLAGER:
             default:
-                return VillagerCorpseHelper.getDefaultCorpse(id, type);
+                return VillagerCorpseHelper.getDefaultCorpse(item, type);
         }
     }
 
@@ -126,7 +128,7 @@ public abstract class CorpseHelper {
     }
 
     public static boolean canSpawnMob(EntityPlayer player, int damage) {
-        if (player.worldObj.getWorldInfo().getGameType().equals(EnumGameType.CREATIVE)) {
+        if (player.worldObj.getWorldInfo().getGameType().equals(WorldSettings.GameType.CREATIVE)) {
             return true;
         } else {
             switch (EnumCorpse.getById((byte) damage)) {

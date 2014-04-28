@@ -6,17 +6,19 @@ import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumSkullCandle;
 import gravestone.config.GraveStoneConfig;
 import gravestone.tileentity.TileEntityGSSkullCandle;
-import java.util.List;
-import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -26,15 +28,14 @@ import net.minecraft.world.World;
  */
 public class BlockGSSkullCandle extends BlockContainer {
 
-    public BlockGSSkullCandle(int id) {
-        super(id, Material.circuits);
-        this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.5F, 0.75F);
-        this.setStepSound(Block.soundStoneFootstep);
-        this.setUnlocalizedName("Skull Candle");
+    public BlockGSSkullCandle() {
+        super(Material.circuits);
+        this.setStepSound(Block.soundTypeStone);
+        this.setBlockName("Skull Candle");
         this.setHardness(0.5F);
         this.setResistance(5F);
-        this.setLightValue(1);
-        this.setTextureName("snow");
+        this.setLightLevel(1);
+        this.setBlockTextureName("snow");
         this.setCreativeTab(ModGraveStone.creativeTab);
         this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.5F, 0.75F);
     }
@@ -70,7 +71,7 @@ public class BlockGSSkullCandle extends BlockContainer {
      * the block.
      */
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int var2) {
         return new TileEntityGSSkullCandle();
     }
 
@@ -86,7 +87,7 @@ public class BlockGSSkullCandle extends BlockContainer {
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
         world.setBlockMetadataWithNotify(x, y, z, stack.getItemDamage(), 2);
 
-        TileEntityGSSkullCandle tileEntity = (TileEntityGSSkullCandle) world.getBlockTileEntity(x, y, z);
+        TileEntityGSSkullCandle tileEntity = (TileEntityGSSkullCandle) world.getTileEntity(x, y, z);
         if (tileEntity != null) {
             float skullRotation = entity.rotationYaw - 180 - 22.5F;
             if (skullRotation < 0) {
@@ -102,9 +103,9 @@ public class BlockGSSkullCandle extends BlockContainer {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(int id, CreativeTabs tab, List list) {
+    public void getSubBlocks(Item item, CreativeTabs tab, List list) {
         for (byte i = 0; i < EnumSkullCandle.values().length; i++) {
-            list.add(new ItemStack(id, 1, i));
+            list.add(new ItemStack(item, 1, i));
         }
     }
 
@@ -116,7 +117,7 @@ public class BlockGSSkullCandle extends BlockContainer {
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World world, int x, int y, int z, Random random) {
 
-        TileEntityGSSkullCandle tileEntity = (TileEntityGSSkullCandle) world.getBlockTileEntity(x, y, z);
+        TileEntityGSSkullCandle tileEntity = (TileEntityGSSkullCandle) world.getTileEntity(x, y, z);
         if (tileEntity != null) {
             double xPos = x + 0.5F;
             double yPos = y + 0.85;

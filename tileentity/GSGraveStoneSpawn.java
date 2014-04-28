@@ -1,8 +1,8 @@
 package gravestone.tileentity;
 
+import gravestone.block.enums.EnumGraves;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSMobSpawn;
-import gravestone.block.enums.EnumGraves;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -51,7 +51,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
         }
 
         if (this.getNewMob) {
-            this.spawnedMob = GSMobSpawn.getMobEntity(this.tileEntity.worldObj, EnumGraves.getByID(((TileEntityGSGraveStone) this.tileEntity).graveType), this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord);
+            this.spawnedMob = GSMobSpawn.getMobEntity(this.tileEntity.getWorldObj(), EnumGraves.getByID(((TileEntityGSGraveStone) this.tileEntity).graveType), this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord);
 
             if (this.spawnedMob == null) {
                 return;
@@ -60,7 +60,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
             this.getNewMob = false;
         }
 
-        int nearbyEntitiesCount = tileEntity.worldObj.getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.getAABBPool().getAABB(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord,
+        int nearbyEntitiesCount = tileEntity.getWorldObj().getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.getAABBPool().getAABB(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord,
                 tileEntity.xCoord + 1, tileEntity.yCoord + 1, tileEntity.zCoord + 1).expand(1.0D, 4.0D, SPAWN_RANGE * 2)).size();
 
         if (nearbyEntitiesCount >= MAX_NEARBY_ENTITIES) {
@@ -68,7 +68,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
             return;
         }
 
-        if (GSMobSpawn.checkChance(this.tileEntity.worldObj.rand) && GSMobSpawn.spawnMob(this.tileEntity.worldObj, this.spawnedMob, this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord, true)) {
+        if (GSMobSpawn.checkChance(this.tileEntity.getWorldObj().rand) && GSMobSpawn.spawnMob(this.tileEntity.getWorldObj(), this.spawnedMob, this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord, true)) {
             this.getNewMob = true;
         }
         this.updateDelay();
@@ -110,7 +110,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
 
     @Override
     protected Entity getMob() {
-        return GSMobSpawn.getMobEntity(this.tileEntity.worldObj, EnumGraves.getByID(((TileEntityGSGraveStone) this.tileEntity).graveType),
+        return GSMobSpawn.getMobEntity(this.tileEntity.getWorldObj(), EnumGraves.getByID(((TileEntityGSGraveStone) this.tileEntity).graveType),
                 this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord);
     }
 }

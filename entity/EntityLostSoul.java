@@ -18,6 +18,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
@@ -36,7 +37,7 @@ public class EntityLostSoul extends EntityGhost {
         this.tasks.addTask(3, new EntityAIOpenDoor(this, true));
         
         
-        this.tasks.addTask(4, new EntityAIBreakBlock(this, Block.torchWood));
+        this.tasks.addTask(4, new EntityAIBreakBlock(this, Blocks.torch));
         
         /*
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));

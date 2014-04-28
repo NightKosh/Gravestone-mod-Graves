@@ -1,7 +1,6 @@
 
 package gravestone.core.compatibility;
 
-import extrabiomes.api.Biomes;
 import gravestone.GraveStoneLogger;
 import gravestone.core.GSBiomes;
 
@@ -31,35 +30,35 @@ public class GSCompatibilityExtraBiomesXL {
     private GSCompatibilityExtraBiomesXL() {}    
 
     protected static void addBiomes() {
-        for (int i = 0; i < CATACOMBS_BIOMES.length; i++) {
-            if (Biomes.getBiome(CATACOMBS_BIOMES[i]).isPresent()) {
-                if (Biomes.getBiome(CATACOMBS_BIOMES[i]).get() != null) {
-                    GSBiomes.addCatacombsBiome(Biomes.getBiome(CATACOMBS_BIOMES[i]).get().biomeID);
-                } else {
-                    namedBiomeError(NAME, CATACOMBS_BIOMES[i]);
-                }
-            }
-        }
-
-        for (int i = 0; i < MEMORIAL_BIOMES.length; i++) {
-            if (Biomes.getBiome(MEMORIAL_BIOMES[i]).isPresent()) {
-                if (Biomes.getBiome(MEMORIAL_BIOMES[i]).get() != null) {
-                    GSBiomes.addMemorialsBiome(Biomes.getBiome(MEMORIAL_BIOMES[i]).get().biomeID);
-                } else {
-                    namedBiomeError(NAME, MEMORIAL_BIOMES[i]);
-                }
-            }
-        }
-
-        for (int i = 0; i < GRAVES_BIOMES.length; i++) {
-            if (Biomes.getBiome(GRAVES_BIOMES[i]).isPresent()) {
-                if (Biomes.getBiome(GRAVES_BIOMES[i]).get() != null) {
-                    GSBiomes.addGravesBiome(Biomes.getBiome(GRAVES_BIOMES[i]).get().biomeID);
-                } else {
-                    namedBiomeError(NAME, GRAVES_BIOMES[i]);
-                }
-            }
-        }
+//        for (int i = 0; i < CATACOMBS_BIOMES.length; i++) {
+//            if (Biomes.getBiome(CATACOMBS_BIOMES[i]).isPresent()) {
+//                if (Biomes.getBiome(CATACOMBS_BIOMES[i]).get() != null) {
+//                    GSBiomes.addCatacombsBiome(Biomes.getBiome(CATACOMBS_BIOMES[i]).get().biomeID);
+//                } else {
+//                    namedBiomeError(NAME, CATACOMBS_BIOMES[i]);
+//                }
+//            }
+//        }
+//
+//        for (int i = 0; i < MEMORIAL_BIOMES.length; i++) {
+//            if (Biomes.getBiome(MEMORIAL_BIOMES[i]).isPresent()) {
+//                if (Biomes.getBiome(MEMORIAL_BIOMES[i]).get() != null) {
+//                    GSBiomes.addMemorialsBiome(Biomes.getBiome(MEMORIAL_BIOMES[i]).get().biomeID);
+//                } else {
+//                    namedBiomeError(NAME, MEMORIAL_BIOMES[i]);
+//                }
+//            }
+//        }
+//
+//        for (int i = 0; i < GRAVES_BIOMES.length; i++) {
+//            if (Biomes.getBiome(GRAVES_BIOMES[i]).isPresent()) {
+//                if (Biomes.getBiome(GRAVES_BIOMES[i]).get() != null) {
+//                    GSBiomes.addGravesBiome(Biomes.getBiome(GRAVES_BIOMES[i]).get().biomeID);
+//                } else {
+//                    namedBiomeError(NAME, GRAVES_BIOMES[i]);
+//                }
+//            }
+//        }
     }
 
     private static void namedBiomeError(String modName, String biomeName) {

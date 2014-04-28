@@ -80,6 +80,6 @@ public class MemorialGenerator implements GSStructureGenerator {
 
     private static boolean isNoWarterUnder(World world, int x, int z) {
         int y = world.getTopSolidOrLiquidBlock(x, z);
-        return !world.getBlockMaterial(x, y, z).equals(Material.water);
+        return !world.getBlock(x, y, z).getMaterial().equals(Material.water);
     }
 }

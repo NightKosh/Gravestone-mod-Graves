@@ -1,6 +1,7 @@
 package gravestone.entity.monster;
 
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -22,7 +23,7 @@ public class EntityZombieSkullCrawler extends EntitySkullCrawler {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(2);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2);
     }
 
     /**
@@ -53,13 +54,13 @@ public class EntityZombieSkullCrawler extends EntitySkullCrawler {
      * Returns the item ID for the item the mob drops on death.
      */
     @Override
-    protected int getDropItemId() {
-        return Item.rottenFlesh.itemID;
+    protected Item getDropItem() {
+        return Items.rotten_flesh;
     }
 
     @Override
     protected void dropRareDrop(int par1) {
-        this.entityDropItem(new ItemStack(Item.skull.itemID, 1, 2), 0);
+        this.entityDropItem(new ItemStack(Items.skull, 1, 2), 0);
     }
 
     @Override

@@ -1,9 +1,10 @@
 package gravestone.core.event;
 
-import gravestone.config.GraveStoneConfig;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.block.GraveStoneHelper;
+import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
 import gravestone.entity.monster.EntitySkullCrawler;
@@ -18,7 +19,6 @@ import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 /**
@@ -29,7 +29,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
  */
 public class GSEventsHook {
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void onEntityLivingDeath(LivingDeathEvent event) {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
             if (!GraveStoneConfig.generateGravesInLava && event.source.damageType.equals("lava")) {

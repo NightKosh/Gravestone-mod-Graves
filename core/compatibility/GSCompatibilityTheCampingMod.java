@@ -38,13 +38,13 @@ public class GSCompatibilityTheCampingMod {
     private static List<ItemStack> addItems(EntityPlayer player, String tagName) {
         List<ItemStack> items = new LinkedList<ItemStack>();
         NBTTagCompound tag = player.getEntityData().getCompoundTag("campInv").getCompoundTag(tagName);
-        NBTTagList inventory = tag.getTagList("Items");
+        NBTTagList inventory = tag.getTagList("Items", 10);
         for (int i = 0; i < inventory.tagCount(); ++i) {
-            NBTTagCompound Slots = (NBTTagCompound) inventory.tagAt(i);
+            NBTTagCompound Slots = inventory.getCompoundTagAt(i);
             Slots.getByte("Slot");
             items.add(ItemStack.loadItemStackFromNBT(Slots).copy());
         }
-        player.getEntityData().getCompoundTag("campInv").setCompoundTag(tagName, new NBTTagCompound());
+        player.getEntityData().getCompoundTag("campInv").setTag(tagName, new NBTTagCompound());
         return items;
     }
 

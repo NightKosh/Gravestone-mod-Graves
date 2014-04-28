@@ -1,12 +1,9 @@
-
 package gravestone.renderer.item;
 
 import gravestone.tileentity.TileEntityGSCandle;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
-import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 /**
  * GraveStone mod
@@ -31,6 +28,6 @@ public class ItemGSCandleRenderer implements IItemRenderer {
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-        TileEntityRenderer.instance.renderTileEntityAt(new TileEntityGSCandle(), 0.0D, 0.0D, 0.0D, 0.0F);
+        TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityGSCandle(), 0, 0, 0, 0);
     }
 }

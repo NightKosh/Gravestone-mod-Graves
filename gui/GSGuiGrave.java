@@ -1,15 +1,19 @@
 package gravestone.gui;
 
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import gravestone.ModGraveStone;
 import gravestone.core.Resources;
 import gravestone.tileentity.TileEntityGSGrave;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+
+import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.src.ModLoader;
+import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.util.ChatAllowedCharacters;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -22,7 +26,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class GSGuiGrave extends GuiScreen {
 
-    private static final String allowedCharacters = ChatAllowedCharacters.allowedCharacters;
+    private static final String allowedCharacters = ChatAllowedCharacters.allowedCharacters.toString();
     private GuiButton button;
     final int xSizeOfTexture = 192, ySizeOfTexture = 135;
     int posX, posY;
@@ -30,6 +34,7 @@ public class GSGuiGrave extends GuiScreen {
     private StringBuilder graveText = new StringBuilder();
 
     public GSGuiGrave(TileEntityGSGrave tileEntity) {
+        //super(fontRenderer, xPosition, yPosition, width, height);
         entityGrave = tileEntity;
     }
 
@@ -63,8 +68,8 @@ public class GSGuiGrave extends GuiScreen {
         int posX = (this.width - xSizeOfTexture) / 2;
         int posY = (this.height - ySizeOfTexture) / 2;
         drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
-        this.drawString(fontRenderer, ModGraveStone.proxy.getLocalizedString("gui.edit_grave"), posX + 20, posY + 31, 16777215);
-        this.drawString(fontRenderer, graveText.toString(), posX + 20, posY + 41, 16777215);
+        this.drawString(this.fontRendererObj, ModGraveStone.proxy.getLocalizedString("gui.edit_grave"), posX + 20, posY + 31, 16777215);
+        this.drawString(this.fontRendererObj, graveText.toString(), posX + 20, posY + 41, 16777215);
         super.drawScreen(x, y, f);
     }
 
@@ -75,7 +80,6 @@ public class GSGuiGrave extends GuiScreen {
     @Override
     public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
-        Packet250CustomPayload packet = new Packet250CustomPayload();
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         DataOutputStream data = new DataOutputStream(bytes);
 
@@ -88,12 +92,15 @@ public class GSGuiGrave extends GuiScreen {
             e.printStackTrace();
         }
 
-        packet.channel = "GSDeathText";
-        packet.data = bytes.toByteArray();
-        packet.length = packet.data.length;
-        ModLoader.getMinecraftInstance().getNetHandler().addToSendQueue(packet);
-        entityGrave.getDeathTextComponent().setDeathText(graveText.toString());
-        entityGrave.setEditable(true);
+//        ByteBuf buf = buffer(4);
+//        buf.writeInt(42);
+//
+//        FMLProxyPacket packet = new FMLProxyPacket(buf, "GSDeathText");
+//
+//        packet.data = bytes.toByteArray();
+//        Minecraft.getMinecraft().getNetHandler().addToSendQueue(packet);
+//        entityGrave.getDeathTextComponent().setDeathText(graveText.toString());
+//        entityGrave.setEditable(true);
     }
 
     /**

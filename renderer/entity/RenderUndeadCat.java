@@ -24,7 +24,7 @@ public class RenderUndeadCat extends RenderLiving {
     }
 
     public void renderLivingUndeadCat(EntityUndeadCat undeadCat, double par2, double par4, double par6, float par8, float par9) {
-        super.doRenderLiving(undeadCat, par2, par4, par6, par8, par9);
+        super.doRender(undeadCat, par2, par4, par6, par8, par9);
     }
 
     /**
@@ -44,7 +44,7 @@ public class RenderUndeadCat extends RenderLiving {
     }
 
     @Override
-    public void doRenderLiving(EntityLiving entityLiving, double par2, double par4, double par6, float par8, float par9) {
+    public void doRender(EntityLiving entityLiving, double par2, double par4, double par6, float par8, float par9) {
         this.renderLivingUndeadCat((EntityUndeadCat) entityLiving, par2, par4, par6, par8, par9);
     }
 

@@ -1,11 +1,12 @@
 package gravestone.structures.catacombs.components;
 
-import java.util.Random;
-import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.MobSpawnHelper;
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -58,34 +59,34 @@ public class Corridor extends CatacombsBaseComponent {
     @Override
     public boolean addComponentParts(World world, Random random) {
         this.fillWithAir(world, boundingBox, 1, 1, 0, 3, 3, 3);
-        
+
         // block floor
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 0, 1, 4, 0, 3, false, random, getCemeteryCatacombsStones());
-        
+
         // trap floor
-        this.fillWithBlocks(world, boundingBox, 0, 0, 0, 4, 0, 0, GraveStoneConfig.trapID, GraveStoneConfig.trapID, false);
-        
+        this.fillWithBlocks(world, boundingBox, 0, 0, 0, 4, 0, 0, GSBlock.trap, GSBlock.trap, false);
+
         // neter ceiling
-        this.fillWithBlocks(world, boundingBox, 0, 4, 0, 4, 4, 3, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
-        
+        this.fillWithBlocks(world, boundingBox, 0, 4, 0, 4, 4, 3, Blocks.nether_brick, Blocks.nether_brick, false);
+
         // block walls
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 1, 1, 0, 3, 3, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 4, 1, 1, 4, 3, 3, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 0, 4, 4, 4, 4, false, random, getCemeteryCatacombsStones());
-        
+
         // nether walls
-        this.fillWithBlocks(world, boundingBox, 0, 1, 0, 0, 3, 0, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
-        this.fillWithBlocks(world, boundingBox, 4, 1, 0, 4, 3, 0, Block.netherBrick.blockID, Block.netherBrick.blockID, false);
-        
+        this.fillWithBlocks(world, boundingBox, 0, 1, 0, 0, 3, 0, Blocks.nether_brick, Blocks.nether_brick, false);
+        this.fillWithBlocks(world, boundingBox, 4, 1, 0, 4, 3, 0, Blocks.nether_brick, Blocks.nether_brick, false);
+
         // spawn bats
         MobSpawnHelper.spawnBats(world, random, boundingBox);
-        
+
         // web
-        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 1, 3, 2, Block.web.blockID, 0);
-        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 1, 2, 1, Block.web.blockID, 0);
-        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 3, 2, 3, Block.web.blockID, 0);
-        this.randomlyPlaceBlock(world, boundingBox, random, 0.2F, 3, 1, 0, Block.web.blockID, 0);
-        
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 1, 3, 2, 1, 3, 2, Blocks.web, Blocks.web, true);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 1, 2, 1, 1, 2, 1, Blocks.web, Blocks.web, true);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 2, 3, 3, 2, 3, Blocks.web, Blocks.web, true);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 1, 0, 3, 1, 0, Blocks.web, Blocks.web, true);
+
         return true;
     }
 

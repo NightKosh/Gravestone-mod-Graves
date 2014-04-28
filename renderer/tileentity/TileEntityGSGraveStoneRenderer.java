@@ -45,7 +45,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         EnumGraves graveType = tileEntity.getGraveType();
         int meta = 0;
 
-        if (tileEntity.worldObj != null) {
+        if (tileEntity.getWorldObj() != null) {
             meta = tileEntity.getBlockMetadata();
         }
 
@@ -53,7 +53,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         //texture
         GL11.glPushMatrix();
 
-        if (tileEntity.worldObj == null && GraveStoneHelper.isSwordGrave(tileEntity)) {
+        if (tileEntity.getWorldObj() == null && GraveStoneHelper.isSwordGrave(tileEntity)) {
             GL11.glTranslatef((float) x + 0.5F, (float) y + 2, (float) z + 0.5F);
             GL11.glScalef(1.5F, -1.5F, -1.5F);
         } else {

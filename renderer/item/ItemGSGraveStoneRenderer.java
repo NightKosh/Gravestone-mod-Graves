@@ -1,14 +1,12 @@
 package gravestone.renderer.item;
 
-import gravestone.tileentity.TileEntityGSGraveStone;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.block.GraveStoneHelper;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+import gravestone.tileentity.TileEntityGSGraveStone;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
-import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 /**
  * GraveStone mod
@@ -44,6 +42,6 @@ public class ItemGSGraveStoneRenderer implements IItemRenderer {
             }
         }
 
-        TileEntityRenderer.instance.renderTileEntityAt(te, 0.0D, 0.0D, 0.0D, 0.0F);
+        TileEntityRendererDispatcher.instance.renderTileEntityAt(te, 0.0D, 0.0D, 0.0D, 0.0F);
     }
 }

@@ -1,16 +1,13 @@
 package gravestone.core;
 
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import gravestone.tileentity.TileEntityGSGrave;
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.Player;
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
+
+import java.io.IOException;
 
 /**
  * GraveStone mod
@@ -18,27 +15,29 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GSPacketHandler implements IPacketHandler {
+public class GSPacketHandler extends SimpleChannelInboundHandler<FMLProxyPacket> {
 
     @Override
-    public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
-        if (packet.channel.equals("GSDeathText")) {
-            World world = ((EntityPlayer) player).worldObj;
+    protected void channelRead0(ChannelHandlerContext ctx, FMLProxyPacket packet) throws Exception {
+        if (packet.channel().equals("GSDeathText")) {
+            ByteBuf payload = packet.payload();
 
-            if (world != null) {
-                DataInputStream InputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
-
-                try {
-                    TileEntity tileEntity = world.getBlockTileEntity(InputStream.readInt(), InputStream.readInt(), InputStream.readInt());
-
-                    if (tileEntity != null) {
-                        String str = InputStream.readUTF();
-                        ((TileEntityGSGrave) tileEntity).getDeathTextComponent().setDeathText(str);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+//            try {
+//                int bytesCount = payload.readableBytes();
+//                if (bytesCount >= 12) {
+//                    TileEntity tileEntity = world.getTileEntity(payload.readInt(), payload.readInt(), payload.readInt());
+//
+//                    if (tileEntity != null) {
+//                        StringBuffer str = new StringBuffer();
+//                        for (int i = 12; i < bytesCount; i++) {
+//                            str.append(payload.readChar());
+//                        }
+//                        ((TileEntityGSGrave) tileEntity).getDeathTextComponent().setDeathText(str.toString());
+//                    }
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
     }
 }

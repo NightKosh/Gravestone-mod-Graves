@@ -1,17 +1,17 @@
 package gravestone.structures.village;
 
-import gravestone.config.GraveStoneConfig;
 import gravestone.block.BlockGSMemorial;
+import gravestone.core.GSBlock;
 import gravestone.tileentity.TileEntityGSMemorial;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.structure.ComponentVillage;
-import net.minecraft.world.gen.structure.ComponentVillageStartPiece;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
+import net.minecraft.world.gen.structure.StructureVillagePieces;
 
 /**
  * GraveStone mod
@@ -19,7 +19,7 @@ import net.minecraft.world.gen.structure.StructureComponent;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSVillageMemorial extends ComponentVillage {
+public class ComponentGSVillageMemorial extends StructureVillagePieces.Village {
 
     private int averageGroundLevel = -1;
     private static final int HEIGHT = 6;
@@ -27,13 +27,13 @@ public class ComponentGSVillageMemorial extends ComponentVillage {
     public ComponentGSVillageMemorial() {
     }
 
-    public ComponentGSVillageMemorial(ComponentVillageStartPiece componentVillageStartPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int direction) {
-        super(componentVillageStartPiece, componentType);
+    public ComponentGSVillageMemorial(StructureVillagePieces.Start startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int direction) {
+        super(startPiece, componentType);
         this.coordBaseMode = direction;
         this.boundingBox = structureBoundingBox;
     }
 
-    public static ComponentGSVillageMemorial buildComponent(ComponentVillageStartPiece startPiece, List list, Random random, int par3, int par4, int par5, int direction, int componentType) {
+    public static ComponentGSVillageMemorial buildComponent(StructureVillagePieces.Start startPiece, List list, Random random, int par3, int par4, int par5, int direction, int componentType) {
         StructureBoundingBox structureBoundingBox = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 5, HEIGHT, 5, direction);
         return canVillageGoDeeper(structureBoundingBox) && StructureComponent.findIntersecting(list, structureBoundingBox) == null ? new ComponentGSVillageMemorial(startPiece, componentType, random, structureBoundingBox, direction) : null;
     }
@@ -55,16 +55,16 @@ public class ComponentGSVillageMemorial extends ComponentVillage {
         }
 
         //this.fillWithAir(world, structureBoundingBox, 0, 1, 0, 5, HEIGHT, 5);
-        int groundID;
+        Block ground;
 
         int biomeId = world.getBiomeGenForCoords(this.getXWithOffset(0, 0), this.getZWithOffset(0, 0)).biomeID;
         if (biomeId == BiomeGenBase.desert.biomeID || biomeId == BiomeGenBase.desertHills.biomeID) {
-            groundID = Block.sand.blockID;
+            ground = Blocks.sand;
         } else {
-            groundID = Block.grass.blockID;
+            ground = Blocks.grass;
         }
 
-        this.fillWithBlocks(world, structureBoundingBox, 0, -5, 0, 5, 0, 5, groundID, groundID, false);
+        this.fillWithBlocks(world, structureBoundingBox, 0, -5, 0, 5, 0, 5, ground, ground, false);
         int memorialMeta = BlockGSMemorial.getMetaDirection(this.coordBaseMode);
         byte memorialType = BlockGSMemorial.getMemorialType(random, 0);
         placeMemorial(world, random, 2, 1, 2, memorialMeta, memorialType);
@@ -72,7 +72,7 @@ public class ComponentGSVillageMemorial extends ComponentVillage {
         for (int x = 0; x < 5; x++) {
             for (int z = 0; z < 5; z++) {
                 this.clearCurrentPositionBlocksUpwards(world, x, HEIGHT, z, structureBoundingBox);
-                this.fillCurrentPositionBlocksDownwards(world, groundID, 0, x, -1, z, structureBoundingBox);
+                this.func_151554_b(world, ground, 0, x, -1, z, structureBoundingBox);
             }
         }
 
@@ -80,8 +80,8 @@ public class ComponentGSVillageMemorial extends ComponentVillage {
     }
 
     protected void placeMemorial(World world, Random random, int x, int y, int z, int memorialMeta, byte memorialType) {
-        this.placeBlockAtCurrentPosition(world, GraveStoneConfig.memorialID, memorialMeta, x, y, z, boundingBox);
-        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getBlockTileEntity(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
+        this.placeBlockAtCurrentPosition(world, GSBlock.memorial, memorialMeta, x, y, z, boundingBox);
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
 
         if (tileEntity != null) {
             tileEntity.setGraveType(memorialType);

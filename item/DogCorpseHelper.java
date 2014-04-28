@@ -1,12 +1,14 @@
 package gravestone.item;
 
 import gravestone.ModGraveStone;
-import java.util.List;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 /**
  * GraveStone mod
@@ -18,17 +20,17 @@ public class DogCorpseHelper extends CorpseHelper {
 
     private DogCorpseHelper() {
     }
-    
-    public static ItemStack getDefaultCorpse(int id, int type) {
-        ItemStack corpse = new ItemStack(id, 1, type);
+
+    public static ItemStack getDefaultCorpse(Item item, int type) {
+        ItemStack corpse = new ItemStack(item, 1, type);
         NBTTagCompound nbtTag = new NBTTagCompound();
-        
+
         nbtTag.setByte("Collar", (byte) 14);
-        
+
         corpse.setTagCompound(nbtTag);
         return corpse;
     }
-    
+
     public static void setNbt(EntityWolf dog, NBTTagCompound nbt) {
         setName(dog, nbt);
         nbt.setByte("Collar", (byte) dog.getCollarColor());
@@ -57,10 +59,10 @@ public class DogCorpseHelper extends CorpseHelper {
     }
 
     private static String getCollarStr(NBTTagCompound nbtTag) {
-        return ModGraveStone.proxy.getLocalizedString("item.corpse.collar") + " " + 
+        return ModGraveStone.proxy.getLocalizedString("item.corpse.collar") + " " +
                 ModGraveStone.proxy.getLocalizedString(getCollar(nbtTag.getByte("Collar")));
     }
-    
+
     private static String getCollar(int type) {
         switch (type) {
             case 0:

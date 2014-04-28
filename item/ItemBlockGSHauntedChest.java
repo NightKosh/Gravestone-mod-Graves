@@ -6,6 +6,7 @@
 package gravestone.item;
 
 import gravestone.block.enums.EnumHauntedChest;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -20,8 +21,8 @@ import net.minecraft.world.World;
  */
 public class ItemBlockGSHauntedChest extends ItemBlock {
 
-    public ItemBlockGSHauntedChest(int id) {
-        super(id);
+    public ItemBlockGSHauntedChest(Block block) {
+        super(block);
         setHasSubtypes(true);
         setUnlocalizedName("Haunted chest");
     }

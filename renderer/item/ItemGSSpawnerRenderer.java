@@ -6,11 +6,9 @@
 package gravestone.renderer.item;
 
 import gravestone.tileentity.TileEntityGSSpawner;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
-import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 /**
  * GraveStone mod
@@ -38,6 +36,6 @@ public class ItemGSSpawnerRenderer implements IItemRenderer {
         TileEntityGSSpawner te = new TileEntityGSSpawner();
         te.blockMetadata = itemstack.getItemDamage();
 
-        TileEntityRenderer.instance.renderTileEntityAt(te, 0.0D, 0.0D, 0.0D, 0.0F);
+        TileEntityRendererDispatcher.instance.renderTileEntityAt(te, 0.0D, 0.0D, 0.0D, 0.0F);
     }
 }

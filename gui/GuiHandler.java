@@ -29,7 +29,7 @@ public class GuiHandler implements IGuiHandler {
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         switch (id) {
             case 0:
-                TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+                TileEntity tileEntity = world.getTileEntity(x, y, z);
 
                 if (tileEntity != null) {
                     return new GSGuiGrave((TileEntityGSGrave) tileEntity);

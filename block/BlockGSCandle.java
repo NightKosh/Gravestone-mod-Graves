@@ -5,13 +5,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.config.GraveStoneConfig;
 import gravestone.tileentity.TileEntityGSCandle;
-import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -21,12 +22,12 @@ import net.minecraft.world.World;
  */
 public class BlockGSCandle extends BlockContainer {
 
-    public BlockGSCandle(int id) {
-        super(id, Material.materialCarpet);
-        this.setStepSound(Block.soundClothFootstep);
-        this.setUnlocalizedName("candle");
+    public BlockGSCandle() {
+        super(Material.carpet);
+        this.setStepSound(Block.soundTypeCloth);
+        this.setBlockName("candle");
         this.setHardness(0);
-        this.setLightValue(1);
+        this.setLightLevel(1);
         this.setResistance(0);
         this.setCreativeTab(ModGraveStone.creativeTab);
         this.setBlockBounds(0.4F, 0.0F, 0.4F, 0.6F, 0.6F, 0.6F);
@@ -98,7 +99,7 @@ public class BlockGSCandle extends BlockContainer {
      * neighbor blockID
      */
     @Override
-    public void onNeighborBlockChange(World world, int x, int y, int z, int blockId) {
+    public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
         if (!this.canPlaceCandleOn(world, x, y - 1, z)) {
             this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
             world.setBlockToAir(x, y, z);
@@ -109,16 +110,16 @@ public class BlockGSCandle extends BlockContainer {
      * Gets if we can place a torch on a block.
      */
     private boolean canPlaceCandleOn(World world, int x, int y, int z) {
-        if (world.doesBlockHaveSolidTopSurface(x, y, z)) {
+        if (world.doesBlockHaveSolidTopSurface(world, x, y, z)) {
             return true;
         } else {
-            int blockId = world.getBlockId(x, y, z);
-            return (Block.blocksList[blockId] != null && Block.blocksList[blockId].canPlaceTorchOnTop(world, x, y, z));
+            Block block = world.getBlock(x, y, z);
+            return (block != null && block.canPlaceTorchOnTop(world, x, y, z));
         }
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int var2) {
         return new TileEntityGSCandle();
     }
 }

@@ -36,7 +36,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
     protected static ModelGraveStone catStatue = new ModelCatStatueMemorial();
     protected static ModelCreeperStatueMemorial creeperStatue = new ModelCreeperStatueMemorial();
     
-    private static IModelCustom celticCross = AdvancedModelLoader.loadModel("/assets/gravestone/obj_models/CelticCross.obj");
+    private static IModelCustom celticCross;// = AdvancedModelLoader.loadModel("/assets/gravestone/obj_models/CelticCross.obj");
     //private ResourceLocation casinoTexture = new ResourceLocation("modid", "textures/casinoTexture.png");
     
     public static TileEntityGSMemorialRenderer instance;
@@ -51,7 +51,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
         byte memorialType = tileEntity.getGraveTypeNum();
         int meta;
 
-        if (tileEntity.worldObj != null) {
+        if (tileEntity.getWorldObj() != null) {
             meta = tileEntity.getBlockMetadata();
         } else {
             meta = 0;
@@ -61,7 +61,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
         //texture
         GL11.glPushMatrix();
 
-        if (tileEntity.worldObj != null) {
+        if (tileEntity.getWorldObj() != null) {
             GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
             GL11.glScalef(1F, -1F, -1F);
         } else {

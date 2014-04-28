@@ -1,11 +1,13 @@
 package gravestone.structures;
 
-import java.util.Random;
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
+
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -41,8 +43,8 @@ public class ComponentGraveStone extends StructureComponent {
      * Place block
      */
     @Override
-    public void placeBlockAtCurrentPosition(World world, int blockId, int blockMeta, int x, int y, int z, StructureBoundingBox boundingBox) {
-        super.placeBlockAtCurrentPosition(world, blockId, blockMeta, x, y, z, boundingBox);
+    public void placeBlockAtCurrentPosition(World world, Block block, int blockMeta, int x, int y, int z, StructureBoundingBox boundingBox) {
+        super.placeBlockAtCurrentPosition(world, block, blockMeta, x, y, z, boundingBox);
     }
 
     /**

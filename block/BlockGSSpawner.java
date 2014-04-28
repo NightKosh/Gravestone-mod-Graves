@@ -7,15 +7,18 @@ import gravestone.block.enums.EnumSpawner;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.Resources;
 import gravestone.tileentity.TileEntityGSSpawner;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockMobSpawner;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import net.minecraft.block.BlockMobSpawner;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 
 /**
  * GraveStone mod
@@ -31,16 +34,17 @@ public class BlockGSSpawner extends BlockMobSpawner {
     public static final List<Byte> BOSS_SPAWNERS = new ArrayList<Byte>(Arrays.asList(
             (byte) EnumSpawner.WITHER_SPAWNER.ordinal()));
 
-    public BlockGSSpawner(int id) {
-        super(id);
-        this.setUnlocalizedName("Spawner");
+    public BlockGSSpawner() {
+        super();
+        this.setBlockName("Spawner");
         this.setHardness(5.0F);
-        this.setLightValue(0.45F);
-        this.setStepSound(soundMetalFootstep);
+        this.setLightLevel(0.45F);
+        this.setStepSound(Block.soundTypeMetal);
         this.disableStats();
         this.setCreativeTab(ModGraveStone.creativeTab);
-        this.setTextureName(Resources.PENTAGRAM_ICO);
+        this.setBlockTextureName(Resources.PENTAGRAM_ICO);
         this.setBlockBounds(-0.5F, 0, -0.5F, 1.5F, 0.05F, 1.5F);
+        this.setHarvestLevel("pickaxe", 1);
     }
 
     /**
@@ -48,7 +52,7 @@ public class BlockGSSpawner extends BlockMobSpawner {
      * the block.
      */
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int var2) {
         return new TileEntityGSSpawner();
     }
 
@@ -101,12 +105,12 @@ public class BlockGSSpawner extends BlockMobSpawner {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(int id, CreativeTabs tab, List list) {
+    public void getSubBlocks(Item item, CreativeTabs tab, List list) {
         for (byte meta : MOB_SPAWNERS) {
-            list.add(new ItemStack(id, 1, meta));
+            list.add(new ItemStack(item, 1, meta));
         }
         for (byte meta : BOSS_SPAWNERS) {
-            list.add(new ItemStack(id, 1, meta));
+            list.add(new ItemStack(item, 1, meta));
         }
     }
 }

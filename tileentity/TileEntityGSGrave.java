@@ -2,13 +2,15 @@ package gravestone.tileentity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.List;
-import java.util.Random;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+
+import java.util.List;
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -62,7 +64,7 @@ public abstract class TileEntityGSGrave extends TileEntity {
     public void setItems(List<ItemStack> items) {
         gSItems.setItems(items);
     }
-    
+
     public void setAdditionalItems(ItemStack[] items) {
         gSItems.setAdditionalItems(items);
     }
@@ -70,7 +72,7 @@ public abstract class TileEntityGSGrave extends TileEntity {
     public void dropAllItems() {
         gSItems.dropAllItems();
     }
-    
+
     public void clearInventory() {
         gSItems.graveContents.clear();
     }
@@ -79,7 +81,6 @@ public abstract class TileEntityGSGrave extends TileEntity {
         return gSDeathText;
     }
 
-    //this.onInventoryChanged();
     public int getAge() {
         return age;
     }
@@ -107,14 +108,21 @@ public abstract class TileEntityGSGrave extends TileEntity {
     /**
      * Called when you receive a TileEntityData packet for the location this
      * TileEntity is currently in. On the client, the NetworkManager will always
-     * be the remote server. On the server, it will be whomever is responsible
-     * for sending the packet.
+     * be the remote server. On the server, it will be whomever is responsible for
+     * sending the packet.
      *
      * @param net The NetworkManager the packet originated from
-     * @param pkt The data packet
+     * @param packet The data packet
      */
     @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-        readFromNBT(packet.data);
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
+        readFromNBT(packet.func_148857_g());
+    }
+
+    @Override
+    public Packet getDescriptionPacket() {
+        NBTTagCompound nbtTag = new NBTTagCompound();
+        this.writeToNBT(nbtTag);
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
     }
 }

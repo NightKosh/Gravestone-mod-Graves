@@ -6,6 +6,7 @@ import gravestone.block.enums.EnumSpawner;
 import gravestone.core.GSMobSpawn;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -57,13 +58,13 @@ public class GSMobSpawner extends GSSpawner {
                 double x = tileEntity.xCoord + 0.5;
                 double y = tileEntity.yCoord;
                 double z = tileEntity.zCoord + 0.5;
-                entity.setLocationAndAngles(x, y, z, tileEntity.worldObj.rand.nextFloat() * 360, 0);
+                entity.setLocationAndAngles(x, y, z, tileEntity.getWorldObj().rand.nextFloat() * 360, 0);
                 if (isBossSpawner()) {
-                    tileEntity.worldObj.removeBlockTileEntity(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
-                    tileEntity.worldObj.setBlock(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, 0);
-                    tileEntity.worldObj.spawnEntityInWorld(entity);
-                } else if (tileEntity.worldObj.getLightBrightness(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord) <= MAX_LIGHT_VALUE){
-                    tileEntity.worldObj.spawnEntityInWorld(entity);
+                    tileEntity.getWorldObj().removeTileEntity(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+                    tileEntity.getWorldObj().setBlock(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, Blocks.air);
+                    tileEntity.getWorldObj().spawnEntityInWorld(entity);
+                } else if (tileEntity.getWorldObj().getLightBrightness(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord) <= MAX_LIGHT_VALUE) {
+                    tileEntity.getWorldObj().spawnEntityInWorld(entity);
                 }
             }
             this.updateDelay();
@@ -76,11 +77,11 @@ public class GSMobSpawner extends GSSpawner {
 
     private EnumSpawner getSpawnerType() {
         if (spawnerType == null) {
-            if (tileEntity.worldObj == null) {
+            if (tileEntity.getWorldObj() == null) {
                 GraveStoneLogger.logError("Spawner te worldobj is null !!!!!");
                 return EnumSpawner.ZOMBIE_SPAWNER;
             } else {
-                byte meta = (byte) tileEntity.worldObj.getBlockMetadata(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+                byte meta = (byte) tileEntity.getWorldObj().getBlockMetadata(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
                 spawnerType = EnumSpawner.getById(meta);
                 return spawnerType;
             }
@@ -100,7 +101,7 @@ public class GSMobSpawner extends GSSpawner {
 
     @Override
     protected Entity getMob() {
-        return GSMobSpawn.getMobEntityForSpawner(this.tileEntity.worldObj, getSpawnerType(),
+        return GSMobSpawn.getMobEntityForSpawner(this.tileEntity.getWorldObj(), getSpawnerType(),
                 this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord);
     }
 

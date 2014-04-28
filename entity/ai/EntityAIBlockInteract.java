@@ -105,7 +105,6 @@ public class EntityAIBlockInteract extends EntityAIBase {
      * Determines if a Block can be broken with AI.
      */
     private Block findBlock(int x, int y, int z) {
-        int id = this.theEntity.worldObj.getBlockId(x, y, z);
-        return id != block.blockID ? null : Block.blocksList[id];
+        return this.theEntity.worldObj.getBlock(x, y, z);
     }
 }

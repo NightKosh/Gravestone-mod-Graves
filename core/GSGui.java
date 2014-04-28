@@ -17,6 +17,6 @@ public class GSGui {
     }
 
     public static void registration() {
-        NetworkRegistry.instance().registerGuiHandler(ModGraveStone.instance, new GuiHandler());
+        NetworkRegistry.INSTANCE.registerGuiHandler(ModGraveStone.instance, new GuiHandler());
     }
 }

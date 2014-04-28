@@ -24,11 +24,11 @@ public class GSCompatibilityBackpacksMod {
             ItemStack backpack;
             if (playerData.hasKey("backpack")) {
                 backpack = ItemStack.loadItemStackFromNBT(playerData.getCompoundTag("backpack")).copy();
-                playerData.setCompoundTag("backpack", new NBTTagCompound());
+                playerData.setTag("backpack", new NBTTagCompound());
                 items.add(backpack);
 
                 System.out.println("backpack !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                System.out.println(backpack.itemID);
+                //System.out.println(backpack);
             }
         }
     }

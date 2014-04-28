@@ -1,10 +1,9 @@
-
 package gravestone.core;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import gravestone.config.GraveStoneConfig;
-import gravestone.item.ItemGSCorpse;
 import gravestone.item.ItemGSChisel;
+import gravestone.item.ItemGSCorpse;
 import net.minecraft.item.Item;
 
 /**
@@ -15,23 +14,19 @@ import net.minecraft.item.Item;
  */
 public class GSItem {
 
-    private GSItem() {
-    }
-    
     // item chisel
     public static Item chisel;
     public static Item corpse;
-    
+
+    private GSItem() {
+    }
+
     public static void registration() {
         // chisel
-        chisel = new ItemGSChisel(GraveStoneConfig.chiselId);
-        LanguageRegistry.addName(chisel, "Chisel");
-        
-        corpse = new ItemGSCorpse(GraveStoneConfig.corpseId);
-        LanguageRegistry.addName(corpse, "Corpse");
-        
-        
-        // override vanilla skulls
-//        Item.skull = (new ItemSkull(Item.skull.itemID)).setUnlocalizedName(Item.skull.getUnlocalizedName()).setTextureName("skull");   
+        chisel = new ItemGSChisel();
+        GameRegistry.registerItem(chisel, "Chisel");
+
+        corpse = new ItemGSCorpse();
+        GameRegistry.registerItem(corpse, "Corpse");
     }
 }

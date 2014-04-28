@@ -1,14 +1,14 @@
 package gravestone.tileentity;
 
 import gravestone.block.enums.EnumGraves;
-import java.util.ArrayList;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
 
 /**
  * GraveStone mod
@@ -117,7 +117,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         nbtTag.setByte("SwordType", swordType);
         nbtTag.setInteger("SwordDamage", swordDamage);
         nbtTag.setString("SwordName", swordName);
-        nbtTag.setCompoundTag("SwordNBT", swordNBT);
+        nbtTag.setTag("SwordNBT", swordNBT);
     }
 
     /*
@@ -195,27 +195,27 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
      * Return sword as ItemStack
      */
     public ItemStack getSwordItem() {
-        int id;
+        Item item;
 
         switch (swordType) {
             case 5:
-                id = Item.swordDiamond.itemID;
+                item = Items.diamond_sword;
                 break;
             case 3:
-                id = Item.swordIron.itemID;
+                item = Items.iron_sword;
                 break;
             case 2:
-                id = Item.swordStone.itemID;
+                item = Items.stone_sword;
                 break;
             case 4:
-                id = Item.swordGold.itemID;
+                item = Items.golden_sword;
                 break;
             default:
-                id = Item.swordWood.itemID;
+                item = Items.wooden_sword;
         }
 
-        ItemStack sword = new ItemStack(id, 1, swordDamage);
-        sword.setItemName(swordName);
+        ItemStack sword = new ItemStack(item, 1, swordDamage);
+        sword.setStackDisplayName(swordName);
         sword.setTagCompound(swordNBT);
         return sword;
     }
@@ -224,16 +224,6 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         return EnumGraves.getByID(graveType);
     }
 
-    /**
-     * Overriden in a sign to provide the text.
-     */
-    @Override
-    public Packet getDescriptionPacket() {
-        NBTTagCompound nbtTag = new NBTTagCompound();
-        this.writeToNBT(nbtTag);
-        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
-    }
-    
     public boolean isEmpty() {
         return gSItems.graveContents.isEmpty();
     }

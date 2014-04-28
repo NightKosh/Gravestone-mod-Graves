@@ -6,6 +6,7 @@ import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.MemorialGenerationHelper;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
@@ -38,25 +39,25 @@ public class ComponentGSMemorial extends ComponentGraveStone {
         }
 
         this.boundingBox.offset(0, averageGroundLevel - boundingBox.maxY + HEIGHT - 1, 0);
-        int groundID, undergroundID;
+        Block ground, underground;
         BiomeGenBase biom = world.getBiomeGenForCoords(getXWithOffset(0, 0), getZWithOffset(0, 0));
 
         if (biom.biomeID == BiomeGenBase.desert.biomeID || biom.biomeID == BiomeGenBase.desertHills.biomeID || biom.biomeID == BiomeGenBase.beach.biomeID) {
-            groundID = Block.sand.blockID;
-            undergroundID = Block.sand.blockID;
+            ground = Blocks.sand;
+            underground = Blocks.sand;
         } else {
-            groundID = Block.grass.blockID;
-            undergroundID = Block.dirt.blockID;
+            ground = Blocks.grass;
+            underground = Blocks.dirt;
         }
 
         this.fillWithAir(world, boundingBox, 0, 0, 2, 0, 6, 2);
-        this.fillWithBlocks(world, boundingBox, 0, 0, 0, 2, 0, 2, groundID, groundID, false);
+        this.fillWithBlocks(world, boundingBox, 0, 0, 0, 2, 0, 2, ground, ground, false);
         byte memorialType = BlockGSMemorial.getMemorialType(random, 0);
         MemorialGenerationHelper.placeMemorial(this, world, random, 1, 1, 1, BlockGSMemorial.getMetaDirection(coordBaseMode), memorialType);
 
         for (int x = 0; x < 3; x++) {
             for (int z = 0; z < 3; z++) {
-                this.fillCurrentPositionBlocksDownwards(world, undergroundID, 0, x, -1, z, boundingBox);
+                this.func_151554_b(world, underground, 0, x, -1, z, boundingBox);
             }
         }
 

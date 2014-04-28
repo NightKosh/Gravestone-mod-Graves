@@ -3,26 +3,22 @@ package gravestone.entity.monster;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.core.Resources;
-import java.util.Random;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityLivingData;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityHorse;
-import net.minecraft.entity.passive.EntityOcelot;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.passive.EntityWolf;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -33,7 +29,7 @@ import net.minecraft.world.World;
 public class EntityZombieCat extends EntityUndeadCat {
 
     private static final byte CAT_TYPES = 4;
-    
+
     public EntityZombieCat(World world) {
         super(world);
         texture = Resources.ZOMBIE_OZELOT;
@@ -55,8 +51,8 @@ public class EntityZombieCat extends EntityUndeadCat {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(10); // max health
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D); // movespeed
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10); // max health
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D); // movespeed
     }
 
     /**
@@ -124,7 +120,7 @@ public class EntityZombieCat extends EntityUndeadCat {
      * Plays step sound at given x, y, z for the entity
      */
     @Override
-    protected void playStepSound(int par1, int par2, int par3, int par4) {
+    protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_) {
     }
 
     /**
@@ -139,8 +135,8 @@ public class EntityZombieCat extends EntityUndeadCat {
      * Returns the item ID for the item the mob drops on death.
      */
     @Override
-    protected int getDropItemId() {
-        return Item.rottenFlesh.itemID;
+    protected Item getDropItem() {
+        return Items.rotten_flesh;
     }
 
     public int getSkin() {
@@ -158,8 +154,8 @@ public class EntityZombieCat extends EntityUndeadCat {
     public void onKillEntity(EntityLivingBase entityLiving) {
         super.onKillEntity(entityLiving);
 
-        if (this.worldObj.difficultySetting >= 2) {
-            if (this.worldObj.difficultySetting == 2 && this.rand.nextBoolean()) {
+        if (this.worldObj.difficultySetting == EnumDifficulty.NORMAL || this.worldObj.difficultySetting == EnumDifficulty.HARD) {
+            if (this.rand.nextBoolean()) {
                 return;
             }
 
@@ -167,7 +163,7 @@ public class EntityZombieCat extends EntityUndeadCat {
                 EntityZombie entityZombie = new EntityZombie(this.worldObj);
                 entityZombie.copyLocationAndAnglesFrom(entityLiving);
                 this.worldObj.removeEntity(entityLiving);
-                entityZombie.onSpawnWithEgg((EntityLivingData) null);
+                entityZombie.onSpawnWithEgg((IEntityLivingData) null);
                 entityZombie.setVillager(true);
 
                 if (entityLiving.isChild()) {
@@ -188,7 +184,7 @@ public class EntityZombieCat extends EntityUndeadCat {
                 int catType = ((EntityOcelot) entityLiving).getTameSkin();
                 this.worldObj.removeEntity(entityLiving);
                 entityZombieCat.setSkin(catType);
-                entityZombieCat.onSpawnWithEgg((EntityLivingData) null);
+                entityZombieCat.onSpawnWithEgg((IEntityLivingData) null);
                 this.worldObj.spawnEntityInWorld(entityZombieCat);
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             } else if (entityLiving instanceof EntityHorse) {
@@ -203,7 +199,7 @@ public class EntityZombieCat extends EntityUndeadCat {
     }
 
     @Override
-    public EntityLivingData onSpawnWithEgg(EntityLivingData data) {
+    public IEntityLivingData onSpawnWithEgg(IEntityLivingData data) {
         this.setSkin(new Random().nextInt(CAT_TYPES));
         return super.onSpawnWithEgg(data);
     }

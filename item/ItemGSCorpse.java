@@ -4,15 +4,16 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.item.enums.EnumCorpse;
-import java.util.List;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 /**
  * GraveStone mod
@@ -21,11 +22,11 @@ import net.minecraft.world.World;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class ItemGSCorpse extends Item {
-    
-    private static Icon[] icons;
-    
-    public ItemGSCorpse(int id) {
-        super(id);
+
+    private static IIcon[] icons;
+
+    public ItemGSCorpse() {
+        super();
         setCreativeTab(ModGraveStone.creativeTab);
         setUnlocalizedName("Corpse");
         this.setHasSubtypes(true);
@@ -53,9 +54,9 @@ public class ItemGSCorpse extends Item {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(int id, CreativeTabs tab, List list) {
+    public void getSubItems(Item item, CreativeTabs tab, List list) {
         for (int damage = 0; damage < EnumCorpse.values().length; ++damage) {
-            list.add(CorpseHelper.getDefaultCorpse(id, damage));
+            list.add(CorpseHelper.getDefaultCorpse(item, damage));
         }
     }
 
@@ -66,15 +67,16 @@ public class ItemGSCorpse extends Item {
     public int getMetadata(int metadata) {
         return metadata;
     }
+
     @Override
-    public String getItemDisplayName(ItemStack itemStack) {
+    public String getUnlocalizedName(ItemStack itemStack) {
         return EnumCorpse.getById((byte) itemStack.getItemDamage()).getName();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister register) {
-        this.icons = new Icon[EnumCorpse.values().length];
+    public void registerIcons(IIconRegister register) {
+        this.icons = new IIcon[EnumCorpse.values().length];
 
         for (int i = 0; i < EnumCorpse.values().length; ++i) {
             this.icons[i] = register.registerIcon(EnumCorpse.values()[i].getIcon());
@@ -86,7 +88,7 @@ public class ItemGSCorpse extends Item {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getIconFromDamage(int damage) {
+    public IIcon getIconFromDamage(int damage) {
         if (damage < 0 || damage >= EnumCorpse.values().length) {
             damage = 0;
         }

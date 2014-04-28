@@ -1,13 +1,15 @@
 package gravestone.item;
 
 import gravestone.ModGraveStone;
-import java.util.List;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 /**
  * GraveStone mod
@@ -19,13 +21,13 @@ public class VillagerCorpseHelper extends CorpseHelper {
 
     private VillagerCorpseHelper() {
     }
-    
-    public static ItemStack getDefaultCorpse(int id, int type) {
-        ItemStack corpse = new ItemStack(id, 1, type);
+
+    public static ItemStack getDefaultCorpse(Item item, int type) {
+        ItemStack corpse = new ItemStack(item, 1, type);
         NBTTagCompound nbtTag = new NBTTagCompound();
-        
+
         nbtTag.setInteger("VillagerType", 0);
-        
+
         corpse.setTagCompound(nbtTag);
         return corpse;
     }
@@ -33,7 +35,7 @@ public class VillagerCorpseHelper extends CorpseHelper {
     public static void setNbt(EntityVillager villager, NBTTagCompound nbt) {
         setName(villager, nbt);
         nbt.setInteger("VillagerType", villager.getProfession());
-        
+
         MerchantRecipeList recipes = villager.getRecipes(null);
         MerchantRecipe recipe;
         NBTTagCompound recipeTag;
@@ -44,7 +46,7 @@ public class VillagerCorpseHelper extends CorpseHelper {
             recipeTag.setInteger("maxUses", 7);
             recipe.readFromTags(recipeTag);
         }
-        nbt.setCompoundTag("Offers", recipes.getRecipiesAsTags());
+        nbt.setTag("Offers", recipes.getRecipiesAsTags());
     }
 
     public static void spawnVillager(World world, int x, int y, int z, NBTTagCompound nbtTag) {
@@ -54,7 +56,7 @@ public class VillagerCorpseHelper extends CorpseHelper {
         NBTTagCompound nbt = new NBTTagCompound();
         villager.writeEntityToNBT(nbt);
         if (nbtTag.hasKey("Offers")) {
-            nbt.setCompoundTag("Offers", nbtTag.getCompoundTag("Offers"));
+            nbt.setTag("Offers", nbtTag.getCompoundTag("Offers"));
         }
         villager.readEntityFromNBT(nbt);
 
@@ -80,10 +82,10 @@ public class VillagerCorpseHelper extends CorpseHelper {
     }
 
     private static String getType(NBTTagCompound nbtTag) {
-        return ModGraveStone.proxy.getLocalizedString("item.corpse.villager_type") + " " + 
+        return ModGraveStone.proxy.getLocalizedString("item.corpse.villager_type") + " " +
                 ModGraveStone.proxy.getLocalizedString(getVillagerProfession(getVillagerType(nbtTag)));
     }
-    
+
     private static String getVillagerProfession(int type) {
         switch (type) {
             case 0:

@@ -1,19 +1,22 @@
 package gravestone.item;
 
-import gravestone.block.enums.EnumGraves;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
-import java.util.List;
+import gravestone.block.enums.EnumGraves;
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.ChatMessageComponent;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 /**
  * GraveStone mod
@@ -23,10 +26,31 @@ import net.minecraft.world.World;
  */
 public class ItemBlockGSGraveStone extends ItemBlock {
 
-    public ItemBlockGSGraveStone(int id) {
-        super(id);
+    public ItemBlockGSGraveStone(Block block) {
+        super(block);
         setHasSubtypes(true);
         setUnlocalizedName("Gravestone");
+    }
+
+    /**
+     * Return sword type for sword grave
+     *
+     * @param sword Sword item id
+     */
+    public static byte swordIdtoSwordGraveType(Item sword) {
+        if (sword.equals(Items.diamond_sword)) {
+            return 5;
+        } else if (sword.equals(Items.iron_sword)) {
+            return 3;
+        } else if (sword.equals(Items.golden_sword)) {
+            return 4;
+        } else if (sword.equals(Items.stone_sword)) {
+            return 2;
+        } else if (sword.equals(Items.wooden_sword)) {
+            return 1;
+        }
+
+        return 0;
     }
 
     @Override
@@ -70,9 +94,9 @@ public class ItemBlockGSGraveStone extends ItemBlock {
                     String name = stack.stackTagCompound.getString("name");
                     String killerName = ModGraveStone.proxy.getLocalizedEntityName(stack.stackTagCompound.getString("KillerName"));
                     if (killerName.length() == 0) {
-                        list.add(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name}).toString());
+                        list.add(new ChatComponentTranslation(deathText, new Object[]{name}).toString());
                     } else {
-                        list.add(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name, killerName.toLowerCase()}).toString());
+                        list.add(new ChatComponentTranslation(deathText, new Object[]{name, killerName.toLowerCase()}).toString());
                     }
                 }
             } else {
@@ -93,12 +117,12 @@ public class ItemBlockGSGraveStone extends ItemBlock {
                 }
 
                 if (stack.stackTagCompound.hasKey("SwordNBT")) {
-                    NBTTagList enchantments = stack.stackTagCompound.getCompoundTag("SwordNBT").getTagList("ench");
+                    NBTTagList enchantments = stack.stackTagCompound.getCompoundTag("SwordNBT").getTagList("ench", 10);
 
                     if (enchantments.tagCount() != 0) {
                         for (int i = 0; i < enchantments.tagCount(); i++) {
-                            short enchantmentId = ((NBTTagCompound) enchantments.tagAt(i)).getShort("id");
-                            short enchantmentLvl = ((NBTTagCompound) enchantments.tagAt(i)).getShort("lvl");
+                            short enchantmentId = enchantments.getCompoundTagAt(i).getShort("id");
+                            short enchantmentLvl = enchantments.getCompoundTagAt(i).getShort("lvl");
 
                             if (Enchantment.enchantmentsList[enchantmentId] != null) {
                                 list.add(Enchantment.enchantmentsList[enchantmentId].getTranslatedName(enchantmentLvl));
@@ -114,7 +138,7 @@ public class ItemBlockGSGraveStone extends ItemBlock {
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
         if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("SwordNBT")) {
-            NBTTagList enchantments = stack.stackTagCompound.getCompoundTag("SwordNBT").getTagList("ench");
+            NBTTagList enchantments = stack.stackTagCompound.getCompoundTag("SwordNBT").getTagList("ench", 10);
 
             if (enchantments.tagCount() != 0) {
                 return true;
@@ -122,26 +146,5 @@ public class ItemBlockGSGraveStone extends ItemBlock {
         }
 
         return false;
-    }
-
-    /**
-     * Return sword type for sword grave
-     *
-     * @param swordId Sword item id
-     */
-    public static byte swordIdtoSwordGraveType(int swordId) {
-        if (swordId == Item.swordDiamond.itemID) {
-            return 5;
-        } else if (swordId == Item.swordIron.itemID) {
-            return 3;
-        } else if (swordId == Item.swordGold.itemID) {
-            return 4;
-        } else if (swordId == Item.swordStone.itemID) {
-            return 2;
-        } else if (swordId == Item.swordWood.itemID) {
-            return 1;
-        }
-
-        return 0;
     }
 }

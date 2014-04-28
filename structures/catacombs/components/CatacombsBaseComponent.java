@@ -3,10 +3,11 @@ package gravestone.structures.catacombs.components;
 import gravestone.core.GSStructures;
 import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.catacombs.CatacombsLevel;
-import java.util.Random;
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
-import net.minecraft.world.gen.structure.StructurePieceBlockSelector;
+
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -16,6 +17,7 @@ import net.minecraft.world.gen.structure.StructurePieceBlockSelector;
  */
 public abstract class CatacombsBaseComponent extends ComponentGraveStone {
 
+    public boolean goTop = true;
     protected int leftXEnd = 0;
     protected int rightXEnd = 0;
     protected int topXEnd = 0;
@@ -26,78 +28,17 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
     protected int xShift = 0;
     protected int zShift = 0;
     protected int level = 0;
-    public boolean goTop = true;
     protected CatacombsBaseComponent prevComponent;
     protected CatacombsBaseComponent[] nextComponents;
 
     protected CatacombsBaseComponent(int direction) {
         this(direction, 0);
     }
-    
+
     protected CatacombsBaseComponent(int direction, int level) {
         super(direction);
         this.coordBaseMode = direction;
         this.level = level;
-    }
-
-    /*
-     * return ground level at x z coordinates
-     */
-    protected int getGroundLevel(World world, int x, int z) {
-        return world.getTopSolidOrLiquidBlock(x, z);
-    }
-
-    protected int invertDirection(int direction) {
-        return 0;
-    }
-
-    /**
-     * Return Left X end coord for next component
-     */
-    public int getLeftXEnd() {
-        return this.getXWithOffset(leftXEnd, leftZEnd);
-    }
-
-    /**
-     * Return Left Z end coord for next component
-     */
-    public int getLeftZEnd() {
-        return this.getZWithOffset(leftXEnd, leftZEnd);
-    }
-
-    /**
-     * Return right X end coord for next component
-     */
-    public int getRightXEnd() {
-        return this.getXWithOffset(rightXEnd, rightZEnd);
-    }
-
-    /**
-     * Return right Z end coord for next component
-     */
-    public int getRightZEnd() {
-        return this.getZWithOffset(rightXEnd, rightZEnd);
-    }
-
-    /**
-     * Return forward Z end coord for next component
-     */
-    public int getTopZEnd() {
-        return this.getZWithOffset(topXEnd, topZEnd);
-    }
-
-    /**
-     * Return forward X end coord for next component
-     */
-    public int getTopXEnd() {
-        return this.getXWithOffset(topXEnd, topZEnd);
-    }
-
-    /**
-     * Return Y end coord for next component
-     */
-    public int getYEnd() {
-        return this.boundingBox.minY + yEnd;
     }
 
     /**
@@ -192,9 +133,76 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
     }
 
     /**
+     * Return valuable block
+     */
+    public static Block getValuableBlock(Random random) {
+        return GSStructures.VALUEBLE_BLOCKS[random.nextInt(GSStructures.VALUEBLE_BLOCKS.length)];
+    }
+
+    /*
+     * return ground level at x z coordinates
+     */
+    protected int getGroundLevel(World world, int x, int z) {
+        return world.getTopSolidOrLiquidBlock(x, z);
+    }
+
+    protected int invertDirection(int direction) {
+        return 0;
+    }
+
+    /**
+     * Return Left X end coord for next component
+     */
+    public int getLeftXEnd() {
+        return this.getXWithOffset(leftXEnd, leftZEnd);
+    }
+
+    /**
+     * Return Left Z end coord for next component
+     */
+    public int getLeftZEnd() {
+        return this.getZWithOffset(leftXEnd, leftZEnd);
+    }
+
+    /**
+     * Return right X end coord for next component
+     */
+    public int getRightXEnd() {
+        return this.getXWithOffset(rightXEnd, rightZEnd);
+    }
+
+    /**
+     * Return right Z end coord for next component
+     */
+    public int getRightZEnd() {
+        return this.getZWithOffset(rightXEnd, rightZEnd);
+    }
+
+    /**
+     * Return forward Z end coord for next component
+     */
+    public int getTopZEnd() {
+        return this.getZWithOffset(topXEnd, topZEnd);
+    }
+
+    /**
+     * Return forward X end coord for next component
+     */
+    public int getTopXEnd() {
+        return this.getXWithOffset(topXEnd, topZEnd);
+    }
+
+    /**
+     * Return Y end coord for next component
+     */
+    public int getYEnd() {
+        return this.boundingBox.minY + yEnd;
+    }
+
+    /**
      * Return StructureGSCemeteryCatacombsStones instance
      */
-    public StructurePieceBlockSelector getCemeteryCatacombsStones() {
+    public BlockSelector getCemeteryCatacombsStones() {
         return CatacombsLevel.getCatacombsStones(this.level);
     }
 
@@ -225,13 +233,13 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      * hitting anything else.
      */
     @Override
-    protected void fillCurrentPositionBlocksDownwards(World world, int blockId, int metadata, int xCoord, int yCoord, int zCoord, StructureBoundingBox boundingBox) {
+    protected void func_151554_b(World world, Block block, int metadata, int xCoord, int yCoord, int zCoord, StructureBoundingBox boundingBox) {
         int x = this.getXWithOffset(xCoord, zCoord);
         int y = this.getYWithOffset(yCoord);
         int z = this.getZWithOffset(xCoord, zCoord);
 
-        while ((world.isAirBlock(x, y, z) || world.getBlockMaterial(x, y, z).isLiquid() || world.getBlockMaterial(x, y, z).isReplaceable()) && y > 1) {
-            world.setBlock(x, y, z, blockId, metadata, 2);
+        while ((world.isAirBlock(x, y, z) || world.getBlock(x, y, z).getMaterial().isLiquid() || world.getBlock(x, y, z).getMaterial().isReplaceable()) && y > 1) {
+            world.setBlock(x, y, z, block, metadata, 2);
             --y;
         }
     }
@@ -241,12 +249,5 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      */
     public int getDirection() {
         return coordBaseMode;
-    }
-
-    /**
-     * Return valuable block
-     */
-    public static int getValuableBlock(Random random) {
-        return GSStructures.VALUEBLE_BLOCKS[random.nextInt(GSStructures.VALUEBLE_BLOCKS.length)];
     }
 }

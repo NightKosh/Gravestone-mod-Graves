@@ -1,16 +1,19 @@
 package gravestone.item;
 
-import gravestone.block.enums.EnumMemorials;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
-import java.util.List;
+import gravestone.block.enums.EnumMemorials;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatMessageComponent;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 /**
  * GraveStone mod
@@ -20,8 +23,8 @@ import net.minecraft.world.World;
  */
 public class ItemBlockGSMemorial extends ItemBlock {
 
-    public ItemBlockGSMemorial(int id) {
-        super(id);
+    public ItemBlockGSMemorial(Block block) {
+        super(block);
         setHasSubtypes(true);
         setUnlocalizedName("Memorial");
     }
@@ -67,9 +70,9 @@ public class ItemBlockGSMemorial extends ItemBlock {
                 String name = stack.stackTagCompound.getString("name");
                 String killerName = ModGraveStone.proxy.getLocalizedEntityName(stack.stackTagCompound.getString("KillerName"));
                 if (killerName.length() == 0) {
-                    list.add(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name}).toString());
+                    list.add(new ChatComponentTranslation(deathText, new Object[]{name}).toString());
                 } else {
-                    list.add(ChatMessageComponent.createFromTranslationWithSubstitutions(deathText, new Object[]{name, killerName.toLowerCase()}).toString());
+                    list.add(new ChatComponentTranslation(deathText, new Object[]{name, killerName.toLowerCase()}).toString());
                 }
             }
         } else {
@@ -83,7 +86,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean canPlaceItemBlockOnSide(World world, int x, int y, int z, int side, EntityPlayer player, ItemStack stack) {
+    public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
         if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("GraveType")) {
             switch (side) {
                 case 0:
@@ -133,7 +136,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
             for (byte shiftY = 0; shiftY < maxY; shiftY++) {
                 for (byte shiftZ = startZ; shiftZ < maxZ; shiftZ++) {
                     for (byte shiftX = startX; shiftX < maxX; shiftX++) {
-                        if (world.getBlockId(x + shiftX, y + shiftY, z + shiftZ) != 0) {
+                        if (world.getBlock(x + shiftX, y + shiftY, z + shiftZ).equals(Blocks.air)) {
                             return false;
                         }
                     }

@@ -6,6 +6,7 @@
 package gravestone.item;
 
 import gravestone.block.enums.EnumTrap;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
@@ -17,8 +18,8 @@ import net.minecraft.item.ItemStack;
  */
 public class ItemBlockGSTrap extends ItemBlock {
 
-    public ItemBlockGSTrap(int id) {
-        super(id);
+    public ItemBlockGSTrap(Block block) {
+        super(block);
         setHasSubtypes(true);
     }
 

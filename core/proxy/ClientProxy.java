@@ -1,41 +1,22 @@
 package gravestone.core.proxy;
 
-import gravestone.config.GraveStoneConfig;
-import gravestone.core.Resources;
-import gravestone.entity.monster.EntitySkeletonCat;
-import gravestone.entity.monster.EntitySkeletonDog;
-import gravestone.entity.monster.EntityZombieCat;
-import gravestone.renderer.item.ItemGSGraveStoneRenderer;
-import gravestone.renderer.item.ItemGSMemorialRenderer;
-import gravestone.entity.monster.EntityZombieDog;
-import gravestone.models.entity.ModelUndeadCat;
-import gravestone.models.entity.ModelUndeadDog;
-import gravestone.renderer.entity.RenderUndeadCat;
-import gravestone.renderer.entity.RenderUndeadDog;
-import gravestone.tileentity.TileEntityGSGraveStone;
-import gravestone.renderer.tileentity.TileEntityGSGraveStoneRenderer;
-import gravestone.tileentity.TileEntityGSMemorial;
-import gravestone.renderer.tileentity.TileEntityGSMemorialRenderer;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import gravestone.entity.monster.EntitySkullCrawler;
+import gravestone.core.GSBlock;
+import gravestone.core.Resources;
+import gravestone.entity.monster.*;
 import gravestone.entity.monster.EntitySkullCrawler.SkullCrawlerType;
-import gravestone.entity.monster.EntityWitherSkullCrawler;
-import gravestone.entity.monster.EntityZombieSkullCrawler;
+import gravestone.models.entity.ModelUndeadCat;
+import gravestone.models.entity.ModelUndeadDog;
 import gravestone.renderer.entity.RenderSkullCrawler;
-import gravestone.renderer.item.ItemGSCandleRenderer;
-import gravestone.renderer.item.ItemGSSkullCandleRenderer;
-import gravestone.renderer.item.ItemGSSpawnerRenderer;
-import gravestone.renderer.tileentity.TileEntityGSCandleRenderer;
-import gravestone.renderer.tileentity.TileEntityGSHauntedChestRenderer;
-import gravestone.renderer.tileentity.TileEntityGSSkullCandleRenderer;
-import gravestone.renderer.tileentity.TileEntityGSSpawnerRenderer;
-import gravestone.tileentity.TileEntityGSCandle;
-import gravestone.tileentity.TileEntityGSHauntedChest;
-import gravestone.tileentity.TileEntityGSSkullCandle;
-import gravestone.tileentity.TileEntityGSSpawner;
+import gravestone.renderer.entity.RenderUndeadCat;
+import gravestone.renderer.entity.RenderUndeadDog;
+import gravestone.renderer.item.*;
+import gravestone.renderer.tileentity.*;
+import gravestone.tileentity.*;
+import net.minecraft.item.Item;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -59,26 +40,26 @@ public class ClientProxy extends CommonProxy {
     private void registerBlocksRenderers() {
         // register GraveStone renderer
         ClientRegistry.registerTileEntity(TileEntityGSGraveStone.class, "GSGraveStone", new TileEntityGSGraveStoneRenderer());
-        MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.graveStoneID, new ItemGSGraveStoneRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(GSBlock.graveStone), new ItemGSGraveStoneRenderer());
 
         // register GraveStone renderer
         ClientRegistry.registerTileEntity(TileEntityGSMemorial.class, "GSMemorial", new TileEntityGSMemorialRenderer());
-        MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.memorialID, new ItemGSMemorialRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(GSBlock.memorial), new ItemGSMemorialRenderer());
 
         // spawner renderer
         ClientRegistry.registerTileEntity(TileEntityGSSpawner.class, "GSSpawner", new TileEntityGSSpawnerRenderer());
-        MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.spawnerID, new ItemGSSpawnerRenderer());
-        
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(GSBlock.spawner), new ItemGSSpawnerRenderer());
+
         // register HauntedChest renderer
         ClientRegistry.registerTileEntity(TileEntityGSHauntedChest.class, "GSHauntedChest", new TileEntityGSHauntedChestRenderer());
 
         // register SkullCandle renderer
         ClientRegistry.registerTileEntity(TileEntityGSSkullCandle.class, "GSSkullCandle", new TileEntityGSSkullCandleRenderer());
-        MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.skullCandleID, new ItemGSSkullCandleRenderer());
-    
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(GSBlock.skullCandle), new ItemGSSkullCandleRenderer());
+
         // candle
         ClientRegistry.registerTileEntity(TileEntityGSCandle.class, "GSCandle", new TileEntityGSCandleRenderer());
-        MinecraftForgeClient.registerItemRenderer(GraveStoneConfig.candleID, new ItemGSCandleRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(GSBlock.candle), new ItemGSCandleRenderer());
     }
 
     private void registerMobsRenderers() {
