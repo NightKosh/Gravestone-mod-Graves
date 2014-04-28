@@ -3,7 +3,9 @@ package gravestone.block;
 import gravestone.ModGraveStone;
 import gravestone.core.Resources;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStoneSlab;
+import net.minecraft.block.material.Material;
 
 /**
  * GraveStone mod
@@ -11,10 +13,10 @@ import net.minecraft.block.BlockStoneSlab;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class BlockGSBoneSlab extends BlockStoneSlab {
+public class BlockGSBoneSlab extends BlockSlab {
 
     public BlockGSBoneSlab() {
-        super(false);
+        super(false, Material.rock);
         this.setStepSound(Block.soundTypeStone);
         this.setBlockName("bone_slab");
         this.setHardness(2F);
