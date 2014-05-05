@@ -2,6 +2,7 @@ package gravestone.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gravestone.GraveStoneLogger;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumMemorials;
 import net.minecraft.block.Block;
@@ -86,7 +87,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
+    public boolean func_150936_a(World world, int x, int y, int z, int side, EntityPlayer player, ItemStack stack) {
         if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("GraveType")) {
             switch (side) {
                 case 0:
@@ -133,10 +134,11 @@ public class ItemBlockGSMemorial extends ItemBlock {
                     break;
             }
 
+            int airBlockId = Block.getIdFromBlock(Blocks.air);
             for (byte shiftY = 0; shiftY < maxY; shiftY++) {
                 for (byte shiftZ = startZ; shiftZ < maxZ; shiftZ++) {
                     for (byte shiftX = startX; shiftX < maxX; shiftX++) {
-                        if (world.getBlock(x + shiftX, y + shiftY, z + shiftZ).equals(Blocks.air)) {
+                        if (Block.getIdFromBlock(world.getBlock(x + shiftX, y + shiftY, z + shiftZ)) != airBlockId) {
                             return false;
                         }
                     }
