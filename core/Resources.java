@@ -37,8 +37,6 @@ public class Resources {
     public static final String CORPSE_DOG = MOD_NAME + ":dog_corpse";
     public static final String CORPSE_CAT = MOD_NAME + ":cat_corpse";
     public static final String CORPSE_HORSE = MOD_NAME + ":horse_corpse";
-    // gui
-    public static final ResourceLocation GRAVE_GUI = new ResourceLocation(GUI_LOCATION + "DeathMessageBackground.png");
     // entities
     public static final ResourceLocation UNDARTAKER = new ResourceLocation(ENTITY_LOCATION + "undertaker.png");
     public static final ResourceLocation ZOMBIE_DOG = new ResourceLocation(ENTITY_LOCATION + "ZombieDog.png");

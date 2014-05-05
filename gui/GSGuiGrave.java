@@ -1,22 +1,15 @@
 package gravestone.gui;
 
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import gravestone.ModGraveStone;
-import gravestone.core.Resources;
 import gravestone.tileentity.TileEntityGSGrave;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
-import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.util.ChatAllowedCharacters;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 /**
  * GraveStone mod
@@ -26,16 +19,13 @@ import org.lwjgl.opengl.GL11;
  */
 public class GSGuiGrave extends GuiScreen {
 
-    private static final String allowedCharacters = ChatAllowedCharacters.allowedCharacters.toString();
+    private final String titleStr = ModGraveStone.proxy.getLocalizedString("gui.edit_grave");
     private GuiButton button;
-    final int xSizeOfTexture = 192, ySizeOfTexture = 135;
-    int posX, posY;
+    private GuiTextField textField;
     private TileEntityGSGrave entityGrave;
-    private StringBuilder graveText = new StringBuilder();
 
     public GSGuiGrave(TileEntityGSGrave tileEntity) {
-        //super(fontRenderer, xPosition, yPosition, width, height);
-        entityGrave = tileEntity;
+        this.entityGrave = tileEntity;
     }
 
     /**
@@ -44,11 +34,15 @@ public class GSGuiGrave extends GuiScreen {
     @Override
     public void initGui() {
         this.buttonList.clear();
-        posX = (this.width - xSizeOfTexture) / 2;
-        posY = (this.height - ySizeOfTexture) / 2;
         Keyboard.enableRepeatEvents(true);
         this.buttonList.add(button = new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120, "Done"));
-        entityGrave.setEditable(false);
+        this.textField = new GuiTextField(this.fontRendererObj, this.width / 2 - 100, 100, 200, 20);
+        this.textField.setText("");
+        this.textField.setEnabled(true);
+        this.textField.setFocused(true);
+        this.textField.setCanLoseFocus(false);
+        this.textField.setMaxStringLength(30);
+        this.entityGrave.setEditable(false);
     }
 
     @Override
@@ -63,13 +57,8 @@ public class GSGuiGrave extends GuiScreen {
     @Override
     public void drawScreen(int x, int y, float f) {
         drawDefaultBackground();
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.renderEngine.bindTexture(Resources.GRAVE_GUI);
-        int posX = (this.width - xSizeOfTexture) / 2;
-        int posY = (this.height - ySizeOfTexture) / 2;
-        drawTexturedModalRect(posX, posY, 0, 0, xSizeOfTexture, ySizeOfTexture);
-        this.drawString(this.fontRendererObj, ModGraveStone.proxy.getLocalizedString("gui.edit_grave"), posX + 20, posY + 31, 16777215);
-        this.drawString(this.fontRendererObj, graveText.toString(), posX + 20, posY + 41, 16777215);
+        this.drawString(this.fontRendererObj, titleStr, this.width / 2 - 40, 60, 16777215);
+        this.textField.drawTextBox();
         super.drawScreen(x, y, f);
     }
 
@@ -79,43 +68,39 @@ public class GSGuiGrave extends GuiScreen {
      */
     @Override
     public void onGuiClosed() {
-        Keyboard.enableRepeatEvents(false);
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        DataOutputStream data = new DataOutputStream(bytes);
+        if (this.textField != null && !this.textField.getText().isEmpty()) {
+            String text = this.textField.getText();
+            Keyboard.enableRepeatEvents(false);
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            DataOutputStream data = new DataOutputStream(bytes);
 
-        try {
-            data.writeInt(entityGrave.xCoord);
-            data.writeInt(entityGrave.yCoord);
-            data.writeInt(entityGrave.zCoord);
-            data.writeUTF(graveText.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                data.writeInt(entityGrave.xCoord);
+                data.writeInt(entityGrave.yCoord);
+                data.writeInt(entityGrave.zCoord);
+                data.writeUTF(text);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //        ByteBuf buf = buffer(4);
+            //        buf.writeInt(42);
+            //
+            //        FMLProxyPacket packet = new FMLProxyPacket(buf, "GSDeathText");
+            //
+            //        packet.data = bytes.toByteArray();
+            //        Minecraft.getMinecraft().getNetHandler().addToSendQueue(packet);
+            entityGrave.getDeathTextComponent().setDeathText(text);
         }
-
-//        ByteBuf buf = buffer(4);
-//        buf.writeInt(42);
-//
-//        FMLProxyPacket packet = new FMLProxyPacket(buf, "GSDeathText");
-//
-//        packet.data = bytes.toByteArray();
-//        Minecraft.getMinecraft().getNetHandler().addToSendQueue(packet);
-//        entityGrave.getDeathTextComponent().setDeathText(graveText.toString());
-//        entityGrave.setEditable(true);
+        entityGrave.setEditable(true);
     }
 
     /**
-     * Fired when a key is typed. This is the equivalent of
-     * KeyListener.keyTyped(KeyEvent e).
+     * Fired when a key is typed.
      */
     @Override
     protected void keyTyped(char key, int keyCode) {
-        if (keyCode == 14 && graveText.length() > 0) {
-            graveText.deleteCharAt(graveText.length() - 1);
-        }
-
-        if (allowedCharacters.indexOf(key) >= 0 && graveText.length() < 30) {
-            graveText.append(key);
-        }
+        this.textField.textboxKeyTyped(key, keyCode);
 
         if (keyCode == 1) {
             actionPerformed(button);
