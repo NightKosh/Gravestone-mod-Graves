@@ -1,8 +1,8 @@
 package gravestone;
 
-import cpw.mods.fml.common.FMLLog;
 import gravestone.core.ModInfo;
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -13,12 +13,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class GraveStoneLogger {
 
-    private static Logger logger;// = Logger.getLogger(ModInfo.ID);
-
-    public static void preinit() {
-        //logger.setParent(
-        logger = FMLLog.getLogger();//);
-    }
+    private static Logger logger = LogManager.getLogger(ModInfo.ID);
 
     public static void log(Level logLevel, String message) {
         logger.log(logLevel, message);
