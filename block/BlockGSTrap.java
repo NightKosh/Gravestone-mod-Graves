@@ -115,7 +115,9 @@ public class BlockGSTrap extends Block {
                     if (dayTime < PRE_NIGHT || dayTime > PRE_MORNING) {
                         time = time - time % 24000 + PRE_NIGHT;
                         world.setWorldTime(time);
-                        ((EntityPlayer) entity).sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(ModGraveStone.proxy.getLocalizedString("block.trap.curse")));
+                        if (GraveStoneConfig.showNightStoneMessage) {
+                            ((EntityPlayer) entity).sendChatToPlayer(ChatMessageComponent.createFromTranslationKey(ModGraveStone.proxy.getLocalizedString("block.trap.curse")));
+                        }
                     } else if (dayTime > 20000 && dayTime < PRE_MORNING) {
                         time = time - time % 24000 + NIGHT;
                         world.setWorldTime(time);
