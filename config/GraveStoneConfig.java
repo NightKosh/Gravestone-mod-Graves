@@ -50,6 +50,7 @@ public class GraveStoneConfig {
     // disable/enable time changing by night stone
     public static boolean enableNightStone;
     public static boolean enableThunderStone;
+    public static boolean showNightStoneMessage;
     // spawner reciepes
     public static boolean enableBossSpawnerCraftingRecipe;
     public static boolean enableSpawnerCraftingRecipe;
@@ -141,6 +142,7 @@ public class GraveStoneConfig {
         
         enableNightStone   = config.get(Configuration.CATEGORY_GENERAL, "EnableNightStone", true).getBoolean(true);
         enableThunderStone = config.get(Configuration.CATEGORY_GENERAL, "EnableThunderStone", true).getBoolean(true);
+        showNightStoneMessage = config.get(Configuration.CATEGORY_GENERAL, "ShowNightStoneMessage", true).getBoolean(true);
         
         // spawners recipes
         enableBossSpawnerCraftingRecipe = config.get(Configuration.CATEGORY_GENERAL, "EnableBossSpawnerCraftingRecipe", true).getBoolean(true);
