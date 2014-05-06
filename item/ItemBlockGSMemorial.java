@@ -2,7 +2,6 @@ package gravestone.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.GraveStoneLogger;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumMemorials;
 import net.minecraft.block.Block;
@@ -71,9 +70,9 @@ public class ItemBlockGSMemorial extends ItemBlock {
                 String name = stack.stackTagCompound.getString("name");
                 String killerName = ModGraveStone.proxy.getLocalizedEntityName(stack.stackTagCompound.getString("KillerName"));
                 if (killerName.length() == 0) {
-                    list.add(new ChatComponentTranslation(deathText, new Object[]{name}).toString());
+                    list.add(new ChatComponentTranslation(deathText, new Object[]{name}).getFormattedText());
                 } else {
-                    list.add(new ChatComponentTranslation(deathText, new Object[]{name, killerName.toLowerCase()}).toString());
+                    list.add(new ChatComponentTranslation(deathText, new Object[]{name, killerName.toLowerCase()}).getFormattedText());
                 }
             }
         } else {

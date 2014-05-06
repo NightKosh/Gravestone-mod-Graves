@@ -94,9 +94,9 @@ public class ItemBlockGSGraveStone extends ItemBlock {
                     String name = stack.stackTagCompound.getString("name");
                     String killerName = ModGraveStone.proxy.getLocalizedEntityName(stack.stackTagCompound.getString("KillerName"));
                     if (killerName.length() == 0) {
-                        list.add(new ChatComponentTranslation(deathText, new Object[]{name}).toString());
+                        list.add(new ChatComponentTranslation(deathText, new Object[]{name}).getFormattedText());
                     } else {
-                        list.add(new ChatComponentTranslation(deathText, new Object[]{name, killerName.toLowerCase()}).toString());
+                        list.add(new ChatComponentTranslation(deathText, new Object[]{name, killerName.toLowerCase()}).getFormattedText());
                     }
                 }
             } else {
