@@ -17,6 +17,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
@@ -504,7 +505,7 @@ public class BlockGSGraveStone extends BlockContainer {
     public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
         if (!world.isSideSolid(x, y - 1, z, ForgeDirection.DOWN, true)) {
             this.dropBlockAsItem(world, x, y, z, 0, 0);
-            world.setBlock(x, y, z, this, 0, 2);
+            world.setBlock(x, y, z, Blocks.air, 0, 2);
         }
     }
 
