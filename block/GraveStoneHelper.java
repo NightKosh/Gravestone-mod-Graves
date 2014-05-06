@@ -5,6 +5,7 @@ import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
 import gravestone.core.compatibility.GSCompatibilityBattlegear;
+import gravestone.core.compatibility.GSCompatibilityBaubles;
 import gravestone.core.compatibility.GSCompatibilityTheCampingMod;
 import gravestone.core.compatibility.GSCompatibilityisArsMagica;
 import gravestone.item.CorpseHelper;
@@ -226,6 +227,7 @@ public class GraveStoneHelper {
 
             GSCompatibilityBattlegear.addItems(items, player);
             GSCompatibilityTheCampingMod.addItems(items, player);
+            GSCompatibilityBaubles.addItems(items, player);
             //GSCompatibilityBackpacksMod.addItems(items, player);
             player.inventory.clearInventory(null, -1);
 

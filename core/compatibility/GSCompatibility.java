@@ -65,6 +65,10 @@ public class GSCompatibility {
         if (Loader.isModLoaded("Thaumcraft")) {
             GSCompatibilityThaumcraft.addAspects();
             GSReciepes.addSkullCandleReciepes(ItemApi.getBlock("blockCandle", 0));
+
+            if (Loader.isModLoaded("Baubles")) {
+                GSCompatibilityBaubles.isInstalled = true;
+            }
         }
         
         if (Loader.isModLoaded("Forestry")) {

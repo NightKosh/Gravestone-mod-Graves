@@ -23,17 +23,15 @@ public class GSCompatibilityThaumcraft {
 
     public static void addAspects() {
         try {
-            ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.graveStone), new int[]{-1}, new AspectList().add(Aspect.SOUL, 3)
+            ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.graveStone), new AspectList().add(Aspect.SOUL, 3)
                     .add(Aspect.DEATH, 3).add(Aspect.UNDEAD, 3));
-            ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.memorial), new int[]{-1}, new AspectList().add(Aspect.SOUL, 10)
+            ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.memorial), new AspectList().add(Aspect.SOUL, 10)
                     .add(Aspect.DEATH, 10).add(Aspect.UNDEAD, 10));
             // trap
-
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Aspect.STONE
             ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.trap), new int[]{0}, new AspectList().add(Aspect.FIRE, 1)
-                    .add(Aspect.MECHANISM, 5).add(Aspect.DARKNESS, 5).add(Aspect.SOUL, 5).add(Aspect.MAGIC, 5));
-            ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.trap), new int[]{1}, new AspectList().add(Aspect.MECHANISM, 5)
-                    .add(Aspect.WEATHER, 5).add(Aspect.SOUL, 5).add(Aspect.MAGIC, 5));
+                    .add(Aspect.EARTH, 2).add(Aspect.MECHANISM, 5).add(Aspect.DARKNESS, 5).add(Aspect.SOUL, 5).add(Aspect.MAGIC, 5));
+            ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.trap), new int[]{1}, new AspectList().add(Aspect.EARTH, 2)
+                    .add(Aspect.MECHANISM, 5).add(Aspect.WEATHER, 5).add(Aspect.SOUL, 5).add(Aspect.MAGIC, 5));
             // spawner
             ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.spawner), new int[]{0}, new AspectList().add(Aspect.MAGIC, 20)
                     .add(Aspect.UNDEAD, 20).add(Aspect.SOUL, 20).add(Aspect.DARKNESS, 20).add(Aspect.ELDRITCH, 20));
@@ -49,10 +47,10 @@ public class GSCompatibilityThaumcraft {
                     .add(Aspect.TRAP, 2).add(Aspect.UNDEAD, 5));
             ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.boneBlock), new int[]{3}, new AspectList().add(Aspect.DEATH, 9).add(Aspect.FLESH, 9)
                     .add(Aspect.UNDEAD, 9).add(Aspect.SOUL, 9).add(Aspect.TRAP, 2));
-            ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.boneSlab), new int[]{-1}, new AspectList().add(Aspect.DEATH, 4).add(Aspect.FLESH, 4));
-            ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.boneStairs), new int[]{-1}, new AspectList().add(Aspect.DEATH, 6).add(Aspect.FLESH, 6));
+            ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.boneSlab), new AspectList().add(Aspect.DEATH, 4).add(Aspect.FLESH, 4));
+            ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.boneStairs), new AspectList().add(Aspect.DEATH, 6).add(Aspect.FLESH, 6));
             // haunted chest
-            ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.hauntedChest), new int[]{-1}, new AspectList().add(Aspect.SOUL, 5).add(Aspect.MAGIC, 5)
+            ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.hauntedChest), new AspectList().add(Aspect.SOUL, 5).add(Aspect.MAGIC, 5)
                     .add(Aspect.TREE, 3).add(Aspect.VOID, 4));
             // candle
             ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.candle), new int[]{0}, new AspectList().add(Aspect.LIGHT, 4));
@@ -64,7 +62,7 @@ public class GSCompatibilityThaumcraft {
                     .add(Aspect.FLESH, 4).add(Aspect.LIGHT, 4));
 
             // items
-            ThaumcraftApi.registerObjectTag(new ItemStack(GSItem.chisel), new int[]{0}, new AspectList().add(Aspect.TOOL, 2));
+            ThaumcraftApi.registerObjectTag(new ItemStack(GSItem.chisel), new AspectList().add(Aspect.TOOL, 2));
 
             // entity
             ThaumcraftApi.registerEntityTag(GSEntity.ZOMBIE_DOG_NAME, new AspectList().add(Aspect.BEAST, 2)
