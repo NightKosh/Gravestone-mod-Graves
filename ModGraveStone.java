@@ -7,6 +7,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.config.GraveStoneConfig;
@@ -97,9 +98,7 @@ public class ModGraveStone {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-
         GSCompatibility.getInstance().checkMods();
-        //GraveStoneLogger.logInfo(ModInfo.NAME + " has loaded successfully.");
     }
 
     @Mod.EventHandler

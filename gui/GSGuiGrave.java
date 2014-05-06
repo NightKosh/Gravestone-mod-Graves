@@ -1,15 +1,16 @@
 package gravestone.gui;
 
+import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import gravestone.ModGraveStone;
 import gravestone.tileentity.TileEntityGSGrave;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.client.network.NetHandlerPlayClient;
 import org.lwjgl.input.Keyboard;
-
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 
 /**
  * GraveStone mod
@@ -68,28 +69,25 @@ public class GSGuiGrave extends GuiScreen {
      */
     @Override
     public void onGuiClosed() {
+        Keyboard.enableRepeatEvents(false);
         if (this.textField != null && !this.textField.getText().isEmpty()) {
             String text = this.textField.getText();
-            Keyboard.enableRepeatEvents(false);
-            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            DataOutputStream data = new DataOutputStream(bytes);
 
-            try {
-                data.writeInt(entityGrave.xCoord);
-                data.writeInt(entityGrave.yCoord);
-                data.writeInt(entityGrave.zCoord);
-                data.writeUTF(text);
-            } catch (IOException e) {
-                e.printStackTrace();
+            ByteBuf buf = Unpooled.compositeBuffer();
+            buf.writeInt(entityGrave.xCoord);
+            buf.writeInt(entityGrave.yCoord);
+            buf.writeInt(entityGrave.zCoord);
+            ByteBufUtils.writeUTF8String(buf, text);
+
+            FMLProxyPacket packet = new FMLProxyPacket(buf, "GSDeathText");
+
+            NetHandlerPlayClient nethandlerplayclient = this.mc.getNetHandler();
+
+
+            if (nethandlerplayclient != null) {
+                nethandlerplayclient.addToSendQueue(packet);//new C12PacketUpdateSign(this.tileSign.xCoord, this.tileSign.yCoord, this.tileSign.zCoord, this.tileSign.signText));
             }
 
-            //        ByteBuf buf = buffer(4);
-            //        buf.writeInt(42);
-            //
-            //        FMLProxyPacket packet = new FMLProxyPacket(buf, "GSDeathText");
-            //
-            //        packet.data = bytes.toByteArray();
-            //        Minecraft.getMinecraft().getNetHandler().addToSendQueue(packet);
             entityGrave.getDeathTextComponent().setDeathText(text);
         }
         entityGrave.setEditable(true);
