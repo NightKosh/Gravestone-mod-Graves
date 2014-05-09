@@ -1,4 +1,3 @@
-
 package gravestone.core.compatibility;
 
 import cpw.mods.fml.common.Loader;
@@ -57,7 +56,7 @@ public class GSCompatibility {
         if (Loader.isModLoaded("arsmagica2")) {
             GSCompatibilityisArsMagica.isInstalled = true;
         }
-        
+
         if (Loader.isModLoaded("Backpack")) {
             GSCompatibilityBackpacksMod.isInstalled = true;
         }
@@ -70,7 +69,7 @@ public class GSCompatibility {
         if (Loader.isModLoaded("Baubles")) {
             GSCompatibilityBaubles.isInstalled = true;
         }
-        
+
         if (Loader.isModLoaded("Forestry")) {
 //            GSReciepes.addSkullCandleReciepes(BlockInterface.getBlock("candle"));
         }
