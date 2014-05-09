@@ -50,17 +50,20 @@ public class GSEventsHook {
                 }
             }
 
-            if (event.entity instanceof EntitySkeleton) {
-                EntitySkullCrawler crawler;
-                if (GSMobSpawn.isWitherSkeleton((EntitySkeleton) event.entity)) {
-                    crawler = new EntityWitherSkullCrawler(event.entity.worldObj);
-                } else {
-                    crawler = new EntitySkullCrawler(event.entity.worldObj);
+            if (GraveStoneConfig.spawnSkullCrawlersAtMobsDeath) {
+                if (event.entity instanceof EntitySkeleton) {
+                    EntitySkullCrawler crawler;
+                    if (GSMobSpawn.isWitherSkeleton((EntitySkeleton) event.entity)) {
+                        crawler = new EntityWitherSkullCrawler(event.entity.worldObj);
+                    } else {
+                        crawler = new EntitySkullCrawler(event.entity.worldObj);
+                    }
+                    GSMobSpawn.spawnCrawler(event.entity, crawler);
+                } else if (event.entity instanceof EntityZombie) {
+                    GSMobSpawn.spawnCrawler(event.entity, new EntityZombieSkullCrawler(event.entity.worldObj));
                 }
-                GSMobSpawn.spawnCrawler(event.entity, crawler);
-            } else if (event.entity instanceof EntityZombie) {
-                GSMobSpawn.spawnCrawler(event.entity, new EntityZombieSkullCrawler(event.entity.worldObj));
-            } else if (event.entity instanceof EntityHorse) {
+            }
+            if (event.entity instanceof EntityHorse) {
                 GraveStoneHelper.createHorseGrave((EntityHorse) event.entity, event);
                 return;
             } else if (event.entity instanceof EntityCreeper && ((EntityCreeper) event.entity).getPowered()) {

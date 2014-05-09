@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumBoneBlock;
+import gravestone.config.GraveStoneConfig;
 import gravestone.core.Resources;
 import gravestone.entity.monster.EntitySkullCrawler;
 import net.minecraft.block.Block;
@@ -87,7 +88,7 @@ public class BlockGSBoneBlock extends Block {
      */
     @Override
     public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int metadata) {
-        if (!world.isRemote && isSkullCrawlerBlock(metadata)) {
+        if (!world.isRemote && isSkullCrawlerBlock(metadata) && GraveStoneConfig.spawnSkullCrawlersAtBoneBlockDestruction) {
             EntitySkullCrawler skullCrawler = new EntitySkullCrawler(world);
             skullCrawler.setLocationAndAngles((double) x + 0.5D, (double) y, (double) z + 0.5D, 0.0F, 0.0F);
             world.spawnEntityInWorld(skullCrawler);
