@@ -83,6 +83,8 @@ public class GraveStoneConfig {
     public static boolean spawnZombieCats;
     public static boolean spawnSkeletonDogs;
     public static boolean spawnSkeletonCats;
+    public static boolean spawnSkullCrawlersAtMobsDeath;
+    public static boolean spawnSkullCrawlersAtBoneBlockDestruction;
     //foreign mobs spawn
     public static boolean spawnMoCreaturesMobs;
     // sword grave
@@ -193,6 +195,9 @@ public class GraveStoneConfig {
         spawnZombieCats = config.get(Configuration.CATEGORY_GENERAL, "SpawnZombieCats", true).getBoolean(true);
         spawnSkeletonDogs = config.get(Configuration.CATEGORY_GENERAL, "SpawnSkeletonDogs", true).getBoolean(true);
         spawnSkeletonCats = config.get(Configuration.CATEGORY_GENERAL, "SpawnSkeletonCats", true).getBoolean(true);
+
+        spawnSkullCrawlersAtMobsDeath = config.get(Configuration.CATEGORY_GENERAL, "SpawnSkullCrawlersAtMobsDeath", true).getBoolean(true);
+        spawnSkullCrawlersAtBoneBlockDestruction = config.get(Configuration.CATEGORY_GENERAL, "SpawnSkullCrawlersOnBoneBlockDestruction", true).getBoolean(true);
     }
 
     private void getGravesText() {
