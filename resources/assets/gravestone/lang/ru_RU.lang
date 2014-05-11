@@ -1,1 +1,143 @@
-# tabsitemGroup.tabGraveStone=Gravestone# blocks## gravesblock.gravestone.gravestone=Надгробный каменьblock.gravestone.cross=Могильный крестblock.gravestone.plate=Надгробная плитаblock.gravestone.dog_statue=Статуя для могилы собакиblock.gravestone.cat_statue=Статуя для могилы кошкиblock.gravestone.wooden_sword=Надгробие из деревянного мечаblock.gravestone.stone_sword=Надгробие из каменного мечаblock.gravestone.iron_sword=Надгробие из железного мечаblock.gravestone.golden_sword=Надгробие из золотого мечаblock.gravestone.diamond_sword=Надгробие из азмазного мечаblock.gravestone.horse_statue=Статуя для могилы лошади## memorialsblock.memorial.cross=Мемориальный крестblock.memorial.obelisk=Обелискblock.memorial.steve_statue=Статуя стиваblock.memorial.villager_statue=Статуя жителяblock.memorial.angel_statue=Статуя ангелаblock.memorial.dog_statue=Статуя собакиblock.memorial.cat_statue=Статуя кошкиblock.memorial.creeper_statue=Статуя крипераblock.memorial.celtic_cross=Кельтский крест## traptile.trap.night.name=Камень тьмыtile.trap.thunder.name=Грозовой каменьblock.trap.curse=Тьма приблежается!## spawnerblock.spawner.wither=Спаунер Иссушителяblock.spawner.skeleton=Спаунер Скелетовblock.spawner.zombie=Спаунер Зомби# bone blockstile.bone_block.name=Костяной блокtile.bone_block.skull_name=Костяной блок с черепомtile.bone_block.crawler_name=Костяной блок ползучего черепаtile.bone_block.crawler_skull_name=Костяной блок ползучего черепа с черепомtile.bone_slab.name=Костяная плитаtile.bone_stairs.name=Костяная лестница## chestsblock.haunted_chest.bats_chest=Сундук с летучими мышамиblock.haunted_chest.skeleton_chest=Сундук со скелетомblock.haunted_chest.raven_chest=Сундук с воронамиblock.haunted_chest.ghost_chest=Сундук с привидениями## candlestile.candle.name=Свечаblock.skull_candle.skeleton.name=Череп скелета со свечойblock.skull_candle.wither_skeleton.name=Череп иссушителя со свечойblock.skull_candle.zombie.name=Череп зомби со свечой# items## chiselitem.chisel.name=Резец## gravesitem.grave.age=Прожилitem.grave.days=днейitem.grave.sword_name=Название мечаitem.grave.sword_damage=Повреждение меча## corpseitem.corpse.villager=Труп жителяitem.corpse.horse=Труп лошадиitem.corpse.dog=Труп собакиitem.corpse.cat=Труп кошкиitem.corpse.entity_name=Имяitem.corpse.villager_type=Профессияitem.corpse.villager_type.farmer=Фермерitem.corpse.villager_type.librarian=Библиотекарьitem.corpse.villager_type.priest=Священникitem.corpse.villager_type.smith=Кузнецitem.corpse.villager_type.butcher=Мясникitem.corpse.villager_type.undertacker=Гробовщикitem.corpse.villager_type.brewer=Пивоварitem.corpse.villager_type.thaumaturge=Тауматургitem.corpse.villager_type.beekeeper=Пчеловодitem.corpse.villager_type.lumberjack=Дровосекitem.corpse.villager_type.unknown=неизвестнаitem.corpse.horse_type=Тип лошадиitem.corpse.horse_type.horse=Лошадьitem.corpse.horse_type.donkey=Осёлitem.corpse.horse_type.mule=Мулitem.corpse.horse_type.zombie=Лошадь-зомбиitem.corpse.horse_type.skeleton=Лошадь-скелетitem.corpse.horse_type.unknown=неизвестенitem.corpse.horse_variant=Разновидностьitem.corpse.health=Максимальное здоровьеitem.corpse.speed=Скоростьitem.corpse.jump_strength=Прыгучестьitem.corpse.collar=Цвет ошейникаitem.corpse.collar.white=Белыйitem.corpse.collar.orange=Оранжевыйitem.corpse.collar.purple=Пурпурныйitem.corpse.collar.azure=Лазурныйitem.corpse.collar.yellow=Жёлтыйitem.corpse.collar.lime=Лаймовыйitem.corpse.collar.pink=Розовыйitem.corpse.collar.grey=Серыйitem.corpse.collar.light_grey=Светло-серыйitem.corpse.collar.turquoise=Бирюзовыйitem.corpse.collar.violet=Фиолетовыйitem.corpse.collar.blue=Синийitem.corpse.collar.brown=Коричневыйitem.corpse.collar.green=Зелёныйitem.corpse.collar.red=Красныйitem.corpse.collar.black=Чёрныйitem.corpse.collar.unknown=Неизвестенitem.corpse.cat_type=Тип кошкиitem.corpse.cat_type.black=Чёрнаяitem.corpse.cat_type.red=Рыжаяitem.corpse.cat_type.siamese=Сиамскаяitem.corpse.cat_type.unknown=неизвестен# guigui.edit_grave=Введите надпись# entityentity.GSZombieDog.name=Пёс-зомбиentity.GSSkeletonDog.name=Пёс-скелетentity.GSZombieCat.name=Кот-зомбиentity.GSSkeletonCat.name=Кот-скелетentity.GSSkullCrawler.name=Ползучий черепentity.GSWitherSkullCrawler.name=Ползучий череп иссушителяentity.GSZombieSkullCrawler.name=Ползучий череп зомбиentity.GSRaven.name=Ворон# death messagesdeath.GS.Herobrine=%1$s был зверски убит Хиробриномdeath.GS.death_sentence=%1$s был казнёнdeath.GS.tortures=%1$s умер в жестоких пытках
+# tabs
+itemGroup.tabGraveStone=Gravestone
+
+
+# blocks
+## graves
+block.gravestone.gravestone=Надгробный камень
+block.gravestone.cross=Могильный крест
+block.gravestone.plate=Надгробная плита
+block.gravestone.dog_statue=Статуя для могилы собаки
+block.gravestone.cat_statue=Статуя для могилы кошки
+block.gravestone.wooden_sword=Надгробие из деревянного меча
+block.gravestone.stone_sword=Надгробие из каменного меча
+block.gravestone.iron_sword=Надгробие из железного меча
+block.gravestone.golden_sword=Надгробие из золотого меча
+block.gravestone.diamond_sword=Надгробие из алмазного меча
+block.gravestone.horse_statue=Статуя для могилы лошади
+
+## memorials
+block.memorial.cross=Мемориальный крест
+block.memorial.obelisk=Обелиск
+block.memorial.steve_statue=Статуя Стива
+block.memorial.villager_statue=Статуя жителя
+block.memorial.angel_statue=Статуя ангела
+block.memorial.dog_statue=Статуя собаки
+block.memorial.cat_statue=Статуя кошки
+block.memorial.creeper_statue=Статуя крипера
+block.memorial.celtic_cross=Кельтский крест
+
+## trap
+tile.trap.night.name=Камень тьмы
+tile.trap.thunder.name=Грозовой камень
+block.trap.curse=Тьма приближается!
+
+## spawner
+block.spawner.wither=Спаунер иссушителя
+block.spawner.skeleton=Спаунер скелетов
+block.spawner.zombie=Спаунер зомби
+
+# bone blocks
+tile.bone_block.name=Костяной блок
+tile.bone_block.skull_name=Костяной блок с черепом
+tile.bone_block.crawler_name=Костяной блок ползучего черепа
+tile.bone_block.crawler_skull_name=Костяной блок ползучего черепа с черепом
+tile.bone_slab.name=Костяная плита
+tile.bone_stairs.name=Костяная лестница
+
+## chests
+block.haunted_chest.bats_chest=Сундук с летучими мышами
+block.haunted_chest.skeleton_chest=Сундук со скелетом
+block.haunted_chest.raven_chest=Сундук с воронами
+block.haunted_chest.ghost_chest=Сундук с привидениями
+
+## candles
+tile.candle.name=Свеча
+block.skull_candle.skeleton.name=Череп скелета со свечой
+block.skull_candle.wither_skeleton.name=Череп иссушителя со свечой
+block.skull_candle.zombie.name=Череп зомби со свечой
+
+
+# items
+## chisel
+item.chisel.name=Резец
+
+## graves
+item.grave.age=Прожил
+item.grave.days=дней
+item.grave.sword_name=Название меча
+item.grave.sword_damage=Повреждение меча
+
+## corpse
+item.corpse.villager=Труп жителя
+item.corpse.horse=Труп лошади
+item.corpse.dog=Труп собаки
+item.corpse.cat=Труп кошки
+item.corpse.entity_name=Имя
+item.corpse.villager_type=Профессия
+item.corpse.villager_type.farmer=Фермер
+item.corpse.villager_type.librarian=Библиотекарь
+item.corpse.villager_type.priest=Священник
+item.corpse.villager_type.smith=Кузнец
+item.corpse.villager_type.butcher=Мясник
+item.corpse.villager_type.undertacker=Гробовщик
+item.corpse.villager_type.brewer=Зельеварщик
+item.corpse.villager_type.thaumaturge=Тауматург
+item.corpse.villager_type.beekeeper=Пчеловод
+item.corpse.villager_type.lumberjack=Дровосек
+item.corpse.villager_type.unknown=неизвестна
+item.corpse.horse_type=Тип лошади
+item.corpse.horse_type.horse=Лошадь
+item.corpse.horse_type.donkey=Осёл
+item.corpse.horse_type.mule=Мул
+item.corpse.horse_type.zombie=Лошадь-зомби
+item.corpse.horse_type.skeleton=Лошадь-скелет
+item.corpse.horse_type.unknown=Неизвестный
+item.corpse.horse_variant=Разновидность
+item.corpse.health=Максимальное здоровье
+item.corpse.speed=Скорость
+item.corpse.jump_strength=Прыгучесть
+item.corpse.collar=Цвет ошейника
+item.corpse.collar.white=Белый
+item.corpse.collar.orange=Оранжевый
+item.corpse.collar.purple=Фиолетовый
+item.corpse.collar.azure=Лазурный
+item.corpse.collar.yellow=Жёлтый
+item.corpse.collar.lime=Лаймовый
+item.corpse.collar.pink=Розовый
+item.corpse.collar.grey=Серый
+item.corpse.collar.light_grey=Светло-серый
+item.corpse.collar.turquoise=Бирюзовый
+item.corpse.collar.violet=Фиолетовый
+item.corpse.collar.blue=Синий
+item.corpse.collar.brown=Коричневый
+item.corpse.collar.green=Зелёный
+item.corpse.collar.red=Красный
+item.corpse.collar.black=Чёрный
+item.corpse.collar.unknown=Неизвестен
+item.corpse.cat_type=Тип кошки
+item.corpse.cat_type.black=Чёрная
+item.corpse.cat_type.red=Рыжая
+item.corpse.cat_type.siamese=Сиамская
+item.corpse.cat_type.unknown=Неизвестный
+
+
+# gui
+gui.edit_grave=Введите надпись
+
+
+# entity
+entity.GSZombieDog.name=Пёс-зомби
+entity.GSSkeletonDog.name=Пёс-скелет
+entity.GSZombieCat.name=Кот-зомби
+entity.GSSkeletonCat.name=Кот-скелет
+entity.GSSkullCrawler.name=Ползучий череп
+entity.GSWitherSkullCrawler.name=Ползучий череп иссушителя
+entity.GSZombieSkullCrawler.name=Ползучий череп зомби
+entity.GSRaven.name=Ворон
+
+
+# death messages
+death.GS.Herobrine=%1$s был зверски убит Хиробрином
+death.GS.death_sentence=%1$s был казнён
+death.GS.tortures=%1$s умер в жестоких пытках
