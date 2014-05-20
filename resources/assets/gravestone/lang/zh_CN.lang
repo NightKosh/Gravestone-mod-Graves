@@ -14,7 +14,7 @@ block.gravestone.stone_sword=石剑墓碑
 block.gravestone.iron_sword=铁剑墓碑
 block.gravestone.golden_sword=金剑墓碑
 block.gravestone.diamond_sword=钻石剑墓碑
-block.gravestone.horse_statue=Horse statue
+block.gravestone.horse_statue=马雕像
 
 ## memorials
 block.memorial.cross=十字纪念碑
@@ -29,27 +29,27 @@ block.memorial.celtic_cross=Celtic cross
 
 ## trap
 tile.trap.night.name=午夜石
-tile.trap.thunder.name=Thunder stone
+tile.trap.thunder.name=雷电石
 block.trap.curse=黑夜正在接近！
 
 ## spawner
 block.spawner.wither=凋灵刷怪笼
-block.spawner.skeleton=Skeleton Spawner
-block.spawner.zombie=Zombie Spawner
+block.spawner.skeleton=骷髅刷怪笼
+block.spawner.zombie=僵尸刷怪笼
 
 # bone blocks
-tile.bone_block.name=Bone block
+tile.bone_block.name=骨质方块
 tile.bone_block.skull_name=Bone block with skull
 tile.bone_block.crawler_name=Skull crawler's bone block 
 tile.bone_block.crawler_skull_name=Skull crawler's bone block with skull
-tile.bone_slab.name=Bone slab
-tile.bone_stairs.name=Bone stairs
+tile.bone_slab.name=骨质台阶
+tile.bone_stairs.name=骨质阶梯
 
 ## chests
 block.haunted_chest.bats_chest=带着蝙蝠的箱子
 block.haunted_chest.skeleton_chest=带着骷髅的箱子
 block.haunted_chest.raven_chest=Chest with ravens
-block.haunted_chest.ghost_chest=Chest with ghost
+block.haunted_chest.ghost_chest=带着鬼魂的箱子
 
 ##candles
 tile.candle.name=Candle
@@ -73,10 +73,10 @@ item.corpse.villager=Villager corpse
 item.corpse.horse=Horse corpse
 item.corpse.dog=Dog corpse
 item.corpse.cat=Cat corpse
-item.corpse.entity_name=Name
-item.corpse.villager_type=Profession
-item.corpse.villager_type.farmer=Farmer
-item.corpse.villager_type.librarian=Librarian
+item.corpse.entity_name=名称
+item.corpse.villager_type=职业
+item.corpse.villager_type.farmer=农民
+item.corpse.villager_type.librarian=帕秋莉
 item.corpse.villager_type.priest=Priest
 item.corpse.villager_type.smith=Smith
 item.corpse.villager_type.butcher=Butcher
@@ -86,13 +86,13 @@ item.corpse.villager_type.thaumaturge=Thaumaturge
 item.corpse.villager_type.beekeeper=Beekeeper
 item.corpse.villager_type.lumberjack=Lumberjack
 item.corpse.villager_type.Unknown=unknown
-item.corpse.horse_type=Horse type
-item.corpse.horse_type.horse=Horse
-item.corpse.horse_type.donkey=Donkey
-item.corpse.horse_type.mule=Mule
-item.corpse.horse_type.zombie=Zombie horse
-item.corpse.horse_type.skeleton=Skeleton horse
-item.corpse.horse_type.unknown=Unknown
+item.corpse.horse_type=马种
+item.corpse.horse_type.horse=普通马
+item.corpse.horse_type.donkey=驴
+item.corpse.horse_type.mule=骡子
+item.corpse.horse_type.zombie=僵尸马
+item.corpse.horse_type.skeleton=骷髅马
+item.corpse.horse_type.unknown=不明
 item.corpse.horse_variant=Horse variant
 item.corpse.health=Max health
 item.corpse.speed=Speed
