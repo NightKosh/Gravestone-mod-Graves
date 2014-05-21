@@ -326,7 +326,7 @@ public class BlockGSGraveStone extends BlockContainer {
      */
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-        ArrayList<ItemStack> ret = new ArrayList();
+        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 
         if (!GraveStoneConfig.silkTouchForGraves) {
             ret.add(getBlockItemStack(world, x, y, z));
@@ -634,8 +634,6 @@ public class BlockGSGraveStone extends BlockContainer {
 
         if (GraveStoneConfig.generateSwordGraves && world.rand.nextInt(1) == 0 && entityType.equals(EnumGraveType.PLAYER_GRAVES)) {
             sword = GraveStoneHelper.checkSword(items);
-            System.out.println("!!!!");
-            GraveStoneLogger.logInfo("FSDSD!!!");
             if (sword != null) {
                 swordType = GraveStoneHelper.getSwordType(sword.getItem());
             }
