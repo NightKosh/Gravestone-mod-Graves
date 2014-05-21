@@ -1,15 +1,13 @@
 package gravestone.gui;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import gravestone.ModGraveStone;
 import gravestone.tileentity.TileEntityGSGrave;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.network.NetHandlerPlayClient;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import org.lwjgl.input.Keyboard;
 
 /**
@@ -23,10 +21,10 @@ public class GSGuiGrave extends GuiScreen {
     private final String titleStr = ModGraveStone.proxy.getLocalizedString("gui.edit_grave");
     private GuiButton button;
     private GuiTextField textField;
-    private TileEntityGSGrave entityGrave;
+    private TileEntityGSGrave teGrave;
 
-    public GSGuiGrave(TileEntityGSGrave tileEntity) {
-        this.entityGrave = tileEntity;
+    public GSGuiGrave(TileEntityGSGrave teGrave) {
+        this.teGrave = teGrave;
     }
 
     /**
@@ -43,7 +41,7 @@ public class GSGuiGrave extends GuiScreen {
         this.textField.setFocused(true);
         this.textField.setCanLoseFocus(false);
         this.textField.setMaxStringLength(30);
-        this.entityGrave.setEditable(false);
+        this.teGrave.setEditable(false);
     }
 
     @Override
@@ -71,26 +69,22 @@ public class GSGuiGrave extends GuiScreen {
     public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
         if (this.textField != null && !this.textField.getText().isEmpty()) {
-            String text = this.textField.getText();
-
-            ByteBuf buf = Unpooled.compositeBuffer();
-            buf.writeInt(entityGrave.xCoord);
-            buf.writeInt(entityGrave.yCoord);
-            buf.writeInt(entityGrave.zCoord);
-            ByteBufUtils.writeUTF8String(buf, text);
-
-            FMLProxyPacket packet = new FMLProxyPacket(buf, "GSDeathText");
-
-            NetHandlerPlayClient nethandlerplayclient = this.mc.getNetHandler();
-
-
-            if (nethandlerplayclient != null) {
-                nethandlerplayclient.addToSendQueue(packet);//new C12PacketUpdateSign(this.tileSign.xCoord, this.tileSign.yCoord, this.tileSign.zCoord, this.tileSign.signText));
+            for (WorldServer world : MinecraftServer.getServer().worldServers) {
+                if (world != null) {
+                    this.setText(world);
+                }
             }
-
-            entityGrave.getDeathTextComponent().setDeathText(text);
         }
-        entityGrave.setEditable(true);
+        this.teGrave.getDeathTextComponent().setDeathText(this.textField.getText());
+        this.teGrave.setEditable(true);
+    }
+
+    private void setText(World world) {
+        TileEntityGSGrave teGrave = (TileEntityGSGrave) world.getTileEntity(this.teGrave.xCoord, this.teGrave.yCoord, this.teGrave.zCoord);
+        if (teGrave != null) {
+            teGrave.getDeathTextComponent().setDeathText(this.textField.getText());
+            teGrave.setEditable(true);
+        }
     }
 
     /**

@@ -7,7 +7,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.config.GraveStoneConfig;
@@ -85,14 +84,12 @@ public class ModGraveStone {
         // tileEntities registration
         GSTileEntity.registration();
 
-        // Gui registration
-        GSGui.registration();
-
         // register structures
         GSStructures.getInstance();
 
         // register entitys
         GSEntity.getInstance();
+
         proxy.registerRenderers();
     }
 
@@ -104,10 +101,5 @@ public class ModGraveStone {
     @Mod.EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
         GSCommands.getInstance(event);
-    }
-
-    @Mod.EventHandler
-    public void serverLoad(FMLServerStartingEvent event) {
-//        NetworkRegistry.INSTANCE.newChannel("GSDeathText", new GSPacketHandler());
     }
 }

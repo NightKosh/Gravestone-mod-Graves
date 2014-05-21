@@ -1,14 +1,15 @@
 package gravestone.item;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import gravestone.ModGraveStone;
 import gravestone.core.GSBlock;
 import gravestone.core.Resources;
+import gravestone.gui.GSGuiGrave;
 import gravestone.tileentity.TileEntityGSGrave;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 
 /**
  * GraveStone mod
@@ -45,10 +46,12 @@ public class ItemGSChisel extends ItemTool {
      */
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10) {
-        if (world.getBlock(x, y, z).equals(GSBlock.graveStone)) {
-            return setGraveText(stack, player, world, x, y, z, false);
-        } else if (world.getBlock(x, y, z).equals(GSBlock.memorial)) {
-            return setGraveText(stack, player, world, x, y, z, true);
+        if (world.isRemote) {
+            if (world.getBlock(x, y, z).equals(GSBlock.graveStone)) {
+                return setGraveText(stack, player, world, x, y, z, false);
+            } else if (world.getBlock(x, y, z).equals(GSBlock.memorial)) {
+                return setGraveText(stack, player, world, x, y, z, true);
+            }
         }
 
         return false;
@@ -58,8 +61,7 @@ public class ItemGSChisel extends ItemTool {
         TileEntityGSGrave tileEntity = (TileEntityGSGrave) world.getTileEntity(x, y, z);
 
         if (tileEntity != null && tileEntity.isEditable() && tileEntity.getDeathTextComponent().getDeathText().length() == 0) {
-            player.openGui(ModGraveStone.instance, 0, world, x, y, z);
-
+            FMLClientHandler.instance().getClient().displayGuiScreen(new GSGuiGrave(tileEntity));
             if (isMemorial) {
                 stack.damageItem(5, player);
             } else {
