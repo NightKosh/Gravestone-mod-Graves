@@ -63,21 +63,31 @@ public class GSCompatibilityThaumcraft {
 
             // items
             ThaumcraftApi.registerObjectTag(new ItemStack(GSItem.chisel), new AspectList().add(Aspect.TOOL, 2));
+            // corpses
+            ThaumcraftApi.registerObjectTag(new ItemStack(GSItem.corpse), new int[]{0}, new AspectList().add(Aspect.DEATH, 2)
+                .add(Aspect.MAN, 3).add(Aspect.AIR, 2)); // villager
+            ThaumcraftApi.registerObjectTag(new ItemStack(GSItem.corpse), new int[]{1}, new AspectList().add(Aspect.DEATH, 2)
+                    .add(Aspect.BEAST, 3).add(Aspect.EARTH, 3)); // wolf
+            ThaumcraftApi.registerObjectTag(new ItemStack(GSItem.corpse), new int[]{2}, new AspectList().add(Aspect.DEATH, 2)
+                    .add(Aspect.BEAST, 3).add(Aspect.ENTROPY, 3)); // cat
+            ThaumcraftApi.registerObjectTag(new ItemStack(GSItem.corpse), new int[]{3}, new AspectList().add(Aspect.DEATH, 2)
+                    .add(Aspect.BEAST, 4).add(Aspect.AIR, 1).add(Aspect.EARTH, 1)); // horse
 
             // entity
-            ThaumcraftApi.registerEntityTag(GSEntity.ZOMBIE_DOG_NAME, new AspectList().add(Aspect.BEAST, 2)
-                    .add(Aspect.UNDEAD, 2).add(Aspect.EARTH, 2));
-            ThaumcraftApi.registerEntityTag(GSEntity.ZOMBIE_CAT_NAME, new AspectList().add(Aspect.BEAST, 2)
-                    .add(Aspect.UNDEAD, 2).add(Aspect.ENTROPY, 1));
-            ThaumcraftApi.registerEntityTag(GSEntity.SKEKETON_DOG_NAME, new AspectList().add(Aspect.BEAST, 1)
-                    .add(Aspect.UNDEAD, 3).add(Aspect.EARTH, 1));
-            ThaumcraftApi.registerEntityTag(GSEntity.SKEKETON_CAT_NAME, new AspectList().add(Aspect.BEAST, 1)
-                    .add(Aspect.UNDEAD, 3).add(Aspect.ENTROPY, 1));
+            ThaumcraftApi.registerEntityTag(GSEntity.ZOMBIE_DOG_NAME, new AspectList().add(Aspect.BEAST, 3)
+                    .add(Aspect.UNDEAD, 3).add(Aspect.EARTH, 3));
+            ThaumcraftApi.registerEntityTag(GSEntity.ZOMBIE_CAT_NAME, new AspectList().add(Aspect.BEAST, 3)
+                    .add(Aspect.UNDEAD, 3).add(Aspect.ENTROPY, 3));
+            ThaumcraftApi.registerEntityTag(GSEntity.SKEKETON_DOG_NAME, new AspectList().add(Aspect.BEAST, 2)
+                    .add(Aspect.UNDEAD, 4).add(Aspect.EARTH, 3));
+            ThaumcraftApi.registerEntityTag(GSEntity.SKEKETON_CAT_NAME, new AspectList().add(Aspect.BEAST, 2)
+                    .add(Aspect.UNDEAD, 4).add(Aspect.ENTROPY, 3));
             // Crawlers
             ThaumcraftApi.registerEntityTag(GSEntity.SKULL_CRAWLER_NAME, new AspectList().add(Aspect.DEATH, 2).add(Aspect.UNDEAD, 2));
             ThaumcraftApi.registerEntityTag(GSEntity.WITHER_SKULL_CRAWLER_NAME, new AspectList().add(Aspect.DEATH, 2)
                     .add(Aspect.UNDEAD, 2).add(Aspect.DARKNESS, 2));
-            ThaumcraftApi.registerEntityTag(GSEntity.ZOMBIE_SKULL_CRAWLER_NAME, new AspectList().add(Aspect.DEATH, 2).add(Aspect.UNDEAD, 2));
+            ThaumcraftApi.registerEntityTag(GSEntity.ZOMBIE_SKULL_CRAWLER_NAME, new AspectList().add(Aspect.DEATH, 2)
+                    .add(Aspect.UNDEAD, 2).add(Aspect.HUNGER, 2));
         } catch (Exception e) {
             GraveStoneLogger.logError("Error in thaumcraft integration");
             e.printStackTrace();
