@@ -6,6 +6,7 @@ import gravestone.core.GSBlock;
 import gravestone.core.Resources;
 import gravestone.gui.GSGuiGrave;
 import gravestone.tileentity.TileEntityGSGrave;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
@@ -72,5 +73,10 @@ public class ItemGSChisel extends ItemTool {
         }
 
         return false;
+    }
+
+    @Override
+    public float func_150893_a(ItemStack itemStack, Block block) {
+        return 1;
     }
 }
