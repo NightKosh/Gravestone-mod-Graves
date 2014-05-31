@@ -2,6 +2,7 @@
 package gravestone.core;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import gravestone.tileentity.TileEntityGSCandle;
 import gravestone.tileentity.TileEntityGSHauntedChest;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import gravestone.tileentity.TileEntityGSMemorial;
@@ -28,6 +29,8 @@ public class GSTileEntity {
         GameRegistry.registerTileEntity(TileEntityGSSpawner.class, "GS Spawner");
         
         GameRegistry.registerTileEntity(TileEntityGSHauntedChest.class, "GSHaunted Chest");
+        
+        GameRegistry.registerTileEntity(TileEntityGSCandle.class, "GSCandle");
         
         GameRegistry.registerTileEntity(TileEntityGSSkullCandle.class, "GSSkull Candle");
     }
