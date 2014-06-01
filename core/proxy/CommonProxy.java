@@ -1,5 +1,7 @@
 package gravestone.core.proxy;
 
+import gravestone.tileentity.TileEntityGSGrave;
+
 /**
  * GraveStone mod
  *
@@ -21,4 +23,6 @@ public class CommonProxy {
     public String getLocalizedEntityName(String str) {
         return str;
     }
+
+    public void openGraveGui(TileEntityGSGrave tileEntity) {}
 }

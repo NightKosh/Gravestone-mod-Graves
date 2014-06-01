@@ -1,10 +1,8 @@
 package gravestone.item;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import gravestone.ModGraveStone;
 import gravestone.core.GSBlock;
 import gravestone.core.Resources;
-import gravestone.gui.GSGuiGrave;
 import gravestone.tileentity.TileEntityGSGrave;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,7 +24,6 @@ public class ItemGSChisel extends ItemTool {
         setCreativeTab(ModGraveStone.creativeTab);
         setUnlocalizedName("chisel");
         setMaxDamage(50);
-        //MinecraftForge.setToolClass(this, "chisel", 1);
         this.setTextureName(Resources.CHISEL);
     }
 
@@ -62,7 +59,7 @@ public class ItemGSChisel extends ItemTool {
         TileEntityGSGrave tileEntity = (TileEntityGSGrave) world.getTileEntity(x, y, z);
 
         if (tileEntity != null && tileEntity.isEditable() && tileEntity.getDeathTextComponent().getDeathText().length() == 0) {
-            FMLClientHandler.instance().getClient().displayGuiScreen(new GSGuiGrave(tileEntity));
+            ModGraveStone.proxy.openGraveGui(tileEntity);
             if (isMemorial) {
                 stack.damageItem(5, player);
             } else {

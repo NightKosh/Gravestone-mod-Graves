@@ -1,5 +1,6 @@
 package gravestone.core.proxy;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -8,6 +9,7 @@ import gravestone.core.GSBlock;
 import gravestone.core.Resources;
 import gravestone.entity.monster.*;
 import gravestone.entity.monster.EntitySkullCrawler.SkullCrawlerType;
+import gravestone.gui.GSGuiGrave;
 import gravestone.models.entity.ModelUndeadCat;
 import gravestone.models.entity.ModelUndeadDog;
 import gravestone.renderer.entity.RenderSkullCrawler;
@@ -99,5 +101,10 @@ public class ClientProxy extends CommonProxy {
     @Override
     public String getLocalizedEntityName(String name) {
         return StatCollector.translateToLocal(name);
+    }
+
+    @Override
+    public void openGraveGui(TileEntityGSGrave tileEntity) {
+        FMLClientHandler.instance().getClient().displayGuiScreen(new GSGuiGrave(tileEntity));
     }
 }
