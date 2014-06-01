@@ -30,7 +30,7 @@ public class GSTileEntity {
         
         GameRegistry.registerTileEntity(TileEntityGSHauntedChest.class, "GSHaunted Chest");
         
-        GameRegistry.registerTileEntity(TileEntityGSCandle.class, "GSCandle");
+        GameRegistry.registerTileEntity(TileEntityGSCandle.class, "GSTECandle");
         
         GameRegistry.registerTileEntity(TileEntityGSSkullCandle.class, "GSSkull Candle");
     }
