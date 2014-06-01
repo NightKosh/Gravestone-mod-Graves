@@ -54,6 +54,9 @@ public class GraveStoneConfig {
     // spawner reciepes
     public static boolean enableBossSpawnerCraftingRecipe;
     public static boolean enableSpawnerCraftingRecipe;
+
+    // haunted chest
+    public static boolean replaceHauntedChest;
     // grave names
     public static ArrayList<String> graveNames;
     public static ArrayList<String> graveDogsNames;
@@ -149,7 +152,11 @@ public class GraveStoneConfig {
         // spawners recipes
         enableBossSpawnerCraftingRecipe = config.get(Configuration.CATEGORY_GENERAL, "EnableBossSpawnerCraftingRecipe", true).getBoolean(true);
         enableSpawnerCraftingRecipe = config.get(Configuration.CATEGORY_GENERAL, "EnableMonsterSpawnerCraftingRecipe", true).getBoolean(true);
-    
+
+        // haunted chest
+        replaceHauntedChest = config.get(Configuration.CATEGORY_GENERAL, "ReplaceHauntedChest", false).getBoolean(false);
+
+
         removeEmptyGraves = config.get(Configuration.CATEGORY_GENERAL, "RemoveEmptyGraves", false).getBoolean(false);
     }
 

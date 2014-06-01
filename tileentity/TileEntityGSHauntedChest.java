@@ -1,9 +1,11 @@
 package gravestone.tileentity;
 
 import gravestone.block.enums.EnumHauntedChest;
+import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSMobSpawn;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntityBat;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -20,6 +22,7 @@ public class TileEntityGSHauntedChest extends TileEntity {
      * The number of players currently using this chest
      */
     private int openTicks = 0;
+    private boolean isOpen = false;
     /**
      * The current angle of the lid (between 0 and 1)
      */
@@ -48,47 +51,65 @@ public class TileEntityGSHauntedChest extends TileEntity {
             openTicks--;
         }
 
-        this.prevLidAngle = this.lidAngle;
-        f = 0.1F;
-        double d0;
+        if (this.worldObj.isRemote) {
+            this.prevLidAngle = this.lidAngle;
+            f = 0.1F;
+            double d0;
 
-        if (this.openTicks > 0 && this.lidAngle == 0.0F) {
-            double d1 = (double) this.xCoord + 0.5D;
-            d0 = (double) this.zCoord + 0.5D;
+            if (this.openTicks > 0 && this.lidAngle == 0.0F) {
+                double d1 = (double) this.xCoord + 0.5D;
+                d0 = (double) this.zCoord + 0.5D;
 
-            this.worldObj.playSoundEffect(d1, (double) this.yCoord + 0.5D, d0, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+                this.worldObj.playSoundEffect(d1, (double) this.yCoord + 0.5D, d0, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+            }
+
+            if (this.openTicks == 0 && this.lidAngle > 0.0F || this.openTicks > 0 && this.lidAngle < 1.0F) {
+                float f1 = this.lidAngle;
+
+                if (this.openTicks > 0) {
+                    this.lidAngle += f;
+                } else {
+                    this.lidAngle -= f;
+                }
+
+                if (this.lidAngle > 1.0F) {
+                    this.lidAngle = 1.0F;
+                }
+
+                float f2 = 0.5F;
+                if (this.lidAngle < f2 && f1 >= f2) {
+                    d0 = (double) this.xCoord + 0.5D;
+                    double d2 = (double) this.zCoord + 0.5D;
+
+                    this.worldObj.playSoundEffect(d0, (double) this.yCoord + 0.5D, d2, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+                }
+
+                if (this.lidAngle < 0.0F) {
+                    this.lidAngle = 0.0F;
+                }
+            }
+        } else {
+            if (openTicks == 45) {
+                spawnMobs(this.worldObj);
+            }
         }
 
-        if (this.openTicks == 0 && this.lidAngle > 0.0F || this.openTicks > 0 && this.lidAngle < 1.0F) {
-            float f1 = this.lidAngle;
-
-            if (this.openTicks > 0) {
-                this.lidAngle += f;
-            } else {
-                this.lidAngle -= f;
+        if (openTicks == 0) {
+            if (this.isOpen && GraveStoneConfig.replaceHauntedChest) {
+                int meta = worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord);
+                this.getWorldObj().removeTileEntity(this.xCoord, this.yCoord, this.zCoord);
+                this.getWorldObj().setBlock(this.xCoord, this.yCoord, this.zCoord, Blocks.chest);
+                this.getWorldObj().setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, meta, 2);
             }
-
-            if (this.lidAngle > 1.0F) {
-                this.lidAngle = 1.0F;
-            }
-
-            float f2 = 0.5F;
-
-            if (this.lidAngle < f2 && f1 >= f2) {
-                d0 = (double) this.xCoord + 0.5D;
-                double d2 = (double) this.zCoord + 0.5D;
-
-                this.worldObj.playSoundEffect(d0, (double) this.yCoord + 0.5D, d2, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
-            }
-
-            if (this.lidAngle < 0.0F) {
-                this.lidAngle = 0.0F;
-            }
+            this.isOpen = false;
         }
     }
 
     public void openChest() {
-        this.openTicks = 50;
+        if (openTicks == 0) {
+            this.openTicks = 50;
+            this.isOpen = true;
+        }
     }
 
     public EnumHauntedChest getChestType() {

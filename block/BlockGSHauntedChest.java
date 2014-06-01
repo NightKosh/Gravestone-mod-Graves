@@ -20,6 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,12 +109,13 @@ public class BlockGSHauntedChest extends BlockContainer {
      */
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-        TileEntityGSHauntedChest te = (TileEntityGSHauntedChest) world.getTileEntity(x, y, z);
-        if (te != null) {
-            if (!world.isRemote) {
-                te.spawnMobs(world);
+        if (player instanceof FakePlayer) {
+            return false;
+        } else {
+            TileEntityGSHauntedChest te = (TileEntityGSHauntedChest) world.getTileEntity(x, y, z);
+            if (te != null) {
+                te.openChest();
             }
-            te.openChest();
         }
         return true;
     }
