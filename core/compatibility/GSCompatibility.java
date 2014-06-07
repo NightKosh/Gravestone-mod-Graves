@@ -70,6 +70,10 @@ public class GSCompatibility {
             GSCompatibilityBaubles.isInstalled = true;
         }
 
+        if (Loader.isModLoaded("Mariculture")) {
+            GSCompatibilityMariculture.isInstalled = true;
+        }
+
         if (Loader.isModLoaded("Forestry")) {
 //            GSReciepes.addSkullCandleReciepes(BlockInterface.getBlock("candle"));
         }
