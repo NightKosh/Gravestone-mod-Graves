@@ -74,7 +74,7 @@ public class GSCompatibility {
             GSCompatibilityMariculture.isInstalled = true;
         }
 
-        if (Loader.isModLoaded("Rpg Inventory")) {
+        if (Loader.isModLoaded("rpginventorymod")) {
             GSCompatibilityRpgInventory.isInstalled = true;
         }
 

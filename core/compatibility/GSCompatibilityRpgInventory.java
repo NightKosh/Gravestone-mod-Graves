@@ -28,13 +28,13 @@ public class GSCompatibilityRpgInventory {
                 Method m = clazz.getDeclaredMethod("get", EntityPlayer.class);
                 Object result = m.invoke(null, player);
 
-                IInventory inv = (IInventory) result;
-                if (inv != null) {
-                    for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
-                        ItemStack stack = inv.getStackInSlot(slot);
+                IInventory inventory = (IInventory) result;
+                if (inventory != null) {
+                    for (int slot = 0; slot < inventory.getSizeInventory(); slot++) {
+                        ItemStack stack = inventory.getStackInSlot(slot);
                         if (stack != null) {
-                            items.add(inv.getStackInSlot(slot).copy());
-                            inv.setInventorySlotContents(slot, null);
+                            items.add(stack.copy());
+                            inventory.setInventorySlotContents(slot, null);
                         }
                     }
                 }
