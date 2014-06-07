@@ -85,5 +85,9 @@ public class GSCompatibility {
         if (Loader.isModLoaded("Forestry")) {
 //            GSReciepes.addSkullCandleReciepes(BlockInterface.getBlock("candle"));
         }
+
+        if (Loader.isModLoaded("SophisticatedWolves")) {
+            GSCompatibilitySophisticatedWolves.isInstalled = true;
+        }
     }
 }

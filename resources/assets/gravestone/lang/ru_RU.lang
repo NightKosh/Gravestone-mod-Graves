@@ -115,6 +115,7 @@ item.corpse.collar.green=Зелёный
 item.corpse.collar.red=Красный
 item.corpse.collar.black=Чёрный
 item.corpse.collar.unknown=Неизвестный
+item.corpse.dog_type=Тип собаки
 item.corpse.cat_type=Тип кошки
 item.corpse.cat_type.black=Чёрная
 item.corpse.cat_type.red=Рыжая

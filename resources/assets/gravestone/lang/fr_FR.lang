@@ -115,6 +115,7 @@ item.corpse.collar.green=Vert
 item.corpse.collar.red=Rouge
 item.corpse.collar.black=Noir
 item.corpse.collar.unknown=Unknown
+item.corpse.dog_type=Dog type
 item.corpse.cat_type=Type de Chat 
 item.corpse.cat_type.black=Noir
 item.corpse.cat_type.red=Rouge

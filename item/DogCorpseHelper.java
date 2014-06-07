@@ -1,12 +1,15 @@
 package gravestone.item;
 
 import gravestone.ModGraveStone;
+import gravestone.core.compatibility.GSCompatibilitySophisticatedWolves;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import sophisticated_wolves.api.ISophisticatedWolf;
+import sophisticated_wolves.api.SophisticatedWolvesAPI;
 
 import java.util.List;
 
@@ -34,10 +37,20 @@ public class DogCorpseHelper extends CorpseHelper {
     public static void setNbt(EntityWolf dog, NBTTagCompound nbt) {
         setName(dog, nbt);
         nbt.setByte("Collar", (byte) dog.getCollarColor());
+
+        if (GSCompatibilitySophisticatedWolves.isInstalled() && dog instanceof ISophisticatedWolf) {
+            nbt.setInteger("Species", ((ISophisticatedWolf) dog).getSpecies());
+        }
     }
 
     public static void spawnDog(World world, int x, int y, int z, NBTTagCompound nbtTag, EntityPlayer player) {
-        EntityWolf wolf = new EntityWolf(world);
+        EntityWolf wolf;
+        if (GSCompatibilitySophisticatedWolves.isInstalled() && nbtTag.hasKey("Species")) {
+            wolf = SophisticatedWolvesAPI.getSophisticatedWolf(world);
+            ((ISophisticatedWolf) wolf).updateSpecies(nbtTag.getInteger("Species"));
+        } else {
+            wolf = new EntityWolf(world);
+        }
         setMobName(wolf, nbtTag);
         wolf.setTamed(true);
         wolf.setHealth(20);
@@ -52,6 +65,9 @@ public class DogCorpseHelper extends CorpseHelper {
         if (hasCollar(nbtTag)) {
             list.add(getCollarStr(nbtTag));
         }
+        if (GSCompatibilitySophisticatedWolves.isInstalled() && nbtTag.hasKey("Species")) {
+            list.add(getSpeciesStr(nbtTag));
+        }
     }
 
     private static boolean hasCollar(NBTTagCompound nbtTag) {
@@ -61,6 +77,10 @@ public class DogCorpseHelper extends CorpseHelper {
     private static String getCollarStr(NBTTagCompound nbtTag) {
         return ModGraveStone.proxy.getLocalizedString("item.corpse.collar") + " " +
                 ModGraveStone.proxy.getLocalizedString(getCollar(nbtTag.getByte("Collar")));
+    }
+
+    private static String getSpeciesStr(NBTTagCompound nbtTag) {
+        return ModGraveStone.proxy.getLocalizedString("item.corpse.dog_type") + " " + getCollar(nbtTag.getInteger("Species"));
     }
 
     private static String getCollar(int type) {
