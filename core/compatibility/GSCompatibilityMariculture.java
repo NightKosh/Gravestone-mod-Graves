@@ -24,16 +24,20 @@ public class GSCompatibilityMariculture {
     public static void addItems(List<ItemStack> items, EntityPlayer player) {
         if (isLoaded()) {
             ItemStack[] mirrorItems = MaricultureHandlers.mirror.getMirrorContents(player);
-            for (ItemStack item : mirrorItems) {
-                items.add(item.copy());
-            }
+            if (mirrorItems != null) {
+                for (ItemStack item : mirrorItems) {
+                    if (item != null) {
+                        items.add(item.copy());
+                    }
+                }
 
-            try {
-                Class<?> mirrorHelperClass = Class.forName("mariculture.magic.MirrorHelper");
-                Method saveMethod = mirrorHelperClass.getDeclaredMethod("save", EntityPlayer.class, ItemStack[].class);
-                saveMethod.invoke(null, player, new ItemStack[3]);
-            } catch (Exception e) {
-                GraveStoneLogger.logError("Can't clear mariculture mirror items!!!");
+                try {
+                    Class<?> mirrorHelperClass = Class.forName("mariculture.magic.MirrorHelper");
+                    Method saveMethod = mirrorHelperClass.getDeclaredMethod("save", EntityPlayer.class, ItemStack[].class);
+                    saveMethod.invoke(null, player, new ItemStack[3]);
+                } catch (Exception e) {
+                    GraveStoneLogger.logError("Can't clear mariculture mirror items!!!");
+                }
             }
         }
     }
