@@ -34,7 +34,7 @@ public class GSCompatibilityMariculture {
                 try {
                     Class<?> mirrorHelperClass = Class.forName("mariculture.magic.MirrorHelper");
                     Method saveMethod = mirrorHelperClass.getDeclaredMethod("save", EntityPlayer.class, ItemStack[].class);
-                    saveMethod.invoke(null, player, new ItemStack[3]);
+                    saveMethod.invoke(null, player, new ItemStack[4]);
                 } catch (Exception e) {
                     GraveStoneLogger.logError("Can't clear mariculture mirror items!!!");
                 }
