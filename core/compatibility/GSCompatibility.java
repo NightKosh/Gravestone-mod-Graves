@@ -74,6 +74,14 @@ public class GSCompatibility {
             GSCompatibilityMariculture.isInstalled = true;
         }
 
+        if (Loader.isModLoaded("Rpg Inventory")) {
+            GSCompatibilityRpgInventory.isInstalled = true;
+        }
+
+        if (Loader.isModLoaded("TConstruct")) {
+            GSCompatibilityTinkerConstruct.isInstalled = true;
+        }
+
         if (Loader.isModLoaded("Forestry")) {
 //            GSReciepes.addSkullCandleReciepes(BlockInterface.getBlock("candle"));
         }

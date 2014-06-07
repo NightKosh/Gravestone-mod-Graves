@@ -226,6 +226,8 @@ public class GraveStoneHelper {
             GSCompatibilityTheCampingMod.addItems(items, player);
             GSCompatibilityBaubles.addItems(items, player);
             GSCompatibilityMariculture.addItems(items, player);
+            GSCompatibilityTinkerConstruct.addItems(items, player);
+            GSCompatibilityRpgInventory.addItems(items, player);
             //GSCompatibilityBackpacksMod.addItems(items, player);
             player.inventory.clearInventory(null, -1);
 
