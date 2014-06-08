@@ -754,8 +754,9 @@ public class BlockGSGraveStone extends BlockContainer {
                 TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
                 if (tileEntity != null) {
                     if (tileEntity.getSword() == 0 && tileEntity.isEmpty()) {
-                        GraveStoneLogger.logInfo("Remove empty grave at "
-                                + x + "/" + y + "/" + z);
+                        if (GraveStoneConfig.showGravesRemovingMessages) {
+                            GraveStoneLogger.logInfo("Remove empty grave at " + x + "/" + y + "/" + z);
+                        }
 
                         world.removeTileEntity(x, y, z);
                         world.setBlock(x, y, z, this, 0, 2);

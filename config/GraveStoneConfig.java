@@ -79,6 +79,7 @@ public class GraveStoneConfig {
     // spawn chance
     public static int spawnChance;
     public static boolean removeEmptyGraves;
+    public static boolean showGravesRemovingMessages;
 
     private GraveStoneConfig(String path, File configFile) {
         this.config = new Configuration(configFile);
@@ -158,6 +159,7 @@ public class GraveStoneConfig {
 
 
         removeEmptyGraves = config.get(Configuration.CATEGORY_GENERAL, "RemoveEmptyGraves", false).getBoolean(false);
+        showGravesRemovingMessages = config.get(Configuration.CATEGORY_GENERAL, "ShowGravesRemovingMessages", true).getBoolean(true);
     }
 
     private static void entityConfig() {
