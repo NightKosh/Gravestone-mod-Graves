@@ -45,7 +45,9 @@ public class BlockGSAltar extends Block {
         if (stack != null && stack.getItem() instanceof ItemGSCorpse && CorpseHelper.canSpawnMob(player, stack.getItemDamage())) {
             CorpseHelper.spawnMob(stack.getItemDamage(), world, x, y, z, stack.stackTagCompound, player);
             CorpseHelper.getExperience(player, stack.getItemDamage());
-            player.destroyCurrentEquippedItem();
+            if (!player.capabilities.isCreativeMode) {
+                stack.stackSize--;
+            }
             return true;
         }
         return false;
