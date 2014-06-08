@@ -28,6 +28,7 @@ public class GSCommands {
     
     private void initCommands(MinecraftServer server) {
         CommandHandler commandManager = (CommandHandler) server.getCommandManager();
-        commandManager.registerCommand(new CommandStructuresGenerator()); 
+        commandManager.registerCommand(new CommandStructuresGenerator());
+        commandManager.registerCommand(new CommandCustomGraveItems());
     }
 }
