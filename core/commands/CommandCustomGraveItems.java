@@ -7,6 +7,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.ChatComponentText;
 
 import java.util.ArrayList;
 
@@ -56,17 +57,16 @@ public class CommandCustomGraveItems extends CommandBase {
                         }
                         ((TileEntityGSGraveStone) graveTE).setAdditionalItems(items.toArray(new ItemStack[items.size()]));
                     } else {
-                        GraveStoneLogger.logError("This coordinates occupied by wrong blocks");
+                        icommandsender.addChatMessage(new ChatComponentText("This coordinates occupied by wrong blocks"));
                     }
                 } else {
-                    GraveStoneLogger.logError("There aren't any blocks at this coordinates");
+                    icommandsender.addChatMessage(new ChatComponentText("There aren't any blocks at this coordinates"));
                 }
             } catch (NumberFormatException e) {
-                GraveStoneLogger.logError("Coordinates error");
-                e.printStackTrace();
+                icommandsender.addChatMessage(new ChatComponentText("Coordinates error"));
             }
         } else {
-            GraveStoneLogger.logError("Wrong number of parameters");
+            icommandsender.addChatMessage(new ChatComponentText("Wrong number of parameters"));
         }
     }
 }
