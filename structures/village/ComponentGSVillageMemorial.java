@@ -3,8 +3,6 @@ package gravestone.structures.village;
 import gravestone.block.BlockGSMemorial;
 import gravestone.core.GSBlock;
 import gravestone.tileentity.TileEntityGSMemorial;
-import java.util.List;
-import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -12,6 +10,9 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
+
+import java.util.List;
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -24,11 +25,14 @@ public class ComponentGSVillageMemorial extends StructureVillagePieces.Village {
     private int averageGroundLevel = -1;
     private static final int HEIGHT = 6;
 
+    private StructureVillagePieces.Start startPiece;
+
     public ComponentGSVillageMemorial() {
     }
 
     public ComponentGSVillageMemorial(StructureVillagePieces.Start startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int direction) {
         super(startPiece, componentType);
+        this.startPiece = startPiece;
         this.coordBaseMode = direction;
         this.boundingBox = structureBoundingBox;
     }
@@ -54,10 +58,8 @@ public class ComponentGSVillageMemorial extends StructureVillagePieces.Village {
             this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.maxY + HEIGHT - 2, 0);
         }
 
-        //this.fillWithAir(world, structureBoundingBox, 0, 1, 0, 5, HEIGHT, 5);
         Block ground;
-
-        int biomeId = world.getBiomeGenForCoords(this.getXWithOffset(0, 0), this.getZWithOffset(0, 0)).biomeID;
+        int biomeId = this.startPiece.biome.biomeID;
         if (biomeId == BiomeGenBase.desert.biomeID || biomeId == BiomeGenBase.desertHills.biomeID) {
             ground = Blocks.sand;
         } else {

@@ -1,7 +1,5 @@
 package gravestone.structures.village;
 
-import java.util.List;
-import java.util.Random;
 import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
 import net.minecraft.init.Blocks;
@@ -9,6 +7,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
+
+import java.util.List;
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -20,11 +21,14 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
 
     private int averageGroundLevel = -1;
 
+    private StructureVillagePieces.Start startPiece;
+
     public ComponentGSVillageUndertaker() {
     }
 
     public ComponentGSVillageUndertaker(StructureVillagePieces.Start startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int direction) {
         super(startPiece, componentType);
+        this.startPiece = startPiece;
         this.coordBaseMode = direction;
         this.boundingBox = structureBoundingBox;
     }
@@ -118,23 +122,5 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
     @Override
     protected int getVillagerType(int par1) {
         return 385;
-    }
-
-    public static int getLeftItemDirection(int direction) {
-        if (direction == 0 || direction == 1) {
-            direction -= 1;
-
-            if (direction < 0) {
-                direction = 3;
-            }
-        } else {
-            direction += 1;
-
-            if (direction > 3) {
-                direction = 0;
-            }
-        }
-
-        return direction;
     }
 }
