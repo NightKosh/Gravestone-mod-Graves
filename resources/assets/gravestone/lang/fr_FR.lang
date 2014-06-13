@@ -6,56 +6,56 @@ itemGroup.tabGraveStone=Gravestone
 ## graves
 block.gravestone.gravestone=Tombe
 block.gravestone.cross=Croix
-block.gravestone.plate=Plaque Tombale
-block.gravestone.dog_statue=Tombe de Chien
-block.gravestone.cat_statue=Tombe de Chat
-block.gravestone.wooden_sword=Tombe d'Epée en Bois
-block.gravestone.stone_sword=Tombe d'Epée en Pierre
-block.gravestone.iron_sword=Tombe d'Epée en Fer
-block.gravestone.golden_sword=Tombe d'Epée en Or
-block.gravestone.diamond_sword=Tombe d'Epée en Diamand
-block.gravestone.horse_statue=Horse statue
+block.gravestone.plate=Pierre tombale
+block.gravestone.dog_statue=Tombe de chien
+block.gravestone.cat_statue=Tombe de chat
+block.gravestone.wooden_sword=Épée en bois tombale
+block.gravestone.stone_sword=Épée en pierre tombale
+block.gravestone.iron_sword=Épée en fer tombale
+block.gravestone.golden_sword=Épée en or tombale
+block.gravestone.diamond_sword=Épée en diamand tombale
+block.gravestone.horse_statue=Statue de cheval
 
 ## memorials
-block.memorial.cross=Croix Memoriale
-block.memorial.obelisk=Obelisk
-block.memorial.steve_statue=Tombe de Steve
-block.memorial.villager_statue=Tombe Villagois
-block.memorial.angel_statue=Tombe d'Ange
-block.memorial.dog_statue=Tombe de Chien
-block.memorial.cat_statue=Tombe de Chat
-block.memorial.creeper_statue=Tombe de Creeper
-block.memorial.celtic_cross=Croix Celtic
+block.memorial.cross=Croix mémoriale
+block.memorial.obelisk=Obélisque
+block.memorial.steve_statue=Statue de Steve
+block.memorial.villager_statue=Statue de villageois
+block.memorial.angel_statue=Statue d'ange
+block.memorial.dog_statue=Statue de chien
+block.memorial.cat_statue=Statue de chat
+block.memorial.creeper_statue=Statue de creeper
+block.memorial.celtic_cross=Croix celtique
 
 ## trap
-tile.trap.night.name=Pierre Nocturne
-tile.trap.thunder.name=Pierre tonnère
-block.trap.curse=La nuit tombe dés lors !
+tile.trap.night.name=Pierre nocturne
+tile.trap.thunder.name=Pierre de tonnerre
+block.trap.curse=Les ténèbres approchent !
 
 ## spawner
-block.spawner.wither=Wither Spawner
-block.spawner.skeleton=Skeleton Spawner
-block.spawner.zombie=Zombie Spawner
+block.spawner.wither=Wither spawner
+block.spawner.skeleton=Skeleton spawner
+block.spawner.zombie=Zombie spawner
 
 # bone blocks
 tile.bone_block.name=Block d'os
-tile.bone_block.skull_name=Block d'os avec crane
-tile.bone_block.crawler_name=Block d'os de Rampeur Crâne 
-tile.bone_block.crawler_skull_name=Block d'os avec crâne de Rampeur Crâne
+tile.bone_block.skull_name=Block d'os avec crâne
+tile.bone_block.crawler_name=Block d'os de crâne rampant
+tile.bone_block.crawler_skull_name=Block d'os de  crâne rampant avec crâne
 tile.bone_slab.name=Dalle d'os
 tile.bone_stairs.name=Escalier d'os
 
 ## chests
 block.haunted_chest.bats_chest=Coffre à chauve-souris
 block.haunted_chest.skeleton_chest=Coffre à squelette
-block.haunted_chest.raven_chest=Coffre à Corbeau
-block.haunted_chest.ghost_chest=Coffre à Fantômes
+block.haunted_chest.raven_chest=Coffre à corbeau
+block.haunted_chest.ghost_chest=Coffre à fantômes
 
 ##candles
 tile.candle.name=Bougie
-block.skull_candle.skeleton.name=Bougie de crâne
-block.skull_candle.wither_skeleton.name=Bougie Wither
-block.skull_candle.zombie.name=Bougie à Crâne de Zombie
+block.skull_candle.skeleton.name=Bougie à tête de squelette
+block.skull_candle.wither_skeleton.name=Bougie à tête de wither
+block.skull_candle.zombie.name=Bougie à tête de Zombie
 
 
 # items
@@ -65,36 +65,36 @@ item.chisel.name=Burin
 ## graves
 item.grave.age=A vécu
 item.grave.days=jours
-item.grave.sword_name=Epée nom
-item.grave.sword_damage=Epée dégats
+item.grave.sword_name=Nom de l'épée
+item.grave.sword_damage=Dégats de l'épée
 
 ## corpse
-item.corpse.villager=Carcasse de Villageois
-item.corpse.horse=Carcasse de Cheval
-item.corpse.dog=Carcasse de Chien
-item.corpse.cat=Carcasse de Chat
+item.corpse.villager=Carcasse de villageois
+item.corpse.horse=Carcasse de cheval
+item.corpse.dog=Carcasse de chien
+item.corpse.cat=Carcasse de chat
 item.corpse.entity_name=Nom
 item.corpse.villager_type=Profession
 item.corpse.villager_type.farmer=Fermier
-item.corpse.villager_type.librarian=Librarien
+item.corpse.villager_type.librarian=Bibliothécaire
 item.corpse.villager_type.priest=Prêtre
 item.corpse.villager_type.smith=Forgeron
 item.corpse.villager_type.butcher=Boucher
-item.corpse.villager_type.undertacker=Entrepreneur Pompe Funèbre
+item.corpse.villager_type.undertacker=Croque-mort
 item.corpse.villager_type.brewer=Brasseur
 item.corpse.villager_type.thaumaturge=Thaumaturge
 item.corpse.villager_type.beekeeper=Apiculteur
 item.corpse.villager_type.lumberjack=Bucheron
 item.corpse.villager_type.Unknown=Inconnu
-item.corpse.horse_type=Type Cheval
+item.corpse.horse_type=Type de cheval
 item.corpse.horse_type.horse=Cheval
 item.corpse.horse_type.donkey=Âne
 item.corpse.horse_type.mule=Mûle
-item.corpse.horse_type.zombie=Cheval Zombie
-item.corpse.horse_type.skeleton=Cheval Squelette
-item.corpse.horse_type.unknown=Inconue
-item.corpse.horse_variant=Variant du Cheval
-item.corpse.health=PV Max
+item.corpse.horse_type.zombie=Cheval zombie
+item.corpse.horse_type.skeleton=Cheval squelette
+item.corpse.horse_type.unknown=Inconu
+item.corpse.horse_variant=Variante de cheval
+item.corpse.health=Vie max
 item.corpse.speed=Vitesse
 item.corpse.jump_strength=Force de saut
 item.corpse.collar=Collier
@@ -114,31 +114,31 @@ item.corpse.collar.brown=Marron
 item.corpse.collar.green=Vert
 item.corpse.collar.red=Rouge
 item.corpse.collar.black=Noir
-item.corpse.collar.unknown=Unknown
-item.corpse.dog_type=Dog type
-item.corpse.cat_type=Type de Chat 
+item.corpse.collar.unknown=Inconnu
+item.corpse.dog_type=Type de chien
+item.corpse.cat_type=Type de chat
 item.corpse.cat_type.black=Noir
 item.corpse.cat_type.red=Rouge
-item.corpse.cat_type.siamese=Siamese
+item.corpse.cat_type.siamese=Siamois
 item.corpse.cat_type.unknown=Inconnu
 
 
 # gui
-gui.edit_grave=Changer le texte de la Tombe
+gui.edit_grave=Changer l'épitaphe
 
 
 # entity
-entity.GSZombieDog.name=Chien Zombie
-entity.GSSkeletonDog.name=Chien Squelette
-entity.GSZombieCat.name=Chat Zombie
-entity.GSSkeletonCat.name=Chat Squelette
-entity.GSSkullCrawler.name=Rampeur de Crâne
-entity.GSWitherSkullCrawler.name=Rampeur Wither
-entity.GSZombieSkullCrawler.name=Rampeur de Crâne Zombie
+entity.GSZombieDog.name=Chien zombie
+entity.GSSkeletonDog.name=Squelette de chien
+entity.GSZombieCat.name=Chat zombie
+entity.GSSkeletonCat.name=Squelette de chat
+entity.GSSkullCrawler.name=Crâne rampant
+entity.GSWitherSkullCrawler.name=Crâne de wither rampant
+entity.GSZombieSkullCrawler.name=Crâne de zombie rampant
 entity.GSRaven.name=Corbeau
 
 
 # death messages
-death.GS.Herobrine=%1$s a été violament tué par Herobrine.
+death.GS.Herobrine=%1$s a été violemment tué par Herobrine
 death.GS.death_sentence=%1$s a reçu une condamnation à mort
-death.GS.tortures=%1$s est mort dans des circonstances médiocre.
+death.GS.tortures=%1$s a été torturé à mort
