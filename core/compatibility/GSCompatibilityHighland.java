@@ -2,7 +2,7 @@ package gravestone.core.compatibility;
 
 import gravestone.GraveStoneLogger;
 import gravestone.core.GSBiomes;
-import highlands.api.HighlandsBiomes;
+//import highlands.api.HighlandsBiomes;
 import net.minecraft.world.biome.BiomeGenBase;
 
 /**
@@ -23,23 +23,23 @@ public class GSCompatibilityHighland {
     }
 
     protected static void loadBiomes() {
-        try {
-            CATACOMBS_BIOMES = new BiomeGenBase[]{
-                HighlandsBiomes.autumnForest, HighlandsBiomes.birchHills, HighlandsBiomes.glacier,
-                HighlandsBiomes.outback, HighlandsBiomes.pinelands, HighlandsBiomes.sahel,
-                HighlandsBiomes.savannah, HighlandsBiomes.tundra, HighlandsBiomes.shrubland
-            };
-            MEMORIAL_BIOMES = new BiomeGenBase[]{
-                HighlandsBiomes.bog, HighlandsBiomes.dunes, HighlandsBiomes.estuary,
-                HighlandsBiomes.tropicalIslands, HighlandsBiomes.lake
-            };
-            GRAVES_BIOMES = new BiomeGenBase[]{
-                HighlandsBiomes.lake
-            };
-        } catch (Exception e) {
-            GraveStoneLogger.logError("Can't load Highlands biomes");
-            e.printStackTrace();
-        }
+//        try {
+//            CATACOMBS_BIOMES = new BiomeGenBase[]{
+//                HighlandsBiomes.autumnForest, HighlandsBiomes.birchHills, HighlandsBiomes.glacier,
+//                HighlandsBiomes.outback, HighlandsBiomes.pinelands, HighlandsBiomes.sahel,
+//                HighlandsBiomes.savannah, HighlandsBiomes.tundra, HighlandsBiomes.shrubland
+//            };
+//            MEMORIAL_BIOMES = new BiomeGenBase[]{
+//                HighlandsBiomes.bog, HighlandsBiomes.dunes, HighlandsBiomes.estuary,
+//                HighlandsBiomes.tropicalIslands, HighlandsBiomes.lake
+//            };
+//            GRAVES_BIOMES = new BiomeGenBase[]{
+//                HighlandsBiomes.lake
+//            };
+//        } catch (Exception e) {
+//            GraveStoneLogger.logError("Can't load Highlands biomes");
+//            e.printStackTrace();
+//        }
     }
 
     protected static void addBiomes() {

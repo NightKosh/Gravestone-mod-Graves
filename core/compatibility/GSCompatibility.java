@@ -28,11 +28,11 @@ public class GSCompatibility {
             GSCompatibilityMoCreatures.addMobs();
         }
 
-        if (Loader.isModLoaded("Highlands")) {
-            GSCompatibilityHighland.isInstalled = true;
-            GSCompatibilityHighland.loadBiomes();
-            GSCompatibilityHighland.addBiomes();
-        }
+//        if (Loader.isModLoaded("Highlands")) {
+//            GSCompatibilityHighland.isInstalled = true;
+//            GSCompatibilityHighland.loadBiomes();
+//            GSCompatibilityHighland.addBiomes();
+//        }
 
 //        if (Loader.isModLoaded("BiomesOPlenty")) {
 //            GSCompatibilityBiomesOPlenty.isInstalled = true;
