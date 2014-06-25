@@ -49,6 +49,11 @@ public class TileEntityGSSkullCandle extends TileEntity {
         readFromNBT(packet.func_148857_g());
     }
 
+    @Override
+    public boolean canUpdate() {
+        return false;
+    }
+
     /**
      * Get the entity type for the skull
      */
