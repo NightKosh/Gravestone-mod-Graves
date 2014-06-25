@@ -24,14 +24,11 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
 
     private int averageGroundLevel = -1;
 
-    private StructureVillagePieces.Start startPiece;
-
     public ComponentGSVillageUndertaker() {
     }
 
     public ComponentGSVillageUndertaker(StructureVillagePieces.Start startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int direction) {
         super(startPiece, componentType);
-        this.startPiece = startPiece;
         this.coordBaseMode = direction;
         this.boundingBox = structureBoundingBox;
     }

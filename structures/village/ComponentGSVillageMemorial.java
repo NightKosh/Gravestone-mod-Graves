@@ -25,14 +25,11 @@ public class ComponentGSVillageMemorial extends StructureVillagePieces.Village {
     private int averageGroundLevel = -1;
     private static final int HEIGHT = 6;
 
-    private StructureVillagePieces.Start startPiece;
-
     public ComponentGSVillageMemorial() {
     }
 
     public ComponentGSVillageMemorial(StructureVillagePieces.Start startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int direction) {
         super(startPiece, componentType);
-        this.startPiece = startPiece;
         this.coordBaseMode = direction;
         this.boundingBox = structureBoundingBox;
     }
@@ -59,7 +56,7 @@ public class ComponentGSVillageMemorial extends StructureVillagePieces.Village {
         }
 
         Block ground;
-        int biomeId = this.startPiece.biome.biomeID;
+        int biomeId = world.getBiomeGenForCoords(this.getXWithOffset(0, 0), this.getZWithOffset(0, 0)).biomeID;;
         if (biomeId == BiomeGenBase.desert.biomeID || biomeId == BiomeGenBase.desertHills.biomeID) {
             ground = Blocks.sand;
         } else {
