@@ -50,7 +50,18 @@ public class Resources {
     public static final ResourceLocation WITHER_SKULL_CRAWLER = new ResourceLocation(ENTITY_LOCATION + "WitherSkullCrawler.png");
     public static final ResourceLocation ZOMBIE_SKULL_CRAWLER = new ResourceLocation(ENTITY_LOCATION + "ZombieSkullCrawler.png");
     // models - graves
-    public static final ResourceLocation GRAVE_VERTICAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "ModelVerticalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_WOODEN_VERTICAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "WoodenVerticalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_STONE_VERTICAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "StoneVerticalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_SANDSTONE_VERTICAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "SandstoneVerticalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_IRON_VERTICAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "IronVerticalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_GOLDEN_VERTICAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "GoldenVerticalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_DIAMOND_VERTICAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "DiamondVerticalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_EMERALD_VERTICAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "EmeraldVerticalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_OBSIDIAN_VERTICAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "ObsidianVerticalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_QUARTZ_VERTICAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "QuartzVerticalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_LAPIS_VERTICAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "LapisVerticalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_REDSTONE_VERTICAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "RedstoneVerticalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_ICE_VERTICAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "IceVerticalPlateGraveStone.png");
     public static final ResourceLocation GRAVE_CROSS = new ResourceLocation(GRAVES_LOCATION + "ModelCrossGraveStone.png");
     public static final ResourceLocation GRAVE_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "ModelHorisontalPlateGraveStone.png");
     public static final ResourceLocation DOG_STATUE_GRAVE = new ResourceLocation(GRAVES_LOCATION + "ModelDogStatueGraveStone.png");

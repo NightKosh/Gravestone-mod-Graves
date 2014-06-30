@@ -10,7 +10,7 @@ import gravestone.ModGraveStone;
  */
 public enum EnumGraves implements IBlockEnum {
 
-    VERTICAL_PLATE("block.gravestone.gravestone"),
+    STONE_VERTICAL_PLATE("block.gravestone.gravestone"),
     CROSS("block.gravestone.cross"),
     HORISONTAL_PLATE("block.gravestone.plate"),
     DOG_STATUE("block.gravestone.dog_statue"),
@@ -20,7 +20,18 @@ public enum EnumGraves implements IBlockEnum {
     IRON_SWORD("block.gravestone.iron_sword"),
     GOLDEN_SWORD("block.gravestone.golden_sword"),
     DIAMOND_SWORD("block.gravestone.diamond_sword"),
-    HORSE_STATUE("block.gravestone.horse_statue");
+    HORSE_STATUE("block.gravestone.horse_statue"),
+    WOODEN_VERTICAL_PLATE("block.gravestone.gravestone"),
+    SANDSTONE_VERTICAL_PLATE("block.gravestone.gravestone"),
+    IRON_VERTICAL_PLATE("block.gravestone.gravestone"),
+    GOLDEN_VERTICAL_PLATE("block.gravestone.gravestone"),
+    DIAMOND_VERTICAL_PLATE("block.gravestone.gravestone"),
+    EMERALD_VERTICAL_PLATE("block.gravestone.gravestone"),
+    LAPIS_VERTICAL_PLATE("block.gravestone.gravestone"),
+    REDSTONE_VERTICAL_PLATE("block.gravestone.gravestone"),
+    OBSIDIAN_VERTICAL_PLATE("block.gravestone.gravestone"),
+    QUARTZ_VERTICAL_PLATE("block.gravestone.gravestone"),
+    ICE_VERTICAL_PLATE("block.gravestone.gravestone");
     private String name;
 
     private EnumGraves(String name) {
@@ -41,6 +52,6 @@ public enum EnumGraves implements IBlockEnum {
         if (id < values().length) {
             return values()[id];
         }
-        return VERTICAL_PLATE;
+        return STONE_VERTICAL_PLATE;
     }
 }

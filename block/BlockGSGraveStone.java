@@ -43,8 +43,39 @@ import java.util.Random;
  */
 public class BlockGSGraveStone extends BlockContainer {
 
+    public static final byte[] TAB_PLAYER_GRAVES = {
+            (byte) EnumGraves.WOODEN_VERTICAL_PLATE.ordinal(),
+            (byte) EnumGraves.SANDSTONE_VERTICAL_PLATE.ordinal(),
+            (byte) EnumGraves.STONE_VERTICAL_PLATE.ordinal(),
+            (byte) EnumGraves.IRON_VERTICAL_PLATE.ordinal(),
+            (byte) EnumGraves.GOLDEN_VERTICAL_PLATE.ordinal(),
+            (byte) EnumGraves.DIAMOND_VERTICAL_PLATE.ordinal(),
+            (byte) EnumGraves.EMERALD_VERTICAL_PLATE.ordinal(),
+            (byte) EnumGraves.LAPIS_VERTICAL_PLATE.ordinal(),
+            (byte) EnumGraves.REDSTONE_VERTICAL_PLATE.ordinal(),
+            (byte) EnumGraves.OBSIDIAN_VERTICAL_PLATE.ordinal(),
+            (byte) EnumGraves.QUARTZ_VERTICAL_PLATE.ordinal(),
+            (byte) EnumGraves.ICE_VERTICAL_PLATE.ordinal(),
+            (byte) EnumGraves.CROSS.ordinal(),
+            (byte) EnumGraves.HORISONTAL_PLATE.ordinal()
+    };
+
+    public static final byte[] TAB_PETS_GRAVES = {
+            (byte) EnumGraves.DOG_STATUE.ordinal(),
+            (byte) EnumGraves.CAT_STATUE.ordinal(),
+            (byte) EnumGraves.HORSE_STATUE.ordinal()
+    };
+
+    public static final byte[] TAB_SWORD_GRAVES = {
+            (byte) EnumGraves.WOODEN_SWORD.ordinal(),
+            (byte) EnumGraves.STONE_SWORD.ordinal(),
+            (byte) EnumGraves.IRON_SWORD.ordinal(),
+            (byte) EnumGraves.GOLDEN_SWORD.ordinal(),
+            (byte) EnumGraves.DIAMOND_SWORD.ordinal()
+    };
+
     public static final byte[] GENERATED_GRAVES = {
-            (byte) EnumGraves.VERTICAL_PLATE.ordinal(),
+            (byte) EnumGraves.STONE_VERTICAL_PLATE.ordinal(),
             (byte) EnumGraves.CROSS.ordinal(),
             (byte) EnumGraves.HORISONTAL_PLATE.ordinal()
     };
@@ -166,11 +197,22 @@ public class BlockGSGraveStone extends BlockContainer {
         if (tileEntity != null) {
             graveType = tileEntity.getGraveType();
         } else {
-            graveType = EnumGraves.VERTICAL_PLATE;
+            graveType = EnumGraves.STONE_VERTICAL_PLATE;
         }
 
         switch (graveType) {
-            case VERTICAL_PLATE:
+            case STONE_VERTICAL_PLATE:
+            case WOODEN_VERTICAL_PLATE:
+            case SANDSTONE_VERTICAL_PLATE:
+            case IRON_VERTICAL_PLATE:
+            case GOLDEN_VERTICAL_PLATE:
+            case DIAMOND_VERTICAL_PLATE:
+            case EMERALD_VERTICAL_PLATE:
+            case LAPIS_VERTICAL_PLATE:
+            case REDSTONE_VERTICAL_PLATE:
+            case OBSIDIAN_VERTICAL_PLATE:
+            case QUARTZ_VERTICAL_PLATE:
+            case ICE_VERTICAL_PLATE:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.125F, 0, 0.0625F, 0.875F, 0.9375F, 0.1875F);
@@ -525,20 +567,20 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item item, CreativeTabs tabs, List list) {
-        for (byte i = 0; i < EnumGraves.WOODEN_SWORD.ordinal(); i++) {
+        for (byte i = 0; i < TAB_PLAYER_GRAVES.length; i++) {
             ItemStack stack = new ItemStack(item, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("GraveType", i);
+            nbt.setByte("GraveType", TAB_PLAYER_GRAVES[i]);
 
             stack.setTagCompound(nbt);
             list.add(stack);
         }
 
-        // horse graves
-        {
+        // pets graves
+        for (byte i = 0; i < TAB_PETS_GRAVES.length; i++) {
             ItemStack stack = new ItemStack(item, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("GraveType", (byte) EnumGraves.HORSE_STATUE.ordinal());
+            nbt.setByte("GraveType", TAB_PETS_GRAVES[i]);
 
             stack.setTagCompound(nbt);
             list.add(stack);
@@ -546,26 +588,26 @@ public class BlockGSGraveStone extends BlockContainer {
 
 
         // swords
-        for (byte i = (byte) EnumGraves.WOODEN_SWORD.ordinal(); i <= EnumGraves.DIAMOND_SWORD.ordinal(); i++) {
+        for (byte i = 0; i < TAB_SWORD_GRAVES.length; i++) {
             ItemStack graveStoneStack = new ItemStack(item, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("GraveType", i);
+            nbt.setByte("GraveType", TAB_SWORD_GRAVES[i]);
 
             if (GraveStoneHelper.isSwordGrave(i)) {
-                nbt.setByte("SwordType", GraveStoneHelper.graveTypeToSwordType(i));
+                nbt.setByte("SwordType", GraveStoneHelper.graveTypeToSwordType(TAB_SWORD_GRAVES[i]));
             }
 
             graveStoneStack.setTagCompound(nbt);
             list.add(graveStoneStack);
         }
         // enchanted swords
-        for (byte i = (byte) EnumGraves.WOODEN_SWORD.ordinal(); i <= EnumGraves.DIAMOND_SWORD.ordinal(); i++) {
+        for (byte i = 0; i < TAB_SWORD_GRAVES.length; i++) {
             ItemStack graveStoneStack = new ItemStack(item, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("GraveType", i);
+            nbt.setByte("GraveType", TAB_SWORD_GRAVES[i]);
 
             if (GraveStoneHelper.isSwordGrave(i)) {
-                nbt.setByte("SwordType", GraveStoneHelper.graveTypeToSwordType(i));
+                nbt.setByte("SwordType", GraveStoneHelper.graveTypeToSwordType(TAB_SWORD_GRAVES[i]));
                 NBTTagCompound enchantmentTags = new NBTTagCompound();
                 enchantmentTags.setTag("ench", new NBTTagList());
                 nbt.setTag("SwordNBT", enchantmentTags);

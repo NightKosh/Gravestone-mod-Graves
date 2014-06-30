@@ -36,7 +36,7 @@ public class GSReciepes {
         GameRegistry.addRecipe(new ItemStack(Items.bone, 9), "x", 'x', GSBlock.boneBlock);
 
         // graves
-        GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.VERTICAL_PLATE.ordinal(), "GraveType"), "sc", 's', Blocks.stone, 'c', GSItem.chisel);
+        GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.STONE_VERTICAL_PLATE.ordinal(), "GraveType"), "sc", 's', Blocks.stone, 'c', GSItem.chisel);
         GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.CROSS.ordinal(), "GraveType"), " c", "s ", 's', Blocks.stone, 'c', GSItem.chisel);
         GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.HORISONTAL_PLATE.ordinal(), "GraveType"), "c", "s", 's', Blocks.stone, 'c', GSItem.chisel);
         // pet graves

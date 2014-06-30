@@ -103,7 +103,18 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
             case GOLDEN_SWORD:
             case DIAMOND_SWORD:
                 return swordGrave;
-            case VERTICAL_PLATE:
+            case STONE_VERTICAL_PLATE:
+            case WOODEN_VERTICAL_PLATE:
+            case SANDSTONE_VERTICAL_PLATE:
+            case IRON_VERTICAL_PLATE:
+            case GOLDEN_VERTICAL_PLATE:
+            case DIAMOND_VERTICAL_PLATE:
+            case EMERALD_VERTICAL_PLATE:
+            case LAPIS_VERTICAL_PLATE:
+            case REDSTONE_VERTICAL_PLATE:
+            case OBSIDIAN_VERTICAL_PLATE:
+            case QUARTZ_VERTICAL_PLATE:
+            case ICE_VERTICAL_PLATE:
             default:
                 return verticalPlate;
         }
@@ -111,8 +122,41 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
 
     private void getGraveTexture(EnumGraves graveType) {
         switch (graveType) {
-            case VERTICAL_PLATE:
-                bindTextureByName(Resources.GRAVE_VERTICAL_PLATE);
+            case WOODEN_VERTICAL_PLATE:
+                bindTextureByName(Resources.GRAVE_WOODEN_VERTICAL_PLATE);
+                break;
+            case STONE_VERTICAL_PLATE:
+                bindTextureByName(Resources.GRAVE_STONE_VERTICAL_PLATE);
+                break;
+            case SANDSTONE_VERTICAL_PLATE:
+                bindTextureByName(Resources.GRAVE_SANDSTONE_VERTICAL_PLATE);
+                break;
+            case IRON_VERTICAL_PLATE:
+                bindTextureByName(Resources.GRAVE_IRON_VERTICAL_PLATE);
+                break;
+            case GOLDEN_VERTICAL_PLATE:
+                bindTextureByName(Resources.GRAVE_GOLDEN_VERTICAL_PLATE);
+                break;
+            case DIAMOND_VERTICAL_PLATE:
+                bindTextureByName(Resources.GRAVE_DIAMOND_VERTICAL_PLATE);
+                break;
+            case EMERALD_VERTICAL_PLATE:
+                bindTextureByName(Resources.GRAVE_EMERALD_VERTICAL_PLATE);
+                break;
+            case LAPIS_VERTICAL_PLATE:
+                bindTextureByName(Resources.GRAVE_LAPIS_VERTICAL_PLATE);
+                break;
+            case REDSTONE_VERTICAL_PLATE:
+                bindTextureByName(Resources.GRAVE_REDSTONE_VERTICAL_PLATE);
+                break;
+            case OBSIDIAN_VERTICAL_PLATE:
+                bindTextureByName(Resources.GRAVE_OBSIDIAN_VERTICAL_PLATE);
+                break;
+            case QUARTZ_VERTICAL_PLATE:
+                bindTextureByName(Resources.GRAVE_QUARTZ_VERTICAL_PLATE);
+                break;
+            case ICE_VERTICAL_PLATE:
+                bindTextureByName(Resources.GRAVE_ICE_VERTICAL_PLATE);
                 break;
             case CROSS:
                 bindTextureByName(Resources.GRAVE_CROSS);
