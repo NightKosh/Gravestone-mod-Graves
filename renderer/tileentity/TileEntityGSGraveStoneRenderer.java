@@ -87,11 +87,35 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
 
     private ModelGraveStone getGraveModel(EnumGraves graveType) {
         switch (graveType) {
-            case CROSS:
+            case WOODEN_CROSS:
+            case SANDSTONE_CROSS:
+            case STONE_CROSS:
+            case MOSSY_CROSS:
+            case IRON_CROSS:
+            case GOLDEN_CROSS:
+            case DIAMOND_CROSS:
+            case EMERALD_CROSS:
+            case LAPIS_CROSS:
+            case REDSTONE_CROSS:
+            case OBSIDIAN_CROSS:
+            case QUARTZ_CROSS:
+            case ICE_CROSS:
                 return cross;
             case HORISONTAL_PLATE:
                 return horisontalPlate;
-            case DOG_STATUE:
+            case WOODEN_DOG_STATUE:
+            case SANDSTONE_DOG_STATUE:
+            case STONE_DOG_STATUE:
+            case MOSSY_DOG_STATUE:
+            case IRON_DOG_STATUE:
+            case GOLDEN_DOG_STATUE:
+            case DIAMOND_DOG_STATUE:
+            case EMERALD_DOG_STATUE:
+            case LAPIS_DOG_STATUE:
+            case REDSTONE_DOG_STATUE:
+            case OBSIDIAN_DOG_STATUE:
+            case QUARTZ_DOG_STATUE:
+            case ICE_DOG_STATUE:
                 return dogStatue;
             case CAT_STATUE:
                 return catStatue;
@@ -104,6 +128,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
             case DIAMOND_SWORD:
                 return swordGrave;
             case STONE_VERTICAL_PLATE:
+            case MOSSY_VERTICAL_PLATE:
             case WOODEN_VERTICAL_PLATE:
             case SANDSTONE_VERTICAL_PLATE:
             case IRON_VERTICAL_PLATE:
@@ -122,11 +147,15 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
 
     private void getGraveTexture(EnumGraves graveType) {
         switch (graveType) {
+            // VERTICAL PLATES
             case WOODEN_VERTICAL_PLATE:
                 bindTextureByName(Resources.GRAVE_WOODEN_VERTICAL_PLATE);
                 break;
             case STONE_VERTICAL_PLATE:
                 bindTextureByName(Resources.GRAVE_STONE_VERTICAL_PLATE);
+                break;
+            case MOSSY_VERTICAL_PLATE:
+                bindTextureByName(Resources.GRAVE_MOSSY_VERTICAL_PLATE);
                 break;
             case SANDSTONE_VERTICAL_PLATE:
                 bindTextureByName(Resources.GRAVE_SANDSTONE_VERTICAL_PLATE);
@@ -158,15 +187,91 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
             case ICE_VERTICAL_PLATE:
                 bindTextureByName(Resources.GRAVE_ICE_VERTICAL_PLATE);
                 break;
-            case CROSS:
-                bindTextureByName(Resources.GRAVE_CROSS);
+            // CROSSES
+            case WOODEN_CROSS:
+                bindTextureByName(Resources.GRAVE_WOODEN_CROSS);
                 break;
+            case SANDSTONE_CROSS:
+                bindTextureByName(Resources.GRAVE_SANDSTONE_CROSS);
+                break;
+            case STONE_CROSS:
+                bindTextureByName(Resources.GRAVE_STONE_CROSS);
+                break;
+            case MOSSY_CROSS:
+                bindTextureByName(Resources.GRAVE_MOSSY_CROSS);
+                break;
+            case IRON_CROSS:
+                bindTextureByName(Resources.GRAVE_IRON_CROSS);
+                break;
+            case GOLDEN_CROSS:
+                bindTextureByName(Resources.GRAVE_GOLDEN_CROSS);
+                break;
+            case DIAMOND_CROSS:
+                bindTextureByName(Resources.GRAVE_DIAMOND_CROSS);
+                break;
+            case EMERALD_CROSS:
+                bindTextureByName(Resources.GRAVE_EMERALD_CROSS);
+                break;
+            case LAPIS_CROSS:
+                bindTextureByName(Resources.GRAVE_LAPIS_CROSS);
+                break;
+            case REDSTONE_CROSS:
+                bindTextureByName(Resources.GRAVE_REDSTONE_CROSS);
+                break;
+            case OBSIDIAN_CROSS:
+                bindTextureByName(Resources.GRAVE_OBSIDIAN_CROSS);
+                break;
+            case QUARTZ_CROSS:
+                bindTextureByName(Resources.GRAVE_QUARTZ_CROSS);
+                break;
+            case ICE_CROSS:
+                bindTextureByName(Resources.GRAVE_ICE_CROSS);
+                break;
+            //
             case HORISONTAL_PLATE:
                 bindTextureByName(Resources.GRAVE_HORISONTAL_PLATE);
                 break;
-            case DOG_STATUE:
-                bindTextureByName(Resources.DOG_STATUE_GRAVE);
+            // DOGS GRAVES
+            case WOODEN_DOG_STATUE:
+                bindTextureByName(Resources.GRAVE_WOODEN_DOG_STATUE);
                 break;
+            case SANDSTONE_DOG_STATUE:
+                bindTextureByName(Resources.GRAVE_SANDSTONE_DOG_STATUE);
+                break;
+            case STONE_DOG_STATUE:
+                bindTextureByName(Resources.GRAVE_STONE_DOG_STATUE);
+                break;
+            case MOSSY_DOG_STATUE:
+                bindTextureByName(Resources.GRAVE_MOSSY_DOG_STATUE);
+                break;
+            case IRON_DOG_STATUE:
+                bindTextureByName(Resources.GRAVE_IRON_DOG_STATUE);
+                break;
+            case GOLDEN_DOG_STATUE:
+                bindTextureByName(Resources.GRAVE_GOLDEN_DOG_STATUE);
+                break;
+            case DIAMOND_DOG_STATUE:
+                bindTextureByName(Resources.GRAVE_DIAMOND_DOG_STATUE);
+                break;
+            case EMERALD_DOG_STATUE:
+                bindTextureByName(Resources.GRAVE_EMERALD_DOG_STATUE);
+                break;
+            case LAPIS_DOG_STATUE:
+                bindTextureByName(Resources.GRAVE_LAPIS_DOG_STATUE);
+                break;
+            case REDSTONE_DOG_STATUE:
+                bindTextureByName(Resources.GRAVE_REDSTONE_DOG_STATUE);
+                break;
+            case OBSIDIAN_DOG_STATUE:
+                bindTextureByName(Resources.GRAVE_OBSIDIAN_DOG_STATUE);
+                break;
+            case QUARTZ_DOG_STATUE:
+                bindTextureByName(Resources.GRAVE_QUARTZ_DOG_STATUE);
+                break;
+            case ICE_DOG_STATUE:
+                bindTextureByName(Resources.GRAVE_ICE_DOG_STATUE);
+                break;
+            // CATS GRAVES
             case CAT_STATUE:
                 bindTextureByName(Resources.CAT_STATUE_GRAVE);
                 break;

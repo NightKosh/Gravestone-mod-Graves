@@ -104,8 +104,19 @@ public class GSGraveStoneDeathText {
             }
         } else {
             if (getDeathMessage(random)) {
-                switch (graveType) {
-                    case DOG_STATUE:
+                switch (graveType) {case WOODEN_DOG_STATUE:
+                    case SANDSTONE_DOG_STATUE:
+                    case STONE_DOG_STATUE:
+                    case MOSSY_DOG_STATUE:
+                    case IRON_DOG_STATUE:
+                    case GOLDEN_DOG_STATUE:
+                    case DIAMOND_DOG_STATUE:
+                    case EMERALD_DOG_STATUE:
+                    case LAPIS_DOG_STATUE:
+                    case REDSTONE_DOG_STATUE:
+                    case OBSIDIAN_DOG_STATUE:
+                    case QUARTZ_DOG_STATUE:
+                    case ICE_DOG_STATUE:
                         name = this.getValue(random, GraveStoneConfig.graveDogsNames);
                         break;
                     case CAT_STATUE:

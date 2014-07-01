@@ -44,9 +44,11 @@ import java.util.Random;
 public class BlockGSGraveStone extends BlockContainer {
 
     public static final byte[] TAB_PLAYER_GRAVES = {
+            // vertical plates
             (byte) EnumGraves.WOODEN_VERTICAL_PLATE.ordinal(),
             (byte) EnumGraves.SANDSTONE_VERTICAL_PLATE.ordinal(),
             (byte) EnumGraves.STONE_VERTICAL_PLATE.ordinal(),
+            (byte) EnumGraves.MOSSY_VERTICAL_PLATE.ordinal(),
             (byte) EnumGraves.IRON_VERTICAL_PLATE.ordinal(),
             (byte) EnumGraves.GOLDEN_VERTICAL_PLATE.ordinal(),
             (byte) EnumGraves.DIAMOND_VERTICAL_PLATE.ordinal(),
@@ -56,13 +58,42 @@ public class BlockGSGraveStone extends BlockContainer {
             (byte) EnumGraves.OBSIDIAN_VERTICAL_PLATE.ordinal(),
             (byte) EnumGraves.QUARTZ_VERTICAL_PLATE.ordinal(),
             (byte) EnumGraves.ICE_VERTICAL_PLATE.ordinal(),
-            (byte) EnumGraves.CROSS.ordinal(),
+            // crosses
+            (byte) EnumGraves.WOODEN_CROSS.ordinal(),
+            (byte) EnumGraves.SANDSTONE_CROSS.ordinal(),
+            (byte) EnumGraves.STONE_CROSS.ordinal(),
+            (byte) EnumGraves.MOSSY_CROSS.ordinal(),
+            (byte) EnumGraves.IRON_CROSS.ordinal(),
+            (byte) EnumGraves.GOLDEN_CROSS.ordinal(),
+            (byte) EnumGraves.DIAMOND_CROSS.ordinal(),
+            (byte) EnumGraves.EMERALD_CROSS.ordinal(),
+            (byte) EnumGraves.LAPIS_CROSS.ordinal(),
+            (byte) EnumGraves.REDSTONE_CROSS.ordinal(),
+            (byte) EnumGraves.OBSIDIAN_CROSS.ordinal(),
+            (byte) EnumGraves.QUARTZ_CROSS.ordinal(),
+            (byte) EnumGraves.ICE_CROSS.ordinal(),
+            // horisontal plates
             (byte) EnumGraves.HORISONTAL_PLATE.ordinal()
     };
 
     public static final byte[] TAB_PETS_GRAVES = {
-            (byte) EnumGraves.DOG_STATUE.ordinal(),
+            // dogs graves
+            (byte) EnumGraves.WOODEN_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.SANDSTONE_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.STONE_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.MOSSY_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.IRON_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.GOLDEN_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.DIAMOND_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.EMERALD_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.LAPIS_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.REDSTONE_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.OBSIDIAN_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.QUARTZ_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.ICE_DOG_STATUE.ordinal(),
+            // cats graves
             (byte) EnumGraves.CAT_STATUE.ordinal(),
+            // horses graves
             (byte) EnumGraves.HORSE_STATUE.ordinal()
     };
 
@@ -76,14 +107,14 @@ public class BlockGSGraveStone extends BlockContainer {
 
     public static final byte[] GENERATED_GRAVES = {
             (byte) EnumGraves.STONE_VERTICAL_PLATE.ordinal(),
-            (byte) EnumGraves.CROSS.ordinal(),
+            (byte) EnumGraves.STONE_CROSS.ordinal(),
             (byte) EnumGraves.HORISONTAL_PLATE.ordinal()
     };
     public static final byte[] PETS_GRAVES = {
-            (byte) EnumGraves.DOG_STATUE.ordinal(),
+            (byte) EnumGraves.STONE_DOG_STATUE.ordinal(),
             (byte) EnumGraves.CAT_STATUE.ordinal()
     };
-    public static final byte[] DOG_GRAVES = {(byte) EnumGraves.DOG_STATUE.ordinal()};
+    public static final byte[] DOG_GRAVES = {(byte) EnumGraves.STONE_DOG_STATUE.ordinal()};
     public static final byte[] CAT_GRAVES = {(byte) EnumGraves.CAT_STATUE.ordinal()};
     public static final byte[] HORSE_GRAVES = {(byte) EnumGraves.HORSE_STATUE.ordinal()};
     public static final byte[] SWORD_GRAVES = {
@@ -228,7 +259,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case CROSS:
+            case STONE_CROSS:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.125F, 0, 0.0625F, 0.875F, 1, 0.1875F);
@@ -260,7 +291,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case DOG_STATUE:
+            case STONE_DOG_STATUE:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.35F, 0, 0.3F, 0.6F, 0.5F, 0.9F);
