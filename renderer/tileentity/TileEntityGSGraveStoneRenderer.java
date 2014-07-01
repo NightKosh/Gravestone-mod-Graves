@@ -101,7 +101,19 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
             case QUARTZ_CROSS:
             case ICE_CROSS:
                 return cross;
-            case HORISONTAL_PLATE:
+            case WOODEN_HORISONTAL_PLATE:
+            case SANDSTONE_HORISONTAL_PLATE:
+            case STONE_HORISONTAL_PLATE:
+            case MOSSY_HORISONTAL_PLATE:
+            case IRON_HORISONTAL_PLATE:
+            case GOLDEN_HORISONTAL_PLATE:
+            case DIAMOND_HORISONTAL_PLATE:
+            case EMERALD_HORISONTAL_PLATE:
+            case LAPIS_HORISONTAL_PLATE:
+            case REDSTONE_HORISONTAL_PLATE:
+            case OBSIDIAN_HORISONTAL_PLATE:
+            case QUARTZ_HORISONTAL_PLATE:
+            case ICE_HORISONTAL_PLATE:
                 return horisontalPlate;
             case WOODEN_DOG_STATUE:
             case SANDSTONE_DOG_STATUE:
@@ -139,10 +151,10 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
             case GOLDEN_SWORD:
             case DIAMOND_SWORD:
                 return swordGrave;
-            case STONE_VERTICAL_PLATE:
-            case MOSSY_VERTICAL_PLATE:
             case WOODEN_VERTICAL_PLATE:
             case SANDSTONE_VERTICAL_PLATE:
+            case STONE_VERTICAL_PLATE:
+            case MOSSY_VERTICAL_PLATE:
             case IRON_VERTICAL_PLATE:
             case GOLDEN_VERTICAL_PLATE:
             case DIAMOND_VERTICAL_PLATE:
@@ -239,9 +251,45 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
             case ICE_CROSS:
                 bindTextureByName(Resources.GRAVE_ICE_CROSS);
                 break;
-            //
-            case HORISONTAL_PLATE:
-                bindTextureByName(Resources.GRAVE_HORISONTAL_PLATE);
+            // HORISONTAL PLATES
+            case WOODEN_HORISONTAL_PLATE:
+                bindTextureByName(Resources.GRAVE_WOODEN_HORISONTAL_PLATE);
+                break;
+            case STONE_HORISONTAL_PLATE:
+                bindTextureByName(Resources.GRAVE_STONE_HORISONTAL_PLATE);
+                break;
+            case MOSSY_HORISONTAL_PLATE:
+                bindTextureByName(Resources.GRAVE_MOSSY_HORISONTAL_PLATE);
+                break;
+            case SANDSTONE_HORISONTAL_PLATE:
+                bindTextureByName(Resources.GRAVE_SANDSTONE_HORISONTAL_PLATE);
+                break;
+            case IRON_HORISONTAL_PLATE:
+                bindTextureByName(Resources.GRAVE_IRON_HORISONTAL_PLATE);
+                break;
+            case GOLDEN_HORISONTAL_PLATE:
+                bindTextureByName(Resources.GRAVE_GOLDEN_HORISONTAL_PLATE);
+                break;
+            case DIAMOND_HORISONTAL_PLATE:
+                bindTextureByName(Resources.GRAVE_DIAMOND_HORISONTAL_PLATE);
+                break;
+            case EMERALD_HORISONTAL_PLATE:
+                bindTextureByName(Resources.GRAVE_EMERALD_HORISONTAL_PLATE);
+                break;
+            case LAPIS_HORISONTAL_PLATE:
+                bindTextureByName(Resources.GRAVE_LAPIS_HORISONTAL_PLATE);
+                break;
+            case REDSTONE_HORISONTAL_PLATE:
+                bindTextureByName(Resources.GRAVE_REDSTONE_HORISONTAL_PLATE);
+                break;
+            case OBSIDIAN_HORISONTAL_PLATE:
+                bindTextureByName(Resources.GRAVE_OBSIDIAN_HORISONTAL_PLATE);
+                break;
+            case QUARTZ_HORISONTAL_PLATE:
+                bindTextureByName(Resources.GRAVE_QUARTZ_HORISONTAL_PLATE);
+                break;
+            case ICE_HORISONTAL_PLATE:
+                bindTextureByName(Resources.GRAVE_ICE_HORISONTAL_PLATE);
                 break;
             // DOGS GRAVES
             case WOODEN_DOG_STATUE:

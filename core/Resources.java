@@ -80,7 +80,19 @@ public class Resources {
     public static final ResourceLocation GRAVE_QUARTZ_CROSS = new ResourceLocation(GRAVES_LOCATION + "QuartzCrossGrave.png");
     public static final ResourceLocation GRAVE_ICE_CROSS = new ResourceLocation(GRAVES_LOCATION + "IceCrossGrave.png");
     // horisontal plates
-    public static final ResourceLocation GRAVE_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "ModelHorisontalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_WOODEN_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "WoodenHorisontalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_SANDSTONE_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "SandstoneHorisontalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_STONE_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "StoneHorisontalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_MOSSY_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "MossyHorisontalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_IRON_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "IronHorisontalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_GOLDEN_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "GoldenHorisontalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_DIAMOND_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "DiamondHorisontalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_EMERALD_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "EmeraldHorisontalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_OBSIDIAN_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "ObsidianHorisontalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_QUARTZ_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "QuartzHorisontalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_LAPIS_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "LapisHorisontalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_REDSTONE_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "RedstoneHorisontalPlateGraveStone.png");
+    public static final ResourceLocation GRAVE_ICE_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "IceHorisontalPlateGraveStone.png");
     // dog graves
     public static final ResourceLocation GRAVE_WOODEN_DOG_STATUE = new ResourceLocation(GRAVES_LOCATION + "WoodenDogGrave.png");
     public static final ResourceLocation GRAVE_SANDSTONE_DOG_STATUE = new ResourceLocation(GRAVES_LOCATION + "SandstoneDogGrave.png");

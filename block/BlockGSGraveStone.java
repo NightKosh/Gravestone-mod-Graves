@@ -73,7 +73,19 @@ public class BlockGSGraveStone extends BlockContainer {
             (byte) EnumGraves.QUARTZ_CROSS.ordinal(),
             (byte) EnumGraves.ICE_CROSS.ordinal(),
             // horisontal plates
-            (byte) EnumGraves.HORISONTAL_PLATE.ordinal()
+            (byte) EnumGraves.WOODEN_HORISONTAL_PLATE.ordinal(),
+            (byte) EnumGraves.SANDSTONE_HORISONTAL_PLATE.ordinal(),
+            (byte) EnumGraves.STONE_HORISONTAL_PLATE.ordinal(),
+            (byte) EnumGraves.MOSSY_HORISONTAL_PLATE.ordinal(),
+            (byte) EnumGraves.IRON_HORISONTAL_PLATE.ordinal(),
+            (byte) EnumGraves.GOLDEN_HORISONTAL_PLATE.ordinal(),
+            (byte) EnumGraves.DIAMOND_HORISONTAL_PLATE.ordinal(),
+            (byte) EnumGraves.EMERALD_HORISONTAL_PLATE.ordinal(),
+            (byte) EnumGraves.LAPIS_HORISONTAL_PLATE.ordinal(),
+            (byte) EnumGraves.REDSTONE_HORISONTAL_PLATE.ordinal(),
+            (byte) EnumGraves.OBSIDIAN_HORISONTAL_PLATE.ordinal(),
+            (byte) EnumGraves.QUARTZ_HORISONTAL_PLATE.ordinal(),
+            (byte) EnumGraves.ICE_HORISONTAL_PLATE.ordinal()
     };
 
     public static final byte[] TAB_PETS_GRAVES = {
@@ -120,7 +132,7 @@ public class BlockGSGraveStone extends BlockContainer {
     public static final byte[] GENERATED_GRAVES = {
             (byte) EnumGraves.STONE_VERTICAL_PLATE.ordinal(),
             (byte) EnumGraves.STONE_CROSS.ordinal(),
-            (byte) EnumGraves.HORISONTAL_PLATE.ordinal()
+            (byte) EnumGraves.STONE_HORISONTAL_PLATE.ordinal()
     };
     public static final byte[] PETS_GRAVES = {
             (byte) EnumGraves.STONE_DOG_STATUE.ordinal(),
@@ -244,10 +256,10 @@ public class BlockGSGraveStone extends BlockContainer {
         }
 
         switch (graveType) {
-            case STONE_VERTICAL_PLATE:
-            case MOSSY_VERTICAL_PLATE:
             case WOODEN_VERTICAL_PLATE:
             case SANDSTONE_VERTICAL_PLATE:
+            case STONE_VERTICAL_PLATE:
+            case MOSSY_VERTICAL_PLATE:
             case IRON_VERTICAL_PLATE:
             case GOLDEN_VERTICAL_PLATE:
             case DIAMOND_VERTICAL_PLATE:
@@ -300,7 +312,19 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case HORISONTAL_PLATE:
+            case WOODEN_HORISONTAL_PLATE:
+            case SANDSTONE_HORISONTAL_PLATE:
+            case STONE_HORISONTAL_PLATE:
+            case MOSSY_HORISONTAL_PLATE:
+            case IRON_HORISONTAL_PLATE:
+            case GOLDEN_HORISONTAL_PLATE:
+            case DIAMOND_HORISONTAL_PLATE:
+            case EMERALD_HORISONTAL_PLATE:
+            case LAPIS_HORISONTAL_PLATE:
+            case REDSTONE_HORISONTAL_PLATE:
+            case OBSIDIAN_HORISONTAL_PLATE:
+            case QUARTZ_HORISONTAL_PLATE:
+            case ICE_HORISONTAL_PLATE:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);

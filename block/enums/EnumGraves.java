@@ -12,7 +12,7 @@ public enum EnumGraves implements IBlockEnum {
 
     STONE_VERTICAL_PLATE("block.gravestone.gravestone"),
     STONE_CROSS("block.gravestone.cross"),
-    HORISONTAL_PLATE("block.gravestone.plate"),
+    STONE_HORISONTAL_PLATE("block.gravestone.plate"),
     STONE_DOG_STATUE("block.gravestone.dog_statue"),
     STONE_CAT_STATUE("block.gravestone.cat_statue"),
     WOODEN_SWORD("block.gravestone.wooden_sword"),
@@ -48,6 +48,18 @@ public enum EnumGraves implements IBlockEnum {
     ICE_CROSS("block.gravestone.cross"),
     MOSSY_CROSS("block.gravestone.cross"),
     // HORISONTAL PLATES
+    WOODEN_HORISONTAL_PLATE("block.gravestone.plate"),
+    SANDSTONE_HORISONTAL_PLATE("block.gravestone.plate"),
+    IRON_HORISONTAL_PLATE("block.gravestone.plate"),
+    GOLDEN_HORISONTAL_PLATE("block.gravestone.plate"),
+    DIAMOND_HORISONTAL_PLATE("block.gravestone.plate"),
+    EMERALD_HORISONTAL_PLATE("block.gravestone.plate"),
+    LAPIS_HORISONTAL_PLATE("block.gravestone.plate"),
+    REDSTONE_HORISONTAL_PLATE("block.gravestone.plate"),
+    OBSIDIAN_HORISONTAL_PLATE("block.gravestone.plate"),
+    QUARTZ_HORISONTAL_PLATE("block.gravestone.plate"),
+    ICE_HORISONTAL_PLATE("block.gravestone.plate"),
+    MOSSY_HORISONTAL_PLATE("block.gravestone.plate"),
     // DOGS GRAVES
     WOODEN_DOG_STATUE("block.gravestone.dog_statue"),
     SANDSTONE_DOG_STATUE("block.gravestone.dog_statue"),
