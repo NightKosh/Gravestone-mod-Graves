@@ -14,7 +14,7 @@ public enum EnumGraves implements IBlockEnum {
     STONE_CROSS("block.gravestone.cross"),
     HORISONTAL_PLATE("block.gravestone.plate"),
     STONE_DOG_STATUE("block.gravestone.dog_statue"),
-    CAT_STATUE("block.gravestone.cat_statue"),
+    STONE_CAT_STATUE("block.gravestone.cat_statue"),
     WOODEN_SWORD("block.gravestone.wooden_sword"),
     STONE_SWORD("block.gravestone.stone_sword"),
     IRON_SWORD("block.gravestone.iron_sword"),
@@ -60,8 +60,20 @@ public enum EnumGraves implements IBlockEnum {
     OBSIDIAN_DOG_STATUE("block.gravestone.dog_statue"),
     QUARTZ_DOG_STATUE("block.gravestone.dog_statue"),
     ICE_DOG_STATUE("block.gravestone.dog_statue"),
-    MOSSY_DOG_STATUE("block.gravestone.dog_statue");
+    MOSSY_DOG_STATUE("block.gravestone.dog_statue"),
     // CATS GRAVES
+    WOODEN_CAT_STATUE("block.gravestone.cat_statue"),
+    SANDSTONE_CAT_STATUE("block.gravestone.cat_statue"),
+    IRON_CAT_STATUE("block.gravestone.cat_statue"),
+    GOLDEN_CAT_STATUE("block.gravestone.cat_statue"),
+    DIAMOND_CAT_STATUE("block.gravestone.cat_statue"),
+    EMERALD_CAT_STATUE("block.gravestone.cat_statue"),
+    LAPIS_CAT_STATUE("block.gravestone.cat_statue"),
+    REDSTONE_CAT_STATUE("block.gravestone.cat_statue"),
+    OBSIDIAN_CAT_STATUE("block.gravestone.cat_statue"),
+    QUARTZ_CAT_STATUE("block.gravestone.cat_statue"),
+    ICE_CAT_STATUE("block.gravestone.cat_statue"),
+    MOSSY_CAT_STATUE("block.gravestone.cat_statue");
     private String name;
 
     private EnumGraves(String name) {

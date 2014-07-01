@@ -92,7 +92,19 @@ public class BlockGSGraveStone extends BlockContainer {
             (byte) EnumGraves.QUARTZ_DOG_STATUE.ordinal(),
             (byte) EnumGraves.ICE_DOG_STATUE.ordinal(),
             // cats graves
-            (byte) EnumGraves.CAT_STATUE.ordinal(),
+            (byte) EnumGraves.WOODEN_CAT_STATUE.ordinal(),
+            (byte) EnumGraves.SANDSTONE_CAT_STATUE.ordinal(),
+            (byte) EnumGraves.STONE_CAT_STATUE.ordinal(),
+            (byte) EnumGraves.MOSSY_CAT_STATUE.ordinal(),
+            (byte) EnumGraves.IRON_CAT_STATUE.ordinal(),
+            (byte) EnumGraves.GOLDEN_CAT_STATUE.ordinal(),
+            (byte) EnumGraves.DIAMOND_CAT_STATUE.ordinal(),
+            (byte) EnumGraves.EMERALD_CAT_STATUE.ordinal(),
+            (byte) EnumGraves.LAPIS_CAT_STATUE.ordinal(),
+            (byte) EnumGraves.REDSTONE_CAT_STATUE.ordinal(),
+            (byte) EnumGraves.OBSIDIAN_CAT_STATUE.ordinal(),
+            (byte) EnumGraves.QUARTZ_CAT_STATUE.ordinal(),
+            (byte) EnumGraves.ICE_CAT_STATUE.ordinal(),
             // horses graves
             (byte) EnumGraves.HORSE_STATUE.ordinal()
     };
@@ -112,10 +124,10 @@ public class BlockGSGraveStone extends BlockContainer {
     };
     public static final byte[] PETS_GRAVES = {
             (byte) EnumGraves.STONE_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.CAT_STATUE.ordinal()
+            (byte) EnumGraves.STONE_CAT_STATUE.ordinal()
     };
     public static final byte[] DOG_GRAVES = {(byte) EnumGraves.STONE_DOG_STATUE.ordinal()};
-    public static final byte[] CAT_GRAVES = {(byte) EnumGraves.CAT_STATUE.ordinal()};
+    public static final byte[] CAT_GRAVES = {(byte) EnumGraves.STONE_CAT_STATUE.ordinal()};
     public static final byte[] HORSE_GRAVES = {(byte) EnumGraves.HORSE_STATUE.ordinal()};
     public static final byte[] SWORD_GRAVES = {
             (byte) EnumGraves.WOODEN_SWORD.ordinal(),
@@ -233,6 +245,7 @@ public class BlockGSGraveStone extends BlockContainer {
 
         switch (graveType) {
             case STONE_VERTICAL_PLATE:
+            case MOSSY_VERTICAL_PLATE:
             case WOODEN_VERTICAL_PLATE:
             case SANDSTONE_VERTICAL_PLATE:
             case IRON_VERTICAL_PLATE:
@@ -259,7 +272,19 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
+            case WOODEN_CROSS:
+            case SANDSTONE_CROSS:
             case STONE_CROSS:
+            case MOSSY_CROSS:
+            case IRON_CROSS:
+            case GOLDEN_CROSS:
+            case DIAMOND_CROSS:
+            case EMERALD_CROSS:
+            case LAPIS_CROSS:
+            case REDSTONE_CROSS:
+            case OBSIDIAN_CROSS:
+            case QUARTZ_CROSS:
+            case ICE_CROSS:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.125F, 0, 0.0625F, 0.875F, 1, 0.1875F);
@@ -291,7 +316,19 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
+            case WOODEN_DOG_STATUE:
+            case SANDSTONE_DOG_STATUE:
             case STONE_DOG_STATUE:
+            case MOSSY_DOG_STATUE:
+            case IRON_DOG_STATUE:
+            case GOLDEN_DOG_STATUE:
+            case DIAMOND_DOG_STATUE:
+            case EMERALD_DOG_STATUE:
+            case LAPIS_DOG_STATUE:
+            case REDSTONE_DOG_STATUE:
+            case OBSIDIAN_DOG_STATUE:
+            case QUARTZ_DOG_STATUE:
+            case ICE_DOG_STATUE:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.35F, 0, 0.3F, 0.6F, 0.5F, 0.9F);
@@ -307,7 +344,19 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case CAT_STATUE:
+            case WOODEN_CAT_STATUE:
+            case SANDSTONE_CAT_STATUE:
+            case STONE_CAT_STATUE:
+            case MOSSY_CAT_STATUE:
+            case IRON_CAT_STATUE:
+            case GOLDEN_CAT_STATUE:
+            case DIAMOND_CAT_STATUE:
+            case EMERALD_CAT_STATUE:
+            case LAPIS_CAT_STATUE:
+            case REDSTONE_CAT_STATUE:
+            case OBSIDIAN_CAT_STATUE:
+            case QUARTZ_CAT_STATUE:
+            case ICE_CAT_STATUE:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.43F, 0, 0.3F, 0.57F, 0.5F, 0.75F);

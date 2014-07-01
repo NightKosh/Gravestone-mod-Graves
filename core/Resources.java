@@ -96,8 +96,22 @@ public class Resources {
     public static final ResourceLocation GRAVE_QUARTZ_DOG_STATUE = new ResourceLocation(GRAVES_LOCATION + "QuartzDogGrave.png");
     public static final ResourceLocation GRAVE_ICE_DOG_STATUE = new ResourceLocation(GRAVES_LOCATION + "IceDogGrave.png");
     // cats graves
-    public static final ResourceLocation CAT_STATUE_GRAVE = new ResourceLocation(GRAVES_LOCATION + "ModelCatStatueGraveStone.png");
+    public static final ResourceLocation GRAVE_WOODEN_CAT_STATUE = new ResourceLocation(GRAVES_LOCATION + "WoodenCatGrave.png");
+    public static final ResourceLocation GRAVE_SANDSTONE_CAT_STATUE = new ResourceLocation(GRAVES_LOCATION + "SandstoneCatGrave.png");
+    public static final ResourceLocation GRAVE_STONE_CAT_STATUE = new ResourceLocation(GRAVES_LOCATION + "StoneCatGrave.png");
+    public static final ResourceLocation GRAVE_MOSSY_CAT_STATUE = new ResourceLocation(GRAVES_LOCATION + "MossyCatGrave.png");
+    public static final ResourceLocation GRAVE_IRON_CAT_STATUE = new ResourceLocation(GRAVES_LOCATION + "IronCatGrave.png");
+    public static final ResourceLocation GRAVE_GOLDEN_CAT_STATUE = new ResourceLocation(GRAVES_LOCATION + "GoldenCatGrave.png");
+    public static final ResourceLocation GRAVE_DIAMOND_CAT_STATUE = new ResourceLocation(GRAVES_LOCATION + "DiamondCatGrave.png");
+    public static final ResourceLocation GRAVE_EMERALD_CAT_STATUE = new ResourceLocation(GRAVES_LOCATION + "EmeraldCatGrave.png");
+    public static final ResourceLocation GRAVE_LAPIS_CAT_STATUE = new ResourceLocation(GRAVES_LOCATION + "LapisCatGrave.png");
+    public static final ResourceLocation GRAVE_REDSTONE_CAT_STATUE = new ResourceLocation(GRAVES_LOCATION + "RedstoneCatGrave.png");
+    public static final ResourceLocation GRAVE_OBSIDIAN_CAT_STATUE = new ResourceLocation(GRAVES_LOCATION + "ObsidianCatGrave.png");
+    public static final ResourceLocation GRAVE_QUARTZ_CAT_STATUE = new ResourceLocation(GRAVES_LOCATION + "QuartzCatGrave.png");
+    public static final ResourceLocation GRAVE_ICE_CAT_STATUE = new ResourceLocation(GRAVES_LOCATION + "IceCatGrave.png");
+    // horses graves
     public static final ResourceLocation HORSE_STATUE_GRAVE = new ResourceLocation(GRAVES_LOCATION + "ModelHorseStatueGraveStone.png");
+    // swords graves
     public static final ResourceLocation WOODEN_SWORD_GRAVE = new ResourceLocation(GRAVES_LOCATION + "WoodenSwordGrave.png");
     public static final ResourceLocation STONE_SWORD_GRAVE = new ResourceLocation(GRAVES_LOCATION + "StoneSwordGrave.png");
     public static final ResourceLocation IRON_SWORD_GRAVE = new ResourceLocation(GRAVES_LOCATION + "IronSwordGrave.png");

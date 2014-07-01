@@ -41,7 +41,7 @@ public class GSReciepes {
         GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.HORISONTAL_PLATE.ordinal(), "GraveType"), "c", "s", 's', Blocks.stone, 'c', GSItem.chisel);
         // pet graves
         GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.STONE_DOG_STATUE.ordinal(), "GraveType"), " c", "  ", "s ", 's', Blocks.stone, 'c', GSItem.chisel);
-        GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.CAT_STATUE.ordinal(), "GraveType"), " c", "  ", " s", 's', Blocks.stone, 'c', GSItem.chisel);
+        GameRegistry.addRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.STONE_CAT_STATUE.ordinal(), "GraveType"), " c", "  ", " s", 's', Blocks.stone, 'c', GSItem.chisel);
         // sword graves
         GameRegistry.addRecipe(getSwordGravestone(GSBlock.graveStone, (byte) EnumGraves.WOODEN_SWORD.ordinal()), "sc", 's', Items.wooden_sword, 'c', GSItem.chisel);
         GameRegistry.addRecipe(getSwordGravestone(GSBlock.graveStone, (byte) EnumGraves.STONE_SWORD.ordinal()), "sc", 's', Items.stone_sword, 'c', GSItem.chisel);

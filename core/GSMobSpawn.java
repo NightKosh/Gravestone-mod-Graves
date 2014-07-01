@@ -93,7 +93,19 @@ public class GSMobSpawn {
             case ICE_DOG_STATUE:
                 id = getMobID(world.rand, EnumMobType.UNDEAD_DOGS);
                 break;
-            case CAT_STATUE:
+            case WOODEN_CAT_STATUE:
+            case SANDSTONE_CAT_STATUE:
+            case STONE_CAT_STATUE:
+            case MOSSY_CAT_STATUE:
+            case IRON_CAT_STATUE:
+            case GOLDEN_CAT_STATUE:
+            case DIAMOND_CAT_STATUE:
+            case EMERALD_CAT_STATUE:
+            case LAPIS_CAT_STATUE:
+            case REDSTONE_CAT_STATUE:
+            case OBSIDIAN_CAT_STATUE:
+            case QUARTZ_CAT_STATUE:
+            case ICE_CAT_STATUE:
                 id = getMobID(world.rand, EnumMobType.UNDEAD_CATS);
                 break;
             case HORSE_STATUE:

@@ -117,7 +117,19 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
             case QUARTZ_DOG_STATUE:
             case ICE_DOG_STATUE:
                 return dogStatue;
-            case CAT_STATUE:
+            case WOODEN_CAT_STATUE:
+            case SANDSTONE_CAT_STATUE:
+            case STONE_CAT_STATUE:
+            case MOSSY_CAT_STATUE:
+            case IRON_CAT_STATUE:
+            case GOLDEN_CAT_STATUE:
+            case DIAMOND_CAT_STATUE:
+            case EMERALD_CAT_STATUE:
+            case LAPIS_CAT_STATUE:
+            case REDSTONE_CAT_STATUE:
+            case OBSIDIAN_CAT_STATUE:
+            case QUARTZ_CAT_STATUE:
+            case ICE_CAT_STATUE:
                 return catStatue;
             case HORSE_STATUE:
                 return horseStatue;
@@ -272,9 +284,46 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
                 bindTextureByName(Resources.GRAVE_ICE_DOG_STATUE);
                 break;
             // CATS GRAVES
-            case CAT_STATUE:
-                bindTextureByName(Resources.CAT_STATUE_GRAVE);
+            case WOODEN_CAT_STATUE:
+                bindTextureByName(Resources.GRAVE_WOODEN_CAT_STATUE);
                 break;
+            case SANDSTONE_CAT_STATUE:
+                bindTextureByName(Resources.GRAVE_SANDSTONE_CAT_STATUE);
+                break;
+            case STONE_CAT_STATUE:
+                bindTextureByName(Resources.GRAVE_STONE_CAT_STATUE);
+                break;
+            case MOSSY_CAT_STATUE:
+                bindTextureByName(Resources.GRAVE_MOSSY_CAT_STATUE);
+                break;
+            case IRON_CAT_STATUE:
+                bindTextureByName(Resources.GRAVE_IRON_CAT_STATUE);
+                break;
+            case GOLDEN_CAT_STATUE:
+                bindTextureByName(Resources.GRAVE_GOLDEN_CAT_STATUE);
+                break;
+            case DIAMOND_CAT_STATUE:
+                bindTextureByName(Resources.GRAVE_DIAMOND_CAT_STATUE);
+                break;
+            case EMERALD_CAT_STATUE:
+                bindTextureByName(Resources.GRAVE_EMERALD_CAT_STATUE);
+                break;
+            case LAPIS_CAT_STATUE:
+                bindTextureByName(Resources.GRAVE_LAPIS_CAT_STATUE);
+                break;
+            case REDSTONE_CAT_STATUE:
+                bindTextureByName(Resources.GRAVE_REDSTONE_CAT_STATUE);
+                break;
+            case OBSIDIAN_CAT_STATUE:
+                bindTextureByName(Resources.GRAVE_OBSIDIAN_CAT_STATUE);
+                break;
+            case QUARTZ_CAT_STATUE:
+                bindTextureByName(Resources.GRAVE_QUARTZ_CAT_STATUE);
+                break;
+            case ICE_CAT_STATUE:
+                bindTextureByName(Resources.GRAVE_ICE_CAT_STATUE);
+                break;
+            // HORSES GRAVES
             case HORSE_STATUE:
                 bindTextureByName(Resources.HORSE_STATUE_GRAVE);
                 break;
