@@ -6,6 +6,7 @@ import gravestone.GraveStoneLogger;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSTabs;
 import gravestone.tileentity.DeathMessageInfo;
 import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSGraveStone;
@@ -161,7 +162,7 @@ public class BlockGSGraveStone extends BlockContainer {
         this.setBlockName("GraveStone");
         this.setHardness(4.5F);
         this.setResistance(5F);
-        this.setCreativeTab(ModGraveStone.creativeTab);
+        this.setCreativeTab(GSTabs.gravesTab);
         this.setTickRandomly(GraveStoneConfig.removeEmptyGraves);
         this.setBlockTextureName("stone");
         this.setHarvestLevel("pickaxe", 1);

@@ -2,8 +2,8 @@ package gravestone.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumHauntedChest;
+import gravestone.core.GSTabs;
 import gravestone.tileentity.TileEntityGSHauntedChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -39,7 +39,7 @@ public class BlockGSHauntedChest extends BlockContainer {
         this.setStepSound(Block.soundTypeWood);
         this.setBlockName("HauntedChest");
         this.setHardness(2.5F);
-        this.setCreativeTab(ModGraveStone.creativeTab);
+        this.setCreativeTab(GSTabs.otherItemsTab);
         this.setBlockTextureName("planks_oak");
         this.setHarvestLevel("axe", 0);
     }

@@ -2,9 +2,9 @@ package gravestone.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumSpawner;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSTabs;
 import gravestone.core.Resources;
 import gravestone.tileentity.TileEntityGSSpawner;
 import net.minecraft.block.Block;
@@ -41,7 +41,7 @@ public class BlockGSSpawner extends BlockMobSpawner {
         this.setLightLevel(0.45F);
         this.setStepSound(Block.soundTypeMetal);
         this.disableStats();
-        this.setCreativeTab(ModGraveStone.creativeTab);
+        this.setCreativeTab(GSTabs.otherItemsTab);
         this.setBlockTextureName(Resources.PENTAGRAM_ICO);
         this.setBlockBounds(-0.5F, 0, -0.5F, 1.5F, 0.05F, 1.5F);
         this.setHarvestLevel("pickaxe", 1);

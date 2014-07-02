@@ -36,7 +36,6 @@ public class ModGraveStone {
     @SidedProxy(clientSide = "gravestone.core.proxy.ClientProxy", serverSide = "gravestone.core.proxy.CommonProxy")
     public static CommonProxy proxy;
     // creative tab
-    public static CreativeTabs creativeTab;
 
     public ModGraveStone() {
         instance = this;
@@ -54,23 +53,8 @@ public class ModGraveStone {
         // register death event
         MinecraftForge.EVENT_BUS.register(new GSEventsHook());
 
-        // creative tab
-        creativeTab = new CreativeTabs("tabGraveStone") {
-            @Override
-            public ItemStack getIconItemStack() {
-                ItemStack stack = new ItemStack(GSBlock.graveStone, 1, 0);
-                NBTTagCompound nbt = new NBTTagCompound();
-                nbt.setByte("GraveType", (byte) 0);
-                stack.setTagCompound(nbt);
-                return stack;
-            }
-
-            @Override
-            @SideOnly(Side.CLIENT)
-            public Item getTabIconItem() {
-                return Item.getItemFromBlock(GSBlock.graveStone);
-            }
-        };
+        // tabs
+        GSTabs.registration();
 
         // blocks registration
         GSBlock.registration();

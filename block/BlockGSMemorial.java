@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSTabs;
 import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -62,7 +63,7 @@ public class BlockGSMemorial extends BlockContainer {
         this.setBlockName("Memorial");
         this.setHardness(4.5F);
         this.setResistance(5F);
-        this.setCreativeTab(ModGraveStone.creativeTab);
+        this.setCreativeTab(GSTabs.memorialsTab);
         this.setBlockTextureName("stone");
         this.setHarvestLevel("pickaxe", 2);
     }

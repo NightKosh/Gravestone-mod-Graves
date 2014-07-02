@@ -2,9 +2,9 @@ package gravestone.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumSkullCandle;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSTabs;
 import gravestone.tileentity.TileEntityGSSkullCandle;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -37,7 +37,7 @@ public class BlockGSSkullCandle extends BlockContainer implements IInfusionStabi
         this.setResistance(5F);
         this.setLightLevel(1);
         this.setBlockTextureName("snow");
-        this.setCreativeTab(ModGraveStone.creativeTab);
+        this.setCreativeTab(GSTabs.otherItemsTab);
         this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.5F, 0.75F);
     }
 

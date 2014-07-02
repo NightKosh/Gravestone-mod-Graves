@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumTrap;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSTabs;
 import gravestone.core.Resources;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -43,7 +44,7 @@ public class BlockGSTrap extends Block {
         this.setBlockName("trap.night");
         this.setHardness(4.5F);
         this.setResistance(5F);
-        this.setCreativeTab(ModGraveStone.creativeTab);
+        this.setCreativeTab(GSTabs.otherItemsTab);
         this.setHarvestLevel("pickaxe", 1);
     }
 

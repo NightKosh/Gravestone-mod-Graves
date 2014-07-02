@@ -2,9 +2,9 @@ package gravestone.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumBoneBlock;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSTabs;
 import gravestone.core.Resources;
 import gravestone.entity.monster.EntitySkullCrawler;
 import net.minecraft.block.Block;
@@ -35,7 +35,7 @@ public class BlockGSBoneBlock extends Block {
         this.setBlockName("bone_block");
         this.setHardness(2F);
         this.setResistance(2F);
-        this.setCreativeTab(ModGraveStone.creativeTab);
+        this.setCreativeTab(GSTabs.otherItemsTab);
         this.setHarvestLevel("pickaxe", 0);
     }
 

@@ -2,8 +2,8 @@ package gravestone.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.ModGraveStone;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSTabs;
 import gravestone.tileentity.TileEntityGSCandle;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -31,7 +31,7 @@ public class BlockGSCandle extends BlockContainer implements IInfusionStabiliser
         this.setLightLevel(1);
         this.setResistance(0);
         this.setBlockTextureName("snow");
-        this.setCreativeTab(ModGraveStone.creativeTab);
+        this.setCreativeTab(GSTabs.otherItemsTab);
         this.setBlockBounds(0.4F, 0.0F, 0.4F, 0.6F, 0.6F, 0.6F);
     }
 

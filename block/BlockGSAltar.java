@@ -2,7 +2,7 @@ package gravestone.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.ModGraveStone;
+import gravestone.core.GSTabs;
 import gravestone.core.Resources;
 import gravestone.item.CorpseHelper;
 import gravestone.item.ItemGSCorpse;
@@ -32,7 +32,7 @@ public class BlockGSAltar extends Block {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
         this.setLightOpacity(0);
         this.setBlockName("Altar");
-        this.setCreativeTab(ModGraveStone.creativeTab);
+        this.setCreativeTab(GSTabs.otherItemsTab);
         this.setHarvestLevel("pickaxe", 2);
     }
 

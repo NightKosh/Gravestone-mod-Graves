@@ -1,10 +1,9 @@
 package gravestone.block;
 
-import gravestone.ModGraveStone;
+import gravestone.core.GSTabs;
 import gravestone.core.Resources;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
-import net.minecraft.block.BlockStoneSlab;
 import net.minecraft.block.material.Material;
 
 /**
@@ -21,7 +20,7 @@ public class BlockGSBoneSlab extends BlockSlab {
         this.setBlockName("bone_slab");
         this.setHardness(2F);
         this.setResistance(2F);
-        this.setCreativeTab(ModGraveStone.creativeTab);
+        this.setCreativeTab(GSTabs.otherItemsTab);
         this.setBlockTextureName(Resources.BONE_BLOCK);
         this.setHarvestLevel("pickaxe", 0);
     }

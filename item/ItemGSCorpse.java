@@ -2,7 +2,7 @@ package gravestone.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.ModGraveStone;
+import gravestone.core.GSTabs;
 import gravestone.item.enums.EnumCorpse;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -27,7 +27,7 @@ public class ItemGSCorpse extends Item {
 
     public ItemGSCorpse() {
         super();
-        setCreativeTab(ModGraveStone.creativeTab);
+        setCreativeTab(GSTabs.otherItemsTab);
         setUnlocalizedName("Corpse");
         this.setHasSubtypes(true);
     }

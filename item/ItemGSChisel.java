@@ -2,6 +2,7 @@ package gravestone.item;
 
 import gravestone.ModGraveStone;
 import gravestone.core.GSBlock;
+import gravestone.core.GSTabs;
 import gravestone.core.Resources;
 import gravestone.tileentity.TileEntityGSGrave;
 import net.minecraft.block.Block;
@@ -21,7 +22,7 @@ public class ItemGSChisel extends ItemTool {
     public ItemGSChisel() {
         super(1, ToolMaterial.IRON, null);
         setMaxStackSize(1);
-        setCreativeTab(ModGraveStone.creativeTab);
+        setCreativeTab(GSTabs.otherItemsTab);
         setUnlocalizedName("chisel");
         setMaxDamage(50);
         this.setTextureName(Resources.CHISEL);
