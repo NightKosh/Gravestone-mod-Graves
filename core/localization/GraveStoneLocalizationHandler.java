@@ -23,6 +23,7 @@ public class GraveStoneLocalizationHandler {
         "fr_FR",
         "es_ES",
         "zh_CN",
+        "zh_TW",
         "cs_CZ"
     };
 
