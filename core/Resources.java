@@ -122,13 +122,25 @@ public class Resources {
     public static final ResourceLocation GRAVE_QUARTZ_CAT_STATUE = new ResourceLocation(GRAVES_LOCATION + "QuartzCatGrave.png");
     public static final ResourceLocation GRAVE_ICE_CAT_STATUE = new ResourceLocation(GRAVES_LOCATION + "IceCatGrave.png");
     // horses graves
-    public static final ResourceLocation HORSE_STATUE_GRAVE = new ResourceLocation(GRAVES_LOCATION + "ModelHorseStatueGraveStone.png");
+    public static final ResourceLocation GRAVE_WOODEN_HORSE_STATUE = new ResourceLocation(GRAVES_LOCATION + "WoodenHorseGrave.png");
+    public static final ResourceLocation GRAVE_SANDSTONE_HORSE_STATUE = new ResourceLocation(GRAVES_LOCATION + "SandstoneHorseGrave.png");
+    public static final ResourceLocation GRAVE_STONE_HORSE_STATUE = new ResourceLocation(GRAVES_LOCATION + "StoneHorseGrave.png");
+    public static final ResourceLocation GRAVE_MOSSY_HORSE_STATUE = new ResourceLocation(GRAVES_LOCATION + "MossyHorseGrave.png");
+    public static final ResourceLocation GRAVE_IRON_HORSE_STATUE = new ResourceLocation(GRAVES_LOCATION + "IronHorseGrave.png");
+    public static final ResourceLocation GRAVE_GOLDEN_HORSE_STATUE = new ResourceLocation(GRAVES_LOCATION + "GoldenHorseGrave.png");
+    public static final ResourceLocation GRAVE_DIAMOND_HORSE_STATUE = new ResourceLocation(GRAVES_LOCATION + "DiamondHorseGrave.png");
+    public static final ResourceLocation GRAVE_EMERALD_HORSE_STATUE = new ResourceLocation(GRAVES_LOCATION + "EmeraldHorseGrave.png");
+    public static final ResourceLocation GRAVE_LAPIS_HORSE_STATUE = new ResourceLocation(GRAVES_LOCATION + "LapisHorseGrave.png");
+    public static final ResourceLocation GRAVE_REDSTONE_HORSE_STATUE = new ResourceLocation(GRAVES_LOCATION + "RedstoneHorseGrave.png");
+    public static final ResourceLocation GRAVE_OBSIDIAN_HORSE_STATUE = new ResourceLocation(GRAVES_LOCATION + "ObsidianHorseGrave.png");
+    public static final ResourceLocation GRAVE_QUARTZ_HORSE_STATUE = new ResourceLocation(GRAVES_LOCATION + "QuartzHorseGrave.png");
+    public static final ResourceLocation GRAVE_ICE_HORSE_STATUE = new ResourceLocation(GRAVES_LOCATION + "IceHorseGrave.png");
     // swords graves
-    public static final ResourceLocation WOODEN_SWORD_GRAVE = new ResourceLocation(GRAVES_LOCATION + "WoodenSwordGrave.png");
-    public static final ResourceLocation STONE_SWORD_GRAVE = new ResourceLocation(GRAVES_LOCATION + "StoneSwordGrave.png");
-    public static final ResourceLocation IRON_SWORD_GRAVE = new ResourceLocation(GRAVES_LOCATION + "IronSwordGrave.png");
-    public static final ResourceLocation GOLDEN_SWORD_GRAVE = new ResourceLocation(GRAVES_LOCATION + "GoldenSwordGrave.png");
-    public static final ResourceLocation DIAMOND_SWORD_GRAVE = new ResourceLocation(GRAVES_LOCATION + "DiamondSwordGrave.png");
+    public static final ResourceLocation GRAVE_WOODEN_SWORD = new ResourceLocation(GRAVES_LOCATION + "WoodenSwordGrave.png");
+    public static final ResourceLocation GRAVE_STONE_SWORD = new ResourceLocation(GRAVES_LOCATION + "StoneSwordGrave.png");
+    public static final ResourceLocation GRAVE_IRON_SWORD = new ResourceLocation(GRAVES_LOCATION + "IronSwordGrave.png");
+    public static final ResourceLocation GRAVE_GOLDEN_SWORD = new ResourceLocation(GRAVES_LOCATION + "GoldenSwordGrave.png");
+    public static final ResourceLocation GRAVE_DIAMOND_SWORD = new ResourceLocation(GRAVES_LOCATION + "DiamondSwordGrave.png");
     // models - memorials
     public static final ResourceLocation MEMORIAL_CROSS = new ResourceLocation(MEMORIALS_LOCATION + "ModelMemorialCross.png");
     public static final ResourceLocation MEMORIAL_OBELISK = new ResourceLocation(MEMORIALS_LOCATION + "ModelMemorialObelisk.png");

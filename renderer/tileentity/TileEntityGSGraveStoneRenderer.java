@@ -1,19 +1,12 @@
 package gravestone.renderer.tileentity;
 
-import gravestone.core.Resources;
-import gravestone.block.enums.EnumGraves;
-import gravestone.block.GraveStoneHelper;
-import gravestone.models.block.graves.ModelCatStatueGraveStone;
-import gravestone.models.block.graves.ModelCrossGraveStone;
-import gravestone.models.block.graves.ModelDogStatueGraveStone;
-import gravestone.models.block.ModelGraveStone;
-import gravestone.models.block.graves.ModelVerticalPlateGraveStone;
-import gravestone.models.block.graves.ModelHorisontalPlateGraveStone;
-import gravestone.models.block.graves.ModelSwordGrave;
-import gravestone.tileentity.TileEntityGSGraveStone;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.models.block.graves.ModelHorseGraveStone;
+import gravestone.block.GraveStoneHelper;
+import gravestone.block.enums.EnumGraves;
+import gravestone.models.block.ModelGraveStone;
+import gravestone.models.block.graves.*;
+import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
@@ -26,13 +19,13 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
 
-    private static ModelGraveStone verticalPlate = new ModelVerticalPlateGraveStone();
-    private static ModelGraveStone cross = new ModelCrossGraveStone();
-    private static ModelGraveStone horisontalPlate = new ModelHorisontalPlateGraveStone();
-    private static ModelGraveStone dogStatue = new ModelDogStatueGraveStone();
-    private static ModelGraveStone catStatue = new ModelCatStatueGraveStone();
-    private static ModelGraveStone horseStatue = new ModelHorseGraveStone();
-    private static ModelGraveStone swordGrave = new ModelSwordGrave();
+    public static ModelGraveStone verticalPlate = new ModelVerticalPlateGraveStone();
+    public static ModelGraveStone cross = new ModelCrossGraveStone();
+    public static ModelGraveStone horisontalPlate = new ModelHorisontalPlateGraveStone();
+    public static ModelGraveStone dogStatue = new ModelDogStatueGraveStone();
+    public static ModelGraveStone catStatue = new ModelCatStatueGraveStone();
+    public static ModelGraveStone horseStatue = new ModelHorseGraveStone();
+    public static ModelGraveStone swordGrave = new ModelSwordGrave();
     public static TileEntityGSGraveStoneRenderer instance;
 
     public TileEntityGSGraveStoneRenderer() {
@@ -49,7 +42,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
             meta = tileEntity.getBlockMetadata();
         }
 
-        getGraveTexture(graveType);
+        bindTextureByName(graveType.getTexture());
         //texture
         GL11.glPushMatrix();
 
@@ -77,320 +70,12 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         }
 
         if (GraveStoneHelper.isSwordGrave(tileEntity) && tileEntity.isEnchanted()) {
-            getGraveModel(graveType).customRender();
+            graveType.getModel().customRender();
         } else {
-            getGraveModel(graveType).renderAll();
+            graveType.getModel().renderAll();
         }
 
         GL11.glPopMatrix();
-    }
-
-    private ModelGraveStone getGraveModel(EnumGraves graveType) {
-        switch (graveType) {
-            case WOODEN_CROSS:
-            case SANDSTONE_CROSS:
-            case STONE_CROSS:
-            case MOSSY_CROSS:
-            case IRON_CROSS:
-            case GOLDEN_CROSS:
-            case DIAMOND_CROSS:
-            case EMERALD_CROSS:
-            case LAPIS_CROSS:
-            case REDSTONE_CROSS:
-            case OBSIDIAN_CROSS:
-            case QUARTZ_CROSS:
-            case ICE_CROSS:
-                return cross;
-            case WOODEN_HORISONTAL_PLATE:
-            case SANDSTONE_HORISONTAL_PLATE:
-            case STONE_HORISONTAL_PLATE:
-            case MOSSY_HORISONTAL_PLATE:
-            case IRON_HORISONTAL_PLATE:
-            case GOLDEN_HORISONTAL_PLATE:
-            case DIAMOND_HORISONTAL_PLATE:
-            case EMERALD_HORISONTAL_PLATE:
-            case LAPIS_HORISONTAL_PLATE:
-            case REDSTONE_HORISONTAL_PLATE:
-            case OBSIDIAN_HORISONTAL_PLATE:
-            case QUARTZ_HORISONTAL_PLATE:
-            case ICE_HORISONTAL_PLATE:
-                return horisontalPlate;
-            case WOODEN_DOG_STATUE:
-            case SANDSTONE_DOG_STATUE:
-            case STONE_DOG_STATUE:
-            case MOSSY_DOG_STATUE:
-            case IRON_DOG_STATUE:
-            case GOLDEN_DOG_STATUE:
-            case DIAMOND_DOG_STATUE:
-            case EMERALD_DOG_STATUE:
-            case LAPIS_DOG_STATUE:
-            case REDSTONE_DOG_STATUE:
-            case OBSIDIAN_DOG_STATUE:
-            case QUARTZ_DOG_STATUE:
-            case ICE_DOG_STATUE:
-                return dogStatue;
-            case WOODEN_CAT_STATUE:
-            case SANDSTONE_CAT_STATUE:
-            case STONE_CAT_STATUE:
-            case MOSSY_CAT_STATUE:
-            case IRON_CAT_STATUE:
-            case GOLDEN_CAT_STATUE:
-            case DIAMOND_CAT_STATUE:
-            case EMERALD_CAT_STATUE:
-            case LAPIS_CAT_STATUE:
-            case REDSTONE_CAT_STATUE:
-            case OBSIDIAN_CAT_STATUE:
-            case QUARTZ_CAT_STATUE:
-            case ICE_CAT_STATUE:
-                return catStatue;
-            case HORSE_STATUE:
-                return horseStatue;
-            case WOODEN_SWORD:
-            case STONE_SWORD:
-            case IRON_SWORD:
-            case GOLDEN_SWORD:
-            case DIAMOND_SWORD:
-                return swordGrave;
-            case WOODEN_VERTICAL_PLATE:
-            case SANDSTONE_VERTICAL_PLATE:
-            case STONE_VERTICAL_PLATE:
-            case MOSSY_VERTICAL_PLATE:
-            case IRON_VERTICAL_PLATE:
-            case GOLDEN_VERTICAL_PLATE:
-            case DIAMOND_VERTICAL_PLATE:
-            case EMERALD_VERTICAL_PLATE:
-            case LAPIS_VERTICAL_PLATE:
-            case REDSTONE_VERTICAL_PLATE:
-            case OBSIDIAN_VERTICAL_PLATE:
-            case QUARTZ_VERTICAL_PLATE:
-            case ICE_VERTICAL_PLATE:
-            default:
-                return verticalPlate;
-        }
-    }
-
-    private void getGraveTexture(EnumGraves graveType) {
-        switch (graveType) {
-            // VERTICAL PLATES
-            case WOODEN_VERTICAL_PLATE:
-                bindTextureByName(Resources.GRAVE_WOODEN_VERTICAL_PLATE);
-                break;
-            case STONE_VERTICAL_PLATE:
-                bindTextureByName(Resources.GRAVE_STONE_VERTICAL_PLATE);
-                break;
-            case MOSSY_VERTICAL_PLATE:
-                bindTextureByName(Resources.GRAVE_MOSSY_VERTICAL_PLATE);
-                break;
-            case SANDSTONE_VERTICAL_PLATE:
-                bindTextureByName(Resources.GRAVE_SANDSTONE_VERTICAL_PLATE);
-                break;
-            case IRON_VERTICAL_PLATE:
-                bindTextureByName(Resources.GRAVE_IRON_VERTICAL_PLATE);
-                break;
-            case GOLDEN_VERTICAL_PLATE:
-                bindTextureByName(Resources.GRAVE_GOLDEN_VERTICAL_PLATE);
-                break;
-            case DIAMOND_VERTICAL_PLATE:
-                bindTextureByName(Resources.GRAVE_DIAMOND_VERTICAL_PLATE);
-                break;
-            case EMERALD_VERTICAL_PLATE:
-                bindTextureByName(Resources.GRAVE_EMERALD_VERTICAL_PLATE);
-                break;
-            case LAPIS_VERTICAL_PLATE:
-                bindTextureByName(Resources.GRAVE_LAPIS_VERTICAL_PLATE);
-                break;
-            case REDSTONE_VERTICAL_PLATE:
-                bindTextureByName(Resources.GRAVE_REDSTONE_VERTICAL_PLATE);
-                break;
-            case OBSIDIAN_VERTICAL_PLATE:
-                bindTextureByName(Resources.GRAVE_OBSIDIAN_VERTICAL_PLATE);
-                break;
-            case QUARTZ_VERTICAL_PLATE:
-                bindTextureByName(Resources.GRAVE_QUARTZ_VERTICAL_PLATE);
-                break;
-            case ICE_VERTICAL_PLATE:
-                bindTextureByName(Resources.GRAVE_ICE_VERTICAL_PLATE);
-                break;
-            // CROSSES
-            case WOODEN_CROSS:
-                bindTextureByName(Resources.GRAVE_WOODEN_CROSS);
-                break;
-            case SANDSTONE_CROSS:
-                bindTextureByName(Resources.GRAVE_SANDSTONE_CROSS);
-                break;
-            case STONE_CROSS:
-                bindTextureByName(Resources.GRAVE_STONE_CROSS);
-                break;
-            case MOSSY_CROSS:
-                bindTextureByName(Resources.GRAVE_MOSSY_CROSS);
-                break;
-            case IRON_CROSS:
-                bindTextureByName(Resources.GRAVE_IRON_CROSS);
-                break;
-            case GOLDEN_CROSS:
-                bindTextureByName(Resources.GRAVE_GOLDEN_CROSS);
-                break;
-            case DIAMOND_CROSS:
-                bindTextureByName(Resources.GRAVE_DIAMOND_CROSS);
-                break;
-            case EMERALD_CROSS:
-                bindTextureByName(Resources.GRAVE_EMERALD_CROSS);
-                break;
-            case LAPIS_CROSS:
-                bindTextureByName(Resources.GRAVE_LAPIS_CROSS);
-                break;
-            case REDSTONE_CROSS:
-                bindTextureByName(Resources.GRAVE_REDSTONE_CROSS);
-                break;
-            case OBSIDIAN_CROSS:
-                bindTextureByName(Resources.GRAVE_OBSIDIAN_CROSS);
-                break;
-            case QUARTZ_CROSS:
-                bindTextureByName(Resources.GRAVE_QUARTZ_CROSS);
-                break;
-            case ICE_CROSS:
-                bindTextureByName(Resources.GRAVE_ICE_CROSS);
-                break;
-            // HORISONTAL PLATES
-            case WOODEN_HORISONTAL_PLATE:
-                bindTextureByName(Resources.GRAVE_WOODEN_HORISONTAL_PLATE);
-                break;
-            case STONE_HORISONTAL_PLATE:
-                bindTextureByName(Resources.GRAVE_STONE_HORISONTAL_PLATE);
-                break;
-            case MOSSY_HORISONTAL_PLATE:
-                bindTextureByName(Resources.GRAVE_MOSSY_HORISONTAL_PLATE);
-                break;
-            case SANDSTONE_HORISONTAL_PLATE:
-                bindTextureByName(Resources.GRAVE_SANDSTONE_HORISONTAL_PLATE);
-                break;
-            case IRON_HORISONTAL_PLATE:
-                bindTextureByName(Resources.GRAVE_IRON_HORISONTAL_PLATE);
-                break;
-            case GOLDEN_HORISONTAL_PLATE:
-                bindTextureByName(Resources.GRAVE_GOLDEN_HORISONTAL_PLATE);
-                break;
-            case DIAMOND_HORISONTAL_PLATE:
-                bindTextureByName(Resources.GRAVE_DIAMOND_HORISONTAL_PLATE);
-                break;
-            case EMERALD_HORISONTAL_PLATE:
-                bindTextureByName(Resources.GRAVE_EMERALD_HORISONTAL_PLATE);
-                break;
-            case LAPIS_HORISONTAL_PLATE:
-                bindTextureByName(Resources.GRAVE_LAPIS_HORISONTAL_PLATE);
-                break;
-            case REDSTONE_HORISONTAL_PLATE:
-                bindTextureByName(Resources.GRAVE_REDSTONE_HORISONTAL_PLATE);
-                break;
-            case OBSIDIAN_HORISONTAL_PLATE:
-                bindTextureByName(Resources.GRAVE_OBSIDIAN_HORISONTAL_PLATE);
-                break;
-            case QUARTZ_HORISONTAL_PLATE:
-                bindTextureByName(Resources.GRAVE_QUARTZ_HORISONTAL_PLATE);
-                break;
-            case ICE_HORISONTAL_PLATE:
-                bindTextureByName(Resources.GRAVE_ICE_HORISONTAL_PLATE);
-                break;
-            // DOGS GRAVES
-            case WOODEN_DOG_STATUE:
-                bindTextureByName(Resources.GRAVE_WOODEN_DOG_STATUE);
-                break;
-            case SANDSTONE_DOG_STATUE:
-                bindTextureByName(Resources.GRAVE_SANDSTONE_DOG_STATUE);
-                break;
-            case STONE_DOG_STATUE:
-                bindTextureByName(Resources.GRAVE_STONE_DOG_STATUE);
-                break;
-            case MOSSY_DOG_STATUE:
-                bindTextureByName(Resources.GRAVE_MOSSY_DOG_STATUE);
-                break;
-            case IRON_DOG_STATUE:
-                bindTextureByName(Resources.GRAVE_IRON_DOG_STATUE);
-                break;
-            case GOLDEN_DOG_STATUE:
-                bindTextureByName(Resources.GRAVE_GOLDEN_DOG_STATUE);
-                break;
-            case DIAMOND_DOG_STATUE:
-                bindTextureByName(Resources.GRAVE_DIAMOND_DOG_STATUE);
-                break;
-            case EMERALD_DOG_STATUE:
-                bindTextureByName(Resources.GRAVE_EMERALD_DOG_STATUE);
-                break;
-            case LAPIS_DOG_STATUE:
-                bindTextureByName(Resources.GRAVE_LAPIS_DOG_STATUE);
-                break;
-            case REDSTONE_DOG_STATUE:
-                bindTextureByName(Resources.GRAVE_REDSTONE_DOG_STATUE);
-                break;
-            case OBSIDIAN_DOG_STATUE:
-                bindTextureByName(Resources.GRAVE_OBSIDIAN_DOG_STATUE);
-                break;
-            case QUARTZ_DOG_STATUE:
-                bindTextureByName(Resources.GRAVE_QUARTZ_DOG_STATUE);
-                break;
-            case ICE_DOG_STATUE:
-                bindTextureByName(Resources.GRAVE_ICE_DOG_STATUE);
-                break;
-            // CATS GRAVES
-            case WOODEN_CAT_STATUE:
-                bindTextureByName(Resources.GRAVE_WOODEN_CAT_STATUE);
-                break;
-            case SANDSTONE_CAT_STATUE:
-                bindTextureByName(Resources.GRAVE_SANDSTONE_CAT_STATUE);
-                break;
-            case STONE_CAT_STATUE:
-                bindTextureByName(Resources.GRAVE_STONE_CAT_STATUE);
-                break;
-            case MOSSY_CAT_STATUE:
-                bindTextureByName(Resources.GRAVE_MOSSY_CAT_STATUE);
-                break;
-            case IRON_CAT_STATUE:
-                bindTextureByName(Resources.GRAVE_IRON_CAT_STATUE);
-                break;
-            case GOLDEN_CAT_STATUE:
-                bindTextureByName(Resources.GRAVE_GOLDEN_CAT_STATUE);
-                break;
-            case DIAMOND_CAT_STATUE:
-                bindTextureByName(Resources.GRAVE_DIAMOND_CAT_STATUE);
-                break;
-            case EMERALD_CAT_STATUE:
-                bindTextureByName(Resources.GRAVE_EMERALD_CAT_STATUE);
-                break;
-            case LAPIS_CAT_STATUE:
-                bindTextureByName(Resources.GRAVE_LAPIS_CAT_STATUE);
-                break;
-            case REDSTONE_CAT_STATUE:
-                bindTextureByName(Resources.GRAVE_REDSTONE_CAT_STATUE);
-                break;
-            case OBSIDIAN_CAT_STATUE:
-                bindTextureByName(Resources.GRAVE_OBSIDIAN_CAT_STATUE);
-                break;
-            case QUARTZ_CAT_STATUE:
-                bindTextureByName(Resources.GRAVE_QUARTZ_CAT_STATUE);
-                break;
-            case ICE_CAT_STATUE:
-                bindTextureByName(Resources.GRAVE_ICE_CAT_STATUE);
-                break;
-            // HORSES GRAVES
-            case HORSE_STATUE:
-                bindTextureByName(Resources.HORSE_STATUE_GRAVE);
-                break;
-            case WOODEN_SWORD:
-                bindTextureByName(Resources.WOODEN_SWORD_GRAVE);
-                break;
-            case STONE_SWORD:
-                bindTextureByName(Resources.STONE_SWORD_GRAVE);
-                break;
-            case IRON_SWORD:
-                bindTextureByName(Resources.IRON_SWORD_GRAVE);
-                break;
-            case GOLDEN_SWORD:
-                bindTextureByName(Resources.GOLDEN_SWORD_GRAVE);
-                break;
-            case DIAMOND_SWORD:
-                bindTextureByName(Resources.DIAMOND_SWORD_GRAVE);
-                break;
-        }
     }
 
     /**

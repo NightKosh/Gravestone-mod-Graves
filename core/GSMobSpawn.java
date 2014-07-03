@@ -108,7 +108,19 @@ public class GSMobSpawn {
             case ICE_CAT_STATUE:
                 id = getMobID(world.rand, EnumMobType.UNDEAD_CATS);
                 break;
-            case HORSE_STATUE:
+            case WOODEN_HORSE_STATUE:
+            case SANDSTONE_HORSE_STATUE:
+            case STONE_HORSE_STATUE:
+            case MOSSY_HORSE_STATUE:
+            case IRON_HORSE_STATUE:
+            case GOLDEN_HORSE_STATUE:
+            case DIAMOND_HORSE_STATUE:
+            case EMERALD_HORSE_STATUE:
+            case LAPIS_HORSE_STATUE:
+            case REDSTONE_HORSE_STATUE:
+            case OBSIDIAN_HORSE_STATUE:
+            case QUARTZ_HORSE_STATUE:
+            case ICE_HORSE_STATUE:
                 return null;
             default:
                 if (canSpawnHellCreatures(world, x, y, z) && world.rand.nextInt(10) == 0) {

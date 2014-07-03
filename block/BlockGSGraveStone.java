@@ -119,7 +119,19 @@ public class BlockGSGraveStone extends BlockContainer {
             (byte) EnumGraves.QUARTZ_CAT_STATUE.ordinal(),
             (byte) EnumGraves.ICE_CAT_STATUE.ordinal(),
             // horses graves
-            (byte) EnumGraves.HORSE_STATUE.ordinal()
+            (byte) EnumGraves.WOODEN_HORSE_STATUE.ordinal(),
+            (byte) EnumGraves.SANDSTONE_HORSE_STATUE.ordinal(),
+            (byte) EnumGraves.STONE_HORSE_STATUE.ordinal(),
+            (byte) EnumGraves.MOSSY_HORSE_STATUE.ordinal(),
+            (byte) EnumGraves.IRON_HORSE_STATUE.ordinal(),
+            (byte) EnumGraves.GOLDEN_HORSE_STATUE.ordinal(),
+            (byte) EnumGraves.DIAMOND_HORSE_STATUE.ordinal(),
+            (byte) EnumGraves.EMERALD_HORSE_STATUE.ordinal(),
+            (byte) EnumGraves.LAPIS_HORSE_STATUE.ordinal(),
+            (byte) EnumGraves.REDSTONE_HORSE_STATUE.ordinal(),
+            (byte) EnumGraves.OBSIDIAN_HORSE_STATUE.ordinal(),
+            (byte) EnumGraves.QUARTZ_HORSE_STATUE.ordinal(),
+            (byte) EnumGraves.ICE_HORSE_STATUE.ordinal()
     };
 
     public static final byte[] TAB_SWORD_GRAVES = {
@@ -141,7 +153,7 @@ public class BlockGSGraveStone extends BlockContainer {
     };
     public static final byte[] DOG_GRAVES = {(byte) EnumGraves.STONE_DOG_STATUE.ordinal()};
     public static final byte[] CAT_GRAVES = {(byte) EnumGraves.STONE_CAT_STATUE.ordinal()};
-    public static final byte[] HORSE_GRAVES = {(byte) EnumGraves.HORSE_STATUE.ordinal()};
+    public static final byte[] HORSE_GRAVES = {(byte) EnumGraves.STONE_HORSE_STATUE.ordinal()};
     public static final byte[] SWORD_GRAVES = {
             (byte) EnumGraves.WOODEN_SWORD.ordinal(),
             (byte) EnumGraves.STONE_SWORD.ordinal(),
@@ -417,7 +429,19 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case HORSE_STATUE:
+            case WOODEN_HORSE_STATUE:
+            case SANDSTONE_HORSE_STATUE:
+            case STONE_HORSE_STATUE:
+            case MOSSY_HORSE_STATUE:
+            case IRON_HORSE_STATUE:
+            case GOLDEN_HORSE_STATUE:
+            case DIAMOND_HORSE_STATUE:
+            case EMERALD_HORSE_STATUE:
+            case LAPIS_HORSE_STATUE:
+            case REDSTONE_HORSE_STATUE:
+            case OBSIDIAN_HORSE_STATUE:
+            case QUARTZ_HORSE_STATUE:
+            case ICE_HORSE_STATUE:
                 switch (meta) {
                     case 0:
                         this.setBlockBounds(0.375F, 0, 0.275F, 0.625F, 0.85F, 0.725F);
