@@ -722,7 +722,7 @@ public class BlockGSGraveStone extends BlockContainer {
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", TAB_SWORD_GRAVES[i]);
 
-            if (GraveStoneHelper.isSwordGrave(i)) {
+            if (GraveStoneHelper.isSwordGrave(TAB_SWORD_GRAVES[i])) {
                 nbt.setByte("SwordType", GraveStoneHelper.graveTypeToSwordType(TAB_SWORD_GRAVES[i]));
             }
 
@@ -735,7 +735,7 @@ public class BlockGSGraveStone extends BlockContainer {
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", TAB_SWORD_GRAVES[i]);
 
-            if (GraveStoneHelper.isSwordGrave(i)) {
+            if (GraveStoneHelper.isSwordGrave(TAB_SWORD_GRAVES[i])) {
                 nbt.setByte("SwordType", GraveStoneHelper.graveTypeToSwordType(TAB_SWORD_GRAVES[i]));
                 NBTTagCompound enchantmentTags = new NBTTagCompound();
                 enchantmentTags.setTag("ench", new NBTTagList());
