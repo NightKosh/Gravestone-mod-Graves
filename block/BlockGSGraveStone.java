@@ -23,6 +23,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.MathHelper;
@@ -691,8 +692,6 @@ public class BlockGSGraveStone extends BlockContainer {
             EnchantmentHelper.addRandomEnchantment(new Random(), swordStack, 5);
 
             ItemStack graveStoneStack = GraveStoneHelper.getSwordAsGrave(gravestone, swordStack);
-            // TODO ????
-//            graveStoneStack.getTagCompound().setBoolean("Enchanted", true);
 
             list.add(graveStoneStack);
         }
@@ -804,6 +803,12 @@ public class BlockGSGraveStone extends BlockContainer {
 
             if (tileEntity != null) {
                 if (sword != null) {
+                    if (isMagic) {
+                        if (sword.getTagCompound() == null) {
+                            sword.setTagCompound(new NBTTagCompound());
+                        }
+                        sword.getTagCompound().setTag("ench", new NBTTagList());
+                    }
                     tileEntity.setSword(sword);
                 }
 
