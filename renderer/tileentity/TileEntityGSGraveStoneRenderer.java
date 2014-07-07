@@ -75,7 +75,11 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         if (tileEntity.isSwordGrave()) {
             renderSword(tileEntity);
         } else {
-            graveType.getModel().renderAll();
+            if (tileEntity.isEnchanted()) {
+                graveType.getModel().renderEnchanted();
+            } else {
+                graveType.getModel().renderAll();
+            }
         }
 
         GL11.glPopMatrix();

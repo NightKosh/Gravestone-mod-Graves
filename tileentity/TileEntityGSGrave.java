@@ -23,6 +23,7 @@ public abstract class TileEntityGSGrave extends TileEntity {
     protected GSGraveStoneItems gSItems;
     protected GSGraveStoneDeathText gSDeathText;
     protected boolean isEditable = true;
+    protected boolean isEnchanted = false;
     protected byte graveType = 0;
     protected int age = -1;
 
@@ -95,6 +96,14 @@ public abstract class TileEntityGSGrave extends TileEntity {
         return isEditable;
     }
 
+    public boolean isEnchanted() {
+        return this.isEnchanted;
+    }
+
+    public void setEnchanted(boolean isEnchanted) {
+        this.isEnchanted = isEnchanted;
+    }
+
     /**
      * Sets the grave's isEditable flag to the specified parameter.
      */
@@ -103,6 +112,27 @@ public abstract class TileEntityGSGrave extends TileEntity {
         this.isEditable = isEditable;
     }
 
+    /**
+     * Reads a tile entity from NBT.
+     */
+    @Override
+    public void readFromNBT(NBTTagCompound nbtTag) {
+        super.readFromNBT(nbtTag);
+
+        if (nbtTag.hasKey("Enchanted")) {
+            isEnchanted = nbtTag.getBoolean("Enchanted");
+        }
+    }
+
+    /**
+     * Writes a tile entity to NBT.
+     */
+    @Override
+    public void writeToNBT(NBTTagCompound nbtTag) {
+        super.writeToNBT(nbtTag);
+
+        nbtTag.setBoolean("Enchanted", isEnchanted);
+    }
     /**
      * Called when you receive a TileEntityData packet for the location this
      * TileEntity is currently in. On the client, the NetworkManager will always

@@ -206,6 +206,10 @@ public class BlockGSGraveStone extends BlockContainer {
                 if (itemStack.stackTagCompound.hasKey("Sword")) {
                     tileEntity.setSword(ItemStack.loadItemStackFromNBT(itemStack.getTagCompound().getCompoundTag("Sword")));
                 }
+
+                if (itemStack.stackTagCompound.hasKey("Enchanted")) {
+                    tileEntity.setEnchanted(itemStack.stackTagCompound.getBoolean("Enchanted"));
+                }
             }
         }
     }
@@ -729,6 +733,8 @@ public class BlockGSGraveStone extends BlockContainer {
                 GraveStoneHelper.addSwordInfo(nbt, tileEntity.getSword());
             }
 
+            nbt.setBoolean("Enchanted", tileEntity.isEnchanted());
+
             itemStack.setTagCompound(nbt);
         }
 
@@ -738,7 +744,7 @@ public class BlockGSGraveStone extends BlockContainer {
     /**
      * Create grave on death
      */
-    public void createOnDeath(World world, int x, int y, int z, DeathMessageInfo deathInfo, int direction, List<ItemStack> items, int age, EnumGraveType entityType) {
+    public void createOnDeath(World world, int x, int y, int z, DeathMessageInfo deathInfo, int direction, List<ItemStack> items, int age, EnumGraveType entityType, boolean isMagic) {
         if (direction < 0) {
             direction = 360 + direction;
         }
@@ -808,6 +814,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 tileEntity.setItems(items);
                 tileEntity.setGraveType(graveType);
                 tileEntity.setAge(age);
+                tileEntity.setEnchanted(isMagic);
             }
             GraveStoneLogger.logInfo("Create " + deathInfo.getName() + "'s grave at " + x + "x" + y + "x" + z);
         } else {
@@ -818,6 +825,7 @@ public class BlockGSGraveStone extends BlockContainer {
             nbt.setString("name", deathInfo.getName());
             nbt.setString("DeathText", deathInfo.getDeathMessage());
             nbt.setString("KillerName", deathInfo.getKillerNameForTE());
+            nbt.setBoolean("Enchanted", isMagic);
 //            nbt.setInteger("Age", age);
 
             if (graveType == EnumGraves.SWORD.ordinal()) {

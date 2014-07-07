@@ -38,6 +38,9 @@ public class ItemGSGraveStoneRenderer implements IItemRenderer {
             if (item.stackTagCompound.hasKey("Sword")) {
                 te.setSword(ItemStack.loadItemStackFromNBT(item.getTagCompound().getCompoundTag("Sword")));
             }
+            if (item.stackTagCompound.hasKey("Enchanted")) {
+                te.setEnchanted(item.stackTagCompound.getBoolean("Enchanted"));
+            }
         }
 
         TileEntityRendererDispatcher.instance.renderTileEntityAt(te, 0.0D, 0.0D, 0.0D, 0.0F);

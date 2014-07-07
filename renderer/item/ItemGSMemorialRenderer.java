@@ -31,12 +31,15 @@ public class ItemGSMemorialRenderer implements IItemRenderer {
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-        TileEntityGSMemorial entity = new TileEntityGSMemorial();
+        TileEntityGSMemorial te = new TileEntityGSMemorial();
 
         if (item.stackTagCompound != null) {
-            entity.setGraveType(item.stackTagCompound.getByte("GraveType"));
+            te.setGraveType(item.stackTagCompound.getByte("GraveType"));
+            if (item.stackTagCompound.hasKey("Enchanted")) {
+                te.setEnchanted(item.stackTagCompound.getBoolean("Enchanted"));
+            }
         }
 
-        TileEntityRendererDispatcher.instance.renderTileEntityAt(entity, 0.0D, 0.0D, 0.0D, 0.0F);
+        TileEntityRendererDispatcher.instance.renderTileEntityAt(te, 0, 0, 0, 0);
     }
 }

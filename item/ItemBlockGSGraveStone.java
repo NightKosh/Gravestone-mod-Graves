@@ -119,14 +119,6 @@ public class ItemBlockGSGraveStone extends ItemBlock {
     @SideOnly(Side.CLIENT)
     // TODO
     public boolean hasEffect(ItemStack stack) {
-        if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("SwordNBT")) {
-            NBTTagList enchantments = stack.stackTagCompound.getCompoundTag("SwordNBT").getTagList("ench", 10);
-
-            if (enchantments.tagCount() != 0) {
-                return true;
-            }
-        }
-
-        return false;
+        return stack.stackTagCompound != null && stack.stackTagCompound.hasKey("Enchanted");
     }
 }

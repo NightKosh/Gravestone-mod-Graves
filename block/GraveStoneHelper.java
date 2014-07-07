@@ -24,6 +24,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -230,9 +231,14 @@ public class GraveStoneHelper {
     }
 
     public static void createGrave(Entity entity, LivingDeathEvent event, List<ItemStack> items, int age, BlockGSGraveStone.EnumGraveType entityType, boolean isVillager) {
+        boolean isMagic = isMagicDamage(event.source);
         GSBlock.graveStone.createOnDeath(entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
                 getDeathMessage((EntityLivingBase) entity, event.source.damageType, isVillager),
-                MathHelper.floor_float(entity.rotationYaw), items, age, entityType);
+                MathHelper.floor_float(entity.rotationYaw), items, age, entityType, isMagic);
+    }
+
+    private static boolean isMagicDamage(DamageSource damage) {
+        return damage.equals(DamageSource.magic) || damage.damageType.toLowerCase().contains("magic");
     }
 
     public static void createPetGrave(Entity entity, LivingDeathEvent event) {
