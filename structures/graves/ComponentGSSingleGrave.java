@@ -6,6 +6,7 @@ import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.block.GraveStoneHelper;
 import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.GraveGenerationHelper;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
@@ -35,7 +36,10 @@ public class ComponentGSSingleGrave extends ComponentGraveStone {
 
         if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
             GraveStoneLogger.logInfo("Generate grave at " + positionX + "x" + positionZ);
-            GraveGenerationHelper.placeGrave(this, world, random, 0, y, 0, GraveStoneHelper.getMetaDirection(coordBaseMode), GraveStoneHelper.getGraveType(random, EnumGraveType.ALL_GRAVES), true);
+
+            byte graveType = GraveStoneHelper.getGraveType(random, EnumGraveType.ALL_GRAVES);
+            Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
+            GraveGenerationHelper.placeGrave(this, world, random, 0, y, 0, GraveStoneHelper.getMetaDirection(coordBaseMode), graveType, sword, true);
         }
 
         return true;

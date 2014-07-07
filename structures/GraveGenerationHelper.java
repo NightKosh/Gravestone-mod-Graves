@@ -2,10 +2,11 @@ package gravestone.structures;
 
 import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
-import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -33,14 +34,14 @@ public class GraveGenerationHelper {
      * @param graveMeta Grave metadata
      * @param graveType Grave type
      */
-    public static void placeGrave(ComponentGraveStone component, World world, Random random, int x, int y, int z, int graveMeta, byte graveType, boolean allLoot) {
+    // TODO
+    public static void placeGrave(ComponentGraveStone component, World world, Random random, int x, int y, int z, int graveMeta, byte graveType, Item sword, boolean allLoot) {
         component.placeBlockAtCurrentPosition(world, GSBlock.graveStone, graveMeta, x, y, z, component.getBoundingBox());
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z));
 
         if (tileEntity != null) {
             if (GraveStoneHelper.isSwordGrave(graveType)) {
-                tileEntity.setSword(GraveStoneHelper.graveTypeToSwordType(graveType));
-                tileEntity.setDamage(GSGraveStoneItems.getRandomDamage(random, 50));
+                tileEntity.setSword(new ItemStack(sword));
             }
 
             tileEntity.setGraveType(graveType);
@@ -63,11 +64,11 @@ public class GraveGenerationHelper {
      * @param graveMeta Grave metadata
      * @param graveType Grave type
      */
-    public static void fillGraves(ComponentGraveStone component, World world, Random random, int xStart, int yStart, int zStart, int xEnd, int yEnd, int zEnd, int graveMeta, byte graveType, boolean allLoot) {
+    public static void fillGraves(ComponentGraveStone component, World world, Random random, int xStart, int yStart, int zStart, int xEnd, int yEnd, int zEnd, int graveMeta, byte graveType, Item sword, boolean allLoot) {
         for (int y = yStart; y <= yEnd; ++y) {
             for (int x = xStart; x <= xEnd; ++x) {
                 for (int z = zStart; z <= zEnd; ++z) {
-                    placeGrave(component, world, random, x, y, z, graveMeta, graveType, allLoot);
+                    placeGrave(component, world, random, x, y, z, graveMeta, graveType, sword, allLoot);
                 }
             }
         }

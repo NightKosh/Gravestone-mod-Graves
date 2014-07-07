@@ -1,6 +1,7 @@
 package gravestone.block;
 
 import gravestone.GraveStoneLogger;
+import gravestone.block.enums.EnumGraves;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
@@ -22,6 +23,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -36,16 +38,25 @@ import java.util.*;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class GraveStoneHelper {
-
-    private static final List<Integer> swordsList = Arrays.asList(
-            Item.getIdFromItem(Items.diamond_sword), Item.getIdFromItem(Items.golden_sword),
-            Item.getIdFromItem(Items.iron_sword), Item.getIdFromItem(Items.stone_sword),
-            Item.getIdFromItem(Items.wooden_sword));
     private static final List<Integer> gravestoneGround = Arrays.asList(
             Block.getIdFromBlock(Blocks.grass), Block.getIdFromBlock(Blocks.dirt),
             Block.getIdFromBlock(Blocks.sand), Block.getIdFromBlock(Blocks.gravel),
             Block.getIdFromBlock(Blocks.soul_sand), Block.getIdFromBlock(Blocks.mycelium),
             Block.getIdFromBlock(Blocks.snow));
+    public static ArrayList<Item> swordsList = new ArrayList<Item>(
+            Arrays.asList(
+                    Items.wooden_sword,
+                    Items.stone_sword,
+                    Items.iron_sword,
+                    Items.golden_sword,
+                    Items.diamond_sword
+            )
+    );
+
+    public static final Item[] GENERATED_SWORD_GRAVES = {
+            Items.wooden_sword,
+            Items.stone_sword
+    };
 
     private GraveStoneHelper() {
     }
@@ -53,12 +64,13 @@ public class GraveStoneHelper {
     /**
      * Check is there sword in your inventory
      */
-    public static ItemStack checkSword(List<ItemStack> items) {
+    // TODO
+    public static ItemStack oldCheckSword(List<ItemStack> items) {
         if (items != null) {
-            for (int i = 0; i < items.size(); i++) {
-                if (items.get(i) != null && swordsList.contains(Item.getIdFromItem(items.get(i).getItem()))) {
-                    ItemStack sword = items.get(i).copy();
-                    items.remove(i);
+            for (ItemStack stack : items) {
+                if (stack != null && swordsList.contains(stack.getItem())) {
+                    ItemStack sword = stack.copy();
+                    items.remove(stack);
                     return sword;
                 }
             }
@@ -70,19 +82,11 @@ public class GraveStoneHelper {
     /**
      * Check is grave - sword grave
      *
-     * @param tileEntity Grave tile entity
-     */
-    public static boolean isSwordGrave(TileEntityGSGraveStone tileEntity) {
-        return tileEntity.getSword() != 0;
-    }
-
-    /**
-     * Check is grave - sword grave
-     *
      * @param graveType Grave type
      */
+    // TODO
     public static boolean isSwordGrave(byte graveType) {
-        return Arrays.binarySearch(BlockGSGraveStone.SWORD_GRAVES, graveType) != -1;
+        return graveType == EnumGraves.SWORD.ordinal();
     }
 
     /**
@@ -91,13 +95,15 @@ public class GraveStoneHelper {
      * @param random
      * @param graveType
      */
+    // TODO
     public static byte getGraveType(Random random, BlockGSGraveStone.EnumGraveType graveType) {
         switch (graveType) {
             case PLAYER_GRAVES:
                 if (random.nextFloat() > 0.1) {
                     return BlockGSGraveStone.GENERATED_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_GRAVES.length)];
                 } else {
-                    return BlockGSGraveStone.GENERATED_SWORD_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_SWORD_GRAVES.length)];
+                    return (byte) EnumGraves.SWORD.ordinal();
+                    //return BlockGSGraveStone.GENERATED_SWORD_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_SWORD_GRAVES.length)];
                 }
             case PETS_GRAVES:
                 return BlockGSGraveStone.PETS_GRAVES[random.nextInt(BlockGSGraveStone.PETS_GRAVES.length)];
@@ -111,7 +117,8 @@ public class GraveStoneHelper {
                     if (random.nextFloat() > 0.1) {
                         return BlockGSGraveStone.GENERATED_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_GRAVES.length)];
                     } else {
-                        return BlockGSGraveStone.GENERATED_SWORD_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_SWORD_GRAVES.length)];
+                        return (byte) EnumGraves.SWORD.ordinal();
+                        //return BlockGSGraveStone.GENERATED_SWORD_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_SWORD_GRAVES.length)];
                     }
                 } else {
                     return BlockGSGraveStone.PETS_GRAVES[random.nextInt(BlockGSGraveStone.PETS_GRAVES.length)];
@@ -146,26 +153,9 @@ public class GraveStoneHelper {
         return Arrays.binarySearch(BlockGSGraveStone.PETS_GRAVES, graveType) >= 0;
     }
 
-    public static byte graveTypeToSwordType(byte graveType) {
+    // TODO
+    public static byte oldGraveTypeToSwordType(byte graveType) {
         return (byte) (graveType - 4);
-    }
-
-    public static byte swordGraveTypeToGraveType(byte swordGraveType) {
-        return (byte) (swordGraveType + 4);
-    }
-
-    public static byte getSwordType(Item item) {
-        if (Item.getIdFromItem(item) == Item.getIdFromItem(Items.diamond_sword)) {
-            return 5;
-        } else if (Item.getIdFromItem(item) == Item.getIdFromItem(Items.iron_sword)) {
-            return 3;
-        } else if (Item.getIdFromItem(item) == Item.getIdFromItem(Items.stone_sword)) {
-            return 2;
-        } else if (Item.getIdFromItem(item) == Item.getIdFromItem(Items.golden_sword)) {
-            return 4;
-        } else {
-            return 1;
-        }
     }
 
     /**
@@ -293,6 +283,40 @@ public class GraveStoneHelper {
             }
         } else {
             return new DeathMessageInfo(entity.getCommandSenderName(), shortString, null);
+        }
+    }
+
+    // TODO
+    public static void fillSwordsList() {
+//        Iterator iter = Item.itemRegistry.iterator();
+//        while (iter.hasNext()) {
+//            if (((Item) iter.next()) instanceof ItemSword) {
+//                swordsList.add(((Item) iter.next()));
+//            }
+//        }
+    }
+
+    public static void addSwordInfo(NBTTagCompound nbt, ItemStack sword) {
+        NBTTagCompound swordNBT = new NBTTagCompound();
+        sword.writeToNBT(swordNBT);
+        nbt.setTag("Sword", swordNBT);
+    }
+
+    public static ItemStack getSwordAsGrave(Item grave, ItemStack sword) {
+        ItemStack graveStoneStack = new ItemStack(grave, 1, 0);
+        NBTTagCompound nbt = new NBTTagCompound();
+        nbt.setByte("GraveType", (byte) EnumGraves.SWORD.ordinal());
+        GraveStoneHelper.addSwordInfo(nbt, sword);
+
+        graveStoneStack.setTagCompound(nbt);
+        return graveStoneStack;
+    }
+
+    public static Item getRandomSwordForGeneration(byte graveType, Random random) {
+        if (graveType == EnumGraves.SWORD.ordinal()) {
+            return GENERATED_SWORD_GRAVES[random.nextInt(GENERATED_SWORD_GRAVES.length)];
+        } else {
+            return null;
         }
     }
 }

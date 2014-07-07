@@ -2,11 +2,12 @@ package gravestone.renderer.tileentity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumGraves;
 import gravestone.models.block.ModelGraveStone;
 import gravestone.models.block.graves.*;
 import gravestone.tileentity.TileEntityGSGraveStone;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
@@ -42,11 +43,13 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
             meta = tileEntity.getBlockMetadata();
         }
 
-        bindTextureByName(graveType.getTexture());
+        if (graveType != EnumGraves.SWORD) {
+            bindTextureByName(graveType.getTexture());
+        }
         //texture
         GL11.glPushMatrix();
 
-        if (tileEntity.getWorldObj() == null && GraveStoneHelper.isSwordGrave(tileEntity)) {
+        if (tileEntity.getWorldObj() == null && tileEntity.isSwordGrave()) {
             GL11.glTranslatef((float) x + 0.5F, (float) y + 2, (float) z + 0.5F);
             GL11.glScalef(1.5F, -1.5F, -1.5F);
         } else {
@@ -69,8 +72,8 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
                 break;
         }
 
-        if (GraveStoneHelper.isSwordGrave(tileEntity) && tileEntity.isEnchanted()) {
-            graveType.getModel().customRender();
+        if (tileEntity.isSwordGrave()) {
+            renderSword(tileEntity);
         } else {
             graveType.getModel().renderAll();
         }
@@ -94,5 +97,15 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
             default:
                 return 2;
         }
+    }
+
+    private void renderSword(TileEntityGSGraveStone te) {
+        EntityItem entityitem = new EntityItem(te.getWorldObj(), 0, 0, 0, te.getSword());
+        entityitem.hoverStart = 0;
+        GL11.glTranslatef(0.24F, 0.83F, 0);
+        GL11.glScalef(1.5F, -1.5F, -1.5F);
+        GL11.glRotatef(135, 0, 0, 1);
+
+        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
     }
 }

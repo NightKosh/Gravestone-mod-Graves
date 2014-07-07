@@ -41,10 +41,10 @@ public class GSCompatibility {
 //            GSCompatibilityBiomesOPlenty.addBiomes();
 //        }
 
-        if (Loader.isModLoaded("ExtrabiomesXL")) {
-            GSCompatibilityExtraBiomesXL.isInstalled = true;
-            GSCompatibilityExtraBiomesXL.addBiomes();
-        }
+//        if (Loader.isModLoaded("ExtrabiomesXL")) {
+//            GSCompatibilityExtraBiomesXL.isInstalled = true;
+//            GSCompatibilityExtraBiomesXL.addBiomes();
+//        }
 
         if (Loader.isModLoaded("battlegear2")) {
             GSCompatibilityBattlegear.isInstalled = true;
@@ -64,6 +64,7 @@ public class GSCompatibility {
 
         if (Loader.isModLoaded("Thaumcraft")) {
             GSCompatibilityThaumcraft.addAspects();
+            GSCompatibilityThaumcraft.addSwords();
             GSReciepes.addSkullCandleReciepes(ItemApi.getBlock("blockCandle", 0));
         }
 

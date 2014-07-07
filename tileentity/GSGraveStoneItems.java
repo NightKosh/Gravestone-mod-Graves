@@ -1,8 +1,7 @@
 package gravestone.tileentity;
 
-import gravestone.block.GraveStoneHelper;
+import gravestone.block.enums.EnumGraves;
 import gravestone.config.GraveStoneConfig;
-import gravestone.item.ItemBlockGSGraveStone;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.item.EntityItem;
@@ -202,7 +201,7 @@ public class GSGraveStoneItems {
                 int graveType = random.nextInt(40);
 
                 if (allLoot) {
-                    if (tileEntity.swordType != 0 && graveType > 5) {
+                    if (tileEntity.isSwordGrave() && graveType > 5) {
                         fillWarriorGrave(random, true);
                     } else if (graveType < 4) {
                         fillAdventureGrave(random);
@@ -320,11 +319,10 @@ public class GSGraveStoneItems {
      * @param sword
      * @param swordDamage
      */
+    // TODO
     private void changeGraveTypeToSword(Item sword, int swordDamage) {
-        byte swordGraveType = ItemBlockGSGraveStone.swordIdtoSwordGraveType(sword);
-        tileEntity.setGraveType(GraveStoneHelper.swordGraveTypeToGraveType(swordGraveType));
-        tileEntity.setSword(swordGraveType);
-        tileEntity.setDamage(swordDamage);
+        tileEntity.setGraveType((byte) EnumGraves.SWORD.ordinal());
+        tileEntity.setSword(new ItemStack(sword, 1, swordDamage));
     }
 
     /**

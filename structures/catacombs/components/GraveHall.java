@@ -7,6 +7,7 @@ import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.GraveGenerationHelper;
 import gravestone.structures.MobSpawnHelper;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -138,50 +139,51 @@ public class GraveHall extends CatacombsBaseComponent {
 
         // graves
         byte graveType = GraveStoneHelper.getGraveType(random, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES);
+        Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
         int metaLeft = GraveStoneHelper.getMetaDirection(getLeftItemDirection(coordBaseMode));
         int metaRight = GraveStoneHelper.getMetaDirection(getRightItemDirection(coordBaseMode));
         int metaTop = GraveStoneHelper.getMetaDirection(coordBaseMode);
         int metaBot = GraveStoneHelper.getMetaDirection(getInvertDirection(coordBaseMode));
 
         // left wall
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 2, metaLeft, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 5, metaLeft, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 8, metaLeft, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 10, metaLeft, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 13, metaLeft, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 16, metaLeft, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 2, metaLeft, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 5, metaLeft, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 8, metaLeft, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 10, metaLeft, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 13, metaLeft, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 16, metaLeft, graveType, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 2, metaLeft, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 5, metaLeft, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 8, metaLeft, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 10, metaLeft, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 13, metaLeft, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 16, metaLeft, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 2, metaLeft, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 5, metaLeft, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 8, metaLeft, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 10, metaLeft, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 13, metaLeft, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 16, metaLeft, graveType, sword, true);
 
         // right wall
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 2, metaRight, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 5, metaRight, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 8, metaRight, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 10, metaRight, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 13, metaRight, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 16, metaRight, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 2, metaRight, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 5, metaRight, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 8, metaRight, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 10, metaRight, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 13, metaRight, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 16, metaRight, graveType, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 2, metaRight, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 5, metaRight, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 8, metaRight, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 10, metaRight, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 13, metaRight, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 16, metaRight, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 2, metaRight, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 5, metaRight, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 8, metaRight, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 10, metaRight, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 13, metaRight, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 16, metaRight, graveType, sword, true);
 
         // top walls
-        GraveGenerationHelper.placeGrave(this, world, random, 3, 1, 17, metaTop, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 13, 1, 17, metaTop, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 3, 4, 17, metaTop, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 13, 4, 17, metaTop, graveType, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 3, 1, 17, metaTop, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 13, 1, 17, metaTop, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 3, 4, 17, metaTop, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 13, 4, 17, metaTop, graveType, sword, true);
 
         // bot walls
-        GraveGenerationHelper.placeGrave(this, world, random, 3, 1, 1, metaBot, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 13, 1, 1, metaBot, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 3, 4, 1, metaBot, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 13, 4, 1, metaBot, graveType, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 3, 1, 1, metaBot, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 13, 1, 1, metaBot, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 3, 4, 1, metaBot, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 13, 4, 1, metaBot, graveType, sword, true);
 
         // trap floor
         this.fillWithBlocks(world, boundingBox, 7, 0, 6, 9, 0, 6, GSBlock.trap, GSBlock.trap, false);

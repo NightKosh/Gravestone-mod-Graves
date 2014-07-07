@@ -1,10 +1,12 @@
 package gravestone.core.compatibility;
 
 import gravestone.GraveStoneLogger;
+import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
 import gravestone.core.GSEntity;
 import gravestone.core.GSItem;
 import net.minecraft.item.ItemStack;
+import thaumcraft.api.ItemApi;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -94,4 +96,8 @@ public class GSCompatibilityThaumcraft {
         }
     }
 
+    public static void addSwords() {
+        GraveStoneHelper.swordsList.add(ItemApi.getItem("itemSwordThaumium", 0).getItem());
+        GraveStoneHelper.swordsList.add(ItemApi.getItem("itemSwordElemental", 0).getItem());
+    }
 }

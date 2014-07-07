@@ -7,8 +7,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.*;
 import gravestone.core.commands.GSCommands;
@@ -16,10 +14,6 @@ import gravestone.core.compatibility.GSCompatibility;
 import gravestone.core.event.GSEventsHook;
 import gravestone.core.localization.GraveStoneLocalizationHandler;
 import gravestone.core.proxy.CommonProxy;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 
 /**
@@ -35,7 +29,6 @@ public class ModGraveStone {
     public static ModGraveStone instance;
     @SidedProxy(clientSide = "gravestone.core.proxy.ClientProxy", serverSide = "gravestone.core.proxy.CommonProxy")
     public static CommonProxy proxy;
-    // creative tab
 
     public ModGraveStone() {
         instance = this;

@@ -6,6 +6,7 @@ import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.GraveGenerationHelper;
 import gravestone.structures.MobSpawnHelper;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -70,10 +71,11 @@ public class Bridge extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 10, 9, 7, 11, 10, 7, false, random, getCemeteryCatacombsStones());
         // graves
         byte graveType = GraveStoneHelper.getGraveType(random, EnumGraveType.PLAYER_GRAVES);
+        Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
         int metaLeft = GraveStoneHelper.getMetaDirection(getLeftItemDirection(coordBaseMode));
         int metaRight = GraveStoneHelper.getMetaDirection(getRightItemDirection(coordBaseMode));
-        GraveGenerationHelper.fillGraves(this, world, random, 1, 9, 1, 1, 9, 6, metaLeft, graveType, true);
-        GraveGenerationHelper.fillGraves(this, world, random, 11, 9, 1, 11, 9, 6, metaRight, graveType, true);
+        GraveGenerationHelper.fillGraves(this, world, random, 1, 9, 1, 1, 9, 6, metaLeft, graveType, sword, true);
+        GraveGenerationHelper.fillGraves(this, world, random, 11, 9, 1, 11, 9, 6, metaRight, graveType, sword, true);
         // lava
         this.fillWithBlocks(world, boundingBox, 3, 1, 1, 9, 2, 6, Blocks.lava, Blocks.lava, false);
         // bridge

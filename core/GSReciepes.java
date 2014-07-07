@@ -86,7 +86,7 @@ public class GSReciepes {
         ItemStack stack = new ItemStack(block, 1, 0);
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setByte("GraveType", graveType);
-        nbt.setByte("SwordType", GraveStoneHelper.graveTypeToSwordType(graveType));
+        nbt.setByte("SwordType", GraveStoneHelper.oldGraveTypeToSwordType(graveType));
         stack.setTagCompound(nbt);
         return stack;
     }

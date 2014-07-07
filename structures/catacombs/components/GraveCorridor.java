@@ -8,6 +8,7 @@ import gravestone.structures.GraveGenerationHelper;
 import gravestone.structures.MobSpawnHelper;
 import gravestone.structures.ObjectsGenerationHelper;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -68,10 +69,11 @@ public class GraveCorridor extends CatacombsBaseComponent {
 
         // graves
         byte graveType = GraveStoneHelper.getGraveType(random, EnumGraveType.ALL_GRAVES);
+        Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
         int metaLeft = GraveStoneHelper.getMetaDirection(getLeftItemDirection(coordBaseMode));
         int metaRight = GraveStoneHelper.getMetaDirection(getRightItemDirection(coordBaseMode));
-        GraveGenerationHelper.fillGraves(this, world, random, 1, 1, 1, 1, 1, 3, metaLeft, graveType, true);
-        GraveGenerationHelper.fillGraves(this, world, random, 5, 1, 1, 5, 1, 3, metaRight, graveType, true);
+        GraveGenerationHelper.fillGraves(this, world, random, 1, 1, 1, 1, 1, 3, metaLeft, graveType, sword, true);
+        GraveGenerationHelper.fillGraves(this, world, random, 5, 1, 1, 5, 1, 3, metaRight, graveType, sword, true);
 
         // chest
         if (random.nextInt(5) < 2) {

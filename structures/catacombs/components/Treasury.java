@@ -7,6 +7,7 @@ import gravestone.structures.GraveGenerationHelper;
 import gravestone.structures.ObjectsGenerationHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -71,14 +72,15 @@ public class Treasury extends CatacombsBaseComponent {
 
         // graves
         byte graveType = GraveStoneHelper.getGraveType(random, BlockGSGraveStone.EnumGraveType.ALL_GRAVES);
+        Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
         int metaLeft = GraveStoneHelper.getMetaDirection(getLeftItemDirection(coordBaseMode));
         int metaRight = GraveStoneHelper.getMetaDirection(getRightItemDirection(coordBaseMode));
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 2, metaLeft, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 4, metaLeft, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 6, metaLeft, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 2, metaRight, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 4, metaRight, graveType, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 6, metaRight, graveType, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 2, metaLeft, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 4, metaLeft, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 6, metaLeft, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 2, metaRight, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 4, metaRight, graveType, sword, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 6, metaRight, graveType, sword, true);
 
         // TNT
         this.fillWithBlocks(world, boundingBox, 0, 0, 3, 1, 0, 3, Blocks.tnt, Blocks.tnt, false);

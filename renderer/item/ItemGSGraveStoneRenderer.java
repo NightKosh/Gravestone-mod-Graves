@@ -2,7 +2,6 @@ package gravestone.renderer.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.block.GraveStoneHelper;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
@@ -36,9 +35,8 @@ public class ItemGSGraveStoneRenderer implements IItemRenderer {
 
         if (item.stackTagCompound != null) {
             te.setGraveType(item.stackTagCompound.getByte("GraveType"));
-            if (GraveStoneHelper.isSwordGrave(item.stackTagCompound.getByte("GraveType"))) {
-                te.setSword(item.stackTagCompound.getByte("SwordType"));
-                te.setEnchantment(item.stackTagCompound.getCompoundTag("SwordNBT"));
+            if (item.stackTagCompound.hasKey("Sword")) {
+                te.setSword(ItemStack.loadItemStackFromNBT(item.getTagCompound().getCompoundTag("Sword")));
             }
         }
 

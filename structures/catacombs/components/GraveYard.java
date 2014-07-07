@@ -4,6 +4,7 @@ import gravestone.block.BlockGSGraveStone;
 import gravestone.block.GraveStoneHelper;
 import gravestone.structures.GraveGenerationHelper;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
@@ -45,7 +46,9 @@ public class GraveYard extends CatacombsBaseComponent {
                     y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
 
                     if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
-                        GraveGenerationHelper.placeGrave(this, world, random, x, y, z, graveMeta, GraveStoneHelper.getGraveType(random, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES), false);
+                        byte graveType = GraveStoneHelper.getGraveType(random, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES);
+                        Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
+                        GraveGenerationHelper.placeGrave(this, world, random, x, y, z, graveMeta, graveType, sword, false);
                     }
                 }
             }

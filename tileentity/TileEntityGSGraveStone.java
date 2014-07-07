@@ -1,14 +1,12 @@
 package gravestone.tileentity;
 
+import gravestone.GraveStoneLogger;
 import gravestone.block.enums.EnumGraves;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
 
 /**
  * GraveStone mod
@@ -19,11 +17,7 @@ import java.util.ArrayList;
 public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
     protected GSGraveStoneSpawn gsSpawn;
-    protected byte swordType = 0;
-    protected int swordDamage = 0;
-    protected String swordName = "";
-    protected ArrayList<NBTBase> swordEnchantment = new ArrayList();
-    protected NBTTagCompound swordNBT = new NBTTagCompound();
+    protected ItemStack sword = null;
 
     public TileEntityGSGraveStone() {
         super();
@@ -80,9 +74,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         }
 
         // sword
-        if (this.graveType > 4 && this.graveType < 10) {
-            readSwordInfo(nbtTag);
-        }
+        readSwordInfo(nbtTag);
     }
 
     /**
@@ -101,123 +93,44 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         nbtTag.setInteger("Age", age);
 
         // sword
-        if (this.swordType != 0) {
-            writeSwordInfo(nbtTag);
-        }
+        writeSwordInfo(nbtTag);
     }
 
     private void readSwordInfo(NBTTagCompound nbtTag) {
-        swordType = nbtTag.getByte("SwordType");
-        swordDamage = nbtTag.getInteger("SwordDamage");
-        swordName = nbtTag.getString("SwordName");
-        swordNBT = nbtTag.getCompoundTag("SwordNBT");
+        // TODO temporary compatibility with old versions - must be removed in feature
+        if (this.graveType > 4 && this.graveType < 10 || nbtTag.hasKey("SwordGrave")) {
+            convertSword(nbtTag);
+        } else if (nbtTag.hasKey("Sword")) {
+            sword = ItemStack.loadItemStackFromNBT(nbtTag.getCompoundTag("Sword"));
+        }
     }
 
     private void writeSwordInfo(NBTTagCompound nbtTag) {
-        nbtTag.setByte("SwordType", swordType);
-        nbtTag.setInteger("SwordDamage", swordDamage);
-        nbtTag.setString("SwordName", swordName);
-        nbtTag.setTag("SwordNBT", swordNBT);
+        if (sword != null) {
+            NBTTagCompound swordNBT = new NBTTagCompound();
+            sword.writeToNBT(swordNBT);
+            nbtTag.setTag("Sword", swordNBT);
+        }
     }
 
     /*
-     * Get sword type
+     * Get sword
      */
-    public byte getSword() {
-        return this.swordType;
+    public ItemStack getSword() {
+        return this.sword;
     }
 
-    /*
-     * Set sword damage
-     */
-    public int getDamage() {
-        return this.swordDamage;
-    }
-
-    /*
-     * Set sword name
-     */
-    public String getSwordName() {
-        return this.swordName;
-    }
-
-    /*
-     * Set sword enchantment
-     */
-    public NBTTagCompound getEnchantment() {
-        return this.swordNBT;
-    }
-
-    /*
-     * Set sword type
-     */
-    public void setSword(byte swordType) {
-        this.swordType = swordType;
-    }
-
-    /*
-     * Set sword damage
-     */
-    public void setDamage(int swordDamage) {
-        this.swordDamage = swordDamage;
-    }
-
-    /*
-     * Set sword name
-     */
-    public void setSwordName(String swordName) {
-        this.swordName = swordName;
-    }
-
-    /*
-     * Set sword enchantment
-     */
-    public void setEnchantment(NBTTagCompound swordNBT) {
-        this.swordNBT = swordNBT;
-    }
-
-    /**
-     * Check is sword have enchantments
-     */
-    public boolean isEnchanted() {
-        return this.swordNBT != null && this.swordNBT.hasKey("ench");
+    public void setSword(ItemStack sword) {
+        this.sword = sword;
     }
 
     /*
      * Drop sword as item
      */
     public void dropSword() {
-        ItemStack sword = getSwordItem();
-        this.gSItems.dropItem(sword, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
-    }
-
-    /**
-     * Return sword as ItemStack
-     */
-    public ItemStack getSwordItem() {
-        Item item;
-
-        switch (swordType) {
-            case 5:
-                item = Items.diamond_sword;
-                break;
-            case 3:
-                item = Items.iron_sword;
-                break;
-            case 2:
-                item = Items.stone_sword;
-                break;
-            case 4:
-                item = Items.golden_sword;
-                break;
-            default:
-                item = Items.wooden_sword;
+        if (this.sword != null) {
+            this.gSItems.dropItem(this.sword, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
         }
-
-        ItemStack sword = new ItemStack(item, 1, swordDamage);
-        sword.setStackDisplayName(swordName);
-        sword.setTagCompound(swordNBT);
-        return sword;
     }
 
     public EnumGraves getGraveType() {
@@ -226,5 +139,59 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
     public boolean isEmpty() {
         return gSItems.graveContents.isEmpty();
+    }
+
+    public boolean isSwordGrave() {
+        return sword != null;
+    }
+
+    private void convertSword(NBTTagCompound nbtTag) {
+        GraveStoneLogger.logInfo("Start converting sword gravestone!");
+        try {
+            Item sword;
+            byte swordType = nbtTag.getByte("SwordType");
+            if (swordType == 0) {
+                swordType = (byte) (this.graveType - 4);
+            }
+            switch (swordType) {
+                case 5:
+                    sword = Items.diamond_sword;
+                    break;
+                case 3:
+                    sword = Items.iron_sword;
+                    break;
+                case 2:
+                    sword = Items.stone_sword;
+                    break;
+                case 4:
+                    sword = Items.golden_sword;
+                    break;
+                default:
+                    sword = Items.wooden_sword;
+            }
+            GraveStoneLogger.logInfo("Sword type - " + nbtTag.getByte("SwordType") + ". Will be converted to " + sword.getUnlocalizedName());
+
+            int damage = 0;
+            if (nbtTag.hasKey("SwordDamage")) {
+                damage = nbtTag.getInteger("SwordDamage");
+                GraveStoneLogger.logInfo("Sword damage - " + damage);
+            }
+
+            ItemStack stack = new ItemStack(sword, 1, damage);
+
+            if (nbtTag.hasKey("SwordName")) {
+                stack.setStackDisplayName(nbtTag.getString("SwordName"));
+                GraveStoneLogger.logInfo("Sword name - " + nbtTag.getString("SwordName"));
+            }
+
+            if (nbtTag.hasKey("SwordNBT")) {
+                stack.setTagCompound(nbtTag.getCompoundTag("SwordNBT"));
+            }
+            this.sword = stack;
+        } catch (Exception e) {
+            GraveStoneLogger.logError("Something went wrong!!!");
+            e.printStackTrace();
+        }
+        GraveStoneLogger.logInfo("Gravestone converting complete!");
     }
 }

@@ -102,7 +102,8 @@ public enum EnumGraves implements IBlockEnum {
     OBSIDIAN_HORSE_STATUE("block.gravestone.horse_statue", Resources.GRAVE_OBSIDIAN_HORSE_STATUE, TileEntityGSGraveStoneRenderer.horseStatue),
     QUARTZ_HORSE_STATUE("block.gravestone.horse_statue", Resources.GRAVE_QUARTZ_HORSE_STATUE, TileEntityGSGraveStoneRenderer.horseStatue),
     ICE_HORSE_STATUE("block.gravestone.horse_statue", Resources.GRAVE_ICE_HORSE_STATUE, TileEntityGSGraveStoneRenderer.horseStatue),
-    MOSSY_HORSE_STATUE("block.gravestone.horse_statue", Resources.GRAVE_MOSSY_HORSE_STATUE, TileEntityGSGraveStoneRenderer.horseStatue);
+    MOSSY_HORSE_STATUE("block.gravestone.horse_statue", Resources.GRAVE_MOSSY_HORSE_STATUE, TileEntityGSGraveStoneRenderer.horseStatue),
+    SWORD("block.gravestone.sword", null, null);
     private String name;
     private ResourceLocation texture;
     private ModelGraveStone model;

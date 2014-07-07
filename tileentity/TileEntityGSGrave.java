@@ -39,9 +39,7 @@ public abstract class TileEntityGSGrave extends TileEntity {
     }
 
     protected void readType(NBTTagCompound nbtTag) {
-        if (nbtTag.hasKey("GraveType")) {
-            graveType = nbtTag.getByte("GraveType");
-        }
+        graveType = nbtTag.getByte("GraveType");
     }
 
     protected void saveType(NBTTagCompound nbtTag) {
