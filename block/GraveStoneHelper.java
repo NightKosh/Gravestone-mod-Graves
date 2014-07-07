@@ -319,4 +319,8 @@ public class GraveStoneHelper {
             return null;
         }
     }
+
+    public static void addSwordToSwordsList(Item sword) {
+        swordsList.add(sword);
+    }
 }
