@@ -97,7 +97,7 @@ public class ItemBlockGSGraveStone extends ItemBlock {
                     list.add(ModGraveStone.proxy.getLocalizedString("item.grave.sword_damage") + " - " + sword.getItemDamage());
                 }
 
-                if (sword.getTagCompound().hasKey("ench")) {
+                if (sword.getTagCompound() != null && sword.getTagCompound().hasKey("ench")) {
                     NBTTagList enchantments = sword.getTagCompound().getTagList("ench", 10);
 
                     if (enchantments.tagCount() != 0) {
