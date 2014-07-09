@@ -91,13 +91,13 @@ public class GSGraveStoneDeathText {
 
         if (isMemorial) {
             switch (memorialType) {
-                case DOG_STATUE:
+                case STONE_DOG_STATUE:
                     getRandomMemorialContent(random, GraveStoneConfig.graveDogsNames, GraveStoneConfig.dogsMemorialText);
                     break;
-                case CAT_STATUE:
+                case STONE_CAT_STATUE:
                     getRandomMemorialContent(random, GraveStoneConfig.graveCatsNames, GraveStoneConfig.catsMemorialText);
                     break;
-                case CREEPER_STATUE:
+                case STONE_CREEPER_STATUE:
                     deathText = "Sssssssssssssss...";
                 default:
                     getRandomMemorialContent(random, GraveStoneConfig.graveNames, GraveStoneConfig.memorialText);

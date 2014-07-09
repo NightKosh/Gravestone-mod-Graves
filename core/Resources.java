@@ -18,6 +18,7 @@ public class Resources {
     private static final String ENTITY_LOCATION = MOD_NAME + ":textures/entities/";
     private static final String GRAVES_LOCATION = MOD_NAME + ":textures/graves/";
     private static final String MEMORIALS_LOCATION = MOD_NAME + ":textures/memorials/";
+    private static final String PEDESTALS_LOCATION = MOD_NAME + ":textures/memorials/pedestal/";
     // localization path
     public static final String LOCALIZATION_LOCATION = "/assets/" + MOD_NAME + "/lang/";
     // blocks
@@ -38,7 +39,7 @@ public class Resources {
     public static final String CORPSE_CAT = MOD_NAME + ":cat_corpse";
     public static final String CORPSE_HORSE = MOD_NAME + ":horse_corpse";
     // entities
-    public static final ResourceLocation UNDARTAKER = new ResourceLocation(ENTITY_LOCATION + "undertaker.png");
+    public static final ResourceLocation UNDERTAKER = new ResourceLocation(ENTITY_LOCATION + "undertaker.png");
     public static final ResourceLocation ZOMBIE_DOG = new ResourceLocation(ENTITY_LOCATION + "ZombieDog.png");
     public static final ResourceLocation ZOMBIE_OZELOT = new ResourceLocation(ENTITY_LOCATION + "ZombieOzelot.png");
     public static final ResourceLocation ZOMBIE_CAT_BLACK = new ResourceLocation(ENTITY_LOCATION + "ZombieCatBlack.png");
@@ -141,21 +142,113 @@ public class Resources {
     public static final ResourceLocation GRAVE_IRON_SWORD = new ResourceLocation(GRAVES_LOCATION + "IronSwordGrave.png");
     public static final ResourceLocation GRAVE_GOLDEN_SWORD = new ResourceLocation(GRAVES_LOCATION + "GoldenSwordGrave.png");
     public static final ResourceLocation GRAVE_DIAMOND_SWORD = new ResourceLocation(GRAVES_LOCATION + "DiamondSwordGrave.png");
+
     // models - memorials
     public static final ResourceLocation MEMORIAL_CROSS = new ResourceLocation(MEMORIALS_LOCATION + "ModelMemorialCross.png");
     public static final ResourceLocation MEMORIAL_OBELISK = new ResourceLocation(MEMORIALS_LOCATION + "ModelMemorialObelisk.png");
-    public static final ResourceLocation STEVE_STATUE_MEMORIAL = new ResourceLocation(MEMORIALS_LOCATION + "ModelSteveStatueMemorial.png");
-    public static final ResourceLocation VILLAGER_STATUE_MEMORIAL = new ResourceLocation(MEMORIALS_LOCATION + "ModelVillagerStatueMemorial.png");
-    public static final ResourceLocation ANGEL_STAUTE_MEMORIAL = new ResourceLocation(MEMORIALS_LOCATION + "ModelAngelStatueMemorial.png");
-    public static final ResourceLocation DOG_STATUE_MEMORIAL = new ResourceLocation(MEMORIALS_LOCATION + "ModelDogStatueMemorial.png");
-    public static final ResourceLocation CAT_STAUTE_MEMORIAL = new ResourceLocation(MEMORIALS_LOCATION + "ModelCatStatueMemorial.png");
-    public static final ResourceLocation CREEPER_STATUE_MEMORIAL = new ResourceLocation(MEMORIALS_LOCATION + "ModelCreeperStatueMemorial.png");
+    // steve memorials
+    public static final ResourceLocation MEMORIAL_WOODEN_STEVE_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "WoodenSteveMemorial.png");
+    public static final ResourceLocation MEMORIAL_SANDSTONE_STEVE_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "SandstoneSteveMemorial.png");
+    public static final ResourceLocation MEMORIAL_STONE_STEVE_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "StoneSteveMemorial.png");
+    public static final ResourceLocation MEMORIAL_MOSSY_STEVE_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "MossySteveMemorial.png");
+    public static final ResourceLocation MEMORIAL_IRON_STEVE_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "IronSteveMemorial.png");
+    public static final ResourceLocation MEMORIAL_GOLDEN_STEVE_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "GoldenSteveMemorial.png");
+    public static final ResourceLocation MEMORIAL_DIAMOND_STEVE_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "DiamondSteveMemorial.png");
+    public static final ResourceLocation MEMORIAL_EMERALD_STEVE_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "EmeraldSteveMemorial.png");
+    public static final ResourceLocation MEMORIAL_LAPIS_STEVE_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "LapisSteveMemorial.png");
+    public static final ResourceLocation MEMORIAL_REDSTONE_STEVE_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "RedstoneSteveMemorial.png");
+    public static final ResourceLocation MEMORIAL_OBSIDIAN_STEVE_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "ObsidianSteveMemorial.png");
+    public static final ResourceLocation MEMORIAL_QUARTZ_STEVE_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "QuartzSteveMemorial.png");
+    public static final ResourceLocation MEMORIAL_ICE_STEVE_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "IceSteveMemorial.png");
+    // villagers memorials
+    public static final ResourceLocation MEMORIAL_WOODEN_VILLAGER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "WoodenVillagerMemorial.png");
+    public static final ResourceLocation MEMORIAL_SANDSTONE_VILLAGER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "SandstoneVillagerMemorial.png");
+    public static final ResourceLocation MEMORIAL_STONE_VILLAGER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "StoneVillagerMemorial.png");
+    public static final ResourceLocation MEMORIAL_MOSSY_VILLAGER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "MossyVillagerMemorial.png");
+    public static final ResourceLocation MEMORIAL_IRON_VILLAGER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "IronVillagerMemorial.png");
+    public static final ResourceLocation MEMORIAL_GOLDEN_VILLAGER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "GoldenVillagerMemorial.png");
+    public static final ResourceLocation MEMORIAL_DIAMOND_VILLAGER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "DiamondVillagerMemorial.png");
+    public static final ResourceLocation MEMORIAL_EMERALD_VILLAGER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "EmeraldVillagerMemorial.png");
+    public static final ResourceLocation MEMORIAL_LAPIS_VILLAGER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "LapisVillagerMemorial.png");
+    public static final ResourceLocation MEMORIAL_REDSTONE_VILLAGER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "RedstoneVillagerMemorial.png");
+    public static final ResourceLocation MEMORIAL_OBSIDIAN_VILLAGER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "ObsidianVillagerMemorial.png");
+    public static final ResourceLocation MEMORIAL_QUARTZ_VILLAGER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "QuartzVillagerMemorial.png");
+    public static final ResourceLocation MEMORIAL_ICE_VILLAGER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "IceVillagerMemorial.png");
+    // angels memorials
+    public static final ResourceLocation MEMORIAL_WOODEN_ANGEL_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "WoodenAngelMemorial.png");
+    public static final ResourceLocation MEMORIAL_SANDSTONE_ANGEL_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "SandstoneAngelMemorial.png");
+    public static final ResourceLocation MEMORIAL_STONE_ANGEL_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "StoneAngelMemorial.png");
+    public static final ResourceLocation MEMORIAL_MOSSY_ANGEL_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "MossyAngelMemorial.png");
+    public static final ResourceLocation MEMORIAL_IRON_ANGEL_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "IronAngelMemorial.png");
+    public static final ResourceLocation MEMORIAL_GOLDEN_ANGEL_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "GoldenAngelMemorial.png");
+    public static final ResourceLocation MEMORIAL_DIAMOND_ANGEL_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "DiamondAngelMemorial.png");
+    public static final ResourceLocation MEMORIAL_EMERALD_ANGEL_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "EmeraldAngelMemorial.png");
+    public static final ResourceLocation MEMORIAL_LAPIS_ANGEL_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "LapisAngelMemorial.png");
+    public static final ResourceLocation MEMORIAL_REDSTONE_ANGEL_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "RedstoneAngelMemorial.png");
+    public static final ResourceLocation MEMORIAL_OBSIDIAN_ANGEL_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "ObsidianAngelMemorial.png");
+    public static final ResourceLocation MEMORIAL_QUARTZ_ANGEL_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "QuartzAngelMemorial.png");
+    public static final ResourceLocation MEMORIAL_ICE_ANGEL_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "IceAngelMemorial.png");
+    // dogs memorials
+    public static final ResourceLocation MEMORIAL_WOODEN_DOG_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "WoodenDogMemorial.png");
+    public static final ResourceLocation MEMORIAL_SANDSTONE_DOG_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "SandstoneDogMemorial.png");
+    public static final ResourceLocation MEMORIAL_STONE_DOG_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "StoneDogMemorial.png");
+    public static final ResourceLocation MEMORIAL_MOSSY_DOG_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "MossyDogMemorial.png");
+    public static final ResourceLocation MEMORIAL_IRON_DOG_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "IronDogMemorial.png");
+    public static final ResourceLocation MEMORIAL_GOLDEN_DOG_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "GoldenDogMemorial.png");
+    public static final ResourceLocation MEMORIAL_DIAMOND_DOG_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "DiamondDogMemorial.png");
+    public static final ResourceLocation MEMORIAL_EMERALD_DOG_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "EmeraldDogMemorial.png");
+    public static final ResourceLocation MEMORIAL_LAPIS_DOG_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "LapisDogMemorial.png");
+    public static final ResourceLocation MEMORIAL_REDSTONE_DOG_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "RedstoneDogMemorial.png");
+    public static final ResourceLocation MEMORIAL_OBSIDIAN_DOG_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "ObsidianDogMemorial.png");
+    public static final ResourceLocation MEMORIAL_QUARTZ_DOG_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "QuartzDogMemorial.png");
+    public static final ResourceLocation MEMORIAL_ICE_DOG_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "IceDogMemorial.png");
+    // cats memorials
+    public static final ResourceLocation MEMORIAL_WOODEN_CAT_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "WoodenCatMemorial.png");
+    public static final ResourceLocation MEMORIAL_SANDSTONE_CAT_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "SandstoneCatMemorial.png");
+    public static final ResourceLocation MEMORIAL_STONE_CAT_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "StoneCatMemorial.png");
+    public static final ResourceLocation MEMORIAL_MOSSY_CAT_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "MossyCatMemorial.png");
+    public static final ResourceLocation MEMORIAL_IRON_CAT_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "IronCatMemorial.png");
+    public static final ResourceLocation MEMORIAL_GOLDEN_CAT_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "GoldenCatMemorial.png");
+    public static final ResourceLocation MEMORIAL_DIAMOND_CAT_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "DiamondCatMemorial.png");
+    public static final ResourceLocation MEMORIAL_EMERALD_CAT_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "EmeraldCatMemorial.png");
+    public static final ResourceLocation MEMORIAL_LAPIS_CAT_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "LapisCatMemorial.png");
+    public static final ResourceLocation MEMORIAL_REDSTONE_CAT_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "RedstoneCatMemorial.png");
+    public static final ResourceLocation MEMORIAL_OBSIDIAN_CAT_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "ObsidianCatMemorial.png");
+    public static final ResourceLocation MEMORIAL_QUARTZ_CAT_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "QuartzCatMemorial.png");
+    public static final ResourceLocation MEMORIAL_ICE_CAT_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "IceCatMemorial.png");
+    // creepers memorials
+    public static final ResourceLocation MEMORIAL_WOODEN_CREEPER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "WoodenCreeperMemorial.png");
+    public static final ResourceLocation MEMORIAL_SANDSTONE_CREEPER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "SandstoneCreeperMemorial.png");
+    public static final ResourceLocation MEMORIAL_STONE_CREEPER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "StoneCreeperMemorial.png");
+    public static final ResourceLocation MEMORIAL_MOSSY_CREEPER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "MossyCreeperMemorial.png");
+    public static final ResourceLocation MEMORIAL_IRON_CREEPER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "IronCreeperMemorial.png");
+    public static final ResourceLocation MEMORIAL_GOLDEN_CREEPER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "GoldenCreeperMemorial.png");
+    public static final ResourceLocation MEMORIAL_DIAMOND_CREEPER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "DiamondCreeperMemorial.png");
+    public static final ResourceLocation MEMORIAL_EMERALD_CREEPER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "EmeraldCreeperMemorial.png");
+    public static final ResourceLocation MEMORIAL_LAPIS_CREEPER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "LapisCreeperMemorial.png");
+    public static final ResourceLocation MEMORIAL_REDSTONE_CREEPER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "RedstoneCreeperMemorial.png");
+    public static final ResourceLocation MEMORIAL_OBSIDIAN_CREEPER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "ObsidianCreeperMemorial.png");
+    public static final ResourceLocation MEMORIAL_QUARTZ_CREEPER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "QuartzCreeperMemorial.png");
+    public static final ResourceLocation MEMORIAL_ICE_CREEPER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "IceCreeperMemorial.png");
     // models - parts
     public static final ResourceLocation CREEPER_AURA = new ResourceLocation("textures/entity/creeper/creeper_armor.png");
     public static final ResourceLocation SWORD_AURA = new ResourceLocation("textures/misc/enchanted_item_glint.png");
-    public static final ResourceLocation SMALL_PEDESTAL = new ResourceLocation(MEMORIALS_LOCATION + "ModelSmallPedestal.png");
-    public static final ResourceLocation BIG_PEDESTAL = new ResourceLocation(MEMORIALS_LOCATION + "ModelBigPedestal.png");
     public static final ResourceLocation STEVE_ARMOR = new ResourceLocation(MEMORIALS_LOCATION + "ModelSteveStatueMemorialArmor.png");
+    public static final ResourceLocation SMALL_PEDESTAL = new ResourceLocation(MEMORIALS_LOCATION + "ModelSmallPedestal.png");
+    // pedestals
+    public static final ResourceLocation MEMORIAL_WOODEN_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "WoodenBigPedestal.png");
+    public static final ResourceLocation MEMORIAL_SANDSTONE_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "SandstoneBigPedestal.png");
+    public static final ResourceLocation MEMORIAL_STONE_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "StoneBigPedestal.png");
+    public static final ResourceLocation MEMORIAL_MOSSY_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "MossyBigPedestal.png");
+    public static final ResourceLocation MEMORIAL_IRON_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "IronBigPedestal.png");
+    public static final ResourceLocation MEMORIAL_GOLDEN_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "GoldenBigPedestal.png");
+    public static final ResourceLocation MEMORIAL_DIAMOND_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "DiamondBigPedestal.png");
+    public static final ResourceLocation MEMORIAL_EMERALD_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "EmeraldBigPedestal.png");
+    public static final ResourceLocation MEMORIAL_LAPIS_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "LapisBigPedestal.png");
+    public static final ResourceLocation MEMORIAL_REDSTONE_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "RedstoneBigPedestal.png");
+    public static final ResourceLocation MEMORIAL_OBSIDIAN_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "ObsidianBigPedestal.png");
+    public static final ResourceLocation MEMORIAL_QUARTZ_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "QuartzBigPedestal.png");
+    public static final ResourceLocation MEMORIAL_ICE_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "IceBigPedestal.png");
     
     // haunted chest
     public static final ResourceLocation CHRISTMAS_CHEST = new ResourceLocation("textures/entity/chest/christmas.png");

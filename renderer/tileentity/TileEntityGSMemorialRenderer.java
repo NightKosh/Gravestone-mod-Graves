@@ -1,21 +1,12 @@
 package gravestone.renderer.tileentity;
 
-import gravestone.core.Resources;
-import gravestone.models.block.memorials.ModelAngelStatueMemorial;
-import gravestone.models.block.memorials.ModelCatStatueMemorial;
-import gravestone.models.block.memorials.ModelCreeperStatueMemorial;
-import gravestone.models.block.memorials.ModelDogStatueMemorial;
-import gravestone.models.block.ModelGraveStone;
-import gravestone.models.block.memorials.ModelMemorialCross;
-import gravestone.models.block.memorials.ModelMemorialObelisk;
-import gravestone.models.block.memorials.ModelSteveStatueMemorial;
-import gravestone.models.block.memorials.ModelVillagerMemorial;
-import gravestone.tileentity.TileEntityGSMemorial;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gravestone.block.enums.EnumMemorials;
+import gravestone.models.block.ModelMemorial;
+import gravestone.models.block.memorials.*;
+import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.client.model.AdvancedModelLoader;
-import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -27,18 +18,18 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
 
-    protected static ModelGraveStone cross = new ModelMemorialCross();
-    protected static ModelGraveStone obelisk = new ModelMemorialObelisk();
-    protected static ModelGraveStone steveStatue = new ModelSteveStatueMemorial();
-    protected static ModelGraveStone villagerStatue = new ModelVillagerMemorial();
-    protected static ModelGraveStone angelStatue = new ModelAngelStatueMemorial();
-    protected static ModelGraveStone dogStatue = new ModelDogStatueMemorial();
-    protected static ModelGraveStone catStatue = new ModelCatStatueMemorial();
-    protected static ModelCreeperStatueMemorial creeperStatue = new ModelCreeperStatueMemorial();
-    
-    private static IModelCustom celticCross;// = AdvancedModelLoader.loadModel("/assets/gravestone/obj_models/CelticCross.obj");
+    public static ModelMemorial cross = new ModelMemorialCross();
+    public static ModelMemorial obelisk = new ModelMemorialObelisk();
+    public static ModelMemorial steveStatue = new ModelSteveStatueMemorial();
+    public static ModelMemorial villagerStatue = new ModelVillagerMemorial();
+    public static ModelMemorial angelStatue = new ModelAngelStatueMemorial();
+    public static ModelMemorial dogStatue = new ModelDogStatueMemorial();
+    public static ModelMemorial catStatue = new ModelCatStatueMemorial();
+    public static ModelMemorial creeperStatue = new ModelCreeperStatueMemorial();
+
+    //private static IModelCustom celticCross = AdvancedModelLoader.loadModel("/assets/gravestone/obj_models/CelticCross.obj");
     //private ResourceLocation casinoTexture = new ResourceLocation("modid", "textures/casinoTexture.png");
-    
+
     public static TileEntityGSMemorialRenderer instance;
 
     public TileEntityGSMemorialRenderer() {
@@ -48,7 +39,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f) {
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) te;
-        byte memorialType = tileEntity.getGraveTypeNum();
+        EnumMemorials memorialType = tileEntity.getMemorialType();
         int meta;
 
         if (tileEntity.getWorldObj() != null) {
@@ -57,7 +48,8 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
             meta = 0;
         }
 
-        getMemorialTexture(memorialType);
+        bindTextureByName(memorialType.getTexture());
+
         //texture
         GL11.glPushMatrix();
 
@@ -65,7 +57,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
             GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
             GL11.glScalef(1F, -1F, -1F);
         } else {
-            if (memorialType == 0 || memorialType == 1) {
+            if (memorialType == EnumMemorials.STONE_CROSS || memorialType == EnumMemorials.OBELISK) {
                 GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
                 GL11.glScalef(0.4F, -0.4F, -0.4F);
             } else {
@@ -91,67 +83,19 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
                 GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
                 break;
         }
-        
-        if (memorialType == 9) {
-            celticCross.renderAll();
-        } else if (memorialType == 7 || memorialType == 2) {
-            getMemorialModel(memorialType).customRender();
+//
+//        if (memorialType == 9) {
+//            celticCross.renderAll();
+//        } else
+
+        memorialType.getModel().setPedestalTexture(memorialType.getPedestalTexture());
+        if (memorialType == EnumMemorials.STONE_CREEPER_STATUE || memorialType == EnumMemorials.STONE_STEVE_STATUE) {
+            memorialType.getModel().customRender();
         } else {
-            getMemorialModel(memorialType).renderAll();
+            memorialType.getModel().renderAll();
         }
 
         GL11.glPopMatrix();
-    }
-
-    private ModelGraveStone getMemorialModel(int memorialType) {
-        switch (memorialType) {
-            case 1:
-                return obelisk;
-            case 2:
-                return steveStatue;
-            case 3:
-                return villagerStatue;
-            case 4:
-                return angelStatue;
-            case 5:
-                return dogStatue;
-            case 6:
-                return catStatue;
-            case 7:
-                return creeperStatue;
-            case 0:
-            default:
-                return cross;
-        }
-    }
-
-    private void getMemorialTexture(int memorialType) {
-        switch (memorialType) {
-            case 0: // MEMORIAL_CROSS
-                bindTextureByName(Resources.MEMORIAL_CROSS);
-                break;
-            case 1: // MEMORIAL_OBELISK
-                bindTextureByName(Resources.MEMORIAL_OBELISK);
-                break;
-            case 2: // STEVE_STATUE_MEMORIAL
-                bindTextureByName(Resources.STEVE_STATUE_MEMORIAL);
-                break;
-            case 3: // VILLAGER_STATUE_MEMORIAL
-                bindTextureByName(Resources.VILLAGER_STATUE_MEMORIAL);
-                break;
-            case 4: // ANGEL_STAUTE_MEMORIAL
-                bindTextureByName(Resources.ANGEL_STAUTE_MEMORIAL);
-                break;
-            case 5: // DOG_STATUE_MEMORIAL
-                bindTextureByName(Resources.DOG_STATUE_MEMORIAL);
-                break;
-            case 6: // CAT_STAUTE_MEMORIAL
-                bindTextureByName(Resources.CAT_STAUTE_MEMORIAL);
-                break;
-            case 7: // CREEPER_STATUE_MEMORIAL
-                bindTextureByName(Resources.CREEPER_STATUE_MEMORIAL);
-                break;
-        }
     }
 
     /**

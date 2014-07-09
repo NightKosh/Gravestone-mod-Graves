@@ -1,12 +1,13 @@
 package gravestone.models.block.memorials;
 
-import gravestone.core.Resources;
-import gravestone.renderer.tileentity.TileEntityGSMemorialRenderer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.models.block.ModelGraveStone;
+import gravestone.core.Resources;
+import gravestone.models.block.ModelMemorial;
+import gravestone.renderer.tileentity.TileEntityGSMemorialRenderer;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -16,7 +17,7 @@ import org.lwjgl.opengl.GL11;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
-public class ModelSteveStatueMemorial extends ModelGraveStone {
+public class ModelSteveStatueMemorial extends ModelMemorial {
 
     public ModelRenderer bipedHead;
     public ModelRenderer bipedBody;
@@ -133,5 +134,10 @@ public class ModelSteveStatueMemorial extends ModelGraveStone {
         GL11.glScalef(scale, scale, scale);
         TileEntityGSMemorialRenderer.instance.bindTextureByName(Resources.STEVE_ARMOR);
         renderSteve();
+    }
+
+    @Override
+    public void setPedestalTexture(ResourceLocation texture) {
+        pedestal.setTexture(texture);
     }
 }

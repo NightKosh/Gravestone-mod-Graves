@@ -2,7 +2,7 @@ package gravestone.models.block.memorials;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.models.block.ModelGraveStone;
+import gravestone.models.block.ModelMemorial;
 import net.minecraft.client.model.ModelRenderer;
 
 /**
@@ -12,7 +12,7 @@ import net.minecraft.client.model.ModelRenderer;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
-public class ModelMemorialObelisk extends ModelGraveStone {
+public class ModelMemorialObelisk extends ModelMemorial {
 
     ModelRenderer Plate1;
     ModelRenderer Plate2;

@@ -85,7 +85,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerVillagers() {
-        VillagerRegistry.instance().registerVillagerSkin(385, Resources.UNDARTAKER);
+        VillagerRegistry.instance().registerVillagerSkin(385, Resources.UNDERTAKER);
     }
 
     @Override

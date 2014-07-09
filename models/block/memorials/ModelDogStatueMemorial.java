@@ -3,7 +3,9 @@ package gravestone.models.block.memorials;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.models.block.ModelGraveStone;
+import gravestone.models.block.ModelMemorial;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -13,7 +15,7 @@ import org.lwjgl.opengl.GL11;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
-public class ModelDogStatueMemorial extends ModelGraveStone {
+public class ModelDogStatueMemorial extends ModelMemorial {
 
     private ModelRenderer wolfHeadMain;
     private ModelRenderer wolfBody;
@@ -23,7 +25,7 @@ public class ModelDogStatueMemorial extends ModelGraveStone {
     private ModelRenderer wolfLeg4;
     private ModelRenderer wolfMane;
     private ModelRenderer wolfTail;
-    
+
     private ModelBigPedestal pedestal;
 
     public ModelDogStatueMemorial() {
@@ -100,5 +102,10 @@ public class ModelDogStatueMemorial extends ModelGraveStone {
         this.wolfMane.render(par7);
         this.wolfTail.render(par7);
         pedestal.renderAll();
+    }
+
+    @Override
+    public void setPedestalTexture(ResourceLocation texture) {
+        pedestal.setTexture(texture);
     }
 }

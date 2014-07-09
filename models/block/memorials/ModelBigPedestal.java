@@ -8,7 +8,7 @@ import gravestone.core.Resources;
 import gravestone.models.block.ModelGraveStone;
 import gravestone.renderer.tileentity.TileEntityGSMemorialRenderer;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -25,6 +25,8 @@ public class ModelBigPedestal extends ModelGraveStone {
     protected ModelRenderer Pedestal4;
     protected ModelRenderer Pedestal5;
     protected ModelRenderer Sign;
+
+    protected ResourceLocation texture = null;
 
     public ModelBigPedestal() {
         textureWidth = 64;
@@ -72,13 +74,17 @@ public class ModelBigPedestal extends ModelGraveStone {
     public void renderAll() {
         unshiftModel();
         float f5 = 0.0625F;
-        TileEntityGSMemorialRenderer.instance.bindTextureByName(Resources.BIG_PEDESTAL);
+        TileEntityGSMemorialRenderer.instance.bindTextureByName(this.texture);
         Pedestal1.render(f5);
         Pedestal2.render(f5);
         Pedestal3.render(f5);
         Pedestal4.render(f5);
         Pedestal5.render(f5);
         Sign.render(f5);
+    }
+
+    public void setTexture(ResourceLocation texture) {
+        this.texture = texture;
     }
 
     public static void shiftModel() {

@@ -2,9 +2,9 @@ package gravestone.models.block.memorials;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.models.block.ModelGraveStone;
+import gravestone.models.block.ModelMemorial;
 import net.minecraft.client.model.ModelRenderer;
-import org.lwjgl.opengl.GL11;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * GraveStone mod
@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
-public class ModelCatStatueMemorial extends ModelGraveStone {
+public class ModelCatStatueMemorial extends ModelMemorial {
 
     private ModelRenderer ocelotBackLeftLeg;
     private ModelRenderer ocelotBackRightLeg;
@@ -23,7 +23,7 @@ public class ModelCatStatueMemorial extends ModelGraveStone {
     private ModelRenderer ocelotBody;
     private ModelRenderer ocelotTail;
     private ModelRenderer ocelotTail2;
-    
+
     private ModelBigPedestal pedestal;
 
     public ModelCatStatueMemorial() {
@@ -106,5 +106,10 @@ public class ModelCatStatueMemorial extends ModelGraveStone {
         this.ocelotTail.render(par7);
         this.ocelotTail2.render(par7);
         pedestal.renderAll();
+    }
+
+    @Override
+    public void setPedestalTexture(ResourceLocation texture) {
+        pedestal.setTexture(texture);
     }
 }

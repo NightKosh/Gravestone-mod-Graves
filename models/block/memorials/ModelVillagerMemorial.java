@@ -2,9 +2,10 @@ package gravestone.models.block.memorials;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.models.block.ModelGraveStone;
+import gravestone.models.block.ModelMemorial;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * GraveStone mod
@@ -13,7 +14,7 @@ import net.minecraft.util.MathHelper;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
-public class ModelVillagerMemorial extends ModelGraveStone {
+public class ModelVillagerMemorial extends ModelMemorial {
 
     public ModelRenderer villagerHead;
     public ModelRenderer villagerBody;
@@ -85,5 +86,10 @@ public class ModelVillagerMemorial extends ModelGraveStone {
         this.leftVillagerLeg.render(par7);
         this.villagerArms.render(par7);
         pedestal.renderAll();
+    }
+
+    @Override
+    public void setPedestalTexture(ResourceLocation texture) {
+        pedestal.setTexture(texture);
     }
 }

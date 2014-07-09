@@ -2,8 +2,9 @@ package gravestone.models.block.memorials;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.models.block.ModelGraveStone;
+import gravestone.models.block.ModelMemorial;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * GraveStone mod
@@ -12,7 +13,7 @@ import net.minecraft.client.model.ModelRenderer;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
-public class ModelAngelStatueMemorial extends ModelGraveStone {
+public class ModelAngelStatueMemorial extends ModelMemorial {
 
     private ModelRenderer Legs;
     private ModelRenderer Body;
@@ -115,5 +116,10 @@ public class ModelAngelStatueMemorial extends ModelGraveStone {
         LeftWing.render(par7);
         LeftWing2.render(par7);
         pedestal.renderAll();
+    }
+
+    @Override
+    public void setPedestalTexture(ResourceLocation texture) {
+        pedestal.setTexture(texture);
     }
 }

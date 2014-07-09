@@ -34,26 +34,114 @@ import java.util.Random;
  */
 public class BlockGSMemorial extends BlockContainer {
 
+    public static final byte[] TAB_MEMORIALS = {
+            (byte) EnumMemorials.STONE_CROSS.ordinal(),
+            (byte) EnumMemorials.OBELISK.ordinal(),
+            // steve memorials
+            (byte) EnumMemorials.WOODEN_STEVE_STATUE.ordinal(),
+            (byte) EnumMemorials.SANDSTONE_STEVE_STATUE.ordinal(),
+            (byte) EnumMemorials.STONE_STEVE_STATUE.ordinal(),
+            (byte) EnumMemorials.MOSSY_STEVE_STATUE.ordinal(),
+            (byte) EnumMemorials.IRON_STEVE_STATUE.ordinal(),
+            (byte) EnumMemorials.GOLDEN_STEVE_STATUE.ordinal(),
+            (byte) EnumMemorials.DIAMOND_STEVE_STATUE.ordinal(),
+            (byte) EnumMemorials.EMERALD_STEVE_STATUE.ordinal(),
+            (byte) EnumMemorials.LAPIS_STEVE_STATUE.ordinal(),
+            (byte) EnumMemorials.REDSTONE_STEVE_STATUE.ordinal(),
+            (byte) EnumMemorials.OBSIDIAN_STEVE_STATUE.ordinal(),
+            (byte) EnumMemorials.QUARTZ_STEVE_STATUE.ordinal(),
+            (byte) EnumMemorials.ICE_STEVE_STATUE.ordinal(),
+            // villager memorials
+            (byte) EnumMemorials.WOODEN_VILLAGER_STATUE.ordinal(),
+            (byte) EnumMemorials.SANDSTONE_VILLAGER_STATUE.ordinal(),
+            (byte) EnumMemorials.STONE_VILLAGER_STATUE.ordinal(),
+            (byte) EnumMemorials.MOSSY_VILLAGER_STATUE.ordinal(),
+            (byte) EnumMemorials.IRON_VILLAGER_STATUE.ordinal(),
+            (byte) EnumMemorials.GOLDEN_VILLAGER_STATUE.ordinal(),
+            (byte) EnumMemorials.DIAMOND_VILLAGER_STATUE.ordinal(),
+            (byte) EnumMemorials.EMERALD_VILLAGER_STATUE.ordinal(),
+            (byte) EnumMemorials.LAPIS_VILLAGER_STATUE.ordinal(),
+            (byte) EnumMemorials.REDSTONE_VILLAGER_STATUE.ordinal(),
+            (byte) EnumMemorials.OBSIDIAN_VILLAGER_STATUE.ordinal(),
+            (byte) EnumMemorials.QUARTZ_VILLAGER_STATUE.ordinal(),
+            (byte) EnumMemorials.ICE_VILLAGER_STATUE.ordinal(),
+            // angel memorials
+            (byte) EnumMemorials.WOODEN_ANGEL_STATUE.ordinal(),
+            (byte) EnumMemorials.SANDSTONE_ANGEL_STATUE.ordinal(),
+            (byte) EnumMemorials.STONE_ANGEL_STATUE.ordinal(),
+            (byte) EnumMemorials.MOSSY_ANGEL_STATUE.ordinal(),
+            (byte) EnumMemorials.IRON_ANGEL_STATUE.ordinal(),
+            (byte) EnumMemorials.GOLDEN_ANGEL_STATUE.ordinal(),
+            (byte) EnumMemorials.DIAMOND_ANGEL_STATUE.ordinal(),
+            (byte) EnumMemorials.EMERALD_ANGEL_STATUE.ordinal(),
+            (byte) EnumMemorials.LAPIS_ANGEL_STATUE.ordinal(),
+            (byte) EnumMemorials.REDSTONE_ANGEL_STATUE.ordinal(),
+            (byte) EnumMemorials.OBSIDIAN_ANGEL_STATUE.ordinal(),
+            (byte) EnumMemorials.QUARTZ_ANGEL_STATUE.ordinal(),
+            (byte) EnumMemorials.ICE_ANGEL_STATUE.ordinal(),
+            // dog memorials
+            (byte) EnumMemorials.WOODEN_DOG_STATUE.ordinal(),
+            (byte) EnumMemorials.SANDSTONE_DOG_STATUE.ordinal(),
+            (byte) EnumMemorials.STONE_DOG_STATUE.ordinal(),
+            (byte) EnumMemorials.MOSSY_DOG_STATUE.ordinal(),
+            (byte) EnumMemorials.IRON_DOG_STATUE.ordinal(),
+            (byte) EnumMemorials.GOLDEN_DOG_STATUE.ordinal(),
+            (byte) EnumMemorials.DIAMOND_DOG_STATUE.ordinal(),
+            (byte) EnumMemorials.EMERALD_DOG_STATUE.ordinal(),
+            (byte) EnumMemorials.LAPIS_DOG_STATUE.ordinal(),
+            (byte) EnumMemorials.REDSTONE_DOG_STATUE.ordinal(),
+            (byte) EnumMemorials.OBSIDIAN_DOG_STATUE.ordinal(),
+            (byte) EnumMemorials.QUARTZ_DOG_STATUE.ordinal(),
+            (byte) EnumMemorials.ICE_DOG_STATUE.ordinal(),
+            // cat memorials
+            (byte) EnumMemorials.WOODEN_CAT_STATUE.ordinal(),
+            (byte) EnumMemorials.SANDSTONE_CAT_STATUE.ordinal(),
+            (byte) EnumMemorials.STONE_CAT_STATUE.ordinal(),
+            (byte) EnumMemorials.MOSSY_CAT_STATUE.ordinal(),
+            (byte) EnumMemorials.IRON_CAT_STATUE.ordinal(),
+            (byte) EnumMemorials.GOLDEN_CAT_STATUE.ordinal(),
+            (byte) EnumMemorials.DIAMOND_CAT_STATUE.ordinal(),
+            (byte) EnumMemorials.EMERALD_CAT_STATUE.ordinal(),
+            (byte) EnumMemorials.LAPIS_CAT_STATUE.ordinal(),
+            (byte) EnumMemorials.REDSTONE_CAT_STATUE.ordinal(),
+            (byte) EnumMemorials.OBSIDIAN_CAT_STATUE.ordinal(),
+            (byte) EnumMemorials.QUARTZ_CAT_STATUE.ordinal(),
+            (byte) EnumMemorials.ICE_CAT_STATUE.ordinal(),
+            // creeper memorials
+            (byte) EnumMemorials.WOODEN_CREEPER_STATUE.ordinal(),
+            (byte) EnumMemorials.SANDSTONE_CREEPER_STATUE.ordinal(),
+            (byte) EnumMemorials.STONE_CREEPER_STATUE.ordinal(),
+            (byte) EnumMemorials.MOSSY_CREEPER_STATUE.ordinal(),
+            (byte) EnumMemorials.IRON_CREEPER_STATUE.ordinal(),
+            (byte) EnumMemorials.GOLDEN_CREEPER_STATUE.ordinal(),
+            (byte) EnumMemorials.DIAMOND_CREEPER_STATUE.ordinal(),
+            (byte) EnumMemorials.EMERALD_CREEPER_STATUE.ordinal(),
+            (byte) EnumMemorials.LAPIS_CREEPER_STATUE.ordinal(),
+            (byte) EnumMemorials.REDSTONE_CREEPER_STATUE.ordinal(),
+            (byte) EnumMemorials.OBSIDIAN_CREEPER_STATUE.ordinal(),
+            (byte) EnumMemorials.QUARTZ_CREEPER_STATUE.ordinal(),
+            (byte) EnumMemorials.ICE_CREEPER_STATUE.ordinal()
+    };
     public static final byte[] GENERATED_MEMORIALS = {
             (byte) EnumMemorials.STONE_CROSS.ordinal(),
             (byte) EnumMemorials.OBELISK.ordinal(),
-            (byte) EnumMemorials.STEVE_STATUE.ordinal(),
-            (byte) EnumMemorials.VILLAGER_STATUE.ordinal(),
-            (byte) EnumMemorials.ANGEL_STATUE.ordinal(),
-            (byte) EnumMemorials.DOG_STATUE.ordinal(),
-            (byte) EnumMemorials.CAT_STATUE.ordinal()
+            (byte) EnumMemorials.STONE_STEVE_STATUE.ordinal(),
+            (byte) EnumMemorials.STONE_VILLAGER_STATUE.ordinal(),
+            (byte) EnumMemorials.STONE_ANGEL_STATUE.ordinal(),
+            (byte) EnumMemorials.STONE_DOG_STATUE.ordinal(),
+            (byte) EnumMemorials.STONE_CAT_STATUE.ordinal()
     };
     public static final byte[] PETS_MEMORIALS = {
-            (byte) EnumMemorials.DOG_STATUE.ordinal(),
-            (byte) EnumMemorials.CAT_STATUE.ordinal()
+            (byte) EnumMemorials.STONE_DOG_STATUE.ordinal(),
+            (byte) EnumMemorials.STONE_CAT_STATUE.ordinal()
     };
-    public static final byte[] DOG_MEMORIALS = {(byte) EnumMemorials.DOG_STATUE.ordinal()};
-    public static final byte[] CAT_MEMORIALS = {(byte) EnumMemorials.CAT_STATUE.ordinal()};
-    public static final byte[] CREEPER_MEMORIALS = {(byte) EnumMemorials.CREEPER_STATUE.ordinal()};
+    public static final byte[] DOG_MEMORIALS = {(byte) EnumMemorials.STONE_DOG_STATUE.ordinal()};
+    public static final byte[] CAT_MEMORIALS = {(byte) EnumMemorials.STONE_CAT_STATUE.ordinal()};
+    public static final byte[] CREEPER_MEMORIALS = {(byte) EnumMemorials.STONE_CREEPER_STATUE.ordinal()};
     public static final byte[] STATUES_MEMORIALS = {
-            (byte) EnumMemorials.STEVE_STATUE.ordinal(),
-            (byte) EnumMemorials.VILLAGER_STATUE.ordinal(),
-            (byte) EnumMemorials.ANGEL_STATUE.ordinal()
+            (byte) EnumMemorials.STONE_STEVE_STATUE.ordinal(),
+            (byte) EnumMemorials.STONE_VILLAGER_STATUE.ordinal(),
+            (byte) EnumMemorials.STONE_ANGEL_STATUE.ordinal()
     };
 
     public BlockGSMemorial() {
@@ -181,16 +269,40 @@ public class BlockGSMemorial extends BlockContainer {
             case OBELISK:
                 this.setBlockBounds(-1, 0, -1, 2, 5, 2);
                 break;
-            case STEVE_STATUE:
-            case VILLAGER_STATUE:
-            case ANGEL_STATUE:
+            case STONE_STEVE_STATUE:
+            case STONE_VILLAGER_STATUE:
+            case STONE_ANGEL_STATUE:
                 this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 3F, 0.875F);
                 break;
-            case DOG_STATUE:
-            case CAT_STATUE:
+            case WOODEN_DOG_STATUE:
+            case WOODEN_CAT_STATUE:
+            case SANDSTONE_DOG_STATUE:
+            case SANDSTONE_CAT_STATUE:
+            case STONE_DOG_STATUE:
+            case STONE_CAT_STATUE:
+            case MOSSY_DOG_STATUE:
+            case MOSSY_CAT_STATUE:
+            case IRON_DOG_STATUE:
+            case IRON_CAT_STATUE:
+            case GOLDEN_DOG_STATUE:
+            case GOLDEN_CAT_STATUE:
+            case DIAMOND_DOG_STATUE:
+            case DIAMOND_CAT_STATUE:
+            case EMERALD_DOG_STATUE:
+            case EMERALD_CAT_STATUE:
+            case LAPIS_DOG_STATUE:
+            case LAPIS_CAT_STATUE:
+            case REDSTONE_DOG_STATUE:
+            case REDSTONE_CAT_STATUE:
+            case OBSIDIAN_DOG_STATUE:
+            case OBSIDIAN_CAT_STATUE:
+            case QUARTZ_DOG_STATUE:
+            case QUARTZ_CAT_STATUE:
+            case ICE_DOG_STATUE:
+            case ICE_CAT_STATUE:
                 this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 2, 0.875F);
                 break;
-            case CREEPER_STATUE:
+            case STONE_CREEPER_STATUE:
                 this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 2.5F, 0.875F);
                 break;
         }
@@ -310,10 +422,10 @@ public class BlockGSMemorial extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item item, CreativeTabs tab, List list) {
-        for (byte j = 0; j < EnumMemorials.values().length; j++) {
+        for (byte i = 0; i < TAB_MEMORIALS.length; i++) {
             ItemStack stack = new ItemStack(item, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("GraveType", j);
+            nbt.setByte("GraveType", TAB_MEMORIALS[i]);
             stack.setTagCompound(nbt);
             list.add(stack);
         }
