@@ -269,7 +269,19 @@ public class BlockGSMemorial extends BlockContainer {
             case OBELISK:
                 this.setBlockBounds(-1, 0, -1, 2, 5, 2);
                 break;
+            case WOODEN_STEVE_STATUE:
+            case SANDSTONE_STEVE_STATUE:
             case STONE_STEVE_STATUE:
+            case MOSSY_STEVE_STATUE:
+            case IRON_STEVE_STATUE:
+            case GOLDEN_STEVE_STATUE:
+            case DIAMOND_STEVE_STATUE:
+            case EMERALD_STEVE_STATUE:
+            case LAPIS_STEVE_STATUE:
+            case REDSTONE_STEVE_STATUE:
+            case OBSIDIAN_STEVE_STATUE:
+            case QUARTZ_STEVE_STATUE:
+            case ICE_STEVE_STATUE:
             case STONE_VILLAGER_STATUE:
             case STONE_ANGEL_STATUE:
                 this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 3F, 0.875F);
@@ -302,7 +314,19 @@ public class BlockGSMemorial extends BlockContainer {
             case ICE_CAT_STATUE:
                 this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 2, 0.875F);
                 break;
+            case WOODEN_CREEPER_STATUE:
+            case SANDSTONE_CREEPER_STATUE:
             case STONE_CREEPER_STATUE:
+            case MOSSY_CREEPER_STATUE:
+            case IRON_CREEPER_STATUE:
+            case GOLDEN_CREEPER_STATUE:
+            case DIAMOND_CREEPER_STATUE:
+            case EMERALD_CREEPER_STATUE:
+            case LAPIS_CREEPER_STATUE:
+            case REDSTONE_CREEPER_STATUE:
+            case OBSIDIAN_CREEPER_STATUE:
+            case QUARTZ_CREEPER_STATUE:
+            case ICE_CREEPER_STATUE:
                 this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 2.5F, 0.875F);
                 break;
         }

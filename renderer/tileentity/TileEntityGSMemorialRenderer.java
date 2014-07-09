@@ -89,10 +89,38 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
 //        } else
 
         memorialType.getModel().setPedestalTexture(memorialType.getPedestalTexture());
-        if (memorialType == EnumMemorials.STONE_CREEPER_STATUE || memorialType == EnumMemorials.STONE_STEVE_STATUE) {
-            memorialType.getModel().customRender();
-        } else {
-            memorialType.getModel().renderAll();
+        switch (memorialType) {
+            case WOODEN_CREEPER_STATUE:
+            case SANDSTONE_CREEPER_STATUE:
+            case STONE_CREEPER_STATUE:
+            case MOSSY_CREEPER_STATUE:
+            case IRON_CREEPER_STATUE:
+            case GOLDEN_CREEPER_STATUE:
+            case DIAMOND_CREEPER_STATUE:
+            case EMERALD_CREEPER_STATUE:
+            case LAPIS_CREEPER_STATUE:
+            case REDSTONE_CREEPER_STATUE:
+            case OBSIDIAN_CREEPER_STATUE:
+            case QUARTZ_CREEPER_STATUE:
+            case ICE_CREEPER_STATUE:
+
+            case WOODEN_STEVE_STATUE:
+            case SANDSTONE_STEVE_STATUE:
+            case STONE_STEVE_STATUE:
+            case MOSSY_STEVE_STATUE:
+            case IRON_STEVE_STATUE:
+            case GOLDEN_STEVE_STATUE:
+            case DIAMOND_STEVE_STATUE:
+            case EMERALD_STEVE_STATUE:
+            case LAPIS_STEVE_STATUE:
+            case REDSTONE_STEVE_STATUE:
+            case OBSIDIAN_STEVE_STATUE:
+            case QUARTZ_STEVE_STATUE:
+            case ICE_STEVE_STATUE:
+                memorialType.getModel().customRender();
+                break;
+            default:
+                memorialType.getModel().renderAll();
         }
 
         GL11.glPopMatrix();
