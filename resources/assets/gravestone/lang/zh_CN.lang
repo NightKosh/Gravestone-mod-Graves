@@ -25,7 +25,7 @@ block.memorial.angel_statue=天使纪念碑
 block.memorial.dog_statue=狗纪念碑
 block.memorial.cat_statue=猫纪念碑
 block.memorial.creeper_statue=爬行者纪念碑
-block.memorial.celtic_cross=Celtic cross
+block.memorial.celtic_cross=凯尔特十字架
 
 ## trap
 tile.trap.night.name=午夜石
@@ -39,23 +39,23 @@ block.spawner.zombie=僵尸刷怪笼
 
 # bone blocks
 tile.bone_block.name=骨质方块
-tile.bone_block.skull_name=Bone block with skull
-tile.bone_block.crawler_name=Skull crawler's bone block 
-tile.bone_block.crawler_skull_name=Skull crawler's bone block with skull
+tile.bone_block.skull_name=颅骨骨质方块
+tile.bone_block.crawler_name=骨质方块(有爬行头颅)
+tile.bone_block.crawler_skull_name=颅骨骨质方块(有爬行头颅)
 tile.bone_slab.name=骨质台阶
 tile.bone_stairs.name=骨质阶梯
 
 ## chests
 block.haunted_chest.bats_chest=带着蝙蝠的箱子
 block.haunted_chest.skeleton_chest=带着骷髅的箱子
-block.haunted_chest.raven_chest=Chest with ravens
+block.haunted_chest.raven_chest=带着乌鸦的箱子
 block.haunted_chest.ghost_chest=带着鬼魂的箱子
 
 ##candles
-tile.candle.name=Candle
-block.skull_candle.skeleton.name=Skull candle
-block.skull_candle.wither_skeleton.name=Wither skull candle
-block.skull_candle.zombie.name=Zombie skull candle
+tile.candle.name=蜡烛
+block.skull_candle.skeleton.name=骷髅头颅蜡烛
+block.skull_candle.wither_skeleton.name=凋灵头颅蜡烛
+block.skull_candle.zombie.name=僵尸头颅蜡烛
 
 
 # items
@@ -69,23 +69,23 @@ item.grave.sword_name=剑的名字
 item.grave.sword_damage=剑的耐久值
 
 ## corpse
-item.corpse.villager=Villager corpse
-item.corpse.horse=Horse corpse
-item.corpse.dog=Dog corpse
-item.corpse.cat=Cat corpse
+item.corpse.villager=村民的尸体
+item.corpse.horse=马的尸体
+item.corpse.dog=狗的尸体
+item.corpse.cat=猫的尸体
 item.corpse.entity_name=名称
 item.corpse.villager_type=职业
 item.corpse.villager_type.farmer=农民
 item.corpse.villager_type.librarian=图书管理员
-item.corpse.villager_type.priest=Priest
-item.corpse.villager_type.smith=Smith
-item.corpse.villager_type.butcher=Butcher
-item.corpse.villager_type.undertacker=Undertacker
-item.corpse.villager_type.brewer=Brewer
-item.corpse.villager_type.thaumaturge=Thaumaturge
-item.corpse.villager_type.beekeeper=Beekeeper
-item.corpse.villager_type.lumberjack=Lumberjack
-item.corpse.villager_type.Unknown=unknown
+item.corpse.villager_type.priest=牧师
+item.corpse.villager_type.smith=铁匠
+item.corpse.villager_type.butcher=屠夫
+item.corpse.villager_type.undertacker=送葬者
+item.corpse.villager_type.brewer=酿造师
+item.corpse.villager_type.thaumaturge=魔术师
+item.corpse.villager_type.beekeeper=养蜂人
+item.corpse.villager_type.lumberjack=伐木工
+item.corpse.villager_type.Unknown=不明
 item.corpse.horse_type=马种
 item.corpse.horse_type.horse=普通马
 item.corpse.horse_type.donkey=驴
@@ -93,34 +93,34 @@ item.corpse.horse_type.mule=骡子
 item.corpse.horse_type.zombie=僵尸马
 item.corpse.horse_type.skeleton=骷髅马
 item.corpse.horse_type.unknown=不明
-item.corpse.horse_variant=Horse variant
-item.corpse.health=Max health
-item.corpse.speed=Speed
-item.corpse.jump_strength=Jump strength
-item.corpse.collar=Collar
-item.corpse.collar.white=White
-item.corpse.collar.orange=Orange
-item.corpse.collar.purple=Purple
-item.corpse.collar.azure=Azure
-item.corpse.collar.yellow=Yellow
-item.corpse.collar.lime=Lime
-item.corpse.collar.pink=Pink
-item.corpse.collar.grey=Grey
-item.corpse.collar.light_grey=Light grey
-item.corpse.collar.turquoise=Turquoise
-item.corpse.collar.violet=Violet
-item.corpse.collar.blue=Blue
-item.corpse.collar.brown=Brown
-item.corpse.collar.green=Green
-item.corpse.collar.red=Red
-item.corpse.collar.black=Black
-item.corpse.collar.unknown=Unknown
-item.corpse.dog_type=Dog type
-item.corpse.cat_type=Cat type
-item.corpse.cat_type.black=Black
-item.corpse.cat_type.red=Red
-item.corpse.cat_type.siamese=Siamese
-item.corpse.cat_type.unknown=Unknown
+item.corpse.horse_variant=变种马
+item.corpse.health=最大生命
+item.corpse.speed=速度
+item.corpse.jump_strength=跳跃高度
+item.corpse.collar=颈圈
+item.corpse.collar.white=白色
+item.corpse.collar.orange=橙色
+item.corpse.collar.purple=紫色
+item.corpse.collar.azure=淡蓝色
+item.corpse.collar.yellow=黄色
+item.corpse.collar.lime=黄绿色
+item.corpse.collar.pink=粉红色
+item.corpse.collar.grey=灰色
+item.corpse.collar.light_grey=浅灰色
+item.corpse.collar.turquoise=青色
+item.corpse.collar.violet=品红色
+item.corpse.collar.blue=蓝色
+item.corpse.collar.brown=棕色
+item.corpse.collar.green=绿色
+item.corpse.collar.red=红色
+item.corpse.collar.black=黑色
+item.corpse.collar.unknown=不明
+item.corpse.dog_type=狗种
+item.corpse.cat_type=猫种
+item.corpse.cat_type.black=黑色
+item.corpse.cat_type.red=红色
+item.corpse.cat_type.siamese=暹罗
+item.corpse.cat_type.unknown=不明
 
 
 # gui
@@ -132,10 +132,10 @@ entity.GSZombieDog.name=僵尸狗
 entity.GSSkeletonDog.name=骷髅狗
 entity.GSZombieCat.name=僵尸猫
 entity.GSSkeletonCat.name=骷髅猫
-entity.GSSkullCrawler.name=Skull Crawler
-entity.GSWitherSkullCrawler.name=Wither Skull Crawler
-entity.GSZombieSkullCrawler.name=Zombie Skull Crawler
-entity.GSRaven.name=Raven
+entity.GSSkullCrawler.name=爬行骷髅头颅
+entity.GSWitherSkullCrawler.name=爬行凋灵头颅
+entity.GSZombieSkullCrawler.name=爬行僵尸头颅
+entity.GSRaven.name=乌鸦
 
 
 # death messages
