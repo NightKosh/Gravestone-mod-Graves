@@ -62,7 +62,7 @@ public class BlockGSMemorial extends BlockContainer {
 //            (byte) EnumMemorials.OBSIDIAN_OBELISK.ordinal(),
             (byte) EnumMemorials.QUARTZ_OBELISK.ordinal(),
 //            (byte) EnumMemorials.ICE_OBELISK.ordinal(),
-            // steve memorials
+            // ANGEL memorials
             (byte) EnumMemorials.WOODEN_STEVE_STATUE.ordinal(),
             (byte) EnumMemorials.SANDSTONE_STEVE_STATUE.ordinal(),
             (byte) EnumMemorials.STONE_STEVE_STATUE.ordinal(),
@@ -331,8 +331,34 @@ public class BlockGSMemorial extends BlockContainer {
             case OBSIDIAN_STEVE_STATUE:
             case QUARTZ_STEVE_STATUE:
             case ICE_STEVE_STATUE:
+                // villager
+            case WOODEN_VILLAGER_STATUE:
+            case SANDSTONE_VILLAGER_STATUE:
             case STONE_VILLAGER_STATUE:
+            case MOSSY_VILLAGER_STATUE:
+            case IRON_VILLAGER_STATUE:
+            case GOLDEN_VILLAGER_STATUE:
+            case DIAMOND_VILLAGER_STATUE:
+            case EMERALD_VILLAGER_STATUE:
+            case LAPIS_VILLAGER_STATUE:
+            case REDSTONE_VILLAGER_STATUE:
+            case OBSIDIAN_VILLAGER_STATUE:
+            case QUARTZ_VILLAGER_STATUE:
+            case ICE_VILLAGER_STATUE:
+                //angel
+            case WOODEN_ANGEL_STATUE:
+            case SANDSTONE_ANGEL_STATUE:
             case STONE_ANGEL_STATUE:
+            case MOSSY_ANGEL_STATUE:
+            case IRON_ANGEL_STATUE:
+            case GOLDEN_ANGEL_STATUE:
+            case DIAMOND_ANGEL_STATUE:
+            case EMERALD_ANGEL_STATUE:
+            case LAPIS_ANGEL_STATUE:
+            case REDSTONE_ANGEL_STATUE:
+            case OBSIDIAN_ANGEL_STATUE:
+            case QUARTZ_ANGEL_STATUE:
+            case ICE_ANGEL_STATUE:
                 this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 3F, 0.875F);
                 break;
             case WOODEN_DOG_STATUE:
