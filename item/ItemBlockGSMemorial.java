@@ -117,7 +117,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
 
             switch (memorialType) {
                 case STONE_CROSS:
-                case OBELISK:
+                case QUARTZ_OBELISK:
                     maxY = 5;
                     maxX = 2;
                     maxZ = 2;

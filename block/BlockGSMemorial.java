@@ -35,8 +35,33 @@ import java.util.Random;
 public class BlockGSMemorial extends BlockContainer {
 
     public static final byte[] TAB_MEMORIALS = {
+            (byte) EnumMemorials.WOODEN_CROSS.ordinal(),
+            (byte) EnumMemorials.SANDSTONE_CROSS.ordinal(),
             (byte) EnumMemorials.STONE_CROSS.ordinal(),
-            (byte) EnumMemorials.OBELISK.ordinal(),
+            (byte) EnumMemorials.MOSSY_CROSS.ordinal(),
+            (byte) EnumMemorials.IRON_CROSS.ordinal(),
+            (byte) EnumMemorials.GOLDEN_CROSS.ordinal(),
+            (byte) EnumMemorials.DIAMOND_CROSS.ordinal(),
+            (byte) EnumMemorials.EMERALD_CROSS.ordinal(),
+            (byte) EnumMemorials.LAPIS_CROSS.ordinal(),
+            (byte) EnumMemorials.REDSTONE_CROSS.ordinal(),
+            (byte) EnumMemorials.OBSIDIAN_CROSS.ordinal(),
+            (byte) EnumMemorials.QUARTZ_CROSS.ordinal(),
+            (byte) EnumMemorials.ICE_CROSS.ordinal(),
+            // obelisks
+//            (byte) EnumMemorials.WOODEN_OBELISK.ordinal(),
+//            (byte) EnumMemorials.SANDSTONE_OBELISK.ordinal(),
+//            (byte) EnumMemorials.STONE_OBELISK.ordinal(),
+//            (byte) EnumMemorials.MOSSY_OBELISK.ordinal(),
+//            (byte) EnumMemorials.IRON_OBELISK.ordinal(),
+//            (byte) EnumMemorials.GOLDEN_OBELISK.ordinal(),
+//            (byte) EnumMemorials.DIAMOND_OBELISK.ordinal(),
+//            (byte) EnumMemorials.EMERALD_OBELISK.ordinal(),
+//            (byte) EnumMemorials.LAPIS_OBELISK.ordinal(),
+//            (byte) EnumMemorials.REDSTONE_OBELISK.ordinal(),
+//            (byte) EnumMemorials.OBSIDIAN_OBELISK.ordinal(),
+            (byte) EnumMemorials.QUARTZ_OBELISK.ordinal(),
+//            (byte) EnumMemorials.ICE_OBELISK.ordinal(),
             // steve memorials
             (byte) EnumMemorials.WOODEN_STEVE_STATUE.ordinal(),
             (byte) EnumMemorials.SANDSTONE_STEVE_STATUE.ordinal(),
@@ -124,7 +149,7 @@ public class BlockGSMemorial extends BlockContainer {
     };
     public static final byte[] GENERATED_MEMORIALS = {
             (byte) EnumMemorials.STONE_CROSS.ordinal(),
-            (byte) EnumMemorials.OBELISK.ordinal(),
+            (byte) EnumMemorials.QUARTZ_OBELISK.ordinal(),
             (byte) EnumMemorials.STONE_STEVE_STATUE.ordinal(),
             (byte) EnumMemorials.STONE_VILLAGER_STATUE.ordinal(),
             (byte) EnumMemorials.STONE_ANGEL_STATUE.ordinal(),
@@ -265,8 +290,32 @@ public class BlockGSMemorial extends BlockContainer {
         }
 
         switch (memorialType) {
+            case WOODEN_CROSS:
+            case SANDSTONE_CROSS:
             case STONE_CROSS:
-            case OBELISK:
+            case MOSSY_CROSS:
+            case IRON_CROSS:
+            case GOLDEN_CROSS:
+            case DIAMOND_CROSS:
+            case EMERALD_CROSS:
+            case LAPIS_CROSS:
+            case REDSTONE_CROSS:
+            case OBSIDIAN_CROSS:
+            case QUARTZ_CROSS:
+            case ICE_CROSS:
+            case WOODEN_OBELISK:
+            case SANDSTONE_OBELISK:
+            case STONE_OBELISK:
+            case MOSSY_OBELISK:
+            case IRON_OBELISK:
+            case GOLDEN_OBELISK:
+            case DIAMOND_OBELISK:
+            case EMERALD_OBELISK:
+            case LAPIS_OBELISK:
+            case REDSTONE_OBELISK:
+            case OBSIDIAN_OBELISK:
+            case QUARTZ_OBELISK:
+            case ICE_OBELISK:
                 this.setBlockBounds(-1, 0, -1, 2, 5, 2);
                 break;
             case WOODEN_STEVE_STATUE:

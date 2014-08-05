@@ -57,12 +57,40 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
             GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
             GL11.glScalef(1F, -1F, -1F);
         } else {
-            if (memorialType == EnumMemorials.STONE_CROSS || memorialType == EnumMemorials.OBELISK) {
-                GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
-                GL11.glScalef(0.4F, -0.4F, -0.4F);
-            } else {
-                GL11.glTranslatef((float) x + 0.5F, (float) y + 0.8F, (float) z + 0.5F);
-                GL11.glScalef(0.7F, -0.7F, -0.7F);
+            switch (memorialType) {
+                case WOODEN_CROSS:
+                case SANDSTONE_CROSS:
+                case STONE_CROSS:
+                case MOSSY_CROSS:
+                case IRON_CROSS:
+                case GOLDEN_CROSS:
+                case DIAMOND_CROSS:
+                case EMERALD_CROSS:
+                case LAPIS_CROSS:
+                case REDSTONE_CROSS:
+                case OBSIDIAN_CROSS:
+                case QUARTZ_CROSS:
+                case ICE_CROSS:
+                case WOODEN_OBELISK:
+                case SANDSTONE_OBELISK:
+                case STONE_OBELISK:
+                case MOSSY_OBELISK:
+                case IRON_OBELISK:
+                case GOLDEN_OBELISK:
+                case DIAMOND_OBELISK:
+                case EMERALD_OBELISK:
+                case LAPIS_OBELISK:
+                case REDSTONE_OBELISK:
+                case OBSIDIAN_OBELISK:
+                case QUARTZ_OBELISK:
+                case ICE_OBELISK:
+                    GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
+                    GL11.glScalef(0.4F, -0.4F, -0.4F);
+                    break;
+                default:
+                    GL11.glTranslatef((float) x + 0.5F, (float) y + 0.8F, (float) z + 0.5F);
+                    GL11.glScalef(0.7F, -0.7F, -0.7F);
+                    break;
             }
         }
 
@@ -70,15 +98,12 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
             case 0:
                 GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
                 break;
-
             case 1:
                 GL11.glRotatef(90, 0.0F, 1.0F, 0.0F);
                 break;
-
             case 2:
                 GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
                 break;
-
             case 3:
                 GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
                 break;

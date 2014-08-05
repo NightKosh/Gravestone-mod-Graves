@@ -144,8 +144,34 @@ public class Resources {
     public static final ResourceLocation GRAVE_DIAMOND_SWORD = new ResourceLocation(GRAVES_LOCATION + "DiamondSwordGrave.png");
 
     // models - memorials
-    public static final ResourceLocation MEMORIAL_CROSS = new ResourceLocation(MEMORIALS_LOCATION + "ModelMemorialCross.png");
-    public static final ResourceLocation MEMORIAL_OBELISK = new ResourceLocation(MEMORIALS_LOCATION + "ModelMemorialObelisk.png");
+    // cross
+    public static final ResourceLocation MEMORIAL_WOODEN_CROSS = new ResourceLocation(MEMORIALS_LOCATION + "WoodenCrossMemorial.png");
+    public static final ResourceLocation MEMORIAL_SANDSTONE_CROSS = new ResourceLocation(MEMORIALS_LOCATION + "SandstoneCrossMemorial.png");
+    public static final ResourceLocation MEMORIAL_STONE_CROSS = new ResourceLocation(MEMORIALS_LOCATION + "StoneCrossMemorial.png");
+    public static final ResourceLocation MEMORIAL_MOSSY_CROSS = new ResourceLocation(MEMORIALS_LOCATION + "MossyCrossMemorial.png");
+    public static final ResourceLocation MEMORIAL_IRON_CROSS = new ResourceLocation(MEMORIALS_LOCATION + "IronCrossMemorial.png");
+    public static final ResourceLocation MEMORIAL_GOLDEN_CROSS = new ResourceLocation(MEMORIALS_LOCATION + "GoldenCrossMemorial.png");
+    public static final ResourceLocation MEMORIAL_DIAMOND_CROSS = new ResourceLocation(MEMORIALS_LOCATION + "DiamondCrossMemorial.png");
+    public static final ResourceLocation MEMORIAL_EMERALD_CROSS = new ResourceLocation(MEMORIALS_LOCATION + "EmeraldCrossMemorial.png");
+    public static final ResourceLocation MEMORIAL_LAPIS_CROSS = new ResourceLocation(MEMORIALS_LOCATION + "LapisCrossMemorial.png");
+    public static final ResourceLocation MEMORIAL_REDSTONE_CROSS = new ResourceLocation(MEMORIALS_LOCATION + "RedstoneCrossMemorial.png");
+    public static final ResourceLocation MEMORIAL_OBSIDIAN_CROSS = new ResourceLocation(MEMORIALS_LOCATION + "ObsidianCrossMemorial.png");
+    public static final ResourceLocation MEMORIAL_QUARTZ_CROSS = new ResourceLocation(MEMORIALS_LOCATION + "QuartzCrossMemorial.png");
+    public static final ResourceLocation MEMORIAL_ICE_CROSS = new ResourceLocation(MEMORIALS_LOCATION + "IceCrossMemorial.png");
+    // obelisk
+    public static final ResourceLocation MEMORIAL_WOODEN_OBELISK = new ResourceLocation(MEMORIALS_LOCATION + "WoodenObeliskMemorial.png");
+    public static final ResourceLocation MEMORIAL_SANDSTONE_OBELISK = new ResourceLocation(MEMORIALS_LOCATION + "SandstoneObeliskMemorial.png");
+    public static final ResourceLocation MEMORIAL_STONE_OBELISK = new ResourceLocation(MEMORIALS_LOCATION + "StoneObeliskMemorial.png");
+    public static final ResourceLocation MEMORIAL_MOSSY_OBELISK = new ResourceLocation(MEMORIALS_LOCATION + "MossyObeliskMemorial.png");
+    public static final ResourceLocation MEMORIAL_IRON_OBELISK = new ResourceLocation(MEMORIALS_LOCATION + "IronObeliskMemorial.png");
+    public static final ResourceLocation MEMORIAL_GOLDEN_OBELISK = new ResourceLocation(MEMORIALS_LOCATION + "GoldenObeliskMemorial.png");
+    public static final ResourceLocation MEMORIAL_DIAMOND_OBELISK = new ResourceLocation(MEMORIALS_LOCATION + "DiamondObeliskMemorial.png");
+    public static final ResourceLocation MEMORIAL_EMERALD_OBELISK = new ResourceLocation(MEMORIALS_LOCATION + "EmeraldObeliskMemorial.png");
+    public static final ResourceLocation MEMORIAL_LAPIS_OBELISK = new ResourceLocation(MEMORIALS_LOCATION + "LapisObeliskMemorial.png");
+    public static final ResourceLocation MEMORIAL_REDSTONE_OBELISK = new ResourceLocation(MEMORIALS_LOCATION + "RedstoneObeliskMemorial.png");
+    public static final ResourceLocation MEMORIAL_OBSIDIAN_OBELISK = new ResourceLocation(MEMORIALS_LOCATION + "ObsidianObeliskMemorial.png");
+    public static final ResourceLocation MEMORIAL_QUARTZ_OBELISK = new ResourceLocation(MEMORIALS_LOCATION + "QuartzObeliskMemorial.png");
+    public static final ResourceLocation MEMORIAL_ICE_OBELISK = new ResourceLocation(MEMORIALS_LOCATION + "IceObeliskMemorial.png");
     // steve memorials
     public static final ResourceLocation MEMORIAL_WOODEN_STEVE_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "WoodenSteveMemorial.png");
     public static final ResourceLocation MEMORIAL_SANDSTONE_STEVE_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "SandstoneSteveMemorial.png");
