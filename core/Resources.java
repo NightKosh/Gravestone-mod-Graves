@@ -18,6 +18,7 @@ public class Resources {
     private static final String ENTITY_LOCATION = MOD_NAME + ":textures/entities/";
     private static final String GRAVES_LOCATION = MOD_NAME + ":textures/graves/";
     private static final String MEMORIALS_LOCATION = MOD_NAME + ":textures/memorials/";
+    private static final String ARMOR_LOCATION = MOD_NAME + ":textures/memorials/armor/";
     private static final String PEDESTALS_LOCATION = MOD_NAME + ":textures/memorials/pedestal/";
     // localization path
     public static final String LOCALIZATION_LOCATION = "/assets/" + MOD_NAME + "/lang/";
@@ -259,7 +260,20 @@ public class Resources {
     // models - parts
     public static final ResourceLocation CREEPER_AURA = new ResourceLocation("textures/entity/creeper/creeper_armor.png");
     public static final ResourceLocation SWORD_AURA = new ResourceLocation("textures/misc/enchanted_item_glint.png");
-    public static final ResourceLocation STEVE_ARMOR = new ResourceLocation(MEMORIALS_LOCATION + "ModelSteveStatueMemorialArmor.png");
+    // armor
+    public static final ResourceLocation WOODEN_ARMOR = new ResourceLocation(ARMOR_LOCATION + "WoodenArmor.png");
+    public static final ResourceLocation SANDSTONE_ARMOR = new ResourceLocation(ARMOR_LOCATION + "SandstoneArmor.png");
+    public static final ResourceLocation STONE_ARMOR = new ResourceLocation(ARMOR_LOCATION + "StoneArmor.png");
+    public static final ResourceLocation MOSSY_ARMOR = new ResourceLocation(ARMOR_LOCATION + "MossyArmor.png");
+    public static final ResourceLocation IRON_ARMOR = new ResourceLocation(ARMOR_LOCATION + "IronArmor.png");
+    public static final ResourceLocation GOLDEN_ARMOR = new ResourceLocation(ARMOR_LOCATION + "GoldenArmor.png");
+    public static final ResourceLocation DIAMOND_ARMOR = new ResourceLocation(ARMOR_LOCATION + "DiamondArmor.png");
+    public static final ResourceLocation EMERALD_ARMOR = new ResourceLocation(ARMOR_LOCATION + "EmeraldArmor.png");
+    public static final ResourceLocation LAPIS_ARMOR = new ResourceLocation(ARMOR_LOCATION + "LapisArmor.png");
+    public static final ResourceLocation REDSTONE_ARMOR = new ResourceLocation(ARMOR_LOCATION + "RedstoneArmor.png");
+    public static final ResourceLocation OBSIDIAN_ARMOR = new ResourceLocation(ARMOR_LOCATION + "ObsidianArmor.png");
+    public static final ResourceLocation QUARTZ_ARMOR = new ResourceLocation(ARMOR_LOCATION + "QuartzArmor.png");
+    public static final ResourceLocation ICE_ARMOR = new ResourceLocation(ARMOR_LOCATION + "IceArmor.png");
     public static final ResourceLocation SMALL_PEDESTAL = new ResourceLocation(MEMORIALS_LOCATION + "ModelSmallPedestal.png");
     // pedestals
     public static final ResourceLocation MEMORIAL_WOODEN_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "WoodenBigPedestal.png");

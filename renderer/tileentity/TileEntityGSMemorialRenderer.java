@@ -128,7 +128,8 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
             case OBSIDIAN_CREEPER_STATUE:
             case QUARTZ_CREEPER_STATUE:
             case ICE_CREEPER_STATUE:
-
+                memorialType.getModel().customRender();
+                break;
             case WOODEN_STEVE_STATUE:
             case SANDSTONE_STEVE_STATUE:
             case STONE_STEVE_STATUE:
@@ -142,7 +143,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
             case OBSIDIAN_STEVE_STATUE:
             case QUARTZ_STEVE_STATUE:
             case ICE_STEVE_STATUE:
-                memorialType.getModel().customRender();
+                memorialType.getModel().customRender(memorialType);
                 break;
             default:
                 memorialType.getModel().renderAll();

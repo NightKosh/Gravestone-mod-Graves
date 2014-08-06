@@ -2,6 +2,7 @@ package gravestone.models.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gravestone.block.enums.EnumMemorials;
 import gravestone.core.Resources;
 import gravestone.renderer.tileentity.TileEntityGSGraveStoneRenderer;
 import net.minecraft.client.Minecraft;
@@ -31,6 +32,10 @@ public abstract class ModelGraveStone extends ModelBase {
      * Custom render
      */
     public void customRender() {
+        renderAll();
+    }
+
+    public void customRender(EnumMemorials memorialType) {
         renderAll();
     }
 

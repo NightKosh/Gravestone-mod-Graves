@@ -2,6 +2,7 @@ package gravestone.models.block.memorials;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gravestone.block.enums.EnumMemorials;
 import gravestone.core.Resources;
 import gravestone.models.block.ModelMemorial;
 import gravestone.renderer.tileentity.TileEntityGSMemorialRenderer;
@@ -9,6 +10,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+
 
 /**
  * GraveStone mod
@@ -123,17 +125,61 @@ public class ModelSteveStatueMemorial extends ModelMemorial {
     }
 
     @Override
-    public void customRender() {
+    public void customRender(EnumMemorials memorialType) {
         renderAll();
-        renderArmor();
+        renderArmor(memorialType);
     }
 
-    private void renderArmor() {
+    private void renderArmor(EnumMemorials memorialType) {
         pedestal.shiftModel();
-        float scale = 1.1F;
-        GL11.glScalef(scale, scale, scale);
-        TileEntityGSMemorialRenderer.instance.bindTextureByName(Resources.STEVE_ARMOR);
-        renderSteve();
+        ResourceLocation texture = null;
+        switch (memorialType) {
+            case WOODEN_STEVE_STATUE:
+                texture = Resources.WOODEN_ARMOR;
+                break;
+            case SANDSTONE_STEVE_STATUE:
+                texture = Resources.SANDSTONE_ARMOR;
+                break;
+            case STONE_STEVE_STATUE:
+                texture = Resources.STONE_ARMOR;
+                break;
+            case MOSSY_STEVE_STATUE:
+                texture = Resources.MOSSY_ARMOR;
+                break;
+            case IRON_STEVE_STATUE:
+                texture = Resources.IRON_ARMOR;
+                break;
+            case GOLDEN_STEVE_STATUE:
+                texture = Resources.GOLDEN_ARMOR;
+                break;
+            case DIAMOND_STEVE_STATUE:
+                texture = Resources.DIAMOND_ARMOR;
+                break;
+            case EMERALD_STEVE_STATUE:
+                texture = Resources.EMERALD_ARMOR;
+                break;
+            case LAPIS_STEVE_STATUE:
+                texture = Resources.LAPIS_ARMOR;
+                break;
+            case REDSTONE_STEVE_STATUE:
+                texture = Resources.REDSTONE_ARMOR;
+                break;
+            case OBSIDIAN_STEVE_STATUE:
+                texture = Resources.OBSIDIAN_ARMOR;
+                break;
+            case QUARTZ_STEVE_STATUE:
+                texture = Resources.QUARTZ_ARMOR;
+                break;
+            case ICE_STEVE_STATUE:
+                texture = Resources.ICE_ARMOR;
+                break;
+        }
+        if (texture != null) {
+            float scale = 1.1F;
+            GL11.glScalef(scale, scale, scale);
+            TileEntityGSMemorialRenderer.instance.bindTextureByName(texture);
+            renderSteve();
+        }
     }
 
     @Override
