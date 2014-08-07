@@ -28,6 +28,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 import java.util.*;
@@ -58,6 +60,61 @@ public class GraveStoneHelper {
             Items.wooden_sword,
             Items.stone_sword
     };
+
+    public static final EnumGraves[] GENERATED_WOODEN_GRAVES = {
+            EnumGraves.WOODEN_VERTICAL_PLATE,
+            EnumGraves.WOODEN_CROSS,
+            EnumGraves.WOODEN_HORISONTAL_PLATE
+    };
+    public static final EnumGraves[] GENERATED_SANDSTONE_GRAVES = {
+            EnumGraves.SANDSTONE_VERTICAL_PLATE,
+            EnumGraves.SANDSTONE_CROSS,
+            EnumGraves.SANDSTONE_HORISONTAL_PLATE
+    };
+    public static final EnumGraves[] GENERATED_STONE_GRAVES = {
+            EnumGraves.STONE_VERTICAL_PLATE,
+            EnumGraves.STONE_CROSS,
+            EnumGraves.STONE_HORISONTAL_PLATE
+    };
+    public static final EnumGraves[] GENERATED_MOSSY_GRAVES = {
+            EnumGraves.MOSSY_VERTICAL_PLATE,
+            EnumGraves.MOSSY_CROSS,
+            EnumGraves.MOSSY_HORISONTAL_PLATE
+    };
+    public static final EnumGraves[] GENERATED_QUARTZ_GRAVES = {
+            EnumGraves.QUARTZ_VERTICAL_PLATE,
+            EnumGraves.QUARTZ_CROSS,
+            EnumGraves.QUARTZ_HORISONTAL_PLATE
+    };
+    public static final EnumGraves[] GENERATED_ICE_GRAVES = {
+            EnumGraves.ICE_VERTICAL_PLATE,
+            EnumGraves.ICE_CROSS,
+            EnumGraves.ICE_HORISONTAL_PLATE
+    };
+    public static final EnumGraves[] PETS_GRAVES = {
+            EnumGraves.STONE_DOG_STATUE,
+            EnumGraves.STONE_CAT_STATUE
+    };
+    public static final EnumGraves[] DOG_WOODEN_GRAVES = {EnumGraves.WOODEN_DOG_STATUE};
+    public static final EnumGraves[] DOG_SANDSTONE_GRAVES = {EnumGraves.SANDSTONE_DOG_STATUE};
+    public static final EnumGraves[] DOG_STONE_GRAVES = {EnumGraves.STONE_DOG_STATUE};
+    public static final EnumGraves[] DOG_MOSSY_GRAVES = {EnumGraves.MOSSY_DOG_STATUE};
+    public static final EnumGraves[] DOG_QUARTZ_GRAVES = {EnumGraves.QUARTZ_DOG_STATUE};
+    public static final EnumGraves[] DOG_ICE_GRAVES = {EnumGraves.ICE_DOG_STATUE};
+
+    public static final EnumGraves[] CAT_WOODEN_GRAVES = {EnumGraves.WOODEN_CAT_STATUE};
+    public static final EnumGraves[] CAT_SANDSTONE_GRAVES = {EnumGraves.SANDSTONE_CAT_STATUE};
+    public static final EnumGraves[] CAT_STONE_GRAVES = {EnumGraves.STONE_CAT_STATUE};
+    public static final EnumGraves[] CAT_MOSSY_GRAVES = {EnumGraves.MOSSY_CAT_STATUE};
+    public static final EnumGraves[] CAT_QUARTZ_GRAVES = {EnumGraves.QUARTZ_CAT_STATUE};
+    public static final EnumGraves[] CAT_ICE_GRAVES = {EnumGraves.ICE_CAT_STATUE};
+
+    public static final EnumGraves[] HORSE_WOODEN_GRAVES = {EnumGraves.WOODEN_HORSE_STATUE};
+    public static final EnumGraves[] HORSE_SANDSTONE_GRAVES = {EnumGraves.SANDSTONE_HORSE_STATUE};
+    public static final EnumGraves[] HORSE_STONE_GRAVES = {EnumGraves.STONE_HORSE_STATUE};
+    public static final EnumGraves[] HORSE_MOSSY_GRAVES = {EnumGraves.MOSSY_HORSE_STATUE};
+    public static final EnumGraves[] HORSE_QUARTZ_GRAVES = {EnumGraves.QUARTZ_HORSE_STATUE};
+    public static final EnumGraves[] HORSE_ICE_GRAVES = {EnumGraves.ICE_HORSE_STATUE};
 
     private GraveStoneHelper() {
     }
@@ -101,28 +158,28 @@ public class GraveStoneHelper {
         switch (graveType) {
             case PLAYER_GRAVES:
                 if (random.nextFloat() > 0.1) {
-                    return BlockGSGraveStone.GENERATED_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_GRAVES.length)];
+                    return (byte) GENERATED_STONE_GRAVES[random.nextInt(GENERATED_STONE_GRAVES.length)].ordinal();
                 } else {
                     return (byte) EnumGraves.SWORD.ordinal();
                     //return BlockGSGraveStone.GENERATED_SWORD_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_SWORD_GRAVES.length)];
                 }
             case PETS_GRAVES:
-                return BlockGSGraveStone.PETS_GRAVES[random.nextInt(BlockGSGraveStone.PETS_GRAVES.length)];
+                return (byte) PETS_GRAVES[random.nextInt(PETS_GRAVES.length)].ordinal();
             case DOGS_GRAVES:
-                return BlockGSGraveStone.DOG_GRAVES[random.nextInt(BlockGSGraveStone.DOG_GRAVES.length)];
+                return (byte) DOG_STONE_GRAVES[random.nextInt(DOG_STONE_GRAVES.length)].ordinal();
             case CATS_GRAVES:
-                return BlockGSGraveStone.CAT_GRAVES[random.nextInt(BlockGSGraveStone.CAT_GRAVES.length)];
+                return (byte) CAT_STONE_GRAVES[random.nextInt(CAT_STONE_GRAVES.length)].ordinal();
             case ALL_GRAVES:
             default:
                 if (random.nextFloat() > 0.2) {
                     if (random.nextFloat() > 0.1) {
-                        return BlockGSGraveStone.GENERATED_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_GRAVES.length)];
+                        return (byte) GENERATED_STONE_GRAVES[random.nextInt(GENERATED_STONE_GRAVES.length)].ordinal();
                     } else {
                         return (byte) EnumGraves.SWORD.ordinal();
                         //return BlockGSGraveStone.GENERATED_SWORD_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_SWORD_GRAVES.length)];
                     }
                 } else {
-                    return BlockGSGraveStone.PETS_GRAVES[random.nextInt(BlockGSGraveStone.PETS_GRAVES.length)];
+                    return (byte) PETS_GRAVES[random.nextInt(PETS_GRAVES.length)].ordinal();
                 }
         }
     }
@@ -151,7 +208,7 @@ public class GraveStoneHelper {
      * @param graveType Grave type
      */
     public static boolean isPetGrave(byte graveType) {
-        return Arrays.binarySearch(BlockGSGraveStone.PETS_GRAVES, graveType) >= 0;
+        return Arrays.binarySearch(PETS_GRAVES, EnumGraves.getByID(graveType)) >= 0;
     }
 
     // TODO
@@ -328,5 +385,180 @@ public class GraveStoneHelper {
 
     public static void addSwordToSwordsList(Item sword) {
         swordsList.add(sword);
+    }
+
+    public static byte getRandomGrave(List<EnumGraves> graveTypes, Random rand) {
+        return (byte) graveTypes.get(rand.nextInt(graveTypes.size())).ordinal();
+    }
+
+    public static ArrayList<EnumGraves> getGeneratedGraveTypes(World world, int x, int z) {
+        BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+
+        ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
+        ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
+
+        if (biomeTypesList.contains(BiomeDictionary.Type.DESERT) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
+            graveTypes.addAll(Arrays.asList(GENERATED_SANDSTONE_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
+            graveTypes.addAll(Arrays.asList(GENERATED_MOSSY_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.MOUNTAIN) || biomeTypesList.contains(BiomeDictionary.Type.HILLS) ||
+                biomeTypesList.contains(BiomeDictionary.Type.PLAINS) || biomeTypesList.contains(BiomeDictionary.Type.MUSHROOM)) {
+            graveTypes.addAll(Arrays.asList(GENERATED_STONE_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.FOREST)) {
+            graveTypes.addAll(Arrays.asList(GENERATED_WOODEN_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.FROZEN)) {
+            graveTypes.addAll(Arrays.asList(GENERATED_ICE_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.NETHER)) {
+            graveTypes.addAll(Arrays.asList(GENERATED_QUARTZ_GRAVES));
+        }
+
+        // TODO
+//        if (biomeTypesList.contains(BiomeDictionary.Type.END)) {
+//        }
+//        if (biomeTypesList.contains(BiomeDictionary.Type.MAGICAL)) {
+//        }
+//        if (biomeTypesList.contains(BiomeDictionary.Type.WATER)) {
+//        }
+//        if (biomeTypesList.contains(BiomeDictionary.Type.WASTELAND)) {
+//        }
+
+        if (graveTypes.isEmpty()) {
+            graveTypes.addAll(Arrays.asList(GENERATED_STONE_GRAVES));
+        }
+
+        return graveTypes;
+    }
+
+    public static ArrayList<EnumGraves> getDogGraveTypes(World world, int x, int z) {
+        BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+
+        ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
+        ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
+
+        if (biomeTypesList.contains(BiomeDictionary.Type.DESERT) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
+            graveTypes.addAll(Arrays.asList(DOG_SANDSTONE_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
+            graveTypes.addAll(Arrays.asList(DOG_MOSSY_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.MOUNTAIN) || biomeTypesList.contains(BiomeDictionary.Type.HILLS) ||
+                biomeTypesList.contains(BiomeDictionary.Type.PLAINS) || biomeTypesList.contains(BiomeDictionary.Type.MUSHROOM)) {
+            graveTypes.addAll(Arrays.asList(DOG_STONE_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.FOREST)) {
+            graveTypes.addAll(Arrays.asList(DOG_WOODEN_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.FROZEN)) {
+            graveTypes.addAll(Arrays.asList(DOG_ICE_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.NETHER)) {
+            graveTypes.addAll(Arrays.asList(DOG_QUARTZ_GRAVES));
+        }
+
+        // TODO
+//        if (biomeTypesList.contains(BiomeDictionary.Type.END)) {
+//        }
+//        if (biomeTypesList.contains(BiomeDictionary.Type.MAGICAL)) {
+//        }
+//        if (biomeTypesList.contains(BiomeDictionary.Type.WATER)) {
+//        }
+//        if (biomeTypesList.contains(BiomeDictionary.Type.WASTELAND)) {
+//        }
+
+        if (graveTypes.isEmpty()) {
+            graveTypes.addAll(Arrays.asList(DOG_STONE_GRAVES));
+        }
+
+        return graveTypes;
+    }
+
+    public static ArrayList<EnumGraves> getCatGraveTypes(World world, int x, int z) {
+        BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+
+        ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
+        ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
+
+        if (biomeTypesList.contains(BiomeDictionary.Type.DESERT) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
+            graveTypes.addAll(Arrays.asList(CAT_SANDSTONE_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
+            graveTypes.addAll(Arrays.asList(CAT_MOSSY_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.MOUNTAIN) || biomeTypesList.contains(BiomeDictionary.Type.HILLS) ||
+                biomeTypesList.contains(BiomeDictionary.Type.PLAINS) || biomeTypesList.contains(BiomeDictionary.Type.MUSHROOM)) {
+            graveTypes.addAll(Arrays.asList(CAT_STONE_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.FOREST)) {
+            graveTypes.addAll(Arrays.asList(CAT_WOODEN_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.FROZEN)) {
+            graveTypes.addAll(Arrays.asList(CAT_ICE_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.NETHER)) {
+            graveTypes.addAll(Arrays.asList(CAT_QUARTZ_GRAVES));
+        }
+
+        // TODO
+//        if (biomeTypesList.contains(BiomeDictionary.Type.END)) {
+//        }
+//        if (biomeTypesList.contains(BiomeDictionary.Type.MAGICAL)) {
+//        }
+//        if (biomeTypesList.contains(BiomeDictionary.Type.WATER)) {
+//        }
+//        if (biomeTypesList.contains(BiomeDictionary.Type.WASTELAND)) {
+//        }
+
+        if (graveTypes.isEmpty()) {
+            graveTypes.addAll(Arrays.asList(CAT_STONE_GRAVES));
+        }
+        return graveTypes;
+    }
+
+    public static ArrayList<EnumGraves> getHorseGraveTypes(World world, int x, int z) {
+        BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+
+        ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
+        ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
+
+        if (biomeTypesList.contains(BiomeDictionary.Type.DESERT) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
+            graveTypes.addAll(Arrays.asList(HORSE_SANDSTONE_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
+            graveTypes.addAll(Arrays.asList(HORSE_MOSSY_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.MOUNTAIN) || biomeTypesList.contains(BiomeDictionary.Type.HILLS) ||
+                biomeTypesList.contains(BiomeDictionary.Type.PLAINS) || biomeTypesList.contains(BiomeDictionary.Type.MUSHROOM)) {
+            graveTypes.addAll(Arrays.asList(HORSE_STONE_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.FOREST)) {
+            graveTypes.addAll(Arrays.asList(HORSE_WOODEN_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.FROZEN)) {
+            graveTypes.addAll(Arrays.asList(HORSE_ICE_GRAVES));
+        }
+        if (biomeTypesList.contains(BiomeDictionary.Type.NETHER)) {
+            graveTypes.addAll(Arrays.asList(HORSE_QUARTZ_GRAVES));
+        }
+
+        // TODO
+//        if (biomeTypesList.contains(BiomeDictionary.Type.END)) {
+//        }
+//        if (biomeTypesList.contains(BiomeDictionary.Type.MAGICAL)) {
+//        }
+//        if (biomeTypesList.contains(BiomeDictionary.Type.WATER)) {
+//        }
+//        if (biomeTypesList.contains(BiomeDictionary.Type.WASTELAND)) {
+//        }
+
+        if (graveTypes.isEmpty()) {
+            graveTypes.addAll(Arrays.asList(HORSE_STONE_GRAVES));
+        }
+
+        return graveTypes;
     }
 }

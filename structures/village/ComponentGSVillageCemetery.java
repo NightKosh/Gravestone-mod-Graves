@@ -1,6 +1,5 @@
 package gravestone.structures.village;
 
-import gravestone.block.BlockGSGraveStone;
 import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
 import gravestone.tileentity.TileEntityGSGraveStone;
@@ -81,7 +80,7 @@ public class ComponentGSVillageCemetery extends StructureVillagePieces.Village {
         int wallMeta;
         Block ground;
 
-        int biomeId = world.getBiomeGenForCoords(this.getXWithOffset(0, 0), this.getZWithOffset(0, 0)).biomeID;;
+        int biomeId = world.getBiomeGenForCoords(this.getXWithOffset(0, 0), this.getZWithOffset(0, 0)).biomeID;
         if (biomeId == BiomeGenBase.desert.biomeID || biomeId == BiomeGenBase.desertHills.biomeID) {
             wallMeta = 0;
             ground = Blocks.sand;
@@ -105,7 +104,8 @@ public class ComponentGSVillageCemetery extends StructureVillagePieces.Village {
         this.placeBlockAtCurrentPosition(world, Blocks.fence_gate, fenceMeta, 6, 1, 1, structureBoundingBox);
         this.placeBlockAtCurrentPosition(world, Blocks.fence_gate, fenceMeta, 6, 1, 9, structureBoundingBox);
         int graveMeta = GraveStoneHelper.getMetaDirection(this.coordBaseMode);
-        byte graveType = BlockGSGraveStone.GENERATED_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_GRAVES.length)];
+
+        byte graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getGeneratedGraveTypes(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0)), random);
 
         for (int x = 3; x < 11; x += 2) {
             for (int z = 3; z < 9; z += 2) {

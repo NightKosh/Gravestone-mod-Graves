@@ -134,20 +134,6 @@ public class BlockGSGraveStone extends BlockContainer {
             (byte) EnumGraves.ICE_HORSE_STATUE.ordinal()
     };
 
-    public static final byte[] GENERATED_GRAVES = {
-            (byte) EnumGraves.STONE_VERTICAL_PLATE.ordinal(),
-            (byte) EnumGraves.STONE_CROSS.ordinal(),
-            (byte) EnumGraves.STONE_HORISONTAL_PLATE.ordinal()
-    };
-    public static final byte[] PETS_GRAVES = {
-            (byte) EnumGraves.STONE_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.STONE_CAT_STATUE.ordinal()
-    };
-    // TODO
-    public static final byte[] DOG_GRAVES = {(byte) EnumGraves.STONE_DOG_STATUE.ordinal()};
-    public static final byte[] CAT_GRAVES = {(byte) EnumGraves.STONE_CAT_STATUE.ordinal()};
-    public static final byte[] HORSE_GRAVES = {(byte) EnumGraves.STONE_HORSE_STATUE.ordinal()};
-
     private static final Random rand = new Random();
 
     public BlockGSGraveStone() {
@@ -754,24 +740,26 @@ public class BlockGSGraveStone extends BlockContainer {
         if (GraveStoneConfig.generateSwordGraves && world.rand.nextInt(4) == 0 && entityType.equals(EnumGraveType.PLAYER_GRAVES)) {
             sword = GraveStoneHelper.oldCheckSword(items);
         }
+
         switch (entityType) {
             case PLAYER_GRAVES:
                 if (sword == null) {
-                    graveType = GENERATED_GRAVES[rand.nextInt(GENERATED_GRAVES.length)];
+                    graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getGeneratedGraveTypes(world, x, z), rand);
                 } else {
                     graveType = (byte) EnumGraves.SWORD.ordinal();
                 }
                 break;
             case DOGS_GRAVES:
-                graveType = DOG_GRAVES[rand.nextInt(DOG_GRAVES.length)];
+                graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getDogGraveTypes(world, x, z), rand);
                 break;
             case CATS_GRAVES:
-                graveType = CAT_GRAVES[rand.nextInt(CAT_GRAVES.length)];
+                graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getCatGraveTypes(world, x, z), rand);
                 break;
             case HORSE_GRAVES:
-                graveType = HORSE_GRAVES[rand.nextInt(HORSE_GRAVES.length)];
+                graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getHorseGraveTypes(world, x, z), rand);
                 break;
         }
+
 
         // TODO rework place finding
         boolean canGenerateGrave = false;
