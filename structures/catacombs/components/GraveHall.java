@@ -138,7 +138,7 @@ public class GraveHall extends CatacombsBaseComponent {
         buildColumn(world, 11, 12);
 
         // graves
-        byte graveType = GraveStoneHelper.getGraveType(random, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES);
+        byte graveType = GraveStoneHelper.getGraveType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES);
         Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
         int metaLeft = GraveStoneHelper.getMetaDirection(getLeftItemDirection(coordBaseMode));
         int metaRight = GraveStoneHelper.getMetaDirection(getRightItemDirection(coordBaseMode));

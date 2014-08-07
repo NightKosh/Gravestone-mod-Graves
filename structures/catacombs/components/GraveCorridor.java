@@ -68,7 +68,7 @@ public class GraveCorridor extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 5, 1, 4, 5, 3, 4, Blocks.nether_brick, Blocks.nether_brick, false);
 
         // graves
-        byte graveType = GraveStoneHelper.getGraveType(random, EnumGraveType.ALL_GRAVES);
+        byte graveType = GraveStoneHelper.getGraveType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, EnumGraveType.ALL_GRAVES);
         Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
         int metaLeft = GraveStoneHelper.getMetaDirection(getLeftItemDirection(coordBaseMode));
         int metaRight = GraveStoneHelper.getMetaDirection(getRightItemDirection(coordBaseMode));

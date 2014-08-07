@@ -37,7 +37,7 @@ public class ComponentGSSingleGrave extends ComponentGraveStone {
         if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
             GraveStoneLogger.logInfo("Generate grave at " + positionX + "x" + positionZ);
 
-            byte graveType = GraveStoneHelper.getGraveType(random, EnumGraveType.ALL_GRAVES);
+            byte graveType = GraveStoneHelper.getGraveType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, EnumGraveType.ALL_GRAVES);
             Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
             GraveGenerationHelper.placeGrave(this, world, random, 0, y, 0, GraveStoneHelper.getMetaDirection(coordBaseMode), graveType, sword, true);
         }

@@ -92,8 +92,32 @@ public class GraveStoneHelper {
             EnumGraves.ICE_HORISONTAL_PLATE
     };
     public static final EnumGraves[] PETS_GRAVES = {
+            EnumGraves.WOODEN_DOG_STATUE,
+            EnumGraves.WOODEN_CAT_STATUE,
+            EnumGraves.SANDSTONE_DOG_STATUE,
+            EnumGraves.SANDSTONE_CAT_STATUE,
             EnumGraves.STONE_DOG_STATUE,
-            EnumGraves.STONE_CAT_STATUE
+            EnumGraves.STONE_CAT_STATUE,
+            EnumGraves.MOSSY_DOG_STATUE,
+            EnumGraves.MOSSY_CAT_STATUE,
+            EnumGraves.IRON_DOG_STATUE,
+            EnumGraves.IRON_CAT_STATUE,
+            EnumGraves.GOLDEN_DOG_STATUE,
+            EnumGraves.GOLDEN_CAT_STATUE,
+            EnumGraves.DIAMOND_DOG_STATUE,
+            EnumGraves.DIAMOND_CAT_STATUE,
+            EnumGraves.EMERALD_DOG_STATUE,
+            EnumGraves.EMERALD_CAT_STATUE,
+            EnumGraves.LAPIS_DOG_STATUE,
+            EnumGraves.LAPIS_CAT_STATUE,
+            EnumGraves.REDSTONE_DOG_STATUE,
+            EnumGraves.REDSTONE_CAT_STATUE,
+            EnumGraves.OBSIDIAN_DOG_STATUE,
+            EnumGraves.OBSIDIAN_CAT_STATUE,
+            EnumGraves.QUARTZ_DOG_STATUE,
+            EnumGraves.QUARTZ_CAT_STATUE,
+            EnumGraves.ICE_DOG_STATUE,
+            EnumGraves.ICE_CAT_STATUE
     };
     public static final EnumGraves[] DOG_WOODEN_GRAVES = {EnumGraves.WOODEN_DOG_STATUE};
     public static final EnumGraves[] DOG_SANDSTONE_GRAVES = {EnumGraves.SANDSTONE_DOG_STATUE};
@@ -153,33 +177,41 @@ public class GraveStoneHelper {
      * @param random
      * @param graveType
      */
-    // TODO
-    public static byte getGraveType(Random random, BlockGSGraveStone.EnumGraveType graveType) {
+    public static byte getGraveType(World world, int x, int z, Random random, BlockGSGraveStone.EnumGraveType graveType) {
+        ArrayList<EnumGraves> petsGravesList;
         switch (graveType) {
             case PLAYER_GRAVES:
                 if (random.nextFloat() > 0.1) {
-                    return (byte) GENERATED_STONE_GRAVES[random.nextInt(GENERATED_STONE_GRAVES.length)].ordinal();
+                    return getRandomGrave(getGeneratedGraveTypes(world, x, z), random);
                 } else {
+                    // TODO
                     return (byte) EnumGraves.SWORD.ordinal();
                     //return BlockGSGraveStone.GENERATED_SWORD_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_SWORD_GRAVES.length)];
                 }
             case PETS_GRAVES:
-                return (byte) PETS_GRAVES[random.nextInt(PETS_GRAVES.length)].ordinal();
+                petsGravesList = new ArrayList<EnumGraves>();
+                petsGravesList.addAll(getDogGraveTypes(world, x, z));
+                petsGravesList.addAll(getCatGraveTypes(world, x, z));
+                return getRandomGrave(petsGravesList, random);
             case DOGS_GRAVES:
-                return (byte) DOG_STONE_GRAVES[random.nextInt(DOG_STONE_GRAVES.length)].ordinal();
+                return getRandomGrave(getDogGraveTypes(world, x, z), random);
             case CATS_GRAVES:
-                return (byte) CAT_STONE_GRAVES[random.nextInt(CAT_STONE_GRAVES.length)].ordinal();
+                return getRandomGrave(getCatGraveTypes(world, x, z), random);
             case ALL_GRAVES:
             default:
                 if (random.nextFloat() > 0.2) {
                     if (random.nextFloat() > 0.1) {
-                        return (byte) GENERATED_STONE_GRAVES[random.nextInt(GENERATED_STONE_GRAVES.length)].ordinal();
+                        return getRandomGrave(getGeneratedGraveTypes(world, x, z), random);
                     } else {
+                        // TODO
                         return (byte) EnumGraves.SWORD.ordinal();
                         //return BlockGSGraveStone.GENERATED_SWORD_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_SWORD_GRAVES.length)];
                     }
                 } else {
-                    return (byte) PETS_GRAVES[random.nextInt(PETS_GRAVES.length)].ordinal();
+                    petsGravesList = new ArrayList<EnumGraves>();
+                    petsGravesList.addAll(getDogGraveTypes(world, x, z));
+                    petsGravesList.addAll(getCatGraveTypes(world, x, z));
+                    return getRandomGrave(petsGravesList, random);
                 }
         }
     }
@@ -208,6 +240,7 @@ public class GraveStoneHelper {
      * @param graveType Grave type
      */
     public static boolean isPetGrave(byte graveType) {
+        // TODO rework
         return Arrays.binarySearch(PETS_GRAVES, EnumGraves.getByID(graveType)) >= 0;
     }
 
