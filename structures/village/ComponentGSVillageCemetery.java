@@ -105,7 +105,7 @@ public class ComponentGSVillageCemetery extends StructureVillagePieces.Village {
         this.placeBlockAtCurrentPosition(world, Blocks.fence_gate, fenceMeta, 6, 1, 9, structureBoundingBox);
         int graveMeta = GraveStoneHelper.getMetaDirection(this.coordBaseMode);
 
-        byte graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getGeneratedGraveTypes(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0)), random);
+        byte graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveTypes(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0)), random);
 
         for (int x = 3; x < 11; x += 2) {
             for (int z = 3; z < 9; z += 2) {

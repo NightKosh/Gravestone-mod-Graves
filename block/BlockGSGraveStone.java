@@ -26,6 +26,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
@@ -729,7 +730,7 @@ public class BlockGSGraveStone extends BlockContainer {
     /**
      * Create grave on death
      */
-    public void createOnDeath(World world, int x, int y, int z, DeathMessageInfo deathInfo, int direction, List<ItemStack> items, int age, EnumGraveType entityType, boolean isMagic) {
+    public void createOnDeath(World world, int x, int y, int z, DeathMessageInfo deathInfo, int direction, List<ItemStack> items, int age, EnumGraveType entityType, DamageSource damageSource) {
         if (direction < 0) {
             direction = 360 + direction;
         }
@@ -741,25 +742,31 @@ public class BlockGSGraveStone extends BlockContainer {
             sword = GraveStoneHelper.oldCheckSword(items);
         }
 
+        // TODO
         switch (entityType) {
             case PLAYER_GRAVES:
                 if (sword == null) {
-                    graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getGeneratedGraveTypes(world, x, z), rand);
+                    graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveTypes(world, x, z), rand);
+                    graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveForDeath(damageSource), rand);
                 } else {
                     graveType = (byte) EnumGraves.SWORD.ordinal();
                 }
                 break;
             case DOGS_GRAVES:
                 graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getDogGraveTypes(world, x, z), rand);
+                graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getDogGraveForDeath(damageSource), rand);
                 break;
             case CATS_GRAVES:
                 graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getCatGraveTypes(world, x, z), rand);
+                graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getCatGraveForDeath(damageSource), rand);
                 break;
             case HORSE_GRAVES:
                 graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getHorseGraveTypes(world, x, z), rand);
+                graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getHorseGraveForDeath(damageSource), rand);
                 break;
         }
 
+        boolean isMagic = GraveStoneHelper.isMagicDamage(damageSource);
 
         // TODO rework place finding
         boolean canGenerateGrave = false;

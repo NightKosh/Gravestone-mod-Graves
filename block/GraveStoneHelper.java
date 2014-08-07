@@ -81,6 +81,11 @@ public class GraveStoneHelper {
             EnumGraves.MOSSY_CROSS,
             EnumGraves.MOSSY_HORISONTAL_PLATE
     };
+    public static final EnumGraves[] GENERATED_OBSIDIAN_GRAVES = {
+            EnumGraves.OBSIDIAN_VERTICAL_PLATE,
+            EnumGraves.OBSIDIAN_CROSS,
+            EnumGraves.OBSIDIAN_HORISONTAL_PLATE
+    };
     public static final EnumGraves[] GENERATED_QUARTZ_GRAVES = {
             EnumGraves.QUARTZ_VERTICAL_PLATE,
             EnumGraves.QUARTZ_CROSS,
@@ -123,6 +128,7 @@ public class GraveStoneHelper {
     public static final EnumGraves[] DOG_SANDSTONE_GRAVES = {EnumGraves.SANDSTONE_DOG_STATUE};
     public static final EnumGraves[] DOG_STONE_GRAVES = {EnumGraves.STONE_DOG_STATUE};
     public static final EnumGraves[] DOG_MOSSY_GRAVES = {EnumGraves.MOSSY_DOG_STATUE};
+    public static final EnumGraves[] DOG_OBSIDIAN_GRAVES = {EnumGraves.OBSIDIAN_DOG_STATUE};
     public static final EnumGraves[] DOG_QUARTZ_GRAVES = {EnumGraves.QUARTZ_DOG_STATUE};
     public static final EnumGraves[] DOG_ICE_GRAVES = {EnumGraves.ICE_DOG_STATUE};
 
@@ -130,6 +136,7 @@ public class GraveStoneHelper {
     public static final EnumGraves[] CAT_SANDSTONE_GRAVES = {EnumGraves.SANDSTONE_CAT_STATUE};
     public static final EnumGraves[] CAT_STONE_GRAVES = {EnumGraves.STONE_CAT_STATUE};
     public static final EnumGraves[] CAT_MOSSY_GRAVES = {EnumGraves.MOSSY_CAT_STATUE};
+    public static final EnumGraves[] CAT_OBSIDIAN_GRAVES = {EnumGraves.OBSIDIAN_CAT_STATUE};
     public static final EnumGraves[] CAT_QUARTZ_GRAVES = {EnumGraves.QUARTZ_CAT_STATUE};
     public static final EnumGraves[] CAT_ICE_GRAVES = {EnumGraves.ICE_CAT_STATUE};
 
@@ -137,6 +144,7 @@ public class GraveStoneHelper {
     public static final EnumGraves[] HORSE_SANDSTONE_GRAVES = {EnumGraves.SANDSTONE_HORSE_STATUE};
     public static final EnumGraves[] HORSE_STONE_GRAVES = {EnumGraves.STONE_HORSE_STATUE};
     public static final EnumGraves[] HORSE_MOSSY_GRAVES = {EnumGraves.MOSSY_HORSE_STATUE};
+    public static final EnumGraves[] HORSE_OBSIDIAN_GRAVES = {EnumGraves.OBSIDIAN_HORSE_STATUE};
     public static final EnumGraves[] HORSE_QUARTZ_GRAVES = {EnumGraves.QUARTZ_HORSE_STATUE};
     public static final EnumGraves[] HORSE_ICE_GRAVES = {EnumGraves.ICE_HORSE_STATUE};
 
@@ -182,7 +190,7 @@ public class GraveStoneHelper {
         switch (graveType) {
             case PLAYER_GRAVES:
                 if (random.nextFloat() > 0.1) {
-                    return getRandomGrave(getGeneratedGraveTypes(world, x, z), random);
+                    return getRandomGrave(getPlayerGraveTypes(world, x, z), random);
                 } else {
                     // TODO
                     return (byte) EnumGraves.SWORD.ordinal();
@@ -201,7 +209,7 @@ public class GraveStoneHelper {
             default:
                 if (random.nextFloat() > 0.2) {
                     if (random.nextFloat() > 0.1) {
-                        return getRandomGrave(getGeneratedGraveTypes(world, x, z), random);
+                        return getRandomGrave(getPlayerGraveTypes(world, x, z), random);
                     } else {
                         // TODO
                         return (byte) EnumGraves.SWORD.ordinal();
@@ -321,14 +329,9 @@ public class GraveStoneHelper {
     }
 
     public static void createGrave(Entity entity, LivingDeathEvent event, List<ItemStack> items, int age, BlockGSGraveStone.EnumGraveType entityType, boolean isVillager) {
-        boolean isMagic = isMagicDamage(event.source);
         GSBlock.graveStone.createOnDeath(entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
                 getDeathMessage((EntityLivingBase) entity, event.source.damageType, isVillager),
-                MathHelper.floor_float(entity.rotationYaw), items, age, entityType, isMagic);
-    }
-
-    private static boolean isMagicDamage(DamageSource damage) {
-        return damage.equals(DamageSource.magic) || damage.damageType.toLowerCase().contains("magic");
+                MathHelper.floor_float(entity.rotationYaw), items, age, entityType, event.source);
     }
 
     public static void createPetGrave(Entity entity, LivingDeathEvent event) {
@@ -424,7 +427,7 @@ public class GraveStoneHelper {
         return (byte) graveTypes.get(rand.nextInt(graveTypes.size())).ordinal();
     }
 
-    public static ArrayList<EnumGraves> getGeneratedGraveTypes(World world, int x, int z) {
+    public static ArrayList<EnumGraves> getPlayerGraveTypes(World world, int x, int z) {
         BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
 
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
@@ -593,5 +596,61 @@ public class GraveStoneHelper {
         }
 
         return graveTypes;
+    }
+
+
+    public static ArrayList<EnumGraves> getPlayerGraveForDeath(DamageSource damageSource) {
+        ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
+
+        if (isFireDamage(damageSource) || isLavaDamage(damageSource) || isBlastDamage(damageSource) || isFireballDamage(damageSource)) {
+            graveTypes.addAll(Arrays.asList(GENERATED_OBSIDIAN_GRAVES));
+        }
+        return graveTypes;
+    }
+
+    public static ArrayList<EnumGraves> getDogGraveForDeath(DamageSource damageSource) {
+        ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
+
+        if (isFireDamage(damageSource) || isLavaDamage(damageSource) || isBlastDamage(damageSource) || isFireballDamage(damageSource)) {
+            graveTypes.addAll(Arrays.asList(DOG_OBSIDIAN_GRAVES));
+        }
+        return graveTypes;
+    }
+
+    public static ArrayList<EnumGraves> getCatGraveForDeath(DamageSource damageSource) {
+        ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
+
+        if (isFireDamage(damageSource) || isLavaDamage(damageSource) || isBlastDamage(damageSource) || isFireballDamage(damageSource)) {
+            graveTypes.addAll(Arrays.asList(CAT_OBSIDIAN_GRAVES));
+        }
+        return graveTypes;
+    }
+
+    public static ArrayList<EnumGraves> getHorseGraveForDeath(DamageSource damageSource) {
+        ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
+
+        if (isFireDamage(damageSource) || isLavaDamage(damageSource) || isBlastDamage(damageSource) || isFireballDamage(damageSource)) {
+            graveTypes.addAll(Arrays.asList(HORSE_OBSIDIAN_GRAVES));
+        }
+        return graveTypes;
+    }
+
+    public static boolean isFireDamage(DamageSource damageSource) {
+        return damageSource.equals(DamageSource.inFire) || damageSource.equals(DamageSource.onFire) ||
+                damageSource.damageType.toLowerCase().contains("nFire");
+    }
+    public static boolean isLavaDamage(DamageSource damageSource) {
+        return damageSource.equals(DamageSource.lava) || damageSource.damageType.toLowerCase().contains("lava");
+    }
+    public static boolean isBlastDamage(DamageSource damageSource) {
+        return damageSource.damageType.toLowerCase().contains("explosion");
+    }
+    public static boolean isFireballDamage(DamageSource damageSource) {
+        return damageSource.damageType.toLowerCase().contains("fireball");
+    }
+
+
+    public static boolean isMagicDamage(DamageSource damageSource) {
+        return damageSource.equals(DamageSource.magic) || damageSource.damageType.toLowerCase().contains("magic");
     }
 }
