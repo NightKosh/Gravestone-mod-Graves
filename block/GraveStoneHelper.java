@@ -81,6 +81,36 @@ public class GraveStoneHelper {
             EnumGraves.MOSSY_CROSS,
             EnumGraves.MOSSY_HORISONTAL_PLATE
     };
+    public static final EnumGraves[] GENERATED_IRON_GRAVES = {
+            EnumGraves.IRON_VERTICAL_PLATE,
+            EnumGraves.IRON_CROSS,
+            EnumGraves.IRON_HORISONTAL_PLATE
+    };
+    public static final EnumGraves[] GENERATED_GOLDEN_GRAVES = {
+            EnumGraves.GOLDEN_VERTICAL_PLATE,
+            EnumGraves.GOLDEN_CROSS,
+            EnumGraves.GOLDEN_HORISONTAL_PLATE
+    };
+    public static final EnumGraves[] GENERATED_DIAMOND_GRAVES = {
+            EnumGraves.DIAMOND_VERTICAL_PLATE,
+            EnumGraves.DIAMOND_CROSS,
+            EnumGraves.DIAMOND_HORISONTAL_PLATE
+    };
+    public static final EnumGraves[] GENERATED_EMERALD_GRAVES = {
+            EnumGraves.EMERALD_VERTICAL_PLATE,
+            EnumGraves.EMERALD_CROSS,
+            EnumGraves.EMERALD_HORISONTAL_PLATE
+    };
+    public static final EnumGraves[] GENERATED_LAPIS_GRAVES = {
+            EnumGraves.LAPIS_VERTICAL_PLATE,
+            EnumGraves.LAPIS_CROSS,
+            EnumGraves.LAPIS_HORISONTAL_PLATE
+    };
+    public static final EnumGraves[] GENERATED_REDSTONE_GRAVES = {
+            EnumGraves.REDSTONE_VERTICAL_PLATE,
+            EnumGraves.REDSTONE_CROSS,
+            EnumGraves.REDSTONE_HORISONTAL_PLATE
+    };
     public static final EnumGraves[] GENERATED_OBSIDIAN_GRAVES = {
             EnumGraves.OBSIDIAN_VERTICAL_PLATE,
             EnumGraves.OBSIDIAN_CROSS,
@@ -329,7 +359,7 @@ public class GraveStoneHelper {
     }
 
     public static void createGrave(Entity entity, LivingDeathEvent event, List<ItemStack> items, int age, BlockGSGraveStone.EnumGraveType entityType, boolean isVillager) {
-        GSBlock.graveStone.createOnDeath(entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
+        GSBlock.graveStone.createOnDeath(entity, entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
                 getDeathMessage((EntityLivingBase) entity, event.source.damageType, isVillager),
                 MathHelper.floor_float(entity.rotationYaw), items, age, entityType, event.source);
     }
@@ -424,7 +454,11 @@ public class GraveStoneHelper {
     }
 
     public static byte getRandomGrave(List<EnumGraves> graveTypes, Random rand) {
-        return (byte) graveTypes.get(rand.nextInt(graveTypes.size())).ordinal();
+        if (graveTypes.size() > 0) {
+            return (byte) graveTypes.get(rand.nextInt(graveTypes.size())).ordinal();
+        } else {
+            return 0;
+        }
     }
 
     public static ArrayList<EnumGraves> getPlayerGraveTypes(World world, int x, int z) {
@@ -632,6 +666,27 @@ public class GraveStoneHelper {
         if (isFireDamage(damageSource) || isLavaDamage(damageSource) || isBlastDamage(damageSource) || isFireballDamage(damageSource)) {
             graveTypes.addAll(Arrays.asList(HORSE_OBSIDIAN_GRAVES));
         }
+        return graveTypes;
+    }
+
+    public static ArrayList<EnumGraves> getPlayerGraveForLevel(Entity entity) {
+        ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
+
+        int level = ((EntityPlayer) entity).experienceLevel;
+        if (level >= 65) {
+            graveTypes.addAll(Arrays.asList(GENERATED_EMERALD_GRAVES));
+        } else if (level >= 55) {
+            graveTypes.addAll(Arrays.asList(GENERATED_DIAMOND_GRAVES));
+        } else if (level >= 45) {
+            graveTypes.addAll(Arrays.asList(GENERATED_REDSTONE_GRAVES));
+        } else if (level >= 35) {
+            graveTypes.addAll(Arrays.asList(GENERATED_GOLDEN_GRAVES));
+        } else if (level >= 25) {
+            graveTypes.addAll(Arrays.asList(GENERATED_LAPIS_GRAVES));
+        } else if (level >= 15) {
+            graveTypes.addAll(Arrays.asList(GENERATED_IRON_GRAVES));
+        }
+
         return graveTypes;
     }
 
