@@ -748,7 +748,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveForLevel(entity), rand);
                 if (graveType == 0) {
                     if (sword == null) {
-                        graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveForDeath(damageSource), rand);
+                        graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveForDeath(damageSource, damageSource.damageType), rand);
                         if (graveType == 0) {
                             graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveTypes(world, x, z), rand);
                         }
@@ -758,26 +758,26 @@ public class BlockGSGraveStone extends BlockContainer {
                 }
                 break;
             case DOGS_GRAVES:
-                graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getDogGraveForDeath(damageSource), rand);
+                graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getDogGraveForDeath(damageSource, damageSource.damageType), rand);
                 if (graveType == 0) {
                     graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getDogGraveTypes(world, x, z), rand);
                 }
                 break;
             case CATS_GRAVES:
-                graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getCatGraveForDeath(damageSource), rand);
+                graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getCatGraveForDeath(damageSource, damageSource.damageType), rand);
                 if (graveType == 0) {
                     graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getCatGraveTypes(world, x, z), rand);
                 }
                 break;
             case HORSE_GRAVES:
-                graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getHorseGraveForDeath(damageSource), rand);
+                graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getHorseGraveForDeath(damageSource, damageSource.damageType), rand);
                 if (graveType == 0) {
                     graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getHorseGraveTypes(world, x, z), rand);
                 }
                 break;
         }
 
-        boolean isMagic = GraveStoneHelper.isMagicDamage(damageSource);
+        boolean isMagic = GraveStoneHelper.isMagicDamage(damageSource, damageSource.damageType);
 
         // TODO rework place finding
         boolean canGenerateGrave = false;

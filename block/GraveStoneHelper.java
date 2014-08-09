@@ -633,37 +633,37 @@ public class GraveStoneHelper {
     }
 
 
-    public static ArrayList<EnumGraves> getPlayerGraveForDeath(DamageSource damageSource) {
+    public static ArrayList<EnumGraves> getPlayerGraveForDeath(DamageSource damageSource, String damageType) {
         ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
 
-        if (isFireDamage(damageSource) || isLavaDamage(damageSource) || isBlastDamage(damageSource) || isFireballDamage(damageSource)) {
+        if (isFireDamage(damageSource, damageType) || isLavaDamage(damageSource, damageType) || isBlastDamage(damageType) || isFireballDamage(damageType)) {
             graveTypes.addAll(Arrays.asList(GENERATED_OBSIDIAN_GRAVES));
         }
         return graveTypes;
     }
 
-    public static ArrayList<EnumGraves> getDogGraveForDeath(DamageSource damageSource) {
+    public static ArrayList<EnumGraves> getDogGraveForDeath(DamageSource damageSource, String damageType) {
         ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
 
-        if (isFireDamage(damageSource) || isLavaDamage(damageSource) || isBlastDamage(damageSource) || isFireballDamage(damageSource)) {
+        if (isFireDamage(damageSource, damageType) || isLavaDamage(damageSource, damageType) || isBlastDamage(damageType) || isFireballDamage(damageType)) {
             graveTypes.addAll(Arrays.asList(DOG_OBSIDIAN_GRAVES));
         }
         return graveTypes;
     }
 
-    public static ArrayList<EnumGraves> getCatGraveForDeath(DamageSource damageSource) {
+    public static ArrayList<EnumGraves> getCatGraveForDeath(DamageSource damageSource, String damageType) {
         ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
 
-        if (isFireDamage(damageSource) || isLavaDamage(damageSource) || isBlastDamage(damageSource) || isFireballDamage(damageSource)) {
+        if (isFireDamage(damageSource, damageType) || isLavaDamage(damageSource, damageType) || isBlastDamage(damageType) || isFireballDamage(damageType)) {
             graveTypes.addAll(Arrays.asList(CAT_OBSIDIAN_GRAVES));
         }
         return graveTypes;
     }
 
-    public static ArrayList<EnumGraves> getHorseGraveForDeath(DamageSource damageSource) {
+    public static ArrayList<EnumGraves> getHorseGraveForDeath(DamageSource damageSource, String damageType) {
         ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
 
-        if (isFireDamage(damageSource) || isLavaDamage(damageSource) || isBlastDamage(damageSource) || isFireballDamage(damageSource)) {
+        if (isFireDamage(damageSource, damageType) || isLavaDamage(damageSource, damageType) || isBlastDamage(damageType) || isFireballDamage(damageType)) {
             graveTypes.addAll(Arrays.asList(HORSE_OBSIDIAN_GRAVES));
         }
         return graveTypes;
@@ -690,22 +690,21 @@ public class GraveStoneHelper {
         return graveTypes;
     }
 
-    public static boolean isFireDamage(DamageSource damageSource) {
-        return damageSource.equals(DamageSource.inFire) || damageSource.equals(DamageSource.onFire) ||
-                damageSource.damageType.toLowerCase().contains("nFire");
+    public static boolean isFireDamage(DamageSource damageSource, String damageType) {
+        return DamageSource.inFire.equals(damageSource) || DamageSource.onFire.equals(damageSource) ||
+                damageType.toLowerCase().contains("nFire");
     }
-    public static boolean isLavaDamage(DamageSource damageSource) {
-        return damageSource.equals(DamageSource.lava) || damageSource.damageType.toLowerCase().contains("lava");
+    public static boolean isLavaDamage(DamageSource damageSource, String damageType) {
+        return DamageSource.lava.equals(damageSource) || damageType.toLowerCase().contains("lava");
     }
-    public static boolean isBlastDamage(DamageSource damageSource) {
-        return damageSource.damageType.toLowerCase().contains("explosion");
+    public static boolean isBlastDamage(String damageType) {
+        return damageType.toLowerCase().contains("explosion");
     }
-    public static boolean isFireballDamage(DamageSource damageSource) {
-        return damageSource.damageType.toLowerCase().contains("fireball");
+    public static boolean isFireballDamage(String damageType) {
+        return damageType.toLowerCase().contains("fireball");
     }
 
-
-    public static boolean isMagicDamage(DamageSource damageSource) {
-        return damageSource.equals(DamageSource.magic) || damageSource.damageType.toLowerCase().contains("magic");
+    public static boolean isMagicDamage(DamageSource damageSource, String damageType) {
+        return DamageSource.magic.equals(damageSource) || damageType.toLowerCase().contains("magic");
     }
 }
