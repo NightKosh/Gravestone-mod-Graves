@@ -65,7 +65,7 @@ public class ComponentGSVillageMemorial extends StructureVillagePieces.Village {
 
         this.fillWithBlocks(world, structureBoundingBox, 0, -5, 0, 5, 0, 5, ground, ground, false);
         int memorialMeta = BlockGSMemorial.getMetaDirection(this.coordBaseMode);
-        byte memorialType = BlockGSMemorial.getMemorialType(random, 0);
+        byte memorialType = BlockGSMemorial.getMemorialType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, 0);
         placeMemorial(world, random, 2, 1, 2, memorialMeta, memorialType);
 
         for (int x = 0; x < 5; x++) {

@@ -172,7 +172,8 @@ public class CreeperRoom extends CatacombsBaseComponent {
 
 
         // creeper statue
-        MemorialGenerationHelper.placeMemorial(this, world, random, 5, yStart + 1, 5, BlockGSMemorial.getMetaDirection(coordBaseMode), BlockGSMemorial.getMemorialType(random, 4));
+        MemorialGenerationHelper.placeMemorial(this, world, random, 5, yStart + 1, 5, BlockGSMemorial.getMetaDirection(coordBaseMode),
+                BlockGSMemorial.getMemorialType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, 4));
 
         // clear enter
         this.fillWithAir(world, boundingBox, 4, yStart + 1, 0, 6, yStart + 3, 0);
