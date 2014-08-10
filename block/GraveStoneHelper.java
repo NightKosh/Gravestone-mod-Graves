@@ -154,10 +154,42 @@ public class GraveStoneHelper {
             EnumGraves.ICE_DOG_STATUE,
             EnumGraves.ICE_CAT_STATUE
     };
+    public static final byte[] DOGS_GRAVES = {
+            (byte) EnumGraves.WOODEN_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.SANDSTONE_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.STONE_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.MOSSY_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.IRON_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.GOLDEN_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.DIAMOND_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.EMERALD_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.LAPIS_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.REDSTONE_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.OBSIDIAN_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.QUARTZ_DOG_STATUE.ordinal(),
+            (byte) EnumGraves.ICE_DOG_STATUE.ordinal()
+    };
+    public static final EnumGraves[] CATS_GRAVES = {
+            EnumGraves.WOODEN_CAT_STATUE,
+            EnumGraves.SANDSTONE_CAT_STATUE,
+            EnumGraves.STONE_CAT_STATUE,
+            EnumGraves.MOSSY_CAT_STATUE,
+            EnumGraves.IRON_CAT_STATUE,
+            EnumGraves.GOLDEN_CAT_STATUE,
+            EnumGraves.DIAMOND_CAT_STATUE,
+            EnumGraves.EMERALD_CAT_STATUE,
+            EnumGraves.LAPIS_CAT_STATUE,
+            EnumGraves.REDSTONE_CAT_STATUE,
+            EnumGraves.OBSIDIAN_CAT_STATUE,
+            EnumGraves.QUARTZ_CAT_STATUE,
+            EnumGraves.ICE_CAT_STATUE
+    };
     public static final EnumGraves[] DOG_WOODEN_GRAVES = {EnumGraves.WOODEN_DOG_STATUE};
     public static final EnumGraves[] DOG_SANDSTONE_GRAVES = {EnumGraves.SANDSTONE_DOG_STATUE};
     public static final EnumGraves[] DOG_STONE_GRAVES = {EnumGraves.STONE_DOG_STATUE};
     public static final EnumGraves[] DOG_MOSSY_GRAVES = {EnumGraves.MOSSY_DOG_STATUE};
+    public static final EnumGraves[] DOG_GOLDEN_GRAVES = {EnumGraves.GOLDEN_DOG_STATUE};
+    public static final EnumGraves[] DOG_DIAMOND_GRAVES = {EnumGraves.DIAMOND_DOG_STATUE};
     public static final EnumGraves[] DOG_OBSIDIAN_GRAVES = {EnumGraves.OBSIDIAN_DOG_STATUE};
     public static final EnumGraves[] DOG_QUARTZ_GRAVES = {EnumGraves.QUARTZ_DOG_STATUE};
     public static final EnumGraves[] DOG_ICE_GRAVES = {EnumGraves.ICE_DOG_STATUE};
@@ -166,6 +198,8 @@ public class GraveStoneHelper {
     public static final EnumGraves[] CAT_SANDSTONE_GRAVES = {EnumGraves.SANDSTONE_CAT_STATUE};
     public static final EnumGraves[] CAT_STONE_GRAVES = {EnumGraves.STONE_CAT_STATUE};
     public static final EnumGraves[] CAT_MOSSY_GRAVES = {EnumGraves.MOSSY_CAT_STATUE};
+    public static final EnumGraves[] CAT_GOLDEN_GRAVES = {EnumGraves.GOLDEN_CAT_STATUE};
+    public static final EnumGraves[] CAT_DIAMOND_GRAVES = {EnumGraves.DIAMOND_CAT_STATUE};
     public static final EnumGraves[] CAT_OBSIDIAN_GRAVES = {EnumGraves.OBSIDIAN_CAT_STATUE};
     public static final EnumGraves[] CAT_QUARTZ_GRAVES = {EnumGraves.QUARTZ_CAT_STATUE};
     public static final EnumGraves[] CAT_ICE_GRAVES = {EnumGraves.ICE_CAT_STATUE};
@@ -222,9 +256,7 @@ public class GraveStoneHelper {
                 if (random.nextFloat() > 0.1) {
                     return getRandomGrave(getPlayerGraveTypes(world, x, z), random);
                 } else {
-                    // TODO
                     return (byte) EnumGraves.SWORD.ordinal();
-                    //return BlockGSGraveStone.GENERATED_SWORD_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_SWORD_GRAVES.length)];
                 }
             case PETS_GRAVES:
                 petsGravesList = new ArrayList<EnumGraves>();
@@ -241,9 +273,7 @@ public class GraveStoneHelper {
                     if (random.nextFloat() > 0.1) {
                         return getRandomGrave(getPlayerGraveTypes(world, x, z), random);
                     } else {
-                        // TODO
                         return (byte) EnumGraves.SWORD.ordinal();
-                        //return BlockGSGraveStone.GENERATED_SWORD_GRAVES[random.nextInt(BlockGSGraveStone.GENERATED_SWORD_GRAVES.length)];
                     }
                 } else {
                     petsGravesList = new ArrayList<EnumGraves>();
@@ -413,16 +443,6 @@ public class GraveStoneHelper {
         } else {
             return new DeathMessageInfo(entity.getCommandSenderName(), shortString, null);
         }
-    }
-
-    // TODO
-    public static void fillSwordsList() {
-//        Iterator iter = Item.itemRegistry.iterator();
-//        while (iter.hasNext()) {
-//            if (((Item) iter.next()) instanceof ItemSword) {
-//                swordsList.add(((Item) iter.next()));
-//            }
-//        }
     }
 
     public static void addSwordInfo(NBTTagCompound nbt, ItemStack sword) {
@@ -672,19 +692,21 @@ public class GraveStoneHelper {
     public static ArrayList<EnumGraves> getPlayerGraveForLevel(Entity entity) {
         ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
 
-        int level = ((EntityPlayer) entity).experienceLevel;
-        if (level >= 65) {
-            graveTypes.addAll(Arrays.asList(GENERATED_EMERALD_GRAVES));
-        } else if (level >= 55) {
-            graveTypes.addAll(Arrays.asList(GENERATED_DIAMOND_GRAVES));
-        } else if (level >= 45) {
-            graveTypes.addAll(Arrays.asList(GENERATED_REDSTONE_GRAVES));
-        } else if (level >= 35) {
-            graveTypes.addAll(Arrays.asList(GENERATED_GOLDEN_GRAVES));
-        } else if (level >= 25) {
-            graveTypes.addAll(Arrays.asList(GENERATED_LAPIS_GRAVES));
-        } else if (level >= 15) {
-            graveTypes.addAll(Arrays.asList(GENERATED_IRON_GRAVES));
+        if (entity instanceof EntityPlayer) {
+            int level = ((EntityPlayer) entity).experienceLevel;
+            if (level >= 65) {
+                graveTypes.addAll(Arrays.asList(GENERATED_EMERALD_GRAVES));
+            } else if (level >= 55) {
+                graveTypes.addAll(Arrays.asList(GENERATED_DIAMOND_GRAVES));
+            } else if (level >= 45) {
+                graveTypes.addAll(Arrays.asList(GENERATED_REDSTONE_GRAVES));
+            } else if (level >= 35) {
+                graveTypes.addAll(Arrays.asList(GENERATED_GOLDEN_GRAVES));
+            } else if (level >= 25) {
+                graveTypes.addAll(Arrays.asList(GENERATED_LAPIS_GRAVES));
+            } else if (level >= 15) {
+                graveTypes.addAll(Arrays.asList(GENERATED_IRON_GRAVES));
+            }
         }
 
         return graveTypes;

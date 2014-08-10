@@ -1,5 +1,6 @@
 package gravestone.tileentity;
 
+import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GraveStoneConfig;
 import net.minecraft.enchantment.Enchantment;
@@ -334,10 +335,13 @@ public class GSGraveStoneItems {
 
             if (pickAxeType > 3) {
                 addInventoryContent(new ItemStack(Items.iron_pickaxe, 1, getRandomDamage(random)));
+                tileEntity.setGraveType(GraveStoneHelper.getRandomGrave(Arrays.asList(GraveStoneHelper.GENERATED_IRON_GRAVES), random));
             } else if (pickAxeType > 0) {
                 addInventoryContent(new ItemStack(Items.golden_pickaxe, 1, getRandomDamage(random, 15)));
+                tileEntity.setGraveType(GraveStoneHelper.getRandomGrave(Arrays.asList(GraveStoneHelper.GENERATED_GOLDEN_GRAVES), random));
             } else {
                 addInventoryContent(new ItemStack(Items.diamond_pickaxe, 1, getRandomDamage(random)));
+                tileEntity.setGraveType(GraveStoneHelper.getRandomGrave(Arrays.asList(GraveStoneHelper.GENERATED_DIAMOND_GRAVES), random));
             }
         }
 
@@ -377,13 +381,16 @@ public class GSGraveStoneItems {
                 EnchantmentData data = new EnchantmentData(Enchantment.enchantmentsBookList[random.nextInt(Enchantment.enchantmentsBookList.length)], 1 + random.nextInt(5));
                 ItemStack items = Items.enchanted_book.getEnchantedItemStack(data);
                 addInventoryContent(items);
+                tileEntity.setGraveType(GraveStoneHelper.getRandomGrave(Arrays.asList(GraveStoneHelper.GENERATED_REDSTONE_GRAVES), random));
                 break;
             case 1:
                 addInventoryContent(new ItemStack(Items.potionitem, 1 + random.nextInt(5), POTION_LIST[random.nextInt(POTION_LIST.length)]));
+                tileEntity.setGraveType(GraveStoneHelper.getRandomGrave(Arrays.asList(GraveStoneHelper.GENERATED_QUARTZ_GRAVES), random));
                 break;
             case 2:
             case 3:
                 addInventoryContent(new ItemStack(Items.book, 3 + random.nextInt(8), 0));
+                tileEntity.setGraveType(GraveStoneHelper.getRandomGrave(Arrays.asList(GraveStoneHelper.GENERATED_LAPIS_GRAVES), random));
                 break;
         }
         switch (random.nextInt(15)) {
@@ -443,18 +450,21 @@ public class GSGraveStoneItems {
             } else {
                 addInventoryContent(new ItemStack(Items.iron_shovel, 1, getRandomDamage(random)));
             }
+            tileEntity.setGraveType(GraveStoneHelper.getRandomGrave(Arrays.asList(GraveStoneHelper.GENERATED_IRON_GRAVES), random));
         } else if (toolType > 0) {
             if (random.nextInt(2) == 0) {
                 addInventoryContent(new ItemStack(Items.golden_axe, 1, getRandomDamage(random, 15)));
             } else {
                 addInventoryContent(new ItemStack(Items.golden_shovel, 1, getRandomDamage(random, 15)));
             }
+            tileEntity.setGraveType(GraveStoneHelper.getRandomGrave(Arrays.asList(GraveStoneHelper.GENERATED_GOLDEN_GRAVES), random));
         } else {
             if (random.nextInt(2) == 0) {
                 addInventoryContent(new ItemStack(Items.diamond_axe, 1, getRandomDamage(random)));
             } else {
                 addInventoryContent(new ItemStack(Items.diamond_shovel, 1, getRandomDamage(random)));
             }
+            tileEntity.setGraveType(GraveStoneHelper.getRandomGrave(Arrays.asList(GraveStoneHelper.GENERATED_DIAMOND_GRAVES), random));
         }
 
         switch (random.nextInt(6)) {
@@ -518,6 +528,7 @@ public class GSGraveStoneItems {
 
         if (random.nextInt(15) == 0) {
             addInventoryContent(getRandomEgg(random));
+            tileEntity.setGraveType(GraveStoneHelper.getRandomGrave(Arrays.asList(GraveStoneHelper.GENERATED_EMERALD_GRAVES), random));
         }
     }
 
@@ -526,11 +537,21 @@ public class GSGraveStoneItems {
      */
     private void fillPetGrave(Random random) {
         if (random.nextInt(10) == 0) {
-            addInventoryContent(new ItemStack(Items.name_tag, 1, 0));
+            addInventoryContent(new ItemStack(Items.lead, 1, 0));
+            if (Arrays.asList(GraveStoneHelper.DOGS_GRAVES).contains(tileEntity.getGraveType())) {
+                tileEntity.setGraveType(GraveStoneHelper.getRandomGrave(Arrays.asList(GraveStoneHelper.DOG_GOLDEN_GRAVES), random));
+            } else if (Arrays.asList(GraveStoneHelper.CATS_GRAVES).contains(tileEntity.getGraveType())) {
+                tileEntity.setGraveType(GraveStoneHelper.getRandomGrave(Arrays.asList(GraveStoneHelper.CAT_GOLDEN_GRAVES), random));
+            }
         }
 
         if (random.nextInt(10) == 0) {
-            addInventoryContent(new ItemStack(Items.lead, 1, 0));
+            addInventoryContent(new ItemStack(Items.name_tag, 1, 0));
+            if (Arrays.asList(GraveStoneHelper.DOGS_GRAVES).contains(tileEntity.getGraveType())) {
+                tileEntity.setGraveType(GraveStoneHelper.getRandomGrave(Arrays.asList(GraveStoneHelper.DOG_DIAMOND_GRAVES), random));
+            } else if (Arrays.asList(GraveStoneHelper.CATS_GRAVES).contains(tileEntity.getGraveType())) {
+                tileEntity.setGraveType(GraveStoneHelper.getRandomGrave(Arrays.asList(GraveStoneHelper.CAT_DIAMOND_GRAVES), random));
+            }
         }
     }
 
