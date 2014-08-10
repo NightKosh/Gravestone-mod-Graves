@@ -125,8 +125,12 @@ public class ModelSteveStatueMemorial extends ModelMemorial {
     }
 
     @Override
-    public void customRender(EnumMemorials memorialType) {
-        renderAll();
+    public void customRender(EnumMemorials memorialType, boolean enchanted) {
+        if (enchanted) {
+            renderEnchanted();
+        } else {
+            renderAll();
+        }
         renderArmor(memorialType);
     }
 

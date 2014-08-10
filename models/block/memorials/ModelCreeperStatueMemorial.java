@@ -84,8 +84,12 @@ public class ModelCreeperStatueMemorial extends ModelMemorial {
     }
 
     @Override
-    public void customRender() {
-        renderAll();
+    public void customRender(boolean enchanted) {
+        if (enchanted) {
+            renderEnchanted();
+        } else {
+            renderAll();
+        }
         renderCreeperCharging();
     }
 
