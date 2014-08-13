@@ -246,7 +246,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
             case OBSIDIAN_CREEPER_STATUE:
             case QUARTZ_CREEPER_STATUE:
             case ICE_CREEPER_STATUE:
-                model.customRender();
+                model.customRender(tileEntity.isEnchanted());
                 break;
             case WOODEN_STEVE_STATUE:
             case SANDSTONE_STEVE_STATUE:
@@ -261,10 +261,14 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
             case OBSIDIAN_STEVE_STATUE:
             case QUARTZ_STEVE_STATUE:
             case ICE_STEVE_STATUE:
-                model.customRender(memorialType);
+                model.customRender(memorialType, tileEntity.isEnchanted());
                 break;
             default:
-                model.renderAll();
+                if (tileEntity.isEnchanted()) {
+                    model.renderEnchanted();
+                } else {
+                    model.renderAll();
+                }
         }
 
         GL11.glPopMatrix();
