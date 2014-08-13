@@ -261,7 +261,7 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
     }
 
     public static boolean checkPainting(World world, int x, int y, int z) {
-        return world.getEntitiesWithinAABB(EntityPainting.class, AxisAlignedBB.getAABBPool().getAABB(x, y, z,
+        return world.getEntitiesWithinAABB(EntityPainting.class, AxisAlignedBB.getBoundingBox(x, y, z,
                 x, y, z).expand(1, 1, 1)).size() == 0;
     }
 }
