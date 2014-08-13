@@ -40,20 +40,20 @@ block.spawner.zombie=僵尸刷怪笼
 # bone blocks
 tile.bone_block.name=骨质方块
 tile.bone_block.skull_name=颅骨骨质方块
-tile.bone_block.crawler_name=骨质方块（有爬行头颅）
-tile.bone_block.crawler_skull_name=颅骨骨质方块（有爬行头颅）
+tile.bone_block.crawler_name=骨质方块(有爬行头颅)
+tile.bone_block.crawler_skull_name=颅骨骨质方块(有爬行头颅)
 tile.bone_slab.name=骨质台阶
 tile.bone_stairs.name=骨质阶梯
 
 ## chests
 block.haunted_chest.bats_chest=带着蝙蝠的箱子
 block.haunted_chest.skeleton_chest=带着骷髅的箱子
-block.haunted_chest.raven_chest=带乌鸦的箱子
+block.haunted_chest.raven_chest=带着乌鸦的箱子
 block.haunted_chest.ghost_chest=带着鬼魂的箱子
 
 ##candles
 tile.candle.name=蜡烛
-block.skull_candle.skeleton.name=头颅蜡烛
+block.skull_candle.skeleton.name=骷髅头颅蜡烛
 block.skull_candle.wither_skeleton.name=凋灵头颅蜡烛
 block.skull_candle.zombie.name=僵尸头颅蜡烛
 
@@ -132,7 +132,7 @@ entity.GSZombieDog.name=僵尸狗
 entity.GSSkeletonDog.name=骷髅狗
 entity.GSZombieCat.name=僵尸猫
 entity.GSSkeletonCat.name=骷髅猫
-entity.GSSkullCrawler.name=爬行头颅
+entity.GSSkullCrawler.name=爬行骷髅头颅
 entity.GSWitherSkullCrawler.name=爬行凋灵头颅
 entity.GSZombieSkullCrawler.name=爬行僵尸头颅
 entity.GSRaven.name=乌鸦
