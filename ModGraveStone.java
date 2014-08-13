@@ -12,7 +12,6 @@ import gravestone.core.*;
 import gravestone.core.commands.GSCommands;
 import gravestone.core.compatibility.GSCompatibility;
 import gravestone.core.event.GSEventsHook;
-import gravestone.core.localization.GraveStoneLocalizationHandler;
 import gravestone.core.proxy.CommonProxy;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -37,7 +36,6 @@ public class ModGraveStone {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         GraveStoneConfig.getInstance(event.getModConfigurationDirectory().getAbsolutePath() + "/GraveStoneMod/", "GraveStone.cfg");
-        GraveStoneLocalizationHandler.init();
         GSStructures.preInit();
     }
 
