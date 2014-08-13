@@ -1,13 +1,15 @@
 package gravestone.structures.graves;
 
-import java.util.LinkedList;
-import java.util.Random;
-import gravestone.core.GSBiomes;
 import gravestone.config.GraveStoneConfig;
 import gravestone.structures.GSStructureGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
+import net.minecraftforge.common.BiomeDictionary;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -17,10 +19,11 @@ import net.minecraft.world.World;
  */
 public class SingleGraveGenerator implements GSStructureGenerator {
     private static SingleGraveGenerator instance;
+
     private SingleGraveGenerator() {
         instance = this;
     }
-    
+
     public static SingleGraveGenerator getInstance() {
         if (instance == null) {
             return new SingleGraveGenerator();
@@ -28,12 +31,12 @@ public class SingleGraveGenerator implements GSStructureGenerator {
             return instance;
         }
     }
-    
+
     // chance to generate a structure
     public static final double CHANCE = 0.1D;
     public static final byte RANGE = 100;
-    private static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
-    
+    private static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList<ChunkCoordIntPair>();
+
     @Override
     public boolean generate(World world, Random rand, int x, int z, double chance, boolean isCommand) {
         if (isCommand || (GraveStoneConfig.generateSingleGraves && canSpawnStructureAtCoords(world, x, z, chance))) {
@@ -50,7 +53,12 @@ public class SingleGraveGenerator implements GSStructureGenerator {
     }
 
     protected static boolean canSpawnStructureAtCoords(World world, int x, int z, double chance) {
-        return chance < CHANCE && !GSBiomes.getGravesBiomes().contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z);
+        return chance < CHANCE && isBiomeAllowed(world, x, z) && noAnyInRange(x, z);
+    }
+
+    protected static boolean isBiomeAllowed(World world, int x, int z) {
+        LinkedList<BiomeDictionary.Type> biomeTypesList = new LinkedList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(x, z))));
+        return !biomeTypesList.contains(BiomeDictionary.Type.WATER);
     }
 
     protected static boolean noAnyInRange(int x, int z) {

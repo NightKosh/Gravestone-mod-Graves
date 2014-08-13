@@ -1,15 +1,16 @@
 package gravestone.structures.memorials;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Random;
 import gravestone.GraveStoneLogger;
-import gravestone.core.GSBiomes;
 import gravestone.config.GraveStoneConfig;
 import gravestone.structures.GSStructureGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
+import net.minecraftforge.common.BiomeDictionary;
 
 /**
  * GraveStone mod
@@ -53,7 +54,12 @@ public class MemorialGenerator implements GSStructureGenerator {
     }
 
     protected static boolean canSpawnStructureAtCoords(World world, int x, int z, double chance) {
-        return chance < CHANCE && !GSBiomes.getMemorialBiomes().contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z);
+        return chance < CHANCE && isBiomeAllowed(world, x, z) && noAnyInRange(x, z);
+    }
+
+    protected static boolean isBiomeAllowed(World world, int x, int z) {
+        LinkedList<BiomeDictionary.Type> biomeTypesList = new LinkedList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(x, z))));
+        return !biomeTypesList.contains(BiomeDictionary.Type.WATER);
     }
 
     protected static boolean noAnyInRange(int x, int z) {

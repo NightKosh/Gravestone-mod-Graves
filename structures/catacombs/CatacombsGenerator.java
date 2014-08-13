@@ -1,16 +1,17 @@
 package gravestone.structures.catacombs;
 
 import gravestone.GraveStoneLogger;
-import gravestone.core.GSBiomes;
 import gravestone.config.GraveStoneConfig;
-import static gravestone.config.GraveStoneConfig.maxCatacombsHeight;
 import gravestone.structures.GSStructureGenerator;
-import java.util.LinkedList;
-import java.util.Random;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.village.Village;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
+import net.minecraftforge.common.BiomeDictionary;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -20,10 +21,11 @@ import net.minecraft.world.World;
  */
 public class CatacombsGenerator implements GSStructureGenerator {
     private static CatacombsGenerator instance;
+
     private CatacombsGenerator() {
         instance = this;
     }
-    
+
     public static CatacombsGenerator getInstance() {
         if (instance == null) {
             return new CatacombsGenerator();
@@ -31,13 +33,13 @@ public class CatacombsGenerator implements GSStructureGenerator {
             return instance;
         }
     }
-    
-    private static final int VILLAGE_RANGE = 200; 
+
+    private static final int VILLAGE_RANGE = 200;
     public static final byte CATACOMBS_RANGE = 100;
     public static final int CATACOMBS_DISTANCE = 1500;
     private static final double CHANCE = 0.00025D;
     protected static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
-    
+
     @Override
     public boolean generate(World world, Random rand, int x, int z, double chance, boolean isCommand) {
         if (isCommand || (GraveStoneConfig.generateCatacombs && canSpawnStructureAtCoords(world, x, z, chance) && isHeightAcceptable(world, x, z))) {
@@ -57,7 +59,21 @@ public class CatacombsGenerator implements GSStructureGenerator {
     }
 
     protected static boolean canSpawnStructureAtCoords(World world, int x, int z, double chance) {
-        return chance < CHANCE && GSBiomes.getCatacombsBiomes().contains(world.getBiomeGenForCoords(x, z).biomeID) && noAnyInRange(x, z, CATACOMBS_DISTANCE, world);
+        return chance < CHANCE && isBiomeAllowed(world, x, z) && noAnyInRange(x, z, CATACOMBS_DISTANCE, world);
+    }
+
+    protected static boolean isBiomeAllowed(World world, int x, int z) {
+        LinkedList<BiomeDictionary.Type> biomeTypesList = new LinkedList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(x, z))));
+        if (!biomeTypesList.contains(BiomeDictionary.Type.WATER) && !biomeTypesList.contains(BiomeDictionary.Type.SWAMP) &&
+                !biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) && !biomeTypesList.contains(BiomeDictionary.Type.MAGICAL) &&
+                !biomeTypesList.contains(BiomeDictionary.Type.HILLS) && !biomeTypesList.contains(BiomeDictionary.Type.MOUNTAIN)) {
+
+            if (biomeTypesList.contains(BiomeDictionary.Type.PLAINS) || biomeTypesList.contains(BiomeDictionary.Type.FOREST) ||
+                    biomeTypesList.contains(BiomeDictionary.Type.FROZEN) || biomeTypesList.contains(BiomeDictionary.Type.WASTELAND)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected static boolean noAnyInRange(int x, int z, int range, World world) {
@@ -68,7 +84,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
                 return false;
             }
         }
-        
+
         if (world.villageCollectionObj != null && world.villageCollectionObj.getVillageList() != null) {
             for (Object villageObj : world.villageCollectionObj.getVillageList()) {
                 ChunkCoordinates villageCenter = ((Village) villageObj).getCenter();
@@ -88,7 +104,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
     public static LinkedList<ChunkCoordIntPair> getStructuresList() {
         return structuresList;
     }
-    
+
     private static boolean isHeightAcceptable(World world, int x, int z) {
         GraveStoneLogger.logInfo("Catacombs generation - Begin Checking area height");
         int height = 0;

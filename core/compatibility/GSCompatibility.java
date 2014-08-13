@@ -29,23 +29,6 @@ public class GSCompatibility {
             GSCompatibilityMoCreatures.addMobs();
         }
 
-//        if (Loader.isModLoaded("Highlands")) {
-//            GSCompatibilityHighland.isInstalled = true;
-//            GSCompatibilityHighland.loadBiomes();
-//            GSCompatibilityHighland.addBiomes();
-//        }
-
-//        if (Loader.isModLoaded("BiomesOPlenty")) {
-//            GSCompatibilityBiomesOPlenty.isInstalled = true;
-//            GSCompatibilityBiomesOPlenty.loadBiomes();
-//            GSCompatibilityBiomesOPlenty.addBiomes();
-//        }
-
-//        if (Loader.isModLoaded("ExtrabiomesXL")) {
-//            GSCompatibilityExtraBiomesXL.isInstalled = true;
-//            GSCompatibilityExtraBiomesXL.addBiomes();
-//        }
-
         if (Loader.isModLoaded("battlegear2")) {
             GSCompatibilityBattlegear.isInstalled = true;
         }
