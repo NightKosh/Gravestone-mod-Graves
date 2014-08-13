@@ -199,7 +199,7 @@ public class GSGraveStoneItems {
                     }
                 }
 
-                int graveType = random.nextInt(40);
+                int graveType = random.nextInt(80);
 
                 if (allLoot) {
                     if (tileEntity.isSwordGrave() && graveType > 5) {
