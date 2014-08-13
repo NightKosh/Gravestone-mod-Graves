@@ -9,6 +9,9 @@ import gravestone.models.block.graves.*;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
@@ -199,7 +202,16 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
     }
 
     private void renderSword(TileEntityGSGraveStone te) {
-        EntityItem entityitem = new EntityItem(te.getWorldObj(), 0, 0, 0, te.getSword());
+        ItemStack sword = te.getSword();
+        if (te.isEnchanted()) {
+            if (!sword.isItemEnchanted()) {
+                if (!sword.hasTagCompound()) {
+                    sword.setTagCompound(new NBTTagCompound());
+                }
+                sword.getTagCompound().setTag("ench", new NBTTagList());
+            }
+        }
+        EntityItem entityitem = new EntityItem(te.getWorldObj(), 0, 0, 0, sword);
         entityitem.hoverStart = 0;
         GL11.glTranslatef(0.24F, 0.83F, 0);
         GL11.glScalef(1.5F, -1.5F, -1.5F);

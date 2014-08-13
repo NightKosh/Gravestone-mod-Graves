@@ -809,12 +809,6 @@ public class BlockGSGraveStone extends BlockContainer {
 
             if (tileEntity != null) {
                 if (sword != null) {
-                    if (isMagic) {
-                        if (sword.getTagCompound() == null) {
-                            sword.setTagCompound(new NBTTagCompound());
-                        }
-                        sword.getTagCompound().setTag("ench", new NBTTagList());
-                    }
                     tileEntity.setSword(sword);
                 }
 
