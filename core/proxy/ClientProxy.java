@@ -21,6 +21,7 @@ import gravestone.tileentity.*;
 import net.minecraft.item.Item;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.MinecraftForgeClient;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * GraveStone mod
@@ -90,8 +91,13 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public String getLocalizedString(String str) {
-        String localizedString = LanguageRegistry.instance().getStringLocalization(str);
-        if (localizedString.length() == 0) {
+        String localizedString = null;
+        try {
+            localizedString = LanguageRegistry.instance().getStringLocalization(str);
+        } catch (Exception e) {
+            // TODO
+        }
+        if (StringUtils.isBlank(localizedString)) {
             return LanguageRegistry.instance().getStringLocalization(str, "en_US");
         } else {
             return localizedString;
