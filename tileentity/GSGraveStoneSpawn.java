@@ -60,7 +60,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
             this.getNewMob = false;
         }
 
-        int nearbyEntitiesCount = tileEntity.getWorldObj().getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.getAABBPool().getAABB(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord,
+        int nearbyEntitiesCount = tileEntity.getWorldObj().getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.getBoundingBox(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord,
                 tileEntity.xCoord + 1, tileEntity.yCoord + 1, tileEntity.zCoord + 1).expand(1.0D, 4.0D, SPAWN_RANGE * 2)).size();
 
         if (nearbyEntitiesCount >= MAX_NEARBY_ENTITIES) {
