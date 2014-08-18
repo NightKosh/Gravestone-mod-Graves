@@ -1,9 +1,6 @@
 package gravestone.core.compatibility;
 
 import cpw.mods.fml.common.Loader;
-import forestry.api.core.BlockInterface;
-import gravestone.core.GSReciepes;
-import thaumcraft.api.ItemApi;
 
 /**
  * GraveStone mod
@@ -46,9 +43,9 @@ public class GSCompatibility {
         }
 
         if (Loader.isModLoaded("Thaumcraft")) {
+            GSCompatibilityThaumcraft.addReciepes();
             GSCompatibilityThaumcraft.addAspects();
             GSCompatibilityThaumcraft.addSwords();
-            GSReciepes.addSkullCandleReciepes(ItemApi.getBlock("blockCandle", 0));
         }
 
         if (Loader.isModLoaded("Baubles")) {
@@ -68,7 +65,7 @@ public class GSCompatibility {
         }
 
         if (Loader.isModLoaded("Forestry")) {
-            GSReciepes.addSkullCandleReciepes(BlockInterface.getBlock("candle"));
+            GSCompatibilityForestry.isInstalled = true;
         }
 
         if (Loader.isModLoaded("SophisticatedWolves")) {

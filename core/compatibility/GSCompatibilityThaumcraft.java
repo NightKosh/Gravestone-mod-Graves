@@ -5,6 +5,7 @@ import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
 import gravestone.core.GSEntity;
 import gravestone.core.GSItem;
+import gravestone.core.GSReciepes;
 import net.minecraft.item.ItemStack;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.ThaumcraftApi;
@@ -21,6 +22,10 @@ public class GSCompatibilityThaumcraft {
 
     private GSCompatibilityThaumcraft() {
 
+    }
+
+    public static void addReciepes() {
+        GSReciepes.addSkullCandleReciepes(ItemApi.getBlock("blockCandle", 0));
     }
 
     public static void addAspects() {
@@ -67,7 +72,7 @@ public class GSCompatibilityThaumcraft {
             ThaumcraftApi.registerObjectTag(new ItemStack(GSItem.chisel), new AspectList().add(Aspect.TOOL, 2));
             // corpses
             ThaumcraftApi.registerObjectTag(new ItemStack(GSItem.corpse), new int[]{0}, new AspectList().add(Aspect.DEATH, 2)
-                .add(Aspect.MAN, 3).add(Aspect.AIR, 2)); // villager
+                    .add(Aspect.MAN, 3).add(Aspect.AIR, 2)); // villager
             ThaumcraftApi.registerObjectTag(new ItemStack(GSItem.corpse), new int[]{1}, new AspectList().add(Aspect.DEATH, 2)
                     .add(Aspect.BEAST, 3).add(Aspect.EARTH, 3)); // wolf
             ThaumcraftApi.registerObjectTag(new ItemStack(GSItem.corpse), new int[]{2}, new AspectList().add(Aspect.DEATH, 2)
