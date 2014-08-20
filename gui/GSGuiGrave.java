@@ -69,9 +69,11 @@ public class GSGuiGrave extends GuiScreen {
     public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
         if (this.textField != null && !this.textField.getText().isEmpty()) {
-            for (WorldServer world : MinecraftServer.getServer().worldServers) {
-                if (world != null) {
-                    this.setText(world);
+            if (MinecraftServer.getServer() != null && MinecraftServer.getServer().worldServers != null) {
+                for (WorldServer world : MinecraftServer.getServer().worldServers) {
+                    if (world != null) {
+                        this.setText(world);
+                    }
                 }
             }
         }
