@@ -23,7 +23,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
@@ -430,8 +429,13 @@ public class BlockGSGraveStone extends BlockContainer {
             } else {
                 TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
 
-                if (tileEntity != null && tileEntity.isSwordGrave()) {
-                    tileEntity.dropSword();
+                if (tileEntity != null) {
+                    if (tileEntity.isSwordGrave()) {
+                        tileEntity.dropSword();
+                    }
+                    if (tileEntity.hasFlower()) {
+                        tileEntity.dropFlower();
+                    }
                 }
             }
         } else {
@@ -556,9 +560,21 @@ public class BlockGSGraveStone extends BlockContainer {
         TileEntityGSGraveStone te = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
 
         if (te != null) {
-            if (world.isRemote) {
-                if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemSpade) {
-                } else {
+            if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemSpade) {
+                if (!world.isRemote) {
+                    GraveStoneLogger.logInfo(player.getCommandSenderName() + " loot grave at " + x + "/" + y + "/" + z);
+                    te.dropAllItems();
+                }
+            } else if (player.inventory.getCurrentItem() != null && !te.hasFlower() &&
+                    GraveStoneHelper.FLOWERS.contains(Block.getBlockFromItem(player.inventory.getCurrentItem().getItem()))) {
+                ItemStack item = player.inventory.getCurrentItem();
+                te.setFlower(new ItemStack(item.getItem(), 1, item.getItemDamage()));
+                if (world.isRemote) {
+                    player.inventory.getCurrentItem().stackSize--;
+                }
+                return true;
+            } else {
+                if (world.isRemote) {
                     String name;
                     String deathText;
                     String killerName;
@@ -582,11 +598,6 @@ public class BlockGSGraveStone extends BlockContainer {
                             //entityPlayer.sendChatToPlayer("Had lived " + entity.getAge() + " days");
                         }
                     }
-                }
-            } else {
-                if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemSpade) {
-                    GraveStoneLogger.logInfo(player.getCommandSenderName() + " loot grave at " + x + "/" + y + "/" + z);
-                    te.dropAllItems();
                 }
             }
         }

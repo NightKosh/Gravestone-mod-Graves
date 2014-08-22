@@ -46,6 +46,8 @@ public class GraveStoneHelper {
             Block.getIdFromBlock(Blocks.sand), Block.getIdFromBlock(Blocks.gravel),
             Block.getIdFromBlock(Blocks.soul_sand), Block.getIdFromBlock(Blocks.mycelium),
             Block.getIdFromBlock(Blocks.snow));
+    public static final List FLOWERS = Arrays.asList(
+            Blocks.yellow_flower, Blocks.red_flower);
     public static ArrayList<Item> swordsList = new ArrayList<Item>(
             Arrays.asList(
                     Items.wooden_sword,

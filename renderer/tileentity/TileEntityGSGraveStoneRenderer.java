@@ -178,6 +178,9 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
             } else {
                 MODELS_MAP.get(graveType).renderAll();
             }
+            if (tileEntity.hasFlower()) {
+                renderFlower(tileEntity);
+            }
         }
 
         GL11.glPopMatrix();
@@ -217,6 +220,19 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         GL11.glScalef(1.5F, -1.5F, -1.5F);
         GL11.glRotatef(135, 0, 0, 1);
 
+        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
+    }
+
+    private void renderFlower(TileEntityGSGraveStone te) {
+        EntityItem entityitem = new EntityItem(te.getWorldObj(), 0, 0, 0, te.getFlower());
+        entityitem.hoverStart = 0;
+        GL11.glTranslatef(0, 1.45F, -0.1F);
+        GL11.glScalef(1, -1F, -1F);
+        GL11.glRotatef(45, 0, 1, 0);
+
+        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
+
+        GL11.glRotatef(-90, 0, 1, 0);
         RenderManager.instance.renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
     }
 }

@@ -18,6 +18,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
     protected GSGraveStoneSpawn gsSpawn;
     protected ItemStack sword = null;
+    protected ItemStack flower = null;
 
     public TileEntityGSGraveStone() {
         super();
@@ -75,6 +76,10 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
         // sword
         readSwordInfo(nbtTag);
+
+        // read
+        // TODO
+        readFlowerInfo(nbtTag);
     }
 
     /**
@@ -94,6 +99,9 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
         // sword
         writeSwordInfo(nbtTag);
+
+        // flower
+        writeFlowerInfo(nbtTag);
     }
 
     private void readSwordInfo(NBTTagCompound nbtTag) {
@@ -105,6 +113,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         }
     }
 
+
     private void writeSwordInfo(NBTTagCompound nbtTag) {
         if (sword != null) {
             NBTTagCompound swordNBT = new NBTTagCompound();
@@ -113,9 +122,20 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         }
     }
 
-    /*
-     * Get sword
-     */
+    private void readFlowerInfo(NBTTagCompound nbtTag) {
+        if (nbtTag.hasKey("Flower")) {
+            flower = ItemStack.loadItemStackFromNBT(nbtTag.getCompoundTag("Flower"));
+        }
+    }
+
+    private void writeFlowerInfo(NBTTagCompound nbtTag) {
+        if (flower != null) {
+            NBTTagCompound flowerNBT = new NBTTagCompound();
+            flower.writeToNBT(flowerNBT);
+            nbtTag.setTag("Flower", flowerNBT);
+        }
+    }
+
     public ItemStack getSword() {
         return this.sword;
     }
@@ -124,13 +144,33 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         this.sword = sword;
     }
 
-    /*
-     * Drop sword as item
-     */
     public void dropSword() {
         if (this.sword != null) {
             this.gSItems.dropItem(this.sword, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
         }
+    }
+
+    public boolean isSwordGrave() {
+        return sword != null;
+    }
+
+
+    public ItemStack getFlower() {
+        return this.flower;
+    }
+
+    public void setFlower(ItemStack flower) {
+        this.flower = flower;
+    }
+
+    public void dropFlower() {
+        if (this.flower != null) {
+            this.gSItems.dropItem(this.flower, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+        }
+    }
+
+    public boolean hasFlower() {
+        return flower != null;
     }
 
     public EnumGraves getGraveType() {
@@ -139,10 +179,6 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
     public boolean isEmpty() {
         return gSItems.graveContents.isEmpty();
-    }
-
-    public boolean isSwordGrave() {
-        return sword != null;
     }
 
     private void convertSword(NBTTagCompound nbtTag) {
