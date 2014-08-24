@@ -41,13 +41,11 @@ import java.util.*;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class GraveStoneHelper {
-    private static final List<Integer> gravestoneGround = Arrays.asList(
+    private static final List<Integer> GRAVESTONE_GROUND = Arrays.asList(
             Block.getIdFromBlock(Blocks.grass), Block.getIdFromBlock(Blocks.dirt),
             Block.getIdFromBlock(Blocks.sand), Block.getIdFromBlock(Blocks.gravel),
             Block.getIdFromBlock(Blocks.soul_sand), Block.getIdFromBlock(Blocks.mycelium),
             Block.getIdFromBlock(Blocks.snow));
-    public static final List FLOWERS = Arrays.asList(
-            Blocks.yellow_flower, Blocks.red_flower);
     public static ArrayList<Item> swordsList = new ArrayList<Item>(
             Arrays.asList(
                     Items.wooden_sword,
@@ -214,6 +212,40 @@ public class GraveStoneHelper {
     public static final EnumGraves[] HORSE_QUARTZ_GRAVES = {EnumGraves.QUARTZ_HORSE_STATUE};
     public static final EnumGraves[] HORSE_ICE_GRAVES = {EnumGraves.ICE_HORSE_STATUE};
 
+
+    public static final List<Block> FLOWERS_GROUND = Arrays.asList(
+            Blocks.grass, Blocks.dirt);
+    public static final List FLOWERS = Arrays.asList(
+            Blocks.yellow_flower, Blocks.red_flower);
+    public static final List<EnumGraves> FLOWER_GRAVES = Arrays.asList(
+            EnumGraves.WOODEN_VERTICAL_PLATE,
+            EnumGraves.WOODEN_CROSS,
+            EnumGraves.SANDSTONE_VERTICAL_PLATE,
+            EnumGraves.SANDSTONE_CROSS,
+            EnumGraves.STONE_VERTICAL_PLATE,
+            EnumGraves.STONE_CROSS,
+            EnumGraves.MOSSY_VERTICAL_PLATE,
+            EnumGraves.MOSSY_CROSS,
+            EnumGraves.IRON_VERTICAL_PLATE,
+            EnumGraves.IRON_CROSS,
+            EnumGraves.GOLDEN_VERTICAL_PLATE,
+            EnumGraves.GOLDEN_CROSS,
+            EnumGraves.DIAMOND_VERTICAL_PLATE,
+            EnumGraves.DIAMOND_CROSS,
+            EnumGraves.EMERALD_VERTICAL_PLATE,
+            EnumGraves.EMERALD_CROSS,
+            EnumGraves.LAPIS_VERTICAL_PLATE,
+            EnumGraves.LAPIS_CROSS,
+            EnumGraves.REDSTONE_VERTICAL_PLATE,
+            EnumGraves.REDSTONE_CROSS,
+            EnumGraves.OBSIDIAN_VERTICAL_PLATE,
+            EnumGraves.OBSIDIAN_CROSS,
+            EnumGraves.QUARTZ_VERTICAL_PLATE,
+            EnumGraves.QUARTZ_CROSS,
+            EnumGraves.ICE_VERTICAL_PLATE,
+            EnumGraves.ICE_CROSS
+    );
+
     private GraveStoneHelper() {
     }
 
@@ -351,7 +383,7 @@ public class GraveStoneHelper {
      * Check can be grave placed on this type of surface
      */
     public static boolean canPlaceBlockAt(Block block) {
-        return GraveStoneConfig.canPlaceGravesEveryWhere || gravestoneGround.contains(Block.getIdFromBlock(block));
+        return GraveStoneConfig.canPlaceGravesEveryWhere || GRAVESTONE_GROUND.contains(Block.getIdFromBlock(block));
     }
 
     public static int getMetadataBasedOnRotation(int rotation) {
@@ -481,6 +513,10 @@ public class GraveStoneHelper {
         } else {
             return 0;
         }
+    }
+
+    public static boolean canFlowerBePlaced(TileEntityGSGraveStone te) {
+        return !te.isSwordGrave() && FLOWER_GRAVES.contains(te.getGraveType());
     }
 
     public static ArrayList<EnumGraves> getPlayerGraveTypes(World world, int x, int z) {
@@ -718,12 +754,15 @@ public class GraveStoneHelper {
         return DamageSource.inFire.equals(damageSource) || DamageSource.onFire.equals(damageSource) ||
                 damageType.toLowerCase().contains("nFire");
     }
+
     public static boolean isLavaDamage(DamageSource damageSource, String damageType) {
         return DamageSource.lava.equals(damageSource) || damageType.toLowerCase().contains("lava");
     }
+
     public static boolean isBlastDamage(String damageType) {
         return damageType.toLowerCase().contains("explosion");
     }
+
     public static boolean isFireballDamage(String damageType) {
         return damageType.toLowerCase().contains("fireball");
     }

@@ -19,9 +19,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemSpade;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
@@ -560,19 +558,31 @@ public class BlockGSGraveStone extends BlockContainer {
         TileEntityGSGraveStone te = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
 
         if (te != null) {
-            if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemSpade) {
-                if (!world.isRemote) {
-                    GraveStoneLogger.logInfo(player.getCommandSenderName() + " loot grave at " + x + "/" + y + "/" + z);
-                    te.dropAllItems();
-                }
-            } else if (player.inventory.getCurrentItem() != null && !te.hasFlower() &&
-                    GraveStoneHelper.FLOWERS.contains(Block.getBlockFromItem(player.inventory.getCurrentItem().getItem()))) {
+            if (player.inventory.getCurrentItem() != null) {
                 ItemStack item = player.inventory.getCurrentItem();
-                te.setFlower(new ItemStack(item.getItem(), 1, item.getItemDamage()));
-                if (world.isRemote) {
-                    player.inventory.getCurrentItem().stackSize--;
+                if (item.getItem() instanceof ItemSpade) {
+                    if (!world.isRemote) {
+                        GraveStoneLogger.logInfo(player.getCommandSenderName() + " loot grave at " + x + "/" + y + "/" + z);
+                        te.dropAllItems();
+                    }
+                } else if (!te.hasFlower()) {
+                    if (GraveStoneHelper.FLOWERS.contains(Block.getBlockFromItem(item.getItem())) &&
+                            GraveStoneHelper.FLOWERS_GROUND.contains(world.getBlock(x, y - 1, z)) &&
+                            GraveStoneHelper.canFlowerBePlaced(te)) {
+                            te.setFlower(new ItemStack(item.getItem(), 1, item.getItemDamage()));
+                            if (world.isRemote) {
+                                player.inventory.getCurrentItem().stackSize--;
+                            }
+                            return true;
+                    }
+                } else {
+                    if (item.getItem() instanceof ItemShears) {
+                        if (!world.isRemote) {
+                            te.dropFlower();
+                        }
+                        te.setFlower(null);
+                    }
                 }
-                return true;
             } else {
                 if (world.isRemote) {
                     String name;
