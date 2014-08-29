@@ -4,58 +4,58 @@ itemGroup.tabGraveStone=Gravestone
 
 # blocks
 ## graves
-block.gravestone.gravestone=Gravestone
-block.gravestone.cross=Cross
-block.gravestone.plate=Grave Plate
-block.gravestone.dog_statue=Dog statue
-block.gravestone.cat_statue=Cat statue
-block.gravestone.wooden_sword=Wooden sword gravestone
-block.gravestone.stone_sword=Stone sword gravestone
-block.gravestone.iron_sword=Iron sword gravestone
-block.gravestone.golden_sword=Golden sword gravestone
-block.gravestone.diamond_sword=Diamond sword gravestone
-block.gravestone.horse_statue=Horse statue
+block.gravestone.gravestone=Lápide
+block.gravestone.cross=Cruz
+block.gravestone.plate=Chapa de Túmulo
+block.gravestone.dog_statue=Estátua de Cachorro
+block.gravestone.cat_statue=Estátua de Gato
+block.gravestone.wooden_sword=Lápide de Espada de Madeira
+block.gravestone.stone_sword=Lápide de Espada de Pedra
+block.gravestone.iron_sword=Lápide de Espada de Ferro
+block.gravestone.golden_sword=Lápide de Espada de Ouro
+block.gravestone.diamond_sword=Lápide de Espada de Diamante
+block.gravestone.horse_statue=Estátua de Cavalo
 
 ## memorials
-block.memorial.cross=Cross Memorial
-block.memorial.obelisk=Obelisk
-block.memorial.steve_statue=Steve statue
-block.memorial.villager_statue=Villager statue
-block.memorial.angel_statue=Angel statue
-block.memorial.dog_statue=Dog statue
-block.memorial.cat_statue=Cat statue
-block.memorial.creeper_statue=Creeper statue
-block.memorial.celtic_cross=Celtic cross
+block.memorial.cross=Memorial em Cruz
+block.memorial.obelisk=Obelisco
+block.memorial.steve_statue=Estátua do Steve
+block.memorial.villager_statue=Estátua de Aldeão
+block.memorial.angel_statue=Estátua de Anjo
+block.memorial.dog_statue=Estátua de Cachorro
+block.memorial.cat_statue=Estátua de Gato
+block.memorial.creeper_statue=Estátua de Creeper
+block.memorial.celtic_cross=Cruz Celta
 
 ## trap
-tile.trap.night.name=Night stone
-tile.trap.thunder.name=Thunder stone
-block.trap.curse=Darkness is coming!
+tile.trap.night.name=Pedra da Noite
+tile.trap.thunder.name=Pedra do Trovão
+block.trap.curse=A escuridão está vindo!
 
 ## spawner
-block.spawner.wither=Wither Spawner
-block.spawner.skeleton=Skeleton Spawner
-block.spawner.zombie=Zombie Spawner
+block.spawner.wither=Spawner de Wither
+block.spawner.skeleton=Spawner de Esqueleto
+block.spawner.zombie=Spawner de Zumbi
 
 # bone blocks
-tile.bone_block.name=Bone block
-tile.bone_block.skull_name=Bone block with skull
-tile.bone_block.crawler_name=Skull crawler's bone block
-tile.bone_block.crawler_skull_name=Skull crawler's bone block with skull
-tile.bone_slab.name=Bone slab
-tile.bone_stairs.name=Bone stairs
+tile.bone_block.name=Bloco de Ossos
+tile.bone_block.skull_name=Bloco de Ossos com Cabeça
+tile.bone_block.crawler_name=Bloco de Ossos do Rastejador Caveira
+tile.bone_block.crawler_skull_name=Blco ode Ossos com Cabeça do Rastejador Caveira
+tile.bone_slab.name=Laje de Ossos
+tile.bone_stairs.name=Escada de Ossos
 
 ## chests
-block.haunted_chest.bats_chest=Chest with bats
-block.haunted_chest.skeleton_chest=Chest with skeleton
-block.haunted_chest.raven_chest=Chest with ravens
-block.haunted_chest.ghost_chest=Chest with ghost
+block.haunted_chest.bats_chest=Baú com Morcegos
+block.haunted_chest.skeleton_chest=Baú com Esqueleto
+block.haunted_chest.raven_chest=Baú com Corvos
+block.haunted_chest.ghost_chest=Baú com Fantasma
 
 ##candles
-tile.candle.name=Candle
-block.skull_candle.skeleton.name=Skull candle
-block.skull_candle.wither_skeleton.name=Wither skull candle
-block.skull_candle.zombie.name=Zombie skull candle
+tile.candle.name=Vela
+block.skull_candle.skeleton.name=Vela de Cabeça
+block.skull_candle.wither_skeleton.name=Vela de Cabeça Wither
+block.skull_candle.zombie.name=Vela de Cabeça de Zumbi
 
 
 # items
@@ -63,82 +63,82 @@ block.skull_candle.zombie.name=Zombie skull candle
 item.chisel.name=Chisel
 
 ## graves
-item.grave.age=Had lived
-item.grave.days=days
-item.grave.sword_name=Sword name
-item.grave.sword_damage=Sword damage
+item.grave.age=Havia vivido
+item.grave.days=dias
+item.grave.sword_name=Nome da espada
+item.grave.sword_damage=Dano da espada
 
 ## corpse
-item.corpse.villager=Villager corpse
-item.corpse.horse=Horse corpse
-item.corpse.dog=Dog corpse
-item.corpse.cat=Cat corpse
-item.corpse.entity_name=Name
-item.corpse.villager_type=Profession
-item.corpse.villager_type.farmer=Farmer
-item.corpse.villager_type.librarian=Librarian
-item.corpse.villager_type.priest=Priest
-item.corpse.villager_type.smith=Smith
-item.corpse.villager_type.butcher=Butcher
-item.corpse.villager_type.undertacker=Undertacker
-item.corpse.villager_type.brewer=Brewer
-item.corpse.villager_type.thaumaturge=Thaumaturge
-item.corpse.villager_type.beekeeper=Beekeeper
-item.corpse.villager_type.lumberjack=Lumberjack
-item.corpse.villager_type.Unknown=unknown
-item.corpse.horse_type=Horse type
-item.corpse.horse_type.horse=Horse
-item.corpse.horse_type.donkey=Donkey
-item.corpse.horse_type.mule=Mule
-item.corpse.horse_type.zombie=Zombie horse
-item.corpse.horse_type.skeleton=Skeleton horse
-item.corpse.horse_type.unknown=Unknown
-item.corpse.horse_variant=Horse variant
-item.corpse.health=Max health
-item.corpse.speed=Speed
-item.corpse.jump_strength=Jump strength
-item.corpse.collar=Collar
-item.corpse.collar.white=White
-item.corpse.collar.orange=Orange
-item.corpse.collar.purple=Purple
-item.corpse.collar.azure=Azure
-item.corpse.collar.yellow=Yellow
-item.corpse.collar.lime=Lime
-item.corpse.collar.pink=Pink
-item.corpse.collar.grey=Grey
-item.corpse.collar.light_grey=Light grey
-item.corpse.collar.turquoise=Turquoise
-item.corpse.collar.violet=Violet
-item.corpse.collar.blue=Blue
-item.corpse.collar.brown=Brown
-item.corpse.collar.green=Green
-item.corpse.collar.red=Red
-item.corpse.collar.black=Black
-item.corpse.collar.unknown=Unknown
-item.corpse.dog_type=Dog type
-item.corpse.cat_type=Cat type
-item.corpse.cat_type.black=Black
-item.corpse.cat_type.red=Red
-item.corpse.cat_type.siamese=Siamese
-item.corpse.cat_type.unknown=Unknown
+item.corpse.villager=Cadáver de Aldeão
+item.corpse.horse=Cadáver de Cavalo
+item.corpse.dog=Cadáver de Cachorro
+item.corpse.cat=Cadáver de Gato
+item.corpse.entity_name=Nome
+item.corpse.villager_type=Profissão
+item.corpse.villager_type.farmer=Fazendeiro
+item.corpse.villager_type.librarian=Bibliotecário
+item.corpse.villager_type.priest=Padre
+item.corpse.villager_type.smith=Ferreiro
+item.corpse.villager_type.butcher=Açougueiro
+item.corpse.villager_type.undertacker=Agente Funerário
+item.corpse.villager_type.brewer=Cervejeiro
+item.corpse.villager_type.thaumaturge=Taumaturgo
+item.corpse.villager_type.beekeeper=Apicultor
+item.corpse.villager_type.lumberjack=Lenhador
+item.corpse.villager_type.Unknown=desconhecido
+item.corpse.horse_type=Tipo de Cavalo
+item.corpse.horse_type.horse=Cavalo
+item.corpse.horse_type.donkey=Jumento
+item.corpse.horse_type.mule=Mula
+item.corpse.horse_type.zombie=Cavalo Zumbi
+item.corpse.horse_type.skeleton=Cavalo Esqueleto
+item.corpse.horse_type.unknown=Desconhecido
+item.corpse.horse_variant=Variante de Cavalo
+item.corpse.health=Saúde Máxima
+item.corpse.speed=Velocidade
+item.corpse.jump_strength=Força do Pulo
+item.corpse.collar=Colarinho
+item.corpse.collar.white=Branco
+item.corpse.collar.orange=Laranja
+item.corpse.collar.purple=Roxo
+item.corpse.collar.azure=Índigo
+item.corpse.collar.yellow=Amarelo
+item.corpse.collar.lime=Lima
+item.corpse.collar.pink=Rosa
+item.corpse.collar.grey=Cinza
+item.corpse.collar.light_grey=Cinza Fraco
+item.corpse.collar.turquoise=Turquesa
+item.corpse.collar.violet=Violeta
+item.corpse.collar.blue=Azul
+item.corpse.collar.brown=Marrom
+item.corpse.collar.green=Verde
+item.corpse.collar.red=Vermelho
+item.corpse.collar.black=Preto
+item.corpse.collar.unknown=Desconhecido
+item.corpse.dog_type=Tipo de Cachorro
+item.corpse.cat_type=Tipo de Gato
+item.corpse.cat_type.black=Preto
+item.corpse.cat_type.red=Vermelho
+item.corpse.cat_type.siamese=Siamês
+item.corpse.cat_type.unknown=Desconhecido
 
 
 # gui
-gui.edit_grave=Set grave text
+gui.edit_grave=Defina o texto do túmulo
 
 
 # entity
-entity.GSZombieDog.name=Zombie Dog
-entity.GSSkeletonDog.name=Skeleton Dog
-entity.GSZombieCat.name=Zombie Cat
-entity.GSSkeletonCat.name=Skeleton Cat
-entity.GSSkullCrawler.name=Skull Crawler
-entity.GSWitherSkullCrawler.name=Wither Skull Crawler
-entity.GSZombieSkullCrawler.name=Zombie Skull Crawler
-entity.GSRaven.name=Raven
+entity.GSZombieDog.name=Cachorro Zumbi
+entity.GSSkeletonDog.name=Cachorro Esqueleto
+entity.GSZombieCat.name=Gato Zumbi
+entity.GSSkeletonCat.name=Gato Esqueleto
+entity.GSSkullCrawler.name=Rastejador Caveira
+entity.GSWitherSkullCrawler.name=Rastejador Caveira Wither
+entity.GSZombieSkullCrawler.name=Rastejador Caveira Zumbi
+entity.GSRaven.name=Corvo
 
 
 # death messages
-death.GS.Herobrine=%1$s was brutally murdered by Herobrine
-death.GS.death_sentence=%1$s received a death sentence
-death.GS.tortures=%1$s was die in cruel tortures
+death.GS.Herobrine=%1$s foi assassinado brutalmente por Herobrine
+death.GS.death_sentence=%1$s recebeu uma pena de morte
+death.GS.tortures=%1$s morreu em torturas cruéis
