@@ -1,4 +1,4 @@
-package gravestone.item;
+package gravestone.item.corpse;
 
 import gravestone.ModGraveStone;
 import net.minecraft.entity.passive.EntityVillager;

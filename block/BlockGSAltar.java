@@ -4,7 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.core.GSTabs;
 import gravestone.core.Resources;
-import gravestone.item.CorpseHelper;
+import gravestone.item.corpse.CorpseHelper;
 import gravestone.item.ItemGSCorpse;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

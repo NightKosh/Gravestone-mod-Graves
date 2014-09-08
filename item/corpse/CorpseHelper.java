@@ -1,4 +1,4 @@
-package gravestone.item;
+package gravestone.item.corpse;
 
 import gravestone.ModGraveStone;
 import gravestone.core.GSItem;

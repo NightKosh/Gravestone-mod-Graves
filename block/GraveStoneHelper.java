@@ -6,7 +6,7 @@ import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
 import gravestone.core.compatibility.*;
-import gravestone.item.CorpseHelper;
+import gravestone.item.corpse.CorpseHelper;
 import gravestone.item.enums.EnumCorpse;
 import gravestone.tileentity.DeathMessageInfo;
 import gravestone.tileentity.TileEntityGSGraveStone;

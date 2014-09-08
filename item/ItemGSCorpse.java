@@ -3,6 +3,7 @@ package gravestone.item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.core.GSTabs;
+import gravestone.item.corpse.CorpseHelper;
 import gravestone.item.enums.EnumCorpse;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;

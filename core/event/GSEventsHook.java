@@ -10,7 +10,7 @@ import gravestone.core.GSMobSpawn;
 import gravestone.entity.monster.EntitySkullCrawler;
 import gravestone.entity.monster.EntityWitherSkullCrawler;
 import gravestone.entity.monster.EntityZombieSkullCrawler;
-import gravestone.item.CorpseHelper;
+import gravestone.item.corpse.CorpseHelper;
 import gravestone.item.enums.EnumCorpse;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySkeleton;
