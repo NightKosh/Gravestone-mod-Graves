@@ -19,7 +19,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemShears;
+import net.minecraft.item.ItemSpade;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
@@ -565,48 +568,51 @@ public class BlockGSGraveStone extends BlockContainer {
                         GraveStoneLogger.logInfo(player.getCommandSenderName() + " loot grave at " + x + "/" + y + "/" + z);
                         te.dropAllItems();
                     }
-                } else if (!te.hasFlower()) {
-                    if (GraveStoneHelper.FLOWERS.contains(Block.getBlockFromItem(item.getItem())) &&
-                            GraveStoneHelper.FLOWERS_GROUND.contains(world.getBlock(x, y - 1, z)) &&
-                            GraveStoneHelper.canFlowerBePlaced(te)) {
+                    return false;
+                } else {
+                    if (te.hasFlower()) {
+                        if (item.getItem() instanceof ItemShears) {
+                            if (!world.isRemote) {
+                                te.dropFlower();
+                            }
+                            te.setFlower(null);
+                            return false;
+                        }
+                    } else {
+                        if (GraveStoneHelper.FLOWERS.contains(Block.getBlockFromItem(item.getItem())) &&
+                                GraveStoneHelper.FLOWERS_GROUND.contains(world.getBlock(x, y - 1, z)) &&
+                                GraveStoneHelper.canFlowerBePlaced(te)) {
                             te.setFlower(new ItemStack(item.getItem(), 1, item.getItemDamage()));
                             if (world.isRemote) {
                                 player.inventory.getCurrentItem().stackSize--;
                             }
                             return true;
-                    }
-                } else {
-                    if (item.getItem() instanceof ItemShears) {
-                        if (!world.isRemote) {
-                            te.dropFlower();
                         }
-                        te.setFlower(null);
                     }
                 }
-            } else {
-                if (world.isRemote) {
-                    String name;
-                    String deathText;
-                    String killerName;
-                    deathText = te.getDeathTextComponent().getDeathText();
+            }
+            if (world.isRemote) {
+                String name;
+                String deathText;
+                String killerName;
+                deathText = te.getDeathTextComponent().getDeathText();
 
-                    if (deathText.length() != 0) {
-                        if (te.getDeathTextComponent().isLocalized()) {
-                            name = te.getDeathTextComponent().getName();
-                            killerName = ModGraveStone.proxy.getLocalizedEntityName(te.getDeathTextComponent().getKillerName());
+                if (deathText.length() != 0) {
+                    if (te.getDeathTextComponent().isLocalized()) {
+                        name = te.getDeathTextComponent().getName();
+                        killerName = ModGraveStone.proxy.getLocalizedEntityName(te.getDeathTextComponent().getKillerName());
 
-                            if (killerName.length() == 0) {
-                                player.addChatComponentMessage(new ChatComponentTranslation(deathText, new Object[]{name}));
-                            } else {
-                                player.addChatComponentMessage(new ChatComponentTranslation(deathText, new Object[]{name, killerName}));
-                            }
+                        if (killerName.length() == 0) {
+                            player.addChatComponentMessage(new ChatComponentTranslation(deathText, new Object[]{name}));
                         } else {
-                            player.addChatComponentMessage(new ChatComponentTranslation(deathText));
+                            player.addChatComponentMessage(new ChatComponentTranslation(deathText, new Object[]{name, killerName}));
                         }
+                    } else {
+                        player.addChatComponentMessage(new ChatComponentTranslation(deathText));
+                    }
 
-                        if (te.getAge() != -1) {
-                            //entityPlayer.sendChatToPlayer("Had lived " + entity.getAge() + " days");
-                        }
+                    if (te.getAge() != -1) {
+                        //entityPlayer.sendChatToPlayer("Had lived " + entity.getAge() + " days");
                     }
                 }
             }
