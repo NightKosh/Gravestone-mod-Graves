@@ -37,16 +37,18 @@ public class VillagerCorpseHelper extends CorpseHelper {
         nbt.setInteger("VillagerType", villager.getProfession());
 
         MerchantRecipeList recipes = villager.getRecipes(null);
-        MerchantRecipe recipe;
-        NBTTagCompound recipeTag;
-        for (int i = 0; i < recipes.size(); i++) {
-            recipe = (MerchantRecipe) recipes.get(i);
-            recipeTag = recipe.writeToTags();
-            recipeTag.setInteger("uses", 0);
-            recipeTag.setInteger("maxUses", 7);
-            recipe.readFromTags(recipeTag);
+        if (recipes != null) {
+            MerchantRecipe recipe;
+            NBTTagCompound recipeTag;
+            for (int i = 0; i < recipes.size(); i++) {
+                recipe = (MerchantRecipe) recipes.get(i);
+                recipeTag = recipe.writeToTags();
+                recipeTag.setInteger("uses", 0);
+                recipeTag.setInteger("maxUses", 7);
+                recipe.readFromTags(recipeTag);
+            }
+            nbt.setTag("Offers", recipes.getRecipiesAsTags());
         }
-        nbt.setTag("Offers", recipes.getRecipiesAsTags());
     }
 
     public static void spawnVillager(World world, int x, int y, int z, NBTTagCompound nbtTag) {
