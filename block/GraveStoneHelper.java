@@ -27,6 +27,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
@@ -396,6 +397,99 @@ public class GraveStoneHelper {
         } else {
             return 3;
         }
+    }
+
+    public static int[] findPlaceForGrave(World world, int x, int y, int z) {
+        boolean canGenerateGrave = false;
+        int[] coordinates = new int[3];
+
+        int newY = getGround(world, x, y, z);
+
+        if (canGenerateGraveAtCoordinates(world, x, newY, z)) {
+            coordinates[0] = x;
+            coordinates[1] = newY;
+            coordinates[2] = z;
+            return coordinates;
+        } else {
+            int dx = 1;
+            int dz = 1;
+
+            while (Math.abs(dx) < 9 && Math.abs(dz) < 9) {
+                if (dx < 0) {
+                    for (int newX = x - 1; newX >= x + dx; newX--) {
+                        newY = getGround(world, newX, y, z);
+                        if (canGenerateGraveAtCoordinates(world, newX, newY, z)) {
+                            coordinates[0] = newX;
+                            coordinates[1] = newY;
+                            coordinates[2] = z;
+                            return coordinates;
+                        }
+                    }
+                } else {
+                    for (int newX = x + 1; newX <= x + dx; newX++) {
+                        newY = getGround(world, newX, y, z);
+                        if (canGenerateGraveAtCoordinates(world, newX, newY, z)) {
+                            coordinates[0] = newX;
+                            coordinates[1] = newY;
+                            coordinates[2] = z;
+                            return coordinates;
+                        }
+                    }
+                }
+                x += dx;
+
+                if (dz < 0) {
+                    for (int newZ = z - 1; newZ >= z + dz; newZ--) {
+                        newY = getGround(world, x, y, newZ);
+                        if (canGenerateGraveAtCoordinates(world, x, newY, newZ)) {
+                            coordinates[0] = x;
+                            coordinates[1] = newY;
+                            coordinates[2] = newZ;
+                            return coordinates;
+                        }
+                    }
+                } else {
+                    for (int newZ = z + 1; newZ <= z + dz; newZ++) {
+                        newY = getGround(world, x, y, newZ);
+                        if (canGenerateGraveAtCoordinates(world, x, newY, newZ)) {
+                            coordinates[0] = x;
+                            coordinates[1] = newY;
+                            coordinates[2] = newZ;
+                            return coordinates;
+                        }
+                    }
+                }
+                z += dz;
+
+                if (dx < 0) {
+                    dx = Math.abs(dx) + 1;
+                } else {
+                    dx = (dx + 1) * -1;
+                }
+
+                if (dz < 0) {
+                    dz = Math.abs(dz) + 1;
+                } else {
+                    dz = (dz + 1) * -1;
+                }
+
+            }
+        }
+
+        return null;
+    }
+
+    private static int getGround(World world, int x, int y, int z) {
+        while ((world.isAirBlock(x, y - 1, z) || world.getBlock(x, y - 1, z).getMaterial().isLiquid() ||
+                world.getBlock(x, y - 1, z).getMaterial().isReplaceable()) && y > 1) {
+            y--;
+        }
+        return y;
+    }
+
+    private static boolean canGenerateGraveAtCoordinates(World world, int x, int y, int z) {
+        return world.getBlock(x, y - 1, z).getMaterial().isSolid() &&
+                (world.isAirBlock(x, y, z) || world.getBlock(x, y, z).getMaterial().isLiquid() || world.getBlock(x, y, z).getMaterial().isReplaceable());
     }
 
     public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event) {

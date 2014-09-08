@@ -28,6 +28,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -371,14 +372,10 @@ public class BlockGSGraveStone extends BlockContainer {
             case SWORD:
                 switch (meta) {
                     case 0:
-                        this.setBlockBounds(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
-                        break;
                     case 1:
                         this.setBlockBounds(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
                         break;
                     case 2:
-                        this.setBlockBounds(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
-                        break;
                     case 3:
                         this.setBlockBounds(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
                         break;
@@ -399,14 +396,10 @@ public class BlockGSGraveStone extends BlockContainer {
             case ICE_HORSE_STATUE:
                 switch (meta) {
                     case 0:
-                        this.setBlockBounds(0.375F, 0, 0.275F, 0.625F, 0.85F, 0.725F);
-                        break;
                     case 1:
                         this.setBlockBounds(0.375F, 0, 0.275F, 0.625F, 0.85F, 0.725F);
                         break;
                     case 2:
-                        this.setBlockBounds(0.275F, 0, 0.375F, 0.725F, 0.85F, 0.625F);
-                        break;
                     case 3:
                         this.setBlockBounds(0.275F, 0, 0.375F, 0.725F, 0.85F, 0.625F);
                         break;
@@ -806,31 +799,14 @@ public class BlockGSGraveStone extends BlockContainer {
 
         boolean isMagic = GraveStoneHelper.isMagicDamage(damageSource, damageSource.damageType);
 
-        // TODO rework place finding
-        boolean canGenerateGrave = false;
-        while ((world.isAirBlock(x, y - 1, z) || world.getBlock(x, y - 1, z).getMaterial().isLiquid() ||
-                world.getBlock(x, y - 1, z).getMaterial().isReplaceable()) && y > 1) {
-            y--;
-        }
-        if (canGenerateGraveAtCoordinates(world, x, y, z)) {
-            canGenerateGrave = true;
-        } else {
-            for (byte xShift = -5; xShift < 6; xShift++) {
-                for (byte zShift = -5; zShift < 6; zShift++) {
-                    if (canGenerateGraveAtCoordinates(world, x + xShift, y, z + zShift)) {
-                        x += xShift;
-                        z += zShift;
-                        canGenerateGrave = true;
-                        break;
-                    }
-                }
-                if (canGenerateGrave) {
-                    break;
-                }
-            }
-        }
 
-        if (canGenerateGrave) {
+        // TODO rework place finding
+        int[] graveCoordinates = GraveStoneHelper.findPlaceForGrave(world, x, y, z);
+        if (graveCoordinates != null) {
+            x = graveCoordinates[0];
+            y = graveCoordinates[1];
+            z = graveCoordinates[2];
+
             world.setBlock(x, y, z, this, GraveStoneHelper.getMetadataBasedOnRotation(direction), 0x02);
             TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
 
@@ -876,10 +852,6 @@ public class BlockGSGraveStone extends BlockContainer {
             }
             GraveStoneLogger.logInfo("Can not create " + deathInfo.getName() + "'s grave at " + x + "x" + y + "x" + z);
         }
-    }
-
-    private boolean canGenerateGraveAtCoordinates(World world, int x, int y, int z) {
-        return (world.isAirBlock(x, y, z) || world.getBlock(x, y, z).getMaterial().isLiquid() || world.getBlock(x, y, z).getMaterial().isReplaceable());
     }
 
     /**
