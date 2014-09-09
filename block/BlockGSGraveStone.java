@@ -605,7 +605,7 @@ public class BlockGSGraveStone extends BlockContainer {
                     }
 
                     if (te.getAge() != -1) {
-                        //entityPlayer.sendChatToPlayer("Had lived " + entity.getAge() + " days");
+                        player.addChatComponentMessage(new ChatComponentTranslation("Had lived " + te.getAge() + " days"));
                     }
                 }
             }
@@ -799,8 +799,6 @@ public class BlockGSGraveStone extends BlockContainer {
 
         boolean isMagic = GraveStoneHelper.isMagicDamage(damageSource, damageSource.damageType);
 
-
-        // TODO rework place finding
         int[] graveCoordinates = GraveStoneHelper.findPlaceForGrave(world, x, y, z);
         if (graveCoordinates != null) {
             x = graveCoordinates[0];
@@ -834,7 +832,7 @@ public class BlockGSGraveStone extends BlockContainer {
             nbt.setString("DeathText", deathInfo.getDeathMessage());
             nbt.setString("KillerName", deathInfo.getKillerNameForTE());
             nbt.setBoolean("Enchanted", isMagic);
-//            nbt.setInteger("Age", age);
+            nbt.setInteger("Age", age);
 
             if (graveType == EnumGraves.SWORD.ordinal()) {
                 GraveStoneHelper.addSwordInfo(nbt, sword);

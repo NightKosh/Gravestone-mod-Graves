@@ -40,7 +40,7 @@ public class GSEventsHook {
                 GraveStoneHelper.createPlayerGrave((EntityPlayer) event.entity, event);
             } else {
                 if (GraveStoneConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
-                    GraveStoneHelper.createGrave(event.entity, event, CorpseHelper.getCorpse(event.entity, EnumCorpse.VILLAGER), ((EntityVillager) event.entity).getAge(), EnumGraveType.PLAYER_GRAVES, true);
+                    GraveStoneHelper.createGrave(event.entity, event, CorpseHelper.getCorpse(event.entity, EnumCorpse.VILLAGER), EnumGraveType.PLAYER_GRAVES, true);
                     return;
                 }
 

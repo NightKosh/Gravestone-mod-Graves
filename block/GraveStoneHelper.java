@@ -510,13 +510,14 @@ public class GraveStoneHelper {
 
             GSCompatibilityisArsMagica.getSoulboundItemsBack(items, player);
 
-            createGrave(player, event, items, player.getAge(), BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES, false);
+            createGrave(player, event, items, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES, false);
         } else {
-            createGrave(player, event, null, player.getAge(), BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES, false);
+            createGrave(player, event, null, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES, false);
         }
     }
 
-    public static void createGrave(Entity entity, LivingDeathEvent event, List<ItemStack> items, int age, BlockGSGraveStone.EnumGraveType entityType, boolean isVillager) {
+    public static void createGrave(Entity entity, LivingDeathEvent event, List<ItemStack> items, BlockGSGraveStone.EnumGraveType entityType, boolean isVillager) {
+        int age = entity.ticksExisted / 24000;
         GSBlock.graveStone.createOnDeath(entity, entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
                 getDeathMessage((EntityLivingBase) entity, event.source.damageType, isVillager),
                 MathHelper.floor_float(entity.rotationYaw), items, age, entityType, event.source);
@@ -527,9 +528,9 @@ public class GraveStoneHelper {
 
         if (pet.isTamed()) {
             if (pet instanceof EntityWolf) {
-                createGrave(entity, event, CorpseHelper.getCorpse(entity, EnumCorpse.DOG), pet.getAge(), BlockGSGraveStone.EnumGraveType.DOGS_GRAVES, false);
+                createGrave(entity, event, CorpseHelper.getCorpse(entity, EnumCorpse.DOG), BlockGSGraveStone.EnumGraveType.DOGS_GRAVES, false);
             } else if (pet instanceof EntityOcelot) {
-                createGrave(entity, event, CorpseHelper.getCorpse(entity, EnumCorpse.CAT), pet.getAge(), BlockGSGraveStone.EnumGraveType.CATS_GRAVES, false);
+                createGrave(entity, event, CorpseHelper.getCorpse(entity, EnumCorpse.CAT), BlockGSGraveStone.EnumGraveType.CATS_GRAVES, false);
             }
         }
     }
@@ -539,7 +540,7 @@ public class GraveStoneHelper {
             List<ItemStack> items = new ArrayList<ItemStack>();
             items.addAll(CorpseHelper.getCorpse(horse, EnumCorpse.HORSE));
 
-            createGrave(horse, event, items, horse.getAge(), BlockGSGraveStone.EnumGraveType.HORSE_GRAVES, false);
+            createGrave(horse, event, items, BlockGSGraveStone.EnumGraveType.HORSE_GRAVES, false);
         }
     }
 
