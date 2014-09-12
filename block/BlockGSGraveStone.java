@@ -605,7 +605,13 @@ public class BlockGSGraveStone extends BlockContainer {
                     }
 
                     if (te.getAge() != -1) {
-                        player.addChatComponentMessage(new ChatComponentTranslation("Had lived " + te.getAge() + " days"));
+                        StringBuilder ageStr = new StringBuilder();
+                        ageStr.append(ModGraveStone.proxy.getLocalizedString("item.grave.age"))
+                                .append(" ")
+                                .append(te.getAge())
+                                .append(" ")
+                                .append(ModGraveStone.proxy.getLocalizedString("item.grave.days"));
+                        player.addChatComponentMessage(new ChatComponentTranslation(ageStr.toString()));
                     }
                 }
             }
