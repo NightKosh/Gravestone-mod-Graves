@@ -620,7 +620,7 @@ public class GraveStoneHelper {
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
 
-        if (biomeTypesList.contains(BiomeDictionary.Type.DESERT) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SANDY) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
             graveTypes.addAll(Arrays.asList(GENERATED_SANDSTONE_GRAVES));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
@@ -633,7 +633,7 @@ public class GraveStoneHelper {
         if (biomeTypesList.contains(BiomeDictionary.Type.FOREST)) {
             graveTypes.addAll(Arrays.asList(GENERATED_WOODEN_GRAVES));
         }
-        if (biomeTypesList.contains(BiomeDictionary.Type.FROZEN)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SNOWY)) {
             graveTypes.addAll(Arrays.asList(GENERATED_ICE_GRAVES));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.NETHER)) {
@@ -663,7 +663,7 @@ public class GraveStoneHelper {
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
 
-        if (biomeTypesList.contains(BiomeDictionary.Type.DESERT) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SANDY) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
             graveTypes.addAll(Arrays.asList(DOG_SANDSTONE_GRAVES));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
@@ -676,7 +676,7 @@ public class GraveStoneHelper {
         if (biomeTypesList.contains(BiomeDictionary.Type.FOREST)) {
             graveTypes.addAll(Arrays.asList(DOG_WOODEN_GRAVES));
         }
-        if (biomeTypesList.contains(BiomeDictionary.Type.FROZEN)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SNOWY)) {
             graveTypes.addAll(Arrays.asList(DOG_ICE_GRAVES));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.NETHER)) {
@@ -706,7 +706,7 @@ public class GraveStoneHelper {
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
 
-        if (biomeTypesList.contains(BiomeDictionary.Type.DESERT) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SANDY) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
             graveTypes.addAll(Arrays.asList(CAT_SANDSTONE_GRAVES));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
@@ -719,7 +719,7 @@ public class GraveStoneHelper {
         if (biomeTypesList.contains(BiomeDictionary.Type.FOREST)) {
             graveTypes.addAll(Arrays.asList(CAT_WOODEN_GRAVES));
         }
-        if (biomeTypesList.contains(BiomeDictionary.Type.FROZEN)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SNOWY)) {
             graveTypes.addAll(Arrays.asList(CAT_ICE_GRAVES));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.NETHER)) {
@@ -748,7 +748,7 @@ public class GraveStoneHelper {
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
 
-        if (biomeTypesList.contains(BiomeDictionary.Type.DESERT) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SANDY) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
             graveTypes.addAll(Arrays.asList(HORSE_SANDSTONE_GRAVES));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
@@ -761,7 +761,7 @@ public class GraveStoneHelper {
         if (biomeTypesList.contains(BiomeDictionary.Type.FOREST)) {
             graveTypes.addAll(Arrays.asList(HORSE_WOODEN_GRAVES));
         }
-        if (biomeTypesList.contains(BiomeDictionary.Type.FROZEN)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SNOWY)) {
             graveTypes.addAll(Arrays.asList(HORSE_ICE_GRAVES));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.NETHER)) {
