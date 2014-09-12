@@ -122,6 +122,9 @@ item.corpse.cat_type.red=Рыжая
 item.corpse.cat_type.siamese=Сиамская
 item.corpse.cat_type.unknown=Неизвестный
 
+##backpacks
+item.backpack.undertaker.t1=Рюкзак гробовщика
+item.backpack.undertaker.t2=Плотный рюкзак гробовщика
 
 # gui
 gui.edit_grave=Введите надпись

@@ -122,6 +122,10 @@ item.corpse.cat_type.red=红色
 item.corpse.cat_type.siamese=暹罗
 item.corpse.cat_type.unknown=不明
 
+##backpacks
+item.backpack.undertaker.t1=Undertaker's backpack
+item.backpack.undertaker.t2=Undertaker's Woven backpack
+
 
 # gui
 gui.edit_grave=更改墓碑文字

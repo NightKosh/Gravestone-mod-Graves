@@ -122,6 +122,10 @@ item.corpse.cat_type.red=Red
 item.corpse.cat_type.siamese=Siamese
 item.corpse.cat_type.unknown=Unknown
 
+##backpacks
+item.backpack.undertaker.t1=Undertaker's backpack
+item.backpack.undertaker.t2=Undertaker's Woven backpack
+
 
 # gui
 gui.edit_grave=Set grave text

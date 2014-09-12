@@ -122,6 +122,10 @@ item.corpse.cat_type.red=Červená
 item.corpse.cat_type.siamese=Siamská
 item.corpse.cat_type.unknown=Neznámá
 
+##backpacks
+item.backpack.undertaker.t1=Undertaker's backpack
+item.backpack.undertaker.t2=Undertaker's Woven backpack
+
 
 # gui
 gui.edit_grave=Nastav text náhrobku

@@ -54,6 +54,8 @@ public class GraveStoneConfig {
     // spawner reciepes
     public static boolean enableBossSpawnerCraftingRecipe;
     public static boolean enableSpawnerCraftingRecipe;
+    // forestry
+    public static boolean enableForestryBackpacks;
 
     // haunted chest
     public static boolean replaceHauntedChest;
@@ -160,6 +162,8 @@ public class GraveStoneConfig {
 
         removeEmptyGraves = config.get(Configuration.CATEGORY_GENERAL, "RemoveEmptyGraves", false).getBoolean(false);
         showGravesRemovingMessages = config.get(Configuration.CATEGORY_GENERAL, "ShowGravesRemovingMessages", true).getBoolean(true);
+
+        enableForestryBackpacks = config.get(Configuration.CATEGORY_GENERAL, "EnableForestryBackpacks", true).getBoolean(true);
     }
 
     private static void entityConfig() {

@@ -122,6 +122,10 @@ item.corpse.cat_type.red=Vermelho
 item.corpse.cat_type.siamese=Siamês
 item.corpse.cat_type.unknown=Desconhecido
 
+##backpacks
+item.backpack.undertaker.t1=Undertaker's backpack
+item.backpack.undertaker.t2=Undertaker's Woven backpack
+
 
 # gui
 gui.edit_grave=Defina o texto do túmulo

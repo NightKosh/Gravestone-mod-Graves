@@ -29,4 +29,8 @@ public class GSItem {
         corpse = new ItemGSCorpse();
         GameRegistry.registerItem(corpse, "Corpse");
     }
+
+    public static void registryExternalItems(Item item, String name) {
+        GameRegistry.registerItem(item, name);
+    }
 }

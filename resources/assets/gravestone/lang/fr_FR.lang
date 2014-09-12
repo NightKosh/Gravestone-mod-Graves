@@ -122,6 +122,10 @@ item.corpse.cat_type.red=Rouge
 item.corpse.cat_type.siamese=Siamois
 item.corpse.cat_type.unknown=Inconnu
 
+##backpacks
+item.backpack.undertaker.t1=Undertaker's backpack
+item.backpack.undertaker.t2=Undertaker's Woven backpack
+
 
 # gui
 gui.edit_grave=Changer l'épitaphe
