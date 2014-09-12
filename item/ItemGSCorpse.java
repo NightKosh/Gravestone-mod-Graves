@@ -70,7 +70,7 @@ public class ItemGSCorpse extends Item {
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack itemStack) {
+    public String getItemStackDisplayName(ItemStack itemStack) {
         return EnumCorpse.getById((byte) itemStack.getItemDamage()).getName();
     }
 
