@@ -124,7 +124,7 @@ item.corpse.cat_type.unknown=Неизвестный
 
 ##backpacks
 item.backpack.undertaker.t1=Рюкзак гробовщика
-item.backpack.undertaker.t2=Плотный рюкзак гробовщика
+item.backpack.undertaker.t2=Ткатный рюкзак гробовщика
 
 # gui
 gui.edit_grave=Введите надпись
