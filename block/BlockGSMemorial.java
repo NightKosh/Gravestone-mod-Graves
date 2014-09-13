@@ -542,9 +542,6 @@ public class BlockGSMemorial extends BlockContainer {
         return memorialTypes;
     }
 
-    /**
-     * Called when the block is placed in the world
-     */
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack itemStack) {
         int direction = MathHelper.floor_float(player.rotationYaw);
@@ -593,10 +590,6 @@ public class BlockGSMemorial extends BlockContainer {
         }
     }
 
-    /**
-     * Updates the blocks bounds based on its current state. Args: world, x, y,
-     * z
-     */
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
         EnumMemorials memorialType;
@@ -726,61 +719,26 @@ public class BlockGSMemorial extends BlockContainer {
         }
     }
 
-    /**
-     * Sets the block's bounds for rendering it as an item
-     */
     @Override
     public void setBlockBoundsForItemRender() {
         this.setBlockBounds(0, 0, 0, 1, 1, 2);
     }
 
-    /**
-     * Return true if a player with Silk Touch can harvest this block directly,
-     * and not its normal drops.
-     */
-    @Override
-    public boolean canSilkHarvest() {
-        return true;
-    }
-
-    /**
-     * Returns the ID of the items to drop on destruction.
-     */
-    @Override
-    public Item getItemDropped(int par1, Random random, int par3) {
-        return null;
-    }
-
-    /**
-     * If this block doesn't render as an ordinary block it will return False
-     * (examples: signs, buttons, stairs, etc)
-     */
     @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
 
-    /**
-     * Is this block (a) opaque and (b) a full 1m cube? This determines whether
-     * or not to render the shared face of two adjacent blocks and also whether
-     * the player can attach torches, redstone wire, etc to this block.
-     */
     @Override
     public boolean isOpaqueCube() {
         return false;
     }
 
-    /**
-     * The type of render function that is called for this block
-     */
     @Override
     public int getRenderType() {
         return GraveStoneConfig.memorialRenderID;
     }
 
-    /**
-     * Called upon block activation (right click on the block.)
-     */
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
         if (world.isRemote) {
@@ -815,28 +773,16 @@ public class BlockGSMemorial extends BlockContainer {
         return false;
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing
-     * the block.
-     */
     @Override
     public TileEntity createNewTileEntity(World world, int var2) {
         return new TileEntityGSMemorial(world);
     }
 
-    /**
-     * Determines the damage on the item the block drops. Used in cloth and
-     * wood.
-     */
     @Override
     public int damageDropped(int metadata) {
         return 0;
     }
 
-    /**
-     * Returns a list of blocks with the same ID, but different meta (eg: wood
-     * returns 4 blocks)
-     */
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item item, CreativeTabs tab, List list) {
@@ -849,19 +795,19 @@ public class BlockGSMemorial extends BlockContainer {
         }
     }
 
-    /**
-     * Called when the block is attempted to be harvested
-     */
     @Override
     public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player) {
         player.addExhaustion(0.025F);
 
+        ItemStack itemStack;
         if (EnchantmentHelper.getSilkTouchModifier(player)) {
-            ItemStack itemStack = getBlockItemStack(world, x, y, z);
+            itemStack = getBlockItemStack(world, x, y, z);
+        } else {
+            itemStack = getBlockItemStackWithoutInfo(world, x, y, z);
+        }
 
-            if (itemStack != null) {
-                this.dropBlockAsItem(world, x, y, z, itemStack);
-            }
+        if (itemStack != null) {
+            this.dropBlockAsItem(world, x, y, z, itemStack);
         }
     }
 
@@ -877,6 +823,19 @@ public class BlockGSMemorial extends BlockContainer {
                 nbt.setString("KillerName", tileEntity.getDeathTextComponent().getKillerName());
             }
             nbt.setString("DeathText", tileEntity.getDeathTextComponent().getDeathText());
+            nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
+            itemStack.setTagCompound(nbt);
+        }
+
+        return itemStack;
+    }
+
+    private ItemStack getBlockItemStackWithoutInfo(World world, int x, int y, int z) {
+        ItemStack itemStack = this.createStackedBlock(0);
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
+
+        if (tileEntity != null) {
+            NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
             itemStack.setTagCompound(nbt);
         }

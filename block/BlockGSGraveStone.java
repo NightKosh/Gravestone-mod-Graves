@@ -28,7 +28,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -417,23 +416,18 @@ public class BlockGSGraveStone extends BlockContainer {
         player.addExhaustion(0.025F);
         GraveStoneHelper.spawnMob(world, x, y, z);
 
-        if (GraveStoneConfig.silkTouchForGraves) {
+        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
+
+        if (tileEntity != null) {
+            if (tileEntity.hasFlower()) {
+                tileEntity.dropFlower();
+            }
+
             if (EnchantmentHelper.getSilkTouchModifier(player)) {
                 dropBlock(world, x, y, z);
             } else {
-                TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
-
-                if (tileEntity != null) {
-                    if (tileEntity.isSwordGrave()) {
-                        tileEntity.dropSword();
-                    }
-                    if (tileEntity.hasFlower()) {
-                        tileEntity.dropFlower();
-                    }
-                }
+                dropBlockWithoutInfo(world, x, y, z);
             }
-        } else {
-            dropBlock(world, x, y, z);
         }
     }
 
@@ -451,77 +445,29 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-
-        if (!GraveStoneConfig.silkTouchForGraves) {
-            ret.add(getBlockItemStack(world, x, y, z));
-        } else {
-            TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
-
-            if (tileEntity != null && tileEntity.isSwordGrave()) {
-                ret.add(tileEntity.getSword());
-            }
-        }
-
+        ret.add(getBlockItemStack(world, x, y, z));
         return ret;
     }
 
-    /**
-     * Called when the player destroys a block with an item that can harvest it.
-     * (x, y, z) are the coordinates of the block and metadata is the block's
-     * subtype/damage.
-     */
     @Override
     public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int metadata) {
     }
 
-    /**
-     * Return true if a player with Silk Touch can harvest this block directly,
-     * and not its normal drops.
-     */
-    @Override
-    public boolean canSilkHarvest() {
-        return GraveStoneConfig.silkTouchForGraves;
-    }
-
-    /**
-     * Returns the ID of the items to drop on destruction.
-     */
-    @Override
-    public Item getItemDropped(int par1, Random random, int par3) {
-        return GraveStoneConfig.silkTouchForGraves ? null : super.getItemDropped(par1, random, par3);
-    }
-
-    /**
-     * If this block doesn't render as an ordinary block it will return False
-     * (examples: signs, buttons, stairs, etc)
-     */
     @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
 
-    /**
-     * Is this block (a) opaque and (b) a full 1m cube? This determines whether
-     * or not to render the shared face of two adjacent blocks and also whether
-     * the player can attach torches, redstone wire, etc to this block.
-     */
     @Override
     public boolean isOpaqueCube() {
         return false;
     }
 
-    /**
-     * The type of render function that is called for this block
-     */
     @Override
     public int getRenderType() {
         return GraveStoneConfig.graveRenderID;
     }
 
-    /**
-     * Called right before the block is destroyed by a player. Args: world, x,
-     * y, z, metaData
-     */
     @Override
     public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
         GraveStoneHelper.spawnMob(world, x, y, z);
@@ -546,9 +492,6 @@ public class BlockGSGraveStone extends BlockContainer {
     public void onBlockExploded(World world, int x, int y, int z, Explosion explosion) {
     }
 
-    /**
-     * Called upon block activation (right click on the block.)
-     */
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
         TileEntityGSGraveStone te = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
@@ -604,7 +547,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         player.addChatComponentMessage(new ChatComponentTranslation(deathText));
                     }
 
-                    if (te.getAge() != -1) {
+                    if (te.getAge() > 0) {
                         StringBuilder ageStr = new StringBuilder();
                         ageStr.append(ModGraveStone.proxy.getLocalizedString("item.grave.age"))
                                 .append(" ")
@@ -620,18 +563,11 @@ public class BlockGSGraveStone extends BlockContainer {
         return false;
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing
-     * the block.
-     */
     @Override
     public TileEntity createNewTileEntity(World world, int var2) {
         return new TileEntityGSGraveStone(world);
     }
 
-    /**
-     * Called whenever the block is added into the world. Args: world, x, y, z
-     */
     @Override
     public void onBlockAdded(World world, int x, int y, int z) {
         super.onBlockAdded(world, x, y, z);
@@ -656,24 +592,16 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
         if (!world.isSideSolid(x, y - 1, z, ForgeDirection.DOWN, true)) {
-            this.dropBlockAsItem(world, x, y, z, 0, 0);
+            this.dropBlockWithoutInfo(world, x, y, z);
             world.setBlock(x, y, z, Blocks.air, 0, 2);
         }
     }
 
-    /**
-     * Determines the damage on the item the block drops. Used in cloth and
-     * wood.
-     */
     @Override
     public int damageDropped(int metadata) {
         return 0;
     }
 
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood
-     * returns 4 blocks)
-     */
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item gravestone, CreativeTabs tabs, List list) {
@@ -718,6 +646,23 @@ public class BlockGSGraveStone extends BlockContainer {
 
         if (itemStack != null) {
             this.dropBlockAsItem(world, x, y, z, itemStack);
+        }
+    }
+
+    private void dropBlockWithoutInfo(World world, int x, int y, int z) {
+        ItemStack itemStack = this.createStackedBlock(0);
+        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
+
+        if (tileEntity != null) {
+            if (tileEntity.isSwordGrave()) {
+                tileEntity.dropSword();
+            } else if (itemStack != null) {
+                NBTTagCompound nbt = new NBTTagCompound();
+                nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
+
+                itemStack.setTagCompound(nbt);
+                this.dropBlockAsItem(world, x, y, z, itemStack);
+            }
         }
     }
 

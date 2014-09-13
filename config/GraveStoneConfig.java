@@ -43,8 +43,6 @@ public class GraveStoneConfig {
     public static int graveItemsCount;
     // spawn rate
     public static int graveSpawnRate;
-    // silk touch for graves
-    public static boolean silkTouchForGraves;
     // allowed ground for graves
     public static boolean canPlaceGravesEveryWhere;
     // disable/enable time changing by night stone
@@ -117,7 +115,6 @@ public class GraveStoneConfig {
     }
 
     private static void gravesConfig() {
-        silkTouchForGraves = config.get(Configuration.CATEGORY_GENERAL, "SilkTouchForGraves", true).getBoolean(true);
         canPlaceGravesEveryWhere = config.get(Configuration.CATEGORY_GENERAL, "CanPlaceGravesEveryWhere", false).getBoolean(false);
         generatePlayerGraves = config.get(Configuration.CATEGORY_GENERAL, "GeneratePlayerGraves", true).getBoolean(true);
         generateVillagerGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateVillagerGraves", true).getBoolean(true);
