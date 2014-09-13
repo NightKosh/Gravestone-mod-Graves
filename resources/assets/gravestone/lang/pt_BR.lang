@@ -128,7 +128,9 @@ item.backpack.undertaker.t2=Undertaker's Woven backpack
 
 
 # gui
-gui.edit_grave=Defina o texto do túmulo
+gui.edit_grave.title=Defina o texto do túmulo
+gui.edit_grave.close=Done
+gui.edit_grave.randomText=Set random text
 
 
 # entity

@@ -85,7 +85,7 @@ public class GSGraveStoneDeathText {
         killerName = (name == null) ? "" : name;
     }
 
-    public void setRandomDeathTextAndName(Random random, byte grave, boolean isMemorial) {
+    public void setRandomDeathTextAndName(Random random, byte grave, boolean isMemorial, boolean changeGraveType) {
         isLocalized = true;
         EnumGraves graveType = EnumGraves.getByID(grave);
         EnumMemorials memorialType = EnumMemorials.getByID(grave);
@@ -123,9 +123,11 @@ public class GSGraveStoneDeathText {
                     case QUARTZ_DOG_STATUE:
                     case ICE_DOG_STATUE:
                         name = this.getValue(random, GraveStoneConfig.graveDogsNames);
-                        newGraveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getDogGraveForDeath(null, deathText), random);
-                        if (newGraveType != 0) {
-                            tileEntity.setGraveType(newGraveType);
+                        if (changeGraveType) {
+                            newGraveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getDogGraveForDeath(null, deathText), random);
+                            if (newGraveType != 0) {
+                                tileEntity.setGraveType(newGraveType);
+                            }
                         }
                         break;
                     case WOODEN_CAT_STATUE:
@@ -142,22 +144,28 @@ public class GSGraveStoneDeathText {
                     case QUARTZ_CAT_STATUE:
                     case ICE_CAT_STATUE:
                         name = this.getValue(random, GraveStoneConfig.graveCatsNames);
-                        newGraveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getCatGraveForDeath(null, deathText), random);
-                        if (newGraveType != 0) {
-                            tileEntity.setGraveType(newGraveType);
+                        if (changeGraveType) {
+                            newGraveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getCatGraveForDeath(null, deathText), random);
+                            if (newGraveType != 0) {
+                                tileEntity.setGraveType(newGraveType);
+                            }
                         }
                         break;
                     default:
                         name = this.getValue(random, GraveStoneConfig.graveNames);
-                        newGraveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveForDeath(null, deathText), random);
-                        if (newGraveType != 0) {
-                            tileEntity.setGraveType(newGraveType);
+                        if (changeGraveType) {
+                            newGraveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveForDeath(null, deathText), random);
+                            if (newGraveType != 0) {
+                                tileEntity.setGraveType(newGraveType);
+                            }
                         }
                         break;
                 }
             }
         }
-        tileEntity.setEnchanted(GraveStoneHelper.isMagicDamage(null, deathText));
+        if (changeGraveType) {
+            tileEntity.setEnchanted(GraveStoneHelper.isMagicDamage(null, deathText));
+        }
     }
 
     /**

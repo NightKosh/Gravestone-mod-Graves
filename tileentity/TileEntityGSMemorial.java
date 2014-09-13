@@ -57,7 +57,7 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
     }
 
     public void setMemorialContent(Random random) {
-        gSDeathText.setRandomDeathTextAndName(random, graveType, true);
+        gSDeathText.setRandomDeathTextAndName(random, graveType, true, true);
     }
 
     @Override

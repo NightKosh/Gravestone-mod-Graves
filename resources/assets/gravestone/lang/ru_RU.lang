@@ -127,7 +127,9 @@ item.backpack.undertaker.t1=Рюкзак гробовщика
 item.backpack.undertaker.t2=Ткатный рюкзак гробовщика
 
 # gui
-gui.edit_grave=Введите надпись
+gui.edit_grave.title=Введите надпись
+gui.edit_grave.close=Готово
+gui.edit_grave.randomText=Ввести случайный текст
 
 
 # entity
