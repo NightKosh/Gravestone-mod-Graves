@@ -52,14 +52,14 @@ public class GSCompatibilityForestry {
                 GSItem.registryExternalItems(backpackItemT2, "GSUndertakerBackpackT2");
 
                 Item itemSilk = GameRegistry.findItem("Forestry", "craftingMaterial");
-                if (itemSilk == null) {
-                    ItemStack silk = new ItemStack(itemSilk, 1);
+                if (itemSilk != null) {
+                    ItemStack wovenSilk = new ItemStack(itemSilk, 1, 3);
 
                     ItemStack backpackStackT2 = new ItemStack(backpackItemT2);
                     RecipeManagers.carpenterManager.addRecipe(200, FluidRegistry.getFluidStack("water", 1000), null, backpackStackT2,
                             new Object[]{
-                                    "sds", "sbs", "s",
-                                    'd', Items.diamond, 's', silk, 'b', backpackItemT2
+                                    "sds", "sbs", "sss",
+                                    'd', Items.diamond, 'b', backpackItemT1, 's', wovenSilk
                             }
                     );
                 }
