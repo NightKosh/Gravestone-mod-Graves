@@ -376,7 +376,7 @@ public class BlockGSMemorial extends BlockContainer {
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumMemorials> memorialTypes = new ArrayList<EnumMemorials>();
 
-        if (biomeTypesList.contains(BiomeDictionary.Type.DESERT) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SANDY) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
             memorialTypes.addAll(Arrays.asList(SANDSTONE_DOG_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
@@ -389,7 +389,7 @@ public class BlockGSMemorial extends BlockContainer {
         if (biomeTypesList.contains(BiomeDictionary.Type.FOREST)) {
             memorialTypes.addAll(Arrays.asList(WOODEN_DOG_MEMORIALS));
         }
-        if (biomeTypesList.contains(BiomeDictionary.Type.FROZEN)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SNOWY)) {
             memorialTypes.addAll(Arrays.asList(ICE_DOG_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.NETHER)) {
@@ -419,7 +419,7 @@ public class BlockGSMemorial extends BlockContainer {
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumMemorials> memorialTypes = new ArrayList<EnumMemorials>();
 
-        if (biomeTypesList.contains(BiomeDictionary.Type.DESERT) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SANDY) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
             memorialTypes.addAll(Arrays.asList(SANDSTONE_CAT_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
@@ -432,7 +432,7 @@ public class BlockGSMemorial extends BlockContainer {
         if (biomeTypesList.contains(BiomeDictionary.Type.FOREST)) {
             memorialTypes.addAll(Arrays.asList(WOODEN_CAT_MEMORIALS));
         }
-        if (biomeTypesList.contains(BiomeDictionary.Type.FROZEN)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SNOWY)) {
             memorialTypes.addAll(Arrays.asList(ICE_CAT_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.NETHER)) {
@@ -462,7 +462,7 @@ public class BlockGSMemorial extends BlockContainer {
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumMemorials> memorialTypes = new ArrayList<EnumMemorials>();
 
-        if (biomeTypesList.contains(BiomeDictionary.Type.DESERT) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SANDY) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
             memorialTypes.addAll(Arrays.asList(SANDSTONE_CREEPER_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
@@ -475,7 +475,7 @@ public class BlockGSMemorial extends BlockContainer {
         if (biomeTypesList.contains(BiomeDictionary.Type.FOREST)) {
             memorialTypes.addAll(Arrays.asList(WOODEN_CREEPER_MEMORIALS));
         }
-        if (biomeTypesList.contains(BiomeDictionary.Type.FROZEN)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SNOWY)) {
             memorialTypes.addAll(Arrays.asList(ICE_CREEPER_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.NETHER)) {
@@ -505,7 +505,7 @@ public class BlockGSMemorial extends BlockContainer {
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumMemorials> memorialTypes = new ArrayList<EnumMemorials>();
 
-        if (biomeTypesList.contains(BiomeDictionary.Type.DESERT) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SANDY) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
             memorialTypes.addAll(Arrays.asList(SANDSTONE_STATUES_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
@@ -518,7 +518,7 @@ public class BlockGSMemorial extends BlockContainer {
         if (biomeTypesList.contains(BiomeDictionary.Type.FOREST)) {
             memorialTypes.addAll(Arrays.asList(WOODEN_STATUES_MEMORIALS));
         }
-        if (biomeTypesList.contains(BiomeDictionary.Type.FROZEN)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SNOWY)) {
             memorialTypes.addAll(Arrays.asList(ICE_STATUES_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.NETHER)) {
