@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public class DeathMessageInfo {
 
-    public enum KillerTypes {
+    public enum DeathTypes {
         ALL,
         ARROW,
         FIREBALL,
@@ -21,43 +21,42 @@ public class DeathMessageInfo {
     private String deathMessage;
     private String killerName;
     private String itemName;
-    private KillerTypes killerTypes;
+    private DeathTypes deathTypes;
     
     public static final DeathMessageInfo[] LOCALIZED_DEATH_TEXT = {
         new DeathMessageInfo("", "death.attack.anvil", null, null, null),
-        new DeathMessageInfo("", "death.attack.arrow", "", null, KillerTypes.ARROW),
+        new DeathMessageInfo("", "death.attack.arrow", "", null, DeathTypes.ARROW),
         new DeathMessageInfo("", "death.attack.cactus", null, null, null),
-        new DeathMessageInfo("", "death.attack.cactus.player", "", null, KillerTypes.ALL),
+        new DeathMessageInfo("", "death.attack.cactus.player", "", null, DeathTypes.ALL),
         new DeathMessageInfo("", "death.attack.drown", null, null, null),
-        new DeathMessageInfo("", "death.attack.drown.player", "", null, KillerTypes.ALL),
+        new DeathMessageInfo("", "death.attack.drown.player", "", null, DeathTypes.ALL),
         new DeathMessageInfo("", "death.attack.explosion", null, null, null),
-        new DeathMessageInfo("", "death.attack.explosion.player", "", null, KillerTypes.BLOW),
+        new DeathMessageInfo("", "death.attack.explosion.player", "", null, DeathTypes.BLOW),
         new DeathMessageInfo("", "death.attack.fall", null, null, null),
         new DeathMessageInfo("", "death.attack.fallingBlock", null, null, null),
-        new DeathMessageInfo("", "death.attack.fireball", "", null, KillerTypes.FIREBALL),
-        new DeathMessageInfo("", "death.attack.generic", null, null, null),
+        new DeathMessageInfo("", "death.attack.fireball", "", null, DeathTypes.FIREBALL),
         new DeathMessageInfo("", "death.attack.inFire", null, null, null),
-        new DeathMessageInfo("", "death.attack.inFire.player", "", null, KillerTypes.ALL),
+        new DeathMessageInfo("", "death.attack.inFire.player", "", null, DeathTypes.ALL),
         new DeathMessageInfo("", "death.attack.inWall", null, null, null),
-        new DeathMessageInfo("", "death.attack.indirectMagic", "", null, KillerTypes.MAGIC),
+        new DeathMessageInfo("", "death.attack.indirectMagic", "", null, DeathTypes.MAGIC),
         new DeathMessageInfo("", "death.attack.lava", null, null, null),
-        new DeathMessageInfo("", "death.attack.lava.player", "", null, KillerTypes.ALL),
+        new DeathMessageInfo("", "death.attack.lava.player", "", null, DeathTypes.ALL),
         new DeathMessageInfo("", "death.attack.magic", null, null, null),
-        new DeathMessageInfo("", "death.attack.mob", "", null, KillerTypes.ALL),
+        new DeathMessageInfo("", "death.attack.mob", "", null, DeathTypes.ALL),
         new DeathMessageInfo("", "death.attack.onFire", null, null, null),
-        new DeathMessageInfo("", "death.attack.onFire.player", "", null, KillerTypes.ALL),
+        new DeathMessageInfo("", "death.attack.onFire.player", "", null, DeathTypes.ALL),
         new DeathMessageInfo("", "death.attack.outOfWorld", null, null, null),
-        new DeathMessageInfo("", "death.attack.player", "", null, KillerTypes.ALL),
+        new DeathMessageInfo("", "death.attack.player", "", null, DeathTypes.ALL),
         new DeathMessageInfo("", "death.attack.starve", null, null, null),
-        new DeathMessageInfo("", "death.attack.thorns", "", null, KillerTypes.ALL),
-        new DeathMessageInfo("", "death.attack.thrown", "", null, KillerTypes.ALL),
+        new DeathMessageInfo("", "death.attack.thorns", "", null, DeathTypes.ALL),
+        new DeathMessageInfo("", "death.attack.thrown", "", null, DeathTypes.ALL),
         new DeathMessageInfo("", "death.attack.wither", null, null, null),
         new DeathMessageInfo("", "death.fell.accident.generic", null, null, null),
         new DeathMessageInfo("", "death.fell.accident.ladder", null, null, null),
         new DeathMessageInfo("", "death.fell.accident.vines", null, null, null),
         new DeathMessageInfo("", "death.fell.accident.water", null, null, null),
-        new DeathMessageInfo("", "death.fell.assist", "", null, KillerTypes.ALL),
-        new DeathMessageInfo("", "death.fell.finish", "", null, KillerTypes.ALL),
+        new DeathMessageInfo("", "death.fell.assist", "", null, DeathTypes.ALL),
+        new DeathMessageInfo("", "death.fell.finish", "", null, DeathTypes.ALL),
         new DeathMessageInfo("", "death.fell.killer", null, null, null),
         new DeathMessageInfo("", "death.GS.Herobrine", null, null, null),
         new DeathMessageInfo("", "death.GS.death_sentence", null, null, null),
@@ -69,7 +68,9 @@ public class DeathMessageInfo {
         new DeathMessageInfo("Jeb", "death.GS.Herobrine", null),
         new DeathMessageInfo("Leeroy Jenkins", "death.attack.onFire.player", "entity.EnderDragon.name"),
         new DeathMessageInfo("Wilson", "death.attack.starve", null),
-        new DeathMessageInfo("Guide", "death.attack.lava", null)
+        new DeathMessageInfo("Guide", "death.attack.lava", null),
+        new DeathMessageInfo("death.GS.mom", "death.GS.Herobrine", null),
+        new DeathMessageInfo("Horke", "death.attack.drown", null)
     };
     public static final String[] ALL_KILLER_NAMES = {
         "entity.Blaze.name",
@@ -131,12 +132,12 @@ public class DeathMessageInfo {
         this(name, deathMessage, killerName, itemName, null);
     }
 
-    public DeathMessageInfo(String name, String deathMessage, String killerName, String itemName, KillerTypes messageTypes) {
+    public DeathMessageInfo(String name, String deathMessage, String killerName, String itemName, DeathTypes messageTypes) {
         this.name = name;
         this.deathMessage = deathMessage;
         this.killerName = killerName;
         this.itemName = itemName;
-        this.killerTypes = messageTypes;
+        this.deathTypes = messageTypes;
     }
 
     public String getName() {
@@ -166,14 +167,14 @@ public class DeathMessageInfo {
         } else {
             info = LOCALIZED_DEATH_TEXT[random.nextInt(LOCALIZED_DEATH_TEXT.length)];
             if (info.killerName != null) {
-                info.killerName = getRandomKillerName(random, info.killerTypes);
+                info.killerName = getRandomKillerName(random, info.deathTypes);
             }
         }
         return info;
     }
 
-    public static String getRandomKillerName(Random random, KillerTypes killerTypes) {
-        switch (killerTypes) {
+    public static String getRandomKillerName(Random random, DeathTypes deathTypes) {
+        switch (deathTypes) {
             case ARROW:
                 return ARROW_KILLER_NAMES[random.nextInt(ARROW_KILLER_NAMES.length)];
             case FIREBALL:
