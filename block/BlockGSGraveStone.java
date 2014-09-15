@@ -28,6 +28,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -801,6 +802,25 @@ public class BlockGSGraveStone extends BlockContainer {
             }
             GraveStoneLogger.logInfo("Can not create " + deathInfo.getName() + "'s grave at " + x + "x" + y + "x" + z);
         }
+    }
+
+    @Override
+    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
+        ItemStack itemStack = this.createStackedBlock(0);
+        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
+
+        if (tileEntity != null) {
+            if (itemStack != null) {
+                NBTTagCompound nbt = new NBTTagCompound();
+                nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
+
+                itemStack.setTagCompound(nbt);
+                if (tileEntity.isSwordGrave()) {
+                    GraveStoneHelper.addSwordInfo(nbt, tileEntity.getSword());
+                }
+            }
+        }
+        return itemStack;
     }
 
     /**

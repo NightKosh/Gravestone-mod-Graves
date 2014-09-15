@@ -20,6 +20,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -862,5 +863,21 @@ public class BlockGSMemorial extends BlockContainer {
         nbt.setByte("GraveType", memorialType);
         itemStack.setTagCompound(nbt);
         this.dropBlockAsItem(world, x, y, z, itemStack);
+    }
+
+    @Override
+    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
+        ItemStack itemStack = this.createStackedBlock(0);
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
+
+        if (tileEntity != null) {
+            if (itemStack != null) {
+                NBTTagCompound nbt = new NBTTagCompound();
+                nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
+
+                itemStack.setTagCompound(nbt);
+            }
+        }
+        return itemStack;
     }
 }
