@@ -13,6 +13,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -74,6 +75,16 @@ public class BlockGSSpawner extends BlockMobSpawner {
         return false;
     }
 
+    @Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+        return null;
+    }
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+    
     /**
      * A randomly called display update to be able to add particles or other
      * items for display
