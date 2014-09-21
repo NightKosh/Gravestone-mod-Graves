@@ -81,7 +81,7 @@ public class ItemBlockGSGraveStone extends ItemBlock {
                 list.add(deathText);
             }
 
-            if (stack.stackTagCompound.hasKey("Age") && stack.stackTagCompound.getInteger("Age") != -1) {
+            if (stack.stackTagCompound.hasKey("Age") && stack.stackTagCompound.getInteger("Age") > 0) {
                 list.add(ModGraveStone.proxy.getLocalizedString("item.grave.age") + " " + stack.stackTagCompound.getInteger("Age") + " " + ModGraveStone.proxy.getLocalizedString("item.grave.days"));
             }
 
