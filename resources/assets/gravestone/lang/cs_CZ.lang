@@ -15,6 +15,7 @@ block.gravestone.iron_sword=Náhrobek ze železného meče
 block.gravestone.golden_sword=Náhrobek ze zlatého meče
 block.gravestone.diamond_sword=Náhrobek z diamantového meče
 block.gravestone.horse_statue=Socha koně
+block.gravestone.sword=Sword of a fallen warrior
 
 ## memorials
 block.memorial.cross=Křížový památník

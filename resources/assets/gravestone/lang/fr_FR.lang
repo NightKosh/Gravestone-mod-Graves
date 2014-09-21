@@ -15,6 +15,7 @@ block.gravestone.iron_sword=Épée en fer tombale
 block.gravestone.golden_sword=Épée en or tombale
 block.gravestone.diamond_sword=Épée en diamand tombale
 block.gravestone.horse_statue=Statue de cheval
+block.gravestone.sword=Sword of a fallen warrior
 
 ## memorials
 block.memorial.cross=Croix mémoriale

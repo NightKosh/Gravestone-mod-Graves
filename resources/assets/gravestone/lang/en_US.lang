@@ -15,6 +15,7 @@ block.gravestone.iron_sword=Iron sword gravestone
 block.gravestone.golden_sword=Golden sword gravestone
 block.gravestone.diamond_sword=Diamond sword gravestone
 block.gravestone.horse_statue=Horse statue
+block.gravestone.sword=Sword of a fallen warrior
 
 ## memorials
 block.memorial.cross=Cross Memorial

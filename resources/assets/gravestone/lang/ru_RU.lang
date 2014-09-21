@@ -15,6 +15,7 @@ block.gravestone.iron_sword=Надгробие из железного меча
 block.gravestone.golden_sword=Надгробие из золотого меча
 block.gravestone.diamond_sword=Надгробие из алмазного меча
 block.gravestone.horse_statue=Статуя для могилы лошади
+block.gravestone.sword=Меч павшего воина
 
 ## memorials
 block.memorial.cross=Мемориальный крест
