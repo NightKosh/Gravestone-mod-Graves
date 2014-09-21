@@ -515,8 +515,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         }
                     } else {
                         if (GraveStoneHelper.FLOWERS.contains(Block.getBlockFromItem(item.getItem())) &&
-                                GraveStoneHelper.FLOWERS_GROUND.contains(world.getBlock(x, y - 1, z)) &&
-                                GraveStoneHelper.canFlowerBePlaced(te)) {
+                                GraveStoneHelper.canFlowerBePlaced(world, x, y, z, te)) {
                             te.setFlower(new ItemStack(item.getItem(), 1, item.getItemDamage()));
                             if (world.isRemote) {
                                 player.inventory.getCurrentItem().stackSize--;

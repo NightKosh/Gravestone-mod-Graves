@@ -1,12 +1,15 @@
 package gravestone.tileentity;
 
 import gravestone.GraveStoneLogger;
+import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumGraves;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -229,5 +232,17 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
             e.printStackTrace();
         }
         GraveStoneLogger.logInfo("Gravestone converting complete!");
+    }
+
+    @Override
+    public void setGraveContent(Random random, boolean isPetGrave, boolean allLoot) {
+        super.setGraveContent(random, isPetGrave, allLoot);
+        setRandomFlower(random);
+    }
+
+    public void setRandomFlower(Random random) {
+        if (random.nextInt(4) == 0 && GraveStoneHelper.canFlowerBePlaced(this.worldObj, this.xCoord, this.yCoord, this.zCoord, this)) {
+            setFlower(new ItemStack(GraveStoneHelper.FLOWERS.get(random.nextInt(GraveStoneHelper.FLOWERS.size())), 1));
+        }
     }
 }

@@ -11,6 +11,7 @@ import gravestone.item.enums.EnumCorpse;
 import gravestone.tileentity.DeathMessageInfo;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -216,7 +217,7 @@ public class GraveStoneHelper {
 
     public static final List<Block> FLOWERS_GROUND = Arrays.asList(
             Blocks.grass, Blocks.dirt);
-    public static final List FLOWERS = Arrays.asList(
+    public static final List<BlockFlower> FLOWERS = Arrays.asList(
             Blocks.yellow_flower, Blocks.red_flower);
     public static final List<EnumGraves> FLOWER_GRAVES = Arrays.asList(
             EnumGraves.WOODEN_VERTICAL_PLATE,
@@ -610,7 +611,11 @@ public class GraveStoneHelper {
         }
     }
 
-    public static boolean canFlowerBePlaced(TileEntityGSGraveStone te) {
+    public static boolean canFlowerBePlaced(World world, int x, int y, int z, TileEntityGSGraveStone te) {
+        return GraveStoneHelper.FLOWERS_GROUND.contains(world.getBlock(x, y - 1, z)) && canFlowerBePlacedOnGrave(te);
+    }
+
+    public static boolean canFlowerBePlacedOnGrave(TileEntityGSGraveStone te) {
         return !te.isSwordGrave() && FLOWER_GRAVES.contains(te.getGraveType());
     }
 
