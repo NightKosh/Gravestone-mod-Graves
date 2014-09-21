@@ -4,17 +4,20 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.block.enums.EnumSpawner;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSBlock;
 import gravestone.core.GSTabs;
 import gravestone.core.Resources;
 import gravestone.tileentity.TileEntityGSSpawner;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMobSpawner;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -84,7 +87,7 @@ public class BlockGSSpawner extends BlockMobSpawner {
     public boolean renderAsNormalBlock() {
         return false;
     }
-    
+
     /**
      * A randomly called display update to be able to add particles or other
      * items for display
@@ -108,6 +111,47 @@ public class BlockGSSpawner extends BlockMobSpawner {
             world.spawnParticle("flame", xPos + dx, yPos, zPos + dz, 0.0D, 0.0D, 0.0D);
             rotation += dRotation;
         }
+    }
+
+    @Override
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+        ret.add(new ItemStack(getItemDropped(metadata, world.rand, fortune), quantityDropped(world.rand), getItemMeta(metadata)));
+
+        for (int i = 0; i < 5; i++) {
+            if ((fortune > 0 && world.rand.nextInt(100) < 5 * fortune) ||
+                    world.rand.nextInt(100) < 5 * fortune) {
+                ret.add(getCustomItemsDropped(metadata));
+            }
+        }
+        return ret;
+    }
+
+    public ItemStack getCustomItemsDropped(int meta) {
+        switch (meta) {
+            case 1:
+                return new ItemStack(GSBlock.skullCandle, 1, 0);
+            case 2:
+                return new ItemStack(GSBlock.skullCandle, 1, 2);
+            case 0:
+            default:
+                return new ItemStack(GSBlock.skullCandle, 1, 1);
+        }
+    }
+
+
+    public int getItemMeta(int metadata) {
+        return 15;
+    }
+
+    @Override
+    public Item getItemDropped(int meta, Random random, int fortune) {
+        return Items.dye;
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return 3;
     }
 
     /**
