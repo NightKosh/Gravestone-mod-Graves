@@ -18,6 +18,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
@@ -263,11 +264,10 @@ public class BlockGSMemorial extends BlockContainer {
         this.isBlockContainer = true;
         this.setStepSound(Block.soundTypeStone);
         this.setBlockName("Memorial");
-        this.setHardness(4.5F);
+        this.setHardness(1);
         this.setResistance(5F);
         this.setCreativeTab(GSTabs.memorialsTab);
         this.setBlockTextureName("stone");
-        this.setHarvestLevel("pickaxe", 2);
     }
 
     /*

@@ -140,12 +140,11 @@ public class BlockGSGraveStone extends BlockContainer {
         this.isBlockContainer = true;
         this.setStepSound(Block.soundTypeStone);
         this.setBlockName("GraveStone");
-        this.setHardness(4.5F);
+        this.setHardness(0.5F);
         this.setResistance(5F);
         this.setCreativeTab(GSTabs.gravesTab);
         this.setTickRandomly(GraveStoneConfig.removeEmptyGraves);
         this.setBlockTextureName("stone");
-        this.setHarvestLevel("pickaxe", 1);
     }
 
     /**
