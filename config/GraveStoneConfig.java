@@ -49,6 +49,8 @@ public class GraveStoneConfig {
     public static boolean enableNightStone;
     public static boolean enableThunderStone;
     public static boolean showNightStoneMessage;
+    // creeper memorials recipes
+    public static boolean enableCreeperStatuesRecipes;
     // spawner reciepes
     public static boolean enableBossSpawnerCraftingRecipe;
     public static boolean enableSpawnerCraftingRecipe;
@@ -148,7 +150,10 @@ public class GraveStoneConfig {
         enableNightStone   = config.get(Configuration.CATEGORY_GENERAL, "EnableNightStone", true).getBoolean(true);
         enableThunderStone = config.get(Configuration.CATEGORY_GENERAL, "EnableThunderStone", true).getBoolean(true);
         showNightStoneMessage = config.get(Configuration.CATEGORY_GENERAL, "ShowNightStoneMessage", true).getBoolean(true);
-        
+
+        // creeper statues
+        enableCreeperStatuesRecipes = config.get(Configuration.CATEGORY_GENERAL, "EnableCreeperStatuesRecipes", false).getBoolean(false);
+
         // spawners recipes
         enableBossSpawnerCraftingRecipe = config.get(Configuration.CATEGORY_GENERAL, "EnableBossSpawnerCraftingRecipe", true).getBoolean(true);
         enableSpawnerCraftingRecipe = config.get(Configuration.CATEGORY_GENERAL, "EnableMonsterSpawnerCraftingRecipe", true).getBoolean(true);
