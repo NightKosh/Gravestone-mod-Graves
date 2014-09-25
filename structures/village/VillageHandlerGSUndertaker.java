@@ -28,15 +28,14 @@ public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCrea
     public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random) {
         // chisel
         recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 1), new ItemStack(GSItem.chisel, 1, 0)));
-        recipeList.add(new MerchantRecipe(new ItemStack(GSItem.chisel, 1, 0), new ItemStack(Items.gold_ingot, 1)));
-        // memorials
-        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 15), getTradeStack(GSBlock.memorial, (byte) 0)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 15), getTradeStack(GSBlock.memorial, (byte) 1)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 25), getTradeStack(GSBlock.memorial, (byte) 2)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 25), getTradeStack(GSBlock.memorial, (byte) 3)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 25), getTradeStack(GSBlock.memorial, (byte) 4)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 20), getTradeStack(GSBlock.memorial, (byte) 5)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 20), getTradeStack(GSBlock.memorial, (byte) 6)));
+        // candle
+        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 1), new ItemStack(GSBlock.candle, 10, 0)));
+        // skulls
+        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 15), new ItemStack(Items.skull, 0, 0))); // skeleton
+        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 15), new ItemStack(Items.skull, 2, 0))); // zombie
+        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 20), new ItemStack(Items.skull, 3, 0))); // steve
+        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 20), new ItemStack(Items.skull, 4, 0))); // creeper
+        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 30), new ItemStack(Items.skull, 1, 0))); // wither
     }
 
     @Override
