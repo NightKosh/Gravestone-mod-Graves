@@ -3,6 +3,9 @@ package gravestone.tileentity;
 import gravestone.GraveStoneLogger;
 import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumGraves;
+import gravestone.core.event.GSRenderEventHandler;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,6 +25,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
     protected GSGraveStoneSpawn gsSpawn;
     protected ItemStack sword = null;
     protected ItemStack flower = null;
+    public static final int FOG_RANGE = 30;
 
     public TileEntityGSGraveStone() {
         super();
@@ -44,6 +48,27 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
     @Override
     public void updateEntity() {
         gsSpawn.updateEntity();
+
+        if (this.worldObj.isRemote) {
+            EntityPlayer player = this.worldObj.getClosestPlayer(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D, FOG_RANGE);
+            if (player != null && player.getCommandSenderName().equals(Minecraft.getMinecraft().thePlayer.getCommandSenderName()) && isFogTime(this.worldObj)) {
+                GSRenderEventHandler.addFog();
+            }
+        }
+    }
+
+
+    public static final int FOG_START_TIME = 12000;
+    public static final int FOG_END_TIME = 24000;
+    public static boolean isFogTime(World world) {
+        if (world.isRaining()) {
+            return false;
+        } else {
+            long time = world.getWorldTime();
+            long dayTime = time % 24000;
+
+            return dayTime > FOG_START_TIME && dayTime < FOG_END_TIME;
+        }
     }
 
     /**

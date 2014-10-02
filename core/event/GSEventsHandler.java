@@ -27,7 +27,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GSEventsHook {
+public class GSEventsHandler {
 
     @SubscribeEvent
     public void onEntityLivingDeath(LivingDeathEvent event) {

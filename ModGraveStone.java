@@ -11,7 +11,7 @@ import gravestone.config.GraveStoneConfig;
 import gravestone.core.*;
 import gravestone.core.commands.GSCommands;
 import gravestone.core.compatibility.GSCompatibility;
-import gravestone.core.event.GSEventsHook;
+import gravestone.core.event.GSEventsHandler;
 import gravestone.core.proxy.CommonProxy;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -42,7 +42,8 @@ public class ModGraveStone {
     @Mod.EventHandler
     public void load(FMLInitializationEvent event) {
         // register death event
-        MinecraftForge.EVENT_BUS.register(new GSEventsHook());
+        MinecraftForge.EVENT_BUS.register(new GSEventsHandler());
+        proxy.registerHandlers();
 
         // tabs
         GSTabs.registration();

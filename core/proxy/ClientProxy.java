@@ -3,10 +3,13 @@ package gravestone.core.proxy;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import gravestone.core.GSBlock;
 import gravestone.core.Resources;
+import gravestone.core.event.GSClientTickEventHandler;
+import gravestone.core.event.GSRenderEventHandler;
 import gravestone.entity.monster.*;
 import gravestone.entity.monster.EntitySkullCrawler.SkullCrawlerType;
 import gravestone.gui.GSGuiGrave;
@@ -21,6 +24,7 @@ import gravestone.tileentity.*;
 import net.minecraft.item.Item;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -112,5 +116,11 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void openGraveGui(TileEntityGSGrave tileEntity) {
         FMLClientHandler.instance().getClient().displayGuiScreen(new GSGuiGrave(tileEntity));
+    }
+
+    @Override
+    public void registerHandlers() {
+        FMLCommonHandler.instance().bus().register(new GSClientTickEventHandler());
+        MinecraftForge.EVENT_BUS.register(new GSRenderEventHandler());
     }
 }
