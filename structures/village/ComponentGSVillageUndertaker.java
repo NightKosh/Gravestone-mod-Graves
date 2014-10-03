@@ -23,6 +23,9 @@ import java.util.Random;
 public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village {
 
     private int averageGroundLevel = -1;
+    private static final int HEIGHT = 7;
+    private static final int X_LENGTH = 12;
+    private static final int Z_LENGTH = 6;
 
     public ComponentGSVillageUndertaker() {
     }
@@ -34,8 +37,12 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
     }
 
     public static ComponentGSVillageUndertaker buildComponent(StructureVillagePieces.Start startPiece, List list, Random random, int par3, int par4, int par5, int par6, int par7) {
-        StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 12, 7, 6, par6);
+        StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, X_LENGTH, HEIGHT, Z_LENGTH, par6);
         return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(list, structureboundingbox) == null ? new ComponentGSVillageUndertaker(startPiece, par7, random, structureboundingbox, par6) : null;
+    }
+
+    public static StructureBoundingBox getBoundingBox(int x, int z) {
+        return new StructureBoundingBox(x, 64, z, x + X_LENGTH, 64 + HEIGHT, z + Z_LENGTH);
     }
 
     /**

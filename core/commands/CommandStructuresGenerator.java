@@ -9,6 +9,8 @@ import gravestone.structures.GSStructureGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
 import gravestone.structures.graves.SingleGraveGenerator;
 import gravestone.structures.memorials.MemorialGenerator;
+import gravestone.structures.village.VillageCemeteryGenerator;
+import gravestone.structures.village.VillageUndertakerGenerator;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.world.World;
@@ -41,6 +43,10 @@ public class CommandStructuresGenerator extends CommandBase {
             generateStructure(icommandsender.getEntityWorld(), commandStr[1], commandStr[2], MemorialGenerator.getInstance());
         } else if (commandStr[0].equals("grave")) {
             generateStructure(icommandsender.getEntityWorld(), commandStr[1], commandStr[2], SingleGraveGenerator.getInstance());
+        } else if (commandStr[0].equals("cemetery")) {
+            generateStructure(icommandsender.getEntityWorld(), commandStr[1], commandStr[2], VillageCemeteryGenerator.getInstance());
+        } else if (commandStr[0].equals("undertaker")) {
+            generateStructure(icommandsender.getEntityWorld(), commandStr[1], commandStr[2], VillageUndertakerGenerator.getInstance());
         } else {
             GraveStoneLogger.logError("Unknown structure type");
         }

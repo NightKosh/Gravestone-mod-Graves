@@ -24,6 +24,8 @@ public class ComponentGSVillageCemetery extends StructureVillagePieces.Village {
 
     private int averageGroundLevel = -1;
     private static final int HEIGHT = 2;
+    private static final int X_LENGTH = 12;
+    private static final int Z_LENGTH = 10;
 
     public ComponentGSVillageCemetery() {
     }
@@ -35,8 +37,12 @@ public class ComponentGSVillageCemetery extends StructureVillagePieces.Village {
     }
 
     public static ComponentGSVillageCemetery buildComponent(StructureVillagePieces.Start startPiece, List list, Random random, int par3, int par4, int par5, int direction, int componentType) {
-        StructureBoundingBox structureBoundingBox = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 12, HEIGHT, 10, direction);
+        StructureBoundingBox structureBoundingBox = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, X_LENGTH, HEIGHT, Z_LENGTH, direction);
         return canVillageGoDeeper(structureBoundingBox) && StructureComponent.findIntersecting(list, structureBoundingBox) == null ? new ComponentGSVillageCemetery(startPiece, componentType, random, structureBoundingBox, direction) : null;
+    }
+
+    public static StructureBoundingBox getBoundingBox(int x, int z) {
+        return new StructureBoundingBox(x, 64, z, x + X_LENGTH, 64 + HEIGHT, z + Z_LENGTH);
     }
 
     /**
