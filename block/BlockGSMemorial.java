@@ -825,6 +825,9 @@ public class BlockGSMemorial extends BlockContainer {
             }
             nbt.setString("DeathText", tileEntity.getDeathTextComponent().getDeathText());
             nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
+            
+            nbt.setBoolean("Enchanted", tileEntity.isEnchanted());
+            
             itemStack.setTagCompound(nbt);
         }
 
