@@ -2,6 +2,7 @@ package gravestone.structures.catacombs.components;
 
 import gravestone.structures.BoundingBoxHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
@@ -18,6 +19,7 @@ public class Fence extends CatacombsBaseComponent {
 
     private final boolean haveEntrance;
     private final boolean haveCorners;
+    public static final int ENTRANCE_HEIGHT = 7;
 
     public Fence(int direction, Random random, StructureBoundingBox structureBoundingBox, boolean haveEntrance, boolean haveCorners) {
         super(direction);
@@ -115,7 +117,14 @@ public class Fence extends CatacombsBaseComponent {
     }
 
     private int getGroundY(World world, int x) {
-        return world.getTopSolidOrLiquidBlock(getXWithOffset(x, 0), getZWithOffset(x, 0));
+        int xPos = getXWithOffset(x, 0);
+        int zPos = getZWithOffset(x, 0);
+        int y = world.getTopSolidOrLiquidBlock(xPos, zPos);
+        while (world.getBlock(xPos, y, zPos).getMaterial().equals(Material.wood) || world.getBlock(xPos, y, zPos).getMaterial().equals(Material.leaves)) {
+            y--;
+        }
+
+        return y;
     }
 
     private boolean checkGround(World world, int x, int y) {
@@ -153,7 +162,7 @@ public class Fence extends CatacombsBaseComponent {
     }
 
     private void createEntrance(World world, Random random) {
-        int y = getAverageGroundLevel(world, BoundingBoxHelper.getCorrectBox(coordBaseMode, getXWithOffset(42, 0), 0, getZWithOffset(42, 0), 5, 7, 0, xShift));
+        int y = getAverageGroundLevel(world, BoundingBoxHelper.getCorrectBox(coordBaseMode, getXWithOffset(42, 0), 0, getZWithOffset(42, 0), 5, ENTRANCE_HEIGHT, 0, xShift));
 
         if (checkGround(world, 42, 47, y)) {
             // blocks
@@ -179,31 +188,11 @@ public class Fence extends CatacombsBaseComponent {
      * supplied BoundingBox. (A median of all the levels in the BB's horizontal
      * rectangle).
      */
-    protected int getMinimumGroundLevel(World world, StructureBoundingBox structureBoundingBox) {
-        int height = 250;
-        int curHeight = 0;
-
-        for (int x = boundingBox.minX; x <= boundingBox.maxX; x++) {
-            curHeight += Math.max(world.getTopSolidOrLiquidBlock(x, 0), world.provider.getAverageGroundLevel());
-
-            if (curHeight < height) {
-                height = curHeight;
-            }
-        }
-
-        return height;
-    }
-
-    /**
-     * Discover the y coordinate that will serve as the ground level of the
-     * supplied BoundingBox. (A median of all the levels in the BB's horizontal
-     * rectangle).
-     */
     protected int getAverageGroundLevel(World world, StructureBoundingBox structureBoundingBox) {
         int height = 0;
         int count = 0;
 
-        for (int x = this.boundingBox.minX; x <= this.boundingBox.maxX; ++x) {
+        for (int x = structureBoundingBox.minX; x <= structureBoundingBox.maxX; ++x) {
             height += Math.max(world.getTopSolidOrLiquidBlock(x, 0), world.provider.getAverageGroundLevel());
             count++;
         }
