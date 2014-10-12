@@ -4,9 +4,9 @@ import gravestone.GraveStoneLogger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import tconstruct.api.IPlayerExtendedInventoryWrapper;
+import tconstruct.api.TConstructAPI;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.List;
 
 /**
@@ -24,43 +24,36 @@ public class GSCompatibilityTinkerConstruct {
 
     public static void addItems(List<ItemStack> items, EntityPlayer player) {
         if (isLoaded()) {
-            try {
-                Class<?> clazz = Class.forName("tconstruct.util.player.TPlayerStats");
-                Method m = clazz.getDeclaredMethod("get", EntityPlayer.class);
-                Object result = m.invoke(null, player);
-                Field f = clazz.getDeclaredField("knapsack");
-                IInventory inventory = (IInventory) f.get(result);
-
-                if (inventory != null) {
-                    for (int i = 0; i < inventory.getSizeInventory(); i++) {
-                        ItemStack itemStack = inventory.getStackInSlot(i);
-                        if (itemStack != null) {
-                            items.add(itemStack.copy());
-                            inventory.setInventorySlotContents(i, null);
+            IPlayerExtendedInventoryWrapper inventoryWrapper = TConstructAPI.getInventoryWrapper(player);
+            if (inventoryWrapper != null) {
+                IInventory knapsackInventory = inventoryWrapper.getKnapsackInventory(player);
+                if (knapsackInventory != null) {
+                    for (int slot = 0; slot < knapsackInventory.getSizeInventory(); slot++) {
+                        ItemStack stack = knapsackInventory.getStackInSlot(slot);
+                        if (stack != null) {
+                            items.add(stack.copy());
+                            knapsackInventory.setInventorySlotContents(slot, null);
                         }
+
                     }
+                } else {
+                    GraveStoneLogger.logError("Can't get Tinkers Construct knapsack items!!!");
                 }
-            } catch (Exception e) {
-                GraveStoneLogger.logError("Can't get access to Tinkers Construct items!!!");
-            }
 
-            try {
-                Class<?> clazz = Class.forName("tconstruct.util.player.TPlayerStats");
-                Method m = clazz.getDeclaredMethod("get", EntityPlayer.class);
-                Object result = m.invoke(null, player);
-                Field f = clazz.getDeclaredField("armor");
-                IInventory inventory = (IInventory) f.get(result);
-
-                if (inventory != null) {
-                    for (int i = 0; i < inventory.getSizeInventory(); i++) {
-                        ItemStack itemStack = inventory.getStackInSlot(i);
-                        if (itemStack != null) {
-                            items.add(itemStack.copy());
-                            inventory.setInventorySlotContents(i, null);
+                IInventory accessoryInventory = inventoryWrapper.getAccessoryInventory(player);
+                if (accessoryInventory != null) {
+                    for (int slot = 0; slot < accessoryInventory.getSizeInventory(); slot++) {
+                        ItemStack stack = accessoryInventory.getStackInSlot(slot);
+                        if (stack != null) {
+                            items.add(stack.copy());
+                            accessoryInventory.setInventorySlotContents(slot, null);
                         }
+
                     }
+                } else {
+                    GraveStoneLogger.logError("Can't get Tinkers Construct accessory items!!!");
                 }
-            } catch (Exception e) {
+            } else {
                 GraveStoneLogger.logError("Can't get access to Tinkers Construct items!!!");
             }
         }
