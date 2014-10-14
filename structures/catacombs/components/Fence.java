@@ -162,7 +162,17 @@ public class Fence extends CatacombsBaseComponent {
     }
 
     private void createEntrance(World world, Random random) {
-        int y = getAverageGroundLevel(world, BoundingBoxHelper.getCorrectBox(coordBaseMode, getXWithOffset(42, 0), 0, getZWithOffset(42, 0), 5, ENTRANCE_HEIGHT, 0, xShift));
+        int y = 0;
+        for (int x = 42; x <= 47; x++) {
+            int xPos = getXWithOffset(x, 0);
+            int zPos = getZWithOffset(x, 0);
+            int yPos = world.getTopSolidOrLiquidBlock(xPos, zPos);
+            while (world.getBlock(xPos, y, zPos).getMaterial().equals(Material.wood) || world.getBlock(xPos, y, zPos).getMaterial().equals(Material.leaves)) {
+                yPos--;
+            }
+            y += yPos;
+        }
+        y /= 6;
 
         if (checkGround(world, 42, 47, y)) {
             // blocks
@@ -180,27 +190,6 @@ public class Fence extends CatacombsBaseComponent {
             this.fillWithMetadataBlocks(world, boundingBox, 44, y + 5, 0, 45, y + 5, 0, Blocks.stone_slab, 5, Blocks.stone_slab, 5, false);
             this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 42, y + 4, 0, boundingBox);
             this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 47, y + 4, 0, boundingBox);
-        }
-    }
-
-    /**
-     * Discover the y coordinate that will serve as the ground level of the
-     * supplied BoundingBox. (A median of all the levels in the BB's horizontal
-     * rectangle).
-     */
-    protected int getAverageGroundLevel(World world, StructureBoundingBox structureBoundingBox) {
-        int height = 0;
-        int count = 0;
-
-        for (int x = structureBoundingBox.minX; x <= structureBoundingBox.maxX; ++x) {
-            height += Math.max(world.getTopSolidOrLiquidBlock(x, 0), world.provider.getAverageGroundLevel());
-            count++;
-        }
-
-        if (count == 0) {
-            return -1;
-        } else {
-            return height / count;
         }
     }
 
