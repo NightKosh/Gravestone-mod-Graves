@@ -83,6 +83,10 @@ public class GraveStoneConfig {
     public static int spawnChance;
     public static boolean removeEmptyGraves;
     public static boolean showGravesRemovingMessages;
+    //structures
+    public static boolean generateCatacombsGraveyard;
+
+
 
     private GraveStoneConfig(String path, File configFile) {
         this.config = new Configuration(configFile);
@@ -110,6 +114,7 @@ public class GraveStoneConfig {
     private static void structures() {
         generateCatacombs = config.get(Configuration.CATEGORY_GENERAL, "GenerateCatacombs", true).getBoolean(true);
         maxCatacombsHeight = config.get(Configuration.CATEGORY_GENERAL, "MaximumCatacombsGenerationHeight", 75).getInt();
+        generateCatacombsGraveyard = config.get(Configuration.CATEGORY_GENERAL, "GenerateCatacombsGraveyard", true).getBoolean(true);
         generateMemorials = config.get(Configuration.CATEGORY_GENERAL, "GenerateMemorials", true).getBoolean(true);
         generateSingleGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateSingleGraves", true).getBoolean(true);
         generateCemeteries = config.get(Configuration.CATEGORY_GENERAL, "GenerateCemeteries", true).getBoolean(true);

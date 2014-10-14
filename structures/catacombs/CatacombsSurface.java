@@ -1,5 +1,6 @@
 package gravestone.structures.catacombs;
 
+import gravestone.config.GraveStoneConfig;
 import gravestone.structures.catacombs.components.CatacombsBaseComponent;
 import gravestone.structures.catacombs.components.Fence;
 import gravestone.structures.catacombs.components.GraveYard;
@@ -33,92 +34,105 @@ public class CatacombsSurface {
         int xCoord = 0;
         int zCoord = 0;
 
-        for (byte shiftX = 1; shiftX < 4; shiftX++) {
-            for (byte shiftZ = 1; shiftZ < 4; shiftZ++) {
-                xCoord = X + shiftX * 12 + 3;
-                zCoord = Z + shiftZ * 12 + 3;
-                buildGraveYard(world, rand, xCoord, zCoord);
-                xCoord = X - shiftX * 12;
-                zCoord = Z - shiftZ * 12;
-                buildGraveYard(world, rand, xCoord, zCoord);
-                xCoord = X + shiftX * 12 + 3;
-                zCoord = Z - shiftZ * 12;
-                buildGraveYard(world, rand, xCoord, zCoord);
-                xCoord = X - shiftX * 12;
-                zCoord = Z + shiftZ * 12 + 3;
-                buildGraveYard(world, rand, xCoord, zCoord);
-            }
-        }
-
         switch (DIRECTION) {
             case 0:
                 xCoord = X;
                 zCoord = Z - 14;
-                buildGraveYard(world, rand, X + 15, Z + 2);
-                buildGraveYard(world, rand, X - 12, Z + 2);
-                buildGraveYard(world, rand, X + 2, Z + 15);
                 break;
-
             case 1:
                 xCoord = X + 14;
                 zCoord = Z;
-                buildGraveYard(world, rand, X + 2, Z + 15);
-                buildGraveYard(world, rand, X + 2, Z - 12);
-                buildGraveYard(world, rand, X - 11, Z + 2);
                 break;
-
             case 2:
                 xCoord = X;
                 zCoord = Z + 14;
-                buildGraveYard(world, rand, X + 15, Z + 2);
-                buildGraveYard(world, rand, X - 12, Z + 2);
-                buildGraveYard(world, rand, X + 2, Z - 13);
                 break;
-
             case 3:
                 xCoord = X - 14;
                 zCoord = Z;
-                buildGraveYard(world, rand, X + 2, Z + 15);
-                buildGraveYard(world, rand, X + 2, Z - 12);
-                buildGraveYard(world, rand, X + 15, Z + 2);
                 break;
         }
 
         new MausoleumEntrance(DIRECTION, rand,
                 new StructureBoundingBox(xCoord, 60, zCoord, 13 + xCoord, 90, 13 + zCoord),
                 mausoleumY).addComponentParts(world, rand);
-        buildGraveYard(world, rand, X + 27, Z + 2);
-        buildGraveYard(world, rand, X - 24, Z + 2);
-        buildGraveYard(world, rand, X + 2, Z + 27);
-        buildGraveYard(world, rand, X + 2, Z - 24);
-        buildGraveYard(world, rand, X + 39, Z + 2);
-        buildGraveYard(world, rand, X - 36, Z + 2);
-        buildGraveYard(world, rand, X + 2, Z + 39);
-        buildGraveYard(world, rand, X + 2, Z - 36);
 
-        // fence
-        if (DIRECTION == 0 || DIRECTION == 2) {
-            if (DIRECTION == 0) {
-                new Fence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z - 38, X + 51, 240, Z - 38), true, true).addComponentParts(world, rand);
-                new Fence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z + 51, X + 51, 240, Z + 51), false, true).addComponentParts(world, rand);
-            } else {
-                new Fence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z - 38, X + 51, 240, Z - 38), false, true).addComponentParts(world, rand);
-                new Fence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z + 51, X + 51, 240, Z + 51), true, true).addComponentParts(world, rand);
+
+        if (GraveStoneConfig.generateCatacombsGraveyard) {
+            switch (DIRECTION) {
+                case 0:
+                    buildGraveYard(world, rand, X + 15, Z + 2);
+                    buildGraveYard(world, rand, X - 12, Z + 2);
+                    buildGraveYard(world, rand, X + 2, Z + 15);
+                    break;
+                case 1:
+                    buildGraveYard(world, rand, X + 2, Z + 15);
+                    buildGraveYard(world, rand, X + 2, Z - 12);
+                    buildGraveYard(world, rand, X - 11, Z + 2);
+                    break;
+                case 2:
+                    buildGraveYard(world, rand, X + 15, Z + 2);
+                    buildGraveYard(world, rand, X - 12, Z + 2);
+                    buildGraveYard(world, rand, X + 2, Z - 13);
+                    break;
+                case 3:
+                    buildGraveYard(world, rand, X + 2, Z + 15);
+                    buildGraveYard(world, rand, X + 2, Z - 12);
+                    buildGraveYard(world, rand, X + 15, Z + 2);
+                    break;
             }
 
-            new Fence(CatacombsBaseComponent.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X - 38, 0, Z - 38, X - 38, 255, Z + 51), false, false).addComponentParts(world, rand);
-            new Fence(CatacombsBaseComponent.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X + 51, 0, Z - 38, X + 51, 255, Z + 51), false, false).addComponentParts(world, rand);
-        } else {
-            if (DIRECTION == 1) {
-                new Fence(DIRECTION, rand, new StructureBoundingBox(X + 51, 0, Z - 38, X + 51, 255, Z + 51), true, false).addComponentParts(world, rand);
-                new Fence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z - 38, X - 38, 255, Z + 51), false, false).addComponentParts(world, rand);
-            } else {
-                new Fence(DIRECTION, rand, new StructureBoundingBox(X + 51, 0, Z - 38, X + 51, 255, Z + 51), false, false).addComponentParts(world, rand);
-                new Fence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z - 38, X - 38, 255, Z + 51), true, false).addComponentParts(world, rand);
+            for (byte shiftX = 1; shiftX < 4; shiftX++) {
+                for (byte shiftZ = 1; shiftZ < 4; shiftZ++) {
+                    xCoord = X + shiftX * 12 + 3;
+                    zCoord = Z + shiftZ * 12 + 3;
+                    buildGraveYard(world, rand, xCoord, zCoord);
+                    xCoord = X - shiftX * 12;
+                    zCoord = Z - shiftZ * 12;
+                    buildGraveYard(world, rand, xCoord, zCoord);
+                    xCoord = X + shiftX * 12 + 3;
+                    zCoord = Z - shiftZ * 12;
+                    buildGraveYard(world, rand, xCoord, zCoord);
+                    xCoord = X - shiftX * 12;
+                    zCoord = Z + shiftZ * 12 + 3;
+                    buildGraveYard(world, rand, xCoord, zCoord);
+                }
             }
 
-            new Fence(CatacombsBaseComponent.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X - 38, 0, Z - 38, X + 51, 240, Z - 38), false, true).addComponentParts(world, rand);
-            new Fence(CatacombsBaseComponent.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X - 38, 0, Z + 51, X + 51, 240, Z + 51), false, true).addComponentParts(world, rand);
+            buildGraveYard(world, rand, X + 27, Z + 2);
+            buildGraveYard(world, rand, X - 24, Z + 2);
+            buildGraveYard(world, rand, X + 2, Z + 27);
+            buildGraveYard(world, rand, X + 2, Z - 24);
+            buildGraveYard(world, rand, X + 39, Z + 2);
+            buildGraveYard(world, rand, X - 36, Z + 2);
+            buildGraveYard(world, rand, X + 2, Z + 39);
+            buildGraveYard(world, rand, X + 2, Z - 36);
+
+
+            // fence
+            if (DIRECTION == 0 || DIRECTION == 2) {
+                if (DIRECTION == 0) {
+                    new Fence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z - 38, X + 51, 240, Z - 38), true, true).addComponentParts(world, rand);
+                    new Fence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z + 51, X + 51, 240, Z + 51), false, true).addComponentParts(world, rand);
+                } else {
+                    new Fence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z - 38, X + 51, 240, Z - 38), false, true).addComponentParts(world, rand);
+                    new Fence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z + 51, X + 51, 240, Z + 51), true, true).addComponentParts(world, rand);
+                }
+
+                new Fence(CatacombsBaseComponent.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X - 38, 0, Z - 38, X - 38, 255, Z + 51), false, false).addComponentParts(world, rand);
+                new Fence(CatacombsBaseComponent.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X + 51, 0, Z - 38, X + 51, 255, Z + 51), false, false).addComponentParts(world, rand);
+            } else {
+                if (DIRECTION == 1) {
+                    new Fence(DIRECTION, rand, new StructureBoundingBox(X + 51, 0, Z - 38, X + 51, 255, Z + 51), true, false).addComponentParts(world, rand);
+                    new Fence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z - 38, X - 38, 255, Z + 51), false, false).addComponentParts(world, rand);
+                } else {
+                    new Fence(DIRECTION, rand, new StructureBoundingBox(X + 51, 0, Z - 38, X + 51, 255, Z + 51), false, false).addComponentParts(world, rand);
+                    new Fence(DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z - 38, X - 38, 255, Z + 51), true, false).addComponentParts(world, rand);
+                }
+
+                new Fence(CatacombsBaseComponent.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X - 38, 0, Z - 38, X + 51, 240, Z - 38), false, true).addComponentParts(world, rand);
+                new Fence(CatacombsBaseComponent.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X - 38, 0, Z + 51, X + 51, 240, Z + 51), false, true).addComponentParts(world, rand);
+            }
         }
     }
 
