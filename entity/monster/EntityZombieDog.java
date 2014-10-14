@@ -1,12 +1,12 @@
 package gravestone.entity.monster;
 
 import gravestone.core.Resources;
+import gravestone.entity.ai.EntityAIAttackLivingHorse;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -32,7 +32,7 @@ public class EntityZombieDog extends EntityUndeadDog {
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityVillager.class, 1, true));
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityWolf.class, 1, true));
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityOcelot.class, 1, true));
-        this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityHorse.class, 1, false));
+        this.tasks.addTask(4, new EntityAIAttackLivingHorse(this, 1, false));
         this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntitySheep.class, 1, false));
         this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, 1, false));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, false));
@@ -106,46 +106,7 @@ public class EntityZombieDog extends EntityUndeadDog {
         super.onKillEntity(entityLiving);
 
         if (this.worldObj.difficultySetting == EnumDifficulty.NORMAL || this.worldObj.difficultySetting == EnumDifficulty.HARD) {
-            if (this.rand.nextBoolean()) {
-                return;
-            }
-
-            if (entityLiving instanceof EntityVillager) {
-                EntityZombie entityZombie = new EntityZombie(this.worldObj);
-                entityZombie.copyLocationAndAnglesFrom(entityLiving);
-                this.worldObj.removeEntity(entityLiving);
-                entityZombie.onSpawnWithEgg((IEntityLivingData) null);
-                entityZombie.setVillager(true);
-
-                if (entityLiving.isChild()) {
-                    entityZombie.setChild(true);
-                }
-
-                this.worldObj.spawnEntityInWorld(entityZombie);
-                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
-            } else if (entityLiving instanceof EntityWolf) {
-                EntityZombieDog entityZombieDog = new EntityZombieDog(this.worldObj);
-                entityZombieDog.copyLocationAndAnglesFrom(entityLiving);
-                this.worldObj.removeEntity(entityLiving);
-                this.worldObj.spawnEntityInWorld(entityZombieDog);
-                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
-            } else if (entityLiving instanceof EntityOcelot) {
-                EntityZombieCat entityZombieCat = new EntityZombieCat(this.worldObj);
-                entityZombieCat.copyLocationAndAnglesFrom(entityLiving);
-                int catType = ((EntityOcelot) entityLiving).getTameSkin();
-                this.worldObj.removeEntity(entityLiving);
-                entityZombieCat.setSkin(catType);
-                entityZombieCat.onSpawnWithEgg((IEntityLivingData) null);
-                this.worldObj.spawnEntityInWorld(entityZombieCat);
-                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
-            } else if (entityLiving instanceof EntityHorse) {
-                EntityHorse horse = new EntityHorse(this.worldObj);
-                horse.copyLocationAndAnglesFrom(entityLiving);
-                horse.setHorseType(3);
-                this.worldObj.removeEntity(entityLiving);
-                this.worldObj.spawnEntityInWorld(horse);
-                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
-            }
+            spawnZombieMob(entityLiving);
         }
     }
 }

@@ -2,15 +2,14 @@ package gravestone.entity.monster;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -101,5 +100,65 @@ public abstract class EntityUndeadPet extends EntityMob {
     @Override
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.UNDEAD;
+    }
+
+    protected void spawnZombieMob(EntityLivingBase entityLivingBase) {
+        if (entityLivingBase instanceof EntityLiving) {
+            EntityLiving entity = (EntityLiving) entityLivingBase;
+            EntityLiving zombie = null;
+            if (entity instanceof EntityVillager) {
+                EntityZombie entityZombie = new EntityZombie(this.worldObj);
+                entityZombie.copyLocationAndAnglesFrom(entity);
+                this.worldObj.removeEntity(entity);
+                entityZombie.onSpawnWithEgg((IEntityLivingData) null);
+                entityZombie.setVillager(true);
+
+                if (entity.isChild()) {
+                    entityZombie.setChild(true);
+                }
+
+                this.worldObj.spawnEntityInWorld(entityZombie);
+                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+                zombie = entityZombie;
+            } else if (entity instanceof EntityWolf) {
+                EntityZombieDog zombieDog = new EntityZombieDog(this.worldObj);
+                zombieDog.copyLocationAndAnglesFrom(entity);
+
+                this.worldObj.removeEntity(entity);
+                this.worldObj.spawnEntityInWorld(zombieDog);
+                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+
+                zombie = zombieDog;
+            } else if (entity instanceof EntityOcelot) {
+                EntityZombieCat zombieCat = new EntityZombieCat(this.worldObj);
+                zombieCat.copyLocationAndAnglesFrom(entity);
+                if (((EntityOcelot) entity).isTamed()) {
+                    zombieCat.setSkin(((EntityOcelot) entity).getTameSkin());
+                } else {
+                    zombieCat.setSkin(0);
+                }
+                this.worldObj.removeEntity(entity);
+
+                zombieCat.onSpawnWithEgg((IEntityLivingData) null);
+                this.worldObj.spawnEntityInWorld(zombieCat);
+                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+
+                zombie = zombieCat;
+            } else if (entity instanceof EntityHorse) {
+                EntityHorse zombieHorse = new EntityHorse(this.worldObj);
+                zombieHorse.copyLocationAndAnglesFrom(entity);
+                zombieHorse.setHorseType(3);
+                zombieHorse.setGrowingAge(((EntityHorse) entity).getGrowingAge());
+
+                this.worldObj.removeEntity(entity);
+                this.worldObj.spawnEntityInWorld(zombieHorse);
+                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+
+                zombie = zombieHorse;
+            }
+            if (zombie != null && entity.hasCustomNameTag()) {
+                zombie.setCustomNameTag(entity.getCustomNameTag());
+            }
+        }
     }
 }
