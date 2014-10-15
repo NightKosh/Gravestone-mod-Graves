@@ -1,6 +1,6 @@
 package gravestone.core.commands;
 
-import gravestone.GraveStoneLogger;
+import gravestone.core.logger.GSLogger;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
@@ -31,7 +31,7 @@ public class CommandCustomGraveItems extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender icommandsender, String[] commandStr) {
-        GraveStoneLogger.logInfo("Custom grave items command recieved");
+        GSLogger.logInfo("Custom grave items command recieved");
 
         if (commandStr.length == 6) {
             try {

@@ -1,6 +1,6 @@
 package gravestone.core.compatibility;
 
-import gravestone.GraveStoneLogger;
+import gravestone.core.logger.GSLogger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -37,7 +37,7 @@ public class GSCompatibilityTinkerConstruct {
 
                     }
                 } else {
-                    GraveStoneLogger.logError("Can't get Tinkers Construct knapsack items!!!");
+                    GSLogger.logError("Can't get Tinkers Construct knapsack items!!!");
                 }
 
                 IInventory accessoryInventory = inventoryWrapper.getAccessoryInventory(player);
@@ -51,10 +51,10 @@ public class GSCompatibilityTinkerConstruct {
 
                     }
                 } else {
-                    GraveStoneLogger.logError("Can't get Tinkers Construct accessory items!!!");
+                    GSLogger.logError("Can't get Tinkers Construct accessory items!!!");
                 }
             } else {
-                GraveStoneLogger.logError("Can't get access to Tinkers Construct items!!!");
+                GSLogger.logError("Can't get access to Tinkers Construct items!!!");
             }
         }
     }

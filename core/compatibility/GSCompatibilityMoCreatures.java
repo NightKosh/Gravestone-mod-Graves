@@ -1,6 +1,6 @@
 package gravestone.core.compatibility;
 
-import gravestone.GraveStoneLogger;
+import gravestone.core.logger.GSLogger;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSMobSpawn;
 import java.lang.reflect.Constructor;
@@ -29,7 +29,7 @@ public class GSCompatibilityMoCreatures {
 
     public static void addMobs() {
         if (GraveStoneConfig.spawnMoCreaturesMobs) {
-        GraveStoneLogger.logInfo("start Mo'Creatures mobs loading");
+        GSLogger.logInfo("start Mo'Creatures mobs loading");
 
         addMobToList(GSMobSpawn.MOB_ID, "SilverSkeleton", getForeinMobConstructor(GSCompatibilityMoCreatures.MO_CREATURES_S_SKELETON));
         addMobToList(GSMobSpawn.MOB_ID, "Wraith", getForeinMobConstructor(GSCompatibilityMoCreatures.MO_CREATURES_WRAITH));
@@ -38,7 +38,7 @@ public class GSCompatibilityMoCreatures {
         
         addMobToList(GSMobSpawn.skeletonSpawnerMobs, "SilverSkeleton", getForeinMobConstructor(GSCompatibilityMoCreatures.MO_CREATURES_S_SKELETON));
 
-        GraveStoneLogger.logInfo("end Mo'Creatures mobs loading");
+        GSLogger.logInfo("end Mo'Creatures mobs loading");
         }
     }
 
@@ -54,10 +54,10 @@ public class GSCompatibilityMoCreatures {
             Class mobClass = Class.forName(path);
             constructor = mobClass.getConstructor(World.class);
         } catch (ClassNotFoundException e) {
-            GraveStoneLogger.logError("getForeinMobConstructor ClassNotFoundException. class path " + path);
+            GSLogger.logError("getForeinMobConstructor ClassNotFoundException. class path " + path);
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
-            GraveStoneLogger.logError("getForeinMobConstructor NoSuchMethodException. class path " + path);
+            GSLogger.logError("getForeinMobConstructor NoSuchMethodException. class path " + path);
             e.printStackTrace();
         }
 

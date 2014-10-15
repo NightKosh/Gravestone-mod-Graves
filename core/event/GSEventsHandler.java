@@ -8,6 +8,7 @@ import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
 import gravestone.core.MobHandler;
+import gravestone.core.logger.GravesLogger;
 import gravestone.entity.monster.EntitySkullCrawler;
 import gravestone.entity.monster.EntityWitherSkullCrawler;
 import gravestone.entity.monster.EntityZombieSkullCrawler;
@@ -100,6 +101,7 @@ public class GSEventsHandler {
     public void worldLoading(WorldEvent.Load event) {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
             MobHandler.loadMobsSpawnTime(event.world);
+            GravesLogger.setWorldDirectory(event.world.getSaveHandler().getWorldDirectory());
         }
     }
 }

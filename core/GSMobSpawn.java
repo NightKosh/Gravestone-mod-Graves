@@ -1,6 +1,6 @@
 package gravestone.core;
 
-import gravestone.GraveStoneLogger;
+import gravestone.core.logger.GSLogger;
 import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumSpawner;
 import gravestone.config.GraveStoneConfig;
@@ -149,7 +149,7 @@ public class GSMobSpawn {
         try {
             entity.onSpawnWithEgg((IEntityLivingData) null);
         } catch (Exception e) {
-            GraveStoneLogger.logError("getMobEntity exception with onSpawnWithEgg");
+            GSLogger.logError("getMobEntity exception with onSpawnWithEgg");
             e.printStackTrace();
         }
 
@@ -190,7 +190,7 @@ public class GSMobSpawn {
         try {
             entity.onSpawnWithEgg((IEntityLivingData) null);
         } catch (Exception e) {
-            GraveStoneLogger.logError("getMobEntity exception with onSpawnWithEgg");
+            GSLogger.logError("getMobEntity exception with onSpawnWithEgg");
             e.printStackTrace();
         }
 
@@ -243,13 +243,13 @@ public class GSMobSpawn {
         try {
             mob = mobNameToClassMapping.get(mobName).newInstance(new Object[]{world});
         } catch (InstantiationException e) {
-            GraveStoneLogger.logError("getForeinMob InstantiationException. mob name " + mobName);
+            GSLogger.logError("getForeinMob InstantiationException. mob name " + mobName);
             e.printStackTrace();
         } catch (IllegalAccessException e) {
-            GraveStoneLogger.logError("getForeinMob IllegalAccessException. mob name " + mobName);
+            GSLogger.logError("getForeinMob IllegalAccessException. mob name " + mobName);
             e.printStackTrace();
         } catch (InvocationTargetException e) {
-            GraveStoneLogger.logError("getForeinMob InvocationTargetException. mob name " + mobName);
+            GSLogger.logError("getForeinMob InvocationTargetException. mob name " + mobName);
             e.getCause().printStackTrace();
         }
 

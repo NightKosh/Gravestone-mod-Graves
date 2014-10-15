@@ -2,7 +2,7 @@ package gravestone.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.GraveStoneLogger;
+import gravestone.core.logger.GSLogger;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GraveStoneConfig;
@@ -499,7 +499,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 ItemStack item = player.inventory.getCurrentItem();
                 if (item.getItem() instanceof ItemSpade) {
                     if (!world.isRemote) {
-                        GraveStoneLogger.logInfo(player.getCommandSenderName() + " loot grave at " + x + "/" + y + "/" + z);
+                        GSLogger.logInfoGrave(player.getCommandSenderName() + " loot grave at " + x + "/" + y + "/" + z);
                         te.dropAllItems();
                     }
                     return false;
@@ -770,7 +770,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 tileEntity.setAge(age);
                 tileEntity.setEnchanted(isMagic);
             }
-            GraveStoneLogger.logInfo("Create " + deathInfo.getName() + "'s grave at " + x + "x" + y + "x" + z);
+            GSLogger.logInfoGrave("Create " + deathInfo.getName() + "'s grave at " + x + "x" + y + "x" + z);
         } else {
             ItemStack itemStack = this.createStackedBlock(0);
             NBTTagCompound nbt = new NBTTagCompound();
@@ -796,7 +796,7 @@ public class BlockGSGraveStone extends BlockContainer {
                     }
                 }
             }
-            GraveStoneLogger.logInfo("Can not create " + deathInfo.getName() + "'s grave at " + x + "x" + y + "x" + z);
+            GSLogger.logInfoGrave("Can not create " + deathInfo.getName() + "'s grave at " + x + "x" + y + "x" + z);
         }
     }
 
@@ -831,7 +831,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 if (tileEntity != null) {
                     if (!tileEntity.isSwordGrave() && tileEntity.isEmpty()) {
                         if (GraveStoneConfig.showGravesRemovingMessages) {
-                            GraveStoneLogger.logInfo("Remove empty grave at " + x + "/" + y + "/" + z);
+                            GSLogger.logInfoGrave("Remove empty grave at " + x + "/" + y + "/" + z);
                         }
 
                         world.removeTileEntity(x, y, z);

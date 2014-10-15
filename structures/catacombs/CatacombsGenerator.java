@@ -1,6 +1,6 @@
 package gravestone.structures.catacombs;
 
-import gravestone.GraveStoneLogger;
+import gravestone.core.logger.GSLogger;
 import gravestone.config.GraveStoneConfig;
 import gravestone.structures.GSStructureGenerator;
 import net.minecraft.util.ChunkCoordinates;
@@ -45,7 +45,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
         if (isCommand || (GraveStoneConfig.generateCatacombs && canSpawnStructureAtCoords(world, x, z, chance) && isHeightAcceptable(world, x, z))) {
             int direction = rand.nextInt(4);
             CatacombsSurface surface = new CatacombsSurface(world, rand, x, z, direction);
-            GraveStoneLogger.logInfo("Generate catacombs at " + x + "x" + z);
+            GSLogger.logInfo("Generate catacombs at " + x + "x" + z);
 
             if (surface.getMausoleumY() > 55) {
                 new CatacombsUnderground(world, rand, direction, surface.getMausoleumX(), surface.getMausoleumY(), surface.getMausoleumZ());
@@ -77,7 +77,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
     }
 
     protected static boolean noAnyInRange(int x, int z, int range, World world) {
-        GraveStoneLogger.logInfo("Catacombs generation - Begin Checking area for another catacombs or villages");
+        GSLogger.logInfo("Catacombs generation - Begin Checking area for another catacombs or villages");
         for (ChunkCoordIntPair position : structuresList) {
             if (position.chunkXPos > x - range && position.chunkXPos < x + range
                     && position.chunkZPos > z - range && position.chunkZPos < z + range) {
@@ -97,7 +97,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
             }
         }
 
-        GraveStoneLogger.logInfo("Catacombs generation - End Checking area for another catacombs or villages");
+        GSLogger.logInfo("Catacombs generation - End Checking area for another catacombs or villages");
         return true;
     }
 
@@ -106,7 +106,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
     }
 
     private static boolean isHeightAcceptable(World world, int x, int z) {
-        GraveStoneLogger.logInfo("Catacombs generation - Begin Checking area height");
+        GSLogger.logInfo("Catacombs generation - Begin Checking area height");
         int height = 0;
         int count = 0;
         for (int xPos = x; xPos < x + 16; xPos++) {
@@ -116,7 +116,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
             }
         }
 
-        GraveStoneLogger.logInfo("Catacombs generation - End Checking area height");
+        GSLogger.logInfo("Catacombs generation - End Checking area height");
         return (height / count) < GraveStoneConfig.maxCatacombsHeight;
     }
 }

@@ -3,7 +3,8 @@ package gravestone.structures.memorials;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Random;
-import gravestone.GraveStoneLogger;
+
+import gravestone.core.logger.GSLogger;
 import gravestone.config.GraveStoneConfig;
 import gravestone.structures.GSStructureGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
@@ -45,7 +46,7 @@ public class MemorialGenerator implements GSStructureGenerator {
         }
         if (isCommand || (GraveStoneConfig.generateMemorials && canSpawnStructureAtCoords(world, x, z, chance) && isNoWarterUnder(world, x, z))) {
             new ComponentGSMemorial(rand.nextInt(4), rand, x, z).addComponentParts(world, rand);
-            GraveStoneLogger.logInfo("Generate memorial at " + x + "x" + z);
+            GSLogger.logInfo("Generate memorial at " + x + "x" + z);
             structuresList.add(new ChunkCoordIntPair(x, z));
             return true;
         }

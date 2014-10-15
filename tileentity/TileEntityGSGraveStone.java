@@ -1,6 +1,6 @@
 package gravestone.tileentity;
 
-import gravestone.GraveStoneLogger;
+import gravestone.core.logger.GSLogger;
 import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumGraves;
 import gravestone.core.event.GSRenderEventHandler;
@@ -210,7 +210,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
     }
 
     private void convertSword(NBTTagCompound nbtTag) {
-        GraveStoneLogger.logInfo("Start converting sword gravestone!");
+        GSLogger.logInfo("Start converting sword gravestone!");
         try {
             Item sword;
             byte swordType = nbtTag.getByte("SwordType");
@@ -233,19 +233,19 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
                 default:
                     sword = Items.wooden_sword;
             }
-            GraveStoneLogger.logInfo("Sword type - " + nbtTag.getByte("SwordType") + ". Will be converted to " + sword.getUnlocalizedName());
+            GSLogger.logInfo("Sword type - " + nbtTag.getByte("SwordType") + ". Will be converted to " + sword.getUnlocalizedName());
 
             int damage = 0;
             if (nbtTag.hasKey("SwordDamage")) {
                 damage = nbtTag.getInteger("SwordDamage");
-                GraveStoneLogger.logInfo("Sword damage - " + damage);
+                GSLogger.logInfo("Sword damage - " + damage);
             }
 
             ItemStack stack = new ItemStack(sword, 1, damage);
 
             if (nbtTag.hasKey("SwordName")) {
                 stack.setStackDisplayName(nbtTag.getString("SwordName"));
-                GraveStoneLogger.logInfo("Sword name - " + nbtTag.getString("SwordName"));
+                GSLogger.logInfo("Sword name - " + nbtTag.getString("SwordName"));
             }
 
             if (nbtTag.hasKey("SwordNBT")) {
@@ -253,10 +253,10 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
             }
             this.sword = stack;
         } catch (Exception e) {
-            GraveStoneLogger.logError("Something went wrong!!!");
+            GSLogger.logError("Something went wrong!!!");
             e.printStackTrace();
         }
-        GraveStoneLogger.logInfo("Gravestone converting complete!");
+        GSLogger.logInfo("Gravestone converting complete!");
     }
 
     @Override

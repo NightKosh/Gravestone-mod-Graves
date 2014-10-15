@@ -1,6 +1,6 @@
 package gravestone.core.compatibility;
 
-import gravestone.GraveStoneLogger;
+import gravestone.core.logger.GSLogger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -39,7 +39,7 @@ public class GSCompatibilityRpgInventory {
                     }
                 }
             }catch (Exception e) {
-                GraveStoneLogger.logError("Can't save RpgInventory items!!!");
+                GSLogger.logError("Can't save RpgInventory items!!!");
             }
         }
     }

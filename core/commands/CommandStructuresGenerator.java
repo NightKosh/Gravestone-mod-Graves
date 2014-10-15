@@ -4,7 +4,7 @@
  */
 package gravestone.core.commands;
 
-import gravestone.GraveStoneLogger;
+import gravestone.core.logger.GSLogger;
 import gravestone.structures.GSStructureGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
 import gravestone.structures.graves.SingleGraveGenerator;
@@ -35,7 +35,7 @@ public class CommandStructuresGenerator extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender icommandsender, String[] commandStr) {
-        GraveStoneLogger.logInfo("Structure generation command recieved");
+        GSLogger.logInfo("Structure generation command recieved");
 
         if (commandStr[0].equals("catacombs")) {
             generateStructure(icommandsender.getEntityWorld(), commandStr[1], commandStr[2], CatacombsGenerator.getInstance());
@@ -48,7 +48,7 @@ public class CommandStructuresGenerator extends CommandBase {
         } else if (commandStr[0].equals("undertaker")) {
             generateStructure(icommandsender.getEntityWorld(), commandStr[1], commandStr[2], VillageUndertakerGenerator.getInstance());
         } else {
-            GraveStoneLogger.logError("Unknown structure type");
+            GSLogger.logError("Unknown structure type");
         }
     }
 
@@ -56,7 +56,7 @@ public class CommandStructuresGenerator extends CommandBase {
         try {
             structure.generate(world, world.rand, Integer.parseInt(xStr), Integer.parseInt(zStr), 0, true);
         } catch (NumberFormatException e) {
-            GraveStoneLogger.logError("Coordinate error");
+            GSLogger.logError("Coordinate error");
             e.printStackTrace();
         }
     }

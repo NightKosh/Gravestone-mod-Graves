@@ -2,7 +2,7 @@ package gravestone.core;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import gravestone.GraveStoneLogger;
+import gravestone.core.logger.GSLogger;
 import gravestone.ModGraveStone;
 import gravestone.config.GraveStoneConfig;
 import gravestone.structures.GraveStoneWorldGenerator;
@@ -43,7 +43,7 @@ public class GSStructures {
             try {
                 MapGenStructureIO.func_143031_a(ComponentGSVillageCemetery.class, "GSVillageCemetery");
             } catch (Throwable e) {
-                GraveStoneLogger.logError("Can not register ComponentGSVillageCemetery");
+                GSLogger.logError("Can not register ComponentGSVillageCemetery");
                 e.printStackTrace();
             }
         }
@@ -53,7 +53,7 @@ public class GSStructures {
             try {
                 MapGenStructureIO.func_143031_a(ComponentGSVillageMemorial.class, "GSVillageMemorial");
             } catch (Throwable e) {
-                GraveStoneLogger.logError("Can not register ComponentGSVillageMemorial");
+                GSLogger.logError("Can not register ComponentGSVillageMemorial");
                 e.printStackTrace();
             }
         }
@@ -63,7 +63,7 @@ public class GSStructures {
             try {
                 MapGenStructureIO.func_143031_a(ComponentGSVillageUndertaker.class, "GSUndertakerHouse");
             } catch (Throwable e) {
-                GraveStoneLogger.logError("Can not register ComponentGSVillageUndertaker");
+                GSLogger.logError("Can not register ComponentGSVillageUndertaker");
                 e.printStackTrace();
             }
         }

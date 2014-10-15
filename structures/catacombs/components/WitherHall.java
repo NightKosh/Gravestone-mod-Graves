@@ -1,6 +1,6 @@
 package gravestone.structures.catacombs.components;
 
-import gravestone.GraveStoneLogger;
+import gravestone.core.logger.GSLogger;
 import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.MobSpawnHelper;
@@ -34,7 +34,7 @@ public class WitherHall extends CatacombsBaseComponent {
      */
     @Override
     public boolean addComponentParts(World world, Random random) {
-        GraveStoneLogger.logInfo("Generate Wither hall at " + boundingBox.getCenterX() + "x" + boundingBox.getCenterY() + "x" + boundingBox.getCenterZ());
+        GSLogger.logInfo("Generate Wither hall at " + boundingBox.getCenterX() + "x" + boundingBox.getCenterY() + "x" + boundingBox.getCenterZ());
 
         metaTop = this.getMetadataWithOffset(Blocks.nether_brick_stairs, 2);
         metaBot = this.getMetadataWithOffset(Blocks.nether_brick_stairs, 3);

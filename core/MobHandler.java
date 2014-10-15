@@ -1,7 +1,7 @@
 package gravestone.core;
 
 import com.google.common.io.Files;
-import gravestone.GraveStoneLogger;
+import gravestone.core.logger.GSLogger;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
@@ -59,7 +59,7 @@ public class MobHandler {
                 data = getDataFromFile(file);
             }
             if (file == null || !file.exists() || data == null || data.hasNoTags()) {
-                GraveStoneLogger.logError("Data not found. Trying to load backup data.");
+                GSLogger.logError("Data not found. Trying to load backup data.");
                 if (backup != null && backup.exists()) {
                     data = getDataFromFile(backup);
                     save = true;
@@ -77,7 +77,7 @@ public class MobHandler {
                 }
             }
         } catch (Exception e) {
-            GraveStoneLogger.logError("Error loading mobs living time");
+            GSLogger.logError("Error loading mobs spawn time");
             e.printStackTrace();
         }
     }
@@ -92,7 +92,7 @@ public class MobHandler {
                     try {
                         Files.copy(file, backup);
                     } catch (Exception e) {
-                        GraveStoneLogger.logError("Could not backup old living time file");
+                        GSLogger.logError("Could not backup old spawn time file");
                     }
                 }
                 try {
@@ -108,7 +108,7 @@ public class MobHandler {
                         fileoutputstream.close();
                     }
                 } catch (Exception e) {
-                    GraveStoneLogger.logError("Could not save spawn time file");
+                    GSLogger.logError("Could not save spawn time file");
                     e.printStackTrace();
                     if (file.exists()) {
                         try {
@@ -118,7 +118,7 @@ public class MobHandler {
                     }
                 }
             } catch (Exception e) {
-                GraveStoneLogger.logError("Error saving mobs living time");
+                GSLogger.logError("Error saving mobs spawn time");
                 e.printStackTrace();
             }
         }

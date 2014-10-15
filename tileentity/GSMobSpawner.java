@@ -1,6 +1,6 @@
 package gravestone.tileentity;
 
-import gravestone.GraveStoneLogger;
+import gravestone.core.logger.GSLogger;
 import gravestone.block.BlockGSSpawner;
 import gravestone.block.enums.EnumSpawner;
 import gravestone.core.GSMobSpawn;
@@ -53,7 +53,7 @@ public class GSMobSpawner extends GSSpawner {
         if (delay <= 0) {
             EntityLiving entity = (EntityLiving) getMob();
             if (entity == null) {
-                GraveStoneLogger.logError("Spanwer mob get 'null' as mob!!!");
+                GSLogger.logError("Spanwer mob get 'null' as mob!!!");
             } else {
                 double x = tileEntity.xCoord + 0.5;
                 double y = tileEntity.yCoord;
@@ -78,7 +78,7 @@ public class GSMobSpawner extends GSSpawner {
     private EnumSpawner getSpawnerType() {
         if (spawnerType == null) {
             if (tileEntity.getWorldObj() == null) {
-                GraveStoneLogger.logError("Spawner te worldobj is null !!!!!");
+                GSLogger.logError("Spawner te worldobj is null !!!!!");
                 return EnumSpawner.ZOMBIE_SPAWNER;
             } else {
                 byte meta = (byte) tileEntity.getWorldObj().getBlockMetadata(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);

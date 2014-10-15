@@ -1,6 +1,6 @@
 package gravestone.core.compatibility;
 
-import gravestone.GraveStoneLogger;
+import gravestone.core.logger.GSLogger;
 import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
 import gravestone.core.GSEntity;
@@ -96,7 +96,7 @@ public class GSCompatibilityThaumcraft {
             ThaumcraftApi.registerEntityTag(GSEntity.ZOMBIE_SKULL_CRAWLER_NAME, new AspectList().add(Aspect.DEATH, 2)
                     .add(Aspect.UNDEAD, 2).add(Aspect.HUNGER, 2));
         } catch (Exception e) {
-            GraveStoneLogger.logError("Error in thaumcraft integration");
+            GSLogger.logError("Error in thaumcraft integration");
             e.printStackTrace();
         }
     }

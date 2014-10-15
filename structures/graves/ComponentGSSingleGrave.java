@@ -1,6 +1,7 @@
 package gravestone.structures.graves;
 
-import gravestone.GraveStoneLogger;
+import gravestone.core.logger.GSLogger;
+
 import java.util.Random;
 import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.block.GraveStoneHelper;
@@ -35,7 +36,7 @@ public class ComponentGSSingleGrave extends ComponentGraveStone {
         y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
 
         if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
-            GraveStoneLogger.logInfo("Generate grave at " + positionX + "x" + positionZ);
+            GSLogger.logInfo("Generate grave at " + positionX + "x" + positionZ);
 
             byte graveType = GraveStoneHelper.getGraveType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, EnumGraveType.ALL_GRAVES);
             Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);

@@ -1,6 +1,6 @@
 package gravestone.block;
 
-import gravestone.GraveStoneLogger;
+import gravestone.core.logger.GSLogger;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
@@ -28,7 +28,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
@@ -555,7 +554,7 @@ public class GraveStoneHelper {
             if (killer instanceof EntityPlayer) {
                 killerName = ((EntityPlayer) killer).getDisplayName();
                 if (isVillager) {
-                    GraveStoneLogger.logInfo("Villager was killed by " + killerName);
+                    GSLogger.logInfoGrave("Villager was killed by " + killerName);
                 }
             } else {
                 killerName = EntityList.getEntityString(killer);
