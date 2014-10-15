@@ -73,27 +73,4 @@ public class ItemGSCorpse extends Item {
     public String getItemStackDisplayName(ItemStack itemStack) {
         return EnumCorpse.getById((byte) itemStack.getItemDamage()).getName();
     }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister register) {
-        this.icons = new IIcon[EnumCorpse.values().length];
-
-        for (int i = 0; i < EnumCorpse.values().length; ++i) {
-            this.icons[i] = register.registerIcon(EnumCorpse.values()[i].getIcon());
-        }
-    }
-
-    /**
-     * Gets an icon index based on an item's damage value
-     */
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int damage) {
-        if (damage < 0 || damage >= EnumCorpse.values().length) {
-            damage = 0;
-        }
-
-        return this.icons[damage];
-    }
 }

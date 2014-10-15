@@ -1,9 +1,7 @@
-
 package gravestone.item.enums;
 
 import gravestone.ModGraveStone;
 import gravestone.block.enums.IBlockEnum;
-import gravestone.core.Resources;
 
 /**
  * GraveStone mod
@@ -12,25 +10,19 @@ import gravestone.core.Resources;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public enum EnumCorpse implements IBlockEnum {
-    VILLAGER("item.corpse.villager", Resources.CORPSE_VILLAGER),
-    DOG("item.corpse.dog", Resources.CORPSE_DOG),
-    CAT("item.corpse.cat", Resources.CORPSE_CAT),
-    HORSE("item.corpse.horse", Resources.CORPSE_HORSE);
+    VILLAGER("item.corpse.villager"),
+    DOG("item.corpse.dog"),
+    CAT("item.corpse.cat"),
+    HORSE("item.corpse.horse");
     private String name;
-    private String icon;
 
-    private EnumCorpse(String name, String icon) {
+    private EnumCorpse(String name) {
         this.name = name;
-        this.icon = icon;
     }
 
     @Override
     public String getName() {
         return ModGraveStone.proxy.getLocalizedString(this.name);
-    }
-    
-    public String getIcon() {
-        return this.icon;
     }
 
     public static EnumCorpse getById(byte id) {

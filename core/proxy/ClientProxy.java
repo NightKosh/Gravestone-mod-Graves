@@ -7,6 +7,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import gravestone.core.GSBlock;
+import gravestone.core.GSItem;
 import gravestone.core.Resources;
 import gravestone.core.event.GSClientTickEventHandler;
 import gravestone.core.event.GSRenderEventHandler;
@@ -67,6 +68,9 @@ public class ClientProxy extends CommonProxy {
         // candle
         ClientRegistry.registerTileEntity(TileEntityGSCandle.class, "GSCandle", new TileEntityGSCandleRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(GSBlock.candle), new ItemGSCandleRenderer());
+
+        // corpses
+        MinecraftForgeClient.registerItemRenderer(GSItem.corpse, new ItemGSCorpseRenderer());
     }
 
     private void registerMobsRenderers() {

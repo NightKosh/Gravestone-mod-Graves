@@ -20,8 +20,6 @@ public class Resources {
     private static final String MEMORIALS_LOCATION = MOD_NAME + ":textures/memorials/";
     private static final String ARMOR_LOCATION = MOD_NAME + ":textures/memorials/armor/";
     private static final String PEDESTALS_LOCATION = MOD_NAME + ":textures/memorials/pedestal/";
-    // localization path
-    public static final String LOCALIZATION_LOCATION = "/assets/" + MOD_NAME + "/lang/";
     // blocks
     public static final String NIGHT_STONE      = "nether_brick";
     public static final String THUNDER_STONE    = "stonebrick";
@@ -35,10 +33,7 @@ public class Resources {
     public static final String ALTAR_SIDE = MOD_NAME  + ":altar_side";
     // items
     public static final String CHISEL = MOD_NAME + ":chisel";
-    public static final String CORPSE_VILLAGER = MOD_NAME + ":villager_corpse";
-    public static final String CORPSE_DOG = MOD_NAME + ":dog_corpse";
-    public static final String CORPSE_CAT = MOD_NAME + ":cat_corpse";
-    public static final String CORPSE_HORSE = MOD_NAME + ":horse_corpse";
+
     // entities
     public static final ResourceLocation UNDERTAKER = new ResourceLocation(ENTITY_LOCATION + "undertaker.png");
     public static final ResourceLocation ZOMBIE_DOG = new ResourceLocation(ENTITY_LOCATION + "ZombieDog.png");
@@ -52,6 +47,18 @@ public class Resources {
     public static final ResourceLocation WITHER_SKULL_CRAWLER = new ResourceLocation(ENTITY_LOCATION + "WitherSkullCrawler.png");
     public static final ResourceLocation ZOMBIE_SKULL_CRAWLER = new ResourceLocation(ENTITY_LOCATION + "ZombieSkullCrawler.png");
 
+    public static final ResourceLocation VILLAGER = new ResourceLocation("textures/entity/villager/villager.png");
+    public static final ResourceLocation VILLAGER_FARMER = new ResourceLocation("textures/entity/villager/farmer.png");
+    public static final ResourceLocation VILLAGER_LIBRARIAN = new ResourceLocation("textures/entity/villager/librarian.png");
+    public static final ResourceLocation VILLAGER_PRIEST = new ResourceLocation("textures/entity/villager/priest.png");
+    public static final ResourceLocation VILLAGER_SMITH = new ResourceLocation("textures/entity/villager/smith.png");
+    public static final ResourceLocation VILLAGER_BUTCHER = new ResourceLocation("textures/entity/villager/butcher.png");
+
+    public static final ResourceLocation WOLF = new ResourceLocation("textures/entity/wolf/wolf.png");
+    public static final ResourceLocation OCELOT = new ResourceLocation("textures/entity/cat/ocelot.png");
+    public static final ResourceLocation BLACK_CAT = new ResourceLocation("textures/entity/cat/black.png");
+    public static final ResourceLocation RED_CAT = new ResourceLocation("textures/entity/cat/red.png");
+    public static final ResourceLocation SIAMESE_CAT = new ResourceLocation("textures/entity/cat/siamese.png");
     // models - graves
     // vertical plates
     public static final ResourceLocation GRAVE_WOODEN_VERTICAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "WoodenVerticalPlateGraveStone.png");

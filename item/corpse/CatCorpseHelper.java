@@ -36,12 +36,16 @@ public class CatCorpseHelper extends CorpseHelper {
         nbt.setByte("CatType", (byte) cat.getTameSkin());
     }
 
+    public static byte getCatType(NBTTagCompound nbtTag) {
+        return nbtTag.getByte("CatType");
+    }
+
     public static void spawnCat(World world, int x, int y, int z, NBTTagCompound nbtTag, EntityPlayer player) {
         EntityOcelot cat = new EntityOcelot(world);
         setMobName(cat, nbtTag);
 
         cat.setTamed(true);
-        cat.setTameSkin(nbtTag.getByte("CatType"));
+        cat.setTameSkin(getCatType(nbtTag));
         cat.func_152115_b(player.getUniqueID().toString());
         world.setEntityState(cat, (byte) 7);
         spawnMob(cat, world, x, y, z);

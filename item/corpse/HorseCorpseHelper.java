@@ -53,8 +53,8 @@ public class HorseCorpseHelper extends CorpseHelper {
         EntityHorse horse = new EntityHorse(world);
         setMobName(horse, nbtTag);
 
-        horse.setHorseType(nbtTag.getInteger("HorseType"));
-        horse.setHorseVariant(nbtTag.getInteger("Variant"));
+        horse.setHorseType(getHorseType(nbtTag));
+        horse.setHorseVariant(getHorseVariant(nbtTag));
 
         BaseAttributeMap attrMap = horse.getAttributeMap();
         attrMap.getAttributeInstanceByName("Max Health").setBaseValue(nbtTag.getDouble("Max Health"));
@@ -83,6 +83,14 @@ public class HorseCorpseHelper extends CorpseHelper {
         if (hasJumpStrength(nbtTag)) {
             list.add(getJumpStrength(nbtTag));
         }
+    }
+
+    public static int getHorseType(NBTTagCompound nbtTag) {
+        return nbtTag.getInteger("HorseType");
+    }
+
+    public static int getHorseVariant(NBTTagCompound nbtTag) {
+        return nbtTag.getInteger("Variant");
     }
 
     private static boolean hasType(NBTTagCompound nbtTag) {
