@@ -493,7 +493,7 @@ public class GraveStoneHelper {
                 (world.isAirBlock(x, y, z) || world.getBlock(x, y, z).getMaterial().isLiquid() || world.getBlock(x, y, z).getMaterial().isReplaceable());
     }
 
-    public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event) {
+    public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event, long spawnTime) {
         if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GraveStoneConfig.graveItemsCount > 0) {
             List<ItemStack> items = new LinkedList<ItemStack>();
 
@@ -511,37 +511,37 @@ public class GraveStoneHelper {
 
             GSCompatibilityisArsMagica.getSoulboundItemsBack(items, player);
 
-            createGrave(player, event, items, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES, false);
+            createGrave(player, event, items, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES, false, spawnTime);
         } else {
-            createGrave(player, event, null, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES, false);
+            createGrave(player, event, null, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES, false, spawnTime);
         }
     }
 
-    public static void createGrave(Entity entity, LivingDeathEvent event, List<ItemStack> items, BlockGSGraveStone.EnumGraveType entityType, boolean isVillager) {
-        int age = entity.ticksExisted / 24000;
+    public static void createGrave(Entity entity, LivingDeathEvent event, List<ItemStack> items, BlockGSGraveStone.EnumGraveType entityType, boolean isVillager, long spawnTime) {
+        int age = (int) (entity.worldObj.getWorldTime() - spawnTime) / 24000;
         GSBlock.graveStone.createOnDeath(entity, entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
                 getDeathMessage((EntityLivingBase) entity, event.source.damageType, isVillager),
                 MathHelper.floor_float(entity.rotationYaw), items, age, entityType, event.source);
     }
 
-    public static void createPetGrave(Entity entity, LivingDeathEvent event) {
+    public static void createPetGrave(Entity entity, LivingDeathEvent event, long spawnTime) {
         EntityTameable pet = (EntityTameable) entity;
 
         if (pet.isTamed()) {
             if (pet instanceof EntityWolf) {
-                createGrave(entity, event, CorpseHelper.getCorpse(entity, EnumCorpse.DOG), BlockGSGraveStone.EnumGraveType.DOGS_GRAVES, false);
+                createGrave(entity, event, CorpseHelper.getCorpse(entity, EnumCorpse.DOG), BlockGSGraveStone.EnumGraveType.DOGS_GRAVES, false, spawnTime);
             } else if (pet instanceof EntityOcelot) {
-                createGrave(entity, event, CorpseHelper.getCorpse(entity, EnumCorpse.CAT), BlockGSGraveStone.EnumGraveType.CATS_GRAVES, false);
+                createGrave(entity, event, CorpseHelper.getCorpse(entity, EnumCorpse.CAT), BlockGSGraveStone.EnumGraveType.CATS_GRAVES, false, spawnTime);
             }
         }
     }
 
-    public static void createHorseGrave(EntityHorse horse, LivingDeathEvent event) {
+    public static void createHorseGrave(EntityHorse horse, LivingDeathEvent event, long spawnTime) {
         if (horse.isTame()) {
             List<ItemStack> items = new ArrayList<ItemStack>();
             items.addAll(CorpseHelper.getCorpse(horse, EnumCorpse.HORSE));
 
-            createGrave(horse, event, items, BlockGSGraveStone.EnumGraveType.HORSE_GRAVES, false);
+            createGrave(horse, event, items, BlockGSGraveStone.EnumGraveType.HORSE_GRAVES, false, spawnTime);
         }
     }
 

@@ -7,19 +7,21 @@ import gravestone.block.GraveStoneHelper;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
+import gravestone.core.MobHandler;
 import gravestone.entity.monster.EntitySkullCrawler;
 import gravestone.entity.monster.EntityWitherSkullCrawler;
 import gravestone.entity.monster.EntityZombieSkullCrawler;
 import gravestone.item.corpse.CorpseHelper;
 import gravestone.item.enums.EnumCorpse;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityHorse;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.world.WorldEvent;
 
 /**
  * GraveStone mod
@@ -36,16 +38,24 @@ public class GSEventsHandler {
                 return;
             }
 
+            long spawnTime = MobHandler.getMobSpawnTime(event.entity);
+            MobHandler.clearMobsSpawnTime(event.entity);
+
             if (GraveStoneConfig.generatePlayerGraves && event.entityLiving instanceof EntityPlayer) {
-                GraveStoneHelper.createPlayerGrave((EntityPlayer) event.entity, event);
+                GraveStoneHelper.createPlayerGrave((EntityPlayer) event.entity, event, spawnTime);
             } else {
                 if (GraveStoneConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
-                    GraveStoneHelper.createGrave(event.entity, event, CorpseHelper.getCorpse(event.entity, EnumCorpse.VILLAGER), EnumGraveType.PLAYER_GRAVES, true);
+                    GraveStoneHelper.createGrave(event.entity, event, CorpseHelper.getCorpse(event.entity, EnumCorpse.VILLAGER), EnumGraveType.PLAYER_GRAVES, true, spawnTime);
                     return;
                 }
 
                 if (GraveStoneConfig.generatePetGraves && event.entity instanceof EntityTameable) {
-                    GraveStoneHelper.createPetGrave(event.entity, event);
+                    GraveStoneHelper.createPetGrave(event.entity, event, spawnTime);
+                    return;
+                }
+
+                if (GraveStoneConfig.generatePetGraves && event.entity instanceof EntityHorse) {
+                    GraveStoneHelper.createHorseGrave((EntityHorse) event.entity, event, spawnTime);
                     return;
                 }
             }
@@ -63,14 +73,33 @@ public class GSEventsHandler {
                     GSMobSpawn.spawnCrawler(event.entity, new EntityZombieSkullCrawler(event.entity.worldObj));
                 }
             }
-            if (event.entity instanceof EntityHorse) {
-                GraveStoneHelper.createHorseGrave((EntityHorse) event.entity, event);
-                return;
-            } else if (event.entity instanceof EntityCreeper && ((EntityCreeper) event.entity).getPowered()) {
+            if (event.entity instanceof EntityCreeper && ((EntityCreeper) event.entity).getPowered()) {
                 // drop creeper statue if entity is a charged creeper
                 GSBlock.memorial.dropCreeperMemorial(event.entity.worldObj, (int) event.entity.posX,
                         (int) event.entity.posY, (int) event.entity.posZ);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void entityJoinWorldEvent(EntityJoinWorldEvent event) {
+        if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+            Entity entity = event.entity;
+            if (entity instanceof EntityVillager ||
+                    entity instanceof EntityWolf ||
+                    entity instanceof EntityOcelot ||
+                    entity instanceof EntityHorse) {
+                MobHandler.setMobSpawnTime(event.entity);
+            }
+        }
+    }
+
+    // TODO remove mobs info at despawn
+
+    @SubscribeEvent
+    public void worldLoading(WorldEvent.Load event) {
+        if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+            MobHandler.loadMobsSpawnTime(event.world);
         }
     }
 }

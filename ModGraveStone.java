@@ -1,5 +1,6 @@
 package gravestone;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
@@ -11,6 +12,7 @@ import gravestone.config.GraveStoneConfig;
 import gravestone.core.*;
 import gravestone.core.commands.GSCommands;
 import gravestone.core.compatibility.GSCompatibility;
+import gravestone.core.event.GSEventHandlerNetwork;
 import gravestone.core.event.GSEventsHandler;
 import gravestone.core.proxy.CommonProxy;
 import net.minecraftforge.common.MinecraftForge;
@@ -43,6 +45,7 @@ public class ModGraveStone {
     public void load(FMLInitializationEvent event) {
         // register death event
         MinecraftForge.EVENT_BUS.register(new GSEventsHandler());
+        FMLCommonHandler.instance().bus().register(new GSEventHandlerNetwork());
         proxy.registerHandlers();
 
         // tabs
