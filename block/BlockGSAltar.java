@@ -4,13 +4,15 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.core.GSTabs;
 import gravestone.core.Resources;
-import gravestone.item.corpse.CorpseHelper;
 import gravestone.item.ItemGSCorpse;
+import gravestone.tileentity.TileEntityGSAltar;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
@@ -20,7 +22,7 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class BlockGSAltar extends Block {
+public class BlockGSAltar extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     private IIcon topTexture;
@@ -42,14 +44,34 @@ public class BlockGSAltar extends Block {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
         ItemStack stack = player.getCurrentEquippedItem();
-        if (stack != null && stack.getItem() instanceof ItemGSCorpse && CorpseHelper.canSpawnMob(player, stack.getItemDamage())) {
-            CorpseHelper.spawnMob(stack.getItemDamage(), world, x, y, z, stack.stackTagCompound, player);
-            CorpseHelper.getExperience(player, stack.getItemDamage());
-            if (!player.capabilities.isCreativeMode) {
-                stack.stackSize--;
+
+        TileEntityGSAltar tileEntity = (TileEntityGSAltar) world.getTileEntity(x, y, z);
+        if (tileEntity != null) {
+            if (tileEntity.hasCorpse()) {
+                if (!world.isRemote) {
+                    tileEntity.dropCorpse();
+                }
+            } else {
+                if (stack != null && stack.getItem() instanceof ItemGSCorpse) {
+                    ItemStack corpse = stack.copy();
+                    corpse.stackSize = 1;
+                    tileEntity.setCorpse(corpse);
+                    if (!player.capabilities.isCreativeMode) {
+                        stack.stackSize--;
+                    }
+                }
             }
             return true;
         }
+
+//        if (stack != null && stack.getItem() instanceof ItemGSCorpse && CorpseHelper.canSpawnMob(player, stack.getItemDamage())) {
+//            CorpseHelper.spawnMob(stack.getItemDamage(), world, x, y, z, stack.stackTagCompound, player);
+//            CorpseHelper.getExperience(player, stack.getItemDamage());
+//            if (!player.capabilities.isCreativeMode) {
+//                stack.stackSize--;
+//            }
+//            return true;
+//        }
         return false;
     }
 
@@ -81,16 +103,32 @@ public class BlockGSAltar extends Block {
         return side == 0 ? this.bottomTexture : (side == 1 ? this.topTexture : this.blockIcon);
     }
 
-    @SideOnly(Side.CLIENT)
     /**
      * When this method is called, your block should register all the icons it
      * needs with the given IconRegister. This is the only chance you get to
      * register icons.
      */
     @Override
+    @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister register) {
         this.blockIcon = register.registerIcon(Resources.ALTAR_SIDE);
         this.topTexture = register.registerIcon(Resources.ALTAR_TOP);
-        this.bottomTexture = register.registerIcon(Resources.ALTAR_BOTTOM);
+        this.bottomTexture = register.registerIcon(Resources.BONE_BLOCK);
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+        return new TileEntityGSAltar();
+    }
+
+    @Override
+    public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
+        TileEntityGSAltar tileEntity = (TileEntityGSAltar) world.getTileEntity(x, y, z);
+
+        if (tileEntity != null) {
+            tileEntity.dropCorpse();
+        }
+
+        super.breakBlock(world, x, y, z, block, par6);
     }
 }

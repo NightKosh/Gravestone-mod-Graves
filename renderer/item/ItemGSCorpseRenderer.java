@@ -51,7 +51,7 @@ public class ItemGSCorpseRenderer implements IItemRenderer {
         float xz = 0.0625F;
         switch (EnumCorpse.getById(corpseType)) {
             case VILLAGER:
-                GL11.glTranslatef(0, -0.4F, 0);
+                GL11.glTranslatef(0, -0.5F, 0);
                 int profession = VillagerCorpseHelper.getVillagerType(item.getTagCompound());
                 switch (profession) {
                     case 0:

@@ -16,6 +16,7 @@ import gravestone.entity.monster.EntitySkullCrawler.SkullCrawlerType;
 import gravestone.gui.GSGuiGrave;
 import gravestone.models.entity.ModelUndeadCat;
 import gravestone.models.entity.ModelUndeadDog;
+import gravestone.renderer.entity.RenderAltar;
 import gravestone.renderer.entity.RenderSkullCrawler;
 import gravestone.renderer.entity.RenderUndeadCat;
 import gravestone.renderer.entity.RenderUndeadDog;
@@ -71,6 +72,8 @@ public class ClientProxy extends CommonProxy {
 
         // corpses
         MinecraftForgeClient.registerItemRenderer(GSItem.corpse, new ItemGSCorpseRenderer());
+
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGSAltar.class, new RenderAltar());
     }
 
     private void registerMobsRenderers() {
