@@ -7,30 +7,30 @@ itemGroup.tabGraveStone=Gravestone
 block.gravestone.gravestone=Gravestone
 block.gravestone.cross=Cross
 block.gravestone.plate=Grave Plate
-block.gravestone.dog_statue=Dog statue
-block.gravestone.cat_statue=Cat statue
-block.gravestone.wooden_sword=Wooden sword gravestone
-block.gravestone.stone_sword=Stone sword gravestone
-block.gravestone.iron_sword=Iron sword gravestone
-block.gravestone.golden_sword=Golden sword gravestone
-block.gravestone.diamond_sword=Diamond sword gravestone
-block.gravestone.horse_statue=Horse statue
-block.gravestone.sword=Sword of a fallen warrior
+block.gravestone.dog_statue=Dog Statue
+block.gravestone.cat_statue=Cat Statue
+block.gravestone.wooden_sword=Wooden Sword Gravestone
+block.gravestone.stone_sword=Stone Sword Gravestone
+block.gravestone.iron_sword=Iron Sword Gravestone
+block.gravestone.golden_sword=Golden Sword Gravestone
+block.gravestone.diamond_sword=Diamond Sword Gravestone
+block.gravestone.horse_statue=Horse Statue
+block.gravestone.sword=Sword of A Fallen Warrior
 
 ## memorials
 block.memorial.cross=Cross Memorial
 block.memorial.obelisk=Obelisk
-block.memorial.steve_statue=Steve statue
-block.memorial.villager_statue=Villager statue
-block.memorial.angel_statue=Angel statue
-block.memorial.dog_statue=Dog statue
-block.memorial.cat_statue=Cat statue
-block.memorial.creeper_statue=Creeper statue
-block.memorial.celtic_cross=Celtic cross
+block.memorial.steve_statue=Steve Statue
+block.memorial.villager_statue=Villager Statue
+block.memorial.angel_statue=Angel Statue
+block.memorial.dog_statue=Dog Statue
+block.memorial.cat_statue=Cat Statue
+block.memorial.creeper_statue=Creeper Statue
+block.memorial.celtic_cross=Celtic Cross
 
 ## trap
-tile.trap.night.name=Night stone
-tile.trap.thunder.name=Thunder stone
+tile.trap.night.name=Night Stone
+tile.trap.thunder.name=Thunder Stone
 block.trap.curse=Darkness is coming!
 
 ## spawner
@@ -39,24 +39,24 @@ block.spawner.skeleton=Skeleton Spawner
 block.spawner.zombie=Zombie Spawner
 
 # bone blocks
-tile.bone_block.name=Bone block
-tile.bone_block.skull_name=Bone block with skull
-tile.bone_block.crawler_name=Skull crawler's bone block
-tile.bone_block.crawler_skull_name=Skull crawler's bone block with skull
-tile.bone_slab.name=Bone slab
-tile.bone_stairs.name=Bone stairs
+tile.bone_block.name=Bone Block
+tile.bone_block.skull_name=Bone Block with Skull
+tile.bone_block.crawler_name=Skull Crawler's Bone Block
+tile.bone_block.crawler_skull_name=Skull Crawler's Bone Block with Skull
+tile.bone_slab.name=Bone Slab
+tile.bone_stairs.name=Bone Stairs
 
 ## chests
-block.haunted_chest.bats_chest=Chest with bats
-block.haunted_chest.skeleton_chest=Chest with skeleton
-block.haunted_chest.raven_chest=Chest with ravens
-block.haunted_chest.ghost_chest=Chest with ghost
+block.haunted_chest.bats_chest=Chest with Bats
+block.haunted_chest.skeleton_chest=Chest with Skeleton
+block.haunted_chest.raven_chest=Chest with Ravens
+block.haunted_chest.ghost_chest=Chest with Ghost
 
 ##candles
 tile.candle.name=Candle
-block.skull_candle.skeleton.name=Skull candle
-block.skull_candle.wither_skeleton.name=Wither skull candle
-block.skull_candle.zombie.name=Zombie skull candle
+block.skull_candle.skeleton.name=Skull Candle
+block.skull_candle.wither_skeleton.name=Wither Skull Candle
+block.skull_candle.zombie.name=Zombie Skull Candle
 
 
 # items
@@ -66,14 +66,14 @@ item.chisel.name=Chisel
 ## graves
 item.grave.age=Had lived
 item.grave.days=days
-item.grave.sword_name=Sword name
-item.grave.sword_damage=Sword damage
+item.grave.sword_name=Sword Name
+item.grave.sword_damage=Sword Damage
 
 ## corpse
-item.corpse.villager=Villager corpse
-item.corpse.horse=Horse corpse
-item.corpse.dog=Dog corpse
-item.corpse.cat=Cat corpse
+item.corpse.villager=Villager Corpse
+item.corpse.horse=Horse Corpse
+item.corpse.dog=Dog Corpse
+item.corpse.cat=Cat Corpse
 item.corpse.entity_name=Name
 item.corpse.villager_type=Profession
 item.corpse.villager_type.farmer=Farmer
@@ -86,18 +86,18 @@ item.corpse.villager_type.brewer=Brewer
 item.corpse.villager_type.thaumaturge=Thaumaturge
 item.corpse.villager_type.beekeeper=Beekeeper
 item.corpse.villager_type.lumberjack=Lumberjack
-item.corpse.villager_type.Unknown=unknown
-item.corpse.horse_type=Horse type
+item.corpse.villager_type.Unknown=Unknown
+item.corpse.horse_type=Horse Type
 item.corpse.horse_type.horse=Horse
 item.corpse.horse_type.donkey=Donkey
 item.corpse.horse_type.mule=Mule
-item.corpse.horse_type.zombie=Zombie horse
-item.corpse.horse_type.skeleton=Skeleton horse
+item.corpse.horse_type.zombie=Zombie Horse
+item.corpse.horse_type.skeleton=Skeleton Horse
 item.corpse.horse_type.unknown=Unknown
-item.corpse.horse_variant=Horse variant
-item.corpse.health=Max health
+item.corpse.horse_variant=Horse Variant
+item.corpse.health=Max Health
 item.corpse.speed=Speed
-item.corpse.jump_strength=Jump strength
+item.corpse.jump_strength=Jump Strength
 item.corpse.collar=Collar
 item.corpse.collar.white=White
 item.corpse.collar.orange=Orange
@@ -107,7 +107,7 @@ item.corpse.collar.yellow=Yellow
 item.corpse.collar.lime=Lime
 item.corpse.collar.pink=Pink
 item.corpse.collar.grey=Grey
-item.corpse.collar.light_grey=Light grey
+item.corpse.collar.light_grey=Light Gray
 item.corpse.collar.turquoise=Turquoise
 item.corpse.collar.violet=Violet
 item.corpse.collar.blue=Blue
@@ -124,8 +124,8 @@ item.corpse.cat_type.siamese=Siamese
 item.corpse.cat_type.unknown=Unknown
 
 ##backpacks
-item.backpack.undertaker.t1=Undertaker's backpack
-item.backpack.undertaker.t2=Undertaker's Woven backpack
+item.backpack.undertaker.t1=Undertaker's Backpack
+item.backpack.undertaker.t2=Undertaker's Woven Backpack
 
 
 # gui
