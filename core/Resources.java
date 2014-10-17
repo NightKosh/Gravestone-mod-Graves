@@ -33,6 +33,9 @@ public class Resources {
     // items
     public static final String CHISEL = MOD_NAME + ":chisel";
 
+    // gui
+    public static final ResourceLocation ALTAR = new ResourceLocation(GUI_LOCATION + "altar.png");
+
     // entities
     public static final ResourceLocation UNDERTAKER = new ResourceLocation(ENTITY_LOCATION + "undertaker.png");
     public static final ResourceLocation ZOMBIE_DOG = new ResourceLocation(ENTITY_LOCATION + "ZombieDog.png");

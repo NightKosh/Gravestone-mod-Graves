@@ -1,6 +1,8 @@
 package gravestone.tileentity;
 
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -16,7 +18,7 @@ import java.util.Random;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class TileEntityGSAltar extends TileEntity {
+public class TileEntityGSAltar extends TileEntity implements IInventory {
     private ItemStack corpse = null;
 
     public boolean hasCorpse() {
@@ -99,5 +101,85 @@ public class TileEntityGSAltar extends TileEntity {
         NBTTagCompound nbtTag = new NBTTagCompound();
         this.writeToNBT(nbtTag);
         return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+    }
+
+    @Override
+    public String getInventoryName() {
+        return "";
+    }
+
+    @Override
+    public boolean hasCustomInventoryName() {
+        return false;
+    }
+
+    @Override
+    public void openInventory() {
+
+    }
+
+    @Override
+    public void closeInventory() {
+
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
+        return false;
+    }
+
+    @Override
+    public int getSizeInventory() {
+        return 1;
+    }
+
+    @Override
+    public ItemStack getStackInSlot(int slot) {
+        return corpse;
+    }
+
+    @Override
+    public void setInventorySlotContents(int slot, ItemStack stack) {
+        corpse = stack;
+//        inv[slot] = stack;
+//        if (stack != null && stack.stackSize > getInventoryStackLimit()) {
+//            stack.stackSize = getInventoryStackLimit();
+//        }
+    }
+
+    @Override
+    public ItemStack decrStackSize(int slot, int amt) {
+        ItemStack stack = getStackInSlot(slot);
+        if (stack != null) {
+            if (stack.stackSize <= amt) {
+                setInventorySlotContents(slot, null);
+            } else {
+                stack = stack.splitStack(amt);
+                if (stack.stackSize == 0) {
+                    setInventorySlotContents(slot, null);
+                }
+            }
+        }
+        return stack;
+    }
+
+    @Override
+    public ItemStack getStackInSlotOnClosing(int slot) {
+        ItemStack stack = getStackInSlot(slot);
+        if (stack != null) {
+            setInventorySlotContents(slot, null);
+        }
+        return stack;
+    }
+
+    @Override
+    public int getInventoryStackLimit() {
+        return 1;
+    }
+
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer player) {
+        return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this &&
+                player.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64;
     }
 }

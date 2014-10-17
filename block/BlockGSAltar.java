@@ -2,6 +2,7 @@ package gravestone.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gravestone.ModGraveStone;
 import gravestone.core.GSTabs;
 import gravestone.core.Resources;
 import gravestone.item.ItemGSCorpse;
@@ -46,32 +47,24 @@ public class BlockGSAltar extends BlockContainer {
         ItemStack stack = player.getCurrentEquippedItem();
 
         TileEntityGSAltar tileEntity = (TileEntityGSAltar) world.getTileEntity(x, y, z);
-        if (tileEntity != null) {
-            if (tileEntity.hasCorpse()) {
-                if (!world.isRemote) {
-                    tileEntity.dropCorpse();
-                }
-            } else {
-                if (stack != null && stack.getItem() instanceof ItemGSCorpse) {
-                    ItemStack corpse = stack.copy();
-                    corpse.stackSize = 1;
-                    tileEntity.setCorpse(corpse);
-                    if (!player.capabilities.isCreativeMode) {
-                        stack.stackSize--;
-                    }
-                }
-            }
+        if (tileEntity != null && !player.isSneaking()) {
+//            if (tileEntity.hasCorpse()) {
+//                if (!world.isRemote) {
+//                    tileEntity.dropCorpse();
+//                }
+//            } else {
+//                if (stack != null && stack.getItem() instanceof ItemGSCorpse) {
+//                    ItemStack corpse = stack.copy();
+//                    corpse.stackSize = 1;
+//                    tileEntity.setCorpse(corpse);
+//                    if (!player.capabilities.isCreativeMode) {
+//                        stack.stackSize--;
+//                    }
+//                }
+//            }
+            player.openGui(ModGraveStone.instance, 2, world, x, y, z);
             return true;
         }
-
-//        if (stack != null && stack.getItem() instanceof ItemGSCorpse && CorpseHelper.canSpawnMob(player, stack.getItemDamage())) {
-//            CorpseHelper.spawnMob(stack.getItemDamage(), world, x, y, z, stack.stackTagCompound, player);
-//            CorpseHelper.getExperience(player, stack.getItemDamage());
-//            if (!player.capabilities.isCreativeMode) {
-//                stack.stackSize--;
-//            }
-//            return true;
-//        }
         return false;
     }
 
