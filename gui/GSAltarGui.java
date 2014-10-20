@@ -1,17 +1,15 @@
 package gravestone.gui;
 
 import gravestone.ModGraveStone;
+import gravestone.core.GSMessageHandler;
 import gravestone.core.Resources;
 import gravestone.gui.container.AltarContainer;
-import gravestone.item.corpse.CorpseHelper;
+import gravestone.packets.AltarMessageToServer;
 import gravestone.tileentity.TileEntityGSAltar;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -22,7 +20,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class GSAltarGui extends GuiContainer {
 
-    private final String resurrectionButtonStr = "Resurrect";//ModGraveStone.proxy.getLocalizedString("gui.edit_grave.close");
+    private final String resurrectionButtonStr = ModGraveStone.proxy.getLocalizedString("gui.altar.resurrect");
     private GuiButton resurrectionButton;
     private TileEntityGSAltar tileEntity = null;
     private EntityPlayer player = null;
@@ -43,17 +41,7 @@ public class GSAltarGui extends GuiContainer {
     public void actionPerformed(GuiButton button) {
         switch (button.id) {
             case 0:
-                if (tileEntity != null && tileEntity.hasCorpse()) {
-                    ItemStack corpse = tileEntity.getCorpse();
-                    if (corpse != null && CorpseHelper.canSpawnMob(player, corpse.getItemDamage())) {
-                        CorpseHelper.spawnMob(corpse.getItemDamage(), tileEntity.getWorldObj(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, corpse.stackTagCompound, player);
-                        CorpseHelper.getExperience(player, corpse.getItemDamage());
-                        if (!player.capabilities.isCreativeMode) {
-                            corpse.stackSize--;
-                        }
-                    }
-                    mc.displayGuiScreen((GuiScreen) null);
-                }
+                GSMessageHandler.networkWrapper.sendToServer(new AltarMessageToServer(this.player, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, AltarMessageToServer.MOB_TYPE.LIVED));
                 break;
         }
     }

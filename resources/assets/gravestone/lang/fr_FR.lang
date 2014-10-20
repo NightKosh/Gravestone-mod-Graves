@@ -132,6 +132,7 @@ item.backpack.undertaker.t2=Undertaker's Woven backpack
 gui.edit_grave.title=Changer l'épitaphe
 gui.edit_grave.close=Done
 gui.edit_grave.randomText=Set random text
+gui.altar.resurrect=Resurrect
 
 
 # entity

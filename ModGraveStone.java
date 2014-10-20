@@ -40,6 +40,8 @@ public class ModGraveStone {
     public void preInit(FMLPreInitializationEvent event) {
         GraveStoneConfig.getInstance(event.getModConfigurationDirectory().getAbsolutePath() + "/GraveStoneMod/", "GraveStone.cfg");
         GSStructures.preInit();
+
+        gravestone.core.GSMessageHandler.init();
     }
 
     @Mod.EventHandler
