@@ -48,6 +48,7 @@ public class GraveStoneConfig {
     public static int graveSpawnRate;
     // allowed ground for graves
     public static boolean canPlaceGravesEveryWhere;
+    public static boolean spawnMobAtGraveDestruction;
     public static boolean isFogEnabled;
     // disable/enable time changing by night stone
     public static boolean enableNightStone;
@@ -152,6 +153,7 @@ public class GraveStoneConfig {
             graveSpawnRate = 600;
         }
 
+        spawnMobAtGraveDestruction = config.get(Configuration.CATEGORY_GENERAL, "SpawnMobAtGraveDestruction", true).getBoolean(true);
         spawnChance = config.get(Configuration.CATEGORY_GENERAL, "SpawnChance", 80).getInt();
         
         // spawned creatures

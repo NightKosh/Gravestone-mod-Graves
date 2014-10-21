@@ -367,7 +367,7 @@ public class GraveStoneHelper {
      * Spawn mob
      */
     public static void spawnMob(World world, int x, int y, int z) {
-        if (world.rand.nextInt(10) == 0) {
+        if (GraveStoneConfig.spawnMobAtGraveDestruction && world.rand.nextInt(10) == 0) {
             TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
 
             if (tileEntity != null) {
