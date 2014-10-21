@@ -1,5 +1,6 @@
 package gravestone.structures;
 
+import gravestone.config.GraveStoneConfig;
 import gravestone.structures.memorials.MemorialGenerator;
 import gravestone.structures.graves.SingleGraveGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
@@ -16,12 +17,14 @@ import net.minecraft.world.chunk.IChunkProvider;
  */
 public class GraveStoneWorldGenerator implements IWorldGenerator {
 
+    public static final int DEFAULT_DIMENSION_ID = 0;
+
     public GraveStoneWorldGenerator() {
     }
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-        if (world.provider.dimensionId == 0) {
+        if (world.provider.dimensionId == GraveStoneConfig.structuresDimensionId) {
             generateSurface(world, random, chunkX * 16, chunkZ * 16);
         }
     }

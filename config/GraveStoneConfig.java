@@ -4,6 +4,8 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import gravestone.structures.GraveStoneWorldGenerator;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
@@ -25,6 +27,7 @@ public class GraveStoneConfig {
     public static int skullCandleRenderID = RenderingRegistry.getNextAvailableRenderId();
     public static int candleRenderID = RenderingRegistry.getNextAvailableRenderId();
     // world generator
+    public static int structuresDimensionId;
     public static boolean generateCatacombs;
     public static boolean generateSingleGraves;
     public static boolean generateMemorials;
@@ -112,6 +115,7 @@ public class GraveStoneConfig {
     }
 
     private static void structures() {
+        structuresDimensionId = config.get(Configuration.CATEGORY_GENERAL, "StructuresDimensionId", GraveStoneWorldGenerator.DEFAULT_DIMENSION_ID).getInt();
         generateCatacombs = config.get(Configuration.CATEGORY_GENERAL, "GenerateCatacombs", true).getBoolean(true);
         maxCatacombsHeight = config.get(Configuration.CATEGORY_GENERAL, "MaximumCatacombsGenerationHeight", 75).getInt();
         generateCatacombsGraveyard = config.get(Configuration.CATEGORY_GENERAL, "GenerateCatacombsGraveyard", true).getBoolean(true);
