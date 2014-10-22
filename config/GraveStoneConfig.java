@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import gravestone.structures.GraveStoneWorldGenerator;
+import gravestone.structures.catacombs.CatacombsGenerator;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
@@ -32,6 +33,7 @@ public class GraveStoneConfig {
     public static boolean generateSingleGraves;
     public static boolean generateMemorials;
     public static int maxCatacombsHeight;
+    public static double catacombsGenerationChance;
     // village generator
     public static boolean generateCemeteries;
     public static boolean generateVillageMemorials;
@@ -119,6 +121,7 @@ public class GraveStoneConfig {
         structuresDimensionId = config.get(Configuration.CATEGORY_GENERAL, "StructuresDimensionId", GraveStoneWorldGenerator.DEFAULT_DIMENSION_ID).getInt();
         generateCatacombs = config.get(Configuration.CATEGORY_GENERAL, "GenerateCatacombs", true).getBoolean(true);
         maxCatacombsHeight = config.get(Configuration.CATEGORY_GENERAL, "MaximumCatacombsGenerationHeight", 75).getInt();
+        catacombsGenerationChance = config.get(Configuration.CATEGORY_GENERAL, "CatacombsGenerationChance", CatacombsGenerator.DEFAULT_GENERATION_CHANCE).getDouble();
         generateCatacombsGraveyard = config.get(Configuration.CATEGORY_GENERAL, "GenerateCatacombsGraveyard", true).getBoolean(true);
         generateMemorials = config.get(Configuration.CATEGORY_GENERAL, "GenerateMemorials", true).getBoolean(true);
         generateSingleGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateSingleGraves", true).getBoolean(true);

@@ -37,7 +37,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
     private static final int VILLAGE_RANGE = 200;
     public static final byte CATACOMBS_RANGE = 100;
     public static final int CATACOMBS_DISTANCE = 1500;
-    private static final double CHANCE = 0.00025D;
+    public static final double DEFAULT_GENERATION_CHANCE = 0.00025D;
     protected static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
 
     @Override
@@ -59,7 +59,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
     }
 
     protected static boolean canSpawnStructureAtCoords(World world, int x, int z, double chance) {
-        return chance < CHANCE && isBiomeAllowed(world, x, z) && noAnyInRange(x, z, CATACOMBS_DISTANCE, world);
+        return chance < GraveStoneConfig.catacombsGenerationChance && isBiomeAllowed(world, x, z) && noAnyInRange(x, z, CATACOMBS_DISTANCE, world);
     }
 
     protected static boolean isBiomeAllowed(World world, int x, int z) {
