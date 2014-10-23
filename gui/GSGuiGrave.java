@@ -1,6 +1,8 @@
 package gravestone.gui;
 
 import gravestone.ModGraveStone;
+import gravestone.core.GSMessageHandler;
+import gravestone.packets.GraveDeathMessageToServer;
 import gravestone.tileentity.TileEntityGSGrave;
 import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.client.gui.GuiButton;
@@ -62,8 +64,8 @@ public class GSGuiGrave extends GuiScreen {
                 isRandomTextButtonClicked = true;
                 mc.displayGuiScreen((GuiScreen) null);
                 break;
-
         }
+        GSMessageHandler.networkWrapper.sendToServer(new GraveDeathMessageToServer(teGrave.getWorldObj(), teGrave.xCoord, teGrave.yCoord, teGrave.zCoord, this.textField.getText(), isRandomTextButtonClicked));
     }
 
     @Override
@@ -72,60 +74,6 @@ public class GSGuiGrave extends GuiScreen {
         this.drawString(this.fontRendererObj, titleStr, this.width / 2 - 40, 60, 16777215);
         this.textField.drawTextBox();
         super.drawScreen(x, y, f);
-    }
-
-    /**
-     * Called when the screen is unloaded. Used to disable keyboard repeat
-     * events
-     */
-    @Override
-    public void onGuiClosed() {
-        Keyboard.enableRepeatEvents(false);
-        if (isRandomTextButtonClicked) {
-            this.teGrave.getDeathTextComponent().setRandomDeathTextAndName(new Random(), this.teGrave.getGraveTypeNum(), this.teGrave instanceof TileEntityGSMemorial, false);
-            if (this.textField != null && !this.textField.getText().isEmpty()) {
-                if (MinecraftServer.getServer() != null && MinecraftServer.getServer().worldServers != null) {
-                    for (WorldServer world : MinecraftServer.getServer().worldServers) {
-                        if (world != null) {
-                            // TODO
-                            this.setRandomText(world);
-                        }
-                    }
-                }
-            }
-        } else {
-            if (this.textField != null && !this.textField.getText().isEmpty()) {
-                if (MinecraftServer.getServer() != null && MinecraftServer.getServer().worldServers != null) {
-                    for (WorldServer world : MinecraftServer.getServer().worldServers) {
-                        if (world != null) {
-                            // TODO
-                            this.setText(world);
-                        }
-                    }
-                }
-            }
-            this.teGrave.getDeathTextComponent().setDeathText(this.textField.getText());
-        }
-        this.teGrave.setEditable(true);
-    }
-
-    private void setRandomText(World world) {
-        TileEntityGSGrave teGrave = (TileEntityGSGrave) world.getTileEntity(this.teGrave.xCoord, this.teGrave.yCoord, this.teGrave.zCoord);
-        if (teGrave != null) {
-            teGrave.getDeathTextComponent().setLocalized();
-            teGrave.getDeathTextComponent().setDeathText(this.teGrave.getDeathTextComponent().getDeathText());
-            teGrave.getDeathTextComponent().setKillerName(this.teGrave.getDeathTextComponent().getKillerName());
-            teGrave.getDeathTextComponent().setName(this.teGrave.getDeathTextComponent().getName());
-            teGrave.setEditable(true);
-        }
-    }
-
-    private void setText(World world) {
-        TileEntityGSGrave teGrave = (TileEntityGSGrave) world.getTileEntity(this.teGrave.xCoord, this.teGrave.yCoord, this.teGrave.zCoord);
-        if (teGrave != null) {
-            teGrave.getDeathTextComponent().setDeathText(this.textField.getText());
-            teGrave.setEditable(true);
-        }
     }
 
     /**
