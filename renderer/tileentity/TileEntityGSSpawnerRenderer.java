@@ -14,11 +14,17 @@ import org.lwjgl.opengl.GL11;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class TileEntityGSSpawnerRenderer extends TileEntitySpecialRenderer {
+public class TileEntityGSSpawnerRenderer extends TileEntityGSRenderer {
 
     private static ModelSpawnerPentagram witherSpawnerModel = new ModelSpawnerPentagram(Resources.WITHER_SKULL_CANDLE);
     private static ModelSpawnerPentagram skeletonSpawnerModel = new ModelSpawnerPentagram(Resources.SKELETON_SKULL_CANDLE);
     private static ModelSpawnerPentagram zombieSpawnerModel = new ModelSpawnerPentagram(Resources.ZOMBIE_SKULL_CANDLE);
+
+    public static TileEntityGSSpawnerRenderer instance;
+
+    public TileEntityGSSpawnerRenderer() {
+        instance = this;
+    }
 
     /**
      * Render a skull tile entity.

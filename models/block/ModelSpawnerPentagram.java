@@ -1,7 +1,6 @@
 package gravestone.models.block;
 
-import gravestone.core.Resources;
-import gravestone.renderer.tileentity.TileEntityGSMemorialRenderer;
+import gravestone.renderer.tileentity.TileEntityGSSpawnerRenderer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -31,7 +30,7 @@ public class ModelSpawnerPentagram extends ModelBase {
         pentagram = new ModelRenderer(this, -32, -32);
         pentagram.addBox(0F, 0F, 0F, 32, 0, 32);
         pentagram.setRotationPoint(-16F, 24F, -16F);
-        
+
         candle1 = new ModelSkullCandle();
         candle2 = new ModelSkullCandle();
         candle3 = new ModelSkullCandle();
@@ -44,36 +43,39 @@ public class ModelSpawnerPentagram extends ModelBase {
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-    
+
     public void renderAll() {
         pentagram.render(0.0625F);
-        
-        TileEntityGSMemorialRenderer.instance.bindTextureByName(candleTexture);
-        
+
+        TileEntityGSSpawnerRenderer.instance.bindTextureByName(candleTexture);
         GL11.glPushMatrix();
         GL11.glTranslated(0, 0, 1);
         GL11.glRotated(180, 0, 1, 0);
         candle1.renderAll();
         GL11.glPopMatrix();
-        
+
+        TileEntityGSSpawnerRenderer.instance.bindTextureByName(candleTexture);
         GL11.glPushMatrix();
         GL11.glTranslated(0.95, 0, 0.3);
         GL11.glRotated(252, 0, 1, 0);
         candle2.renderAll();
         GL11.glPopMatrix();
-        
+
+        TileEntityGSSpawnerRenderer.instance.bindTextureByName(candleTexture);
         GL11.glPushMatrix();
         GL11.glTranslated(-0.95, 0, 0.3);
         GL11.glRotated(108, 0, 1, 0);
         candle3.renderAll();
         GL11.glPopMatrix();
-        
+
+        TileEntityGSSpawnerRenderer.instance.bindTextureByName(candleTexture);
         GL11.glPushMatrix();
         GL11.glTranslated(-0.59, 0, -0.8);
         GL11.glRotated(36, 0, 1, 0);
         candle4.renderAll();
         GL11.glPopMatrix();
-        
+
+        TileEntityGSSpawnerRenderer.instance.bindTextureByName(candleTexture);
         GL11.glPushMatrix();
         GL11.glTranslated(0.61, 0, -0.8);
         GL11.glRotated(-36, 0, 1, 0);
