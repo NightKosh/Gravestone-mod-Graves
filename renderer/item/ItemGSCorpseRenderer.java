@@ -12,8 +12,6 @@ import net.minecraft.client.model.ModelOcelot;
 import net.minecraft.client.model.ModelVillager;
 import net.minecraft.client.model.ModelWolf;
 import net.minecraft.client.renderer.texture.LayeredTexture;
-import net.minecraft.client.renderer.texture.SimpleTexture;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.item.ItemStack;
@@ -33,6 +31,8 @@ public class ItemGSCorpseRenderer implements IItemRenderer {
     private static final ModelWolf dogModel = new ModelWolf();
     private static final ModelOcelot catModel = new ModelOcelot();
     private static final ModelHorse horseModel = new ModelHorse();
+    private static EntityWolf dog;
+    private static EntityHorse horse;
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -80,11 +80,11 @@ public class ItemGSCorpseRenderer implements IItemRenderer {
             case DOG:
                 GL11.glTranslatef(0, -1, 0);
                 Minecraft.getMinecraft().renderEngine.bindTexture(Resources.WOLF);
-//                EntityWolf dog = new EntityWolf(Minecraft.getMinecraft().theWorld);
-//                dog.setGrowingAge(0);
-//                dog.setSitting(true);
-//                dog.setTamed(true);
-                dogModel.render(null, xz, xz, xz, xz, xz, xz);
+                if (dog == null) {
+                    dog = new EntityWolf(Minecraft.getMinecraft().theWorld);
+                }
+                dogModel.setLivingAnimations(dog, 0, 0, 0);
+                dogModel.render(dog, xz, xz, xz, xz, xz, xz);
                 break;
             case CAT:
                 GL11.glTranslatef(0, -1, 0);
@@ -108,10 +108,11 @@ public class ItemGSCorpseRenderer implements IItemRenderer {
                 break;
             case HORSE:
                 GL11.glTranslatef(0, -0.6F, 0);
-                EntityHorse horse = new EntityHorse(Minecraft.getMinecraft().theWorld);
+                if (horse == null) {
+                    horse = new EntityHorse(Minecraft.getMinecraft().theWorld);
+                }
                 horse.setHorseType(HorseCorpseHelper.getHorseType(item.getTagCompound()));
                 horse.setHorseVariant(HorseCorpseHelper.getHorseVariant(item.getTagCompound()));
-//                horse..setEating(false);
 
                 switch (HorseCorpseHelper.getHorseType(item.getTagCompound())) {
                     case 0:
@@ -131,6 +132,7 @@ public class ItemGSCorpseRenderer implements IItemRenderer {
                         break;
                 }
 
+                horseModel.setLivingAnimations(horse, 0, 0, 0);
                 horseModel.render(horse, xz, xz, xz, xz, xz, xz);
                 break;
         }
