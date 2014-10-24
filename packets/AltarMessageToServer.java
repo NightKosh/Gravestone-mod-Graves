@@ -4,6 +4,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import gravestone.core.GSMessageHandler;
+import gravestone.item.ItemGSCorpse;
 import gravestone.item.corpse.CorpseHelper;
 import gravestone.tileentity.TileEntityGSAltar;
 import io.netty.buffer.ByteBuf;
@@ -89,7 +90,7 @@ public class AltarMessageToServer implements IMessage, IMessageHandler<AltarMess
                 TileEntityGSAltar tileEntity = (TileEntityGSAltar) te;
                 if (tileEntity.hasCorpse()) {
                     ItemStack corpse = tileEntity.getCorpse();
-                    if (corpse != null && CorpseHelper.canSpawnMob(player, corpse.getItemDamage())) {
+                    if (corpse != null && corpse.getItem() instanceof ItemGSCorpse && CorpseHelper.canSpawnMob(player, corpse.getItemDamage())) {
                         CorpseHelper.spawnMob(corpse.getItemDamage(), tileEntity.getWorldObj(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, corpse.stackTagCompound, player);
                         CorpseHelper.getExperience(player, corpse.getItemDamage());
                         GSMessageHandler.networkWrapper.sendToAll(new AltarMessageToClient(message.playerID, corpse.getItemDamage()));
