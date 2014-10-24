@@ -70,17 +70,17 @@ public abstract class CorpseHelper {
         }
     }
 
-    public static ItemStack getDefaultCorpse(Item item, int type) {
-        switch (EnumCorpse.values()[type]) {
+    public static List<ItemStack> getDefaultCorpse(Item item, int corpseType) {
+        switch (EnumCorpse.values()[corpseType]) {
             case HORSE:
-                return HorseCorpseHelper.getDefaultCorpse(item, type);
+                return HorseCorpseHelper.getDefaultCorpses(item, corpseType);
             case DOG:
-                return DogCorpseHelper.getDefaultCorpse(item, type);
+                return DogCorpseHelper.getDefaultCorpses(item, corpseType);
             case CAT:
-                return CatCorpseHelper.getDefaultCorpse(item, type);
+                return CatCorpseHelper.getDefaultCorpses(item, corpseType);
             case VILLAGER:
             default:
-                return VillagerCorpseHelper.getDefaultCorpse(item, type);
+                return VillagerCorpseHelper.getDefaultCorpses(item, corpseType);
         }
     }
 

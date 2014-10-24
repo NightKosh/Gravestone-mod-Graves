@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import sophisticated_wolves.api.ISophisticatedWolf;
 import sophisticated_wolves.api.SophisticatedWolvesAPI;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,14 +25,18 @@ public class DogCorpseHelper extends CorpseHelper {
     private DogCorpseHelper() {
     }
 
-    public static ItemStack getDefaultCorpse(Item item, int type) {
+    public static List<ItemStack> getDefaultCorpses(Item item, int type) {
+        List<ItemStack> list = new ArrayList<ItemStack>();
+
         ItemStack corpse = new ItemStack(item, 1, type);
         NBTTagCompound nbtTag = new NBTTagCompound();
 
         nbtTag.setByte("Collar", (byte) 14);
 
         corpse.setTagCompound(nbtTag);
-        return corpse;
+
+        list.add(corpse);
+        return list;
     }
 
     public static void setNbt(EntityWolf dog, NBTTagCompound nbt) {

@@ -1,6 +1,8 @@
 package gravestone.item.corpse;
 
+import cpw.mods.fml.common.registry.VillagerRegistry;
 import gravestone.ModGraveStone;
+import gravestone.structures.village.VillageHandlerGSUndertaker;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -9,6 +11,9 @@ import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -22,11 +27,29 @@ public class VillagerCorpseHelper extends CorpseHelper {
     private VillagerCorpseHelper() {
     }
 
-    public static ItemStack getDefaultCorpse(Item item, int type) {
-        ItemStack corpse = new ItemStack(item, 1, type);
-        NBTTagCompound nbtTag = new NBTTagCompound();
+    public static List<ItemStack> getDefaultCorpses(Item item, int corpseType) {
+        List<ItemStack> list = new ArrayList<ItemStack>();
 
-        nbtTag.setInteger("VillagerType", 0);
+        list.add(getDefaultVillagerCorpse(item, corpseType, 0)); // Farmer
+        list.add(getDefaultVillagerCorpse(item, corpseType, 1)); // Librarian
+        list.add(getDefaultVillagerCorpse(item, corpseType, 2)); // Priest
+        list.add(getDefaultVillagerCorpse(item, corpseType, 3)); // Smith
+        list.add(getDefaultVillagerCorpse(item, corpseType, 4)); // Butcher
+
+        Collection<Integer> villagerIds = VillagerRegistry.getRegisteredVillagers();
+        Iterator<Integer> it = villagerIds.iterator();
+        while (it.hasNext()) {
+            list.add(getDefaultVillagerCorpse(item, corpseType, it.next()));
+        }
+
+        return list;
+    }
+
+    private static ItemStack getDefaultVillagerCorpse(Item item, int corpseType, int type) {
+        ItemStack corpse = new ItemStack(item, 1, corpseType);
+
+        NBTTagCompound nbtTag = new NBTTagCompound();
+        nbtTag.setInteger("VillagerType", type);
 
         corpse.setTagCompound(nbtTag);
         return corpse;

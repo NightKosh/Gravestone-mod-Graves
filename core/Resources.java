@@ -61,6 +61,11 @@ public class Resources {
     public static final ResourceLocation BLACK_CAT = new ResourceLocation("textures/entity/cat/black.png");
     public static final ResourceLocation RED_CAT = new ResourceLocation("textures/entity/cat/red.png");
     public static final ResourceLocation SIAMESE_CAT = new ResourceLocation("textures/entity/cat/siamese.png");
+    public static final ResourceLocation DONKEY = new ResourceLocation("textures/entity/horse/donkey.png");
+    public static final ResourceLocation MULE = new ResourceLocation("textures/entity/horse/mule.png");
+    public static final ResourceLocation ZOMBIE_HORSE = new ResourceLocation("textures/entity/horse/horse_zombie.png");
+    public static final ResourceLocation SKELETON_HORSE = new ResourceLocation("textures/entity/horse/horse_skeleton.png");
+
     // models - graves
     // vertical plates
     public static final ResourceLocation GRAVE_WOODEN_VERTICAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "WoodenVerticalPlateGraveStone.png");

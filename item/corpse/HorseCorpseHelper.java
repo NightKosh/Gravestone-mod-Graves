@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,17 +23,28 @@ public class HorseCorpseHelper extends CorpseHelper {
     private HorseCorpseHelper() {
     }
 
-    public static ItemStack getDefaultCorpse(Item item, int type) {
-        ItemStack corpse = new ItemStack(item, 1, type);
+    public static List<ItemStack> getDefaultCorpses(Item item, int corpseType) {
+        List<ItemStack> list = new ArrayList<ItemStack>();
+
+        list.add(getDefaultHorseCorpse(item, corpseType, 0)); // horse
+        list.add(getDefaultHorseCorpse(item, corpseType, 1)); // donkey
+        list.add(getDefaultHorseCorpse(item, corpseType, 2)); // mule
+        list.add(getDefaultHorseCorpse(item, corpseType, 3)); // zombie
+        list.add(getDefaultHorseCorpse(item, corpseType, 4)); // skeleton
+
+        return list;
+    }
+
+    private static ItemStack getDefaultHorseCorpse(Item item, int corpseType, int type) {
+        ItemStack corpse = new ItemStack(item, 1, corpseType);
         NBTTagCompound nbtTag = new NBTTagCompound();
 
-        nbtTag.setInteger("HorseType", 0);
+        nbtTag.setInteger("HorseType", type);
         nbtTag.setInteger("Variant", 0);
 
         nbtTag.setDouble("Max Health", 25);
         nbtTag.setDouble("Movement Speed", 0.3);
         nbtTag.setDouble("Jump Strength", 0.7);
-
         corpse.setTagCompound(nbtTag);
         return corpse;
     }

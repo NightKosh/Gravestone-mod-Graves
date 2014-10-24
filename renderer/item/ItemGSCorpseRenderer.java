@@ -12,8 +12,10 @@ import net.minecraft.client.model.ModelOcelot;
 import net.minecraft.client.model.ModelVillager;
 import net.minecraft.client.model.ModelWolf;
 import net.minecraft.client.renderer.texture.LayeredTexture;
+import net.minecraft.client.renderer.texture.SimpleTexture;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
@@ -73,12 +75,16 @@ public class ItemGSCorpseRenderer implements IItemRenderer {
                         Minecraft.getMinecraft().renderEngine.bindTexture(VillagerRegistry.getVillagerSkin(profession, Resources.VILLAGER));
                         break;
                 }
-                villagerModel.render((Entity) null, xz, xz, xz, xz, xz, xz);
+                villagerModel.render(null, xz, xz, xz, xz, xz, xz);
                 break;
             case DOG:
                 GL11.glTranslatef(0, -1, 0);
                 Minecraft.getMinecraft().renderEngine.bindTexture(Resources.WOLF);
-                dogModel.render((Entity) null, xz, xz, xz, xz, xz, xz);
+//                EntityWolf dog = new EntityWolf(Minecraft.getMinecraft().theWorld);
+//                dog.setGrowingAge(0);
+//                dog.setSitting(true);
+//                dog.setTamed(true);
+                dogModel.render(null, xz, xz, xz, xz, xz, xz);
                 break;
             case CAT:
                 GL11.glTranslatef(0, -1, 0);
@@ -98,16 +104,32 @@ public class ItemGSCorpseRenderer implements IItemRenderer {
                         Minecraft.getMinecraft().renderEngine.bindTexture(Resources.SIAMESE_CAT);
                         break;
                 }
-                catModel.render((Entity) null, xz, xz, xz, xz, xz, xz);
+                catModel.render(null, xz, xz, xz, xz, xz, xz);
                 break;
             case HORSE:
                 GL11.glTranslatef(0, -0.6F, 0);
                 EntityHorse horse = new EntityHorse(Minecraft.getMinecraft().theWorld);
                 horse.setHorseType(HorseCorpseHelper.getHorseType(item.getTagCompound()));
                 horse.setHorseVariant(HorseCorpseHelper.getHorseVariant(item.getTagCompound()));
+//                horse..setEating(false);
 
-                ResourceLocation horseTexture = new ResourceLocation(horse.getHorseTexture());
-                Minecraft.getMinecraft().getTextureManager().loadTexture(horseTexture, new LayeredTexture(horse.getVariantTexturePaths()));
+                switch (HorseCorpseHelper.getHorseType(item.getTagCompound())) {
+                    case 0:
+                        Minecraft.getMinecraft().getTextureManager().loadTexture(new ResourceLocation(horse.getHorseTexture()), new LayeredTexture(horse.getVariantTexturePaths()));
+                        break;
+                    case 1:
+                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.DONKEY);
+                        break;
+                    case 2:
+                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.MULE);
+                        break;
+                    case 3:
+                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.ZOMBIE_HORSE);
+                        break;
+                    case 4:
+                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.SKELETON_HORSE);
+                        break;
+                }
 
                 horseModel.render(horse, xz, xz, xz, xz, xz, xz);
                 break;

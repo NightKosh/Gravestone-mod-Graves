@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,11 +22,20 @@ public class CatCorpseHelper extends CorpseHelper {
     private CatCorpseHelper() {
     }
 
-    public static ItemStack getDefaultCorpse(Item item, int type) {
-        ItemStack corpse = new ItemStack(item, 1, type);
+    public static List<ItemStack> getDefaultCorpses(Item item, int corpseType) {
+        List<ItemStack> list = new ArrayList<ItemStack>();
+        list.add(getDefaultCatCorpse(item, corpseType, 0)); // Ocelot
+        list.add(getDefaultCatCorpse(item, corpseType, 1)); // Black
+        list.add(getDefaultCatCorpse(item, corpseType, 2)); // Red
+        list.add(getDefaultCatCorpse(item, corpseType, 3)); // Siamese
+        return list;
+    }
+
+    private static ItemStack getDefaultCatCorpse(Item item, int corpseType, int type) {
+        ItemStack corpse = new ItemStack(item, 1, corpseType);
         NBTTagCompound nbtTag = new NBTTagCompound();
 
-        nbtTag.setByte("CatType", (byte) 1);
+        nbtTag.setByte("CatType", (byte) type);
 
         corpse.setTagCompound(nbtTag);
         return corpse;
