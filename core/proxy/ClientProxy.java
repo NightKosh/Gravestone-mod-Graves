@@ -22,6 +22,7 @@ import gravestone.renderer.entity.RenderUndeadCat;
 import gravestone.renderer.entity.RenderUndeadDog;
 import gravestone.renderer.item.*;
 import gravestone.renderer.tileentity.*;
+import gravestone.structures.village.VillageHandlerGSUndertaker;
 import gravestone.tileentity.*;
 import net.minecraft.item.Item;
 import net.minecraft.util.StatCollector;
@@ -97,7 +98,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerVillagers() {
-        VillagerRegistry.instance().registerVillagerSkin(385, Resources.UNDERTAKER);
+        VillagerRegistry.instance().registerVillagerSkin(VillageHandlerGSUndertaker.UNDERTAKER_ID, Resources.UNDERTAKER);
     }
 
     @Override

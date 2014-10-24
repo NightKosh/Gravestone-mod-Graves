@@ -24,6 +24,8 @@ import java.util.Random;
  */
 public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCreationHandler, VillagerRegistry.IVillageTradeHandler {
 
+    public static final int UNDERTAKER_ID = 385;
+
     @Override
     public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random) {
         // chisel
@@ -51,13 +53,5 @@ public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCrea
     @Override
     public Object buildComponent(StructureVillagePieces.PieceWeight villagePiece, StructureVillagePieces.Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5) {
         return ComponentGSVillageUndertaker.buildComponent(startPiece, pieces, random, p1, p2, p3, p4, p5);
-    }
-
-    private ItemStack getTradeStack(Block block, byte graveType) {
-        ItemStack stack = new ItemStack(block, 1, 0);
-        NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setByte("GraveType", graveType);
-        stack.setTagCompound(nbt);
-        return stack;
     }
 }
