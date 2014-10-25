@@ -3,6 +3,7 @@ package gravestone.structures.village;
 import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
 import gravestone.tileentity.TileEntityGSSkullCandle;
+import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
@@ -67,6 +68,7 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
         int brownClayMeta = 12;
         int darkGlassMeta = 15;
         int darkSlabMeta = 5;
+        int darkWoodMeta = 5;
         int graveMeta = GraveStoneHelper.getMetaDirection(this.coordBaseMode);
 
         // ground
@@ -146,15 +148,15 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
         this.fillWithMetadataBlocks(world, boundingBox, 0, 7, 3, 12, 7, 3, Blocks.wooden_slab, darkSlabMeta, Blocks.wooden_slab, darkSlabMeta, false);
 
 
-        this.fillWithMetadataBlocks(world, boundingBox, 1, 4, 1, 1, 4, 5, Blocks.planks, darkSlabMeta, Blocks.planks, darkSlabMeta, false);
-        this.fillWithMetadataBlocks(world, boundingBox, 11, 4, 1, 11, 4, 5, Blocks.planks, darkSlabMeta, Blocks.planks, darkSlabMeta, false);
-        this.placeBlockAtCurrentPosition(world, Blocks.planks, darkSlabMeta, 1, 5, 2, boundingBox);
-        this.placeBlockAtCurrentPosition(world, Blocks.planks, darkSlabMeta, 1, 5, 4, boundingBox);
-        this.placeBlockAtCurrentPosition(world, Blocks.planks, darkSlabMeta, 11, 5, 2, boundingBox);
-        this.placeBlockAtCurrentPosition(world, Blocks.planks, darkSlabMeta, 11, 5, 4, boundingBox);
+        this.fillWithMetadataBlocks(world, boundingBox, 1, 4, 1, 1, 4, 5, Blocks.planks, darkWoodMeta, Blocks.planks, darkWoodMeta, false);
+        this.fillWithMetadataBlocks(world, boundingBox, 11, 4, 1, 11, 4, 5, Blocks.planks, darkWoodMeta, Blocks.planks, darkWoodMeta, false);
+        this.placeBlockAtCurrentPosition(world, Blocks.planks, darkWoodMeta, 1, 5, 2, boundingBox);
+        this.placeBlockAtCurrentPosition(world, Blocks.planks, darkWoodMeta, 1, 5, 4, boundingBox);
+        this.placeBlockAtCurrentPosition(world, Blocks.planks, darkWoodMeta, 11, 5, 2, boundingBox);
+        this.placeBlockAtCurrentPosition(world, Blocks.planks, darkWoodMeta, 11, 5, 4, boundingBox);
 
-        this.placeBlockAtCurrentPosition(world, Blocks.planks, darkSlabMeta, 1, 6, 3, boundingBox);
-        this.placeBlockAtCurrentPosition(world, Blocks.planks, darkSlabMeta, 11, 6, 3, boundingBox);
+        this.placeBlockAtCurrentPosition(world, Blocks.planks, darkWoodMeta, 1, 6, 3, boundingBox);
+        this.placeBlockAtCurrentPosition(world, Blocks.planks, darkWoodMeta, 11, 6, 3, boundingBox);
 
         this.placeBlockAtCurrentPosition(world, Blocks.stained_glass_pane, darkGlassMeta, 1, 5, 3, boundingBox);
         this.placeBlockAtCurrentPosition(world, Blocks.stained_glass_pane, darkGlassMeta, 11, 5, 3, boundingBox);
@@ -169,6 +171,17 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
 
         this.spawnVillagers(world, boundingBox, 8, 1, 3, 1);
         return true;
+    }
+
+    @Override
+    protected void placeBlockAtCurrentPosition(World world, Block block, int blockMeta, int x, int y, int z, StructureBoundingBox boundingBox) {
+        int xPos = this.getXWithOffset(x, z);
+        int yPos = this.getYWithOffset(y);
+        int zPos = this.getZWithOffset(x, z);
+
+        if (boundingBox.isVecInside(xPos, yPos, zPos)) {
+            world.setBlock(xPos, yPos, zPos, block, blockMeta, 2);
+        }
     }
 
     /**
