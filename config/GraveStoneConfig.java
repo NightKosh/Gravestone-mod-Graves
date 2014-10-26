@@ -21,6 +21,8 @@ public class GraveStoneConfig {
     private static Configuration config;
     private static GraveStoneConfig instance;
     private static String path;
+    // CATEGORIES
+    public static final String CATEGORY_COMPATIBILITY = "compatibility";
     // renderer Id
     public static int graveRenderID = RenderingRegistry.getNextAvailableRenderId();
     public static int memorialRenderID = RenderingRegistry.getNextAvailableRenderId();
@@ -61,9 +63,6 @@ public class GraveStoneConfig {
     // spawner reciepes
     public static boolean enableBossSpawnerCraftingRecipe;
     public static boolean enableSpawnerCraftingRecipe;
-    // forestry
-    public static boolean enableForestryBackpacks;
-
     // haunted chest
     public static boolean replaceHauntedChest;
     // grave names
@@ -81,8 +80,6 @@ public class GraveStoneConfig {
     public static boolean spawnSkeletonCats;
     public static boolean spawnSkullCrawlersAtMobsDeath;
     public static boolean spawnSkullCrawlersAtBoneBlockDestruction;
-    //foreign mobs spawn
-    public static boolean spawnMoCreaturesMobs;
     // sword grave
     public static boolean generateSwordGraves;
     // spawn chance
@@ -92,6 +89,16 @@ public class GraveStoneConfig {
     //structures
     public static boolean generateCatacombsGraveyard;
 
+    // COMPATIBILITY
+    public static boolean spawnMoCreaturesMobs;
+    public static boolean enableForestryBackpacks;
+    public static boolean storeBattlegearItems;
+    public static boolean storeTheCampingModItems;
+    public static boolean storeBaublesItems;
+    public static boolean storeMaricultureItems;
+    public static boolean storeTinkerConstructItems;
+    public static boolean storeRpgInventoryItems;
+    public static boolean enableArsMagicaSoulbound;
 
 
     private GraveStoneConfig(String path, File configFile) {
@@ -113,6 +120,7 @@ public class GraveStoneConfig {
         structures();
         gravesConfig();
         entityConfig();
+        compatibilityConfigs();
         config.save();
         getGravesText();
     }
@@ -158,9 +166,6 @@ public class GraveStoneConfig {
 
         spawnMobAtGraveDestruction = config.get(Configuration.CATEGORY_GENERAL, "SpawnMobAtGraveDestruction", true).getBoolean(true);
         spawnChance = config.get(Configuration.CATEGORY_GENERAL, "SpawnChance", 80).getInt();
-        
-        // spawned creatures
-        spawnMoCreaturesMobs = config.get(Configuration.CATEGORY_GENERAL, "SpawnMoCreaturesMobsByGraves", true).getBoolean(true);
 
         isFogEnabled = config.get(Configuration.CATEGORY_GENERAL, "IsFogEnabled", true).getBoolean(true);
         
@@ -181,8 +186,6 @@ public class GraveStoneConfig {
 
         removeEmptyGraves = config.get(Configuration.CATEGORY_GENERAL, "RemoveEmptyGraves", false).getBoolean(false);
         showGravesRemovingMessages = config.get(Configuration.CATEGORY_GENERAL, "ShowGravesRemovingMessages", true).getBoolean(true);
-
-        enableForestryBackpacks = config.get(Configuration.CATEGORY_GENERAL, "EnableForestryBackpacks", true).getBoolean(true);
     }
 
     private static void entityConfig() {
@@ -193,6 +196,20 @@ public class GraveStoneConfig {
 
         spawnSkullCrawlersAtMobsDeath = config.get(Configuration.CATEGORY_GENERAL, "SpawnSkullCrawlersAtMobsDeath", true).getBoolean(true);
         spawnSkullCrawlersAtBoneBlockDestruction = config.get(Configuration.CATEGORY_GENERAL, "SpawnSkullCrawlersOnBoneBlockDestruction", true).getBoolean(true);
+    }
+
+    private static void compatibilityConfigs() {
+        spawnMoCreaturesMobs = config.get(CATEGORY_COMPATIBILITY, "SpawnMoCreaturesMobsByGraves", true).getBoolean(true);
+
+        enableForestryBackpacks = config.get(CATEGORY_COMPATIBILITY, "EnableForestryBackpacks", true).getBoolean(true);
+
+        storeBattlegearItems = config.get(CATEGORY_COMPATIBILITY, "StoreBattlegearItems", true).getBoolean(true);
+        storeTheCampingModItems = config.get(CATEGORY_COMPATIBILITY, "StoreTheCampingModItems", true).getBoolean(true);
+        storeBaublesItems = config.get(CATEGORY_COMPATIBILITY, "StoreBaublesItems", true).getBoolean(true);
+        storeMaricultureItems = config.get(CATEGORY_COMPATIBILITY, "StoreMaricultureItems", true).getBoolean(true);
+        storeTinkerConstructItems = config.get(CATEGORY_COMPATIBILITY, "StoreTinkerConstructItems", true).getBoolean(true);
+        storeRpgInventoryItems = config.get(CATEGORY_COMPATIBILITY, "StoreRpgInventoryItems", true).getBoolean(true);
+        enableArsMagicaSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableArsMagicaSoulbound", true).getBoolean(true);
     }
 
     private void getGravesText() {

@@ -1,5 +1,6 @@
 package gravestone.core.compatibility;
 
+import gravestone.config.GraveStoneConfig;
 import mariculture.api.core.MaricultureHandlers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,7 +21,7 @@ public class GSCompatibilityMariculture {
     }
 
     public static void addItems(List<ItemStack> items, EntityPlayer player) {
-        if (isLoaded()) {
+        if (isLoaded() && GraveStoneConfig.storeMaricultureItems) {
             if (MaricultureHandlers.mirror != null) {
                 ItemStack[] mirrorItems = MaricultureHandlers.mirror.getMirrorContents(player);
                 if (mirrorItems != null) {

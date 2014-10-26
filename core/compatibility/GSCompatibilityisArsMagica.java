@@ -3,6 +3,8 @@ package gravestone.core.compatibility;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import gravestone.config.GraveStoneConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +24,7 @@ public class GSCompatibilityisArsMagica {
     }
 
     public static void getSoulboundItemsBack(List<ItemStack> items, EntityPlayer player) {
-        if (isInstalled()) {
+        if (isInstalled() && GraveStoneConfig.enableArsMagicaSoulbound) {
             Iterator<ItemStack> it = items.iterator();
             while (it.hasNext()) {
                 ItemStack stack = it.next();
@@ -38,7 +40,7 @@ public class GSCompatibilityisArsMagica {
         Map enchantments = EnchantmentHelper.getEnchantments(stack);
         for (Object id : enchantments.keySet()) {
             Enchantment ench = Enchantment.enchantmentsList[((Integer) id).shortValue()];
-            if (ench.getClass().getName().equals("am2.enchantments.EnchantmentSoulbound")) {
+            if (ench != null && ench.getClass().getName().equals("am2.enchantments.EnchantmentSoulbound")) {
                 return true;
             }
         }

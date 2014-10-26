@@ -1,5 +1,6 @@
 package gravestone.core.compatibility;
 
+import gravestone.config.GraveStoneConfig;
 import gravestone.core.logger.GSLogger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -22,7 +23,7 @@ public class GSCompatibilityRpgInventory {
     }
 
     public static void addItems(List<ItemStack> items, EntityPlayer player) {
-        if (isLoaded()) {
+        if (isLoaded() && GraveStoneConfig.storeRpgInventoryItems) {
             try {
                 Class<?> clazz = Class.forName("rpgInventory.gui.rpginv.PlayerRpgInventory");
                 Method m = clazz.getDeclaredMethod("get", EntityPlayer.class);
