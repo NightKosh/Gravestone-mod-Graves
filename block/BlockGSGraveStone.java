@@ -532,7 +532,7 @@ public class BlockGSGraveStone extends BlockContainer {
 
                 if (deathText.length() != 0) {
                     if (te.getDeathTextComponent().isLocalized()) {
-                        name = te.getDeathTextComponent().getName();
+                        name = ModGraveStone.proxy.getLocalizedEntityName(te.getDeathTextComponent().getName());
                         killerName = ModGraveStone.proxy.getLocalizedEntityName(te.getDeathTextComponent().getKillerName());
 
                         if (killerName.length() == 0) {

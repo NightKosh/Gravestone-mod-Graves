@@ -67,7 +67,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
 
         if (stack.stackTagCompound.hasKey("isLocalized") && stack.stackTagCompound.getBoolean("isLocalized")) {
             if (stack.stackTagCompound.hasKey("name")) {
-                String name = stack.stackTagCompound.getString("name");
+                String name = ModGraveStone.proxy.getLocalizedEntityName(stack.stackTagCompound.getString("name"));
                 String killerName = ModGraveStone.proxy.getLocalizedEntityName(stack.stackTagCompound.getString("KillerName"));
                 if (killerName.length() == 0) {
                     list.add(new ChatComponentTranslation(deathText, new Object[]{name}).getFormattedText());

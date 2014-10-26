@@ -743,20 +743,20 @@ public class BlockGSMemorial extends BlockContainer {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
         if (world.isRemote) {
-            TileEntityGSMemorial entity = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
+            TileEntityGSMemorial te = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
 
-            if (entity != null) {
+            if (te != null) {
                 String name;
                 String killerName;
-                String deathText = entity.getDeathTextComponent().getDeathText();
+                String deathText = te.getDeathTextComponent().getDeathText();
 
                 if (deathText.length() != 0) {
                     //entityPlayer.sendChatToPlayer(ChatMessageComponent.func_111066_d(deathText));
 
-                    if (entity.getDeathTextComponent().isLocalized()) {
-                        name = entity.getDeathTextComponent().getName();
+                    if (te.getDeathTextComponent().isLocalized()) {
+                        name = ModGraveStone.proxy.getLocalizedEntityName(te.getDeathTextComponent().getName());
                         if (name.length() != 0) {
-                            killerName = ModGraveStone.proxy.getLocalizedEntityName(entity.getDeathTextComponent().getKillerName());
+                            killerName = ModGraveStone.proxy.getLocalizedEntityName(te.getDeathTextComponent().getKillerName());
 
                             if (killerName.length() == 0) {
                                 player.addChatComponentMessage(new ChatComponentTranslation(deathText, new Object[]{name}));

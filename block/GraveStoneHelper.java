@@ -549,6 +549,13 @@ public class GraveStoneHelper {
         String shortString = "death.attack." + damageType;
         String fullString = shortString + ".player";
 
+        String entityName = EntityList.getEntityString(entity);
+        if (entityName == null) {
+            entityName = entity.getCommandSenderName();
+        } else {
+            entityName = "entity." + entityName + ".name";
+        }
+
         if (killer != null) {
             String killerName;
             if (killer instanceof EntityPlayer) {
@@ -565,12 +572,12 @@ public class GraveStoneHelper {
                 }
             }
             if (StatCollector.canTranslate(fullString)) {
-                return new DeathMessageInfo(entity.getCommandSenderName(), fullString, killerName);
+                return new DeathMessageInfo(entityName, fullString, killerName);
             } else {
-                return new DeathMessageInfo(entity.getCommandSenderName(), shortString, killerName);
+                return new DeathMessageInfo(entityName, shortString, killerName);
             }
         } else {
-            return new DeathMessageInfo(entity.getCommandSenderName(), shortString, null);
+            return new DeathMessageInfo(entityName, shortString, null);
         }
     }
 
