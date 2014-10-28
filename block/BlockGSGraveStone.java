@@ -7,6 +7,7 @@ import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSTabs;
+import gravestone.core.logger.GravesLogger;
 import gravestone.tileentity.DeathMessageInfo;
 import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSGraveStone;
@@ -626,12 +627,17 @@ public class BlockGSGraveStone extends BlockContainer {
             list.add(GraveStoneHelper.getSwordAsGrave(gravestone, new ItemStack(sword, 1)));
         }
         for (Item sword : GraveStoneHelper.swordsList) {
-            ItemStack swordStack = new ItemStack(sword, 1);
-            EnchantmentHelper.addRandomEnchantment(new Random(), swordStack, 5);
+            try {
+                ItemStack swordStack = new ItemStack(sword, 1);
+                EnchantmentHelper.addRandomEnchantment(new Random(), swordStack, 5);
 
-            ItemStack graveStoneStack = GraveStoneHelper.getSwordAsGrave(gravestone, swordStack);
+                ItemStack graveStoneStack = GraveStoneHelper.getSwordAsGrave(gravestone, swordStack);
 
-            list.add(graveStoneStack);
+                list.add(graveStoneStack);
+            } catch (IllegalArgumentException exception) {
+                GSLogger.logError("Can't create enchanted sword gravestone");
+                exception.printStackTrace();
+            }
         }
     }
 
