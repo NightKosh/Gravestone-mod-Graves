@@ -131,31 +131,33 @@ public abstract class CorpseHelper {
         if (player.worldObj.getWorldInfo().getGameType().equals(WorldSettings.GameType.CREATIVE)) {
             return true;
         } else {
-            switch (EnumCorpse.getById((byte) damage)) {
-                case VILLAGER:
-                    return player.experienceLevel >= 20;
-                case DOG:
-                case CAT:
-                    return player.experienceLevel >= 7;
-                case HORSE:
-                    return player.experienceLevel >= 15;
-            }
+            return player.experienceLevel >= getRequiredLevel(damage);
         }
-        return false;
     }
 
     public static void getExperience(EntityPlayer player, int damage) {
+        player.experienceLevel -= getRequiredLevel(damage);
+    }
+
+    public static int getRequiredLevel(int damage) {
         switch (EnumCorpse.getById((byte) damage)) {
             case VILLAGER:
-                player.experienceLevel -= 20;
-                break;
+                return 20;
             case DOG:
             case CAT:
-                player.experienceLevel -= 7;
-                break;
+                return 7;
             case HORSE:
-                player.experienceLevel -= 15;
-                break;
+                return 15;
+            default :
+                return 0;
+        }
+    }
+
+    public static int getRequiredLevel(ItemStack itemStack) {
+        if (itemStack != null) {
+            return getRequiredLevel(itemStack.getItemDamage());
+        } else {
+            return 0;
         }
     }
 }

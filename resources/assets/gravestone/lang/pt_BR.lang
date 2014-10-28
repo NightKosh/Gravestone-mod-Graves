@@ -133,6 +133,7 @@ gui.edit_grave.title=Defina o texto do túmulo
 gui.edit_grave.close=Done
 gui.edit_grave.randomText=Set random text
 gui.altar.resurrect=Resurrect
+gui.altar.requirements=%d levels required
 
 
 # entity

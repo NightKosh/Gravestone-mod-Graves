@@ -133,6 +133,7 @@ gui.edit_grave.title=更改墓碑文字
 gui.edit_grave.close=Done
 gui.edit_grave.randomText=Set random text
 gui.altar.resurrect=Resurrect
+gui.altar.requirements=%d levels required
 
 
 # entity

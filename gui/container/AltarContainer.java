@@ -1,15 +1,16 @@
 package gravestone.gui.container;
 
-import gravestone.item.ItemGSCorpse;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import gravestone.item.corpse.CorpseHelper;
 import gravestone.tileentity.TileEntityGSAltar;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
+import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * GraveStone mod
@@ -52,8 +53,26 @@ public class AltarContainer extends Container {
             ItemStack stackInSlot = slotObject.getStack();
             stack = stackInSlot.copy();
 
-            if (!this.mergeItemStack(stackInSlot, 0, 1, false)) {
-                return null;
+            if (slot == 0) {
+                if (!this.mergeItemStack(stackInSlot, 0, inventorySlots.size(), true)) {
+                    return null;
+                }
+            } else {
+                if (((Slot) this.inventorySlots.get(0)).getHasStack() || !((AltarSlot) this.inventorySlots.get(0)).isItemValid(stackInSlot)) {
+                    return null;
+                }
+
+                if (stackInSlot.hasTagCompound() && stackInSlot.stackSize == 1) {
+                    ((Slot) this.inventorySlots.get(0)).putStack(stackInSlot.copy());
+                    stackInSlot.stackSize = 0;
+                } else if (stackInSlot.stackSize >= 1) {
+                    ItemStack newStack = new ItemStack(stackInSlot.getItem(), 1, stackInSlot.getItemDamage());
+                    if (stackInSlot.hasTagCompound()) {
+                        newStack.setTagCompound((NBTTagCompound) stackInSlot.getTagCompound().copy());
+                    }
+                    ((Slot) this.inventorySlots.get(0)).putStack(newStack);
+                    stackInSlot.stackSize--;
+                }
             }
 
             if (stackInSlot.stackSize == 0) {
@@ -68,5 +87,9 @@ public class AltarContainer extends Container {
             slotObject.onPickupFromSlot(player, stackInSlot);
         }
         return stack;
+    }
+
+    public int getResurrectionLevel() {
+        return CorpseHelper.getRequiredLevel(tileEntity.getCorpse());
     }
 }

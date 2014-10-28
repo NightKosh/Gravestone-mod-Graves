@@ -132,6 +132,7 @@ gui.edit_grave.title=Введите надпись
 gui.edit_grave.close=Готово
 gui.edit_grave.randomText=Ввести случайный текст
 gui.altar.resurrect=Воскресить
+gui.altar.requirements=Требуется %d уровней
 
 
 # entity
