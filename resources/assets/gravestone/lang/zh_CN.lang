@@ -15,7 +15,7 @@ block.gravestone.iron_sword=铁剑墓碑
 block.gravestone.golden_sword=金剑墓碑
 block.gravestone.diamond_sword=钻石剑墓碑
 block.gravestone.horse_statue=马雕像
-block.gravestone.sword=Sword of a fallen warrior
+block.gravestone.sword=战魂之剑
 
 ## memorials
 block.memorial.cross=十字纪念碑
@@ -31,7 +31,7 @@ block.memorial.celtic_cross=凯尔特十字架
 ## trap
 tile.trap.night.name=午夜石
 tile.trap.thunder.name=雷电石
-block.trap.curse=黑夜正在接近！
+block.trap.curse=暗夜正在降临！
 
 ## spawner
 block.spawner.wither=凋灵刷怪笼
@@ -130,10 +130,10 @@ item.backpack.undertaker.t2=Undertaker's Woven backpack
 
 # gui
 gui.edit_grave.title=更改墓碑文字
-gui.edit_grave.close=Done
-gui.edit_grave.randomText=Set random text
-gui.altar.resurrect=Resurrect
-gui.altar.requirements=%d levels required
+gui.edit_grave.close=已完成
+gui.edit_grave.randomText=设定随机文本
+gui.altar.resurrect=复活
+gui.altar.requirements=需要%d级
 
 
 # entity
