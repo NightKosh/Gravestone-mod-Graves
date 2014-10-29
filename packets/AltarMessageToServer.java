@@ -93,7 +93,7 @@ public class AltarMessageToServer implements IMessage, IMessageHandler<AltarMess
                     if (corpse != null && corpse.getItem() instanceof ItemGSCorpse && CorpseHelper.canSpawnMob(player, corpse.getItemDamage())) {
                         CorpseHelper.spawnMob(corpse.getItemDamage(), tileEntity.getWorldObj(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, corpse.stackTagCompound, player);
                         CorpseHelper.getExperience(player, corpse.getItemDamage());
-                        GSMessageHandler.networkWrapper.sendToAll(new AltarMessageToClient(message.playerID, corpse.getItemDamage()));
+                        GSMessageHandler.networkWrapper.sendToAll(new AltarMessageToClient(player, corpse.getItemDamage()));
                         tileEntity.setCorpse(null);
                     }
                 }
