@@ -1,5 +1,6 @@
 package gravestone.renderer.item;
 
+import com.google.common.collect.Maps;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import gravestone.core.Resources;
 import gravestone.item.corpse.CatCorpseHelper;
@@ -19,6 +20,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
+import java.util.Map;
+
 /**
  * GraveStone mod
  *
@@ -27,6 +30,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class ItemGSCorpseRenderer implements IItemRenderer {
 
+    private static final Map horsesTexturesMap = Maps.newHashMap();
     private static final ModelVillager villagerModel = new ModelVillager(0);
     private static final ModelWolf dogModel = new ModelWolf();
     private static final ModelOcelot catModel = new ModelOcelot();
@@ -116,7 +120,14 @@ public class ItemGSCorpseRenderer implements IItemRenderer {
 
                 switch (HorseCorpseHelper.getHorseType(item.getTagCompound())) {
                     case 0:
-                        Minecraft.getMinecraft().getTextureManager().loadTexture(new ResourceLocation(horse.getHorseTexture()), new LayeredTexture(horse.getVariantTexturePaths()));
+                        String horseTexturePath = horse.getHorseTexture();
+                        ResourceLocation horseResourceLocation = (ResourceLocation) horsesTexturesMap.get(horseTexturePath);
+                        if (horseResourceLocation == null) {
+                            horseResourceLocation = new ResourceLocation(horseTexturePath);
+                            Minecraft.getMinecraft().getTextureManager().loadTexture(horseResourceLocation, new LayeredTexture(horse.getVariantTexturePaths()));
+                            horsesTexturesMap.put(horseTexturePath, horseResourceLocation);
+                        }
+                        Minecraft.getMinecraft().renderEngine.bindTexture(horseResourceLocation);
                         break;
                     case 1:
                         Minecraft.getMinecraft().renderEngine.bindTexture(Resources.DONKEY);
