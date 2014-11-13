@@ -123,8 +123,22 @@ public enum EnumMemorials implements IBlockEnum {
     REDSTONE_CREEPER_STATUE("block.memorial.creeper_statue", Resources.MEMORIAL_REDSTONE_CREEPER_STATUE, Resources.MEMORIAL_REDSTONE_BIG_PEDESTAL),
     OBSIDIAN_CREEPER_STATUE("block.memorial.creeper_statue", Resources.MEMORIAL_OBSIDIAN_CREEPER_STATUE, Resources.MEMORIAL_OBSIDIAN_BIG_PEDESTAL),
     QUARTZ_CREEPER_STATUE("block.memorial.creeper_statue", Resources.MEMORIAL_QUARTZ_CREEPER_STATUE, Resources.MEMORIAL_QUARTZ_BIG_PEDESTAL),
-    ICE_CREEPER_STATUE("block.memorial.creeper_statue", Resources.MEMORIAL_ICE_CREEPER_STATUE, Resources.MEMORIAL_ICE_BIG_PEDESTAL);
-    //CELTIC_CROSS("block.memorial.celtic_cross");
+    ICE_CREEPER_STATUE("block.memorial.creeper_statue", Resources.MEMORIAL_ICE_CREEPER_STATUE, Resources.MEMORIAL_ICE_BIG_PEDESTAL),
+    // celtic crosses
+    WOODEN_CELTIC_CROSS("block.memorial.celtic_cross", Resources.MEMORIAL_QUARTZ_CROSS, null),
+    SANDSTONE_CELTIC_CROSS("block.memorial.celtic_cross", Resources.MEMORIAL_QUARTZ_CROSS, null),
+    MOSSY_CELTIC_CROSS("block.memorial.celtic_cross", Resources.MEMORIAL_QUARTZ_CROSS, null),
+    IRON_CELTIC_CROSS("block.memorial.celtic_cross", Resources.MEMORIAL_QUARTZ_CROSS, null),
+    GOLDEN_CELTIC_CROSS("block.memorial.celtic_cross", Resources.MEMORIAL_QUARTZ_CROSS, null),
+    DIAMOND_CELTIC_CROSS("block.memorial.celtic_cross", Resources.MEMORIAL_QUARTZ_CROSS, null),
+    EMERALD_CELTIC_CROSS("block.memorial.celtic_cross", Resources.MEMORIAL_QUARTZ_CROSS, null),
+    LAPIS_CELTIC_CROSS("block.memorial.celtic_cross", Resources.MEMORIAL_QUARTZ_CROSS, null),
+    REDSTONE_CELTIC_CROSS("block.memorial.celtic_cross", Resources.MEMORIAL_QUARTZ_CROSS, null),
+    OBSIDIAN_CELTIC_CROSS("block.memorial.celtic_cross", Resources.MEMORIAL_QUARTZ_CROSS, null),
+    QUARTZ_CELTIC_CROSS("block.memorial.celtic_cross", Resources.MEMORIAL_QUARTZ_CROSS, null),
+    ICE_CELTIC_CROSS("block.memorial.celtic_cross", Resources.MEMORIAL_QUARTZ_CROSS, null),
+    // gibbets
+    GIBBET("block.memorial.gibbet", Resources.MEMORIAL_GIBBET, null);
     private String name;
     private ResourceLocation texture;
     private ResourceLocation pedestalTexture;

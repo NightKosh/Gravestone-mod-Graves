@@ -1,5 +1,6 @@
 package gravestone.models.block;
 
+import gravestone.block.enums.EnumMemorials;
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -11,5 +12,16 @@ import net.minecraft.util.ResourceLocation;
 public abstract class ModelMemorial extends ModelGraveStone {
 
     public void setPedestalTexture(ResourceLocation texture) {
+    }
+
+    public void customRender(EnumMemorials memorialType, boolean enchanted) {
+        if (enchanted) {
+            renderEnchanted();
+        } else {
+            renderAll();
+        }
+    }
+
+    public void customRender(EnumMemorials memorialType, int mob) {
     }
 }

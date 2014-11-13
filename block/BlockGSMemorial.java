@@ -151,7 +151,9 @@ public class BlockGSMemorial extends BlockContainer {
             (byte) EnumMemorials.REDSTONE_CREEPER_STATUE.ordinal(),
             (byte) EnumMemorials.OBSIDIAN_CREEPER_STATUE.ordinal(),
             (byte) EnumMemorials.QUARTZ_CREEPER_STATUE.ordinal(),
-            (byte) EnumMemorials.ICE_CREEPER_STATUE.ordinal()
+            (byte) EnumMemorials.ICE_CREEPER_STATUE.ordinal(),
+            // gibbets
+            (byte) EnumMemorials.GIBBET.ordinal()
     };
     public static final EnumMemorials[] WOODEN_GENERATED_MEMORIALS = {
             EnumMemorials.WOODEN_CROSS,

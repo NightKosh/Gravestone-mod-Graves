@@ -27,6 +27,7 @@ block.memorial.dog_statue=Dog Statue
 block.memorial.cat_statue=Cat Statue
 block.memorial.creeper_statue=Creeper Statue
 block.memorial.celtic_cross=Celtic Cross
+block.memorial.gibbet=Gibbet
 
 ## trap
 tile.trap.night.name=Night Stone
