@@ -30,6 +30,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
     public static ModelMemorial catStatue = new ModelCatStatueMemorial();
     public static ModelMemorial creeperStatue = new ModelCreeperStatueMemorial();
     public static ModelMemorial gibbet = new ModelGibbet();
+    public static ModelMemorial stocks = new ModelStocks();
 
     //private static IModelCustom celticCross = AdvancedModelLoader.loadModel("/assets/gravestone/obj_models/CelticCross.obj");
 
@@ -148,6 +149,8 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
             .put(EnumMemorials.ICE_CREEPER_STATUE, creeperStatue)
             // gibbets
             .put(EnumMemorials.GIBBET, gibbet)
+            // stocks
+            .put(EnumMemorials.STOCKS, stocks)
             .build();
 
     public static TileEntityGSMemorialRenderer instance;
@@ -266,6 +269,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
                 model.customRender(memorialType, tileEntity.isEnchanted());
                 break;
             case GIBBET:
+            case STOCKS:
                 model.customRender(memorialType, 0);
             default:
                 if (tileEntity.isEnchanted()) {

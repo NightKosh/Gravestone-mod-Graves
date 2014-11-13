@@ -138,7 +138,10 @@ public enum EnumMemorials implements IBlockEnum {
     QUARTZ_CELTIC_CROSS("block.memorial.celtic_cross", Resources.MEMORIAL_QUARTZ_CROSS, null),
     ICE_CELTIC_CROSS("block.memorial.celtic_cross", Resources.MEMORIAL_QUARTZ_CROSS, null),
     // gibbets
-    GIBBET("block.memorial.gibbet", Resources.MEMORIAL_GIBBET, null);
+    GIBBET("block.memorial.gibbet", Resources.MEMORIAL_GIBBET, null),
+    // stocks
+    STOCKS("block.memorial.stocks", Resources.MEMORIAL_STOCKS, null);
+
     private String name;
     private ResourceLocation texture;
     private ResourceLocation pedestalTexture;

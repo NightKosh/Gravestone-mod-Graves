@@ -277,6 +277,9 @@ public class Resources {
     public static final ResourceLocation MEMORIAL_ICE_CREEPER_STATUE = new ResourceLocation(MEMORIALS_LOCATION + "IceCreeperMemorial.png");
     // gibbet
     public static final ResourceLocation MEMORIAL_GIBBET = new ResourceLocation(MEMORIALS_LOCATION + "gibbet.png");
+    // stocks
+    public static final ResourceLocation MEMORIAL_STOCKS = new ResourceLocation(MEMORIALS_LOCATION + "stocks.png");
+
     // models - parts
     public static final ResourceLocation CREEPER_AURA = new ResourceLocation("textures/entity/creeper/creeper_armor.png");
     public static final ResourceLocation SWORD_AURA = new ResourceLocation("textures/misc/enchanted_item_glint.png");

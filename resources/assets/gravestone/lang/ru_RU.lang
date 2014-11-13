@@ -28,6 +28,7 @@ block.memorial.cat_statue=Статуя кошки
 block.memorial.creeper_statue=Статуя крипера
 block.memorial.celtic_cross=Кельтский крест
 block.memorial.gibbet=Виселица
+block.memorial.stocks=Колодки
 
 ## trap
 tile.trap.night.name=Камень тьмы

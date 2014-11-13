@@ -28,6 +28,7 @@ block.memorial.cat_statue=Estatua de gato
 block.memorial.creeper_statue=Estatua de creeper
 block.memorial.celtic_cross=Cruz céltica
 block.memorial.gibbet=Gibbet
+block.memorial.stocks=Stocks
 
 ## trap
 tile.trap.night.name=Piedra nocturna

@@ -28,6 +28,7 @@ block.memorial.cat_statue=Socha kočky
 block.memorial.creeper_statue=Socha Creepera
 block.memorial.celtic_cross=Keltský kříž
 block.memorial.gibbet=Gibbet
+block.memorial.stocks=Stocks
 
 ## trap
 tile.trap.night.name=Noční kámen
