@@ -199,7 +199,7 @@ public class GraveStoneConfig {
     }
 
     private static void compatibilityConfigs() {
-        spawnMoCreaturesMobs = config.get(CATEGORY_COMPATIBILITY, "SpawnMoCreaturesMobsByGraves", true).getBoolean(true);
+        spawnMoCreaturesMobs = config.get(CATEGORY_COMPATIBILITY, "SpawnMoCreaturesMobs", true).getBoolean(true);
 
         enableForestryBackpacks = config.get(CATEGORY_COMPATIBILITY, "EnableForestryBackpacks", true).getBoolean(true);
 

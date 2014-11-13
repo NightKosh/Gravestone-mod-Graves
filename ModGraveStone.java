@@ -69,8 +69,10 @@ public class ModGraveStone {
         // register structures
         GSStructures.getInstance();
 
-        // register entitys
+        // register entities
         GSEntity.getInstance();
+
+        GSPotion.init();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GSGuiHandler());
 

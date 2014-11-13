@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumTrap;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSPotion;
 import gravestone.core.GSTabs;
 import gravestone.core.Resources;
 import net.minecraft.block.Block;
@@ -16,6 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -127,6 +129,7 @@ public class BlockGSTrap extends Block {
                         time = time - time % 24000 + NIGHT;
                         world.setWorldTime(time);
                     }
+                    ((EntityPlayer) entity).addPotionEffect(new PotionEffect(GSPotion.curse.getId(), 1200));
                 }
             } else {
                 if (GraveStoneConfig.enableThunderStone) {

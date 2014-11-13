@@ -15,6 +15,7 @@ public class Resources {
     private static final String MOD_NAME = ModInfo.ID.toLowerCase();
     private static final String GUI_LOCATION = MOD_NAME + ":textures/gui/";
     private static final String BLOCK_LOCATION = MOD_NAME + ":textures/blocks/";
+    private static final String POTIONS_LOCATION = MOD_NAME + ":textures/potions/";
     private static final String ENTITY_LOCATION = MOD_NAME + ":textures/entities/";
     private static final String GRAVES_LOCATION = MOD_NAME + ":textures/graves/";
     private static final String MEMORIALS_LOCATION = MOD_NAME + ":textures/memorials/";
@@ -35,6 +36,9 @@ public class Resources {
 
     // gui
     public static final ResourceLocation ALTAR = new ResourceLocation(GUI_LOCATION + "altar.png");
+
+    //potions
+    public static final ResourceLocation POTIONS = new ResourceLocation(POTIONS_LOCATION + "potions.png");
 
     // entities
     public static final ResourceLocation UNDERTAKER = new ResourceLocation(ENTITY_LOCATION + "undertaker.png");
