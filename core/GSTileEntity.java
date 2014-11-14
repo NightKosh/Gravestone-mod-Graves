@@ -29,6 +29,8 @@ public class GSTileEntity {
         
         GameRegistry.registerTileEntity(TileEntityGSSkullCandle.class, "GSSkull Candle");
 
+        GameRegistry.registerTileEntity(TileEntityGSPileOfBones.class, "GSTEPileOfBones");
+
         GameRegistry.registerTileEntity(TileEntityGSAltar.class, "GSAltarTE");
     }
 }

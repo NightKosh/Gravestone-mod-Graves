@@ -48,6 +48,10 @@ tile.bone_block.crawler_skull_name=Костяной блок ползучего 
 tile.bone_slab.name=Костяная плита
 tile.bone_stairs.name=Костяная лестница
 
+#pile of bones
+block.pile_of_bones.name=Кучка костей
+block.pile_of_bones_with_skull.name=Кучка костей с черепом
+
 ## chests
 block.haunted_chest.bats_chest=Сундук с летучими мышами
 block.haunted_chest.skeleton_chest=Сундук со скелетом

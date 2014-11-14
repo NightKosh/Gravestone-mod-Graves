@@ -6,7 +6,7 @@ import forestry.api.storage.BackpackManager;
 import forestry.api.storage.EnumBackpackType;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSItem;
-import gravestone.core.GSReciepes;
+import gravestone.core.GSRecipes;
 import gravestone.core.GSTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -42,7 +42,7 @@ public class GSCompatibilityForestry {
                 GSItem.registryExternalItems(backpackItemT1, "GSUndertakerBackpackT1");
 
                 ItemStack backpackStackT1 = new ItemStack(backpackItemT1);
-                GSReciepes.addForestryBackpack(backpackStackT1, GSItem.chisel);
+                GSRecipes.addForestryBackpack(backpackStackT1, GSItem.chisel);
 
 
                 String backpackT2Name = "backpack.undertaker.t2";

@@ -26,6 +26,7 @@ public class GSBlock {
     // block memorial
     public static BlockGSMemorial memorial;
     // bone blocks
+    public static BlockGSPileOfBones pileOfBones;
     public static BlockGSBoneBlock boneBlock;
     public static BlockGSBoneSlab boneSlab;
     public static BlockGSBoneStairs boneStairs;
@@ -70,6 +71,9 @@ public class GSBlock {
         trap = new BlockGSTrap();
         advancedMetaBlockRegistration(trap, ItemBlockGSTrap.class, "GSTrap", EnumTrap.values());
 
+        //pile of bones
+        pileOfBones = new BlockGSPileOfBones();
+        advancedMetaBlockRegistration(pileOfBones, ItemBlockGSPileOfBones.class, "GSPileOfBones", EnumPileOfBones.values());
         // bone block
         boneBlock = new BlockGSBoneBlock();
         advancedMetaBlockRegistration(boneBlock, ItemBlockGSBoneBlock.class, "GSBoneBlock", EnumBoneBlock.values());

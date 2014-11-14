@@ -48,6 +48,10 @@ tile.bone_block.crawler_skull_name=Kostěnný blok s lebkou a krabem uvnitř
 tile.bone_slab.name=Kostěnný půlblok
 tile.bone_stairs.name=Kostěnné schody
 
+#pile of bones
+block.pile_of_bones.name=Pile Of Bones
+block.pile_of_bones_with_skull.name=Pile Of Bones with Skull
+
 ## chests
 block.haunted_chest.bats_chest=Bedna s netopýry
 block.haunted_chest.skeleton_chest=Bedna s kostlivcem

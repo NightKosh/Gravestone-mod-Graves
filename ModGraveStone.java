@@ -61,7 +61,7 @@ public class ModGraveStone {
         GSItem.registration();
 
         // reciepes registration
-        GSReciepes.registration();
+        GSRecipes.registration();
 
         // tileEntities registration
         GSTileEntity.registration();

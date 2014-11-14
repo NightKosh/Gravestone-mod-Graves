@@ -48,6 +48,10 @@ tile.bone_block.crawler_skull_name=颅骨骨质方块(有爬行头颅)
 tile.bone_slab.name=骨质台阶
 tile.bone_stairs.name=骨质阶梯
 
+#pile of bones
+block.pile_of_bones.name=Pile Of Bones
+block.pile_of_bones_with_skull.name=Pile Of Bones with Skull
+
 ## chests
 block.haunted_chest.bats_chest=带着蝙蝠的箱子
 block.haunted_chest.skeleton_chest=带着骷髅的箱子

@@ -29,6 +29,7 @@ public class GraveStoneConfig {
     public static int spawnerRenderID = RenderingRegistry.getNextAvailableRenderId();
     public static int skullCandleRenderID = RenderingRegistry.getNextAvailableRenderId();
     public static int candleRenderID = RenderingRegistry.getNextAvailableRenderId();
+    public static int pileOfBonesRenderID = RenderingRegistry.getNextAvailableRenderId();
     // world generator
     public static int structuresDimensionId;
     public static boolean generateCatacombs;

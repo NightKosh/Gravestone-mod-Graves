@@ -29,6 +29,7 @@ public class Resources {
     public static final String PENTAGRAM_ICO    = MOD_NAME  + ":pentagram";
     public static final ResourceLocation PENTAGRAM = new ResourceLocation(BLOCK_LOCATION  + "pentagram.png");
     public static final ResourceLocation CANDLE = new ResourceLocation(BLOCK_LOCATION  + "candle.png");
+    public static final ResourceLocation PILE_OF_BONES = new ResourceLocation(BLOCK_LOCATION + "pileOfBones.png");
     public static final String ALTAR_TOP = MOD_NAME  + ":altar_top";
     public static final String ALTAR_SIDE = MOD_NAME  + ":altar_side";
     // items

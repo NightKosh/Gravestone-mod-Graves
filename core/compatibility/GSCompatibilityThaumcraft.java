@@ -1,11 +1,11 @@
 package gravestone.core.compatibility;
 
+import gravestone.core.GSRecipes;
 import gravestone.core.logger.GSLogger;
 import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
 import gravestone.core.GSEntity;
 import gravestone.core.GSItem;
-import gravestone.core.GSReciepes;
 import net.minecraft.item.ItemStack;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.ThaumcraftApi;
@@ -25,7 +25,7 @@ public class GSCompatibilityThaumcraft {
     }
 
     public static void addReciepes() {
-        GSReciepes.addSkullCandleReciepes(ItemApi.getBlock("blockCandle", 0));
+        GSRecipes.addSkullCandleReciepes(ItemApi.getBlock("blockCandle", 0));
     }
 
     public static void addAspects() {

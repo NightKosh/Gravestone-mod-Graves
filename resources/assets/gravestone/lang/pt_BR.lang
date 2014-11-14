@@ -48,6 +48,10 @@ tile.bone_block.crawler_skull_name=Blco ode Ossos com Cabeça do Rastejador Cave
 tile.bone_slab.name=Laje de Ossos
 tile.bone_stairs.name=Escada de Ossos
 
+#pile of bones
+block.pile_of_bones.name=Pile Of Bones
+block.pile_of_bones_with_skull.name=Pile Of Bones with Skull
+
 ## chests
 block.haunted_chest.bats_chest=Baú com Morcegos
 block.haunted_chest.skeleton_chest=Baú com Esqueleto
