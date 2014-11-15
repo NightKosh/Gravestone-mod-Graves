@@ -67,7 +67,7 @@ block.skull_candle.zombie.name=Zombie Skull Candle
 
 # items
 ## chisel
-item.chisel.name=Chisel
+item.chisel.name=Gravestone Chisel
 
 ## graves
 item.grave.age=Had lived

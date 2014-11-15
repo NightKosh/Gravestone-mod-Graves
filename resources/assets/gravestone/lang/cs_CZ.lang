@@ -67,7 +67,7 @@ block.skull_candle.zombie.name=Zombie hlava se svíčkou
 
 # items
 ## chisel
-item.chisel.name=Dláto
+item.chisel.name=Gravestone Chisel
 
 ## graves
 item.grave.age=Žil

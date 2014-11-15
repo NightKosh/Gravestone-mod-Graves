@@ -67,7 +67,7 @@ block.skull_candle.zombie.name=Череп зомби со свечой
 
 # items
 ## chisel
-item.chisel.name=Резец
+item.chisel.name=Резец для надгробий
 
 ## graves
 item.grave.age=Прожил

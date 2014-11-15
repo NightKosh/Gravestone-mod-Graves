@@ -67,7 +67,7 @@ block.skull_candle.zombie.name=Bougie à tête de zombie
 
 # items
 ## chisel
-item.chisel.name=Burin
+item.chisel.name=Gravestone Chisel
 
 ## graves
 item.grave.age=A vécu

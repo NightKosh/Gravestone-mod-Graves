@@ -67,7 +67,7 @@ block.skull_candle.zombie.name=僵尸头颅蜡烛
 
 # items
 ## chisel
-item.chisel.name=凿子
+item.chisel.name=Gravestone Chisel
 
 ## graves
 item.grave.age=已生活了

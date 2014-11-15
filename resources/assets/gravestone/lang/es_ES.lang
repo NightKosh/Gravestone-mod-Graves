@@ -67,7 +67,7 @@ block.skull_candle.zombie.name=Vela en Cabeza de Zombi
 
 # items
 ## chisel
-item.chisel.name=Cincel
+item.chisel.name=Gravestone Chisel
 
 ## graves
 item.grave.age=Vivió
