@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.block.enums.EnumPileOfBones;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSBlock;
 import gravestone.core.GSTabs;
 import gravestone.tileentity.TileEntityGSPileOfBones;
 import net.minecraft.block.Block;
@@ -16,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -85,9 +87,18 @@ public class BlockGSPileOfBones extends BlockContainer {
         return damage;
     }
 
+    protected ItemStack createStackedBlock(int meta) {
+        return new ItemStack(GSBlock.pileOfBones, 1, meta);
+    }
+
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
         world.setBlockMetadataWithNotify(x, y, z, stack.getItemDamage(), 2);
+
+        TileEntityGSPileOfBones te = (TileEntityGSPileOfBones) world.getTileEntity(x, y, z);
+        if (te != null) {
+            te.setDirection((byte) (MathHelper.floor_double((double) (entity.rotationYaw * 4F / 360F) + 0.5D) & 3));
+        }
     }
 
     @Override

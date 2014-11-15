@@ -35,6 +35,23 @@ public class TileEntityGSPileOfBonesRenderer extends TileEntitySpecialRenderer {
             GL11.glTranslatef(x + 0.5F, y + 1.5F, z + 0.5F);
             GL11.glScalef(1, -1, -1);
             meta = tileEntity.getBlockMetadata();
+            int direction = tileEntity.getDirection();
+            switch (direction) {
+                case 1:
+                    direction = -90;
+                    break;
+                case 0:
+                    direction = 180;
+                    break;
+                case 2:
+                    direction = 0;
+                    break;
+                case 3:
+                default:
+                    direction = 90;
+                    break;
+            }
+            GL11.glRotatef(direction, 0.0F, 1.0F, 0.0F);
         }
 
         pileOfBonesModel.renderAll(meta != 0);
