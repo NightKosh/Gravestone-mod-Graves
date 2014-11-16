@@ -114,8 +114,8 @@ public class Entrance extends CatacombsBaseComponent {
             this.fillWithRandomizedBlocks(world, boundingBox, 3, shiftY - 3, shiftZ + 1, 3, shiftY - 1, shiftZ + 2, false, random, getCemeteryCatacombsStones());
 
             // web
-            this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, shiftY - 1, shiftY - 3, shiftZ + 1, shiftY - 1, shiftY - 3, shiftZ + 1, Blocks.web, Blocks.web, true);
-            this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, shiftY - 2, shiftY - 3, shiftZ + 2, shiftY - 2, shiftY - 3, shiftZ + 2, Blocks.web, Blocks.web, true);
+            this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, shiftY - 1, shiftY - 3, shiftZ + 1, shiftY - 1, shiftY - 3, shiftZ + 1, Blocks.web, Blocks.web, false);
+            this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, shiftY - 2, shiftY - 3, shiftZ + 2, shiftY - 2, shiftY - 3, shiftZ + 2, Blocks.web, Blocks.web, false);
             shiftZ += 3;
         }
 

@@ -17,6 +17,8 @@ import java.util.Random;
  */
 public abstract class CatacombsBaseComponent extends ComponentGraveStone {
 
+    protected static final float PILE_OF_BONES_GENERATION_CHANCE = 0.35F;
+
     public boolean goTop = true;
     protected int leftXEnd = 0;
     protected int rightXEnd = 0;

@@ -32,7 +32,7 @@ import java.util.Random;
 public class BlockGSPileOfBones extends BlockContainer {
 
     public BlockGSPileOfBones() {
-        super(Material.rock);
+        super(Material.circuits);
         this.setStepSound(Block.soundTypeStone);
         this.setBlockName("pile of bones");
         this.setHardness(0.1F);
@@ -106,6 +106,19 @@ public class BlockGSPileOfBones extends BlockContainer {
     public void getSubBlocks(Item item, CreativeTabs tab, List list) {
         for (byte i = 0; i < EnumPileOfBones.values().length; i++) {
             list.add(new ItemStack(item, 1, i));
+        }
+    }
+
+    @Override
+    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+        return world.doesBlockHaveSolidTopSurface(world, x, y, z);
+    }
+
+    @Override
+    public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
+        if (!canPlaceBlockAt(world, x, y, z)) {
+            this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+            world.setBlockToAir(x, y, z);
         }
     }
 }

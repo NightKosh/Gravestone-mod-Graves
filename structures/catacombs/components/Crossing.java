@@ -1,5 +1,6 @@
 package gravestone.structures.catacombs.components;
 
+import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.ObjectsGenerationHelper;
 import net.minecraft.init.Blocks;
@@ -64,6 +65,8 @@ public class Crossing extends CatacombsBaseComponent {
         int metaRight = this.getMetadataWithOffset(Blocks.nether_brick_stairs, 1);
         int metaLeft = this.getMetadataWithOffset(Blocks.nether_brick_stairs, 0);
         this.fillWithAir(world, boundingBox, 1, 1, 1, 11, 4, 11);
+
+        this.randomlyFillWithBlocks(world, boundingBox, random, PILE_OF_BONES_GENERATION_CHANCE, 1, 1, 1, 12, 1, 12, GSBlock.pileOfBones, GSBlock.pileOfBones, false);
 
         // trap floor
         this.fillWithBlocks(world, boundingBox, 0, 0, 0, 0, 0, 12, Blocks.nether_brick, Blocks.nether_brick, false);
@@ -151,18 +154,18 @@ public class Crossing extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 12, 1, 5, 12, 3, 7, false, random, getCemeteryCatacombsStones());
 
         // web
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 7, 2, 1, 7, 2, 1, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 5, 3, 2, 5, 3, 2, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 1, 5, 3, 1, 5, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 2, 6, 3, 2, 6, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 1, 3, 7, 1, 3, 7, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 6, 2, 5, 6, 2, 5, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 8, 3, 5, 8, 3, 5, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 10, 1, 5, 10, 1, 5, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 5, 1, 7, 5, 1, 7, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 11, 2, 7, 11, 2, 7, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 9, 3, 9, 9, 3, 9, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 5, 1, 11, 5, 1, 11, Blocks.web, Blocks.web, true);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 7, 2, 1, 7, 2, 1, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 5, 3, 2, 5, 3, 2, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 1, 5, 3, 1, 5, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 2, 6, 3, 2, 6, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 1, 3, 7, 1, 3, 7, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 6, 2, 5, 6, 2, 5, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 8, 3, 5, 8, 3, 5, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 10, 1, 5, 10, 1, 5, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 5, 1, 7, 5, 1, 7, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 11, 2, 7, 11, 2, 7, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 9, 3, 9, 9, 3, 9, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 5, 1, 11, 5, 1, 11, Blocks.web, Blocks.web, false);
 
         // clear enter
         this.fillWithAir(world, boundingBox, 5, 1, 0, 7, 3, 0);

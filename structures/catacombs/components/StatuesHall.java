@@ -1,6 +1,7 @@
 package gravestone.structures.catacombs.components;
 
 import gravestone.block.BlockGSMemorial;
+import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.MemorialGenerationHelper;
@@ -43,6 +44,8 @@ public class StatuesHall extends CatacombsBaseComponent {
         // blocks floor and ceiling
         this.fillWithRandomizedBlocks(world, boundingBox, 1, 0, 1, 9, 0, 17, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 1, 5, 1, 9, 5, 17, false, random, getCemeteryCatacombsStones());
+
+        this.randomlyFillWithBlocks(world, boundingBox, random, PILE_OF_BONES_GENERATION_CHANCE, 1, 1, 1, 10, 1, 18, GSBlock.pileOfBones, GSBlock.pileOfBones, false);
 
         // blocks wall
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 1, 1, 0, 4, 17, false, random, getCemeteryCatacombsStones());
@@ -134,20 +137,20 @@ public class StatuesHall extends CatacombsBaseComponent {
         MobSpawnHelper.spawnBats(world, random, boundingBox);
 
         // web
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 6, 1, 1, 6, 1, 1, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 9, 3, 1, 9, 3, 1, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 4, 2, 2, 4, 2, 2, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 1, 1, 5, 1, 1, 5, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 5, 3, 5, 5, 3, 5, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 9, 2, 5, 9, 2, 5, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 8, 1, 7, 8, 1, 7, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 2, 2, 10, 2, 2, 10, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 6, 1, 11, 6, 1, 11, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 4, 3, 13, 4, 3, 13, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 9, 1, 14, 9, 1, 14, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 5, 2, 16, 5, 2, 16, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 2, 3, 17, 2, 3, 17, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 6, 1, 17, 6, 1, 17, Blocks.web, Blocks.web, true);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 6, 1, 1, 6, 1, 1, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 9, 3, 1, 9, 3, 1, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 4, 2, 2, 4, 2, 2, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 1, 1, 5, 1, 1, 5, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 5, 3, 5, 5, 3, 5, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 9, 2, 5, 9, 2, 5, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 8, 1, 7, 8, 1, 7, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 2, 2, 10, 2, 2, 10, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 6, 1, 11, 6, 1, 11, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 4, 3, 13, 4, 3, 13, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 9, 1, 14, 9, 1, 14, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 5, 2, 16, 5, 2, 16, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 2, 3, 17, 2, 3, 17, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 6, 1, 17, 6, 1, 17, Blocks.web, Blocks.web, false);
 
         return true;
     }

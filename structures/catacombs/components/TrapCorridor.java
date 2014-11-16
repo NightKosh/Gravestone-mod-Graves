@@ -71,9 +71,9 @@ public class TrapCorridor extends CatacombsBaseComponent {
         this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 5, 2, 2, boundingBox);
 
         // web
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 2, 1, 1, 2, 1, 1, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 4, 2, 2, 4, 2, 2, Blocks.web, Blocks.web, true);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 3, 3, 3, 3, 3, Blocks.web, Blocks.web, true);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 2, 1, 1, 2, 1, 1, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 4, 2, 2, 4, 2, 2, Blocks.web, Blocks.web, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 3, 3, 3, 3, 3, Blocks.web, Blocks.web, false);
 
         return true;
     }
