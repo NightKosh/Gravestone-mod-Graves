@@ -132,7 +132,7 @@ public class VillagerCorpseHelper extends CorpseHelper {
 
     private static String getNotVanillaVillagerProfession(int type) {
         if (type == GraveStoneConfig.undertakerId) {
-            return "item.corpse.villager_type.undertacker";
+            return "item.corpse.villager_type.undertaker";
         } else if (type == GSCompatibilityForestry.getApicultureVillagerID()) {
             return "item.corpse.villager_type.beekeeper";
         } else if (type == GSCompatibilityForestry.getArboricultureVillagerID()) {
