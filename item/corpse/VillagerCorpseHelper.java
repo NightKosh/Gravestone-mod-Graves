@@ -2,6 +2,8 @@ package gravestone.item.corpse;
 
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import gravestone.ModGraveStone;
+import gravestone.config.GraveStoneConfig;
+import gravestone.core.compatibility.forestry.GSCompatibilityForestry;
 import gravestone.structures.village.VillageHandlerGSUndertaker;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
@@ -123,19 +125,24 @@ public class VillagerCorpseHelper extends CorpseHelper {
                 return "item.corpse.villager_type.smith";
             case 4:
                 return "item.corpse.villager_type.butcher";
-            case 385:
-                return "item.corpse.villager_type.undertacker";
-            case 10:
-                return "item.corpse.villager_type.brewer";
-            case 206:
-                return "item.corpse.villager_type.thaumaturge";
-            case 80:
-                return "item.corpse.villager_type.beekeeper";
-            case 81:
-                return "item.corpse.villager_type.lumberjack";
             default:
-                return "item.corpse.villager_type.unknown";
+                return getNotVanillaVillagerProfession(type);
         }
+    }
+
+    private static String getNotVanillaVillagerProfession(int type) {
+        if (type == GraveStoneConfig.undertakerId) {
+            return "item.corpse.villager_type.undertacker";
+        } else if (type == GSCompatibilityForestry.getApicultureVillagerID()) {
+            return "item.corpse.villager_type.beekeeper";
+        } else if (type == GSCompatibilityForestry.getArboricultureVillagerID()) {
+            return "item.corpse.villager_type.lumberjack";
+        } else if (type == 10) {
+            return "item.corpse.villager_type.brewer";
+        } else if (type == 206) {
+            return "item.corpse.villager_type.thaumaturge";
+        }
+        return "item.corpse.villager_type.unknown";
     }
 
     private static boolean hasTrades(NBTTagCompound nbtTag) {

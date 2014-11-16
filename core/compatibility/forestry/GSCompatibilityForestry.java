@@ -1,6 +1,7 @@
 package gravestone.core.compatibility.forestry;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import forestry.api.core.ForestryAPI;
 import forestry.api.recipes.RecipeManagers;
 import forestry.api.storage.BackpackManager;
 import forestry.api.storage.EnumBackpackType;
@@ -30,7 +31,13 @@ public class GSCompatibilityForestry {
 
     }
 
-    // TODO villagers ID
+    public static int getApicultureVillagerID() {
+        return ForestryAPI.forestryConstants.getApicultureVillagerID();
+    }
+
+    public static int getArboricultureVillagerID() {
+        return ForestryAPI.forestryConstants.getArboricultureVillagerID();
+    }
 
     public static void addBackpack() {
         if (BackpackManager.backpackInterface != null) {

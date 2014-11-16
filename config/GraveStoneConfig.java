@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import gravestone.structures.GraveStoneWorldGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
+import gravestone.structures.village.VillageHandlerGSUndertaker;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
@@ -89,6 +90,8 @@ public class GraveStoneConfig {
     public static boolean showGravesRemovingMessages;
     //structures
     public static boolean generateCatacombsGraveyard;
+    // villager
+    public static int undertakerId;
 
     // COMPATIBILITY
     public static boolean spawnMoCreaturesMobs;
@@ -137,6 +140,7 @@ public class GraveStoneConfig {
         generateCemeteries = config.get(Configuration.CATEGORY_GENERAL, "GenerateCemeteries", true).getBoolean(true);
         generateVillageMemorials = config.get(Configuration.CATEGORY_GENERAL, "GenerateVillageMemorials", true).getBoolean(true);
         generateUndertaker = config.get(Configuration.CATEGORY_GENERAL, "GenerateUndertaker", true).getBoolean(true);
+        undertakerId = config.get(Configuration.CATEGORY_GENERAL, "undertakerId", VillageHandlerGSUndertaker.UNDERTAKER_ID).getInt();
     }
 
     private static void gravesConfig() {

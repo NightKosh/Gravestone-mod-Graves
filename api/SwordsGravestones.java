@@ -15,9 +15,9 @@ public class SwordsGravestones {
 
     public static void addSwordGravestone(Item sword) {
         try {
-            Class<?> mirrorHelperClass = Class.forName("gravestone.block.GraveStoneHelper");
-            Method addMethod = mirrorHelperClass.getDeclaredMethod("addSwordToSwordsList", Item.class);
-            addMethod.invoke(null, sword);
+            Class<?> aClass = Class.forName("gravestone.block.GraveStoneHelper");
+            Method method = aClass.getDeclaredMethod("addSwordToSwordsList", Item.class);
+            method.invoke(null, sword);
         } catch (Exception e) {
             FMLLog.warning("[GraveStone] Can't add sword to swords gravestones list!");
             e.printStackTrace();
