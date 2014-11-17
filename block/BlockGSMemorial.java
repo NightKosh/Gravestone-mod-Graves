@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
+import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSTabs;
@@ -579,7 +580,7 @@ public class BlockGSMemorial extends BlockContainer {
                 }
 
                 if (itemStack.stackTagCompound.hasKey("HangedMob")) {
-                    tileEntity.setHangedMob(itemStack.stackTagCompound.getByte("HangedMob"));
+                    tileEntity.setHangedMob(EnumHangedMobs.getByID(itemStack.stackTagCompound.getByte("HangedMob")));
                     tileEntity.setHangedVillagerProfession(itemStack.stackTagCompound.getInteger("HangedVillagerProfession"));
                 }
             }
@@ -795,41 +796,43 @@ public class BlockGSMemorial extends BlockContainer {
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item item, CreativeTabs tab, List list) {
         for (byte i = 0; i < TAB_MEMORIALS.length; i++) {
-            ItemStack stack = new ItemStack(item, 1, 0);
-            NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("GraveType", TAB_MEMORIALS[i]);
-            stack.setTagCompound(nbt);
-            list.add(stack);
+            list.add(getMemorialItemForCreativeInventory(item, TAB_MEMORIALS[i]));
         }
 
         // gibbets
+        for (byte mobType = 0; mobType < EnumHangedMobs.values().length; mobType++) {
+            ItemStack stack = getMemorialItemForCreativeInventory(item, (byte) EnumMemorials.GIBBET.ordinal());
+            stack.getTagCompound().setByte("HangedMob", mobType);
+            switch (EnumHangedMobs.values()[mobType]) {
+                case VILLAGER:
+                    ItemStack villagerStack;
+                    for (byte villagerProfession = 0; villagerProfession <= 4; villagerProfession++) {
+                        villagerStack = stack.copy();
+                        villagerStack.getTagCompound().setInteger("HangedVillagerProfession", villagerProfession);
+                        list.add(villagerStack);
+                    }
 
-        ItemStack stack = new ItemStack(item, 1, 0);
-        NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setByte("GraveType", (byte) EnumMemorials.GIBBET.ordinal());
-        nbt.setByte("HangedMob", (byte) 0);
-        stack.setTagCompound(nbt);
-        list.add(stack);
-
-        for (byte i = 0; i <= 4; i++) {
-            list.add(getMemorialWithVillager(item, i));
+                    Collection<Integer> villagerIds = VillagerRegistry.getRegisteredVillagers();
+                    Iterator<Integer> it = villagerIds.iterator();
+                    while (it.hasNext()) {
+                        villagerStack = stack.copy();
+                        villagerStack.getTagCompound().setInteger("HangedVillagerProfession", it.next());
+                        list.add(villagerStack);
+                    }
+                    break;
+                default:
+                    list.add(stack);
+            }
         }
-        Collection<Integer> villagerIds = VillagerRegistry.getRegisteredVillagers();
-        Iterator<Integer> it = villagerIds.iterator();
-        while (it.hasNext()) {
-            list.add(getMemorialWithVillager(item, it.next()));
-        }
 
-//            // stocks
-//            (byte) EnumMemorials.STOCKS.ordinal()
+        // stocks
+        list.add(getMemorialItemForCreativeInventory(item, (byte) EnumMemorials.STOCKS.ordinal()));
     }
 
-    private static ItemStack getMemorialWithVillager(Item item, int villagerProfession) {
+    private static ItemStack getMemorialItemForCreativeInventory(Item item, byte graveType) {
         ItemStack stack = new ItemStack(item, 1, 0);
         NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setByte("GraveType", (byte) EnumMemorials.GIBBET.ordinal());
-        nbt.setByte("HangedMob", (byte) 1);
-        nbt.setInteger("HangedVillagerProfession", villagerProfession);
+        nbt.setByte("GraveType", graveType);
         stack.setTagCompound(nbt);
         return stack;
     }
@@ -866,7 +869,7 @@ public class BlockGSMemorial extends BlockContainer {
             
             nbt.setBoolean("Enchanted", tileEntity.isEnchanted());
 
-            nbt.setByte("HangedMob", tileEntity.getHangedMob());
+            nbt.setByte("HangedMob", (byte) tileEntity.getHangedMob().ordinal());
             nbt.setInteger("HangedVillagerProfession", tileEntity.getHangedVillagerProfession());
 
             itemStack.setTagCompound(nbt);
@@ -919,7 +922,7 @@ public class BlockGSMemorial extends BlockContainer {
                 NBTTagCompound nbt = new NBTTagCompound();
                 nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
 
-                nbt.setByte("HangedMob", tileEntity.getHangedMob());
+                nbt.setByte("HangedMob", (byte) tileEntity.getHangedMob().ordinal());
                 nbt.setInteger("HangedVillagerProfession", tileEntity.getHangedVillagerProfession());
 
                 itemStack.setTagCompound(nbt);

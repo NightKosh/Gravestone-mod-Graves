@@ -1,5 +1,6 @@
 package gravestone.models.block;
 
+import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
 import net.minecraft.util.ResourceLocation;
 
@@ -22,6 +23,6 @@ public abstract class ModelMemorial extends ModelGraveStone {
         }
     }
 
-    public void customRender(EnumMemorials memorialType, byte mob, int villagerProfession) {
+    public void customRender(EnumMemorials memorialType, EnumHangedMobs mob, int villagerProfession) {
     }
 }

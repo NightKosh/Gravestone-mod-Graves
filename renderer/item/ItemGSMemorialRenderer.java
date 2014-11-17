@@ -2,6 +2,7 @@ package gravestone.renderer.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gravestone.block.enums.EnumHangedMobs;
 import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
@@ -39,7 +40,7 @@ public class ItemGSMemorialRenderer implements IItemRenderer {
                 te.setEnchanted(item.stackTagCompound.getBoolean("Enchanted"));
             }
             if (item.stackTagCompound.hasKey("HangedMob")) {
-                te.setHangedMob(item.stackTagCompound.getByte("HangedMob"));
+                te.setHangedMob(EnumHangedMobs.getByID(item.stackTagCompound.getByte("HangedMob")));
                 te.setHangedVillagerProfession(item.stackTagCompound.getInteger("HangedVillagerProfession"));
             }
         }

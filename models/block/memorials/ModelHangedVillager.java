@@ -15,19 +15,23 @@ import net.minecraft.entity.Entity;
 @SideOnly(Side.CLIENT)
 public class ModelHangedVillager extends ModelBase {
 
-    private ModelRenderer head;
-    private ModelRenderer body;
-    private ModelRenderer rightArm;
-    private ModelRenderer leftArm;
-    private ModelRenderer rightLeg;
-    private ModelRenderer leftLeg;
-    private ModelRenderer nose;
-    private ModelRenderer rightArm2;
-    private ModelRenderer leftArm2;
+    protected ModelRenderer head;
+    protected ModelRenderer body;
+    protected ModelRenderer rightArm;
+    protected ModelRenderer leftArm;
+    protected ModelRenderer rightLeg;
+    protected ModelRenderer leftLeg;
+    protected ModelRenderer nose;
+    protected ModelRenderer rightArm2;
+    protected ModelRenderer leftArm2;
 
     public ModelHangedVillager() {
-        textureWidth = 64;
-        textureHeight = 64;
+        this(64, 64);
+    }
+
+    public ModelHangedVillager(int textureWidth, int textureHeight) {
+        this.textureWidth = textureWidth;
+        this.textureHeight = textureHeight;
 
         head = new ModelRenderer(this, 0, 0);
         head.addBox(-4F, -8F, -4F, 8, 10, 8);

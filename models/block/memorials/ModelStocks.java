@@ -1,5 +1,6 @@
 package gravestone.models.block.memorials;
 
+import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.models.block.ModelMemorial;
 import net.minecraft.client.model.ModelRenderer;
@@ -71,7 +72,7 @@ public class ModelStocks extends ModelMemorial {
         armHole2.render(0.0625F);
     }
 
-    public void customRender(EnumMemorials memorialType, int mob) {
+    public void customRender(EnumMemorials memorialType, EnumHangedMobs mob, int villagerProfession) {
         renderAll();
     }
 }

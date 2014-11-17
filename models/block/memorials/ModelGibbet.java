@@ -1,10 +1,12 @@
 package gravestone.models.block.memorials;
 
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.core.Resources;
 import gravestone.models.block.ModelMemorial;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import org.lwjgl.opengl.GL11;
 
@@ -31,7 +33,13 @@ public class ModelGibbet extends ModelMemorial {
     private ModelRenderer loop4;
     private ModelRenderer loop5;
 
+    private static final ModelHangedBiped bipedModel = new ModelHangedBiped();
+    private static final ModelHangedBiped zombieModel = new ModelHangedBiped(true);
+    private static final ModelHangedSkeleton skeletonModel = new ModelHangedSkeleton();
+    private static final ModelHangedSkeleton witherSkeletonModel = new ModelHangedSkeleton(true); // TODO
     private static final ModelHangedVillager villagerModel = new ModelHangedVillager();
+    private static final ModelHangedZombieVillager zombieVillagerModel = new ModelHangedZombieVillager();
+    private static final ModelHangedWitch witchModel = new ModelHangedWitch();
 
     public ModelGibbet() {
         textureWidth = 64;
@@ -135,8 +143,8 @@ public class ModelGibbet extends ModelMemorial {
         renderLoop();
     }
 
-    public void customRender(EnumMemorials memorialType, byte mob, int villagerProfession) {
-        if (mob == 0) {
+    public void customRender(EnumMemorials memorialType, EnumHangedMobs mob, int villagerProfession) {
+        if (mob == EnumHangedMobs.NONE) {
             renderAll();
         } else {
             renderAllWithoutLoop();
@@ -144,7 +152,11 @@ public class ModelGibbet extends ModelMemorial {
             GL11.glPushMatrix();
             GL11.glTranslatef(0, -0.5F, -1.1F);
             switch (mob) {
-                case 1: // villager
+                case STEVE:
+                    Minecraft.getMinecraft().renderEngine.bindTexture(Resources.STEVE);
+                    bipedModel.renderAll();
+                    break;
+                case VILLAGER:
                     switch (villagerProfession) {
                         case 0:
                             Minecraft.getMinecraft().renderEngine.bindTexture(Resources.VILLAGER_FARMER);
@@ -167,11 +179,31 @@ public class ModelGibbet extends ModelMemorial {
                     }
                     villagerModel.renderAll();
                     break;
-                case 2: // zombie
+                case ZOMBIE:
+                    Minecraft.getMinecraft().renderEngine.bindTexture(Resources.ZOMBIE);
+                    zombieModel.renderAll();
                     break;
-                case 3: // skeleton
+                case ZOMBIE_VILLAGER:
+                    Minecraft.getMinecraft().renderEngine.bindTexture(Resources.ZOMBIE_VILLAGER);
+                    zombieVillagerModel.renderAll();
                     break;
-
+                case SKELETON:
+                    GL11.glTranslatef(0, 0, 0.1F);
+                    Minecraft.getMinecraft().renderEngine.bindTexture(Resources.SKELETON);
+                    skeletonModel.renderAll();
+                    break;
+                case WITHER_SKELETON:
+                    GL11.glTranslatef(0, 0, 0.1F);
+                    Minecraft.getMinecraft().renderEngine.bindTexture(Resources.WITHER_SKELETON);
+                    witherSkeletonModel.renderAll();
+                    break;
+                case WITCH:
+                    Minecraft.getMinecraft().renderEngine.bindTexture(Resources.WITCH);
+                    witchModel.renderAll();
+                    break;
+                case ZOMBIE_PIGMAN:
+                    Minecraft.getMinecraft().renderEngine.bindTexture(Resources.ZOMBIE_PIGMAN);
+                    zombieModel.renderAll();
             }
             GL11.glPopMatrix();
         }

@@ -1,5 +1,6 @@
 package gravestone.tileentity;
 
+import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -14,8 +15,8 @@ import java.util.Random;
  */
 public class TileEntityGSMemorial extends TileEntityGSGrave {
 
-    private byte hangedMob;
-    private int hangedVillagerProfession;
+    private EnumHangedMobs hangedMob = EnumHangedMobs.NONE;
+    private int hangedVillagerProfession = 0;
 
     public TileEntityGSMemorial() {
         super();
@@ -46,7 +47,7 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
         // death text
         gSDeathText.readText(nbtTag);
 
-        hangedMob = nbtTag.getByte("HangedMob");
+        hangedMob = EnumHangedMobs.getByID(nbtTag.getByte("HangedMob"));
         hangedVillagerProfession = nbtTag.getInteger("HangedVillagerProfession");
     }
 
@@ -61,7 +62,7 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
         // death text
         gSDeathText.saveText(nbtTag);
 
-        nbtTag.setByte("HangedMob", hangedMob);
+        nbtTag.setByte("HangedMob", (byte) hangedMob.ordinal());
         nbtTag.setInteger("HangedVillagerProfession", hangedVillagerProfession);
     }
 
@@ -91,11 +92,11 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
         this.hangedVillagerProfession = hangedVillagerProfession;
     }
 
-    public byte getHangedMob() {
+    public EnumHangedMobs getHangedMob() {
         return hangedMob;
     }
 
-    public void setHangedMob(byte hangedMob) {
+    public void setHangedMob(EnumHangedMobs hangedMob) {
         this.hangedMob = hangedMob;
     }
 
