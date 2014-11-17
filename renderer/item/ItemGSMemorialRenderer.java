@@ -38,6 +38,10 @@ public class ItemGSMemorialRenderer implements IItemRenderer {
             if (item.stackTagCompound.hasKey("Enchanted")) {
                 te.setEnchanted(item.stackTagCompound.getBoolean("Enchanted"));
             }
+            if (item.stackTagCompound.hasKey("HangedMob")) {
+                te.setHangedMob(item.stackTagCompound.getByte("HangedMob"));
+                te.setHangedVillagerProfession(item.stackTagCompound.getInteger("HangedVillagerProfession"));
+            }
         }
 
         TileEntityRendererDispatcher.instance.renderTileEntityAt(te, 0, 0, 0, 0);

@@ -1,5 +1,6 @@
 package gravestone.block;
 
+import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
@@ -27,10 +28,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * GraveStone mod
@@ -151,11 +149,11 @@ public class BlockGSMemorial extends BlockContainer {
             (byte) EnumMemorials.REDSTONE_CREEPER_STATUE.ordinal(),
             (byte) EnumMemorials.OBSIDIAN_CREEPER_STATUE.ordinal(),
             (byte) EnumMemorials.QUARTZ_CREEPER_STATUE.ordinal(),
-            (byte) EnumMemorials.ICE_CREEPER_STATUE.ordinal(),
+            (byte) EnumMemorials.ICE_CREEPER_STATUE.ordinal()//,
             // gibbets
-            (byte) EnumMemorials.GIBBET.ordinal(),
-            // stocks
-            (byte) EnumMemorials.STOCKS.ordinal()
+//            (byte) EnumMemorials.GIBBET.ordinal(),
+//            // stocks
+//            (byte) EnumMemorials.STOCKS.ordinal()
     };
     public static final EnumMemorials[] WOODEN_GENERATED_MEMORIALS = {
             EnumMemorials.WOODEN_CROSS,
@@ -579,6 +577,11 @@ public class BlockGSMemorial extends BlockContainer {
                 } else {
                     tileEntity.setGraveType((byte) 0);
                 }
+
+                if (itemStack.stackTagCompound.hasKey("HangedMob")) {
+                    tileEntity.setHangedMob(itemStack.stackTagCompound.getByte("HangedMob"));
+                    tileEntity.setHangedVillagerProfession(itemStack.stackTagCompound.getInteger("HangedVillagerProfession"));
+                }
             }
         }
     }
@@ -798,6 +801,37 @@ public class BlockGSMemorial extends BlockContainer {
             stack.setTagCompound(nbt);
             list.add(stack);
         }
+
+        // gibbets
+
+        ItemStack stack = new ItemStack(item, 1, 0);
+        NBTTagCompound nbt = new NBTTagCompound();
+        nbt.setByte("GraveType", (byte) EnumMemorials.GIBBET.ordinal());
+        nbt.setByte("HangedMob", (byte) 0);
+        stack.setTagCompound(nbt);
+        list.add(stack);
+
+        for (byte i = 0; i <= 4; i++) {
+            list.add(getMemorialWithVillager(item, i));
+        }
+        Collection<Integer> villagerIds = VillagerRegistry.getRegisteredVillagers();
+        Iterator<Integer> it = villagerIds.iterator();
+        while (it.hasNext()) {
+            list.add(getMemorialWithVillager(item, it.next()));
+        }
+
+//            // stocks
+//            (byte) EnumMemorials.STOCKS.ordinal()
+    }
+
+    private static ItemStack getMemorialWithVillager(Item item, int villagerProfession) {
+        ItemStack stack = new ItemStack(item, 1, 0);
+        NBTTagCompound nbt = new NBTTagCompound();
+        nbt.setByte("GraveType", (byte) EnumMemorials.GIBBET.ordinal());
+        nbt.setByte("HangedMob", (byte) 1);
+        nbt.setInteger("HangedVillagerProfession", villagerProfession);
+        stack.setTagCompound(nbt);
+        return stack;
     }
 
     @Override
@@ -831,7 +865,10 @@ public class BlockGSMemorial extends BlockContainer {
             nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
             
             nbt.setBoolean("Enchanted", tileEntity.isEnchanted());
-            
+
+            nbt.setByte("HangedMob", tileEntity.getHangedMob());
+            nbt.setInteger("HangedVillagerProfession", tileEntity.getHangedVillagerProfession());
+
             itemStack.setTagCompound(nbt);
         }
 
@@ -881,6 +918,9 @@ public class BlockGSMemorial extends BlockContainer {
             if (itemStack != null) {
                 NBTTagCompound nbt = new NBTTagCompound();
                 nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
+
+                nbt.setByte("HangedMob", tileEntity.getHangedMob());
+                nbt.setInteger("HangedVillagerProfession", tileEntity.getHangedVillagerProfession());
 
                 itemStack.setTagCompound(nbt);
             }

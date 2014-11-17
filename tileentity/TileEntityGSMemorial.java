@@ -14,6 +14,9 @@ import java.util.Random;
  */
 public class TileEntityGSMemorial extends TileEntityGSGrave {
 
+    private byte hangedMob;
+    private int hangedVillagerProfession;
+
     public TileEntityGSMemorial() {
         super();
     }
@@ -42,6 +45,9 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
         readType(nbtTag);
         // death text
         gSDeathText.readText(nbtTag);
+
+        hangedMob = nbtTag.getByte("HangedMob");
+        hangedVillagerProfession = nbtTag.getInteger("HangedVillagerProfession");
     }
 
     /**
@@ -54,6 +60,9 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
         saveType(nbtTag);
         // death text
         gSDeathText.saveText(nbtTag);
+
+        nbtTag.setByte("HangedMob", hangedMob);
+        nbtTag.setInteger("HangedVillagerProfession", hangedVillagerProfession);
     }
 
     public void setMemorialContent(Random random) {
@@ -73,4 +82,21 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
     public EnumMemorials getMemorialType() {
         return EnumMemorials.getByID(graveType);
     }
+
+    public int getHangedVillagerProfession() {
+        return hangedVillagerProfession;
+    }
+
+    public void setHangedVillagerProfession(int hangedVillagerProfession) {
+        this.hangedVillagerProfession = hangedVillagerProfession;
+    }
+
+    public byte getHangedMob() {
+        return hangedMob;
+    }
+
+    public void setHangedMob(byte hangedMob) {
+        this.hangedMob = hangedMob;
+    }
+
 }

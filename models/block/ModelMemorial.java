@@ -22,6 +22,6 @@ public abstract class ModelMemorial extends ModelGraveStone {
         }
     }
 
-    public void customRender(EnumMemorials memorialType, int mob) {
+    public void customRender(EnumMemorials memorialType, byte mob, int villagerProfession) {
     }
 }

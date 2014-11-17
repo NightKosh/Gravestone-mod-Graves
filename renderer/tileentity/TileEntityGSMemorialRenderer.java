@@ -270,7 +270,8 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
                 break;
             case GIBBET:
             case STOCKS:
-                model.customRender(memorialType, 0);
+                model.customRender(memorialType, tileEntity.getHangedMob(), tileEntity.getHangedVillagerProfession());
+                break;
             default:
                 if (tileEntity.isEnchanted()) {
                     model.renderEnchanted();
