@@ -1,9 +1,9 @@
-# tabs
+# Tabs
 itemGroup.tabGraveStone=Gravestone
 
 
-# blocks
-## graves
+# Blocks
+## Graves
 block.gravestone.gravestone=Lápide
 block.gravestone.cross=Cruz
 block.gravestone.plate=Chapa de Túmulo
@@ -17,7 +17,7 @@ block.gravestone.diamond_sword=Lápide de Espada de Diamante
 block.gravestone.horse_statue=Estátua de Cavalo
 block.gravestone.sword=Sword of a fallen warrior
 
-## memorials
+## Memorials
 block.memorial.cross=Memorial em Cruz
 block.memorial.obelisk=Obelisco
 block.memorial.steve_statue=Estátua do Steve
@@ -30,17 +30,17 @@ block.memorial.celtic_cross=Cruz Celta
 block.memorial.gibbet=Gibbet
 block.memorial.stocks=Stocks
 
-## trap
+## Traps
 tile.trap.night.name=Pedra da Noite
 tile.trap.thunder.name=Pedra do Trovão
 block.trap.curse=A escuridão está vindo!
 
-## spawner
+## Spawners
 block.spawner.wither=Spawner de Wither
 block.spawner.skeleton=Spawner de Esqueleto
 block.spawner.zombie=Spawner de Zumbi
 
-# bone blocks
+# Bone Blocks
 tile.bone_block.name=Bloco de Ossos
 tile.bone_block.skull_name=Bloco de Ossos com Cabeça
 tile.bone_block.crawler_name=Bloco de Ossos do Rastejador Caveira
@@ -48,34 +48,34 @@ tile.bone_block.crawler_skull_name=Blco ode Ossos com Cabeça do Rastejador Cave
 tile.bone_slab.name=Laje de Ossos
 tile.bone_stairs.name=Escada de Ossos
 
-#pile of bones
-block.pile_of_bones.name=Pile Of Bones
-block.pile_of_bones_with_skull.name=Pile Of Bones with Skull
+#Pile of Bones
+block.pile_of_bones.name=Pile of Bones
+block.pile_of_bones_with_skull.name=Pile of Bones with Skull
 
-## chests
+## Chests
 block.haunted_chest.bats_chest=Baú com Morcegos
 block.haunted_chest.skeleton_chest=Baú com Esqueleto
 block.haunted_chest.raven_chest=Baú com Corvos
 block.haunted_chest.ghost_chest=Baú com Fantasma
 
-##candles
+##Candles
 tile.candle.name=Vela
 block.skull_candle.skeleton.name=Vela de Cabeça
 block.skull_candle.wither_skeleton.name=Vela de Cabeça Wither
 block.skull_candle.zombie.name=Vela de Cabeça de Zumbi
 
 
-# items
-## chisel
+# Items
+## Chisel
 item.chisel.name=Gravestone Chisel
 
-## graves
+## Graves
 item.grave.age=Havia vivido
 item.grave.days=dias
 item.grave.sword_name=Nome da espada
 item.grave.sword_damage=Dano da espada
 
-## corpse
+## Corpses
 item.corpse.villager=Cadáver de Aldeão
 item.corpse.horse=Cadáver de Cavalo
 item.corpse.dog=Cadáver de Cachorro
@@ -129,12 +129,12 @@ item.corpse.cat_type.red=Vermelho
 item.corpse.cat_type.siamese=Siamês
 item.corpse.cat_type.unknown=Desconhecido
 
-##backpacks
-item.backpack.undertaker.t1=Undertaker's backpack
-item.backpack.undertaker.t2=Undertaker's Woven backpack
+##Backpacks
+item.backpack.undertaker.t1=Undertaker's Backpack
+item.backpack.undertaker.t2=Undertaker's Woven Backpack
 
 
-# gui
+# GUI
 gui.edit_grave.title=Defina o texto do túmulo
 gui.edit_grave.close=Done
 gui.edit_grave.randomText=Set random text
@@ -142,7 +142,7 @@ gui.altar.resurrect=Resurrect
 gui.altar.requirements=%d levels required
 
 
-# entity
+# Entity
 entity.GSZombieDog.name=Cachorro Zumbi
 entity.GSSkeletonDog.name=Cachorro Esqueleto
 entity.GSZombieCat.name=Gato Zumbi
@@ -153,7 +153,7 @@ entity.GSZombieSkullCrawler.name=Rastejador Caveira Zumbi
 entity.GSRaven.name=Corvo
 
 
-# death messages
+# Death Messages
 death.GS.Herobrine=%1$s foi assassinado brutalmente por Herobrine
 death.GS.death_sentence=%1$s recebeu uma pena de morte
 death.GS.tortures=%1$s morreu em torturas cruéis

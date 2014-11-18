@@ -1,9 +1,9 @@
-# tabs
+# Tabs
 itemGroup.tabGraveStone=Lapida
 
 
-# blocks
-## graves
+# Blocks
+## Graves
 block.gravestone.gravestone=Lapida
 block.gravestone.cross=Cruz
 block.gravestone.plate=Placa
@@ -14,10 +14,10 @@ block.gravestone.stone_sword=Lapida de espada de Piedra
 block.gravestone.iron_sword=Lapida de espada de Hierro
 block.gravestone.golden_sword=Lapida de espada de Oro
 block.gravestone.diamond_sword=Lapida de espada de Diamante
-block.gravestone.horse_statue=Horse statue
-block.gravestone.sword=Sword of a fallen warrior
+block.gravestone.horse_statue=Horse Statue
+block.gravestone.sword=Sword of A Fallen Warrior
 
-## memorials
+## Memorials
 block.memorial.cross=Memorial Cruz
 block.memorial.obelisk=Obelisco
 block.memorial.steve_statue=Estatua de Steve
@@ -30,17 +30,17 @@ block.memorial.celtic_cross=Cruz céltica
 block.memorial.gibbet=Gibbet
 block.memorial.stocks=Stocks
 
-## trap
+## Traps
 tile.trap.night.name=Piedra nocturna
 tile.trap.thunder.name=Piedra del trueno
 block.trap.curse=¡La oscuridad de aproxima!
 
-## spawner
+## Spawners
 block.spawner.wither=Engendrador de wither
 block.spawner.skeleton=Skeleton Spawner
 block.spawner.zombie=Zombie Spawner
 
-# bone blocks
+# Bone Blocks
 tile.bone_block.name=Bloque de hueso
 tile.bone_block.skull_name=Bloque de hueso con craneo
 tile.bone_block.crawler_name=Bloque de hueso con craneo del arranca craneos
@@ -48,38 +48,38 @@ tile.bone_block.crawler_skull_name=Bloque de hueso con craneo de
 tile.bone_slab.name=Losa de hueso
 tile.bone_stairs.name=Escaleras de hueso
 
-#pile of bones
-block.pile_of_bones.name=Pile Of Bones
-block.pile_of_bones_with_skull.name=Pile Of Bones with Skull
+#Pile of Bones
+block.pile_of_bones.name=Pile of Bones
+block.pile_of_bones_with_skull.name=Pile of Bones with Skull
 
-## chests
+## Chests
 block.haunted_chest.bats_chest=Cofre con Murciélagos
 block.haunted_chest.skeleton_chest=Cofre con Esqueletos
 block.haunted_chest.raven_chest=Cofre con Cuervos
 block.haunted_chest.ghost_chest=Cofre con Fantasmas
 
-##candles
+##Candles
 tile.candle.name=Candle
 block.skull_candle.skeleton.name=Vela en Cráneo
 block.skull_candle.wither_skeleton.name=Vela en Cráneo de Wither
 block.skull_candle.zombie.name=Vela en Cabeza de Zombi
 
 
-# items
-## chisel
+# Items
+## Chisel
 item.chisel.name=Gravestone Chisel
 
-## graves
+## Graves
 item.grave.age=Vivió
 item.grave.days=dias
 item.grave.sword_name=Nombre
 item.grave.sword_damage=Daño
 
-## corpse
-item.corpse.villager=Villager corpse
-item.corpse.horse=Horse corpse
-item.corpse.dog=Dog corpse
-item.corpse.cat=Cat corpse
+## Corpses
+item.corpse.villager=Villager Corpse
+item.corpse.horse=Horse Corpse
+item.corpse.dog=Dog Corpse
+item.corpse.cat=Cat Corpse
 item.corpse.entity_name=Name
 item.corpse.villager_type=Profession
 item.corpse.villager_type.farmer=Farmer
@@ -92,18 +92,18 @@ item.corpse.villager_type.brewer=Brewer
 item.corpse.villager_type.thaumaturge=Thaumaturge
 item.corpse.villager_type.beekeeper=Beekeeper
 item.corpse.villager_type.lumberjack=Lumberjack
-item.corpse.villager_type.Unknown=unknown
-item.corpse.horse_type=Horse type
+item.corpse.villager_type.Unknown=Unknown
+item.corpse.horse_type=Horse Type
 item.corpse.horse_type.horse=Horse
 item.corpse.horse_type.donkey=Donkey
 item.corpse.horse_type.mule=Mule
-item.corpse.horse_type.zombie=Zombie horse
-item.corpse.horse_type.skeleton=Skeleton horse
+item.corpse.horse_type.zombie=Zombie Horse
+item.corpse.horse_type.skeleton=Skeleton Horse
 item.corpse.horse_type.unknown=Unknown
-item.corpse.horse_variant=Horse variant
-item.corpse.health=Max health
+item.corpse.horse_variant=Horse Variant
+item.corpse.health=Max Health
 item.corpse.speed=Speed
-item.corpse.jump_strength=Jump strength
+item.corpse.jump_strength=Jump Strength
 item.corpse.collar=Collar
 item.corpse.collar.white=White
 item.corpse.collar.orange=Orange
@@ -113,7 +113,7 @@ item.corpse.collar.yellow=Yellow
 item.corpse.collar.lime=Lime
 item.corpse.collar.pink=Pink
 item.corpse.collar.grey=Grey
-item.corpse.collar.light_grey=Light grey
+item.corpse.collar.light_grey=Light Gray
 item.corpse.collar.turquoise=Turquoise
 item.corpse.collar.violet=Violet
 item.corpse.collar.blue=Blue
@@ -129,12 +129,12 @@ item.corpse.cat_type.red=Red
 item.corpse.cat_type.siamese=Siamese
 item.corpse.cat_type.unknown=Unknown
 
-##backpacks
-item.backpack.undertaker.t1=Undertaker's backpack
-item.backpack.undertaker.t2=Undertaker's Woven backpack
+##Backpacks
+item.backpack.undertaker.t1=Undertaker's Backpack
+item.backpack.undertaker.t2=Undertaker's Woven Backpack
 
 
-# gui
+# GUI
 gui.edit_grave.title=Ponga nombre a la lapida
 gui.edit_grave.close=Done
 gui.edit_grave.randomText=Set random text
@@ -142,7 +142,7 @@ gui.altar.resurrect=Resurrect
 gui.altar.requirements=%d levels required
 
 
-# entity
+# Entity
 entity.GSZombieDog.name=Perro Zombi
 entity.GSSkeletonDog.name=Perro Esqueleto
 entity.GSZombieCat.name=Gato Zombi
@@ -153,7 +153,7 @@ entity.GSZombieSkullCrawler.name=Arranca Cráneos Zombi
 entity.GSRaven.name=Cuervo
 
 
-# death messages
+# Death Messages
 death.GS.Herobrine=%1$s fue brutalmente asesinado por Herobrine.
 death.GS.death_sentence=%1$s recibió una sentencia de muerte.
 death.GS.tortures=%1$s murió a causa de terribles torturas.
