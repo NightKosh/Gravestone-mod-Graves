@@ -1,9 +1,9 @@
-# tabs
+# Tabs
 itemGroup.tabGraveStone=Gravestone
 
 
-# blocks
-## graves
+# Blocks
+## Graves
 block.gravestone.gravestone=Надгробный камень
 block.gravestone.cross=Могильный крест
 block.gravestone.plate=Надгробная плита
@@ -17,7 +17,7 @@ block.gravestone.diamond_sword=Надгробие из алмазного меч
 block.gravestone.horse_statue=Статуя для могилы лошади
 block.gravestone.sword=Меч павшего воина
 
-## memorials
+## Memorials
 block.memorial.cross=Мемориальный крест
 block.memorial.obelisk=Обелиск
 block.memorial.steve_statue=Статуя Стива
@@ -30,17 +30,17 @@ block.memorial.celtic_cross=Кельтский крест
 block.memorial.gibbet=Виселица
 block.memorial.stocks=Колодки
 
-## trap
+## Traps
 tile.trap.night.name=Камень тьмы
 tile.trap.thunder.name=Грозовой камень
 block.trap.curse=Тьма приближается!
 
-## spawner
-block.spawner.wither=Спаунер иссушителя
+## Spawners
+block.spawner.wither=Спаунер иссушителей
 block.spawner.skeleton=Спаунер скелетов
 block.spawner.zombie=Спаунер зомби
 
-# bone blocks
+# Bone Blocks
 tile.bone_block.name=Костяной блок
 tile.bone_block.skull_name=Костяной блок с черепом
 tile.bone_block.crawler_name=Костяной блок ползучего черепа
@@ -48,11 +48,11 @@ tile.bone_block.crawler_skull_name=Костяной блок ползучего 
 tile.bone_slab.name=Костяная плита
 tile.bone_stairs.name=Костяная лестница
 
-#pile of bones
+#Pile of Bones
 block.pile_of_bones.name=Кучка костей
 block.pile_of_bones_with_skull.name=Кучка костей с черепом
 
-## chests
+## Chests
 block.haunted_chest.bats_chest=Сундук с летучими мышами
 block.haunted_chest.skeleton_chest=Сундук со скелетом
 block.haunted_chest.raven_chest=Сундук с воронами
@@ -65,17 +65,17 @@ block.skull_candle.wither_skeleton.name=Череп иссушителя со с�
 block.skull_candle.zombie.name=Череп зомби со свечой
 
 
-# items
-## chisel
+# Items
+## Chisel
 item.chisel.name=Резец для надгробий
 
-## graves
+## Graves
 item.grave.age=Прожил
 item.grave.days=дней
 item.grave.sword_name=Название меча
 item.grave.sword_damage=Повреждение меча
 
-## corpse
+## Corpses
 item.corpse.villager=Труп жителя
 item.corpse.horse=Труп лошади
 item.corpse.dog=Труп собаки
@@ -129,11 +129,12 @@ item.corpse.cat_type.red=Рыжая
 item.corpse.cat_type.siamese=Сиамская
 item.corpse.cat_type.unknown=Неизвестный
 
-##backpacks
+##Backpacks
 item.backpack.undertaker.t1=Рюкзак гробовщика
-item.backpack.undertaker.t2=Ткатный рюкзак гробовщика
+item.backpack.undertaker.t2=Тканый рюкзак гробовщика
 
-# gui
+
+# GUI
 gui.edit_grave.title=Введите надпись
 gui.edit_grave.close=Готово
 gui.edit_grave.randomText=Ввести случайный текст
@@ -141,7 +142,7 @@ gui.altar.resurrect=Воскресить
 gui.altar.requirements=Требуется %d уровней
 
 
-# entity
+# Entity
 entity.GSZombieDog.name=Пёс-зомби
 entity.GSSkeletonDog.name=Пёс-скелет
 entity.GSZombieCat.name=Кот-зомби
@@ -152,7 +153,7 @@ entity.GSZombieSkullCrawler.name=Ползучий череп зомби
 entity.GSRaven.name=Ворон
 
 
-# death messages
+# Death Messages
 death.GS.Herobrine=%1$s был зверски убит Хиробрином
 death.GS.death_sentence=%1$s был казнён
 death.GS.tortures=%1$s умер в мучительных пытках

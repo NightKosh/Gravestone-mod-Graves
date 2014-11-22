@@ -1,9 +1,9 @@
-# tabs
+# Tabs
 itemGroup.tabGraveStone=Gravestone
 
 
-# blocks
-## graves
+# Blocks
+## Graves
 block.gravestone.gravestone=Náhrobek
 block.gravestone.cross=Kříž
 block.gravestone.plate=Náhrobní kámenk
@@ -15,9 +15,9 @@ block.gravestone.iron_sword=Náhrobek ze železného meče
 block.gravestone.golden_sword=Náhrobek ze zlatého meče
 block.gravestone.diamond_sword=Náhrobek z diamantového meče
 block.gravestone.horse_statue=Socha koně
-block.gravestone.sword=Sword of a fallen warrior
+block.gravestone.sword=Sword of A Fallen Warrior
 
-## memorials
+## Memorials
 block.memorial.cross=Křížový památník
 block.memorial.obelisk=Obelisk
 block.memorial.steve_statue=Socha Steva
@@ -30,17 +30,17 @@ block.memorial.celtic_cross=Keltský kříž
 block.memorial.gibbet=Gibbet
 block.memorial.stocks=Stocks
 
-## trap
+## Traps
 tile.trap.night.name=Noční kámen
 tile.trap.thunder.name=Bleskový kámen
 block.trap.curse=Temnota přichází!
 
-## spawner
+## Spawners
 block.spawner.wither=Spawner na withera
 block.spawner.skeleton=Spawner na kostlivce
 block.spawner.zombie=Spawner na zombie
 
-# bone blocks
+# Bone Blocks
 tile.bone_block.name=Kostěnný blok
 tile.bone_block.skull_name=Kostěnný blok s lebkou
 tile.bone_block.crawler_name=Kostěnný blok a s krabem uvnitř
@@ -48,34 +48,34 @@ tile.bone_block.crawler_skull_name=Kostěnný blok s lebkou a krabem uvnitř
 tile.bone_slab.name=Kostěnný půlblok
 tile.bone_stairs.name=Kostěnné schody
 
-#pile of bones
-block.pile_of_bones.name=Pile Of Bones
-block.pile_of_bones_with_skull.name=Pile Of Bones with Skull
+#Pile of Bones
+block.pile_of_bones.name=Pile of Bones
+block.pile_of_bones_with_skull.name=Pile of Bones with Skull
 
-## chests
+## Chests
 block.haunted_chest.bats_chest=Bedna s netopýry
 block.haunted_chest.skeleton_chest=Bedna s kostlivcem
 block.haunted_chest.raven_chest=Bedna s havrany
 block.haunted_chest.ghost_chest=Bedna s duchem
 
-##candles
+##Candles
 tile.candle.name=Svíčka
 block.skull_candle.skeleton.name=Lebka se svíčkou
 block.skull_candle.wither_skeleton.name=Lebka withera se svíčkou
 block.skull_candle.zombie.name=Zombie hlava se svíčkou
 
 
-# items
-## chisel
+# Items
+## Chisel
 item.chisel.name=Gravestone Chisel
 
-## graves
+## Graves
 item.grave.age=Žil
 item.grave.days=dní
 item.grave.sword_name=Jméno meče
 item.grave.sword_damage=Poškození meče
 
-## corpse
+## Corpses
 item.corpse.villager=Mrtvola vesničana
 item.corpse.horse=Mrtvola koně
 item.corpse.dog=Mrtvola psa
@@ -129,12 +129,12 @@ item.corpse.cat_type.red=Červená
 item.corpse.cat_type.siamese=Siamská
 item.corpse.cat_type.unknown=Neznámá
 
-##backpacks
-item.backpack.undertaker.t1=Undertaker's backpack
-item.backpack.undertaker.t2=Undertaker's Woven backpack
+##Backpacks
+item.backpack.undertaker.t1=Undertaker's Backpack
+item.backpack.undertaker.t2=Undertaker's Woven Backpack
 
 
-# gui
+# GUI
 gui.edit_grave.title=Nastav text náhrobku
 gui.edit_grave.close=Done
 gui.edit_grave.randomText=Set random text
@@ -142,7 +142,7 @@ gui.altar.resurrect=Resurrect
 gui.altar.requirements=%d levels required
 
 
-# entity
+# Entity
 entity.GSZombieDog.name=Zombie pes
 entity.GSSkeletonDog.name=Kostlivý pes
 entity.GSZombieCat.name=Zombie kočka
@@ -153,7 +153,7 @@ entity.GSZombieSkullCrawler.name=Zombie lebkokrab
 entity.GSRaven.name=Havran
 
 
-# death messages
+# Death Messages
 death.GS.Herobrine=%1$s byl brutálně zavražděn Herobrinem
 death.GS.death_sentence=%1$s obdržel rozsudek smrti
 death.GS.tortures=%1$s zemřel v krutých bolestech
