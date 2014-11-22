@@ -841,7 +841,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         }
 
                         world.removeTileEntity(x, y, z);
-                        world.setBlock(x, y, z, this, 0, 2);
+                        world.setBlock(x, y, z, Blocks.air, 0, 2);
                     }
                 }
             }
