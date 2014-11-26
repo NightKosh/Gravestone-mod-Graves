@@ -509,6 +509,7 @@ public class GraveStoneHelper {
             player.inventory.clearInventory(null, -1);
 
             GSCompatibilityisArsMagica.getSoulboundItemsBack(items, player);
+            GSCompatibilityEnderIO.getSoulboundItemsBack(items, player);
 
             createGrave(player, event, items, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES, false, spawnTime);
         } else {
