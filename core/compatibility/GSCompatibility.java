@@ -73,5 +73,9 @@ public class GSCompatibility {
         if (Loader.isModLoaded("SophisticatedWolves")) {
             GSCompatibilitySophisticatedWolves.isInstalled = true;
         }
+        
+        if (Loader.isModLoaded("EnderIO")) {
+            GSCompatibilityEnderIO.isInstalled = true;
+        }
     }
 }

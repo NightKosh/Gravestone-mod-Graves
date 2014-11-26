@@ -103,6 +103,7 @@ public class GraveStoneConfig {
     public static boolean storeTinkerConstructItems;
     public static boolean storeRpgInventoryItems;
     public static boolean enableArsMagicaSoulbound;
+    public static boolean enableEnderIOSoulbound;
 
 
     private GraveStoneConfig(String path, File configFile) {
@@ -215,6 +216,7 @@ public class GraveStoneConfig {
         storeTinkerConstructItems = config.get(CATEGORY_COMPATIBILITY, "StoreTinkerConstructItems", true).getBoolean(true);
         storeRpgInventoryItems = config.get(CATEGORY_COMPATIBILITY, "StoreRpgInventoryItems", true).getBoolean(true);
         enableArsMagicaSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableArsMagicaSoulbound", true).getBoolean(true);
+        enableEnderIOSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableEnderIOSoulbound", true).getBoolean(true);
     }
 
     private void getGravesText() {
