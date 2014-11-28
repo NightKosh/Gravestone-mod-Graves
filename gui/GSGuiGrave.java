@@ -51,7 +51,6 @@ public class GSGuiGrave extends GuiScreen {
         this.textField.setFocused(true);
         this.textField.setCanLoseFocus(false);
         this.textField.setMaxStringLength(30);
-        this.teGrave.setEditable(false);
     }
 
     @Override

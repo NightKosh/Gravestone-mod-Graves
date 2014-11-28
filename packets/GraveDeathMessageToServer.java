@@ -76,7 +76,6 @@ public class GraveDeathMessageToServer implements IMessage, IMessageHandler<Grav
                     } else {
                         tileEntity.getDeathTextComponent().setDeathText(message.text);
                     }
-                    tileEntity.setEditable(true);
                     world.markBlockForUpdate(message.x, message.y, message.z);
                 }
             }
