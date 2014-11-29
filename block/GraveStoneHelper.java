@@ -505,6 +505,7 @@ public class GraveStoneHelper {
             GSCompatibilityMariculture.addItems(items, player);
             GSCompatibilityTinkerConstruct.addItems(items, player);
             GSCompatibilityRpgInventory.addItems(items, player);
+            GSCompatibilityGalacticraft.addItems(items, player);
             //GSCompatibilityBackpacksMod.addItems(items, player);
             player.inventory.clearInventory(null, -1);
 

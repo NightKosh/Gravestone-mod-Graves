@@ -2,6 +2,8 @@ package gravestone.core.compatibility;
 
 import cpw.mods.fml.common.Loader;
 import gravestone.core.compatibility.forestry.GSCompatibilityForestry;
+import gravestone.core.logger.GSLogger;
+import gravestone.core.logger.GravesLogger;
 
 /**
  * GraveStone mod
@@ -63,6 +65,10 @@ public class GSCompatibility {
 
         if (Loader.isModLoaded("TConstruct")) {
             GSCompatibilityTinkerConstruct.isInstalled = true;
+        }
+
+        if (Loader.isModLoaded("GalacticraftCore")) {
+            GSCompatibilityGalacticraft.isInstalled = true;
         }
 
         if (Loader.isModLoaded("Forestry")) {
