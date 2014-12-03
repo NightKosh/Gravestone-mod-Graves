@@ -103,6 +103,7 @@ public class GraveStoneConfig {
     public static boolean storeTinkerConstructItems;
     public static boolean storeRpgInventoryItems;
     public static boolean storeGalacticraftItems;
+    public static boolean storeBackpacksItems;
     public static boolean enableArsMagicaSoulbound;
     public static boolean enableEnderIOSoulbound;
 
@@ -217,6 +218,8 @@ public class GraveStoneConfig {
         storeTinkerConstructItems = config.get(CATEGORY_COMPATIBILITY, "StoreTinkerConstructItems", true).getBoolean(true);
         storeRpgInventoryItems = config.get(CATEGORY_COMPATIBILITY, "StoreRpgInventoryItems", true).getBoolean(true);
         storeGalacticraftItems = config.get(CATEGORY_COMPATIBILITY, "StoreGalacticraftItems", true).getBoolean(true);
+        storeBackpacksItems = config.get(CATEGORY_COMPATIBILITY, "StoreBackpacksItems", true).getBoolean(true);
+
         enableArsMagicaSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableArsMagicaSoulbound", true).getBoolean(true);
         enableEnderIOSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableEnderIOSoulbound", true).getBoolean(true);
     }

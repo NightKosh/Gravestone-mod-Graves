@@ -1,9 +1,13 @@
 package gravestone.core.compatibility;
 
-import java.util.List;
+import gravestone.config.GraveStoneConfig;
+import gravestone.core.logger.GSLogger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.util.List;
 
 /**
  * GraveStone mod
@@ -19,21 +23,32 @@ public class GSCompatibilityBackpacksMod {
     }
 
     public static void addItems(List<ItemStack> items, EntityPlayer player) {
-        if (isLoaded()) {
-            NBTTagCompound playerData = player.getEntityData();
-            ItemStack backpack;
-            if (playerData.hasKey("backpack")) {
-                backpack = ItemStack.loadItemStackFromNBT(playerData.getCompoundTag("backpack")).copy();
-                playerData.setTag("backpack", new NBTTagCompound());
-                items.add(backpack);
+        if (isInstalled() && GraveStoneConfig.storeBackpacksItems) {
+            try {
+                Class<?> PlayerSaveClass = Class.forName("de.eydamos.backpack.saves.PlayerSave");
+                if (PlayerSaveClass != null) {
+                    Constructor constructor = PlayerSaveClass.getConstructor(EntityPlayer.class);
+                    Object playerSave = constructor.newInstance(player);
 
-                System.out.println("backpack !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                //System.out.println(backpack);
+                    Method getPersonalBackpackMethod = playerSave.getClass().getDeclaredMethod("getPersonalBackpack");
+                    Method setPersonalBackpackMethod = playerSave.getClass().getDeclaredMethod("setPersonalBackpack", ItemStack.class);
+
+                    if (getPersonalBackpackMethod != null && setPersonalBackpackMethod != null) {
+                        Object backpackObject = getPersonalBackpackMethod.invoke(playerSave);
+                        if (backpackObject != null && backpackObject instanceof ItemStack) {
+                            items.add(((ItemStack) backpackObject).copy());
+                            setPersonalBackpackMethod.invoke(playerSave, (ItemStack) null);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                GSLogger.logError("Can't save Backpacks items!!!");
+                e.printStackTrace();
             }
         }
     }
 
-    public static boolean isLoaded() {
+    public static boolean isInstalled() {
         return isInstalled;
     }
 }

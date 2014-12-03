@@ -506,7 +506,7 @@ public class GraveStoneHelper {
             GSCompatibilityTinkerConstruct.addItems(items, player);
             GSCompatibilityRpgInventory.addItems(items, player);
             GSCompatibilityGalacticraft.addItems(items, player);
-            //GSCompatibilityBackpacksMod.addItems(items, player);
+            GSCompatibilityBackpacksMod.addItems(items, player);
             player.inventory.clearInventory(null, -1);
 
             GSCompatibilityisArsMagica.getSoulboundItemsBack(items, player);
