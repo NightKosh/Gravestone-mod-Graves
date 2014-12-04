@@ -64,9 +64,7 @@ public class ComponentGSVillageMemorial extends StructureVillagePieces.Village {
         }
 
         this.fillWithBlocks(world, structureBoundingBox, 0, -5, 0, 5, 0, 5, ground, ground, false);
-        int memorialMeta = BlockGSMemorial.getMetaDirection(this.coordBaseMode);
-        byte memorialType = BlockGSMemorial.getMemorialType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, 0);
-        placeMemorial(world, random, 2, 1, 2, memorialMeta, memorialType);
+        placeMemorial(world, random, 2, 1, 2);
 
         for (int x = 0; x < 5; x++) {
             for (int z = 0; z < 5; z++) {
@@ -78,13 +76,25 @@ public class ComponentGSVillageMemorial extends StructureVillagePieces.Village {
         return true;
     }
 
-    protected void placeMemorial(World world, Random random, int x, int y, int z, int memorialMeta, byte memorialType) {
+    protected void placeMemorial(World world, Random random, int x, int y, int z) {
+        int memorialMeta = BlockGSMemorial.getMetaDirection(this.coordBaseMode);
+        byte memorialType;
+        boolean isTortureMemorial = random.nextInt(4) == 0;
+        if (isTortureMemorial) {
+            memorialType = (byte) BlockGSMemorial.TORTURE_MEMORIALS[random.nextInt(BlockGSMemorial.TORTURE_MEMORIALS.length)].ordinal();
+        } else {
+            memorialType = BlockGSMemorial.getMemorialType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, 0);
+        }
         this.placeBlockAtCurrentPosition(world, GSBlock.memorial, memorialMeta, x, y, z, boundingBox);
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
 
         if (tileEntity != null) {
             tileEntity.setGraveType(memorialType);
-            tileEntity.setMemorialContent(random);
+            if (isTortureMemorial) {
+                tileEntity.setRandomMob(random);
+            } else {
+                tileEntity.setMemorialContent(random);
+            }
         }
     }
 }

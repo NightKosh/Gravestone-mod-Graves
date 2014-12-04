@@ -70,6 +70,10 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
         gSDeathText.setRandomDeathTextAndName(random, graveType, true, true);
     }
 
+    public void setRandomMob(Random random) {
+        hangedMob = EnumHangedMobs.values()[random.nextInt(EnumHangedMobs.values().length)] ;
+    }
+
     @Override
     public GSGraveStoneDeathText getDeathTextComponent() {
         return gSDeathText;

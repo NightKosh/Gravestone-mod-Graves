@@ -262,6 +262,11 @@ public class BlockGSMemorial extends BlockContainer {
             EnumMemorials.ICE_ANGEL_STATUE
     };
 
+    public static final EnumMemorials[] TORTURE_MEMORIALS = {
+            EnumMemorials.GIBBET,
+            EnumMemorials.STOCKS
+    };
+
     public BlockGSMemorial() {
         super(Material.rock);
         this.isBlockContainer = true;
