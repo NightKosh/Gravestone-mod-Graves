@@ -247,6 +247,11 @@ public class GSRecipes {
             addCreeperMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.OBSIDIAN_CREEPER_STATUE.ordinal(), "GraveType"), Blocks.obsidian);
             addCreeperMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.ICE_CREEPER_STATUE.ordinal(), "GraveType"), Blocks.ice);
         }
+        // gibbets
+        GameRegistry.addRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.GIBBET.ordinal(), "GraveType"), "ww ", "wr ", "wc ", 'w', Blocks.planks, 'r', Items.lead, 'c', GSItem.chisel);
+        // stocks
+        GameRegistry.addRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.STOCKS.ordinal(), "GraveType"), "wsw", "wcw", 'w', Blocks.planks, 's', Blocks.wooden_slab, 'c', GSItem.chisel);
+
 
         // sword graves
         for (Item sword : GraveStoneHelper.swordsList) {
@@ -296,19 +301,24 @@ public class GSRecipes {
     private static void addVerticalPlateGravestoneRecipe(ItemStack gravestone, Block material) {
         GameRegistry.addRecipe(gravestone, "mc", 'm', material, 'c', GSItem.chisel);
     }
+
     private static void addCrossGravestoneRecipe(ItemStack gravestone, Block material) {
         GameRegistry.addRecipe(gravestone, " c", "m ", 'm', material, 'c', GSItem.chisel);
     }
+
     private static void addHorisontalPlateGravestoneRecipe(ItemStack gravestone, Block material) {
         GameRegistry.addRecipe(gravestone, "c", "m", 'm', material, 'c', GSItem.chisel);
     }
+
     // pets graves
     private static void addDogGravestoneRecipe(ItemStack gravestone, Block material) {
         GameRegistry.addRecipe(gravestone, " c", "  ", "m ", 'm', material, 'c', GSItem.chisel);
     }
+
     private static void addCatGravestoneRecipe(ItemStack gravestone, Block material) {
         GameRegistry.addRecipe(gravestone, " c", "  ", " m", 'm', material, 'c', GSItem.chisel);
     }
+
     private static void addHorseGravestoneRecipe(ItemStack gravestone, Block material) {
         GameRegistry.addRecipe(gravestone, "  c", "   ", "m  ", 'm', material, 'c', GSItem.chisel);
     }
@@ -318,25 +328,32 @@ public class GSRecipes {
     private static void addCrossMemorialRecipe(ItemStack memorial, Block material) {
         GameRegistry.addRecipe(memorial, " mc", "mmm", " m ", 'm', material, 'c', GSItem.chisel);
     }
+
     // obelisk
     private static void addObeliskMemorialRecipe(ItemStack memorial, Block material) {
         GameRegistry.addRecipe(memorial, " mc", " m ", "mmm", 'm', material, 'c', GSItem.chisel);
     }
+
     private static void addSteveMemorialRecipe(ItemStack memorial, Block material) {
         GameRegistry.addRecipe(memorial, "mc", "m ", "m ", 'm', material, 'c', GSItem.chisel);
     }
+
     private static void addVillagerMemorialRecipe(ItemStack memorial, Block material) {
         GameRegistry.addRecipe(memorial, "m ", "mc", "m ", 'm', material, 'c', GSItem.chisel);
     }
+
     private static void addAngelMemorialRecipe(ItemStack memorial, Block material) {
         GameRegistry.addRecipe(memorial, "m ", "m ", "mc", 'm', material, 'c', GSItem.chisel);
     }
+
     private static void addDogMemorialRecipe(ItemStack memorial, Block material) {
         GameRegistry.addRecipe(memorial, "mc", "m ", 'm', material, 'c', GSItem.chisel);
     }
+
     private static void addCatMemorialRecipe(ItemStack memorial, Block material) {
         GameRegistry.addRecipe(memorial, "m ", "mc", 'm', material, 'c', GSItem.chisel);
     }
+
     private static void addCreeperMemorialRecipe(ItemStack memorial, Block material) {
         GameRegistry.addRecipe(memorial, "m  ", "m c", "m  ", 'm', material, 'c', GSItem.chisel);
     }
