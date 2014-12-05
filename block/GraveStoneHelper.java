@@ -551,11 +551,9 @@ public class GraveStoneHelper {
         String shortString = "death.attack." + damageType;
         String fullString = shortString + ".player";
 
-        String entityName = EntityList.getEntityString(entity);
+        String entityName = entity.getCommandSenderName();
         if (entityName == null) {
-            entityName = entity.getCommandSenderName();
-        } else {
-            entityName = "entity." + entityName + ".name";
+            entityName = "entity." + EntityList.getEntityString(entity) + ".name";
         }
 
         if (killer != null) {
