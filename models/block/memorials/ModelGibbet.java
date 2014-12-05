@@ -33,88 +33,96 @@ public class ModelGibbet extends ModelMemorial {
     private ModelRenderer loop4;
     private ModelRenderer loop5;
 
-    private static final ModelHangedBiped bipedModel = new ModelHangedBiped();
-    private static final ModelHangedBiped zombieModel = new ModelHangedBiped(true);
-    private static final ModelHangedSkeleton skeletonModel = new ModelHangedSkeleton();
-    private static final ModelHangedSkeleton witherSkeletonModel = new ModelHangedSkeleton(true); // TODO
-    private static final ModelHangedVillager villagerModel = new ModelHangedVillager();
-    private static final ModelHangedZombieVillager zombieVillagerModel = new ModelHangedZombieVillager();
-    private static final ModelHangedWitch witchModel = new ModelHangedWitch();
+    private static final ModelHangedBiped bipedModel = new ModelHangedBiped(false);
+    private static final ModelHangedBiped zombieModel = new ModelHangedBiped(false, true);
+    private static final ModelHangedSkeleton skeletonModel = new ModelHangedSkeleton(false);
+    private static final ModelHangedSkeleton witherSkeletonModel = new ModelHangedSkeleton(false, true);
+    private static final ModelHangedVillager villagerModel = new ModelHangedVillager(false);
+    private static final ModelHangedZombieVillager zombieVillagerModel = new ModelHangedZombieVillager(false);
+    private static final ModelHangedWitch witchModel = new ModelHangedWitch(false);
 
     public ModelGibbet() {
         textureWidth = 64;
         textureHeight = 128;
 
         horisontalPlank = new ModelRenderer(this, 0, 0);
-        horisontalPlank.addBox(0F, 0F, 0F, 4, 56, 4);
-        horisontalPlank.setRotationPoint(-2F, -32F, 3F);
-        horisontalPlank.setTextureSize(64, 128);
-        setRotation(horisontalPlank, 0F, 0F, 0F);
+        horisontalPlank.addBox(0, 0, 0, 4, 56, 4);
+        horisontalPlank.setRotationPoint(-2, -32, 3);
+        horisontalPlank.setTextureSize(this.textureWidth, this.textureHeight);
+
         verticalPlank = new ModelRenderer(this, 16, 0);
-        verticalPlank.addBox(0F, 0F, 0F, 4, 4, 20);
-        verticalPlank.setRotationPoint(-2F, -32F, -17F);
-        verticalPlank.setTextureSize(64, 128);
-        setRotation(verticalPlank, 0F, 0F, 0F);
+        verticalPlank.addBox(0, 0, 0, 4, 4, 20);
+        verticalPlank.setRotationPoint(-2, -32, -17);
+        verticalPlank.setTextureSize(this.textureWidth, this.textureHeight);
+
         plank1 = new ModelRenderer(this, 31, 24);
-        plank1.addBox(0F, 0F, 0F, 4, 15, 3);
-        plank1.setRotationPoint(-2F, 13.3F, 3.5F);
-        plank1.setTextureSize(64, 128);
-        setRotation(plank1, 0F, 0F, 0.7853982F);
+        plank1.addBox(0, 0, 0, 4, 15, 3);
+        plank1.setRotationPoint(-2, 13.3F, 3.5F);
+        plank1.setTextureSize(this.textureWidth, this.textureHeight);
+        setRotation(plank1, 0, 0, 0.7853982F);
+
         plank2 = new ModelRenderer(this, 16, 24);
-        plank2.addBox(0F, 0F, 0F, 3, 15, 4);
-        plank2.setRotationPoint(-1.5F, 13.3F, 3F);
-        plank2.setTextureSize(64, 128);
+        plank2.addBox(0, 0, 0, 3, 15, 4);
+        plank2.setRotationPoint(-1.5F, 13.3F, 3);
+        plank2.setTextureSize(this.textureWidth, this.textureHeight);
         setRotation(plank2, -0.7853982F, 0F, 0F);
+
         plank3 = new ModelRenderer(this, 31, 42);
-        plank3.addBox(0F, 0F, 0F, 4, 15, 3);
-        plank3.setRotationPoint(-1F, 16F, 3.5F);
-        plank3.setTextureSize(64, 128);
-        setRotation(plank3, 0F, 0F, -0.7853982F);
+        plank3.addBox(0, 0, 0, 4, 15, 3);
+        plank3.setRotationPoint(-1, 16, 3.5F);
+        plank3.setTextureSize(this.textureWidth, this.textureHeight);
+        setRotation(plank3, 0, 0, -0.7853982F);
+
         plank4 = new ModelRenderer(this, 16, 43);
-        plank4.addBox(0F, 0F, 0F, 3, 15, 4);
-        plank4.setRotationPoint(-1.5F, -20.3F, 6F);
-        plank4.setTextureSize(64, 128);
-        setRotation(plank4, -2.356194F, 0F, 0F);
+        plank4.addBox(0, 0, 0, 3, 15, 4);
+        plank4.setRotationPoint(-1.5F, -20.3F, 6);
+        plank4.setTextureSize(this.textureWidth, this.textureHeight);
+        setRotation(plank4, -2.356194F, 0, 0);
+
         rope = new ModelRenderer(this, 0, 62);
-        rope.addBox(0F, 0F, 0F, 5, 5, 3);
-        rope.setRotationPoint(-2.5F, -32.5F, -16F);
-        rope.setTextureSize(64, 128);
-        setRotation(rope, 0F, 0F, 0F);
+        rope.addBox(0, 0, 0, 5, 5, 3);
+        rope.setRotationPoint(-2.5F, -32.5F, -16);
+        rope.setTextureSize(this.textureWidth, this.textureHeight);
+
         rope2 = new ModelRenderer(this, 0, 71);
-        rope2.addBox(0F, 0F, 0F, 1, 16, 1);
-        rope2.setRotationPoint(-0.5F, -28F, -15F);
-        rope2.setTextureSize(64, 128);
-        setRotation(rope2, 0F, 0F, 0F);
+        rope2.addBox(0, 0, 0, 1, 16, 1);
+        rope2.setRotationPoint(-0.5F, -28, -15);
+        rope2.setTextureSize(this.textureWidth, this.textureHeight);
+
         knot = new ModelRenderer(this, 5, 71);
-        knot.addBox(0F, 0F, 0F, 2, 6, 2);
-        knot.setRotationPoint(-1.4F, -18F, -14.5F);
-        knot.setTextureSize(64, 128);
-        setRotation(knot, 0F, 0.7853982F, 0F);
+        knot.addBox(0, 0, 0, 2, 6, 2);
+        knot.setRotationPoint(-1.4F, -18, -14.5F);
+        knot.setTextureSize(this.textureWidth, this.textureHeight);
+        setRotation(knot, 0, 0.7853982F, 0);
+
         loop1 = new ModelRenderer(this, 17, 65);
-        loop1.addBox(0F, 0F, 0F, 1, 4, 1);
-        loop1.setRotationPoint(-0.8F, -12.3F, -15F);
-        loop1.setTextureSize(64, 128);
-        setRotation(loop1, 0F, 0F, 0.1745329F);
+        loop1.addBox(0, 0, 0, 1, 4, 1);
+        loop1.setRotationPoint(-0.8F, -12.3F, -15);
+        loop1.setTextureSize(this.textureWidth, this.textureHeight);
+        setRotation(loop1, 0, 0, 0.1745329F);
+
         loop2 = new ModelRenderer(this, 22, 65);
-        loop2.addBox(0F, 0F, 0F, 1, 4, 1);
-        loop2.setRotationPoint(-0.2F, -12.1F, -15F);
-        loop2.setTextureSize(64, 128);
-        setRotation(loop2, 0F, 0F, -0.1745329F);
+        loop2.addBox(0, 0, 0, 1, 4, 1);
+        loop2.setRotationPoint(-0.2F, -12.1F, -15);
+        loop2.setTextureSize(this.textureWidth, this.textureHeight);
+        setRotation(loop2, 0, 0, -0.1745329F);
+
         loop3 = new ModelRenderer(this, 27, 65);
-        loop3.addBox(0F, 0F, 0F, 2, 1, 1);
-        loop3.setRotationPoint(-0.65F, -8.85F, -15F);
-        loop3.setTextureSize(64, 128);
-        setRotation(loop3, 0F, 0F, 1.082104F);
+        loop3.addBox(0, 0, 0, 2, 1, 1);
+        loop3.setRotationPoint(-0.65F, -8.85F, -15);
+        loop3.setTextureSize(this.textureWidth, this.textureHeight);
+        setRotation(loop3, 0, 0, 1.082104F);
+
         loop4 = new ModelRenderer(this, 27, 68);
-        loop4.addBox(0F, 0F, 0F, 2, 1, 1);
-        loop4.setRotationPoint(1.5F, -8.4F, -15F);
-        loop4.setTextureSize(64, 128);
-        setRotation(loop4, 0F, 0F, 2.094395F);
+        loop4.addBox(0, 0, 0, 2, 1, 1);
+        loop4.setRotationPoint(1.5F, -8.4F, -15);
+        loop4.setTextureSize(this.textureWidth, this.textureHeight);
+        setRotation(loop4, 0, 0, 2.094395F);
+
         loop5 = new ModelRenderer(this, 34, 65);
-        loop5.addBox(0F, 0F, 0F, 1, 1, 1);
-        loop5.setRotationPoint(-0.5F, -7.6F, -15F);
-        loop5.setTextureSize(64, 128);
-        setRotation(loop5, 0F, 0F, 0F);
+        loop5.addBox(0, 0, 0, 1, 1, 1);
+        loop5.setRotationPoint(-0.5F, -7.6F, -15);
+        loop5.setTextureSize(this.textureWidth, this.textureHeight);
     }
 
     public void renderAllWithoutLoop() {

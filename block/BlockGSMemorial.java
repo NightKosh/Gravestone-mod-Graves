@@ -831,7 +831,30 @@ public class BlockGSMemorial extends BlockContainer {
         }
 
         // stocks
-        list.add(getMemorialItemForCreativeInventory(item, (byte) EnumMemorials.STOCKS.ordinal()));
+        for (byte mobType = 0; mobType < EnumHangedMobs.values().length; mobType++) {
+            ItemStack stack = getMemorialItemForCreativeInventory(item, (byte) EnumMemorials.STOCKS.ordinal());
+            stack.getTagCompound().setByte("HangedMob", mobType);
+            switch (EnumHangedMobs.values()[mobType]) {
+                case VILLAGER:
+                    ItemStack villagerStack;
+                    for (byte villagerProfession = 0; villagerProfession <= 4; villagerProfession++) {
+                        villagerStack = stack.copy();
+                        villagerStack.getTagCompound().setInteger("HangedVillagerProfession", villagerProfession);
+                        list.add(villagerStack);
+                    }
+
+                    Collection<Integer> villagerIds = VillagerRegistry.getRegisteredVillagers();
+                    Iterator<Integer> it = villagerIds.iterator();
+                    while (it.hasNext()) {
+                        villagerStack = stack.copy();
+                        villagerStack.getTagCompound().setInteger("HangedVillagerProfession", it.next());
+                        list.add(villagerStack);
+                    }
+                    break;
+                default:
+                    list.add(stack);
+            }
+        }
     }
 
     private static ItemStack getMemorialItemForCreativeInventory(Item item, byte graveType) {

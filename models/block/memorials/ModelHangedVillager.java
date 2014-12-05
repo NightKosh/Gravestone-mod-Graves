@@ -25,70 +25,74 @@ public class ModelHangedVillager extends ModelBase {
     protected ModelRenderer rightArm2;
     protected ModelRenderer leftArm2;
 
-    public ModelHangedVillager() {
-        this(64, 64);
+    public ModelHangedVillager(boolean isInStocks) {
+        this(isInStocks, 64, 64);
     }
 
-    public ModelHangedVillager(int textureWidth, int textureHeight) {
+    public ModelHangedVillager(boolean isInStocks, int textureWidth, int textureHeight) {
         this.textureWidth = textureWidth;
         this.textureHeight = textureHeight;
 
         head = new ModelRenderer(this, 0, 0);
         head.addBox(-4F, -8F, -4F, 8, 10, 8);
-        head.setRotationPoint(0F, -2F, 0F);
-        head.setTextureSize(64, 64);
-        setRotation(head, 0.20F, 0F, 0F);
+        head.setRotationPoint(0, -2, 0);
+        head.setTextureSize(textureWidth, textureHeight);
+        setRotation(head, 0.20F, 0, 0);
 
         body = new ModelRenderer(this, 16, 20);
-        body.setTextureOffset(16, 20).addBox(-4F, 0F, -2F, 8, 12, 6);
-        body.setTextureOffset(0, 38).addBox(-4F, 0F, -2F, 8, 18, 6, 0.5F);
-        body.setRotationPoint(0F, 0F, -1F);
-        body.setTextureSize(64, 64);
-        setRotation(body, 0F, 0F, 0F);
+        body.setTextureOffset(16, 20).addBox(-4, 0, -2, 8, 12, 6);
+        body.setTextureOffset(0, 38).addBox(-4, 0, -2, 8, 18, 6, 0.5F);
+        body.setRotationPoint(0, 0, -1);
+        body.setTextureSize(textureWidth, textureHeight);
 
         rightArm = new ModelRenderer(this, 44, 22);
-        rightArm.addBox(-3F, -2F, -2F, 4, 8, 4);
-        rightArm.setRotationPoint(-5F, 2F, 0F);
-        rightArm.setTextureSize(64, 64);
-        setRotation(rightArm, 0F, 0F, 0F);
+        rightArm.addBox(-3, -2, -2, 4, 8, 4);
+        rightArm.setRotationPoint(-5, 2, 0);
+        rightArm.setTextureSize(textureWidth, textureHeight);
 
         leftArm = new ModelRenderer(this, 44, 22);
-        leftArm.addBox(-1F, -2F, -2F, 4, 8, 4);
-        leftArm.setRotationPoint(5F, 2F, 0F);
-        leftArm.setTextureSize(64, 64);
-        setRotation(leftArm, 0F, 0F, 0F);
+        leftArm.addBox(-1, -2, -2, 4, 8, 4);
+        leftArm.setRotationPoint(5, 2, 0);
+        leftArm.setTextureSize(textureWidth, textureHeight);
 
         rightLeg = new ModelRenderer(this, 0, 22);
-        rightLeg.addBox(-2F, 0F, -2F, 4, 12, 4);
-        rightLeg.setRotationPoint(-2F, 12F, 0F);
-        rightLeg.setTextureSize(64, 64);
-        setRotation(rightLeg, 0F, 0F, 0F);
+        rightLeg.addBox(-2, 0, -2, 4, 12, 4);
+        rightLeg.setRotationPoint(-2, 12, 0);
+        rightLeg.setTextureSize(textureWidth, textureHeight);
 
         leftLeg = new ModelRenderer(this, 0, 22);
-        leftLeg.addBox(-2F, 0F, -2F, 4, 12, 4);
-        leftLeg.setRotationPoint(2F, 12F, 0F);
-        leftLeg.setTextureSize(64, 64);
-        setRotation(leftLeg, 0F, 0F, 0F);
+        leftLeg.addBox(-2, 0, -2, 4, 12, 4);
+        leftLeg.setRotationPoint(2, 12, 0);
+        leftLeg.setTextureSize(textureWidth, textureHeight);
 
         nose = new ModelRenderer(this, 24, 0);
-        nose.addBox(0F, 0F, 0F, 2, 4, 2);
-        nose.setRotationPoint(-1F, -3F, -6F);
-        nose.setTextureSize(64, 64);
-        setRotation(nose, 0F, 0F, 0F);
+        nose.addBox(0, 0, 0, 2, 4, 2);
+        nose.setRotationPoint(-1, -3, -6);
+        nose.setTextureSize(textureWidth, textureHeight);
 
         rightArm2 = new ModelRenderer(this, 44, 22);
-        rightArm2.addBox(0F, 0F, 0F, 4, 4, 4);
-        rightArm2.setRotationPoint(4F, 8F, -2F);
-        rightArm2.setTextureSize(64, 64);
-        setRotation(rightArm2, 0F, 0F, 0F);
+        rightArm2.addBox(0, 0, 0, 4, 4, 4);
+        rightArm2.setRotationPoint(-8, 8, -2);
+        rightArm2.setTextureSize(textureWidth, textureHeight);
 
         leftArm2 = new ModelRenderer(this, 44, 22);
-        leftArm2.addBox(0F, 0F, 0F, 4, 4, 4);
-        leftArm2.setRotationPoint(-8F, 8F, -2F);
-        leftArm2.setTextureSize(64, 64);
-        setRotation(leftArm2, 0F, 0F, 0F);
+        leftArm2.addBox(0, 0, 0, 4, 4, 4);
+        leftArm2.setRotationPoint(4, 8, -2);
+        leftArm2.setTextureSize(textureWidth, textureHeight);
+
+        if (isInStocks) {
+            setRotation(this.leftArm, 0, 0, -1.57F);
+            setRotation(this.rightArm, 0, 0, 1.57F);
+
+            leftArm2.setRotationPoint(11, -1, -2);
+            setRotation(this.leftArm2, 0, 0, 3.14F);
+
+            rightArm2.setRotationPoint(-7, -1, -2);
+            setRotation(this.rightArm2, 0, 0, 3.14F);
+        }
     }
 
+    @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         super.render(entity, f, f1, f2, f3, f4, f5);
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
@@ -103,7 +107,7 @@ public class ModelHangedVillager extends ModelBase {
         leftArm2.render(f5);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z) {
+    protected void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
