@@ -288,6 +288,8 @@ public class Resources {
     public static final ResourceLocation MEMORIAL_GIBBET = new ResourceLocation(MEMORIALS_LOCATION + "gibbet.png");
     // stocks
     public static final ResourceLocation MEMORIAL_STOCKS = new ResourceLocation(MEMORIALS_LOCATION + "stocks.png");
+    // burning stake
+    public static final ResourceLocation BURNING_STAKE = new ResourceLocation(MEMORIALS_LOCATION + "BurningStake.png");
 
     // models - parts
     public static final ResourceLocation CREEPER_AURA = new ResourceLocation("textures/entity/creeper/creeper_armor.png");

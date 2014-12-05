@@ -29,6 +29,7 @@ block.memorial.creeper_statue=Статуя крипера
 block.memorial.celtic_cross=Кельтский крест
 block.memorial.gibbet=Виселица
 block.memorial.stocks=Колодки
+block.memorial.burning_stake=Костёр инквизиции
 
 ## Traps
 tile.trap.night.name=Камень тьмы

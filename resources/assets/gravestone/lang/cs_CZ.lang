@@ -29,6 +29,7 @@ block.memorial.creeper_statue=Socha Creepera
 block.memorial.celtic_cross=Keltský kříž
 block.memorial.gibbet=Gibbet
 block.memorial.stocks=Stocks
+block.memorial.burning_stake=Burning Stake
 
 ## Traps
 tile.trap.night.name=Noční kámen

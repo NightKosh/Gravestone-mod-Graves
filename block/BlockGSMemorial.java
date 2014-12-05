@@ -8,10 +8,13 @@ import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSTabs;
+import gravestone.particle.EntityBigFlameFX;
 import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,7 +23,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
@@ -264,7 +266,8 @@ public class BlockGSMemorial extends BlockContainer {
 
     public static final EnumMemorials[] TORTURE_MEMORIALS = {
             EnumMemorials.GIBBET,
-            EnumMemorials.STOCKS
+            EnumMemorials.STOCKS,
+            EnumMemorials.BURNING_STAKE
     };
 
     public BlockGSMemorial() {
@@ -855,6 +858,31 @@ public class BlockGSMemorial extends BlockContainer {
                     list.add(stack);
             }
         }
+        // burning stake
+        for (byte mobType = 0; mobType < EnumHangedMobs.values().length; mobType++) {
+            ItemStack stack = getMemorialItemForCreativeInventory(item, (byte) EnumMemorials.BURNING_STAKE.ordinal());
+            stack.getTagCompound().setByte("HangedMob", mobType);
+            switch (EnumHangedMobs.values()[mobType]) {
+                case VILLAGER:
+                    ItemStack villagerStack;
+                    for (byte villagerProfession = 0; villagerProfession <= 4; villagerProfession++) {
+                        villagerStack = stack.copy();
+                        villagerStack.getTagCompound().setInteger("HangedVillagerProfession", villagerProfession);
+                        list.add(villagerStack);
+                    }
+
+                    Collection<Integer> villagerIds = VillagerRegistry.getRegisteredVillagers();
+                    Iterator<Integer> it = villagerIds.iterator();
+                    while (it.hasNext()) {
+                        villagerStack = stack.copy();
+                        villagerStack.getTagCompound().setInteger("HangedVillagerProfession", it.next());
+                        list.add(villagerStack);
+                    }
+                    break;
+                default:
+                    list.add(stack);
+            }
+        }
     }
 
     private static ItemStack getMemorialItemForCreativeInventory(Item item, byte graveType) {
@@ -894,7 +922,7 @@ public class BlockGSMemorial extends BlockContainer {
             }
             nbt.setString("DeathText", tileEntity.getDeathTextComponent().getDeathText());
             nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
-            
+
             nbt.setBoolean("Enchanted", tileEntity.isEnchanted());
 
             nbt.setByte("HangedMob", (byte) tileEntity.getHangedMob().ordinal());
@@ -957,5 +985,54 @@ public class BlockGSMemorial extends BlockContainer {
             }
         }
         return itemStack;
+    }
+
+    @Override
+    public int getLightValue(IBlockAccess world, int x, int y, int z) {
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
+
+        if (tileEntity != null && tileEntity.getMemorialType() == EnumMemorials.BURNING_STAKE && tileEntity.getHangedMob() != EnumHangedMobs.NONE) {
+            return 15;
+        } else {
+            return super.getLightValue(world, x, y, z);
+        }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
+        if (tileEntity != null && tileEntity.getMemorialType() == EnumMemorials.BURNING_STAKE && tileEntity.getHangedMob() != EnumHangedMobs.NONE) {
+            double xPos, zPos, yPos;
+
+            yPos = y + 0.25;
+            for (int angle = 0; angle < 20; angle++) {
+                xPos = x + 0.5 + Math.sin(angle * 0.2792) * 0.75;
+                zPos = z + 0.5 + Math.cos(angle * 0.2792) * 0.75;
+
+                EntityFX entityfx = new EntityBigFlameFX(world, xPos, yPos, zPos, 0, 0, 0);
+                Minecraft.getMinecraft().effectRenderer.addEffect(entityfx);
+            }
+
+            yPos += 0.25;
+            for (int angle = 0; angle < 11; angle++) {
+                xPos = x + 0.5 + Math.sin(angle * 0.5584) * 0.5;
+                zPos = z + 0.5 + Math.cos(angle * 0.5584) * 0.5;
+
+                EntityFX entityfx = new EntityBigFlameFX(world, xPos, yPos, zPos, 0, 0, 0);
+                Minecraft.getMinecraft().effectRenderer.addEffect(entityfx);
+            }
+
+            yPos += 0.35;
+            for (int angle = 0; angle < 5; angle++) {
+                xPos = x + 0.5 + Math.sin(angle * 1.1168) * 0.2;
+                zPos = z + 0.5 + Math.cos(angle * 1.1168) * 0.2;
+
+                EntityFX entityfx = new EntityBigFlameFX(world, xPos, yPos, zPos, 0, 0, 0);
+                Minecraft.getMinecraft().effectRenderer.addEffect(entityfx);
+                world.spawnParticle("lava", xPos, yPos, zPos, 0, 0, 0);
+                world.spawnParticle("largesmoke", xPos, yPos, zPos, 0, 0, 0);
+            }
+        }
     }
 }

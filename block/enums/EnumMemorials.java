@@ -140,7 +140,9 @@ public enum EnumMemorials implements IBlockEnum {
     // gibbets
     GIBBET("block.memorial.gibbet", Resources.MEMORIAL_GIBBET, null),
     // stocks
-    STOCKS("block.memorial.stocks", Resources.MEMORIAL_STOCKS, null);
+    STOCKS("block.memorial.stocks", Resources.MEMORIAL_STOCKS, null),
+    // burning stake
+    BURNING_STAKE("block.memorial.burning_stake", Resources.BURNING_STAKE, null);
 
     private String name;
     private ResourceLocation texture;

@@ -251,6 +251,8 @@ public class GSRecipes {
         GameRegistry.addRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.GIBBET.ordinal(), "GraveType"), "ww ", "wr ", "wc ", 'w', Blocks.planks, 'r', Items.lead, 'c', GSItem.chisel);
         // stocks
         GameRegistry.addRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.STOCKS.ordinal(), "GraveType"), "wsw", "wcw", 'w', Blocks.planks, 's', Blocks.wooden_slab, 'c', GSItem.chisel);
+        // burning stake
+        GameRegistry.addRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.BURNING_STAKE.ordinal(), "GraveType"), " w ", "www", "hwh", 'w', Blocks.planks, 'h', Blocks.hay_block);
 
 
         // sword graves

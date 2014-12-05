@@ -29,6 +29,7 @@ block.memorial.creeper_statue=Estátua de Creeper
 block.memorial.celtic_cross=Cruz Celta
 block.memorial.gibbet=Gibbet
 block.memorial.stocks=Stocks
+block.memorial.burning_stake=Burning Stake
 
 ## Traps
 tile.trap.night.name=Pedra da Noite

@@ -31,6 +31,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
     public static ModelMemorial creeperStatue = new ModelCreeperStatueMemorial();
     public static ModelMemorial gibbet = new ModelGibbet();
     public static ModelMemorial stocks = new ModelStocks();
+    public static ModelMemorial burningStake = new ModelBurningStake();
 
     //private static IModelCustom celticCross = AdvancedModelLoader.loadModel("/assets/gravestone/obj_models/CelticCross.obj");
 
@@ -151,6 +152,8 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
             .put(EnumMemorials.GIBBET, gibbet)
             // stocks
             .put(EnumMemorials.STOCKS, stocks)
+            // burning stake
+            .put(EnumMemorials.BURNING_STAKE, burningStake)
             .build();
 
     public static TileEntityGSMemorialRenderer instance;
@@ -270,6 +273,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
                 break;
             case GIBBET:
             case STOCKS:
+            case BURNING_STAKE:
                 model.customRender(memorialType, tileEntity.getHangedMob(), tileEntity.getHangedVillagerProfession());
                 break;
             default:

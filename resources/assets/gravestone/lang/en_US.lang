@@ -29,6 +29,7 @@ block.memorial.creeper_statue=Creeper Statue
 block.memorial.celtic_cross=Celtic Cross
 block.memorial.gibbet=Gibbet
 block.memorial.stocks=Stocks
+block.memorial.burning_stake=Burning Stake
 
 ## Traps
 tile.trap.night.name=Night Stone
