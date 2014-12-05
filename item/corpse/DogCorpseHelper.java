@@ -85,7 +85,7 @@ public class DogCorpseHelper extends CorpseHelper {
     }
 
     private static String getSpeciesStr(NBTTagCompound nbtTag) {
-        return ModGraveStone.proxy.getLocalizedString("item.corpse.dog_type") + " " + getCollar(nbtTag.getInteger("Species"));
+        return ModGraveStone.proxy.getLocalizedString("item.corpse.dog_type") + " " + nbtTag.getInteger("Species");
     }
 
     private static String getCollar(int type) {
