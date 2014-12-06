@@ -1,11 +1,11 @@
 package gravestone.block;
 
-import gravestone.core.logger.GSLogger;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
 import gravestone.core.compatibility.*;
+import gravestone.core.logger.GSLogger;
 import gravestone.item.corpse.CorpseHelper;
 import gravestone.item.enums.EnumCorpse;
 import gravestone.tileentity.DeathMessageInfo;
@@ -25,9 +25,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
@@ -541,9 +540,52 @@ public class GraveStoneHelper {
         if (horse.isTame()) {
             List<ItemStack> items = new ArrayList<ItemStack>();
             items.addAll(CorpseHelper.getCorpse(horse, EnumCorpse.HORSE));
+            items.addAll(getHorseItems(horse));
 
             createGrave(horse, event, items, BlockGSGraveStone.EnumGraveType.HORSE_GRAVES, false, spawnTime);
         }
+    }
+
+    private static List<ItemStack> getHorseItems(EntityHorse horse) {
+        List<ItemStack> items = new ArrayList<ItemStack>();
+
+        NBTTagCompound nbt = new NBTTagCompound();
+        horse.writeEntityToNBT(nbt);
+        NBTTagList nbtItemsList = nbt.getTagList("Items", 10);
+
+//        if (horse.isHorseSaddled()) {
+//            items.add(new ItemStack(Items.saddle));
+//            nbt.removeTag("SaddleItem");
+//        }
+//        if (nbt.hasKey("ArmorItem", 10)) {
+//            items.add(ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("ArmorItem")));
+//            nbt.setTag("ArmorItem", new ItemStack(Blocks.air).writeToNBT(new NBTTagCompound()));
+//        }
+        if (horse.isChested()) {
+            for (int i = 0; i < nbtItemsList.tagCount(); i++) {
+                items.add(ItemStack.loadItemStackFromNBT(nbtItemsList.getCompoundTagAt(i)));
+            }
+
+            items.add(new ItemStack(Blocks.chest));
+        }
+
+        // new chest inventory
+        nbtItemsList = new NBTTagList();
+        for (int slot = 2; slot < 17; slot++) {
+            NBTTagCompound nbtTagCompound = new NBTTagCompound();
+            nbtTagCompound.setByte("Slot", (byte) slot);
+            new ItemStack(Blocks.air).writeToNBT(nbtTagCompound);
+            nbtItemsList.appendTag(nbtTagCompound);
+        }
+
+        nbt.removeTag("Items");
+        nbt.setTag("Items", nbtItemsList);
+        horse.readEntityFromNBT(nbt);
+
+        // must be invoked after "readEntityFromNBT" otherwise items in chest will not be cleared
+        horse.setChested(false);
+
+        return items;
     }
 
     private static DeathMessageInfo getDeathMessage(EntityLivingBase entity, String damageType, boolean isVillager) {
