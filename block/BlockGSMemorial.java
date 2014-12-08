@@ -609,6 +609,7 @@ public class BlockGSMemorial extends BlockContainer {
 
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
+        int meta = access.getBlockMetadata(x, y, z);
         EnumMemorials memorialType;
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) access.getTileEntity(x, y, z);
 
@@ -732,6 +733,22 @@ public class BlockGSMemorial extends BlockContainer {
             case QUARTZ_CREEPER_STATUE:
             case ICE_CREEPER_STATUE:
                 this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 2.5F, 0.875F);
+                break;
+            case GIBBET:
+            case BURNING_STAKE:
+                this.setBlockBounds(0, 0, 0, 1, 2.5F, 1);
+                break;
+            case STOCKS:
+                switch (meta) {
+                    case 0:
+                    case 1:
+                        this.setBlockBounds(-0.5F, 0, 0, 1.5F, 2, 1);
+                        break;
+                    case 2:
+                    case 3:
+                        this.setBlockBounds(0, 0, -0.5F, 1, 2, 1.5F);
+                        break;
+                }
                 break;
         }
     }
