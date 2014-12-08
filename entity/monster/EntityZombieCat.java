@@ -30,9 +30,18 @@ public class EntityZombieCat extends EntityUndeadCat {
 
     private static final byte CAT_TYPES = 4;
 
+    protected boolean isGreen = false;
+
     public EntityZombieCat(World world) {
+        this(world, world.rand.nextBoolean());
+    }
+
+    public EntityZombieCat(World world, boolean isGreen) {
         super(world);
-        texture = Resources.ZOMBIE_OZELOT;
+
+        this.isGreen = isGreen;
+        texture = (isGreen) ? Resources.GREEN_ZOMBIE_OZELOT : Resources.ZOMBIE_OZELOT;
+
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1, false));
         this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1));
         this.tasks.addTask(6, new EntityAIWander(this, 1));
@@ -55,22 +64,33 @@ public class EntityZombieCat extends EntityUndeadCat {
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D); // movespeed
     }
 
-    /**
-     * Returns the texture's file path as a String.
-     */
     @Override
     @SideOnly(Side.CLIENT)
     public ResourceLocation getTexture() {
-        switch (this.getSkin()) {
-            case 1:
-                return Resources.ZOMBIE_CAT_BLACK;
-            case 2:
-                return Resources.ZOMBIE_CAT_RED;
-            case 3:
-                return Resources.ZOMBIE_CAT_SIAMESE;
-            case 0:
-            default:
-                return Resources.ZOMBIE_OZELOT;
+        if (this.isGreen) {
+            switch (this.getSkin()) {
+                case 1:
+                    return Resources.GREEN_ZOMBIE_CAT_BLACK;
+                case 2:
+                    return Resources.GREEN_ZOMBIE_CAT_RED;
+                case 3:
+                    return Resources.GREEN_ZOMBIE_CAT_SIAMESE;
+                case 0:
+                default:
+                    return Resources.GREEN_ZOMBIE_OZELOT;
+            }
+        } else {
+            switch (this.getSkin()) {
+                case 1:
+                    return Resources.ZOMBIE_CAT_BLACK;
+                case 2:
+                    return Resources.ZOMBIE_CAT_RED;
+                case 3:
+                    return Resources.ZOMBIE_CAT_SIAMESE;
+                case 0:
+                default:
+                    return Resources.ZOMBIE_OZELOT;
+            }
         }
     }
 
@@ -80,7 +100,10 @@ public class EntityZombieCat extends EntityUndeadCat {
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
+
         nbt.setInteger("ZombieCatType", this.getSkin());
+
+        nbt.setBoolean("IsGreen", this.isGreen);
     }
 
     /**
@@ -89,7 +112,12 @@ public class EntityZombieCat extends EntityUndeadCat {
     @Override
     public void readEntityFromNBT(NBTTagCompound nbt) {
         super.readEntityFromNBT(nbt);
+
         this.setSkin(nbt.getInteger("ZombieCatType"));
+
+        if (nbt.hasKey("IsGreen")) {
+            this.isGreen = nbt.getBoolean("IsGreen");
+        }
     }
 
     /**

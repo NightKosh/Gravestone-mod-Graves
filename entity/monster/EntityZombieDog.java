@@ -11,6 +11,7 @@ import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
@@ -22,9 +23,16 @@ import net.minecraft.world.World;
  */
 public class EntityZombieDog extends EntityUndeadDog {
 
+    protected boolean isGreen = false;
+
     public EntityZombieDog(World world) {
+        this(world, world.rand.nextBoolean());
+    }
+
+    public EntityZombieDog(World world, boolean isGreen) {
         super(world);
-        texture = Resources.ZOMBIE_DOG;
+        this.isGreen = isGreen;
+        texture = (isGreen) ? Resources.GREEN_ZOMBIE_DOG : Resources.ZOMBIE_DOG;
 
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1, false));
         this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1));
@@ -108,5 +116,20 @@ public class EntityZombieDog extends EntityUndeadDog {
         if (this.worldObj.difficultySetting == EnumDifficulty.NORMAL || this.worldObj.difficultySetting == EnumDifficulty.HARD) {
             spawnZombieMob(entityLiving);
         }
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.readEntityFromNBT(nbt);
+
+        if (nbt.hasKey("IsGreen")) {
+            this.isGreen = nbt.getBoolean("IsGreen");
+        }
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        nbt.setBoolean("IsGreen", this.isGreen);
     }
 }

@@ -121,7 +121,7 @@ public abstract class EntityUndeadPet extends EntityMob {
                 this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
                 zombie = entityZombie;
             } else if (entity instanceof EntityWolf) {
-                EntityZombieDog zombieDog = new EntityZombieDog(this.worldObj);
+                EntityZombieDog zombieDog = new EntityZombieDog(this.worldObj, false);
                 zombieDog.copyLocationAndAnglesFrom(entity);
 
                 this.worldObj.removeEntity(entity);
@@ -130,7 +130,7 @@ public abstract class EntityUndeadPet extends EntityMob {
 
                 zombie = zombieDog;
             } else if (entity instanceof EntityOcelot) {
-                EntityZombieCat zombieCat = new EntityZombieCat(this.worldObj);
+                EntityZombieCat zombieCat = new EntityZombieCat(this.worldObj, false);
                 zombieCat.copyLocationAndAnglesFrom(entity);
                 if (((EntityOcelot) entity).isTamed()) {
                     zombieCat.setSkin(((EntityOcelot) entity).getTameSkin());
