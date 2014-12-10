@@ -206,7 +206,7 @@ public class BlockGSGraveStone extends BlockContainer {
      */
     @Override
     public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-        return GraveStoneHelper.canPlaceBlockAt(world.getBlock(x, y - 1, z));
+        return GraveStoneHelper.canPlaceBlockAt(world, x, y - 1, z);
     }
 
     @Override

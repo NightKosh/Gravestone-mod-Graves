@@ -92,7 +92,7 @@ public class GraveGenerationHelper {
             if (block != null) {
                 if (block.equals(Blocks.water) || block.equals(Blocks.lava)) {
                     return false;
-                } else if (GraveStoneHelper.canPlaceBlockAt(block)) {
+                } else if (GraveStoneHelper.canPlaceBlockAt(world, block, x, y, z)) {
                     return true;
                 }
             }

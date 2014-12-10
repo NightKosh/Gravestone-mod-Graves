@@ -26,7 +26,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
@@ -41,11 +43,6 @@ import java.util.*;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class GraveStoneHelper {
-    private static final List<Integer> GRAVESTONE_GROUND = Arrays.asList(
-            Block.getIdFromBlock(Blocks.grass), Block.getIdFromBlock(Blocks.dirt),
-            Block.getIdFromBlock(Blocks.sand), Block.getIdFromBlock(Blocks.gravel),
-            Block.getIdFromBlock(Blocks.soul_sand), Block.getIdFromBlock(Blocks.mycelium),
-            Block.getIdFromBlock(Blocks.snow));
     public static ArrayList<Item> swordsList = new ArrayList<Item>(
             Arrays.asList(
                     Items.wooden_sword,
@@ -382,8 +379,22 @@ public class GraveStoneHelper {
     /**
      * Check can be grave placed on this type of surface
      */
-    public static boolean canPlaceBlockAt(Block block) {
-        return GraveStoneConfig.canPlaceGravesEveryWhere || GRAVESTONE_GROUND.contains(Block.getIdFromBlock(block));
+    public static boolean canPlaceBlockAt(World world, int x, int y, int z) {
+        return canPlaceBlockAt(world, world.getBlock(x, y, z), x, y, z);
+    }
+
+    public static boolean canPlaceBlockAt(World world, Block block, int x, int y, int z) {
+        if (GraveStoneConfig.canPlaceGravesEveryWhere) {
+            return true;
+        } else {
+            int meta = world.getBlockMetadata(x, y, z);
+            String tool = block.getHarvestTool(meta);
+            if (tool != null) {
+                return tool.equals("shovel");
+            } else {
+                return false;
+            }
+        }
     }
 
     public static int getMetadataBasedOnRotation(int rotation) {
