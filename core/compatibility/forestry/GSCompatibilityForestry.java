@@ -27,16 +27,27 @@ public class GSCompatibilityForestry {
     public static Item backpackItemT1;
     public static Item backpackItemT2;
 
+    public static final int DEFAULT_BEEKEEPER_ID = 80;
+    public static final int DEFAULT_LUMBERJACK_ID = 81;
+
     private GSCompatibilityForestry() {
 
     }
 
     public static int getApicultureVillagerID() {
-        return ForestryAPI.forestryConstants.getApicultureVillagerID();
+        if (ForestryAPI.forestryConstants != null) {
+            return ForestryAPI.forestryConstants.getApicultureVillagerID();
+        } else {
+            return DEFAULT_BEEKEEPER_ID;
+        }
     }
 
     public static int getArboricultureVillagerID() {
-        return ForestryAPI.forestryConstants.getArboricultureVillagerID();
+        if (ForestryAPI.forestryConstants != null) {
+            return ForestryAPI.forestryConstants.getArboricultureVillagerID();
+        } else {
+            return DEFAULT_LUMBERJACK_ID;
+        }
     }
 
     public static void addBackpack() {
