@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import gravestone.core.GSPotion;
 import gravestone.structures.GraveStoneWorldGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
 import gravestone.structures.village.VillageHandlerGSUndertaker;
@@ -24,6 +25,7 @@ public class GraveStoneConfig {
     private static String path;
     // CATEGORIES
     public static final String CATEGORY_COMPATIBILITY = "compatibility";
+    public static final String CATEGORY_POTIONS = "potions";
     // renderer Id
     public static int graveRenderID = RenderingRegistry.getNextAvailableRenderId();
     public static int memorialRenderID = RenderingRegistry.getNextAvailableRenderId();
@@ -93,6 +95,8 @@ public class GraveStoneConfig {
     public static boolean generateGravesInMushroomBiomes;
     // villager
     public static int undertakerId;
+    // potions id
+    public static int cursePotionEffectId;
 
     // COMPATIBILITY
     public static boolean spawnMoCreaturesMobs;
@@ -182,6 +186,7 @@ public class GraveStoneConfig {
         enableNightStone   = config.get(Configuration.CATEGORY_GENERAL, "EnableNightStone", true).getBoolean(true);
         enableThunderStone = config.get(Configuration.CATEGORY_GENERAL, "EnableThunderStone", true).getBoolean(true);
         showNightStoneMessage = config.get(Configuration.CATEGORY_GENERAL, "ShowNightStoneMessage", true).getBoolean(true);
+        cursePotionEffectId = config.get(CATEGORY_POTIONS, "CursePotionEffectId", GSPotion.CURSE_DEFAULT_ID).getInt();
 
         // creeper statues
         enableCreeperStatuesRecipes = config.get(Configuration.CATEGORY_GENERAL, "EnableCreeperStatuesRecipes", false).getBoolean(false);
