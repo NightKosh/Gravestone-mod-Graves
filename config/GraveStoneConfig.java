@@ -90,6 +90,7 @@ public class GraveStoneConfig {
     public static boolean showGravesRemovingMessages;
     //structures
     public static boolean generateCatacombsGraveyard;
+    public static boolean generateGravesInMushroomBiomes;
     // villager
     public static int undertakerId;
 
@@ -138,6 +139,7 @@ public class GraveStoneConfig {
         maxCatacombsHeight = config.get(Configuration.CATEGORY_GENERAL, "MaximumCatacombsGenerationHeight", 75).getInt();
         catacombsGenerationChance = config.get(Configuration.CATEGORY_GENERAL, "CatacombsGenerationChance", CatacombsGenerator.DEFAULT_GENERATION_CHANCE).getDouble();
         generateCatacombsGraveyard = config.get(Configuration.CATEGORY_GENERAL, "GenerateCatacombsGraveyard", true).getBoolean(true);
+        generateGravesInMushroomBiomes = config.get(Configuration.CATEGORY_GENERAL, "GenerateGravesInMushroomBiomes", true).getBoolean(true);
         generateMemorials = config.get(Configuration.CATEGORY_GENERAL, "GenerateMemorials", true).getBoolean(true);
         generateSingleGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateSingleGraves", true).getBoolean(true);
         generateCemeteries = config.get(Configuration.CATEGORY_GENERAL, "GenerateCemeteries", true).getBoolean(true);
