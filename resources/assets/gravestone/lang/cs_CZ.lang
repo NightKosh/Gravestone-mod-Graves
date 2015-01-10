@@ -125,6 +125,7 @@ item.corpse.collar.black=Černý
 item.corpse.collar.unknown=Neznámý
 item.corpse.dog_type=Dog type
 item.corpse.cat_type=Typ kočky
+item.corpse.cat_type.ocelot=Ocelot
 item.corpse.cat_type.black=Černá
 item.corpse.cat_type.red=Červená
 item.corpse.cat_type.siamese=Siamská

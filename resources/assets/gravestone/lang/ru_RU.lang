@@ -125,6 +125,7 @@ item.corpse.collar.black=Чёрный
 item.corpse.collar.unknown=Неизвестный
 item.corpse.dog_type=Тип собаки
 item.corpse.cat_type=Тип кошки
+item.corpse.cat_type.ocelot=Оцелот
 item.corpse.cat_type.black=Чёрная
 item.corpse.cat_type.red=Рыжая
 item.corpse.cat_type.siamese=Сиамская

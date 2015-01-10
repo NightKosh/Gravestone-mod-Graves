@@ -125,6 +125,7 @@ item.corpse.collar.black=黑色
 item.corpse.collar.unknown=不明
 item.corpse.dog_type=狗种
 item.corpse.cat_type=猫种
+item.corpse.cat_type.ocelot=Ocelot
 item.corpse.cat_type.black=黑色
 item.corpse.cat_type.red=红色
 item.corpse.cat_type.siamese=暹罗

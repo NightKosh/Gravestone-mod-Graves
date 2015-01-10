@@ -79,6 +79,8 @@ public class CatCorpseHelper extends CorpseHelper {
 
     private static String getCatType(int type) {
         switch (type) {
+            case 0:
+                return "item.corpse.cat_type.ocelot";
             case 1:
                 return "item.corpse.cat_type.black";
             case 2:

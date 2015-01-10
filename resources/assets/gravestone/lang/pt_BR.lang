@@ -125,6 +125,7 @@ item.corpse.collar.black=Preto
 item.corpse.collar.unknown=Desconhecido
 item.corpse.dog_type=Tipo de Cachorro
 item.corpse.cat_type=Tipo de Gato
+item.corpse.cat_type.ocelot=Ocelot
 item.corpse.cat_type.black=Preto
 item.corpse.cat_type.red=Vermelho
 item.corpse.cat_type.siamese=Siamês

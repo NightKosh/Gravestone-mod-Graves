@@ -125,6 +125,7 @@ item.corpse.collar.black=Black
 item.corpse.collar.unknown=Unknown
 item.corpse.dog_type=Dog type
 item.corpse.cat_type=Cat type
+item.corpse.cat_type.ocelot=Ocelot
 item.corpse.cat_type.black=Black
 item.corpse.cat_type.red=Red
 item.corpse.cat_type.siamese=Siamese
