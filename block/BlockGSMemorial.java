@@ -8,6 +8,9 @@ import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSTabs;
+import gravestone.item.ItemGSCorpse;
+import gravestone.item.corpse.VillagerCorpseHelper;
+import gravestone.item.enums.EnumCorpse;
 import gravestone.particle.EntityBigFlameFX;
 import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.block.Block;
@@ -775,10 +778,19 @@ public class BlockGSMemorial extends BlockContainer {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-        if (world.isRemote) {
-            TileEntityGSMemorial te = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
+        TileEntityGSMemorial te = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
 
-            if (te != null) {
+        if (te != null) {
+            ItemStack item = player.inventory.getCurrentItem();
+            if (item != null && item.getItem() instanceof ItemGSCorpse && EnumCorpse.getById((byte) item.getItemDamage()).equals(EnumCorpse.VILLAGER) &&
+                    te.getHangedMob() == EnumHangedMobs.NONE && (te.getMemorialType().equals(EnumMemorials.GIBBET) ||
+                    te.getMemorialType().equals(EnumMemorials.STOCKS) || te.getMemorialType().equals(EnumMemorials.BURNING_STAKE))) {
+                te.setHangedMob(EnumHangedMobs.VILLAGER);
+                te.setHangedVillagerProfession(VillagerCorpseHelper.getVillagerType(item.getTagCompound()));
+                item.stackSize--;
+            }
+
+            if (world.isRemote) {
                 String name;
                 String killerName;
                 String deathText = te.getDeathTextComponent().getDeathText();
