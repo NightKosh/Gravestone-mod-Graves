@@ -136,7 +136,7 @@ public abstract class CorpseHelper {
     }
 
     public static void getExperience(EntityPlayer player, int damage) {
-        player.experienceLevel -= getRequiredLevel(damage);
+        player.addExperienceLevel(-getRequiredLevel(damage));
     }
 
     public static int getRequiredLevel(int damage) {
