@@ -8,6 +8,7 @@ import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSPotion;
 import gravestone.core.GSTabs;
 import gravestone.core.Resources;
+import gravestone.core.TimeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -32,10 +33,6 @@ import java.util.Random;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class BlockGSTrap extends Block {
-
-    private static final int PRE_NIGHT = 12000;
-    private static final int NIGHT = 14000;
-    private static final int PRE_MORNING = 22500;
 
     @SideOnly(Side.CLIENT)
     private IIcon thunderStoneIcon;
@@ -118,15 +115,15 @@ public class BlockGSTrap extends Block {
             if (meta == 0) {
                 if (GraveStoneConfig.enableNightStone) {
                     long time = world.getWorldTime();
-                    long dayTime = time % 24000;
-                    if (dayTime < PRE_NIGHT || dayTime > PRE_MORNING) {
-                        time = time - time % 24000 + PRE_NIGHT;
+                    long dayTime = TimeHelper.getDayTime(time);
+                    if (dayTime < TimeHelper.PRE_NIGHT || dayTime > TimeHelper.PRE_MORNING) {
+                        time = time - dayTime + TimeHelper.PRE_NIGHT;
                         world.setWorldTime(time);
                         if (GraveStoneConfig.showNightStoneMessage) {
                             ((EntityPlayer) entity).addChatComponentMessage(new ChatComponentTranslation(ModGraveStone.proxy.getLocalizedString("block.trap.curse")));
                         }
-                    } else if (dayTime > 20000 && dayTime < PRE_MORNING) {
-                        time = time - time % 24000 + NIGHT;
+                    } else if (dayTime > 20000 && dayTime < TimeHelper.PRE_MORNING) {
+                        time = time - dayTime + TimeHelper.NIGHT;
                         world.setWorldTime(time);
                     }
                     ((EntityPlayer) entity).addPotionEffect(new PotionEffect(GSPotion.curse.getId(), 1200));

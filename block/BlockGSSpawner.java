@@ -7,9 +7,12 @@ import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSTabs;
 import gravestone.core.Resources;
+import gravestone.particle.EntityGreenFlameFX;
 import gravestone.tileentity.TileEntityGSSpawner;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMobSpawner;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -107,8 +110,9 @@ public class BlockGSSpawner extends BlockMobSpawner {
         for (int i = 0; i < 5; i++) {
             dx = -Math.sin(rotation) * d;
             dz = Math.cos(rotation) * d;
-            world.spawnParticle("smoke", xPos + dx, yPos, zPos + dz, 0.0D, 0.0D, 0.0D);
-            world.spawnParticle("flame", xPos + dx, yPos, zPos + dz, 0.0D, 0.0D, 0.0D);
+            world.spawnParticle("smoke", xPos + dx, yPos, zPos + dz, 0, 0, 0);
+            EntityFX entityfx = new EntityGreenFlameFX(world, xPos + dx, yPos, zPos + dz, 0, 0, 0);
+            Minecraft.getMinecraft().effectRenderer.addEffect(entityfx);
             rotation += dRotation;
         }
     }

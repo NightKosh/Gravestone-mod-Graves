@@ -4,10 +4,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSTabs;
+import gravestone.core.TimeHelper;
+import gravestone.particle.EntityGreenFlameFX;
 import gravestone.tileentity.TileEntityGSCandle;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -46,8 +50,14 @@ public class BlockGSCandle extends BlockContainer implements IInfusionStabiliser
         double yPos = y + 0.5;
         double zPos = z + 0.5;
 
+        long dayTime = TimeHelper.getDayTime(world);
+        if (dayTime < TimeHelper.SUN_SET || dayTime > TimeHelper.SUN_RISING) {
+            world.spawnParticle("flame", xPos, yPos, zPos, 0, 0, 0);
+        } else {
+            EntityFX entityfx = new EntityGreenFlameFX(world, xPos, yPos, zPos, 0, 0, 0);
+            Minecraft.getMinecraft().effectRenderer.addEffect(entityfx);
+        }
         world.spawnParticle("smoke", xPos, yPos, zPos, 0, 0, 0);
-        world.spawnParticle("flame", xPos, yPos, zPos, 0, 0, 0);
     }
 
     /**

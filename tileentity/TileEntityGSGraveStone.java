@@ -1,6 +1,7 @@
 package gravestone.tileentity;
 
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.TimeHelper;
 import gravestone.core.logger.GSLogger;
 import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumGraves;
@@ -58,17 +59,12 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         }
     }
 
-
-    public static final int FOG_START_TIME = 12000;
-    public static final int FOG_END_TIME = 24000;
     public static boolean isFogTime(World world) {
         if (world.isRaining()) {
             return false;
         } else {
-            long time = world.getWorldTime();
-            long dayTime = time % 24000;
-
-            return dayTime > FOG_START_TIME && dayTime < FOG_END_TIME;
+            long dayTime = TimeHelper.getDayTime(world);
+            return dayTime > TimeHelper.FOG_START_TIME && dayTime < TimeHelper.FOG_END_TIME;
         }
     }
 

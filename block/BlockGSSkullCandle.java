@@ -5,10 +5,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.block.enums.EnumSkullCandle;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSTabs;
+import gravestone.core.TimeHelper;
+import gravestone.particle.EntityGreenFlameFX;
 import gravestone.tileentity.TileEntityGSSkullCandle;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
@@ -128,8 +132,15 @@ public class BlockGSSkullCandle extends BlockContainer implements IInfusionStabi
             double dx = -Math.sin(rotation) * d;
             double dz = Math.cos(rotation) * d;
 
-            world.spawnParticle("smoke", xPos + dx, yPos, zPos + dz, 0.0D, 0.0D, 0.0D);
-            world.spawnParticle("flame", xPos + dx, yPos, zPos + dz, 0.0D, 0.0D, 0.0D);
+            long dayTime = TimeHelper.getDayTime(world);
+            if (dayTime < TimeHelper.SUN_SET || dayTime > TimeHelper.SUN_RISING) {
+                world.spawnParticle("flame", xPos + dx, yPos, zPos + dz, 0, 0, 0);
+            } else {
+                EntityFX entityfx = new EntityGreenFlameFX(world, xPos + dx, yPos, zPos + dz, 0, 0, 0);
+                Minecraft.getMinecraft().effectRenderer.addEffect(entityfx);
+            }
+
+            world.spawnParticle("smoke", xPos + dx, yPos, zPos + dz, 0, 0, 0);
         }
     }
 
