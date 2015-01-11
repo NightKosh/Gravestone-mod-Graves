@@ -670,8 +670,8 @@ public class GraveStoneHelper {
         }
     }
 
-    public static boolean canFlowerBePlaced(World world, int x, int y, int z, TileEntityGSGraveStone te) {
-        return GraveStoneHelper.FLOWERS_GROUND.contains(world.getBlock(x, y - 1, z)) && canFlowerBePlacedOnGrave(te);
+    public static boolean canFlowerBePlaced(World world, int x, int y, int z, ItemStack item, TileEntityGSGraveStone te) {
+        return Block.getBlockFromItem(item.getItem()).canBlockStay(world, x, y, z) && canFlowerBePlacedOnGrave(te);
     }
 
     public static boolean canFlowerBePlacedOnGrave(TileEntityGSGraveStone te) {

@@ -267,8 +267,11 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
     }
 
     public void setRandomFlower(Random random) {
-        if (random.nextInt(4) == 0 && GraveStoneHelper.canFlowerBePlaced(this.worldObj, this.xCoord, this.yCoord, this.zCoord, this)) {
-            setFlower(new ItemStack(GraveStoneHelper.FLOWERS.get(random.nextInt(GraveStoneHelper.FLOWERS.size())), 1));
+        if (random.nextInt(4) == 0) {
+            ItemStack flower = new ItemStack(GraveStoneHelper.FLOWERS.get(random.nextInt(GraveStoneHelper.FLOWERS.size())), 1);
+            if (GraveStoneHelper.canFlowerBePlaced(this.worldObj, this.xCoord, this.yCoord, this.zCoord, flower, this)) {
+                setFlower(flower);
+            }
         }
     }
 }

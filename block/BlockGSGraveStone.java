@@ -2,12 +2,11 @@ package gravestone.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gravestone.core.logger.GSLogger;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSTabs;
-import gravestone.core.logger.GravesLogger;
+import gravestone.core.logger.GSLogger;
 import gravestone.tileentity.DeathMessageInfo;
 import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSGraveStone;
@@ -515,7 +514,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         }
                     } else {
                         if (GraveStoneHelper.FLOWERS.contains(Block.getBlockFromItem(item.getItem())) &&
-                                GraveStoneHelper.canFlowerBePlaced(world, x, y, z, te)) {
+                                GraveStoneHelper.canFlowerBePlaced(world, x, y, z, item, te)) {
                             te.setFlower(new ItemStack(item.getItem(), 1, item.getItemDamage()));
                             player.inventory.getCurrentItem().stackSize--;
                             return true;
