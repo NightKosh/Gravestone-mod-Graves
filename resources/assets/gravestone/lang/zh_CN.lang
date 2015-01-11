@@ -27,9 +27,9 @@ block.memorial.dog_statue=狗纪念碑
 block.memorial.cat_statue=猫纪念碑
 block.memorial.creeper_statue=爬行者纪念碑
 block.memorial.celtic_cross=凯尔特十字架
-block.memorial.gibbet=Gibbet
-block.memorial.stocks=Stocks
-block.memorial.burning_stake=Burning Stake
+block.memorial.gibbet=绞刑架
+block.memorial.stocks=足枷
+block.memorial.burning_stake=燃烧的火刑柱
 
 ## Traps
 tile.trap.night.name=午夜石
@@ -50,8 +50,8 @@ tile.bone_slab.name=骨质台阶
 tile.bone_stairs.name=骨质阶梯
 
 #Pile of Bones
-block.pile_of_bones.name=Pile of Bones
-block.pile_of_bones_with_skull.name=Pile of Bones with Skull
+block.pile_of_bones.name=骨堆
+block.pile_of_bones_with_skull.name=颅骨骨堆
 
 ## Chests
 block.haunted_chest.bats_chest=带着蝙蝠的箱子
@@ -68,7 +68,7 @@ block.skull_candle.zombie.name=僵尸头颅蜡烛
 
 # Items
 ## Chisel
-item.gravestone chisel.name=Gravestone Chisel
+item.gravestone chisel.name=墓碑凿
 
 ## Graves
 item.grave.age=已生活了
@@ -125,15 +125,15 @@ item.corpse.collar.black=黑色
 item.corpse.collar.unknown=不明
 item.corpse.dog_type=狗种
 item.corpse.cat_type=猫种
-item.corpse.cat_type.ocelot=Ocelot
+item.corpse.cat_type.ocelot=豹猫
 item.corpse.cat_type.black=黑色
 item.corpse.cat_type.red=红色
 item.corpse.cat_type.siamese=暹罗
 item.corpse.cat_type.unknown=不明
 
 ##Backpacks
-item.backpack.undertaker.t1=Undertaker's Backpack
-item.backpack.undertaker.t2=Undertaker's Woven Backpack
+item.backpack.undertaker.t1=送葬者的背包
+item.backpack.undertaker.t2=送葬者的布织背包
 
 
 # GUI
