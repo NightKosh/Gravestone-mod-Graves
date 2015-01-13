@@ -1,21 +1,27 @@
 package gravestone.entity.monster;
 
 import gravestone.core.GSBlock;
+import gravestone.entity.ai.AIHideInBones;
+import gravestone.entity.ai.AISummonSkullCrawler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.init.Blocks;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -27,18 +33,31 @@ import net.minecraft.world.World;
  */
 public class EntitySkullCrawler extends EntityMob {
 
-    protected int allySummonCooldown;
-    protected int defaultSummonCooldown = 10;
+    private AISummonSkullCrawler summonAI;
 
     public EntitySkullCrawler(World world) {
         super(world);
         this.setSize(0.8F, 0.8F);
+
+        this.tasks.addTask(1, new EntityAISwimming(this));
+        this.tasks.addTask(3, this.summonAI = new AISummonSkullCrawler(this));
+        this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1, false));
+        this.tasks.addTask(5, new AIHideInBones(this));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[0]));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
     }
 
     @Override
-    protected void entityInit() {
-        super.entityInit();
-        this.dataWatcher.addObject(16, new Byte((byte) 0));
+    public float getEyeHeight() {
+        return 0.5F;
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(12);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.9D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.5);
     }
 
     /**
@@ -48,6 +67,48 @@ public class EntitySkullCrawler extends EntityMob {
     @Override
     protected boolean canTriggerWalking() {
         return false;
+    }
+
+    @Override
+    protected String getLivingSound() {
+        return "mob.skeleton.say";
+    }
+
+    @Override
+    protected String getHurtSound() {
+        return "mob.skeleton.say";
+    }
+
+    @Override
+    protected String getDeathSound() {
+        return "mob.skeleton.death";
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, Block block) {
+        this.playSound("mob.spider.step", 0.15F, 1);
+    }
+
+    /**
+     * Called when the entity is attacked.
+     */
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float par2) {
+        if (this.isEntityInvulnerable(source)) {
+            return false;
+        } else {
+            if ((source instanceof EntityDamageSource || source == DamageSource.magic)) {
+                summonAI.resetSummonColdown();
+            }
+
+            return super.attackEntityFrom(source, par2);
+        }
+    }
+
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        this.dataWatcher.addObject(16, new Byte((byte) 0));
     }
 
     /**
@@ -63,88 +124,17 @@ public class EntitySkullCrawler extends EntityMob {
     }
 
     @Override
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(12);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.9D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.5);
+    protected boolean isValidLightLevel() {
+        return true;
     }
 
-    /**
-     * Finds the closest player within 16 blocks to attack, or null if this
-     * Entity isn't interested in attacking (Animals, Spiders at day, peaceful
-     * PigZombies).
-     */
     @Override
-    protected Entity findPlayerToAttack() {
-        return this.worldObj.getClosestVulnerablePlayerToEntity(this, 10);
-    }
-
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    @Override
-    protected String getLivingSound() {
-        return "mob.skeleton.say";
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    @Override
-    protected String getHurtSound() {
-        return "mob.skeleton.say";
-    }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    @Override
-    protected String getDeathSound() {
-        return "mob.skeleton.death";
-    }
-
-    /**
-     * Plays step sound at given x, y, z for the entity
-     */
-    @Override
-    protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_) {
-        this.playSound("mob.spider.step", 0.15F, 1.0F);
-    }
-
-    /**
-     * Basic mob attack. Default to touch of death in EntityCreature. Overridden
-     * by each mob to define their attack.
-     */
-    @Override
-    protected void attackEntity(Entity entity, float par2) {
-        if (par2 > 2.0F && par2 < 6.0F && this.rand.nextInt(10) == 0) {
-            if (this.onGround) {
-                double d0 = entity.posX - this.posX;
-                double d1 = entity.posZ - this.posZ;
-                float f2 = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-                this.motionX = d0 / (double) f2 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
-                this.motionZ = d1 / (double) f2 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
-                this.motionY = 0.4000000059604645D;
-            }
+    public boolean getCanSpawnHere() {
+        if (super.getCanSpawnHere()) {
+            EntityPlayer entityplayer = this.worldObj.getClosestPlayerToEntity(this, 5);
+            return entityplayer == null;
         } else {
-            super.attackEntity(entity, par2);
-        }
-    }
-
-    /**
-     * Called when the entity is attacked.
-     */
-    @Override
-    public boolean attackEntityFrom(DamageSource source, float par2) {
-        if (this.isEntityInvulnerable()) {
             return false;
-        } else {
-            if (this.allySummonCooldown <= 0 && (source instanceof EntityDamageSource || source == DamageSource.magic)) {
-                this.allySummonCooldown = defaultSummonCooldown;
-            }
-
-            return super.attackEntityFrom(source, par2);
         }
     }
 
@@ -153,8 +143,8 @@ public class EntitySkullCrawler extends EntityMob {
      * creature will try to path to the block. Args: x, y, z
      */
     @Override
-    public float getBlockPathWeight(int x, int y, int z) {
-        return this.worldObj.getBlock(x, y - 1, z).equals(Blocks.stone) ? 10 : super.getBlockPathWeight(x, y, z);
+    public float func_180484_a(BlockPos pos) {
+        return this.worldObj.getBlockState(new BlockPos(pos.down())).getBlock().equals(GSBlock.boneBlock) ? 10 : super.func_180484_a(pos);
     }
 
     /**
@@ -165,9 +155,17 @@ public class EntitySkullCrawler extends EntityMob {
         return Items.bone;
     }
 
+    protected ItemStack getRareDrop() {
+        return new ItemStack(Items.skull, 1, 0);
+    }
+
     @Override
-    protected void dropRareDrop(int par1) {
-        this.entityDropItem(new ItemStack(Items.skull, 1, 0), 0);
+    protected void dropFewItems(boolean p_70628_1_, int lootAttr) {
+        super.dropFewItems(p_70628_1_, lootAttr);
+
+        if (p_70628_1_ && (this.rand.nextInt(100) == 0 || this.rand.nextInt(60 - lootAttr * 10) == 0)) {
+            this.entityDropItem(getRareDrop(), 0);
+        }
     }
 
     /**
@@ -185,9 +183,6 @@ public class EntitySkullCrawler extends EntityMob {
     public void setInWeb() {
     }
 
-    /**
-     * Get this Entity's EnumCreatureAttribute
-     */
     @Override
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.UNDEAD;
@@ -241,10 +236,10 @@ public class EntitySkullCrawler extends EntityMob {
     @Override
     public void onLivingUpdate() {
         if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
-            float f = this.getBrightness(1.0F);
+            float f = this.getBrightness(1);
 
-            if (!this.isImmuneToFire && f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F
-                    && this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ))) {
+            if (!this.isImmuneToFire && f > 0 && this.rand.nextFloat() * 30 < (f - 0.4F) * 2
+                    && this.worldObj.canBlockSeeSky(new BlockPos(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)))) {
                 this.setFire(8);
             }
         }
@@ -252,65 +247,8 @@ public class EntitySkullCrawler extends EntityMob {
         super.onLivingUpdate();
     }
 
-    @Override
-    protected void updateEntityActionState() {
-        super.updateEntityActionState();
-
-        silverfishLikeBehaviour();
-    }
-
-    protected void silverfishLikeBehaviour() {
-        if (!this.worldObj.isRemote) {
-            int x = MathHelper.floor_double(this.posX);
-            int y = MathHelper.floor_double(this.posY);
-            int z = MathHelper.floor_double(this.posZ);
-            if (this.allySummonCooldown > 0) {
-                --this.allySummonCooldown;
-
-                if (this.allySummonCooldown == 0) {
-                    boolean flag = false;
-
-                    for (int shiftY = 0; !flag && shiftY <= 5 && shiftY >= -5; shiftY = shiftY <= 0 ? 1 - shiftY : 0 - shiftY) {
-                        for (int shiftX = 0; !flag && shiftX <= 10 && shiftX >= -10; shiftX = shiftX <= 0 ? 1 - shiftX : 0 - shiftX) {
-                            for (int ShiftZ = 0; !flag && ShiftZ <= 10 && ShiftZ >= -10; ShiftZ = ShiftZ <= 0 ? 1 - ShiftZ : 0 - ShiftZ) {
-                                Block block = this.worldObj.getBlock(x + shiftX, y + shiftY, z + ShiftZ);
-                                int blockMeta = this.worldObj.getBlockMetadata(x + shiftX, y + shiftY, z + ShiftZ);
-
-                                if (block.equals(GSBlock.boneBlock) && GSBlock.boneBlock.isSkullCrawlerBlock(blockMeta)) {
-                                    this.worldObj.func_147480_a(x + shiftX, y + shiftY, z + ShiftZ, false);
-                                    GSBlock.boneBlock.onBlockDestroyedByPlayer(this.worldObj, x + shiftX, y + shiftY, z + ShiftZ, blockMeta);
-
-                                    if (this.rand.nextBoolean()) {
-                                        flag = true;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (this.entityToAttack == null && !this.hasPath()) {
-                int offset = this.rand.nextInt(6);
-                x += Facing.offsetsXForSide[offset];
-                y = MathHelper.floor_double(this.posY + 0.5D) + Facing.offsetsYForSide[offset];
-                z += Facing.offsetsZForSide[offset];
-
-                Block block = this.worldObj.getBlock(x, y, z);
-                int metadata = this.worldObj.getBlockMetadata(x, y, z);
-
-                if (GSBlock.boneBlock.equals(block) && !GSBlock.boneBlock.isSkullCrawlerBlock(metadata)) {
-                    this.worldObj.setBlock(x, y, z, GSBlock.boneBlock, metadata + 2, 3);
-                    this.spawnExplosionParticle();
-                    this.setDead();
-                } else {
-                    this.updateWanderPath();
-                }
-            } else if (this.entityToAttack != null && !this.hasPath()) {
-                this.entityToAttack = null;
-            }
-        }
+    public boolean canHideInBones() {
+        return true;
     }
 
     public enum SkullCrawlerType {

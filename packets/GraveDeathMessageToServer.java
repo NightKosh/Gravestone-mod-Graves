@@ -1,15 +1,16 @@
 package gravestone.packets;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import gravestone.tileentity.TileEntityGSGrave;
 import gravestone.tileentity.TileEntityGSMemorial;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import java.util.Random;
 
@@ -33,7 +34,7 @@ public class GraveDeathMessageToServer implements IMessage, IMessageHandler<Grav
     }
 
     public GraveDeathMessageToServer(World world, int x, int y, int z, String text, boolean randomText) {
-        this.dimensionID = world.provider.dimensionId;
+        this.dimensionID = world.provider.getDimensionId();
         this.x = x;
         this.y = y;
         this.z = z;
@@ -67,7 +68,7 @@ public class GraveDeathMessageToServer implements IMessage, IMessageHandler<Grav
         if (ctx.side.isServer()) {
             World world = DimensionManager.getWorld(message.dimensionID);
             if (world != null) {
-                TileEntity te = world.getTileEntity(message.x, message.y, message.z);
+                TileEntity te = world.getTileEntity(new BlockPos(message.x, message.y, message.z));
                 if (te != null && te instanceof TileEntityGSGrave) {
                     TileEntityGSGrave tileEntity = (TileEntityGSGrave) te;
 
@@ -76,7 +77,7 @@ public class GraveDeathMessageToServer implements IMessage, IMessageHandler<Grav
                     } else {
                         tileEntity.getDeathTextComponent().setDeathText(message.text);
                     }
-                    world.markBlockForUpdate(message.x, message.y, message.z);
+                    world.markBlockForUpdate(new BlockPos(message.x, message.y, message.z));
                 }
             }
         }

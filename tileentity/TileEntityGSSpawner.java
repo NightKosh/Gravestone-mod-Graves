@@ -1,5 +1,6 @@
 package gravestone.tileentity;
 
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 
 /**
@@ -8,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class TileEntityGSSpawner extends TileEntity {
+public class TileEntityGSSpawner extends TileEntity implements IUpdatePlayerListBox {
 
     protected GSMobSpawner spawner;
 
@@ -22,7 +23,7 @@ public class TileEntityGSSpawner extends TileEntity {
      * inside its implementation.
      */
     @Override
-    public void updateEntity() {
-        spawner.updateEntity();
+    public void update() {
+        spawner.update();
     }
 }

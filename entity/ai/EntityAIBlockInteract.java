@@ -6,6 +6,7 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathPoint;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 
 /**
@@ -105,6 +106,6 @@ public class EntityAIBlockInteract extends EntityAIBase {
      * Determines if a Block can be broken with AI.
      */
     private Block findBlock(int x, int y, int z) {
-        return this.theEntity.worldObj.getBlock(x, y, z);
+        return this.theEntity.worldObj.getBlockState(new BlockPos(x, y, z)).getBlock();
     }
 }

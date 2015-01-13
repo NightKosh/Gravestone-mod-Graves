@@ -1,7 +1,5 @@
 package gravestone.entity.monster;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
@@ -11,10 +9,14 @@ import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * GraveStone mod
@@ -28,13 +30,13 @@ public abstract class EntityUndeadPet extends EntityMob {
 
     public EntityUndeadPet(World world) {
         super(world);
-        this.getNavigator().setAvoidsWater(true);
+        ((PathNavigateGround) this.getNavigator()).func_179690_a(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(7, new EntityAILeapAtTarget(this, 0.3F));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
     }
 
     /**
@@ -50,14 +52,6 @@ public abstract class EntityUndeadPet extends EntityMob {
      */
     @Override
     protected boolean canDespawn() {
-        return true;
-    }
-
-    /**
-     * Returns true if the newer Entity AI code should be run
-     */
-    @Override
-    public boolean isAIEnabled() {
         return true;
     }
 
@@ -86,7 +80,8 @@ public abstract class EntityUndeadPet extends EntityMob {
         if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
             float f = this.getBrightness(1.0F);
 
-            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ))) {
+            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.worldObj.canBlockSeeSky(
+                    new BlockPos(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)))) {
                 this.setFire(8);
             }
         }
@@ -110,7 +105,7 @@ public abstract class EntityUndeadPet extends EntityMob {
                 EntityZombie entityZombie = new EntityZombie(this.worldObj);
                 entityZombie.copyLocationAndAnglesFrom(entity);
                 this.worldObj.removeEntity(entity);
-                entityZombie.onSpawnWithEgg((IEntityLivingData) null);
+                entityZombie.func_180482_a(this.worldObj.getDifficultyForLocation(new BlockPos(this)), (IEntityLivingData) null);
                 entityZombie.setVillager(true);
 
                 if (entity.isChild()) {
@@ -118,7 +113,7 @@ public abstract class EntityUndeadPet extends EntityMob {
                 }
 
                 this.worldObj.spawnEntityInWorld(entityZombie);
-                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, new BlockPos(this), 0);
                 zombie = entityZombie;
             } else if (entity instanceof EntityWolf) {
                 EntityZombieDog zombieDog = new EntityZombieDog(this.worldObj, false);
@@ -126,7 +121,7 @@ public abstract class EntityUndeadPet extends EntityMob {
 
                 this.worldObj.removeEntity(entity);
                 this.worldObj.spawnEntityInWorld(zombieDog);
-                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, new BlockPos(this), 0);
 
                 zombie = zombieDog;
             } else if (entity instanceof EntityOcelot) {
@@ -139,9 +134,9 @@ public abstract class EntityUndeadPet extends EntityMob {
                 }
                 this.worldObj.removeEntity(entity);
 
-                zombieCat.onSpawnWithEgg((IEntityLivingData) null);
+                zombieCat.func_180482_a(this.worldObj.getDifficultyForLocation(new BlockPos(this)), (IEntityLivingData) null);
                 this.worldObj.spawnEntityInWorld(zombieCat);
-                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, new BlockPos(this), 0);
 
                 zombie = zombieCat;
             } else if (entity instanceof EntityHorse) {
@@ -152,11 +147,11 @@ public abstract class EntityUndeadPet extends EntityMob {
 
                 this.worldObj.removeEntity(entity);
                 this.worldObj.spawnEntityInWorld(zombieHorse);
-                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, new BlockPos(this), 0);
 
                 zombie = zombieHorse;
             }
-            if (zombie != null && entity.hasCustomNameTag()) {
+            if (zombie != null && entity.hasCustomName()) {
                 zombie.setCustomNameTag(entity.getCustomNameTag());
             }
         }

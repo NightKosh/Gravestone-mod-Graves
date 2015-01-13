@@ -1,6 +1,6 @@
 package gravestone.core.commands;
 
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraft.command.CommandHandler;
 import net.minecraft.server.MinecraftServer;
 

@@ -1,9 +1,9 @@
 package gravestone.core;
 
-import gravestone.core.logger.GSLogger;
 import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumSpawner;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.logger.GSLogger;
 import gravestone.entity.monster.EntitySkullCrawler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -14,6 +14,8 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 import java.lang.reflect.Constructor;
@@ -65,7 +67,7 @@ public class GSMobSpawn {
      */
     private static boolean canSpawnHellCreatures(World world, int x, int y, int z) {
         if (world != null) {
-            return y < HELL_HEIGHT && world.getBlock(x, y - 1, z).equals(Blocks.nether_brick);
+            return y < HELL_HEIGHT && world.getBlockState(new BlockPos(x, y - 1, z)).getBlock().equals(Blocks.nether_brick);
         } else {
             return false;
         }
@@ -147,7 +149,7 @@ public class GSMobSpawn {
         }
 
         try {
-            entity.onSpawnWithEgg((IEntityLivingData) null);
+            entity.func_180482_a(world.getDifficultyForLocation(new BlockPos(x, y, z)), (IEntityLivingData) null);
         } catch (Exception e) {
             GSLogger.logError("getMobEntity exception with onSpawnWithEgg");
             e.printStackTrace();
@@ -188,7 +190,7 @@ public class GSMobSpawn {
         }
 
         try {
-            entity.onSpawnWithEgg((IEntityLivingData) null);
+            entity.func_180482_a(world.getDifficultyForLocation(new BlockPos(x, y, z)), (IEntityLivingData) null);
         } catch (Exception e) {
             GSLogger.logError("getMobEntity exception with onSpawnWithEgg");
             e.printStackTrace();
@@ -338,10 +340,10 @@ public class GSMobSpawn {
             xPosition = x + world.rand.nextFloat();
             yPosition = y + world.rand.nextFloat();
             zPosition = z + world.rand.nextFloat();
-            world.spawnParticle("largesmoke", xPosition, yPosition + 2, zPosition, 0.0D, 0.0D, 0.0D);
-            world.spawnParticle("flame", xPosition, yPosition + 1, zPosition, 0.0D, 0.0D, 0.0D);
+            world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, xPosition, yPosition + 2, zPosition, 0.0D, 0.0D, 0.0D);
+            world.spawnParticle(EnumParticleTypes.FLAME, xPosition, yPosition + 1, zPosition, 0.0D, 0.0D, 0.0D);
             world.spawnEntityInWorld(mob);
-            world.playAuxSFX(2004, (int) x, (int) y, (int) z, 0);
+            world.playAuxSFX(2004, new BlockPos(x, y, z), 0);
             return true;
         } else {
             return false;

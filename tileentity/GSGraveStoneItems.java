@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.*;
@@ -92,7 +93,7 @@ public class GSGraveStoneItems {
             switch (GraveStoneConfig.graveItemsCount) {
                 case 0:
                     for (byte i = 0; i < items.size(); i++) {
-                        dropItem(items.get(i), tileEntity.getWorldObj(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+                        dropItem(items.get(i), tileEntity.getWorld(), tileEntity.getPos());
                     }
                     break;
                 case 40:
@@ -109,7 +110,7 @@ public class GSGraveStoneItems {
                             addInventoryContent(items.get(i));
                             savedItems--;
                         } else {
-                            dropItem(items.get(i), tileEntity.getWorldObj(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+                            dropItem(items.get(i), tileEntity.getWorld(), tileEntity.getPos());
                         }
                     }
                     break;
@@ -130,7 +131,7 @@ public class GSGraveStoneItems {
      *
      * @param items Dropping item
      */
-    public static void dropItem(ItemStack items, World world, int x, int y, int z) {
+    public static void dropItem(ItemStack items, World world, BlockPos pos) {
         if (items != null) {
             Random random = new Random();
             float var10 = random.nextFloat() * 0.8F + 0.1F;
@@ -145,7 +146,7 @@ public class GSGraveStoneItems {
                 }
 
                 items.stackSize -= var13;
-                entityItem = new EntityItem(world, x + var10, y + var11, z + var12, new ItemStack(items.getItem(), var13, items.getItemDamage()));
+                entityItem = new EntityItem(world, pos.getX() + var10, pos.getY() + var11, pos.getZ() + var12, new ItemStack(items.getItem(), var13, items.getItemDamage()));
                 entityItem.motionX = (double) (random.nextGaussian() * 0.05F);
                 entityItem.motionY = (double) (random.nextGaussian() * 0.15F);
                 entityItem.motionZ = (double) (random.nextGaussian() * 0.05F);
@@ -163,11 +164,11 @@ public class GSGraveStoneItems {
      * @param slot Item slot number
      */
     public void dropItem(int slot) {
-        dropItem(graveContents.get(slot), tileEntity.getWorldObj(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+        dropItem(graveContents.get(slot), tileEntity.getWorld(), tileEntity.getPos());
     }
 
     public void dropItem(ItemStack stack) {
-        dropItem(stack, tileEntity.getWorldObj(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+        dropItem(stack, tileEntity.getWorld(), tileEntity.getPos());
     }
 
     /*

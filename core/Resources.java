@@ -12,6 +12,7 @@ public class Resources {
 
     private Resources() {
     }
+
     private static final String MOD_NAME = ModInfo.ID.toLowerCase();
     private static final String GUI_LOCATION = MOD_NAME + ":textures/gui/";
     private static final String BLOCK_LOCATION = MOD_NAME + ":textures/blocks/";
@@ -22,16 +23,16 @@ public class Resources {
     private static final String ARMOR_LOCATION = MOD_NAME + ":textures/memorials/armor/";
     private static final String PEDESTALS_LOCATION = MOD_NAME + ":textures/memorials/pedestal/";
     // blocks
-    public static final String NIGHT_STONE      = "nether_brick";
-    public static final String THUNDER_STONE    = "stonebrick";
-    public static final String BONE_BLOCK       = MOD_NAME  + ":bone_block";
-    public static final String SKULL_BONE_BLOCK = MOD_NAME  + ":skull_bone_block";
-    public static final String PENTAGRAM_ICO    = MOD_NAME  + ":pentagram";
-    public static final ResourceLocation PENTAGRAM = new ResourceLocation(BLOCK_LOCATION  + "pentagram.png");
-    public static final ResourceLocation CANDLE = new ResourceLocation(BLOCK_LOCATION  + "candle.png");
+    public static final String NIGHT_STONE = "nether_brick";
+    public static final String THUNDER_STONE = "stonebrick";
+    public static final String BONE_BLOCK = MOD_NAME + ":bone_block";
+    public static final String SKULL_BONE_BLOCK = MOD_NAME + ":skull_bone_block";
+    public static final String PENTAGRAM_ICO = MOD_NAME + ":pentagram";
+    public static final ResourceLocation PENTAGRAM = new ResourceLocation(BLOCK_LOCATION + "pentagram.png");
+    public static final ResourceLocation CANDLE = new ResourceLocation(BLOCK_LOCATION + "candle.png");
     public static final ResourceLocation PILE_OF_BONES = new ResourceLocation(BLOCK_LOCATION + "pileOfBones.png");
-    public static final String ALTAR_TOP = MOD_NAME  + ":altar_top";
-    public static final String ALTAR_SIDE = MOD_NAME  + ":altar_side";
+    public static final String ALTAR_TOP = MOD_NAME + ":altar_top";
+    public static final String ALTAR_SIDE = MOD_NAME + ":altar_side";
     // items
     public static final String CHISEL = MOD_NAME + ":chisel";
 
@@ -328,11 +329,11 @@ public class Resources {
     public static final ResourceLocation MEMORIAL_OBSIDIAN_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "ObsidianBigPedestal.png");
     public static final ResourceLocation MEMORIAL_QUARTZ_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "QuartzBigPedestal.png");
     public static final ResourceLocation MEMORIAL_ICE_BIG_PEDESTAL = new ResourceLocation(PEDESTALS_LOCATION + "IceBigPedestal.png");
-    
+
     // haunted chest
     public static final ResourceLocation CHRISTMAS_CHEST = new ResourceLocation("textures/entity/chest/christmas.png");
     public static final ResourceLocation DEFAULT_CHEST = new ResourceLocation("textures/entity/chest/normal.png");
-    
+
     // skull candle
     public static final ResourceLocation SKELETON_SKULL_CANDLE = new ResourceLocation(BLOCK_LOCATION + "SkeletonSkullCandle.png");
     public static final ResourceLocation WITHER_SKULL_CANDLE = new ResourceLocation(BLOCK_LOCATION + "WitherSkullCandle.png");

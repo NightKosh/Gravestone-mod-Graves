@@ -1,7 +1,7 @@
 package gravestone.core;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import gravestone.block.*;
 import gravestone.block.enums.*;
 import gravestone.item.*;

@@ -1,13 +1,13 @@
 package gravestone.renderer.tileentity;
 
 import com.google.common.collect.ImmutableMap;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.models.block.ModelMemorial;
 import gravestone.models.block.memorials.*;
 import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Map;
@@ -148,11 +148,11 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
             .put(EnumMemorials.OBSIDIAN_CREEPER_STATUE, creeperStatue)
             .put(EnumMemorials.QUARTZ_CREEPER_STATUE, creeperStatue)
             .put(EnumMemorials.ICE_CREEPER_STATUE, creeperStatue)
-            // gibbets
+                    // gibbets
             .put(EnumMemorials.GIBBET, gibbet)
-            // stocks
+                    // stocks
             .put(EnumMemorials.STOCKS, stocks)
-            // burning stake
+                    // burning stake
             .put(EnumMemorials.BURNING_STAKE, burningStake)
             .build();
 

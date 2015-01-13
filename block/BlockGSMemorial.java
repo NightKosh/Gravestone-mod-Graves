@@ -1,8 +1,5 @@
 package gravestone.block;
 
-import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
@@ -16,6 +13,7 @@ import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.creativetab.CreativeTabs;
@@ -26,13 +24,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.*;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.*;
 
@@ -277,11 +276,11 @@ public class BlockGSMemorial extends BlockContainer {
         super(Material.rock);
         this.isBlockContainer = true;
         this.setStepSound(Block.soundTypeStone);
-        this.setBlockName("Memorial");
+        this.setUnlocalizedName("Memorial");
         this.setHardness(1);
         this.setResistance(5F);
         this.setCreativeTab(GSTabs.memorialsTab);
-        this.setBlockTextureName("stone");
+//        this.setBlockTextureName("stone");
     }
 
     /*
@@ -308,21 +307,21 @@ public class BlockGSMemorial extends BlockContainer {
      * - only dogs memorials 3 - only cats memorials 4 - creeper memorials 5 -
      * only statues memorials(steve, villager, angel)
      */
-    public static byte getMemorialType(World world, int x, int z, Random random, int memorialType) {
+    public static byte getMemorialType(World world, BlockPos pos, Random random, int memorialType) {
         switch (memorialType) {
             default:
             case 0:
-                return getRandomMemorial(getGeneratedMemorialsTypes(world, x, z), random);
+                return getRandomMemorial(getGeneratedMemorialsTypes(world, pos), random);
             case 1:
-                return getRandomMemorial(getPetsMemorialsTypes(world, x, z), random);
+                return getRandomMemorial(getPetsMemorialsTypes(world, pos), random);
             case 2:
-                return getRandomMemorial(getDogsMemorialsTypes(world, x, z), random);
+                return getRandomMemorial(getDogsMemorialsTypes(world, pos), random);
             case 3:
-                return getRandomMemorial(getCatsMemorialsTypes(world, x, z), random);
+                return getRandomMemorial(getCatsMemorialsTypes(world, pos), random);
             case 4:
-                return getRandomMemorial(getCreeperMemorialsTypes(world, x, z), random);
+                return getRandomMemorial(getCreeperMemorialsTypes(world, pos), random);
             case 5:
-                return getRandomMemorial(getStatuesMemorialsTypes(world, x, z), random);
+                return getRandomMemorial(getStatuesMemorialsTypes(world, pos), random);
         }
     }
 
@@ -334,13 +333,13 @@ public class BlockGSMemorial extends BlockContainer {
         }
     }
 
-    public static ArrayList<EnumMemorials> getGeneratedMemorialsTypes(World world, int x, int z) {
-        BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+    public static ArrayList<EnumMemorials> getGeneratedMemorialsTypes(World world, BlockPos pos) {
+        BiomeGenBase biome = world.getBiomeGenForCoords(pos);
 
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumMemorials> memorialTypes = new ArrayList<EnumMemorials>();
 
-        if (biomeTypesList.contains(BiomeDictionary.Type.DESERT) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SANDY) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
             memorialTypes.addAll(Arrays.asList(SANDSTONE_GENERATED_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
@@ -377,16 +376,16 @@ public class BlockGSMemorial extends BlockContainer {
         return memorialTypes;
     }
 
-    public static ArrayList<EnumMemorials> getPetsMemorialsTypes(World world, int x, int z) {
+    public static ArrayList<EnumMemorials> getPetsMemorialsTypes(World world, BlockPos pos) {
         ArrayList<EnumMemorials> memorialTypes = new ArrayList<EnumMemorials>();
-        memorialTypes.addAll(getDogsMemorialsTypes(world, x, z));
-        memorialTypes.addAll(getCatsMemorialsTypes(world, x, z));
+        memorialTypes.addAll(getDogsMemorialsTypes(world, pos));
+        memorialTypes.addAll(getCatsMemorialsTypes(world, pos));
 
         return memorialTypes;
     }
 
-    public static ArrayList<EnumMemorials> getDogsMemorialsTypes(World world, int x, int z) {
-        BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+    public static ArrayList<EnumMemorials> getDogsMemorialsTypes(World world, BlockPos pos) {
+        BiomeGenBase biome = world.getBiomeGenForCoords(pos);
 
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumMemorials> memorialTypes = new ArrayList<EnumMemorials>();
@@ -428,8 +427,8 @@ public class BlockGSMemorial extends BlockContainer {
         return memorialTypes;
     }
 
-    public static ArrayList<EnumMemorials> getCatsMemorialsTypes(World world, int x, int z) {
-        BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+    public static ArrayList<EnumMemorials> getCatsMemorialsTypes(World world, BlockPos pos) {
+        BiomeGenBase biome = world.getBiomeGenForCoords(pos);
 
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumMemorials> memorialTypes = new ArrayList<EnumMemorials>();
@@ -471,8 +470,8 @@ public class BlockGSMemorial extends BlockContainer {
         return memorialTypes;
     }
 
-    public static ArrayList<EnumMemorials> getCreeperMemorialsTypes(World world, int x, int z) {
-        BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+    public static ArrayList<EnumMemorials> getCreeperMemorialsTypes(World world, BlockPos pos) {
+        BiomeGenBase biome = world.getBiomeGenForCoords(pos);
 
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumMemorials> memorialTypes = new ArrayList<EnumMemorials>();
@@ -514,8 +513,8 @@ public class BlockGSMemorial extends BlockContainer {
         return memorialTypes;
     }
 
-    public static ArrayList<EnumMemorials> getStatuesMemorialsTypes(World world, int x, int z) {
-        BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+    public static ArrayList<EnumMemorials> getStatuesMemorialsTypes(World world, BlockPos pos) {
+        BiomeGenBase biome = world.getBiomeGenForCoords(pos);
 
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumMemorials> memorialTypes = new ArrayList<EnumMemorials>();
@@ -558,7 +557,7 @@ public class BlockGSMemorial extends BlockContainer {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack itemStack) {
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase player, ItemStack itemStack) {
         int direction = MathHelper.floor_float(player.rotationYaw);
 
         if (direction < 0) {
@@ -567,32 +566,32 @@ public class BlockGSMemorial extends BlockContainer {
 
         int metadata = getMetadataBasedOnRotation(direction);
         world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
-        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
 
         if (tileEntity != null) {
-            if (itemStack.stackTagCompound != null) {
-                if (itemStack.stackTagCompound.hasKey("isLocalized") && itemStack.stackTagCompound.getBoolean("isLocalized")) {
+            if (itemStack.getTagCompound() != null) {
+                if (itemStack.getTagCompound().hasKey("isLocalized") && itemStack.getTagCompound().getBoolean("isLocalized")) {
                     tileEntity.getDeathTextComponent().setLocalized();
 
-                    if (itemStack.stackTagCompound.hasKey("name") && itemStack.stackTagCompound.hasKey("KillerName")) {
-                        tileEntity.getDeathTextComponent().setName(itemStack.stackTagCompound.getString("name"));
-                        tileEntity.getDeathTextComponent().setKillerName(itemStack.stackTagCompound.getString("KillerName"));
+                    if (itemStack.getTagCompound().hasKey("name") && itemStack.getTagCompound().hasKey("KillerName")) {
+                        tileEntity.getDeathTextComponent().setName(itemStack.getTagCompound().getString("name"));
+                        tileEntity.getDeathTextComponent().setKillerName(itemStack.getTagCompound().getString("KillerName"));
                     }
                 }
 
-                if (itemStack.stackTagCompound.hasKey("DeathText")) {
-                    tileEntity.getDeathTextComponent().setDeathText(itemStack.stackTagCompound.getString("DeathText"));
+                if (itemStack.getTagCompound().hasKey("DeathText")) {
+                    tileEntity.getDeathTextComponent().setDeathText(itemStack.getTagCompound().getString("DeathText"));
                 }
 
-                if (itemStack.stackTagCompound.hasKey("GraveType")) {
-                    tileEntity.setGraveType(itemStack.stackTagCompound.getByte("GraveType"));
+                if (itemStack.getTagCompound().hasKey("GraveType")) {
+                    tileEntity.setGraveType(itemStack.getTagCompound().getByte("GraveType"));
                 } else {
                     tileEntity.setGraveType((byte) 0);
                 }
 
-                if (itemStack.stackTagCompound.hasKey("HangedMob")) {
-                    tileEntity.setHangedMob(EnumHangedMobs.getByID(itemStack.stackTagCompound.getByte("HangedMob")));
-                    tileEntity.setHangedVillagerProfession(itemStack.stackTagCompound.getInteger("HangedVillagerProfession"));
+                if (itemStack.getTagCompound().hasKey("HangedMob")) {
+                    tileEntity.setHangedMob(EnumHangedMobs.getByID(itemStack.getTagCompound().getByte("HangedMob")));
+                    tileEntity.setHangedVillagerProfession(itemStack.getTagCompound().getInteger("HangedVillagerProfession"));
                 }
             }
         }
@@ -611,10 +610,10 @@ public class BlockGSMemorial extends BlockContainer {
     }
 
     @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
+    public void setBlockBoundsBasedOnState(IBlockAccess access, BlockPos pos) {
         int meta = access.getBlockMetadata(x, y, z);
         EnumMemorials memorialType;
-        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) access.getTileEntity(x, y, z);
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) access.getTileEntity(pos);
 
         if (tileEntity != null) {
             memorialType = tileEntity.getMemorialType();
@@ -760,11 +759,11 @@ public class BlockGSMemorial extends BlockContainer {
     public void setBlockBoundsForItemRender() {
         this.setBlockBounds(0, 0, 0, 1, 1, 2);
     }
-
-    @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
+//
+//    @Override
+//    public boolean renderAsNormalBlock() {
+//        return false;
+//    }
 
     @Override
     public boolean isOpaqueCube() {
@@ -777,8 +776,8 @@ public class BlockGSMemorial extends BlockContainer {
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-        TileEntityGSMemorial te = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
+        TileEntityGSMemorial te = (TileEntityGSMemorial) world.getTileEntity(pos);
 
         if (te != null) {
             ItemStack item = player.inventory.getCurrentItem();
@@ -796,8 +795,6 @@ public class BlockGSMemorial extends BlockContainer {
                 String deathText = te.getDeathTextComponent().getDeathText();
 
                 if (deathText.length() != 0) {
-                    //entityPlayer.sendChatToPlayer(ChatMessageComponent.func_111066_d(deathText));
-
                     if (te.getDeathTextComponent().isLocalized()) {
                         name = ModGraveStone.proxy.getLocalizedEntityName(te.getDeathTextComponent().getName());
                         if (name.length() != 0) {
@@ -825,7 +822,7 @@ public class BlockGSMemorial extends BlockContainer {
     }
 
     @Override
-    public int damageDropped(int metadata) {
+    public int damageDropped(IBlockState state) {
         return 0;
     }
 
@@ -923,24 +920,24 @@ public class BlockGSMemorial extends BlockContainer {
     }
 
     @Override
-    public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player) {
+    public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
         player.addExhaustion(0.025F);
 
         ItemStack itemStack;
         if (EnchantmentHelper.getSilkTouchModifier(player)) {
-            itemStack = getBlockItemStack(world, x, y, z);
+            itemStack = getBlockItemStack(world, pos);
         } else {
-            itemStack = getBlockItemStackWithoutInfo(world, x, y, z);
+            itemStack = getBlockItemStackWithoutInfo(world, pos);
         }
 
         if (itemStack != null) {
-            this.dropBlockAsItem(world, x, y, z, itemStack);
+            this.dropBlockAsItem(world, pos, itemStack);
         }
     }
 
-    private ItemStack getBlockItemStack(World world, int x, int y, int z) {
+    private ItemStack getBlockItemStack(World world, BlockPos pos) {
         ItemStack itemStack = this.createStackedBlock(0);
-        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
 
         if (tileEntity != null) {
             NBTTagCompound nbt = new NBTTagCompound();
@@ -963,9 +960,9 @@ public class BlockGSMemorial extends BlockContainer {
         return itemStack;
     }
 
-    private ItemStack getBlockItemStackWithoutInfo(World world, int x, int y, int z) {
+    private ItemStack getBlockItemStackWithoutInfo(World world, BlockPos pos) {
         ItemStack itemStack = this.createStackedBlock(0);
-        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
 
         if (tileEntity != null) {
             NBTTagCompound nbt = new NBTTagCompound();
@@ -978,29 +975,27 @@ public class BlockGSMemorial extends BlockContainer {
 
     /**
      * Called when the player destroys a block with an item that can harvest it.
-     * (i, j, k) are the coordinates of the block and l is the block's
-     * subtype/damage.
      */
     @Override
-    public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int metadata) {
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te) {
     }
 
     /*
      * Drop sword as item
      */
-    public void dropCreeperMemorial(World world, int x, int y, int z) {
-        byte memorialType = BlockGSMemorial.getMemorialType(world, x, z, new Random(), 4);
+    public void dropCreeperMemorial(World world, BlockPos pos) {
+        byte memorialType = BlockGSMemorial.getMemorialType(world, pos, new Random(), 4);
         ItemStack itemStack = new ItemStack(this);
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setByte("GraveType", memorialType);
         itemStack.setTagCompound(nbt);
-        this.dropBlockAsItem(world, x, y, z, itemStack);
+        this.dropBlockAsItem(world, pos, itemStack);
     }
 
     @Override
-    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
+    public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos) {
         ItemStack itemStack = this.createStackedBlock(0);
-        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
 
         if (tileEntity != null) {
             if (itemStack != null) {
@@ -1017,27 +1012,27 @@ public class BlockGSMemorial extends BlockContainer {
     }
 
     @Override
-    public int getLightValue(IBlockAccess world, int x, int y, int z) {
-        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
+    public int getLightValue(IBlockAccess access, BlockPos pos) {
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) access.getTileEntity(pos);
 
         if (tileEntity != null && tileEntity.getMemorialType() == EnumMemorials.BURNING_STAKE && tileEntity.getHangedMob() != EnumHangedMobs.NONE) {
             return 15;
         } else {
-            return super.getLightValue(world, x, y, z);
+            return super.getLightValue(access, pos);
         }
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
+    public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random random) {
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
         if (tileEntity != null && tileEntity.getMemorialType() == EnumMemorials.BURNING_STAKE && tileEntity.getHangedMob() != EnumHangedMobs.NONE) {
             double xPos, zPos, yPos;
 
-            yPos = y + 0.25;
+            yPos = pos.getY() + 0.25;
             for (int angle = 0; angle < 20; angle++) {
-                xPos = x + 0.5 + Math.sin(angle * 0.2792) * 0.75;
-                zPos = z + 0.5 + Math.cos(angle * 0.2792) * 0.75;
+                xPos = pos.getX() + 0.5 + Math.sin(angle * 0.2792) * 0.75;
+                zPos = pos.getZ() + 0.5 + Math.cos(angle * 0.2792) * 0.75;
 
                 EntityFX entityfx = new EntityBigFlameFX(world, xPos, yPos, zPos, 0, 0, 0);
                 Minecraft.getMinecraft().effectRenderer.addEffect(entityfx);
@@ -1045,8 +1040,8 @@ public class BlockGSMemorial extends BlockContainer {
 
             yPos += 0.25;
             for (int angle = 0; angle < 11; angle++) {
-                xPos = x + 0.5 + Math.sin(angle * 0.5584) * 0.5;
-                zPos = z + 0.5 + Math.cos(angle * 0.5584) * 0.5;
+                xPos = pos.getX() + 0.5 + Math.sin(angle * 0.5584) * 0.5;
+                zPos = pos.getZ() + 0.5 + Math.cos(angle * 0.5584) * 0.5;
 
                 EntityFX entityfx = new EntityBigFlameFX(world, xPos, yPos, zPos, 0, 0, 0);
                 Minecraft.getMinecraft().effectRenderer.addEffect(entityfx);
@@ -1054,13 +1049,13 @@ public class BlockGSMemorial extends BlockContainer {
 
             yPos += 0.35;
             for (int angle = 0; angle < 5; angle++) {
-                xPos = x + 0.5 + Math.sin(angle * 1.1168) * 0.2;
-                zPos = z + 0.5 + Math.cos(angle * 1.1168) * 0.2;
+                xPos = pos.getX() + 0.5 + Math.sin(angle * 1.1168) * 0.2;
+                zPos = pos.getZ() + 0.5 + Math.cos(angle * 1.1168) * 0.2;
 
                 EntityFX entityfx = new EntityBigFlameFX(world, xPos, yPos, zPos, 0, 0, 0);
                 Minecraft.getMinecraft().effectRenderer.addEffect(entityfx);
-                world.spawnParticle("lava", xPos, yPos, zPos, 0, 0, 0);
-                world.spawnParticle("largesmoke", xPos, yPos, zPos, 0, 0, 0);
+                world.spawnParticle(EnumParticleTypes.LAVA, xPos, yPos, zPos, 0, 0, 0);
+                world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, xPos, yPos, zPos, 0, 0, 0);
             }
         }
     }

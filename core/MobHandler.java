@@ -66,7 +66,7 @@ public class MobHandler {
                 }
             }
             if (data != null) {
-                Set keySet = data.func_150296_c();
+                Set keySet = data.getKeySet();
                 Iterator it = keySet.iterator();
                 while (it.hasNext()) {
                     String tagName = (String) it.next();

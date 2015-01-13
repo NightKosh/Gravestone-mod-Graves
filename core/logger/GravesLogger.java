@@ -27,14 +27,7 @@ public class GravesLogger extends AbstractLogger {
 
     public static void setWorldDirectory(File worldDirectory) {
         File logsDir = new File(worldDirectory, LOG_FILE_DIRECTORY);
-//        if (!logsDir..exists()) {
-//            try {
-                logsDir.mkdir();
-//            } catch (IOException e) {
-//                GSLogger.logError("Can't create graves logger directory!");
-//                e.printStackTrace();
-//            }
-//        }
+        logsDir.mkdir();
 
         StringBuilder fileName = new StringBuilder();
         fileName.append(LOG_FILE_DIRECTORY)

@@ -1,7 +1,5 @@
 package gravestone.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumGraves;
 import net.minecraft.block.Block;
@@ -13,6 +11,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -40,8 +40,8 @@ public class ItemBlockGSGraveStone extends ItemBlock {
     public String getUnlocalizedName(ItemStack itemStack) {
         EnumGraves graveType;
 
-        if (itemStack.stackTagCompound != null && itemStack.stackTagCompound.hasKey("GraveType")) {
-            graveType = EnumGraves.getByID(itemStack.stackTagCompound.getByte("GraveType"));
+        if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("GraveType")) {
+            graveType = EnumGraves.getByID(itemStack.getTagCompound().getByte("GraveType"));
         } else {
             graveType = EnumGraves.getByID(0);
         }
@@ -51,26 +51,26 @@ public class ItemBlockGSGraveStone extends ItemBlock {
 
     @Override
     public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-        if (stack.stackTagCompound == null) {
+        if (stack.getTagCompound() == null) {
             stack.setTagCompound(new NBTTagCompound());
         }
     }
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        if (stack.stackTagCompound == null) {
+        if (stack.getTagCompound() == null) {
             stack.setTagCompound(new NBTTagCompound());
         } else {
             String deathText = "";
 
-            if (stack.stackTagCompound.hasKey("DeathText") && StringUtils.isNotBlank(stack.stackTagCompound.getString("DeathText"))) {
-                deathText = stack.stackTagCompound.getString("DeathText");
+            if (stack.getTagCompound().hasKey("DeathText") && StringUtils.isNotBlank(stack.getTagCompound().getString("DeathText"))) {
+                deathText = stack.getTagCompound().getString("DeathText");
             }
 
-            if (stack.stackTagCompound.hasKey("isLocalized") && stack.stackTagCompound.getBoolean("isLocalized")) {
-                if (stack.stackTagCompound.hasKey("name")) {
-                    String name = ModGraveStone.proxy.getLocalizedEntityName(stack.stackTagCompound.getString("name"));
-                    String killerName = ModGraveStone.proxy.getLocalizedEntityName(stack.stackTagCompound.getString("KillerName"));
+            if (stack.getTagCompound().hasKey("isLocalized") && stack.getTagCompound().getBoolean("isLocalized")) {
+                if (stack.getTagCompound().hasKey("name")) {
+                    String name = ModGraveStone.proxy.getLocalizedEntityName(stack.getTagCompound().getString("name"));
+                    String killerName = ModGraveStone.proxy.getLocalizedEntityName(stack.getTagCompound().getString("KillerName"));
                     if (killerName.length() == 0) {
                         list.add(new ChatComponentTranslation(deathText, new Object[]{name}).getFormattedText());
                     } else {
@@ -81,11 +81,11 @@ public class ItemBlockGSGraveStone extends ItemBlock {
                 list.add(deathText);
             }
 
-            if (stack.stackTagCompound.hasKey("Age") && stack.stackTagCompound.getInteger("Age") > 0) {
-                list.add(ModGraveStone.proxy.getLocalizedString("item.grave.age") + " " + stack.stackTagCompound.getInteger("Age") + " " + ModGraveStone.proxy.getLocalizedString("item.grave.days"));
+            if (stack.getTagCompound().hasKey("Age") && stack.getTagCompound().getInteger("Age") > 0) {
+                list.add(ModGraveStone.proxy.getLocalizedString("item.grave.age") + " " + stack.getTagCompound().getInteger("Age") + " " + ModGraveStone.proxy.getLocalizedString("item.grave.days"));
             }
 
-            if (stack.stackTagCompound.hasKey("Sword")) {
+            if (stack.getTagCompound().hasKey("Sword")) {
                 ItemStack sword = ItemStack.loadItemStackFromNBT(stack.getTagCompound().getCompoundTag("Sword"));
 
                 if (StringUtils.isNotBlank(sword.getDisplayName())) {
@@ -104,8 +104,8 @@ public class ItemBlockGSGraveStone extends ItemBlock {
                             short enchantmentId = enchantments.getCompoundTagAt(i).getShort("id");
                             short enchantmentLvl = enchantments.getCompoundTagAt(i).getShort("lvl");
 
-                            if (Enchantment.enchantmentsList[enchantmentId] != null) {
-                                list.add(Enchantment.enchantmentsList[enchantmentId].getTranslatedName(enchantmentLvl));
+                            if (Enchantment.enchantmentsBookList[enchantmentId] != null) {
+                                list.add(Enchantment.enchantmentsBookList[enchantmentId].getTranslatedName(enchantmentLvl));
                             }
                         }
                     }
@@ -118,6 +118,6 @@ public class ItemBlockGSGraveStone extends ItemBlock {
     @SideOnly(Side.CLIENT)
     // TODO
     public boolean hasEffect(ItemStack stack) {
-        return stack.stackTagCompound != null && stack.stackTagCompound.hasKey("Enchanted");
+        return stack.getTagCompound() != null && stack.getTagCompound().hasKey("Enchanted");
     }
 }

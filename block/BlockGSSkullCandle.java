@@ -1,7 +1,10 @@
 package gravestone.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import gravestone.block.enums.EnumSkullCandle;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSTabs;
@@ -36,11 +39,11 @@ public class BlockGSSkullCandle extends BlockContainer implements IInfusionStabi
     public BlockGSSkullCandle() {
         super(Material.circuits);
         this.setStepSound(Block.soundTypeStone);
-        this.setBlockName("Skull Candle");
+        this.setUnlocalizedName("Skull Candle");
         this.setHardness(0.5F);
         this.setResistance(5F);
         this.setLightLevel(1);
-        this.setBlockTextureName("snow");
+//        this.setBlockTextureName("snow");
         this.setCreativeTab(GSTabs.otherItemsTab);
         this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.5F, 0.75F);
     }
@@ -58,10 +61,10 @@ public class BlockGSSkullCandle extends BlockContainer implements IInfusionStabi
     /**
      * If this block doesn't render as an ordinary block it will return False
      */
-    @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
+//    @Override
+//    public boolean renderAsNormalBlock() {
+//        return false;
+//    }
 
     /**
      * The type of render function that is called for this block
@@ -81,18 +84,18 @@ public class BlockGSSkullCandle extends BlockContainer implements IInfusionStabi
     }
 
     @Override
-    public int damageDropped(int damage) {
-        return damage;
+    public int damageDropped(IBlockState state) {
+        return metadata;
     }
 
     /**
      * Called when the block is placed in the world.
      */
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entity, ItemStack stack) {
         world.setBlockMetadataWithNotify(x, y, z, stack.getItemDamage(), 2);
 
-        TileEntityGSSkullCandle tileEntity = (TileEntityGSSkullCandle) world.getTileEntity(x, y, z);
+        TileEntityGSSkullCandle tileEntity = (TileEntityGSSkullCandle) world.getTileEntity(pos);
         if (tileEntity != null) {
             float skullRotation = entity.rotationYaw - 180 - 22.5F;
             if (skullRotation < 0) {
@@ -120,13 +123,12 @@ public class BlockGSSkullCandle extends BlockContainer implements IInfusionStabi
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-
-        TileEntityGSSkullCandle tileEntity = (TileEntityGSSkullCandle) world.getTileEntity(x, y, z);
+    public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random random) {
+        TileEntityGSSkullCandle tileEntity = (TileEntityGSSkullCandle) world.getTileEntity(pos);
         if (tileEntity != null) {
-            double xPos = x + 0.5F;
-            double yPos = y + 0.85;
-            double zPos = z + 0.5F;
+            double xPos = pos.getX() + 0.5F;
+            double yPos = pos.getY() + 0.85;
+            double zPos = pos.getZ() + 0.5F;
             double rotation = Math.toRadians(tileEntity.getRotation() * 360 / 8F);
             double d = 0.07;
             double dx = -Math.sin(rotation) * d;
@@ -134,13 +136,13 @@ public class BlockGSSkullCandle extends BlockContainer implements IInfusionStabi
 
             long dayTime = TimeHelper.getDayTime(world);
             if (dayTime < TimeHelper.SUN_SET || dayTime > TimeHelper.SUN_RISING) {
-                world.spawnParticle("flame", xPos + dx, yPos, zPos + dz, 0, 0, 0);
+                world.spawnParticle(EnumParticleTypes.FLAME, xPos + dx, yPos, zPos + dz, 0, 0, 0);
             } else {
                 EntityFX entityfx = new EntityGreenFlameFX(world, xPos + dx, yPos, zPos + dz, 0, 0, 0);
                 Minecraft.getMinecraft().effectRenderer.addEffect(entityfx);
             }
 
-            world.spawnParticle("smoke", xPos + dx, yPos, zPos + dz, 0, 0, 0);
+            world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, xPos + dx, yPos, zPos + dz, 0, 0, 0);
         }
     }
 

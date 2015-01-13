@@ -59,7 +59,7 @@ public class DogCorpseHelper extends CorpseHelper {
         setMobName(wolf, nbtTag);
         wolf.setTamed(true);
         wolf.setHealth(20);
-        wolf.func_152115_b(player.getUniqueID().toString());
+        wolf.setOwnerId(player.getUniqueID().toString());
         wolf.setCollarColor(nbtTag.getByte("Collar"));
         world.setEntityState(wolf, (byte) 7);
         spawnMob(wolf, world, x, y, z);

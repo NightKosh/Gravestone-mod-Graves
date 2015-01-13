@@ -12,6 +12,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -22,7 +23,7 @@ import java.util.Random;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class TileEntityGSGraveStone extends TileEntityGSGrave {
+public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdatePlayerListBox {
 
     protected GSGraveStoneSpawn gsSpawn;
     protected ItemStack sword = null;
@@ -48,12 +49,12 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
      * inside its implementation.
      */
     @Override
-    public void updateEntity() {
-        gsSpawn.updateEntity();
+    public void update() {
+        gsSpawn.update();
 
         if (this.worldObj.isRemote && GraveStoneConfig.isFogEnabled) {
-            EntityPlayer player = this.worldObj.getClosestPlayer(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D, FOG_RANGE);
-            if (player != null && player.getCommandSenderName().equals(Minecraft.getMinecraft().thePlayer.getCommandSenderName()) && isFogTime(this.worldObj)) {
+            EntityPlayer player = this.worldObj.getClosestPlayer(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D, FOG_RANGE);
+            if (player != null && player.getCommandSenderEntity().equals(Minecraft.getMinecraft().thePlayer) && isFogTime(this.worldObj)) {
                 GSRenderEventHandler.addFog();
             }
         }
@@ -171,7 +172,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
     public void dropSword() {
         if (this.sword != null) {
-            this.gSItems.dropItem(this.sword, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+            this.gSItems.dropItem(this.sword, this.worldObj, this.pos.getX(), this.pos.getY(), this.pos.getZ());
         }
     }
 
@@ -190,7 +191,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
     public void dropFlower() {
         if (this.flower != null) {
-            this.gSItems.dropItem(this.flower, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+            this.gSItems.dropItem(this.flower, this.worldObj, this.pos.getX(), this.pos.getY(), this.pos.getZ());
         }
     }
 
@@ -265,7 +266,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
     public void setRandomFlower(Random random) {
         if (random.nextInt(4) == 0) {
             ItemStack flower = new ItemStack(GraveStoneHelper.FLOWERS.get(random.nextInt(GraveStoneHelper.FLOWERS.size())), 1);
-            if (GraveStoneHelper.canFlowerBePlaced(this.worldObj, this.xCoord, this.yCoord, this.zCoord, flower, this)) {
+            if (GraveStoneHelper.canFlowerBePlaced(this.worldObj, this.pos.getX(), this.pos.getY(), this.pos.getZ(), flower, this)) {
                 setFlower(flower);
             }
         }

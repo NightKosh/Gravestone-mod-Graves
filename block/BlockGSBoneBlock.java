@@ -1,7 +1,5 @@
 package gravestone.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.block.enums.EnumBoneBlock;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSTabs;
@@ -9,12 +7,16 @@ import gravestone.core.Resources;
 import gravestone.entity.monster.EntitySkullCrawler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -26,36 +28,36 @@ import java.util.List;
  */
 public class BlockGSBoneBlock extends Block {
 
-    @SideOnly(Side.CLIENT)
-    private IIcon skullIcon;
+//    @SideOnly(Side.CLIENT)
+//    private IIcon skullIcon;
 
     public BlockGSBoneBlock() {
         super(Material.rock);
         this.setStepSound(Block.soundTypeStone);
-        this.setBlockName("bone_block");
+        this.setUnlocalizedName("bone_block");
         this.setHardness(2F);
         this.setResistance(2F);
         this.setCreativeTab(GSTabs.otherItemsTab);
         this.setHarvestLevel("pickaxe", 0);
     }
 
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon(Resources.BONE_BLOCK);
-        this.skullIcon = iconRegister.registerIcon(Resources.SKULL_BONE_BLOCK);
-    }
+//    @Override
+//    public void registerBlockIcons(IIconRegister iconRegister) {
+//        this.blockIcon = iconRegister.registerIcon(Resources.BONE_BLOCK);
+//        this.skullIcon = iconRegister.registerIcon(Resources.SKULL_BONE_BLOCK);
+//    }
 
     /**
      * From the specified side and block metadata retrieves the blocks texture.
      */
-    @Override
-    public IIcon getIcon(int side, int metadata) {
-        if (metadata == 1 || metadata == 3) {
-            return skullIcon;
-        } else {
-            return blockIcon;
-        }
-    }
+//    @Override
+//    public IIcon getIcon(int side, int metadata) {
+//        if (metadata == 1 || metadata == 3) {
+//            return skullIcon;
+//        } else {
+//            return blockIcon;
+//        }
+//    }
 
     /**
      * Returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
@@ -72,7 +74,7 @@ public class BlockGSBoneBlock extends Block {
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
     @Override
-    public int damageDropped(int metadata) {
+    public int damageDropped(IBlockState state) {
         if (isSkullCrawlerBlock(metadata)) {
             metadata -= 2;
         }
@@ -87,14 +89,14 @@ public class BlockGSBoneBlock extends Block {
      * Called right before the block is destroyed by a player. Args: world, x, y, z, metaData
      */
     @Override
-    public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int metadata) {
+    public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
         if (!world.isRemote && isSkullCrawlerBlock(metadata) && GraveStoneConfig.spawnSkullCrawlersAtBoneBlockDestruction) {
             EntitySkullCrawler skullCrawler = new EntitySkullCrawler(world);
-            skullCrawler.setLocationAndAngles((double) x + 0.5D, (double) y, (double) z + 0.5D, 0.0F, 0.0F);
+            skullCrawler.setLocationAndAngles(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0, 0);
             world.spawnEntityInWorld(skullCrawler);
             skullCrawler.spawnExplosionParticle();
         }
 
-        super.onBlockDestroyedByPlayer(world, x, y, z, metadata);
+        super.onBlockDestroyedByPlayer(world, pos, state);
     }
 }

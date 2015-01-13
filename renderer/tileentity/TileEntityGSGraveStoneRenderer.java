@@ -1,8 +1,6 @@
 package gravestone.renderer.tileentity;
 
 import com.google.common.collect.ImmutableMap;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.block.enums.EnumGraves;
 import gravestone.models.block.ModelGraveStone;
 import gravestone.models.block.graves.*;
@@ -13,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Map;

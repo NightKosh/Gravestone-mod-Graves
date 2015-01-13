@@ -9,6 +9,8 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.IChatComponent;
 
 import java.util.Random;
 
@@ -48,7 +50,7 @@ public class TileEntityGSAltar extends TileEntity implements IInventory {
                 }
 
                 corpse.stackSize -= stackSize;
-                entityItem = new EntityItem(this.worldObj, this.xCoord + x, this.yCoord + y, this.zCoord + z,
+                entityItem = new EntityItem(this.worldObj, this.pos.getX() + x, this.pos.getY() + y, this.pos.getZ() + z,
                         new ItemStack(corpse.getItem(), stackSize, corpse.getItemDamage()));
                 entityItem.motionX = random.nextGaussian() * 0.05;
                 entityItem.motionY = random.nextGaussian() * 0.15;
@@ -93,39 +95,64 @@ public class TileEntityGSAltar extends TileEntity implements IInventory {
      */
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
-        readFromNBT(packet.func_148857_g());
+        readFromNBT(packet.getNbtCompound());
     }
 
     @Override
     public Packet getDescriptionPacket() {
         NBTTagCompound nbtTag = new NBTTagCompound();
         this.writeToNBT(nbtTag);
-        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+        return new S35PacketUpdateTileEntity(this.pos, 1, nbtTag);
     }
 
     @Override
-    public String getInventoryName() {
-        return "";
-    }
-
-    @Override
-    public boolean hasCustomInventoryName() {
-        return false;
-    }
-
-    @Override
-    public void openInventory() {
+    public void openInventory(EntityPlayer player) {
 
     }
 
     @Override
-    public void closeInventory() {
+    public void closeInventory(EntityPlayer player) {
 
     }
 
     @Override
     public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
         return false;
+    }
+
+    @Override
+    public int getField(int id) {
+        return 0;
+    }
+
+    @Override
+    public void setField(int id, int value) {
+
+    }
+
+    @Override
+    public int getFieldCount() {
+        return 0;
+    }
+
+    @Override
+    public void clear() {
+
+    }
+
+    @Override
+    public String getName() {
+        return "";
+    }
+
+    @Override
+    public boolean hasCustomName() {
+        return false;
+    }
+
+    @Override
+    public IChatComponent getDisplayName() {
+        return null;
     }
 
     @Override
@@ -179,7 +206,7 @@ public class TileEntityGSAltar extends TileEntity implements IInventory {
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer player) {
-        return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this &&
-                player.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64;
+        return worldObj.getTileEntity(this.pos) == this &&
+                player.getDistanceSq(new BlockPos(this.pos.getX() + 0.5, this.pos.getY() + 0.5, this.pos.getZ() + 0.5)) < 64;
     }
 }

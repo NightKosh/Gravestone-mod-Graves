@@ -12,6 +12,7 @@ import gravestone.structures.memorials.MemorialGenerator;
 import gravestone.structures.village.VillageCemeteryGenerator;
 import gravestone.structures.village.VillageUndertakerGenerator;
 import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.world.World;
 
@@ -24,32 +25,33 @@ import net.minecraft.world.World;
 public class CommandStructuresGenerator extends CommandBase {
 
     @Override
-    public String getCommandName() {
+    public String getName() {
         return "generate";
     }
 
     @Override
     public String getCommandUsage(ICommandSender icommandsender) {
-        return "/" + getCommandName() + " <structure name> <x coordinate> <z coordinate>";
+        return "/" + getName() + " <structure name> <x coordinate> <z coordinate>";
     }
 
     @Override
-    public void processCommand(ICommandSender icommandsender, String[] commandStr) {
+    public void execute(ICommandSender sender, String[] args) throws CommandException {
         GSLogger.logInfo("Structure generation command recieved");
 
-        if (commandStr[0].equals("catacombs")) {
-            generateStructure(icommandsender.getEntityWorld(), commandStr[1], commandStr[2], CatacombsGenerator.getInstance());
-        } else if (commandStr[0].equals("memorial")) {
-            generateStructure(icommandsender.getEntityWorld(), commandStr[1], commandStr[2], MemorialGenerator.getInstance());
-        } else if (commandStr[0].equals("grave")) {
-            generateStructure(icommandsender.getEntityWorld(), commandStr[1], commandStr[2], SingleGraveGenerator.getInstance());
-        } else if (commandStr[0].equals("cemetery")) {
-            generateStructure(icommandsender.getEntityWorld(), commandStr[1], commandStr[2], VillageCemeteryGenerator.getInstance());
-        } else if (commandStr[0].equals("undertaker")) {
-            generateStructure(icommandsender.getEntityWorld(), commandStr[1], commandStr[2], VillageUndertakerGenerator.getInstance());
+        if (args[0].equals("catacombs")) {
+            generateStructure(sender.getEntityWorld(), args[1], args[2], CatacombsGenerator.getInstance());
+        } else if (args[0].equals("memorial")) {
+            generateStructure(sender.getEntityWorld(), args[1], args[2], MemorialGenerator.getInstance());
+        } else if (args[0].equals("grave")) {
+            generateStructure(sender.getEntityWorld(), args[1], args[2], SingleGraveGenerator.getInstance());
+        } else if (args[0].equals("cemetery")) {
+            generateStructure(sender.getEntityWorld(), args[1], args[2], VillageCemeteryGenerator.getInstance());
+        } else if (args[0].equals("undertaker")) {
+            generateStructure(sender.getEntityWorld(), args[1], args[2], VillageUndertakerGenerator.getInstance());
         } else {
             GSLogger.logError("Unknown structure type");
         }
+
     }
 
     private static void generateStructure(World world, String xStr, String zStr, GSStructureGenerator structure) {

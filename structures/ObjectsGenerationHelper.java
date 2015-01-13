@@ -189,7 +189,7 @@ public class ObjectsGenerationHelper {
         TileEntityMobSpawner tileEntity = (TileEntityMobSpawner) world.getTileEntity(x, y, z);
 
         if (tileEntity != null) {
-            tileEntity.func_145881_a().setEntityName(mobNmae);
+            tileEntity.getSpawnerBaseLogic().setEntityName(mobNmae);
         }
     }
 

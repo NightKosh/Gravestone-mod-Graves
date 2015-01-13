@@ -1,6 +1,6 @@
 package gravestone.item.corpse;
 
-import cpw.mods.fml.common.registry.VillagerRegistry;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import gravestone.ModGraveStone;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.compatibility.forestry.GSCompatibilityForestry;

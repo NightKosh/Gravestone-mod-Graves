@@ -1,6 +1,6 @@
 package gravestone.models.block.memorials;
 
-import cpw.mods.fml.common.registry.VillagerRegistry;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.core.Resources;

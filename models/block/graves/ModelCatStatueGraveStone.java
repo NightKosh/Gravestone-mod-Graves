@@ -1,7 +1,7 @@
 package gravestone.models.block.graves;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import gravestone.models.block.ModelGraveStone;
 import net.minecraft.client.model.ModelRenderer;
 import org.lwjgl.opengl.GL11;

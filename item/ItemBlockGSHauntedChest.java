@@ -34,8 +34,8 @@ public class ItemBlockGSHauntedChest extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
-        if (itemStack.stackTagCompound != null && itemStack.stackTagCompound.hasKey("ChestType")) {
-            return EnumHauntedChest.getById(itemStack.stackTagCompound.getByte("ChestType")).getName();
+        if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("ChestType")) {
+            return EnumHauntedChest.getById(itemStack.getTagCompound().getByte("ChestType")).getName();
         } else {
             return EnumHauntedChest.getById((byte) 0).getName();
         }
@@ -43,7 +43,7 @@ public class ItemBlockGSHauntedChest extends ItemBlock {
 
     @Override
     public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-        if (stack.stackTagCompound == null) {
+        if (stack.getTagCompound() == null) {
             stack.setTagCompound(new NBTTagCompound());
         }
     }

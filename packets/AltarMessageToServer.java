@@ -1,8 +1,5 @@
 package gravestone.packets;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import gravestone.core.GSMessageHandler;
 import gravestone.item.ItemGSCorpse;
 import gravestone.item.corpse.CorpseHelper;
@@ -12,8 +9,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 /**
  * GraveStone mod
@@ -51,7 +52,7 @@ public class AltarMessageToServer implements IMessage, IMessageHandler<AltarMess
 
     public AltarMessageToServer(EntityPlayer player, int x, int y, int z, MOB_TYPE mobType) {
         this.playerID = player.getEntityId();
-        this.dimensionID = player.worldObj.provider.dimensionId;
+        this.dimensionID = player.worldObj.provider.getDimensionId();
         this.x = x;
         this.y = y;
         this.z = z;
@@ -86,13 +87,13 @@ public class AltarMessageToServer implements IMessage, IMessageHandler<AltarMess
                 return null;
             }
             EntityPlayer player = (EntityPlayer) world.getEntityByID(message.playerID);
-            TileEntity te = world.getTileEntity(message.x, message.y, message.z);
+            TileEntity te = world.getTileEntity(new BlockPos(message.x, message.y, message.z));
             if (te != null && te instanceof TileEntityGSAltar) {
                 TileEntityGSAltar tileEntity = (TileEntityGSAltar) te;
                 if (tileEntity.hasCorpse()) {
                     ItemStack corpse = tileEntity.getCorpse();
                     if (corpse != null && corpse.getItem() instanceof ItemGSCorpse && CorpseHelper.canSpawnMob(player, corpse.getItemDamage())) {
-                        CorpseHelper.spawnMob(corpse.getItemDamage(), tileEntity.getWorldObj(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, corpse.stackTagCompound, player);
+                        CorpseHelper.spawnMob(corpse.getItemDamage(), tileEntity.getWorld(), tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ(), corpse.getTagCompound(), player);
                         CorpseHelper.getExperience(player, corpse.getItemDamage());
                         GSMessageHandler.networkWrapper.sendTo(new AltarMessageToClient(), (EntityPlayerMP) player);
                         tileEntity.setCorpse(null);

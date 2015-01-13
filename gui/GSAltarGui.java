@@ -48,7 +48,7 @@ public class GSAltarGui extends GuiContainer {
     public void actionPerformed(GuiButton button) {
         switch (button.id) {
             case 0:
-                GSMessageHandler.networkWrapper.sendToServer(new AltarMessageToServer(this.player, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, AltarMessageToServer.MOB_TYPE.LIVED));
+                GSMessageHandler.networkWrapper.sendToServer(new AltarMessageToServer(this.player, tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ(), AltarMessageToServer.MOB_TYPE.LIVED));
                 break;
         }
     }

@@ -1,13 +1,14 @@
 package gravestone.structures;
 
 import gravestone.config.GraveStoneConfig;
-import gravestone.structures.memorials.MemorialGenerator;
-import gravestone.structures.graves.SingleGraveGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
-import cpw.mods.fml.common.IWorldGenerator;
-import java.util.Random;
+import gravestone.structures.graves.SingleGraveGenerator;
+import gravestone.structures.memorials.MemorialGenerator;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.fml.common.IWorldGenerator;
+
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -24,7 +25,7 @@ public class GraveStoneWorldGenerator implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-        if (world.provider.dimensionId == GraveStoneConfig.structuresDimensionId) {
+        if (world.provider.getDimensionId() == GraveStoneConfig.structuresDimensionId) {
             generateSurface(world, random, chunkX * 16, chunkZ * 16);
         }
     }

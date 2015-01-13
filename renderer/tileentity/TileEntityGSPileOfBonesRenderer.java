@@ -1,12 +1,12 @@
 package gravestone.renderer.tileentity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.core.Resources;
 import gravestone.models.block.ModelPileOfBones;
 import gravestone.tileentity.TileEntityGSPileOfBones;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -26,7 +26,7 @@ public class TileEntityGSPileOfBonesRenderer extends TileEntitySpecialRenderer {
         int meta;
 
         GL11.glPushMatrix();
-        if (tileEntity.getWorldObj() == null ) {
+        if (tileEntity.getWorldObj() == null) {
             GL11.glTranslatef(x + 0.5F, y + 2.7F, z + 0.5F);
             GL11.glScalef(1.8F, -1.8F, -1.8F);
             GL11.glRotatef(-90, 0, 1, 0);

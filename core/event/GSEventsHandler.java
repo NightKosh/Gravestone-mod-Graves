@@ -1,7 +1,8 @@
 package gravestone.core.event;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.block.GraveStoneHelper;
 import gravestone.config.GraveStoneConfig;
@@ -76,8 +77,8 @@ public class GSEventsHandler {
             }
             if (event.entity instanceof EntityCreeper && ((EntityCreeper) event.entity).getPowered()) {
                 // drop creeper statue if entity is a charged creeper
-                GSBlock.memorial.dropCreeperMemorial(event.entity.worldObj, (int) event.entity.posX,
-                        (int) event.entity.posY, (int) event.entity.posZ);
+                GSBlock.memorial.dropCreeperMemorial(event.entity.worldObj,
+                        new BlockPos(event.entity.posX, event.entity.posY, event.entity.posZ));
             }
         }
     }

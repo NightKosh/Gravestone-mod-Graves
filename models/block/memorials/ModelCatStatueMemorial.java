@@ -1,7 +1,7 @@
 package gravestone.models.block.memorials;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import gravestone.models.block.ModelMemorial;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;

@@ -1,6 +1,5 @@
 package gravestone.core;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumMemorials;
@@ -13,6 +12,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * GraveStone mod

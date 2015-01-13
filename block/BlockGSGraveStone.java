@@ -1,7 +1,5 @@
 package gravestone.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GraveStoneConfig;
@@ -13,6 +11,7 @@ import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -29,7 +28,8 @@ import net.minecraft.util.*;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -139,19 +139,19 @@ public class BlockGSGraveStone extends BlockContainer {
         super(Material.rock);
         this.isBlockContainer = true;
         this.setStepSound(Block.soundTypeStone);
-        this.setBlockName("GraveStone");
+        this.setUnlocalizedName("GraveStone");
         this.setHardness(0.5F);
         this.setResistance(5F);
         this.setCreativeTab(GSTabs.gravesTab);
         this.setTickRandomly(GraveStoneConfig.removeEmptyGraves);
-        this.setBlockTextureName("stone");
+//        this.setBlockTextureName("stone");
     }
 
     /**
      * Called when the block is placed in the world
      */
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack itemStack) {
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase player, ItemStack itemStack) {
         GraveStoneHelper.replaceGround(world, x, y - 1, z);
         int direction = MathHelper.floor_float(player.rotationYaw);
 
@@ -164,36 +164,36 @@ public class BlockGSGraveStone extends BlockContainer {
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
 
         if (tileEntity != null) {
-            if (itemStack.stackTagCompound != null) {
-                if (itemStack.stackTagCompound.hasKey("GraveType")) {
-                    tileEntity.setGraveType(itemStack.stackTagCompound.getByte("GraveType"));
+            if (itemStack.hasTagCompound()) {
+                if (itemStack.getTagCompound().hasKey("GraveType")) {
+                    tileEntity.setGraveType(itemStack.getTagCompound().getByte("GraveType"));
                 } else {
                     tileEntity.setGraveType((byte) 0);
                 }
 
-                if (itemStack.stackTagCompound.hasKey("isLocalized") && itemStack.stackTagCompound.getBoolean("isLocalized")) {
+                if (itemStack.getTagCompound().hasKey("isLocalized") && itemStack.getTagCompound().getBoolean("isLocalized")) {
                     tileEntity.getDeathTextComponent().setLocalized();
 
-                    if (itemStack.stackTagCompound.hasKey("name") && itemStack.stackTagCompound.hasKey("KillerName")) {
-                        tileEntity.getDeathTextComponent().setName(itemStack.stackTagCompound.getString("name"));
-                        tileEntity.getDeathTextComponent().setKillerName(itemStack.stackTagCompound.getString("KillerName"));
+                    if (itemStack.getTagCompound().hasKey("name") && itemStack.getTagCompound().hasKey("KillerName")) {
+                        tileEntity.getDeathTextComponent().setName(itemStack.getTagCompound().getString("name"));
+                        tileEntity.getDeathTextComponent().setKillerName(itemStack.getTagCompound().getString("KillerName"));
                     }
                 }
 
-                if (itemStack.stackTagCompound.hasKey("DeathText")) {
-                    tileEntity.getDeathTextComponent().setDeathText(itemStack.stackTagCompound.getString("DeathText"));
+                if (itemStack.getTagCompound().hasKey("DeathText")) {
+                    tileEntity.getDeathTextComponent().setDeathText(itemStack.getTagCompound().getString("DeathText"));
                 }
 
-                if (itemStack.stackTagCompound.hasKey("Age")) {
-                    tileEntity.setAge(itemStack.stackTagCompound.getInteger("Age"));
+                if (itemStack.getTagCompound().hasKey("Age")) {
+                    tileEntity.setAge(itemStack.getTagCompound().getInteger("Age"));
                 }
 
-                if (itemStack.stackTagCompound.hasKey("Sword")) {
+                if (itemStack.getTagCompound().hasKey("Sword")) {
                     tileEntity.setSword(ItemStack.loadItemStackFromNBT(itemStack.getTagCompound().getCompoundTag("Sword")));
                 }
 
-                if (itemStack.stackTagCompound.hasKey("Enchanted")) {
-                    tileEntity.setEnchanted(itemStack.stackTagCompound.getBoolean("Enchanted"));
+                if (itemStack.getTagCompound().hasKey("Enchanted")) {
+                    tileEntity.setEnchanted(itemStack.getTagCompound().getBoolean("Enchanted"));
                 }
             }
         }
@@ -204,20 +204,20 @@ public class BlockGSGraveStone extends BlockContainer {
      * coordinates. Args: world, x, y, z
      */
     @Override
-    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-        return GraveStoneHelper.canPlaceBlockAt(world, x, y - 1, z);
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+        return GraveStoneHelper.canPlaceBlockAt(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()));
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+    public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state) {
         return null;
     }
 
     @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
+    public void setBlockBoundsBasedOnState(IBlockAccess access, BlockPos pos) {
         int meta = access.getBlockMetadata(x, y, z);
         EnumGraves graveType;
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) access.getTileEntity(x, y, z);
+        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) access.getTileEntity(pos);
 
         if (tileEntity != null) {
             graveType = tileEntity.getGraveType();
@@ -410,11 +410,11 @@ public class BlockGSGraveStone extends BlockContainer {
      * Called when the block is attempted to be harvested
      */
     @Override
-    public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player) {
+    public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
         player.addExhaustion(0.025F);
-        GraveStoneHelper.spawnMob(world, x, y, z);
+        GraveStoneHelper.spawnMob(world, pos);
 
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
+        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
 
         if (tileEntity != null) {
             if (tileEntity.hasFlower()) {
@@ -422,39 +422,31 @@ public class BlockGSGraveStone extends BlockContainer {
             }
 
             if (EnchantmentHelper.getSilkTouchModifier(player)) {
-                dropBlock(world, x, y, z);
+                dropBlock(world, pos, state);
             } else {
-                dropBlockWithoutInfo(world, x, y, z);
+                dropBlockWithoutInfo(world, pos);
             }
         }
     }
 
     /**
      * This returns a complete list of items dropped from this block.
-     *
-     * @param world    The current world
-     * @param x        X Position
-     * @param y        Y Position
-     * @param z        Z Position
-     * @param metadata Current metadata
-     * @param fortune  Breakers fortune level
-     * @return A ArrayList containing all items this block drops
      */
     @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-        ret.add(getBlockItemStack(world, x, y, z));
+    public List<ItemStack> getDrops(IBlockAccess access, BlockPos pos, IBlockState state, int fortune) {
+        List<ItemStack> ret = new ArrayList<ItemStack>();
+        ret.add(getBlockItemStack(access, pos));
         return ret;
     }
 
     @Override
-    public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int metadata) {
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te) {
     }
 
-    @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
+//    @Override
+//    public boolean renderAsNormalBlock() {
+//        return false;
+//    }
 
     @Override
     public boolean isOpaqueCube() {
@@ -467,17 +459,12 @@ public class BlockGSGraveStone extends BlockContainer {
     }
 
     @Override
-    public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
-        GraveStoneHelper.spawnMob(world, x, y, z);
+    public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
+        GraveStoneHelper.spawnMob(world, pos);
     }
 
     @Override
-    public float getExplosionResistance(Entity par1Entity, World world, int x, int y, int z, double explosionX, double explosionY, double explosionZ) {
-        return getExplosionResistance(par1Entity);
-    }
-
-    @Override
-    public float getExplosionResistance(Entity par1Entity) {
+    public float getExplosionResistance(Entity entity) {
         return 18000000F;
     }
 
@@ -487,19 +474,20 @@ public class BlockGSGraveStone extends BlockContainer {
      * exploded, before it is removed.
      */
     @Override
-    public void onBlockExploded(World world, int x, int y, int z, Explosion explosion) {
+    public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-        TileEntityGSGraveStone te = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
+        TileEntityGSGraveStone te = (TileEntityGSGraveStone) world.getTileEntity(pos);
 
         if (te != null) {
             if (player.inventory.getCurrentItem() != null) {
                 ItemStack item = player.inventory.getCurrentItem();
                 if (item.getItem() instanceof ItemSpade) {
                     if (!world.isRemote) {
-                        GSLogger.logInfoGrave(player.getCommandSenderName() + " loot grave at " + x + "/" + y + "/" + z);
+                        // TODO getName  - getCommandSenderName
+                        GSLogger.logInfoGrave(player.getName() + " loot grave at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
                         te.dropAllItems();
                     }
                     return false;
@@ -514,7 +502,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         }
                     } else {
                         if (GraveStoneHelper.FLOWERS.contains(Block.getBlockFromItem(item.getItem())) &&
-                                GraveStoneHelper.canFlowerBePlaced(world, x, y, z, item, te)) {
+                                GraveStoneHelper.canFlowerBePlaced(world, pos, item, te)) {
                             te.setFlower(new ItemStack(item.getItem(), 1, item.getItemDamage()));
                             player.inventory.getCurrentItem().stackSize--;
                             return true;
@@ -564,9 +552,9 @@ public class BlockGSGraveStone extends BlockContainer {
     }
 
     @Override
-    public void onBlockAdded(World world, int x, int y, int z) {
-        super.onBlockAdded(world, x, y, z);
-        GraveStoneHelper.replaceGround(world, x, y - 1, z);
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+        super.onBlockAdded(world, pos, state);
+        GraveStoneHelper.replaceGround(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()));
     }
 
     /**
@@ -574,26 +562,26 @@ public class BlockGSGraveStone extends BlockContainer {
      * update, as appropriate
      */
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
 
         if (tileEntity != null) {
             tileEntity.dropAllItems();
         }
 
-        super.breakBlock(world, x, y, z, block, par6);
+        super.breakBlock(world, pos, state);
     }
 
     @Override
-    public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-        if (!world.isSideSolid(x, y - 1, z, ForgeDirection.DOWN, true)) {
-            this.dropBlockWithoutInfo(world, x, y, z);
-            world.setBlock(x, y, z, Blocks.air, 0, 2);
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block block) {
+        if (!world.isSideSolid(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), EnumFacing.DOWN, true)) {
+            this.dropBlockWithoutInfo(world, pos);
+            world.setBlockToAir(pos);
         }
     }
 
     @Override
-    public int damageDropped(int metadata) {
+    public int damageDropped(IBlockState state) {
         return 0;
     }
 
@@ -641,17 +629,17 @@ public class BlockGSGraveStone extends BlockContainer {
     /**
      * Drop grave as item block
      */
-    private void dropBlock(World world, int x, int y, int z) {
-        ItemStack itemStack = getBlockItemStack(world, x, y, z);
+    private void dropBlock(World world, BlockPos pos, IBlockState state) {
+        ItemStack itemStack = getBlockItemStack(world, pos);
 
         if (itemStack != null) {
-            this.dropBlockAsItem(world, x, y, z, itemStack);
+            this.dropBlockAsItem(world, pos, itemStack);
         }
     }
 
-    private void dropBlockWithoutInfo(World world, int x, int y, int z) {
+    private void dropBlockWithoutInfo(World world, BlockPos pos) {
         ItemStack itemStack = this.createStackedBlock(0);
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
+        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
 
         if (tileEntity != null) {
             if (tileEntity.isSwordGrave()) {
@@ -661,7 +649,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
 
                 itemStack.setTagCompound(nbt);
-                this.dropBlockAsItem(world, x, y, z, itemStack);
+                this.dropBlockAsItem(world, pos, itemStack);
             }
         }
     }
@@ -669,9 +657,9 @@ public class BlockGSGraveStone extends BlockContainer {
     /**
      * Get grave block as item block
      */
-    private ItemStack getBlockItemStack(World world, int x, int y, int z) {
+    private ItemStack getBlockItemStack(IBlockAccess access, BlockPos pos) {
         ItemStack itemStack = this.createStackedBlock(0);
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
+        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) access.getTileEntity(pos);
 
         if (tileEntity != null) {
             NBTTagCompound nbt = new NBTTagCompound();
@@ -701,7 +689,7 @@ public class BlockGSGraveStone extends BlockContainer {
     /**
      * Create grave on death
      */
-    public void createOnDeath(Entity entity, World world, int x, int y, int z, DeathMessageInfo deathInfo, int direction, List<ItemStack> items, int age, EnumGraveType entityType, DamageSource damageSource) {
+    public void createOnDeath(Entity entity, World world, BlockPos pos, DeathMessageInfo deathInfo, int direction, List<ItemStack> items, int age, EnumGraveType entityType, DamageSource damageSource) {
         if (direction < 0) {
             direction = 360 + direction;
         }
@@ -721,7 +709,7 @@ public class BlockGSGraveStone extends BlockContainer {
                     if (sword == null) {
                         graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveForDeath(damageSource, damageSource.damageType), rand);
                         if (graveType == 0) {
-                            graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveTypes(world, x, z), rand);
+                            graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveTypes(world, pos), rand);
                         }
                     } else {
                         graveType = (byte) EnumGraves.SWORD.ordinal();
@@ -731,33 +719,29 @@ public class BlockGSGraveStone extends BlockContainer {
             case DOGS_GRAVES:
                 graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getDogGraveForDeath(damageSource, damageSource.damageType), rand);
                 if (graveType == 0) {
-                    graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getDogGraveTypes(world, x, z), rand);
+                    graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getDogGraveTypes(world, pos), rand);
                 }
                 break;
             case CATS_GRAVES:
                 graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getCatGraveForDeath(damageSource, damageSource.damageType), rand);
                 if (graveType == 0) {
-                    graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getCatGraveTypes(world, x, z), rand);
+                    graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getCatGraveTypes(world, pos), rand);
                 }
                 break;
             case HORSE_GRAVES:
                 graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getHorseGraveForDeath(damageSource, damageSource.damageType), rand);
                 if (graveType == 0) {
-                    graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getHorseGraveTypes(world, x, z), rand);
+                    graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getHorseGraveTypes(world, pos), rand);
                 }
                 break;
         }
 
         boolean isMagic = GraveStoneHelper.isMagicDamage(damageSource, damageSource.damageType);
 
-        int[] graveCoordinates = GraveStoneHelper.findPlaceForGrave(world, x, y, z);
-        if (graveCoordinates != null) {
-            x = graveCoordinates[0];
-            y = graveCoordinates[1];
-            z = graveCoordinates[2];
-
-            world.setBlock(x, y, z, this, GraveStoneHelper.getMetadataBasedOnRotation(direction), 0x02);
-            TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
+        BlockPos newPos = GraveStoneHelper.findPlaceForGrave(world, pos);
+        if (newPos != null) {
+            world.setBlock(newPos, this, GraveStoneHelper.getMetadataBasedOnRotation(direction), 0x02);
+            TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(newPos);
 
             if (tileEntity != null) {
                 if (sword != null) {
@@ -773,7 +757,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 tileEntity.setAge(age);
                 tileEntity.setEnchanted(isMagic);
             }
-            GSLogger.logInfoGrave("Create " + deathInfo.getName() + "'s grave at " + x + "x" + y + "x" + z);
+            GSLogger.logInfoGrave("Create " + deathInfo.getName() + "'s grave at " + newPos.getX() + "x" + newPos.getY() + "x" + newPos.getZ());
         } else {
             ItemStack itemStack = this.createStackedBlock(0);
             NBTTagCompound nbt = new NBTTagCompound();
@@ -790,23 +774,23 @@ public class BlockGSGraveStone extends BlockContainer {
             }
 
             itemStack.setTagCompound(nbt);
-            this.dropBlockAsItem(world, x, y, z, itemStack);
+            this.dropBlockAsItem(world, pos, itemStack);
 
             if (items != null) {
                 for (int i = 0; i < items.size(); i++) {
                     if (items.get(i) != null) {
-                        GSGraveStoneItems.dropItem(items.get(i), world, x, y, z);
+                        GSGraveStoneItems.dropItem(items.get(i), world, pos);
                     }
                 }
             }
-            GSLogger.logInfoGrave("Can not create " + deathInfo.getName() + "'s grave at " + x + "x" + y + "x" + z);
+            GSLogger.logInfoGrave("Can not create " + deathInfo.getName() + "'s grave at " + pos.getX() + "x" + pos.getY() + "x" + pos.getZ());
         }
     }
 
     @Override
-    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
+    public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos) {
         ItemStack itemStack = this.createStackedBlock(0);
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
+        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
 
         if (tileEntity != null) {
             if (itemStack != null) {
@@ -827,18 +811,18 @@ public class BlockGSGraveStone extends BlockContainer {
      * items for display
      */
     @Override
-    public void updateTick(World world, int x, int y, int z, Random random) {
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
         if (GraveStoneConfig.removeEmptyGraves) {
             if (!world.isRemote) {
-                TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
+                TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
                 if (tileEntity != null) {
                     if (!tileEntity.isSwordGrave() && tileEntity.isEmpty()) {
                         if (GraveStoneConfig.showGravesRemovingMessages) {
-                            GSLogger.logInfoGrave("Remove empty grave at " + x + "/" + y + "/" + z);
+                            GSLogger.logInfoGrave("Remove empty grave at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
                         }
 
-                        world.removeTileEntity(x, y, z);
-                        world.setBlock(x, y, z, Blocks.air, 0, 2);
+                        world.removeTileEntity(pos);
+                        world.setBlockToAir(pos);
                     }
                 }
             }

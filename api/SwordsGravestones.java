@@ -1,6 +1,6 @@
 package gravestone.api;
 
-import cpw.mods.fml.common.FMLLog;
+import net.minecraftforge.fml.common.FMLLog;
 import net.minecraft.item.Item;
 
 import java.lang.reflect.Method;

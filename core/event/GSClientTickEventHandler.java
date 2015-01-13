@@ -1,10 +1,10 @@
 package gravestone.core.event;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * GraveStone mod
@@ -18,7 +18,7 @@ public class GSClientTickEventHandler {
     @SideOnly(Side.CLIENT)
     public void playerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
-            if (event.player.getCommandSenderName().equals(Minecraft.getMinecraft().thePlayer.getCommandSenderName())) {
+            if (event.player.equals(Minecraft.getMinecraft().thePlayer)) {
                 GSRenderEventHandler.fogDensityPerTick = 0;
             }
         }

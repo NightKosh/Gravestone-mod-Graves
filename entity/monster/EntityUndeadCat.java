@@ -49,6 +49,6 @@ public abstract class EntityUndeadCat extends EntityUndeadPet {
      * Called when the mob is falling. Calculates and applies fall damage.
      */
     @Override
-    protected void fall(float par1) {
+    public void fall(float distance, float damageMultiplier) {
     }
 }

@@ -1,13 +1,13 @@
 package gravestone.renderer.entity;
 
 import gravestone.entity.monster.EntityUndeadCat;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -60,7 +60,7 @@ public class RenderUndeadCat extends RenderLiving {
     public void doRender(Entity entity, double par2, double par4, double par6, float par8, float par9) {
         this.renderLivingUndeadCat((EntityUndeadCat) entity, par2, par4, par6, par8, par9);
     }
-    
+
     @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
         return ((EntityUndeadCat) entity).getTexture();

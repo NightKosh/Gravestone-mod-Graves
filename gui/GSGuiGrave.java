@@ -64,7 +64,7 @@ public class GSGuiGrave extends GuiScreen {
                 mc.displayGuiScreen((GuiScreen) null);
                 break;
         }
-        GSMessageHandler.networkWrapper.sendToServer(new GraveDeathMessageToServer(teGrave.getWorldObj(), teGrave.xCoord, teGrave.yCoord, teGrave.zCoord, this.textField.getText(), isRandomTextButtonClicked));
+        GSMessageHandler.networkWrapper.sendToServer(new GraveDeathMessageToServer(teGrave.getWorld(), teGrave.getPos().getX(), teGrave.getPos().getY(), teGrave.getPos().getZ(), this.textField.getText(), isRandomTextButtonClicked));
     }
 
     @Override

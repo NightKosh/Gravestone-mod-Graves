@@ -1,8 +1,8 @@
 package gravestone.entity.monster;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * GraveStone mod
@@ -12,16 +12,13 @@ import net.minecraft.world.World;
  */
 public abstract class EntityUndeadDog extends EntityUndeadPet {
 
-    protected float field_70926_e;
-    protected float field_70924_f;
+    protected float headRotationCourse;
+    protected float headRotationCourseOld;
 
     public EntityUndeadDog(World world) {
         super(world);
     }
 
-    /**
-     * main AI tick function, replaces updateEntityActionState
-     */
     @Override
     protected void updateAITick() {
         this.dataWatcher.updateObject(18, Float.valueOf(this.getHealth()));
@@ -40,22 +37,18 @@ public abstract class EntityUndeadDog extends EntityUndeadPet {
     @Override
     public void onUpdate() {
         super.onUpdate();
-        this.field_70924_f = this.field_70926_e;
+        this.headRotationCourseOld = this.headRotationCourse;
 
         if (this.func_70922_bv()) {
-            this.field_70926_e += (1.0F - this.field_70926_e) * 0.4F;
+            this.headRotationCourse += (1 - this.headRotationCourse) * 0.4F;
         } else {
-            this.field_70926_e += (0.0F - this.field_70926_e) * 0.4F;
-        }
-
-        if (this.func_70922_bv()) {
-            this.numTicksToChaseTarget = 10;
+            this.headRotationCourse += (0 - this.headRotationCourse) * 0.4F;
         }
     }
 
     @SideOnly(Side.CLIENT)
     public float getInterestedAngle(float par1) {
-        return (this.field_70924_f + (this.field_70926_e - this.field_70924_f) * par1) * 0.15F * (float) Math.PI;
+        return (this.headRotationCourseOld + (this.headRotationCourse - this.headRotationCourseOld) * par1) * 0.15F * (float) Math.PI;
     }
 
     @Override
@@ -71,15 +64,7 @@ public abstract class EntityUndeadDog extends EntityUndeadPet {
 
     @SideOnly(Side.CLIENT)
     public float getTailRotation() {
-        return (0.55F - (float) (20 - this.dataWatcher.getWatchableObjectFloat(18)) * 0.02F) * (float) Math.PI;
-    }
-
-    public void func_70918_i(boolean par1) {
-        if (par1) {
-            this.dataWatcher.updateObject(19, Byte.valueOf((byte) 1));
-        } else {
-            this.dataWatcher.updateObject(19, Byte.valueOf((byte) 0));
-        }
+        return (0.55F - (20 - this.dataWatcher.getWatchableObjectFloat(18)) * 0.02F) * (float) Math.PI;
     }
 
     public boolean func_70922_bv() {

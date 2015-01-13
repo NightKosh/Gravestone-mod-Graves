@@ -1,7 +1,5 @@
 package gravestone.entity.monster;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.core.Resources;
 import gravestone.entity.ai.EntityAIAttackLivingHorse;
 import net.minecraft.block.Block;
@@ -14,9 +12,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -50,11 +52,11 @@ public class EntityZombieCat extends EntityUndeadCat {
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityOcelot.class, 1, true));
         this.tasks.addTask(4, new EntityAIAttackLivingHorse(this, 1, false));
         this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, 1, false));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, false));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWolf.class, 0, false));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityOcelot.class, 0, false));
-        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityChicken.class, 0, false));
-        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityHorse.class, 0, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWolf.class, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityOcelot.class, false));
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityChicken.class, false));
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityHorse.class, false));
     }
 
     @Override
@@ -148,7 +150,7 @@ public class EntityZombieCat extends EntityUndeadCat {
      * Plays step sound at given x, y, z for the entity
      */
     @Override
-    protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_) {
+    protected void playStepSound(BlockPos pos, Block block) {
     }
 
     /**
@@ -182,14 +184,14 @@ public class EntityZombieCat extends EntityUndeadCat {
     public void onKillEntity(EntityLivingBase entityLiving) {
         super.onKillEntity(entityLiving);
 
-        if (this.worldObj.difficultySetting == EnumDifficulty.NORMAL || this.worldObj.difficultySetting == EnumDifficulty.HARD) {
+        if (this.worldObj.getDifficulty() == EnumDifficulty.NORMAL || this.worldObj.getDifficulty() == EnumDifficulty.HARD) {
             spawnZombieMob(entityLiving);
         }
     }
 
     @Override
-    public IEntityLivingData onSpawnWithEgg(IEntityLivingData data) {
+    public IEntityLivingData func_180482_a(DifficultyInstance difficulty, IEntityLivingData data) {
         this.setSkin(new Random().nextInt(CAT_TYPES));
-        return super.onSpawnWithEgg(data);
+        return super.func_180482_a(difficulty, data);
     }
 }

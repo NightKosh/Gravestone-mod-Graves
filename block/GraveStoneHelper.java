@@ -26,12 +26,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 import java.util.*;
@@ -280,36 +279,36 @@ public class GraveStoneHelper {
      * @param random
      * @param graveType
      */
-    public static byte getGraveType(World world, int x, int z, Random random, BlockGSGraveStone.EnumGraveType graveType) {
+    public static byte getGraveType(World world, BlockPos pos, Random random, BlockGSGraveStone.EnumGraveType graveType) {
         ArrayList<EnumGraves> petsGravesList;
         switch (graveType) {
             case PLAYER_GRAVES:
                 if (random.nextFloat() > 0.1) {
-                    return getRandomGrave(getPlayerGraveTypes(world, x, z), random);
+                    return getRandomGrave(getPlayerGraveTypes(world, pos), random);
                 } else {
                     return (byte) EnumGraves.SWORD.ordinal();
                 }
             case PETS_GRAVES:
                 petsGravesList = new ArrayList<EnumGraves>();
-                petsGravesList.addAll(getDogGraveTypes(world, x, z));
-                petsGravesList.addAll(getCatGraveTypes(world, x, z));
+                petsGravesList.addAll(getDogGraveTypes(world, pos));
+                petsGravesList.addAll(getCatGraveTypes(world, pos));
                 return getRandomGrave(petsGravesList, random);
             case DOGS_GRAVES:
-                return getRandomGrave(getDogGraveTypes(world, x, z), random);
+                return getRandomGrave(getDogGraveTypes(world, pos), random);
             case CATS_GRAVES:
-                return getRandomGrave(getCatGraveTypes(world, x, z), random);
+                return getRandomGrave(getCatGraveTypes(world, pos), random);
             case ALL_GRAVES:
             default:
                 if (random.nextFloat() > 0.2) {
                     if (random.nextFloat() > 0.1) {
-                        return getRandomGrave(getPlayerGraveTypes(world, x, z), random);
+                        return getRandomGrave(getPlayerGraveTypes(world, pos), random);
                     } else {
                         return (byte) EnumGraves.SWORD.ordinal();
                     }
                 } else {
                     petsGravesList = new ArrayList<EnumGraves>();
-                    petsGravesList.addAll(getDogGraveTypes(world, x, z));
-                    petsGravesList.addAll(getCatGraveTypes(world, x, z));
+                    petsGravesList.addAll(getDogGraveTypes(world, pos));
+                    petsGravesList.addAll(getCatGraveTypes(world, pos));
                     return getRandomGrave(petsGravesList, random);
                 }
         }
@@ -351,8 +350,8 @@ public class GraveStoneHelper {
     /**
      * Check ground type and replace it on dirt if it grass or mycelium
      */
-    public static void replaceGround(World world, int x, int y, int z) {
-        Block botBlock = world.getBlock(x, y, z);
+    public static void replaceGround(World world, BlockPos pos) {
+        Block botBlock = world.getBlockState(pos).getBlock();
 
         if (botBlock.equals(Blocks.grass) || botBlock.equals(Blocks.mycelium)) {
             world.setBlock(x, y, z, Blocks.dirt);
@@ -362,15 +361,15 @@ public class GraveStoneHelper {
     /**
      * Spawn mob
      */
-    public static void spawnMob(World world, int x, int y, int z) {
+    public static void spawnMob(World world, BlockPos pos) {
         if (GraveStoneConfig.spawnMobAtGraveDestruction && world.rand.nextInt(10) == 0) {
-            TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
+            TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
 
             if (tileEntity != null) {
-                Entity mob = GSMobSpawn.getMobEntity(world, tileEntity.getGraveType(), x, y, z);
+                Entity mob = GSMobSpawn.getMobEntity(world, tileEntity.getGraveType(), pos.getX(), pos.getY(), pos.getZ());
 
                 if (mob != null) {
-                    GSMobSpawn.spawnMob(world, mob, x, y, z, false);
+                    GSMobSpawn.spawnMob(world, mob, pos.getX(), pos.getY(), pos.getZ(), false);
                 }
             }
         }
@@ -379,11 +378,11 @@ public class GraveStoneHelper {
     /**
      * Check can be grave placed on this type of surface
      */
-    public static boolean canPlaceBlockAt(World world, int x, int y, int z) {
-        return canPlaceBlockAt(world, world.getBlock(x, y, z), x, y, z);
+    public static boolean canPlaceBlockAt(World world, BlockPos pos) {
+        return canPlaceBlockAt(world, world.getBlockState(pos).getBlock(), pos);
     }
 
-    public static boolean canPlaceBlockAt(World world, Block block, int x, int y, int z) {
+    public static boolean canPlaceBlockAt(World world, Block block, BlockPos pos) {
         if (GraveStoneConfig.canPlaceGravesEveryWhere) {
             return true;
         } else {
@@ -409,17 +408,14 @@ public class GraveStoneHelper {
         }
     }
 
-    public static int[] findPlaceForGrave(World world, int x, int y, int z) {
-        boolean canGenerateGrave = false;
-        int[] coordinates = new int[3];
-
+    public static BlockPos findPlaceForGrave(World world, BlockPos pos) {
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
         int newY = getGround(world, x, y, z);
 
         if (canGenerateGraveAtCoordinates(world, x, newY, z)) {
-            coordinates[0] = x;
-            coordinates[1] = newY;
-            coordinates[2] = z;
-            return coordinates;
+            return new BlockPos(x, newY, z);
         } else {
             int dx = 1;
             int dz = 1;
@@ -429,20 +425,14 @@ public class GraveStoneHelper {
                     for (int newX = x - 1; newX >= x + dx; newX--) {
                         newY = getGround(world, newX, y, z);
                         if (canGenerateGraveAtCoordinates(world, newX, newY, z)) {
-                            coordinates[0] = newX;
-                            coordinates[1] = newY;
-                            coordinates[2] = z;
-                            return coordinates;
+                            return new BlockPos(newX, newY, z);
                         }
                     }
                 } else {
                     for (int newX = x + 1; newX <= x + dx; newX++) {
                         newY = getGround(world, newX, y, z);
                         if (canGenerateGraveAtCoordinates(world, newX, newY, z)) {
-                            coordinates[0] = newX;
-                            coordinates[1] = newY;
-                            coordinates[2] = z;
-                            return coordinates;
+                            return new BlockPos(newX, newY, z);
                         }
                     }
                 }
@@ -452,20 +442,14 @@ public class GraveStoneHelper {
                     for (int newZ = z - 1; newZ >= z + dz; newZ--) {
                         newY = getGround(world, x, y, newZ);
                         if (canGenerateGraveAtCoordinates(world, x, newY, newZ)) {
-                            coordinates[0] = x;
-                            coordinates[1] = newY;
-                            coordinates[2] = newZ;
-                            return coordinates;
+                            return new BlockPos(x, newY, newZ);
                         }
                     }
                 } else {
                     for (int newZ = z + 1; newZ <= z + dz; newZ++) {
                         newY = getGround(world, x, y, newZ);
                         if (canGenerateGraveAtCoordinates(world, x, newY, newZ)) {
-                            coordinates[0] = x;
-                            coordinates[1] = newY;
-                            coordinates[2] = newZ;
-                            return coordinates;
+                            return new BlockPos(x, newY, newZ);
                         }
                     }
                 }
@@ -490,16 +474,16 @@ public class GraveStoneHelper {
     }
 
     private static int getGround(World world, int x, int y, int z) {
-        while ((world.isAirBlock(x, y - 1, z) || world.getBlock(x, y - 1, z).getMaterial().isLiquid() ||
-                world.getBlock(x, y - 1, z).getMaterial().isReplaceable()) && y > 1) {
+        while ((world.isAirBlock(new BlockPos(x, y - 1, z)) || world.getBlockState(new BlockPos(x, y - 1, z)).getBlock().getMaterial().isLiquid() ||
+                world.getBlockState(new BlockPos(x, y - 1, z)).getBlock().getMaterial().isReplaceable()) && y > 1) {
             y--;
         }
         return y;
     }
 
-    private static boolean canGenerateGraveAtCoordinates(World world, int x, int y, int z) {
-        return world.getBlock(x, y - 1, z).getMaterial().isSolid() &&
-                (world.isAirBlock(x, y, z) || world.getBlock(x, y, z).getMaterial().isLiquid() || world.getBlock(x, y, z).getMaterial().isReplaceable());
+    private static boolean canGenerateGraveAtCoordinates(World world, BlockPos pos) {
+        return world.getBlockState(pos.down()).getBlock().getMaterial().isSolid() &&
+                (world.isAirBlock(pos) || world.getBlockState(pos).getBlock().getMaterial().isLiquid() || world.getBlockState(pos).getBlock().getMaterial().isReplaceable());
     }
 
     public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event, long spawnTime) {
@@ -517,7 +501,7 @@ public class GraveStoneHelper {
             GSCompatibilityRpgInventory.addItems(items, player);
             GSCompatibilityGalacticraft.addItems(items, player);
             GSCompatibilityBackpacksMod.addItems(items, player);
-            player.inventory.clearInventory(null, -1);
+            player.inventory.clear();
 
             GSCompatibilityisArsMagica.getSoulboundItemsBack(items, player);
             GSCompatibilityEnderIO.getSoulboundItemsBack(items, player);
@@ -530,7 +514,7 @@ public class GraveStoneHelper {
 
     public static void createGrave(Entity entity, LivingDeathEvent event, List<ItemStack> items, BlockGSGraveStone.EnumGraveType entityType, boolean isVillager, long spawnTime) {
         int age = (int) (entity.worldObj.getWorldTime() - spawnTime) / 24000;
-        GSBlock.graveStone.createOnDeath(entity, entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
+        GSBlock.graveStone.createOnDeath(entity, entity.worldObj, new BlockPos(entity.posX, entity.posY, entity.posZ - 1),
                 getDeathMessage((EntityLivingBase) entity, event.source.damageType, isVillager),
                 MathHelper.floor_float(entity.rotationYaw), items, age, entityType, event.source);
     }
@@ -604,7 +588,8 @@ public class GraveStoneHelper {
         String shortString = "death.attack." + damageType;
         String fullString = shortString + ".player";
 
-        String entityName = entity.getCommandSenderName();
+        //TODO getName().getCommandSenderName()
+        String entityName = entity.getName();
         if (entityName == null) {
             entityName = "entity." + EntityList.getEntityString(entity) + ".name";
         }
@@ -670,16 +655,16 @@ public class GraveStoneHelper {
         }
     }
 
-    public static boolean canFlowerBePlaced(World world, int x, int y, int z, ItemStack item, TileEntityGSGraveStone te) {
-        return Block.getBlockFromItem(item.getItem()).canBlockStay(world, x, y, z) && canFlowerBePlacedOnGrave(te);
+    public static boolean canFlowerBePlaced(World world, BlockPos pos, ItemStack item, TileEntityGSGraveStone te) {
+        return Block.getBlockFromItem(item.getItem()).canSustainPlant(world, pos.down(), EnumFacing.UP, (IPlantable) item.getItem()) && canFlowerBePlacedOnGrave(te);
     }
 
     public static boolean canFlowerBePlacedOnGrave(TileEntityGSGraveStone te) {
         return !te.isSwordGrave() && FLOWER_GRAVES.contains(te.getGraveType());
     }
 
-    public static ArrayList<EnumGraves> getPlayerGraveTypes(World world, int x, int z) {
-        BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+    public static ArrayList<EnumGraves> getPlayerGraveTypes(World world, BlockPos pos) {
+        BiomeGenBase biome = world.getBiomeGenForCoords(pos);
 
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
@@ -721,8 +706,8 @@ public class GraveStoneHelper {
         return graveTypes;
     }
 
-    public static ArrayList<EnumGraves> getDogGraveTypes(World world, int x, int z) {
-        BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+    public static ArrayList<EnumGraves> getDogGraveTypes(World world, BlockPos pos) {
+        BiomeGenBase biome = world.getBiomeGenForCoords(pos);
 
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
@@ -764,8 +749,8 @@ public class GraveStoneHelper {
         return graveTypes;
     }
 
-    public static ArrayList<EnumGraves> getCatGraveTypes(World world, int x, int z) {
-        BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+    public static ArrayList<EnumGraves> getCatGraveTypes(World world, BlockPos pos) {
+        BiomeGenBase biome = world.getBiomeGenForCoords(pos);
 
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();
@@ -806,8 +791,8 @@ public class GraveStoneHelper {
         return graveTypes;
     }
 
-    public static ArrayList<EnumGraves> getHorseGraveTypes(World world, int x, int z) {
-        BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+    public static ArrayList<EnumGraves> getHorseGraveTypes(World world, BlockPos pos) {
+        BiomeGenBase biome = world.getBiomeGenForCoords(pos);
 
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(biome)));
         ArrayList<EnumGraves> graveTypes = new ArrayList<EnumGraves>();

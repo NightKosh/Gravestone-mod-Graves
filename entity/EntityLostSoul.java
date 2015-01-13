@@ -52,32 +52,32 @@ public class EntityLostSoul extends EntityGhost {
         * */
     }
 
-    @Override
-    public boolean attackEntityAsMob(Entity entity) {
-        float f = (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
-        int i = 0;
-
-        if (entity instanceof EntityLivingBase) {
-            f += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) entity);
-            i += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) entity);
-
-            ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(getPotionId(entity.worldObj.rand), 3));
-        }
-        //blindness
-        //poison
-        //wither
-
-        return false;
-    }
+//    @Override
+//    public boolean attackEntityAsMob(Entity entity) {
+//        float f = (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+//        int i = 0;
+//
+//        if (entity instanceof EntityLivingBase) {
+//            f += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) entity);
+//            i += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) entity);
+//
+//            ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(getPotionId(entity.worldObj.rand), 3));
+//        }
+//        //blindness
+//        //poison
+//        //wither
+//
+//        return false;
+//    }
 
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden
      * by each mob to define their attack.
      */
-    protected void attackEntity(Entity par1Entity, float par2) {
-        if (this.attackTime <= 0 && par2 < 2.0F && par1Entity.boundingBox.maxY > this.boundingBox.minY && par1Entity.boundingBox.minY < this.boundingBox.maxY) {
-            this.attackTime = 20;
-            this.attackEntityAsMob(par1Entity);
-        }
-    }
+//    protected void attackEntity(Entity par1Entity, float par2) {
+//        if (this.attackTime <= 0 && par2 < 2.0F && par1Entity.boundingBox.maxY > this.boundingBox.minY && par1Entity.boundingBox.minY < this.boundingBox.maxY) {
+//            this.attackTime = 20;
+//            this.attackEntityAsMob(par1Entity);
+//        }
+//    }
 }

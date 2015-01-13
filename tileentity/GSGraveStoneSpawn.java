@@ -51,7 +51,8 @@ public class GSGraveStoneSpawn extends GSSpawner {
         }
 
         if (this.getNewMob) {
-            this.spawnedMob = GSMobSpawn.getMobEntity(this.tileEntity.getWorldObj(), EnumGraves.getByID(((TileEntityGSGraveStone) this.tileEntity).graveType), this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord);
+            this.spawnedMob = GSMobSpawn.getMobEntity(this.tileEntity.getWorld(), EnumGraves.getByID(((TileEntityGSGraveStone) this.tileEntity).graveType),
+                    this.tileEntity.getPos().getX(), this.tileEntity.getPos().getY(), this.tileEntity.getPos().getZ());
 
             if (this.spawnedMob == null) {
                 return;
@@ -60,15 +61,16 @@ public class GSGraveStoneSpawn extends GSSpawner {
             this.getNewMob = false;
         }
 
-        int nearbyEntitiesCount = tileEntity.getWorldObj().getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.getBoundingBox(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord,
-                tileEntity.xCoord + 1, tileEntity.yCoord + 1, tileEntity.zCoord + 1).expand(1.0D, 4.0D, SPAWN_RANGE * 2)).size();
+        int nearbyEntitiesCount = tileEntity.getWorld().getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.fromBounds(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ(),
+                tileEntity.getPos().getX() + 1, tileEntity.getPos().getY() + 1, tileEntity.getPos().getZ() + 1).expand(1.0D, 4.0D, SPAWN_RANGE * 2)).size();
 
         if (nearbyEntitiesCount >= MAX_NEARBY_ENTITIES) {
             this.updateDelay();
             return;
         }
 
-        if (GSMobSpawn.checkChance(this.tileEntity.getWorldObj().rand) && GSMobSpawn.spawnMob(this.tileEntity.getWorldObj(), this.spawnedMob, this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord, true)) {
+        if (GSMobSpawn.checkChance(this.tileEntity.getWorld().rand) && GSMobSpawn.spawnMob(this.tileEntity.getWorld(), this.spawnedMob,
+                this.tileEntity.getPos().getX(), this.tileEntity.getPos().getY(), this.tileEntity.getPos().getZ(), true)) {
             this.getNewMob = true;
         }
         this.updateDelay();
@@ -110,7 +112,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
 
     @Override
     protected Entity getMob() {
-        return GSMobSpawn.getMobEntity(this.tileEntity.getWorldObj(), EnumGraves.getByID(((TileEntityGSGraveStone) this.tileEntity).graveType),
-                this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord);
+        return GSMobSpawn.getMobEntity(this.tileEntity.getWorld(), EnumGraves.getByID(((TileEntityGSGraveStone) this.tileEntity).graveType),
+                this.tileEntity.getPos().getX(), this.tileEntity.getPos().getY(), this.tileEntity.getPos().getZ());
     }
 }

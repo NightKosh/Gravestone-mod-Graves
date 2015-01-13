@@ -1,7 +1,6 @@
 package gravestone.renderer.item;
 
 import com.google.common.collect.Maps;
-import cpw.mods.fml.common.registry.VillagerRegistry;
 import gravestone.core.Resources;
 import gravestone.item.corpse.CatCorpseHelper;
 import gravestone.item.corpse.HorseCorpseHelper;
@@ -18,6 +17,7 @@ import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Map;

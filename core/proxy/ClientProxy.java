@@ -1,11 +1,11 @@
 package gravestone.core.proxy;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.registry.LanguageRegistry;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import gravestone.core.GSBlock;
 import gravestone.core.GSItem;
 import gravestone.core.Resources;

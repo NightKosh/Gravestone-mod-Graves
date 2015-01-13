@@ -41,18 +41,19 @@ public class TileEntityGSSkullCandle extends TileEntity {
     public Packet getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         this.writeToNBT(nbt);
-        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 4, nbt);
-    }
-    
-    @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
-        readFromNBT(packet.func_148857_g());
+        return new S35PacketUpdateTileEntity(this.pos, 4, nbt);
     }
 
     @Override
-    public boolean canUpdate() {
-        return false;
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
+        readFromNBT(packet.getNbtCompound());
     }
+
+    // TODO
+//    @Override
+//    public boolean canUpdate() {
+//        return false;
+//    }
 
     /**
      * Get the entity type for the skull
@@ -60,8 +61,8 @@ public class TileEntityGSSkullCandle extends TileEntity {
     public byte getRotation() {
         return this.rotation;
     }
-    
-    
+
+
     public void setRotation(byte rotation) {
         this.rotation = rotation;
     }

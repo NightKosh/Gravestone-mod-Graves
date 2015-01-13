@@ -36,7 +36,7 @@ public abstract class CorpseHelper {
     }
 
     protected static void setName(EntityLiving entity, NBTTagCompound nbtTag) {
-        if (entity.hasCustomNameTag()) {
+        if (entity.hasCustomName()) {
             nbtTag.setString("Name", entity.getCustomNameTag());
         }
     }
@@ -148,7 +148,7 @@ public abstract class CorpseHelper {
                 return 7;
             case HORSE:
                 return 15;
-            default :
+            default:
                 return 0;
         }
     }

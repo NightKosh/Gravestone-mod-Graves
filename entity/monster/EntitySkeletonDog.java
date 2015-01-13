@@ -1,14 +1,16 @@
 package gravestone.entity.monster;
 
+import com.google.common.base.Predicate;
 import gravestone.core.Resources;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 /**
@@ -23,6 +25,18 @@ public class EntitySkeletonDog extends EntityUndeadDog {
         super(world);
         this.setSize(0.6F, 0.8F);
         texture = Resources.SKELETON_DOG;
+
+        this.tasks.addTask(1, new EntityAIRestrictSun(this));
+        this.tasks.addTask(1, new EntityAIFleeSun(this, 1));
+        this.tasks.addTask(1, new EntityAIAvoidEntity(this, new Predicate() {
+            public boolean func_179945_a(Entity entity) {
+                return entity instanceof EntityWolf;
+            }
+
+            public boolean apply(Object p_apply_1_) {
+                return this.func_179945_a((Entity) p_apply_1_);
+            }
+        }, 6, 1, 1.2D));
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1, false));
         this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1));
         this.tasks.addTask(6, new EntityAIWander(this, 1));
@@ -63,8 +77,8 @@ public class EntitySkeletonDog extends EntityUndeadDog {
      * Plays step sound at given x, y, z for the entity
      */
     @Override
-    protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_) {
-        this.playSound("mob.skeleton.step", 0.15F, 1.0F);
+    protected void playStepSound(BlockPos pos, Block block) {
+        this.playSound("mob.skeleton.step", 0.15F, 1);
     }
 
     /**

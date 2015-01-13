@@ -1,15 +1,15 @@
 package gravestone.core;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
-import gravestone.core.logger.GSLogger;
 import gravestone.ModGraveStone;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.logger.GSLogger;
 import gravestone.structures.GraveStoneWorldGenerator;
 import gravestone.structures.village.*;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 /**
  * GraveStone mod
@@ -41,7 +41,7 @@ public class GSStructures {
     public static void preInit() {
         if (GraveStoneConfig.generateCemeteries) {
             try {
-                MapGenStructureIO.func_143031_a(ComponentGSVillageCemetery.class, "GSVillageCemetery");
+                MapGenStructureIO.registerStructure(ComponentGSVillageCemetery.class, "GSVillageCemetery");
             } catch (Throwable e) {
                 GSLogger.logError("Can not register ComponentGSVillageCemetery");
                 e.printStackTrace();
@@ -51,7 +51,7 @@ public class GSStructures {
         // register memorials
         if (GraveStoneConfig.generateVillageMemorials) {
             try {
-                MapGenStructureIO.func_143031_a(ComponentGSVillageMemorial.class, "GSVillageMemorial");
+                MapGenStructureIO.registerStructure(ComponentGSVillageMemorial.class, "GSVillageMemorial");
             } catch (Throwable e) {
                 GSLogger.logError("Can not register ComponentGSVillageMemorial");
                 e.printStackTrace();
@@ -61,7 +61,7 @@ public class GSStructures {
         // register Undertaker
         if (GraveStoneConfig.generateUndertaker) {
             try {
-                MapGenStructureIO.func_143031_a(ComponentGSVillageUndertaker.class, "GSUndertakerHouse");
+                MapGenStructureIO.registerStructure(ComponentGSVillageUndertaker.class, "GSUndertakerHouse");
             } catch (Throwable e) {
                 GSLogger.logError("Can not register ComponentGSVillageUndertaker");
                 e.printStackTrace();

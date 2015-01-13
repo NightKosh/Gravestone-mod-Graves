@@ -1,17 +1,15 @@
 package gravestone.structures.village;
 
-import cpw.mods.fml.common.registry.VillagerRegistry;
 import gravestone.core.GSBlock;
 import gravestone.core.GSItem;
-import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 import java.util.List;
 import java.util.Random;

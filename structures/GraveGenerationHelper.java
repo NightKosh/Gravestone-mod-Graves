@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -37,7 +38,7 @@ public class GraveGenerationHelper {
     // TODO
     public static void placeGrave(ComponentGraveStone component, World world, Random random, int x, int y, int z, int graveMeta, byte graveType, Item sword, boolean allLoot) {
         component.placeBlockAtCurrentPosition(world, GSBlock.graveStone, graveMeta, x, y, z, component.getBoundingBox());
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z));
+        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(new BlockPos(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z)));
 
         if (tileEntity != null) {
             if (GraveStoneHelper.isSwordGrave(graveType)) {
@@ -87,12 +88,13 @@ public class GraveGenerationHelper {
         Block block;
 
         for (int y = maxY; y >= minY - 1; y--) {
-            block = world.getBlock(x, y, z);
+            BlockPos pos = new BlockPos(x, y, z);
+            block = world.getBlockState(pos).getBlock();
 
             if (block != null) {
                 if (block.equals(Blocks.water) || block.equals(Blocks.lava)) {
                     return false;
-                } else if (GraveStoneHelper.canPlaceBlockAt(world, block, x, y, z)) {
+                } else if (GraveStoneHelper.canPlaceBlockAt(world, block, pos)) {
                     return true;
                 }
             }

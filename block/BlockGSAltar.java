@@ -1,20 +1,16 @@
 package gravestone.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.core.GSTabs;
-import gravestone.core.Resources;
-import gravestone.item.ItemGSCorpse;
 import gravestone.tileentity.TileEntityGSAltar;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 /**
@@ -24,17 +20,17 @@ import net.minecraft.world.World;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class BlockGSAltar extends BlockContainer {
-
-    @SideOnly(Side.CLIENT)
-    private IIcon topTexture;
-    @SideOnly(Side.CLIENT)
-    private IIcon bottomTexture;
+//
+//    @SideOnly(Side.CLIENT)
+//    private IIcon topTexture;
+//    @SideOnly(Side.CLIENT)
+//    private IIcon bottomTexture;
 
     public BlockGSAltar() {
         super(Material.rock);
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
         this.setLightOpacity(0);
-        this.setBlockName("Altar");
+        this.setUnlocalizedName("Altar");
         this.setCreativeTab(GSTabs.otherItemsTab);
         this.setHarvestLevel("pickaxe", 2);
     }
@@ -43,10 +39,10 @@ public class BlockGSAltar extends BlockContainer {
      * Called upon block activation (right click on the block.)
      */
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
         ItemStack stack = player.getCurrentEquippedItem();
 
-        TileEntityGSAltar tileEntity = (TileEntityGSAltar) world.getTileEntity(x, y, z);
+        TileEntityGSAltar tileEntity = (TileEntityGSAltar) world.getTileEntity(pos);
         if (tileEntity != null && !player.isSneaking()) {
 //            if (tileEntity.hasCorpse()) {
 //                if (!world.isRemote) {
@@ -62,20 +58,20 @@ public class BlockGSAltar extends BlockContainer {
 //                    }
 //                }
 //            }
-            player.openGui(ModGraveStone.instance, 2, world, x, y, z);
+            player.openGui(ModGraveStone.instance, 2, world, pos.getX(), pos.getY(), pos.getZ());
             return true;
         }
         return false;
     }
-
-    /**
-     * If this block doesn't render as an ordinary block it will return False
-     * (examples: signs, buttons, stairs, etc)
-     */
-    @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
+//
+//    /**
+//     * If this block doesn't render as an ordinary block it will return False
+//     * (examples: signs, buttons, stairs, etc)
+//     */
+//    @Override
+//    public boolean renderAsNormalBlock() {
+//        return false;
+//    }
 
     /**
      * Is this block (a) opaque and (b) a full 1m cube? This determines whether
@@ -87,41 +83,41 @@ public class BlockGSAltar extends BlockContainer {
         return false;
     }
 
-    /**
-     * From the specified side and block metadata retrieves the blocks texture.
-     */
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int side, int metadata) {
-        return side == 0 ? this.bottomTexture : (side == 1 ? this.topTexture : this.blockIcon);
-    }
+//    /**
+//     * From the specified side and block metadata retrieves the blocks texture.
+//     */
+//    @Override
+//    @SideOnly(Side.CLIENT)
+//    public IIcon getIcon(int side, int metadata) {
+//        return side == 0 ? this.bottomTexture : (side == 1 ? this.topTexture : this.blockIcon);
+//    }
+//
+//    /**
+//     * When this method is called, your block should register all the icons it
+//     * needs with the given IconRegister. This is the only chance you get to
+//     * register icons.
+//     */
+//    @Override
+//    @SideOnly(Side.CLIENT)
+//    public void registerBlockIcons(IIconRegister register) {
+//        this.blockIcon = register.registerIcon(Resources.ALTAR_SIDE);
+//        this.topTexture = register.registerIcon(Resources.ALTAR_TOP);
+//        this.bottomTexture = register.registerIcon(Resources.BONE_BLOCK);
+//    }
 
-    /**
-     * When this method is called, your block should register all the icons it
-     * needs with the given IconRegister. This is the only chance you get to
-     * register icons.
-     */
     @Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister register) {
-        this.blockIcon = register.registerIcon(Resources.ALTAR_SIDE);
-        this.topTexture = register.registerIcon(Resources.ALTAR_TOP);
-        this.bottomTexture = register.registerIcon(Resources.BONE_BLOCK);
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+    public TileEntity createNewTileEntity(World world, int meta) {
         return new TileEntityGSAltar();
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
-        TileEntityGSAltar tileEntity = (TileEntityGSAltar) world.getTileEntity(x, y, z);
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        TileEntityGSAltar tileEntity = (TileEntityGSAltar) world.getTileEntity(pos);
 
         if (tileEntity != null) {
             tileEntity.dropCorpse();
         }
 
-        super.breakBlock(world, x, y, z, block, par6);
+        super.breakBlock(world, pos, state);
     }
 }

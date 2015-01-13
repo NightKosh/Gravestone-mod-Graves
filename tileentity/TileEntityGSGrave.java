@@ -1,13 +1,13 @@
 package gravestone.tileentity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 import java.util.Random;
@@ -133,24 +133,25 @@ public abstract class TileEntityGSGrave extends TileEntity {
 
         nbtTag.setBoolean("Enchanted", isEnchanted);
     }
+
     /**
      * Called when you receive a TileEntityData packet for the location this
      * TileEntity is currently in. On the client, the NetworkManager will always
      * be the remote server. On the server, it will be whomever is responsible for
      * sending the packet.
      *
-     * @param net The NetworkManager the packet originated from
+     * @param net    The NetworkManager the packet originated from
      * @param packet The data packet
      */
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
-        readFromNBT(packet.func_148857_g());
+        readFromNBT(packet.getNbtCompound());
     }
 
     @Override
     public Packet getDescriptionPacket() {
         NBTTagCompound nbtTag = new NBTTagCompound();
         this.writeToNBT(nbtTag);
-        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+        return new S35PacketUpdateTileEntity(this.pos, 1, nbtTag);
     }
 }

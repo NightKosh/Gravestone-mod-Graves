@@ -59,8 +59,8 @@ public class EntityZombieSkullCrawler extends EntitySkullCrawler {
     }
 
     @Override
-    protected void dropRareDrop(int par1) {
-        this.entityDropItem(new ItemStack(Items.skull, 1, 2), 0);
+    protected ItemStack getRareDrop() {
+        return new ItemStack(Items.skull, 1, 2);
     }
 
     @Override
@@ -69,6 +69,7 @@ public class EntityZombieSkullCrawler extends EntitySkullCrawler {
     }
 
     @Override
-    protected void silverfishLikeBehaviour() {
+    public boolean canHideInBones() {
+        return false;
     }
 }

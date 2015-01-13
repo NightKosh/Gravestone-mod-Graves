@@ -35,7 +35,7 @@ public class GSCompatibilityEnderIO {
   private static boolean hasSoulbound(ItemStack stack) {
       Map enchantments = EnchantmentHelper.getEnchantments(stack);
       for (Object id : enchantments.keySet()) {
-          Enchantment ench = Enchantment.enchantmentsList[((Integer) id).shortValue()];          
+          Enchantment ench = Enchantment.enchantmentsBookList[((Integer) id).shortValue()];
           if (ench != null && ench.getName().equals("enchantment.enderio.soulBound")) {
               return true;
           }

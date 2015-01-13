@@ -1,11 +1,11 @@
 package gravestone.core;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.relauncher.Side;
 import gravestone.packets.AltarMessageToClient;
 import gravestone.packets.AltarMessageToServer;
 import gravestone.packets.GraveDeathMessageToServer;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * GraveStone mod

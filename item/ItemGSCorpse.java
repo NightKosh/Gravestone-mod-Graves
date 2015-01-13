@@ -1,18 +1,16 @@
 package gravestone.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.core.GSTabs;
 import gravestone.item.corpse.CorpseHelper;
 import gravestone.item.enums.EnumCorpse;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -24,8 +22,6 @@ import java.util.List;
  */
 public class ItemGSCorpse extends Item {
 
-    private static IIcon[] icons;
-
     public ItemGSCorpse() {
         super();
         setCreativeTab(GSTabs.otherItemsTab);
@@ -35,17 +31,17 @@ public class ItemGSCorpse extends Item {
 
     @Override
     public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-        if (stack.stackTagCompound == null) {
+        if (stack.getTagCompound() == null) {
             stack.setTagCompound(new NBTTagCompound());
         }
     }
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        if (stack.stackTagCompound == null) {
+        if (stack.getTagCompound() == null) {
             stack.setTagCompound(new NBTTagCompound());
         } else {
-            CorpseHelper.addInfo(stack.getItemDamage(), list, stack.stackTagCompound);
+            CorpseHelper.addInfo(stack.getItemDamage(), list, stack.getTagCompound());
         }
     }
 

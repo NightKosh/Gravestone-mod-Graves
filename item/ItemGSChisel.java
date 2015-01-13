@@ -5,10 +5,11 @@ import gravestone.core.GSBlock;
 import gravestone.core.GSTabs;
 import gravestone.core.Resources;
 import gravestone.tileentity.TileEntityGSGrave;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 /**
@@ -44,20 +45,20 @@ public class ItemGSChisel extends ItemTool {
      * false if it don't. This is for ITEMS, not BLOCKS
      */
     @Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10) {
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (world.isRemote) {
-            if (world.getBlock(x, y, z).equals(GSBlock.graveStone)) {
-                return setGraveText(stack, player, world, x, y, z, false);
-            } else if (world.getBlock(x, y, z).equals(GSBlock.memorial)) {
-                return setGraveText(stack, player, world, x, y, z, true);
+            if (world.getBlockState(pos).getBlock().equals(GSBlock.graveStone)) {
+                return setGraveText(stack, player, world, pos, false);
+            } else if (world.getBlockState(pos).getBlock().equals(GSBlock.memorial)) {
+                return setGraveText(stack, player, world, pos, true);
             }
         }
 
         return false;
     }
 
-    private boolean setGraveText(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, boolean isMemorial) {
-        TileEntityGSGrave tileEntity = (TileEntityGSGrave) world.getTileEntity(x, y, z);
+    private boolean setGraveText(ItemStack stack, EntityPlayer player, World world, BlockPos pos, boolean isMemorial) {
+        TileEntityGSGrave tileEntity = (TileEntityGSGrave) world.getTileEntity(pos);
 
         if (tileEntity != null && tileEntity.isEditable() && tileEntity.getDeathTextComponent().getDeathText().length() == 0) {
             ModGraveStone.proxy.openGraveGui(tileEntity);
@@ -71,10 +72,5 @@ public class ItemGSChisel extends ItemTool {
         }
 
         return false;
-    }
-
-    @Override
-    public float func_150893_a(ItemStack itemStack, Block block) {
-        return 1;
     }
 }

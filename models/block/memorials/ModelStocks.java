@@ -1,12 +1,12 @@
 package gravestone.models.block.memorials;
 
-import cpw.mods.fml.common.registry.VillagerRegistry;
 import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.core.Resources;
 import gravestone.models.block.ModelMemorial;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import org.lwjgl.opengl.GL11;
 
 /**

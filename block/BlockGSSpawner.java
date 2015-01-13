@@ -1,7 +1,11 @@
 package gravestone.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import gravestone.block.enums.EnumSpawner;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
@@ -43,13 +47,13 @@ public class BlockGSSpawner extends BlockMobSpawner {
 
     public BlockGSSpawner() {
         super();
-        this.setBlockName("Spawner");
+        this.setUnlocalizedName("Spawner");
         this.setHardness(5.0F);
         this.setLightLevel(0.45F);
         this.setStepSound(Block.soundTypeMetal);
         this.disableStats();
         this.setCreativeTab(GSTabs.otherItemsTab);
-        this.setBlockTextureName(Resources.PENTAGRAM_ICO);
+//        this.setBlockTextureName(Resources.PENTAGRAM_ICO);
         this.setBlockBounds(-0.5F, 0, -0.5F, 1.5F, 0.05F, 1.5F);
         this.setHarvestLevel("pickaxe", 1);
     }
@@ -82,14 +86,14 @@ public class BlockGSSpawner extends BlockMobSpawner {
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+    public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state) {
         return null;
     }
 
-    @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
+//    @Override
+//    public boolean renderAsNormalBlock() {
+//        return false;
+//    }
 
     /**
      * A randomly called display update to be able to add particles or other
@@ -97,10 +101,10 @@ public class BlockGSSpawner extends BlockMobSpawner {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-        double xPos = x + 0.5F;
-        double yPos = y + 0.85;
-        double zPos = z + 0.5F;
+    public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random random) {
+        double xPos = pos.getX() + 0.5F;
+        double yPos = pos.getY() + 0.85;
+        double zPos = pos.getZ() + 0.5F;
         double dRotation = Math.toRadians(72);
         double rotation = Math.toRadians(-36);
         double d = 1.07;
@@ -110,7 +114,7 @@ public class BlockGSSpawner extends BlockMobSpawner {
         for (int i = 0; i < 5; i++) {
             dx = -Math.sin(rotation) * d;
             dz = Math.cos(rotation) * d;
-            world.spawnParticle("smoke", xPos + dx, yPos, zPos + dz, 0, 0, 0);
+            world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, xPos + dx, yPos, zPos + dz, 0, 0, 0);
             EntityFX entityfx = new EntityGreenFlameFX(world, xPos + dx, yPos, zPos + dz, 0, 0, 0);
             Minecraft.getMinecraft().effectRenderer.addEffect(entityfx);
             rotation += dRotation;
@@ -118,13 +122,15 @@ public class BlockGSSpawner extends BlockMobSpawner {
     }
 
     @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-        ret.add(new ItemStack(getItemDropped(metadata, world.rand, fortune), quantityDropped(world.rand), getItemMeta(metadata)));
+    public List<ItemStack> getDrops(IBlockAccess access, BlockPos pos, IBlockState state, int fortune) {
+        List<ItemStack> ret = new ArrayList<ItemStack>();
+        Random random = new Random();
+        //TODO getBlockState ??? + meta -> fortune
+        ret.add(new ItemStack(getItemDropped(access.getBlockState(pos), random, fortune), quantityDropped(random), getItemMeta(metadata)));
 
         for (int i = 0; i < 5; i++) {
-            if ((fortune > 0 && world.rand.nextInt(100) < 5 * fortune) ||
-                    world.rand.nextInt(100) < 5 * fortune) {
+            if ((fortune > 0 && random.nextInt(100) < 5 * fortune) ||
+                    random.nextInt(100) < 5 * fortune) {
                 ret.add(getCustomItemsDropped(metadata));
             }
         }
@@ -149,7 +155,7 @@ public class BlockGSSpawner extends BlockMobSpawner {
     }
 
     @Override
-    public Item getItemDropped(int meta, Random random, int fortune) {
+    public Item getItemDropped(IBlockState state, Random random, int fortune) {
         return Items.dye;
     }
 

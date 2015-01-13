@@ -1,7 +1,5 @@
 package gravestone.renderer.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.tileentity.TileEntityGSAltar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -10,6 +8,8 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -30,7 +30,7 @@ public class RenderAltar extends TileEntitySpecialRenderer {
             GL11.glTranslatef((float) x + 0.5F, (float) y + 1.2F, (float) z + 0.5F);
             GL11.glRotatef(time % 360, 0, 1, 0);
 
-            EntityItem entityItem = new EntityItem(te.getWorldObj(), 0, 0, 0, corpse);
+            EntityItem entityItem = new EntityItem(te.getWorld(), 0, 0, 0, corpse);
             if (corpse.hasTagCompound()) {
                 entityItem.getEntityItem().setTagCompound((NBTTagCompound) corpse.getTagCompound().copy());
             }
@@ -43,5 +43,11 @@ public class RenderAltar extends TileEntitySpecialRenderer {
 
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float xz) {
         this.renderTileEntityAt((TileEntityGSAltar) te, x, y, z, xz);
+    }
+
+    @Override
+    public void renderTileEntityAt(TileEntity te, double x, double z, double y, float f, int p_180535_9_) {
+        this.renderTileEntityAt((TileEntityGSAltar) te, x, y, z, f);
+
     }
 }

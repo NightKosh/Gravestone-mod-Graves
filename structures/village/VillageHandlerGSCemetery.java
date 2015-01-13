@@ -1,8 +1,8 @@
 package gravestone.structures.village;
 
-import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 import java.util.List;
 import java.util.Random;

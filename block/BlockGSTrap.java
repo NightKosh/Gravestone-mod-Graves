@@ -1,7 +1,9 @@
 package gravestone.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumTrap;
 import gravestone.config.GraveStoneConfig;
@@ -34,13 +36,13 @@ import java.util.Random;
  */
 public class BlockGSTrap extends Block {
 
-    @SideOnly(Side.CLIENT)
-    private IIcon thunderStoneIcon;
+//    @SideOnly(Side.CLIENT)
+//    private IIcon thunderStoneIcon;
 
     public BlockGSTrap() {
         super(Material.rock);
         this.setStepSound(Block.soundTypeStone);
-        this.setBlockName("trap.night");
+        this.setUnlocalizedName("trap.night");
         this.setHardness(4.5F);
         this.setResistance(5F);
         this.setCreativeTab(GSTabs.otherItemsTab);
@@ -53,31 +55,31 @@ public class BlockGSTrap extends Block {
      * needs with the given IconRegister. This is the only chance you get to
      * register icons.
      */
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon(Resources.NIGHT_STONE);
-        this.thunderStoneIcon = iconRegister.registerIcon(Resources.THUNDER_STONE);
-    }
+//    @Override
+//    public void registerBlockIcons(IIconRegister iconRegister) {
+//        this.blockIcon = iconRegister.registerIcon(Resources.NIGHT_STONE);
+//        this.thunderStoneIcon = iconRegister.registerIcon(Resources.THUNDER_STONE);
+//    }
 
     /**
      * From the specified side and block metadata retrieves the blocks texture.
      */
-    @Override
-    public IIcon getIcon(int side, int metadata) {
-        switch (metadata) {
-            case 1:
-                return thunderStoneIcon;
-            case 0:
-            default:
-                return blockIcon;
-        }
-    }
+//    @Override
+//    public IIcon getIcon(int side, int metadata) {
+//        switch (metadata) {
+//            case 1:
+//                return thunderStoneIcon;
+//            case 0:
+//            default:
+//                return blockIcon;
+//        }
+//    }
 
     /**
      * Returns the ID of the items to drop on destruction.
      */
     @Override
-    public Item getItemDropped(int par1, Random random, int metadata) {
+    public Item getItemDropped(IBlockState state, Random random, int fortune) {
         switch (metadata) {
             case 1:
                 return Item.getItemFromBlock(Blocks.stonebrick);
@@ -92,8 +94,10 @@ public class BlockGSTrap extends Block {
      * wood.
      */
     @Override
-    public int damageDropped(int metadata) {
-        return metadata;
+    public int damageDropped(IBlockState state) {
+        //TODO
+//        return metadata;
+        return 0;
     }
 
     /**
@@ -109,7 +113,7 @@ public class BlockGSTrap extends Block {
      * Called whenever an entity is walking on top of this block. Args: world, x, y, z, entity
      */
     @Override
-    public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
+    public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity) {
         if (entity instanceof EntityPlayer) {
             int meta = world.getBlockMetadata(x, y, z);
             if (meta == 0) {

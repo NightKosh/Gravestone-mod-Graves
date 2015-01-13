@@ -3,7 +3,6 @@ package gravestone.entity.monster;
 import gravestone.core.Resources;
 import gravestone.entity.ai.EntityAIAttackLivingHorse;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -12,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
@@ -43,11 +43,11 @@ public class EntityZombieDog extends EntityUndeadDog {
         this.tasks.addTask(4, new EntityAIAttackLivingHorse(this, 1, false));
         this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntitySheep.class, 1, false));
         this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, 1, false));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, false));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWolf.class, 0, false));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityOcelot.class, 0, false));
-        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityHorse.class, 0, false));
-        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntitySheep.class, 0, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWolf.class, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityOcelot.class, false));
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityHorse.class, false));
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntitySheep.class, false));
     }
 
     @Override
@@ -86,7 +86,7 @@ public class EntityZombieDog extends EntityUndeadDog {
      * Plays step sound at given x, y, z for the entity
      */
     @Override
-    protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_) {
+    protected void playStepSound(BlockPos pos, Block block) {
         this.playSound("mob.wolf.step", 0.15F, 1.0F);
     }
 
@@ -113,7 +113,7 @@ public class EntityZombieDog extends EntityUndeadDog {
     public void onKillEntity(EntityLivingBase entityLiving) {
         super.onKillEntity(entityLiving);
 
-        if (this.worldObj.difficultySetting == EnumDifficulty.NORMAL || this.worldObj.difficultySetting == EnumDifficulty.HARD) {
+        if (this.worldObj.getDifficulty() == EnumDifficulty.NORMAL || this.worldObj.getDifficulty() == EnumDifficulty.HARD) {
             spawnZombieMob(entityLiving);
         }
     }

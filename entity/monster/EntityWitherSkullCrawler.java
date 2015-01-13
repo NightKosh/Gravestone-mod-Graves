@@ -1,4 +1,3 @@
-
 package gravestone.entity.monster;
 
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -28,16 +27,17 @@ public class EntityWitherSkullCrawler extends EntitySkullCrawler {
     }
 
     @Override
-    protected void dropRareDrop(int par1) {
-        this.entityDropItem(new ItemStack(Items.skull, 1, 1), 0);
+    protected ItemStack getRareDrop() {
+        return new ItemStack(Items.skull, 1, 1);
     }
-    
+
     @Override
     protected PotionEffect getPotionEffect() {
         return new PotionEffect(Potion.wither.id, 100);
     }
-    
+
     @Override
-    protected void silverfishLikeBehaviour() {
+    public boolean canHideInBones() {
+        return false;
     }
 }

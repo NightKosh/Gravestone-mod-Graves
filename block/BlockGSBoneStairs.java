@@ -15,9 +15,9 @@ public class BlockGSBoneStairs extends BlockStairs {
 
     public BlockGSBoneStairs() {
         super(GSBlock.boneBlock, 0);
-        this.setBlockName("bone_stairs");
+        this.setUnlocalizedName("bone_stairs");
         this.setCreativeTab(GSTabs.otherItemsTab);
-        this.setBlockTextureName(Resources.BONE_BLOCK);
+//        this.setBlockTextureName(Resources.BONE_BLOCK);
         this.setHarvestLevel("pickaxe", 0);
     }
 }

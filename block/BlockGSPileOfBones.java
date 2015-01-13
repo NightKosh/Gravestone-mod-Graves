@@ -1,7 +1,9 @@
 package gravestone.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import gravestone.block.enums.EnumPileOfBones;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
@@ -34,10 +36,10 @@ public class BlockGSPileOfBones extends BlockContainer {
     public BlockGSPileOfBones() {
         super(Material.circuits);
         this.setStepSound(Block.soundTypeStone);
-        this.setBlockName("pile of bones");
+        this.setUnlocalizedName("pile of bones");
         this.setHardness(0.1F);
         this.setResistance(0);
-        this.setBlockTextureName("snow");
+//        this.setBlockTextureName("snow");
         this.setCreativeTab(GSTabs.otherItemsTab);
         this.setBlockBounds(0.1F, 0, 0.1F, 0.9F, 0.2F, 0.9F);
     }
@@ -48,7 +50,7 @@ public class BlockGSPileOfBones extends BlockContainer {
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+    public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state) {
         return null;
     }
 
@@ -57,10 +59,10 @@ public class BlockGSPileOfBones extends BlockContainer {
         return false;
     }
 
-    @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
+//    @Override
+//    public boolean renderAsNormalBlock() {
+//        return false;
+//    }
 
     @Override
     public int getRenderType() {
@@ -73,7 +75,7 @@ public class BlockGSPileOfBones extends BlockContainer {
     }
 
     @Override
-    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+    public Item getItemDropped(IBlockState state, Random random, int fortune) {
         return Items.bone;
     }
 
@@ -83,8 +85,8 @@ public class BlockGSPileOfBones extends BlockContainer {
     }
 
     @Override
-    public int damageDropped(int damage) {
-        return damage;
+    public int damageDropped(IBlockState state) {
+        return metadata;
     }
 
     protected ItemStack createStackedBlock(int meta) {
@@ -92,10 +94,10 @@ public class BlockGSPileOfBones extends BlockContainer {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entity, ItemStack stack) {
         world.setBlockMetadataWithNotify(x, y, z, stack.getItemDamage(), 2);
 
-        TileEntityGSPileOfBones te = (TileEntityGSPileOfBones) world.getTileEntity(x, y, z);
+        TileEntityGSPileOfBones te = (TileEntityGSPileOfBones) world.getTileEntity(pos);
         if (te != null) {
             te.setDirection((byte) (MathHelper.floor_double((double) (entity.rotationYaw * 4F / 360F) + 0.5D) & 3));
         }
@@ -110,15 +112,15 @@ public class BlockGSPileOfBones extends BlockContainer {
     }
 
     @Override
-    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-        return world.doesBlockHaveSolidTopSurface(world, x, y - 1, z);
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+        return world.doesBlockHaveSolidTopSurface(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()));
     }
 
     @Override
-    public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-        if (!canPlaceBlockAt(world, x, y, z)) {
-            this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-            world.setBlockToAir(x, y, z);
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block block) {
+        if (!canPlaceBlockAt(world, pos)) {
+            this.dropBlockAsItem(world, pos, world.getBlockMetadata(x, y, z), 0);
+            world.setBlockToAir(pos);
         }
     }
 }

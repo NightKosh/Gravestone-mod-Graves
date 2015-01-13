@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -19,7 +20,7 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class TileEntityGSHauntedChest extends TileEntity {
+public class TileEntityGSHauntedChest extends TileEntity implements IUpdatePlayerListBox {
 
     private int openTicks = 0;
     private boolean isOpen = false;
@@ -42,8 +43,7 @@ public class TileEntityGSHauntedChest extends TileEntity {
      * inside its implementation.
      */
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
         float f;
 
         if (openTicks > 0) {
@@ -56,10 +56,10 @@ public class TileEntityGSHauntedChest extends TileEntity {
             double d0;
 
             if (this.openTicks > 0 && this.lidAngle == 0.0F) {
-                double d1 = (double) this.xCoord + 0.5D;
-                d0 = (double) this.zCoord + 0.5D;
+                double d1 = (double) this.pos.getX() + 0.5D;
+                d0 = (double) this.pos.getZ() + 0.5D;
 
-                this.worldObj.playSoundEffect(d1, (double) this.yCoord + 0.5D, d0, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+                this.worldObj.playSoundEffect(d1, (double) this.pos.getY() + 0.5D, d0, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
             }
 
             if (this.openTicks == 0 && this.lidAngle > 0.0F || this.openTicks > 0 && this.lidAngle < 1.0F) {
@@ -77,10 +77,10 @@ public class TileEntityGSHauntedChest extends TileEntity {
 
                 float f2 = 0.5F;
                 if (this.lidAngle < f2 && f1 >= f2) {
-                    d0 = (double) this.xCoord + 0.5D;
-                    double d2 = (double) this.zCoord + 0.5D;
+                    d0 = (double) this.pos.getX() + 0.5D;
+                    double d2 = (double) this.pos.getZ() + 0.5D;
 
-                    this.worldObj.playSoundEffect(d0, (double) this.yCoord + 0.5D, d2, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+                    this.worldObj.playSoundEffect(d0, (double) this.pos.getY() + 0.5D, d2, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
                 }
 
                 if (this.lidAngle < 0.0F) {
@@ -95,10 +95,10 @@ public class TileEntityGSHauntedChest extends TileEntity {
 
         if (openTicks == 0) {
             if (this.isOpen && GraveStoneConfig.replaceHauntedChest) {
-                int meta = worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord);
-                this.getWorldObj().removeTileEntity(this.xCoord, this.yCoord, this.zCoord);
-                this.getWorldObj().setBlock(this.xCoord, this.yCoord, this.zCoord, Blocks.chest);
-                this.getWorldObj().setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, meta, 2);
+                int meta = worldObj.getBlockMetadata(this.pos.getX(), this.pos.getY(), this.pos.getZ());
+                this.worldObj.removeTileEntity(this.pos);
+                this.worldObj.setBlock(this.pos.getX(), this.pos.getY(), this.pos.getZ(), Blocks.chest);
+                this.worldObj.setBlockMetadataWithNotify(this.pos.getX(), this.pos.getY(), this.pos.getZ(), meta, 2);
             }
             this.isOpen = false;
         }
@@ -143,7 +143,7 @@ public class TileEntityGSHauntedChest extends TileEntity {
         switch (getChestType()) {
             case SKELETON_CHEST:
                 EntitySkeleton skeleton = GSMobSpawn.getSkeleton(world, (byte) 1);
-                skeleton.setLocationAndAngles(this.xCoord + 0.5, this.yCoord, this.zCoord + 0.5, 0.0F, 0.0F);
+                skeleton.setLocationAndAngles(this.pos.getX() + 0.5, this.pos.getY(), this.pos.getZ() + 0.5, 0.0F, 0.0F);
                 world.spawnEntityInWorld(skeleton);
                 break;
             case BATS_CHEST:
@@ -153,7 +153,7 @@ public class TileEntityGSHauntedChest extends TileEntity {
 
                 for (byte i = 0; i < batsCount; i++) {
                     bat = new EntityBat(world);
-                    bat.setLocationAndAngles(this.xCoord + 0.5, this.yCoord + 0.7, this.zCoord + 0.5, 0.0F, 0.0F);
+                    bat.setLocationAndAngles(this.pos.getX() + 0.5, this.pos.getY() + 0.7, this.pos.getZ() + 0.5, 0.0F, 0.0F);
 
                     world.spawnEntityInWorld(bat);
                 }
@@ -163,13 +163,13 @@ public class TileEntityGSHauntedChest extends TileEntity {
 
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
-        readFromNBT(packet.func_148857_g());
+        readFromNBT(packet.getNbtCompound());
     }
 
     @Override
     public Packet getDescriptionPacket() {
         NBTTagCompound nbtTag = new NBTTagCompound();
         this.writeToNBT(nbtTag);
-        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+        return new S35PacketUpdateTileEntity(this.pos, 1, nbtTag);
     }
 }

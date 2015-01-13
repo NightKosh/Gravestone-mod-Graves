@@ -1,13 +1,13 @@
 package gravestone.renderer.tileentity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.block.enums.EnumSkullCandle;
 import gravestone.core.Resources;
 import gravestone.models.block.ModelSkullCandle;
 import gravestone.tileentity.TileEntityGSSkullCandle;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 /**

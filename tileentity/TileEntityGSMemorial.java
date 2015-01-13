@@ -79,10 +79,11 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
         return gSDeathText;
     }
 
-    @Override
-    public boolean canUpdate() {
-        return false;
-    }
+    // TODO
+//    @Override
+//    public boolean canUpdate() {
+//        return false;
+//    }
 
     public EnumMemorials getMemorialType() {
         return EnumMemorials.getByID(graveType);

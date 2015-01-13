@@ -55,16 +55,16 @@ public class GSMobSpawner extends GSSpawner {
             if (entity == null) {
                 GSLogger.logError("Spanwer mob get 'null' as mob!!!");
             } else {
-                double x = tileEntity.xCoord + 0.5;
-                double y = tileEntity.yCoord;
-                double z = tileEntity.zCoord + 0.5;
-                entity.setLocationAndAngles(x, y, z, tileEntity.getWorldObj().rand.nextFloat() * 360, 0);
+                double x = tileEntity.getPos().getX() + 0.5;
+                double y = tileEntity.getPos().getY();
+                double z = tileEntity.getPos().getZ() + 0.5;
+                entity.setLocationAndAngles(x, y, z, tileEntity.getWorld().rand.nextFloat() * 360, 0);
                 if (isBossSpawner()) {
-                    tileEntity.getWorldObj().removeTileEntity(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
-                    tileEntity.getWorldObj().setBlock(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, Blocks.air);
-                    tileEntity.getWorldObj().spawnEntityInWorld(entity);
-                } else if (tileEntity.getWorldObj().getLightBrightness(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord) <= MAX_LIGHT_VALUE) {
-                    tileEntity.getWorldObj().spawnEntityInWorld(entity);
+                    tileEntity.getWorld().removeTileEntity(tileEntity.getPos());
+                    tileEntity.getWorld().setBlockToAir(tileEntity.getPos());
+                    tileEntity.getWorld().spawnEntityInWorld(entity);
+                } else if (tileEntity.getWorld().getLightBrightness(tileEntity.getPos()) <= MAX_LIGHT_VALUE) {
+                    tileEntity.getWorld().spawnEntityInWorld(entity);
                 }
             }
             this.updateDelay();
@@ -77,11 +77,11 @@ public class GSMobSpawner extends GSSpawner {
 
     private EnumSpawner getSpawnerType() {
         if (spawnerType == null) {
-            if (tileEntity.getWorldObj() == null) {
+            if (tileEntity.getWorld() == null) {
                 GSLogger.logError("Spawner te worldobj is null !!!!!");
                 return EnumSpawner.ZOMBIE_SPAWNER;
             } else {
-                byte meta = (byte) tileEntity.getWorldObj().getBlockMetadata(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+                byte meta = (byte) tileEntity.getWorld().getBlockMetadata(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ());
                 spawnerType = EnumSpawner.getById(meta);
                 return spawnerType;
             }
@@ -101,8 +101,8 @@ public class GSMobSpawner extends GSSpawner {
 
     @Override
     protected Entity getMob() {
-        return GSMobSpawn.getMobEntityForSpawner(this.tileEntity.getWorldObj(), getSpawnerType(),
-                this.tileEntity.xCoord, this.tileEntity.yCoord, this.tileEntity.zCoord);
+        return GSMobSpawn.getMobEntityForSpawner(this.tileEntity.getWorld(), getSpawnerType(),
+                this.tileEntity.getPos().getX(), this.tileEntity.getPos().getY(), this.tileEntity.getPos().getZ());
     }
 
     @Override

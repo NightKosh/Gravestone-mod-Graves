@@ -1,7 +1,5 @@
 package gravestone.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumMemorials;
 import net.minecraft.block.Block;
@@ -10,8 +8,12 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -38,8 +40,8 @@ public class ItemBlockGSMemorial extends ItemBlock {
     public String getUnlocalizedName(ItemStack itemStack) {
         EnumMemorials memorialType;
 
-        if (itemStack.stackTagCompound != null && itemStack.stackTagCompound.hasKey("GraveType")) {
-            memorialType = EnumMemorials.getByID(itemStack.stackTagCompound.getByte("GraveType"));
+        if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("GraveType")) {
+            memorialType = EnumMemorials.getByID(itemStack.getTagCompound().getByte("GraveType"));
         } else {
             memorialType = EnumMemorials.getByID(0);
         }
@@ -49,26 +51,26 @@ public class ItemBlockGSMemorial extends ItemBlock {
 
     @Override
     public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-        if (stack.stackTagCompound == null) {
+        if (stack.getTagCompound() == null) {
             stack.setTagCompound(new NBTTagCompound());
         }
     }
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        if (stack.stackTagCompound == null) {
+        if (stack.getTagCompound() == null) {
             stack.setTagCompound(new NBTTagCompound());
         }
 
         String deathText = "";
-        if (stack.stackTagCompound.hasKey("DeathText") && stack.stackTagCompound.getString("DeathText").length() != 0) {
-            deathText = stack.stackTagCompound.getString("DeathText");
+        if (stack.getTagCompound().hasKey("DeathText") && stack.getTagCompound().getString("DeathText").length() != 0) {
+            deathText = stack.getTagCompound().getString("DeathText");
         }
 
-        if (stack.stackTagCompound.hasKey("isLocalized") && stack.stackTagCompound.getBoolean("isLocalized")) {
-            if (stack.stackTagCompound.hasKey("name")) {
-                String name = ModGraveStone.proxy.getLocalizedEntityName(stack.stackTagCompound.getString("name"));
-                String killerName = ModGraveStone.proxy.getLocalizedEntityName(stack.stackTagCompound.getString("KillerName"));
+        if (stack.getTagCompound().hasKey("isLocalized") && stack.getTagCompound().getBoolean("isLocalized")) {
+            if (stack.getTagCompound().hasKey("name")) {
+                String name = ModGraveStone.proxy.getLocalizedEntityName(stack.getTagCompound().getString("name"));
+                String killerName = ModGraveStone.proxy.getLocalizedEntityName(stack.getTagCompound().getString("KillerName"));
                 if (killerName.length() == 0) {
                     list.add(new ChatComponentTranslation(deathText, new Object[]{name}).getFormattedText());
                 } else {
@@ -86,29 +88,32 @@ public class ItemBlockGSMemorial extends ItemBlock {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean func_150936_a(World world, int x, int y, int z, int side, EntityPlayer player, ItemStack stack) {
-        if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("GraveType")) {
+    public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack) {
+        if (stack.hasTagCompound() && stack.getTagCompound().hasKey("GraveType")) {
+            int x = pos.getX();
+            int y = pos.getY();
+            int z = pos.getZ();
             switch (side) {
-                case 0:
+                case DOWN:
                     return false;
-                case 1:
+                case UP:
                     y++;
                     break;
-                case 2:
+                case NORTH:
                     z--;
                     break;
-                case 3:
+                case SOUTH:
                     z++;
                     break;
-                case 4:
+                case WEST:
                     x--;
                     break;
-                case 5:
+                case EAST:
                     x++;
                     break;
             }
 
-            EnumMemorials memorialType = EnumMemorials.getByID(stack.stackTagCompound.getByte("GraveType"));
+            EnumMemorials memorialType = EnumMemorials.getByID(stack.getTagCompound().getByte("GraveType"));
             byte maxY;
             byte maxX = 1;
             byte maxZ = 1;
@@ -137,7 +142,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
             for (byte shiftY = 0; shiftY < maxY; shiftY++) {
                 for (byte shiftZ = startZ; shiftZ < maxZ; shiftZ++) {
                     for (byte shiftX = startX; shiftX < maxX; shiftX++) {
-                        if (Block.getIdFromBlock(world.getBlock(x + shiftX, y + shiftY, z + shiftZ)) != airBlockId) {
+                        if (Block.getIdFromBlock(world.getBlockState(new BlockPos(x + shiftX, y + shiftY, z + shiftZ)).getBlock()) != airBlockId) {
                             return false;
                         }
                     }

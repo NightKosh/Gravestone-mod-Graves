@@ -1,6 +1,6 @@
 package gravestone.core.compatibility;
 
-import cpw.mods.fml.common.Loader;
+import net.minecraftforge.fml.common.Loader;
 import gravestone.core.compatibility.forestry.GSCompatibilityForestry;
 import gravestone.core.logger.GSLogger;
 import gravestone.core.logger.GravesLogger;

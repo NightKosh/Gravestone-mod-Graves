@@ -1,6 +1,6 @@
 package gravestone.config;
 
-import cpw.mods.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;

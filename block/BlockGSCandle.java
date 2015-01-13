@@ -1,7 +1,5 @@
 package gravestone.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSTabs;
 import gravestone.core.TimeHelper;
@@ -10,11 +8,16 @@ import gravestone.tileentity.TileEntityGSCandle;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.crafting.IInfusionStabiliser;
 
 import java.util.Random;
@@ -30,11 +33,11 @@ public class BlockGSCandle extends BlockContainer implements IInfusionStabiliser
     public BlockGSCandle() {
         super(Material.carpet);
         this.setStepSound(Block.soundTypeCloth);
-        this.setBlockName("candle");
+        this.setUnlocalizedName("candle");
         this.setHardness(0);
         this.setLightLevel(1);
         this.setResistance(0);
-        this.setBlockTextureName("snow");
+//        this.setBlockTextureName("snow");
         this.setCreativeTab(GSTabs.otherItemsTab);
         this.setBlockBounds(0.4F, 0.0F, 0.4F, 0.6F, 0.6F, 0.6F);
     }
@@ -45,19 +48,19 @@ public class BlockGSCandle extends BlockContainer implements IInfusionStabiliser
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-        double xPos = x + 0.5;
-        double yPos = y + 0.5;
-        double zPos = z + 0.5;
+    public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random random) {
+        double xPos = pos.getX() + 0.5;
+        double yPos = pos.getY() + 0.5;
+        double zPos = pos.getZ() + 0.5;
 
         long dayTime = TimeHelper.getDayTime(world);
         if (dayTime < TimeHelper.SUN_SET || dayTime > TimeHelper.SUN_RISING) {
-            world.spawnParticle("flame", xPos, yPos, zPos, 0, 0, 0);
+            world.spawnParticle(EnumParticleTypes.FLAME, xPos, yPos, zPos, 0, 0, 0);
         } else {
             EntityFX entityfx = new EntityGreenFlameFX(world, xPos, yPos, zPos, 0, 0, 0);
             Minecraft.getMinecraft().effectRenderer.addEffect(entityfx);
         }
-        world.spawnParticle("smoke", xPos, yPos, zPos, 0, 0, 0);
+        world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, xPos, yPos, zPos, 0, 0, 0);
     }
 
     /**
@@ -65,7 +68,7 @@ public class BlockGSCandle extends BlockContainer implements IInfusionStabiliser
      * box can change after the pool has been cleared to be reused)
      */
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+    public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state) {
         return null;
     }
 
@@ -83,10 +86,10 @@ public class BlockGSCandle extends BlockContainer implements IInfusionStabiliser
      * If this block doesn't render as an ordinary block it will return False
      * (examples: signs, buttons, stairs, etc)
      */
-    @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
+//    @Override
+//    public boolean renderAsNormalBlock() {
+//        return false;
+//    }
 
     /**
      * The type of render function that is called for this block
@@ -101,8 +104,8 @@ public class BlockGSCandle extends BlockContainer implements IInfusionStabiliser
      * coordinates. Args: world, x, y, z
      */
     @Override
-    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-        return canPlaceCandleOn(world, x, y - 1, z);
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+        return canPlaceCandleOn(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()));
     }
 
     /**
@@ -111,22 +114,22 @@ public class BlockGSCandle extends BlockContainer implements IInfusionStabiliser
      * neighbor blockID
      */
     @Override
-    public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-        if (!this.canPlaceCandleOn(world, x, y - 1, z)) {
-            this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-            world.setBlockToAir(x, y, z);
+    public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block block) {
+        if (!this.canPlaceCandleOn(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()))) {
+            this.dropBlockAsItem(world, pos, state, 0);
+            world.setBlockToAir(pos);
         }
     }
 
     /**
      * Gets if we can place a torch on a block.
      */
-    private boolean canPlaceCandleOn(World world, int x, int y, int z) {
-        if (world.doesBlockHaveSolidTopSurface(world, x, y, z)) {
+    private boolean canPlaceCandleOn(World world, BlockPos pos) {
+        if (world.doesBlockHaveSolidTopSurface(world, pos)) {
             return true;
         } else {
-            Block block = world.getBlock(x, y, z);
-            return (block != null && block.canPlaceTorchOnTop(world, x, y, z));
+            Block block = world.getBlockState(pos).getBlock();
+            return (block != null && block.canPlaceTorchOnTop(world, pos));
         }
     }
 
