@@ -17,7 +17,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemSpade;
@@ -152,7 +151,7 @@ public class BlockGSGraveStone extends BlockContainer {
      */
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase player, ItemStack itemStack) {
-        GraveStoneHelper.replaceGround(world, x, y - 1, z);
+        GraveStoneHelper.replaceGround(world, pos.down());
         int direction = MathHelper.floor_float(player.rotationYaw);
 
         if (direction < 0) {
@@ -160,8 +159,9 @@ public class BlockGSGraveStone extends BlockContainer {
         }
 
         int metadata = GraveStoneHelper.getMetadataBasedOnRotation(direction);
-        world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(x, y, z);
+        // TODO world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
+        world.setBlockState(pos, state, 2);
+        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
 
         if (tileEntity != null) {
             if (itemStack.hasTagCompound()) {
@@ -215,7 +215,7 @@ public class BlockGSGraveStone extends BlockContainer {
 
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, BlockPos pos) {
-        int meta = access.getBlockMetadata(x, y, z);
+        int meta = 0;//TODO access.getBlockMetadata(x, y, z);
         EnumGraves graveType;
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) access.getTileEntity(pos);
 
@@ -424,7 +424,7 @@ public class BlockGSGraveStone extends BlockContainer {
             if (EnchantmentHelper.getSilkTouchModifier(player)) {
                 dropBlock(world, pos, state);
             } else {
-                dropBlockWithoutInfo(world, pos);
+                dropBlockWithoutInfo(world, pos, state);
             }
         }
     }
@@ -435,7 +435,7 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     public List<ItemStack> getDrops(IBlockAccess access, BlockPos pos, IBlockState state, int fortune) {
         List<ItemStack> ret = new ArrayList<ItemStack>();
-        ret.add(getBlockItemStack(access, pos));
+        ret.add(getBlockItemStack(access, pos, state));
         return ret;
     }
 
@@ -453,10 +453,11 @@ public class BlockGSGraveStone extends BlockContainer {
         return false;
     }
 
-    @Override
-    public int getRenderType() {
-        return GraveStoneConfig.graveRenderID;
-    }
+    //TODO
+//    @Override
+//    public int getRenderType() {
+//        return GraveStoneConfig.graveRenderID;
+//    }
 
     @Override
     public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
@@ -575,7 +576,7 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block block) {
         if (!world.isSideSolid(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), EnumFacing.DOWN, true)) {
-            this.dropBlockWithoutInfo(world, pos);
+            this.dropBlockWithoutInfo(world, pos, state);
             world.setBlockToAir(pos);
         }
     }
@@ -630,15 +631,16 @@ public class BlockGSGraveStone extends BlockContainer {
      * Drop grave as item block
      */
     private void dropBlock(World world, BlockPos pos, IBlockState state) {
-        ItemStack itemStack = getBlockItemStack(world, pos);
+        ItemStack itemStack = getBlockItemStack(world, pos, state);
 
         if (itemStack != null) {
-            this.dropBlockAsItem(world, pos, itemStack);
+            // TODO this.dropBlockAsItem(world, pos, itemStack);
+            this.dropBlockAsItem(world, pos, state, 0);
         }
     }
 
-    private void dropBlockWithoutInfo(World world, BlockPos pos) {
-        ItemStack itemStack = this.createStackedBlock(0);
+    private void dropBlockWithoutInfo(World world, BlockPos pos, IBlockState state) {
+        ItemStack itemStack = this.createStackedBlock(state); //TODO this.createStackedBlock(0);
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
 
         if (tileEntity != null) {
@@ -649,7 +651,8 @@ public class BlockGSGraveStone extends BlockContainer {
                 nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
 
                 itemStack.setTagCompound(nbt);
-                this.dropBlockAsItem(world, pos, itemStack);
+                // TODO this.dropBlockAsItem(world, pos, itemStack);
+                this.dropBlockAsItem(world, pos, state, 0);
             }
         }
     }
@@ -657,8 +660,8 @@ public class BlockGSGraveStone extends BlockContainer {
     /**
      * Get grave block as item block
      */
-    private ItemStack getBlockItemStack(IBlockAccess access, BlockPos pos) {
-        ItemStack itemStack = this.createStackedBlock(0);
+    private ItemStack getBlockItemStack(IBlockAccess access, BlockPos pos, IBlockState state) {
+        ItemStack itemStack = this.createStackedBlock(state); //TODO this.createStackedBlock(0);
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) access.getTileEntity(pos);
 
         if (tileEntity != null) {
@@ -740,7 +743,8 @@ public class BlockGSGraveStone extends BlockContainer {
 
         BlockPos newPos = GraveStoneHelper.findPlaceForGrave(world, pos);
         if (newPos != null) {
-            world.setBlock(newPos, this, GraveStoneHelper.getMetadataBasedOnRotation(direction), 0x02);
+            //TODO
+            //world.setBlock(newPos, this, GraveStoneHelper.getMetadataBasedOnRotation(direction), 2);
             TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(newPos);
 
             if (tileEntity != null) {
@@ -759,7 +763,7 @@ public class BlockGSGraveStone extends BlockContainer {
             }
             GSLogger.logInfoGrave("Create " + deathInfo.getName() + "'s grave at " + newPos.getX() + "x" + newPos.getY() + "x" + newPos.getZ());
         } else {
-            ItemStack itemStack = this.createStackedBlock(0);
+            ItemStack itemStack = this.createStackedBlock(world.getBlockState(pos)); //TODO this.createStackedBlock(0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", graveType);
             nbt.setBoolean("isLocalized", true);
@@ -774,7 +778,8 @@ public class BlockGSGraveStone extends BlockContainer {
             }
 
             itemStack.setTagCompound(nbt);
-            this.dropBlockAsItem(world, pos, itemStack);
+            //TODO this.dropBlockAsItem(world, pos, itemStack);
+            this.dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
 
             if (items != null) {
                 for (int i = 0; i < items.size(); i++) {
@@ -789,7 +794,7 @@ public class BlockGSGraveStone extends BlockContainer {
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos) {
-        ItemStack itemStack = this.createStackedBlock(0);
+        ItemStack itemStack = this.createStackedBlock(world.getBlockState(pos)); //TODO this.createStackedBlock(0);
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
 
         if (tileEntity != null) {

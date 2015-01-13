@@ -30,7 +30,9 @@ public class ModelHangedSkeleton extends ModelSkeleton {
     }
 
     public ModelHangedSkeleton(boolean isInStocks, boolean isWitherSkeleton) {
-        super(0);
+        //TODO
+//        super(0);
+        super(0, false);
 
         this.isInStocks = isInStocks;
         this.isWitherSkeleton = isWitherSkeleton;

@@ -29,7 +29,8 @@ public class ItemGSPileOfBonesRenderer implements IItemRenderer {
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         TileEntityGSPileOfBones te = new TileEntityGSPileOfBones();
-        te.blockMetadata = item.getItemDamage();
+        //TODO
+//        te.blockMetadata = item.getItemDamage();
         TileEntityRendererDispatcher.instance.renderTileEntityAt(te, 0, 0, 0, 0);
     }
 }

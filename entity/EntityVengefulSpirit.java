@@ -34,8 +34,9 @@ public class EntityVengefulSpirit extends EntityGhost {
         int i = 0;
 
         if (entity instanceof EntityLivingBase) {
-            f += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) entity);
-            i += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) entity);
+            //TODO
+//            f += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) entity);
+//            i += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) entity);
             
             ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(getPotionId(entity.worldObj.rand), 7));
             ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(getAdditionalPotionId(entity.worldObj.rand), 3));

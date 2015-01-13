@@ -15,8 +15,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public class CursePotion extends Potion {
 
-    public CursePotion(int id, boolean isBadEffect, int liquidColor) {
-        super(id, isBadEffect, liquidColor);
+    public CursePotion(int id) {
+        super(id, Resources.POTIONS, true, 0);
         setIconIndex(0, 0);
     }
 
@@ -30,9 +30,10 @@ public class CursePotion extends Potion {
         return "Curse";
     }
 
-    @SideOnly(Side.CLIENT)
-    public int getStatusIconIndex() {
-        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.POTIONS);
-        return super.getStatusIconIndex();
-    }
+    //TODO
+//    @SideOnly(Side.CLIENT)
+//    public int getStatusIconIndex() {
+//        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.POTIONS);
+//        return super.getStatusIconIndex();
+//    }
 }

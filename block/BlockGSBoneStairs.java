@@ -2,8 +2,8 @@ package gravestone.block;
 
 import gravestone.core.GSBlock;
 import gravestone.core.GSTabs;
-import gravestone.core.Resources;
 import net.minecraft.block.BlockStairs;
+import net.minecraft.block.state.BlockState;
 
 /**
  * GraveStone mod
@@ -14,7 +14,7 @@ import net.minecraft.block.BlockStairs;
 public class BlockGSBoneStairs extends BlockStairs {
 
     public BlockGSBoneStairs() {
-        super(GSBlock.boneBlock, 0);
+        super(new BlockState(GSBlock.boneBlock).getBaseState());
         this.setUnlocalizedName("bone_stairs");
         this.setCreativeTab(GSTabs.otherItemsTab);
 //        this.setBlockTextureName(Resources.BONE_BLOCK);

@@ -1,9 +1,7 @@
 package gravestone.core.compatibility;
 
-import net.minecraftforge.fml.common.Loader;
 import gravestone.core.compatibility.forestry.GSCompatibilityForestry;
-import gravestone.core.logger.GSLogger;
-import gravestone.core.logger.GravesLogger;
+import net.minecraftforge.fml.common.Loader;
 
 /**
  * GraveStone mod
@@ -79,7 +77,7 @@ public class GSCompatibility {
         if (Loader.isModLoaded("SophisticatedWolves")) {
             GSCompatibilitySophisticatedWolves.isInstalled = true;
         }
-        
+
         if (Loader.isModLoaded("EnderIO")) {
             GSCompatibilityEnderIO.isInstalled = true;
         }

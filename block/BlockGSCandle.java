@@ -18,7 +18,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import thaumcraft.api.crafting.IInfusionStabiliser;
 
 import java.util.Random;
 
@@ -28,7 +27,9 @@ import java.util.Random;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class BlockGSCandle extends BlockContainer implements IInfusionStabiliser {
+//TODO
+//public class BlockGSCandle extends BlockContainer implements IInfusionStabiliser {
+public class BlockGSCandle extends BlockContainer {
 
     public BlockGSCandle() {
         super(Material.carpet);
@@ -94,10 +95,11 @@ public class BlockGSCandle extends BlockContainer implements IInfusionStabiliser
     /**
      * The type of render function that is called for this block
      */
-    @Override
-    public int getRenderType() {
-        return GraveStoneConfig.candleRenderID;
-    }
+    //TODO
+//    @Override
+//    public int getRenderType() {
+//        return GraveStoneConfig.candleRenderID;
+//    }
 
     /**
      * Checks to see if its valid to put this block at the specified
@@ -138,8 +140,9 @@ public class BlockGSCandle extends BlockContainer implements IInfusionStabiliser
         return new TileEntityGSCandle();
     }
 
-    @Override
-    public boolean canStabaliseInfusion(World world, int x, int y, int z) {
-        return true;
-    }
+    //TODO
+//    @Override
+//    public boolean canStabaliseInfusion(World world, int x, int y, int z) {
+//        return true;
+//    }
 }

@@ -1,10 +1,5 @@
 package gravestone.block;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import gravestone.block.enums.EnumSkullCandle;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSTabs;
@@ -14,6 +9,8 @@ import gravestone.tileentity.TileEntityGSSkullCandle;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.creativetab.CreativeTabs;
@@ -21,9 +18,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import thaumcraft.api.crafting.IInfusionStabiliser;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 import java.util.Random;
@@ -34,7 +34,11 @@ import java.util.Random;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class BlockGSSkullCandle extends BlockContainer implements IInfusionStabiliser {
+//TODO
+//public class BlockGSSkullCandle extends BlockContainer implements IInfusionStabiliser {
+public class BlockGSSkullCandle extends BlockContainer {
+
+    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", EnumSkullCandle.class);
 
     public BlockGSSkullCandle() {
         super(Material.circuits);
@@ -69,10 +73,11 @@ public class BlockGSSkullCandle extends BlockContainer implements IInfusionStabi
     /**
      * The type of render function that is called for this block
      */
-    @Override
-    public int getRenderType() {
-        return GraveStoneConfig.skullCandleRenderID;
-    }
+    //TODO
+//    @Override
+//    public int getRenderType() {
+//        return GraveStoneConfig.skullCandleRenderID;
+//    }
 
     /**
      * Returns a new instance of a block's tile entity class. Called on placing
@@ -85,6 +90,7 @@ public class BlockGSSkullCandle extends BlockContainer implements IInfusionStabi
 
     @Override
     public int damageDropped(IBlockState state) {
+        int metadata = ((Enum) state.getValue(VARIANT)).ordinal();
         return metadata;
     }
 
@@ -93,7 +99,8 @@ public class BlockGSSkullCandle extends BlockContainer implements IInfusionStabi
      */
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entity, ItemStack stack) {
-        world.setBlockMetadataWithNotify(x, y, z, stack.getItemDamage(), 2);
+        //TODO world.setBlockMetadataWithNotify(x, y, z, stack.getItemDamage(), 2);
+        world.setBlockState(pos, state, 2);
 
         TileEntityGSSkullCandle tileEntity = (TileEntityGSSkullCandle) world.getTileEntity(pos);
         if (tileEntity != null) {
@@ -146,8 +153,9 @@ public class BlockGSSkullCandle extends BlockContainer implements IInfusionStabi
         }
     }
 
-    @Override
-    public boolean canStabaliseInfusion(World world, int x, int y, int z) {
-        return true;
-    }
+    //TODO
+//    @Override
+//    public boolean canStabaliseInfusion(World world, int x, int y, int z) {
+//        return true;
+//    }
 }

@@ -21,7 +21,7 @@ public class TileEntityGSCandleRenderer extends TileEntitySpecialRenderer {
         this.bindTexture(Resources.CANDLE);
 
         GL11.glPushMatrix();
-        if (tileEntity.getWorldObj() == null ) {
+        if (tileEntity.getWorld() == null ) {
             GL11.glTranslatef(x + 0.5F, y + 3.7F, z + 0.5F);
             GL11.glScalef(2.5F, -2.5F, -2.5F);
         } else {
@@ -35,7 +35,7 @@ public class TileEntityGSCandleRenderer extends TileEntitySpecialRenderer {
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float par8) {
+    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float par8, int par9) {
         this.renderTileEntityCandleAt((TileEntityGSCandle) tileEntity, (float) x, (float) y, (float) z, par8);
     }
 }

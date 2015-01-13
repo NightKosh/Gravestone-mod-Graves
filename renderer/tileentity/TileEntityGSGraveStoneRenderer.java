@@ -132,12 +132,12 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f) {
+    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f, int par9) {
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) te;
         EnumGraves graveType = tileEntity.getGraveType();
         int meta = 0;
 
-        if (tileEntity.getWorldObj() != null) {
+        if (tileEntity.getWorld() != null) {
             meta = tileEntity.getBlockMetadata();
         }
 
@@ -147,7 +147,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         //texture
         GL11.glPushMatrix();
 
-        if (tileEntity.getWorldObj() == null && tileEntity.isSwordGrave()) {
+        if (tileEntity.getWorld() == null && tileEntity.isSwordGrave()) {
             GL11.glTranslatef((float) x + 0.5F, (float) y + 2, (float) z + 0.5F);
             GL11.glScalef(1.5F, -1.5F, -1.5F);
         } else {
@@ -214,25 +214,28 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
                 sword.getTagCompound().setTag("ench", new NBTTagList());
             }
         }
-        EntityItem entityitem = new EntityItem(te.getWorldObj(), 0, 0, 0, sword);
+        EntityItem entityitem = new EntityItem(te.getWorld(), 0, 0, 0, sword);
         entityitem.hoverStart = 0;
         GL11.glTranslatef(0.24F, 0.83F, 0);
         GL11.glScalef(1.5F, -1.5F, -1.5F);
         GL11.glRotatef(135, 0, 0, 1);
 
-        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
+        // TODO
+//        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
     }
 
     private void renderFlower(TileEntityGSGraveStone te) {
-        EntityItem entityitem = new EntityItem(te.getWorldObj(), 0, 0, 0, te.getFlower());
+        EntityItem entityitem = new EntityItem(te.getWorld(), 0, 0, 0, te.getFlower());
         entityitem.hoverStart = 0;
         GL11.glTranslatef(0, 1.45F, -0.1F);
         GL11.glScalef(1, -1F, -1F);
         GL11.glRotatef(45, 0, 1, 0);
 
-        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
+        // TODO
+//        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
 
         GL11.glRotatef(-90, 0, 1, 0);
-        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
+        // TODO
+//        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
     }
 }

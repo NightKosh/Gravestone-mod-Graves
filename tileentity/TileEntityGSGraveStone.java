@@ -1,11 +1,11 @@
 package gravestone.tileentity;
 
-import gravestone.config.GraveStoneConfig;
-import gravestone.core.TimeHelper;
-import gravestone.core.logger.GSLogger;
 import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumGraves;
+import gravestone.config.GraveStoneConfig;
+import gravestone.core.TimeHelper;
 import gravestone.core.event.GSRenderEventHandler;
+import gravestone.core.logger.GSLogger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -172,7 +172,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
 
     public void dropSword() {
         if (this.sword != null) {
-            this.gSItems.dropItem(this.sword, this.worldObj, this.pos.getX(), this.pos.getY(), this.pos.getZ());
+            this.gSItems.dropItem(this.sword, this.worldObj, this.pos);
         }
     }
 
@@ -191,7 +191,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
 
     public void dropFlower() {
         if (this.flower != null) {
-            this.gSItems.dropItem(this.flower, this.worldObj, this.pos.getX(), this.pos.getY(), this.pos.getZ());
+            this.gSItems.dropItem(this.flower, this.worldObj, this.pos);
         }
     }
 
@@ -266,7 +266,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     public void setRandomFlower(Random random) {
         if (random.nextInt(4) == 0) {
             ItemStack flower = new ItemStack(GraveStoneHelper.FLOWERS.get(random.nextInt(GraveStoneHelper.FLOWERS.size())), 1);
-            if (GraveStoneHelper.canFlowerBePlaced(this.worldObj, this.pos.getX(), this.pos.getY(), this.pos.getZ(), flower, this)) {
+            if (GraveStoneHelper.canFlowerBePlaced(this.worldObj, this.pos, flower, this)) {
                 setFlower(flower);
             }
         }

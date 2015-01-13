@@ -81,7 +81,7 @@ public class GSMobSpawner extends GSSpawner {
                 GSLogger.logError("Spawner te worldobj is null !!!!!");
                 return EnumSpawner.ZOMBIE_SPAWNER;
             } else {
-                byte meta = (byte) tileEntity.getWorld().getBlockMetadata(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ());
+                byte meta = (byte) 0;//TODO tileEntity.getWorld().getBlockMetadata(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ());
                 spawnerType = EnumSpawner.getById(meta);
                 return spawnerType;
             }

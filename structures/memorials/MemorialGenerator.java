@@ -9,6 +9,7 @@ import gravestone.config.GraveStoneConfig;
 import gravestone.structures.GSStructureGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
@@ -59,7 +60,7 @@ public class MemorialGenerator implements GSStructureGenerator {
     }
 
     protected static boolean isBiomeAllowed(World world, int x, int z) {
-        LinkedList<BiomeDictionary.Type> biomeTypesList = new LinkedList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(x, z))));
+        LinkedList<BiomeDictionary.Type> biomeTypesList = new LinkedList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(new BlockPos(x, 0, z)))));//TODO world.getBiomeGenForCoords(x, z))));
         return !biomeTypesList.contains(BiomeDictionary.Type.WATER);
     }
 
@@ -86,7 +87,8 @@ public class MemorialGenerator implements GSStructureGenerator {
     }
 
     private static boolean isNoWarterUnder(World world, int x, int z) {
-        int y = world.getTopSolidOrLiquidBlock(x, z);
-        return !world.getBlock(x, y, z).getMaterial().equals(Material.water);
+        //TODO
+        int y = 100;//world.getTopSolidOrLiquidBlock(x, z);
+        return !world.getBlockState(new BlockPos(x, y, z)).getBlock().getMaterial().equals(Material.water);
     }
 }

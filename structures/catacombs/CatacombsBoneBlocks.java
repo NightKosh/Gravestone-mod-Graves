@@ -22,20 +22,21 @@ public class CatacombsBoneBlocks extends StructureComponent.BlockSelector {
      */
     @Override
     public void selectBlocks(Random random, int par2, int par3, int par4, boolean flag) {
-        if (flag) {
-            this.field_151562_a = GSBlock.boneBlock;
-            if (random.nextInt(5) == 0) {
-                this.selectedBlockMetaData = 1;
-            } else {
-                this.selectedBlockMetaData = 0;
-            }
-
-            if (random.nextInt(100) < 60) {
-                this.selectedBlockMetaData += 2;
-            }
-        } else {
-            this.field_151562_a = Blocks.air;
-            this.selectedBlockMetaData = 0;
-        }
+        //TODO
+//        if (flag) {
+//            this.field_151562_a = GSBlock.boneBlock;
+//            if (random.nextInt(5) == 0) {
+//                this.selectedBlockMetaData = 1;
+//            } else {
+//                this.selectedBlockMetaData = 0;
+//            }
+//
+//            if (random.nextInt(100) < 60) {
+//                this.selectedBlockMetaData += 2;
+//            }
+//        } else {
+//            this.field_151562_a = Blocks.air;
+//            this.selectedBlockMetaData = 0;
+//        }
     }
 }

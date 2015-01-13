@@ -33,14 +33,15 @@ public class ComponentGSSingleGrave extends ComponentGraveStone {
         int positionX, positionZ, y;
         positionX = getXWithOffset(0, 0);
         positionZ = getZWithOffset(0, 0);
-        y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
+        y = 100;//TODO world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
 
         if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
             GSLogger.logInfo("Generate grave at " + positionX + "x" + positionZ);
 
-            byte graveType = GraveStoneHelper.getGraveType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, EnumGraveType.ALL_GRAVES);
-            Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
-            GraveGenerationHelper.placeGrave(this, world, random, 0, y, 0, GraveStoneHelper.getMetaDirection(coordBaseMode), graveType, sword, true);
+            //TODO
+//            byte graveType = GraveStoneHelper.getGraveType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, EnumGraveType.ALL_GRAVES);
+//            Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
+//            GraveGenerationHelper.placeGrave(this, world, random, 0, y, 0, GraveStoneHelper.getMetaDirection(coordBaseMode), graveType, sword, true);
         }
 
         return true;
@@ -51,9 +52,10 @@ public class ComponentGSSingleGrave extends ComponentGraveStone {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
         nbttagcompound.setString("id", "GSSingleGrave");
         nbttagcompound.setTag("BB", this.boundingBox.func_151535_h());
-        nbttagcompound.setInteger("O", this.coordBaseMode);
-        nbttagcompound.setInteger("GD", this.componentType);
-        this.func_143012_a(nbttagcompound);
+        //TODO
+//        nbttagcompound.setInteger("O", this.coordBaseMode);
+//        nbttagcompound.setInteger("GD", this.componentType);
+//        this.func_143012_a(nbttagcompound);
         return nbttagcompound;
     }
 }

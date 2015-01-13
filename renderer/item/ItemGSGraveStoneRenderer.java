@@ -33,13 +33,13 @@ public class ItemGSGraveStoneRenderer implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         TileEntityGSGraveStone te = new TileEntityGSGraveStone();
 
-        if (item.stackTagCompound != null) {
-            te.setGraveType(item.stackTagCompound.getByte("GraveType"));
-            if (item.stackTagCompound.hasKey("Sword")) {
+        if (item.hasTagCompound()) {
+            te.setGraveType(item.getTagCompound().getByte("GraveType"));
+            if (item.getTagCompound().hasKey("Sword")) {
                 te.setSword(ItemStack.loadItemStackFromNBT(item.getTagCompound().getCompoundTag("Sword")));
             }
-            if (item.stackTagCompound.hasKey("Enchanted")) {
-                te.setEnchanted(item.stackTagCompound.getBoolean("Enchanted"));
+            if (item.getTagCompound().hasKey("Enchanted")) {
+                te.setEnchanted(item.getTagCompound().getBoolean("Enchanted"));
             }
         }
 

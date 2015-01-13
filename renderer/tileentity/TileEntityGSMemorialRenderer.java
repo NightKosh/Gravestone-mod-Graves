@@ -163,12 +163,12 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f) {
+    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f, int par9) {
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) te;
         EnumMemorials memorialType = tileEntity.getMemorialType();
         int meta;
 
-        if (tileEntity.getWorldObj() != null) {
+        if (tileEntity.getWorld() != null) {
             meta = tileEntity.getBlockMetadata();
         } else {
             meta = 0;
@@ -179,7 +179,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
         //texture
         GL11.glPushMatrix();
 
-        if (tileEntity.getWorldObj() != null) {
+        if (tileEntity.getWorld() != null) {
             GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
             GL11.glScalef(1F, -1F, -1F);
         } else {

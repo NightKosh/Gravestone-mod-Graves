@@ -41,7 +41,8 @@ public class DogCorpseHelper extends CorpseHelper {
 
     public static void setNbt(EntityWolf dog, NBTTagCompound nbt) {
         setName(dog, nbt);
-        nbt.setByte("Collar", (byte) dog.getCollarColor());
+        //TODO
+//        nbt.setByte("Collar", (byte) dog.getCollarColor());
 
         if (GSCompatibilitySophisticatedWolves.isInstalled() && dog instanceof ISophisticatedWolf) {
             nbt.setInteger("Species", ((ISophisticatedWolf) dog).getSpecies());
@@ -60,7 +61,8 @@ public class DogCorpseHelper extends CorpseHelper {
         wolf.setTamed(true);
         wolf.setHealth(20);
         wolf.setOwnerId(player.getUniqueID().toString());
-        wolf.setCollarColor(nbtTag.getByte("Collar"));
+        //TODO
+//        wolf.setCollarColor(nbtTag.getByte("Collar"));
         world.setEntityState(wolf, (byte) 7);
         spawnMob(wolf, world, x, y, z);
     }

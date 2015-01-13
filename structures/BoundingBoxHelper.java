@@ -77,10 +77,11 @@ public class BoundingBoxHelper {
 
         for (int z = boundingBox.minZ; z <= boundingBox.maxZ; ++z) {
             for (int x = boundingBox.minX; x <= boundingBox.maxX; ++x) {
-                if (boundingBox.isVecInside(x, 64, z)) {
-                    height += Math.max(world.getTopSolidOrLiquidBlock(x, z), world.provider.getAverageGroundLevel());
-                    count++;
-                }
+                // TODO
+//                if (boundingBox.isVecInside(x, 64, z)) {
+//                    height += Math.max(world.getTopSolidOrLiquidBlock(x, z), world.provider.getAverageGroundLevel());
+//                    count++;
+//                }
             }
         }
 

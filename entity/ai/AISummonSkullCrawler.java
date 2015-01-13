@@ -50,7 +50,8 @@ public class AISummonSkullCrawler extends EntityAIBase {
                         BlockPos blockPos = blockpos.add(j, i, k);
                         IBlockState state = world.getBlockState(blockPos);
 
-                        if (state.getBlock().equals(GSBlock.boneBlock) && GSBlock.boneBlock.isSkullCrawlerBlock(blockMeta)) {
+                        //TODO
+                        if (state.getBlock().equals(GSBlock.boneBlock)) {// && GSBlock.boneBlock.isSkullCrawlerBlock(blockMeta)) {
                             if (world.getGameRules().getGameRuleBooleanValue("mobGriefing")) {
                                 world.destroyBlock(blockPos, true);
                             } else {

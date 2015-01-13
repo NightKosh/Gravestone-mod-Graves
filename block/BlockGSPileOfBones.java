@@ -1,9 +1,5 @@
 package gravestone.block;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockPos;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import gravestone.block.enums.EnumPileOfBones;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
@@ -12,6 +8,8 @@ import gravestone.tileentity.TileEntityGSPileOfBones;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
@@ -19,8 +17,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 import java.util.Random;
@@ -32,6 +33,8 @@ import java.util.Random;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class BlockGSPileOfBones extends BlockContainer {
+
+    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", EnumPileOfBones.class);
 
     public BlockGSPileOfBones() {
         super(Material.circuits);
@@ -64,10 +67,11 @@ public class BlockGSPileOfBones extends BlockContainer {
 //        return false;
 //    }
 
-    @Override
-    public int getRenderType() {
-        return GraveStoneConfig.pileOfBonesRenderID;
-    }
+    //TODO
+//    @Override
+//    public int getRenderType() {
+//        return GraveStoneConfig.pileOfBonesRenderID;
+//    }
 
     @Override
     protected boolean canSilkHarvest() {
@@ -86,6 +90,7 @@ public class BlockGSPileOfBones extends BlockContainer {
 
     @Override
     public int damageDropped(IBlockState state) {
+        int metadata = ((Enum) state.getValue(VARIANT)).ordinal();
         return metadata;
     }
 
@@ -95,7 +100,8 @@ public class BlockGSPileOfBones extends BlockContainer {
 
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entity, ItemStack stack) {
-        world.setBlockMetadataWithNotify(x, y, z, stack.getItemDamage(), 2);
+        // TODO setBlockMetadataWithNotify(x, y, z, stack.getItemDamage(), 2);
+        world.setBlockState(pos, state, 2);
 
         TileEntityGSPileOfBones te = (TileEntityGSPileOfBones) world.getTileEntity(pos);
         if (te != null) {
@@ -119,7 +125,7 @@ public class BlockGSPileOfBones extends BlockContainer {
     @Override
     public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block block) {
         if (!canPlaceBlockAt(world, pos)) {
-            this.dropBlockAsItem(world, pos, world.getBlockMetadata(x, y, z), 0);
+            this.dropBlockAsItem(world, pos, state, 0);
             world.setBlockToAir(pos);
         }
     }

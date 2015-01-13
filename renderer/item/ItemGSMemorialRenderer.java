@@ -34,14 +34,14 @@ public class ItemGSMemorialRenderer implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         TileEntityGSMemorial te = new TileEntityGSMemorial();
 
-        if (item.stackTagCompound != null) {
-            te.setGraveType(item.stackTagCompound.getByte("GraveType"));
-            if (item.stackTagCompound.hasKey("Enchanted")) {
-                te.setEnchanted(item.stackTagCompound.getBoolean("Enchanted"));
+        if (item.hasTagCompound()) {
+            te.setGraveType(item.getTagCompound().getByte("GraveType"));
+            if (item.getTagCompound().hasKey("Enchanted")) {
+                te.setEnchanted(item.getTagCompound().getBoolean("Enchanted"));
             }
-            if (item.stackTagCompound.hasKey("HangedMob")) {
-                te.setHangedMob(EnumHangedMobs.getByID(item.stackTagCompound.getByte("HangedMob")));
-                te.setHangedVillagerProfession(item.stackTagCompound.getInteger("HangedVillagerProfession"));
+            if (item.getTagCompound().hasKey("HangedMob")) {
+                te.setHangedMob(EnumHangedMobs.getByID(item.getTagCompound().getByte("HangedMob")));
+                te.setHangedVillagerProfession(item.getTagCompound().getInteger("HangedVillagerProfession"));
             }
         }
 

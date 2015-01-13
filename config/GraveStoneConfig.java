@@ -27,12 +27,13 @@ public class GraveStoneConfig {
     public static final String CATEGORY_COMPATIBILITY = "compatibility";
     public static final String CATEGORY_POTIONS = "potions";
     // renderer Id
-    public static int graveRenderID = RenderingRegistry.getNextAvailableRenderId();
-    public static int memorialRenderID = RenderingRegistry.getNextAvailableRenderId();
-    public static int spawnerRenderID = RenderingRegistry.getNextAvailableRenderId();
-    public static int skullCandleRenderID = RenderingRegistry.getNextAvailableRenderId();
-    public static int candleRenderID = RenderingRegistry.getNextAvailableRenderId();
-    public static int pileOfBonesRenderID = RenderingRegistry.getNextAvailableRenderId();
+    //TODO
+//    public static int graveRenderID = RenderingRegistry.getNextAvailableRenderId();
+//    public static int memorialRenderID = RenderingRegistry.getNextAvailableRenderId();
+//    public static int spawnerRenderID = RenderingRegistry.getNextAvailableRenderId();
+//    public static int skullCandleRenderID = RenderingRegistry.getNextAvailableRenderId();
+//    public static int candleRenderID = RenderingRegistry.getNextAvailableRenderId();
+//    public static int pileOfBonesRenderID = RenderingRegistry.getNextAvailableRenderId();
     // world generator
     public static int structuresDimensionId;
     public static boolean generateCatacombs;

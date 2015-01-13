@@ -1,6 +1,8 @@
 package gravestone.entity.item;
 
 import net.minecraft.entity.item.EntityPainting;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 /**
@@ -15,7 +17,7 @@ public class EntityHauntedPainting extends EntityPainting {
         super(world);
     }
 
-    public EntityHauntedPainting(World world, int par2, int par3, int par4, int par5) {
-        super(world, par2, par3, par4, par5);
+    public EntityHauntedPainting(World world, BlockPos pos, EnumFacing facing) {
+        super(world, pos, facing);
     }
 }

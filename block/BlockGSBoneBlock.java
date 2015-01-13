@@ -3,17 +3,15 @@ package gravestone.block;
 import gravestone.block.enums.EnumBoneBlock;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSTabs;
-import gravestone.core.Resources;
 import gravestone.entity.monster.EntitySkullCrawler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -28,6 +26,7 @@ import java.util.List;
  */
 public class BlockGSBoneBlock extends Block {
 
+    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", EnumBoneBlock.class);
 //    @SideOnly(Side.CLIENT)
 //    private IIcon skullIcon;
 
@@ -75,13 +74,15 @@ public class BlockGSBoneBlock extends Block {
      */
     @Override
     public int damageDropped(IBlockState state) {
-        if (isSkullCrawlerBlock(metadata)) {
+        int metadata = ((Enum) state.getValue(VARIANT)).ordinal();
+        if (isSkullCrawlerBlock(state)) {
             metadata -= 2;
         }
         return metadata;
     }
 
-    public boolean isSkullCrawlerBlock(int metadata) {
+    public boolean isSkullCrawlerBlock(IBlockState state) {
+        int metadata = ((Enum) state.getValue(VARIANT)).ordinal();
         return metadata == 2 || metadata == 3;
     }
 
@@ -90,7 +91,7 @@ public class BlockGSBoneBlock extends Block {
      */
     @Override
     public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
-        if (!world.isRemote && isSkullCrawlerBlock(metadata) && GraveStoneConfig.spawnSkullCrawlersAtBoneBlockDestruction) {
+        if (!world.isRemote && isSkullCrawlerBlock(state) && GraveStoneConfig.spawnSkullCrawlersAtBoneBlockDestruction) {
             EntitySkullCrawler skullCrawler = new EntitySkullCrawler(world);
             skullCrawler.setLocationAndAngles(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0, 0);
             world.spawnEntityInWorld(skullCrawler);

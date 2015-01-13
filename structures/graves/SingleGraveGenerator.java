@@ -3,6 +3,7 @@ package gravestone.structures.graves;
 import gravestone.config.GraveStoneConfig;
 import gravestone.structures.GSStructureGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
@@ -57,9 +58,9 @@ public class SingleGraveGenerator implements GSStructureGenerator {
     }
 
     protected static boolean isBiomeAllowed(World world, int x, int z) {
-        LinkedList<BiomeDictionary.Type> biomeTypesList = new LinkedList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(x, z))));
+        LinkedList<BiomeDictionary.Type> biomeTypesList = new LinkedList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(new BlockPos(x, 0, z)))));//TODO world.getBiomeGenForCoords(x, z))));
         return !biomeTypesList.contains(BiomeDictionary.Type.WATER) &&
-                (GraveStoneConfig.generateGravesInMushroomBiomes || !BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(x, z)).equals(BiomeDictionary.Type.MUSHROOM));
+                (GraveStoneConfig.generateGravesInMushroomBiomes || !BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(new BlockPos(x, 0, z))).equals(BiomeDictionary.Type.MUSHROOM));//TODO world.getBiomeGenForCoords(x, z))));
     }
 
     protected static boolean noAnyInRange(int x, int z) {

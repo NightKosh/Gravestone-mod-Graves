@@ -34,7 +34,7 @@ public class TileEntityGSSpawnerRenderer extends TileEntityGSRenderer {
         this.bindTexture(Resources.PENTAGRAM);
 
         GL11.glPushMatrix();
-        if (tileEntity.getWorldObj() != null) {
+        if (tileEntity.getWorld() != null) {
             GL11.glTranslatef(x + 0.5F, y + 1.5F, z + 0.5F);
             GL11.glScalef(1.0F, -1F, -1F);
         } else {
@@ -50,7 +50,7 @@ public class TileEntityGSSpawnerRenderer extends TileEntityGSRenderer {
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float par8) {
+    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float par8, int par9) {
         this.renderSpawnerPentagramAt((TileEntityGSSpawner) tileEntity, (float) x, (float) y, (float) z, par8);
     }
 

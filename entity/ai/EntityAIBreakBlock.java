@@ -3,6 +3,7 @@ package gravestone.entity.ai;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 
 /**
@@ -60,13 +61,15 @@ public class EntityAIBreakBlock extends EntityAIBlockInteract {
     public void updateTask() {
         super.updateTask();
 
-        if (!isBlockBroken && this.theEntity.worldObj.difficultySetting == EnumDifficulty.NORMAL ||
-                this.theEntity.worldObj.difficultySetting == EnumDifficulty.HARD) {
+        if (!isBlockBroken && this.theEntity.worldObj.getDifficulty() == EnumDifficulty.NORMAL ||
+                this.theEntity.worldObj.getDifficulty() == EnumDifficulty.HARD) {
             isBlockBroken = true;
-            this.targetBlock.dropBlockAsItem(this.theEntity.worldObj, this.entityPosX, this.entityPosY, this.entityPosZ, 0, 0);
-            this.theEntity.worldObj.setBlockToAir(this.entityPosX, this.entityPosY, this.entityPosZ);
-            this.theEntity.worldObj.playAuxSFX(1012, this.entityPosX, this.entityPosY, this.entityPosZ, 0);
-            this.theEntity.worldObj.playAuxSFX(2001, this.entityPosX, this.entityPosY, this.entityPosZ, 0);
+            BlockPos pos = new BlockPos(this.theEntity);
+            //TODO
+//            this.targetBlock.dropBlockAsItem(this.theEntity.worldObj, pos, 0, 0);
+            this.theEntity.worldObj.setBlockToAir(pos);
+            this.theEntity.worldObj.playAuxSFX(1012, pos, 0);
+            this.theEntity.worldObj.playAuxSFX(2001, pos, 0);
         }
     }
 }

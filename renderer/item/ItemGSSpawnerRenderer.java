@@ -34,8 +34,9 @@ public class ItemGSSpawnerRenderer implements IItemRenderer {
     @Override
     public void renderItem(ItemRenderType type, ItemStack itemstack, Object... data) {
         TileEntityGSSpawner te = new TileEntityGSSpawner();
-        te.blockMetadata = itemstack.getItemDamage();
+        //TODO
+//        te.blockMetadata = itemstack.getItemDamage();
 
-        TileEntityRendererDispatcher.instance.renderTileEntityAt(te, 0.0D, 0.0D, 0.0D, 0.0F);
+        TileEntityRendererDispatcher.instance.renderTileEntityAt(te, 0, 0, 0, 0);
     }
 }

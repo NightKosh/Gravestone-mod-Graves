@@ -5,6 +5,7 @@ import gravestone.entity.monster.EntitySkullCrawler;
 import gravestone.entity.monster.EntitySkullCrawler.SkullCrawlerType;
 import gravestone.models.entity.ModelSkullCrawler;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
@@ -18,10 +19,11 @@ import net.minecraft.util.ResourceLocation;
 public class RenderSkullCrawler extends RenderLiving {
     private SkullCrawlerType crawlerType;
 
-    public RenderSkullCrawler(SkullCrawlerType crawlerType) {
-        super(new ModelSkullCrawler(), 0.2F);
-        this.crawlerType = crawlerType; 
-        this.setRenderPassModel(new ModelSkullCrawler());
+    public RenderSkullCrawler(SkullCrawlerType crawlerType, RenderManager renderManager) {
+        super(renderManager, new ModelSkullCrawler(), 0.2F);
+        this.crawlerType = crawlerType;
+        //TODO
+//        this.setRenderPassModel(new ModelSkullCrawler());
     }
 
     protected float setSpiderDeathMaxRotation(EntitySkullCrawler entity) {

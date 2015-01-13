@@ -43,11 +43,12 @@ public class Bridge extends CatacombsBaseComponent {
         this.fillWithAir(world, boundingBox, 1, 9, 1, 2, 10, 6);
         this.fillWithAir(world, boundingBox, 10, 9, 1, 11, 10, 6);
         // neter floor and ceiling
-        this.fillWithBlocks(world, boundingBox, 2, 0, 0, 10, 0, 7, Blocks.nether_brick, Blocks.nether_brick, false);
-        this.fillWithBlocks(world, boundingBox, 2, 13, 0, 10, 13, 7, Blocks.nether_brick, Blocks.nether_brick, false);
-        // nether walls
-        this.fillWithBlocks(world, boundingBox, 3, 1, 0, 9, 12, 0, Blocks.nether_brick, Blocks.nether_brick, false);
-        this.fillWithBlocks(world, boundingBox, 3, 1, 7, 9, 12, 7, Blocks.nether_brick, Blocks.nether_brick, false);
+        //TODO
+//        this.fillWithBlocks(world, boundingBox, 2, 0, 0, 10, 0, 7, Blocks.nether_brick, Blocks.nether_brick, false);
+//        this.fillWithBlocks(world, boundingBox, 2, 13, 0, 10, 13, 7, Blocks.nether_brick, Blocks.nether_brick, false);
+//        // nether walls
+//        this.fillWithBlocks(world, boundingBox, 3, 1, 0, 9, 12, 0, Blocks.nether_brick, Blocks.nether_brick, false);
+//        this.fillWithBlocks(world, boundingBox, 3, 1, 7, 9, 12, 7, Blocks.nether_brick, Blocks.nether_brick, false);
         // block walls
         this.fillWithRandomizedBlocks(world, boundingBox, 2, 1, 0, 2, 8, 7, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 2, 11, 0, 2, 12, 7, false, random, getCemeteryCatacombsStones());
@@ -70,20 +71,21 @@ public class Bridge extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 10, 9, 7, 11, 10, 7, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 10, 9, 7, 11, 10, 7, false, random, getCemeteryCatacombsStones());
         // graves
-        byte graveType = GraveStoneHelper.getGraveType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, EnumGraveType.PLAYER_GRAVES);
-        Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
-        int metaLeft = GraveStoneHelper.getMetaDirection(getLeftItemDirection(coordBaseMode));
-        int metaRight = GraveStoneHelper.getMetaDirection(getRightItemDirection(coordBaseMode));
-        GraveGenerationHelper.fillGraves(this, world, random, 1, 9, 1, 1, 9, 6, metaLeft, graveType, sword, true);
-        GraveGenerationHelper.fillGraves(this, world, random, 11, 9, 1, 11, 9, 6, metaRight, graveType, sword, true);
-        // lava
-        this.fillWithBlocks(world, boundingBox, 3, 1, 1, 9, 2, 6, Blocks.lava, Blocks.lava, false);
-        // bridge
-        this.fillWithMetadataBlocks(world, boundingBox, 6, 8, 1, 6, 8, 6, Blocks.stone_slab, 14, Blocks.stone_slab, 14, false);
-
-        if (random.nextInt(10) < 4) {
-            this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 6, 8, 5, boundingBox);
-        }
+        //TODO
+//        byte graveType = GraveStoneHelper.getGraveType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, EnumGraveType.PLAYER_GRAVES);
+//        Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
+//        int metaLeft = GraveStoneHelper.getMetaDirection(getLeftItemDirection(coordBaseMode));
+//        int metaRight = GraveStoneHelper.getMetaDirection(getRightItemDirection(coordBaseMode));
+//        GraveGenerationHelper.fillGraves(this, world, random, 1, 9, 1, 1, 9, 6, metaLeft, graveType, sword, true);
+//        GraveGenerationHelper.fillGraves(this, world, random, 11, 9, 1, 11, 9, 6, metaRight, graveType, sword, true);
+//        // lava
+//        this.fillWithBlocks(world, boundingBox, 3, 1, 1, 9, 2, 6, Blocks.lava, Blocks.lava, false);
+//        // bridge
+//        this.fillWithMetadataBlocks(world, boundingBox, 6, 8, 1, 6, 8, 6, Blocks.stone_slab, 14, Blocks.stone_slab, 14, false);
+//
+//        if (random.nextInt(10) < 4) {
+//            this.func_175811_a(world, Blocks.air, 0, 6, 8, 5, boundingBox);
+//        }
 
         // block exit wall
         this.fillWithRandomizedBlocks(world, boundingBox, 5, 9, 7, 7, 11, 7, false, random, getCemeteryCatacombsStones());

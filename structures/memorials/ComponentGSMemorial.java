@@ -7,6 +7,7 @@ import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.MemorialGenerationHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
@@ -40,7 +41,7 @@ public class ComponentGSMemorial extends ComponentGraveStone {
 
         this.boundingBox.offset(0, averageGroundLevel - boundingBox.maxY + HEIGHT - 1, 0);
         Block ground, underground;
-        BiomeGenBase biom = world.getBiomeGenForCoords(getXWithOffset(0, 0), getZWithOffset(0, 0));
+        BiomeGenBase biom = world.getBiomeGenForCoords(new BlockPos(getXWithOffset(0, 0), getYWithOffset(0), getZWithOffset(0, 0)));
 
         if (biom.biomeID == BiomeGenBase.desert.biomeID || biom.biomeID == BiomeGenBase.desertHills.biomeID || biom.biomeID == BiomeGenBase.beach.biomeID) {
             ground = Blocks.sand;
@@ -51,21 +52,22 @@ public class ComponentGSMemorial extends ComponentGraveStone {
         }
 
         this.fillWithAir(world, boundingBox, 0, 0, 2, 0, 6, 2);
-        this.fillWithBlocks(world, boundingBox, 0, 0, 0, 2, 0, 2, ground, ground, false);
-        byte memorialType = BlockGSMemorial.getMemorialType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, 0);
-        MemorialGenerationHelper.placeMemorial(this, world, random, 1, 1, 1, BlockGSMemorial.getMetaDirection(coordBaseMode), memorialType);
-
-        for (int x = 0; x < 3; x++) {
-            for (int z = 0; z < 3; z++) {
-                this.func_151554_b(world, underground, 0, x, -1, z, boundingBox);
-            }
-        }
-
-        for (int x = 0; x < 3; x++) {
-            for (int z = 0; z < 3; z++) {
-                this.clearCurrentPositionBlocksUpwards(world, x, HEIGHT, z, boundingBox);
-            }
-        }
+        //TODO
+//        this.fillWithBlocks(world, boundingBox, 0, 0, 0, 2, 0, 2, ground, ground, false);
+//        byte memorialType = BlockGSMemorial.getMemorialType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, 0);
+//        MemorialGenerationHelper.placeMemorial(this, world, random, 1, 1, 1, BlockGSMemorial.getMetaDirection(coordBaseMode), memorialType);
+//
+//        for (int x = 0; x < 3; x++) {
+//            for (int z = 0; z < 3; z++) {
+//                this.func_151554_b(world, underground, 0, x, -1, z, boundingBox);
+//            }
+//        }
+//
+//        for (int x = 0; x < 3; x++) {
+//            for (int z = 0; z < 3; z++) {
+//                this.clearCurrentPositionBlocksUpwards(world, x, HEIGHT, z, boundingBox);
+//            }
+//        }
 
         return true;
     }

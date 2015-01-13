@@ -67,14 +67,17 @@ public class ObjectsGenerationHelper {
             items = NETHER_CHEST_CONTENT;
             count = 2 + random.nextInt(4);
         } else {
-            items = chest.getItems(random);
+            //TODO
+//            items = chest.getItems(random);
             count = chest.getCount(random);
         }
 
         if (defaultChest) {
-            component.generateStructureChestContents(world, component.getBoundingBox(), random, xCoord, yCoord, zCoord, items, count);
+            //TODO
+//            component.generateStructureChestContents(world, component.getBoundingBox(), random, xCoord, yCoord, zCoord, items, count);
         } else {
-            generateTrappedChestContents(component, world, random, xCoord, yCoord, zCoord, items, count);
+            //TODO
+//            generateTrappedChestContents(component, world, random, xCoord, yCoord, zCoord, items, count);
         }
     }
 
@@ -83,12 +86,13 @@ public class ObjectsGenerationHelper {
         int y = component.getYWithOffset(yCoord);
         int z = component.getZWithOffset(xCoord, zCoord);
 
-        world.setBlock(x, y, z, GSBlock.hauntedChest, 0, 2);
-        TileEntityGSHauntedChest te = (TileEntityGSHauntedChest) world.getTileEntity(x, y, z);
-
-        if (te != null) {
-            te.setChestType(EnumHauntedChest.getById((byte) random.nextInt(EnumHauntedChest.values().length)));
-        }
+        //TODO
+//        world.setBlock(x, y, z, GSBlock.hauntedChest, 0, 2);
+//        TileEntityGSHauntedChest te = (TileEntityGSHauntedChest) world.getTileEntity(x, y, z);
+//
+//        if (te != null) {
+//            te.setChestType(EnumHauntedChest.getById((byte) random.nextInt(EnumHauntedChest.values().length)));
+//        }
     }
 
     /**
@@ -99,12 +103,13 @@ public class ObjectsGenerationHelper {
         int y = component.getYWithOffset(yCoord);
         int z = component.getZWithOffset(xCoord, zCoord);
 
-        world.setBlock(x, y, z, Blocks.trapped_chest, 0, 2);
-        TileEntityChest tileentitychest = (TileEntityChest) world.getTileEntity(x, y, z);
-
-        if (tileentitychest != null) {
-            WeightedRandomChestContent.generateChestContents(random, chestContent, tileentitychest, count);
-        }
+        //TODO
+//        world.setBlock(x, y, z, Blocks.trapped_chest, 0, 2);
+//        TileEntityChest tileentitychest = (TileEntityChest) world.getTileEntity(x, y, z);
+//
+//        if (tileentitychest != null) {
+//            WeightedRandomChestContent.generateChestContents(random, chestContent, tileentitychest, count);
+//        }
     }
 
     private static ChestGenHooks getChest(Random random, EnumChestTypes chestType) {
@@ -167,7 +172,8 @@ public class ObjectsGenerationHelper {
         int x = component.getXWithOffset(xCoord, zCoord);
         int z = component.getZWithOffset(xCoord, zCoord);
 
-        world.setBlock(x, y, z, GSBlock.spawner, BlockGSSpawner.MOB_SPAWNERS.get(random.nextInt(BlockGSSpawner.MOB_SPAWNERS.size())), 2);
+        //TODO
+//        world.setBlock(x, y, z, GSBlock.spawner, BlockGSSpawner.MOB_SPAWNERS.get(random.nextInt(BlockGSSpawner.MOB_SPAWNERS.size())), 2);
     }
 
     /**
@@ -185,12 +191,13 @@ public class ObjectsGenerationHelper {
         int x = component.getXWithOffset(xCoord, zCoord);
         int z = component.getZWithOffset(xCoord, zCoord);
 
-        world.setBlock(x, y, z, Blocks.mob_spawner);
-        TileEntityMobSpawner tileEntity = (TileEntityMobSpawner) world.getTileEntity(x, y, z);
-
-        if (tileEntity != null) {
-            tileEntity.getSpawnerBaseLogic().setEntityName(mobNmae);
-        }
+        //TODO
+//        world.setBlock(x, y, z, Blocks.mob_spawner);
+//        TileEntityMobSpawner tileEntity = (TileEntityMobSpawner) world.getTileEntity(x, y, z);
+//
+//        if (tileEntity != null) {
+//            tileEntity.getSpawnerBaseLogic().setEntityName(mobNmae);
+//        }
     }
 
     /**
@@ -201,13 +208,14 @@ public class ObjectsGenerationHelper {
         int y = component.getYWithOffset(yCoord);
         int z = component.getZWithOffset(xCoord, zCoord);
 
-        world.setBlock(x, y, z, Blocks.dispenser);
+        //TODO
+//        world.setBlock(x, y, z, Blocks.dispenser);
         ObjectsGenerationHelper.setDispenserMeta(world, x, y, z, direction);
-        TileEntityDispenser dispenser = (TileEntityDispenser) world.getTileEntity(x, y, z);
-
-        if (dispenser != null) {
-            generateDispenserContents(random, dispenser);
-        }
+//        TileEntityDispenser dispenser = (TileEntityDispenser) world.getTileEntity(x, y, z);
+//
+//        if (dispenser != null) {
+//            generateDispenserContents(random, dispenser);
+//        }
     }
 
     /**
@@ -237,20 +245,21 @@ public class ObjectsGenerationHelper {
      * @param direction Direction
      */
     public static void setDispenserMeta(World world, int x, int y, int z, int direction) {
-        switch (direction) {
-            case 0:
-                world.setBlockMetadataWithNotify(x, y, z, 2, 2);
-                break;
-            case 1:
-                world.setBlockMetadataWithNotify(x, y, z, 5, 2);
-                break;
-            case 2:
-                world.setBlockMetadataWithNotify(x, y, z, 3, 2);
-                break;
-            case 3:
-                world.setBlockMetadataWithNotify(x, y, z, 4, 2);
-                break;
-        }
+        //TODO
+//        switch (direction) {
+//            case 0:
+//                world.setBlockMetadataWithNotify(x, y, z, 2, 2);
+//                break;
+//            case 1:
+//                world.setBlockMetadataWithNotify(x, y, z, 5, 2);
+//                break;
+//            case 2:
+//                world.setBlockMetadataWithNotify(x, y, z, 3, 2);
+//                break;
+//            case 3:
+//                world.setBlockMetadataWithNotify(x, y, z, 4, 2);
+//                break;
+//        }
     }
 
     public enum EnumChestTypes {

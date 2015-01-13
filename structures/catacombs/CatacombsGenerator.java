@@ -3,7 +3,7 @@ package gravestone.structures.catacombs;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.logger.GSLogger;
 import gravestone.structures.GSStructureGenerator;
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.BlockPos;
 import net.minecraft.village.Village;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
@@ -64,7 +64,8 @@ public class CatacombsGenerator implements GSStructureGenerator {
     }
 
     protected static boolean isBiomeAllowed(World world, int x, int z) {
-        LinkedList<BiomeDictionary.Type> biomeTypesList = new LinkedList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(x, z))));
+        // TODO new BlockPos(x, 0, z)
+        LinkedList<BiomeDictionary.Type> biomeTypesList = new LinkedList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(new BlockPos(x, 0, z)))));
         if (!biomeTypesList.contains(BiomeDictionary.Type.WATER) && !biomeTypesList.contains(BiomeDictionary.Type.SWAMP) &&
                 !biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) && !biomeTypesList.contains(BiomeDictionary.Type.MAGICAL) &&
                 !biomeTypesList.contains(BiomeDictionary.Type.HILLS) && !biomeTypesList.contains(BiomeDictionary.Type.MOUNTAIN)) {
@@ -87,9 +88,9 @@ public class CatacombsGenerator implements GSStructureGenerator {
 
         if (world.villageCollectionObj != null && world.villageCollectionObj.getVillageList() != null) {
             for (Object villageObj : world.villageCollectionObj.getVillageList()) {
-                ChunkCoordinates villageCenter = ((Village) villageObj).getCenter();
+                BlockPos villageCenter = ((Village) villageObj).getCenter();
 
-                if (checkStructuresInRange(villageCenter.posX, villageCenter.posZ, x, z, VILLAGE_RANGE)) {
+                if (checkStructuresInRange(villageCenter.getX(), villageCenter.getZ(), x, z, VILLAGE_RANGE)) {
                     return false;
                 }
 
@@ -119,7 +120,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
         int count = 0;
         for (int xPos = x; xPos < x + 16; xPos++) {
             for (int zPos = z; zPos < z + 16; zPos++) {
-                height += world.getTopSolidOrLiquidBlock(xPos, zPos);
+                height += 64;//TODO world.getTopSolidOrLiquidBlock(new BlockPos(xPos, zPos));
                 count++;
             }
         }

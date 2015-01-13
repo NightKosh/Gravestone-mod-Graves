@@ -31,8 +31,9 @@ public class MobSpawnHelper {
 
         for (byte i = 0; i < batsCount; i++) {
             bat = new EntityBat(world);
-            bat.setLocationAndAngles(boundingBox.getCenterX() - 1.5 + random.nextInt(5), boundingBox.getCenterY(),
-                    boundingBox.getCenterZ() - 1.5 + random.nextInt(5), 0.0F, 0.0F);
+            //TODO
+//            bat.setLocationAndAngles(boundingBox.getCenterX() - 1.5 + random.nextInt(5), boundingBox.getCenterY(),
+//                    boundingBox.getCenterZ() - 1.5 + random.nextInt(5), 0.0F, 0.0F);
             livingEntity = (EntityLiving) bat;
 
             if (livingEntity.getCanSpawnHere()) {

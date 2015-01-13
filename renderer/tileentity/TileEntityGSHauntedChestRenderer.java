@@ -90,7 +90,7 @@ public class TileEntityGSHauntedChestRenderer extends TileEntitySpecialRenderer 
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float par8) {
+    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float par8, int par9) {
         this.renderTileEntityChestAt((TileEntityGSHauntedChest) te, x, y, z, par8);
     }
 }

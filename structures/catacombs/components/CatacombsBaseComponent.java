@@ -4,6 +4,7 @@ import gravestone.core.GSStructures;
 import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.catacombs.CatacombsLevel;
 import net.minecraft.block.Block;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
@@ -39,7 +40,8 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
 
     protected CatacombsBaseComponent(int direction, int level) {
         super(direction);
-        this.coordBaseMode = direction;
+        //TODO
+//        this.coordBaseMode = direction;
         this.level = level;
     }
 
@@ -145,7 +147,7 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      * return ground level at x z coordinates
      */
     protected int getGroundLevel(World world, int x, int z) {
-        return world.getTopSolidOrLiquidBlock(x, z);
+        return 64;//TODO world.getTopSolidOrLiquidBlock(x, z);
     }
 
     protected int invertDirection(int direction) {
@@ -214,7 +216,7 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      * @param boundingBox Component bounding box
      */
     public boolean canBePlacedHere(StructureBoundingBox boundingBox) {
-        if (coordBaseMode == 0 || coordBaseMode == 2) {
+        if (true) { //TODO (coordBaseMode == 0 || coordBaseMode == 2) {
             return this.boundingBox.maxX > boundingBox.minX && this.boundingBox.minX < boundingBox.maxX
                     && this.boundingBox.maxZ - 1 > boundingBox.minZ && this.boundingBox.minZ + 1 < boundingBox.maxZ;
         } else {
@@ -234,22 +236,23 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      * Overwrites air and liquids from selected position downwards, stops at
      * hitting anything else.
      */
-    @Override
-    protected void func_151554_b(World world, Block block, int metadata, int xCoord, int yCoord, int zCoord, StructureBoundingBox boundingBox) {
-        int x = this.getXWithOffset(xCoord, zCoord);
-        int y = this.getYWithOffset(yCoord);
-        int z = this.getZWithOffset(xCoord, zCoord);
-
-        while ((world.isAirBlock(x, y, z) || world.getBlock(x, y, z).getMaterial().isLiquid() || world.getBlock(x, y, z).getMaterial().isReplaceable()) && y > 1) {
-            world.setBlock(x, y, z, block, metadata, 2);
-            --y;
-        }
-    }
+    //TODO
+//    @Override
+//    protected void func_151554_b(World world, Block block, int metadata, int xCoord, int yCoord, int zCoord, StructureBoundingBox boundingBox) {
+//        int x = this.getXWithOffset(xCoord, zCoord);
+//        int y = this.getYWithOffset(yCoord);
+//        int z = this.getZWithOffset(xCoord, zCoord);
+//
+//        while ((world.isAirBlock(x, y, z) || world.getBlock(x, y, z).getMaterial().isLiquid() || world.getBlock(x, y, z).getMaterial().isReplaceable()) && y > 1) {
+//            world.setBlock(x, y, z, block, metadata, 2);
+//            --y;
+//        }
+//    }
 
     /**
      * Return component direction
      */
     public int getDirection() {
-        return coordBaseMode;
+        return 0; //TODO coordBaseMode;
     }
 }

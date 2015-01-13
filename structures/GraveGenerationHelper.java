@@ -37,7 +37,8 @@ public class GraveGenerationHelper {
      */
     // TODO
     public static void placeGrave(ComponentGraveStone component, World world, Random random, int x, int y, int z, int graveMeta, byte graveType, Item sword, boolean allLoot) {
-        component.placeBlockAtCurrentPosition(world, GSBlock.graveStone, graveMeta, x, y, z, component.getBoundingBox());
+        //TODO
+//        component.func_175811_a(world, GSBlock.graveStone, graveMeta, x, y, z, component.getBoundingBox());
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(new BlockPos(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z)));
 
         if (tileEntity != null) {

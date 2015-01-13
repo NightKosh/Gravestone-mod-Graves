@@ -1,19 +1,15 @@
 package gravestone.block;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockPos;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumTrap;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSPotion;
 import gravestone.core.GSTabs;
-import gravestone.core.Resources;
 import gravestone.core.TimeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,9 +17,11 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 import java.util.Random;
@@ -36,6 +34,7 @@ import java.util.Random;
  */
 public class BlockGSTrap extends Block {
 
+    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", EnumTrap.class);
 //    @SideOnly(Side.CLIENT)
 //    private IIcon thunderStoneIcon;
 
@@ -80,10 +79,10 @@ public class BlockGSTrap extends Block {
      */
     @Override
     public Item getItemDropped(IBlockState state, Random random, int fortune) {
-        switch (metadata) {
-            case 1:
+        switch ((EnumTrap) state.getValue(VARIANT)) {
+            case THUNDER_STONE:
                 return Item.getItemFromBlock(Blocks.stonebrick);
-            case 0:
+            case NIGHT_STONE:
             default:
                 return Item.getItemFromBlock(Blocks.nether_brick);
         }
@@ -95,9 +94,7 @@ public class BlockGSTrap extends Block {
      */
     @Override
     public int damageDropped(IBlockState state) {
-        //TODO
-//        return metadata;
-        return 0;
+        return ((Enum) state.getValue(VARIANT)).ordinal();
     }
 
     /**
@@ -115,8 +112,7 @@ public class BlockGSTrap extends Block {
     @Override
     public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity) {
         if (entity instanceof EntityPlayer) {
-            int meta = world.getBlockMetadata(x, y, z);
-            if (meta == 0) {
+            if ((EnumTrap) world.getBlockState(pos).getValue(VARIANT) == EnumTrap.NIGHT_STONE) {
                 if (GraveStoneConfig.enableNightStone) {
                     long time = world.getWorldTime();
                     long dayTime = TimeHelper.getDayTime(time);

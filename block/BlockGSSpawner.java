@@ -1,20 +1,15 @@
 package gravestone.block;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import gravestone.block.enums.EnumSpawner;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSTabs;
-import gravestone.core.Resources;
 import gravestone.particle.EntityGreenFlameFX;
 import gravestone.tileentity.TileEntityGSSpawner;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMobSpawner;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.creativetab.CreativeTabs;
@@ -23,8 +18,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,6 +37,8 @@ import java.util.Random;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class BlockGSSpawner extends BlockMobSpawner {
+
+    public static final PropertyEnum VARIANT = PropertyEnum.create("variant", EnumSpawner.class);
 
     public static final List<Byte> MOB_SPAWNERS = new ArrayList<Byte>(Arrays.asList(
             (byte) EnumSpawner.SKELETON_SPAWNER.ordinal(),
@@ -70,10 +71,11 @@ public class BlockGSSpawner extends BlockMobSpawner {
     /**
      * The type of render function that is called for this block
      */
-    @Override
-    public int getRenderType() {
-        return GraveStoneConfig.spawnerRenderID;
-    }
+    //TODO
+//    @Override
+//    public int getRenderType() {
+//        return GraveStoneConfig.spawnerRenderID;
+//    }
 
     /**
      * Is this block (a) opaque and (b) a full 1m cube? This determines whether
@@ -125,6 +127,7 @@ public class BlockGSSpawner extends BlockMobSpawner {
     public List<ItemStack> getDrops(IBlockAccess access, BlockPos pos, IBlockState state, int fortune) {
         List<ItemStack> ret = new ArrayList<ItemStack>();
         Random random = new Random();
+        int metadata = ((Enum) state.getValue(VARIANT)).ordinal();
         //TODO getBlockState ??? + meta -> fortune
         ret.add(new ItemStack(getItemDropped(access.getBlockState(pos), random, fortune), quantityDropped(random), getItemMeta(metadata)));
 

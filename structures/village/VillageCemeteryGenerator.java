@@ -32,8 +32,9 @@ public class VillageCemeteryGenerator implements GSStructureGenerator {
     public boolean generate(World world, Random rand, int x, int z, double chance, boolean isCommand) {
         if (isCommand) {
             StructureBoundingBox boundingBox = ComponentGSVillageCemetery.getBoundingBox(x, z);
-            new ComponentGSVillageCemetery(new StructureVillagePieces.Start(), 0, rand, boundingBox, 0)
-                    .addComponentParts(world, rand, boundingBox);
+            //TODO
+//            new ComponentGSVillageCemetery(new StructureVillagePieces.Start(), 0, rand, boundingBox, 0)
+//                    .addComponentParts(world, rand, boundingBox);
             return true;
         }
         return false;

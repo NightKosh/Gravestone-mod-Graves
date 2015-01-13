@@ -30,12 +30,13 @@ public class MemorialGenerationHelper {
      * @param memorialType Memorial type
      */
     public static void placeMemorial(ComponentGraveStone component, World world, Random random, int x, int y, int z, int memorialMeta, byte memorialType) {
-        component.placeBlockAtCurrentPosition(world, GSBlock.memorial, memorialMeta, x, y, z, component.getBoundingBox());
-        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z));
+        //TODO
+//        component.func_175811_a(world, GSBlock.memorial, memorialMeta, x, y, z, component.getBoundingBox());
+//        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z));
 
-        if (tileEntity != null) {
-            tileEntity.setGraveType(memorialType);
-            tileEntity.setMemorialContent(random);
-        }
+//        if (tileEntity != null) {
+//            tileEntity.setGraveType(memorialType);
+//            tileEntity.setMemorialContent(random);
+//        }
     }
 }

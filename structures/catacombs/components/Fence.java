@@ -1,9 +1,9 @@
 package gravestone.structures.catacombs.components;
 
-import gravestone.structures.BoundingBoxHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
@@ -119,16 +119,17 @@ public class Fence extends CatacombsBaseComponent {
     private int getGroundY(World world, int x) {
         int xPos = getXWithOffset(x, 0);
         int zPos = getZWithOffset(x, 0);
-        int y = world.getTopSolidOrLiquidBlock(xPos, zPos);
-        while (world.getBlock(xPos, y, zPos).getMaterial().equals(Material.wood) || world.getBlock(xPos, y, zPos).getMaterial().equals(Material.leaves)) {
-            y--;
-        }
+        int y = 64;//TODO world.getTopSolidOrLiquidBlock(xPos, zPos);
+        //TODO
+//        while (world.getBlock(xPos, y, zPos).getMaterial().equals(Material.wood) || world.getBlock(xPos, y, zPos).getMaterial().equals(Material.leaves)) {
+//            y--;
+//        }
 
         return y;
     }
 
     private boolean checkGround(World world, int x, int y) {
-        Block block = world.getBlock(getXWithOffset(x, 0), y, getZWithOffset(x, 0));
+        Block block = world.getBlockState(new BlockPos(getXWithOffset(x, 0), y, getZWithOffset(x, 0))).getBlock();
 
         if (block != null) {
             return (!block.equals(Blocks.water) && !block.equals(Blocks.lava));
@@ -141,7 +142,7 @@ public class Fence extends CatacombsBaseComponent {
         Block block;
 
         for (int x = startX; x <= endX; x++) {
-            block = world.getBlock(getXWithOffset(x, 0), y, getZWithOffset(x, 0));
+            block = world.getBlockState(new BlockPos(getXWithOffset(x, 0), y, getZWithOffset(x, 0))).getBlock();
 
             if (block != null) {
                 if (block.equals(Blocks.water) || block.equals(Blocks.lava)) {
@@ -157,7 +158,8 @@ public class Fence extends CatacombsBaseComponent {
         int y = getGroundY(world, x);
 
         if (checkGround(world, x, y)) {
-            this.fillWithBlocks(world, boundingBox, x, y, 0, x, y + 3, 0, Blocks.iron_bars, Blocks.iron_bars, false);
+            //TODO
+//            this.fillWithBlocks(world, boundingBox, x, y, 0, x, y + 3, 0, Blocks.iron_bars, Blocks.iron_bars, false);
         }
     }
 
@@ -166,10 +168,11 @@ public class Fence extends CatacombsBaseComponent {
         for (int x = 42; x <= 47; x++) {
             int xPos = getXWithOffset(x, 0);
             int zPos = getZWithOffset(x, 0);
-            int yPos = world.getTopSolidOrLiquidBlock(xPos, zPos);
-            while (world.getBlock(xPos, y, zPos).getMaterial().equals(Material.wood) || world.getBlock(xPos, y, zPos).getMaterial().equals(Material.leaves)) {
-                yPos--;
-            }
+            int yPos = 64; //TODO world.getTopSolidOrLiquidBlock(xPos, zPos);
+            //TODO
+//            while (world.getBlock(xPos, y, zPos).getMaterial().equals(Material.wood) || world.getBlock(xPos, y, zPos).getMaterial().equals(Material.leaves)) {
+//                yPos--;
+//            }
             y += yPos;
         }
         y /= 6;
@@ -181,20 +184,20 @@ public class Fence extends CatacombsBaseComponent {
             this.fillWithRandomizedBlocks(world, boundingBox, 43, y + 4, 0, 43, y + 4, 0, false, random, getCemeteryCatacombsStones());
             this.fillWithRandomizedBlocks(world, boundingBox, 46, y + 4, 0, 46, y + 4, 0, false, random, getCemeteryCatacombsStones());
 
-            // fence
-            this.fillWithBlocks(world, boundingBox, 43, y, 0, 43, y + 3, 0, Blocks.iron_bars, Blocks.iron_bars, false);
-            this.fillWithBlocks(world, boundingBox, 46, y, 0, 46, y + 3, 0, Blocks.iron_bars, Blocks.iron_bars, false);
-            this.fillWithBlocks(world, boundingBox, 44, y + 3, 0, 45, y + 4, 0, Blocks.iron_bars, Blocks.iron_bars, false);
-
-            // slabs
-            this.fillWithMetadataBlocks(world, boundingBox, 44, y + 5, 0, 45, y + 5, 0, Blocks.stone_slab, 5, Blocks.stone_slab, 5, false);
-            this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 42, y + 4, 0, boundingBox);
-            this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 47, y + 4, 0, boundingBox);
+            //TODO
+//            // fence
+//            this.fillWithBlocks(world, boundingBox, 43, y, 0, 43, y + 3, 0, Blocks.iron_bars, Blocks.iron_bars, false);
+//            this.fillWithBlocks(world, boundingBox, 46, y, 0, 46, y + 3, 0, Blocks.iron_bars, Blocks.iron_bars, false);
+//            this.fillWithBlocks(world, boundingBox, 44, y + 3, 0, 45, y + 4, 0, Blocks.iron_bars, Blocks.iron_bars, false);
+//
+//            // slabs
+//            this.fillWithMetadataBlocks(world, boundingBox, 44, y + 5, 0, 45, y + 5, 0, Blocks.stone_slab, 5, Blocks.stone_slab, 5, false);
+//            this.func_175811_a(world, Blocks.stone_slab, 5, 42, y + 4, 0, boundingBox);
+//            this.func_175811_a(world, Blocks.stone_slab, 5, 47, y + 4, 0, boundingBox);
         }
     }
 
     private static enum FENCE_DIRECTION {
-
         LEFT,
         RIGHT
     }

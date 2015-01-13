@@ -70,26 +70,28 @@ public class GSStructures {
     }
 
     private void generateStructures() {
-        // register cemeteries
-        if (GraveStoneConfig.generateCemeteries) {
-            VillageHandlerGSCemetery villageCemeteryHandler = new VillageHandlerGSCemetery();
-            VillagerRegistry.instance().registerVillageCreationHandler(villageCemeteryHandler);
-        }
-
-        // register memorials
-        if (GraveStoneConfig.generateVillageMemorials) {
-            VillageHandlerGSMemorial villageMemorialHandler = new VillageHandlerGSMemorial();
-            VillagerRegistry.instance().registerVillageCreationHandler(villageMemorialHandler);
-        }
-
-        // register Undertaker
-        if (GraveStoneConfig.generateUndertaker) {
-            VillageHandlerGSUndertaker villageUndertakerHandler = new VillageHandlerGSUndertaker();
-            VillagerRegistry.instance().registerVillageCreationHandler(villageUndertakerHandler);
-            VillagerRegistry.instance().registerVillagerId(385);
-            ModGraveStone.proxy.registerVillagers();
-            VillagerRegistry.instance().registerVillageTradeHandler(385, villageUndertakerHandler);
-        }
+        //TODO
+//        // register cemeteries
+//        if (GraveStoneConfig.generateCemeteries) {
+//            VillageHandlerGSCemetery villageCemeteryHandler = new VillageHandlerGSCemetery();
+//            VillagerRegistry.instance().registerVillageCreationHandler(villageCemeteryHandler);
+//        }
+//
+//        // register memorials
+//        if (GraveStoneConfig.generateVillageMemorials) {
+//            VillageHandlerGSMemorial villageMemorialHandler = new VillageHandlerGSMemorial();
+//            VillagerRegistry.instance().registerVillageCreationHandler(villageMemorialHandler);
+//        }
+//
+//        // register Undertaker
+//        if (GraveStoneConfig.generateUndertaker) {
+//            VillageHandlerGSUndertaker villageUndertakerHandler = new VillageHandlerGSUndertaker();
+//            VillagerRegistry.instance().registerVillageCreationHandler(villageUndertakerHandler);
+//            VillagerRegistry.instance().registerVillagerId(385);
+//            ModGraveStone.proxy.registerVillagers();
+//            //TODO
+////            VillagerRegistry.instance().registerVillageTradeHandler(385, villageUndertakerHandler);
+//        }
 
         // structure generator
         GameRegistry.registerWorldGenerator(new GraveStoneWorldGenerator(), 50);

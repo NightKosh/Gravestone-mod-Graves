@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.potion.Potion;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -39,14 +40,6 @@ public class EntityGhost extends EntityFlying implements IMob {
         return true;
     }
 
-    /**
-     * Returns true if the newer Entity AI code should be run
-     */
-    @Override
-    public boolean isAIEnabled() {
-        return true;
-    }
-    
     @Override
     public boolean attackEntityAsMob(Entity entity) {
         return entity.attackEntityFrom(DamageSource.causeMobDamage(this), 3);
@@ -73,7 +66,7 @@ public class EntityGhost extends EntityFlying implements IMob {
             float f = this.getBrightness(1.0F);
 
             if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && 
-                    this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ))) {
+                    this.worldObj.canBlockSeeSky(new BlockPos(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)))) {
                 this.setFire(8);
             }
         }

@@ -26,7 +26,8 @@ public class ItemGSChisel extends ItemTool {
         setCreativeTab(GSTabs.otherItemsTab);
         setUnlocalizedName("gravestone chisel");
         setMaxDamage(50);
-        this.setTextureName(Resources.CHISEL);
+        //TODO
+//        this.setTextureName(Resources.CHISEL);
     }
 
     /**

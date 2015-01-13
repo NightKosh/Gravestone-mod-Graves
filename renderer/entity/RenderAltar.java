@@ -2,7 +2,6 @@ package gravestone.renderer.entity;
 
 import gravestone.tileentity.TileEntityGSAltar;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -36,7 +35,8 @@ public class RenderAltar extends TileEntitySpecialRenderer {
             }
             entityItem.hoverStart = 0;
 
-            RenderManager.instance.renderEntityWithPosYaw(entityItem, 0, 0, 0, 0, 0);
+            //TODO
+//            RenderManager.instance.renderEntityWithPosYaw(entityItem, 0, 0, 0, 0, 0);
             GL11.glPopMatrix();
         }
     }

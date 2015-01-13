@@ -564,8 +564,10 @@ public class BlockGSMemorial extends BlockContainer {
             direction = 360 + direction;
         }
 
+        //TODO EnumFacing
         int metadata = getMetadataBasedOnRotation(direction);
-        world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
+        // TODO world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
+        world.setBlockState(pos, state, 2);
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
 
         if (tileEntity != null) {
@@ -611,7 +613,8 @@ public class BlockGSMemorial extends BlockContainer {
 
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, BlockPos pos) {
-        int meta = access.getBlockMetadata(x, y, z);
+        //TODO
+        int meta = 0;//access.getBlockMetadata(x, y, z);
         EnumMemorials memorialType;
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) access.getTileEntity(pos);
 
@@ -770,10 +773,11 @@ public class BlockGSMemorial extends BlockContainer {
         return false;
     }
 
-    @Override
-    public int getRenderType() {
-        return GraveStoneConfig.memorialRenderID;
-    }
+    //TODO
+//    @Override
+//    public int getRenderType() {
+//        return GraveStoneConfig.memorialRenderID;
+//    }
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
@@ -931,12 +935,13 @@ public class BlockGSMemorial extends BlockContainer {
         }
 
         if (itemStack != null) {
-            this.dropBlockAsItem(world, pos, itemStack);
+            //TODO this.dropBlockAsItem(world, pos, itemStack);
+            this.dropBlockAsItem(world, pos, state, 0);
         }
     }
 
     private ItemStack getBlockItemStack(World world, BlockPos pos) {
-        ItemStack itemStack = this.createStackedBlock(0);
+        ItemStack itemStack = this.createStackedBlock(world.getBlockState(pos));// TODO this.createStackedBlock(0);
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
 
         if (tileEntity != null) {
@@ -961,7 +966,7 @@ public class BlockGSMemorial extends BlockContainer {
     }
 
     private ItemStack getBlockItemStackWithoutInfo(World world, BlockPos pos) {
-        ItemStack itemStack = this.createStackedBlock(0);
+        ItemStack itemStack = this.createStackedBlock(world.getBlockState(pos));// TODO this.createStackedBlock(0);
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
 
         if (tileEntity != null) {
@@ -989,12 +994,13 @@ public class BlockGSMemorial extends BlockContainer {
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setByte("GraveType", memorialType);
         itemStack.setTagCompound(nbt);
-        this.dropBlockAsItem(world, pos, itemStack);
+        //TODO this.dropBlockAsItem(world, pos, itemStack);
+        this.dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
     }
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos) {
-        ItemStack itemStack = this.createStackedBlock(0);
+        ItemStack itemStack = this.createStackedBlock(world.getBlockState(pos));// TODO this.createStackedBlock(0);
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
 
         if (tileEntity != null) {

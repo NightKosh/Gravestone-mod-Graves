@@ -12,6 +12,7 @@ import gravestone.tileentity.DeathMessageInfo;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -354,7 +355,7 @@ public class GraveStoneHelper {
         Block botBlock = world.getBlockState(pos).getBlock();
 
         if (botBlock.equals(Blocks.grass) || botBlock.equals(Blocks.mycelium)) {
-            world.setBlock(x, y, z, Blocks.dirt);
+            world.setBlockState(pos, new BlockState(Blocks.dirt).getBaseState());
         }
     }
 
@@ -386,8 +387,7 @@ public class GraveStoneHelper {
         if (GraveStoneConfig.canPlaceGravesEveryWhere) {
             return true;
         } else {
-            int meta = world.getBlockMetadata(x, y, z);
-            String tool = block.getHarvestTool(meta);
+            String tool = block.getHarvestTool(world.getBlockState(pos));
             if (tool != null) {
                 return tool.equals("shovel");
             } else {
@@ -414,7 +414,7 @@ public class GraveStoneHelper {
         int z = pos.getZ();
         int newY = getGround(world, x, y, z);
 
-        if (canGenerateGraveAtCoordinates(world, x, newY, z)) {
+        if (canGenerateGraveAtCoordinates(world, new BlockPos(x, newY, z))) {
             return new BlockPos(x, newY, z);
         } else {
             int dx = 1;
@@ -424,14 +424,14 @@ public class GraveStoneHelper {
                 if (dx < 0) {
                     for (int newX = x - 1; newX >= x + dx; newX--) {
                         newY = getGround(world, newX, y, z);
-                        if (canGenerateGraveAtCoordinates(world, newX, newY, z)) {
+                        if (canGenerateGraveAtCoordinates(world, new BlockPos(newX, newY, z))) {
                             return new BlockPos(newX, newY, z);
                         }
                     }
                 } else {
                     for (int newX = x + 1; newX <= x + dx; newX++) {
                         newY = getGround(world, newX, y, z);
-                        if (canGenerateGraveAtCoordinates(world, newX, newY, z)) {
+                        if (canGenerateGraveAtCoordinates(world, new BlockPos(newX, newY, z))) {
                             return new BlockPos(newX, newY, z);
                         }
                     }
@@ -441,14 +441,14 @@ public class GraveStoneHelper {
                 if (dz < 0) {
                     for (int newZ = z - 1; newZ >= z + dz; newZ--) {
                         newY = getGround(world, x, y, newZ);
-                        if (canGenerateGraveAtCoordinates(world, x, newY, newZ)) {
+                        if (canGenerateGraveAtCoordinates(world, new BlockPos(x, newY, newZ))) {
                             return new BlockPos(x, newY, newZ);
                         }
                     }
                 } else {
                     for (int newZ = z + 1; newZ <= z + dz; newZ++) {
                         newY = getGround(world, x, y, newZ);
-                        if (canGenerateGraveAtCoordinates(world, x, newY, newZ)) {
+                        if (canGenerateGraveAtCoordinates(world, new BlockPos(x, newY, newZ))) {
                             return new BlockPos(x, newY, newZ);
                         }
                     }
@@ -597,7 +597,7 @@ public class GraveStoneHelper {
         if (killer != null) {
             String killerName;
             if (killer instanceof EntityPlayer) {
-                killerName = ((EntityPlayer) killer).getDisplayName();
+                killerName = "KILLER_NAME";//TODO ((EntityPlayer) killer).getDisplayName();
                 if (isVillager) {
                     GSLogger.logInfoGrave("Villager was killed by " + killerName);
                 }

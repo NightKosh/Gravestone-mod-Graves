@@ -5,6 +5,8 @@ import gravestone.core.GSBlock;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
@@ -30,14 +32,14 @@ public class ComponentGSVillageCemetery extends StructureVillagePieces.Village {
     public ComponentGSVillageCemetery() {
     }
 
-    public ComponentGSVillageCemetery(StructureVillagePieces.Start startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, int direction) {
+    public ComponentGSVillageCemetery(StructureVillagePieces.Start startPiece, int componentType, Random random, StructureBoundingBox structureBoundingBox, EnumFacing direction) {
         super(startPiece, componentType);
         this.coordBaseMode = direction;
         this.boundingBox = structureBoundingBox;
     }
 
-    public static ComponentGSVillageCemetery buildComponent(StructureVillagePieces.Start startPiece, List list, Random random, int par3, int par4, int par5, int direction, int componentType) {
-        StructureBoundingBox structureBoundingBox = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, X_LENGTH, HEIGHT, Z_LENGTH, direction);
+    public static ComponentGSVillageCemetery buildComponent(StructureVillagePieces.Start startPiece, List list, Random random, int par3, int par4, int par5, EnumFacing direction, int componentType) {
+        StructureBoundingBox structureBoundingBox = StructureBoundingBox.func_175897_a(par3, par4, par5, 0, 0, 0, X_LENGTH, HEIGHT, Z_LENGTH, direction);
         return canVillageGoDeeper(structureBoundingBox) && StructureComponent.findIntersecting(list, structureBoundingBox) == null ? new ComponentGSVillageCemetery(startPiece, componentType, random, structureBoundingBox, direction) : null;
     }
 
@@ -76,7 +78,8 @@ public class ComponentGSVillageCemetery extends StructureVillagePieces.Village {
         this.fillWithAir(world, structureBoundingBox, 3, 1, 8, 9, 1, 8);
         int fenceMeta;
 
-        if (this.coordBaseMode == 1 || this.coordBaseMode == 3) {
+        //TODO
+        if (true) {//(this.coordBaseMode == 1 || this.coordBaseMode == 3) {
             fenceMeta = 1;
         } else {
             fenceMeta = 0;
@@ -86,7 +89,7 @@ public class ComponentGSVillageCemetery extends StructureVillagePieces.Village {
         int wallMeta;
         Block ground;
 
-        int biomeId = world.getBiomeGenForCoords(this.getXWithOffset(0, 0), this.getZWithOffset(0, 0)).biomeID;
+        int biomeId = world.getBiomeGenForCoords(new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0))).biomeID;
         if (biomeId == BiomeGenBase.desert.biomeID || biomeId == BiomeGenBase.desertHills.biomeID) {
             wallMeta = 0;
             ground = Blocks.sand;
@@ -95,36 +98,37 @@ public class ComponentGSVillageCemetery extends StructureVillagePieces.Village {
             ground = Blocks.grass;
         }
 
-        this.fillWithBlocks(world, structureBoundingBox, 0, -5, 0, 11, 0, 9, ground, ground, false);
-
-        for (int x = 1; x < 12; x++) {
-            this.placeBlockAtCurrentPosition(world, wall, wallMeta, x, 1, 1, structureBoundingBox);
-            this.placeBlockAtCurrentPosition(world, wall, wallMeta, x, 1, 9, structureBoundingBox);
-        }
-
-        for (int z = 1; z < 10; z++) {
-            this.placeBlockAtCurrentPosition(world, wall, wallMeta, 1, 1, z, structureBoundingBox);
-            this.placeBlockAtCurrentPosition(world, wall, wallMeta, 11, 1, z, structureBoundingBox);
-        }
-
-        this.placeBlockAtCurrentPosition(world, Blocks.fence_gate, fenceMeta, 6, 1, 1, structureBoundingBox);
-        this.placeBlockAtCurrentPosition(world, Blocks.fence_gate, fenceMeta, 6, 1, 9, structureBoundingBox);
-        int graveMeta = GraveStoneHelper.getMetaDirection(this.coordBaseMode);
-
-        byte graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveTypes(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0)), random);
-
-        for (int x = 3; x < 11; x += 2) {
-            for (int z = 3; z < 9; z += 2) {
-                placeGrave(world, random, x, 1, z, graveMeta, graveType, structureBoundingBox);
-            }
-        }
-
-        for (int x = 0; x < 11; x++) {
-            for (int z = 0; z < 9; z++) {
-                this.clearCurrentPositionBlocksUpwards(world, x, HEIGHT, z, structureBoundingBox);
-                this.func_151554_b(world, ground, 0, x, -1, z, structureBoundingBox);
-            }
-        }
+        //TODO
+//        this.fillWithBlocks(world, structureBoundingBox, 0, -5, 0, 11, 0, 9, ground, ground, false);
+//
+//        for (int x = 1; x < 12; x++) {
+//            this.placeBlockAtCurrentPosition(world, wall, wallMeta, x, 1, 1, structureBoundingBox);
+//            this.placeBlockAtCurrentPosition(world, wall, wallMeta, x, 1, 9, structureBoundingBox);
+//        }
+//
+//        for (int z = 1; z < 10; z++) {
+//            this.placeBlockAtCurrentPosition(world, wall, wallMeta, 1, 1, z, structureBoundingBox);
+//            this.placeBlockAtCurrentPosition(world, wall, wallMeta, 11, 1, z, structureBoundingBox);
+//        }
+//
+//        this.placeBlockAtCurrentPosition(world, Blocks.fence_gate, fenceMeta, 6, 1, 1, structureBoundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.fence_gate, fenceMeta, 6, 1, 9, structureBoundingBox);
+//        int graveMeta = GraveStoneHelper.getMetaDirection(this.coordBaseMode);
+//
+//        byte graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveTypes(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0)), random);
+//
+//        for (int x = 3; x < 11; x += 2) {
+//            for (int z = 3; z < 9; z += 2) {
+//                placeGrave(world, random, x, 1, z, graveMeta, graveType, structureBoundingBox);
+//            }
+//        }
+//
+//        for (int x = 0; x < 11; x++) {
+//            for (int z = 0; z < 9; z++) {
+//                this.clearCurrentPositionBlocksUpwards(world, x, HEIGHT, z, structureBoundingBox);
+//                this.func_151554_b(world, ground, 0, x, -1, z, structureBoundingBox);
+//            }
+//        }
 
         return true;
     }
@@ -134,12 +138,13 @@ public class ComponentGSVillageCemetery extends StructureVillagePieces.Village {
         int yCoord = this.getYWithOffset(y);
         int zCoord = this.getZWithOffset(x, z);
 
-        this.placeBlockAtCurrentPosition(world, GSBlock.graveStone, graveMeta, x, y, z, boundingBox);
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(xCoord, yCoord, zCoord);
-
-        if (tileEntity != null) {
-            tileEntity.setGraveType(graveType);
-            tileEntity.setGraveContent(random, false, true);
-        }
+        //TODO
+//        this.placeBlockAtCurrentPosition(world, GSBlock.graveStone, graveMeta, x, y, z, boundingBox);
+//        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(xCoord, yCoord, zCoord);
+//
+//        if (tileEntity != null) {
+//            tileEntity.setGraveType(graveType);
+//            tileEntity.setGraveContent(random, false, true);
+//        }
     }
 }
