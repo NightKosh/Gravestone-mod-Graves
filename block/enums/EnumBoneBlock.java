@@ -6,6 +6,7 @@
 package gravestone.block.enums;
 
 import gravestone.ModGraveStone;
+import net.minecraft.util.IStringSerializable;
 
 /**
  * GraveStone mod
@@ -13,7 +14,7 @@ import gravestone.ModGraveStone;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public enum EnumBoneBlock implements IBlockEnum {
+public enum EnumBoneBlock implements IBlockEnum, IStringSerializable {
 
     BONE_BLOCK("tile.bone_block.name"),
     SKULL_BONE_BLOCK("tile.bone_block.skull_name"),

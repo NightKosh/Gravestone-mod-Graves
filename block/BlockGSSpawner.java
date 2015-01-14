@@ -1,14 +1,15 @@
 package gravestone.block;
 
 import gravestone.block.enums.EnumSpawner;
-import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSTabs;
 import gravestone.particle.EntityGreenFlameFX;
 import gravestone.tileentity.TileEntityGSSpawner;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMobSpawner;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
@@ -71,11 +72,12 @@ public class BlockGSSpawner extends BlockMobSpawner {
     /**
      * The type of render function that is called for this block
      */
-    //TODO
-//    @Override
-//    public int getRenderType() {
+    @Override
+    public int getRenderType() {
+        //TODO
 //        return GraveStoneConfig.spawnerRenderID;
-//    }
+        return -1;
+    }
 
     /**
      * Is this block (a) opaque and (b) a full 1m cube? This determines whether
@@ -180,5 +182,20 @@ public class BlockGSSpawner extends BlockMobSpawner {
         for (byte meta : BOSS_SPAWNERS) {
             list.add(new ItemStack(item, 1, meta));
         }
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState().withProperty(VARIANT, EnumSpawner.getById((byte) meta));
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return ((EnumSpawner) state.getValue(VARIANT)).ordinal();
+    }
+
+    @Override
+    protected BlockState createBlockState() {
+        return new BlockState(this, new IProperty[]{VARIANT});
     }
 }

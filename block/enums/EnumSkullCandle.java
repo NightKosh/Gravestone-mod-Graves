@@ -2,6 +2,7 @@
 package gravestone.block.enums;
 
 import gravestone.ModGraveStone;
+import net.minecraft.util.IStringSerializable;
 
 /**
  * GraveStone mod
@@ -9,7 +10,7 @@ import gravestone.ModGraveStone;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public enum EnumSkullCandle implements IBlockEnum {
+public enum EnumSkullCandle implements IBlockEnum, IStringSerializable {
 
     SKELETON_SKULL("block.skull_candle.skeleton.name"),
     WITHER_SKULL("block.skull_candle.wither_skeleton.name"),
@@ -25,7 +26,7 @@ public enum EnumSkullCandle implements IBlockEnum {
         return ModGraveStone.proxy.getLocalizedString(this.name);
     }
     
-    public static EnumSkullCandle getByID(int id) {
+    public static EnumSkullCandle getById(int id) {
         if (id < values().length) {
             return values()[id];
         }

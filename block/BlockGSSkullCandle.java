@@ -9,7 +9,9 @@ import gravestone.tileentity.TileEntityGSSkullCandle;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
@@ -90,8 +92,22 @@ public class BlockGSSkullCandle extends BlockContainer {
 
     @Override
     public int damageDropped(IBlockState state) {
-        int metadata = ((Enum) state.getValue(VARIANT)).ordinal();
-        return metadata;
+        return ((Enum) state.getValue(VARIANT)).ordinal();
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState().withProperty(VARIANT, EnumSkullCandle.getById((byte) meta));
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return ((EnumSkullCandle) state.getValue(VARIANT)).ordinal();
+    }
+
+    @Override
+    protected BlockState createBlockState() {
+        return new BlockState(this, new IProperty[]{VARIANT});
     }
 
     /**
@@ -99,8 +115,7 @@ public class BlockGSSkullCandle extends BlockContainer {
      */
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entity, ItemStack stack) {
-        //TODO world.setBlockMetadataWithNotify(x, y, z, stack.getItemDamage(), 2);
-        world.setBlockState(pos, state, 2);
+        world.setBlockState(pos, getStateFromMeta(stack.getItemDamage()), 2);
 
         TileEntityGSSkullCandle tileEntity = (TileEntityGSSkullCandle) world.getTileEntity(pos);
         if (tileEntity != null) {

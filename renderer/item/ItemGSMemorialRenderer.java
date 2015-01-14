@@ -40,7 +40,7 @@ public class ItemGSMemorialRenderer implements IItemRenderer {
                 te.setEnchanted(item.getTagCompound().getBoolean("Enchanted"));
             }
             if (item.getTagCompound().hasKey("HangedMob")) {
-                te.setHangedMob(EnumHangedMobs.getByID(item.getTagCompound().getByte("HangedMob")));
+                te.setHangedMob(EnumHangedMobs.getById(item.getTagCompound().getByte("HangedMob")));
                 te.setHangedVillagerProfession(item.getTagCompound().getInteger("HangedVillagerProfession"));
             }
         }

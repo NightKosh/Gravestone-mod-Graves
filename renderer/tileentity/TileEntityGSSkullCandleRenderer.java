@@ -32,7 +32,7 @@ public class TileEntityGSSkullCandleRenderer extends TileEntitySpecialRenderer {
             meta = 0;//(byte) tileEntity.blockMetadata;
         }
 
-        bindSkullCandleTexture(EnumSkullCandle.getByID(meta));
+        bindSkullCandleTexture(EnumSkullCandle.getById(meta));
 
         GL11.glPushMatrix();
         if (tileEntity.getWorld() == null) {

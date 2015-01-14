@@ -41,9 +41,9 @@ public class ItemBlockGSMemorial extends ItemBlock {
         EnumMemorials memorialType;
 
         if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("GraveType")) {
-            memorialType = EnumMemorials.getByID(itemStack.getTagCompound().getByte("GraveType"));
+            memorialType = EnumMemorials.getById(itemStack.getTagCompound().getByte("GraveType"));
         } else {
-            memorialType = EnumMemorials.getByID(0);
+            memorialType = EnumMemorials.getById(0);
         }
 
         return getUnlocalizedName() + "." + memorialType.getName();
@@ -113,7 +113,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
                     break;
             }
 
-            EnumMemorials memorialType = EnumMemorials.getByID(stack.getTagCompound().getByte("GraveType"));
+            EnumMemorials memorialType = EnumMemorials.getById(stack.getTagCompound().getByte("GraveType"));
             byte maxY;
             byte maxX = 1;
             byte maxZ = 1;

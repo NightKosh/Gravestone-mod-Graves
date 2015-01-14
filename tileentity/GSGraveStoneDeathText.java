@@ -87,8 +87,8 @@ public class GSGraveStoneDeathText {
 
     public void setRandomDeathTextAndName(Random random, byte grave, boolean isMemorial, boolean changeGraveType) {
         isLocalized = true;
-        EnumGraves graveType = EnumGraves.getByID(grave);
-        EnumMemorials memorialType = EnumMemorials.getByID(grave);
+        EnumGraves graveType = EnumGraves.getById(grave);
+        EnumMemorials memorialType = EnumMemorials.getById(grave);
 
         if (isMemorial) {
             switch (memorialType) {

@@ -31,9 +31,9 @@ public class CursePotion extends Potion {
     }
 
     //TODO
-//    @SideOnly(Side.CLIENT)
-//    public int getStatusIconIndex() {
-//        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.POTIONS);
-//        return super.getStatusIconIndex();
-//    }
+    @SideOnly(Side.CLIENT)
+    public int getStatusIconIndex() {
+        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.POTIONS);
+        return super.getStatusIconIndex();
+    }
 }

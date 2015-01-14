@@ -3,7 +3,6 @@ package gravestone.block;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
-import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSTabs;
 import gravestone.item.ItemGSCorpse;
 import gravestone.item.corpse.VillagerCorpseHelper;
@@ -592,7 +591,7 @@ public class BlockGSMemorial extends BlockContainer {
                 }
 
                 if (itemStack.getTagCompound().hasKey("HangedMob")) {
-                    tileEntity.setHangedMob(EnumHangedMobs.getByID(itemStack.getTagCompound().getByte("HangedMob")));
+                    tileEntity.setHangedMob(EnumHangedMobs.getById(itemStack.getTagCompound().getByte("HangedMob")));
                     tileEntity.setHangedVillagerProfession(itemStack.getTagCompound().getInteger("HangedVillagerProfession"));
                 }
             }

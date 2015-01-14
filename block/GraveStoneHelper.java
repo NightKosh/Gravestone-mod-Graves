@@ -340,7 +340,7 @@ public class GraveStoneHelper {
      */
     public static boolean isPetGrave(byte graveType) {
         // TODO rework
-        return Arrays.binarySearch(PETS_GRAVES, EnumGraves.getByID(graveType)) >= 0;
+        return Arrays.binarySearch(PETS_GRAVES, EnumGraves.getById(graveType)) >= 0;
     }
 
     // TODO

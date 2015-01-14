@@ -17,7 +17,7 @@ public enum EnumHangedMobs {
     WITCH,
     ZOMBIE_PIGMAN;
 
-    public static EnumHangedMobs getByID(int id) {
+    public static EnumHangedMobs getById(int id) {
         if (id < values().length) {
             return values()[id];
         }

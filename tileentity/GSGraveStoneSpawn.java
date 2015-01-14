@@ -51,7 +51,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
         }
 
         if (this.getNewMob) {
-            this.spawnedMob = GSMobSpawn.getMobEntity(this.tileEntity.getWorld(), EnumGraves.getByID(((TileEntityGSGraveStone) this.tileEntity).graveType),
+            this.spawnedMob = GSMobSpawn.getMobEntity(this.tileEntity.getWorld(), EnumGraves.getById(((TileEntityGSGraveStone) this.tileEntity).graveType),
                     this.tileEntity.getPos().getX(), this.tileEntity.getPos().getY(), this.tileEntity.getPos().getZ());
 
             if (this.spawnedMob == null) {
@@ -112,7 +112,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
 
     @Override
     protected Entity getMob() {
-        return GSMobSpawn.getMobEntity(this.tileEntity.getWorld(), EnumGraves.getByID(((TileEntityGSGraveStone) this.tileEntity).graveType),
+        return GSMobSpawn.getMobEntity(this.tileEntity.getWorld(), EnumGraves.getById(((TileEntityGSGraveStone) this.tileEntity).graveType),
                 this.tileEntity.getPos().getX(), this.tileEntity.getPos().getY(), this.tileEntity.getPos().getZ());
     }
 }

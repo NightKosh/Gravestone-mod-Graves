@@ -125,7 +125,7 @@ public enum EnumGraves implements IBlockEnum {
      *
      * @param id Grave Id
      */
-    public static EnumGraves getByID(int id) {
+    public static EnumGraves getById(int id) {
         if (id < values().length) {
             return values()[id];
         }

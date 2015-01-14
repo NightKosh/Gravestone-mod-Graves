@@ -42,6 +42,7 @@ public class AIHideInBones extends EntityAIWander {
                 BlockPos blockpos = (new BlockPos(crawler.posX, crawler.posY + 0.5D, crawler.posZ)).offset(this.enumFacing);
                 IBlockState iblockstate = crawler.worldObj.getBlockState(blockpos);
 
+                //TODO
                 if (BlockSilverfish.canContainSilverfish(iblockstate)) {
                     this.field_179484_c = true;
                     return true;

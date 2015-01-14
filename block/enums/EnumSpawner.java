@@ -2,6 +2,7 @@
 package gravestone.block.enums;
 
 import gravestone.ModGraveStone;
+import net.minecraft.util.IStringSerializable;
 
 /**
  * GraveStone mod
@@ -9,7 +10,7 @@ import gravestone.ModGraveStone;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public enum EnumSpawner implements IBlockEnum {
+public enum EnumSpawner implements IBlockEnum, IStringSerializable {
 
     WITHER_SPAWNER("block.spawner.wither"),
     SKELETON_SPAWNER("block.spawner.skeleton"),

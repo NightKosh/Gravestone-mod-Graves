@@ -139,7 +139,7 @@ public class BlockGSHauntedChest extends BlockContainer {
      */
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        EnumFacing enumfacing = EnumFacing.getHorizontal(MathHelper.floor_double((double)(placer.rotationYaw * 4 / 360.0F) + 0.5D) & 3).getOpposite();
+        EnumFacing enumfacing = EnumFacing.getHorizontal(MathHelper.floor_double((double) (placer.rotationYaw * 4 / 360.0F) + 0.5D) & 3).getOpposite();
         state = state.withProperty(FACING, enumfacing);
 
         world.setBlockState(pos, state, 3);
@@ -242,13 +242,13 @@ public class BlockGSHauntedChest extends BlockContainer {
         return this.getDefaultState().withProperty(FACING, enumfacing);
     }
 
-    public int getMetaFromState(IBlockState state)
-    {
-        return ((EnumFacing)state.getValue(FACING)).getIndex();
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return ((EnumFacing) state.getValue(FACING)).getIndex();
     }
 
-    protected BlockState createBlockState()
-    {
-        return new BlockState(this, new IProperty[] {FACING});
+    @Override
+    protected BlockState createBlockState() {
+        return new BlockState(this, new IProperty[]{FACING});
     }
 }

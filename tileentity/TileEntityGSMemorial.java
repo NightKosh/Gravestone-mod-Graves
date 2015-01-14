@@ -47,7 +47,7 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
         // death text
         gSDeathText.readText(nbtTag);
 
-        hangedMob = EnumHangedMobs.getByID(nbtTag.getByte("HangedMob"));
+        hangedMob = EnumHangedMobs.getById(nbtTag.getByte("HangedMob"));
         hangedVillagerProfession = nbtTag.getInteger("HangedVillagerProfession");
     }
 
@@ -86,7 +86,7 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
 //    }
 
     public EnumMemorials getMemorialType() {
-        return EnumMemorials.getByID(graveType);
+        return EnumMemorials.getById(graveType);
     }
 
     public int getHangedVillagerProfession() {

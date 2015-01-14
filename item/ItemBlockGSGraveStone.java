@@ -41,9 +41,9 @@ public class ItemBlockGSGraveStone extends ItemBlock {
         EnumGraves graveType;
 
         if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("GraveType")) {
-            graveType = EnumGraves.getByID(itemStack.getTagCompound().getByte("GraveType"));
+            graveType = EnumGraves.getById(itemStack.getTagCompound().getByte("GraveType"));
         } else {
-            graveType = EnumGraves.getByID(0);
+            graveType = EnumGraves.getById(0);
         }
 
         return getUnlocalizedName() + "." + graveType.getName();

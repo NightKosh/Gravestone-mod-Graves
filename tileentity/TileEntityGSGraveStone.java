@@ -200,7 +200,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     }
 
     public EnumGraves getGraveType() {
-        return EnumGraves.getByID(graveType);
+        return EnumGraves.getById(graveType);
     }
 
     public boolean isEmpty() {

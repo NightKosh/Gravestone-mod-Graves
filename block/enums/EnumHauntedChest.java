@@ -1,6 +1,7 @@
 package gravestone.block.enums;
 
 import gravestone.ModGraveStone;
+import net.minecraft.util.IStringSerializable;
 
 /**
  * GraveStone mod
@@ -8,7 +9,7 @@ import gravestone.ModGraveStone;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public enum EnumHauntedChest implements IBlockEnum {
+public enum EnumHauntedChest implements IBlockEnum, IStringSerializable {
 
     BATS_CHEST("block.haunted_chest.bats_chest"),
     SKELETON_CHEST("block.haunted_chest.skeleton_chest");

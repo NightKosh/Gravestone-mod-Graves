@@ -30,8 +30,7 @@ public class TileEntityGSPileOfBonesRenderer extends TileEntitySpecialRenderer {
             GL11.glTranslatef(x + 0.5F, y + 2.7F, z + 0.5F);
             GL11.glScalef(1.8F, -1.8F, -1.8F);
             GL11.glRotatef(-90, 0, 1, 0);
-            // TODO
-//            meta = tileEntity.blockMetadata;
+            meta = tileEntity.getBlockMetadata();
         } else {
             GL11.glTranslatef(x + 0.5F, y + 1.5F, z + 0.5F);
             GL11.glScalef(1, -1, -1);
@@ -55,8 +54,7 @@ public class TileEntityGSPileOfBonesRenderer extends TileEntitySpecialRenderer {
             GL11.glRotatef(direction, 0.0F, 1.0F, 0.0F);
         }
 
-        // TODO
-//        pileOfBonesModel.renderAll(meta != 0);
+        pileOfBonesModel.renderAll(meta != 0);
         GL11.glPopMatrix();
     }
 

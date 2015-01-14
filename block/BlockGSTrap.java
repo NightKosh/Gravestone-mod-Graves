@@ -7,8 +7,11 @@ import gravestone.core.GSPotion;
 import gravestone.core.GSTabs;
 import gravestone.core.TimeHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockStoneBrick;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -112,7 +115,7 @@ public class BlockGSTrap extends Block {
     @Override
     public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity) {
         if (entity instanceof EntityPlayer) {
-            if ((EnumTrap) world.getBlockState(pos).getValue(VARIANT) == EnumTrap.NIGHT_STONE) {
+            if (world.getBlockState(pos).getValue(VARIANT) == EnumTrap.NIGHT_STONE) {
                 if (GraveStoneConfig.enableNightStone) {
                     long time = world.getWorldTime();
                     long dayTime = TimeHelper.getDayTime(time);
@@ -139,6 +142,21 @@ public class BlockGSTrap extends Block {
                 }
             }
         }
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState().withProperty(VARIANT, EnumTrap.getById((byte) meta));
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return ((EnumTrap) state.getValue(VARIANT)).ordinal();
+    }
+
+    @Override
+    protected BlockState createBlockState() {
+        return new BlockState(this, new IProperty[]{VARIANT});
     }
 
     /**

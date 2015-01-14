@@ -1,6 +1,7 @@
 package gravestone.block.enums;
 
 import gravestone.ModGraveStone;
+import net.minecraft.util.IStringSerializable;
 
 /**
  * GraveStone mod
@@ -8,7 +9,7 @@ import gravestone.ModGraveStone;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public enum EnumPileOfBones implements IBlockEnum {
+public enum EnumPileOfBones implements IBlockEnum, IStringSerializable {
 
     PILE_OF_BONES("block.pile_of_bones.name"),
     PILE_OF_BONES_WITH_SKULL("block.pile_of_bones_with_skull.name");
@@ -24,7 +25,7 @@ public enum EnumPileOfBones implements IBlockEnum {
         return ModGraveStone.proxy.getLocalizedString(this.name);
     }
 
-    public static EnumPileOfBones getByID(int id) {
+    public static EnumPileOfBones getById(int id) {
         if (id < values().length) {
             return values()[id];
         }
