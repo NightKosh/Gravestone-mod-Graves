@@ -12,18 +12,25 @@ import net.minecraft.util.IStringSerializable;
  */
 public enum EnumSpawner implements IBlockEnum, IStringSerializable {
 
-    WITHER_SPAWNER("block.spawner.wither"),
-    SKELETON_SPAWNER("block.spawner.skeleton"),
-    ZOMBIE_SPAWNER("block.spawner.zombie");
+    WITHER_SPAWNER("block.spawner.wither", "wither_spawner"),
+    SKELETON_SPAWNER("block.spawner.skeleton", "skeleton_spawner"),
+    ZOMBIE_SPAWNER("block.spawner.zombie", "zombie_spawner");
     private String name;
+    private String blockModelName;
 
-    private EnumSpawner(String name) {
+    private EnumSpawner(String name, String blockModelName) {
         this.name = name;
+        this.blockModelName = blockModelName;
+    }
+
+    @Override
+    public String getLocalizedName() {
+        return ModGraveStone.proxy.getLocalizedString(this.name);
     }
 
     @Override
     public String getName() {
-        return ModGraveStone.proxy.getLocalizedString(this.name);
+        return blockModelName;
     }
 
     public static EnumSpawner getById(byte id) {

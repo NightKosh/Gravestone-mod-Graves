@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "gravestone:blocks/skull_bone_block"
+    }
+}

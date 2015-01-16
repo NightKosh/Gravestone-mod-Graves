@@ -11,18 +11,25 @@ import net.minecraft.util.IStringSerializable;
  */
 public enum EnumHauntedChest implements IBlockEnum, IStringSerializable {
 
-    BATS_CHEST("block.haunted_chest.bats_chest"),
-    SKELETON_CHEST("block.haunted_chest.skeleton_chest");
-    //RAVEN_CHEST("block.haunted_chest.raven_chest");
+    BATS_CHEST("block.haunted_chest.bats_chest", "chest_with_bats"),
+    SKELETON_CHEST("block.haunted_chest.skeleton_chest", "chest_with_skeleton");
+    //RAVEN_CHEST("block.haunted_chest.raven_chest", "chest_with_ravens");
     private String name;
+    private String blockModelName;
 
-    private EnumHauntedChest(String name) {
+    private EnumHauntedChest(String name, String blockModelName) {
         this.name = name;
+        this.blockModelName = blockModelName;
+    }
+
+    @Override
+    public String getLocalizedName() {
+        return ModGraveStone.proxy.getLocalizedString(this.name);
     }
 
     @Override
     public String getName() {
-        return ModGraveStone.proxy.getLocalizedString(this.name);
+        return blockModelName;
     }
 
     public static EnumHauntedChest getById(byte id) {

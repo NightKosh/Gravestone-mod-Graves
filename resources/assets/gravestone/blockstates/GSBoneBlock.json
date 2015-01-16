@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "variant=bone_block":                        { "model": "gravestone:GSBoneBlock" },
+        "variant=bone_block_with_skull":             { "model": "gravestone:GSBoneBlock_with_skull" },
+        "variant=bone_block_with_crawler":           { "model": "gravestone:GSBoneBlock_with_crawler" },
+        "variant=bone_block_with_skull_and_crawler": { "model": "gravestone:GSBoneBlock_with_skull_and_crawler" }
+    }
+}

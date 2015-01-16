@@ -111,7 +111,7 @@ public enum EnumGraves implements IBlockEnum {
     }
 
     @Override
-    public String getName() {
+    public String getLocalizedName() {
         return ModGraveStone.proxy.getLocalizedString(this.name);
     }
 

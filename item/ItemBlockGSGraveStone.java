@@ -46,7 +46,7 @@ public class ItemBlockGSGraveStone extends ItemBlock {
             graveType = EnumGraves.getById(0);
         }
 
-        return getUnlocalizedName() + "." + graveType.getName();
+        return getUnlocalizedName() + "." + graveType.getLocalizedName();
     }
 
     @Override

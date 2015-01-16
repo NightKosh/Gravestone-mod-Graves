@@ -7,7 +7,6 @@ import gravestone.core.GSPotion;
 import gravestone.core.GSTabs;
 import gravestone.core.TimeHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockStoneBrick;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -38,44 +37,17 @@ import java.util.Random;
 public class BlockGSTrap extends Block {
 
     public static final PropertyEnum VARIANT = PropertyEnum.create("variant", EnumTrap.class);
-//    @SideOnly(Side.CLIENT)
-//    private IIcon thunderStoneIcon;
+    public static final String NIGHT_STONE_CURSE_TEXT = "block.trap.curse";
 
     public BlockGSTrap() {
         super(Material.rock);
         this.setStepSound(Block.soundTypeStone);
         this.setUnlocalizedName("trap.night");
         this.setHardness(4.5F);
-        this.setResistance(5F);
+        this.setResistance(5);
         this.setCreativeTab(GSTabs.otherItemsTab);
         this.setHarvestLevel("pickaxe", 1);
     }
-
-
-    /**
-     * When this method is called, your block should register all the icons it
-     * needs with the given IconRegister. This is the only chance you get to
-     * register icons.
-     */
-//    @Override
-//    public void registerBlockIcons(IIconRegister iconRegister) {
-//        this.blockIcon = iconRegister.registerIcon(Resources.NIGHT_STONE);
-//        this.thunderStoneIcon = iconRegister.registerIcon(Resources.THUNDER_STONE);
-//    }
-
-    /**
-     * From the specified side and block metadata retrieves the blocks texture.
-     */
-//    @Override
-//    public IIcon getIcon(int side, int metadata) {
-//        switch (metadata) {
-//            case 1:
-//                return thunderStoneIcon;
-//            case 0:
-//            default:
-//                return blockIcon;
-//        }
-//    }
 
     /**
      * Returns the ID of the items to drop on destruction.
@@ -123,7 +95,7 @@ public class BlockGSTrap extends Block {
                         time = time - dayTime + TimeHelper.PRE_NIGHT;
                         world.setWorldTime(time);
                         if (GraveStoneConfig.showNightStoneMessage) {
-                            ((EntityPlayer) entity).addChatComponentMessage(new ChatComponentTranslation(ModGraveStone.proxy.getLocalizedString("block.trap.curse")));
+                            ((EntityPlayer) entity).addChatComponentMessage(new ChatComponentTranslation(ModGraveStone.proxy.getLocalizedString(NIGHT_STONE_CURSE_TEXT)));
                         }
                     } else if (dayTime > 20000 && dayTime < TimeHelper.PRE_MORNING) {
                         time = time - dayTime + TimeHelper.NIGHT;

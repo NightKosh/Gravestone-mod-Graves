@@ -1,5 +1,6 @@
 package gravestone.core;
 
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import gravestone.item.ItemGSChisel;
@@ -25,6 +26,7 @@ public class GSItem {
         // chisel
         chisel = new ItemGSChisel();
         GameRegistry.registerItem(chisel, "Chisel");
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(chisel, 0, Resources.chiselModel);
 
         corpse = new ItemGSCorpse();
         GameRegistry.registerItem(corpse, "Corpse");

@@ -12,18 +12,25 @@ import net.minecraft.util.IStringSerializable;
  */
 public enum EnumSkullCandle implements IBlockEnum, IStringSerializable {
 
-    SKELETON_SKULL("block.skull_candle.skeleton.name"),
-    WITHER_SKULL("block.skull_candle.wither_skeleton.name"),
-    ZOMBIE_SKULL("block.skull_candle.zombie.name");
+    SKELETON_SKULL("block.skull_candle.skeleton.name", "skeleton_skull_candle"),
+    WITHER_SKULL("block.skull_candle.wither_skeleton.name", "wither_skull_candle"),
+    ZOMBIE_SKULL("block.skull_candle.zombie.name", "zombie_skull_candle");
     private String name;
+    private String blockModelName;
 
-    private EnumSkullCandle(String name) {
+    private EnumSkullCandle(String name, String blockModelName) {
         this.name = name;
+        this.blockModelName = blockModelName;
+    }
+
+    @Override
+    public String getLocalizedName() {
+        return ModGraveStone.proxy.getLocalizedString(this.name);
     }
 
     @Override
     public String getName() {
-        return ModGraveStone.proxy.getLocalizedString(this.name);
+        return blockModelName;
     }
     
     public static EnumSkullCandle getById(int id) {

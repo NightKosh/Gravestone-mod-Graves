@@ -20,6 +20,6 @@ public class ItemBlockGSPileOfBones extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
-        return getUnlocalizedName() + "." + EnumPileOfBones.values()[itemStack.getItemDamage()].getName();
+        return getUnlocalizedName() + "." + EnumPileOfBones.values()[itemStack.getItemDamage()].getLocalizedName();
     }
 }

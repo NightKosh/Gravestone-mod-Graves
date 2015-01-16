@@ -19,8 +19,8 @@ public class BlockGSBoneSlab extends BlockSlab {
         super(Material.rock);
         this.setStepSound(Block.soundTypeStone);
         this.setUnlocalizedName("bone_slab");
-        this.setHardness(2F);
-        this.setResistance(2F);
+        this.setHardness(2);
+        this.setResistance(2);
         this.setCreativeTab(GSTabs.otherItemsTab);
 //        this.setBlockTextureName(Resources.BONE_BLOCK);
         this.setHarvestLevel("pickaxe", 0);
@@ -38,11 +38,11 @@ public class BlockGSBoneSlab extends BlockSlab {
 
     @Override
     public IProperty getVariantProperty() {
-        return null;
+        return HALF;
     }
 
     @Override
     public Object getVariant(ItemStack stack) {
-        return null;
+        return EnumBlockHalf.values()[stack.getMetadata()];
     }
 }

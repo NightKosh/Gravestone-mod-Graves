@@ -20,15 +20,10 @@ import net.minecraft.world.World;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class BlockGSAltar extends BlockContainer {
-//
-//    @SideOnly(Side.CLIENT)
-//    private IIcon topTexture;
-//    @SideOnly(Side.CLIENT)
-//    private IIcon bottomTexture;
 
     public BlockGSAltar() {
         super(Material.rock);
-        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
+        this.setBlockBounds(0, 0, 0, 1, 0.75F, 1);
         this.setLightOpacity(0);
         this.setUnlocalizedName("Altar");
         this.setCreativeTab(GSTabs.otherItemsTab);
@@ -83,27 +78,10 @@ public class BlockGSAltar extends BlockContainer {
         return false;
     }
 
-//    /**
-//     * From the specified side and block metadata retrieves the blocks texture.
-//     */
-//    @Override
-//    @SideOnly(Side.CLIENT)
-//    public IIcon getIcon(int side, int metadata) {
-//        return side == 0 ? this.bottomTexture : (side == 1 ? this.topTexture : this.blockIcon);
-//    }
-//
-//    /**
-//     * When this method is called, your block should register all the icons it
-//     * needs with the given IconRegister. This is the only chance you get to
-//     * register icons.
-//     */
-//    @Override
-//    @SideOnly(Side.CLIENT)
-//    public void registerBlockIcons(IIconRegister register) {
-//        this.blockIcon = register.registerIcon(Resources.ALTAR_SIDE);
-//        this.topTexture = register.registerIcon(Resources.ALTAR_TOP);
-//        this.bottomTexture = register.registerIcon(Resources.BONE_BLOCK);
-//    }
+    @Override
+    public int getRenderType() {
+        return 3;
+    }
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {

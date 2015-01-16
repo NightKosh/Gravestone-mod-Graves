@@ -22,6 +22,6 @@ public class ItemBlockGSSkullCandle extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
-        return getUnlocalizedName() + "." + EnumSkullCandle.values()[itemStack.getItemDamage()].getName();
+        return getUnlocalizedName() + "." + EnumSkullCandle.values()[itemStack.getItemDamage()].getLocalizedName();
     }
 }

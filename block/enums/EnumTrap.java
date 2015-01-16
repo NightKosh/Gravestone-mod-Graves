@@ -12,17 +12,24 @@ import net.minecraft.util.IStringSerializable;
  */
 public enum EnumTrap implements IBlockEnum, IStringSerializable {
 
-    NIGHT_STONE("tile.trap.night.name"),
-    THUNDER_STONE("tile.trap.thunder.name");
+    NIGHT_STONE("tile.trap.night.name", "night_stone"),
+    THUNDER_STONE("tile.trap.thunder.name", "thunder_stone");
     private String name;
+    private String blockModelName;
 
-    private EnumTrap(String name) {
+    private EnumTrap(String name, String blockModelName) {
         this.name = name;
+        this.blockModelName = blockModelName;
+    }
+
+    @Override
+    public String getLocalizedName() {
+        return ModGraveStone.proxy.getLocalizedString(this.name);
     }
 
     @Override
     public String getName() {
-        return ModGraveStone.proxy.getLocalizedString(this.name);
+        return blockModelName;
     }
 
     public static EnumTrap getById(byte id) {
@@ -31,5 +38,4 @@ public enum EnumTrap implements IBlockEnum, IStringSerializable {
         }
         return NIGHT_STONE;
     }
-
 }

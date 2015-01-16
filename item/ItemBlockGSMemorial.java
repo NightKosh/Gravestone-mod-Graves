@@ -46,7 +46,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
             memorialType = EnumMemorials.getById(0);
         }
 
-        return getUnlocalizedName() + "." + memorialType.getName();
+        return getUnlocalizedName() + "." + memorialType.getLocalizedName();
     }
 
     @Override

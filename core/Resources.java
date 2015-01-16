@@ -1,5 +1,6 @@
 package gravestone.core;
 
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -34,7 +35,7 @@ public class Resources {
     public static final String ALTAR_TOP = MOD_NAME + ":altar_top";
     public static final String ALTAR_SIDE = MOD_NAME + ":altar_side";
     // items
-    public static final String CHISEL = MOD_NAME + ":chisel";
+    public static final String CHISEL = MOD_NAME + ":Chisel";
 
     // gui
     public static final ResourceLocation ALTAR = new ResourceLocation(GUI_LOCATION + "altar.png");
@@ -338,4 +339,13 @@ public class Resources {
     public static final ResourceLocation SKELETON_SKULL_CANDLE = new ResourceLocation(BLOCK_LOCATION + "SkeletonSkullCandle.png");
     public static final ResourceLocation WITHER_SKULL_CANDLE = new ResourceLocation(BLOCK_LOCATION + "WitherSkullCandle.png");
     public static final ResourceLocation ZOMBIE_SKULL_CANDLE = new ResourceLocation(BLOCK_LOCATION + "ZombieSkullCandle.png");
+
+    // MODEL RESOURCES
+    public static final ModelResourceLocation chiselModel = new ModelResourceLocation(CHISEL, "inventory");
+    public static final ModelResourceLocation trapModel = new ModelResourceLocation(MOD_NAME + ":GSTrap", "inventory");
+    public static final ModelResourceLocation boneBlockModel = new ModelResourceLocation(MOD_NAME + ":GSBoneBlock", "inventory");
+    public static final ModelResourceLocation boneSlabModel = new ModelResourceLocation(MOD_NAME + ":GSBoneSlab", "inventory");
+    public static final ModelResourceLocation boneStairsModel = new ModelResourceLocation(MOD_NAME + ":GSBoneStairs", "inventory");
+    public static final ModelResourceLocation hauntedChestModel = new ModelResourceLocation(MOD_NAME + ":GSHauntedChest", "inventory");
+    public static final ModelResourceLocation altarModel = new ModelResourceLocation(MOD_NAME + ":GSAltar", "inventory");
 }

@@ -11,18 +11,25 @@ import net.minecraft.util.IStringSerializable;
  */
 public enum EnumPileOfBones implements IBlockEnum, IStringSerializable {
 
-    PILE_OF_BONES("block.pile_of_bones.name"),
-    PILE_OF_BONES_WITH_SKULL("block.pile_of_bones_with_skull.name");
+    PILE_OF_BONES("block.pile_of_bones.name", "pile_of_bones"),
+    PILE_OF_BONES_WITH_SKULL("block.pile_of_bones_with_skull.name", "pile_of_bones_with_skull");
 
     private String name;
+    private String blockModelName;
 
-    private EnumPileOfBones(String name) {
+    private EnumPileOfBones(String name, String blockModelName) {
         this.name = name;
+        this.blockModelName = blockModelName;
+    }
+
+    @Override
+    public String getLocalizedName() {
+        return ModGraveStone.proxy.getLocalizedString(this.name);
     }
 
     @Override
     public String getName() {
-        return ModGraveStone.proxy.getLocalizedString(this.name);
+        return blockModelName;
     }
 
     public static EnumPileOfBones getById(int id) {

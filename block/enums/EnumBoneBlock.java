@@ -16,19 +16,26 @@ import net.minecraft.util.IStringSerializable;
  */
 public enum EnumBoneBlock implements IBlockEnum, IStringSerializable {
 
-    BONE_BLOCK("tile.bone_block.name"),
-    SKULL_BONE_BLOCK("tile.bone_block.skull_name"),
-    CRAWLER_BONE_BLOCK("tile.bone_block.crawler_name"),
-    CRAWLER_SKULL_BONE_BLOCK("tile.bone_block.crawler_skull_name");
+    BONE_BLOCK("tile.bone_block.name", "bone_block"),
+    SKULL_BONE_BLOCK("tile.bone_block.skull_name", "bone_block_with_skull"),
+    CRAWLER_BONE_BLOCK("tile.bone_block.crawler_name", "bone_block_with_crawler"),
+    CRAWLER_SKULL_BONE_BLOCK("tile.bone_block.crawler_skull_name", "bone_block_with_skull_and_crawler");
     private String name;
+    private String blockModelName;
 
-    private EnumBoneBlock(String name) {
+    private EnumBoneBlock(String name, String blockModelName) {
         this.name = name;
+        this.blockModelName = blockModelName;
+    }
+
+    @Override
+    public String getLocalizedName() {
+        return ModGraveStone.proxy.getLocalizedString(this.name);
     }
 
     @Override
     public String getName() {
-        return ModGraveStone.proxy.getLocalizedString(this.name);
+        return blockModelName;
     }
 
     public static EnumBoneBlock getById(byte id) {
