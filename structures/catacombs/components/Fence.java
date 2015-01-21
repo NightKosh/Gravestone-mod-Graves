@@ -1,6 +1,7 @@
 package gravestone.structures.catacombs.components;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
@@ -120,10 +121,10 @@ public class Fence extends CatacombsBaseComponent {
         int xPos = getXWithOffset(x, 0);
         int zPos = getZWithOffset(x, 0);
         int y = 64;//TODO world.getTopSolidOrLiquidBlock(xPos, zPos);
-        //TODO
-//        while (world.getBlock(xPos, y, zPos).getMaterial().equals(Material.wood) || world.getBlock(xPos, y, zPos).getMaterial().equals(Material.leaves)) {
-//            y--;
-//        }
+        while (world.getBlockState(new BlockPos(xPos, y, zPos)).getBlock().getMaterial().equals(Material.wood) ||
+                world.getBlockState(new BlockPos(xPos, y, zPos)).getBlock().getMaterial().equals(Material.leaves)) {
+            y--;
+        }
 
         return y;
     }
@@ -169,10 +170,10 @@ public class Fence extends CatacombsBaseComponent {
             int xPos = getXWithOffset(x, 0);
             int zPos = getZWithOffset(x, 0);
             int yPos = 64; //TODO world.getTopSolidOrLiquidBlock(xPos, zPos);
-            //TODO
-//            while (world.getBlock(xPos, y, zPos).getMaterial().equals(Material.wood) || world.getBlock(xPos, y, zPos).getMaterial().equals(Material.leaves)) {
-//                yPos--;
-//            }
+            while (world.getBlockState(new BlockPos(xPos, y, zPos)).getBlock().getMaterial().equals(Material.wood) ||
+                    world.getBlockState(new BlockPos(xPos, y, zPos)).getBlock().getMaterial().equals(Material.leaves)) {
+                yPos--;
+            }
             y += yPos;
         }
         y /= 6;
@@ -188,11 +189,11 @@ public class Fence extends CatacombsBaseComponent {
             this.fillWithBlocks(world, boundingBox, 43, y, 0, 43, y + 3, 0, Blocks.iron_bars.getDefaultState(), false);
             this.fillWithBlocks(world, boundingBox, 46, y, 0, 46, y + 3, 0, Blocks.iron_bars.getDefaultState(), false);
             this.fillWithBlocks(world, boundingBox, 44, y + 3, 0, 45, y + 4, 0, Blocks.iron_bars.getDefaultState(), false);
-//TODO
-//            // slabs
-//            this.fillWithMetadataBlocks(world, boundingBox, 44, y + 5, 0, 45, y + 5, 0, Blocks.stone_slab, 5, Blocks.stone_slab, 5, false);
-//            this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 42, y + 4, 0, boundingBox);
-//            this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 47, y + 4, 0, boundingBox);
+
+            // slabs
+            this.fillWithBlocks(world, boundingBox, 44, y + 5, 0, 45, y + 5, 0, Blocks.stone_slab.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP), false);
+            this.placeBlockAtCurrentPosition(world, Blocks.stone_slab.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.BOTTOM), 42, y + 4, 0, boundingBox);
+            this.placeBlockAtCurrentPosition(world, Blocks.stone_slab.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.BOTTOM), 47, y + 4, 0, boundingBox);
         }
     }
 

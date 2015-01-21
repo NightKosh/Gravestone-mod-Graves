@@ -71,19 +71,13 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
     }
 
     public void setRandomMob(Random random) {
-        hangedMob = EnumHangedMobs.values()[random.nextInt(EnumHangedMobs.values().length)] ;
+        hangedMob = EnumHangedMobs.values()[random.nextInt(EnumHangedMobs.values().length)];
     }
 
     @Override
     public GSGraveStoneDeathText getDeathTextComponent() {
         return gSDeathText;
     }
-
-    // TODO
-//    @Override
-//    public boolean canUpdate() {
-//        return false;
-//    }
 
     public EnumMemorials getMemorialType() {
         return EnumMemorials.getById(graveType);

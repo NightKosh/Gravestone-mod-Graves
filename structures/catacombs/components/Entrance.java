@@ -81,14 +81,14 @@ public class Entrance extends CatacombsBaseComponent {
 
             //TODO
 //            // nether stairs
-//            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY, shiftZ, 2, shiftY, shiftZ, Blocks.nether_brick_stairs, metaBot, Blocks.nether_brick_stairs, metaBot, false);
-//            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 1, shiftZ + 1, 2, shiftY - 1, shiftZ + 1, Blocks.nether_brick_stairs, metaBot, Blocks.nether_brick_stairs, metaBot, false);
-//            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 2, shiftZ + 2, 2, shiftY - 2, shiftZ + 2, Blocks.nether_brick_stairs, metaBot, Blocks.nether_brick_stairs, metaBot, false);
+//            this.fillWithBlocks(world, boundingBox, 1, shiftY, shiftZ, 2, shiftY, shiftZ, Blocks.nether_brick_stairs, metaBot, Blocks.nether_brick_stairs, metaBot, false);
+//            this.fillWithBlocks(world, boundingBox, 1, shiftY - 1, shiftZ + 1, 2, shiftY - 1, shiftZ + 1, Blocks.nether_brick_stairs, metaBot, Blocks.nether_brick_stairs, metaBot, false);
+//            this.fillWithBlocks(world, boundingBox, 1, shiftY - 2, shiftZ + 2, 2, shiftY - 2, shiftZ + 2, Blocks.nether_brick_stairs, metaBot, Blocks.nether_brick_stairs, metaBot, false);
 //
 //            // block stairs
-//            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY, shiftZ + 4, 2, shiftY, shiftZ + 4, Blocks.stone_brick_stairs, metaTop, Blocks.stone_brick_stairs, metaTop, false);
-//            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 1, shiftZ + 5, 2, shiftY - 1, shiftZ + 5, Blocks.stone_brick_stairs, metaTop, Blocks.stone_brick_stairs, metaTop, false);
-//            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 2, shiftZ + 6, 2, shiftY - 2, shiftZ + 6, Blocks.stone_brick_stairs, metaTop, Blocks.stone_brick_stairs, metaTop, false);
+//            this.fillWithBlocks(world, boundingBox, 1, shiftY, shiftZ + 4, 2, shiftY, shiftZ + 4, Blocks.stone_brick_stairs, metaTop, Blocks.stone_brick_stairs, metaTop, false);
+//            this.fillWithBlocks(world, boundingBox, 1, shiftY - 1, shiftZ + 5, 2, shiftY - 1, shiftZ + 5, Blocks.stone_brick_stairs, metaTop, Blocks.stone_brick_stairs, metaTop, false);
+//            this.fillWithBlocks(world, boundingBox, 1, shiftY - 2, shiftZ + 6, 2, shiftY - 2, shiftZ + 6, Blocks.stone_brick_stairs, metaTop, Blocks.stone_brick_stairs, metaTop, false);
         }
 
         shiftY += 1;

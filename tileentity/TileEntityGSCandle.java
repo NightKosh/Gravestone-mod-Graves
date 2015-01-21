@@ -10,10 +10,4 @@ import net.minecraft.tileentity.TileEntity;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class TileEntityGSCandle extends TileEntity {
-// TODO
-//    @Override
-//    public boolean canUpdate() {
-//        return false;
-//    }
-
 }

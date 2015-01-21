@@ -21,26 +21,11 @@ public class RenderUndeadDog extends RenderLiving {
 
     public RenderUndeadDog(RenderManager renderManager, ModelBase model, ModelBase model2) {
         super(renderManager, model, 0.5F);
-// TODO       this.setRenderPassModel(model2);
     }
 
     protected float getTailRotation(EntityUndeadDog undeadDog, float par2) {
         return undeadDog.getTailRotation();
     }
-
-    //TODO
-//    protected int func_82447_a(EntityUndeadDog undeadDog, int par2, float par3) {
-//        return -1;
-//    }
-
-    /**
-     * Queries whether should render the specified pass or not.
-     */
-    //TODO
-//    @Override
-//    protected int shouldRenderPass(EntityLivingBase entityLiving, int par2, float par3) {
-//        return this.func_82447_a((EntityUndeadDog) entityLiving, par2, par3);
-//    }
 
     /**
      * Defines what float the third param in setRotationAngles of ModelBase is

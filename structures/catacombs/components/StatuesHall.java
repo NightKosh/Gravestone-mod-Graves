@@ -8,6 +8,8 @@ import gravestone.structures.MemorialGenerationHelper;
 import gravestone.structures.MobSpawnHelper;
 import gravestone.structures.ObjectsGenerationHelper;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -111,26 +113,25 @@ public class StatuesHall extends CatacombsBaseComponent {
         ObjectsGenerationHelper.generateMinecraftSpawner(this, world, 7, 0, 15, GSMobSpawn.getMobForStatueSpawner(random));
 
         // loot chests
-//        ObjectsGenerationHelper.generateChest(this, world, random, 3, 0, 6, false, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);
-//        ObjectsGenerationHelper.generateChest(this, world, random, 3, 0, 12, false, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);
-//        ObjectsGenerationHelper.generateChest(this, world, random, 7, 0, 6, false, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);
-//        ObjectsGenerationHelper.generateChest(this, world, random, 7, 0, 12, false, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);
+        ObjectsGenerationHelper.generateChest(this, world, random, 3, 0, 6, this.coordBaseMode, false, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);
+        ObjectsGenerationHelper.generateChest(this, world, random, 3, 0, 12, this.coordBaseMode, false, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);
+        ObjectsGenerationHelper.generateChest(this, world, random, 7, 0, 6, this.coordBaseMode, false, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);
+        ObjectsGenerationHelper.generateChest(this, world, random, 7, 0, 12, this.coordBaseMode, false, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);
 
-        //TODO
-//        // statues
-//        byte memorialType = BlockGSMemorial.getMemorialType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, 5);
-//        int metaLeft = BlockGSMemorial.getMetaDirection(getLeftItemDirection(coordBaseMode));
-//        int metaRight = BlockGSMemorial.getMetaDirection(getRightItemDirection(coordBaseMode));
-//        MemorialGenerationHelper.placeMemorial(this, world, random, 3, 1, 3, metaLeft, memorialType);
-//        MemorialGenerationHelper.placeMemorial(this, world, random, 3, 1, 6, metaLeft, memorialType);
-//        MemorialGenerationHelper.placeMemorial(this, world, random, 3, 1, 9, metaLeft, memorialType);
-//        MemorialGenerationHelper.placeMemorial(this, world, random, 3, 1, 12, metaLeft, memorialType);
-//        MemorialGenerationHelper.placeMemorial(this, world, random, 3, 1, 15, metaLeft, memorialType);
-//        MemorialGenerationHelper.placeMemorial(this, world, random, 7, 1, 3, metaRight, memorialType);
-//        MemorialGenerationHelper.placeMemorial(this, world, random, 7, 1, 6, metaRight, memorialType);
-//        MemorialGenerationHelper.placeMemorial(this, world, random, 7, 1, 9, metaRight, memorialType);
-//        MemorialGenerationHelper.placeMemorial(this, world, random, 7, 1, 12, metaRight, memorialType);
-//        MemorialGenerationHelper.placeMemorial(this, world, random, 7, 1, 15, metaRight, memorialType);
+        // statues
+        byte memorialType = BlockGSMemorial.getMemorialType(world, new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0)), random, 5);
+        EnumFacing left = this.coordBaseMode.rotateY();
+        EnumFacing right = this.coordBaseMode.rotateYCCW();
+        MemorialGenerationHelper.placeMemorial(this, world, random, 3, 1, 3, left, memorialType);
+        MemorialGenerationHelper.placeMemorial(this, world, random, 3, 1, 6, left, memorialType);
+        MemorialGenerationHelper.placeMemorial(this, world, random, 3, 1, 9, left, memorialType);
+        MemorialGenerationHelper.placeMemorial(this, world, random, 3, 1, 12, left, memorialType);
+        MemorialGenerationHelper.placeMemorial(this, world, random, 3, 1, 15, left, memorialType);
+        MemorialGenerationHelper.placeMemorial(this, world, random, 7, 1, 3, right, memorialType);
+        MemorialGenerationHelper.placeMemorial(this, world, random, 7, 1, 6, right, memorialType);
+        MemorialGenerationHelper.placeMemorial(this, world, random, 7, 1, 9, right, memorialType);
+        MemorialGenerationHelper.placeMemorial(this, world, random, 7, 1, 12, right, memorialType);
+        MemorialGenerationHelper.placeMemorial(this, world, random, 7, 1, 15, right, memorialType);
 
         // fill exit with random blocks
         this.fillWithRandomizedBlocks(world, boundingBox, 4, 1, 18, 6, 3, 18, false, random, getCemeteryCatacombsStones());

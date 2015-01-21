@@ -30,7 +30,6 @@ public class CursePotion extends Potion {
         return "Curse";
     }
 
-    //TODO
     @SideOnly(Side.CLIENT)
     public int getStatusIconIndex() {
         Minecraft.getMinecraft().renderEngine.bindTexture(Resources.POTIONS);

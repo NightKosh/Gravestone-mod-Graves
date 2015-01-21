@@ -1,5 +1,6 @@
 package gravestone.structures.catacombs.components;
 
+import gravestone.block.BlockGSGraveStone;
 import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
@@ -7,8 +8,10 @@ import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.GraveGenerationHelper;
 import gravestone.structures.MobSpawnHelper;
 import gravestone.structures.ObjectsGenerationHelper;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -68,19 +71,20 @@ public class GraveCorridor extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 1, 1, 4, 1, 3, 4, Blocks.nether_brick.getDefaultState(), false);
         this.fillWithBlocks(world, boundingBox, 5, 1, 0, 5, 3, 0, Blocks.nether_brick.getDefaultState(), false);
         this.fillWithBlocks(world, boundingBox, 5, 1, 4, 5, 3, 4, Blocks.nether_brick.getDefaultState(), false);
-//TODO
-//        // graves
-//        byte graveType = GraveStoneHelper.getGraveType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, EnumGraveType.ALL_GRAVES);
-//        Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
-//        int metaLeft = GraveStoneHelper.getMetaDirection(getLeftItemDirection(coordBaseMode));
-//        int metaRight = GraveStoneHelper.getMetaDirection(getRightItemDirection(coordBaseMode));
-//        GraveGenerationHelper.fillGraves(this, world, random, 1, 1, 1, 1, 1, 3, metaLeft, graveType, sword, true);
-//        GraveGenerationHelper.fillGraves(this, world, random, 5, 1, 1, 5, 1, 3, metaRight, graveType, sword, true);
-//
-//        // chest
-//        if (random.nextInt(5) < 2) {
-//            ObjectsGenerationHelper.generateChest(this, world, random, 3, 1, 2, true, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);
-//        }
+
+        // graves
+        byte graveType = GraveStoneHelper.getGraveType(world, new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0)), random, EnumGraveType.ALL_GRAVES);
+        Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
+        IBlockState graveState = GSBlock.graveStone.getDefaultState();
+        IBlockState leftGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.rotateY());
+        IBlockState rightGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.rotateYCCW());
+        GraveGenerationHelper.fillGraves(this, world, random, 1, 1, 1, 1, 1, 3, leftGraveState, graveType, sword, true);
+        GraveGenerationHelper.fillGraves(this, world, random, 5, 1, 1, 5, 1, 3, rightGraveState, graveType, sword, true);
+
+        // chest
+        if (random.nextInt(5) < 2) {
+            ObjectsGenerationHelper.generateChest(this, world, random, 3, 1, 2, this.coordBaseMode, true, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);
+        }
 
         // spawn bats
         MobSpawnHelper.spawnBats(world, random, boundingBox);

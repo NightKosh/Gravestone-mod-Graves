@@ -38,12 +38,6 @@ public class TileEntityGSPileOfBones extends TileEntity {
         nbt.setByte("Direction", direction);
     }
 
-    // TODO
-//    @Override
-//    public boolean canUpdate() {
-//        return false;
-//    }
-
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
         readFromNBT(packet.getNbtCompound());

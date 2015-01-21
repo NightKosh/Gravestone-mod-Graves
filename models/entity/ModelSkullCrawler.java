@@ -41,30 +41,30 @@ public class ModelSkullCrawler extends ModelBase {
         
         // Right legs
         rightLeg1 = new ModelRenderer(this, 0, 16);
-        rightLeg1.addBox(0F, 0F, 0F, 3, 1, 1);
-        rightLeg1.setRotationPoint(-3.9F, 22F, -2.1F);
+        rightLeg1.addBox(0, 0, 0, 3, 1, 1);
+        rightLeg1.setRotationPoint(-3.9F, 22, -2.1F);
         rightLeg2 = new ModelRenderer(this, 0, 16);
-        rightLeg2.addBox(0F, 0F, 0F, 3, 1, 1);
-        rightLeg2.setRotationPoint(-3.9F, 22F, -0.9F);
+        rightLeg2.addBox(0, 0, 0, 3, 1, 1);
+        rightLeg2.setRotationPoint(-3.9F, 22, -0.9F);
         rightLeg3 = new ModelRenderer(this, 0, 16);
-        rightLeg3.addBox(0F, 0F, 0F, 3, 1, 1);
-        rightLeg3.setRotationPoint(-3.9F, 22F, 0.4F);
+        rightLeg3.addBox(0, 0, 0, 3, 1, 1);
+        rightLeg3.setRotationPoint(-3.9F, 22, 0.4F);
         rightLeg4 = new ModelRenderer(this, 0, 16);
-        rightLeg4.addBox(0F, 0F, 0F, 3, 1, 1);
-        rightLeg4.setRotationPoint(-3.9F, 22F, 1.6F);
+        rightLeg4.addBox(0, 0, 0, 3, 1, 1);
+        rightLeg4.setRotationPoint(-3.9F, 22, 1.6F);
 
         // Left legs
         leftLeg1 = new ModelRenderer(this, 0, 16);
-        leftLeg1.addBox(0F, 0F, 0F, 3, 1, 1);
+        leftLeg1.addBox(0, 0, 0, 3, 1, 1);
         leftLeg1.setRotationPoint(3.7F, 22, -3.1F);
         leftLeg2 = new ModelRenderer(this, 0, 16);
-        leftLeg2.addBox(0F, 0F, 0F, 3, 1, 1);
+        leftLeg2.addBox(0, 0, 0, 3, 1, 1);
         leftLeg2.setRotationPoint(3.7F, 22, -1.9F);
         leftLeg3 = new ModelRenderer(this, 0, 16);
-        leftLeg3.addBox(0F, 0F, 0F, 3, 1, 1);
+        leftLeg3.addBox(0, 0, 0, 3, 1, 1);
         leftLeg3.setRotationPoint(3.7F, 22, -0.6F);
         leftLeg4 = new ModelRenderer(this, 0, 16);
-        leftLeg4.addBox(0F, 0F, 0F, 3, 1, 1);
+        leftLeg4.addBox(0, 0, 0, 3, 1, 1);
         leftLeg4.setRotationPoint(3.7F, 22, 0.6F);
     }
 
@@ -125,15 +125,15 @@ public class ModelSkullCrawler extends ModelBase {
         this.leftLeg3.rotateAngleY = -baseY;
         this.leftLeg4.rotateAngleY = -advBaseY;
 
-        float firstY = -(MathHelper.cos(f * 0.6662F * 2.0F + 0.0F) * 0.4F) * f1;
-        float secondY = -(MathHelper.cos(f * 0.6662F * 2.0F + (float) Math.PI) * 0.4F) * f1;
-        float thirdY = -(MathHelper.cos(f * 0.6662F * 2.0F + ((float) Math.PI / 2F)) * 0.4F) * f1;
-        float fourthY = -(MathHelper.cos(f * 0.6662F * 2.0F + ((float) Math.PI * 3F / 2F)) * 0.4F) * f1;
+        float firstY = -(MathHelper.cos(f * 0.6662F * 2) * 0.4F) * f1;
+        float secondY = -(MathHelper.cos(f * 0.6662F * 2 + (float) Math.PI) * 0.4F) * f1;
+        float thirdY = -(MathHelper.cos(f * 0.6662F * 2 + ((float) Math.PI / 2F)) * 0.4F) * f1;
+        float fourthY = -(MathHelper.cos(f * 0.6662F * 2 + ((float) Math.PI * 3 / 2F)) * 0.4F) * f1;
 
-        float firstZ = Math.abs(MathHelper.sin(f * 0.6662F + 0.0F) * 0.4F) * f1;
+        float firstZ = Math.abs(MathHelper.sin(f * 0.6662F) * 0.4F) * f1;
         float secondZ = Math.abs(MathHelper.sin(f * 0.6662F + (float) Math.PI) * 0.4F) * f1;
         float thirdZ = Math.abs(MathHelper.sin(f * 0.6662F + ((float) Math.PI / 2F)) * 0.4F) * f1;
-        float fourthZ = Math.abs(MathHelper.sin(f * 0.6662F + ((float) Math.PI * 3F / 2F)) * 0.4F) * f1;
+        float fourthZ = Math.abs(MathHelper.sin(f * 0.6662F + ((float) Math.PI * 3 / 2F)) * 0.4F) * f1;
 
 
         this.rightLeg1.rotateAngleY += firstY;

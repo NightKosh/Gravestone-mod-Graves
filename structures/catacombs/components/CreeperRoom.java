@@ -4,8 +4,8 @@ import gravestone.block.BlockGSMemorial;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.MemorialGenerationHelper;
 import gravestone.structures.ObjectsGenerationHelper;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -170,10 +170,9 @@ public class CreeperRoom extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 10, yStart + 1, 4, 10, yStart + 3, 6, false, random, getCemeteryCatacombsStones());
 
 
-        //TODO
-//        // creeper statue
-//        MemorialGenerationHelper.placeMemorial(this, world, random, 5, yStart + 1, 5, BlockGSMemorial.getMetaDirection(coordBaseMode),
-//                BlockGSMemorial.getMemorialType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, 4));
+        // creeper statue
+        MemorialGenerationHelper.placeMemorial(this, world, random, 5, yStart + 1, 5, coordBaseMode.getOpposite(),
+                BlockGSMemorial.getMemorialType(world, new BlockPos(this.getXWithOffset(5, 5), this.getYWithOffset(yStart + 1), this.getZWithOffset(5, 5)), random, 4));
 
         // clear enter
         this.fillWithAir(world, boundingBox, 4, yStart + 1, 0, 6, yStart + 3, 0);

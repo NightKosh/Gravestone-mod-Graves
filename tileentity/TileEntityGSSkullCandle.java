@@ -49,12 +49,6 @@ public class TileEntityGSSkullCandle extends TileEntity {
         readFromNBT(packet.getNbtCompound());
     }
 
-    // TODO
-//    @Override
-//    public boolean canUpdate() {
-//        return false;
-//    }
-
     /**
      * Get the entity type for the skull
      */

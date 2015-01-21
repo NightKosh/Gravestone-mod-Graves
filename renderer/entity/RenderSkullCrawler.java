@@ -22,12 +22,10 @@ public class RenderSkullCrawler extends RenderLiving {
     public RenderSkullCrawler(SkullCrawlerType crawlerType, RenderManager renderManager) {
         super(renderManager, new ModelSkullCrawler(), 0.2F);
         this.crawlerType = crawlerType;
-        //TODO
-//        this.setRenderPassModel(new ModelSkullCrawler());
     }
 
     protected float setSpiderDeathMaxRotation(EntitySkullCrawler entity) {
-        return 180.0F;
+        return 180;
     }
 
     @Override

@@ -63,7 +63,6 @@ public class EnderHall extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 18, 2, 3, 18, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 10, 1, 18, 11, 3, 18, false, random, getCemeteryCatacombsStones());
 
-        //TODO
         // nether walls
         this.fillWithBlocks(world, boundingBox, 3, 0, 0, 9, 3, 0, Blocks.nether_brick.getDefaultState(), false);
         this.fillWithBlocks(world, boundingBox, 3, 0, 18, 9, 3, 18, Blocks.nether_brick.getDefaultState(), false);
@@ -106,14 +105,13 @@ public class EnderHall extends CatacombsBaseComponent {
         ObjectsGenerationHelper.generateMinecraftSpawner(this, world, 3, 0, 15, "Enderman");
         ObjectsGenerationHelper.generateMinecraftSpawner(this, world, 9, 0, 15, "Enderman");
 
-        // fiil exit
+        // fill exit
         this.fillWithRandomizedBlocks(world, boundingBox, 5, 1, 18, 7, 3, 18, false, random, getCemeteryCatacombsStones());
         this.fillWithAir(world, boundingBox, 5, 1, 0, 7, 3, 0);
 
         // spawn bats
         MobSpawnHelper.spawnBats(world, random, boundingBox);
 
-        //TODO
         // web
         this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 1, 2, 1, 1, 2, 1, Blocks.web.getDefaultState(), false);
         this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 2, 3, 1, 2, 3, 1, Blocks.web.getDefaultState(), false);
