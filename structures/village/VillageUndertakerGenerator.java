@@ -33,7 +33,7 @@ public class VillageUndertakerGenerator implements GSStructureGenerator {
     public boolean generate(World world, Random rand, int x, int z, double chance, boolean isCommand) {
         if (isCommand) {
             StructureBoundingBox boundingBox = ComponentGSVillageUndertaker.getBoundingBox(x, z);
-            new ComponentGSVillageUndertaker(new StructureVillagePieces.Start(), 0, rand, boundingBox, EnumFacing.EAST)
+            new ComponentGSVillageUndertaker(new StructureVillagePieces.Start(), 0, rand, boundingBox, EnumFacing.SOUTH)
                     .addComponentParts(world, rand, boundingBox);
             return true;
         }

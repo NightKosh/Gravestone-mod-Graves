@@ -6,6 +6,7 @@ import gravestone.models.block.ModelMemorial;
 import gravestone.models.block.memorials.*;
 import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
@@ -166,13 +167,12 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f, int par9) {
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) te;
         EnumMemorials memorialType = tileEntity.getMemorialType();
-        int meta;
+        int meta = 0;
 
         if (tileEntity.getWorld() != null) {
             meta = tileEntity.getBlockMetadata();
-        } else {
-            meta = 0;
         }
+        EnumFacing facing = EnumFacing.values()[meta];
 
         bindTextureByName(memorialType.getTexture());
 
@@ -220,17 +220,17 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
             }
         }
 
-        switch (getMemorialDirection(meta)) {
-            case 0:
+        switch (facing) {
+            case SOUTH:
                 GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
                 break;
-            case 1:
+            case WEST:
                 GL11.glRotatef(90, 0.0F, 1.0F, 0.0F);
                 break;
-            case 2:
+            case NORTH:
                 GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
                 break;
-            case 3:
+            case EAST:
                 GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
                 break;
         }
@@ -285,23 +285,5 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
         }
 
         GL11.glPopMatrix();
-    }
-
-    /**
-     * Return grave direction by metadata
-     */
-    private static int getMemorialDirection(int meta) {
-        switch (meta) {
-            case 0: // S
-                return 0;
-            case 1: // N
-                return 2;
-            case 2: // E
-                return 3;
-            case 3: // W
-                return 1;
-            default:
-                return 2;
-        }
     }
 }

@@ -60,6 +60,7 @@ public class GSBlock {
             graveStoneStack.setTagCompound(nbt);
             LanguageRegistry.addName(graveStoneStack, EnumGraves.values()[i].getLocalizedName());
         }
+//        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(graveStone), 0, Resources.graveStoneModel);
 
         // memorials
         memorial = new BlockGSMemorial();
@@ -67,7 +68,7 @@ public class GSBlock {
 
         // wither spawner
         spawner = new BlockGSSpawner();
-//        advancedMetaBlockRegistration(spawner, ItemBlockGSSpawner.class, "GSSpawner", EnumSpawner.values());
+        advancedMetaBlockRegistration(spawner, ItemBlockGSSpawner.class, "GSSpawner", EnumSpawner.values());
 
         // trap
         trap = new BlockGSTrap();
@@ -78,7 +79,7 @@ public class GSBlock {
 
         //pile of bones
         pileOfBones = new BlockGSPileOfBones();
-//        advancedMetaBlockRegistration(pileOfBones, ItemBlockGSPileOfBones.class, "GSPileOfBones", EnumPileOfBones.values());
+        advancedMetaBlockRegistration(pileOfBones, ItemBlockGSPileOfBones.class, "GSPileOfBones", EnumPileOfBones.values());
         // bone block
         boneBlock = new BlockGSBoneBlock();
         advancedMetaBlockRegistration(boneBlock, ItemBlockGSBoneBlock.class, "GSBoneBlock", EnumBoneBlock.values());
@@ -103,7 +104,7 @@ public class GSBlock {
 
         // skull candle
         candle = new BlockGSCandle();
-//        simpleBlockRegistration(candle, "Candle", ItemBlockGSCandle.class, "GSCandle");
+        simpleBlockRegistration(candle, "Candle", ItemBlockGSCandle.class, "GSCandle");
         skullCandle = new BlockGSSkullCandle();
         advancedMetaBlockRegistration(skullCandle, ItemBlockGSSkullCandle.class, "GSSkullCandle", EnumSkullCandle.values());
 

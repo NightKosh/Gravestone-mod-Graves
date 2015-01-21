@@ -342,6 +342,7 @@ public class Resources {
 
     // MODEL RESOURCES
     public static final ModelResourceLocation chiselModel = new ModelResourceLocation(CHISEL, "inventory");
+    public static final ModelResourceLocation graveStoneModel = new ModelResourceLocation(MOD_NAME + ":GSGraveStone", "inventory");
     public static final ModelResourceLocation trapModel = new ModelResourceLocation(MOD_NAME + ":GSTrap", "inventory");
     public static final ModelResourceLocation boneBlockModel = new ModelResourceLocation(MOD_NAME + ":GSBoneBlock", "inventory");
     public static final ModelResourceLocation boneSlabModel = new ModelResourceLocation(MOD_NAME + ":GSBoneSlab", "inventory");

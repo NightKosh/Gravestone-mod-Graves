@@ -316,24 +316,6 @@ public class GraveStoneHelper {
     }
 
     /**
-     * Return grave metadata by direction
-     */
-    public static int getMetaDirection(int direction) {
-        switch (direction) {
-            case 0: // S
-                return 1;
-            case 1: // W
-                return 2;
-            case 2: // N
-                return 0;
-            case 3: // E
-                return 3;
-            default:
-                return 0;
-        }
-    }
-
-    /**
      * Check is grave - pet grave
      *
      * @param graveType Grave type
@@ -355,7 +337,7 @@ public class GraveStoneHelper {
         Block botBlock = world.getBlockState(pos).getBlock();
 
         if (botBlock.equals(Blocks.grass) || botBlock.equals(Blocks.mycelium)) {
-            world.setBlockState(pos, new BlockState(Blocks.dirt).getBaseState());
+            world.setBlockState(pos, Blocks.dirt.getBlockState().getBaseState());
         }
     }
 
@@ -393,18 +375,6 @@ public class GraveStoneHelper {
             } else {
                 return false;
             }
-        }
-    }
-
-    public static int getMetadataBasedOnRotation(int rotation) {
-        if (rotation >= 315 || rotation < 45) {
-            return 1;
-        } else if (rotation >= 45 && rotation < 135) {
-            return 2;
-        } else if (rotation >= 135 && rotation < 225) {
-            return 0;
-        } else {
-            return 3;
         }
     }
 
@@ -643,6 +613,7 @@ public class GraveStoneHelper {
         }
     }
 
+    //TODO
     public static void addSwordToSwordsList(Item sword) {
         swordsList.add(sword);
     }

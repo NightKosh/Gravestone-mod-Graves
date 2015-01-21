@@ -11,6 +11,9 @@ import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -41,6 +44,8 @@ import java.util.Random;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class BlockGSGraveStone extends BlockContainer {
+
+    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
     public static final byte[] TAB_PLAYER_GRAVES = {
             // vertical plates
@@ -143,7 +148,6 @@ public class BlockGSGraveStone extends BlockContainer {
         this.setResistance(5F);
         this.setCreativeTab(GSTabs.gravesTab);
         this.setTickRandomly(GraveStoneConfig.removeEmptyGraves);
-//        this.setBlockTextureName("stone");
     }
 
     /**
@@ -152,14 +156,9 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase player, ItemStack itemStack) {
         GraveStoneHelper.replaceGround(world, pos.down());
-        int direction = MathHelper.floor_float(player.rotationYaw);
 
-        if (direction < 0) {
-            direction = 360 + direction;
-        }
-
-        int metadata = GraveStoneHelper.getMetadataBasedOnRotation(direction);
-        // TODO world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
+        EnumFacing enumfacing = EnumFacing.getHorizontal(MathHelper.floor_double((double) (player.rotationYaw * 4 / 360F) + 0.5D) & 3).getOpposite();
+        state = state.withProperty(FACING, enumfacing);
         world.setBlockState(pos, state, 2);
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
 
@@ -215,7 +214,7 @@ public class BlockGSGraveStone extends BlockContainer {
 
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, BlockPos pos) {
-        int meta = 0;//TODO access.getBlockMetadata(x, y, z);
+        EnumFacing facing = (EnumFacing) access.getBlockState(pos).getValue(FACING);
         EnumGraves graveType;
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) access.getTileEntity(pos);
 
@@ -239,17 +238,17 @@ public class BlockGSGraveStone extends BlockContainer {
             case OBSIDIAN_VERTICAL_PLATE:
             case QUARTZ_VERTICAL_PLATE:
             case ICE_VERTICAL_PLATE:
-                switch (meta) {
-                    case 0:
+                switch (facing) {
+                    case SOUTH:
                         this.setBlockBounds(0.125F, 0, 0.0625F, 0.875F, 0.9375F, 0.1875F);
                         break;
-                    case 1:
+                    case NORTH:
                         this.setBlockBounds(0.125F, 0, 0.8125F, 0.875F, 0.9375F, 0.9375F);
                         break;
-                    case 2:
+                    case EAST:
                         this.setBlockBounds(0.0625F, 0, 0.125F, 0.1875F, 0.9375F, 0.875F);
                         break;
-                    case 3:
+                    case WEST:
                         this.setBlockBounds(0.8125F, 0, 0.125F, 0.9375F, 0.9375F, 0.875F);
                         break;
                 }
@@ -267,17 +266,17 @@ public class BlockGSGraveStone extends BlockContainer {
             case OBSIDIAN_CROSS:
             case QUARTZ_CROSS:
             case ICE_CROSS:
-                switch (meta) {
-                    case 0:
+                switch (facing) {
+                    case SOUTH:
                         this.setBlockBounds(0.125F, 0, 0.0625F, 0.875F, 1, 0.1875F);
                         break;
-                    case 1:
+                    case NORTH:
                         this.setBlockBounds(0.125F, 0, 0.8125F, 0.875F, 1, 0.9375F);
                         break;
-                    case 2:
+                    case EAST:
                         this.setBlockBounds(0.0625F, 0, 0.125F, 0.1875F, 1, 0.875F);
                         break;
-                    case 3:
+                    case WEST:
                         this.setBlockBounds(0.8125F, 0, 0.125F, 0.9375F, 1, 0.875F);
                         break;
                 }
@@ -295,17 +294,17 @@ public class BlockGSGraveStone extends BlockContainer {
             case OBSIDIAN_HORISONTAL_PLATE:
             case QUARTZ_HORISONTAL_PLATE:
             case ICE_HORISONTAL_PLATE:
-                switch (meta) {
-                    case 0:
+                switch (facing) {
+                    case SOUTH:
                         this.setBlockBounds(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
                         break;
-                    case 1:
+                    case NORTH:
                         this.setBlockBounds(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
                         break;
-                    case 2:
+                    case EAST:
                         this.setBlockBounds(0.0625F, 0, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
                         break;
-                    case 3:
+                    case WEST:
                         this.setBlockBounds(0.0625F, 0, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
                         break;
                 }
@@ -323,17 +322,17 @@ public class BlockGSGraveStone extends BlockContainer {
             case OBSIDIAN_DOG_STATUE:
             case QUARTZ_DOG_STATUE:
             case ICE_DOG_STATUE:
-                switch (meta) {
-                    case 0:
+                switch (facing) {
+                    case SOUTH:
                         this.setBlockBounds(0.35F, 0, 0.3F, 0.6F, 0.5F, 0.9F);
                         break;
-                    case 1:
+                    case NORTH:
                         this.setBlockBounds(0.35F, 0, 0.7F, 0.6F, 0.5F, 0.1F);
                         break;
-                    case 2:
+                    case EAST:
                         this.setBlockBounds(0.3F, 0, 0.35F, 0.9F, 0.5F, 0.6F);
                         break;
-                    case 3:
+                    case WEST:
                         this.setBlockBounds(0.7F, 0, 0.35F, 0.1F, 0.5F, 0.6F);
                         break;
                 }
@@ -351,29 +350,29 @@ public class BlockGSGraveStone extends BlockContainer {
             case OBSIDIAN_CAT_STATUE:
             case QUARTZ_CAT_STATUE:
             case ICE_CAT_STATUE:
-                switch (meta) {
-                    case 0:
+                switch (facing) {
+                    case SOUTH:
                         this.setBlockBounds(0.43F, 0, 0.3F, 0.57F, 0.5F, 0.75F);
                         break;
-                    case 1:
+                    case NORTH:
                         this.setBlockBounds(0.43F, 0, 0.7F, 0.57F, 0.5F, 0.25F);
                         break;
-                    case 2:
+                    case EAST:
                         this.setBlockBounds(0.3F, 0, 0.43F, 0.75F, 0.5F, 0.57F);
                         break;
-                    case 3:
+                    case WEST:
                         this.setBlockBounds(0.7F, 0, 0.43F, 0.25F, 0.5F, 0.57F);
                         break;
                 }
                 break;
             case SWORD:
-                switch (meta) {
-                    case 0:
-                    case 1:
+                switch (facing) {
+                    case SOUTH:
+                    case NORTH:
                         this.setBlockBounds(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
                         break;
-                    case 2:
-                    case 3:
+                    case EAST:
+                    case WEST:
                         this.setBlockBounds(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
                         break;
                 }
@@ -391,18 +390,17 @@ public class BlockGSGraveStone extends BlockContainer {
             case OBSIDIAN_HORSE_STATUE:
             case QUARTZ_HORSE_STATUE:
             case ICE_HORSE_STATUE:
-                switch (meta) {
-                    case 0:
-                    case 1:
+                switch (facing) {
+                    case SOUTH:
+                    case NORTH:
                         this.setBlockBounds(0.375F, 0, 0.275F, 0.625F, 0.85F, 0.725F);
                         break;
-                    case 2:
-                    case 3:
+                    case EAST:
+                    case WEST:
                         this.setBlockBounds(0.275F, 0, 0.375F, 0.725F, 0.85F, 0.625F);
                         break;
                 }
                 break;
-
         }
     }
 
@@ -832,6 +830,27 @@ public class BlockGSGraveStone extends BlockContainer {
                 }
             }
         }
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        EnumFacing enumfacing = EnumFacing.getFront(meta);
+
+        if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
+            enumfacing = EnumFacing.NORTH;
+        }
+
+        return this.getDefaultState().withProperty(FACING, enumfacing);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return ((EnumFacing) state.getValue(FACING)).getIndex();
+    }
+
+    @Override
+    protected BlockState createBlockState() {
+        return new BlockState(this, new IProperty[]{FACING});
     }
 
     public enum EnumGraveType {

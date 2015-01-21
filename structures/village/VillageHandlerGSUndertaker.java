@@ -27,6 +27,7 @@ public class VillageHandlerGSUndertaker implements VillagerRegistry.IVillageCrea
 
     public static final int UNDERTAKER_ID = 385;
 
+//TODO
 //    @Override
 //    public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random) {
 //        // chisel

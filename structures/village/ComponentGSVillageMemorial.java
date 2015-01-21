@@ -3,7 +3,7 @@ package gravestone.structures.village;
 import gravestone.block.BlockGSMemorial;
 import gravestone.core.GSBlock;
 import gravestone.tileentity.TileEntityGSMemorial;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -57,49 +57,48 @@ public class ComponentGSVillageMemorial extends StructureVillagePieces.Village {
             this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.maxY + HEIGHT - 2, 0);
         }
 
-        Block ground;
+        IBlockState groundState;
         int biomeId = world.getBiomeGenForCoords(new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0))).biomeID;
         if (biomeId == BiomeGenBase.desert.biomeID || biomeId == BiomeGenBase.desertHills.biomeID) {
-            ground = Blocks.sand;
+            groundState = Blocks.sand.getDefaultState();
         } else {
-            ground = Blocks.grass;
+            groundState = Blocks.grass.getDefaultState();
         }
 
-        //TODO
-//        this.fillWithBlocks(world, structureBoundingBox, 0, -5, 0, 5, 0, 5, ground, ground, false);
-//        placeMemorial(world, random, 2, 1, 2);
-//
-//        for (int x = 0; x < 5; x++) {
-//            for (int z = 0; z < 5; z++) {
-//                this.clearCurrentPositionBlocksUpwards(world, x, HEIGHT, z, structureBoundingBox);
-//                this.func_151554_b(world, ground, 0, x, -1, z, structureBoundingBox);
-//            }
-//        }
+        this.func_175804_a(world, structureBoundingBox, 0, -5, 0, 5, 0, 5, groundState, groundState, false);
+        placeMemorial(world, random, 2, 1, 2);
+
+        for (int x = 0; x < 5; x++) {
+            for (int z = 0; z < 5; z++) {
+                this.clearCurrentPositionBlocksUpwards(world, x, HEIGHT, z, structureBoundingBox);
+                this.func_175808_b(world, groundState, x, -1, z, structureBoundingBox);
+            }
+        }
 
         return true;
     }
 
     protected void placeMemorial(World world, Random random, int x, int y, int z) {
+        byte memorialType;
+        boolean isTortureMemorial = random.nextInt(4) == 0;
+        BlockPos pos = new BlockPos(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
+        if (isTortureMemorial) {
+            memorialType = (byte) BlockGSMemorial.TORTURE_MEMORIALS[random.nextInt(BlockGSMemorial.TORTURE_MEMORIALS.length)].ordinal();
+        } else {
+            memorialType = BlockGSMemorial.getMemorialType(world, pos, random, 0);
+        }
 
-        //TODO
-//        int memorialMeta = BlockGSMemorial.getMetaDirection(this.coordBaseMode);
-//        byte memorialType;
-//        boolean isTortureMemorial = random.nextInt(4) == 0;
-//        if (isTortureMemorial) {
-//            memorialType = (byte) BlockGSMemorial.TORTURE_MEMORIALS[random.nextInt(BlockGSMemorial.TORTURE_MEMORIALS.length)].ordinal();
-//        } else {
-//            memorialType = BlockGSMemorial.getMemorialType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, 0);
-//        }
-//        this.placeBlockAtCurrentPosition(world, GSBlock.memorial, memorialMeta, x, y, z, boundingBox);
-//        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
-//
-//        if (tileEntity != null) {
-//            tileEntity.setGraveType(memorialType);
-//            if (isTortureMemorial) {
-//                tileEntity.setRandomMob(random);
-//            } else {
-//                tileEntity.setMemorialContent(random);
-//            }
-//        }
+        IBlockState memorialState = GSBlock.memorial.getDefaultState().withProperty(BlockGSMemorial.FACING, this.coordBaseMode);
+        this.func_175811_a(world, memorialState, x, y, z, boundingBox);
+
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
+        if (tileEntity != null) {
+            tileEntity.setGraveType(memorialType);
+            if (isTortureMemorial) {
+                tileEntity.setRandomMob(random);
+            } else {
+                tileEntity.setMemorialContent(random);
+            }
+        }
     }
 }

@@ -12,6 +12,9 @@ import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
@@ -41,6 +44,8 @@ import java.util.*;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class BlockGSMemorial extends BlockContainer {
+
+    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
     public static final byte[] TAB_MEMORIALS = {
             (byte) EnumMemorials.WOODEN_CROSS.ordinal(),
@@ -279,25 +284,6 @@ public class BlockGSMemorial extends BlockContainer {
         this.setHardness(1);
         this.setResistance(5F);
         this.setCreativeTab(GSTabs.memorialsTab);
-//        this.setBlockTextureName("stone");
-    }
-
-    /*
-     * Return memorial metadata by direction
-     */
-    public static int getMetaDirection(int direction) {
-        switch (direction) {
-            case 0: // S
-                return 1;
-            case 1: // W
-                return 2;
-            case 2: // N
-                return 0;
-            case 3: // E
-                return 3;
-            default:
-                return 0;
-        }
     }
 
     /**
@@ -557,16 +543,10 @@ public class BlockGSMemorial extends BlockContainer {
 
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase player, ItemStack itemStack) {
-        int direction = MathHelper.floor_float(player.rotationYaw);
-
-        if (direction < 0) {
-            direction = 360 + direction;
-        }
-
-        //TODO EnumFacing
-        int metadata = getMetadataBasedOnRotation(direction);
-        // TODO world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
+        EnumFacing enumfacing = EnumFacing.getHorizontal(MathHelper.floor_double((double) (player.rotationYaw * 4 / 360F) + 0.5D) & 3).getOpposite();
+        state = state.withProperty(FACING, enumfacing);
         world.setBlockState(pos, state, 2);
+
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
 
         if (tileEntity != null) {
@@ -598,22 +578,9 @@ public class BlockGSMemorial extends BlockContainer {
         }
     }
 
-    private int getMetadataBasedOnRotation(int rotation) {
-        if (rotation >= 315 || rotation < 45) {
-            return 1;
-        } else if (rotation >= 45 && rotation < 135) {
-            return 2;
-        } else if (rotation >= 135 && rotation < 225) {
-            return 0;
-        } else {
-            return 3;
-        }
-    }
-
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, BlockPos pos) {
-        //TODO
-        int meta = 0;//access.getBlockMetadata(x, y, z);
+        EnumFacing facing = (EnumFacing) access.getBlockState(pos).getValue(FACING);
         EnumMemorials memorialType;
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) access.getTileEntity(pos);
 
@@ -743,13 +710,13 @@ public class BlockGSMemorial extends BlockContainer {
                 this.setBlockBounds(0, 0, 0, 1, 2.5F, 1);
                 break;
             case STOCKS:
-                switch (meta) {
-                    case 0:
-                    case 1:
+                switch (facing) {
+                    case SOUTH:
+                    case NORTH:
                         this.setBlockBounds(-0.5F, 0, 0, 1.5F, 2, 1);
                         break;
-                    case 2:
-                    case 3:
+                    case EAST:
+                    case WEST:
                         this.setBlockBounds(0, 0, -0.5F, 1, 2, 1.5F);
                         break;
                 }
@@ -1063,5 +1030,26 @@ public class BlockGSMemorial extends BlockContainer {
                 world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, xPos, yPos, zPos, 0, 0, 0);
             }
         }
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        EnumFacing enumfacing = EnumFacing.getFront(meta);
+
+        if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
+            enumfacing = EnumFacing.NORTH;
+        }
+
+        return this.getDefaultState().withProperty(FACING, enumfacing);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return ((EnumFacing) state.getValue(FACING)).getIndex();
+    }
+
+    @Override
+    protected BlockState createBlockState() {
+        return new BlockState(this, new IProperty[]{FACING});
     }
 }

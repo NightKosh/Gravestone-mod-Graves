@@ -5,12 +5,12 @@ import gravestone.block.enums.EnumGraves;
 import gravestone.models.block.ModelGraveStone;
 import gravestone.models.block.graves.*;
 import gravestone.tileentity.TileEntityGSGraveStone;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
@@ -136,10 +136,10 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) te;
         EnumGraves graveType = tileEntity.getGraveType();
         int meta = 0;
-
         if (tileEntity.getWorld() != null) {
             meta = tileEntity.getBlockMetadata();
         }
+        EnumFacing facing = EnumFacing.values()[meta];
 
         if (graveType != EnumGraves.SWORD) {
             bindTextureByName(graveType.getTexture());
@@ -152,20 +152,20 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
             GL11.glScalef(1.5F, -1.5F, -1.5F);
         } else {
             GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-            GL11.glScalef(1.0F, -1F, -1F);
+            GL11.glScalef(1, -1, -1);
         }
 
-        switch (getGraveDirection(meta)) {
-            case 0:
+        switch (facing) {
+            case SOUTH:
                 GL11.glRotatef(0, 0, 1, 0);
                 break;
-            case 1:
+            case WEST:
                 GL11.glRotatef(90, 0, 1, 0);
                 break;
-            case 2:
+            case NORTH:
                 GL11.glRotatef(180, 0, 1, 0);
                 break;
-            case 3:
+            case EAST:
                 GL11.glRotatef(270, 0, 1, 0);
                 break;
         }
