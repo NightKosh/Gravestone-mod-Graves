@@ -71,10 +71,9 @@ public class Entrance extends CatacombsBaseComponent {
             this.fillWithAir(world, boundingBox, 1, shiftY - 1, shiftZ + 1, 2, shiftY - 1, shiftZ + 4);
             this.fillWithAir(world, boundingBox, 1, shiftY - 2, shiftZ + 2, 2, shiftY - 2, shiftZ + 5);
 
-            //TODO
-//            // nether walls
-//            this.fillWithBlocks(world, boundingBox, 0, shiftY, shiftZ, 0, shiftY + 4, shiftZ, Blocks.nether_brick, Blocks.nether_brick, false);
-//            this.fillWithBlocks(world, boundingBox, 3, shiftY, shiftZ, 3, shiftY + 4, shiftZ, Blocks.nether_brick, Blocks.nether_brick, false);
+            // nether walls
+            this.fillWithBlocks(world, boundingBox, 0, shiftY, shiftZ, 0, shiftY + 4, shiftZ, Blocks.nether_brick.getDefaultState(), false);
+            this.fillWithBlocks(world, boundingBox, 3, shiftY, shiftZ, 3, shiftY + 4, shiftZ, Blocks.nether_brick.getDefaultState(), false);
 
             // block walls
             this.fillWithRandomizedBlocks(world, boundingBox, 0, shiftY - 2, shiftZ + 1, 0, shiftY + 3, shiftZ + 2, false, random, getCemeteryCatacombsStones());
@@ -97,30 +96,29 @@ public class Entrance extends CatacombsBaseComponent {
         int zLength = corridorLength * 3;
         this.fillWithAir(world, boundingBox, 1, shiftY - 2, shiftZ, 2, shiftY - 1, shiftZ);
         this.fillWithAir(world, boundingBox, 1, shiftY - 3, shiftZ + 1, 2, shiftY - 1, shiftZ + zLength + 4);
-        //TODO
-//        this.func_175811_a(world, Blocks.nether_brick, 0, 0, shiftY, shiftZ, boundingBox);
-//        this.func_175811_a(world, Blocks.nether_brick, 0, 3, shiftY, shiftZ, boundingBox);
-//
-//        // ceiling
-//        this.fillWithBlocks(world, boundingBox, 0, shiftY, shiftZ + 1, 3, shiftY, shiftZ + zLength + 4, Blocks.nether_brick, Blocks.nether_brick, false);
-//
-//        // trap floor
-//        this.fillWithBlocks(world, boundingBox, 0, shiftY - 4, shiftZ, 3, shiftY - 4, shiftZ + zLength + 4, GSBlock.trap, GSBlock.trap, false);
-//
-//        for (int j = 0; j < corridorLength; j++) {
-//            // nether walls
-//            this.fillWithBlocks(world, boundingBox, 0, shiftY - 3, shiftZ, 0, shiftY - 1, shiftZ, Blocks.nether_brick, Blocks.nether_brick, false);
-//            this.fillWithBlocks(world, boundingBox, 3, shiftY - 3, shiftZ, 3, shiftY - 1, shiftZ, Blocks.nether_brick, Blocks.nether_brick, false);
-//
-//            // block walls
-//            this.fillWithRandomizedBlocks(world, boundingBox, 0, shiftY - 3, shiftZ + 1, 0, shiftY - 1, shiftZ + 2, false, random, getCemeteryCatacombsStones());
-//            this.fillWithRandomizedBlocks(world, boundingBox, 3, shiftY - 3, shiftZ + 1, 3, shiftY - 1, shiftZ + 2, false, random, getCemeteryCatacombsStones());
-//
-//            // web
-//            this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, shiftY - 1, shiftY - 3, shiftZ + 1, shiftY - 1, shiftY - 3, shiftZ + 1, Blocks.web, Blocks.web, false);
-//            this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, shiftY - 2, shiftY - 3, shiftZ + 2, shiftY - 2, shiftY - 3, shiftZ + 2, Blocks.web, Blocks.web, false);
-//            shiftZ += 3;
-//        }
+        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick.getDefaultState(), 0, shiftY, shiftZ, boundingBox);
+        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick.getDefaultState(), 3, shiftY, shiftZ, boundingBox);
+
+        // ceiling
+        this.fillWithBlocks(world, boundingBox, 0, shiftY, shiftZ + 1, 3, shiftY, shiftZ + zLength + 4, Blocks.nether_brick.getDefaultState(), false);
+
+        // trap floor
+        this.fillWithBlocks(world, boundingBox, 0, shiftY - 4, shiftZ, 3, shiftY - 4, shiftZ + zLength + 4, GSBlock.trap.getDefaultState(), false);
+
+        for (int j = 0; j < corridorLength; j++) {
+            // nether walls
+            this.fillWithBlocks(world, boundingBox, 0, shiftY - 3, shiftZ, 0, shiftY - 1, shiftZ, Blocks.nether_brick.getDefaultState(), false);
+            this.fillWithBlocks(world, boundingBox, 3, shiftY - 3, shiftZ, 3, shiftY - 1, shiftZ, Blocks.nether_brick.getDefaultState(), false);
+
+            // block walls
+            this.fillWithRandomizedBlocks(world, boundingBox, 0, shiftY - 3, shiftZ + 1, 0, shiftY - 1, shiftZ + 2, false, random, getCemeteryCatacombsStones());
+            this.fillWithRandomizedBlocks(world, boundingBox, 3, shiftY - 3, shiftZ + 1, 3, shiftY - 1, shiftZ + 2, false, random, getCemeteryCatacombsStones());
+
+            // web
+            this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, shiftY - 1, shiftY - 3, shiftZ + 1, shiftY - 1, shiftY - 3, shiftZ + 1, Blocks.web.getDefaultState(), false);
+            this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, shiftY - 2, shiftY - 3, shiftZ + 2, shiftY - 2, shiftY - 3, shiftZ + 2, Blocks.web.getDefaultState(), false);
+            shiftZ += 3;
+        }
 
         shiftZ += 4;
         this.fillWithRandomizedBlocks(world, boundingBox, 1, shiftY - 3, shiftZ, 2, shiftY - 1, shiftZ, false, random, getCemeteryCatacombsStones());

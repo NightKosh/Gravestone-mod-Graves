@@ -41,11 +41,11 @@ public class BlockGSSpawner extends BlockMobSpawner {
 
     public static final PropertyEnum VARIANT = PropertyEnum.create("variant", EnumSpawner.class);
 
-    public static final List<Byte> MOB_SPAWNERS = new ArrayList<Byte>(Arrays.asList(
-            (byte) EnumSpawner.SKELETON_SPAWNER.ordinal(),
-            (byte) EnumSpawner.ZOMBIE_SPAWNER.ordinal()));
-    public static final List<Byte> BOSS_SPAWNERS = new ArrayList<Byte>(Arrays.asList(
-            (byte) EnumSpawner.WITHER_SPAWNER.ordinal()));
+    public static final List<EnumSpawner> MOB_SPAWNERS = new ArrayList<EnumSpawner>(Arrays.asList(
+            EnumSpawner.SKELETON_SPAWNER,
+            EnumSpawner.ZOMBIE_SPAWNER));
+    public static final List<EnumSpawner> BOSS_SPAWNERS = new ArrayList<EnumSpawner>(Arrays.asList(
+            EnumSpawner.WITHER_SPAWNER));
 
     public BlockGSSpawner() {
         super();
@@ -176,11 +176,11 @@ public class BlockGSSpawner extends BlockMobSpawner {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item item, CreativeTabs tab, List list) {
-        for (byte meta : MOB_SPAWNERS) {
-            list.add(new ItemStack(item, 1, meta));
+        for (EnumSpawner meta : MOB_SPAWNERS) {
+            list.add(new ItemStack(item, 1, meta.ordinal()));
         }
-        for (byte meta : BOSS_SPAWNERS) {
-            list.add(new ItemStack(item, 1, meta));
+        for (EnumSpawner meta : BOSS_SPAWNERS) {
+            list.add(new ItemStack(item, 1, meta.ordinal()));
         }
     }
 

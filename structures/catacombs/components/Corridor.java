@@ -3,6 +3,7 @@ package gravestone.structures.catacombs.components;
 import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.MobSpawnHelper;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
@@ -63,33 +64,31 @@ public class Corridor extends CatacombsBaseComponent {
         // block floor
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 0, 1, 4, 0, 3, false, random, getCemeteryCatacombsStones());
 
-        //TODO
-//        this.randomlyFillWithBlocks(world, boundingBox, random, PILE_OF_BONES_GENERATION_CHANCE, 1, 1, 1, 4, 1, 4, GSBlock.pileOfBones, GSBlock.pileOfBones, false);
-//
-//        // trap floor
-//        this.fillWithBlocks(world, boundingBox, 0, 0, 0, 4, 0, 0, GSBlock.trap, GSBlock.trap, false);
-//
-//        // neter ceiling
-//        this.fillWithBlocks(world, boundingBox, 0, 4, 0, 4, 4, 3, Blocks.nether_brick, Blocks.nether_brick, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, PILE_OF_BONES_GENERATION_CHANCE, 1, 1, 1, 4, 1, 4, GSBlock.pileOfBones.getDefaultState(), GSBlock.pileOfBones.getDefaultState(), false);
+
+        // trap floor
+        this.fillWithBlocks(world, boundingBox, 0, 0, 0, 4, 0, 0, GSBlock.trap.getDefaultState(), GSBlock.trap.getDefaultState(), false);
+
+        // neter ceiling
+        this.fillWithBlocks(world, boundingBox, 0, 4, 0, 4, 4, 3, Blocks.nether_brick.getDefaultState(), false);
 
         // block walls
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 1, 1, 0, 3, 3, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 4, 1, 1, 4, 3, 3, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 0, 4, 4, 4, 4, false, random, getCemeteryCatacombsStones());
 
-        //TODO
-//        // nether walls
-//        this.fillWithBlocks(world, boundingBox, 0, 1, 0, 0, 3, 0, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 4, 1, 0, 4, 3, 0, Blocks.nether_brick, Blocks.nether_brick, false);
-//
-//        // spawn bats
-//        MobSpawnHelper.spawnBats(world, random, boundingBox);
-//
-//        // web
-//        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 1, 3, 2, 1, 3, 2, Blocks.web, Blocks.web, false);
-//        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 1, 2, 1, 1, 2, 1, Blocks.web, Blocks.web, false);
-//        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 2, 3, 3, 2, 3, Blocks.web, Blocks.web, false);
-//        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 1, 0, 3, 1, 0, Blocks.web, Blocks.web, false);
+        // nether walls
+        this.fillWithBlocks(world, boundingBox, 0, 1, 0, 0, 3, 0, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 4, 1, 0, 4, 3, 0, Blocks.nether_brick.getDefaultState(), false);
+
+        // spawn bats
+        MobSpawnHelper.spawnBats(world, random, boundingBox);
+
+        // web
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 1, 3, 2, 1, 3, 2, Blocks.web.getDefaultState(), false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 1, 2, 1, 1, 2, 1, Blocks.web.getDefaultState(), false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 2, 3, 3, 2, 3, Blocks.web.getDefaultState(), false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 1, 0, 3, 1, 0, Blocks.web.getDefaultState(), false);
 
         return true;
     }

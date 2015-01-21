@@ -1,12 +1,18 @@
 package gravestone.structures.catacombs.components;
 
+import gravestone.block.BlockGSGraveStone;
 import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.block.GraveStoneHelper;
+import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.GraveGenerationHelper;
 import gravestone.structures.MobSpawnHelper;
+import net.minecraft.block.BlockSlab;
+import net.minecraft.block.BlockStoneSlab;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -43,12 +49,11 @@ public class Bridge extends CatacombsBaseComponent {
         this.fillWithAir(world, boundingBox, 1, 9, 1, 2, 10, 6);
         this.fillWithAir(world, boundingBox, 10, 9, 1, 11, 10, 6);
         // neter floor and ceiling
-        //TODO
-//        this.fillWithBlocks(world, boundingBox, 2, 0, 0, 10, 0, 7, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 2, 13, 0, 10, 13, 7, Blocks.nether_brick, Blocks.nether_brick, false);
-//        // nether walls
-//        this.fillWithBlocks(world, boundingBox, 3, 1, 0, 9, 12, 0, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 3, 1, 7, 9, 12, 7, Blocks.nether_brick, Blocks.nether_brick, false);
+        this.fillWithBlocks(world, boundingBox, 2, 0, 0, 10, 0, 7, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 2, 13, 0, 10, 13, 7, Blocks.nether_brick.getDefaultState(), false);
+        // nether walls
+        this.fillWithBlocks(world, boundingBox, 3, 1, 0, 9, 12, 0, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 3, 1, 7, 9, 12, 7, Blocks.nether_brick.getDefaultState(), false);
         // block walls
         this.fillWithRandomizedBlocks(world, boundingBox, 2, 1, 0, 2, 8, 7, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 2, 11, 0, 2, 12, 7, false, random, getCemeteryCatacombsStones());
@@ -71,21 +76,26 @@ public class Bridge extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 10, 9, 7, 11, 10, 7, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 10, 9, 7, 11, 10, 7, false, random, getCemeteryCatacombsStones());
         // graves
-        //TODO
-//        byte graveType = GraveStoneHelper.getGraveType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, EnumGraveType.PLAYER_GRAVES);
-//        Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
-//        int metaLeft = GraveStoneHelper.getMetaDirection(getLeftItemDirection(coordBaseMode));
-//        int metaRight = GraveStoneHelper.getMetaDirection(getRightItemDirection(coordBaseMode));
-//        GraveGenerationHelper.fillGraves(this, world, random, 1, 9, 1, 1, 9, 6, metaLeft, graveType, sword, true);
-//        GraveGenerationHelper.fillGraves(this, world, random, 11, 9, 1, 11, 9, 6, metaRight, graveType, sword, true);
-//        // lava
-//        this.fillWithBlocks(world, boundingBox, 3, 1, 1, 9, 2, 6, Blocks.lava, Blocks.lava, false);
-//        // bridge
-//        this.fillWithMetadataBlocks(world, boundingBox, 6, 8, 1, 6, 8, 6, Blocks.stone_slab, 14, Blocks.stone_slab, 14, false);
-//
-//        if (random.nextInt(10) < 4) {
-//            this.func_175811_a(world, Blocks.air, 0, 6, 8, 5, boundingBox);
-//        }
+        byte graveType = GraveStoneHelper.getGraveType(world, new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0)), random, EnumGraveType.PLAYER_GRAVES);
+        Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
+
+        IBlockState graveState = GSBlock.graveStone.getDefaultState();
+        IBlockState leftGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.rotateY());
+        IBlockState rightGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.rotateYCCW());
+
+        GraveGenerationHelper.fillGraves(this, world, random, 1, 9, 1, 1, 9, 6, leftGraveState, graveType, sword, true);
+        GraveGenerationHelper.fillGraves(this, world, random, 11, 9, 1, 11, 9, 6, rightGraveState, graveType, sword, true);
+        // lava
+        this.fillWithBlocks(world, boundingBox, 3, 1, 1, 9, 2, 6, Blocks.lava.getDefaultState(), Blocks.lava.getDefaultState(), false);
+        // bridge
+        IBlockState slabState = Blocks.stone_slab.getDefaultState().withProperty(BlockStoneSlab.VARIANT, BlockStoneSlab.EnumType.NETHERBRICK)
+                .withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP);
+
+        this.fillWithBlocks(world, boundingBox, 6, 8, 1, 6, 8, 6, slabState, slabState, false);
+
+        if (random.nextInt(10) < 4) {
+            this.placeBlockAtCurrentPosition(world, Blocks.air.getDefaultState(), 6, 8, 5, boundingBox);
+        }
 
         // block exit wall
         this.fillWithRandomizedBlocks(world, boundingBox, 5, 9, 7, 7, 11, 7, false, random, getCemeteryCatacombsStones());

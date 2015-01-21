@@ -49,7 +49,6 @@ public class BlockGSHauntedChest extends BlockContainer {
         this.setUnlocalizedName("HauntedChest");
         this.setHardness(2.5F);
         this.setCreativeTab(GSTabs.otherItemsTab);
-//        this.setBlockTextureName("planks_oak");
         this.setHarvestLevel("axe", 0);
     }
 
@@ -64,15 +63,6 @@ public class BlockGSHauntedChest extends BlockContainer {
     }
 
     /**
-     * If this block doesn't render as an ordinary block it will return False
-     * (examples: signs, buttons, stairs, etc)
-     */
-//    @Override
-//    public boolean renderAsNormalBlock() {
-//        return false;
-//    }
-
-    /**
      * The type of render function that is called for this block
      */
     @Override
@@ -85,7 +75,7 @@ public class BlockGSHauntedChest extends BlockContainer {
      */
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, BlockPos pos) {
-        this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
+        this.setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 0.875F, 0.9375F);
     }
 
     /**

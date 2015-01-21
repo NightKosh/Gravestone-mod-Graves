@@ -1,9 +1,9 @@
 package gravestone.structures;
 
 import gravestone.block.GraveStoneHelper;
-import gravestone.core.GSBlock;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,22 +23,8 @@ public class GraveGenerationHelper {
     private GraveGenerationHelper() {
     }
 
-    /**
-     * Place component
-     *
-     * @param component Component instance
-     * @param world     World object
-     * @param random
-     * @param x         X coord
-     * @param y         Y coord
-     * @param z         Z coord
-     * @param graveMeta Grave metadata
-     * @param graveType Grave type
-     */
-    // TODO
-    public static void placeGrave(ComponentGraveStone component, World world, Random random, int x, int y, int z, int graveMeta, byte graveType, Item sword, boolean allLoot) {
-        //TODO
-//        component.func_175811_a(world, GSBlock.graveStone, graveMeta, x, y, z, component.getBoundingBox());
+    public static void placeGrave(ComponentGraveStone component, World world, Random random, int x, int y, int z, IBlockState graveState, byte graveType, Item sword, boolean allLoot) {
+        component.placeBlockAtCurrentPosition(world, graveState, x, y, z, component.getBoundingBox());
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(new BlockPos(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z)));
 
         if (tileEntity != null) {
@@ -51,26 +37,11 @@ public class GraveGenerationHelper {
         }
     }
 
-    /**
-     * Fill squer with graves
-     *
-     * @param component Component instance
-     * @param world     World object
-     * @param random
-     * @param xStart    Start X coord
-     * @param yStart    Start Y coord
-     * @param zStart    Start Z coord
-     * @param xEnd      End X coord
-     * @param yEnd      End Y coord
-     * @param zEnd      End Z coord
-     * @param graveMeta Grave metadata
-     * @param graveType Grave type
-     */
-    public static void fillGraves(ComponentGraveStone component, World world, Random random, int xStart, int yStart, int zStart, int xEnd, int yEnd, int zEnd, int graveMeta, byte graveType, Item sword, boolean allLoot) {
+    public static void fillGraves(ComponentGraveStone component, World world, Random random, int xStart, int yStart, int zStart, int xEnd, int yEnd, int zEnd, IBlockState graveState, byte graveType, Item sword, boolean allLoot) {
         for (int y = yStart; y <= yEnd; ++y) {
             for (int x = xStart; x <= xEnd; ++x) {
                 for (int z = zStart; z <= zEnd; ++z) {
-                    placeGrave(component, world, random, x, y, z, graveMeta, graveType, sword, allLoot);
+                    placeGrave(component, world, random, x, y, z, graveState, graveType, sword, allLoot);
                 }
             }
         }

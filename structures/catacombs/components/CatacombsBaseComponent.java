@@ -4,7 +4,9 @@ import gravestone.core.GSStructures;
 import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.catacombs.CatacombsLevel;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
@@ -95,46 +97,48 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      *
      * @param direction Component direction
      */
-    public static int getLeftItemDirection(int direction) {
-        if (direction == 0 || direction == 1) {
-            direction += 1;
-
-            if (direction > 3) {
-                direction = 0;
-            }
-        } else {
-            direction -= 1;
-
-            if (direction < 0) {
-                direction = 3;
-            }
-        }
-
-        return direction;
-    }
+    // TODO - remove
+//    public static int getLeftItemDirection(int direction) {
+//        if (direction == 0 || direction == 1) {
+//            direction += 1;
+//
+//            if (direction > 3) {
+//                direction = 0;
+//            }
+//        } else {
+//            direction -= 1;
+//
+//            if (direction < 0) {
+//                direction = 3;
+//            }
+//        }
+//
+//        return direction;
+//    }
 
     /**
      * Return right direction for items
      *
      * @param direction Component direction
      */
-    public static int getRightItemDirection(int direction) {
-        if (direction == 0 || direction == 1) {
-            direction -= 1;
-
-            if (direction < 0) {
-                direction = 3;
-            }
-        } else {
-            direction += 1;
-
-            if (direction > 3) {
-                direction = 0;
-            }
-        }
-
-        return direction;
-    }
+    // TODO - remove
+//    public static int getRightItemDirection(int direction) {
+//        if (direction == 0 || direction == 1) {
+//            direction -= 1;
+//
+//            if (direction < 0) {
+//                direction = 3;
+//            }
+//        } else {
+//            direction += 1;
+//
+//            if (direction > 3) {
+//                direction = 0;
+//            }
+//        }
+//
+//        return direction;
+//    }
 
     /**
      * Return valuable block
@@ -216,7 +220,7 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      * @param boundingBox Component bounding box
      */
     public boolean canBePlacedHere(StructureBoundingBox boundingBox) {
-        if (true) { //TODO (coordBaseMode == 0 || coordBaseMode == 2) {
+        if (coordBaseMode == EnumFacing.SOUTH || coordBaseMode == EnumFacing.EAST) {
             return this.boundingBox.maxX > boundingBox.minX && this.boundingBox.minX < boundingBox.maxX
                     && this.boundingBox.maxZ - 1 > boundingBox.minZ && this.boundingBox.minZ + 1 < boundingBox.maxZ;
         } else {
@@ -238,13 +242,14 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      */
     //TODO
 //    @Override
-//    protected void func_151554_b(World world, Block block, int metadata, int xCoord, int yCoord, int zCoord, StructureBoundingBox boundingBox) {
+//    protected void func_151554_b(World world, IBlockState blockState, int xCoord, int yCoord, int zCoord, StructureBoundingBox boundingBox) {
 //        int x = this.getXWithOffset(xCoord, zCoord);
 //        int y = this.getYWithOffset(yCoord);
 //        int z = this.getZWithOffset(xCoord, zCoord);
 //
-//        while ((world.isAirBlock(x, y, z) || world.getBlock(x, y, z).getMaterial().isLiquid() || world.getBlock(x, y, z).getMaterial().isReplaceable()) && y > 1) {
-//            world.setBlock(x, y, z, block, metadata, 2);
+//        BlockPos pos = new BlockPos(x, y, z);
+//        while ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().getMaterial().isLiquid() || world.getBlockState(pos).getBlock().getMaterial().isReplaceable()) && y > 1) {
+//            world.setBlockState(pos, blockState, 2);
 //            --y;
 //        }
 //    }

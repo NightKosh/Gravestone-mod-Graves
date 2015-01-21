@@ -178,7 +178,6 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
         return true;
     }
 
-    //TODO
     @Override
     protected void func_175811_a(World world, IBlockState blockState, int x, int y, int z, StructureBoundingBox boundingBox) {
         int xPos = this.getXWithOffset(x, z);
@@ -257,7 +256,7 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
         int zCoord = this.getZWithOffset(x, z);
 
         if (checkPainting(world, xCoord, yCoord, zCoord)) {
-            //TODO
+            //TODO - position
             EntityPainting painting = new EntityPainting(world, new BlockPos(xCoord, yCoord, zCoord), getPaintingDirection(direction));
             painting.art = paintings[world.rand.nextInt(paintings.length)];
             world.spawnEntityInWorld(painting);

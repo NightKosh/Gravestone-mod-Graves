@@ -1,10 +1,11 @@
 package gravestone.structures;
 
-import java.util.Random;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityBat;
+import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
+
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -20,23 +21,22 @@ public class MobSpawnHelper {
     /**
      * Spawn bats
      *
-     * @param world World object
+     * @param world       World object
      * @param random
      * @param boundingBox Bounding box
      */
     public static void spawnBats(World world, Random random, StructureBoundingBox boundingBox) {
         EntityBat bat;
-        EntityLiving livingEntity;
         int batsCount = 3 + random.nextInt(8);
 
         for (byte i = 0; i < batsCount; i++) {
             bat = new EntityBat(world);
-            //TODO
-//            bat.setLocationAndAngles(boundingBox.getCenterX() - 1.5 + random.nextInt(5), boundingBox.getCenterY(),
-//                    boundingBox.getCenterZ() - 1.5 + random.nextInt(5), 0.0F, 0.0F);
-            livingEntity = (EntityLiving) bat;
+            // getCenterX - func_180717_f
+            Vec3i center = boundingBox.func_180717_f();
+            bat.setLocationAndAngles(center.getX() - 1.5 + random.nextInt(5), center.getY(),
+                    center.getZ() - 1.5 + random.nextInt(5), 0, 0);
 
-            if (livingEntity.getCanSpawnHere()) {
+            if (bat.getCanSpawnHere()) {
                 world.spawnEntityInWorld(bat);
             }
         }

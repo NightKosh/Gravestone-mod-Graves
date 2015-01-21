@@ -1,19 +1,26 @@
 package gravestone.structures;
 
+import gravestone.block.BlockGSHauntedChest;
 import gravestone.block.BlockGSSpawner;
 import gravestone.block.enums.EnumHauntedChest;
 import gravestone.core.GSBlock;
 import gravestone.tileentity.TileEntityGSHauntedChest;
+import net.minecraft.block.BlockChest;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityDispenser;
 import net.minecraft.tileentity.TileEntityMobSpawner;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -24,8 +31,9 @@ import java.util.Random;
  */
 public class ObjectsGenerationHelper {
 
+    // TODO add weakness potion
     private static final int[] POTIONS = {32764, 32692};
-    private static final WeightedRandomChestContent[] NETHER_CHEST_CONTENT = new WeightedRandomChestContent[]{
+    private static final List<WeightedRandomChestContent> NETHER_CHEST_CONTENT = new ArrayList<WeightedRandomChestContent>(Arrays.asList(
             new WeightedRandomChestContent(Items.diamond, 0, 1, 3, 5),
             new WeightedRandomChestContent(Items.iron_ingot, 0, 1, 5, 5),
             new WeightedRandomChestContent(Items.gold_ingot, 0, 1, 3, 15),
@@ -36,7 +44,7 @@ public class ObjectsGenerationHelper {
             new WeightedRandomChestContent(Items.saddle, 0, 1, 1, 10),
             new WeightedRandomChestContent(Items.golden_horse_armor, 0, 1, 1, 8),
             new WeightedRandomChestContent(Items.iron_horse_armor, 0, 1, 1, 5),
-            new WeightedRandomChestContent(Items.diamond_horse_armor, 0, 1, 1, 3)};
+            new WeightedRandomChestContent(Items.diamond_horse_armor, 0, 1, 1, 3)));
 
     private ObjectsGenerationHelper() {
     }
@@ -44,72 +52,69 @@ public class ObjectsGenerationHelper {
     /**
      * Generate chest with random loot type or haunted chest
      */
-    public static void generateChest(ComponentGraveStone component, World world, Random random, int xCoord, int yCoord, int zCoord, boolean defaultChest, EnumChestTypes chestType) {
+    public static void generateChest(ComponentGraveStone component, World world, Random random, int xCoord, int yCoord, int zCoord, EnumFacing facing, boolean defaultChest, EnumChestTypes chestType) {
         if (chestType.equals(EnumChestTypes.ALL_CHESTS) && random.nextInt(7) == 0) {
-            generateHauntedChest(component, world, random, xCoord, yCoord, zCoord);
+            generateHauntedChest(component, world, random, xCoord, yCoord, zCoord, facing);
         } else {
-            generateVanillaChest(component, world, random, xCoord, yCoord, zCoord, defaultChest, chestType);
+            generateVanillaChest(component, world, random, xCoord, yCoord, zCoord, facing, defaultChest, chestType);
         }
     }
 
     /**
      * Generate chest with random loot type
      */
-    public static void generateVanillaChest(ComponentGraveStone component, World world, Random random, int xCoord, int yCoord, int zCoord, boolean defaultChest, EnumChestTypes chestType) {
+    public static void generateVanillaChest(ComponentGraveStone component, World world, Random random, int xCoord, int yCoord, int zCoord, EnumFacing facing, boolean defaultChest, EnumChestTypes chestType) {
         int y = component.getYWithOffset(yCoord);
         int x = component.getXWithOffset(xCoord, zCoord);
         int z = component.getZWithOffset(xCoord, zCoord);
 
         ChestGenHooks chest = getChest(random, chestType);
-        WeightedRandomChestContent[] items;
+        List<WeightedRandomChestContent> items;
         int count;
         if (chest == null) { // временный костыль для "аццких" сундуков
             items = NETHER_CHEST_CONTENT;
             count = 2 + random.nextInt(4);
         } else {
-            //TODO
-//            items = chest.getItems(random);
+            items = chest.getItems(random);
             count = chest.getCount(random);
         }
 
         if (defaultChest) {
-            //TODO
-//            component.generateStructureChestContents(world, component.getBoundingBox(), random, xCoord, yCoord, zCoord, items, count);
+            //func_180778_a -> generateStructureChestContents
+            component.func_180778_a(world, component.getBoundingBox(), random, xCoord, yCoord, zCoord, items, count);
         } else {
-            //TODO
-//            generateTrappedChestContents(component, world, random, xCoord, yCoord, zCoord, items, count);
+            generateTrappedChestContents(component, world, random, xCoord, yCoord, zCoord, facing, items, count);
         }
     }
 
-    public static void generateHauntedChest(ComponentGraveStone component, World world, Random random, int xCoord, int yCoord, int zCoord) {
+    public static void generateHauntedChest(ComponentGraveStone component, World world, Random random, int xCoord, int yCoord, int zCoord, EnumFacing facing) {
         int x = component.getXWithOffset(xCoord, zCoord);
         int y = component.getYWithOffset(yCoord);
         int z = component.getZWithOffset(xCoord, zCoord);
 
-        //TODO
-//        world.setBlock(x, y, z, GSBlock.hauntedChest, 0, 2);
-//        TileEntityGSHauntedChest te = (TileEntityGSHauntedChest) world.getTileEntity(x, y, z);
-//
-//        if (te != null) {
-//            te.setChestType(EnumHauntedChest.getById((byte) random.nextInt(EnumHauntedChest.values().length)));
-//        }
+        BlockPos pos = new BlockPos(x, y, z);
+        world.setBlockState(pos, GSBlock.hauntedChest.getDefaultState().withProperty(BlockGSHauntedChest.FACING, facing), 2);
+        TileEntityGSHauntedChest te = (TileEntityGSHauntedChest) world.getTileEntity(pos);
+        if (te != null) {
+            te.setChestType(EnumHauntedChest.getById((byte) random.nextInt(EnumHauntedChest.values().length)));
+        }
     }
 
     /**
      * Generate trapped chests with items.
      */
-    public static void generateTrappedChestContents(ComponentGraveStone component, World world, Random random, int xCoord, int yCoord, int zCoord, WeightedRandomChestContent[] chestContent, int count) {
+    public static void generateTrappedChestContents(ComponentGraveStone component, World world, Random random, int xCoord, int yCoord, int zCoord, EnumFacing facing, List<WeightedRandomChestContent> chestContent, int count) {
         int x = component.getXWithOffset(xCoord, zCoord);
         int y = component.getYWithOffset(yCoord);
         int z = component.getZWithOffset(xCoord, zCoord);
 
-        //TODO
-//        world.setBlock(x, y, z, Blocks.trapped_chest, 0, 2);
-//        TileEntityChest tileentitychest = (TileEntityChest) world.getTileEntity(x, y, z);
-//
-//        if (tileentitychest != null) {
-//            WeightedRandomChestContent.generateChestContents(random, chestContent, tileentitychest, count);
-//        }
+        BlockPos pos = new BlockPos(x, y, z);
+        world.setBlockState(pos, Blocks.trapped_chest.getDefaultState().withProperty(BlockChest.FACING, facing), 2);
+        TileEntityChest tileentitychest = (TileEntityChest) world.getTileEntity(pos);
+
+        if (tileentitychest != null) {
+            WeightedRandomChestContent.generateChestContents(random, chestContent, tileentitychest, count);
+        }
     }
 
     private static ChestGenHooks getChest(Random random, EnumChestTypes chestType) {
@@ -172,8 +177,8 @@ public class ObjectsGenerationHelper {
         int x = component.getXWithOffset(xCoord, zCoord);
         int z = component.getZWithOffset(xCoord, zCoord);
 
-        //TODO
-//        world.setBlock(x, y, z, GSBlock.spawner, BlockGSSpawner.MOB_SPAWNERS.get(random.nextInt(BlockGSSpawner.MOB_SPAWNERS.size())), 2);
+        world.setBlockState(new BlockPos(x, y, z), GSBlock.spawner.getDefaultState().withProperty(BlockGSSpawner.VARIANT,
+                BlockGSSpawner.MOB_SPAWNERS.get(random.nextInt(BlockGSSpawner.MOB_SPAWNERS.size()))), 2);
     }
 
     /**
@@ -191,31 +196,31 @@ public class ObjectsGenerationHelper {
         int x = component.getXWithOffset(xCoord, zCoord);
         int z = component.getZWithOffset(xCoord, zCoord);
 
-        //TODO
-//        world.setBlock(x, y, z, Blocks.mob_spawner);
-//        TileEntityMobSpawner tileEntity = (TileEntityMobSpawner) world.getTileEntity(x, y, z);
-//
-//        if (tileEntity != null) {
-//            tileEntity.getSpawnerBaseLogic().setEntityName(mobNmae);
-//        }
+        BlockPos pos = new BlockPos(x, y, z);
+        world.setBlockState(pos, Blocks.mob_spawner.getDefaultState());
+        TileEntityMobSpawner tileEntity = (TileEntityMobSpawner) world.getTileEntity(pos);
+
+        if (tileEntity != null) {
+            tileEntity.getSpawnerBaseLogic().setEntityName(mobNmae);
+        }
     }
 
     /**
      * Used to generate dispenser contents for structures. ex: Jungle Temples.
      */
-    public static void generateDispenser(World world, ComponentGraveStone component, Random random, int xCoord, int yCoord, int zCoord, int direction) {
+    public static void generateDispenser(World world, ComponentGraveStone component, Random random, int xCoord, int yCoord, int zCoord, EnumFacing direction) {
         int x = component.getXWithOffset(xCoord, zCoord);
         int y = component.getYWithOffset(yCoord);
         int z = component.getZWithOffset(xCoord, zCoord);
 
-        //TODO
-//        world.setBlock(x, y, z, Blocks.dispenser);
-        ObjectsGenerationHelper.setDispenserMeta(world, x, y, z, direction);
-//        TileEntityDispenser dispenser = (TileEntityDispenser) world.getTileEntity(x, y, z);
-//
-//        if (dispenser != null) {
-//            generateDispenserContents(random, dispenser);
-//        }
+        BlockPos pos = new BlockPos(x, y, z);
+        world.setBlockState(pos, Blocks.dispenser.getDefaultState());
+        // TODO
+//        ObjectsGenerationHelper.getDispenserMeta(world, x, y, z, direction);
+        TileEntityDispenser dispenser = (TileEntityDispenser) world.getTileEntity(pos);
+        if (dispenser != null) {
+            generateDispenserContents(random, dispenser);
+        }
     }
 
     /**
@@ -244,7 +249,7 @@ public class ObjectsGenerationHelper {
      * @param z         Z coord
      * @param direction Direction
      */
-    public static void setDispenserMeta(World world, int x, int y, int z, int direction) {
+    public static void getDispenserMeta(World world, int x, int y, int z, int direction) {
         //TODO
 //        switch (direction) {
 //            case 0:

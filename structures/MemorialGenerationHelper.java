@@ -2,6 +2,8 @@ package gravestone.structures;
 
 import gravestone.core.GSBlock;
 import gravestone.tileentity.TileEntityGSMemorial;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -17,26 +19,13 @@ public class MemorialGenerationHelper {
     private MemorialGenerationHelper() {
     }
 
-    /**
-     * Place memorial block
-     *
-     * @param component    Component instance
-     * @param world        World object
-     * @param random
-     * @param x            X coord
-     * @param y            Y coord
-     * @param z            Z coord
-     * @param memorialMeta Memorial metadata
-     * @param memorialType Memorial type
-     */
-    public static void placeMemorial(ComponentGraveStone component, World world, Random random, int x, int y, int z, int memorialMeta, byte memorialType) {
-        //TODO
-//        component.func_175811_a(world, GSBlock.memorial, memorialMeta, x, y, z, component.getBoundingBox());
-//        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z));
+    public static void placeMemorial(ComponentGraveStone component, World world, Random random, int x, int y, int z, IBlockState memorialState, byte memorialType) {
+        component.placeBlockAtCurrentPosition(world, memorialState, x, y, z, component.getBoundingBox());
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(new BlockPos(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z)));
 
-//        if (tileEntity != null) {
-//            tileEntity.setGraveType(memorialType);
-//            tileEntity.setMemorialContent(random);
-//        }
+        if (tileEntity != null) {
+            tileEntity.setGraveType(memorialType);
+            tileEntity.setMemorialContent(random);
+        }
     }
 }

@@ -64,7 +64,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
     }
 
     protected static boolean isBiomeAllowed(World world, int x, int z) {
-        // TODO new BlockPos(x, 0, z)
+        // TODO new BlockPos(x, 0, z) - ?
         LinkedList<BiomeDictionary.Type> biomeTypesList = new LinkedList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(new BlockPos(x, 0, z)))));
         if (!biomeTypesList.contains(BiomeDictionary.Type.WATER) && !biomeTypesList.contains(BiomeDictionary.Type.SWAMP) &&
                 !biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) && !biomeTypesList.contains(BiomeDictionary.Type.MAGICAL) &&

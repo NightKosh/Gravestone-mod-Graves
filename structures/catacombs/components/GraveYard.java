@@ -38,7 +38,7 @@ public class GraveYard extends CatacombsBaseComponent {
                     positionZ = getZWithOffset(x + 1, z + 1);
                     //TODO
 //                    y = world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
-//                    this.func_175811_a(world, Blocks.deadbush, 0, x + 1, y, z + 1, boundingBox);
+//                    this.placeBlockAtCurrentPosition(world, Blocks.deadbush, 0, x + 1, y, z + 1, boundingBox);
                 }
 
                 if (random.nextInt(5) < 2) {

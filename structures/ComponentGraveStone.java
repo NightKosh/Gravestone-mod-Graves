@@ -1,9 +1,7 @@
 package gravestone.structures;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
@@ -48,6 +46,34 @@ public class ComponentGraveStone extends StructureComponent {
     @Override
     public void func_175811_a(World world, IBlockState blockState, int x, int y, int z, StructureBoundingBox boundingBox) {
         super.func_175811_a(world, blockState, x, y, z, boundingBox);
+    }
+    // TODO Temporal fix
+    public void placeBlockAtCurrentPosition(World world, IBlockState blockState, int x, int y, int z, StructureBoundingBox boundingBox) {
+        func_175811_a(world, blockState, x, y, z, boundingBox);
+    }
+
+    @Override
+    protected void func_175804_a(World world, StructureBoundingBox boundingBox, int startX, int startY, int startZ, int endX, int endY, int endZ, IBlockState state1, IBlockState state2, boolean replace) {
+        super.func_175804_a(world, boundingBox, startX, startY, startZ, endX, endY, endZ, state1, state2, replace);
+    }
+    // TODO Temporal fix
+    protected void fillWithBlocks(World world, StructureBoundingBox boundingBox, int startX, int startY, int startZ, int endX, int endY, int endZ, IBlockState state1, IBlockState state2, boolean replace) {
+        func_175804_a(world, boundingBox, startX, startY, startZ, endX, endY, endZ, state1, state2, replace);
+    }
+    protected void fillWithBlocks(World world, StructureBoundingBox boundingBox, int startX, int startY, int startZ, int endX, int endY, int endZ, IBlockState state, boolean replace) {
+        fillWithBlocks(world, boundingBox, startX, startY, startZ, endX, endY, endZ, state, state, replace);
+    }
+
+    @Override
+    protected void func_175805_a(World world, StructureBoundingBox boundingBox, Random random, float chance, int startX, int startY, int startZ, int endX, int endY, int endZ, IBlockState state1, IBlockState state2, boolean replace) {
+        super.func_175805_a(world, boundingBox, random, chance, startX, startY, startZ, endX, endY, endZ, state1, state2, replace);
+    }
+    // TODO Temporal fix
+    protected void randomlyFillWithBlocks(World world, StructureBoundingBox boundingBox, Random random, float chance, int startX, int startY, int startZ, int endX, int endY, int endZ, IBlockState state1, IBlockState state2, boolean replace) {
+        func_175805_a(world, boundingBox, random, chance, startX, startY, startZ, endX, endY, endZ, state1, state2, replace);
+    }
+    protected void randomlyFillWithBlocks(World world, StructureBoundingBox boundingBox, Random random, float chance, int startX, int startY, int startZ, int endX, int endY, int endZ, IBlockState state, boolean replace) {
+        randomlyFillWithBlocks(world, boundingBox, random, chance, startX, startY, startZ, endX, endY, endZ, state, state, replace);
     }
 
     /**

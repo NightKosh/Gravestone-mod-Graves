@@ -1,5 +1,7 @@
 package gravestone.structures.graves;
 
+import gravestone.block.BlockGSGraveStone;
+import gravestone.core.GSBlock;
 import gravestone.core.logger.GSLogger;
 
 import java.util.Random;
@@ -9,6 +11,7 @@ import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.GraveGenerationHelper;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
@@ -38,10 +41,10 @@ public class ComponentGSSingleGrave extends ComponentGraveStone {
         if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
             GSLogger.logInfo("Generate grave at " + positionX + "x" + positionZ);
 
-            //TODO
-//            byte graveType = GraveStoneHelper.getGraveType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, EnumGraveType.ALL_GRAVES);
-//            Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
-//            GraveGenerationHelper.placeGrave(this, world, random, 0, y, 0, GraveStoneHelper.getMetaDirection(coordBaseMode), graveType, sword, true);
+            byte graveType = GraveStoneHelper.getGraveType(world, new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(y), this.getZWithOffset(0, 0)), random, EnumGraveType.ALL_GRAVES);
+            Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
+            GraveGenerationHelper.placeGrave(this, world, random, 0, y, 0,
+                    GSBlock.graveStone.getDefaultState().withProperty(BlockGSGraveStone.FACING, this.coordBaseMode), graveType, sword, true);
         }
 
         return true;
@@ -52,10 +55,9 @@ public class ComponentGSSingleGrave extends ComponentGraveStone {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
         nbttagcompound.setString("id", "GSSingleGrave");
         nbttagcompound.setTag("BB", this.boundingBox.func_151535_h());
-        //TODO
-//        nbttagcompound.setInteger("O", this.coordBaseMode);
-//        nbttagcompound.setInteger("GD", this.componentType);
-//        this.func_143012_a(nbttagcompound);
+        nbttagcompound.setInteger("O", this.coordBaseMode == null ? -1 : this.coordBaseMode.getHorizontalIndex());
+        nbttagcompound.setInteger("GD", this.componentType);
+        this.writeStructureToNBT(nbttagcompound);
         return nbttagcompound;
     }
 }

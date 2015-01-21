@@ -45,24 +45,23 @@ public class GraveHall extends CatacombsBaseComponent {
         // fill exit
         this.fillWithRandomizedBlocks(world, boundingBox, 7, 1, 18, 9, 3, 18, false, random, getCemeteryCatacombsStones());
 
-        //TODO
-//        this.randomlyFillWithBlocks(world, boundingBox, random, PILE_OF_BONES_GENERATION_CHANCE, 3, 1, 3, 13, 1, 15, GSBlock.pileOfBones, GSBlock.pileOfBones, false);
-//
-//        // nether floor
-//        this.fillWithBlocks(world, boundingBox, 1, 0, 1, 1, 0, 17, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 15, 0, 1, 15, 0, 17, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 5, 0, 3, 5, 0, 15, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 11, 0, 3, 11, 0, 15, Blocks.nether_brick, Blocks.nether_brick, false);
-//
-//        // nether floor lines
-//        this.fillWithBlocks(world, boundingBox, 2, 0, 1, 14, 0, 1, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 2, 0, 6, 14, 0, 6, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 2, 0, 12, 14, 0, 12, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 2, 0, 17, 14, 0, 17, Blocks.nether_brick, Blocks.nether_brick, false);
-//
-//        // floor entrance
-//        this.fillWithBlocks(world, boundingBox, 5, 0, 0, 11, 0, 2, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 5, 0, 16, 11, 0, 18, Blocks.nether_brick, Blocks.nether_brick, false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, PILE_OF_BONES_GENERATION_CHANCE, 3, 1, 3, 13, 1, 15, GSBlock.pileOfBones.getDefaultState(), false);
+
+        // nether floor
+        this.fillWithBlocks(world, boundingBox, 1, 0, 1, 1, 0, 17, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 15, 0, 1, 15, 0, 17, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 5, 0, 3, 5, 0, 15, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 11, 0, 3, 11, 0, 15, Blocks.nether_brick.getDefaultState(), false);
+
+        // nether floor lines
+        this.fillWithBlocks(world, boundingBox, 2, 0, 1, 14, 0, 1, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 2, 0, 6, 14, 0, 6, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 2, 0, 12, 14, 0, 12, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 2, 0, 17, 14, 0, 17, Blocks.nether_brick.getDefaultState(), false);
+
+        // floor entrance
+        this.fillWithBlocks(world, boundingBox, 5, 0, 0, 11, 0, 2, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 5, 0, 16, 11, 0, 18, Blocks.nether_brick.getDefaultState(), false);
 
         // block foolr
         this.fillWithRandomizedBlocks(world, boundingBox, 2, 0, 2, 4, 0, 5, false, random, getCemeteryCatacombsStones());
@@ -75,22 +74,21 @@ public class GraveHall extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 6, 0, 13, 10, 0, 15, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 12, 0, 13, 14, 0, 16, false, random, getCemeteryCatacombsStones());
 
-        //TODO
-//        // nether ceiling
-//        this.fillWithBlocks(world, boundingBox, 1, 6, 1, 1, 6, 17, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 15, 6, 1, 15, 6, 17, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 5, 6, 3, 5, 6, 15, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 11, 6, 3, 11, 6, 15, Blocks.nether_brick, Blocks.nether_brick, false);
-//
-//        // nether ceiling lines
-//        this.fillWithBlocks(world, boundingBox, 2, 6, 1, 14, 6, 1, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 2, 6, 6, 14, 6, 6, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 2, 6, 12, 14, 6, 12, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 2, 6, 17, 14, 6, 17, Blocks.nether_brick, Blocks.nether_brick, false);
-//
-//        // ceiling entrance
-//        this.fillWithBlocks(world, boundingBox, 5, 4, 0, 11, 6, 2, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 5, 4, 16, 11, 6, 18, Blocks.nether_brick, Blocks.nether_brick, false);
+        // nether ceiling
+        this.fillWithBlocks(world, boundingBox, 1, 6, 1, 1, 6, 17, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 15, 6, 1, 15, 6, 17, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 5, 6, 3, 5, 6, 15, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 11, 6, 3, 11, 6, 15, Blocks.nether_brick.getDefaultState(), false);
+
+        // nether ceiling lines
+        this.fillWithBlocks(world, boundingBox, 2, 6, 1, 14, 6, 1, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 2, 6, 6, 14, 6, 6, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 2, 6, 12, 14, 6, 12, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 2, 6, 17, 14, 6, 17, Blocks.nether_brick.getDefaultState(), false);
+
+        // ceiling entrance
+        this.fillWithBlocks(world, boundingBox, 5, 4, 0, 11, 6, 2, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 5, 4, 16, 11, 6, 18, Blocks.nether_brick.getDefaultState(), false);
 
         // block ceiling
         this.fillWithRandomizedBlocks(world, boundingBox, 2, 6, 2, 4, 6, 5, false, random, getCemeteryCatacombsStones());
@@ -103,30 +101,29 @@ public class GraveHall extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 6, 6, 13, 10, 6, 15, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 12, 6, 13, 14, 6, 16, false, random, getCemeteryCatacombsStones());
 
-        //TODO
-//        // nether walls
-//        this.fillWithBlocks(world, boundingBox, 1, 1, 1, 1, 5, 1, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 15, 1, 1, 15, 5, 1, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 1, 1, 6, 1, 5, 6, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 15, 1, 6, 15, 5, 6, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 1, 1, 12, 1, 5, 12, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 15, 1, 12, 15, 5, 12, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 1, 1, 17, 1, 5, 17, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 15, 1, 17, 15, 5, 17, Blocks.nether_brick, Blocks.nether_brick, false);
-//
-//        // nether walls lines
-//        this.fillWithBlocks(world, boundingBox, 1, 3, 1, 1, 3, 17, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 15, 3, 1, 15, 3, 17, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 2, 3, 1, 4, 3, 1, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 12, 3, 1, 14, 3, 1, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 2, 3, 17, 4, 3, 17, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 12, 3, 17, 14, 3, 17, Blocks.nether_brick, Blocks.nether_brick, false);
-//
-//        // nether wall entrance
-//        this.fillWithBlocks(world, boundingBox, 5, 1, 0, 6, 3, 2, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 10, 1, 0, 11, 3, 2, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 5, 1, 16, 6, 3, 18, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 10, 1, 16, 11, 3, 18, Blocks.nether_brick, Blocks.nether_brick, false);
+        // nether walls
+        this.fillWithBlocks(world, boundingBox, 1, 1, 1, 1, 5, 1, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 15, 1, 1, 15, 5, 1, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 1, 1, 6, 1, 5, 6, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 15, 1, 6, 15, 5, 6, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 1, 1, 12, 1, 5, 12, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 15, 1, 12, 15, 5, 12, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 1, 1, 17, 1, 5, 17, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 15, 1, 17, 15, 5, 17, Blocks.nether_brick.getDefaultState(), false);
+
+        // nether walls lines
+        this.fillWithBlocks(world, boundingBox, 1, 3, 1, 1, 3, 17, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 15, 3, 1, 15, 3, 17, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 2, 3, 1, 4, 3, 1, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 12, 3, 1, 14, 3, 1, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 2, 3, 17, 4, 3, 17, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 12, 3, 17, 14, 3, 17, Blocks.nether_brick.getDefaultState(), false);
+
+        // nether wall entrance
+        this.fillWithBlocks(world, boundingBox, 5, 1, 0, 6, 3, 2, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 10, 1, 0, 11, 3, 2, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 5, 1, 16, 6, 3, 18, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 10, 1, 16, 11, 3, 18, Blocks.nether_brick.getDefaultState(), false);
 
         // block walls
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 0, 0, 0, 6, 18, false, random, getCemeteryCatacombsStones());
@@ -190,56 +187,56 @@ public class GraveHall extends CatacombsBaseComponent {
 //        GraveGenerationHelper.placeGrave(this, world, random, 13, 1, 1, metaBot, graveType, sword, true);
 //        GraveGenerationHelper.placeGrave(this, world, random, 3, 4, 1, metaBot, graveType, sword, true);
 //        GraveGenerationHelper.placeGrave(this, world, random, 13, 4, 1, metaBot, graveType, sword, true);
-//
-//        // trap floor
-//        this.fillWithBlocks(world, boundingBox, 7, 0, 6, 9, 0, 6, GSBlock.trap, GSBlock.trap, false);
-//        this.fillWithBlocks(world, boundingBox, 7, 0, 12, 9, 0, 12, GSBlock.trap, GSBlock.trap, false);
-//
-//        // spawn bats
-//        MobSpawnHelper.spawnBats(world, random, boundingBox);
-//
-//        // web
-//        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 7, 1, 0, 7, 1, 0, Blocks.web, Blocks.web, false);
-//        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 9, 2, 0, 9, 2, 0, Blocks.web, Blocks.web, false);
-//        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 8, 3, 1, 8, 3, 1, Blocks.web, Blocks.web, false);
-//        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 7, 2, 2, 7, 2, 2, Blocks.web, Blocks.web, false);
-//        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 8, 2, 2, 8, 2, 2, Blocks.web, Blocks.web, false);
-//        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 9, 1, 2, 9, 1, 2, Blocks.web, Blocks.web, false);
-//        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 7, 3, 16, 7, 3, 16, Blocks.web, Blocks.web, false);
-//        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 8, 2, 16, 8, 2, 16, Blocks.web, Blocks.web, false);
-//        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 7, 1, 17, 7, 1, 17, Blocks.web, Blocks.web, false);
-//        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 8, 3, 17, 8, 3, 17, Blocks.web, Blocks.web, false);
-//        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 9, 1, 17, 9, 1, 17, Blocks.web, Blocks.web, false);
+
+        // trap floor
+        this.fillWithBlocks(world, boundingBox, 7, 0, 6, 9, 0, 6, GSBlock.trap.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 7, 0, 12, 9, 0, 12, GSBlock.trap.getDefaultState(), false);
+
+        // spawn bats
+        MobSpawnHelper.spawnBats(world, random, boundingBox);
+
+        // web
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 7, 1, 0, 7, 1, 0, Blocks.web.getDefaultState(), false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 9, 2, 0, 9, 2, 0, Blocks.web.getDefaultState(), false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 8, 3, 1, 8, 3, 1, Blocks.web.getDefaultState(), false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 7, 2, 2, 7, 2, 2, Blocks.web.getDefaultState(), false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 8, 2, 2, 8, 2, 2, Blocks.web.getDefaultState(), false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 9, 1, 2, 9, 1, 2, Blocks.web.getDefaultState(), false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 7, 3, 16, 7, 3, 16, Blocks.web.getDefaultState(), false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 8, 2, 16, 8, 2, 16, Blocks.web.getDefaultState(), false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 7, 1, 17, 7, 1, 17, Blocks.web.getDefaultState(), false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 8, 3, 17, 8, 3, 17, Blocks.web.getDefaultState(), false);
+        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 9, 1, 17, 9, 1, 17, Blocks.web.getDefaultState(), false);
 
         return true;
     }
 
     private void buildColumn(World world, int x, int z) {
         //TODO
-//        this.fillWithBlocks(world, boundingBox, x, 1, z, x, 5, z, Blocks.nether_brick, Blocks.nether_brick, false);
+        this.fillWithBlocks(world, boundingBox, x, 1, z, x, 5, z, Blocks.nether_brick.getDefaultState(), false);
 //        int metaTop = this.getMetadataWithOffset(Blocks.nether_brick_stairs, 2);
 //        int metaBot = this.getMetadataWithOffset(Blocks.nether_brick_stairs, 3);
 //        int metaRight = this.getMetadataWithOffset(Blocks.nether_brick_stairs, 1);
 //        int metaLeft = this.getMetadataWithOffset(Blocks.nether_brick_stairs, 0);
 //
 //        // stairs
-//        this.func_175811_a(world, Blocks.nether_brick_stairs, metaBot, x - 1, 1, z - 1, boundingBox);
-//        this.func_175811_a(world, Blocks.nether_brick_stairs, metaBot, x, 1, z - 1, boundingBox);
-//        this.func_175811_a(world, Blocks.nether_brick_stairs, metaBot, x + 1, 1, z - 1, boundingBox);
-//        this.func_175811_a(world, Blocks.nether_brick_stairs, metaLeft, x - 1, 1, z, boundingBox);
-//        this.func_175811_a(world, Blocks.nether_brick_stairs, metaRight, x + 1, 1, z, boundingBox);
-//        this.func_175811_a(world, Blocks.nether_brick_stairs, metaTop, x - 1, 1, z + 1, boundingBox);
-//        this.func_175811_a(world, Blocks.nether_brick_stairs, metaTop, x, 1, z + 1, boundingBox);
-//        this.func_175811_a(world, Blocks.nether_brick_stairs, metaTop, x + 1, 1, z + 1, boundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaBot, x - 1, 1, z - 1, boundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaBot, x, 1, z - 1, boundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaBot, x + 1, 1, z - 1, boundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaLeft, x - 1, 1, z, boundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaRight, x + 1, 1, z, boundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaTop, x - 1, 1, z + 1, boundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaTop, x, 1, z + 1, boundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaTop, x + 1, 1, z + 1, boundingBox);
 //
 //        // stairs top
-//        this.func_175811_a(world, Blocks.nether_brick_stairs, metaBot + 4, x - 1, 5, z - 1, boundingBox);
-//        this.func_175811_a(world, Blocks.nether_brick_stairs, metaBot + 4, x, 5, z - 1, boundingBox);
-//        this.func_175811_a(world, Blocks.nether_brick_stairs, metaBot + 4, x + 1, 5, z - 1, boundingBox);
-//        this.func_175811_a(world, Blocks.nether_brick_stairs, metaLeft + 4, x - 1, 5, z, boundingBox);
-//        this.func_175811_a(world, Blocks.nether_brick_stairs, metaRight + 4, x + 1, 5, z, boundingBox);
-//        this.func_175811_a(world, Blocks.nether_brick_stairs, metaTop + 4, x - 1, 5, z + 1, boundingBox);
-//        this.func_175811_a(world, Blocks.nether_brick_stairs, metaTop + 4, x, 5, z + 1, boundingBox);
-//        this.func_175811_a(world, Blocks.nether_brick_stairs, metaTop + 4, x + 1, 5, z + 1, boundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaBot + 4, x - 1, 5, z - 1, boundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaBot + 4, x, 5, z - 1, boundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaBot + 4, x + 1, 5, z - 1, boundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaLeft + 4, x - 1, 5, z, boundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaRight + 4, x + 1, 5, z, boundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaTop + 4, x - 1, 5, z + 1, boundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaTop + 4, x, 5, z + 1, boundingBox);
+//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaTop + 4, x + 1, 5, z + 1, boundingBox);
     }
 }

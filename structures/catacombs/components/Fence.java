@@ -184,16 +184,15 @@ public class Fence extends CatacombsBaseComponent {
             this.fillWithRandomizedBlocks(world, boundingBox, 43, y + 4, 0, 43, y + 4, 0, false, random, getCemeteryCatacombsStones());
             this.fillWithRandomizedBlocks(world, boundingBox, 46, y + 4, 0, 46, y + 4, 0, false, random, getCemeteryCatacombsStones());
 
-            //TODO
-//            // fence
-//            this.fillWithBlocks(world, boundingBox, 43, y, 0, 43, y + 3, 0, Blocks.iron_bars, Blocks.iron_bars, false);
-//            this.fillWithBlocks(world, boundingBox, 46, y, 0, 46, y + 3, 0, Blocks.iron_bars, Blocks.iron_bars, false);
-//            this.fillWithBlocks(world, boundingBox, 44, y + 3, 0, 45, y + 4, 0, Blocks.iron_bars, Blocks.iron_bars, false);
-//
+            // fence
+            this.fillWithBlocks(world, boundingBox, 43, y, 0, 43, y + 3, 0, Blocks.iron_bars.getDefaultState(), false);
+            this.fillWithBlocks(world, boundingBox, 46, y, 0, 46, y + 3, 0, Blocks.iron_bars.getDefaultState(), false);
+            this.fillWithBlocks(world, boundingBox, 44, y + 3, 0, 45, y + 4, 0, Blocks.iron_bars.getDefaultState(), false);
+//TODO
 //            // slabs
 //            this.fillWithMetadataBlocks(world, boundingBox, 44, y + 5, 0, 45, y + 5, 0, Blocks.stone_slab, 5, Blocks.stone_slab, 5, false);
-//            this.func_175811_a(world, Blocks.stone_slab, 5, 42, y + 4, 0, boundingBox);
-//            this.func_175811_a(world, Blocks.stone_slab, 5, 47, y + 4, 0, boundingBox);
+//            this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 42, y + 4, 0, boundingBox);
+//            this.placeBlockAtCurrentPosition(world, Blocks.stone_slab, 5, 47, y + 4, 0, boundingBox);
         }
     }
 

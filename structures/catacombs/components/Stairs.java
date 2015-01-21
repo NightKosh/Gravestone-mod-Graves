@@ -38,8 +38,7 @@ public class Stairs extends CatacombsBaseComponent {
         int top = boundingBox.maxY - boundingBox.minY - 1;
         int shiftY;
         int shiftZ;
-        //TODO
-//        this.fillWithBlocks(world, boundingBox, 0, top + 1, 0, 4, top + 1, 0, Blocks.nether_brick, Blocks.nether_brick, false);
+        this.fillWithBlocks(world, boundingBox, 0, top + 1, 0, 4, top + 1, 0, Blocks.nether_brick.getDefaultState(), false);
 
         for (int i = 0; i < 3; i++) {
             shiftZ = i * 4;
@@ -50,9 +49,9 @@ public class Stairs extends CatacombsBaseComponent {
             this.fillWithAir(world, boundingBox, 1, shiftY - 7, shiftZ + 3, 3, shiftY - 4, shiftZ + 4);
 
             //TODO
-//            // nether walls
-//            this.fillWithBlocks(world, boundingBox, 0, shiftY - 4, shiftZ, 0, shiftY, shiftZ, Blocks.nether_brick, Blocks.nether_brick, false);
-//            this.fillWithBlocks(world, boundingBox, 4, shiftY - 4, shiftZ, 4, shiftY, shiftZ, Blocks.nether_brick, Blocks.nether_brick, false);
+            // nether walls
+            this.fillWithBlocks(world, boundingBox, 0, shiftY - 4, shiftZ, 0, shiftY, shiftZ, Blocks.nether_brick.getDefaultState(), false);
+            this.fillWithBlocks(world, boundingBox, 4, shiftY - 4, shiftZ, 4, shiftY, shiftZ, Blocks.nether_brick.getDefaultState(), false);
             
             // block walls
             this.fillWithRandomizedBlocks(world, boundingBox, 0, shiftY - 5, shiftZ + 1, 0, shiftY - 1, shiftZ + 1, false, random, getCemeteryCatacombsStones());
@@ -76,16 +75,15 @@ public class Stairs extends CatacombsBaseComponent {
 //            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 2, shiftZ + 2, 3, shiftY - 2, shiftZ + 2, stairsBlock, metaTop, stairsBlock, metaTop, false);
 //            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 3, shiftZ + 3, 3, shiftY - 3, shiftZ + 3, stairsBlock, metaTop, stairsBlock, metaTop, false);
 //            this.fillWithMetadataBlocks(world, boundingBox, 1, shiftY - 4, shiftZ + 4, 3, shiftY - 4, shiftZ + 4, stairsBlock, metaTop, stairsBlock, metaTop, false);
-//
-//            // web
-//            this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 1, shiftY - 3, shiftZ, 1, shiftY - 3, shiftZ, Blocks.web, Blocks.web, false);
-//            this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, shiftY - 3, shiftZ + 1, 3, shiftY - 3, shiftZ + 1, Blocks.web, Blocks.web, false);
-//            this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 2, shiftY - 5, shiftZ + 2, 2, shiftY - 5, shiftZ + 2, Blocks.web, Blocks.web, false);
-//            this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, shiftY - 5, shiftZ + 3, 3, shiftY - 5, shiftZ + 3, Blocks.web, Blocks.web, false);
+
+            // web
+            this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 1, shiftY - 3, shiftZ, 1, shiftY - 3, shiftZ, Blocks.web.getDefaultState(), false);
+            this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, shiftY - 3, shiftZ + 1, 3, shiftY - 3, shiftZ + 1, Blocks.web.getDefaultState(), false);
+            this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 2, shiftY - 5, shiftZ + 2, 2, shiftY - 5, shiftZ + 2, Blocks.web.getDefaultState(), false);
+            this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, shiftY - 5, shiftZ + 3, 3, shiftY - 5, shiftZ + 3, Blocks.web.getDefaultState(), false);
         }
 
-        //TODO
-//        this.fillWithBlocks(world, boundingBox, 0, 0, Z_LENGTH - 1, 4, 0, Z_LENGTH - 1, Blocks.nether_brick, Blocks.nether_brick, false);
+        this.fillWithBlocks(world, boundingBox, 0, 0, Z_LENGTH - 1, 4, 0, Z_LENGTH - 1, Blocks.nether_brick.getDefaultState(), false);
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 0, Z_LENGTH - 1, 0, 4, Z_LENGTH - 1, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 4, 0, Z_LENGTH - 1, 4, 4, Z_LENGTH - 1, false, random, getCemeteryCatacombsStones());
         return true;

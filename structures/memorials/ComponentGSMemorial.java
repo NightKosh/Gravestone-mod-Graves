@@ -1,15 +1,17 @@
 package gravestone.structures.memorials;
 
-import java.util.Random;
 import gravestone.block.BlockGSMemorial;
+import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.MemorialGenerationHelper;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -40,34 +42,36 @@ public class ComponentGSMemorial extends ComponentGraveStone {
         }
 
         this.boundingBox.offset(0, averageGroundLevel - boundingBox.maxY + HEIGHT - 1, 0);
-        Block ground, underground;
-        BiomeGenBase biom = world.getBiomeGenForCoords(new BlockPos(getXWithOffset(0, 0), getYWithOffset(0), getZWithOffset(0, 0)));
 
-        if (biom.biomeID == BiomeGenBase.desert.biomeID || biom.biomeID == BiomeGenBase.desertHills.biomeID || biom.biomeID == BiomeGenBase.beach.biomeID) {
-            ground = Blocks.sand;
-            underground = Blocks.sand;
+        IBlockState groundState, undergroundState;
+        BlockPos pos = new BlockPos(getXWithOffset(0, 0), getYWithOffset(0), getZWithOffset(0, 0));
+        BiomeGenBase biome = world.getBiomeGenForCoords(pos);
+
+        if (biome.biomeID == BiomeGenBase.desert.biomeID || biome.biomeID == BiomeGenBase.desertHills.biomeID || biome.biomeID == BiomeGenBase.beach.biomeID) {
+            groundState = Blocks.sand.getDefaultState();
+            undergroundState = Blocks.sand.getDefaultState();
         } else {
-            ground = Blocks.grass;
-            underground = Blocks.dirt;
+            groundState = Blocks.grass.getDefaultState();
+            undergroundState = Blocks.dirt.getDefaultState();
         }
 
         this.fillWithAir(world, boundingBox, 0, 0, 2, 0, 6, 2);
-        //TODO
-//        this.fillWithBlocks(world, boundingBox, 0, 0, 0, 2, 0, 2, ground, ground, false);
-//        byte memorialType = BlockGSMemorial.getMemorialType(world, this.getXWithOffset(0, 0), this.getZWithOffset(0, 0), random, 0);
-//        MemorialGenerationHelper.placeMemorial(this, world, random, 1, 1, 1, BlockGSMemorial.getMetaDirection(coordBaseMode), memorialType);
-//
-//        for (int x = 0; x < 3; x++) {
-//            for (int z = 0; z < 3; z++) {
-//                this.func_151554_b(world, underground, 0, x, -1, z, boundingBox);
-//            }
-//        }
-//
-//        for (int x = 0; x < 3; x++) {
-//            for (int z = 0; z < 3; z++) {
-//                this.clearCurrentPositionBlocksUpwards(world, x, HEIGHT, z, boundingBox);
-//            }
-//        }
+        this.func_175804_a(world, boundingBox, 0, 0, 0, 2, 0, 2, groundState, groundState, false);
+        byte memorialType = BlockGSMemorial.getMemorialType(world, pos, random, 0);
+        MemorialGenerationHelper.placeMemorial(this, world, random, 1, 1, 1,
+                GSBlock.memorial.getDefaultState().withProperty(BlockGSMemorial.FACING, this.coordBaseMode), memorialType);
+
+        for (int x = 0; x < 3; x++) {
+            for (int z = 0; z < 3; z++) {
+                this.func_175808_b(world, undergroundState, x, -1, z, boundingBox);
+            }
+        }
+
+        for (int x = 0; x < 3; x++) {
+            for (int z = 0; z < 3; z++) {
+                this.clearCurrentPositionBlocksUpwards(world, x, HEIGHT, z, boundingBox);
+            }
+        }
 
         return true;
     }
