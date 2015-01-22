@@ -5,6 +5,7 @@ import gravestone.structures.catacombs.CatacombsLevel;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 /**
@@ -19,10 +20,10 @@ public class Stairs extends CatacombsBaseComponent {
     public static final int HEIGHT = 16;
     public static final int Z_LENGTH = 13;
 
-    public Stairs(int direction, int level, Random random, int x, int y, int z) {
-        super(direction, level);
+    public Stairs(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(componentType, facing, level);
         y = y - HEIGHT + 4;
-        boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
+        boundingBox = BoundingBoxHelper.getCorrectBox(facing, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
         goTop = true;
         topXEnd = 0;
         topZEnd = Z_LENGTH;

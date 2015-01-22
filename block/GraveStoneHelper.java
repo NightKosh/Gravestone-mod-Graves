@@ -626,8 +626,13 @@ public class GraveStoneHelper {
         }
     }
 
-    public static boolean canFlowerBePlaced(World world, BlockPos pos, ItemStack item, TileEntityGSGraveStone te) {
-        return Block.getBlockFromItem(item.getItem()).canSustainPlant(world, pos.down(), EnumFacing.UP, (IPlantable) item.getItem()) && canFlowerBePlacedOnGrave(te);
+    public static boolean canFlowerBePlaced(World world, BlockPos pos, ItemStack itemStack, TileEntityGSGraveStone te) {
+        Item item = itemStack.getItem();
+        if (item instanceof IPlantable) {
+            return Block.getBlockFromItem(item).canSustainPlant(world, pos.down(), EnumFacing.UP, (IPlantable) item) && canFlowerBePlacedOnGrave(te);
+        } else {
+            return false;
+        }
     }
 
     public static boolean canFlowerBePlacedOnGrave(TileEntityGSGraveStone te) {

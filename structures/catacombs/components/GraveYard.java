@@ -8,6 +8,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
@@ -21,8 +22,8 @@ import java.util.Random;
  */
 public class GraveYard extends CatacombsBaseComponent {
 
-    public GraveYard(int direction, Random random, StructureBoundingBox structureBoundingBox) {
-        super(direction);
+    public GraveYard(int componentType, EnumFacing direction, Random random, StructureBoundingBox structureBoundingBox) {
+        super(componentType, direction);
         boundingBox = structureBoundingBox;
     }
 
@@ -38,14 +39,14 @@ public class GraveYard extends CatacombsBaseComponent {
                 if (random.nextDouble() < 0.05) {
                     positionX = getXWithOffset(x + 1, z + 1);
                     positionZ = getZWithOffset(x + 1, z + 1);
-                    y = 64;//TODO world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
+                    y = world.getTopSolidOrLiquidBlock(new BlockPos(positionX, 0, positionZ)).getY() - boundingBox.minY;
                     this.placeBlockAtCurrentPosition(world, Blocks.deadbush.getDefaultState(), x + 1, y, z + 1, boundingBox);
                 }
 
                 if (random.nextInt(5) < 2) {
                     positionX = getXWithOffset(x, z);
                     positionZ = getZWithOffset(x, z);
-                    y = 64;//TODO world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
+                    y = world.getTopSolidOrLiquidBlock(new BlockPos(positionX, 0, positionZ)).getY() - boundingBox.minY;
 
                     if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
                         byte graveType = GraveStoneHelper.getGraveType(world, new BlockPos(positionX, this.getYWithOffset(y), positionZ), random, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES);

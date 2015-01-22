@@ -1,5 +1,7 @@
 package gravestone.structures;
 
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
@@ -18,14 +20,14 @@ public class BoundingBoxHelper {
      * Return bounding Box for structure component
      *
      * @param direction Component direction
-     * @param x X coord
-     * @param y Y coord
-     * @param z Z coord
-     * @param xLength Compenent x axis length
-     * @param height Component height
-     * @param zLength Component z axis length
+     * @param x         X coord
+     * @param y         Y coord
+     * @param z         Z coord
+     * @param xLength   Compenent x axis length
+     * @param height    Component height
+     * @param zLength   Component z axis length
      */
-    public static StructureBoundingBox getCorrectBox(int direction, int x, int y, int z, int xLength, int height, int zLength, int xShift) {
+    public static StructureBoundingBox getCorrectBox(EnumFacing direction, int x, int y, int z, int xLength, int height, int zLength, int xShift) {
         int minX = 0;
         int maxX = 0;
         int minY = y;
@@ -34,28 +36,25 @@ public class BoundingBoxHelper {
         int maxZ = 0;
 
         switch (direction) {
-            case 0:
+            case SOUTH:
                 minX = x - xShift;
                 maxX = x - xShift + xLength;
                 minZ = z;
                 maxZ = z + zLength;
                 break;
-
-            case 1:
+            case NORTH:
                 minX = x - zLength;
                 maxX = x;
                 minZ = z - xShift;
                 maxZ = z - xShift + xLength;
                 break;
-
-            case 2:
+            case EAST:
                 minX = x - xShift;
                 maxX = x - xShift + xLength;
                 minZ = z - zLength;
                 maxZ = z;
                 break;
-
-            case 3:
+            case WEST:
                 minX = x;
                 maxX = x + zLength;
                 minZ = z - xShift;
@@ -77,11 +76,9 @@ public class BoundingBoxHelper {
 
         for (int z = boundingBox.minZ; z <= boundingBox.maxZ; ++z) {
             for (int x = boundingBox.minX; x <= boundingBox.maxX; ++x) {
-                // TODO
-//                if (boundingBox.isVecInside(x, 64, z)) {
-//                    height += Math.max(world.getTopSolidOrLiquidBlock(x, z), world.provider.getAverageGroundLevel());
-//                    count++;
-//                }
+                BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
+                height += Math.max(world.getTopSolidOrLiquidBlock(pos).getY(), world.provider.getAverageGroundLevel());
+                count++;
             }
         }
 

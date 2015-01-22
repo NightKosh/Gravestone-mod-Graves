@@ -4,6 +4,7 @@ import gravestone.config.GraveStoneConfig;
 import gravestone.core.logger.GSLogger;
 import gravestone.structures.GSStructureGenerator;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.village.Village;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
@@ -42,9 +43,8 @@ public class CatacombsGenerator implements GSStructureGenerator {
     protected static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
 
     @Override
-    public boolean generate(World world, Random rand, int x, int z, double chance, boolean isCommand) {
+    public boolean generate(World world, Random rand, int x, int z, EnumFacing direction, double chance, boolean isCommand) {
         if (isCommand || (GraveStoneConfig.generateCatacombs && canSpawnStructureAtCoords(world, x, z, chance) && isHeightAcceptable(world, x, z))) {
-            int direction = rand.nextInt(4);
             CatacombsSurface surface = new CatacombsSurface(world, rand, x, z, direction);
             GSLogger.logInfo("Generate catacombs at " + x + "x" + z);
 
@@ -120,7 +120,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
         int count = 0;
         for (int xPos = x; xPos < x + 16; xPos++) {
             for (int zPos = z; zPos < z + 16; zPos++) {
-                height += 64;//TODO world.getTopSolidOrLiquidBlock(new BlockPos(xPos, zPos));
+                height += world.getTopSolidOrLiquidBlock(new BlockPos(xPos, 0, zPos)).getY();
                 count++;
             }
         }

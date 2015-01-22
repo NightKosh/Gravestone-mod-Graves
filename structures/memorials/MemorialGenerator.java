@@ -1,18 +1,19 @@
 package gravestone.structures.memorials;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Random;
-
-import gravestone.core.logger.GSLogger;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.logger.GSLogger;
 import gravestone.structures.GSStructureGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -35,18 +36,19 @@ public class MemorialGenerator implements GSStructureGenerator {
             return instance;
         }
     }
+
     public static final double CHANCE = 0.05D;
     public static final short RANGE = 400;
     private static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
 
     @Override
-    public boolean generate(World world, Random rand, int x, int z, double chance, boolean isCommand) {
+    public boolean generate(World world, Random rand, int x, int z, EnumFacing direction, double chance, boolean isCommand) {
         if (!isCommand) {
             x = x + (16 - ComponentGSMemorial.X_LENGTH) / 2;
             z = z + (16 - ComponentGSMemorial.Z_LENGTH) / 2;
         }
         if (isCommand || (GraveStoneConfig.generateMemorials && canSpawnStructureAtCoords(world, x, z, chance) && isNoWarterUnder(world, x, z))) {
-            new ComponentGSMemorial(rand.nextInt(4), rand, x, z).addComponentParts(world, rand);
+            new ComponentGSMemorial(0, direction, rand, x, z).addComponentParts(world, rand);
             GSLogger.logInfo("Generate memorial at " + x + "x" + z);
             structuresList.add(new ChunkCoordIntPair(x, z));
             return true;
@@ -60,7 +62,7 @@ public class MemorialGenerator implements GSStructureGenerator {
     }
 
     protected static boolean isBiomeAllowed(World world, int x, int z) {
-        LinkedList<BiomeDictionary.Type> biomeTypesList = new LinkedList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(new BlockPos(x, 0, z)))));//TODO world.getBiomeGenForCoords(x, z))));
+        LinkedList<BiomeDictionary.Type> biomeTypesList = new LinkedList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(new BlockPos(x, 0, z)))));
         return !biomeTypesList.contains(BiomeDictionary.Type.WATER);
     }
 
@@ -87,8 +89,7 @@ public class MemorialGenerator implements GSStructureGenerator {
     }
 
     private static boolean isNoWarterUnder(World world, int x, int z) {
-        //TODO
-        int y = 100;//world.getTopSolidOrLiquidBlock(x, z);
-        return !world.getBlockState(new BlockPos(x, y, z)).getBlock().getMaterial().equals(Material.water);
+        BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
+        return !world.getBlockState(pos).getBlock().getMaterial().equals(Material.water);
     }
 }

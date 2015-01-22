@@ -3,7 +3,11 @@ package gravestone.structures.catacombs.components;
 import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.MobSpawnHelper;
+import net.minecraft.block.BlockSlab;
+import net.minecraft.block.BlockStoneSlab;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
@@ -17,8 +21,8 @@ import java.util.Random;
  */
 public class Mausoleum extends CatacombsBaseComponent {
 
-    public Mausoleum(int direction, Random random, StructureBoundingBox structureBoundingBox) {
-        super(direction);
+    public Mausoleum(int componentType, EnumFacing direction, Random random, StructureBoundingBox structureBoundingBox) {
+        super(componentType, direction);
         this.boundingBox = structureBoundingBox;
         topXEnd = 5;
         topZEnd = 5;
@@ -91,36 +95,39 @@ public class Mausoleum extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 8, 1, 5, 8, 4, 5, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 5, 1, 8, 5, 4, 8, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 8, 1, 8, 8, 4, 8, false, random, getCemeteryCatacombsStones());
-//TODO
-//        // roof 1
-//        this.fillWithBlocks(world, boundingBox, 0, 5, 0, 0, 5, 13, Blocks.stone_slab, 6, Blocks.stone_slab, 6, false);
-//        this.fillWithBlocks(world, boundingBox, 13, 5, 0, 13, 5, 13, Blocks.stone_slab, 6, Blocks.stone_slab, 6, false);
-//        this.fillWithBlocks(world, boundingBox, 2, 5, 0, 11, 5, 0, Blocks.stone_slab, 6, Blocks.stone_slab, 6, false);
-//        this.fillWithBlocks(world, boundingBox, 2, 5, 13, 11, 5, 13, Blocks.stone_slab, 6, Blocks.stone_slab, 6, false);
-//        this.fillWithBlocks(world, boundingBox, 1, 5, 1, 12, 5, 12, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick, 0, 1, 5, 0, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick, 0, 12, 5, 0, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick, 0, 1, 5, 13, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick, 0, 12, 5, 13, boundingBox);
-//
-//        // roof 2
-//        this.fillWithBlocks(world, boundingBox, 2, 6, 0, 2, 6, 13, Blocks.stone_slab, 6, Blocks.stone_slab, 6, false);
-//        this.fillWithBlocks(world, boundingBox, 11, 6, 0, 11, 6, 13, Blocks.stone_slab, 6, Blocks.stone_slab, 6, false);
-//        this.fillWithBlocks(world, boundingBox, 3, 6, 0, 3, 6, 13, Blocks.stone_slab, 14, Blocks.stone_slab, 14, false);
-//        this.fillWithBlocks(world, boundingBox, 10, 6, 0, 10, 6, 13, Blocks.stone_slab, 14, Blocks.stone_slab, 14, false);
-//        this.fillWithBlocks(world, boundingBox, 3, 6, 1, 10, 6, 1, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 3, 6, 12, 10, 6, 12, Blocks.nether_brick, Blocks.nether_brick, false);
-//
-//        // roof 3
-//        this.fillWithBlocks(world, boundingBox, 4, 7, 0, 4, 7, 13, Blocks.stone_slab, 6, Blocks.stone_slab, 6, false);
-//        this.fillWithBlocks(world, boundingBox, 9, 7, 0, 9, 7, 13, Blocks.stone_slab, 6, Blocks.stone_slab, 6, false);
-//        this.fillWithBlocks(world, boundingBox, 5, 7, 0, 5, 7, 13, Blocks.stone_slab, 14, Blocks.stone_slab, 14, false);
-//        this.fillWithBlocks(world, boundingBox, 8, 7, 0, 8, 7, 13, Blocks.stone_slab, 14, Blocks.stone_slab, 14, false);
-//        this.fillWithBlocks(world, boundingBox, 5, 7, 1, 8, 7, 1, Blocks.nether_brick, Blocks.nether_brick, false);
-//        this.fillWithBlocks(world, boundingBox, 5, 7, 12, 8, 7, 12, Blocks.nether_brick, Blocks.nether_brick, false);
-//
-//        // roof 4
-//        this.fillWithBlocks(world, boundingBox, 6, 8, 0, 7, 8, 13, Blocks.stone_slab, 6, Blocks.stone_slab, 6, false);
+
+        IBlockState netherSlabsState = Blocks.stone_slab.getDefaultState().withProperty(BlockStoneSlab.VARIANT, BlockStoneSlab.EnumType.NETHERBRICK);
+        IBlockState netherSlabsBotState = netherSlabsState.withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.BOTTOM);
+        IBlockState netherSlabsTopState = netherSlabsState.withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP);
+        // roof 1
+        this.fillWithBlocks(world, boundingBox, 0, 5, 0, 0, 5, 13, netherSlabsBotState, false);
+        this.fillWithBlocks(world, boundingBox, 13, 5, 0, 13, 5, 13, netherSlabsBotState, false);
+        this.fillWithBlocks(world, boundingBox, 2, 5, 0, 11, 5, 0, netherSlabsBotState, false);
+        this.fillWithBlocks(world, boundingBox, 2, 5, 13, 11, 5, 13, netherSlabsBotState, false);
+        this.fillWithBlocks(world, boundingBox, 1, 5, 1, 12, 5, 12, Blocks.nether_brick.getDefaultState(), false);
+        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick.getDefaultState(), 1, 5, 0, boundingBox);
+        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick.getDefaultState(), 12, 5, 0, boundingBox);
+        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick.getDefaultState(), 1, 5, 13, boundingBox);
+        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick.getDefaultState(), 12, 5, 13, boundingBox);
+
+        // roof 2
+        this.fillWithBlocks(world, boundingBox, 2, 6, 0, 2, 6, 13, netherSlabsBotState, false);
+        this.fillWithBlocks(world, boundingBox, 11, 6, 0, 11, 6, 13, netherSlabsBotState, false);
+        this.fillWithBlocks(world, boundingBox, 3, 6, 0, 3, 6, 13, netherSlabsTopState, false);
+        this.fillWithBlocks(world, boundingBox, 10, 6, 0, 10, 6, 13, netherSlabsTopState, false);
+        this.fillWithBlocks(world, boundingBox, 3, 6, 1, 10, 6, 1, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 3, 6, 12, 10, 6, 12, Blocks.nether_brick.getDefaultState(), false);
+
+        // roof 3
+        this.fillWithBlocks(world, boundingBox, 4, 7, 0, 4, 7, 13, netherSlabsBotState, false);
+        this.fillWithBlocks(world, boundingBox, 9, 7, 0, 9, 7, 13, netherSlabsBotState, false);
+        this.fillWithBlocks(world, boundingBox, 5, 7, 0, 5, 7, 13, netherSlabsTopState, false);
+        this.fillWithBlocks(world, boundingBox, 8, 7, 0, 8, 7, 13, netherSlabsTopState, false);
+        this.fillWithBlocks(world, boundingBox, 5, 7, 1, 8, 7, 1, Blocks.nether_brick.getDefaultState(), false);
+        this.fillWithBlocks(world, boundingBox, 5, 7, 12, 8, 7, 12, Blocks.nether_brick.getDefaultState(), false);
+
+        // roof 4
+        this.fillWithBlocks(world, boundingBox, 6, 8, 0, 7, 8, 13, netherSlabsBotState, false);
 
         for (int x = 2; x < 12; x++) {
             for (int z = 2; z < 12; z++) {

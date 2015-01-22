@@ -4,6 +4,7 @@ import gravestone.config.GraveStoneConfig;
 import gravestone.structures.catacombs.CatacombsGenerator;
 import gravestone.structures.graves.SingleGraveGenerator;
 import gravestone.structures.memorials.MemorialGenerator;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
@@ -32,10 +33,11 @@ public class GraveStoneWorldGenerator implements IWorldGenerator {
 
     public void generateSurface(World world, Random rand, int x, int z) {
         double chance = rand.nextDouble();
+        EnumFacing direction = EnumFacing.Plane.HORIZONTAL.facings()[rand.nextInt(EnumFacing.Plane.HORIZONTAL.facings().length)];
 
-        if (!CatacombsGenerator.getInstance().generate(world, rand, x, z, chance, false)) {
-            if (!MemorialGenerator.getInstance().generate(world, rand, x, z, chance, false)) {
-                SingleGraveGenerator.getInstance().generate(world, rand, x, z, chance, false);
+        if (!CatacombsGenerator.getInstance().generate(world, rand, x, z, direction, chance, false)) {
+            if (!MemorialGenerator.getInstance().generate(world, rand, x, z, direction, chance, false)) {
+                SingleGraveGenerator.getInstance().generate(world, rand, x, z, direction, chance, false);
             }
         }
     }

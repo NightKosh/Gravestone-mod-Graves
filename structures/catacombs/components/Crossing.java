@@ -3,7 +3,10 @@ package gravestone.structures.catacombs.components;
 import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.ObjectsGenerationHelper;
+import net.minecraft.block.BlockStoneBrick;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -20,39 +23,39 @@ public class Crossing extends CatacombsBaseComponent {
     public static final int HEIGHT = 6;
     public static final int Z_LENGTH = 13;
 
-    public Crossing(int direction, int level, Random random, int x, int y, int z) {
-        super(direction, level);
+    public Crossing(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(componentType, facing, level);
         xShift = 4;
         topXEnd = 4;
         topZEnd = 12;
 
-        switch (direction) {
-            case 0:
+        switch (facing) {
+            case SOUTH:
                 leftXEnd = 12;
                 leftZEnd = 4;
                 rightXEnd = 0;
                 rightZEnd = 4;
                 break;
-            case 1:
+            case NORTH:
                 leftXEnd = 12;
                 leftZEnd = 8;
                 rightXEnd = 0;
                 rightZEnd = 8;
                 break;
-            case 2:
+            case EAST:
                 leftXEnd = 0;
                 leftZEnd = 8;
                 rightXEnd = 12;
                 rightZEnd = 8;
                 break;
-            case 3:
+            case WEST:
                 leftXEnd = 0;
                 leftZEnd = 4;
                 rightXEnd = 12;
                 rightZEnd = 4;
         }
 
-        boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
+        boundingBox = BoundingBoxHelper.getCorrectBox(facing, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
     }
 
     /**
@@ -108,10 +111,10 @@ public class Crossing extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 9, 5, 5, 11, 5, 7, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 9, 5, 9, 11, 5, 11, false, random, getCemeteryCatacombsStones());
 
-        //TODO
-//        // cutted stoneBrick floor and ceiling
-//        this.fillWithMetadataBlocks(world, boundingBox, 5, 0, 5, 7, 0, 7, Blocks.stonebrick, 3, Blocks.stonebrick, 3, false);
-//        this.fillWithMetadataBlocks(world, boundingBox, 5, 5, 5, 7, 5, 7, Blocks.stonebrick, 3, Blocks.stonebrick, 3, false);
+        // cutted stoneBrick floor and ceiling
+        IBlockState chiseledStoneState = Blocks.stonebrick.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CHISELED);
+        this.fillWithBlocks(world, boundingBox, 5, 0, 5, 7, 0, 7, chiseledStoneState, false);
+        this.fillWithBlocks(world, boundingBox, 5, 5, 5, 7, 5, 7, chiseledStoneState, false);
 
         // nether walls
         this.fillWithBlocks(world, boundingBox, 0, 1, 0, 0, 4, 12, Blocks.nether_brick.getDefaultState(), false);

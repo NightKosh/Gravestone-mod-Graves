@@ -3,6 +3,7 @@ package gravestone.structures.catacombs.components;
 import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -19,32 +20,32 @@ public class Entrance extends CatacombsBaseComponent {
     private int stairsLength;
     private int corridorLength;
 
-    public Entrance(int direction, Random random, int x, int y, int z) {
-        super(direction);
+    public Entrance(int componentType, EnumFacing direction, Random random, int x, int y, int z) {
+        super(componentType, direction);
         stairsLength = 4 + random.nextInt(4);
         corridorLength = 2 + random.nextInt(2);
         boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y - stairsLength * 3, z, X_LENGTH, stairsLength * 3, (stairsLength + corridorLength) * 3 + 5, xShift);
 
         switch (direction) {
-            case 0:
+            case SOUTH:
                 leftXEnd = 3;
                 leftZEnd = (stairsLength + corridorLength) * 3;
                 rightXEnd = 0;
                 rightZEnd = leftZEnd;
                 break;
-            case 1:
+            case NORTH:
                 leftXEnd = 3;
                 leftZEnd = (stairsLength + corridorLength) * 3 + 4;
                 rightXEnd = 0;
                 rightZEnd = leftZEnd;
                 break;
-            case 2:
+            case EAST:
                 leftXEnd = 0;
                 leftZEnd = (stairsLength + corridorLength) * 3 + 4;
                 rightXEnd = 3;
                 rightZEnd = leftZEnd;
                 break;
-            case 3:
+            case WEST:
                 leftXEnd = 0;
                 leftZEnd = (stairsLength + corridorLength) * 3;
                 rightXEnd = 3;

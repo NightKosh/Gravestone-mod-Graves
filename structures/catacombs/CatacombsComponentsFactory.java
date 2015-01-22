@@ -13,6 +13,8 @@ import gravestone.structures.catacombs.components.SpidersCorridor;
 import gravestone.structures.catacombs.components.StatuesHall;
 import gravestone.structures.catacombs.components.TrapCorridor;
 import gravestone.structures.catacombs.components.Treasury;
+import net.minecraft.util.EnumFacing;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
@@ -145,11 +147,11 @@ public class CatacombsComponentsFactory {
     /**
      * Create component
      * @param component previouse component
-     * @param direction component direction
+     * @param componentType component direction
      * @param buildComponent component class
      * @param componentSide 
      */
-    public static CatacombsBaseComponent createComponent(CatacombsBaseComponent component, Random random, int direction, int level, Class buildComponent, CatacombsLevel.COMPONENT_SIDE componentSide) {
+    public static CatacombsBaseComponent createComponent(CatacombsBaseComponent component, Random random, int componentType, EnumFacing facing, int level, Class buildComponent, CatacombsLevel.COMPONENT_SIDE componentSide) {
         if (component != null) {
             int x, y, z;
             y = component.getYEnd();
@@ -166,8 +168,8 @@ public class CatacombsComponentsFactory {
             }
 
             try {
-                Constructor<CatacombsBaseComponent> constructor = buildComponent.getConstructor(int.class, int.class, Random.class, int.class, int.class, int.class);
-                component = constructor.newInstance(direction, level, random, x, y, z);
+                Constructor<CatacombsBaseComponent> constructor = buildComponent.getConstructor(int.class, EnumFacing.class, int.class, Random.class, int.class, int.class, int.class);
+                component = constructor.newInstance(componentType, facing, level, random, x, y, z);
                 return component;
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();

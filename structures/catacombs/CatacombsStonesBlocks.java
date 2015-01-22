@@ -1,5 +1,7 @@
 package gravestone.structures.catacombs;
 
+import net.minecraft.block.BlockSilverfish;
+import net.minecraft.block.BlockStoneBrick;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.structure.StructureComponent;
 
@@ -21,24 +23,20 @@ public class CatacombsStonesBlocks extends StructureComponent.BlockSelector {
      */
     @Override
     public void selectBlocks(Random random, int par2, int par3, int par4, boolean par5) {
-        //TODO
-//        if (par5) {
-//            this.field_151562_a = Blocks.stonebrick;
-//            float randFloat = random.nextFloat();
-//
-//            if (randFloat < 0.2F) {
-//                this.selectedBlockMetaData = 2;
-//            } else if (randFloat < 0.4F) {
-//                this.selectedBlockMetaData = 0;
-//            } else if (randFloat < 0.45F) {
-//                this.field_151562_a = Blocks.monster_egg;
-//                this.selectedBlockMetaData = 2;
-//            } else {
-//                this.selectedBlockMetaData = 1;
-//            }
-//        } else {
-//            this.field_151562_a = Blocks.air;
-//            this.selectedBlockMetaData = 0;
-//        }
+        if (par5) {
+            float randFloat = random.nextFloat();
+
+            if (randFloat < 0.2F) {
+                this.field_151562_a = Blocks.stonebrick.getStateFromMeta(BlockStoneBrick.CRACKED_META);
+            } else if (randFloat < 0.4F) {
+                this.field_151562_a = Blocks.stonebrick.getStateFromMeta(BlockStoneBrick.MOSSY_META);
+            } else if (randFloat < 0.45F) {
+                this.field_151562_a = Blocks.monster_egg.getStateFromMeta(BlockSilverfish.EnumType.STONEBRICK.getMetadata());
+            } else {
+                this.field_151562_a = Blocks.stonebrick.getDefaultState();
+            }
+        } else {
+            this.field_151562_a = Blocks.air.getDefaultState();
+        }
     }
 }

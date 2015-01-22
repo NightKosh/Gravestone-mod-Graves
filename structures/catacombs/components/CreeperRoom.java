@@ -6,6 +6,7 @@ import gravestone.structures.MemorialGenerationHelper;
 import gravestone.structures.ObjectsGenerationHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -22,41 +23,41 @@ public class CreeperRoom extends CatacombsBaseComponent {
     public static final int HEIGHT = 14;
     public static final int Z_LENGTH = 11;
 
-    public CreeperRoom(int direction, int level, Random random, int x, int y, int z) {
-        super(direction, level);
+    public CreeperRoom(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(componentType, facing, level);
         xShift = 3;
         y = y - HEIGHT + 6;
         yEnd = 8;
         topXEnd = 3;
         topZEnd = 10;
 
-        switch (direction) {
-            case 0:
+        switch (facing) {
+            case SOUTH:
                 leftXEnd = 10;
                 leftZEnd = 3;
                 rightXEnd = 0;
                 rightZEnd = 3;
                 break;
-            case 1:
+            case NORTH:
                 leftXEnd = 10;
                 leftZEnd = 7;
                 rightXEnd = 0;
                 rightZEnd = 7;
                 break;
-            case 2:
+            case EAST:
                 leftXEnd = 0;
                 leftZEnd = 7;
                 rightXEnd = 10;
                 rightZEnd = 7;
                 break;
-            case 3:
+            case WEST:
                 leftXEnd = 0;
                 leftZEnd = 3;
                 rightXEnd = 10;
                 rightZEnd = 3;
         }
 
-        boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
+        boundingBox = BoundingBoxHelper.getCorrectBox(facing, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
     }
 
     /**

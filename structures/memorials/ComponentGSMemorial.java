@@ -8,6 +8,7 @@ import gravestone.structures.MemorialGenerationHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
@@ -25,8 +26,8 @@ public class ComponentGSMemorial extends ComponentGraveStone {
     public static final int HEIGHT = 7;
     public static final int Z_LENGTH = 3;
 
-    public ComponentGSMemorial(int direction, Random random, int x, int z) {
-        super(direction);
+    public ComponentGSMemorial(int componentType, EnumFacing direction, Random random, int x, int z) {
+        super(componentType, direction);
         boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, 64, z, X_LENGTH, HEIGHT, Z_LENGTH, 0);
     }
 

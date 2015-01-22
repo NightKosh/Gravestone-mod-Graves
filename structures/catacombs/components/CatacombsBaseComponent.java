@@ -4,7 +4,6 @@ import gravestone.core.GSStructures;
 import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.catacombs.CatacombsLevel;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -36,14 +35,12 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
     protected CatacombsBaseComponent prevComponent;
     protected CatacombsBaseComponent[] nextComponents;
 
-    protected CatacombsBaseComponent(int direction) {
-        this(direction, 0);
+    protected CatacombsBaseComponent(int componentType, EnumFacing facing) {
+        this(componentType, facing, 0);
     }
 
-    protected CatacombsBaseComponent(int direction, int level) {
-        super(direction);
-        //TODO
-//        this.coordBaseMode = direction;
+    protected CatacombsBaseComponent(int componentType, EnumFacing facing, int level) {
+        super(componentType, facing);
         this.level = level;
     }
 
@@ -52,14 +49,8 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      *
      * @param direction Component direction
      */
-    public static int getLeftDirection(int direction) {
-        direction -= 1;
-
-        if (direction < 0) {
-            direction = 3;
-        }
-
-        return direction;
+    public static EnumFacing getLeftDirection(EnumFacing direction) {
+        return direction.rotateY();
     }
 
     /**
@@ -67,29 +58,8 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      *
      * @param direction Component direction
      */
-    public static int getRightDirection(int direction) {
-        direction += 1;
-
-        if (direction > 3) {
-            direction = 0;
-        }
-
-        return direction;
-    }
-
-    /**
-     * Return Inverted direction
-     *
-     * @param direction Component direction
-     */
-    public static int getInvertDirection(int direction) {
-        direction += 2;
-
-        if (direction > 3) {
-            direction -= 4;
-        }
-
-        return direction;
+    public static EnumFacing getRightDirection(EnumFacing direction) {
+        return direction.rotateYCCW();
     }
 
     /**
@@ -151,7 +121,7 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      * return ground level at x z coordinates
      */
     protected int getGroundLevel(World world, int x, int z) {
-        return 64;//TODO world.getTopSolidOrLiquidBlock(x, z);
+        return world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z)).getY();
     }
 
     protected int invertDirection(int direction) {
@@ -257,7 +227,7 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
     /**
      * Return component direction
      */
-    public int getDirection() {
-        return 0; //TODO coordBaseMode;
+    public EnumFacing getDirection() {
+        return coordBaseMode;
     }
 }

@@ -2,6 +2,7 @@ package gravestone.structures;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
@@ -17,8 +18,9 @@ import java.util.Random;
  */
 public class ComponentGraveStone extends StructureComponent {
 
-    protected ComponentGraveStone(int componentType) {
+    protected ComponentGraveStone(int componentType, EnumFacing facing) {
         super(componentType);
+        this.coordBaseMode = facing;
         // TODO
         //coordBaseMode = direction;
     }

@@ -5,6 +5,7 @@ import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
@@ -20,10 +21,9 @@ public class Fence extends CatacombsBaseComponent {
 
     private final boolean haveEntrance;
     private final boolean haveCorners;
-    public static final int ENTRANCE_HEIGHT = 7;
 
-    public Fence(int direction, Random random, StructureBoundingBox structureBoundingBox, boolean haveEntrance, boolean haveCorners) {
-        super(direction);
+    public Fence(int componentType, EnumFacing direction, Random random, StructureBoundingBox structureBoundingBox, boolean haveEntrance, boolean haveCorners) {
+        super(componentType, direction);
         boundingBox = structureBoundingBox;
         this.haveEntrance = haveEntrance;
         this.haveCorners = haveCorners;
@@ -120,13 +120,13 @@ public class Fence extends CatacombsBaseComponent {
     private int getGroundY(World world, int x) {
         int xPos = getXWithOffset(x, 0);
         int zPos = getZWithOffset(x, 0);
-        int y = 64;//TODO world.getTopSolidOrLiquidBlock(xPos, zPos);
-        while (world.getBlockState(new BlockPos(xPos, y, zPos)).getBlock().getMaterial().equals(Material.wood) ||
-                world.getBlockState(new BlockPos(xPos, y, zPos)).getBlock().getMaterial().equals(Material.leaves)) {
-            y--;
+        BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(xPos, 0, zPos));
+        while (world.getBlockState(pos).getBlock().getMaterial().equals(Material.wood) ||
+                world.getBlockState(pos).getBlock().getMaterial().equals(Material.leaves)) {
+            pos = pos.down();
         }
 
-        return y;
+        return pos.getY();
     }
 
     private boolean checkGround(World world, int x, int y) {
@@ -169,12 +169,12 @@ public class Fence extends CatacombsBaseComponent {
         for (int x = 42; x <= 47; x++) {
             int xPos = getXWithOffset(x, 0);
             int zPos = getZWithOffset(x, 0);
-            int yPos = 64; //TODO world.getTopSolidOrLiquidBlock(xPos, zPos);
-            while (world.getBlockState(new BlockPos(xPos, y, zPos)).getBlock().getMaterial().equals(Material.wood) ||
-                    world.getBlockState(new BlockPos(xPos, y, zPos)).getBlock().getMaterial().equals(Material.leaves)) {
-                yPos--;
+            BlockPos pos = world.getTopSolidOrLiquidBlock(new BlockPos(xPos, 0, zPos));
+            while (world.getBlockState(pos).getBlock().getMaterial().equals(Material.wood) ||
+                    world.getBlockState(pos).getBlock().getMaterial().equals(Material.leaves)) {
+                pos = pos.down();
             }
-            y += yPos;
+            y += pos.getY();
         }
         y /= 6;
 
@@ -191,9 +191,9 @@ public class Fence extends CatacombsBaseComponent {
             this.fillWithBlocks(world, boundingBox, 44, y + 3, 0, 45, y + 4, 0, Blocks.iron_bars.getDefaultState(), false);
 
             // slabs
-            this.fillWithBlocks(world, boundingBox, 44, y + 5, 0, 45, y + 5, 0, Blocks.stone_slab.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP), false);
-            this.placeBlockAtCurrentPosition(world, Blocks.stone_slab.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.BOTTOM), 42, y + 4, 0, boundingBox);
-            this.placeBlockAtCurrentPosition(world, Blocks.stone_slab.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.BOTTOM), 47, y + 4, 0, boundingBox);
+            this.fillWithBlocks(world, boundingBox, 44, y + 5, 0, 45, y + 5, 0, Blocks.stone_slab.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.BOTTOM), false);
+            this.placeBlockAtCurrentPosition(world, Blocks.stone_slab.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP), 42, y + 4, 0, boundingBox);
+            this.placeBlockAtCurrentPosition(world, Blocks.stone_slab.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP), 47, y + 4, 0, boundingBox);
         }
     }
 

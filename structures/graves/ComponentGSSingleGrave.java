@@ -12,6 +12,7 @@ import gravestone.structures.GraveGenerationHelper;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
@@ -23,8 +24,8 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
  */
 public class ComponentGSSingleGrave extends ComponentGraveStone {
 
-    public ComponentGSSingleGrave(int direction, Random random, int x, int z) {
-        super(direction);
+    public ComponentGSSingleGrave(int componentType, EnumFacing direction, Random random, int x, int z) {
+        super(componentType, direction);
         boundingBox = new StructureBoundingBox(x, 0, z, x, 240, z);
     }
 
@@ -36,7 +37,7 @@ public class ComponentGSSingleGrave extends ComponentGraveStone {
         int positionX, positionZ, y;
         positionX = getXWithOffset(0, 0);
         positionZ = getZWithOffset(0, 0);
-        y = 100;//TODO world.getTopSolidOrLiquidBlock(positionX, positionZ) - boundingBox.minY;
+        y = world.getTopSolidOrLiquidBlock(new BlockPos(positionX, 0, positionZ)).getY() - boundingBox.minY;
 
         if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
             GSLogger.logInfo("Generate grave at " + positionX + "x" + positionZ);

@@ -4,6 +4,8 @@ import gravestone.structures.catacombs.components.CatacombsBaseComponent;
 import gravestone.structures.catacombs.components.Entrance;
 import java.util.LinkedList;
 import java.util.Random;
+
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 /**
@@ -14,10 +16,10 @@ import net.minecraft.world.World;
  */
 public class CatacombsUnderground {
 
-    private final int direction;
+    private final EnumFacing direction;
     private CatacombsBaseComponent entrance;
 
-    public CatacombsUnderground(World world, Random rand, int direction, int x, int y, int z) {
+    public CatacombsUnderground(World world, Random rand, EnumFacing direction, int x, int y, int z) {
         this.direction = direction;
         prepareStructurePieces(rand, x, y, z);
         build(world, rand);
@@ -27,7 +29,7 @@ public class CatacombsUnderground {
      * sets up Arrays with the Structure pieces and their weights
      */
     private void prepareStructurePieces(Random rand, int x, int y, int z) {
-        entrance = new Entrance(direction, rand, x, y, z);
+        entrance = new Entrance(0, direction, rand, x, y, z);
     }
 
     public final void build(World world, Random rand) {

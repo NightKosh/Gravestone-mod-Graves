@@ -5,6 +5,7 @@ import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.MobSpawnHelper;
 import gravestone.structures.ObjectsGenerationHelper;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -21,10 +22,10 @@ public class EnderHall extends CatacombsBaseComponent {
     public static final int HEIGHT = 5;
     public static final int Z_LENGTH = 18;
 
-    public EnderHall(int direction, int level, Random random, int x, int y, int z) {
-        super(direction, level);
+    public EnderHall(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(componentType, facing, level);
         xShift = 4;
-        boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
+        boundingBox = BoundingBoxHelper.getCorrectBox(facing, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
         topXEnd = 4;
         topZEnd = Z_LENGTH;
         goTop = true;

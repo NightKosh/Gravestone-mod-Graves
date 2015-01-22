@@ -3,8 +3,8 @@ package gravestone.structures.catacombs.components;
 import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.MobSpawnHelper;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -21,32 +21,32 @@ public class Corridor extends CatacombsBaseComponent {
     public static final int HEIGHT = 5;
     public static final int Z_LENGTH = 5;
 
-    public Corridor(int direction, int level, Random random, int x, int y, int z) {
-        super(direction, level);
-        boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
+    public Corridor(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(componentType, facing, level);
+        boundingBox = BoundingBoxHelper.getCorrectBox(facing, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
         topXEnd = 0;
         topZEnd = Z_LENGTH - 1;
 
-        switch (direction) {
-            case 0:
+        switch (facing) {
+            case SOUTH:
                 leftXEnd = X_LENGTH - 1;
                 leftZEnd = 0;
                 rightXEnd = 0;
                 rightZEnd = 0;
                 break;
-            case 1:
+            case NORTH:
                 leftXEnd = X_LENGTH - 1;
                 leftZEnd = 4;
                 rightXEnd = 0;
                 rightZEnd = 4;
                 break;
-            case 2:
+            case EAST:
                 leftXEnd = 0;
                 leftZEnd = 4;
                 rightXEnd = X_LENGTH - 1;
                 rightZEnd = 4;
                 break;
-            case 3:
+            case WEST:
                 leftXEnd = 0;
                 leftZEnd = 0;
                 rightXEnd = X_LENGTH - 1;

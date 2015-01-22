@@ -2,6 +2,7 @@ package gravestone.structures.catacombs.components;
 
 import gravestone.structures.BoundingBoxHelper;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 
@@ -17,8 +18,8 @@ public class MausoleumEntrance extends CatacombsBaseComponent {
 
     private int offsetY;
 
-    public MausoleumEntrance(int direction, Random random, StructureBoundingBox structureBoundingBox, int offsetY) {
-        super(direction);
+    public MausoleumEntrance(int componentType, EnumFacing direction, Random random, StructureBoundingBox structureBoundingBox, int offsetY) {
+        super(componentType, direction);
         this.boundingBox = structureBoundingBox;
         this.offsetY = offsetY;
     }

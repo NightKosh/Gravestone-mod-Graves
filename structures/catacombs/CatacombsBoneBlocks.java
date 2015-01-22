@@ -1,5 +1,7 @@
 package gravestone.structures.catacombs;
 
+import gravestone.block.BlockGSBoneBlock;
+import gravestone.block.enums.EnumBoneBlock;
 import gravestone.core.GSBlock;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.structure.StructureComponent;
@@ -22,21 +24,22 @@ public class CatacombsBoneBlocks extends StructureComponent.BlockSelector {
      */
     @Override
     public void selectBlocks(Random random, int par2, int par3, int par4, boolean flag) {
-        //TODO
-//        if (flag) {
-//            this.field_151562_a = GSBlock.boneBlock;
-//            if (random.nextInt(5) == 0) {
-//                this.selectedBlockMetaData = 1;
-//            } else {
-//                this.selectedBlockMetaData = 0;
-//            }
-//
-//            if (random.nextInt(100) < 60) {
-//                this.selectedBlockMetaData += 2;
-//            }
-//        } else {
-//            this.field_151562_a = Blocks.air;
-//            this.selectedBlockMetaData = 0;
-//        }
+        if (flag) {
+            if (random.nextInt(5) == 0) {
+                if (random.nextInt(100) < 60) {
+                    this.field_151562_a = GSBlock.boneBlock.getDefaultState().withProperty(BlockGSBoneBlock.VARIANT, EnumBoneBlock.CRAWLER_SKULL_BONE_BLOCK);
+                } else {
+                    this.field_151562_a = GSBlock.boneBlock.getDefaultState().withProperty(BlockGSBoneBlock.VARIANT, EnumBoneBlock.SKULL_BONE_BLOCK);
+                }
+            } else {
+                if (random.nextInt(100) < 60) {
+                    this.field_151562_a = GSBlock.boneBlock.getDefaultState().withProperty(BlockGSBoneBlock.VARIANT, EnumBoneBlock.CRAWLER_BONE_BLOCK);
+                } else {
+                    this.field_151562_a = GSBlock.boneBlock.getDefaultState();
+                }
+            }
+        } else {
+            this.field_151562_a = Blocks.air.getDefaultState();
+        }
     }
 }
