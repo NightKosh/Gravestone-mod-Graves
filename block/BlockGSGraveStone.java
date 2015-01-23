@@ -485,7 +485,6 @@ public class BlockGSGraveStone extends BlockContainer {
                 ItemStack item = player.inventory.getCurrentItem();
                 if (item.getItem() instanceof ItemSpade) {
                     if (!world.isRemote) {
-                        // TODO getName  - getCommandSenderName
                         GSLogger.logInfoGrave(player.getName() + " loot grave at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
                         te.dropAllItems();
                     }
@@ -741,8 +740,7 @@ public class BlockGSGraveStone extends BlockContainer {
 
         BlockPos newPos = GraveStoneHelper.findPlaceForGrave(world, pos);
         if (newPos != null) {
-            //TODO
-            //world.setBlock(newPos, this, GraveStoneHelper.getMetadataBasedOnRotation(direction), 2);
+            world.setBlockState(newPos, this.getDefaultState().withProperty(FACING, direction), 2);
             TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(newPos);
 
             if (tileEntity != null) {

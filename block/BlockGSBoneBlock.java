@@ -2,6 +2,7 @@ package gravestone.block;
 
 import gravestone.block.enums.EnumBoneBlock;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSBlock;
 import gravestone.core.GSTabs;
 import gravestone.entity.monster.EntitySkullCrawler;
 import net.minecraft.block.Block;
@@ -29,8 +30,6 @@ import java.util.List;
 public class BlockGSBoneBlock extends Block {
 
     public static final PropertyEnum VARIANT = PropertyEnum.create("variant", EnumBoneBlock.class);
-//    @SideOnly(Side.CLIENT)
-//    private IIcon skullIcon;
 
     public BlockGSBoneBlock() {
         super(Material.rock);
@@ -41,24 +40,6 @@ public class BlockGSBoneBlock extends Block {
         this.setCreativeTab(GSTabs.otherItemsTab);
         this.setHarvestLevel("pickaxe", 0);
     }
-
-//    @Override
-//    public void registerBlockIcons(IIconRegister iconRegister) {
-//        this.blockIcon = iconRegister.registerIcon(Resources.BONE_BLOCK);
-//        this.skullIcon = iconRegister.registerIcon(Resources.SKULL_BONE_BLOCK);
-//    }
-
-    /**
-     * From the specified side and block metadata retrieves the blocks texture.
-     */
-//    @Override
-//    public IIcon getIcon(int side, int metadata) {
-//        if (metadata == 1 || metadata == 3) {
-//            return skullIcon;
-//        } else {
-//            return blockIcon;
-//        }
-//    }
 
     /**
      * Returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
@@ -99,8 +80,22 @@ public class BlockGSBoneBlock extends Block {
     }
 
     public boolean isSkullCrawlerBlock(IBlockState state) {
-        int metadata = ((Enum) state.getValue(VARIANT)).ordinal();
-        return metadata == 2 || metadata == 3;
+        EnumBoneBlock variant = (EnumBoneBlock) state.getValue(VARIANT);
+        return variant == EnumBoneBlock.CRAWLER_BONE_BLOCK || variant == EnumBoneBlock.CRAWLER_SKULL_BONE_BLOCK;
+    }
+
+    public static boolean canContainCrawler(IBlockState state) {
+        return state.equals(GSBlock.boneBlock.getDefaultState().withProperty(BlockGSBoneBlock.VARIANT, EnumBoneBlock.BONE_BLOCK)) ||
+                state.equals(GSBlock.boneBlock.getDefaultState().withProperty(BlockGSBoneBlock.VARIANT, EnumBoneBlock.SKULL_BONE_BLOCK));
+    }
+
+    public static IBlockState getCrawlerBlockState(IBlockState state) {
+        EnumBoneBlock variant = (EnumBoneBlock) state.getValue(VARIANT);
+        if (variant == EnumBoneBlock.BONE_BLOCK) {
+            return state.withProperty(BlockGSBoneBlock.VARIANT, EnumBoneBlock.CRAWLER_BONE_BLOCK);
+        } else {
+            return state.withProperty(BlockGSBoneBlock.VARIANT, EnumBoneBlock.CRAWLER_SKULL_BONE_BLOCK);
+        }
     }
 
     /**

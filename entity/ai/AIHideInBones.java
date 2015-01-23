@@ -1,5 +1,7 @@
 package gravestone.entity.ai;
 
+import gravestone.block.BlockGSBoneBlock;
+import gravestone.core.GSBlock;
 import gravestone.entity.monster.EntitySkullCrawler;
 import net.minecraft.block.BlockSilverfish;
 import net.minecraft.block.state.IBlockState;
@@ -39,11 +41,10 @@ public class AIHideInBones extends EntityAIWander {
 
             if (random.nextInt(10) == 0) {
                 this.enumFacing = EnumFacing.random(random);
-                BlockPos blockpos = (new BlockPos(crawler.posX, crawler.posY + 0.5D, crawler.posZ)).offset(this.enumFacing);
-                IBlockState iblockstate = crawler.worldObj.getBlockState(blockpos);
+                BlockPos blockPos = (new BlockPos(crawler.posX, crawler.posY + 0.5, crawler.posZ)).offset(this.enumFacing);
+                IBlockState blockState = crawler.worldObj.getBlockState(blockPos);
 
-                //TODO
-                if (BlockSilverfish.canContainSilverfish(iblockstate)) {
+                if (BlockGSBoneBlock.canContainCrawler(blockState)) {
                     this.field_179484_c = true;
                     return true;
                 }
@@ -66,15 +67,10 @@ public class AIHideInBones extends EntityAIWander {
                 super.startExecuting();
             } else {
                 World world = crawler.worldObj;
-                BlockPos blockpos = (new BlockPos(crawler.posX, crawler.posY + 0.5D, crawler.posZ)).offset(this.enumFacing);
-                IBlockState iblockstate = world.getBlockState(blockpos);
-
-//            int metadata = world.getBlockMetadata(x, y, z);
-
-//            if (GSBlock.boneBlock.equals(iblockstate.getBlock()) && !GSBlock.boneBlock.isSkullCrawlerBlock(metadata)) {
-//                world.setBlock(x, y, z, GSBlock.boneBlock, metadata + 2, 3);
-                if (BlockSilverfish.canContainSilverfish(iblockstate)) {
-                    world.setBlockState(blockpos, Blocks.monster_egg.getDefaultState().withProperty(BlockSilverfish.VARIANT, BlockSilverfish.EnumType.forModelBlock(iblockstate)), 3);
+                BlockPos blockPos = (new BlockPos(crawler.posX, crawler.posY + 0.5D, crawler.posZ)).offset(this.enumFacing);
+                IBlockState blockState = world.getBlockState(blockPos);
+                if (BlockGSBoneBlock.canContainCrawler(blockState)) {
+                    world.setBlockState(blockPos, GSBlock.boneBlock.getCrawlerBlockState(blockState), 3);
                     crawler.spawnExplosionParticle();
                     crawler.setDead();
                 }

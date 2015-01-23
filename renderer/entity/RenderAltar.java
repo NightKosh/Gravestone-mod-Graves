@@ -35,8 +35,7 @@ public class RenderAltar extends TileEntitySpecialRenderer {
             }
             entityItem.hoverStart = 0;
 
-            //TODO
-//            RenderManager.instance.renderEntityWithPosYaw(entityItem, 0, 0, 0, 0, 0);
+            Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityItem, 0, 0, 0, 0, 0);
             GL11.glPopMatrix();
         }
     }

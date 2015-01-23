@@ -4,6 +4,7 @@ import gravestone.ModGraveStone;
 import gravestone.core.compatibility.GSCompatibilitySophisticatedWolves;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -41,8 +42,7 @@ public class DogCorpseHelper extends CorpseHelper {
 
     public static void setNbt(EntityWolf dog, NBTTagCompound nbt) {
         setName(dog, nbt);
-        //TODO
-//        nbt.setByte("Collar", (byte) dog.getCollarColor());
+        nbt.setByte("Collar", (byte) dog.getCollarColor().getMetadata());
 
         if (GSCompatibilitySophisticatedWolves.isInstalled() && dog instanceof ISophisticatedWolf) {
             nbt.setInteger("Species", ((ISophisticatedWolf) dog).getSpecies());
@@ -61,8 +61,7 @@ public class DogCorpseHelper extends CorpseHelper {
         wolf.setTamed(true);
         wolf.setHealth(20);
         wolf.setOwnerId(player.getUniqueID().toString());
-        //TODO
-//        wolf.setCollarColor(nbtTag.getByte("Collar"));
+        wolf.setCollarColor(EnumDyeColor.byMetadata(nbtTag.getByte("Collar")));
         world.setEntityState(wolf, (byte) 7);
         spawnMob(wolf, world, x, y, z);
     }

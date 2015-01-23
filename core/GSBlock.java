@@ -52,7 +52,6 @@ public class GSBlock {
             ItemStack graveStoneStack = new ItemStack(graveStone, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", i);
-            //TODO
             if (GraveStoneHelper.isSwordGrave(i)) {
                 nbt.setByte("SwordType", GraveStoneHelper.oldGraveTypeToSwordType(i));
             }

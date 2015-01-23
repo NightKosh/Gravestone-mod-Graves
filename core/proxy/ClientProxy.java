@@ -112,7 +112,6 @@ public class ClientProxy extends CommonProxy {
         try {
             localizedString = LanguageRegistry.instance().getStringLocalization(str);
         } catch (Exception e) {
-            // TODO
         }
         if (StringUtils.isBlank(localizedString)) {
             return LanguageRegistry.instance().getStringLocalization(str, "en_US");

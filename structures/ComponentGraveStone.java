@@ -21,8 +21,6 @@ public class ComponentGraveStone extends StructureComponent {
     protected ComponentGraveStone(int componentType, EnumFacing facing) {
         super(componentType);
         this.coordBaseMode = facing;
-        // TODO
-        //coordBaseMode = direction;
     }
 
     /**

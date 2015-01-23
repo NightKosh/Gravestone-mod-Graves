@@ -269,7 +269,6 @@ public class GraveStoneHelper {
      *
      * @param graveType Grave type
      */
-    // TODO
     public static boolean isSwordGrave(byte graveType) {
         return graveType == EnumGraves.SWORD.ordinal();
     }
@@ -558,7 +557,6 @@ public class GraveStoneHelper {
         String shortString = "death.attack." + damageType;
         String fullString = shortString + ".player";
 
-        //TODO getName().getCommandSenderName()
         String entityName = entity.getName();
         if (entityName == null) {
             entityName = "entity." + EntityList.getEntityString(entity) + ".name";

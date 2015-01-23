@@ -116,7 +116,6 @@ public class ItemBlockGSGraveStone extends ItemBlock {
 
     @Override
     @SideOnly(Side.CLIENT)
-    // TODO
     public boolean hasEffect(ItemStack stack) {
         return stack.getTagCompound() != null && stack.getTagCompound().hasKey("Enchanted");
     }

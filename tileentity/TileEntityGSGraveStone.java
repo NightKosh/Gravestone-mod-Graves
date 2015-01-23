@@ -5,11 +5,8 @@ import gravestone.block.enums.EnumGraves;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.TimeHelper;
 import gravestone.core.event.GSRenderEventHandler;
-import gravestone.core.logger.GSLogger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
@@ -104,7 +101,6 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
         readSwordInfo(nbtTag);
 
         // read
-        // TODO
         readFlowerInfo(nbtTag);
     }
 
@@ -131,10 +127,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     }
 
     private void readSwordInfo(NBTTagCompound nbtTag) {
-        // TODO temporary compatibility with old versions - must be removed in feature
-        if (this.graveType > 4 && this.graveType < 10 || nbtTag.hasKey("SwordGrave")) {
-            convertSword(nbtTag);
-        } else if (nbtTag.hasKey("Sword")) {
+        if (nbtTag.hasKey("Sword")) {
             sword = ItemStack.loadItemStackFromNBT(nbtTag.getCompoundTag("Sword"));
         }
     }
@@ -205,56 +198,6 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
 
     public boolean isEmpty() {
         return gSItems.graveContents.isEmpty();
-    }
-
-    private void convertSword(NBTTagCompound nbtTag) {
-        GSLogger.logInfo("Start converting sword gravestone!");
-        try {
-            Item sword;
-            byte swordType = nbtTag.getByte("SwordType");
-            if (swordType == 0) {
-                swordType = (byte) (this.graveType - 4);
-            }
-            switch (swordType) {
-                case 5:
-                    sword = Items.diamond_sword;
-                    break;
-                case 3:
-                    sword = Items.iron_sword;
-                    break;
-                case 2:
-                    sword = Items.stone_sword;
-                    break;
-                case 4:
-                    sword = Items.golden_sword;
-                    break;
-                default:
-                    sword = Items.wooden_sword;
-            }
-            GSLogger.logInfo("Sword type - " + nbtTag.getByte("SwordType") + ". Will be converted to " + sword.getUnlocalizedName());
-
-            int damage = 0;
-            if (nbtTag.hasKey("SwordDamage")) {
-                damage = nbtTag.getInteger("SwordDamage");
-                GSLogger.logInfo("Sword damage - " + damage);
-            }
-
-            ItemStack stack = new ItemStack(sword, 1, damage);
-
-            if (nbtTag.hasKey("SwordName")) {
-                stack.setStackDisplayName(nbtTag.getString("SwordName"));
-                GSLogger.logInfo("Sword name - " + nbtTag.getString("SwordName"));
-            }
-
-            if (nbtTag.hasKey("SwordNBT")) {
-                stack.setTagCompound(nbtTag.getCompoundTag("SwordNBT"));
-            }
-            this.sword = stack;
-        } catch (Exception e) {
-            GSLogger.logError("Something went wrong!!!");
-            e.printStackTrace();
-        }
-        GSLogger.logInfo("Gravestone converting complete!");
     }
 
     @Override

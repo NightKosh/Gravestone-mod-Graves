@@ -4,16 +4,10 @@ import gravestone.ModGraveStone;
 import gravestone.core.GSMessageHandler;
 import gravestone.packets.GraveDeathMessageToServer;
 import gravestone.tileentity.TileEntityGSGrave;
-import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import org.lwjgl.input.Keyboard;
-
-import java.util.Random;
 
 /**
  * GraveStone mod
@@ -45,8 +39,6 @@ public class GSGuiGrave extends GuiScreen {
         Keyboard.enableRepeatEvents(true);
         this.buttonList.add(randomTextButton = new GuiButton(1, this.width / 2 - 100, this.height / 4 + 95, randomTextStr));
         this.buttonList.add(closeButton = new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120, closeStr));
-        //TODO
-//        this.textField = new GuiTextField(this.fontRendererObj, this.width / 2 - 100, 100, 200, 20);
         this.textField = new GuiTextField(0, this.fontRendererObj, this.width / 2 - 100, 100, 200, 20);
         this.textField.setText("");
         this.textField.setEnabled(true);

@@ -38,7 +38,6 @@ public class BlockGSCandle extends BlockContainer {
         this.setHardness(0);
         this.setLightLevel(1);
         this.setResistance(0);
-//        this.setBlockTextureName("snow");
         this.setCreativeTab(GSTabs.otherItemsTab);
         this.setBlockBounds(0.4F, 0.0F, 0.4F, 0.6F, 0.6F, 0.6F);
     }

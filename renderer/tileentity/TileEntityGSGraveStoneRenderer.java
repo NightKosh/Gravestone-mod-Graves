@@ -5,6 +5,7 @@ import gravestone.block.enums.EnumGraves;
 import gravestone.models.block.ModelGraveStone;
 import gravestone.models.block.graves.*;
 import gravestone.tileentity.TileEntityGSGraveStone;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -186,24 +187,6 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         GL11.glPopMatrix();
     }
 
-    /**
-     * Return grave direction by metadata
-     */
-    private static int getGraveDirection(int meta) {
-        switch (meta) {
-            case 0: // S
-                return 0;
-            case 1: // N
-                return 2;
-            case 2: // E
-                return 3;
-            case 3: // W
-                return 1;
-            default:
-                return 2;
-        }
-    }
-
     private void renderSword(TileEntityGSGraveStone te) {
         ItemStack sword = te.getSword();
         if (te.isEnchanted()) {
@@ -220,22 +203,19 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         GL11.glScalef(1.5F, -1.5F, -1.5F);
         GL11.glRotatef(135, 0, 0, 1);
 
-        // TODO
-//        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
+        Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
     }
 
     private void renderFlower(TileEntityGSGraveStone te) {
         EntityItem entityitem = new EntityItem(te.getWorld(), 0, 0, 0, te.getFlower());
         entityitem.hoverStart = 0;
         GL11.glTranslatef(0, 1.45F, -0.1F);
-        GL11.glScalef(1, -1F, -1F);
+        GL11.glScalef(1, -1, -1);
         GL11.glRotatef(45, 0, 1, 0);
 
-        // TODO
-//        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
+        Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
 
         GL11.glRotatef(-90, 0, 1, 0);
-        // TODO
-//        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
+        Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
     }
 }

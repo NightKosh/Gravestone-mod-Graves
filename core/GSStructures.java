@@ -70,7 +70,6 @@ public class GSStructures {
     }
 
     private void generateStructures() {
-        //TODO
         // register cemeteries
         if (GraveStoneConfig.generateCemeteries) {
             VillageHandlerGSCemetery villageCemeteryHandler = new VillageHandlerGSCemetery();

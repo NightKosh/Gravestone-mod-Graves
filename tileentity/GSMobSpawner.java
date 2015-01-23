@@ -1,12 +1,11 @@
 package gravestone.tileentity;
 
-import gravestone.core.logger.GSLogger;
 import gravestone.block.BlockGSSpawner;
 import gravestone.block.enums.EnumSpawner;
 import gravestone.core.GSMobSpawn;
+import gravestone.core.logger.GSLogger;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -78,11 +77,10 @@ public class GSMobSpawner extends GSSpawner {
     private EnumSpawner getSpawnerType() {
         if (spawnerType == null) {
             if (tileEntity.getWorld() == null) {
-                GSLogger.logError("Spawner te worldobj is null !!!!!");
+                GSLogger.logError("Spawner tileentity's world obj is null !!!!!");
                 return EnumSpawner.ZOMBIE_SPAWNER;
             } else {
-                byte meta = (byte) 0;//TODO tileEntity.getWorld().getBlockMetadata(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ());
-                spawnerType = EnumSpawner.getById(meta);
+                spawnerType = EnumSpawner.getById((byte) tileEntity.getBlockMetadata());
                 return spawnerType;
             }
         }

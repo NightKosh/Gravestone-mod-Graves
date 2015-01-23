@@ -256,7 +256,6 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
         int zCoord = this.getZWithOffset(x, z);
 
         if (checkPainting(world, xCoord, yCoord, zCoord)) {
-            //TODO - position
             EntityPainting painting = new EntityPainting(world, new BlockPos(xCoord, yCoord, zCoord), getPaintingDirection(direction));
             painting.art = paintings[world.rand.nextInt(paintings.length)];
             world.spawnEntityInWorld(painting);
