@@ -4,7 +4,6 @@ import gravestone.block.enums.EnumSpawner;
 import gravestone.core.Resources;
 import gravestone.models.block.ModelSpawnerPentagram;
 import gravestone.tileentity.TileEntityGSSpawner;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
@@ -36,7 +35,7 @@ public class TileEntityGSSpawnerRenderer extends TileEntityGSRenderer {
         GL11.glPushMatrix();
         if (tileEntity.getWorld() != null) {
             GL11.glTranslatef(x + 0.5F, y + 1.5F, z + 0.5F);
-            GL11.glScalef(1.0F, -1F, -1F);
+            GL11.glScalef(1, -1, -1);
         } else {
             GL11.glTranslatef(x + 0.5F, y + 1, z + 0.5F);
             GL11.glScalef(0.6F, -0.6F, -0.6F);

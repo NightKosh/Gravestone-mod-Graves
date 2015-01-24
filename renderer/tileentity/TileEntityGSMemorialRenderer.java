@@ -181,7 +181,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
 
         if (tileEntity.getWorld() != null) {
             GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-            GL11.glScalef(1F, -1F, -1F);
+            GL11.glScalef(1, -1, -1);
         } else {
             switch (memorialType) {
                 case WOODEN_CROSS:
@@ -222,16 +222,16 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
 
         switch (facing) {
             case SOUTH:
-                GL11.glRotatef(0, 0.0F, 1.0F, 0.0F);
+                GL11.glRotatef(0, 0, 1, 0);
                 break;
             case WEST:
-                GL11.glRotatef(90, 0.0F, 1.0F, 0.0F);
+                GL11.glRotatef(90, 0, 1, 0);
                 break;
             case NORTH:
-                GL11.glRotatef(180, 0.0F, 1.0F, 0.0F);
+                GL11.glRotatef(180, 0, 1, 0);
                 break;
             case EAST:
-                GL11.glRotatef(270, 0.0F, 1.0F, 0.0F);
+                GL11.glRotatef(270, 0, 1, 0);
                 break;
         }
 //

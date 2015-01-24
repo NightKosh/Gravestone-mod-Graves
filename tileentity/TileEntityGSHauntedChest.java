@@ -2,6 +2,7 @@ package gravestone.tileentity;
 
 import gravestone.block.enums.EnumHauntedChest;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntityBat;
@@ -12,6 +13,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 /**
@@ -55,14 +57,14 @@ public class TileEntityGSHauntedChest extends TileEntity implements IUpdatePlaye
             f = 0.1F;
             double d0;
 
-            if (this.openTicks > 0 && this.lidAngle == 0.0F) {
+            if (this.openTicks > 0 && this.lidAngle == 0) {
                 double d1 = (double) this.pos.getX() + 0.5D;
                 d0 = (double) this.pos.getZ() + 0.5D;
 
                 this.worldObj.playSoundEffect(d1, (double) this.pos.getY() + 0.5D, d0, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
             }
 
-            if (this.openTicks == 0 && this.lidAngle > 0.0F || this.openTicks > 0 && this.lidAngle < 1.0F) {
+            if (this.openTicks == 0 && this.lidAngle > 0 || this.openTicks > 0 && this.lidAngle < 1) {
                 float f1 = this.lidAngle;
 
                 if (this.openTicks > 0) {
@@ -71,8 +73,8 @@ public class TileEntityGSHauntedChest extends TileEntity implements IUpdatePlaye
                     this.lidAngle -= f;
                 }
 
-                if (this.lidAngle > 1.0F) {
-                    this.lidAngle = 1.0F;
+                if (this.lidAngle > 1) {
+                    this.lidAngle = 1;
                 }
 
                 float f2 = 0.5F;
@@ -83,8 +85,8 @@ public class TileEntityGSHauntedChest extends TileEntity implements IUpdatePlaye
                     this.worldObj.playSoundEffect(d0, (double) this.pos.getY() + 0.5D, d2, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
                 }
 
-                if (this.lidAngle < 0.0F) {
-                    this.lidAngle = 0.0F;
+                if (this.lidAngle < 0) {
+                    this.lidAngle = 0;
                 }
             }
         } else {
@@ -95,11 +97,9 @@ public class TileEntityGSHauntedChest extends TileEntity implements IUpdatePlaye
 
         if (openTicks == 0) {
             if (this.isOpen && GraveStoneConfig.replaceHauntedChest) {
-                //TODO
-//                int meta = worldObj.getBlockMetadata(this.pos.getX(), this.pos.getY(), this.pos.getZ());
-//                this.worldObj.removeTileEntity(this.pos);
-//                this.worldObj.setBlock(this.pos.getX(), this.pos.getY(), this.pos.getZ(), Blocks.chest);
-//                this.worldObj.setBlockMetadataWithNotify(this.pos.getX(), this.pos.getY(), this.pos.getZ(), meta, 2);
+                BlockPos pos = new BlockPos(this.pos.getX(), this.pos.getY(), this.pos.getZ());
+                this.worldObj.removeTileEntity(this.pos);
+                this.worldObj.setBlockState(pos, Blocks.chest.getStateFromMeta(GSBlock.hauntedChest.getMetaFromState(worldObj.getBlockState(pos))));
             }
             this.isOpen = false;
         }
@@ -144,7 +144,7 @@ public class TileEntityGSHauntedChest extends TileEntity implements IUpdatePlaye
         switch (getChestType()) {
             case SKELETON_CHEST:
                 EntitySkeleton skeleton = GSMobSpawn.getSkeleton(world, (byte) 1);
-                skeleton.setLocationAndAngles(this.pos.getX() + 0.5, this.pos.getY(), this.pos.getZ() + 0.5, 0.0F, 0.0F);
+                skeleton.setLocationAndAngles(this.pos.getX() + 0.5, this.pos.getY(), this.pos.getZ() + 0.5, 0, 0);
                 world.spawnEntityInWorld(skeleton);
                 break;
             case BATS_CHEST:
@@ -154,7 +154,7 @@ public class TileEntityGSHauntedChest extends TileEntity implements IUpdatePlaye
 
                 for (byte i = 0; i < batsCount; i++) {
                     bat = new EntityBat(world);
-                    bat.setLocationAndAngles(this.pos.getX() + 0.5, this.pos.getY() + 0.7, this.pos.getZ() + 0.5, 0.0F, 0.0F);
+                    bat.setLocationAndAngles(this.pos.getX() + 0.5, this.pos.getY() + 0.7, this.pos.getZ() + 0.5, 0, 0);
 
                     world.spawnEntityInWorld(bat);
                 }

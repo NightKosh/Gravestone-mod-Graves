@@ -50,12 +50,11 @@ public class BlockGSSpawner extends BlockMobSpawner {
     public BlockGSSpawner() {
         super();
         this.setUnlocalizedName("Spawner");
-        this.setHardness(5.0F);
+        this.setHardness(4);
         this.setLightLevel(0.45F);
         this.setStepSound(Block.soundTypeMetal);
         this.disableStats();
         this.setCreativeTab(GSTabs.otherItemsTab);
-//        this.setBlockTextureName(Resources.PENTAGRAM_ICO);
         this.setBlockBounds(-0.5F, 0, -0.5F, 1.5F, 0.05F, 1.5F);
         this.setHarvestLevel("pickaxe", 1);
     }
@@ -90,14 +89,14 @@ public class BlockGSSpawner extends BlockMobSpawner {
     }
 
     @Override
+    public boolean isFullCube() {
+        return false;
+    }
+
+    @Override
     public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state) {
         return null;
     }
-
-//    @Override
-//    public boolean renderAsNormalBlock() {
-//        return false;
-//    }
 
     /**
      * A randomly called display update to be able to add particles or other
@@ -130,7 +129,6 @@ public class BlockGSSpawner extends BlockMobSpawner {
         List<ItemStack> ret = new ArrayList<ItemStack>();
         Random random = new Random();
         int metadata = ((Enum) state.getValue(VARIANT)).ordinal();
-        //TODO getBlockState ??? + meta -> fortune
         ret.add(new ItemStack(getItemDropped(access.getBlockState(pos), random, fortune), quantityDropped(random), getItemMeta(metadata)));
 
         for (int i = 0; i < 5; i++) {

@@ -219,7 +219,7 @@ public class GraveHall extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, x, 1, z, x, 5, z, Blocks.nether_brick.getDefaultState(), false);
         IBlockState netherBrickStairsState = Blocks.nether_brick_stairs.getDefaultState();
         IBlockState netherBrickStairsTopState = netherBrickStairsState.withProperty(BlockStairs.FACING, this.coordBaseMode.getOpposite());
-        IBlockState netherBrickStairsBotState = netherBrickStairsState;
+        IBlockState netherBrickStairsBotState = netherBrickStairsState.withProperty(BlockStairs.FACING, this.coordBaseMode);
         IBlockState netherBrickStairsLeftState = netherBrickStairsState.withProperty(BlockStairs.FACING, this.getLeftDirection(this.coordBaseMode));
         IBlockState netherBrickStairsRightState = netherBrickStairsState.withProperty(BlockStairs.FACING, this.getRightDirection(this.coordBaseMode));
 

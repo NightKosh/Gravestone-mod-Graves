@@ -51,7 +51,18 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      * @param direction Component direction
      */
     public static EnumFacing getLeftDirection(EnumFacing direction) {
-        return direction.rotateYCCW();
+        switch (direction) {
+            case SOUTH:
+                return EnumFacing.EAST;
+            case EAST:
+                return EnumFacing.NORTH;
+            case WEST:
+                return EnumFacing.SOUTH;
+            case NORTH:
+            default:
+                return EnumFacing.WEST;
+        }
+//        return direction.rotateYCCW(); TODO
     }
 
     /**
@@ -60,56 +71,19 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      * @param direction Component direction
      */
     public static EnumFacing getRightDirection(EnumFacing direction) {
-        return direction.rotateY();
+        switch (direction) {
+            case SOUTH:
+                return EnumFacing.WEST;
+            case EAST:
+                return EnumFacing.SOUTH;
+            case WEST:
+                return EnumFacing.NORTH;
+            case NORTH:
+            default:
+                return EnumFacing.EAST;
+        }
+//        return direction.rotateY(); TODO
     }
-
-    /**
-     * Return left direction for items
-     *
-     * @param direction Component direction
-     */
-    // TODO - remove
-//    public static int getLeftItemDirection(int direction) {
-//        if (direction == 0 || direction == 1) {
-//            direction += 1;
-//
-//            if (direction > 3) {
-//                direction = 0;
-//            }
-//        } else {
-//            direction -= 1;
-//
-//            if (direction < 0) {
-//                direction = 3;
-//            }
-//        }
-//
-//        return direction;
-//    }
-
-    /**
-     * Return right direction for items
-     *
-     * @param direction Component direction
-     */
-    // TODO - remove
-//    public static int getRightItemDirection(int direction) {
-//        if (direction == 0 || direction == 1) {
-//            direction -= 1;
-//
-//            if (direction < 0) {
-//                direction = 3;
-//            }
-//        } else {
-//            direction += 1;
-//
-//            if (direction > 3) {
-//                direction = 0;
-//            }
-//        }
-//
-//        return direction;
-//    }
 
     /**
      * Return valuable block

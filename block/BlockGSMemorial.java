@@ -8,6 +8,7 @@ import gravestone.item.ItemGSCorpse;
 import gravestone.item.corpse.VillagerCorpseHelper;
 import gravestone.item.enums.EnumCorpse;
 import gravestone.particle.EntityBigFlameFX;
+import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -282,7 +283,7 @@ public class BlockGSMemorial extends BlockContainer {
         this.setStepSound(Block.soundTypeStone);
         this.setUnlocalizedName("Memorial");
         this.setHardness(1);
-        this.setResistance(5F);
+        this.setResistance(5);
         this.setCreativeTab(GSTabs.memorialsTab);
     }
 
@@ -337,7 +338,7 @@ public class BlockGSMemorial extends BlockContainer {
         if (biomeTypesList.contains(BiomeDictionary.Type.FOREST)) {
             memorialTypes.addAll(Arrays.asList(WOODEN_GENERATED_MEMORIALS));
         }
-        if (biomeTypesList.contains(BiomeDictionary.Type.FROZEN)) {
+        if (biomeTypesList.contains(BiomeDictionary.Type.SNOWY)) {
             memorialTypes.addAll(Arrays.asList(ICE_GENERATED_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.NETHER)) {
@@ -728,14 +729,14 @@ public class BlockGSMemorial extends BlockContainer {
     public void setBlockBoundsForItemRender() {
         this.setBlockBounds(0, 0, 0, 1, 1, 2);
     }
-//
-//    @Override
-//    public boolean renderAsNormalBlock() {
-//        return false;
-//    }
 
     @Override
     public boolean isOpaqueCube() {
+        return false;
+    }
+
+    @Override
+    public boolean isFullCube() {
         return false;
     }
 
@@ -901,13 +902,12 @@ public class BlockGSMemorial extends BlockContainer {
         }
 
         if (itemStack != null) {
-            //TODO this.dropBlockAsItem(world, pos, itemStack);
-            this.dropBlockAsItem(world, pos, state, 0);
+            GSGraveStoneItems.dropItem(itemStack, world, pos);
         }
     }
 
     private ItemStack getBlockItemStack(World world, BlockPos pos) {
-        ItemStack itemStack = this.createStackedBlock(world.getBlockState(pos));// TODO this.createStackedBlock(0);
+        ItemStack itemStack = this.createStackedBlock(this.getDefaultState());
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
 
         if (tileEntity != null) {
@@ -932,7 +932,7 @@ public class BlockGSMemorial extends BlockContainer {
     }
 
     private ItemStack getBlockItemStackWithoutInfo(World world, BlockPos pos) {
-        ItemStack itemStack = this.createStackedBlock(world.getBlockState(pos));// TODO this.createStackedBlock(0);
+        ItemStack itemStack = this.createStackedBlock(this.getDefaultState());
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
 
         if (tileEntity != null) {
@@ -960,13 +960,12 @@ public class BlockGSMemorial extends BlockContainer {
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setByte("GraveType", memorialType);
         itemStack.setTagCompound(nbt);
-        //TODO this.dropBlockAsItem(world, pos, itemStack);
-        this.dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
+        GSGraveStoneItems.dropItem(itemStack, world, pos);
     }
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos) {
-        ItemStack itemStack = this.createStackedBlock(world.getBlockState(pos));// TODO this.createStackedBlock(0);
+        ItemStack itemStack = this.createStackedBlock(this.getDefaultState());
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
 
         if (tileEntity != null) {

@@ -6,6 +6,7 @@ import gravestone.block.enums.EnumHauntedChest;
 import gravestone.core.GSBlock;
 import gravestone.tileentity.TileEntityGSHauntedChest;
 import net.minecraft.block.BlockChest;
+import net.minecraft.block.BlockDispenser;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -217,9 +218,7 @@ public class ObjectsGenerationHelper {
         int z = component.getZWithOffset(xCoord, zCoord);
 
         BlockPos pos = new BlockPos(x, y, z);
-        world.setBlockState(pos, Blocks.dispenser.getDefaultState());
-        // TODO
-//        ObjectsGenerationHelper.getDispenserMeta(world, x, y, z, direction);
+        world.setBlockState(pos, Blocks.dispenser.getDefaultState().withProperty(BlockDispenser.FACING, direction));
         TileEntityDispenser dispenser = (TileEntityDispenser) world.getTileEntity(pos);
         if (dispenser != null) {
             generateDispenserContents(random, dispenser);
@@ -241,33 +240,6 @@ public class ObjectsGenerationHelper {
      */
     private static int getRandomCount(Random random) {
         return 5 + random.nextInt(5);
-    }
-
-    /**
-     * Set dispenser metadata
-     *
-     * @param world     World object
-     * @param x         X coorf
-     * @param y         Y coord
-     * @param z         Z coord
-     * @param direction Direction
-     */
-    public static void getDispenserMeta(World world, int x, int y, int z, int direction) {
-        //TODO
-//        switch (direction) {
-//            case 0:
-//                world.setBlockMetadataWithNotify(x, y, z, 2, 2);
-//                break;
-//            case 1:
-//                world.setBlockMetadataWithNotify(x, y, z, 5, 2);
-//                break;
-//            case 2:
-//                world.setBlockMetadataWithNotify(x, y, z, 3, 2);
-//                break;
-//            case 3:
-//                world.setBlockMetadataWithNotify(x, y, z, 4, 2);
-//                break;
-//        }
     }
 
     public enum EnumChestTypes {

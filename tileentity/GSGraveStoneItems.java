@@ -147,9 +147,9 @@ public class GSGraveStoneItems {
 
                 items.stackSize -= var13;
                 entityItem = new EntityItem(world, pos.getX() + var10, pos.getY() + var11, pos.getZ() + var12, new ItemStack(items.getItem(), var13, items.getItemDamage()));
-                entityItem.motionX = (double) (random.nextGaussian() * 0.05F);
-                entityItem.motionY = (double) (random.nextGaussian() * 0.15F);
-                entityItem.motionZ = (double) (random.nextGaussian() * 0.05F);
+                entityItem.motionX = random.nextGaussian() * 0.05F;
+                entityItem.motionY = random.nextGaussian() * 0.15F;
+                entityItem.motionZ = random.nextGaussian() * 0.05F;
 
                 if (items.hasTagCompound()) {
                     entityItem.getEntityItem().setTagCompound((NBTTagCompound) items.getTagCompound().copy());

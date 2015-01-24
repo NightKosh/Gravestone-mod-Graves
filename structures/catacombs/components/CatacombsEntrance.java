@@ -43,13 +43,13 @@ public class CatacombsEntrance extends CatacombsBaseComponent {
                 break;
             case EAST:
                 leftXEnd = 0;
-                leftZEnd = (stairsLength + corridorLength) * 3 + 4;
+                leftZEnd = (stairsLength + corridorLength) * 3;
                 rightXEnd = 3;
                 rightZEnd = leftZEnd;
                 break;
             case WEST:
                 leftXEnd = 0;
-                leftZEnd = (stairsLength + corridorLength) * 3;
+                leftZEnd = (stairsLength + corridorLength) * 3 + 4;
                 rightXEnd = 3;
                 rightZEnd = leftZEnd;
                 break;
@@ -62,8 +62,8 @@ public class CatacombsEntrance extends CatacombsBaseComponent {
     @Override
     public boolean addComponentParts(World world, Random random) {
         int top = boundingBox.maxY - boundingBox.minY - 1;
-        IBlockState netherBrickStairsBotState = Blocks.nether_brick_stairs.getDefaultState();
-        IBlockState stairsTopState = Blocks.stone_brick_stairs.getDefaultState().withProperty(BlockStairs.FACING, this.coordBaseMode.getOpposite())
+        IBlockState netherBrickStairsBotState = Blocks.nether_brick_stairs.getDefaultState().withProperty(BlockStairs.FACING, this.coordBaseMode.getOpposite());
+        IBlockState stairsTopState = Blocks.stone_brick_stairs.getDefaultState().withProperty(BlockStairs.FACING, this.coordBaseMode)
                 .withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.TOP);
         int shiftY = top;
         int shiftZ = 0;

@@ -36,7 +36,7 @@ public class Stairs extends CatacombsBaseComponent {
      */
     @Override
     public boolean addComponentParts(World world, Random random) {
-        IBlockState netherBrickStairsBotState = Blocks.nether_brick_stairs.getDefaultState();
+        IBlockState netherBrickStairsBotState = Blocks.nether_brick_stairs.getDefaultState().withProperty(BlockStairs.FACING, this.coordBaseMode.getOpposite());
 
         int top = boundingBox.maxY - boundingBox.minY - 1;
         int shiftY;
@@ -70,7 +70,7 @@ public class Stairs extends CatacombsBaseComponent {
             this.fillWithBlocks(world, boundingBox, 1, shiftY - 7, shiftZ + 3, 3, shiftY - 7, shiftZ + 3, netherBrickStairsBotState, false);
 
             Block stairsBlock = CatacombsLevel.getCatacombsStairsByLevelId(this.level);
-            IBlockState stairsTopState = stairsBlock.getDefaultState().withProperty(BlockStairs.FACING, this.coordBaseMode.getOpposite())
+            IBlockState stairsTopState = stairsBlock.getDefaultState().withProperty(BlockStairs.FACING, this.coordBaseMode)
                     .withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.TOP);
 
             // block stairs

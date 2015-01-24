@@ -2,6 +2,7 @@ package gravestone.block;
 
 import gravestone.block.enums.EnumHauntedChest;
 import gravestone.core.GSTabs;
+import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSHauntedChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -59,6 +60,11 @@ public class BlockGSHauntedChest extends BlockContainer {
      */
     @Override
     public boolean isOpaqueCube() {
+        return false;
+    }
+
+    @Override
+    public boolean isFullCube() {
         return false;
     }
 
@@ -164,9 +170,7 @@ public class BlockGSHauntedChest extends BlockContainer {
         }
 
         if (itemStack != null) {
-            //TODO
-//            this.dropBlockAsItem(world, x, y, z, itemStack);
-            this.dropBlockAsItem(world, pos, state, 0);
+            GSGraveStoneItems.dropItem(itemStack, world, pos);
         }
     }
 
@@ -185,9 +189,7 @@ public class BlockGSHauntedChest extends BlockContainer {
      * Get chest block as item block
      */
     private ItemStack getBlockItemStack(World world, BlockPos pos, IBlockState state) {
-        //TODO
-//        ItemStack itemStack = this.createStackedBlock(0);
-        ItemStack itemStack = this.createStackedBlock(state);
+        ItemStack itemStack = this.createStackedBlock(this.getDefaultState());
         TileEntityGSHauntedChest tileEntity = (TileEntityGSHauntedChest) world.getTileEntity(pos);
 
         if (tileEntity != null) {

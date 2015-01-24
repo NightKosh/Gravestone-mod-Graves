@@ -126,7 +126,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
             .put(EnumGraves.QUARTZ_HORSE_STATUE, horseStatue)
             .put(EnumGraves.ICE_HORSE_STATUE, horseStatue)
             .put(EnumGraves.MOSSY_HORSE_STATUE, horseStatue)
-            .put(EnumGraves.SWORD, swordGrave).build();// TODO заменить на null
+            .put(EnumGraves.SWORD, swordGrave).build();
 
     public TileEntityGSGraveStoneRenderer() {
         instance = this;

@@ -67,8 +67,8 @@ public class TrapCorridor extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 2, 1, 2, 4, 1, 2, Blocks.tripwire.getDefaultState(), false);
 
         //dispencer
-        ObjectsGenerationHelper.generateDispenser(world, this, random, 0, 2, 2, this.getLeftDirection(this.coordBaseMode));
-        ObjectsGenerationHelper.generateDispenser(world, this, random, 6, 2, 2, this.getRightDirection(this.coordBaseMode));
+        ObjectsGenerationHelper.generateDispenser(world, this, random, 0, 2, 2, this.getRightDirection(this.coordBaseMode));
+        ObjectsGenerationHelper.generateDispenser(world, this, random, 6, 2, 2, this.getLeftDirection(this.coordBaseMode));
         this.placeBlockAtCurrentPosition(world, Blocks.air.getDefaultState(), 1, 2, 2, boundingBox);
         this.placeBlockAtCurrentPosition(world, Blocks.air.getDefaultState(), 5, 2, 2, boundingBox);
 

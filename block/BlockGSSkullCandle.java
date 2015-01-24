@@ -1,7 +1,6 @@
 package gravestone.block;
 
 import gravestone.block.enums.EnumSkullCandle;
-import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSTabs;
 import gravestone.core.TimeHelper;
 import gravestone.particle.EntityGreenFlameFX;
@@ -47,9 +46,8 @@ public class BlockGSSkullCandle extends BlockContainer {
         this.setStepSound(Block.soundTypeStone);
         this.setUnlocalizedName("Skull Candle");
         this.setHardness(0.5F);
-        this.setResistance(5F);
+        this.setResistance(5);
         this.setLightLevel(1);
-//        this.setBlockTextureName("snow");
         this.setCreativeTab(GSTabs.otherItemsTab);
         this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.5F, 0.75F);
     }
@@ -64,13 +62,10 @@ public class BlockGSSkullCandle extends BlockContainer {
         return false;
     }
 
-    /**
-     * If this block doesn't render as an ordinary block it will return False
-     */
-//    @Override
-//    public boolean renderAsNormalBlock() {
-//        return false;
-//    }
+    @Override
+    public boolean isFullCube() {
+        return false;
+    }
 
     /**
      * The type of render function that is called for this block

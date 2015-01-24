@@ -163,7 +163,7 @@ public class EntitySkullCrawler extends EntityMob {
     protected void dropFewItems(boolean p_70628_1_, int lootAttr) {
         super.dropFewItems(p_70628_1_, lootAttr);
 
-        if (p_70628_1_ && (this.rand.nextInt(100) == 0 || this.rand.nextInt(60 - lootAttr * 10) == 0)) {
+        if (p_70628_1_ && (this.rand.nextInt(100) <= (lootAttr * 10))) {
             this.entityDropItem(getRareDrop(), 0);
         }
     }

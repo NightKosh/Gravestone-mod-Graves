@@ -1,6 +1,5 @@
 package gravestone.block;
 
-import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSTabs;
 import gravestone.core.TimeHelper;
 import gravestone.particle.EntityGreenFlameFX;
@@ -39,7 +38,7 @@ public class BlockGSCandle extends BlockContainer {
         this.setLightLevel(1);
         this.setResistance(0);
         this.setCreativeTab(GSTabs.otherItemsTab);
-        this.setBlockBounds(0.4F, 0.0F, 0.4F, 0.6F, 0.6F, 0.6F);
+        this.setBlockBounds(0.4F, 0, 0.4F, 0.6F, 0.6F, 0.6F);
     }
 
     /**
@@ -82,14 +81,10 @@ public class BlockGSCandle extends BlockContainer {
         return false;
     }
 
-    /**
-     * If this block doesn't render as an ordinary block it will return False
-     * (examples: signs, buttons, stairs, etc)
-     */
-//    @Override
-//    public boolean renderAsNormalBlock() {
-//        return false;
-//    }
+    @Override
+    public boolean isFullCube() {
+        return false;
+    }
 
     /**
      * The type of render function that is called for this block

@@ -2,12 +2,13 @@ package gravestone.renderer.tileentity;
 
 import gravestone.core.Resources;
 import gravestone.tileentity.TileEntityGSHauntedChest;
-import java.util.Calendar;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
+import java.util.Calendar;
 
 /**
  * GraveStone mod
@@ -55,9 +56,9 @@ public class TileEntityGSHauntedChestRenderer extends TileEntitySpecialRenderer 
 
         GL11.glPushMatrix();
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GL11.glTranslatef((float) par2, (float) par4 + 1.0F, (float) par6 + 1.0F);
-        GL11.glScalef(1.0F, -1.0F, -1.0F);
+        GL11.glColor4f(1, 1, 1, 1);
+        GL11.glTranslatef((float) par2, (float) par4 + 1, (float) par6 + 1);
+        GL11.glScalef(1, -1, -1);
         GL11.glTranslatef(0.5F, 0.5F, 0.5F);
         float direction = 0;
 
@@ -76,17 +77,17 @@ public class TileEntityGSHauntedChestRenderer extends TileEntitySpecialRenderer 
                 break;
         }
 
-        GL11.glRotatef(direction, 0.0F, 1.0F, 0.0F);
+        GL11.glRotatef(direction, 0, 1, 0);
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
         float f1 = te.prevLidAngle + (te.lidAngle - te.prevLidAngle) * par8;
 
-        f1 = 1.0F - f1;
-        f1 = 1.0F - f1 * f1 * f1;
-        modelchest.chestLid.rotateAngleX = -(f1 * (float) Math.PI / 2.0F);
+        f1 = 1 - f1;
+        f1 = 1 - f1 * f1 * f1;
+        modelchest.chestLid.rotateAngleX = -(f1 * (float) Math.PI / 2F);
         modelchest.renderAll();
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPopMatrix();
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glColor4f(1, 1, 1, 1);
     }
 
     @Override

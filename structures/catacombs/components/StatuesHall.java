@@ -57,7 +57,6 @@ public class StatuesHall extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 18, 2, 4, 18, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 8, 1, 18, 9, 4, 18, false, random, getCemeteryCatacombsStones());
 
-        //TODO
         // nether floor and ceiling
         this.fillWithBlocks(world, boundingBox, 0, 0, 0, 0, 0, 18, Blocks.nether_brick.getDefaultState(), false);
         this.fillWithBlocks(world, boundingBox, 3, 0, 0, 3, 0, 18, Blocks.nether_brick.getDefaultState(), false);

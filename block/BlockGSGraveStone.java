@@ -145,7 +145,7 @@ public class BlockGSGraveStone extends BlockContainer {
         this.setStepSound(Block.soundTypeStone);
         this.setUnlocalizedName("GraveStone");
         this.setHardness(0.5F);
-        this.setResistance(5F);
+        this.setResistance(5);
         this.setCreativeTab(GSTabs.gravesTab);
         this.setTickRandomly(GraveStoneConfig.removeEmptyGraves);
     }
@@ -441,13 +441,13 @@ public class BlockGSGraveStone extends BlockContainer {
     public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te) {
     }
 
-//    @Override
-//    public boolean renderAsNormalBlock() {
-//        return false;
-//    }
-
     @Override
     public boolean isOpaqueCube() {
+        return false;
+    }
+
+    @Override
+    public boolean isFullCube() {
         return false;
     }
 
@@ -631,13 +631,13 @@ public class BlockGSGraveStone extends BlockContainer {
         ItemStack itemStack = getBlockItemStack(world, pos, state);
 
         if (itemStack != null) {
-            // TODO this.dropBlockAsItem(world, pos, itemStack);
-            this.dropBlockAsItem(world, pos, state, 0);
+            GSGraveStoneItems.dropItem(itemStack, world, pos);
+
         }
     }
 
     private void dropBlockWithoutInfo(World world, BlockPos pos, IBlockState state) {
-        ItemStack itemStack = this.createStackedBlock(state); //TODO this.createStackedBlock(0);
+        ItemStack itemStack = this.createStackedBlock(this.getDefaultState());
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
 
         if (tileEntity != null) {
@@ -648,8 +648,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
 
                 itemStack.setTagCompound(nbt);
-                // TODO this.dropBlockAsItem(world, pos, itemStack);
-                this.dropBlockAsItem(world, pos, state, 0);
+                GSGraveStoneItems.dropItem(itemStack, world, pos);
             }
         }
     }
@@ -658,7 +657,7 @@ public class BlockGSGraveStone extends BlockContainer {
      * Get grave block as item block
      */
     private ItemStack getBlockItemStack(IBlockAccess access, BlockPos pos, IBlockState state) {
-        ItemStack itemStack = this.createStackedBlock(state); //TODO this.createStackedBlock(0);
+        ItemStack itemStack = this.createStackedBlock(this.getDefaultState());
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) access.getTileEntity(pos);
 
         if (tileEntity != null) {
@@ -701,7 +700,6 @@ public class BlockGSGraveStone extends BlockContainer {
             sword = GraveStoneHelper.oldCheckSword(items);
         }
 
-        // TODO
         switch (entityType) {
             case PLAYER_GRAVES:
                 graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveForLevel(entity), rand);
@@ -759,7 +757,7 @@ public class BlockGSGraveStone extends BlockContainer {
             }
             GSLogger.logInfoGrave("Create " + deathInfo.getName() + "'s grave at " + newPos.getX() + "x" + newPos.getY() + "x" + newPos.getZ());
         } else {
-            ItemStack itemStack = this.createStackedBlock(world.getBlockState(pos)); //TODO this.createStackedBlock(0);
+            ItemStack itemStack = this.createStackedBlock(this.getDefaultState());
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", graveType);
             nbt.setBoolean("isLocalized", true);
@@ -774,8 +772,7 @@ public class BlockGSGraveStone extends BlockContainer {
             }
 
             itemStack.setTagCompound(nbt);
-            //TODO this.dropBlockAsItem(world, pos, itemStack);
-            this.dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
+            GSGraveStoneItems.dropItem(itemStack, world, pos);
 
             if (items != null) {
                 for (int i = 0; i < items.size(); i++) {
@@ -790,7 +787,7 @@ public class BlockGSGraveStone extends BlockContainer {
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos) {
-        ItemStack itemStack = this.createStackedBlock(world.getBlockState(pos)); //TODO this.createStackedBlock(0);
+        ItemStack itemStack = this.createStackedBlock(this.getDefaultState());
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
 
         if (tileEntity != null) {

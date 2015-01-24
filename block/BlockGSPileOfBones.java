@@ -1,7 +1,6 @@
 package gravestone.block;
 
 import gravestone.block.enums.EnumPileOfBones;
-import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSTabs;
 import gravestone.tileentity.TileEntityGSPileOfBones;
@@ -44,7 +43,6 @@ public class BlockGSPileOfBones extends BlockContainer {
         this.setUnlocalizedName("pile of bones");
         this.setHardness(0.1F);
         this.setResistance(0);
-//        this.setBlockTextureName("snow");
         this.setCreativeTab(GSTabs.otherItemsTab);
         this.setBlockBounds(0.1F, 0, 0.1F, 0.9F, 0.2F, 0.9F);
     }
@@ -64,10 +62,10 @@ public class BlockGSPileOfBones extends BlockContainer {
         return false;
     }
 
-//    @Override
-//    public boolean renderAsNormalBlock() {
-//        return false;
-//    }
+    @Override
+    public boolean isFullCube() {
+        return false;
+    }
 
     //TODO
 //    @Override
