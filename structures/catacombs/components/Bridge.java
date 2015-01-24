@@ -81,8 +81,8 @@ public class Bridge extends CatacombsBaseComponent {
         Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
 
         IBlockState graveState = GSBlock.graveStone.getDefaultState();
-        IBlockState leftGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.rotateY());
-        IBlockState rightGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.rotateYCCW());
+        IBlockState leftGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.getLeftDirection(this.coordBaseMode));
+        IBlockState rightGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.getRightDirection(this.coordBaseMode));
 
         GraveGenerationHelper.fillGraves(this, world, random, 1, 9, 1, 1, 9, 6, leftGraveState, graveType, sword, true);
         GraveGenerationHelper.fillGraves(this, world, random, 11, 9, 1, 11, 9, 6, rightGraveState, graveType, sword, true);

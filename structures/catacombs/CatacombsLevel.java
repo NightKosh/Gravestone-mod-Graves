@@ -69,7 +69,7 @@ public class CatacombsLevel {
         return (level < 3) ? catacombsStoneBlocks : catacombsBoneBlocks;
     }
 
-    public static Block getCatacombsStairsId(int level) {
+    public static Block getCatacombsStairsByLevelId(int level) {
         return (level < 3) ? Blocks.stone_brick_stairs : GSBlock.boneStairs;
     }
 
@@ -95,8 +95,8 @@ public class CatacombsLevel {
                 } else {
                     if (component.goTop) {
                         resultComponentsCount += addComponent(newComponents, component, componentType, component.getDirection(), COMPONENT_SIDE.TOP);
-                        resultComponentsCount += addComponent(newComponents, component, componentType, component.getDirection().rotateY(), COMPONENT_SIDE.LEFT);
-                        resultComponentsCount += addComponent(newComponents, component, componentType, component.getDirection().rotateYCCW(), COMPONENT_SIDE.RIGHT);
+                        resultComponentsCount += addComponent(newComponents, component, componentType, component.getLeftDirection(component.getDirection()), COMPONENT_SIDE.LEFT);
+                        resultComponentsCount += addComponent(newComponents, component, componentType, component.getRightDirection(component.getDirection()), COMPONENT_SIDE.RIGHT);
                     }
                 }
             }
@@ -150,10 +150,10 @@ public class CatacombsLevel {
                 newComponent = tryCreateComponent(component, componentClass, componentType, component.getDirection(), level, COMPONENT_SIDE.TOP);
 
                 if (newComponent == null) {
-                    newComponent = tryCreateComponent(component, componentClass, componentType, component.getDirection().rotateY(), level, COMPONENT_SIDE.LEFT);
+                    newComponent = tryCreateComponent(component, componentClass, componentType, component.getLeftDirection(component.getDirection()), level, COMPONENT_SIDE.LEFT);
 
                     if (newComponent == null) {
-                        newComponent = tryCreateComponent(component, componentClass, componentType, component.getDirection().rotateY(), level, COMPONENT_SIDE.LEFT);
+                        newComponent = tryCreateComponent(component, componentClass, componentType, component.getLeftDirection(component.getDirection()), level, COMPONENT_SIDE.LEFT);
 
                         if (newComponent != null) {
                             levelComponents.add(newComponent);

@@ -35,6 +35,12 @@ public class Corridor extends CatacombsBaseComponent {
                 rightZEnd = 0;
                 break;
             case NORTH:
+                leftXEnd = 0;
+                leftZEnd = 0;
+                rightXEnd = X_LENGTH - 1;
+                rightZEnd = 0;
+                break;
+            case WEST:
                 leftXEnd = X_LENGTH - 1;
                 leftZEnd = 4;
                 rightXEnd = 0;
@@ -46,11 +52,6 @@ public class Corridor extends CatacombsBaseComponent {
                 rightXEnd = X_LENGTH - 1;
                 rightZEnd = 4;
                 break;
-            case WEST:
-                leftXEnd = 0;
-                leftZEnd = 0;
-                rightXEnd = X_LENGTH - 1;
-                rightZEnd = 0;
         }
     }
 

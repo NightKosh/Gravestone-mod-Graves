@@ -76,8 +76,8 @@ public class Treasury extends CatacombsBaseComponent {
         // graves
         byte graveType = GraveStoneHelper.getGraveType(world, new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0)), random, BlockGSGraveStone.EnumGraveType.ALL_GRAVES);
         IBlockState graveState = GSBlock.graveStone.getDefaultState();
-        IBlockState leftGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.rotateY());
-        IBlockState rightGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.rotateYCCW());
+        IBlockState leftGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.getLeftDirection(this.coordBaseMode));
+        IBlockState rightGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.getRightDirection(this.coordBaseMode));
 
         Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
         GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 2, leftGraveState, graveType, sword, true);

@@ -5,6 +5,7 @@ import gravestone.core.GSBlock;
 import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -88,7 +89,7 @@ public class ComponentGSVillageMemorial extends StructureVillagePieces.Village {
             memorialType = BlockGSMemorial.getMemorialType(world, pos, random, 0);
         }
 
-        IBlockState memorialState = GSBlock.memorial.getDefaultState().withProperty(BlockGSMemorial.FACING, this.coordBaseMode);
+        IBlockState memorialState = GSBlock.memorial.getDefaultState().withProperty(BlockGSMemorial.FACING, this.coordBaseMode.getOpposite());
         this.func_175811_a(world, memorialState, x, y, z, boundingBox);
 
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
@@ -100,5 +101,16 @@ public class ComponentGSVillageMemorial extends StructureVillagePieces.Village {
                 tileEntity.setMemorialContent(random);
             }
         }
+    }
+
+    @Override
+    public NBTTagCompound func_143010_b() {
+        NBTTagCompound nbttagcompound = new NBTTagCompound();
+        nbttagcompound.setString("id", "GSVillageMemorial");
+        nbttagcompound.setTag("BB", this.boundingBox.func_151535_h());
+        nbttagcompound.setInteger("O", this.coordBaseMode == null ? -1 : this.coordBaseMode.getHorizontalIndex());
+        nbttagcompound.setInteger("GD", this.componentType);
+        this.writeStructureToNBT(nbttagcompound);
+        return nbttagcompound;
     }
 }

@@ -38,15 +38,15 @@ public class CatacombsSurface {
                 zCoord = Z - 14;
                 break;
             case NORTH:
-                xCoord = X + 14;
-                zCoord = Z;
-                break;
-            case EAST:
                 xCoord = X;
                 zCoord = Z + 14;
                 break;
-            case WEST:
+            case EAST:
                 xCoord = X - 14;
+                zCoord = Z;
+                break;
+            case WEST:
+                xCoord = X + 14;
                 zCoord = Z;
                 break;
         }
@@ -54,7 +54,6 @@ public class CatacombsSurface {
         new MausoleumEntrance(0, DIRECTION, rand,
                 new StructureBoundingBox(xCoord, 60, zCoord, 13 + xCoord, 90, 13 + zCoord),
                 mausoleumY).addComponentParts(world, rand);
-
 
         if (GraveStoneConfig.generateCatacombsGraveyard) {
             switch (DIRECTION) {
@@ -64,19 +63,19 @@ public class CatacombsSurface {
                     buildGraveYard(world, rand, X + 2, Z + 15);
                     break;
                 case NORTH:
-                    buildGraveYard(world, rand, X + 2, Z + 15);
-                    buildGraveYard(world, rand, X + 2, Z - 12);
-                    buildGraveYard(world, rand, X - 11, Z + 2);
-                    break;
-                case EAST:
                     buildGraveYard(world, rand, X + 15, Z + 2);
                     buildGraveYard(world, rand, X - 12, Z + 2);
                     buildGraveYard(world, rand, X + 2, Z - 13);
                     break;
-                case WEST:
+                case EAST:
                     buildGraveYard(world, rand, X + 2, Z + 15);
                     buildGraveYard(world, rand, X + 2, Z - 12);
                     buildGraveYard(world, rand, X + 15, Z + 2);
+                    break;
+                case WEST:
+                    buildGraveYard(world, rand, X + 2, Z + 15);
+                    buildGraveYard(world, rand, X + 2, Z - 12);
+                    buildGraveYard(world, rand, X - 11, Z + 2);
                     break;
             }
 
@@ -108,7 +107,7 @@ public class CatacombsSurface {
 
 
             // fence
-            if (DIRECTION == EnumFacing.SOUTH || DIRECTION == EnumFacing.EAST) {
+            if (DIRECTION == EnumFacing.SOUTH || DIRECTION == EnumFacing.NORTH) {
                 if (DIRECTION == EnumFacing.SOUTH) {
                     new Fence(0, DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z - 38, X + 51, 240, Z - 38), true, true).addComponentParts(world, rand);
                     new Fence(0, DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z + 51, X + 51, 240, Z + 51), false, true).addComponentParts(world, rand);
@@ -120,7 +119,7 @@ public class CatacombsSurface {
                 new Fence(0, CatacombsBaseComponent.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X - 38, 0, Z - 38, X - 38, 255, Z + 51), false, false).addComponentParts(world, rand);
                 new Fence(0, CatacombsBaseComponent.getLeftDirection(DIRECTION), rand, new StructureBoundingBox(X + 51, 0, Z - 38, X + 51, 255, Z + 51), false, false).addComponentParts(world, rand);
             } else {
-                if (DIRECTION == EnumFacing.NORTH) {
+                if (DIRECTION == EnumFacing.WEST) {
                     new Fence(0, DIRECTION, rand, new StructureBoundingBox(X + 51, 0, Z - 38, X + 51, 255, Z + 51), true, false).addComponentParts(world, rand);
                     new Fence(0, DIRECTION, rand, new StructureBoundingBox(X - 38, 0, Z - 38, X - 38, 255, Z + 51), false, false).addComponentParts(world, rand);
                 } else {

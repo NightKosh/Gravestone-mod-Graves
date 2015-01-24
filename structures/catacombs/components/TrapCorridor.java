@@ -3,6 +3,8 @@ package gravestone.structures.catacombs.components;
 import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.ObjectsGenerationHelper;
+import net.minecraft.block.BlockTripWire;
+import net.minecraft.block.BlockTripWireHook;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -39,7 +41,6 @@ public class TrapCorridor extends CatacombsBaseComponent {
         // block floor
         this.fillWithRandomizedBlocks(world, boundingBox, 1, 0, 1, 5, 0, 3, false, random, getCemeteryCatacombsStones());
 
-        //TODO
         // trap floor
         this.fillWithBlocks(world, boundingBox, 1, 0, 0, 5, 0, 0, GSBlock.trap.getDefaultState(), false);
 
@@ -57,20 +58,19 @@ public class TrapCorridor extends CatacombsBaseComponent {
         // blocks
         this.placeBlockAtCurrentPosition(world, Blocks.stonebrick.getDefaultState(), 0, 1, 2, boundingBox);
         this.placeBlockAtCurrentPosition(world, Blocks.stonebrick.getDefaultState(), 6, 1, 2, boundingBox);
-//TODO
-//        // tripWire hook
-//        this.placeBlockAtCurrentPosition(world, Blocks.tripwire_hook, getRightItemDirection(coordBaseMode), 1, 1, 2, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.tripwire_hook, getLeftItemDirection(coordBaseMode), 5, 1, 2, boundingBox);
+
+        // tripWire hook
+        this.placeBlockAtCurrentPosition(world, Blocks.tripwire_hook.getDefaultState().withProperty(BlockTripWireHook.FACING, this.getRightDirection(this.coordBaseMode)), 1, 1, 2, boundingBox);
+        this.placeBlockAtCurrentPosition(world, Blocks.tripwire_hook.getDefaultState().withProperty(BlockTripWireHook.FACING, this.getLeftDirection(this.coordBaseMode)), 5, 1, 2, boundingBox);
 
         // tripWire
         this.fillWithBlocks(world, boundingBox, 2, 1, 2, 4, 1, 2, Blocks.tripwire.getDefaultState(), false);
 
-        //TODO
-        // dispencer
-//        ObjectsGenerationHelper.generateDispenser(world, this, random, 0, 2, 2, getLeftItemDirection(coordBaseMode));
-//        ObjectsGenerationHelper.generateDispenser(world, this, random, 6, 2, 2, getRightItemDirection(coordBaseMode));
-//        this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 1, 2, 2, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.air, 0, 5, 2, 2, boundingBox);
+        //dispencer
+        ObjectsGenerationHelper.generateDispenser(world, this, random, 0, 2, 2, this.getLeftDirection(this.coordBaseMode));
+        ObjectsGenerationHelper.generateDispenser(world, this, random, 6, 2, 2, this.getRightDirection(this.coordBaseMode));
+        this.placeBlockAtCurrentPosition(world, Blocks.air.getDefaultState(), 1, 2, 2, boundingBox);
+        this.placeBlockAtCurrentPosition(world, Blocks.air.getDefaultState(), 5, 2, 2, boundingBox);
 
         // web
         this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 2, 1, 1, 2, 1, 1, Blocks.web.getDefaultState(), false);

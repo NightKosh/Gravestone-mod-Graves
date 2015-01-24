@@ -1,6 +1,8 @@
 package gravestone.structures.catacombs.components;
 
 import gravestone.structures.BoundingBoxHelper;
+import net.minecraft.block.BlockStairs;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -41,57 +43,58 @@ public class MausoleumEntrance extends CatacombsBaseComponent {
             this.boundingBox.offset(0, this.offsetY + 1 - this.boundingBox.minY, 0);
         }
 
-        int metaTop = this.getMetadataWithOffset(Blocks.nether_brick_stairs, 2);
-        int metaBot = this.getMetadataWithOffset(Blocks.nether_brick_stairs, 3);
-        int metaRight = this.getMetadataWithOffset(Blocks.nether_brick_stairs, 1);
-        int metaLeft = this.getMetadataWithOffset(Blocks.nether_brick_stairs, 0);
+        IBlockState netherBrickStairsState = Blocks.nether_brick_stairs.getDefaultState();
+        IBlockState netherBrickStairsTopState = netherBrickStairsState.withProperty(BlockStairs.FACING, this.coordBaseMode.getOpposite());
+        IBlockState netherBrickStairsBotState = netherBrickStairsState;
+        IBlockState netherBrickStairsLeftState = netherBrickStairsState.withProperty(BlockStairs.FACING, this.getLeftDirection(this.coordBaseMode));
+        IBlockState netherBrickStairsRightState = netherBrickStairsState.withProperty(BlockStairs.FACING, this.getRightDirection(this.coordBaseMode));
         this.fillWithAir(world, boundingBox, 0, 0, 6, 13, 5, 13);
 
         // fire
         this.placeBlockAtCurrentPosition(world, Blocks.netherrack.getDefaultState(), 4, 0, 9, boundingBox);
         this.placeBlockAtCurrentPosition(world, Blocks.fire.getDefaultState(), 4, 1, 9, boundingBox);
-//TODO
-//        // fire stairs
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaBot, 3, 0, 8, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaBot, 4, 0, 8, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaBot, 5, 0, 8, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaLeft, 3, 0, 9, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaRight, 5, 0, 9, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaTop, 3, 0, 10, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaTop, 4, 0, 10, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaTop, 5, 0, 10, boundingBox);
-//
-//        for (int x = 3; x < 5; x++) {
-//            for (int z = 8; z < 10; z++) {
-//                this.func_151554_b(world, Blocks.nether_brick, 0, x, -1, z, boundingBox);
-//            }
-//        }
+
+        // fire stairs
+        this.placeBlockAtCurrentPosition(world, netherBrickStairsBotState, 3, 0, 8, boundingBox);
+        this.placeBlockAtCurrentPosition(world, netherBrickStairsBotState, 4, 0, 8, boundingBox);
+        this.placeBlockAtCurrentPosition(world, netherBrickStairsBotState, 5, 0, 8, boundingBox);
+        this.placeBlockAtCurrentPosition(world, netherBrickStairsLeftState, 3, 0, 9, boundingBox);
+        this.placeBlockAtCurrentPosition(world, netherBrickStairsRightState, 5, 0, 9, boundingBox);
+        this.placeBlockAtCurrentPosition(world, netherBrickStairsTopState, 3, 0, 10, boundingBox);
+        this.placeBlockAtCurrentPosition(world, netherBrickStairsTopState, 4, 0, 10, boundingBox);
+        this.placeBlockAtCurrentPosition(world, netherBrickStairsTopState, 5, 0, 10, boundingBox);
+
+        for (int x = 3; x < 5; x++) {
+            for (int z = 8; z < 10; z++) {
+                this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), x, -1, z, boundingBox);
+            }
+        }
 
         // fire
         this.placeBlockAtCurrentPosition(world, Blocks.netherrack.getDefaultState(), 9, 0, 9, boundingBox);
         this.placeBlockAtCurrentPosition(world, Blocks.fire.getDefaultState(), 9, 1, 9, boundingBox);
-//TODO
-//        // fire stairs
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaBot, 8, 0, 8, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaBot, 9, 0, 8, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaBot, 10, 0, 8, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaLeft, 8, 0, 9, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaRight, 10, 0, 9, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaTop, 8, 0, 10, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaTop, 9, 0, 10, boundingBox);
-//        this.placeBlockAtCurrentPosition(world, Blocks.nether_brick_stairs, metaTop, 10, 0, 10, boundingBox);
-//
-//        for (int x = 3; x < 6; x++) {
-//            for (int z = 8; z < 11; z++) {
-//                this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), x, -1, z, boundingBox);
-//            }
-//        }
-//
-//        for (int x = 8; x < 11; x++) {
-//            for (int z = 8; z < 11; z++) {
-//                this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), x, -1, z, boundingBox);
-//            }
-//        }
+
+        // fire stairs
+        this.placeBlockAtCurrentPosition(world, netherBrickStairsBotState, 8, 0, 8, boundingBox);
+        this.placeBlockAtCurrentPosition(world, netherBrickStairsBotState, 9, 0, 8, boundingBox);
+        this.placeBlockAtCurrentPosition(world, netherBrickStairsBotState, 10, 0, 8, boundingBox);
+        this.placeBlockAtCurrentPosition(world, netherBrickStairsLeftState, 8, 0, 9, boundingBox);
+        this.placeBlockAtCurrentPosition(world, netherBrickStairsRightState, 10, 0, 9, boundingBox);
+        this.placeBlockAtCurrentPosition(world, netherBrickStairsTopState, 8, 0, 10, boundingBox);
+        this.placeBlockAtCurrentPosition(world, netherBrickStairsTopState, 9, 0, 10, boundingBox);
+        this.placeBlockAtCurrentPosition(world, netherBrickStairsTopState, 10, 0, 10, boundingBox);
+
+        for (int x = 3; x < 6; x++) {
+            for (int z = 8; z < 11; z++) {
+                this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), x, -1, z, boundingBox);
+            }
+        }
+
+        for (int x = 8; x < 11; x++) {
+            for (int z = 8; z < 11; z++) {
+                this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), x, -1, z, boundingBox);
+            }
+        }
 
         return true;
     }

@@ -2,7 +2,9 @@ package gravestone.structures.catacombs.components;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
+import net.minecraft.block.BlockStoneSlab;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -159,8 +161,7 @@ public class Fence extends CatacombsBaseComponent {
         int y = getGroundY(world, x);
 
         if (checkGround(world, x, y)) {
-            //TODO
-//            this.fillWithBlocks(world, boundingBox, x, y, 0, x, y + 3, 0, Blocks.iron_bars, Blocks.iron_bars, false);
+            this.fillWithBlocks(world, boundingBox, x, y, 0, x, y + 3, 0, Blocks.iron_bars.getDefaultState(), false);
         }
     }
 
@@ -191,9 +192,11 @@ public class Fence extends CatacombsBaseComponent {
             this.fillWithBlocks(world, boundingBox, 44, y + 3, 0, 45, y + 4, 0, Blocks.iron_bars.getDefaultState(), false);
 
             // slabs
-            this.fillWithBlocks(world, boundingBox, 44, y + 5, 0, 45, y + 5, 0, Blocks.stone_slab.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.BOTTOM), false);
-            this.placeBlockAtCurrentPosition(world, Blocks.stone_slab.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP), 42, y + 4, 0, boundingBox);
-            this.placeBlockAtCurrentPosition(world, Blocks.stone_slab.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP), 47, y + 4, 0, boundingBox);
+            IBlockState stoneSlabsState = Blocks.stone_slab.getDefaultState().withProperty(BlockStoneSlab.VARIANT, BlockStoneSlab.EnumType.SMOOTHBRICK)
+                    .withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.BOTTOM);
+            this.fillWithBlocks(world, boundingBox, 44, y + 5, 0, 45, y + 5, 0, stoneSlabsState, false);
+            this.placeBlockAtCurrentPosition(world, stoneSlabsState, 42, y + 4, 0, boundingBox);
+            this.placeBlockAtCurrentPosition(world, stoneSlabsState, 47, y + 4, 0, boundingBox);
         }
     }
 

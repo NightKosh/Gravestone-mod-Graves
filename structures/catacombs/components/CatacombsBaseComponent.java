@@ -4,6 +4,7 @@ import gravestone.core.GSStructures;
 import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.catacombs.CatacombsLevel;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -50,7 +51,7 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      * @param direction Component direction
      */
     public static EnumFacing getLeftDirection(EnumFacing direction) {
-        return direction.rotateY();
+        return direction.rotateYCCW();
     }
 
     /**
@@ -59,7 +60,7 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      * @param direction Component direction
      */
     public static EnumFacing getRightDirection(EnumFacing direction) {
-        return direction.rotateYCCW();
+        return direction.rotateY();
     }
 
     /**
@@ -210,19 +211,20 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      * Overwrites air and liquids from selected position downwards, stops at
      * hitting anything else.
      */
-    //TODO
-//    @Override
-//    protected void func_151554_b(World world, IBlockState blockState, int xCoord, int yCoord, int zCoord, StructureBoundingBox boundingBox) {
-//        int x = this.getXWithOffset(xCoord, zCoord);
-//        int y = this.getYWithOffset(yCoord);
-//        int z = this.getZWithOffset(xCoord, zCoord);
-//
-//        BlockPos pos = new BlockPos(x, y, z);
-//        while ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().getMaterial().isLiquid() || world.getBlockState(pos).getBlock().getMaterial().isReplaceable()) && y > 1) {
-//            world.setBlockState(pos, blockState, 2);
-//            --y;
-//        }
-//    }
+    @Override
+    protected void func_175808_b(World world, IBlockState blockState, int xCoord, int yCoord, int zCoord, StructureBoundingBox boundingBox) {
+        fillDownwards(world, blockState, xCoord, yCoord, zCoord, boundingBox);
+    }
+    protected void fillDownwards(World world, IBlockState blockState, int xCoord, int yCoord, int zCoord, StructureBoundingBox boundingBox) {
+        int x = this.getXWithOffset(xCoord, zCoord);
+        int y = this.getYWithOffset(yCoord);
+        int z = this.getZWithOffset(xCoord, zCoord);
+
+        while ((world.isAirBlock(new BlockPos(x, y, z)) || world.getBlockState(new BlockPos(x, y, z)).getBlock().getMaterial().isLiquid() || world.getBlockState(new BlockPos(x, y, z)).getBlock().getMaterial().isReplaceable()) && y > 1) {
+            world.setBlockState(new BlockPos(x, y, z), blockState, 2);
+            --y;
+        }
+    }
 
     /**
      * Return component direction

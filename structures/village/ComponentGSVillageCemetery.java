@@ -9,6 +9,7 @@ import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -138,5 +139,16 @@ public class ComponentGSVillageCemetery extends StructureVillagePieces.Village {
             tileEntity.setGraveType(graveType);
             tileEntity.setGraveContent(random, false, true);
         }
+    }
+
+    @Override
+    public NBTTagCompound func_143010_b() {
+        NBTTagCompound nbttagcompound = new NBTTagCompound();
+        nbttagcompound.setString("id", "GSVillageCemetery");
+        nbttagcompound.setTag("BB", this.boundingBox.func_151535_h());
+        nbttagcompound.setInteger("O", this.coordBaseMode == null ? -1 : this.coordBaseMode.getHorizontalIndex());
+        nbttagcompound.setInteger("GD", this.componentType);
+        this.writeStructureToNBT(nbttagcompound);
+        return nbttagcompound;
     }
 }

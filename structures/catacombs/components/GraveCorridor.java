@@ -77,8 +77,8 @@ public class GraveCorridor extends CatacombsBaseComponent {
         byte graveType = GraveStoneHelper.getGraveType(world, new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0)), random, EnumGraveType.ALL_GRAVES);
         Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
         IBlockState graveState = GSBlock.graveStone.getDefaultState();
-        IBlockState leftGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.rotateY());
-        IBlockState rightGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.rotateYCCW());
+        IBlockState leftGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.getLeftDirection(this.coordBaseMode));
+        IBlockState rightGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.getRightDirection(this.coordBaseMode));
         GraveGenerationHelper.fillGraves(this, world, random, 1, 1, 1, 1, 1, 3, leftGraveState, graveType, sword, true);
         GraveGenerationHelper.fillGraves(this, world, random, 5, 1, 1, 5, 1, 3, rightGraveState, graveType, sword, true);
 

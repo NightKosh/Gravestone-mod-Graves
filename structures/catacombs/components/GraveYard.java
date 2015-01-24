@@ -50,7 +50,7 @@ public class GraveYard extends CatacombsBaseComponent {
 
                     if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
                         byte graveType = GraveStoneHelper.getGraveType(world, new BlockPos(positionX, this.getYWithOffset(y), positionZ), random, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES);
-                        IBlockState graveState = GSBlock.graveStone.getDefaultState().withProperty(BlockGSGraveStone.FACING, this.coordBaseMode);
+                        IBlockState graveState = GSBlock.graveStone.getDefaultState().withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.getOpposite());
                         Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
                         GraveGenerationHelper.placeGrave(this, world, random, x, y, z, graveState, graveType, sword, false);
                     }

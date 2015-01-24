@@ -4,6 +4,7 @@ import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.MobSpawnHelper;
 import net.minecraft.block.BlockSlab;
+import net.minecraft.block.BlockStoneBrick;
 import net.minecraft.block.BlockStoneSlab;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -131,28 +132,26 @@ public class Mausoleum extends CatacombsBaseComponent {
 
         for (int x = 2; x < 12; x++) {
             for (int z = 2; z < 12; z++) {
-                //TODO
-//                this.func_151554_b(world, Blocks.stonebrick.getDefaultState(), 1, x, -1, z, boundingBox);
+                this.fillDownwards(world, Blocks.stonebrick.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.MOSSY), x, -1, z, boundingBox);
             }
         }
 
-        //TODO
-//        this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), 2, -1, 1, boundingBox);
-//        this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), 5, -1, 1, boundingBox);
-//        this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), 8, -1, 1, boundingBox);
-//        this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), 11, -1, 1, boundingBox);
-//        this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), 2, -1, 12, boundingBox);
-//        this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), 5, -1, 12, boundingBox);
-//        this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), 8, -1, 12, boundingBox);
-//        this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), 11, -1, 12, boundingBox);
-//        this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), 1, -1, 2, boundingBox);
-//        this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), 1, -1, 5, boundingBox);
-//        this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), 1, -1, 8, boundingBox);
-//        this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), 1, -1, 11, boundingBox);
-//        this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), 12, -1, 2, boundingBox);
-//        this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), 12, -1, 5, boundingBox);
-//        this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), 12, -1, 8, boundingBox);
-//        this.func_151554_b(world, Blocks.nether_brick.getDefaultState(), 12, -1, 11, boundingBox);
+        this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), 2, -1, 1, boundingBox);
+        this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), 5, -1, 1, boundingBox);
+        this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), 8, -1, 1, boundingBox);
+        this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), 11, -1, 1, boundingBox);
+        this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), 2, -1, 12, boundingBox);
+        this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), 5, -1, 12, boundingBox);
+        this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), 8, -1, 12, boundingBox);
+        this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), 11, -1, 12, boundingBox);
+        this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), 1, -1, 2, boundingBox);
+        this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), 1, -1, 5, boundingBox);
+        this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), 1, -1, 8, boundingBox);
+        this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), 1, -1, 11, boundingBox);
+        this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), 12, -1, 2, boundingBox);
+        this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), 12, -1, 5, boundingBox);
+        this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), 12, -1, 8, boundingBox);
+        this.fillDownwards(world, Blocks.nether_brick.getDefaultState(), 12, -1, 11, boundingBox);
 
         // spawn bats
         MobSpawnHelper.spawnBats(world, random, boundingBox);

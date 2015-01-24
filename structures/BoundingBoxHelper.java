@@ -43,20 +43,20 @@ public class BoundingBoxHelper {
                 maxZ = z + zLength;
                 break;
             case NORTH:
-                minX = x - zLength;
-                maxX = x;
-                minZ = z - xShift;
-                maxZ = z - xShift + xLength;
-                break;
-            case EAST:
                 minX = x - xShift;
                 maxX = x - xShift + xLength;
                 minZ = z - zLength;
                 maxZ = z;
                 break;
-            case WEST:
+            case EAST:
                 minX = x;
                 maxX = x + zLength;
+                minZ = z - xShift;
+                maxZ = z - xShift + xLength;
+                break;
+            case WEST:
+                minX = x - zLength;
+                maxX = x;
                 minZ = z - xShift;
                 maxZ = z - xShift + xLength;
                 break;

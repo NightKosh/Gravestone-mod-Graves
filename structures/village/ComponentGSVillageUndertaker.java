@@ -10,6 +10,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -285,5 +286,16 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
     public static boolean checkPainting(World world, int x, int y, int z) {
         return world.getEntitiesWithinAABB(EntityPainting.class, AxisAlignedBB.fromBounds(x, y, z,
                 x, y, z).expand(1, 1, 1)).size() == 0;
+    }
+
+    @Override
+    public NBTTagCompound func_143010_b() {
+        NBTTagCompound nbttagcompound = new NBTTagCompound();
+        nbttagcompound.setString("id", "GSVillageUndertaker");
+        nbttagcompound.setTag("BB", this.boundingBox.func_151535_h());
+        nbttagcompound.setInteger("O", this.coordBaseMode == null ? -1 : this.coordBaseMode.getHorizontalIndex());
+        nbttagcompound.setInteger("GD", this.componentType);
+        this.writeStructureToNBT(nbttagcompound);
+        return nbttagcompound;
     }
 }

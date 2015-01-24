@@ -32,8 +32,10 @@ import java.util.Random;
  */
 public class ObjectsGenerationHelper {
 
-    // TODO add weakness potion
-    private static final int[] POTIONS = {32764, 32692};
+    public static final int POISON_POTION_ID = 16420;
+    public static final int HARM_POTION_ID = 16428;
+    public static final int WEAKNESS_POTION_ID = 16424;
+    private static final int[] POTIONS = {POISON_POTION_ID, HARM_POTION_ID, WEAKNESS_POTION_ID};
     private static final List<WeightedRandomChestContent> NETHER_CHEST_CONTENT = new ArrayList<WeightedRandomChestContent>(Arrays.asList(
             new WeightedRandomChestContent(Items.diamond, 0, 1, 3, 5),
             new WeightedRandomChestContent(Items.iron_ingot, 0, 1, 5, 5),

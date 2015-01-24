@@ -120,8 +120,8 @@ public class StatuesHall extends CatacombsBaseComponent {
 
         // statues
         byte memorialType = BlockGSMemorial.getMemorialType(world, new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0)), random, 5);
-        EnumFacing left = this.coordBaseMode.rotateY();
-        EnumFacing right = this.coordBaseMode.rotateYCCW();
+        EnumFacing left = this.getLeftDirection(this.coordBaseMode);
+        EnumFacing right = this.getRightDirection(this.coordBaseMode);
         MemorialGenerationHelper.placeMemorial(this, world, random, 3, 1, 3, left, memorialType);
         MemorialGenerationHelper.placeMemorial(this, world, random, 3, 1, 6, left, memorialType);
         MemorialGenerationHelper.placeMemorial(this, world, random, 3, 1, 9, left, memorialType);

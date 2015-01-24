@@ -39,6 +39,12 @@ public class CreeperRoom extends CatacombsBaseComponent {
                 rightZEnd = 3;
                 break;
             case NORTH:
+                leftXEnd = 0;
+                leftZEnd = 3;
+                rightXEnd = 10;
+                rightZEnd = 3;
+                break;
+            case WEST:
                 leftXEnd = 10;
                 leftZEnd = 7;
                 rightXEnd = 0;
@@ -50,11 +56,6 @@ public class CreeperRoom extends CatacombsBaseComponent {
                 rightXEnd = 10;
                 rightZEnd = 7;
                 break;
-            case WEST:
-                leftXEnd = 0;
-                leftZEnd = 3;
-                rightXEnd = 10;
-                rightZEnd = 3;
         }
 
         boundingBox = BoundingBoxHelper.getCorrectBox(facing, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
