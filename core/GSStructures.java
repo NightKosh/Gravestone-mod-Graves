@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry;
  */
 public class GSStructures {
 
-    public static final Block[] VALUEBLE_BLOCKS = {
+    public static final Block[] VALUABLE_BLOCKS = {
             Blocks.gold_block, Blocks.lapis_block, Blocks.redstone_block,
             Blocks.gold_block, Blocks.lapis_block, Blocks.redstone_block,
             Blocks.diamond_block, Blocks.emerald_block

@@ -49,7 +49,10 @@ public class GraveCorridor extends CatacombsBaseComponent {
         // block floor
         this.fillWithRandomizedBlocks(world, boundingBox, 2, 0, 1, 4, 0, 3, false, random, getCemeteryCatacombsStones());
 
-        this.randomlyFillWithBlocks(world, boundingBox, random, PILE_OF_BONES_GENERATION_CHANCE, 2, 1, 2, 5, 1, 3, GSBlock.pileOfBones.getDefaultState(), false);
+        // web
+        this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 2, 1, 2, 5, 3, 3, Blocks.web.getDefaultState(), false);
+        // piles of bones
+        this.fillWithRandomizedBlocks(world, boundingBox, 2, 1, 2, 5, 1, 3, false, random, getPileOfBonesSelector());
 
         // trap floor
         this.fillWithBlocks(world, boundingBox, 1, 0, 0, 5, 0, 0, GSBlock.trap.getDefaultState(), false);
@@ -89,11 +92,6 @@ public class GraveCorridor extends CatacombsBaseComponent {
 
         // spawn bats
         MobSpawnHelper.spawnBats(world, random, boundingBox);
-
-        // web
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 2, 2, 1, 2, 2, 1, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 4, 1, 2, 4, 1, 2, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 3, 3, 3, 3, 3, Blocks.web.getDefaultState(), false);
 
         return true;
     }

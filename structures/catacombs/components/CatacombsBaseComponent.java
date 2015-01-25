@@ -9,6 +9,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
+import net.minecraft.world.gen.structure.StructureComponent;
 
 import java.util.Random;
 
@@ -20,7 +21,8 @@ import java.util.Random;
  */
 public abstract class CatacombsBaseComponent extends ComponentGraveStone {
 
-    protected static final float PILE_OF_BONES_GENERATION_CHANCE = 0.35F;
+    public static final float WEB_GENERATION_CHANCE = 0.05F;
+    protected static final StructureComponent.BlockSelector catacombsPileOfBones = new CatacombsPileOfBonesSelector();
 
     public boolean goTop = true;
     protected int leftXEnd = 0;
@@ -89,7 +91,7 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      * Return valuable block
      */
     public static Block getValuableBlock(Random random) {
-        return GSStructures.VALUEBLE_BLOCKS[random.nextInt(GSStructures.VALUEBLE_BLOCKS.length)];
+        return GSStructures.VALUABLE_BLOCKS[random.nextInt(GSStructures.VALUABLE_BLOCKS.length)];
     }
 
     /*
@@ -97,10 +99,6 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      */
     protected int getGroundLevel(World world, int x, int z) {
         return world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z)).getY();
-    }
-
-    protected int invertDirection(int direction) {
-        return 0;
     }
 
     /**
@@ -157,6 +155,10 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      */
     public BlockSelector getCemeteryCatacombsStones() {
         return CatacombsLevel.getCatacombsStones(this.level);
+    }
+
+    public static BlockSelector getPileOfBonesSelector() {
+        return catacombsPileOfBones;
     }
 
     /**

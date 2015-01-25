@@ -199,9 +199,9 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         }
         EntityItem entityitem = new EntityItem(te.getWorld(), 0, 0, 0, sword);
         entityitem.hoverStart = 0;
-        GL11.glTranslatef(0.24F, 0.83F, 0);
+        GL11.glTranslatef(-0.37F, 0.83F, 0);
         GL11.glScalef(1.5F, -1.5F, -1.5F);
-        GL11.glRotatef(135, 0, 0, 1);
+        GL11.glRotatef(225, 0, 0, 1);
 
         Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
     }

@@ -1,10 +1,9 @@
 package gravestone.structures.catacombs;
 
+import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
-import gravestone.structures.catacombs.components.CatacombsBaseComponent;
-import gravestone.structures.catacombs.components.Stairs;
-import gravestone.structures.catacombs.components.Treasury;
-import gravestone.structures.catacombs.components.WitherHall;
+import gravestone.core.logger.GSLogger;
+import gravestone.structures.catacombs.components.*;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
@@ -30,6 +29,14 @@ public class CatacombsLevel {
     private World world;
     private int totalComponentsCount;
     private int componentsCount;
+    public static final int DEFAULT_MIN_ROOMS_COUNT_AT_1_LEVEL = 30;
+    public static final int DEFAULT_MAX_ROOMS_COUNT_AT_1_LEVEL = 60;
+    public static final int DEFAULT_MIN_ROOMS_COUNT_AT_2_LEVEL = 60;
+    public static final int DEFAULT_MAX_ROOMS_COUNT_AT_2_LEVEL = 120;
+    public static final int DEFAULT_MIN_ROOMS_COUNT_AT_3_LEVEL = 90;
+    public static final int DEFAULT_MAX_ROOMS_COUNT_AT_3_LEVEL = 180;
+    public static final int DEFAULT_MIN_ROOMS_COUNT_AT_4_LEVEL = 160;
+    public static final int DEFAULT_MAX_ROOMS_COUNT_AT_4_LEVEL = 320;
     private LinkedList levelComponents = new LinkedList();
     private LinkedList endComponents = new LinkedList();
 
@@ -38,28 +45,28 @@ public class CatacombsLevel {
         this.random = random;
         this.world = world;
         this.level = level;
+        GSLogger.logInfo("Catacombs generation - start generation of " + this.level + " level");
 
-        switch (level) {
+        switch (this.level) {
             case 1:
-                totalComponentsCount = 30 + random.nextInt(30);
+                totalComponentsCount = GraveStoneConfig.catacombsMinRoomsCountAt1Level + random.nextInt(GraveStoneConfig.catacombsMaxRoomsCountAt1Level - GraveStoneConfig.catacombsMinRoomsCountAt1Level);
                 break;
             case 2:
-                totalComponentsCount = 60 + random.nextInt(60);
+                totalComponentsCount = GraveStoneConfig.catacombsMinRoomsCountAt2Level + random.nextInt(GraveStoneConfig.catacombsMaxRoomsCountAt2Level - GraveStoneConfig.catacombsMinRoomsCountAt2Level);
                 break;
             case 3:
-                totalComponentsCount = 90 + random.nextInt(90);
+                totalComponentsCount = GraveStoneConfig.catacombsMinRoomsCountAt3Level + random.nextInt(GraveStoneConfig.catacombsMaxRoomsCountAt3Level - GraveStoneConfig.catacombsMinRoomsCountAt3Level);
                 break;
             case 4:
-                totalComponentsCount = 120 + random.nextInt(120);
-                break;
-            default:
-                totalComponentsCount = 150 + random.nextInt(150);
+                totalComponentsCount = GraveStoneConfig.catacombsMinRoomsCountAt4Level + random.nextInt(GraveStoneConfig.catacombsMaxRoomsCountAt4Level - GraveStoneConfig.catacombsMinRoomsCountAt4Level);
                 break;
         }
 
         componentsCount = 0;
         prepareLevel(levelComponents);
         generateLevel();
+
+        GSLogger.logInfo("Catacombs generation - " + this.level + " level was successfully generated");
     }
 
     /**

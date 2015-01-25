@@ -44,6 +44,9 @@ public class Treasury extends CatacombsBaseComponent {
         // block floor
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 0, 1, 6, 0, 7, false, random, getCemeteryCatacombsStones());
 
+        // web
+        this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 1, 1, 1, 5, 3, 6, Blocks.web.getDefaultState(), false);
+
         //block ceiling
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 4, 1, 6, 4, 7, false, random, getCemeteryCatacombsStones());
 
@@ -64,14 +67,6 @@ public class Treasury extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 1, 4, 0, 5, 4, 0, Blocks.nether_brick.getDefaultState(), false);
         this.fillWithBlocks(world, boundingBox, 1, 1, 0, 1, 3, 0, Blocks.nether_brick.getDefaultState(), false);
         this.fillWithBlocks(world, boundingBox, 5, 1, 0, 5, 3, 0, Blocks.nether_brick.getDefaultState(), false);
-
-        // web
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 2, 2, 2, 2, 2, 2, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 4, 1, 3, 4, 1, 3, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 4, 3, 5, 4, 3, 5, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 2, 1, 4, 2, 1, 4, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 1, 2, 5, 1, 2, 5, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.4F, 2, 3, 6, 2, 3, 6, Blocks.web.getDefaultState(), false);
 
         // graves
         byte graveType = GraveStoneHelper.getGraveType(world, new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0)), random, BlockGSGraveStone.EnumGraveType.ALL_GRAVES);

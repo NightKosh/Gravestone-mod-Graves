@@ -44,6 +44,9 @@ public class TrapCorridor extends CatacombsBaseComponent {
         // trap floor
         this.fillWithBlocks(world, boundingBox, 1, 0, 0, 5, 0, 0, GSBlock.trap.getDefaultState(), false);
 
+        // web
+        this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 2, 1, 0, 4, 3, 3, Blocks.web.getDefaultState(), false);
+
         // neter ceiling
         this.fillWithBlocks(world, boundingBox, 1, 4, 0, 5, 4, 3, Blocks.nether_brick.getDefaultState(), false);
 
@@ -71,11 +74,6 @@ public class TrapCorridor extends CatacombsBaseComponent {
         ObjectsGenerationHelper.generateDispenser(world, this, random, 6, 2, 2, this.getLeftDirection(this.coordBaseMode));
         this.placeBlockAtCurrentPosition(world, Blocks.air.getDefaultState(), 1, 2, 2, boundingBox);
         this.placeBlockAtCurrentPosition(world, Blocks.air.getDefaultState(), 5, 2, 2, boundingBox);
-
-        // web
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 2, 1, 1, 2, 1, 1, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 4, 2, 2, 4, 2, 2, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 3, 3, 3, 3, 3, Blocks.web.getDefaultState(), false);
 
         return true;
     }

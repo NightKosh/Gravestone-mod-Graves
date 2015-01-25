@@ -65,7 +65,10 @@ public class Corridor extends CatacombsBaseComponent {
         // block floor
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 0, 1, 4, 0, 3, false, random, getCemeteryCatacombsStones());
 
-        this.randomlyFillWithBlocks(world, boundingBox, random, PILE_OF_BONES_GENERATION_CHANCE, 1, 1, 1, 4, 1, 4, GSBlock.pileOfBones.getDefaultState(), GSBlock.pileOfBones.getDefaultState(), false);
+        // web
+        this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 1, 1, 0, 3, 3, 3, Blocks.web.getDefaultState(), false);
+        //piles of bones
+        this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 1, 4, 1, 4, false, random, getPileOfBonesSelector());
 
         // trap floor
         this.fillWithBlocks(world, boundingBox, 0, 0, 0, 4, 0, 0, GSBlock.trap.getDefaultState(), GSBlock.trap.getDefaultState(), false);
@@ -84,12 +87,6 @@ public class Corridor extends CatacombsBaseComponent {
 
         // spawn bats
         MobSpawnHelper.spawnBats(world, random, boundingBox);
-
-        // web
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 1, 3, 2, 1, 3, 2, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 1, 2, 1, 1, 2, 1, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 2, 3, 3, 2, 3, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 1, 0, 3, 1, 0, Blocks.web.getDefaultState(), false);
 
         return true;
     }

@@ -35,7 +35,8 @@ public class SpidersCorridor extends CatacombsBaseComponent {
     @Override
     public boolean addComponentParts(World world, Random random) {
         this.fillWithAir(world, boundingBox, 1, 1, 0, 3, 3, Z_LENGTH - 1);
-        this.fillWithBlocks(world, boundingBox, 1, 1, 0, 3, 3, Z_LENGTH - 1, Blocks.web.getDefaultState(), false);
+        // web
+        this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE + 0.3F, 1, 1, 0, 3, 3, Z_LENGTH - 1, Blocks.web.getDefaultState(), false);
 
         for (int i = 0; i < 3; i++) {
             int z = i * 4;

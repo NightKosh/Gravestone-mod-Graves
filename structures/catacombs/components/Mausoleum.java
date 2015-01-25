@@ -45,6 +45,8 @@ public class Mausoleum extends CatacombsBaseComponent {
         this.fillWithAir(world, boundingBox, 1, 1, 0, 12, 5, 1);
         this.fillWithAir(world, boundingBox, 6, 0, 6, 7, 0, 8);
 
+        // web
+        this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 4, 1, 4, 9, 3, 9, Blocks.web.getDefaultState(), false);
         // brick floor
         this.fillWithRandomizedBlocks(world, boundingBox, 3, 0, 3, 10, 0, 10, false, random, getCemeteryCatacombsStones());
 
@@ -155,17 +157,6 @@ public class Mausoleum extends CatacombsBaseComponent {
 
         // spawn bats
         MobSpawnHelper.spawnBats(world, random, boundingBox);
-
-        // web
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, 6, 3, 3, 6, 3, 3, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, 5, 4, 6, 5, 4, 6, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, 7, 1, 7, 7, 1, 7, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, 10, 2, 10, 10, 2, 10, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, 3, 1, 9, 3, 1, 9, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, 6, 4, 10, 6, 4, 10, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, 10, 2, 3, 10, 2, 3, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, 9, 3, 4, 9, 3, 4, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, 3, 2, 4, 3, 2, 4, Blocks.web.getDefaultState(), false);
 
         return true;
     }

@@ -67,7 +67,10 @@ public class Crossing extends CatacombsBaseComponent {
     public boolean addComponentParts(World world, Random random) {
         this.fillWithAir(world, boundingBox, 1, 1, 1, 11, 4, 11);
 
-        this.randomlyFillWithBlocks(world, boundingBox, random, PILE_OF_BONES_GENERATION_CHANCE, 1, 1, 1, 12, 1, 12, GSBlock.pileOfBones.getDefaultState(), false);
+        // web
+        this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 1, 1, 1, 11, 4, 11, Blocks.web.getDefaultState(), false);
+        // piles of bones
+        this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 1, 12, 1, 12, false, random, getPileOfBonesSelector());
 
         // trap floor
         this.fillWithBlocks(world, boundingBox, 0, 0, 0, 0, 0, 12, Blocks.nether_brick.getDefaultState(), false);
@@ -159,20 +162,6 @@ public class Crossing extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 5, 1, 12, 7, 3, 12, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 1, 5, 0, 3, 7, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 12, 1, 5, 12, 3, 7, false, random, getCemeteryCatacombsStones());
-
-        // web
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 7, 2, 1, 7, 2, 1, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 5, 3, 2, 5, 3, 2, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 1, 5, 3, 1, 5, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 3, 2, 6, 3, 2, 6, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 1, 3, 7, 1, 3, 7, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 6, 2, 5, 6, 2, 5, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 8, 3, 5, 8, 3, 5, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 10, 1, 5, 10, 1, 5, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 5, 1, 7, 5, 1, 7, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 11, 2, 7, 11, 2, 7, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 9, 3, 9, 9, 3, 9, Blocks.web.getDefaultState(), false);
-        this.randomlyFillWithBlocks(world, boundingBox, random, 0.2F, 5, 1, 11, 5, 1, 11, Blocks.web.getDefaultState(), false);
 
         // clear enter
         this.fillWithAir(world, boundingBox, 5, 1, 0, 7, 3, 0);
