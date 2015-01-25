@@ -1,6 +1,6 @@
 package gravestone.core.compatibility;
 
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.core.logger.GSLogger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -23,7 +23,7 @@ public class GSCompatibilityBackpacksMod {
     }
 
     public static void addItems(List<ItemStack> items, EntityPlayer player) {
-        if (isInstalled() && GraveStoneConfig.storeBackpacksItems) {
+        if (isInstalled() && GSConfig.storeBackpacksItems) {
             try {
                 Class<?> PlayerSaveClass = Class.forName("de.eydamos.backpack.saves.PlayerSave");
                 if (PlayerSaveClass != null) {

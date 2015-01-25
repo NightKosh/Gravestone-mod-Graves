@@ -1,6 +1,6 @@
 package gravestone.core.compatibility;
 
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.core.logger.GSLogger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -24,7 +24,7 @@ public class GSCompatibilityTinkerConstruct {
     }
 
     public static void addItems(List<ItemStack> items, EntityPlayer player) {
-        if (isLoaded() && GraveStoneConfig.storeTinkerConstructItems) {
+        if (isLoaded() && GSConfig.storeTinkerConstructItems) {
             IPlayerExtendedInventoryWrapper inventoryWrapper = TConstructAPI.getInventoryWrapper(player);
             if (inventoryWrapper != null) {
                 IInventory knapsackInventory = inventoryWrapper.getKnapsackInventory(player);

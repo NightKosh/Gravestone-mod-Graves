@@ -1,6 +1,6 @@
 package gravestone.structures.catacombs;
 
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.logger.GSLogger;
 import gravestone.structures.catacombs.components.*;
@@ -49,16 +49,16 @@ public class CatacombsLevel {
 
         switch (this.level) {
             case 1:
-                totalComponentsCount = GraveStoneConfig.catacombsMinRoomsCountAt1Level + random.nextInt(GraveStoneConfig.catacombsMaxRoomsCountAt1Level - GraveStoneConfig.catacombsMinRoomsCountAt1Level);
+                totalComponentsCount = GSConfig.catacombsMinRoomsCountAt1Level + random.nextInt(GSConfig.catacombsMaxRoomsCountAt1Level - GSConfig.catacombsMinRoomsCountAt1Level);
                 break;
             case 2:
-                totalComponentsCount = GraveStoneConfig.catacombsMinRoomsCountAt2Level + random.nextInt(GraveStoneConfig.catacombsMaxRoomsCountAt2Level - GraveStoneConfig.catacombsMinRoomsCountAt2Level);
+                totalComponentsCount = GSConfig.catacombsMinRoomsCountAt2Level + random.nextInt(GSConfig.catacombsMaxRoomsCountAt2Level - GSConfig.catacombsMinRoomsCountAt2Level);
                 break;
             case 3:
-                totalComponentsCount = GraveStoneConfig.catacombsMinRoomsCountAt3Level + random.nextInt(GraveStoneConfig.catacombsMaxRoomsCountAt3Level - GraveStoneConfig.catacombsMinRoomsCountAt3Level);
+                totalComponentsCount = GSConfig.catacombsMinRoomsCountAt3Level + random.nextInt(GSConfig.catacombsMaxRoomsCountAt3Level - GSConfig.catacombsMinRoomsCountAt3Level);
                 break;
             case 4:
-                totalComponentsCount = GraveStoneConfig.catacombsMinRoomsCountAt4Level + random.nextInt(GraveStoneConfig.catacombsMaxRoomsCountAt4Level - GraveStoneConfig.catacombsMinRoomsCountAt4Level);
+                totalComponentsCount = GSConfig.catacombsMinRoomsCountAt4Level + random.nextInt(GSConfig.catacombsMaxRoomsCountAt4Level - GSConfig.catacombsMinRoomsCountAt4Level);
                 break;
         }
 

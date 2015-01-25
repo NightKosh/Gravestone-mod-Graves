@@ -1,7 +1,7 @@
 package gravestone.block;
 
 import gravestone.block.enums.EnumGraves;
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
 import gravestone.core.compatibility.*;
@@ -12,7 +12,6 @@ import gravestone.tileentity.DeathMessageInfo;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
-import net.minecraft.block.state.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -344,7 +343,7 @@ public class GraveStoneHelper {
      * Spawn mob
      */
     public static void spawnMob(World world, BlockPos pos) {
-        if (GraveStoneConfig.spawnMobAtGraveDestruction && world.rand.nextInt(10) == 0) {
+        if (GSConfig.spawnMobAtGraveDestruction && world.rand.nextInt(10) == 0) {
             TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
 
             if (tileEntity != null) {
@@ -365,7 +364,7 @@ public class GraveStoneHelper {
     }
 
     public static boolean canPlaceBlockAt(World world, Block block, BlockPos pos) {
-        if (GraveStoneConfig.canPlaceGravesEveryWhere) {
+        if (GSConfig.canPlaceGravesEveryWhere) {
             return true;
         } else {
             String tool = block.getHarvestTool(world.getBlockState(pos));
@@ -456,7 +455,7 @@ public class GraveStoneHelper {
     }
 
     public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event, long spawnTime) {
-        if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GraveStoneConfig.graveItemsCount > 0) {
+        if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GSConfig.graveItemsCount > 0) {
             List<ItemStack> items = new LinkedList<ItemStack>();
 
             items.addAll(Arrays.asList(player.inventory.mainInventory));

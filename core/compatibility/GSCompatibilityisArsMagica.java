@@ -1,6 +1,6 @@
 package gravestone.core.compatibility;
 
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,7 +24,7 @@ public class GSCompatibilityisArsMagica {
     }
 
     public static void getSoulboundItemsBack(List<ItemStack> items, EntityPlayer player) {
-        if (isInstalled() && GraveStoneConfig.enableArsMagicaSoulbound) {
+        if (isInstalled() && GSConfig.enableArsMagicaSoulbound) {
             Iterator<ItemStack> it = items.iterator();
             while (it.hasNext()) {
                 ItemStack stack = it.next();

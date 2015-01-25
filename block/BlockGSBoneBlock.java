@@ -1,7 +1,7 @@
 package gravestone.block;
 
 import gravestone.block.enums.EnumBoneBlock;
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSTabs;
 import gravestone.entity.monster.EntitySkullCrawler;
@@ -103,7 +103,7 @@ public class BlockGSBoneBlock extends Block {
      */
     @Override
     public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
-        if (!world.isRemote && isSkullCrawlerBlock(state) && GraveStoneConfig.spawnSkullCrawlersAtBoneBlockDestruction) {
+        if (!world.isRemote && isSkullCrawlerBlock(state) && GSConfig.spawnSkullCrawlersAtBoneBlockDestruction) {
             EntitySkullCrawler skullCrawler = new EntitySkullCrawler(world);
             skullCrawler.setLocationAndAngles(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0, 0);
             world.spawnEntityInWorld(skullCrawler);

@@ -1,6 +1,6 @@
 package gravestone.core.compatibility;
 
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 
 import java.util.Iterator;
 import java.util.List;
@@ -20,7 +20,7 @@ public class GSCompatibilityEnderIO {
   }
 
   public static void getSoulboundItemsBack(List<ItemStack> items, EntityPlayer player) {
-      if (isInstalled() && GraveStoneConfig.enableEnderIOSoulbound) {
+      if (isInstalled() && GSConfig.enableEnderIOSoulbound) {
           Iterator<ItemStack> it = items.iterator();
           while (it.hasNext()) {
               ItemStack stack = it.next();

@@ -1,6 +1,6 @@
 package gravestone.core;
 
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.entity.monster.*;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraftforge.common.BiomeDictionary;
@@ -40,25 +40,25 @@ public class GSEntity {
     public void getEntity() {
         // zombie dog
         EntityRegistry.registerGlobalEntityID(EntityZombieDog.class, ZOMBIE_DOG_NAME, EntityRegistry.findGlobalUniqueEntityId(), 14144467, 7969893);
-        if (GraveStoneConfig.spawnZombieDogs) {
+        if (GSConfig.spawnZombieDogs) {
             EntityRegistry.addSpawn(EntityZombieDog.class, 2, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.FOREST));
         }
 
         // zombie cat
         EntityRegistry.registerGlobalEntityID(EntityZombieCat.class, ZOMBIE_CAT_NAME, EntityRegistry.findGlobalUniqueEntityId(), 15720061, 7969893);
-        if (GraveStoneConfig.spawnZombieCats) {
+        if (GSConfig.spawnZombieCats) {
             EntityRegistry.addSpawn(EntityZombieCat.class, 2, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.JUNGLE));
         }
 
         // skeleton dog
         EntityRegistry.registerGlobalEntityID(EntitySkeletonDog.class, SKEKETON_DOG_NAME, EntityRegistry.findGlobalUniqueEntityId(), 14144467, 4802889);
-        if (GraveStoneConfig.spawnSkeletonDogs) {
+        if (GSConfig.spawnSkeletonDogs) {
             EntityRegistry.addSpawn(EntityZombieDog.class, 2, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.FOREST));
         }
 
         // skeleton cat
         EntityRegistry.registerGlobalEntityID(EntitySkeletonCat.class, SKEKETON_CAT_NAME, EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
-        if (GraveStoneConfig.spawnSkeletonCats) {
+        if (GSConfig.spawnSkeletonCats) {
             EntityRegistry.addSpawn(EntityZombieCat.class, 2, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.JUNGLE));
         }
 

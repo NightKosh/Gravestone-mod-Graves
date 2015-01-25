@@ -1,7 +1,7 @@
 package gravestone.tileentity;
 
 import gravestone.block.enums.EnumHauntedChest;
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -96,7 +96,7 @@ public class TileEntityGSHauntedChest extends TileEntity implements IUpdatePlaye
         }
 
         if (openTicks == 0) {
-            if (this.isOpen && GraveStoneConfig.replaceHauntedChest) {
+            if (this.isOpen && GSConfig.replaceHauntedChest) {
                 BlockPos pos = new BlockPos(this.pos.getX(), this.pos.getY(), this.pos.getZ());
                 this.worldObj.removeTileEntity(this.pos);
                 this.worldObj.setBlockState(pos, Blocks.chest.getStateFromMeta(GSBlock.hauntedChest.getMetaFromState(worldObj.getBlockState(pos))));

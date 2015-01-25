@@ -1,6 +1,6 @@
 package gravestone.core.compatibility;
 
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.core.logger.GSLogger;
 import micdoodle8.mods.galacticraft.api.inventory.AccessInventoryGC;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,7 +25,7 @@ public class GSCompatibilityGalacticraft {
     }
 
     public static void addItems(List<ItemStack> items, EntityPlayer player) {
-        if (isInstalled() && GraveStoneConfig.storeGalacticraftItems) {
+        if (isInstalled() && GSConfig.storeGalacticraftItems) {
             IInventory inventory = AccessInventoryGC.getGCInventoryForPlayer((EntityPlayerMP) player);
             if (inventory != null) {
                 for (int slot = 0; slot < inventory.getSizeInventory(); slot++) {

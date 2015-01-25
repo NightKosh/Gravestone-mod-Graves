@@ -2,7 +2,7 @@ package gravestone.block;
 
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumGraves;
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.core.GSTabs;
 import gravestone.core.logger.GSLogger;
 import gravestone.tileentity.DeathMessageInfo;
@@ -147,7 +147,7 @@ public class BlockGSGraveStone extends BlockContainer {
         this.setHardness(0.5F);
         this.setResistance(5);
         this.setCreativeTab(GSTabs.gravesTab);
-        this.setTickRandomly(GraveStoneConfig.removeEmptyGraves);
+        this.setTickRandomly(GSConfig.removeEmptyGraves);
     }
 
     /**
@@ -696,7 +696,7 @@ public class BlockGSGraveStone extends BlockContainer {
         byte graveType = 0;
         ItemStack sword = null;
 
-        if (GraveStoneConfig.generateSwordGraves && world.rand.nextInt(4) == 0 && entityType.equals(EnumGraveType.PLAYER_GRAVES)) {
+        if (GSConfig.generateSwordGraves && world.rand.nextInt(4) == 0 && entityType.equals(EnumGraveType.PLAYER_GRAVES)) {
             sword = GraveStoneHelper.oldCheckSword(items);
         }
 
@@ -810,12 +810,12 @@ public class BlockGSGraveStone extends BlockContainer {
      */
     @Override
     public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
-        if (GraveStoneConfig.removeEmptyGraves) {
+        if (GSConfig.removeEmptyGraves) {
             if (!world.isRemote) {
                 TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
                 if (tileEntity != null) {
                     if (!tileEntity.isSwordGrave() && tileEntity.isEmpty()) {
-                        if (GraveStoneConfig.showGravesRemovingMessages) {
+                        if (GSConfig.showGravesRemovingMessages) {
                             GSLogger.logInfoGrave("Remove empty grave at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
                         }
 

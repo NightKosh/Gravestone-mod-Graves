@@ -1,7 +1,7 @@
 package gravestone.core.compatibility;
 
+import gravestone.config.GSConfig;
 import gravestone.core.logger.GSLogger;
-import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSMobSpawn;
 import java.lang.reflect.Constructor;
 import java.util.List;
@@ -28,7 +28,7 @@ public class GSCompatibilityMoCreatures {
     }
 
     public static void addMobs() {
-        if (GraveStoneConfig.spawnMoCreaturesMobs) {
+        if (GSConfig.spawnMoCreaturesMobs) {
         GSLogger.logInfo("start Mo'Creatures mobs loading");
 
         addMobToList(GSMobSpawn.MOB_ID, "SilverSkeleton", getForeinMobConstructor(GSCompatibilityMoCreatures.MO_CREATURES_S_SKELETON));

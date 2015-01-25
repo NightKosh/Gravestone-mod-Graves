@@ -1,7 +1,7 @@
 package gravestone.tileentity;
 
 import gravestone.block.enums.EnumGraves;
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.core.GSMobSpawn;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
@@ -107,7 +107,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
 
     @Override
     protected int getMaxDelay() {
-        return GraveStoneConfig.graveSpawnRate;
+        return GSConfig.graveSpawnRate;
     }
 
     @Override

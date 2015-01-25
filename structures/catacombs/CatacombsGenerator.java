@@ -1,6 +1,6 @@
 package gravestone.structures.catacombs;
 
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.core.logger.GSLogger;
 import gravestone.structures.GSStructureGenerator;
 import net.minecraft.util.BlockPos;
@@ -44,7 +44,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
 
     @Override
     public boolean generate(World world, Random rand, int x, int z, EnumFacing direction, double chance, boolean isCommand) {
-        if (isCommand || (GraveStoneConfig.generateCatacombs && canSpawnStructureAtCoords(world, x, z, chance) && isHeightAcceptable(world, x, z))) {
+        if (isCommand || (GSConfig.generateCatacombs && canSpawnStructureAtCoords(world, x, z, chance) && isHeightAcceptable(world, x, z))) {
             CatacombsSurface surface = new CatacombsSurface(world, rand, x, z, direction);
             GSLogger.logInfo("Generate catacombs at " + x + "x" + z);
 
@@ -60,7 +60,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
     }
 
     protected static boolean canSpawnStructureAtCoords(World world, int x, int z, double chance) {
-        return chance < GraveStoneConfig.catacombsGenerationChance && isBiomeAllowed(world, x, z) && noAnyInRange(x, z, world);
+        return chance < GSConfig.catacombsGenerationChance && isBiomeAllowed(world, x, z) && noAnyInRange(x, z, world);
     }
 
     protected static boolean isBiomeAllowed(World world, int x, int z) {
@@ -125,6 +125,6 @@ public class CatacombsGenerator implements GSStructureGenerator {
         }
 
         GSLogger.logInfo("Catacombs generation - End Checking area height");
-        return (height / count) < GraveStoneConfig.maxCatacombsHeight;
+        return (height / count) < GSConfig.maxCatacombsHeight;
     }
 }

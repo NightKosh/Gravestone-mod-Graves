@@ -2,7 +2,7 @@ package gravestone.block;
 
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumTrap;
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.core.GSPotion;
 import gravestone.core.GSTabs;
 import gravestone.core.TimeHelper;
@@ -88,13 +88,13 @@ public class BlockGSTrap extends Block {
     public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity) {
         if (entity instanceof EntityPlayer) {
             if (world.getBlockState(pos).getValue(VARIANT) == EnumTrap.NIGHT_STONE) {
-                if (GraveStoneConfig.enableNightStone) {
+                if (GSConfig.enableNightStone) {
                     long time = world.getWorldTime();
                     long dayTime = TimeHelper.getDayTime(time);
                     if (dayTime < TimeHelper.PRE_NIGHT || dayTime > TimeHelper.PRE_MORNING) {
                         time = time - dayTime + TimeHelper.PRE_NIGHT;
                         world.setWorldTime(time);
-                        if (GraveStoneConfig.showNightStoneMessage) {
+                        if (GSConfig.showNightStoneMessage) {
                             ((EntityPlayer) entity).addChatComponentMessage(new ChatComponentTranslation(ModGraveStone.proxy.getLocalizedString(NIGHT_STONE_CURSE_TEXT)));
                         }
                     } else if (dayTime > 20000 && dayTime < TimeHelper.PRE_MORNING) {
@@ -104,7 +104,7 @@ public class BlockGSTrap extends Block {
                     ((EntityPlayer) entity).addPotionEffect(new PotionEffect(GSPotion.curse.getId(), 1200));
                 }
             } else {
-                if (GraveStoneConfig.enableThunderStone) {
+                if (GSConfig.enableThunderStone) {
                     if (!world.isThundering() || world.getWorldInfo().getThunderTime() < 1000) {
                         world.getWorldInfo().setRaining(true);
                         world.getWorldInfo().setRainTime(10000);

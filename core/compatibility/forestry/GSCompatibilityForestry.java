@@ -1,11 +1,11 @@
 package gravestone.core.compatibility.forestry;
 
+import gravestone.config.GSConfig;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import forestry.api.core.ForestryAPI;
 import forestry.api.recipes.RecipeManagers;
 import forestry.api.storage.BackpackManager;
 import forestry.api.storage.EnumBackpackType;
-import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSItem;
 import gravestone.core.GSRecipes;
 import gravestone.core.GSTabs;
@@ -52,7 +52,7 @@ public class GSCompatibilityForestry {
 
     public static void addBackpack() {
         if (BackpackManager.backpackInterface != null) {
-            if (GraveStoneConfig.enableForestryBackpacks) {
+            if (GSConfig.enableForestryBackpacks) {
                 String backpackT1Name = "backpack.undertaker.t1";
                 backpackItemT1 = BackpackManager.backpackInterface.addBackpack(UndertakerBackpack.getInstance(), EnumBackpackType.T1);
                 backpackItemT1.setCreativeTab(GSTabs.otherItemsTab);

@@ -5,7 +5,7 @@ import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.block.enums.EnumSkullCandle;
 import gravestone.block.enums.EnumSpawner;
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -232,7 +232,7 @@ public class GSRecipes {
         addCatMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.OBSIDIAN_CAT_STATUE.ordinal(), "GraveType"), Blocks.obsidian);
         addCatMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.ICE_CAT_STATUE.ordinal(), "GraveType"), Blocks.ice);
         // creeper statue
-        if (GraveStoneConfig.enableCreeperStatuesRecipes) {
+        if (GSConfig.enableCreeperStatuesRecipes) {
             addCreeperMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.WOODEN_CREEPER_STATUE.ordinal(), "GraveType"), Blocks.planks);
             addCreeperMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.SANDSTONE_CREEPER_STATUE.ordinal(), "GraveType"), Blocks.sandstone);
             addCreeperMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.STONE_CREEPER_STATUE.ordinal(), "GraveType"), Blocks.stone);
@@ -261,12 +261,12 @@ public class GSRecipes {
         }
 
         // spawners
-        if (GraveStoneConfig.enableBossSpawnerCraftingRecipe) {
+        if (GSConfig.enableBossSpawnerCraftingRecipe) {
             GameRegistry.addRecipe(new ItemStack(GSBlock.spawner, 1, EnumSpawner.WITHER_SPAWNER.ordinal()), "bcb", "cec", "cbc",
                     'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.WITHER_SKULL.ordinal()),
                     'b', new ItemStack(Items.dye, 1, 15), 'e', Items.ender_eye);
         }
-        if (GraveStoneConfig.enableSpawnerCraftingRecipe) {
+        if (GSConfig.enableSpawnerCraftingRecipe) {
             GameRegistry.addRecipe(new ItemStack(GSBlock.spawner, 1, EnumSpawner.SKELETON_SPAWNER.ordinal()), "bcb", "cec", "cbc",
                     'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.SKELETON_SKULL.ordinal()),
                     'b', new ItemStack(Items.dye, 1, 15), 'e', Items.ender_eye);

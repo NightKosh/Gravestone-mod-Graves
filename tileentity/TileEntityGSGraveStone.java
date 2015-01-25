@@ -2,7 +2,7 @@ package gravestone.tileentity;
 
 import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumGraves;
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.core.TimeHelper;
 import gravestone.core.event.GSRenderEventHandler;
 import net.minecraft.client.Minecraft;
@@ -49,7 +49,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     public void update() {
         gsSpawn.update();
 
-        if (this.worldObj.isRemote && GraveStoneConfig.isFogEnabled) {
+        if (this.worldObj.isRemote && GSConfig.isFogEnabled) {
             EntityPlayer player = this.worldObj.getClosestPlayer(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D, FOG_RANGE);
             if (player != null && player.getCommandSenderEntity().equals(Minecraft.getMinecraft().thePlayer) && isFogTime(this.worldObj)) {
                 GSRenderEventHandler.addFog();

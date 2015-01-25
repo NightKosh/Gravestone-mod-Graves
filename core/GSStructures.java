@@ -1,7 +1,6 @@
 package gravestone.core;
 
-import gravestone.ModGraveStone;
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.core.logger.GSLogger;
 import gravestone.structures.GraveStoneWorldGenerator;
 import gravestone.structures.village.*;
@@ -39,7 +38,7 @@ public class GSStructures {
     }
 
     public static void preInit() {
-        if (GraveStoneConfig.generateCemeteries) {
+        if (GSConfig.generateCemeteries) {
             try {
                 MapGenStructureIO.registerStructure(ComponentGSVillageCemetery.class, "GSVillageCemetery");
             } catch (Throwable e) {
@@ -49,7 +48,7 @@ public class GSStructures {
         }
 
         // register memorials
-        if (GraveStoneConfig.generateVillageMemorials) {
+        if (GSConfig.generateVillageMemorials) {
             try {
                 MapGenStructureIO.registerStructure(ComponentGSVillageMemorial.class, "GSVillageMemorial");
             } catch (Throwable e) {
@@ -59,7 +58,7 @@ public class GSStructures {
         }
 
         // register Undertaker
-        if (GraveStoneConfig.generateUndertaker) {
+        if (GSConfig.generateUndertaker) {
             try {
                 MapGenStructureIO.registerStructure(ComponentGSVillageUndertaker.class, "GSUndertakerHouse");
             } catch (Throwable e) {
@@ -71,19 +70,19 @@ public class GSStructures {
 
     private void generateStructures() {
         // register cemeteries
-        if (GraveStoneConfig.generateCemeteries) {
+        if (GSConfig.generateCemeteries) {
             VillageHandlerGSCemetery villageCemeteryHandler = new VillageHandlerGSCemetery();
             VillagerRegistry.instance().registerVillageCreationHandler(villageCemeteryHandler);
         }
 
         // register memorials
-        if (GraveStoneConfig.generateVillageMemorials) {
+        if (GSConfig.generateVillageMemorials) {
             VillageHandlerGSMemorial villageMemorialHandler = new VillageHandlerGSMemorial();
             VillagerRegistry.instance().registerVillageCreationHandler(villageMemorialHandler);
         }
 
         // register Undertaker
-        if (GraveStoneConfig.generateUndertaker) {
+        if (GSConfig.generateUndertaker) {
             VillageHandlerGSUndertaker villageUndertakerHandler = new VillageHandlerGSUndertaker();
             VillagerRegistry.instance().registerVillageCreationHandler(villageUndertakerHandler);
             //TODO

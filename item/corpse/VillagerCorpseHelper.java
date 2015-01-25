@@ -1,10 +1,9 @@
 package gravestone.item.corpse;
 
+import gravestone.config.GSConfig;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import gravestone.ModGraveStone;
-import gravestone.config.GraveStoneConfig;
 import gravestone.core.compatibility.forestry.GSCompatibilityForestry;
-import gravestone.structures.village.VillageHandlerGSUndertaker;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -131,7 +130,7 @@ public class VillagerCorpseHelper extends CorpseHelper {
     }
 
     private static String getNotVanillaVillagerProfession(int type) {
-        if (type == GraveStoneConfig.undertakerId) {
+        if (type == GSConfig.undertakerId) {
             return "item.corpse.villager_type.undertaker";
         } else if (type == GSCompatibilityForestry.getApicultureVillagerID()) {
             return "item.corpse.villager_type.beekeeper";

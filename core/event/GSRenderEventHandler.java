@@ -1,9 +1,9 @@
 package gravestone.core.event;
 
+import gravestone.config.GSConfig;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import gravestone.config.GraveStoneConfig;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import org.lwjgl.opengl.GL11;
 
@@ -33,7 +33,7 @@ public class GSRenderEventHandler {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void fogEvent(EntityViewRenderEvent.RenderFogEvent event) {
-        if (GraveStoneConfig.isFogEnabled) {
+        if (GSConfig.isFogEnabled) {
             if (fogDensity < fogDensityPerTick) {
                 fogDensity += DENSITY_PER_TICK;
             } else if (fogDensity > fogDensityPerTick) {

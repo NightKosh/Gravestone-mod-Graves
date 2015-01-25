@@ -1,6 +1,6 @@
 package gravestone.structures.graves;
 
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.structures.GSStructureGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
 import net.minecraft.util.BlockPos;
@@ -41,7 +41,7 @@ public class SingleGraveGenerator implements GSStructureGenerator {
 
     @Override
     public boolean generate(World world, Random rand, int x, int z, EnumFacing direction, double chance, boolean isCommand) {
-        if (isCommand || (GraveStoneConfig.generateSingleGraves && canSpawnStructureAtCoords(world, x, z, chance))) {
+        if (isCommand || (GSConfig.generateSingleGraves && canSpawnStructureAtCoords(world, x, z, chance))) {
             if (!isCommand) {
                 x += 7;
                 z += 7;
@@ -61,7 +61,7 @@ public class SingleGraveGenerator implements GSStructureGenerator {
     protected static boolean isBiomeAllowed(World world, int x, int z) {
         LinkedList<BiomeDictionary.Type> biomeTypesList = new LinkedList<BiomeDictionary.Type>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(new BlockPos(x, 0, z)))));
         return !biomeTypesList.contains(BiomeDictionary.Type.WATER) &&
-                (GraveStoneConfig.generateGravesInMushroomBiomes || !BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(new BlockPos(x, 0, z))).equals(BiomeDictionary.Type.MUSHROOM));
+                (GSConfig.generateGravesInMushroomBiomes || !BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(new BlockPos(x, 0, z))).equals(BiomeDictionary.Type.MUSHROOM));
     }
 
     protected static boolean noAnyInRange(int x, int z) {

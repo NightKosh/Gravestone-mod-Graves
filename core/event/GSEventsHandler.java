@@ -1,11 +1,11 @@
 package gravestone.core.event;
 
+import gravestone.config.GSConfig;
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.block.GraveStoneHelper;
-import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
 import gravestone.core.MobHandler;
@@ -36,33 +36,33 @@ public class GSEventsHandler {
     @SubscribeEvent
     public void onEntityLivingDeath(LivingDeathEvent event) {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-            if (!GraveStoneConfig.generateGravesInLava && event.source.damageType.equals("lava")) {
+            if (!GSConfig.generateGravesInLava && event.source.damageType.equals("lava")) {
                 return;
             }
 
             long spawnTime = MobHandler.getMobSpawnTime(event.entity);
             MobHandler.clearMobsSpawnTime(event.entity);
 
-            if (GraveStoneConfig.generatePlayerGraves && event.entityLiving instanceof EntityPlayer) {
+            if (GSConfig.generatePlayerGraves && event.entityLiving instanceof EntityPlayer) {
                 GraveStoneHelper.createPlayerGrave((EntityPlayer) event.entity, event, spawnTime);
             } else {
-                if (GraveStoneConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
+                if (GSConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
                     GraveStoneHelper.createGrave(event.entity, event, CorpseHelper.getCorpse(event.entity, EnumCorpse.VILLAGER), EnumGraveType.PLAYER_GRAVES, true, spawnTime);
                     return;
                 }
 
-                if (GraveStoneConfig.generatePetGraves && event.entity instanceof EntityTameable) {
+                if (GSConfig.generatePetGraves && event.entity instanceof EntityTameable) {
                     GraveStoneHelper.createPetGrave(event.entity, event, spawnTime);
                     return;
                 }
 
-                if (GraveStoneConfig.generatePetGraves && event.entity instanceof EntityHorse) {
+                if (GSConfig.generatePetGraves && event.entity instanceof EntityHorse) {
                     GraveStoneHelper.createHorseGrave((EntityHorse) event.entity, event, spawnTime);
                     return;
                 }
             }
 
-            if (GraveStoneConfig.spawnSkullCrawlersAtMobsDeath) {
+            if (GSConfig.spawnSkullCrawlersAtMobsDeath) {
                 if (event.entity instanceof EntitySkeleton) {
                     EntitySkullCrawler crawler;
                     if (GSMobSpawn.isWitherSkeleton((EntitySkeleton) event.entity)) {

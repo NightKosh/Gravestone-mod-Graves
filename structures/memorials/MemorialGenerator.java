@@ -1,6 +1,6 @@
 package gravestone.structures.memorials;
 
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.core.logger.GSLogger;
 import gravestone.structures.GSStructureGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
@@ -47,7 +47,7 @@ public class MemorialGenerator implements GSStructureGenerator {
             x = x + (16 - ComponentGSMemorial.X_LENGTH) / 2;
             z = z + (16 - ComponentGSMemorial.Z_LENGTH) / 2;
         }
-        if (isCommand || (GraveStoneConfig.generateMemorials && canSpawnStructureAtCoords(world, x, z, chance) && isNoWarterUnder(world, x, z))) {
+        if (isCommand || (GSConfig.generateMemorials && canSpawnStructureAtCoords(world, x, z, chance) && isNoWarterUnder(world, x, z))) {
             new ComponentGSMemorial(0, direction, rand, x, z).addComponentParts(world, rand);
             GSLogger.logInfo("Generate memorial at " + x + "x" + z);
             structuresList.add(new ChunkCoordIntPair(x, z));

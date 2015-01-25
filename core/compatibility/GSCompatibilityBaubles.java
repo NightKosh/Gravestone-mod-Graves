@@ -1,7 +1,7 @@
 package gravestone.core.compatibility;
 
 import baubles.api.BaublesApi;
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -23,7 +23,7 @@ public class GSCompatibilityBaubles {
     }
 
     public static void addItems(List<ItemStack> items, EntityPlayer player) {
-        if (isInstalled() && GraveStoneConfig.storeBaublesItems) {
+        if (isInstalled() && GSConfig.storeBaublesItems) {
             IInventory inventory = BaublesApi.getBaubles(player);
             if (inventory != null) {
                 for (int slot = 0; slot < inventory.getSizeInventory(); slot++) {

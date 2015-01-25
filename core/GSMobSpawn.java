@@ -2,7 +2,7 @@ package gravestone.core;
 
 import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumSpawner;
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.core.logger.GSLogger;
 import gravestone.entity.monster.EntitySkullCrawler;
 import net.minecraft.entity.Entity;
@@ -354,7 +354,7 @@ public class GSMobSpawn {
      * Check spawn mob or
      */
     public static boolean checkChance(Random random) {
-        return random.nextInt(100) < GraveStoneConfig.spawnChance;
+        return random.nextInt(100) < GSConfig.spawnChance;
     }
 
     /**

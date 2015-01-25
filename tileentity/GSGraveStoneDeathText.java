@@ -1,7 +1,7 @@
 package gravestone.tileentity;
 
 import gravestone.block.GraveStoneHelper;
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumMemorials;
 import java.util.ArrayList;
@@ -93,16 +93,16 @@ public class GSGraveStoneDeathText {
         if (isMemorial) {
             switch (memorialType) {
                 case STONE_DOG_STATUE:
-                    getRandomMemorialContent(random, GraveStoneConfig.graveDogsNames, GraveStoneConfig.dogsMemorialText);
+                    getRandomMemorialContent(random, GSConfig.graveDogsNames, GSConfig.dogsMemorialText);
                     break;
                 case STONE_CAT_STATUE:
-                    getRandomMemorialContent(random, GraveStoneConfig.graveCatsNames, GraveStoneConfig.catsMemorialText);
+                    getRandomMemorialContent(random, GSConfig.graveCatsNames, GSConfig.catsMemorialText);
                     break;
                 case STONE_CREEPER_STATUE:
                     deathText = "Sssssssssssssss...";
                     break;
                 default:
-                    getRandomMemorialContent(random, GraveStoneConfig.graveNames, GraveStoneConfig.memorialText);
+                    getRandomMemorialContent(random, GSConfig.graveNames, GSConfig.memorialText);
                     break;
             }
         } else {
@@ -122,7 +122,7 @@ public class GSGraveStoneDeathText {
                     case OBSIDIAN_DOG_STATUE:
                     case QUARTZ_DOG_STATUE:
                     case ICE_DOG_STATUE:
-                        name = this.getValue(random, GraveStoneConfig.graveDogsNames);
+                        name = this.getValue(random, GSConfig.graveDogsNames);
                         if (changeGraveType) {
                             newGraveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getDogGraveForDeath(null, deathText), random);
                             if (newGraveType != 0) {
@@ -143,7 +143,7 @@ public class GSGraveStoneDeathText {
                     case OBSIDIAN_CAT_STATUE:
                     case QUARTZ_CAT_STATUE:
                     case ICE_CAT_STATUE:
-                        name = this.getValue(random, GraveStoneConfig.graveCatsNames);
+                        name = this.getValue(random, GSConfig.graveCatsNames);
                         if (changeGraveType) {
                             newGraveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getCatGraveForDeath(null, deathText), random);
                             if (newGraveType != 0) {
@@ -152,7 +152,7 @@ public class GSGraveStoneDeathText {
                         }
                         break;
                     default:
-                        name = this.getValue(random, GraveStoneConfig.graveNames);
+                        name = this.getValue(random, GSConfig.graveNames);
                         if (changeGraveType) {
                             newGraveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveForDeath(null, deathText), random);
                             if (newGraveType != 0) {

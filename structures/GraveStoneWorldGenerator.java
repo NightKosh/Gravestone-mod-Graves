@@ -1,6 +1,6 @@
 package gravestone.structures;
 
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.structures.catacombs.CatacombsGenerator;
 import gravestone.structures.graves.SingleGraveGenerator;
 import gravestone.structures.memorials.MemorialGenerator;
@@ -26,7 +26,7 @@ public class GraveStoneWorldGenerator implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-        if (world.provider.getDimensionId() == GraveStoneConfig.structuresDimensionId) {
+        if (world.provider.getDimensionId() == GSConfig.structuresDimensionId) {
             generateSurface(world, random, chunkX * 16, chunkZ * 16);
         }
     }

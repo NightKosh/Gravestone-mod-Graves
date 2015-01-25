@@ -1,6 +1,6 @@
 package gravestone.structures.catacombs;
 
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import gravestone.structures.catacombs.components.*;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -55,7 +55,7 @@ public class CatacombsSurface {
                 new StructureBoundingBox(xCoord, 60, zCoord, 13 + xCoord, 90, 13 + zCoord),
                 mausoleumY).addComponentParts(world, rand);
 
-        if (GraveStoneConfig.generateCatacombsGraveyard) {
+        if (GSConfig.generateCatacombsGraveyard) {
             switch (DIRECTION) {
                 case SOUTH:
                     buildGraveYard(world, rand, X + 15, Z + 2);

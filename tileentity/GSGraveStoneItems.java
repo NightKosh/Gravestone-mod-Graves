@@ -2,7 +2,7 @@ package gravestone.tileentity;
 
 import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumGraves;
-import gravestone.config.GraveStoneConfig;
+import gravestone.config.GSConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.item.EntityItem;
@@ -90,7 +90,7 @@ public class GSGraveStoneItems {
      */
     public void setItems(List<ItemStack> items) {
         if (items != null) {
-            switch (GraveStoneConfig.graveItemsCount) {
+            switch (GSConfig.graveItemsCount) {
                 case 0:
                     for (byte i = 0; i < items.size(); i++) {
                         dropItem(items.get(i), tileEntity.getWorld(), tileEntity.getPos());
@@ -102,7 +102,7 @@ public class GSGraveStoneItems {
                     }
                     break;
                 default:
-                    int savedItems = GraveStoneConfig.graveItemsCount;
+                    int savedItems = GSConfig.graveItemsCount;
                     Collections.shuffle(Arrays.asList(items.size()), new Random());
 
                     for (byte i = 0; i < items.size(); i++) {

@@ -1,5 +1,6 @@
 package gravestone;
 
+import gravestone.config.GSConfig;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -9,7 +10,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import gravestone.config.GraveStoneConfig;
 import gravestone.core.*;
 import gravestone.core.commands.GSCommands;
 import gravestone.core.compatibility.GSCompatibility;
@@ -38,7 +38,7 @@ public class ModGraveStone {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        GraveStoneConfig.getInstance(event.getModConfigurationDirectory().getAbsolutePath() + "/GraveStoneMod/", "GraveStone.cfg");
+        GSConfig.getInstance(event.getModConfigurationDirectory().getAbsolutePath() + "/GraveStoneMod/", "GraveStone.cfg");
         GSStructures.preInit();
 
         gravestone.core.GSMessageHandler.init();
