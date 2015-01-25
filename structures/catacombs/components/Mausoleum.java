@@ -22,11 +22,11 @@ import java.util.Random;
  */
 public class Mausoleum extends CatacombsBaseComponent {
 
-    public Mausoleum(int componentType, EnumFacing direction, Random random, StructureBoundingBox structureBoundingBox) {
-        super(componentType, direction);
+    public Mausoleum(EnumFacing direction, Random random, StructureBoundingBox structureBoundingBox) {
+        super(0, direction);
         this.boundingBox = structureBoundingBox;
-        topXEnd = 5;
-        topZEnd = 5;
+        frontXEnd = 5;
+        frontZEnd = 5;
     }
 
     /**

@@ -3,6 +3,7 @@ package gravestone.structures.catacombs.components;
 import gravestone.core.GSStructures;
 import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.catacombs.CatacombsLevel;
+import gravestone.structures.catacombs.CatacombsPileOfBonesSelector;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
@@ -24,13 +25,13 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
     public static final float WEB_GENERATION_CHANCE = 0.05F;
     protected static final StructureComponent.BlockSelector catacombsPileOfBones = new CatacombsPileOfBonesSelector();
 
-    public boolean goTop = true;
+    public boolean goForward = true;
     protected int leftXEnd = 0;
     protected int rightXEnd = 0;
-    protected int topXEnd = 0;
+    protected int frontXEnd = 0;
     protected int leftZEnd = 0;
     protected int rightZEnd = 0;
-    protected int topZEnd = 0;
+    protected int frontZEnd = 0;
     protected int yEnd = 0;
     protected int xShift = 0;
     protected int zShift = 0;
@@ -132,15 +133,15 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
     /**
      * Return forward Z end coord for next component
      */
-    public int getTopZEnd() {
-        return this.getZWithOffset(topXEnd, topZEnd);
+    public int getFrontZEnd() {
+        return this.getZWithOffset(frontXEnd, frontZEnd);
     }
 
     /**
      * Return forward X end coord for next component
      */
-    public int getTopXEnd() {
-        return this.getXWithOffset(topXEnd, topZEnd);
+    public int getFrontXEnd() {
+        return this.getXWithOffset(frontXEnd, frontZEnd);
     }
 
     /**
@@ -179,7 +180,7 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
     /**
      * Is component have only forvard exit
      */
-    public boolean canGoOnlyTop() {
+    public boolean canGoOnlyForward() {
         return true;
     }
 

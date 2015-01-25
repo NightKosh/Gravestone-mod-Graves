@@ -30,15 +30,15 @@ public class Bridge extends CatacombsBaseComponent {
     public static final int HEIGHT = 14;
     public static final int Z_LENGTH = 7;
 
-    public Bridge(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
-        super(componentType, facing, level);
+    public Bridge(EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(0, facing, level);
         xShift = 4;
         y = y - HEIGHT + 6;
         boundingBox = BoundingBoxHelper.getCorrectBox(facing, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
         yEnd = 8;
-        topXEnd = 4;
-        topZEnd = Z_LENGTH;
-        goTop = true;
+        frontXEnd = 4;
+        frontZEnd = Z_LENGTH;
+        goForward = true;
     }
 
     /**

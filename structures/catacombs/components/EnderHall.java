@@ -22,13 +22,13 @@ public class EnderHall extends CatacombsBaseComponent {
     public static final int HEIGHT = 5;
     public static final int Z_LENGTH = 18;
 
-    public EnderHall(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
-        super(componentType, facing, level);
+    public EnderHall(EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(0, facing, level);
         xShift = 4;
         boundingBox = BoundingBoxHelper.getCorrectBox(facing, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
-        topXEnd = 4;
-        topZEnd = Z_LENGTH;
-        goTop = true;
+        frontXEnd = 4;
+        frontZEnd = Z_LENGTH;
+        goForward = true;
     }
 
     /**

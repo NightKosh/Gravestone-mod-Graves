@@ -24,8 +24,8 @@ public class Fence extends CatacombsBaseComponent {
     private final boolean haveEntrance;
     private final boolean haveCorners;
 
-    public Fence(int componentType, EnumFacing direction, Random random, StructureBoundingBox structureBoundingBox, boolean haveEntrance, boolean haveCorners) {
-        super(componentType, direction);
+    public Fence(EnumFacing direction, Random random, StructureBoundingBox structureBoundingBox, boolean haveEntrance, boolean haveCorners) {
+        super(0, direction);
         boundingBox = structureBoundingBox;
         this.haveEntrance = haveEntrance;
         this.haveCorners = haveCorners;

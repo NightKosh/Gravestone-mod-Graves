@@ -20,8 +20,8 @@ public class MausoleumEntrance extends CatacombsBaseComponent {
 
     private int offsetY;
 
-    public MausoleumEntrance(int componentType, EnumFacing direction, Random random, StructureBoundingBox structureBoundingBox, int offsetY) {
-        super(componentType, direction);
+    public MausoleumEntrance(EnumFacing direction, Random random, StructureBoundingBox structureBoundingBox, int offsetY) {
+        super(0, direction);
         this.boundingBox = structureBoundingBox;
         this.offsetY = offsetY;
     }
@@ -46,8 +46,8 @@ public class MausoleumEntrance extends CatacombsBaseComponent {
         IBlockState netherBrickStairsState = Blocks.nether_brick_stairs.getDefaultState();
         IBlockState netherBrickStairsTopState = netherBrickStairsState.withProperty(BlockStairs.FACING, this.coordBaseMode.getOpposite());
         IBlockState netherBrickStairsBotState = netherBrickStairsState.withProperty(BlockStairs.FACING, this.coordBaseMode);
-        IBlockState netherBrickStairsLeftState = netherBrickStairsState.withProperty(BlockStairs.FACING, this.getLeftDirection(this.coordBaseMode));
-        IBlockState netherBrickStairsRightState = netherBrickStairsState.withProperty(BlockStairs.FACING, this.getRightDirection(this.coordBaseMode));
+        IBlockState netherBrickStairsLeftState = netherBrickStairsState.withProperty(BlockStairs.FACING, this.getLeftDirection(this.coordBaseMode).getOpposite());
+        IBlockState netherBrickStairsRightState = netherBrickStairsState.withProperty(BlockStairs.FACING, this.getRightDirection(this.coordBaseMode).getOpposite());
         this.fillWithAir(world, boundingBox, 0, 0, 6, 13, 5, 13);
 
         // fire

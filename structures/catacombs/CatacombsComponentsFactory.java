@@ -97,7 +97,7 @@ public class CatacombsComponentsFactory {
     
     
     public static Class getNextComponent(Class componentClass, CatacombsLevel.COMPONENT_SIDE componentSide, Random random, int level) {
-        if (componentSide == CatacombsLevel.COMPONENT_SIDE.TOP) {
+        if (componentSide == CatacombsLevel.COMPONENT_SIDE.FRONT) {
             return CatacombsComponentsFactory.getNextComponentForLevel(componentClass, random, level);
         } else {
             if (level == 1 || random.nextInt(100) >= 5) {
@@ -143,22 +143,15 @@ public class CatacombsComponentsFactory {
             return StatuesHall.class;
         }
     }
-    
-    /**
-     * Create component
-     * @param component previouse component
-     * @param componentType component direction
-     * @param buildComponent component class
-     * @param componentSide 
-     */
-    public static CatacombsBaseComponent createComponent(CatacombsBaseComponent component, Random random, int componentType, EnumFacing facing, int level, Class buildComponent, CatacombsLevel.COMPONENT_SIDE componentSide) {
+
+    public static CatacombsBaseComponent createComponent(CatacombsBaseComponent component, Random random, EnumFacing facing, int level, Class buildComponent, CatacombsLevel.COMPONENT_SIDE componentSide) {
         if (component != null) {
             int x, y, z;
             y = component.getYEnd();
 
-            if (componentSide == CatacombsLevel.COMPONENT_SIDE.TOP) {
-                x = component.getTopXEnd();
-                z = component.getTopZEnd();
+            if (componentSide == CatacombsLevel.COMPONENT_SIDE.FRONT) {
+                x = component.getFrontXEnd();
+                z = component.getFrontZEnd();
             } else if (componentSide == CatacombsLevel.COMPONENT_SIDE.LEFT) {
                 x = component.getLeftXEnd();
                 z = component.getLeftZEnd();
@@ -168,8 +161,8 @@ public class CatacombsComponentsFactory {
             }
 
             try {
-                Constructor<CatacombsBaseComponent> constructor = buildComponent.getConstructor(int.class, EnumFacing.class, int.class, Random.class, int.class, int.class, int.class);
-                component = constructor.newInstance(componentType, facing, level, random, x, y, z);
+                Constructor<CatacombsBaseComponent> constructor = buildComponent.getConstructor(EnumFacing.class, int.class, Random.class, int.class, int.class, int.class);
+                component = constructor.newInstance(facing, level, random, x, y, z);
                 return component;
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();

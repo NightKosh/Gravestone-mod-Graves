@@ -16,7 +16,7 @@ import gravestone.renderer.entity.RenderUndeadCat;
 import gravestone.renderer.entity.RenderUndeadDog;
 import gravestone.renderer.item.*;
 import gravestone.renderer.tileentity.*;
-import gravestone.structures.village.VillageHandlerGSUndertaker;
+import gravestone.structures.village.undertaker.VillageHandlerGSUndertaker;
 import gravestone.tileentity.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;

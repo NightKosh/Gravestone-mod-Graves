@@ -21,12 +21,12 @@ public class SpidersCorridor extends CatacombsBaseComponent {
     public static final int HEIGHT = 5;
     public static final int Z_LENGTH = 13;
 
-    public SpidersCorridor(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
-        super(componentType, facing, level);
+    public SpidersCorridor(EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(0, facing, level);
         boundingBox = BoundingBoxHelper.getCorrectBox(facing, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
-        topXEnd = 0;
-        topZEnd = Z_LENGTH - 1;
-        goTop = true;
+        frontXEnd = 0;
+        frontZEnd = Z_LENGTH - 1;
+        goForward = true;
     }
 
     /**

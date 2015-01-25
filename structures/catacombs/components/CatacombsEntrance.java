@@ -22,8 +22,8 @@ public class CatacombsEntrance extends CatacombsBaseComponent {
     private int stairsLength;
     private int corridorLength;
 
-    public CatacombsEntrance(int componentType, EnumFacing direction, Random random, int x, int y, int z) {
-        super(componentType, direction);
+    public CatacombsEntrance(EnumFacing direction, Random random, int x, int y, int z) {
+        super(0, direction);
         stairsLength = 4 + random.nextInt(4);
         corridorLength = 2 + random.nextInt(2);
         boundingBox = BoundingBoxHelper.getCorrectBox(direction, x, y - stairsLength * 3, z, X_LENGTH, stairsLength * 3, (stairsLength + corridorLength) * 3 + 5, xShift);
@@ -36,9 +36,9 @@ public class CatacombsEntrance extends CatacombsBaseComponent {
                 rightZEnd = leftZEnd;
                 break;
             case NORTH:
-                leftXEnd = 3;
+                leftXEnd = 0;
                 leftZEnd = (stairsLength + corridorLength) * 3 + 4;
-                rightXEnd = 0;
+                rightXEnd = 3;
                 rightZEnd = leftZEnd;
                 break;
             case EAST:
@@ -48,9 +48,9 @@ public class CatacombsEntrance extends CatacombsBaseComponent {
                 rightZEnd = leftZEnd;
                 break;
             case WEST:
-                leftXEnd = 0;
+                leftXEnd = 3;
                 leftZEnd = (stairsLength + corridorLength) * 3 + 4;
-                rightXEnd = 3;
+                rightXEnd = 0;
                 rightZEnd = leftZEnd;
                 break;
         }
@@ -119,8 +119,7 @@ public class CatacombsEntrance extends CatacombsBaseComponent {
             this.fillWithRandomizedBlocks(world, boundingBox, 3, shiftY - 3, shiftZ + 1, 3, shiftY - 1, shiftZ + 2, false, random, getCemeteryCatacombsStones());
 
             // web
-            this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, shiftY - 1, shiftY - 3, shiftZ + 1, shiftY - 1, shiftY - 3, shiftZ + 1, Blocks.web.getDefaultState(), false);
-            this.randomlyFillWithBlocks(world, boundingBox, random, 0.3F, shiftY - 2, shiftY - 3, shiftZ + 2, shiftY - 2, shiftY - 3, shiftZ + 2, Blocks.web.getDefaultState(), false);
+            this.randomlyFillWithBlocks(world, boundingBox, random, this.WEB_GENERATION_CHANCE, 1, shiftY - 3, shiftZ, 2, shiftY - 1, shiftZ + 2, Blocks.web.getDefaultState(), false);
             shiftZ += 3;
         }
 
@@ -131,7 +130,7 @@ public class CatacombsEntrance extends CatacombsBaseComponent {
     }
 
     @Override
-    public boolean canGoOnlyTop() {
+    public boolean canGoOnlyForward() {
         return false;
     }
 }

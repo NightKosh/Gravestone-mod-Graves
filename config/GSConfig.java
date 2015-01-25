@@ -4,7 +4,7 @@ import gravestone.core.GSPotion;
 import gravestone.structures.GraveStoneWorldGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
 import gravestone.structures.catacombs.CatacombsLevel;
-import gravestone.structures.village.VillageHandlerGSUndertaker;
+import gravestone.structures.village.undertaker.VillageHandlerGSUndertaker;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 

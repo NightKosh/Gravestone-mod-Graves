@@ -27,11 +27,11 @@ public class WitherHall extends CatacombsBaseComponent {
     private IBlockState netherBrickStairsTopState, netherBrickStairsBotState, netherBrickStairsLeftState, netherBrickStairsRightState;
     private IBlockState netherBrickStairsTopUPState, netherBrickStairsBotUPState, netherBrickStairsLeftUPState, netherBrickStairsRightUPState;
 
-    public WitherHall(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
-        super(componentType, facing, level);
+    public WitherHall(EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(0, facing, level);
         xShift = 9;
         boundingBox = BoundingBoxHelper.getCorrectBox(facing, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
-        goTop = false;
+        goForward = false;
     }
 
     /**

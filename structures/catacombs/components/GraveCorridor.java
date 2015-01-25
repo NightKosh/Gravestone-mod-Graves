@@ -29,13 +29,13 @@ public class GraveCorridor extends CatacombsBaseComponent {
     public static final int HEIGHT = 5;
     public static final int Z_LENGTH = 5;
 
-    public GraveCorridor(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
-        super(componentType, facing, level);
+    public GraveCorridor(EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(0, facing, level);
         xShift = 1;
         boundingBox = BoundingBoxHelper.getCorrectBox(facing, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
-        goTop = true;
-        topXEnd = 1;
-        topZEnd = Z_LENGTH - 1;
+        goForward = true;
+        frontXEnd = 1;
+        frontZEnd = Z_LENGTH - 1;
     }
 
     /**

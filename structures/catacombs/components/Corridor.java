@@ -21,11 +21,11 @@ public class Corridor extends CatacombsBaseComponent {
     public static final int HEIGHT = 5;
     public static final int Z_LENGTH = 5;
 
-    public Corridor(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
-        super(componentType, facing, level);
+    public Corridor(EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(0, facing, level);
         boundingBox = BoundingBoxHelper.getCorrectBox(facing, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
-        topXEnd = 0;
-        topZEnd = Z_LENGTH - 1;
+        frontXEnd = 0;
+        frontZEnd = Z_LENGTH - 1;
 
         switch (facing) {
             case SOUTH:
@@ -36,9 +36,9 @@ public class Corridor extends CatacombsBaseComponent {
                 break;
             case NORTH:
                 leftXEnd = 0;
-                leftZEnd = 0;
+                leftZEnd = 4;
                 rightXEnd = X_LENGTH - 1;
-                rightZEnd = 0;
+                rightZEnd = 4;
                 break;
             case WEST:
                 leftXEnd = X_LENGTH - 1;
@@ -48,9 +48,9 @@ public class Corridor extends CatacombsBaseComponent {
                 break;
             case EAST:
                 leftXEnd = 0;
-                leftZEnd = 4;
+                leftZEnd = 0;
                 rightXEnd = X_LENGTH - 1;
-                rightZEnd = 4;
+                rightZEnd = 0;
                 break;
         }
     }
@@ -92,7 +92,7 @@ public class Corridor extends CatacombsBaseComponent {
     }
 
     @Override
-    public boolean canGoOnlyTop() {
+    public boolean canGoOnlyForward() {
         return false;
     }
 }

@@ -1,4 +1,4 @@
-package gravestone.structures.catacombs.components;
+package gravestone.structures.catacombs;
 
 import gravestone.block.BlockGSPileOfBones;
 import gravestone.block.enums.EnumPileOfBones;

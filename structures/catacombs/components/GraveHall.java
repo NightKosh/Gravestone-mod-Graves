@@ -28,13 +28,13 @@ public class GraveHall extends CatacombsBaseComponent {
     public static final int HEIGHT = 6;
     public static final int Z_LENGTH = 18;
 
-    public GraveHall(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
-        super(componentType, facing, level);
+    public GraveHall(EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(0, facing, level);
         xShift = 6;
         boundingBox = BoundingBoxHelper.getCorrectBox(facing, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
-        goTop = true;
-        topXEnd = 6;
-        topZEnd = Z_LENGTH;
+        goForward = true;
+        frontXEnd = 6;
+        frontZEnd = Z_LENGTH;
     }
 
     /**

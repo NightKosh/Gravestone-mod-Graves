@@ -22,8 +22,8 @@ import java.util.Random;
  */
 public class GraveYard extends CatacombsBaseComponent {
 
-    public GraveYard(int componentType, EnumFacing direction, Random random, StructureBoundingBox structureBoundingBox) {
-        super(componentType, direction);
+    public GraveYard(EnumFacing direction, Random random, StructureBoundingBox structureBoundingBox) {
+        super(0, direction);
         boundingBox = structureBoundingBox;
     }
 

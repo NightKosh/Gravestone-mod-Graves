@@ -1,6 +1,5 @@
 package gravestone.structures.catacombs.components;
 
-import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.ObjectsGenerationHelper;
 import net.minecraft.block.BlockStairs;
@@ -24,11 +23,11 @@ public class Crossing extends CatacombsBaseComponent {
     public static final int HEIGHT = 6;
     public static final int Z_LENGTH = 13;
 
-    public Crossing(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
-        super(componentType, facing, level);
+    public Crossing(EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(0, facing, level);
         xShift = 4;
-        topXEnd = 4;
-        topZEnd = 12;
+        frontXEnd = 4;
+        frontZEnd = 12;
 
         switch (facing) {
             case SOUTH:
@@ -39,9 +38,9 @@ public class Crossing extends CatacombsBaseComponent {
                 break;
             case NORTH:
                 leftXEnd = 0;
-                leftZEnd = 4;
+                leftZEnd = 8;
                 rightXEnd = 12;
-                rightZEnd = 4;
+                rightZEnd = 8;
                 break;
             case WEST:
                 leftXEnd = 12;
@@ -51,9 +50,9 @@ public class Crossing extends CatacombsBaseComponent {
                 break;
             case EAST:
                 leftXEnd = 0;
-                leftZEnd = 8;
+                leftZEnd = 4;
                 rightXEnd = 12;
-                rightZEnd = 8;
+                rightZEnd = 4;
                 break;
         }
 
@@ -173,7 +172,7 @@ public class Crossing extends CatacombsBaseComponent {
     }
 
     @Override
-    public boolean canGoOnlyTop() {
+    public boolean canGoOnlyForward() {
         return false;
     }
 }

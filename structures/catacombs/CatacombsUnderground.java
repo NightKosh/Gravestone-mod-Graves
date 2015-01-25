@@ -30,7 +30,7 @@ public class CatacombsUnderground {
      * sets up Arrays with the Structure pieces and their weights
      */
     private void prepareStructurePieces(Random rand, int x, int y, int z) {
-        entrance = new CatacombsEntrance(0, direction, rand, x, y, z);
+        entrance = new CatacombsEntrance(direction, rand, x, y, z);
     }
 
     public final void build(World world, Random rand) {

@@ -22,13 +22,13 @@ public class Stairs extends CatacombsBaseComponent {
     public static final int HEIGHT = 16;
     public static final int Z_LENGTH = 13;
 
-    public Stairs(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
-        super(componentType, facing, level);
+    public Stairs(EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(0, facing, level);
         y = y - HEIGHT + 4;
         boundingBox = BoundingBoxHelper.getCorrectBox(facing, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
-        goTop = true;
-        topXEnd = 0;
-        topZEnd = Z_LENGTH;
+        goForward = true;
+        frontXEnd = 0;
+        frontZEnd = Z_LENGTH;
     }
 
     /**

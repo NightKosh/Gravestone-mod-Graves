@@ -3,7 +3,6 @@ package gravestone.structures.catacombs.components;
 import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.ObjectsGenerationHelper;
-import net.minecraft.block.BlockTripWire;
 import net.minecraft.block.BlockTripWireHook;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
@@ -23,12 +22,12 @@ public class TrapCorridor extends CatacombsBaseComponent {
     public static final int HEIGHT = 5;
     public static final int Z_LENGTH = 5;
 
-    public TrapCorridor(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
-        super(componentType, facing, level);
+    public TrapCorridor(EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(0, facing, level);
         xShift = 1;
         boundingBox = BoundingBoxHelper.getCorrectBox(facing, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
-        topZEnd = Z_LENGTH - 1;
-        topXEnd = 1;
+        frontZEnd = Z_LENGTH - 1;
+        frontXEnd = 1;
     }
 
     /**

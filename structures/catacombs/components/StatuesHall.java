@@ -1,7 +1,6 @@
 package gravestone.structures.catacombs.components;
 
 import gravestone.block.BlockGSMemorial;
-import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.MemorialGenerationHelper;
@@ -26,13 +25,13 @@ public class StatuesHall extends CatacombsBaseComponent {
     public static final int HEIGHT = 6;
     public static final int Z_LENGTH = 19;
 
-    public StatuesHall(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
-        super(componentType, facing, level);
+    public StatuesHall(EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(0, facing, level);
         xShift = 3;
         boundingBox = BoundingBoxHelper.getCorrectBox(facing, x, y, z, X_LENGTH, HEIGHT, Z_LENGTH, xShift);
-        topXEnd = 3;
-        topZEnd = Z_LENGTH - 1;
-        goTop = true;
+        frontXEnd = 3;
+        frontZEnd = Z_LENGTH - 1;
+        goForward = true;
     }
 
     /**

@@ -23,13 +23,13 @@ public class CreeperRoom extends CatacombsBaseComponent {
     public static final int HEIGHT = 14;
     public static final int Z_LENGTH = 11;
 
-    public CreeperRoom(int componentType, EnumFacing facing, int level, Random random, int x, int y, int z) {
-        super(componentType, facing, level);
+    public CreeperRoom(EnumFacing facing, int level, Random random, int x, int y, int z) {
+        super(0, facing, level);
         xShift = 3;
         y = y - HEIGHT + 6;
         yEnd = 8;
-        topXEnd = 3;
-        topZEnd = 10;
+        frontXEnd = 3;
+        frontZEnd = 10;
 
         switch (facing) {
             case SOUTH:
@@ -40,9 +40,9 @@ public class CreeperRoom extends CatacombsBaseComponent {
                 break;
             case NORTH:
                 leftXEnd = 0;
-                leftZEnd = 3;
+                leftZEnd = 7;
                 rightXEnd = 10;
-                rightZEnd = 3;
+                rightZEnd = 7;
                 break;
             case WEST:
                 leftXEnd = 10;
@@ -52,9 +52,9 @@ public class CreeperRoom extends CatacombsBaseComponent {
                 break;
             case EAST:
                 leftXEnd = 0;
-                leftZEnd = 7;
+                leftZEnd = 3;
                 rightXEnd = 10;
-                rightZEnd = 7;
+                rightZEnd = 3;
                 break;
         }
 
@@ -181,7 +181,7 @@ public class CreeperRoom extends CatacombsBaseComponent {
     }
 
     @Override
-    public boolean canGoOnlyTop() {
+    public boolean canGoOnlyForward() {
         return false;
     }
 }
