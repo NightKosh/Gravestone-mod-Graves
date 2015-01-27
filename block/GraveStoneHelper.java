@@ -484,7 +484,7 @@ public class GraveStoneHelper {
         int age = (int) (entity.worldObj.getWorldTime() - spawnTime) / 24000;
         GSBlock.graveStone.createOnDeath(entity, entity.worldObj, new BlockPos(entity.posX, entity.posY, entity.posZ - 1),
                 getDeathMessage((EntityLivingBase) entity, event.source.damageType, isVillager),
-                MathHelper.floor_float(entity.rotationYaw), items, age, entityType, event.source);
+                items, age, entityType, event.source);
     }
 
     public static void createPetGrave(Entity entity, LivingDeathEvent event, long spawnTime) {

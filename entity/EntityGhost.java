@@ -65,7 +65,7 @@ public class EntityGhost extends EntityFlying implements IMob {
         if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
             float f = this.getBrightness(1.0F);
 
-            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && 
+            if (f > 0.5F && this.rand.nextFloat() * 30 < (f - 0.4F) * 2 &&
                     this.worldObj.canBlockSeeSky(new BlockPos(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)))) {
                 this.setFire(8);
             }

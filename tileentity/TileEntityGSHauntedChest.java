@@ -97,9 +97,8 @@ public class TileEntityGSHauntedChest extends TileEntity implements IUpdatePlaye
 
         if (openTicks == 0) {
             if (this.isOpen && GSConfig.replaceHauntedChest) {
-                BlockPos pos = new BlockPos(this.pos.getX(), this.pos.getY(), this.pos.getZ());
                 this.worldObj.removeTileEntity(this.pos);
-                this.worldObj.setBlockState(pos, Blocks.chest.getStateFromMeta(GSBlock.hauntedChest.getMetaFromState(worldObj.getBlockState(pos))));
+                this.worldObj.setBlockState(this.pos, Blocks.chest.getStateFromMeta(GSBlock.hauntedChest.getMetaFromState(worldObj.getBlockState(this.pos))));
             }
             this.isOpen = false;
         }

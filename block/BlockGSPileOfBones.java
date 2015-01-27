@@ -132,7 +132,7 @@ public class BlockGSPileOfBones extends BlockContainer {
 
     @Override
     public boolean canPlaceBlockAt(World world, BlockPos pos) {
-        return world.doesBlockHaveSolidTopSurface(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()));
+        return world.doesBlockHaveSolidTopSurface(world, pos.down());
     }
 
     @Override

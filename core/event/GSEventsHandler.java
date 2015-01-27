@@ -77,8 +77,7 @@ public class GSEventsHandler {
             }
             if (event.entity instanceof EntityCreeper && ((EntityCreeper) event.entity).getPowered()) {
                 // drop creeper statue if entity is a charged creeper
-                GSBlock.memorial.dropCreeperMemorial(event.entity.worldObj,
-                        new BlockPos(event.entity.posX, event.entity.posY, event.entity.posZ));
+                GSBlock.memorial.dropCreeperMemorial(event.entity.worldObj, new BlockPos(event.entity));
             }
         }
     }

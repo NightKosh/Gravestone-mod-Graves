@@ -204,7 +204,7 @@ public class BlockGSGraveStone extends BlockContainer {
      */
     @Override
     public boolean canPlaceBlockAt(World world, BlockPos pos) {
-        return GraveStoneHelper.canPlaceBlockAt(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()));
+        return GraveStoneHelper.canPlaceBlockAt(world, pos.down());
     }
 
     @Override
@@ -552,7 +552,7 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
         super.onBlockAdded(world, pos, state);
-        GraveStoneHelper.replaceGround(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()));
+        GraveStoneHelper.replaceGround(world, pos.down());
     }
 
     /**
@@ -572,7 +572,7 @@ public class BlockGSGraveStone extends BlockContainer {
 
     @Override
     public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block block) {
-        if (!world.isSideSolid(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), EnumFacing.DOWN, true)) {
+        if (!world.isSideSolid(pos.down(), EnumFacing.DOWN, true)) {
             this.dropBlockWithoutInfo(world, pos, state);
             world.setBlockToAir(pos);
         }
@@ -688,10 +688,8 @@ public class BlockGSGraveStone extends BlockContainer {
     /**
      * Create grave on death
      */
-    public void createOnDeath(Entity entity, World world, BlockPos pos, DeathMessageInfo deathInfo, int direction, List<ItemStack> items, int age, EnumGraveType entityType, DamageSource damageSource) {
-        if (direction < 0) {
-            direction = 360 + direction;
-        }
+    public void createOnDeath(Entity entity, World world, BlockPos pos, DeathMessageInfo deathInfo, List<ItemStack> items, int age, EnumGraveType entityType, DamageSource damageSource) {
+        EnumFacing direction = EnumFacing.getHorizontal(MathHelper.floor_double((double) (entity.rotationYaw * 4 / 360F) + 0.5D) & 3);
 
         byte graveType = 0;
         ItemStack sword = null;

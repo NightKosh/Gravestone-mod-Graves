@@ -101,7 +101,7 @@ public class BlockGSCandle extends BlockContainer {
      */
     @Override
     public boolean canPlaceBlockAt(World world, BlockPos pos) {
-        return canPlaceCandleOn(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()));
+        return canPlaceCandleOn(world, pos.down());
     }
 
     /**
@@ -111,7 +111,7 @@ public class BlockGSCandle extends BlockContainer {
      */
     @Override
     public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block block) {
-        if (!this.canPlaceCandleOn(world, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()))) {
+        if (!this.canPlaceCandleOn(world, pos.down())) {
             this.dropBlockAsItem(world, pos, state, 0);
             world.setBlockToAir(pos);
         }
