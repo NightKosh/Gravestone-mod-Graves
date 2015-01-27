@@ -82,9 +82,9 @@ public class GSCompatibilityThaumcraft {
 //                    .add(Aspect.UNDEAD, 3).add(Aspect.EARTH, 3));
 //            ThaumcraftApi.registerEntityTag(GSEntity.ZOMBIE_CAT_NAME, new AspectList().add(Aspect.BEAST, 3)
 //                    .add(Aspect.UNDEAD, 3).add(Aspect.ENTROPY, 3));
-//            ThaumcraftApi.registerEntityTag(GSEntity.SKEKETON_DOG_NAME, new AspectList().add(Aspect.BEAST, 2)
+//            ThaumcraftApi.registerEntityTag(GSEntity.SKELETON_DOG_NAME, new AspectList().add(Aspect.BEAST, 2)
 //                    .add(Aspect.UNDEAD, 4).add(Aspect.EARTH, 3));
-//            ThaumcraftApi.registerEntityTag(GSEntity.SKEKETON_CAT_NAME, new AspectList().add(Aspect.BEAST, 2)
+//            ThaumcraftApi.registerEntityTag(GSEntity.SKELETON_CAT_NAME, new AspectList().add(Aspect.BEAST, 2)
 //                    .add(Aspect.UNDEAD, 4).add(Aspect.ENTROPY, 3));
 //            // Crawlers
 //            ThaumcraftApi.registerEntityTag(GSEntity.SKULL_CRAWLER_NAME, new AspectList().add(Aspect.DEATH, 2).add(Aspect.UNDEAD, 2));

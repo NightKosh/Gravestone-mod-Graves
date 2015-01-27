@@ -153,6 +153,8 @@ entity.GSSkullCrawler.name=Ползучий череп
 entity.GSWitherSkullCrawler.name=Ползучий череп иссушителя
 entity.GSZombieSkullCrawler.name=Ползучий череп зомби
 entity.GSRaven.name=Ворон
+entity.GSSkeletonRaider.name=Скелет наездник
+entity.GSZombieRaider.name=Зомби наездник
 
 
 # Death Messages

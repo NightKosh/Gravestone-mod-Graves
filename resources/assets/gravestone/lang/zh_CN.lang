@@ -153,6 +153,8 @@ entity.GSSkullCrawler.name=爬行骷髅头颅
 entity.GSWitherSkullCrawler.name=爬行凋灵头颅
 entity.GSZombieSkullCrawler.name=爬行僵尸头颅
 entity.GSRaven.name=乌鸦
+entity.GSSkeletonRaider.name=Skeleton Raider
+entity.GSZombieRaider.name=Zombie Raider
 
 
 # Death Messages

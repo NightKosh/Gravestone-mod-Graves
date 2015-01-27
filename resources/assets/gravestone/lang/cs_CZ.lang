@@ -153,6 +153,8 @@ entity.GSSkullCrawler.name=Lebkokrab
 entity.GSWitherSkullCrawler.name=Witherský lebkokrab
 entity.GSZombieSkullCrawler.name=Zombie lebkokrab
 entity.GSRaven.name=Havran
+entity.GSSkeletonRaider.name=Skeleton Raider
+entity.GSZombieRaider.name=Zombie Raider
 
 
 # Death Messages

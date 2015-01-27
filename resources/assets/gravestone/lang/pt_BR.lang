@@ -153,6 +153,8 @@ entity.GSSkullCrawler.name=Rastejador Caveira
 entity.GSWitherSkullCrawler.name=Rastejador Caveira Wither
 entity.GSZombieSkullCrawler.name=Rastejador Caveira Zumbi
 entity.GSRaven.name=Corvo
+entity.GSSkeletonRaider.name=Skeleton Raider
+entity.GSZombieRaider.name=Zombie Raider
 
 
 # Death Messages

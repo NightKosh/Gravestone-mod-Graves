@@ -153,6 +153,8 @@ entity.GSSkullCrawler.name=Crâne rampant
 entity.GSWitherSkullCrawler.name=Crâne de wither rampant
 entity.GSZombieSkullCrawler.name=Crâne de zombie rampant
 entity.GSRaven.name=Corbeau
+entity.GSSkeletonRaider.name=Skeleton Raider
+entity.GSZombieRaider.name=Zombie Raider
 
 
 # Death Messages

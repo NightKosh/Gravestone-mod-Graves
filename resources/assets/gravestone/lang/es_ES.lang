@@ -153,6 +153,8 @@ entity.GSSkullCrawler.name=Arranca cráneos
 entity.GSWitherSkullCrawler.name=Arranca Cráneos Wither
 entity.GSZombieSkullCrawler.name=Arranca Cráneos Zombi
 entity.GSRaven.name=Cuervo
+entity.GSSkeletonRaider.name=Skeleton Raider
+entity.GSZombieRaider.name=Zombie Raider
 
 
 # Death Messages
