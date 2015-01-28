@@ -136,6 +136,7 @@ public class GSConfig {
     public static int spawnChance;
     public static boolean removeEmptyGraves;
     public static boolean showGravesRemovingMessages;
+    public static boolean onlyOwnerCanLootGrave;
 
     private static void gravesConfig() {
         canPlaceGravesEveryWhere = config.get(CATEGORY_GRAVES, "AllowToPlaceGravesEveryWhere", false).getBoolean(false);
@@ -144,6 +145,8 @@ public class GSConfig {
         generatePetGraves = config.get(CATEGORY_GRAVES, "GeneratePetsGraves", true).getBoolean(true);
         generateGravesInLava = config.get(CATEGORY_GRAVES, "GenerateGravesInLava", true).getBoolean(true);
         generateSwordGraves = config.get(CATEGORY_GRAVES, "GenerateSwordGraves", true).getBoolean(true);
+        onlyOwnerCanLootGrave = config.get(CATEGORY_GRAVES, "OnlyOwnerCanLootGrave", false).getBoolean(false);
+
 
         // store items
         Property graveItemsCountProperty = config.get(CATEGORY_GRAVES, "SavedItemsCount", 40);

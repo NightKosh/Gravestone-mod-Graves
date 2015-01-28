@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Random;
 
@@ -25,6 +26,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     protected GSGraveStoneSpawn gsSpawn;
     protected ItemStack sword = null;
     protected ItemStack flower = null;
+    protected String playerId = "";
     public static final int FOG_RANGE = 30;
 
     public TileEntityGSGraveStone() {
@@ -102,6 +104,11 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
 
         // read
         readFlowerInfo(nbtTag);
+
+        // owner
+        if (nbtTag.hasKey("PlayerId")) {
+            playerId = nbtTag.getString("PlayerId");
+        }
     }
 
     /**
@@ -124,6 +131,9 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
 
         // flower
         writeFlowerInfo(nbtTag);
+
+        // owner
+        nbtTag.setString("PlayerId", playerId);
     }
 
     private void readSwordInfo(NBTTagCompound nbtTag) {
@@ -213,5 +223,13 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
                 setFlower(flower);
             }
         }
+    }
+
+    public void setOwner(String playerId) {
+        this.playerId = playerId;
+    }
+
+    public boolean canBeLooted(String playerId) {
+        return StringUtils.isBlank(this.playerId) || playerId.equals(this.playerId);
     }
 }

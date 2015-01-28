@@ -19,6 +19,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemShears;
@@ -485,8 +487,12 @@ public class BlockGSGraveStone extends BlockContainer {
                 ItemStack item = player.inventory.getCurrentItem();
                 if (item.getItem() instanceof ItemSpade) {
                     if (!world.isRemote) {
-                        GSLogger.logInfoGrave(player.getName() + " loot grave at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
-                        te.dropAllItems();
+                        if (te.canBeLooted(player.getUniqueID().toString())) {
+                            GSLogger.logInfoGrave(player.getName() + " loot grave at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
+                            te.dropAllItems();
+                        } else {
+                            player.addChatComponentMessage(new ChatComponentTranslation("grave.cant_be_looted").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                        }
                     }
                     return false;
                 } else {
@@ -752,6 +758,11 @@ public class BlockGSGraveStone extends BlockContainer {
                 tileEntity.setGraveType(graveType);
                 tileEntity.setAge(age);
                 tileEntity.setEnchanted(isMagic);
+                if (entity instanceof EntityPlayer) {
+                    tileEntity.setOwner(entity.getUniqueID().toString());
+                } else if (entity instanceof EntityTameable && ((EntityTameable) entity).isTamed()) {
+                    tileEntity.setOwner(((EntityTameable) entity).getOwner().getUniqueID().toString());
+                }
             }
             GSLogger.logInfoGrave("Create " + deathInfo.getName() + "'s grave at " + newPos.getX() + "x" + newPos.getY() + "x" + newPos.getZ());
         } else {

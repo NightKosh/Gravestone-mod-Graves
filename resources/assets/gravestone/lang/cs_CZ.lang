@@ -162,3 +162,6 @@ death.GS.Herobrine=%1$s byl brutálně zavražděn Herobrinem
 death.GS.death_sentence=%1$s obdržel rozsudek smrti
 death.GS.tortures=%1$s zemřel v krutých bolestech
 death.GS.mom=Your mom
+
+# Console messages
+grave.cant_be_looted=You can't loot this grave!

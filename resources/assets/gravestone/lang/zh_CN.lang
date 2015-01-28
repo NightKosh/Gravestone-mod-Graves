@@ -162,3 +162,6 @@ death.GS.Herobrine=%1$s 惨遭Herobrine杀害！
 death.GS.death_sentence=%1$s 受到死刑判决！
 death.GS.tortures=%1$s 死在残酷的折磨下！
 death.GS.mom=Your mom
+
+# Console messages
+grave.cant_be_looted=You can't loot this grave!

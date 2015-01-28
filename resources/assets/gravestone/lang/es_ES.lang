@@ -162,3 +162,6 @@ death.GS.Herobrine=%1$s fue brutalmente asesinado por Herobrine.
 death.GS.death_sentence=%1$s recibió una sentencia de muerte.
 death.GS.tortures=%1$s murió a causa de terribles torturas.
 death.GS.mom=Your mom
+
+# Console messages
+grave.cant_be_looted=You can't loot this grave!
