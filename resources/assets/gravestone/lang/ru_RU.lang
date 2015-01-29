@@ -165,3 +165,12 @@ death.GS.mom=Твоя мамка
 
 # Console messages
 grave.cant_be_looted=Вы не можете разграбить эту могилу!
+## Console commands
+commands.not_enough_parameters=Недостаточно параметров!
+commands.coordinate_error=Введены не корректные координаты!
+commands.direction_error=Введено не корректное направление!
+
+commands.generate.unknown_structure=Введён не известный тип строения!
+
+commands.fill_grave.empty=По указанным координатам нет никаких блоков!
+commands.fill_grave.wrong_block=По указанным координатам располагаются не корректные блоки!

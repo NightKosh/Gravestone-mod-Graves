@@ -165,3 +165,12 @@ death.GS.mom=Your mom
 
 # Console messages
 grave.cant_be_looted=You can't loot this grave!
+## Console commands
+commands.not_enough_parameters=Not enough parameters!
+commands.coordinate_error=Coordinate error!
+commands.direction_error=Direction error!
+
+commands.generate.unknown_structure=Unknown structure!
+
+commands.fill_grave.empty=There aren't any blocks at this coordinates!
+commands.fill_grave.wrong_block=This coordinates occupied by wrong blocks!

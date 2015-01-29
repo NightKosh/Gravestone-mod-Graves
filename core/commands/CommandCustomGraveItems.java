@@ -8,8 +8,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.*;
 
 import java.util.ArrayList;
 
@@ -33,9 +32,9 @@ public class CommandCustomGraveItems extends CommandBase {
 
     @Override
     public void execute(ICommandSender sender, String[] args) throws CommandException {
-        GSLogger.logInfo("Custom grave items command recieved");
+        GSLogger.logInfo("Custom grave items command received");
 
-        if (args.length == 6) {
+        if (args.length >= 6) {
             try {
                 int graveXCoord = Integer.parseInt(args[0]);
                 int graveYCoord = Integer.parseInt(args[1]);
@@ -59,16 +58,16 @@ public class CommandCustomGraveItems extends CommandBase {
                         }
                         ((TileEntityGSGraveStone) graveTE).setAdditionalItems(items.toArray(new ItemStack[items.size()]));
                     } else {
-                        sender.addChatMessage(new ChatComponentText("This coordinates occupied by wrong blocks"));
+                        sender.addChatMessage(new ChatComponentTranslation("commands.fill_grave.wrong_block").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                     }
                 } else {
-                    sender.addChatMessage(new ChatComponentText("There aren't any blocks at this coordinates"));
+                    sender.addChatMessage(new ChatComponentTranslation("commands.fill_grave.empty").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                 }
             } catch (NumberFormatException e) {
-                sender.addChatMessage(new ChatComponentText("Coordinates error"));
+                sender.addChatMessage(new ChatComponentTranslation("commands.coordinate_error").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
             }
         } else {
-            sender.addChatMessage(new ChatComponentText("Wrong number of parameters"));
+            sender.addChatMessage(new ChatComponentTranslation("commands.not_enough_parameters").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
         }
     }
 }
