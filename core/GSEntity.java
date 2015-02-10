@@ -45,37 +45,37 @@ public class GSEntity {
     
     public void getEntity() {
         // zombie dog
-        EntityRegistry.registerGlobalEntityID(EntityZombieDog.class, ZOMBIE_DOG_NAME, EntityRegistry.findGlobalUniqueEntityId(), 14144467, 7969893);
+        EntityRegistry.registerModEntity(EntityZombieDog.class, ZOMBIE_DOG_NAME, 0, ModInfo.ID, 100, 1, true);
         if (GraveStoneConfig.spawnZombieDogs) {
             EntityRegistry.addSpawn(EntityZombieDog.class, 2, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.FOREST));
         }
 
         // zombie cat
-        EntityRegistry.registerGlobalEntityID(EntityZombieCat.class, ZOMBIE_CAT_NAME, EntityRegistry.findGlobalUniqueEntityId(), 15720061, 7969893);
+        EntityRegistry.registerModEntity(EntityZombieCat.class, ZOMBIE_CAT_NAME, 1, ModInfo.ID, 100, 1, true);
         if (GraveStoneConfig.spawnZombieCats) {
             EntityRegistry.addSpawn(EntityZombieCat.class, 2, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.JUNGLE));
         }
 
         // skeleton dog
-        EntityRegistry.registerGlobalEntityID(EntitySkeletonDog.class, SKEKETON_DOG_NAME, EntityRegistry.findGlobalUniqueEntityId(), 14144467, 4802889);
+        EntityRegistry.registerModEntity(EntitySkeletonDog.class, SKEKETON_DOG_NAME, 2, ModInfo.ID, 100, 1, true);
         if (GraveStoneConfig.spawnSkeletonDogs) {
             EntityRegistry.addSpawn(EntityZombieDog.class, 2, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.FOREST));
         }
 
         // skeleton cat
-        EntityRegistry.registerGlobalEntityID(EntitySkeletonCat.class, SKEKETON_CAT_NAME, EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
+        EntityRegistry.registerModEntity(EntitySkeletonCat.class, SKEKETON_CAT_NAME, 3, ModInfo.ID, 100, 1, true);
         if (GraveStoneConfig.spawnSkeletonCats) {
             EntityRegistry.addSpawn(EntityZombieCat.class, 2, 1, 1, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.JUNGLE));
         }
 
         // skullcrawler
-        EntityRegistry.registerGlobalEntityID(EntitySkullCrawler.class, SKULL_CRAWLER_NAME, EntityRegistry.findGlobalUniqueEntityId(), 12698049, 11013646);
+        EntityRegistry.registerModEntity(EntitySkullCrawler.class, SKULL_CRAWLER_NAME, 4, ModInfo.ID, 100, 1, true);
         // wither
-        EntityRegistry.registerGlobalEntityID(EntityWitherSkullCrawler.class, WITHER_SKULL_CRAWLER_NAME, EntityRegistry.findGlobalUniqueEntityId(), 0, 11013646);
+        EntityRegistry.registerModEntity(EntityWitherSkullCrawler.class, WITHER_SKULL_CRAWLER_NAME, 5, ModInfo.ID, 100, 1, true);
         EntityRegistry.addSpawn(EntityWitherSkullCrawler.class, 3, 1, 4, EnumCreatureType.monster, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.NETHER));
         // zombie
-        EntityRegistry.registerGlobalEntityID(EntityZombieSkullCrawler.class, ZOMBIE_SKULL_CRAWLER_NAME, EntityRegistry.findGlobalUniqueEntityId(), 44975, 11013646);
-        
+        EntityRegistry.registerModEntity(EntityZombieSkullCrawler.class, ZOMBIE_SKULL_CRAWLER_NAME, 6, ModInfo.ID, 100, 1, true);
+
         // ghosts
         // LostSoul
         //EntityRegistry.registerGlobalEntityID(EntityLostSoul.class, "GSLostSoul", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
