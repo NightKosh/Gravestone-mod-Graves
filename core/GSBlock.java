@@ -1,5 +1,6 @@
 package gravestone.core;
 
+import gravestone.item.itemblock.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.item.Item;
@@ -7,7 +8,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import gravestone.block.*;
 import gravestone.block.enums.*;
-import gravestone.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

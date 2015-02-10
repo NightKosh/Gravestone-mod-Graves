@@ -1,4 +1,4 @@
-package gravestone.item;
+package gravestone.item.itemblock;
 
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumGraves;

@@ -1,5 +1,5 @@
 
-package gravestone.item;
+package gravestone.item.itemblock;
 
 import gravestone.block.enums.EnumSkullCandle;
 import net.minecraft.block.Block;

@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package gravestone.item;
+package gravestone.item.itemblock;
 
 import gravestone.block.enums.EnumHauntedChest;
 import net.minecraft.block.Block;

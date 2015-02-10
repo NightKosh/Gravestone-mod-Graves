@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package gravestone.item;
 
-import gravestone.block.enums.EnumBoneBlock;
+package gravestone.item.itemblock;
+
+import gravestone.block.enums.EnumTrap;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -15,9 +16,9 @@ import net.minecraft.item.ItemStack;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ItemBlockGSBoneBlock extends ItemBlock {
+public class ItemBlockGSTrap extends ItemBlock {
 
-    public ItemBlockGSBoneBlock(Block block) {
+    public ItemBlockGSTrap(Block block) {
         super(block);
         setHasSubtypes(true);
     }
@@ -29,6 +30,7 @@ public class ItemBlockGSBoneBlock extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        return EnumBoneBlock.values()[itemstack.getItemDamage()].getLocalizedName();
+        return EnumTrap.values()[itemstack.getItemDamage()].getLocalizedName();
     }
+
 }

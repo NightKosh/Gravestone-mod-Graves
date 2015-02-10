@@ -1,5 +1,5 @@
 
-package gravestone.item;
+package gravestone.item.itemblock;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
