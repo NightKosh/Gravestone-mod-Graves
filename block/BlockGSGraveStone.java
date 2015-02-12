@@ -332,7 +332,7 @@ public class BlockGSGraveStone extends BlockContainer {
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
         if (tileEntity != null && tileEntity.canBeLooted(player.getUniqueID().toString())) {
             GraveStoneHelper.spawnMob(world, pos);
-            
+
             if (tileEntity.hasFlower()) {
                 tileEntity.dropFlower();
             }
@@ -648,7 +648,7 @@ public class BlockGSGraveStone extends BlockContainer {
         ItemStack sword = null;
 
         if (GSConfig.generateSwordGraves && world.rand.nextInt(4) == 0 && entityType.equals(EnumGraveType.PLAYER_GRAVES)) {
-            sword = GraveStoneHelper.oldCheckSword(items);
+            sword = GraveStoneHelper.checkSword(items);
         }
 
         switch (entityType) {

@@ -26,7 +26,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.*;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
@@ -234,8 +237,7 @@ public class GraveStoneHelper {
     /**
      * Check is there sword in your inventory
      */
-    // TODO
-    public static ItemStack oldCheckSword(List<ItemStack> items) {
+    public static ItemStack checkSword(List<ItemStack> items) {
         if (items != null) {
             for (ItemStack stack : items) {
                 if (stack != null && swordsList.contains(stack.getItem())) {
@@ -305,13 +307,8 @@ public class GraveStoneHelper {
      * @param graveType Grave type
      */
     public static boolean isPetGrave(byte graveType) {
-        // TODO rework
-        return Arrays.binarySearch(PETS_GRAVES, EnumGraves.getById(graveType)) >= 0;
-    }
-
-    // TODO
-    public static byte oldGraveTypeToSwordType(byte graveType) {
-        return (byte) (graveType - 4);
+        return EnumGraves.getById(graveType).getGraveType() == EnumGraves.EnumGraveType.DOG_STATUE ||
+                EnumGraves.getById(graveType).getGraveType() == EnumGraves.EnumGraveType.CAT_STATUE;
     }
 
     /**

@@ -1,16 +1,16 @@
 package gravestone.core;
 
+import gravestone.block.*;
+import gravestone.block.enums.*;
 import gravestone.item.itemblock.*;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
-import gravestone.block.*;
-import gravestone.block.enums.*;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 /**
  * GraveStone mod
@@ -47,18 +47,7 @@ public class GSBlock {
     public static void registration() {
         // gravestone
         graveStone = new BlockGSGraveStone();
-        GameRegistry.registerBlock(graveStone, ItemBlockGSGraveStone.class, "GSGraveStone");
-        for (byte i = 0; i < EnumGraves.values().length; i++) {
-            ItemStack graveStoneStack = new ItemStack(graveStone, 1, 0);
-            NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("GraveType", i);
-            if (GraveStoneHelper.isSwordGrave(i)) {
-                nbt.setByte("SwordType", GraveStoneHelper.oldGraveTypeToSwordType(i));
-            }
-
-            graveStoneStack.setTagCompound(nbt);
-            LanguageRegistry.addName(graveStoneStack, EnumGraves.values()[i].getLocalizedName());
-        }
+        advancedNTBBlockRegistration(graveStone, "GSGraveStone", "GraveStone", EnumGraves.values(), "GraveType", ItemBlockGSGraveStone.class);
 //        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(graveStone), 0, Resources.graveStoneModel);
 
         // memorials
