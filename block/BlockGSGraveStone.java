@@ -328,11 +328,11 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
         player.addExhaustion(0.025F);
-        GraveStoneHelper.spawnMob(world, pos);
 
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
-
-        if (tileEntity != null) {
+        if (tileEntity != null && tileEntity.canBeLooted(player.getUniqueID().toString())) {
+            GraveStoneHelper.spawnMob(world, pos);
+            
             if (tileEntity.hasFlower()) {
                 tileEntity.dropFlower();
             }
@@ -510,9 +510,24 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block block) {
         if (!world.isSideSolid(pos.down(), EnumFacing.DOWN, true)) {
-            this.dropBlockWithoutInfo(world, pos, state);
-            world.setBlockToAir(pos);
+            TileEntityGSGraveStone te = (TileEntityGSGraveStone) world.getTileEntity(pos);
+            if (te != null) {
+                if (te.canBeLooted("")) {
+                    this.dropBlockWithoutInfo(world, pos, state);
+                    world.setBlockToAir(pos);
+                }
+            }
         }
+    }
+
+    @Override
+    public boolean removedByPlayer(World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+        TileEntityGSGraveStone te = (TileEntityGSGraveStone) world.getTileEntity(pos);
+        if (te != null && !te.canBeLooted(player.getUniqueID().toString())) {
+            player.addChatComponentMessage(new ChatComponentTranslation("grave.cant_be_looted").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -569,7 +584,6 @@ public class BlockGSGraveStone extends BlockContainer {
 
         if (itemStack != null) {
             GSGraveStoneItems.dropItem(itemStack, world, pos);
-
         }
     }
 

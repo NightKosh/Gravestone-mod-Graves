@@ -181,6 +181,10 @@ public class GSGraveStoneItems {
         graveContents.clear();
     }
 
+    public List<ItemStack> getGraveContent() {
+        return graveContents;
+    }
+
     /**
      * Set random itesm as grave loot
      */
