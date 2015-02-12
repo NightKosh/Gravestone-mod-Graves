@@ -527,7 +527,7 @@ public class BlockGSGraveStone extends BlockContainer {
             player.addChatComponentMessage(new ChatComponentTranslation("grave.cant_be_looted").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
             return false;
         }
-        return true;
+        return super.removedByPlayer(world, pos, player, willHarvest);
     }
 
     @Override
