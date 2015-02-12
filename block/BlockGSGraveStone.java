@@ -739,6 +739,7 @@ public class BlockGSGraveStone extends BlockContainer {
             if (itemStack != null) {
                 NBTTagCompound nbt = new NBTTagCompound();
                 nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
+                nbt.setBoolean("Mossy", tileEntity.isMossy());
 
                 itemStack.setTagCompound(nbt);
                 if (tileEntity.isSwordGrave()) {

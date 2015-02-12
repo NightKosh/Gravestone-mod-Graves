@@ -870,6 +870,7 @@ public class BlockGSMemorial extends BlockContainer {
             if (itemStack != null) {
                 NBTTagCompound nbt = new NBTTagCompound();
                 nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
+                nbt.setBoolean("Mossy", tileEntity.isMossy());
 
                 nbt.setByte("HangedMob", (byte) tileEntity.getHangedMob().ordinal());
                 nbt.setInteger("HangedVillagerProfession", tileEntity.getHangedVillagerProfession());
