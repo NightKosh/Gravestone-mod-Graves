@@ -135,7 +135,7 @@ public class GSBlock {
     }
 
     private static void subNTBBlocksRegistration(Block block, IBlockEnum[] blockEnums, String nbtName) {
-        for (byte i = 0; i < blockEnums.length; i++) {
+        for (int i = 0; i < blockEnums.length; i++) {
             ItemStack stack = new ItemStack(block, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setInteger(nbtName, i);
