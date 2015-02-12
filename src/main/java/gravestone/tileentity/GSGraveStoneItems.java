@@ -327,7 +327,7 @@ public class GSGraveStoneItems {
      */
     // TODO
     private void changeGraveTypeToSword(Item sword, int swordDamage) {
-        tileEntity.setGraveType((byte) EnumGraves.SWORD.ordinal());
+        tileEntity.setGraveType(EnumGraves.SWORD.ordinal());
         tileEntity.setSword(new ItemStack(sword, 1, swordDamage));
     }
 

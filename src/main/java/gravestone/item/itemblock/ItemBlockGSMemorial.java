@@ -39,7 +39,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
-        EnumMemorials memorialType = EnumMemorials.getById(itemStack.getTagCompound().getByte("GraveType"));
+        EnumMemorials memorialType = EnumMemorials.getById(itemStack.getTagCompound().getInteger("Type"));
         return getUnlocalizedName() + "." + memorialType.getLocalizedName();
     }
 
@@ -76,7 +76,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
                 list.add(deathText);
             }
 
-            EnumGraveMaterial material = EnumMemorials.getById(nbt.getByte("GraveType")).getMaterial();
+            EnumGraveMaterial material = EnumMemorials.getById(nbt.getInteger("Type")).getMaterial();
             if (material != EnumGraveMaterial.OTHER) {
                 StringBuilder materialStr = new StringBuilder();
                 materialStr.append(ModGraveStone.proxy.getLocalizedString("material.title"))
@@ -122,7 +122,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
                     break;
             }
 
-            EnumMemorials memorialType = EnumMemorials.getById(stack.getTagCompound().getByte("GraveType"));
+            EnumMemorials memorialType = EnumMemorials.getById(stack.getTagCompound().getInteger("Type"));
             byte maxY;
             byte maxX = 1;
             byte maxZ = 1;

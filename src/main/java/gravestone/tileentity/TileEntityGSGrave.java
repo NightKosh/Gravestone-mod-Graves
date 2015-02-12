@@ -25,18 +25,18 @@ public abstract class TileEntityGSGrave extends TileEntity {
     protected boolean isEditable = true;
     protected boolean isEnchanted = false;
     protected boolean isMossy = false;
-    protected byte graveType = 0;
+    protected int graveType = 0;
     protected int age = -1;
 
     public TileEntityGSGrave() {
         gSDeathText = new GSGraveStoneDeathText(this);
     }
 
-    public void setGraveType(byte graveType) {
+    public void setGraveType(int graveType) {
         this.graveType = graveType;
     }
 
-    public byte getGraveTypeNum() {
+    public int getGraveTypeNum() {
         return graveType;
     }
 
@@ -120,7 +120,7 @@ public abstract class TileEntityGSGrave extends TileEntity {
     public void readFromNBT(NBTTagCompound nbtTag) {
         super.readFromNBT(nbtTag);
 
-        graveType = nbtTag.getByte("GraveType");
+        graveType = nbtTag.getInteger("Type");
         isEnchanted = nbtTag.getBoolean("Enchanted");
         isMossy = nbtTag.getBoolean("Mossy");
     }
@@ -132,7 +132,7 @@ public abstract class TileEntityGSGrave extends TileEntity {
     public void writeToNBT(NBTTagCompound nbtTag) {
         super.writeToNBT(nbtTag);
 
-        nbtTag.setByte("GraveType", graveType);
+        nbtTag.setInteger("Type", graveType);
         nbtTag.setBoolean("Enchanted", isEnchanted);
         nbtTag.setBoolean("Mossy", isMossy);
     }

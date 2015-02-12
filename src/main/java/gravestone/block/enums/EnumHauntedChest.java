@@ -32,7 +32,7 @@ public enum EnumHauntedChest implements IBlockEnum, IStringSerializable {
         return blockModelName;
     }
 
-    public static EnumHauntedChest getById(byte id) {
+    public static EnumHauntedChest getById(int id) {
         if (id < values().length) {
             return values()[id];
         }

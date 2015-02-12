@@ -100,7 +100,7 @@ public class ObjectsGenerationHelper {
         world.setBlockState(pos, GSBlock.hauntedChest.getDefaultState().withProperty(BlockGSHauntedChest.FACING, facing), 2);
         TileEntityGSHauntedChest te = (TileEntityGSHauntedChest) world.getTileEntity(pos);
         if (te != null) {
-            te.setChestType(EnumHauntedChest.getById((byte) random.nextInt(EnumHauntedChest.values().length)));
+            te.setChestType(EnumHauntedChest.getById(random.nextInt(EnumHauntedChest.values().length)));
         }
     }
 

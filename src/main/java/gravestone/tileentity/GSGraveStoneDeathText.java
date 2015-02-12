@@ -1,12 +1,13 @@
 package gravestone.tileentity;
 
 import gravestone.block.GraveStoneHelper;
-import gravestone.config.GSConfig;
 import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumMemorials;
+import gravestone.config.GSConfig;
+import net.minecraft.nbt.NBTTagCompound;
+
 import java.util.ArrayList;
 import java.util.Random;
-import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * GraveStone mod
@@ -85,7 +86,7 @@ public class GSGraveStoneDeathText {
         killerName = (name == null) ? "" : name;
     }
 
-    public void setRandomDeathTextAndName(Random random, byte grave, boolean isMemorial, boolean changeGraveType) {
+    public void setRandomDeathTextAndName(Random random, int grave, boolean isMemorial, boolean changeGraveType) {
         isLocalized = true;
         EnumGraves graveType = EnumGraves.getById(grave);
         EnumMemorials memorialType = EnumMemorials.getById(grave);
@@ -107,20 +108,9 @@ public class GSGraveStoneDeathText {
             }
         } else {
             if (getDeathMessage(random)) {
-                byte newGraveType;
-                switch (graveType) {
-                    case WOODEN_DOG_STATUE:
-                    case SANDSTONE_DOG_STATUE:
-                    case STONE_DOG_STATUE:
-                    case IRON_DOG_STATUE:
-                    case GOLDEN_DOG_STATUE:
-                    case DIAMOND_DOG_STATUE:
-                    case EMERALD_DOG_STATUE:
-                    case LAPIS_DOG_STATUE:
-                    case REDSTONE_DOG_STATUE:
-                    case OBSIDIAN_DOG_STATUE:
-                    case QUARTZ_DOG_STATUE:
-                    case ICE_DOG_STATUE:
+                int newGraveType;
+                switch (graveType.getGraveType()) {
+                    case DOG_STATUE:
                         name = this.getValue(random, GSConfig.graveDogsNames);
                         if (changeGraveType) {
                             newGraveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getDogGraveForDeath(null, deathText), random);
@@ -129,18 +119,7 @@ public class GSGraveStoneDeathText {
                             }
                         }
                         break;
-                    case WOODEN_CAT_STATUE:
-                    case SANDSTONE_CAT_STATUE:
-                    case STONE_CAT_STATUE:
-                    case IRON_CAT_STATUE:
-                    case GOLDEN_CAT_STATUE:
-                    case DIAMOND_CAT_STATUE:
-                    case EMERALD_CAT_STATUE:
-                    case LAPIS_CAT_STATUE:
-                    case REDSTONE_CAT_STATUE:
-                    case OBSIDIAN_CAT_STATUE:
-                    case QUARTZ_CAT_STATUE:
-                    case ICE_CAT_STATUE:
+                    case CAT_STATUE:
                         name = this.getValue(random, GSConfig.graveCatsNames);
                         if (changeGraveType) {
                             newGraveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getCatGraveForDeath(null, deathText), random);
@@ -173,9 +152,9 @@ public class GSGraveStoneDeathText {
         //if (random.nextInt(5) > 2) {
         //    deathText = this.getValue(random, textList);
         //} else {
-            if (getDeathMessage(random)) {
-                name = this.getValue(random, nameList);
-            }
+        if (getDeathMessage(random)) {
+            name = this.getValue(random, nameList);
+        }
         //}
     }
 

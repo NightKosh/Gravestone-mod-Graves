@@ -120,7 +120,7 @@ public class StatuesHall extends CatacombsBaseComponent {
         ObjectsGenerationHelper.generateChest(this, world, random, 7, 0, 12, this.coordBaseMode, false, ObjectsGenerationHelper.EnumChestTypes.ALL_CHESTS);
 
         // statues
-        byte memorialType = BlockGSMemorial.getMemorialType(world, new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0)), random, 5);
+        int memorialType = BlockGSMemorial.getMemorialType(world, new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0)), random, 5);
         EnumFacing left = this.getLeftDirection(this.coordBaseMode);
         EnumFacing right = this.getRightDirection(this.coordBaseMode);
         MemorialGenerationHelper.placeMemorial(this, world, random, 3, 1, 3, left, memorialType);

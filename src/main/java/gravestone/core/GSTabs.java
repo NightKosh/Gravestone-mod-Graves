@@ -29,7 +29,7 @@ public class GSTabs {
             public ItemStack getIconItemStack() {
                 ItemStack stack = new ItemStack(GSBlock.graveStone, 1, 0);
                 NBTTagCompound nbt = new NBTTagCompound();
-                nbt.setByte("GraveType", (byte) EnumGraves.STONE_VERTICAL_PLATE.ordinal());
+                nbt.setInteger("Type", EnumGraves.STONE_VERTICAL_PLATE.ordinal());
                 stack.setTagCompound(nbt);
                 return stack;
             }
@@ -46,7 +46,7 @@ public class GSTabs {
             public ItemStack getIconItemStack() {
                 ItemStack stack = new ItemStack(GSBlock.memorial, 1, 0);
                 NBTTagCompound nbt = new NBTTagCompound();
-                nbt.setByte("GraveType", (byte) EnumMemorials.STONE_CREEPER_STATUE.ordinal());
+                nbt.setInteger("Type", EnumMemorials.STONE_CREEPER_STATUE.ordinal());
                 stack.setTagCompound(nbt);
                 return stack;
             }

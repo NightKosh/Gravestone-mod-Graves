@@ -120,45 +120,19 @@ public class GraveStoneHelper {
             EnumGraves.ICE_CROSS,
             EnumGraves.ICE_HORISONTAL_PLATE
     };
-    public static final EnumGraves[] PETS_GRAVES = {
-            EnumGraves.WOODEN_DOG_STATUE,
-            EnumGraves.WOODEN_CAT_STATUE,
-            EnumGraves.SANDSTONE_DOG_STATUE,
-            EnumGraves.SANDSTONE_CAT_STATUE,
-            EnumGraves.STONE_DOG_STATUE,
-            EnumGraves.STONE_CAT_STATUE,
-            EnumGraves.IRON_DOG_STATUE,
-            EnumGraves.IRON_CAT_STATUE,
-            EnumGraves.GOLDEN_DOG_STATUE,
-            EnumGraves.GOLDEN_CAT_STATUE,
-            EnumGraves.DIAMOND_DOG_STATUE,
-            EnumGraves.DIAMOND_CAT_STATUE,
-            EnumGraves.EMERALD_DOG_STATUE,
-            EnumGraves.EMERALD_CAT_STATUE,
-            EnumGraves.LAPIS_DOG_STATUE,
-            EnumGraves.LAPIS_CAT_STATUE,
-            EnumGraves.REDSTONE_DOG_STATUE,
-            EnumGraves.REDSTONE_CAT_STATUE,
-            EnumGraves.OBSIDIAN_DOG_STATUE,
-            EnumGraves.OBSIDIAN_CAT_STATUE,
-            EnumGraves.QUARTZ_DOG_STATUE,
-            EnumGraves.QUARTZ_CAT_STATUE,
-            EnumGraves.ICE_DOG_STATUE,
-            EnumGraves.ICE_CAT_STATUE
-    };
-    public static final byte[] DOGS_GRAVES = {
-            (byte) EnumGraves.WOODEN_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.SANDSTONE_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.STONE_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.IRON_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.GOLDEN_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.DIAMOND_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.EMERALD_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.LAPIS_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.REDSTONE_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.OBSIDIAN_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.QUARTZ_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.ICE_DOG_STATUE.ordinal()
+    public static final int[] DOGS_GRAVES = {
+            EnumGraves.WOODEN_DOG_STATUE.ordinal(),
+            EnumGraves.SANDSTONE_DOG_STATUE.ordinal(),
+            EnumGraves.STONE_DOG_STATUE.ordinal(),
+            EnumGraves.IRON_DOG_STATUE.ordinal(),
+            EnumGraves.GOLDEN_DOG_STATUE.ordinal(),
+            EnumGraves.DIAMOND_DOG_STATUE.ordinal(),
+            EnumGraves.EMERALD_DOG_STATUE.ordinal(),
+            EnumGraves.LAPIS_DOG_STATUE.ordinal(),
+            EnumGraves.REDSTONE_DOG_STATUE.ordinal(),
+            EnumGraves.OBSIDIAN_DOG_STATUE.ordinal(),
+            EnumGraves.QUARTZ_DOG_STATUE.ordinal(),
+            EnumGraves.ICE_DOG_STATUE.ordinal()
     };
     public static final EnumGraves[] CATS_GRAVES = {
             EnumGraves.WOODEN_CAT_STATUE,
@@ -256,7 +230,7 @@ public class GraveStoneHelper {
      *
      * @param graveType Grave type
      */
-    public static boolean isSwordGrave(byte graveType) {
+    public static boolean isSwordGrave(int graveType) {
         return graveType == EnumGraves.SWORD.ordinal();
     }
 
@@ -266,14 +240,14 @@ public class GraveStoneHelper {
      * @param random
      * @param graveType
      */
-    public static byte getGraveType(World world, BlockPos pos, Random random, BlockGSGraveStone.EnumGraveType graveType) {
+    public static int getGraveType(World world, BlockPos pos, Random random, BlockGSGraveStone.EnumGraveType graveType) {
         ArrayList<EnumGraves> petsGravesList;
         switch (graveType) {
             case PLAYER_GRAVES:
                 if (random.nextFloat() > 0.1) {
                     return getRandomGrave(getPlayerGraveTypes(world, pos), random);
                 } else {
-                    return (byte) EnumGraves.SWORD.ordinal();
+                    return EnumGraves.SWORD.ordinal();
                 }
             case PETS_GRAVES:
                 petsGravesList = new ArrayList<EnumGraves>();
@@ -290,7 +264,7 @@ public class GraveStoneHelper {
                     if (random.nextFloat() > 0.1) {
                         return getRandomGrave(getPlayerGraveTypes(world, pos), random);
                     } else {
-                        return (byte) EnumGraves.SWORD.ordinal();
+                        return EnumGraves.SWORD.ordinal();
                     }
                 } else {
                     petsGravesList = new ArrayList<EnumGraves>();
@@ -306,7 +280,7 @@ public class GraveStoneHelper {
      *
      * @param graveType Grave type
      */
-    public static boolean isPetGrave(byte graveType) {
+    public static boolean isPetGrave(int graveType) {
         return EnumGraves.getById(graveType).getGraveType() == EnumGraves.EnumGraveType.DOG_STATUE ||
                 EnumGraves.getById(graveType).getGraveType() == EnumGraves.EnumGraveType.CAT_STATUE;
     }
@@ -578,14 +552,14 @@ public class GraveStoneHelper {
     public static ItemStack getSwordAsGrave(Item grave, ItemStack sword) {
         ItemStack graveStoneStack = new ItemStack(grave, 1, 0);
         NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setByte("GraveType", (byte) EnumGraves.SWORD.ordinal());
+        nbt.setInteger("Type", EnumGraves.SWORD.ordinal());
         GraveStoneHelper.addSwordInfo(nbt, sword);
 
         graveStoneStack.setTagCompound(nbt);
         return graveStoneStack;
     }
 
-    public static Item getRandomSwordForGeneration(byte graveType, Random random) {
+    public static Item getRandomSwordForGeneration(int graveType, Random random) {
         if (graveType == EnumGraves.SWORD.ordinal()) {
             return GENERATED_SWORD_GRAVES[random.nextInt(GENERATED_SWORD_GRAVES.length)];
         } else {
@@ -598,9 +572,9 @@ public class GraveStoneHelper {
         swordsList.add(sword);
     }
 
-    public static byte getRandomGrave(List<EnumGraves> graveTypes, Random rand) {
+    public static int getRandomGrave(List<EnumGraves> graveTypes, Random rand) {
         if (graveTypes.size() > 0) {
-            return (byte) graveTypes.get(rand.nextInt(graveTypes.size())).ordinal();
+            return graveTypes.get(rand.nextInt(graveTypes.size())).ordinal();
         } else {
             return 0;
         }

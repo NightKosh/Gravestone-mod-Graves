@@ -108,7 +108,7 @@ public class ComponentGSVillageCemetery extends StructureVillagePieces.Village {
         this.func_175811_a(world, gateState, 6, 1, 1, structureBoundingBox);
         this.func_175811_a(world, gateState, 6, 1, 9, structureBoundingBox);
 
-        byte graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveTypes(world,
+        int graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveTypes(world,
                 new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0))), random);
         IBlockState graveState = GSBlock.graveStone.getDefaultState().withProperty(BlockGSGraveStone.FACING, this.coordBaseMode);
         for (int x = 3; x < 11; x += 2) {
@@ -127,7 +127,7 @@ public class ComponentGSVillageCemetery extends StructureVillagePieces.Village {
         return true;
     }
 
-    protected void placeGrave(World world, Random random, int x, int y, int z, IBlockState graveState, byte graveType, StructureBoundingBox structureBoundingBox) {
+    protected void placeGrave(World world, Random random, int x, int y, int z, IBlockState graveState, int graveType, StructureBoundingBox structureBoundingBox) {
         int xCoord = this.getXWithOffset(x, z);
         int yCoord = this.getYWithOffset(y);
         int zCoord = this.getZWithOffset(x, z);

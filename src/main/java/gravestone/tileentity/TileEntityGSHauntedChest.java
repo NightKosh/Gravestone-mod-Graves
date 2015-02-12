@@ -126,7 +126,7 @@ public class TileEntityGSHauntedChest extends TileEntity implements IUpdatePlaye
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
 
-        chestType = EnumHauntedChest.getById(nbt.getByte("ChestType"));
+        chestType = EnumHauntedChest.getById(nbt.getInteger("ChestType"));
     }
 
     /**
@@ -136,7 +136,7 @@ public class TileEntityGSHauntedChest extends TileEntity implements IUpdatePlaye
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
 
-        nbt.setByte("ChestType", (byte) chestType.ordinal());
+        nbt.setInteger("ChestType", chestType.ordinal());
     }
 
     public void spawnMobs(World world) {

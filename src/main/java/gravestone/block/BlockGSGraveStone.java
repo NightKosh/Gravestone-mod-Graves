@@ -50,88 +50,88 @@ public class BlockGSGraveStone extends BlockContainer {
 
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
-    public static final byte[] TAB_PLAYER_GRAVES = {
+    public static final int[] TAB_PLAYER_GRAVES = {
             // vertical plates
-            (byte) EnumGraves.WOODEN_VERTICAL_PLATE.ordinal(),
-            (byte) EnumGraves.SANDSTONE_VERTICAL_PLATE.ordinal(),
-            (byte) EnumGraves.STONE_VERTICAL_PLATE.ordinal(),
-            (byte) EnumGraves.IRON_VERTICAL_PLATE.ordinal(),
-            (byte) EnumGraves.GOLDEN_VERTICAL_PLATE.ordinal(),
-            (byte) EnumGraves.DIAMOND_VERTICAL_PLATE.ordinal(),
-            (byte) EnumGraves.EMERALD_VERTICAL_PLATE.ordinal(),
-            (byte) EnumGraves.LAPIS_VERTICAL_PLATE.ordinal(),
-            (byte) EnumGraves.REDSTONE_VERTICAL_PLATE.ordinal(),
-            (byte) EnumGraves.OBSIDIAN_VERTICAL_PLATE.ordinal(),
-            (byte) EnumGraves.QUARTZ_VERTICAL_PLATE.ordinal(),
-            (byte) EnumGraves.ICE_VERTICAL_PLATE.ordinal(),
+            EnumGraves.WOODEN_VERTICAL_PLATE.ordinal(),
+            EnumGraves.SANDSTONE_VERTICAL_PLATE.ordinal(),
+            EnumGraves.STONE_VERTICAL_PLATE.ordinal(),
+            EnumGraves.IRON_VERTICAL_PLATE.ordinal(),
+            EnumGraves.GOLDEN_VERTICAL_PLATE.ordinal(),
+            EnumGraves.DIAMOND_VERTICAL_PLATE.ordinal(),
+            EnumGraves.EMERALD_VERTICAL_PLATE.ordinal(),
+            EnumGraves.LAPIS_VERTICAL_PLATE.ordinal(),
+            EnumGraves.REDSTONE_VERTICAL_PLATE.ordinal(),
+            EnumGraves.OBSIDIAN_VERTICAL_PLATE.ordinal(),
+            EnumGraves.QUARTZ_VERTICAL_PLATE.ordinal(),
+            EnumGraves.ICE_VERTICAL_PLATE.ordinal(),
             // crosses
-            (byte) EnumGraves.WOODEN_CROSS.ordinal(),
-            (byte) EnumGraves.SANDSTONE_CROSS.ordinal(),
-            (byte) EnumGraves.STONE_CROSS.ordinal(),
-            (byte) EnumGraves.IRON_CROSS.ordinal(),
-            (byte) EnumGraves.GOLDEN_CROSS.ordinal(),
-            (byte) EnumGraves.DIAMOND_CROSS.ordinal(),
-            (byte) EnumGraves.EMERALD_CROSS.ordinal(),
-            (byte) EnumGraves.LAPIS_CROSS.ordinal(),
-            (byte) EnumGraves.REDSTONE_CROSS.ordinal(),
-            (byte) EnumGraves.OBSIDIAN_CROSS.ordinal(),
-            (byte) EnumGraves.QUARTZ_CROSS.ordinal(),
-            (byte) EnumGraves.ICE_CROSS.ordinal(),
+            EnumGraves.WOODEN_CROSS.ordinal(),
+            EnumGraves.SANDSTONE_CROSS.ordinal(),
+            EnumGraves.STONE_CROSS.ordinal(),
+            EnumGraves.IRON_CROSS.ordinal(),
+            EnumGraves.GOLDEN_CROSS.ordinal(),
+            EnumGraves.DIAMOND_CROSS.ordinal(),
+            EnumGraves.EMERALD_CROSS.ordinal(),
+            EnumGraves.LAPIS_CROSS.ordinal(),
+            EnumGraves.REDSTONE_CROSS.ordinal(),
+            EnumGraves.OBSIDIAN_CROSS.ordinal(),
+            EnumGraves.QUARTZ_CROSS.ordinal(),
+            EnumGraves.ICE_CROSS.ordinal(),
             // horisontal plates
-            (byte) EnumGraves.WOODEN_HORISONTAL_PLATE.ordinal(),
-            (byte) EnumGraves.SANDSTONE_HORISONTAL_PLATE.ordinal(),
-            (byte) EnumGraves.STONE_HORISONTAL_PLATE.ordinal(),
-            (byte) EnumGraves.IRON_HORISONTAL_PLATE.ordinal(),
-            (byte) EnumGraves.GOLDEN_HORISONTAL_PLATE.ordinal(),
-            (byte) EnumGraves.DIAMOND_HORISONTAL_PLATE.ordinal(),
-            (byte) EnumGraves.EMERALD_HORISONTAL_PLATE.ordinal(),
-            (byte) EnumGraves.LAPIS_HORISONTAL_PLATE.ordinal(),
-            (byte) EnumGraves.REDSTONE_HORISONTAL_PLATE.ordinal(),
-            (byte) EnumGraves.OBSIDIAN_HORISONTAL_PLATE.ordinal(),
-            (byte) EnumGraves.QUARTZ_HORISONTAL_PLATE.ordinal(),
-            (byte) EnumGraves.ICE_HORISONTAL_PLATE.ordinal()
+            EnumGraves.WOODEN_HORISONTAL_PLATE.ordinal(),
+            EnumGraves.SANDSTONE_HORISONTAL_PLATE.ordinal(),
+            EnumGraves.STONE_HORISONTAL_PLATE.ordinal(),
+            EnumGraves.IRON_HORISONTAL_PLATE.ordinal(),
+            EnumGraves.GOLDEN_HORISONTAL_PLATE.ordinal(),
+            EnumGraves.DIAMOND_HORISONTAL_PLATE.ordinal(),
+            EnumGraves.EMERALD_HORISONTAL_PLATE.ordinal(),
+            EnumGraves.LAPIS_HORISONTAL_PLATE.ordinal(),
+            EnumGraves.REDSTONE_HORISONTAL_PLATE.ordinal(),
+            EnumGraves.OBSIDIAN_HORISONTAL_PLATE.ordinal(),
+            EnumGraves.QUARTZ_HORISONTAL_PLATE.ordinal(),
+            EnumGraves.ICE_HORISONTAL_PLATE.ordinal()
     };
 
-    public static final byte[] TAB_PETS_GRAVES = {
+    public static final int[] TAB_PETS_GRAVES = {
             // dogs graves
-            (byte) EnumGraves.WOODEN_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.SANDSTONE_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.STONE_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.IRON_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.GOLDEN_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.DIAMOND_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.EMERALD_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.LAPIS_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.REDSTONE_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.OBSIDIAN_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.QUARTZ_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.ICE_DOG_STATUE.ordinal(),
+            EnumGraves.WOODEN_DOG_STATUE.ordinal(),
+            EnumGraves.SANDSTONE_DOG_STATUE.ordinal(),
+            EnumGraves.STONE_DOG_STATUE.ordinal(),
+            EnumGraves.IRON_DOG_STATUE.ordinal(),
+            EnumGraves.GOLDEN_DOG_STATUE.ordinal(),
+            EnumGraves.DIAMOND_DOG_STATUE.ordinal(),
+            EnumGraves.EMERALD_DOG_STATUE.ordinal(),
+            EnumGraves.LAPIS_DOG_STATUE.ordinal(),
+            EnumGraves.REDSTONE_DOG_STATUE.ordinal(),
+            EnumGraves.OBSIDIAN_DOG_STATUE.ordinal(),
+            EnumGraves.QUARTZ_DOG_STATUE.ordinal(),
+            EnumGraves.ICE_DOG_STATUE.ordinal(),
             // cats graves
-            (byte) EnumGraves.WOODEN_CAT_STATUE.ordinal(),
-            (byte) EnumGraves.SANDSTONE_CAT_STATUE.ordinal(),
-            (byte) EnumGraves.STONE_CAT_STATUE.ordinal(),
-            (byte) EnumGraves.IRON_CAT_STATUE.ordinal(),
-            (byte) EnumGraves.GOLDEN_CAT_STATUE.ordinal(),
-            (byte) EnumGraves.DIAMOND_CAT_STATUE.ordinal(),
-            (byte) EnumGraves.EMERALD_CAT_STATUE.ordinal(),
-            (byte) EnumGraves.LAPIS_CAT_STATUE.ordinal(),
-            (byte) EnumGraves.REDSTONE_CAT_STATUE.ordinal(),
-            (byte) EnumGraves.OBSIDIAN_CAT_STATUE.ordinal(),
-            (byte) EnumGraves.QUARTZ_CAT_STATUE.ordinal(),
-            (byte) EnumGraves.ICE_CAT_STATUE.ordinal(),
+            EnumGraves.WOODEN_CAT_STATUE.ordinal(),
+            EnumGraves.SANDSTONE_CAT_STATUE.ordinal(),
+            EnumGraves.STONE_CAT_STATUE.ordinal(),
+            EnumGraves.IRON_CAT_STATUE.ordinal(),
+            EnumGraves.GOLDEN_CAT_STATUE.ordinal(),
+            EnumGraves.DIAMOND_CAT_STATUE.ordinal(),
+            EnumGraves.EMERALD_CAT_STATUE.ordinal(),
+            EnumGraves.LAPIS_CAT_STATUE.ordinal(),
+            EnumGraves.REDSTONE_CAT_STATUE.ordinal(),
+            EnumGraves.OBSIDIAN_CAT_STATUE.ordinal(),
+            EnumGraves.QUARTZ_CAT_STATUE.ordinal(),
+            EnumGraves.ICE_CAT_STATUE.ordinal(),
             // horses graves
-            (byte) EnumGraves.WOODEN_HORSE_STATUE.ordinal(),
-            (byte) EnumGraves.SANDSTONE_HORSE_STATUE.ordinal(),
-            (byte) EnumGraves.STONE_HORSE_STATUE.ordinal(),
-            (byte) EnumGraves.IRON_HORSE_STATUE.ordinal(),
-            (byte) EnumGraves.GOLDEN_HORSE_STATUE.ordinal(),
-            (byte) EnumGraves.DIAMOND_HORSE_STATUE.ordinal(),
-            (byte) EnumGraves.EMERALD_HORSE_STATUE.ordinal(),
-            (byte) EnumGraves.LAPIS_HORSE_STATUE.ordinal(),
-            (byte) EnumGraves.REDSTONE_HORSE_STATUE.ordinal(),
-            (byte) EnumGraves.OBSIDIAN_HORSE_STATUE.ordinal(),
-            (byte) EnumGraves.QUARTZ_HORSE_STATUE.ordinal(),
-            (byte) EnumGraves.ICE_HORSE_STATUE.ordinal()
+            EnumGraves.WOODEN_HORSE_STATUE.ordinal(),
+            EnumGraves.SANDSTONE_HORSE_STATUE.ordinal(),
+            EnumGraves.STONE_HORSE_STATUE.ordinal(),
+            EnumGraves.IRON_HORSE_STATUE.ordinal(),
+            EnumGraves.GOLDEN_HORSE_STATUE.ordinal(),
+            EnumGraves.DIAMOND_HORSE_STATUE.ordinal(),
+            EnumGraves.EMERALD_HORSE_STATUE.ordinal(),
+            EnumGraves.LAPIS_HORSE_STATUE.ordinal(),
+            EnumGraves.REDSTONE_HORSE_STATUE.ordinal(),
+            EnumGraves.OBSIDIAN_HORSE_STATUE.ordinal(),
+            EnumGraves.QUARTZ_HORSE_STATUE.ordinal(),
+            EnumGraves.ICE_HORSE_STATUE.ordinal()
     };
 
     private static final Random rand = new Random();
@@ -162,7 +162,7 @@ public class BlockGSGraveStone extends BlockContainer {
         if (tileEntity != null) {
             NBTTagCompound nbt = itemStack.getTagCompound();
             if (nbt != null) {
-                tileEntity.setGraveType(nbt.getByte("GraveType"));
+                tileEntity.setGraveType(nbt.getInteger("Type"));
 
                 if (nbt.hasKey("isLocalized") && nbt.getBoolean("isLocalized")) {
                     tileEntity.getDeathTextComponent().setLocalized();
@@ -538,20 +538,20 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item gravestone, CreativeTabs tabs, List list) {
-        for (byte i = 0; i < TAB_PLAYER_GRAVES.length; i++) {
+        for (int i = 0; i < TAB_PLAYER_GRAVES.length; i++) {
             ItemStack stack = new ItemStack(gravestone, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("GraveType", TAB_PLAYER_GRAVES[i]);
+            nbt.setInteger("Type", TAB_PLAYER_GRAVES[i]);
 
             stack.setTagCompound(nbt);
             list.add(stack);
         }
 
         // pets graves
-        for (byte i = 0; i < TAB_PETS_GRAVES.length; i++) {
+        for (int i = 0; i < TAB_PETS_GRAVES.length; i++) {
             ItemStack stack = new ItemStack(gravestone, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("GraveType", TAB_PETS_GRAVES[i]);
+            nbt.setInteger("Type", TAB_PETS_GRAVES[i]);
 
             stack.setTagCompound(nbt);
             list.add(stack);
@@ -596,7 +596,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 tileEntity.dropSword();
             } else if (itemStack != null) {
                 NBTTagCompound nbt = new NBTTagCompound();
-                nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
+                nbt.setInteger("Type", tileEntity.getGraveTypeNum());
                 nbt.setBoolean("Mossy", tileEntity.isMossy());
 
                 itemStack.setTagCompound(nbt);
@@ -614,7 +614,7 @@ public class BlockGSGraveStone extends BlockContainer {
 
         if (tileEntity != null) {
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
+            nbt.setInteger("Type", tileEntity.getGraveTypeNum());
 
             if (tileEntity.getDeathTextComponent().isLocalized()) {
                 nbt.setBoolean("isLocalized", true);
@@ -644,7 +644,7 @@ public class BlockGSGraveStone extends BlockContainer {
     public void createOnDeath(Entity entity, World world, BlockPos pos, DeathMessageInfo deathInfo, List<ItemStack> items, int age, EnumGraveType entityType, DamageSource damageSource) {
         EnumFacing direction = EnumFacing.getHorizontal(MathHelper.floor_double((double) (entity.rotationYaw * 4 / 360F) + 0.5D) & 3);
 
-        byte graveType = 0;
+        int graveType = 0;
         ItemStack sword = null;
 
         if (GSConfig.generateSwordGraves && world.rand.nextInt(4) == 0 && entityType.equals(EnumGraveType.PLAYER_GRAVES)) {
@@ -661,7 +661,7 @@ public class BlockGSGraveStone extends BlockContainer {
                             graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveTypes(world, pos), rand);
                         }
                     } else {
-                        graveType = (byte) EnumGraves.SWORD.ordinal();
+                        graveType = EnumGraves.SWORD.ordinal();
                     }
                 }
                 break;
@@ -717,7 +717,7 @@ public class BlockGSGraveStone extends BlockContainer {
         } else {
             ItemStack itemStack = this.createStackedBlock(this.getDefaultState());
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("GraveType", graveType);
+            nbt.setInteger("Type", graveType);
             nbt.setBoolean("isLocalized", true);
             nbt.setString("name", deathInfo.getName());
             nbt.setString("DeathText", deathInfo.getDeathMessage());
@@ -752,7 +752,7 @@ public class BlockGSGraveStone extends BlockContainer {
         if (tileEntity != null) {
             if (itemStack != null) {
                 NBTTagCompound nbt = new NBTTagCompound();
-                nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
+                nbt.setInteger("Type", tileEntity.getGraveTypeNum());
                 nbt.setBoolean("Mossy", tileEntity.isMossy());
 
                 itemStack.setTagCompound(nbt);

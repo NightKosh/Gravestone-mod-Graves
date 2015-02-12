@@ -39,7 +39,7 @@ public class ItemBlockGSGraveStone extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
-        EnumGraves graveType = EnumGraves.getById(itemStack.getTagCompound().getByte("GraveType"));
+        EnumGraves graveType = EnumGraves.getById(itemStack.getTagCompound().getInteger("Type"));
         return getUnlocalizedName() + "." + graveType.getLocalizedName();
     }
 
@@ -80,7 +80,7 @@ public class ItemBlockGSGraveStone extends ItemBlock {
                 list.add(ModGraveStone.proxy.getLocalizedString("item.grave.age") + " " + nbt.getInteger("Age") + " " + ModGraveStone.proxy.getLocalizedString("item.grave.days"));
             }
 
-            EnumGraveMaterial material = EnumGraves.getById(nbt.getByte("GraveType")).getMaterial();
+            EnumGraveMaterial material = EnumGraves.getById(nbt.getInteger("Type")).getMaterial();
             if (material != EnumGraveMaterial.OTHER) {
                 StringBuilder materialStr = new StringBuilder();
                 materialStr.append(ModGraveStone.proxy.getLocalizedString("material.title"))

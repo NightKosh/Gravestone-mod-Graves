@@ -47,12 +47,12 @@ public class GSBlock {
     public static void registration() {
         // gravestone
         graveStone = new BlockGSGraveStone();
-        advancedNTBBlockRegistration(graveStone, "GSGraveStone", "GraveStone", EnumGraves.values(), "GraveType", ItemBlockGSGraveStone.class);
+        advancedNTBBlockRegistration(graveStone, "GSGraveStone", "GraveStone", EnumGraves.values(), "Type", ItemBlockGSGraveStone.class);
 //        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(graveStone), 0, Resources.graveStoneModel);
 
         // memorials
         memorial = new BlockGSMemorial();
-        advancedNTBBlockRegistration(memorial, "GSMemorial", "Memorial", EnumMemorials.values(), "GraveType", ItemBlockGSMemorial.class);
+        advancedNTBBlockRegistration(memorial, "GSMemorial", "Memorial", EnumMemorials.values(), "Type", ItemBlockGSMemorial.class);
 
         // wither spawner
         spawner = new BlockGSSpawner();
@@ -138,7 +138,7 @@ public class GSBlock {
         for (byte i = 0; i < blockEnums.length; i++) {
             ItemStack stack = new ItemStack(block, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte(nbtName, i);
+            nbt.setInteger(nbtName, i);
             stack.setTagCompound(nbt);
             LanguageRegistry.addName(stack, blockEnums[i].getLocalizedName());
         }

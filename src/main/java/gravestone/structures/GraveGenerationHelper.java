@@ -23,7 +23,7 @@ public class GraveGenerationHelper {
     private GraveGenerationHelper() {
     }
 
-    public static void placeGrave(ComponentGraveStone component, World world, Random random, int x, int y, int z, IBlockState graveState, byte graveType, Item sword, boolean allLoot) {
+    public static void placeGrave(ComponentGraveStone component, World world, Random random, int x, int y, int z, IBlockState graveState, int graveType, Item sword, boolean allLoot) {
         component.placeBlockAtCurrentPosition(world, graveState, x, y, z, component.getBoundingBox());
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(new BlockPos(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z)));
 
@@ -37,7 +37,7 @@ public class GraveGenerationHelper {
         }
     }
 
-    public static void fillGraves(ComponentGraveStone component, World world, Random random, int xStart, int yStart, int zStart, int xEnd, int yEnd, int zEnd, IBlockState graveState, byte graveType, Item sword, boolean allLoot) {
+    public static void fillGraves(ComponentGraveStone component, World world, Random random, int xStart, int yStart, int zStart, int xEnd, int yEnd, int zEnd, IBlockState graveState, int graveType, Item sword, boolean allLoot) {
         for (int y = yStart; y <= yEnd; ++y) {
             for (int x = xStart; x <= xEnd; ++x) {
                 for (int z = zStart; z <= zEnd; ++z) {

@@ -58,7 +58,7 @@ public class ComponentGSMemorial extends ComponentGraveStone {
 
         this.fillWithAir(world, boundingBox, 0, 0, 2, 0, 6, 2);
         this.func_175804_a(world, boundingBox, 0, 0, 0, 2, 0, 2, groundState, groundState, false);
-        byte memorialType = BlockGSMemorial.getMemorialType(world, pos, random, 0);
+        int memorialType = BlockGSMemorial.getMemorialType(world, pos, random, 0);
         MemorialGenerationHelper.placeMemorial(this, world, random, 1, 1, 1,
                 GSBlock.memorial.getDefaultState().withProperty(BlockGSMemorial.FACING, this.coordBaseMode.getOpposite()), memorialType);
 

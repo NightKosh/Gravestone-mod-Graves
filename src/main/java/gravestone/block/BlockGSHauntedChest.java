@@ -144,7 +144,7 @@ public class BlockGSHauntedChest extends BlockContainer {
 
         if (tileEntity != null) {
             if (stack.getTagCompound() != null) {
-                tileEntity.setChestType(EnumHauntedChest.getById(stack.getTagCompound().getByte("ChestType")));
+                tileEntity.setChestType(EnumHauntedChest.getById(stack.getTagCompound().getInteger("ChestType")));
             }
         }
     }
@@ -194,7 +194,7 @@ public class BlockGSHauntedChest extends BlockContainer {
 
         if (tileEntity != null) {
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("ChestType", (byte) tileEntity.getChestType().ordinal());
+            nbt.setInteger("ChestType", tileEntity.getChestType().ordinal());
 
             itemStack.setTagCompound(nbt);
         }
@@ -216,7 +216,7 @@ public class BlockGSHauntedChest extends BlockContainer {
         for (byte i = 0; i < EnumHauntedChest.values().length; i++) {
             ItemStack stack = new ItemStack(item, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setByte("ChestType", i);
+            nbt.setInteger("ChestType", i);
 
             stack.setTagCompound(nbt);
             list.add(stack);

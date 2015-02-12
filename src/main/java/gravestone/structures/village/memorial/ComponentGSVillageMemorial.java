@@ -80,11 +80,11 @@ public class ComponentGSVillageMemorial extends StructureVillagePieces.Village {
     }
 
     protected void placeMemorial(World world, Random random, int x, int y, int z) {
-        byte memorialType;
+        int memorialType;
         boolean isTortureMemorial = random.nextInt(4) == 0;
         BlockPos pos = new BlockPos(this.getXWithOffset(x, z), this.getYWithOffset(y), this.getZWithOffset(x, z));
         if (isTortureMemorial) {
-            memorialType = (byte) BlockGSMemorial.TORTURE_MEMORIALS[random.nextInt(BlockGSMemorial.TORTURE_MEMORIALS.length)].ordinal();
+            memorialType = BlockGSMemorial.TORTURE_MEMORIALS[random.nextInt(BlockGSMemorial.TORTURE_MEMORIALS.length)].ordinal();
         } else {
             memorialType = BlockGSMemorial.getMemorialType(world, pos, random, 0);
         }
