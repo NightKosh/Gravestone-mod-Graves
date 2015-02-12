@@ -1,5 +1,7 @@
 # Tabs
-itemGroup.tabGraveStone=Gravestone
+itemGroup.tabGSGraveStone=Надгробия
+itemGroup.tabGSMemorials=Мемориалы
+itemGroup.tabGSOther=Предметы из Gravestone mod
 
 
 # Blocks

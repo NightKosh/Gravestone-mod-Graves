@@ -1,5 +1,7 @@
 # Tabs
-itemGroup.tabGraveStone=Lapida
+itemGroup.tabGSGraveStone=Lapida
+itemGroup.tabGSMemorials=Memorials
+itemGroup.tabGSOther=Gravestone mod items
 
 
 # Blocks

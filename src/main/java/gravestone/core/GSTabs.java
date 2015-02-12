@@ -24,7 +24,7 @@ public class GSTabs {
     public static CreativeTabs otherItemsTab;
 
     public static void registration() {
-        gravesTab = new CreativeTabs("tabGraveStone") {
+        gravesTab = new CreativeTabs("tabGSGraveStone") {
             @Override
             public ItemStack getIconItemStack() {
                 ItemStack stack = new ItemStack(GSBlock.graveStone, 1, 0);
@@ -41,7 +41,7 @@ public class GSTabs {
             }
         };
 
-        memorialsTab = new CreativeTabs("tabGraveStone") {
+        memorialsTab = new CreativeTabs("tabGSMemorials") {
             @Override
             public ItemStack getIconItemStack() {
                 ItemStack stack = new ItemStack(GSBlock.memorial, 1, 0);
@@ -58,7 +58,7 @@ public class GSTabs {
             }
         };
 
-        otherItemsTab = new CreativeTabs("tabGraveStone") {
+        otherItemsTab = new CreativeTabs("tabGSOther") {
             @Override
             public ItemStack getIconItemStack() {
                 return new ItemStack(GSBlock.skullCandle, 1, 1);

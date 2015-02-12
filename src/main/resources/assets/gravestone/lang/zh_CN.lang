@@ -1,5 +1,7 @@
 # Tabs
-itemGroup.tabGraveStone=墓碑
+itemGroup.tabGSGraveStone=墓碑
+itemGroup.tabGSMemorials=Memorials
+itemGroup.tabGSOther=Gravestone mod items
 
 
 # Blocks
