@@ -11,7 +11,11 @@ import gravestone.ModGraveStone;
 public enum EnumGraveMaterial {
     WOOD,
     SANDSTONE,
+    RED_SANDSTONE,
     STONE,
+    DIORITE,
+    ANDESITE,
+    GRANITE,
     IRON,
     GOLD,
     DIAMOND,
@@ -20,6 +24,7 @@ public enum EnumGraveMaterial {
     REDSTONE,
     OBSIDIAN,
     QUARTZ,
+    PRIZMARINE,
     ICE,
     OTHER;
 
