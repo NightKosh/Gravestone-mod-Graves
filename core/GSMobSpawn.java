@@ -251,6 +251,9 @@ public class GSMobSpawn {
         } catch (InvocationTargetException e) {
             GSLogger.logError("getForeinMob InvocationTargetException. mob name " + mobName);
             e.getCause().printStackTrace();
+        } catch (NullPointerException e) {
+            GSLogger.logError("getForeinMob NullPointerException. mob name " + mobName);
+            e.getCause().printStackTrace();
         }
 
         return mob;
