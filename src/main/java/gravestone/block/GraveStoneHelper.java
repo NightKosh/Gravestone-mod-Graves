@@ -178,32 +178,6 @@ public class GraveStoneHelper {
             Blocks.grass, Blocks.dirt);
     public static final List<BlockFlower> FLOWERS = Arrays.asList(
             Blocks.yellow_flower, Blocks.red_flower);
-    public static final List<EnumGraves> FLOWER_GRAVES = Arrays.asList(
-            EnumGraves.WOODEN_VERTICAL_PLATE,
-            EnumGraves.WOODEN_CROSS,
-            EnumGraves.SANDSTONE_VERTICAL_PLATE,
-            EnumGraves.SANDSTONE_CROSS,
-            EnumGraves.STONE_VERTICAL_PLATE,
-            EnumGraves.STONE_CROSS,
-            EnumGraves.IRON_VERTICAL_PLATE,
-            EnumGraves.IRON_CROSS,
-            EnumGraves.GOLDEN_VERTICAL_PLATE,
-            EnumGraves.GOLDEN_CROSS,
-            EnumGraves.DIAMOND_VERTICAL_PLATE,
-            EnumGraves.DIAMOND_CROSS,
-            EnumGraves.EMERALD_VERTICAL_PLATE,
-            EnumGraves.EMERALD_CROSS,
-            EnumGraves.LAPIS_VERTICAL_PLATE,
-            EnumGraves.LAPIS_CROSS,
-            EnumGraves.REDSTONE_VERTICAL_PLATE,
-            EnumGraves.REDSTONE_CROSS,
-            EnumGraves.OBSIDIAN_VERTICAL_PLATE,
-            EnumGraves.OBSIDIAN_CROSS,
-            EnumGraves.QUARTZ_VERTICAL_PLATE,
-            EnumGraves.QUARTZ_CROSS,
-            EnumGraves.ICE_VERTICAL_PLATE,
-            EnumGraves.ICE_CROSS
-    );
 
     private GraveStoneHelper() {
     }
@@ -590,7 +564,8 @@ public class GraveStoneHelper {
     }
 
     public static boolean canFlowerBePlacedOnGrave(TileEntityGSGraveStone te) {
-        return !te.isSwordGrave() && FLOWER_GRAVES.contains(te.getGraveType());
+        return !te.isSwordGrave() && (te.getGraveType().getGraveType() == EnumGraves.EnumGraveType.VERTICAL_PLATE ||
+                te.getGraveType().getGraveType() == EnumGraves.EnumGraveType.CROSS);
     }
 
     public static ArrayList<EnumGraves> getPlayerGraveTypes(World world, BlockPos pos) {
