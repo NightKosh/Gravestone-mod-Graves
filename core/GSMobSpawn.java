@@ -79,47 +79,14 @@ public class GSMobSpawn {
     public static Entity getMobEntity(World world, EnumGraves graveType, int x, int y, int z) {
         String id;
 
-        switch (graveType) {
-            case WOODEN_DOG_STATUE:
-            case SANDSTONE_DOG_STATUE:
-            case STONE_DOG_STATUE:
-            case IRON_DOG_STATUE:
-            case GOLDEN_DOG_STATUE:
-            case DIAMOND_DOG_STATUE:
-            case EMERALD_DOG_STATUE:
-            case LAPIS_DOG_STATUE:
-            case REDSTONE_DOG_STATUE:
-            case OBSIDIAN_DOG_STATUE:
-            case QUARTZ_DOG_STATUE:
-            case ICE_DOG_STATUE:
+        switch (graveType.getGraveType()) {
+            case DOG_STATUE:
                 id = getMobID(world.rand, EnumMobType.UNDEAD_DOGS);
                 break;
-            case WOODEN_CAT_STATUE:
-            case SANDSTONE_CAT_STATUE:
-            case STONE_CAT_STATUE:
-            case IRON_CAT_STATUE:
-            case GOLDEN_CAT_STATUE:
-            case DIAMOND_CAT_STATUE:
-            case EMERALD_CAT_STATUE:
-            case LAPIS_CAT_STATUE:
-            case REDSTONE_CAT_STATUE:
-            case OBSIDIAN_CAT_STATUE:
-            case QUARTZ_CAT_STATUE:
-            case ICE_CAT_STATUE:
+            case CAT_STATUE:
                 id = getMobID(world.rand, EnumMobType.UNDEAD_CATS);
                 break;
-            case WOODEN_HORSE_STATUE:
-            case SANDSTONE_HORSE_STATUE:
-            case STONE_HORSE_STATUE:
-            case IRON_HORSE_STATUE:
-            case GOLDEN_HORSE_STATUE:
-            case DIAMOND_HORSE_STATUE:
-            case EMERALD_HORSE_STATUE:
-            case LAPIS_HORSE_STATUE:
-            case REDSTONE_HORSE_STATUE:
-            case OBSIDIAN_HORSE_STATUE:
-            case QUARTZ_HORSE_STATUE:
-            case ICE_HORSE_STATUE:
+            case HORSE_STATUE:
                 return null;
             default:
                 if (canSpawnHellCreatures(world, x, y, z) && world.rand.nextInt(10) == 0) {

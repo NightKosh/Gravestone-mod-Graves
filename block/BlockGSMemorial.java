@@ -556,120 +556,30 @@ public class BlockGSMemorial extends BlockContainer {
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, BlockPos pos) {
         EnumFacing facing = (EnumFacing) access.getBlockState(pos).getValue(FACING);
-        EnumMemorials memorialType;
+        EnumMemorials.EnumMemorialType memorialType;
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) access.getTileEntity(pos);
 
         if (tileEntity != null) {
-            memorialType = tileEntity.getMemorialType();
+            memorialType = tileEntity.getMemorialType().getMemorialType();
         } else {
-            memorialType = EnumMemorials.STONE_CROSS;
+            memorialType = EnumMemorials.EnumMemorialType.CROSS;
         }
 
         switch (memorialType) {
-            case WOODEN_CROSS:
-            case SANDSTONE_CROSS:
-            case STONE_CROSS:
-            case IRON_CROSS:
-            case GOLDEN_CROSS:
-            case DIAMOND_CROSS:
-            case EMERALD_CROSS:
-            case LAPIS_CROSS:
-            case REDSTONE_CROSS:
-            case OBSIDIAN_CROSS:
-            case QUARTZ_CROSS:
-            case ICE_CROSS:
-            case WOODEN_OBELISK:
-            case SANDSTONE_OBELISK:
-            case STONE_OBELISK:
-            case IRON_OBELISK:
-            case GOLDEN_OBELISK:
-            case DIAMOND_OBELISK:
-            case EMERALD_OBELISK:
-            case LAPIS_OBELISK:
-            case REDSTONE_OBELISK:
-            case OBSIDIAN_OBELISK:
-            case QUARTZ_OBELISK:
-            case ICE_OBELISK:
+            case CROSS:
+            case OBELISK:
                 this.setBlockBounds(-1, 0, -1, 2, 5, 2);
                 break;
-            case WOODEN_STEVE_STATUE:
-            case SANDSTONE_STEVE_STATUE:
-            case STONE_STEVE_STATUE:
-            case IRON_STEVE_STATUE:
-            case GOLDEN_STEVE_STATUE:
-            case DIAMOND_STEVE_STATUE:
-            case EMERALD_STEVE_STATUE:
-            case LAPIS_STEVE_STATUE:
-            case REDSTONE_STEVE_STATUE:
-            case OBSIDIAN_STEVE_STATUE:
-            case QUARTZ_STEVE_STATUE:
-            case ICE_STEVE_STATUE:
-                // villager
-            case WOODEN_VILLAGER_STATUE:
-            case SANDSTONE_VILLAGER_STATUE:
-            case STONE_VILLAGER_STATUE:
-            case IRON_VILLAGER_STATUE:
-            case GOLDEN_VILLAGER_STATUE:
-            case DIAMOND_VILLAGER_STATUE:
-            case EMERALD_VILLAGER_STATUE:
-            case LAPIS_VILLAGER_STATUE:
-            case REDSTONE_VILLAGER_STATUE:
-            case OBSIDIAN_VILLAGER_STATUE:
-            case QUARTZ_VILLAGER_STATUE:
-            case ICE_VILLAGER_STATUE:
-                //angel
-            case WOODEN_ANGEL_STATUE:
-            case SANDSTONE_ANGEL_STATUE:
-            case STONE_ANGEL_STATUE:
-            case IRON_ANGEL_STATUE:
-            case GOLDEN_ANGEL_STATUE:
-            case DIAMOND_ANGEL_STATUE:
-            case EMERALD_ANGEL_STATUE:
-            case LAPIS_ANGEL_STATUE:
-            case REDSTONE_ANGEL_STATUE:
-            case OBSIDIAN_ANGEL_STATUE:
-            case QUARTZ_ANGEL_STATUE:
-            case ICE_ANGEL_STATUE:
+            case STEVE_STATUE:
+            case VILLAGER_STATUE:
+            case ANGEL_STATUE:
                 this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 3F, 0.875F);
                 break;
-            case WOODEN_DOG_STATUE:
-            case WOODEN_CAT_STATUE:
-            case SANDSTONE_DOG_STATUE:
-            case SANDSTONE_CAT_STATUE:
-            case STONE_DOG_STATUE:
-            case STONE_CAT_STATUE:
-            case IRON_DOG_STATUE:
-            case IRON_CAT_STATUE:
-            case GOLDEN_DOG_STATUE:
-            case GOLDEN_CAT_STATUE:
-            case DIAMOND_DOG_STATUE:
-            case DIAMOND_CAT_STATUE:
-            case EMERALD_DOG_STATUE:
-            case EMERALD_CAT_STATUE:
-            case LAPIS_DOG_STATUE:
-            case LAPIS_CAT_STATUE:
-            case REDSTONE_DOG_STATUE:
-            case REDSTONE_CAT_STATUE:
-            case OBSIDIAN_DOG_STATUE:
-            case OBSIDIAN_CAT_STATUE:
-            case QUARTZ_DOG_STATUE:
-            case QUARTZ_CAT_STATUE:
-            case ICE_DOG_STATUE:
-            case ICE_CAT_STATUE:
+            case DOG_STATUE:
+            case CAT_STATUE:
                 this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 2, 0.875F);
                 break;
-            case WOODEN_CREEPER_STATUE:
-            case SANDSTONE_CREEPER_STATUE:
-            case STONE_CREEPER_STATUE:
-            case IRON_CREEPER_STATUE:
-            case GOLDEN_CREEPER_STATUE:
-            case DIAMOND_CREEPER_STATUE:
-            case EMERALD_CREEPER_STATUE:
-            case LAPIS_CREEPER_STATUE:
-            case REDSTONE_CREEPER_STATUE:
-            case OBSIDIAN_CREEPER_STATUE:
-            case QUARTZ_CREEPER_STATUE:
-            case ICE_CREEPER_STATUE:
+            case CREEPER_STATUE:
                 this.setBlockBounds(0.125F, 0, 0.125F, 0.875F, 2.5F, 0.875F);
                 break;
             case GIBBET:

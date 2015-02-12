@@ -205,28 +205,17 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, BlockPos pos) {
         EnumFacing facing = (EnumFacing) access.getBlockState(pos).getValue(FACING);
-        EnumGraves graveType;
+        EnumGraves.EnumGraveType graveType;
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) access.getTileEntity(pos);
 
         if (tileEntity != null) {
-            graveType = tileEntity.getGraveType();
+            graveType = tileEntity.getGraveType().getGraveType();
         } else {
-            graveType = EnumGraves.STONE_VERTICAL_PLATE;
+            graveType = EnumGraves.EnumGraveType.VERTICAL_PLATE;
         }
 
         switch (graveType) {
-            case WOODEN_VERTICAL_PLATE:
-            case SANDSTONE_VERTICAL_PLATE:
-            case STONE_VERTICAL_PLATE:
-            case IRON_VERTICAL_PLATE:
-            case GOLDEN_VERTICAL_PLATE:
-            case DIAMOND_VERTICAL_PLATE:
-            case EMERALD_VERTICAL_PLATE:
-            case LAPIS_VERTICAL_PLATE:
-            case REDSTONE_VERTICAL_PLATE:
-            case OBSIDIAN_VERTICAL_PLATE:
-            case QUARTZ_VERTICAL_PLATE:
-            case ICE_VERTICAL_PLATE:
+            case VERTICAL_PLATE:
                 switch (facing) {
                     case SOUTH:
                         this.setBlockBounds(0.125F, 0, 0.0625F, 0.875F, 0.9375F, 0.1875F);
@@ -242,18 +231,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case WOODEN_CROSS:
-            case SANDSTONE_CROSS:
-            case STONE_CROSS:
-            case IRON_CROSS:
-            case GOLDEN_CROSS:
-            case DIAMOND_CROSS:
-            case EMERALD_CROSS:
-            case LAPIS_CROSS:
-            case REDSTONE_CROSS:
-            case OBSIDIAN_CROSS:
-            case QUARTZ_CROSS:
-            case ICE_CROSS:
+            case CROSS:
                 switch (facing) {
                     case SOUTH:
                         this.setBlockBounds(0.125F, 0, 0.0625F, 0.875F, 1, 0.1875F);
@@ -269,18 +247,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case WOODEN_HORISONTAL_PLATE:
-            case SANDSTONE_HORISONTAL_PLATE:
-            case STONE_HORISONTAL_PLATE:
-            case IRON_HORISONTAL_PLATE:
-            case GOLDEN_HORISONTAL_PLATE:
-            case DIAMOND_HORISONTAL_PLATE:
-            case EMERALD_HORISONTAL_PLATE:
-            case LAPIS_HORISONTAL_PLATE:
-            case REDSTONE_HORISONTAL_PLATE:
-            case OBSIDIAN_HORISONTAL_PLATE:
-            case QUARTZ_HORISONTAL_PLATE:
-            case ICE_HORISONTAL_PLATE:
+            case HORISONTAL_PLATE:
                 switch (facing) {
                     case SOUTH:
                         this.setBlockBounds(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
@@ -296,18 +263,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case WOODEN_DOG_STATUE:
-            case SANDSTONE_DOG_STATUE:
-            case STONE_DOG_STATUE:
-            case IRON_DOG_STATUE:
-            case GOLDEN_DOG_STATUE:
-            case DIAMOND_DOG_STATUE:
-            case EMERALD_DOG_STATUE:
-            case LAPIS_DOG_STATUE:
-            case REDSTONE_DOG_STATUE:
-            case OBSIDIAN_DOG_STATUE:
-            case QUARTZ_DOG_STATUE:
-            case ICE_DOG_STATUE:
+            case DOG_STATUE:
                 switch (facing) {
                     case SOUTH:
                         this.setBlockBounds(0.35F, 0, 0.3F, 0.6F, 0.5F, 0.9F);
@@ -323,18 +279,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case WOODEN_CAT_STATUE:
-            case SANDSTONE_CAT_STATUE:
-            case STONE_CAT_STATUE:
-            case IRON_CAT_STATUE:
-            case GOLDEN_CAT_STATUE:
-            case DIAMOND_CAT_STATUE:
-            case EMERALD_CAT_STATUE:
-            case LAPIS_CAT_STATUE:
-            case REDSTONE_CAT_STATUE:
-            case OBSIDIAN_CAT_STATUE:
-            case QUARTZ_CAT_STATUE:
-            case ICE_CAT_STATUE:
+            case CAT_STATUE:
                 switch (facing) {
                     case SOUTH:
                         this.setBlockBounds(0.43F, 0, 0.3F, 0.57F, 0.5F, 0.75F);
@@ -362,18 +307,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case WOODEN_HORSE_STATUE:
-            case SANDSTONE_HORSE_STATUE:
-            case STONE_HORSE_STATUE:
-            case IRON_HORSE_STATUE:
-            case GOLDEN_HORSE_STATUE:
-            case DIAMOND_HORSE_STATUE:
-            case EMERALD_HORSE_STATUE:
-            case LAPIS_HORSE_STATUE:
-            case REDSTONE_HORSE_STATUE:
-            case OBSIDIAN_HORSE_STATUE:
-            case QUARTZ_HORSE_STATUE:
-            case ICE_HORSE_STATUE:
+            case HORSE_STATUE:
                 switch (facing) {
                     case SOUTH:
                     case NORTH:
