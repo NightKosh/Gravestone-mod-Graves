@@ -73,6 +73,7 @@ item.gravestone chisel.name=Gravestone Chisel
 ## Graves
 item.grave.age=Žil
 item.grave.days=dní
+item.grave.mossy=Mossy
 item.grave.sword_name=Jméno meče
 item.grave.sword_damage=Poškození meče
 

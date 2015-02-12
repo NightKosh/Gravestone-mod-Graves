@@ -10,6 +10,7 @@ import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockVine;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -19,9 +20,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemSpade;
@@ -54,7 +55,6 @@ public class BlockGSGraveStone extends BlockContainer {
             (byte) EnumGraves.WOODEN_VERTICAL_PLATE.ordinal(),
             (byte) EnumGraves.SANDSTONE_VERTICAL_PLATE.ordinal(),
             (byte) EnumGraves.STONE_VERTICAL_PLATE.ordinal(),
-            (byte) EnumGraves.MOSSY_VERTICAL_PLATE.ordinal(),
             (byte) EnumGraves.IRON_VERTICAL_PLATE.ordinal(),
             (byte) EnumGraves.GOLDEN_VERTICAL_PLATE.ordinal(),
             (byte) EnumGraves.DIAMOND_VERTICAL_PLATE.ordinal(),
@@ -68,7 +68,6 @@ public class BlockGSGraveStone extends BlockContainer {
             (byte) EnumGraves.WOODEN_CROSS.ordinal(),
             (byte) EnumGraves.SANDSTONE_CROSS.ordinal(),
             (byte) EnumGraves.STONE_CROSS.ordinal(),
-            (byte) EnumGraves.MOSSY_CROSS.ordinal(),
             (byte) EnumGraves.IRON_CROSS.ordinal(),
             (byte) EnumGraves.GOLDEN_CROSS.ordinal(),
             (byte) EnumGraves.DIAMOND_CROSS.ordinal(),
@@ -82,7 +81,6 @@ public class BlockGSGraveStone extends BlockContainer {
             (byte) EnumGraves.WOODEN_HORISONTAL_PLATE.ordinal(),
             (byte) EnumGraves.SANDSTONE_HORISONTAL_PLATE.ordinal(),
             (byte) EnumGraves.STONE_HORISONTAL_PLATE.ordinal(),
-            (byte) EnumGraves.MOSSY_HORISONTAL_PLATE.ordinal(),
             (byte) EnumGraves.IRON_HORISONTAL_PLATE.ordinal(),
             (byte) EnumGraves.GOLDEN_HORISONTAL_PLATE.ordinal(),
             (byte) EnumGraves.DIAMOND_HORISONTAL_PLATE.ordinal(),
@@ -99,7 +97,6 @@ public class BlockGSGraveStone extends BlockContainer {
             (byte) EnumGraves.WOODEN_DOG_STATUE.ordinal(),
             (byte) EnumGraves.SANDSTONE_DOG_STATUE.ordinal(),
             (byte) EnumGraves.STONE_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.MOSSY_DOG_STATUE.ordinal(),
             (byte) EnumGraves.IRON_DOG_STATUE.ordinal(),
             (byte) EnumGraves.GOLDEN_DOG_STATUE.ordinal(),
             (byte) EnumGraves.DIAMOND_DOG_STATUE.ordinal(),
@@ -113,7 +110,6 @@ public class BlockGSGraveStone extends BlockContainer {
             (byte) EnumGraves.WOODEN_CAT_STATUE.ordinal(),
             (byte) EnumGraves.SANDSTONE_CAT_STATUE.ordinal(),
             (byte) EnumGraves.STONE_CAT_STATUE.ordinal(),
-            (byte) EnumGraves.MOSSY_CAT_STATUE.ordinal(),
             (byte) EnumGraves.IRON_CAT_STATUE.ordinal(),
             (byte) EnumGraves.GOLDEN_CAT_STATUE.ordinal(),
             (byte) EnumGraves.DIAMOND_CAT_STATUE.ordinal(),
@@ -127,7 +123,6 @@ public class BlockGSGraveStone extends BlockContainer {
             (byte) EnumGraves.WOODEN_HORSE_STATUE.ordinal(),
             (byte) EnumGraves.SANDSTONE_HORSE_STATUE.ordinal(),
             (byte) EnumGraves.STONE_HORSE_STATUE.ordinal(),
-            (byte) EnumGraves.MOSSY_HORSE_STATUE.ordinal(),
             (byte) EnumGraves.IRON_HORSE_STATUE.ordinal(),
             (byte) EnumGraves.GOLDEN_HORSE_STATUE.ordinal(),
             (byte) EnumGraves.DIAMOND_HORSE_STATUE.ordinal(),
@@ -165,36 +160,29 @@ public class BlockGSGraveStone extends BlockContainer {
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
 
         if (tileEntity != null) {
-            if (itemStack.hasTagCompound()) {
-                if (itemStack.getTagCompound().hasKey("GraveType")) {
-                    tileEntity.setGraveType(itemStack.getTagCompound().getByte("GraveType"));
-                } else {
-                    tileEntity.setGraveType((byte) 0);
-                }
+            NBTTagCompound nbt = itemStack.getTagCompound();
+            if (nbt != null) {
+                tileEntity.setGraveType(nbt.getByte("GraveType"));
 
-                if (itemStack.getTagCompound().hasKey("isLocalized") && itemStack.getTagCompound().getBoolean("isLocalized")) {
+                if (nbt.hasKey("isLocalized") && nbt.getBoolean("isLocalized")) {
                     tileEntity.getDeathTextComponent().setLocalized();
 
-                    if (itemStack.getTagCompound().hasKey("name") && itemStack.getTagCompound().hasKey("KillerName")) {
-                        tileEntity.getDeathTextComponent().setName(itemStack.getTagCompound().getString("name"));
-                        tileEntity.getDeathTextComponent().setKillerName(itemStack.getTagCompound().getString("KillerName"));
+                    if (nbt.hasKey("name") && nbt.hasKey("KillerName")) {
+                        tileEntity.getDeathTextComponent().setName(nbt.getString("name"));
+                        tileEntity.getDeathTextComponent().setKillerName(nbt.getString("KillerName"));
                     }
                 }
 
-                if (itemStack.getTagCompound().hasKey("DeathText")) {
-                    tileEntity.getDeathTextComponent().setDeathText(itemStack.getTagCompound().getString("DeathText"));
-                }
+                tileEntity.getDeathTextComponent().setDeathText(nbt.getString("DeathText"));
 
-                if (itemStack.getTagCompound().hasKey("Age")) {
-                    tileEntity.setAge(itemStack.getTagCompound().getInteger("Age"));
-                }
+                tileEntity.setAge(nbt.getInteger("Age"));
 
-                if (itemStack.getTagCompound().hasKey("Sword")) {
-                    tileEntity.setSword(ItemStack.loadItemStackFromNBT(itemStack.getTagCompound().getCompoundTag("Sword")));
-                }
+                tileEntity.setEnchanted(nbt.getBoolean("Enchanted"));
 
-                if (itemStack.getTagCompound().hasKey("Enchanted")) {
-                    tileEntity.setEnchanted(itemStack.getTagCompound().getBoolean("Enchanted"));
+                tileEntity.setMossy(nbt.getBoolean("Mossy"));
+
+                if (nbt.hasKey("Sword")) {
+                    tileEntity.setSword(ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("Sword")));
                 }
             }
         }
@@ -230,7 +218,6 @@ public class BlockGSGraveStone extends BlockContainer {
             case WOODEN_VERTICAL_PLATE:
             case SANDSTONE_VERTICAL_PLATE:
             case STONE_VERTICAL_PLATE:
-            case MOSSY_VERTICAL_PLATE:
             case IRON_VERTICAL_PLATE:
             case GOLDEN_VERTICAL_PLATE:
             case DIAMOND_VERTICAL_PLATE:
@@ -258,7 +245,6 @@ public class BlockGSGraveStone extends BlockContainer {
             case WOODEN_CROSS:
             case SANDSTONE_CROSS:
             case STONE_CROSS:
-            case MOSSY_CROSS:
             case IRON_CROSS:
             case GOLDEN_CROSS:
             case DIAMOND_CROSS:
@@ -286,7 +272,6 @@ public class BlockGSGraveStone extends BlockContainer {
             case WOODEN_HORISONTAL_PLATE:
             case SANDSTONE_HORISONTAL_PLATE:
             case STONE_HORISONTAL_PLATE:
-            case MOSSY_HORISONTAL_PLATE:
             case IRON_HORISONTAL_PLATE:
             case GOLDEN_HORISONTAL_PLATE:
             case DIAMOND_HORISONTAL_PLATE:
@@ -314,7 +299,6 @@ public class BlockGSGraveStone extends BlockContainer {
             case WOODEN_DOG_STATUE:
             case SANDSTONE_DOG_STATUE:
             case STONE_DOG_STATUE:
-            case MOSSY_DOG_STATUE:
             case IRON_DOG_STATUE:
             case GOLDEN_DOG_STATUE:
             case DIAMOND_DOG_STATUE:
@@ -342,7 +326,6 @@ public class BlockGSGraveStone extends BlockContainer {
             case WOODEN_CAT_STATUE:
             case SANDSTONE_CAT_STATUE:
             case STONE_CAT_STATUE:
-            case MOSSY_CAT_STATUE:
             case IRON_CAT_STATUE:
             case GOLDEN_CAT_STATUE:
             case DIAMOND_CAT_STATUE:
@@ -382,7 +365,6 @@ public class BlockGSGraveStone extends BlockContainer {
             case WOODEN_HORSE_STATUE:
             case SANDSTONE_HORSE_STATUE:
             case STONE_HORSE_STATUE:
-            case MOSSY_HORSE_STATUE:
             case IRON_HORSE_STATUE:
             case GOLDEN_HORSE_STATUE:
             case DIAMOND_HORSE_STATUE:
@@ -496,6 +478,21 @@ public class BlockGSGraveStone extends BlockContainer {
                     }
                     return false;
                 } else {
+                    if (te.isMossy()) {
+                        if (item.getItem() instanceof ItemShears) {
+                            if (!world.isRemote) {
+                                GSGraveStoneItems.dropItem(new ItemStack(Blocks.vine, 1), world, pos);
+                            }
+                            te.setMossy(false);
+                            return false;
+                        }
+                    } else {
+                        if (!te.isSwordGrave() && Block.getBlockFromItem(item.getItem()) instanceof BlockVine) {
+                            te.setMossy(true);
+                            player.inventory.getCurrentItem().stackSize--;
+                            return true;
+                        }
+                    }
                     if (te.hasFlower()) {
                         if (item.getItem() instanceof ItemShears) {
                             if (!world.isRemote) {
@@ -652,6 +649,7 @@ public class BlockGSGraveStone extends BlockContainer {
             } else if (itemStack != null) {
                 NBTTagCompound nbt = new NBTTagCompound();
                 nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
+                nbt.setBoolean("Mossy", tileEntity.isMossy());
 
                 itemStack.setTagCompound(nbt);
                 GSGraveStoneItems.dropItem(itemStack, world, pos);
@@ -684,6 +682,7 @@ public class BlockGSGraveStone extends BlockContainer {
             }
 
             nbt.setBoolean("Enchanted", tileEntity.isEnchanted());
+            nbt.setBoolean("Mossy", tileEntity.isMossy());
 
             itemStack.setTagCompound(nbt);
         }
@@ -739,6 +738,7 @@ public class BlockGSGraveStone extends BlockContainer {
         }
 
         boolean isMagic = GraveStoneHelper.isMagicDamage(damageSource, damageSource.damageType);
+        boolean isMossy = false; //TODO
 
         BlockPos newPos = GraveStoneHelper.findPlaceForGrave(world, pos);
         if (newPos != null) {
@@ -758,6 +758,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 tileEntity.setGraveType(graveType);
                 tileEntity.setAge(age);
                 tileEntity.setEnchanted(isMagic);
+                tileEntity.setMossy(isMossy);
                 if (entity instanceof EntityPlayer) {
                     tileEntity.setOwner(entity.getUniqueID().toString());
                 } else if (entity instanceof EntityTameable && ((EntityTameable) entity).isTamed()) {
@@ -774,6 +775,7 @@ public class BlockGSGraveStone extends BlockContainer {
             nbt.setString("DeathText", deathInfo.getDeathMessage());
             nbt.setString("KillerName", deathInfo.getKillerNameForTE());
             nbt.setBoolean("Enchanted", isMagic);
+            nbt.setBoolean("Mossy", isMossy);
             nbt.setInteger("Age", age);
 
             if (graveType == EnumGraves.SWORD.ordinal()) {

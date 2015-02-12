@@ -24,6 +24,7 @@ public abstract class TileEntityGSGrave extends TileEntity {
     protected GSGraveStoneDeathText gSDeathText;
     protected boolean isEditable = true;
     protected boolean isEnchanted = false;
+    protected boolean isMossy = false;
     protected byte graveType = 0;
     protected int age = -1;
 
@@ -37,14 +38,6 @@ public abstract class TileEntityGSGrave extends TileEntity {
 
     public byte getGraveTypeNum() {
         return graveType;
-    }
-
-    protected void readType(NBTTagCompound nbtTag) {
-        graveType = nbtTag.getByte("GraveType");
-    }
-
-    protected void saveType(NBTTagCompound nbtTag) {
-        nbtTag.setByte("GraveType", graveType);
     }
 
     public void setGraveContent(Random random, boolean isPetGrave, boolean allLoot) {
@@ -104,6 +97,14 @@ public abstract class TileEntityGSGrave extends TileEntity {
         this.isEnchanted = isEnchanted;
     }
 
+    public boolean isMossy() {
+        return this.isMossy;
+    }
+
+    public void setMossy(boolean isMossy) {
+        this.isMossy = isMossy;
+    }
+
     /**
      * Sets the grave's isEditable flag to the specified parameter.
      */
@@ -119,9 +120,9 @@ public abstract class TileEntityGSGrave extends TileEntity {
     public void readFromNBT(NBTTagCompound nbtTag) {
         super.readFromNBT(nbtTag);
 
-        if (nbtTag.hasKey("Enchanted")) {
-            isEnchanted = nbtTag.getBoolean("Enchanted");
-        }
+        graveType = nbtTag.getByte("GraveType");
+        isEnchanted = nbtTag.getBoolean("Enchanted");
+        isMossy = nbtTag.getBoolean("Mossy");
     }
 
     /**
@@ -131,7 +132,9 @@ public abstract class TileEntityGSGrave extends TileEntity {
     public void writeToNBT(NBTTagCompound nbtTag) {
         super.writeToNBT(nbtTag);
 
+        nbtTag.setByte("GraveType", graveType);
         nbtTag.setBoolean("Enchanted", isEnchanted);
+        nbtTag.setBoolean("Mossy", isMossy);
     }
 
     /**

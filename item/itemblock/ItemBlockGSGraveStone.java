@@ -38,39 +38,33 @@ public class ItemBlockGSGraveStone extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
-        EnumGraves graveType;
-
-        if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("GraveType")) {
-            graveType = EnumGraves.getById(itemStack.getTagCompound().getByte("GraveType"));
-        } else {
-            graveType = EnumGraves.getById(0);
-        }
-
+        EnumGraves graveType = EnumGraves.getById(itemStack.getTagCompound().getByte("GraveType"));
         return getUnlocalizedName() + "." + graveType.getLocalizedName();
     }
 
     @Override
     public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-        if (stack.getTagCompound() == null) {
+        if (!stack.hasTagCompound()) {
             stack.setTagCompound(new NBTTagCompound());
         }
     }
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        if (stack.getTagCompound() == null) {
+        if (!stack.hasTagCompound()) {
             stack.setTagCompound(new NBTTagCompound());
         } else {
-            String deathText = "";
+            NBTTagCompound nbt = stack.getTagCompound();
 
-            if (stack.getTagCompound().hasKey("DeathText") && StringUtils.isNotBlank(stack.getTagCompound().getString("DeathText"))) {
-                deathText = stack.getTagCompound().getString("DeathText");
+            String deathText = "";
+            if (nbt.hasKey("DeathText") && StringUtils.isNotBlank(nbt.getString("DeathText"))) {
+                deathText = nbt.getString("DeathText");
             }
 
-            if (stack.getTagCompound().hasKey("isLocalized") && stack.getTagCompound().getBoolean("isLocalized")) {
-                if (stack.getTagCompound().hasKey("name")) {
-                    String name = ModGraveStone.proxy.getLocalizedEntityName(stack.getTagCompound().getString("name"));
-                    String killerName = ModGraveStone.proxy.getLocalizedEntityName(stack.getTagCompound().getString("KillerName"));
+            if (nbt.hasKey("isLocalized") && nbt.getBoolean("isLocalized")) {
+                if (nbt.hasKey("name")) {
+                    String name = ModGraveStone.proxy.getLocalizedEntityName(nbt.getString("name"));
+                    String killerName = ModGraveStone.proxy.getLocalizedEntityName(nbt.getString("KillerName"));
                     if (killerName.length() == 0) {
                         list.add(new ChatComponentTranslation(deathText, new Object[]{name}).getFormattedText());
                     } else {
@@ -81,12 +75,16 @@ public class ItemBlockGSGraveStone extends ItemBlock {
                 list.add(deathText);
             }
 
-            if (stack.getTagCompound().hasKey("Age") && stack.getTagCompound().getInteger("Age") > 0) {
-                list.add(ModGraveStone.proxy.getLocalizedString("item.grave.age") + " " + stack.getTagCompound().getInteger("Age") + " " + ModGraveStone.proxy.getLocalizedString("item.grave.days"));
+            if (nbt.getInteger("Age") > 0) {
+                list.add(ModGraveStone.proxy.getLocalizedString("item.grave.age") + " " + nbt.getInteger("Age") + " " + ModGraveStone.proxy.getLocalizedString("item.grave.days"));
             }
 
-            if (stack.getTagCompound().hasKey("Sword")) {
-                ItemStack sword = ItemStack.loadItemStackFromNBT(stack.getTagCompound().getCompoundTag("Sword"));
+            if (nbt.getBoolean("Mossy")) {
+                list.add(ModGraveStone.proxy.getLocalizedString("item.grave.mossy"));
+            }
+
+            if (nbt.hasKey("Sword")) {
+                ItemStack sword = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("Sword"));
 
                 if (StringUtils.isNotBlank(sword.getDisplayName())) {
                     list.add(ModGraveStone.proxy.getLocalizedString("item.grave.sword_name") + " - " + sword.getDisplayName());
@@ -117,6 +115,6 @@ public class ItemBlockGSGraveStone extends ItemBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
-        return stack.getTagCompound() != null && stack.getTagCompound().hasKey("Enchanted");
+        return stack.hasTagCompound() && stack.getTagCompound().hasKey("Enchanted");
     }
 }

@@ -87,28 +87,18 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     @Override
     public void readFromNBT(NBTTagCompound nbtTag) {
         super.readFromNBT(nbtTag);
-        // grave type
-        readType(nbtTag);
+        // age
+        age = nbtTag.getInteger("Age");
         // grave loot
         gSItems.readItems(nbtTag);
         // death text
         gSDeathText.readText(nbtTag);
-
-        // age
-        if (nbtTag.hasKey("Age")) {
-            age = nbtTag.getInteger("Age");
-        }
-
         // sword
         readSwordInfo(nbtTag);
-
-        // read
+        // flower
         readFlowerInfo(nbtTag);
-
         // owner
-        if (nbtTag.hasKey("PlayerId")) {
-            playerId = nbtTag.getString("PlayerId");
-        }
+        playerId = nbtTag.getString("PlayerId");
     }
 
     /**
@@ -117,21 +107,16 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     @Override
     public void writeToNBT(NBTTagCompound nbtTag) {
         super.writeToNBT(nbtTag);
-        // grave type
-        saveType(nbtTag);
+        // age
+        nbtTag.setInteger("Age", age);
         // grave loot
         gSItems.saveItems(nbtTag);
         // death text
         gSDeathText.saveText(nbtTag);
-        // age
-        nbtTag.setInteger("Age", age);
-
         // sword
         writeSwordInfo(nbtTag);
-
         // flower
         writeFlowerInfo(nbtTag);
-
         // owner
         nbtTag.setString("PlayerId", playerId);
     }

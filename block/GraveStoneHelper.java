@@ -72,11 +72,6 @@ public class GraveStoneHelper {
             EnumGraves.STONE_CROSS,
             EnumGraves.STONE_HORISONTAL_PLATE
     };
-    public static final EnumGraves[] GENERATED_MOSSY_GRAVES = {
-            EnumGraves.MOSSY_VERTICAL_PLATE,
-            EnumGraves.MOSSY_CROSS,
-            EnumGraves.MOSSY_HORISONTAL_PLATE
-    };
     public static final EnumGraves[] GENERATED_IRON_GRAVES = {
             EnumGraves.IRON_VERTICAL_PLATE,
             EnumGraves.IRON_CROSS,
@@ -129,8 +124,6 @@ public class GraveStoneHelper {
             EnumGraves.SANDSTONE_CAT_STATUE,
             EnumGraves.STONE_DOG_STATUE,
             EnumGraves.STONE_CAT_STATUE,
-            EnumGraves.MOSSY_DOG_STATUE,
-            EnumGraves.MOSSY_CAT_STATUE,
             EnumGraves.IRON_DOG_STATUE,
             EnumGraves.IRON_CAT_STATUE,
             EnumGraves.GOLDEN_DOG_STATUE,
@@ -154,7 +147,6 @@ public class GraveStoneHelper {
             (byte) EnumGraves.WOODEN_DOG_STATUE.ordinal(),
             (byte) EnumGraves.SANDSTONE_DOG_STATUE.ordinal(),
             (byte) EnumGraves.STONE_DOG_STATUE.ordinal(),
-            (byte) EnumGraves.MOSSY_DOG_STATUE.ordinal(),
             (byte) EnumGraves.IRON_DOG_STATUE.ordinal(),
             (byte) EnumGraves.GOLDEN_DOG_STATUE.ordinal(),
             (byte) EnumGraves.DIAMOND_DOG_STATUE.ordinal(),
@@ -169,7 +161,6 @@ public class GraveStoneHelper {
             EnumGraves.WOODEN_CAT_STATUE,
             EnumGraves.SANDSTONE_CAT_STATUE,
             EnumGraves.STONE_CAT_STATUE,
-            EnumGraves.MOSSY_CAT_STATUE,
             EnumGraves.IRON_CAT_STATUE,
             EnumGraves.GOLDEN_CAT_STATUE,
             EnumGraves.DIAMOND_CAT_STATUE,
@@ -183,7 +174,6 @@ public class GraveStoneHelper {
     public static final EnumGraves[] DOG_WOODEN_GRAVES = {EnumGraves.WOODEN_DOG_STATUE};
     public static final EnumGraves[] DOG_SANDSTONE_GRAVES = {EnumGraves.SANDSTONE_DOG_STATUE};
     public static final EnumGraves[] DOG_STONE_GRAVES = {EnumGraves.STONE_DOG_STATUE};
-    public static final EnumGraves[] DOG_MOSSY_GRAVES = {EnumGraves.MOSSY_DOG_STATUE};
     public static final EnumGraves[] DOG_GOLDEN_GRAVES = {EnumGraves.GOLDEN_DOG_STATUE};
     public static final EnumGraves[] DOG_DIAMOND_GRAVES = {EnumGraves.DIAMOND_DOG_STATUE};
     public static final EnumGraves[] DOG_OBSIDIAN_GRAVES = {EnumGraves.OBSIDIAN_DOG_STATUE};
@@ -193,7 +183,6 @@ public class GraveStoneHelper {
     public static final EnumGraves[] CAT_WOODEN_GRAVES = {EnumGraves.WOODEN_CAT_STATUE};
     public static final EnumGraves[] CAT_SANDSTONE_GRAVES = {EnumGraves.SANDSTONE_CAT_STATUE};
     public static final EnumGraves[] CAT_STONE_GRAVES = {EnumGraves.STONE_CAT_STATUE};
-    public static final EnumGraves[] CAT_MOSSY_GRAVES = {EnumGraves.MOSSY_CAT_STATUE};
     public static final EnumGraves[] CAT_GOLDEN_GRAVES = {EnumGraves.GOLDEN_CAT_STATUE};
     public static final EnumGraves[] CAT_DIAMOND_GRAVES = {EnumGraves.DIAMOND_CAT_STATUE};
     public static final EnumGraves[] CAT_OBSIDIAN_GRAVES = {EnumGraves.OBSIDIAN_CAT_STATUE};
@@ -203,7 +192,6 @@ public class GraveStoneHelper {
     public static final EnumGraves[] HORSE_WOODEN_GRAVES = {EnumGraves.WOODEN_HORSE_STATUE};
     public static final EnumGraves[] HORSE_SANDSTONE_GRAVES = {EnumGraves.SANDSTONE_HORSE_STATUE};
     public static final EnumGraves[] HORSE_STONE_GRAVES = {EnumGraves.STONE_HORSE_STATUE};
-    public static final EnumGraves[] HORSE_MOSSY_GRAVES = {EnumGraves.MOSSY_HORSE_STATUE};
     public static final EnumGraves[] HORSE_OBSIDIAN_GRAVES = {EnumGraves.OBSIDIAN_HORSE_STATUE};
     public static final EnumGraves[] HORSE_QUARTZ_GRAVES = {EnumGraves.QUARTZ_HORSE_STATUE};
     public static final EnumGraves[] HORSE_ICE_GRAVES = {EnumGraves.ICE_HORSE_STATUE};
@@ -220,8 +208,6 @@ public class GraveStoneHelper {
             EnumGraves.SANDSTONE_CROSS,
             EnumGraves.STONE_VERTICAL_PLATE,
             EnumGraves.STONE_CROSS,
-            EnumGraves.MOSSY_VERTICAL_PLATE,
-            EnumGraves.MOSSY_CROSS,
             EnumGraves.IRON_VERTICAL_PLATE,
             EnumGraves.IRON_CROSS,
             EnumGraves.GOLDEN_VERTICAL_PLATE,
@@ -646,7 +632,7 @@ public class GraveStoneHelper {
             graveTypes.addAll(Arrays.asList(GENERATED_SANDSTONE_GRAVES));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
-            graveTypes.addAll(Arrays.asList(GENERATED_MOSSY_GRAVES));
+            //TODO graveTypes.addAll(Arrays.asList(GENERATED_MOSSY_GRAVES));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.MOUNTAIN) || biomeTypesList.contains(BiomeDictionary.Type.HILLS) ||
                 biomeTypesList.contains(BiomeDictionary.Type.PLAINS) || biomeTypesList.contains(BiomeDictionary.Type.MUSHROOM)) {
@@ -689,7 +675,7 @@ public class GraveStoneHelper {
             graveTypes.addAll(Arrays.asList(DOG_SANDSTONE_GRAVES));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
-            graveTypes.addAll(Arrays.asList(DOG_MOSSY_GRAVES));
+            //TODO graveTypes.addAll(Arrays.asList(DOG_MOSSY_GRAVES));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.MOUNTAIN) || biomeTypesList.contains(BiomeDictionary.Type.HILLS) ||
                 biomeTypesList.contains(BiomeDictionary.Type.PLAINS) || biomeTypesList.contains(BiomeDictionary.Type.MUSHROOM)) {
@@ -732,7 +718,7 @@ public class GraveStoneHelper {
             graveTypes.addAll(Arrays.asList(CAT_SANDSTONE_GRAVES));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
-            graveTypes.addAll(Arrays.asList(CAT_MOSSY_GRAVES));
+            //TODO graveTypes.addAll(Arrays.asList(CAT_MOSSY_GRAVES));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.MOUNTAIN) || biomeTypesList.contains(BiomeDictionary.Type.HILLS) ||
                 biomeTypesList.contains(BiomeDictionary.Type.PLAINS) || biomeTypesList.contains(BiomeDictionary.Type.MUSHROOM)) {
@@ -774,7 +760,7 @@ public class GraveStoneHelper {
             graveTypes.addAll(Arrays.asList(HORSE_SANDSTONE_GRAVES));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
-            graveTypes.addAll(Arrays.asList(HORSE_MOSSY_GRAVES));
+            //TODO graveTypes.addAll(Arrays.asList(HORSE_MOSSY_GRAVES));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.MOUNTAIN) || biomeTypesList.contains(BiomeDictionary.Type.HILLS) ||
                 biomeTypesList.contains(BiomeDictionary.Type.PLAINS) || biomeTypesList.contains(BiomeDictionary.Type.MUSHROOM)) {

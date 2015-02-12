@@ -12,6 +12,7 @@ import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockVine;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -23,7 +24,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -52,7 +55,6 @@ public class BlockGSMemorial extends BlockContainer {
             (byte) EnumMemorials.WOODEN_CROSS.ordinal(),
             (byte) EnumMemorials.SANDSTONE_CROSS.ordinal(),
             (byte) EnumMemorials.STONE_CROSS.ordinal(),
-            (byte) EnumMemorials.MOSSY_CROSS.ordinal(),
             (byte) EnumMemorials.IRON_CROSS.ordinal(),
             (byte) EnumMemorials.GOLDEN_CROSS.ordinal(),
             (byte) EnumMemorials.DIAMOND_CROSS.ordinal(),
@@ -66,7 +68,6 @@ public class BlockGSMemorial extends BlockContainer {
 //            (byte) EnumMemorials.WOODEN_OBELISK.ordinal(),
 //            (byte) EnumMemorials.SANDSTONE_OBELISK.ordinal(),
 //            (byte) EnumMemorials.STONE_OBELISK.ordinal(),
-//            (byte) EnumMemorials.MOSSY_OBELISK.ordinal(),
 //            (byte) EnumMemorials.IRON_OBELISK.ordinal(),
 //            (byte) EnumMemorials.GOLDEN_OBELISK.ordinal(),
 //            (byte) EnumMemorials.DIAMOND_OBELISK.ordinal(),
@@ -80,7 +81,6 @@ public class BlockGSMemorial extends BlockContainer {
             (byte) EnumMemorials.WOODEN_STEVE_STATUE.ordinal(),
             (byte) EnumMemorials.SANDSTONE_STEVE_STATUE.ordinal(),
             (byte) EnumMemorials.STONE_STEVE_STATUE.ordinal(),
-            (byte) EnumMemorials.MOSSY_STEVE_STATUE.ordinal(),
             (byte) EnumMemorials.IRON_STEVE_STATUE.ordinal(),
             (byte) EnumMemorials.GOLDEN_STEVE_STATUE.ordinal(),
             (byte) EnumMemorials.DIAMOND_STEVE_STATUE.ordinal(),
@@ -94,7 +94,6 @@ public class BlockGSMemorial extends BlockContainer {
             (byte) EnumMemorials.WOODEN_VILLAGER_STATUE.ordinal(),
             (byte) EnumMemorials.SANDSTONE_VILLAGER_STATUE.ordinal(),
             (byte) EnumMemorials.STONE_VILLAGER_STATUE.ordinal(),
-            (byte) EnumMemorials.MOSSY_VILLAGER_STATUE.ordinal(),
             (byte) EnumMemorials.IRON_VILLAGER_STATUE.ordinal(),
             (byte) EnumMemorials.GOLDEN_VILLAGER_STATUE.ordinal(),
             (byte) EnumMemorials.DIAMOND_VILLAGER_STATUE.ordinal(),
@@ -108,7 +107,6 @@ public class BlockGSMemorial extends BlockContainer {
             (byte) EnumMemorials.WOODEN_ANGEL_STATUE.ordinal(),
             (byte) EnumMemorials.SANDSTONE_ANGEL_STATUE.ordinal(),
             (byte) EnumMemorials.STONE_ANGEL_STATUE.ordinal(),
-            (byte) EnumMemorials.MOSSY_ANGEL_STATUE.ordinal(),
             (byte) EnumMemorials.IRON_ANGEL_STATUE.ordinal(),
             (byte) EnumMemorials.GOLDEN_ANGEL_STATUE.ordinal(),
             (byte) EnumMemorials.DIAMOND_ANGEL_STATUE.ordinal(),
@@ -122,7 +120,6 @@ public class BlockGSMemorial extends BlockContainer {
             (byte) EnumMemorials.WOODEN_DOG_STATUE.ordinal(),
             (byte) EnumMemorials.SANDSTONE_DOG_STATUE.ordinal(),
             (byte) EnumMemorials.STONE_DOG_STATUE.ordinal(),
-            (byte) EnumMemorials.MOSSY_DOG_STATUE.ordinal(),
             (byte) EnumMemorials.IRON_DOG_STATUE.ordinal(),
             (byte) EnumMemorials.GOLDEN_DOG_STATUE.ordinal(),
             (byte) EnumMemorials.DIAMOND_DOG_STATUE.ordinal(),
@@ -136,7 +133,6 @@ public class BlockGSMemorial extends BlockContainer {
             (byte) EnumMemorials.WOODEN_CAT_STATUE.ordinal(),
             (byte) EnumMemorials.SANDSTONE_CAT_STATUE.ordinal(),
             (byte) EnumMemorials.STONE_CAT_STATUE.ordinal(),
-            (byte) EnumMemorials.MOSSY_CAT_STATUE.ordinal(),
             (byte) EnumMemorials.IRON_CAT_STATUE.ordinal(),
             (byte) EnumMemorials.GOLDEN_CAT_STATUE.ordinal(),
             (byte) EnumMemorials.DIAMOND_CAT_STATUE.ordinal(),
@@ -150,7 +146,6 @@ public class BlockGSMemorial extends BlockContainer {
             (byte) EnumMemorials.WOODEN_CREEPER_STATUE.ordinal(),
             (byte) EnumMemorials.SANDSTONE_CREEPER_STATUE.ordinal(),
             (byte) EnumMemorials.STONE_CREEPER_STATUE.ordinal(),
-            (byte) EnumMemorials.MOSSY_CREEPER_STATUE.ordinal(),
             (byte) EnumMemorials.IRON_CREEPER_STATUE.ordinal(),
             (byte) EnumMemorials.GOLDEN_CREEPER_STATUE.ordinal(),
             (byte) EnumMemorials.DIAMOND_CREEPER_STATUE.ordinal(),
@@ -192,15 +187,6 @@ public class BlockGSMemorial extends BlockContainer {
             EnumMemorials.STONE_DOG_STATUE,
             EnumMemorials.STONE_CAT_STATUE
     };
-    public static final EnumMemorials[] MOSSY_GENERATED_MEMORIALS = {
-            EnumMemorials.MOSSY_CROSS,
-            EnumMemorials.QUARTZ_OBELISK,
-            EnumMemorials.MOSSY_STEVE_STATUE,
-            EnumMemorials.MOSSY_VILLAGER_STATUE,
-            EnumMemorials.MOSSY_ANGEL_STATUE,
-            EnumMemorials.MOSSY_DOG_STATUE,
-            EnumMemorials.MOSSY_CAT_STATUE
-    };
     public static final EnumMemorials[] QUARTZ_GENERATED_MEMORIALS = {
             EnumMemorials.QUARTZ_CROSS,
             EnumMemorials.QUARTZ_OBELISK,
@@ -222,21 +208,18 @@ public class BlockGSMemorial extends BlockContainer {
     public static final EnumMemorials[] WOODEN_DOG_MEMORIALS = {EnumMemorials.WOODEN_DOG_STATUE};
     public static final EnumMemorials[] SANDSTONE_DOG_MEMORIALS = {EnumMemorials.SANDSTONE_DOG_STATUE};
     public static final EnumMemorials[] STONE_DOG_MEMORIALS = {EnumMemorials.STONE_DOG_STATUE};
-    public static final EnumMemorials[] MOSSY_DOG_MEMORIALS = {EnumMemorials.MOSSY_DOG_STATUE};
     public static final EnumMemorials[] QUARTZ_DOG_MEMORIALS = {EnumMemorials.QUARTZ_DOG_STATUE};
     public static final EnumMemorials[] ICE_DOG_MEMORIALS = {EnumMemorials.ICE_DOG_STATUE};
 
     public static final EnumMemorials[] WOODEN_CAT_MEMORIALS = {EnumMemorials.WOODEN_CAT_STATUE};
     public static final EnumMemorials[] SANDSTONE_CAT_MEMORIALS = {EnumMemorials.SANDSTONE_CAT_STATUE};
     public static final EnumMemorials[] STONE_CAT_MEMORIALS = {EnumMemorials.STONE_CAT_STATUE};
-    public static final EnumMemorials[] MOSSY_CAT_MEMORIALS = {EnumMemorials.MOSSY_CAT_STATUE};
     public static final EnumMemorials[] QUARTZ_CAT_MEMORIALS = {EnumMemorials.QUARTZ_CAT_STATUE};
     public static final EnumMemorials[] ICE_CAT_MEMORIALS = {EnumMemorials.ICE_CAT_STATUE};
 
     public static final EnumMemorials[] WOODEN_CREEPER_MEMORIALS = {EnumMemorials.WOODEN_CREEPER_STATUE};
     public static final EnumMemorials[] SANDSTONE_CREEPER_MEMORIALS = {EnumMemorials.SANDSTONE_CREEPER_STATUE};
     public static final EnumMemorials[] STONE_CREEPER_MEMORIALS = {EnumMemorials.STONE_CREEPER_STATUE};
-    public static final EnumMemorials[] MOSSY_CREEPER_MEMORIALS = {EnumMemorials.MOSSY_CREEPER_STATUE};
     public static final EnumMemorials[] QUARTZ_CREEPER_MEMORIALS = {EnumMemorials.QUARTZ_CREEPER_STATUE};
     public static final EnumMemorials[] ICE_CREEPER_MEMORIALS = {EnumMemorials.ICE_CREEPER_STATUE};
 
@@ -254,11 +237,6 @@ public class BlockGSMemorial extends BlockContainer {
             EnumMemorials.STONE_STEVE_STATUE,
             EnumMemorials.STONE_VILLAGER_STATUE,
             EnumMemorials.STONE_ANGEL_STATUE
-    };
-    public static final EnumMemorials[] MOSSY_STATUES_MEMORIALS = {
-            EnumMemorials.MOSSY_STEVE_STATUE,
-            EnumMemorials.MOSSY_VILLAGER_STATUE,
-            EnumMemorials.MOSSY_ANGEL_STATUE
     };
     public static final EnumMemorials[] QUARTZ_STATUES_MEMORIALS = {
             EnumMemorials.QUARTZ_STEVE_STATUE,
@@ -329,7 +307,7 @@ public class BlockGSMemorial extends BlockContainer {
             memorialTypes.addAll(Arrays.asList(SANDSTONE_GENERATED_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
-            memorialTypes.addAll(Arrays.asList(MOSSY_GENERATED_MEMORIALS));
+            //TODO memorialTypes.addAll(Arrays.asList(MOSSY_GENERATED_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.MOUNTAIN) || biomeTypesList.contains(BiomeDictionary.Type.HILLS) ||
                 biomeTypesList.contains(BiomeDictionary.Type.PLAINS) || biomeTypesList.contains(BiomeDictionary.Type.MUSHROOM)) {
@@ -380,7 +358,7 @@ public class BlockGSMemorial extends BlockContainer {
             memorialTypes.addAll(Arrays.asList(SANDSTONE_DOG_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
-            memorialTypes.addAll(Arrays.asList(MOSSY_DOG_MEMORIALS));
+            //TODO memorialTypes.addAll(Arrays.asList(MOSSY_DOG_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.MOUNTAIN) || biomeTypesList.contains(BiomeDictionary.Type.HILLS) ||
                 biomeTypesList.contains(BiomeDictionary.Type.PLAINS) || biomeTypesList.contains(BiomeDictionary.Type.MUSHROOM)) {
@@ -423,7 +401,7 @@ public class BlockGSMemorial extends BlockContainer {
             memorialTypes.addAll(Arrays.asList(SANDSTONE_CAT_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
-            memorialTypes.addAll(Arrays.asList(MOSSY_CAT_MEMORIALS));
+            //TODO memorialTypes.addAll(Arrays.asList(MOSSY_CAT_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.MOUNTAIN) || biomeTypesList.contains(BiomeDictionary.Type.HILLS) ||
                 biomeTypesList.contains(BiomeDictionary.Type.PLAINS) || biomeTypesList.contains(BiomeDictionary.Type.MUSHROOM)) {
@@ -466,7 +444,7 @@ public class BlockGSMemorial extends BlockContainer {
             memorialTypes.addAll(Arrays.asList(SANDSTONE_CREEPER_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
-            memorialTypes.addAll(Arrays.asList(MOSSY_CREEPER_MEMORIALS));
+            //TODO memorialTypes.addAll(Arrays.asList(MOSSY_CREEPER_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.MOUNTAIN) || biomeTypesList.contains(BiomeDictionary.Type.HILLS) ||
                 biomeTypesList.contains(BiomeDictionary.Type.PLAINS) || biomeTypesList.contains(BiomeDictionary.Type.MUSHROOM)) {
@@ -509,7 +487,7 @@ public class BlockGSMemorial extends BlockContainer {
             memorialTypes.addAll(Arrays.asList(SANDSTONE_STATUES_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP)) {
-            memorialTypes.addAll(Arrays.asList(MOSSY_STATUES_MEMORIALS));
+            //TODO memorialTypes.addAll(Arrays.asList(MOSSY_STATUES_MEMORIALS));
         }
         if (biomeTypesList.contains(BiomeDictionary.Type.MOUNTAIN) || biomeTypesList.contains(BiomeDictionary.Type.HILLS) ||
                 biomeTypesList.contains(BiomeDictionary.Type.PLAINS) || biomeTypesList.contains(BiomeDictionary.Type.MUSHROOM)) {
@@ -551,30 +529,26 @@ public class BlockGSMemorial extends BlockContainer {
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
 
         if (tileEntity != null) {
-            if (itemStack.getTagCompound() != null) {
-                if (itemStack.getTagCompound().hasKey("isLocalized") && itemStack.getTagCompound().getBoolean("isLocalized")) {
+            if (itemStack.hasTagCompound()) {
+                NBTTagCompound nbt = itemStack.getTagCompound();
+                if (nbt.hasKey("isLocalized") && nbt.getBoolean("isLocalized")) {
                     tileEntity.getDeathTextComponent().setLocalized();
 
-                    if (itemStack.getTagCompound().hasKey("name") && itemStack.getTagCompound().hasKey("KillerName")) {
-                        tileEntity.getDeathTextComponent().setName(itemStack.getTagCompound().getString("name"));
-                        tileEntity.getDeathTextComponent().setKillerName(itemStack.getTagCompound().getString("KillerName"));
+                    if (nbt.hasKey("name") && nbt.hasKey("KillerName")) {
+                        tileEntity.getDeathTextComponent().setName(nbt.getString("name"));
+                        tileEntity.getDeathTextComponent().setKillerName(nbt.getString("KillerName"));
                     }
                 }
 
-                if (itemStack.getTagCompound().hasKey("DeathText")) {
-                    tileEntity.getDeathTextComponent().setDeathText(itemStack.getTagCompound().getString("DeathText"));
+                if (nbt.hasKey("DeathText")) {
+                    tileEntity.getDeathTextComponent().setDeathText(nbt.getString("DeathText"));
                 }
 
-                if (itemStack.getTagCompound().hasKey("GraveType")) {
-                    tileEntity.setGraveType(itemStack.getTagCompound().getByte("GraveType"));
-                } else {
-                    tileEntity.setGraveType((byte) 0);
-                }
+                tileEntity.setGraveType(nbt.getByte("GraveType"));
+                tileEntity.setMossy(nbt.getBoolean("Mossy"));
 
-                if (itemStack.getTagCompound().hasKey("HangedMob")) {
-                    tileEntity.setHangedMob(EnumHangedMobs.getById(itemStack.getTagCompound().getByte("HangedMob")));
-                    tileEntity.setHangedVillagerProfession(itemStack.getTagCompound().getInteger("HangedVillagerProfession"));
-                }
+                tileEntity.setHangedMob(EnumHangedMobs.getById(nbt.getByte("HangedMob")));
+                tileEntity.setHangedVillagerProfession(nbt.getInteger("HangedVillagerProfession"));
             }
         }
     }
@@ -595,7 +569,6 @@ public class BlockGSMemorial extends BlockContainer {
             case WOODEN_CROSS:
             case SANDSTONE_CROSS:
             case STONE_CROSS:
-            case MOSSY_CROSS:
             case IRON_CROSS:
             case GOLDEN_CROSS:
             case DIAMOND_CROSS:
@@ -608,7 +581,6 @@ public class BlockGSMemorial extends BlockContainer {
             case WOODEN_OBELISK:
             case SANDSTONE_OBELISK:
             case STONE_OBELISK:
-            case MOSSY_OBELISK:
             case IRON_OBELISK:
             case GOLDEN_OBELISK:
             case DIAMOND_OBELISK:
@@ -623,7 +595,6 @@ public class BlockGSMemorial extends BlockContainer {
             case WOODEN_STEVE_STATUE:
             case SANDSTONE_STEVE_STATUE:
             case STONE_STEVE_STATUE:
-            case MOSSY_STEVE_STATUE:
             case IRON_STEVE_STATUE:
             case GOLDEN_STEVE_STATUE:
             case DIAMOND_STEVE_STATUE:
@@ -637,7 +608,6 @@ public class BlockGSMemorial extends BlockContainer {
             case WOODEN_VILLAGER_STATUE:
             case SANDSTONE_VILLAGER_STATUE:
             case STONE_VILLAGER_STATUE:
-            case MOSSY_VILLAGER_STATUE:
             case IRON_VILLAGER_STATUE:
             case GOLDEN_VILLAGER_STATUE:
             case DIAMOND_VILLAGER_STATUE:
@@ -651,7 +621,6 @@ public class BlockGSMemorial extends BlockContainer {
             case WOODEN_ANGEL_STATUE:
             case SANDSTONE_ANGEL_STATUE:
             case STONE_ANGEL_STATUE:
-            case MOSSY_ANGEL_STATUE:
             case IRON_ANGEL_STATUE:
             case GOLDEN_ANGEL_STATUE:
             case DIAMOND_ANGEL_STATUE:
@@ -669,8 +638,6 @@ public class BlockGSMemorial extends BlockContainer {
             case SANDSTONE_CAT_STATUE:
             case STONE_DOG_STATUE:
             case STONE_CAT_STATUE:
-            case MOSSY_DOG_STATUE:
-            case MOSSY_CAT_STATUE:
             case IRON_DOG_STATUE:
             case IRON_CAT_STATUE:
             case GOLDEN_DOG_STATUE:
@@ -694,7 +661,6 @@ public class BlockGSMemorial extends BlockContainer {
             case WOODEN_CREEPER_STATUE:
             case SANDSTONE_CREEPER_STATUE:
             case STONE_CREEPER_STATUE:
-            case MOSSY_CREEPER_STATUE:
             case IRON_CREEPER_STATUE:
             case GOLDEN_CREEPER_STATUE:
             case DIAMOND_CREEPER_STATUE:
@@ -752,12 +718,31 @@ public class BlockGSMemorial extends BlockContainer {
 
         if (te != null) {
             ItemStack item = player.inventory.getCurrentItem();
-            if (item != null && item.getItem() instanceof ItemGSCorpse && EnumCorpse.getById((byte) item.getItemDamage()).equals(EnumCorpse.VILLAGER) &&
-                    te.getHangedMob() == EnumHangedMobs.NONE && (te.getMemorialType().equals(EnumMemorials.GIBBET) ||
-                    te.getMemorialType().equals(EnumMemorials.STOCKS) || te.getMemorialType().equals(EnumMemorials.BURNING_STAKE))) {
-                te.setHangedMob(EnumHangedMobs.VILLAGER);
-                te.setHangedVillagerProfession(VillagerCorpseHelper.getVillagerType(item.getTagCompound()));
-                item.stackSize--;
+            if (item != null) {
+                if (te.getMemorialType().equals(EnumMemorials.GIBBET) || te.getMemorialType().equals(EnumMemorials.STOCKS) || te.getMemorialType().equals(EnumMemorials.BURNING_STAKE)) {
+                    if (item.getItem() instanceof ItemGSCorpse && EnumCorpse.getById((byte) item.getItemDamage()).equals(EnumCorpse.VILLAGER) && te.getHangedMob() == EnumHangedMobs.NONE) {
+                        te.setHangedMob(EnumHangedMobs.VILLAGER);
+                        te.setHangedVillagerProfession(VillagerCorpseHelper.getVillagerType(item.getTagCompound()));
+                        item.stackSize--;
+                        return true;
+                    }
+                } else {
+                    if (te.isMossy()) {
+                        if (item.getItem() instanceof ItemShears) {
+                            if (!world.isRemote) {
+                                GSGraveStoneItems.dropItem(new ItemStack(Blocks.vine, 1), world, pos);
+                            }
+                            te.setMossy(false);
+                            return false;
+                        }
+                    } else {
+                        if (Block.getBlockFromItem(item.getItem()) instanceof BlockVine) {
+                            te.setMossy(true);
+                            player.inventory.getCurrentItem().stackSize--;
+                            return true;
+                        }
+                    }
+                }
             }
 
             if (world.isRemote) {
@@ -922,6 +907,8 @@ public class BlockGSMemorial extends BlockContainer {
 
             nbt.setBoolean("Enchanted", tileEntity.isEnchanted());
 
+            nbt.setBoolean("Mossy", tileEntity.isMossy());
+
             nbt.setByte("HangedMob", (byte) tileEntity.getHangedMob().ordinal());
             nbt.setInteger("HangedVillagerProfession", tileEntity.getHangedVillagerProfession());
 
@@ -938,6 +925,7 @@ public class BlockGSMemorial extends BlockContainer {
         if (tileEntity != null) {
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setByte("GraveType", tileEntity.getGraveTypeNum());
+            nbt.setBoolean("Mossy", tileEntity.isMossy());
             itemStack.setTagCompound(nbt);
         }
 

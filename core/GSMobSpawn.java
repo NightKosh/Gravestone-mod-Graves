@@ -83,7 +83,6 @@ public class GSMobSpawn {
             case WOODEN_DOG_STATUE:
             case SANDSTONE_DOG_STATUE:
             case STONE_DOG_STATUE:
-            case MOSSY_DOG_STATUE:
             case IRON_DOG_STATUE:
             case GOLDEN_DOG_STATUE:
             case DIAMOND_DOG_STATUE:
@@ -98,7 +97,6 @@ public class GSMobSpawn {
             case WOODEN_CAT_STATUE:
             case SANDSTONE_CAT_STATUE:
             case STONE_CAT_STATUE:
-            case MOSSY_CAT_STATUE:
             case IRON_CAT_STATUE:
             case GOLDEN_CAT_STATUE:
             case DIAMOND_CAT_STATUE:
@@ -113,7 +111,6 @@ public class GSMobSpawn {
             case WOODEN_HORSE_STATUE:
             case SANDSTONE_HORSE_STATUE:
             case STONE_HORSE_STATUE:
-            case MOSSY_HORSE_STATUE:
             case IRON_HORSE_STATUE:
             case GOLDEN_HORSE_STATUE:
             case DIAMOND_HORSE_STATUE:

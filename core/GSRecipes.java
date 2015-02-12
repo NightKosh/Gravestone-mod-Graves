@@ -50,7 +50,6 @@ public class GSRecipes {
         addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.WOODEN_VERTICAL_PLATE.ordinal(), "GraveType"), Blocks.planks);
         addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.SANDSTONE_VERTICAL_PLATE.ordinal(), "GraveType"), Blocks.sandstone);
         addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.STONE_VERTICAL_PLATE.ordinal(), "GraveType"), Blocks.stone);
-        addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.MOSSY_VERTICAL_PLATE.ordinal(), "GraveType"), Blocks.mossy_cobblestone);
         addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.IRON_VERTICAL_PLATE.ordinal(), "GraveType"), Blocks.iron_block);
         addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.GOLDEN_VERTICAL_PLATE.ordinal(), "GraveType"), Blocks.gold_block);
         addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.DIAMOND_VERTICAL_PLATE.ordinal(), "GraveType"), Blocks.diamond_block);
@@ -64,7 +63,6 @@ public class GSRecipes {
         addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.WOODEN_CROSS.ordinal(), "GraveType"), Blocks.planks);
         addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.SANDSTONE_CROSS.ordinal(), "GraveType"), Blocks.sandstone);
         addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.STONE_CROSS.ordinal(), "GraveType"), Blocks.stone);
-        addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.MOSSY_CROSS.ordinal(), "GraveType"), Blocks.mossy_cobblestone);
         addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.IRON_CROSS.ordinal(), "GraveType"), Blocks.iron_block);
         addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.GOLDEN_CROSS.ordinal(), "GraveType"), Blocks.gold_block);
         addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.DIAMOND_CROSS.ordinal(), "GraveType"), Blocks.diamond_block);
@@ -78,7 +76,6 @@ public class GSRecipes {
         addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.WOODEN_HORISONTAL_PLATE.ordinal(), "GraveType"), Blocks.planks);
         addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.SANDSTONE_HORISONTAL_PLATE.ordinal(), "GraveType"), Blocks.sandstone);
         addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.STONE_HORISONTAL_PLATE.ordinal(), "GraveType"), Blocks.stone);
-        addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.MOSSY_HORISONTAL_PLATE.ordinal(), "GraveType"), Blocks.mossy_cobblestone);
         addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.IRON_HORISONTAL_PLATE.ordinal(), "GraveType"), Blocks.iron_block);
         addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.GOLDEN_HORISONTAL_PLATE.ordinal(), "GraveType"), Blocks.gold_block);
         addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.DIAMOND_HORISONTAL_PLATE.ordinal(), "GraveType"), Blocks.diamond_block);
@@ -93,7 +90,6 @@ public class GSRecipes {
         addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.WOODEN_DOG_STATUE.ordinal(), "GraveType"), Blocks.planks);
         addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.SANDSTONE_DOG_STATUE.ordinal(), "GraveType"), Blocks.sandstone);
         addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.STONE_DOG_STATUE.ordinal(), "GraveType"), Blocks.stone);
-        addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.MOSSY_DOG_STATUE.ordinal(), "GraveType"), Blocks.mossy_cobblestone);
         addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.IRON_DOG_STATUE.ordinal(), "GraveType"), Blocks.iron_block);
         addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.GOLDEN_DOG_STATUE.ordinal(), "GraveType"), Blocks.gold_block);
         addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.DIAMOND_DOG_STATUE.ordinal(), "GraveType"), Blocks.diamond_block);
@@ -107,7 +103,6 @@ public class GSRecipes {
         addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.WOODEN_CAT_STATUE.ordinal(), "GraveType"), Blocks.planks);
         addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.SANDSTONE_CAT_STATUE.ordinal(), "GraveType"), Blocks.sandstone);
         addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.STONE_CAT_STATUE.ordinal(), "GraveType"), Blocks.stone);
-        addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.MOSSY_CAT_STATUE.ordinal(), "GraveType"), Blocks.mossy_cobblestone);
         addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.IRON_CAT_STATUE.ordinal(), "GraveType"), Blocks.iron_block);
         addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.GOLDEN_CAT_STATUE.ordinal(), "GraveType"), Blocks.gold_block);
         addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.DIAMOND_CAT_STATUE.ordinal(), "GraveType"), Blocks.diamond_block);
@@ -121,7 +116,6 @@ public class GSRecipes {
         addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.WOODEN_HORSE_STATUE.ordinal(), "GraveType"), Blocks.planks);
         addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.SANDSTONE_HORSE_STATUE.ordinal(), "GraveType"), Blocks.sandstone);
         addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.STONE_HORSE_STATUE.ordinal(), "GraveType"), Blocks.stone);
-        addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.MOSSY_HORSE_STATUE.ordinal(), "GraveType"), Blocks.mossy_cobblestone);
         addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.IRON_HORSE_STATUE.ordinal(), "GraveType"), Blocks.iron_block);
         addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.GOLDEN_HORSE_STATUE.ordinal(), "GraveType"), Blocks.gold_block);
         addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, (byte) EnumGraves.DIAMOND_HORSE_STATUE.ordinal(), "GraveType"), Blocks.diamond_block);
@@ -137,7 +131,6 @@ public class GSRecipes {
         addCrossMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.WOODEN_CROSS.ordinal(), "GraveType"), Blocks.planks);
         addCrossMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.SANDSTONE_CROSS.ordinal(), "GraveType"), Blocks.sandstone);
         addCrossMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.STONE_CROSS.ordinal(), "GraveType"), Blocks.stone);
-        addCrossMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.MOSSY_CROSS.ordinal(), "GraveType"), Blocks.mossy_cobblestone);
         addCrossMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.IRON_CROSS.ordinal(), "GraveType"), Blocks.iron_block);
         addCrossMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.GOLDEN_CROSS.ordinal(), "GraveType"), Blocks.gold_block);
         addCrossMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.DIAMOND_CROSS.ordinal(), "GraveType"), Blocks.diamond_block);
@@ -151,7 +144,6 @@ public class GSRecipes {
 //        addObeliskMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.WOODEN_OBELISK.ordinal(), "GraveType"), Blocks.planks);
 //        addObeliskMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.SANDSTONE_OBELISK.ordinal(), "GraveType"), Blocks.sandstone);
 //        addObeliskMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.STONE_OBELISK.ordinal(), "GraveType"), Blocks.stone);
-//        addObeliskMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.MOSSY_OBELISK.ordinal(), "GraveType"), Blocks.mossy_cobblestone);
 //        addObeliskMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.IRON_OBELISK.ordinal(), "GraveType"), Blocks.iron_block);
 //        addObeliskMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.GOLDEN_OBELISK.ordinal(), "GraveType"), Blocks.gold_block);
 //        addObeliskMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.DIAMOND_OBELISK.ordinal(), "GraveType"), Blocks.diamond_block);
@@ -165,7 +157,6 @@ public class GSRecipes {
         addSteveMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.WOODEN_STEVE_STATUE.ordinal(), "GraveType"), Blocks.planks);
         addSteveMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.SANDSTONE_STEVE_STATUE.ordinal(), "GraveType"), Blocks.sandstone);
         addSteveMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.STONE_STEVE_STATUE.ordinal(), "GraveType"), Blocks.stone);
-        addSteveMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.MOSSY_STEVE_STATUE.ordinal(), "GraveType"), Blocks.mossy_cobblestone);
         addSteveMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.IRON_STEVE_STATUE.ordinal(), "GraveType"), Blocks.iron_block);
         addSteveMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.GOLDEN_STEVE_STATUE.ordinal(), "GraveType"), Blocks.gold_block);
         addSteveMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.DIAMOND_STEVE_STATUE.ordinal(), "GraveType"), Blocks.diamond_block);
@@ -179,7 +170,6 @@ public class GSRecipes {
         addVillagerMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.WOODEN_VILLAGER_STATUE.ordinal(), "GraveType"), Blocks.planks);
         addVillagerMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.SANDSTONE_VILLAGER_STATUE.ordinal(), "GraveType"), Blocks.sandstone);
         addVillagerMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.STONE_VILLAGER_STATUE.ordinal(), "GraveType"), Blocks.stone);
-        addVillagerMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.MOSSY_VILLAGER_STATUE.ordinal(), "GraveType"), Blocks.mossy_cobblestone);
         addVillagerMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.IRON_VILLAGER_STATUE.ordinal(), "GraveType"), Blocks.iron_block);
         addVillagerMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.GOLDEN_VILLAGER_STATUE.ordinal(), "GraveType"), Blocks.gold_block);
         addVillagerMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.DIAMOND_VILLAGER_STATUE.ordinal(), "GraveType"), Blocks.diamond_block);
@@ -193,7 +183,6 @@ public class GSRecipes {
         addAngelMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.WOODEN_ANGEL_STATUE.ordinal(), "GraveType"), Blocks.planks);
         addAngelMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.SANDSTONE_ANGEL_STATUE.ordinal(), "GraveType"), Blocks.sandstone);
         addAngelMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.STONE_ANGEL_STATUE.ordinal(), "GraveType"), Blocks.stone);
-        addAngelMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.MOSSY_ANGEL_STATUE.ordinal(), "GraveType"), Blocks.mossy_cobblestone);
         addAngelMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.IRON_ANGEL_STATUE.ordinal(), "GraveType"), Blocks.iron_block);
         addAngelMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.GOLDEN_ANGEL_STATUE.ordinal(), "GraveType"), Blocks.gold_block);
         addAngelMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.DIAMOND_ANGEL_STATUE.ordinal(), "GraveType"), Blocks.diamond_block);
@@ -207,7 +196,6 @@ public class GSRecipes {
         addDogMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.WOODEN_DOG_STATUE.ordinal(), "GraveType"), Blocks.planks);
         addDogMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.SANDSTONE_DOG_STATUE.ordinal(), "GraveType"), Blocks.sandstone);
         addDogMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.STONE_DOG_STATUE.ordinal(), "GraveType"), Blocks.stone);
-        addDogMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.MOSSY_DOG_STATUE.ordinal(), "GraveType"), Blocks.mossy_cobblestone);
         addDogMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.IRON_DOG_STATUE.ordinal(), "GraveType"), Blocks.iron_block);
         addDogMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.GOLDEN_DOG_STATUE.ordinal(), "GraveType"), Blocks.gold_block);
         addDogMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.DIAMOND_DOG_STATUE.ordinal(), "GraveType"), Blocks.diamond_block);
@@ -221,7 +209,6 @@ public class GSRecipes {
         addCatMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.WOODEN_CAT_STATUE.ordinal(), "GraveType"), Blocks.planks);
         addCatMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.SANDSTONE_CAT_STATUE.ordinal(), "GraveType"), Blocks.sandstone);
         addCatMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.STONE_CAT_STATUE.ordinal(), "GraveType"), Blocks.stone);
-        addCatMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.MOSSY_CAT_STATUE.ordinal(), "GraveType"), Blocks.mossy_cobblestone);
         addCatMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.IRON_CAT_STATUE.ordinal(), "GraveType"), Blocks.iron_block);
         addCatMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.GOLDEN_CAT_STATUE.ordinal(), "GraveType"), Blocks.gold_block);
         addCatMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.DIAMOND_CAT_STATUE.ordinal(), "GraveType"), Blocks.diamond_block);
@@ -236,7 +223,6 @@ public class GSRecipes {
             addCreeperMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.WOODEN_CREEPER_STATUE.ordinal(), "GraveType"), Blocks.planks);
             addCreeperMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.SANDSTONE_CREEPER_STATUE.ordinal(), "GraveType"), Blocks.sandstone);
             addCreeperMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.STONE_CREEPER_STATUE.ordinal(), "GraveType"), Blocks.stone);
-            addCreeperMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.MOSSY_CREEPER_STATUE.ordinal(), "GraveType"), Blocks.mossy_cobblestone);
             addCreeperMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.IRON_CREEPER_STATUE.ordinal(), "GraveType"), Blocks.iron_block);
             addCreeperMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.GOLDEN_CREEPER_STATUE.ordinal(), "GraveType"), Blocks.gold_block);
             addCreeperMemorialRecipe(getStackWithNTB(GSBlock.memorial, (byte) EnumMemorials.DIAMOND_CREEPER_STATUE.ordinal(), "GraveType"), Blocks.diamond_block);

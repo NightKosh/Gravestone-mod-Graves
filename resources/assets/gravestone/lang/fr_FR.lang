@@ -73,6 +73,7 @@ item.gravestone chisel.name=Gravestone Chisel
 ## Graves
 item.grave.age=A vécu
 item.grave.days=jours
+item.grave.mossy=Mossy
 item.grave.sword_name=Nom de l'épée
 item.grave.sword_damage=Dégats de l'épée
 

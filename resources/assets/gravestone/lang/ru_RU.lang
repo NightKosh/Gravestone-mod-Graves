@@ -73,6 +73,7 @@ item.gravestone chisel.name=Резец для надгробий
 ## Graves
 item.grave.age=Прожил
 item.grave.days=дней
+item.grave.mossy=Замшелый
 item.grave.sword_name=Название меча
 item.grave.sword_damage=Повреждение меча
 

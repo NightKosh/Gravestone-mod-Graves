@@ -38,47 +38,47 @@ public class ItemBlockGSMemorial extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
-        EnumMemorials memorialType;
-
-        if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("GraveType")) {
-            memorialType = EnumMemorials.getById(itemStack.getTagCompound().getByte("GraveType"));
-        } else {
-            memorialType = EnumMemorials.getById(0);
-        }
-
+        EnumMemorials memorialType = EnumMemorials.getById(itemStack.getTagCompound().getByte("GraveType"));
         return getUnlocalizedName() + "." + memorialType.getLocalizedName();
     }
 
     @Override
     public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-        if (stack.getTagCompound() == null) {
+        if (!stack.hasTagCompound()) {
             stack.setTagCompound(new NBTTagCompound());
         }
     }
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        if (stack.getTagCompound() == null) {
+        if (!stack.hasTagCompound()) {
             stack.setTagCompound(new NBTTagCompound());
-        }
-
-        String deathText = "";
-        if (stack.getTagCompound().hasKey("DeathText") && stack.getTagCompound().getString("DeathText").length() != 0) {
-            deathText = stack.getTagCompound().getString("DeathText");
-        }
-
-        if (stack.getTagCompound().hasKey("isLocalized") && stack.getTagCompound().getBoolean("isLocalized")) {
-            if (stack.getTagCompound().hasKey("name")) {
-                String name = ModGraveStone.proxy.getLocalizedEntityName(stack.getTagCompound().getString("name"));
-                String killerName = ModGraveStone.proxy.getLocalizedEntityName(stack.getTagCompound().getString("KillerName"));
-                if (killerName.length() == 0) {
-                    list.add(new ChatComponentTranslation(deathText, new Object[]{name}).getFormattedText());
-                } else {
-                    list.add(new ChatComponentTranslation(deathText, new Object[]{name, killerName.toLowerCase()}).getFormattedText());
-                }
-            }
         } else {
-            list.add(deathText);
+            NBTTagCompound nbt = stack.getTagCompound();
+
+            String deathText = "";
+            if (nbt.hasKey("DeathText") && nbt.getString("DeathText").length() != 0) {
+                deathText = nbt.getString("DeathText");
+            }
+
+            if (nbt.hasKey("isLocalized") && nbt.getBoolean("isLocalized")) {
+                if (nbt.hasKey("name")) {
+                    String name = ModGraveStone.proxy.getLocalizedEntityName(nbt.getString("name"));
+                    String killerName = ModGraveStone.proxy.getLocalizedEntityName(nbt.getString("KillerName"));
+                    if (killerName.length() == 0) {
+                        list.add(new ChatComponentTranslation(deathText, new Object[]{name}).getFormattedText());
+                    } else {
+                        list.add(new ChatComponentTranslation(deathText, new Object[]{name, killerName.toLowerCase()}).getFormattedText());
+                    }
+                }
+            } else {
+                list.add(deathText);
+            }
+
+            if (nbt.getBoolean("Mossy")) {
+                //TODO add Mossy text
+                list.add(ModGraveStone.proxy.getLocalizedString("item.grave.mossy"));
+            }
         }
     }
 
@@ -89,7 +89,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack) {
-        if (stack.hasTagCompound() && stack.getTagCompound().hasKey("GraveType")) {
+        if (stack.hasTagCompound()) {
             int x = pos.getX();
             int y = pos.getY();
             int z = pos.getZ();

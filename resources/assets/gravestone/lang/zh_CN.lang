@@ -73,6 +73,7 @@ item.gravestone chisel.name=墓碑凿
 ## Graves
 item.grave.age=已生活了
 item.grave.days=天
+item.grave.mossy=Mossy
 item.grave.sword_name=剑的名字
 item.grave.sword_damage=剑的耐久值
 
