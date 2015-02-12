@@ -1,6 +1,7 @@
 package gravestone.item.itemblock;
 
 import gravestone.ModGraveStone;
+import gravestone.block.enums.EnumGraveMaterial;
 import gravestone.block.enums.EnumMemorials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -75,9 +76,17 @@ public class ItemBlockGSMemorial extends ItemBlock {
                 list.add(deathText);
             }
 
-            if (nbt.getBoolean("Mossy")) {
-                //TODO add Mossy text
-                list.add(ModGraveStone.proxy.getLocalizedString("item.grave.mossy"));
+            EnumGraveMaterial material = EnumMemorials.getById(nbt.getByte("GraveType")).getMaterial();
+            if (material != EnumGraveMaterial.OTHER) {
+                StringBuilder materialStr = new StringBuilder();
+                materialStr.append(ModGraveStone.proxy.getLocalizedString("material.title"))
+                        .append(" ")
+                        .append(material.getLocalizedMaterial());
+                if (nbt.getBoolean("Mossy")) {
+                    materialStr.append(", ")
+                            .append(ModGraveStone.proxy.getLocalizedString("material.mossy"));
+                }
+                list.add(materialStr.toString());
             }
         }
     }

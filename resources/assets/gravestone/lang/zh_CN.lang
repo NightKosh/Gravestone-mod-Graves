@@ -73,7 +73,6 @@ item.gravestone chisel.name=墓碑凿
 ## Graves
 item.grave.age=已生活了
 item.grave.days=天
-item.grave.mossy=Mossy
 item.grave.sword_name=剑的名字
 item.grave.sword_damage=剑的耐久值
 
@@ -175,3 +174,19 @@ commands.generate.unknown_structure=Unknown structure!
 
 commands.fill_grave.empty=There aren't any blocks at this coordinates!
 commands.fill_grave.wrong_block=This coordinates occupied by wrong blocks!
+
+# Materials
+material.title=Made of
+material.mossy=Mossy
+material.wood=Wood
+material.sandstone=Sandstone
+material.stone=Stone
+material.iron=Iron
+material.gold=Gold
+material.diamond=Diamond
+material.emerald=Emerald
+material.lapis=Lapis
+material.redstone=Redstone
+material.obsidian=Obsidian
+material.quartz=Quartz
+material.ice=Ice

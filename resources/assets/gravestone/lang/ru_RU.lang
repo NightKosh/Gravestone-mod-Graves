@@ -73,7 +73,6 @@ item.gravestone chisel.name=Резец для надгробий
 ## Graves
 item.grave.age=Прожил
 item.grave.days=дней
-item.grave.mossy=Замшелый
 item.grave.sword_name=Название меча
 item.grave.sword_damage=Повреждение меча
 
@@ -175,3 +174,19 @@ commands.generate.unknown_structure=Введён не известный тип 
 
 commands.fill_grave.empty=По указанным координатам нет никаких блоков!
 commands.fill_grave.wrong_block=По указанным координатам располагаются не корректные блоки!
+
+# Materials
+material.title=Сделан из
+material.mossy=Замшелый
+material.wood=Дерева
+material.sandstone=Песчанника
+material.stone=Камня
+material.iron=Железа
+material.gold=Золота
+material.diamond=Алмазов
+material.emerald=Изумрудов
+material.lapis=Лазурита
+material.redstone=Редстоуна
+material.obsidian=Обсидиана
+material.quartz=Кварца
+material.ice=Льда

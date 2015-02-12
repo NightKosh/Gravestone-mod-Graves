@@ -1,6 +1,7 @@
 package gravestone.item.itemblock;
 
 import gravestone.ModGraveStone;
+import gravestone.block.enums.EnumGraveMaterial;
 import gravestone.block.enums.EnumGraves;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -79,8 +80,17 @@ public class ItemBlockGSGraveStone extends ItemBlock {
                 list.add(ModGraveStone.proxy.getLocalizedString("item.grave.age") + " " + nbt.getInteger("Age") + " " + ModGraveStone.proxy.getLocalizedString("item.grave.days"));
             }
 
-            if (nbt.getBoolean("Mossy")) {
-                list.add(ModGraveStone.proxy.getLocalizedString("item.grave.mossy"));
+            EnumGraveMaterial material = EnumGraves.getById(nbt.getByte("GraveType")).getMaterial();
+            if (material != EnumGraveMaterial.OTHER) {
+                StringBuilder materialStr = new StringBuilder();
+                materialStr.append(ModGraveStone.proxy.getLocalizedString("material.title"))
+                        .append(" ")
+                        .append(material.getLocalizedMaterial());
+                if (nbt.getBoolean("Mossy")) {
+                    materialStr.append(", ")
+                            .append(ModGraveStone.proxy.getLocalizedString("material.mossy"));
+                }
+                list.add(materialStr.toString());
             }
 
             if (nbt.hasKey("Sword")) {
@@ -102,8 +112,12 @@ public class ItemBlockGSGraveStone extends ItemBlock {
                             short enchantmentId = enchantments.getCompoundTagAt(i).getShort("id");
                             short enchantmentLvl = enchantments.getCompoundTagAt(i).getShort("lvl");
 
-                            if (Enchantment.enchantmentsBookList[enchantmentId] != null) {
-                                list.add(Enchantment.enchantmentsBookList[enchantmentId].getTranslatedName(enchantmentLvl));
+                            try {
+                                if (Enchantment.enchantmentsBookList[enchantmentId] != null) {
+                                    list.add(Enchantment.enchantmentsBookList[enchantmentId].getTranslatedName(enchantmentLvl));
+                                }
+                            } catch (Exception e) {
+
                             }
                         }
                     }
