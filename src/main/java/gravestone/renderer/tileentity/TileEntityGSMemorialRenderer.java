@@ -221,8 +221,16 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
                 return Resources.WOODEN_ARMOR;
             case SANDSTONE_STEVE_STATUE:
                 return Resources.SANDSTONE_ARMOR;
+            case RED_SANDSTONE_STEVE_STATUE:
+                return Resources.RED_SANDSTONE_ARMOR;
             case STONE_STEVE_STATUE:
                 return Resources.STONE_ARMOR;
+            case DIORITE_STEVE_STATUE:
+                return Resources.DIORITE_ARMOR;
+            case ANDESITE_STEVE_STATUE:
+                return Resources.ANDESITE_ARMOR;
+            case GRANITE_STEVE_STATUE:
+                return Resources.GRANITE_ARMOR;
             case IRON_STEVE_STATUE:
                 return Resources.IRON_ARMOR;
             case GOLDEN_STEVE_STATUE:
@@ -239,6 +247,8 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
                 return Resources.OBSIDIAN_ARMOR;
             case QUARTZ_STEVE_STATUE:
                 return Resources.QUARTZ_ARMOR;
+            case PRIZMARINE_STEVE_STATUE:
+                return Resources.PRIZMARINE_ARMOR;
             case ICE_STEVE_STATUE:
                 return Resources.ICE_ARMOR;
         }

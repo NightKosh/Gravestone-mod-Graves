@@ -111,9 +111,9 @@ public class Resources {
     public static final ResourceLocation GRAVE_SANDSTONE_CROSS = new ResourceLocation(GRAVES_LOCATION + "SandstoneCrossGrave.png");
     public static final ResourceLocation GRAVE_RED_SANDSTONE_CROSS = new ResourceLocation(GRAVES_LOCATION + "RedSandstoneCrossGrave.png");
     public static final ResourceLocation GRAVE_STONE_CROSS = new ResourceLocation(GRAVES_LOCATION + "StoneCrossGrave.png");
-    public static final ResourceLocation GRAVE_DIORITE_CROSS = new ResourceLocation(GRAVES_LOCATION + "DioriteStoneCrossGrave.png");
-    public static final ResourceLocation GRAVE_ANDESITE_CROSS = new ResourceLocation(GRAVES_LOCATION + "AndesiteStoneCrossGrave.png");
-    public static final ResourceLocation GRAVE_GRANITE_CROSS = new ResourceLocation(GRAVES_LOCATION + "GraniteStoneCrossGrave.png");
+    public static final ResourceLocation GRAVE_DIORITE_CROSS = new ResourceLocation(GRAVES_LOCATION + "DioriteCrossGrave.png");
+    public static final ResourceLocation GRAVE_ANDESITE_CROSS = new ResourceLocation(GRAVES_LOCATION + "AndesiteCrossGrave.png");
+    public static final ResourceLocation GRAVE_GRANITE_CROSS = new ResourceLocation(GRAVES_LOCATION + "GraniteCrossGrave.png");
     public static final ResourceLocation GRAVE_IRON_CROSS = new ResourceLocation(GRAVES_LOCATION + "IronCrossGrave.png");
     public static final ResourceLocation GRAVE_GOLDEN_CROSS = new ResourceLocation(GRAVES_LOCATION + "GoldenCrossGrave.png");
     public static final ResourceLocation GRAVE_DIAMOND_CROSS = new ResourceLocation(GRAVES_LOCATION + "DiamondCrossGrave.png");
