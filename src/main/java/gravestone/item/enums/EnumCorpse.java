@@ -21,7 +21,7 @@ public enum EnumCorpse implements IBlockEnum {
     }
 
     @Override
-    public String getLocalizedName() {
+    public String getUnLocalizedName() {
         return ModGraveStone.proxy.getLocalizedString(this.name);
     }
 

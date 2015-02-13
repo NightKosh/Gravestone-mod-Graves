@@ -35,7 +35,7 @@ public class Resources {
     public static final String ALTAR_TOP = MOD_NAME + ":altar_top";
     public static final String ALTAR_SIDE = MOD_NAME + ":altar_side";
     // items
-    public static final String CHISEL = MOD_NAME + ":Chisel";
+    public static final String CHISEL = MOD_NAME + ":GSChisel";
 
     // gui
     public static final ResourceLocation ALTAR = new ResourceLocation(GUI_LOCATION + "altar.png");

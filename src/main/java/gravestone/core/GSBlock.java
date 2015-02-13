@@ -1,16 +1,11 @@
 package gravestone.core;
 
 import gravestone.block.*;
-import gravestone.block.enums.*;
 import gravestone.item.itemblock.*;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 /**
  * GraveStone mod
@@ -47,30 +42,30 @@ public class GSBlock {
     public static void registration() {
         // gravestone
         graveStone = new BlockGSGraveStone();
-        advancedNTBBlockRegistration(graveStone, "GSGraveStone", "GraveStone", EnumGraves.values(), "Type", ItemBlockGSGraveStone.class);
+        GameRegistry.registerBlock(graveStone, ItemBlockGSGraveStone.class, "GSGraveStone");
 //        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(graveStone), 0, Resources.graveStoneModel);
 
         // memorials
         memorial = new BlockGSMemorial();
-        advancedNTBBlockRegistration(memorial, "GSMemorial", "Memorial", EnumMemorials.values(), "Type", ItemBlockGSMemorial.class);
+        GameRegistry.registerBlock(memorial, ItemBlockGSMemorial.class, "GSMemorial");
 
         // wither spawner
         spawner = new BlockGSSpawner();
-        advancedMetaBlockRegistration(spawner, ItemBlockGSSpawner.class, "GSSpawner", EnumSpawner.values());
+        GameRegistry.registerBlock(spawner, ItemBlockGSSpawner.class, "GSSpawner");
 
         // trap
         trap = new BlockGSTrap();
-        advancedMetaBlockRegistration(trap, ItemBlockGSTrap.class, "GSTrap", EnumTrap.values());
+        GameRegistry.registerBlock(trap, ItemBlockGSTrap.class, "GSTrap");
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(trap), 0, Resources.trapModel);
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(trap), 1, Resources.trapModel);
         ModelBakery.addVariantName(Item.getItemFromBlock(trap), new String[]{"gravestone:GSTrap_night_stone", "gravestone:GSTrap_thunder_stone"});
 
         //pile of bones
         pileOfBones = new BlockGSPileOfBones();
-        advancedMetaBlockRegistration(pileOfBones, ItemBlockGSPileOfBones.class, "GSPileOfBones", EnumPileOfBones.values());
+        GameRegistry.registerBlock(pileOfBones, ItemBlockGSPileOfBones.class, "GSPileOfBones");
         // bone block
         boneBlock = new BlockGSBoneBlock();
-        advancedMetaBlockRegistration(boneBlock, ItemBlockGSBoneBlock.class, "GSBoneBlock", EnumBoneBlock.values());
+        GameRegistry.registerBlock(boneBlock, ItemBlockGSBoneBlock.class, "GSBoneBlock");
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(boneBlock), 0, Resources.boneBlockModel);
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(boneBlock), 1, Resources.boneBlockModel);
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(boneBlock), 2, Resources.boneBlockModel);
@@ -79,68 +74,26 @@ public class GSBlock {
                 "gravestone:GSBoneBlock_with_crawler", "gravestone:GSBoneBlock_with_skull_and_crawler"});
         // bone slab
         boneSlab = new BlockGSBoneSlab();
-        simpleBlockRegistration(boneSlab, "GSBoneSlab", "Bone slab");
+        GameRegistry.registerBlock(boneSlab, "GSBoneSlab");
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(boneSlab), 0, Resources.boneSlabModel);
         // bone stairs
         boneStairs = new BlockGSBoneStairs();
-        simpleBlockRegistration(boneStairs, "GSBoneStairs", "Bone stairs");
+        GameRegistry.registerBlock(boneStairs, "GSBoneStairs");
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(boneStairs), 0, Resources.boneStairsModel);
         // hauntedChest
         hauntedChest = new BlockGSHauntedChest();
-        advancedNTBBlockRegistration(hauntedChest, "GSHauntedChest", "Haunted chest", EnumHauntedChest.values(), "ChestType", ItemBlockGSHauntedChest.class);
+        GameRegistry.registerBlock(hauntedChest, ItemBlockGSHauntedChest.class, "GSHauntedChest");
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(hauntedChest), 0, Resources.hauntedChestModel);
 
         // skull candle
         candle = new BlockGSCandle();
-        simpleBlockRegistration(candle, "Candle", ItemBlockGSCandle.class, "GSCandle");
+        GameRegistry.registerBlock(candle, ItemBlockGSCandle.class, "GSCandle");
         skullCandle = new BlockGSSkullCandle();
-        advancedMetaBlockRegistration(skullCandle, ItemBlockGSSkullCandle.class, "GSSkullCandle", EnumSkullCandle.values());
+        GameRegistry.registerBlock(skullCandle, ItemBlockGSSkullCandle.class, "GSSkullCandle");
 
         // altar
         altar = new BlockGSAltar();
-        simpleBlockRegistration(altar, "GSAltar", "Altar");
+        GameRegistry.registerBlock(altar, "GSAltar");
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(altar), 0, Resources.altarModel);
-    }
-
-    private static void simpleBlockRegistration(Block block, String name, Class itemClass, String registerName) {
-        GameRegistry.registerBlock(block, itemClass, registerName);
-        LanguageRegistry.addName(block, name);
-    }
-
-    private static void simpleBlockRegistration(Block block, String registerName, String name) {
-        GameRegistry.registerBlock(block, registerName);
-        LanguageRegistry.addName(block, name);
-    }
-
-    private static void advancedMetaBlockRegistration(Block block, Class itemClass, String registerName, IBlockEnum[] blockEnums) {
-        GameRegistry.registerBlock(block, itemClass, registerName);
-        subMetaBlocksRegistration(block, blockEnums);
-    }
-
-    private static void advancedNTBBlockRegistration(Block block, String registerName, String name, IBlockEnum[] blockEnums, String nbtName) {
-        simpleBlockRegistration(block, registerName, name);
-        subNTBBlocksRegistration(block, blockEnums, nbtName);
-    }
-
-    private static void advancedNTBBlockRegistration(Block block, String registerName, String name, IBlockEnum[] blockEnums, String nbtName, Class itemClass) {
-        GameRegistry.registerBlock(block, itemClass, registerName);
-        LanguageRegistry.addName(block, name);
-        subNTBBlocksRegistration(block, blockEnums, nbtName);
-    }
-
-    private static void subMetaBlocksRegistration(Block block, IBlockEnum[] blockEnums) {
-        for (byte meta = 0; meta < blockEnums.length; meta++) {
-            LanguageRegistry.addName(new ItemStack(block, 1, meta), blockEnums[meta].getLocalizedName());
-        }
-    }
-
-    private static void subNTBBlocksRegistration(Block block, IBlockEnum[] blockEnums, String nbtName) {
-        for (int i = 0; i < blockEnums.length; i++) {
-            ItemStack stack = new ItemStack(block, 1, 0);
-            NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setInteger(nbtName, i);
-            stack.setTagCompound(nbt);
-            LanguageRegistry.addName(stack, blockEnums[i].getLocalizedName());
-        }
     }
 }

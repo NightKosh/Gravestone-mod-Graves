@@ -1,6 +1,5 @@
 package gravestone.block.enums;
 
-import gravestone.ModGraveStone;
 import gravestone.core.Resources;
 import net.minecraft.util.ResourceLocation;
 
@@ -146,8 +145,8 @@ public enum EnumGraves implements IBlockEnum {
     }
 
     @Override
-    public String getLocalizedName() {
-        return ModGraveStone.proxy.getLocalizedString(this.name);
+    public String getUnLocalizedName() {
+        return this.name;
     }
 
     public ResourceLocation getTexture() {

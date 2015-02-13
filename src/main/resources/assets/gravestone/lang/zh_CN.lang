@@ -6,66 +6,64 @@ itemGroup.tabGSOther=Gravestone mod items
 
 # Blocks
 ## Graves
-block.gravestone.gravestone=墓碑
-block.gravestone.cross=十字架
-block.gravestone.plate=墓碑板
-block.gravestone.dog_statue=狗雕像
-block.gravestone.cat_statue=猫雕像
-block.gravestone.wooden_sword=木剑墓碑
-block.gravestone.stone_sword=石剑墓碑
-block.gravestone.iron_sword=铁剑墓碑
-block.gravestone.golden_sword=金剑墓碑
-block.gravestone.diamond_sword=钻石剑墓碑
-block.gravestone.horse_statue=马雕像
-block.gravestone.sword=战魂之剑
+block.gravestone.gravestone.name=墓碑
+block.gravestone.cross.name=十字架
+block.gravestone.plate.name=墓碑板
+block.gravestone.dog_statue.name=狗雕像
+block.gravestone.cat_statue.name=猫雕像
+block.gravestone.horse_statue.name=马雕像
+block.gravestone.sword.name=战魂之剑
 
 ## Memorials
-block.memorial.cross=十字纪念碑
-block.memorial.obelisk=方尖碑
-block.memorial.steve_statue=玩家纪念碑
-block.memorial.villager_statue=村民纪念碑
-block.memorial.angel_statue=天使纪念碑
-block.memorial.dog_statue=狗纪念碑
-block.memorial.cat_statue=猫纪念碑
-block.memorial.creeper_statue=爬行者纪念碑
-block.memorial.celtic_cross=凯尔特十字架
-block.memorial.gibbet=绞刑架
-block.memorial.stocks=足枷
-block.memorial.burning_stake=燃烧的火刑柱
+block.memorial.cross.name=十字纪念碑
+block.memorial.obelisk.name=方尖碑
+block.memorial.steve_statue.name=玩家纪念碑
+block.memorial.villager_statue.name=村民纪念碑
+block.memorial.angel_statue.name=天使纪念碑
+block.memorial.dog_statue.name=狗纪念碑
+block.memorial.cat_statue.name=猫纪念碑
+block.memorial.creeper_statue.name=爬行者纪念碑
+block.memorial.celtic_cross.name=凯尔特十字架
+block.memorial.gibbet.name=绞刑架
+block.memorial.stocks.name=足枷
+block.memorial.burning_stake.name=燃烧的火刑柱
 
 ## Traps
-tile.trap.night.name=午夜石
-tile.trap.thunder.name=雷电石
+block.trap.night.name=午夜石
+block.trap.thunder.name=雷电石
 block.trap.curse=暗夜正在降临！
 
 ## Spawners
-block.spawner.wither=凋灵刷怪笼
-block.spawner.skeleton=骷髅刷怪笼
-block.spawner.zombie=僵尸刷怪笼
+block.spawner.wither.name=凋灵刷怪笼
+block.spawner.skeleton.name=骷髅刷怪笼
+block.spawner.zombie.name=僵尸刷怪笼
 
-# Bone Blocks
-tile.bone_block.name=骨质方块
-tile.bone_block.skull_name=颅骨骨质方块
-tile.bone_block.crawler_name=骨质方块(有爬行头颅)
-tile.bone_block.crawler_skull_name=颅骨骨质方块(有爬行头颅)
+## Bone Blocks
+block.bone_block.default.name=骨质方块
+block.bone_block.skull.name=颅骨骨质方块
+block.bone_block.crawler.name=骨质方块(有爬行头颅)
+block.bone_block.crawler_skull.name=颅骨骨质方块(有爬行头颅)
 tile.bone_slab.name=骨质台阶
 tile.bone_stairs.name=骨质阶梯
 
-#Pile of Bones
+## Pile of Bones
 block.pile_of_bones.name=骨堆
 block.pile_of_bones_with_skull.name=颅骨骨堆
 
 ## Chests
-block.haunted_chest.bats_chest=带着蝙蝠的箱子
-block.haunted_chest.skeleton_chest=带着骷髅的箱子
-block.haunted_chest.raven_chest=带着乌鸦的箱子
-block.haunted_chest.ghost_chest=带着鬼魂的箱子
+block.haunted_chest.bats_chest.name=带着蝙蝠的箱子
+block.haunted_chest.skeleton_chest.name=带着骷髅的箱子
+block.haunted_chest.raven_chest.name=带着乌鸦的箱子
+block.haunted_chest.ghost_chest.name=带着鬼魂的箱子
 
-##Candles
+## Candles
 tile.candle.name=蜡烛
 block.skull_candle.skeleton.name=骷髅头颅蜡烛
 block.skull_candle.wither_skeleton.name=凋灵头颅蜡烛
 block.skull_candle.zombie.name=僵尸头颅蜡烛
+
+## Altar
+tile.altar.name=Altar
 
 
 # Items

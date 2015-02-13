@@ -44,12 +44,11 @@ public class BlockGSSkullCandle extends BlockContainer {
     public BlockGSSkullCandle() {
         super(Material.circuits);
         this.setStepSound(Block.soundTypeStone);
-        this.setUnlocalizedName("Skull Candle");
         this.setHardness(0.5F);
         this.setResistance(5);
         this.setLightLevel(1);
         this.setCreativeTab(GSTabs.otherItemsTab);
-        this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.5F, 0.75F);
+        this.setBlockBounds(0.25F, 0, 0.25F, 0.75F, 0.5F, 0.75F);
     }
 
     /**

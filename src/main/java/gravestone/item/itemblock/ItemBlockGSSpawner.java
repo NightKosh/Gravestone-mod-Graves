@@ -26,6 +26,6 @@ public class ItemBlockGSSpawner extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        return EnumSpawner.values()[itemstack.getItemDamage()].getLocalizedName();
+        return EnumSpawner.values()[itemstack.getItemDamage()].getUnLocalizedName();
     }
 }

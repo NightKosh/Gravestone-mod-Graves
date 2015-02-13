@@ -5,7 +5,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IStringSerializable;
 
 /**
  * GraveStone mod
@@ -22,13 +26,12 @@ public class BlockGSBoneSlab extends BlockSlab {
         this.setHardness(2);
         this.setResistance(2);
         this.setCreativeTab(GSTabs.otherItemsTab);
-//        this.setBlockTextureName(Resources.BONE_BLOCK);
         this.setHarvestLevel("pickaxe", 0);
     }
 
     @Override
     public String getUnlocalizedName(int meta) {
-        return getUnlocalizedName();
+        return super.getUnlocalizedName() + "." + getUnlocalizedName();
     }
 
     @Override
@@ -38,11 +41,19 @@ public class BlockGSBoneSlab extends BlockSlab {
 
     @Override
     public IProperty getVariantProperty() {
-        return HALF;
+        return null;
     }
 
     @Override
     public Object getVariant(ItemStack stack) {
-        return EnumBlockHalf.values()[stack.getMetadata()];
+        return BlockSlab.EnumBlockHalf.values()[stack.getMetadata()];
+    }
+
+    public int getMetaFromState(IBlockState state) {
+        return ((Enum) state.getValue(HALF)).ordinal();
+    }
+
+    protected BlockState createBlockState() {
+        return new BlockState(this, new IProperty[]{HALF});
     }
 }

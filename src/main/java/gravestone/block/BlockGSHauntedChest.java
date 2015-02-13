@@ -47,7 +47,6 @@ public class BlockGSHauntedChest extends BlockContainer {
     public BlockGSHauntedChest() {
         super(Material.wood);
         this.setStepSound(Block.soundTypeWood);
-        this.setUnlocalizedName("HauntedChest");
         this.setHardness(2.5F);
         this.setCreativeTab(GSTabs.otherItemsTab);
         this.setHarvestLevel("axe", 0);

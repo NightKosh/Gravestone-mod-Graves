@@ -259,7 +259,6 @@ public class BlockGSMemorial extends BlockContainer {
         super(Material.rock);
         this.isBlockContainer = true;
         this.setStepSound(Block.soundTypeStone);
-        this.setUnlocalizedName("Memorial");
         this.setHardness(1);
         this.setResistance(5);
         this.setCreativeTab(GSTabs.memorialsTab);

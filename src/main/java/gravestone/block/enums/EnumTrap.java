@@ -1,7 +1,5 @@
-
 package gravestone.block.enums;
 
-import gravestone.ModGraveStone;
 import net.minecraft.util.IStringSerializable;
 
 /**
@@ -12,8 +10,8 @@ import net.minecraft.util.IStringSerializable;
  */
 public enum EnumTrap implements IBlockEnum, IStringSerializable {
 
-    NIGHT_STONE("tile.trap.night.name", "night_stone"),
-    THUNDER_STONE("tile.trap.thunder.name", "thunder_stone");
+    NIGHT_STONE("block.trap.night", "night_stone"),
+    THUNDER_STONE("block.trap.thunder", "thunder_stone");
     private String name;
     private String blockModelName;
 
@@ -23,8 +21,8 @@ public enum EnumTrap implements IBlockEnum, IStringSerializable {
     }
 
     @Override
-    public String getLocalizedName() {
-        return ModGraveStone.proxy.getLocalizedString(this.name);
+    public String getUnLocalizedName() {
+        return this.name;
     }
 
     @Override

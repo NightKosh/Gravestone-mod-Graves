@@ -67,6 +67,6 @@ public class ItemGSCorpse extends Item {
 
     @Override
     public String getItemStackDisplayName(ItemStack itemStack) {
-        return EnumCorpse.getById((byte) itemStack.getItemDamage()).getLocalizedName();
+        return EnumCorpse.getById((byte) itemStack.getItemDamage()).getUnLocalizedName();
     }
 }

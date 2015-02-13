@@ -6,66 +6,64 @@ itemGroup.tabGSOther=Предметы из Gravestone mod
 
 # Blocks
 ## Graves
-block.gravestone.gravestone=Надгробный камень
-block.gravestone.cross=Могильный крест
-block.gravestone.plate=Надгробная плита
-block.gravestone.dog_statue=Статуя для могилы собаки
-block.gravestone.cat_statue=Статуя для могилы кошки
-block.gravestone.wooden_sword=Надгробие из деревянного меча
-block.gravestone.stone_sword=Надгробие из каменного меча
-block.gravestone.iron_sword=Надгробие из железного меча
-block.gravestone.golden_sword=Надгробие из золотого меча
-block.gravestone.diamond_sword=Надгробие из алмазного меча
-block.gravestone.horse_statue=Статуя для могилы лошади
-block.gravestone.sword=Меч павшего воина
+block.gravestone.gravestone.name=Надгробный камень
+block.gravestone.cross.name=Могильный крест
+block.gravestone.plate.name=Надгробная плита
+block.gravestone.dog_statue.name=Статуя для могилы собаки
+block.gravestone.cat_statue.name=Статуя для могилы кошки
+block.gravestone.horse_statue.name=Статуя для могилы лошади
+block.gravestone.sword.name=Меч павшего воина
 
 ## Memorials
-block.memorial.cross=Мемориальный крест
-block.memorial.obelisk=Обелиск
-block.memorial.steve_statue=Статуя Стива
-block.memorial.villager_statue=Статуя жителя
-block.memorial.angel_statue=Статуя ангела
-block.memorial.dog_statue=Статуя собаки
-block.memorial.cat_statue=Статуя кошки
-block.memorial.creeper_statue=Статуя крипера
-block.memorial.celtic_cross=Кельтский крест
-block.memorial.gibbet=Виселица
-block.memorial.stocks=Колодки
+block.memorial.cross.name=Мемориальный крест
+block.memorial.obelisk.name=Обелиск
+block.memorial.steve_statue.name=Статуя Стива
+block.memorial.villager_statue.name=Статуя жителя
+block.memorial.angel_statue.name=Статуя ангела
+block.memorial.dog_statue.name=Статуя собаки
+block.memorial.cat_statue.name=Статуя кошки
+block.memorial.creeper_statue.name=Статуя крипера
+block.memorial.celtic_cross.name=Кельтский крест
+block.memorial.gibbet.name=Виселица
+block.memorial.stocks.name=Колодки
 block.memorial.burning_stake=Костёр инквизиции
 
 ## Traps
-tile.trap.night.name=Камень тьмы
-tile.trap.thunder.name=Грозовой камень
+block.trap.night.name=Камень тьмы
+block.trap.thunder.name=Грозовой камень
 block.trap.curse=Тьма приближается!
 
 ## Spawners
-block.spawner.wither=Спаунер иссушителей
-block.spawner.skeleton=Спаунер скелетов
-block.spawner.zombie=Спаунер зомби
+block.spawner.wither.name=Спаунер иссушителей
+block.spawner.skeleton.name=Спаунер скелетов
+block.spawner.zombie.name=Спаунер зомби
 
-# Bone Blocks
-tile.bone_block.name=Костяной блок
-tile.bone_block.skull_name=Костяной блок с черепом
-tile.bone_block.crawler_name=Костяной блок ползучего черепа
-tile.bone_block.crawler_skull_name=Костяной блок ползучего черепа с черепом
+## Bone Blocks
+block.bone_block.default.name=Костяной блок
+block.bone_block.skull.name=Костяной блок с черепом
+block.bone_block.crawler.name=Костяной блок ползучего черепа
+block.bone_block.crawler_skull.name=Костяной блок ползучего черепа с черепом
 tile.bone_slab.name=Костяная плита
 tile.bone_stairs.name=Костяная лестница
 
-#Pile of Bones
+## Pile of Bones
 block.pile_of_bones.name=Кучка костей
 block.pile_of_bones_with_skull.name=Кучка костей с черепом
 
 ## Chests
-block.haunted_chest.bats_chest=Сундук с летучими мышами
-block.haunted_chest.skeleton_chest=Сундук со скелетом
-block.haunted_chest.raven_chest=Сундук с воронами
-block.haunted_chest.ghost_chest=Сундук с привидениями
+block.haunted_chest.bats_chest.name=Сундук с летучими мышами
+block.haunted_chest.skeleton_chest.name=Сундук со скелетом
+block.haunted_chest.raven_chest.name=Сундук с воронами
+block.haunted_chest.ghost_chest.name=Сундук с привидениями
 
 ## candles
 tile.candle.name=Свеча
 block.skull_candle.skeleton.name=Череп скелета со свечой
 block.skull_candle.wither_skeleton.name=Череп иссушителя со свечой
 block.skull_candle.zombie.name=Череп зомби со свечой
+
+## Altar
+tile.altar.name=Алтарь
 
 
 # Items

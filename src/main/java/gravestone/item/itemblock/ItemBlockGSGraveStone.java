@@ -29,7 +29,6 @@ public class ItemBlockGSGraveStone extends ItemBlock {
     public ItemBlockGSGraveStone(Block block) {
         super(block);
         setHasSubtypes(true);
-        setUnlocalizedName("Gravestone");
     }
 
     @Override
@@ -39,8 +38,7 @@ public class ItemBlockGSGraveStone extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
-        EnumGraves graveType = EnumGraves.getById(itemStack.getTagCompound().getInteger("Type"));
-        return getUnlocalizedName() + "." + graveType.getLocalizedName();
+        return EnumGraves.getById(itemStack.getTagCompound().getInteger("Type")).getUnLocalizedName();
     }
 
     @Override

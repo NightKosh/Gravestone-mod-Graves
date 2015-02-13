@@ -24,7 +24,6 @@ public class ItemBlockGSHauntedChest extends ItemBlock {
     public ItemBlockGSHauntedChest(Block block) {
         super(block);
         setHasSubtypes(true);
-        setUnlocalizedName("Haunted chest");
     }
 
     @Override
@@ -34,11 +33,7 @@ public class ItemBlockGSHauntedChest extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
-        if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("ChestType")) {
-            return EnumHauntedChest.getById(itemStack.getTagCompound().getInteger("ChestType")).getLocalizedName();
-        } else {
-            return EnumHauntedChest.getById(0).getLocalizedName();
-        }
+        return EnumHauntedChest.getById(itemStack.getTagCompound().getInteger("ChestType")).getUnLocalizedName();
     }
 
     @Override

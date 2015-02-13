@@ -40,7 +40,6 @@ public class BlockGSPileOfBones extends BlockContainer {
     public BlockGSPileOfBones() {
         super(Material.circuits);
         this.setStepSound(Block.soundTypeStone);
-        this.setUnlocalizedName("pile of bones");
         this.setHardness(0.1F);
         this.setResistance(0);
         this.setCreativeTab(GSTabs.otherItemsTab);

@@ -49,7 +49,6 @@ public class BlockGSSpawner extends BlockMobSpawner {
 
     public BlockGSSpawner() {
         super();
-        this.setUnlocalizedName("Spawner");
         this.setHardness(4);
         this.setLightLevel(0.45F);
         this.setStepSound(Block.soundTypeMetal);

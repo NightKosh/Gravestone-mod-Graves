@@ -25,7 +25,7 @@ public class BlockGSAltar extends BlockContainer {
         super(Material.rock);
         this.setBlockBounds(0, 0, 0, 1, 0.75F, 1);
         this.setLightOpacity(0);
-        this.setUnlocalizedName("Altar");
+        this.setUnlocalizedName("altar");
         this.setCreativeTab(GSTabs.otherItemsTab);
         this.setHarvestLevel("pickaxe", 2);
     }

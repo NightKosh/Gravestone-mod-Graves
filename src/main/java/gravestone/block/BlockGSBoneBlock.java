@@ -34,7 +34,6 @@ public class BlockGSBoneBlock extends Block {
     public BlockGSBoneBlock() {
         super(Material.rock);
         this.setStepSound(Block.soundTypeStone);
-        this.setUnlocalizedName("bone_block");
         this.setHardness(2);
         this.setResistance(2);
         this.setCreativeTab(GSTabs.otherItemsTab);

@@ -1,7 +1,5 @@
-
 package gravestone.block.enums;
 
-import gravestone.ModGraveStone;
 import net.minecraft.util.IStringSerializable;
 
 /**
@@ -24,8 +22,8 @@ public enum EnumSpawner implements IBlockEnum, IStringSerializable {
     }
 
     @Override
-    public String getLocalizedName() {
-        return ModGraveStone.proxy.getLocalizedString(this.name);
+    public String getUnLocalizedName() {
+        return this.name;
     }
 
     @Override

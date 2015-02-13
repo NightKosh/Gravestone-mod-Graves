@@ -5,7 +5,6 @@
 
 package gravestone.block.enums;
 
-import gravestone.ModGraveStone;
 import net.minecraft.util.IStringSerializable;
 
 /**
@@ -16,10 +15,10 @@ import net.minecraft.util.IStringSerializable;
  */
 public enum EnumBoneBlock implements IBlockEnum, IStringSerializable {
 
-    BONE_BLOCK("tile.bone_block.name", "bone_block"),
-    SKULL_BONE_BLOCK("tile.bone_block.skull_name", "bone_block_with_skull"),
-    CRAWLER_BONE_BLOCK("tile.bone_block.crawler_name", "bone_block_with_crawler"),
-    CRAWLER_SKULL_BONE_BLOCK("tile.bone_block.crawler_skull_name", "bone_block_with_skull_and_crawler");
+    BONE_BLOCK("block.bone_block.default", "bone_block"),
+    SKULL_BONE_BLOCK("block.bone_block.skull", "bone_block_with_skull"),
+    CRAWLER_BONE_BLOCK("block.bone_block.crawler", "bone_block_with_crawler"),
+    CRAWLER_SKULL_BONE_BLOCK("block.bone_block.crawler_skull", "bone_block_with_skull_and_crawler");
     private String name;
     private String blockModelName;
 
@@ -29,8 +28,8 @@ public enum EnumBoneBlock implements IBlockEnum, IStringSerializable {
     }
 
     @Override
-    public String getLocalizedName() {
-        return ModGraveStone.proxy.getLocalizedString(this.name);
+    public String getUnLocalizedName() {
+        return this.name;
     }
 
     @Override

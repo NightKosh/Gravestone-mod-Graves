@@ -6,66 +6,64 @@ itemGroup.tabGSOther=Gravestone mod items
 
 # Blocks
 ## Graves
-block.gravestone.gravestone=Lápide
-block.gravestone.cross=Cruz
-block.gravestone.plate=Chapa de Túmulo
-block.gravestone.dog_statue=Estátua de Cachorro
-block.gravestone.cat_statue=Estátua de Gato
-block.gravestone.wooden_sword=Lápide de Espada de Madeira
-block.gravestone.stone_sword=Lápide de Espada de Pedra
-block.gravestone.iron_sword=Lápide de Espada de Ferro
-block.gravestone.golden_sword=Lápide de Espada de Ouro
-block.gravestone.diamond_sword=Lápide de Espada de Diamante
-block.gravestone.horse_statue=Estátua de Cavalo
-block.gravestone.sword=Sword of a fallen warrior
+block.gravestone.gravestone.name=Lápide
+block.gravestone.cross.name=Cruz
+block.gravestone.plate.name=Chapa de Túmulo
+block.gravestone.dog_statue.name=Estátua de Cachorro
+block.gravestone.cat_statue.name=Estátua de Gato
+block.gravestone.horse_statue.name=Estátua de Cavalo
+block.gravestone.sword.name=Sword of a fallen warrior
 
 ## Memorials
-block.memorial.cross=Memorial em Cruz
-block.memorial.obelisk=Obelisco
-block.memorial.steve_statue=Estátua do Steve
-block.memorial.villager_statue=Estátua de Aldeão
-block.memorial.angel_statue=Estátua de Anjo
-block.memorial.dog_statue=Estátua de Cachorro
-block.memorial.cat_statue=Estátua de Gato
-block.memorial.creeper_statue=Estátua de Creeper
-block.memorial.celtic_cross=Cruz Celta
-block.memorial.gibbet=Gibbet
-block.memorial.stocks=Stocks
-block.memorial.burning_stake=Burning Stake
+block.memorial.cross.name=Memorial em Cruz
+block.memorial.obelisk.name=Obelisco
+block.memorial.steve_statue.name=Estátua do Steve
+block.memorial.villager_statue.name=Estátua de Aldeão
+block.memorial.angel_statue.name=Estátua de Anjo
+block.memorial.dog_statue.name=Estátua de Cachorro
+block.memorial.cat_statue.name=Estátua de Gato
+block.memorial.creeper_statue.name=Estátua de Creeper
+block.memorial.celtic_cross.name=Cruz Celta
+block.memorial.gibbet.name=Gibbet
+block.memorial.stocks.name=Stocks
+block.memorial.burning_stake.name=Burning Stake
 
 ## Traps
-tile.trap.night.name=Pedra da Noite
-tile.trap.thunder.name=Pedra do Trovão
+block.trap.night.name=Pedra da Noite
+block.trap.thunder.name=Pedra do Trovão
 block.trap.curse=A escuridão está vindo!
 
 ## Spawners
-block.spawner.wither=Spawner de Wither
-block.spawner.skeleton=Spawner de Esqueleto
-block.spawner.zombie=Spawner de Zumbi
+block.spawner.wither.name=Spawner de Wither
+block.spawner.skeleton.name=Spawner de Esqueleto
+block.spawner.zombie.name=Spawner de Zumbi
 
-# Bone Blocks
-tile.bone_block.name=Bloco de Ossos
-tile.bone_block.skull_name=Bloco de Ossos com Cabeça
-tile.bone_block.crawler_name=Bloco de Ossos do Rastejador Caveira
-tile.bone_block.crawler_skull_name=Blco ode Ossos com Cabeça do Rastejador Caveira
+## Bone Blocks
+block.bone_block.default.name=Bloco de Ossos
+block.bone_block.skull.name=Bloco de Ossos com Cabeça
+block.bone_block.crawler.name=Bloco de Ossos do Rastejador Caveira
+block.bone_block.crawler_skull.name=Blco ode Ossos com Cabeça do Rastejador Caveira
 tile.bone_slab.name=Laje de Ossos
 tile.bone_stairs.name=Escada de Ossos
 
-#Pile of Bones
+## Pile of Bones
 block.pile_of_bones.name=Pile of Bones
 block.pile_of_bones_with_skull.name=Pile of Bones with Skull
 
 ## Chests
-block.haunted_chest.bats_chest=Baú com Morcegos
-block.haunted_chest.skeleton_chest=Baú com Esqueleto
-block.haunted_chest.raven_chest=Baú com Corvos
-block.haunted_chest.ghost_chest=Baú com Fantasma
+block.haunted_chest.bats_chest.name=Baú com Morcegos
+block.haunted_chest.skeleton_chest.name=Baú com Esqueleto
+block.haunted_chest.raven_chest.name=Baú com Corvos
+block.haunted_chest.ghost_chest.name=Baú com Fantasma
 
-##Candles
+## Candles
 tile.candle.name=Vela
 block.skull_candle.skeleton.name=Vela de Cabeça
 block.skull_candle.wither_skeleton.name=Vela de Cabeça Wither
 block.skull_candle.zombie.name=Vela de Cabeça de Zumbi
+
+## Altar
+tile.altar.name=Altar
 
 
 # Items

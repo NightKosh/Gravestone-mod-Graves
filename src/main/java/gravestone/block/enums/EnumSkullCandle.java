@@ -1,7 +1,5 @@
-
 package gravestone.block.enums;
 
-import gravestone.ModGraveStone;
 import net.minecraft.util.IStringSerializable;
 
 /**
@@ -12,9 +10,9 @@ import net.minecraft.util.IStringSerializable;
  */
 public enum EnumSkullCandle implements IBlockEnum, IStringSerializable {
 
-    SKELETON_SKULL("block.skull_candle.skeleton.name", "skeleton_skull_candle"),
-    WITHER_SKULL("block.skull_candle.wither_skeleton.name", "wither_skull_candle"),
-    ZOMBIE_SKULL("block.skull_candle.zombie.name", "zombie_skull_candle");
+    SKELETON_SKULL("block.skull_candle.skeleton", "skeleton_skull_candle"),
+    WITHER_SKULL("block.skull_candle.wither_skeleton", "wither_skull_candle"),
+    ZOMBIE_SKULL("block.skull_candle.zombie", "zombie_skull_candle");
     private String name;
     private String blockModelName;
 
@@ -24,15 +22,15 @@ public enum EnumSkullCandle implements IBlockEnum, IStringSerializable {
     }
 
     @Override
-    public String getLocalizedName() {
-        return ModGraveStone.proxy.getLocalizedString(this.name);
+    public String getUnLocalizedName() {
+        return this.name;
     }
 
     @Override
     public String getName() {
         return blockModelName;
     }
-    
+
     public static EnumSkullCandle getById(int id) {
         if (id < values().length) {
             return values()[id];

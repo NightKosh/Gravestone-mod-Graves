@@ -29,6 +29,6 @@ public class ItemBlockGSBoneBlock extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        return EnumBoneBlock.values()[itemstack.getItemDamage()].getLocalizedName();
+        return EnumBoneBlock.values()[itemstack.getItemDamage()].getUnLocalizedName();
     }
 }

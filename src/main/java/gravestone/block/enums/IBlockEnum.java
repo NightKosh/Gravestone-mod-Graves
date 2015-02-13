@@ -9,5 +9,5 @@ package gravestone.block.enums;
  */
 public interface IBlockEnum {
 
-    public String getLocalizedName();
+    public String getUnLocalizedName();
 }

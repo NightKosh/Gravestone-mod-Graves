@@ -170,7 +170,6 @@ public class BlockGSGraveStone extends BlockContainer {
         super(Material.rock);
         this.isBlockContainer = true;
         this.setStepSound(Block.soundTypeStone);
-        this.setUnlocalizedName("GraveStone");
         this.setHardness(0.5F);
         this.setResistance(5);
         this.setCreativeTab(GSTabs.gravesTab);

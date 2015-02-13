@@ -6,66 +6,64 @@ itemGroup.tabGSOther=Gravestone mod items
 
 # Blocks
 ## Graves
-block.gravestone.gravestone=Náhrobek
-block.gravestone.cross=Kříž
-block.gravestone.plate=Náhrobní kámenk
-block.gravestone.dog_statue=Socha psa
-block.gravestone.cat_statue=Socha kočky
-block.gravestone.wooden_sword=Náhrobek z dřevěného meče
-block.gravestone.stone_sword=Náhrobek z kamenného meče
-block.gravestone.iron_sword=Náhrobek ze železného meče
-block.gravestone.golden_sword=Náhrobek ze zlatého meče
-block.gravestone.diamond_sword=Náhrobek z diamantového meče
-block.gravestone.horse_statue=Socha koně
-block.gravestone.sword=Sword of A Fallen Warrior
+block.gravestone.gravestone.name=Náhrobek
+block.gravestone.cross.name=Kříž
+block.gravestone.plate.name=Náhrobní kámenk
+block.gravestone.dog_statue.name=Socha psa
+block.gravestone.cat_statue.name=Socha kočky
+block.gravestone.horse_statue.name=Socha koně
+block.gravestone.sword.name=Sword of A Fallen Warrior
 
 ## Memorials
-block.memorial.cross=Křížový památník
-block.memorial.obelisk=Obelisk
-block.memorial.steve_statue=Socha Steva
-block.memorial.villager_statue=Socha vesničana
-block.memorial.angel_statue=Socha anděla
-block.memorial.dog_statue=Socha psa
-block.memorial.cat_statue=Socha kočky
-block.memorial.creeper_statue=Socha Creepera
-block.memorial.celtic_cross=Keltský kříž
-block.memorial.gibbet=Gibbet
-block.memorial.stocks=Stocks
-block.memorial.burning_stake=Burning Stake
+block.memorial.cross.name=Křížový památník
+block.memorial.obelisk.name=Obelisk
+block.memorial.steve_statue.name=Socha Steva
+block.memorial.villager_statue.name=Socha vesničana
+block.memorial.angel_statue.name=Socha anděla
+block.memorial.dog_statue.name=Socha psa
+block.memorial.cat_statue.name=Socha kočky
+block.memorial.creeper_statue.name=Socha Creepera
+block.memorial.celtic_cross.name=Keltský kříž
+block.memorial.gibbet.name=Gibbet
+block.memorial.stocks.name=Stocks
+block.memorial.burning_stake.name=Burning Stake
 
 ## Traps
-tile.trap.night.name=Noční kámen
-tile.trap.thunder.name=Bleskový kámen
+block.trap.night.name=Noční kámen
+block.trap.thunder.name=Bleskový kámen
 block.trap.curse=Temnota přichází!
 
 ## Spawners
-block.spawner.wither=Spawner na withera
-block.spawner.skeleton=Spawner na kostlivce
-block.spawner.zombie=Spawner na zombie
+block.spawner.wither.name=Spawner na withera
+block.spawner.skeleton.name=Spawner na kostlivce
+block.spawner.zombie.name=Spawner na zombie
 
-# Bone Blocks
-tile.bone_block.name=Kostěnný blok
-tile.bone_block.skull_name=Kostěnný blok s lebkou
-tile.bone_block.crawler_name=Kostěnný blok a s krabem uvnitř
-tile.bone_block.crawler_skull_name=Kostěnný blok s lebkou a krabem uvnitř
+## Bone Blocks
+block.bone_block.default.name=Kostěnný blok
+block.bone_block.skull.name=Kostěnný blok s lebkou
+block.bone_block.crawler.name=Kostěnný blok a s krabem uvnitř
+block.bone_block.crawler_skull.name=Kostěnný blok s lebkou a krabem uvnitř
 tile.bone_slab.name=Kostěnný půlblok
 tile.bone_stairs.name=Kostěnné schody
 
-#Pile of Bones
+## Pile of Bones
 block.pile_of_bones.name=Pile of Bones
 block.pile_of_bones_with_skull.name=Pile of Bones with Skull
 
 ## Chests
-block.haunted_chest.bats_chest=Bedna s netopýry
-block.haunted_chest.skeleton_chest=Bedna s kostlivcem
-block.haunted_chest.raven_chest=Bedna s havrany
-block.haunted_chest.ghost_chest=Bedna s duchem
+block.haunted_chest.bats_chest.name=Bedna s netopýry
+block.haunted_chest.skeleton_chest.name=Bedna s kostlivcem
+block.haunted_chest.raven_chest.name=Bedna s havrany
+block.haunted_chest.ghost_chest.name=Bedna s duchem
 
-##Candles
+## Candles
 tile.candle.name=Svíčka
 block.skull_candle.skeleton.name=Lebka se svíčkou
 block.skull_candle.wither_skeleton.name=Lebka withera se svíčkou
 block.skull_candle.zombie.name=Zombie hlava se svíčkou
+
+## Altar
+tile.altar.name=Altar
 
 
 # Items

@@ -6,67 +6,64 @@ itemGroup.tabGSOther=Gravestone mod items
 
 # Blocks
 ## Graves
-block.gravestone.gravestone=Gravestone
-block.gravestone.cross=Cross
-block.gravestone.plate=Grave Plate
-block.gravestone.dog_statue=Dog Statue
-block.gravestone.cat_statue=Cat Statue
-block.gravestone.wooden_sword=Wooden Sword Gravestone
-block.gravestone.stone_sword=Stone Sword Gravestone
-block.gravestone.iron_sword=Iron Sword Gravestone
-block.gravestone.golden_sword=Golden Sword Gravestone
-block.gravestone.diamond_sword=Diamond Sword Gravestone
-block.gravestone.horse_statue=Horse Statue
-block.gravestone.sword=Sword of A Fallen Warrior
+block.gravestone.gravestone.name=Gravestone
+block.gravestone.cross.name=Cross
+block.gravestone.plate.name=Grave Plate
+block.gravestone.dog_statue.name=Dog Statue
+block.gravestone.cat_statue.name=Cat Statue
+block.gravestone.horse_statue.name=Horse Statue
+block.gravestone.sword.name=Sword of A Fallen Warrior
 
 ## Memorials
-block.memorial.cross=Cross Memorial
-block.memorial.obelisk=Obelisk
-block.memorial.steve_statue=Steve Statue
-block.memorial.villager_statue=Villager Statue
-block.memorial.angel_statue=Angel Statue
-block.memorial.dog_statue=Dog Statue
-block.memorial.cat_statue=Cat Statue
-block.memorial.creeper_statue=Creeper Statue
-block.memorial.celtic_cross=Celtic Cross
-block.memorial.gibbet=Gibbet
-block.memorial.stocks=Stocks
-block.memorial.burning_stake=Burning Stake
+block.memorial.cross.name=Cross Memorial
+block.memorial.obelisk.name=Obelisk
+block.memorial.steve_statue.name=Steve Statue
+block.memorial.villager_statue.name=Villager Statue
+block.memorial.angel_statue.name=Angel Statue
+block.memorial.dog_statue.name=Dog Statue
+block.memorial.cat_statue.name=Cat Statue
+block.memorial.creeper_statue.name=Creeper Statue
+block.memorial.celtic_cross.name=Celtic Cross
+block.memorial.gibbet.name=Gibbet
+block.memorial.stocks.name=Stocks
+block.memorial.burning_stake.name=Burning Stake
 
 ## Traps
-tile.trap.night.name=Night Stone
-tile.trap.thunder.name=Thunder Stone
+block.trap.night.name=Night Stone
+block.trap.thunder.name=Thunder Stone
 block.trap.curse=Darkness is coming!
 
 ## Spawners
-block.spawner.wither=Wither Spawner
-block.spawner.skeleton=Skeleton Spawner
-block.spawner.zombie=Zombie Spawner
+block.spawner.wither.name=Wither Spawner
+block.spawner.skeleton.name=Skeleton Spawner
+block.spawner.zombie.name=Zombie Spawner
 
-# Bone Blocks
-tile.bone_block.name=Bone Block
-tile.bone_block.skull_name=Bone Block with Skull
-tile.bone_block.crawler_name=Skull Crawler's Bone Block
-tile.bone_block.crawler_skull_name=Skull Crawler's Bone Block with Skull
+## Bone Blocks
+block.bone_block.default.name=Bone Block
+block.bone_block.skull.name=Bone Block with Skull
+block.bone_block.crawler.name=Skull Crawler's Bone Block
+block.bone_block.crawler_skull.name=Skull Crawler's Bone Block with Skull
 tile.bone_slab.name=Bone Slab
 tile.bone_stairs.name=Bone Stairs
 
-#Pile of Bones
+## Pile of Bones
 block.pile_of_bones.name=Pile of Bones
 block.pile_of_bones_with_skull.name=Pile of Bones with Skull
 
 ## Chests
-block.haunted_chest.bats_chest=Chest with Bats
-block.haunted_chest.skeleton_chest=Chest with Skeleton
-block.haunted_chest.raven_chest=Chest with Ravens
-block.haunted_chest.ghost_chest=Chest with Ghost
+block.haunted_chest.bats_chest.name=Chest with Bats
+block.haunted_chest.skeleton_chest.name=Chest with Skeleton
+block.haunted_chest.raven_chest.name=Chest with Ravens
+block.haunted_chest.ghost_chest.name=Chest with Ghost
 
-##Candles
+## Candles
 tile.candle.name=Candle
 block.skull_candle.skeleton.name=Skull Candle
 block.skull_candle.wither_skeleton.name=Wither Skull Candle
 block.skull_candle.zombie.name=Zombie Skull Candle
 
+## Altar
+tile.altar.name=Altar
 
 # Items
 ## Chisel

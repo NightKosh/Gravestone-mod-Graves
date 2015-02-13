@@ -30,7 +30,7 @@ public class ItemBlockGSTrap extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        return EnumTrap.values()[itemstack.getItemDamage()].getLocalizedName();
+        return EnumTrap.values()[itemstack.getItemDamage()].getUnLocalizedName();
     }
 
 }

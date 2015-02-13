@@ -25,11 +25,11 @@ public class GSItem {
     public static void registration() {
         // chisel
         chisel = new ItemGSChisel();
-        GameRegistry.registerItem(chisel, "Chisel");
+        GameRegistry.registerItem(chisel, "GSChisel");
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(chisel, 0, Resources.chiselModel);
 
         corpse = new ItemGSCorpse();
-        GameRegistry.registerItem(corpse, "Corpse");
+        GameRegistry.registerItem(corpse, "GSCorpse");
     }
 
     public static void registryExternalItems(Item item, String name) {

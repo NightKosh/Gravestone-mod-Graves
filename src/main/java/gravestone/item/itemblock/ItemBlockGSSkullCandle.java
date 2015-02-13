@@ -17,11 +17,10 @@ public class ItemBlockGSSkullCandle extends ItemBlock {
     public ItemBlockGSSkullCandle(Block block) {
         super(block);
         setHasSubtypes(true);
-        setUnlocalizedName("Skull Candle");
     }
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
-        return getUnlocalizedName() + "." + EnumSkullCandle.values()[itemStack.getItemDamage()].getLocalizedName();
+        return EnumSkullCandle.values()[itemStack.getItemDamage()].getUnLocalizedName();
     }
 }

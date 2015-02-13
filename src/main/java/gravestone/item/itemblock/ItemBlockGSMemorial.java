@@ -29,7 +29,6 @@ public class ItemBlockGSMemorial extends ItemBlock {
     public ItemBlockGSMemorial(Block block) {
         super(block);
         setHasSubtypes(true);
-        setUnlocalizedName("Memorial");
     }
 
     @Override
@@ -39,8 +38,7 @@ public class ItemBlockGSMemorial extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
-        EnumMemorials memorialType = EnumMemorials.getById(itemStack.getTagCompound().getInteger("Type"));
-        return getUnlocalizedName() + "." + memorialType.getLocalizedName();
+        return EnumMemorials.getById(itemStack.getTagCompound().getInteger("Type")).getUnLocalizedName();
     }
 
     @Override

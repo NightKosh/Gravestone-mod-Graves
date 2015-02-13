@@ -42,7 +42,6 @@ public class BlockGSTrap extends Block {
     public BlockGSTrap() {
         super(Material.rock);
         this.setStepSound(Block.soundTypeStone);
-        this.setUnlocalizedName("trap.night");
         this.setHardness(4.5F);
         this.setResistance(5);
         this.setCreativeTab(GSTabs.otherItemsTab);
