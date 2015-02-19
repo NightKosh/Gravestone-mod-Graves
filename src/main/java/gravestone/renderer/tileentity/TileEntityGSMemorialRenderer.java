@@ -1,14 +1,19 @@
 package gravestone.renderer.tileentity;
 
 import com.google.common.collect.Maps;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import gravestone.block.enums.EnumGraveMaterial;
 import gravestone.block.enums.EnumMemorials;
+import gravestone.core.ModInfo;
 import gravestone.core.Resources;
 import gravestone.models.block.ModelMemorial;
 import gravestone.models.block.memorials.*;
 import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.LayeredTexture;
+import net.minecraft.client.resources.DefaultPlayerSkin;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -17,6 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * GraveStone mod
@@ -27,9 +33,10 @@ import java.util.Map;
 @SideOnly(Side.CLIENT)
 public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
 
-    private static final Map<EnumMemorials, ResourceLocation> mossyTexturesMap = Maps.newHashMap();
-    private static final Map<EnumGraveMaterial, ResourceLocation> mossyPedestalTexturesMap = Maps.newHashMap();
-    private static final Map<EnumGraveMaterial, ResourceLocation> mossyArmorTexturesMap = Maps.newHashMap();
+    private static final Map<EnumMemorials, ResourceLocation> mossyTextures = Maps.newHashMap();
+    private static final Map<EnumGraveMaterial, ResourceLocation> mossyPedestalTextures = Maps.newHashMap();
+    private static final Map<EnumGraveMaterial, ResourceLocation> mossyArmorTextures = Maps.newHashMap();
+//    private static final Map<String, ResourceLocation> steveTextures = Maps.newHashMap();
     public static ModelMemorial cross = new ModelMemorialCross();
     public static ModelMemorial obelisk = new ModelMemorialObelisk();
     public static ModelMemorial steveStatue = new ModelSteveStatueMemorial();
@@ -100,21 +107,24 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
 //        } else
         boolean isMossy = tileEntity.isMossy();
         ModelMemorial model = getModel(memorialType.getMemorialType());
-        bindTextureByName(getTexture(memorialType, memorialType.getTexture(), isMossy));
         model.setPedestalTexture(getPedestalTexture(memorialType, isMossy));
         switch (memorialType.getMemorialType()) {
             case CREEPER_STATUE:
+                bindTextureByName(getTexture(memorialType, memorialType.getTexture(), isMossy));
                 model.customRender(tileEntity.isEnchanted());
                 break;
             case STEVE_STATUE:
+                bindTextureByName(getTexture(memorialType, memorialType.getTexture(), isMossy));
                 model.customRender(getArmorTexture(memorialType, isMossy), tileEntity.isEnchanted());
                 break;
             case GIBBET:
             case STOCKS:
             case BURNING_STAKE:
+                bindTextureByName(memorialType.getTexture());
                 model.customRender(memorialType, tileEntity.getHangedMob(), tileEntity.getHangedVillagerProfession());
                 break;
             default:
+                bindTextureByName(getTexture(memorialType, memorialType.getTexture(), isMossy));
                 if (tileEntity.isEnchanted()) {
                     model.renderEnchanted();
                 } else {
@@ -125,16 +135,16 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
         GL11.glPopMatrix();
     }
 
-    private ResourceLocation getTexture(EnumMemorials memorialType, ResourceLocation texture, boolean isMossy) {
+    private static ResourceLocation getTexture(EnumMemorials memorialType, ResourceLocation texture, boolean isMossy) {
         if (isMossy) {
-            ResourceLocation mixedMossyTexture = mossyTexturesMap.get(memorialType);
+            ResourceLocation mixedMossyTexture = mossyTextures.get(memorialType);
             if (mixedMossyTexture == null) {
                 ResourceLocation mossyTexture = getMossyTexture(memorialType.getMemorialType());
                 mixedMossyTexture = new ResourceLocation(texture.getResourceDomain() + ":mossy_" + texture.getResourcePath());
                 Minecraft.getMinecraft().getTextureManager().loadTexture(mixedMossyTexture,
                         new LayeredTexture(texture.getResourceDomain() + ":" + texture.getResourcePath(),
                                 mossyTexture.getResourceDomain() + ":" + mossyTexture.getResourcePath()));
-                mossyTexturesMap.put(memorialType, mixedMossyTexture);
+                mossyTextures.put(memorialType, mixedMossyTexture);
                 return mixedMossyTexture;
             } else {
                 return mixedMossyTexture;
@@ -144,17 +154,17 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
         }
     }
 
-    private ResourceLocation getPedestalTexture(EnumMemorials memorialType, boolean isMossy) {
+    private static ResourceLocation getPedestalTexture(EnumMemorials memorialType, boolean isMossy) {
         ResourceLocation texture = memorialType.getPedestalTexture();
         if (isMossy && texture != null) {
-            ResourceLocation mixedMossyTexture = mossyPedestalTexturesMap.get(memorialType.getMaterial());
+            ResourceLocation mixedMossyTexture = mossyPedestalTextures.get(memorialType.getMaterial());
             if (mixedMossyTexture == null) {
                 ResourceLocation mossyTexture = getMossyPedestalTexture(memorialType.getMemorialType());
                 mixedMossyTexture = new ResourceLocation(texture.getResourceDomain() + ":mossy_" + texture.getResourcePath());
                 Minecraft.getMinecraft().getTextureManager().loadTexture(mixedMossyTexture,
                         new LayeredTexture(texture.getResourceDomain() + ":" + texture.getResourcePath(),
                                 mossyTexture.getResourceDomain() + ":" + mossyTexture.getResourcePath()));
-                mossyPedestalTexturesMap.put(memorialType.getMaterial(), mixedMossyTexture);
+                mossyPedestalTextures.put(memorialType.getMaterial(), mixedMossyTexture);
                 return mixedMossyTexture;
             } else {
                 return mixedMossyTexture;
@@ -164,17 +174,58 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
         }
     }
 
-    public static ResourceLocation getArmorTexture(EnumMemorials memorialType, boolean isMossy) {
+//    private static ResourceLocation getSteveTexture(EnumMemorials memorialType, ResourceLocation texture, GameProfile profile, boolean isMossy) {
+//        ResourceLocation playerTexture;
+//        StringBuilder playerPrefix = new StringBuilder();
+//        if (isMossy) {
+//            playerPrefix.append("mossy_");
+//        }
+//        if (profile != null) {
+//            Minecraft minecraft = Minecraft.getMinecraft();
+//            Map map = minecraft.getSkinManager().loadSkinFromCache(profile);
+//
+//            playerPrefix.append(profile.getId().toString()).append("_");
+//            if (map.containsKey(MinecraftProfileTexture.Type.SKIN)) {
+//                playerTexture = minecraft.getSkinManager().loadSkin((MinecraftProfileTexture) map.get(MinecraftProfileTexture.Type.SKIN), MinecraftProfileTexture.Type.SKIN);
+//            } else {
+//                UUID uuid = EntityPlayer.getUUID(profile);
+//                playerTexture = DefaultPlayerSkin.getDefaultSkin(uuid);
+//            }
+//        } else {
+//            playerTexture = Resources.STEVE;
+//            playerPrefix.append("steve_");
+//        }
+//
+//        ResourceLocation mixedSteveTexture = steveTextures.get(memorialType.getMaterial());
+//        if (mixedSteveTexture == null) {
+//            mixedSteveTexture = new ResourceLocation(texture.getResourceDomain() + ":" + playerPrefix.toString() + texture.getResourcePath());
+//            if (isMossy) {
+//                ResourceLocation mossyTexture = getMossyTexture(memorialType.getMemorialType());
+//                Minecraft.getMinecraft().getTextureManager().loadTexture(mixedSteveTexture,
+//                        new LayeredTexture(playerTexture.getResourceDomain() + ":" + playerTexture.getResourcePath(),
+//                                texture.getResourceDomain() + ":" + texture.getResourcePath(),
+//                                mossyTexture.getResourceDomain() + ":" + mossyTexture.getResourcePath()));
+//            } else {
+//                Minecraft.getMinecraft().getTextureManager().loadTexture(mixedSteveTexture,
+//                        new LayeredTexture(playerTexture.getResourceDomain() + ":" + playerTexture.getResourcePath(),
+//                                texture.getResourceDomain() + ":" + texture.getResourcePath()));
+//            }
+//            steveTextures.put(mixedSteveTexture.getResourcePath(), mixedSteveTexture);
+//        }
+//        return mixedSteveTexture;
+//    }
+
+    private static ResourceLocation getArmorTexture(EnumMemorials memorialType, boolean isMossy) {
         ResourceLocation texture = getArmorTexture(memorialType);
         if (isMossy) {
-            ResourceLocation mixedMossyTexture = mossyArmorTexturesMap.get(memorialType.getMaterial());
+            ResourceLocation mixedMossyTexture = mossyArmorTextures.get(memorialType.getMaterial());
             if (mixedMossyTexture == null) {
                 ResourceLocation mossyTexture = Resources.MOSSY_ARMOR;
                 mixedMossyTexture = new ResourceLocation(texture.getResourceDomain() + ":mossy_" + texture.getResourcePath());
                 Minecraft.getMinecraft().getTextureManager().loadTexture(mixedMossyTexture,
                         new LayeredTexture(texture.getResourceDomain() + ":" + texture.getResourcePath(),
                                 mossyTexture.getResourceDomain() + ":" + mossyTexture.getResourcePath()));
-                mossyArmorTexturesMap.put(memorialType.getMaterial(), mixedMossyTexture);
+                mossyArmorTextures.put(memorialType.getMaterial(), mixedMossyTexture);
                 return mixedMossyTexture;
             } else {
                 return mixedMossyTexture;
@@ -207,11 +258,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
     }
 
     private static ResourceLocation getMossyPedestalTexture(EnumMemorials.EnumMemorialType memorialType) {
-        switch (memorialType) {
-            case CROSS:
-            default:
-                return Resources.MEMORIAL_MOSSY_BIG_PEDESTAL;
-        }
+        return Resources.MEMORIAL_MOSSY_BIG_PEDESTAL;
     }
 
     private static ResourceLocation getArmorTexture(EnumMemorials memorialType) {
