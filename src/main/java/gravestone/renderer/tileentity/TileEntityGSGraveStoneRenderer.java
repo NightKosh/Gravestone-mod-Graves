@@ -176,7 +176,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
     private void renderFlower(TileEntityGSGraveStone te) {
         EntityItem entityitem = new EntityItem(te.getWorld(), 0, 0, 0, te.getFlower());
         entityitem.hoverStart = 0;
-        GL11.glTranslatef(0, 1.45F, -0.1F);
+        GL11.glTranslatef(0, 1.6F, -0.1F);
         GL11.glScalef(1, -1, -1);
         GL11.glRotatef(45, 0, 1, 0);
 

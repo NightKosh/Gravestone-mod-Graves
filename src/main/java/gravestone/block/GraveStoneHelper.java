@@ -556,7 +556,9 @@ public class GraveStoneHelper {
 
     public static boolean canFlowerBePlaced(World world, BlockPos pos, ItemStack itemStack, TileEntityGSGraveStone te) {
         Item item = itemStack.getItem();
-        if (item instanceof IPlantable) {
+        if (Block.getBlockFromItem(item) instanceof BlockFlower) {
+            return true;
+        } else if (item instanceof IPlantable) {
             return Block.getBlockFromItem(item).canSustainPlant(world, pos.down(), EnumFacing.UP, (IPlantable) item) && canFlowerBePlacedOnGrave(te);
         } else {
             return false;
