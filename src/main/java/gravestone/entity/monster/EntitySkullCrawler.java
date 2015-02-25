@@ -56,7 +56,7 @@ public class EntitySkullCrawler extends EntityMob {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(12);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.9D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4D);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.5);
     }
 
