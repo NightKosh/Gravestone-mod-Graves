@@ -1,6 +1,5 @@
 package gravestone.structures.catacombs.components;
 
-import gravestone.structures.BoundingBoxHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;

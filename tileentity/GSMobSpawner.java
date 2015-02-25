@@ -1,9 +1,9 @@
 package gravestone.tileentity;
 
-import gravestone.core.logger.GSLogger;
 import gravestone.block.BlockGSSpawner;
 import gravestone.block.enums.EnumSpawner;
 import gravestone.core.GSMobSpawn;
+import gravestone.core.logger.GSLogger;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Blocks;

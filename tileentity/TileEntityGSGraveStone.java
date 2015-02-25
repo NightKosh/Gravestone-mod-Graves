@@ -1,11 +1,11 @@
 package gravestone.tileentity;
 
-import gravestone.config.GraveStoneConfig;
-import gravestone.core.TimeHelper;
-import gravestone.core.logger.GSLogger;
 import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumGraves;
+import gravestone.config.GraveStoneConfig;
+import gravestone.core.TimeHelper;
 import gravestone.core.event.GSRenderEventHandler;
+import gravestone.core.logger.GSLogger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;

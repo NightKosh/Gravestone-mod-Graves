@@ -1,14 +1,14 @@
 package gravestone.core.compatibility;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import gravestone.config.GraveStoneConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * GraveStone mod

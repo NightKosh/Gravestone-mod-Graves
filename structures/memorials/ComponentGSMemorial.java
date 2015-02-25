@@ -1,6 +1,5 @@
 package gravestone.structures.memorials;
 
-import java.util.Random;
 import gravestone.block.BlockGSMemorial;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.ComponentGraveStone;
@@ -9,6 +8,8 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+
+import java.util.Random;
 
 /**
  * GraveStone mod

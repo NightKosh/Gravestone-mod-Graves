@@ -4,16 +4,10 @@ import gravestone.ModGraveStone;
 import gravestone.core.GSMessageHandler;
 import gravestone.packets.GraveDeathMessageToServer;
 import gravestone.tileentity.TileEntityGSGrave;
-import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import org.lwjgl.input.Keyboard;
-
-import java.util.Random;
 
 /**
  * GraveStone mod

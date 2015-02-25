@@ -4,7 +4,6 @@ import gravestone.block.enums.EnumSpawner;
 import gravestone.core.Resources;
 import gravestone.models.block.ModelSpawnerPentagram;
 import gravestone.tileentity.TileEntityGSSpawner;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 

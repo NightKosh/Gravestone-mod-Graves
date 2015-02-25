@@ -1,10 +1,11 @@
 package gravestone.structures;
 
-import java.util.Random;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
+
+import java.util.Random;
 
 /**
  * GraveStone mod

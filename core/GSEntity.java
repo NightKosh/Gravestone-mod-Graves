@@ -1,14 +1,8 @@
 package gravestone.core;
 
-import gravestone.config.GraveStoneConfig;
 import cpw.mods.fml.common.registry.EntityRegistry;
-import gravestone.entity.monster.EntitySkullCrawler;
-import gravestone.entity.monster.EntitySkeletonCat;
-import gravestone.entity.monster.EntitySkeletonDog;
-import gravestone.entity.monster.EntityWitherSkullCrawler;
-import gravestone.entity.monster.EntityZombieCat;
-import gravestone.entity.monster.EntityZombieDog;
-import gravestone.entity.monster.EntityZombieSkullCrawler;
+import gravestone.config.GraveStoneConfig;
+import gravestone.entity.monster.*;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraftforge.common.BiomeDictionary;
 

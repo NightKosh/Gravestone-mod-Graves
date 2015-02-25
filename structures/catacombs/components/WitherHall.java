@@ -1,7 +1,7 @@
 package gravestone.structures.catacombs.components;
 
-import gravestone.core.logger.GSLogger;
 import gravestone.core.GSBlock;
+import gravestone.core.logger.GSLogger;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.MobSpawnHelper;
 import net.minecraft.init.Blocks;

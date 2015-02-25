@@ -1,16 +1,16 @@
 package gravestone.config;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import gravestone.core.GSPotion;
 import gravestone.structures.GraveStoneWorldGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
 import gravestone.structures.village.VillageHandlerGSUndertaker;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * GraveStone mod
@@ -111,6 +111,7 @@ public class GraveStoneConfig {
     public static boolean storeBackpacksItems;
     public static boolean enableArsMagicaSoulbound;
     public static boolean enableEnderIOSoulbound;
+    public static boolean enableTwilightForestKeeping;
 
 
     private GraveStoneConfig(String path, File configFile) {
@@ -229,6 +230,7 @@ public class GraveStoneConfig {
 
         enableArsMagicaSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableArsMagicaSoulbound", true).getBoolean(true);
         enableEnderIOSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableEnderIOSoulbound", true).getBoolean(true);
+        enableTwilightForestKeeping = config.get(CATEGORY_COMPATIBILITY, "EnableTwilightForestCharmsOfKeeping", true).getBoolean(true);
     }
 
     private void getGravesText() {

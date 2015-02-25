@@ -2,9 +2,9 @@ package gravestone.core;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import gravestone.core.logger.GSLogger;
 import gravestone.ModGraveStone;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.logger.GSLogger;
 import gravestone.structures.GraveStoneWorldGenerator;
 import gravestone.structures.village.*;
 import net.minecraft.block.Block;

@@ -1,7 +1,6 @@
 package gravestone.core;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import gravestone.item.ItemGSChisel;
 import gravestone.item.ItemGSCorpse;
 import net.minecraft.item.Item;

@@ -1,12 +1,13 @@
 package gravestone.core.compatibility;
 
-import gravestone.core.logger.GSLogger;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSMobSpawn;
-import java.lang.reflect.Constructor;
-import java.util.List;
+import gravestone.core.logger.GSLogger;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.World;
+
+import java.lang.reflect.Constructor;
+import java.util.List;
 
 /**
  * GraveStone mod

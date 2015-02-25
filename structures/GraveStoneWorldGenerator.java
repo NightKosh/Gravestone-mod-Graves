@@ -1,13 +1,14 @@
 package gravestone.structures;
 
-import gravestone.config.GraveStoneConfig;
-import gravestone.structures.memorials.MemorialGenerator;
-import gravestone.structures.graves.SingleGraveGenerator;
-import gravestone.structures.catacombs.CatacombsGenerator;
 import cpw.mods.fml.common.IWorldGenerator;
-import java.util.Random;
+import gravestone.config.GraveStoneConfig;
+import gravestone.structures.catacombs.CatacombsGenerator;
+import gravestone.structures.graves.SingleGraveGenerator;
+import gravestone.structures.memorials.MemorialGenerator;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+
+import java.util.Random;
 
 /**
  * GraveStone mod

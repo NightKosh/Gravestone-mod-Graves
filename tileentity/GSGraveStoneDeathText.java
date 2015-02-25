@@ -1,12 +1,13 @@
 package gravestone.tileentity;
 
 import gravestone.block.GraveStoneHelper;
-import gravestone.config.GraveStoneConfig;
 import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumMemorials;
+import gravestone.config.GraveStoneConfig;
+import net.minecraft.nbt.NBTTagCompound;
+
 import java.util.ArrayList;
 import java.util.Random;
-import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * GraveStone mod
