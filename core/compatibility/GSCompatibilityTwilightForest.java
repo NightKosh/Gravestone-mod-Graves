@@ -30,6 +30,7 @@ public class GSCompatibilityTwilightForest {
                 while (it.hasNext()) {
                     ItemStack item = it.next();
                     if(item == null) continue;
+                    if(item.getTagCompound() == null || !item.getTagCompound().hasKey("slot")) continue;
                     byte slot = item.getTagCompound().getByte("slot");
                     if (keepingData[0] == 1) {
                         if(slot == player.inventory.currentItem){
@@ -49,6 +50,7 @@ public class GSCompatibilityTwilightForest {
                 for(ItemStack item : items)
                 {
                     if(item == null) continue;
+                    if(item.getTagCompound() == null || !item.getTagCompound().hasKey("slot")) continue;
                     byte slot = item.getTagCompound().getByte("slot");
                     if(slot == keepingData[1])
                     {
