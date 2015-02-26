@@ -517,9 +517,9 @@ public class GraveStoneHelper {
                 NBTTagCompound nbt = item.getTagCompound();
                 if(nbt == null){
                     nbt = new NBTTagCompound();
-                }
-                if(nbt.hasKey("slot")){
-                    continue;
+                    if(nbt.hasKey("slot")){
+                        continue;
+                    }
                 }
                 nbt.setByte("slot", (byte)i);
                 item.setTagCompound(nbt);
@@ -549,7 +549,6 @@ public class GraveStoneHelper {
                     ItemStack item = items.get(i);
                     if (item == null) continue;
                     NBTTagCompound nbt = item.getTagCompound();
-                    if(item.getTagCompound() == null || !item.getTagCompound().hasKey("slot")) continue;
                     nbt.removeTag("slot");
                     if (nbt.hasNoTags()) {
                         item.setTagCompound(null);
