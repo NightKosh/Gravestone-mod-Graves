@@ -10,8 +10,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * GraveStone mod
+ *
+ * @author CrazyPants
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ */
 public class GSCompatibilityEnderIO {
-
   
   protected static boolean isInstalled = false;
 
