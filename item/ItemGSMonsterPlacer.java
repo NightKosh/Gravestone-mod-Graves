@@ -9,7 +9,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMonsterPlacer;
@@ -19,7 +18,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import org.lwjgl.util.Color;
 
 import java.util.List;
 
@@ -48,7 +46,6 @@ public class ItemGSMonsterPlacer extends ItemMonsterPlacer {
             {0xC1C1C1, 0xA80E0E},
             {0x00AFAF, 0xA80E0E}
     };
-    Color c = new Color();
 
     public ItemGSMonsterPlacer() {
         this.setHasSubtypes(true);
@@ -195,7 +192,7 @@ public class ItemGSMonsterPlacer extends ItemMonsterPlacer {
             entity.setLocationAndAngles(x, y, z, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F), 0.0F);
             entityliving.rotationYawHead = entityliving.rotationYaw;
             entityliving.renderYawOffset = entityliving.rotationYaw;
-            entityliving.onSpawnWithEgg((IEntityLivingData)null);
+            entityliving.onSpawnWithEgg(null);
             world.spawnEntityInWorld(entity);
             entityliving.playLivingSound();
         }
