@@ -24,40 +24,41 @@ public class GSCompatibilityTwilightForest {
         if (isInstalled() && GraveStoneConfig.enableTwilightForestKeeping) {
             byte[] keepingData = checkForCharmOfKeeping(player);
 
-            if(keepingData[0] > 0)
-            {
+            if (keepingData[0] > 0) {
                 Iterator<ItemStack> it = items.iterator();
                 while (it.hasNext()) {
                     ItemStack item = it.next();
-                    if(item == null) continue;
+                    if (item == null || !item.hasTagCompound()) {
+                        continue;
+                    }
                     byte slot = item.getTagCompound().getByte("slot");
                     if (keepingData[0] == 1) {
-                        if(slot == player.inventory.currentItem){
+                        if (slot == player.inventory.currentItem) {
                             it.remove();
                             break;
                         }
-                    } else if(keepingData[0] == 2) {
-                        if(slot < 9){
+                    } else if (keepingData[0] == 2) {
+                        if (slot < 9) {
                             it.remove();
                         }
-                    } else if(keepingData[0] == 3) {
-                        if(slot < 40) {
+                    } else if (keepingData[0] == 3) {
+                        if (slot < 40) {
                             it.remove();
                         }
                     }
                 }
-                for(ItemStack item : items)
-                {
-                    if(item == null) continue;
+                for (ItemStack item : items) {
+                    if (item == null || !item.hasTagCompound()) {
+                        continue;
+                    }
                     byte slot = item.getTagCompound().getByte("slot");
-                    if(slot == keepingData[1])
-                    {
+                    if (slot == keepingData[1]) {
                         //make sure there is a charm of keeping left for TwilightForest to detect
                         player.inventory.setInventorySlotContents(slot, item.splitStack(1));
-                        if(item.stackSize <= 0){
+                        if (item.stackSize <= 0) {
                             item = null;
                         }
-                    }else {
+                    } else {
                         player.inventory.setInventorySlotContents(slot, null);
                     }
                 }
@@ -65,6 +66,7 @@ public class GSCompatibilityTwilightForest {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -91,7 +93,7 @@ public class GSCompatibilityTwilightForest {
                 }
             }
         }
-        return new byte[] { max, slot };
+        return new byte[]{max, slot};
     }
 
     public static boolean isInstalled() {
