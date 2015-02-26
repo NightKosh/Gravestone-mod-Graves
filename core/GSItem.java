@@ -3,6 +3,7 @@ package gravestone.core;
 import cpw.mods.fml.common.registry.GameRegistry;
 import gravestone.item.ItemGSChisel;
 import gravestone.item.ItemGSCorpse;
+import gravestone.item.ItemGSMonsterPlacer;
 import net.minecraft.item.Item;
 
 /**
@@ -16,6 +17,7 @@ public class GSItem {
     // item chisel
     public static Item chisel;
     public static Item corpse;
+    public static Item spawnEgg;
 
     private GSItem() {
     }
@@ -27,6 +29,9 @@ public class GSItem {
 
         corpse = new ItemGSCorpse();
         GameRegistry.registerItem(corpse, "Corpse");
+
+        spawnEgg = new ItemGSMonsterPlacer();
+        GameRegistry.registerItem(spawnEgg, "SpawnEgg");
     }
 
     public static void registryExternalItems(Item item, String name) {
