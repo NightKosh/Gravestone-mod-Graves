@@ -1,11 +1,11 @@
 package gravestone.core.compatibility;
 
-import gravestone.core.GSRecipes;
-import gravestone.core.logger.GSLogger;
 import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
 import gravestone.core.GSEntity;
 import gravestone.core.GSItem;
+import gravestone.core.GSRecipes;
+import gravestone.core.logger.GSLogger;
 import net.minecraft.item.ItemStack;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.ThaumcraftApi;

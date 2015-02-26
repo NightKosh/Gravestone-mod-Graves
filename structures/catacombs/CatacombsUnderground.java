@@ -2,9 +2,10 @@ package gravestone.structures.catacombs;
 
 import gravestone.structures.catacombs.components.CatacombsBaseComponent;
 import gravestone.structures.catacombs.components.Entrance;
+import net.minecraft.world.World;
+
 import java.util.LinkedList;
 import java.util.Random;
-import net.minecraft.world.World;
 
 /**
  * GraveStone mod

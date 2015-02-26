@@ -509,6 +509,24 @@ public class GraveStoneHelper {
             items.addAll(Arrays.asList(player.inventory.mainInventory));
             items.addAll(Arrays.asList(player.inventory.armorInventory));
 
+            // Ensure the slot tag is set. Mainly for TwilightForest, but could have other uses
+            for(byte i = 0; i < GraveStoneConfig.graveItemsCount; i++)
+            {
+                ItemStack item = items.get(i);
+                if(item == null) continue;
+                NBTTagCompound nbt = item.getTagCompound();
+                if(nbt == null){
+                    nbt = new NBTTagCompound();
+                    if(nbt.hasKey("slot")){
+                        continue;
+                    }
+                }
+                nbt.setByte("slot", (byte)i);
+                item.setTagCompound(nbt);
+        }
+
+            boolean flag = true;
+
             GSCompatibilityBattlegear.addItems(items, player);
             GSCompatibilityTheCampingMod.addItems(items, player);
             GSCompatibilityBaubles.addItems(items, player);
@@ -517,10 +535,26 @@ public class GraveStoneHelper {
             GSCompatibilityRpgInventory.addItems(items, player);
             GSCompatibilityGalacticraft.addItems(items, player);
             GSCompatibilityBackpacksMod.addItems(items, player);
-            player.inventory.clearInventory(null, -1);
+
+            // Twilight Forest checks the players inventory on death, so we can't wipe it all
+            if(GSCompatibilityTwilightForest.handleCharmsOfKeeping(items, player)) flag = false;
+            if(flag) player.inventory.clearInventory(null, -1);
 
             GSCompatibilityisArsMagica.getSoulboundItemsBack(items, player);
             GSCompatibilityEnderIO.getSoulboundItemsBack(items, player);
+
+            // remove the slot tag to avoid stacking issues, items.size() after the size was modified
+            if(items.size() > 0) {
+                for (byte i = 0; i < items.size(); i++) {
+                    ItemStack item = items.get(i);
+                    if (item == null) continue;
+                    NBTTagCompound nbt = item.getTagCompound();
+                    nbt.removeTag("slot");
+                    if (nbt.hasNoTags()) {
+                        item.setTagCompound(null);
+                    }
+                }
+            }
 
             createGrave(player, event, items, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES, false, spawnTime);
         } else {

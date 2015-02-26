@@ -2,10 +2,11 @@ package gravestone.structures.catacombs.components;
 
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.catacombs.CatacombsLevel;
-import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 /**
  * GraveStone mod

@@ -4,7 +4,6 @@
  */
 package gravestone.models.block.memorials;
 
-import gravestone.core.Resources;
 import gravestone.models.block.ModelGraveStone;
 import gravestone.renderer.tileentity.TileEntityGSMemorialRenderer;
 import net.minecraft.client.model.ModelRenderer;

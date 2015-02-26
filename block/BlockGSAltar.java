@@ -5,7 +5,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.core.GSTabs;
 import gravestone.core.Resources;
-import gravestone.item.ItemGSCorpse;
 import gravestone.tileentity.TileEntityGSAltar;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

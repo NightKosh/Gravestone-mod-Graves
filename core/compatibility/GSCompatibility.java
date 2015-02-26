@@ -2,8 +2,6 @@ package gravestone.core.compatibility;
 
 import cpw.mods.fml.common.Loader;
 import gravestone.core.compatibility.forestry.GSCompatibilityForestry;
-import gravestone.core.logger.GSLogger;
-import gravestone.core.logger.GravesLogger;
 
 /**
  * GraveStone mod
@@ -82,6 +80,10 @@ public class GSCompatibility {
         
         if (Loader.isModLoaded("EnderIO")) {
             GSCompatibilityEnderIO.isInstalled = true;
+        }
+
+        if (Loader.isModLoaded("TwilightForest")) {
+            GSCompatibilityTwilightForest.isInstalled = true;
         }
     }
 }

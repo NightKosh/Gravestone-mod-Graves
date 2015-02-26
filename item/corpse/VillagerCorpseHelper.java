@@ -4,7 +4,6 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import gravestone.ModGraveStone;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.compatibility.forestry.GSCompatibilityForestry;
-import gravestone.structures.village.VillageHandlerGSUndertaker;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

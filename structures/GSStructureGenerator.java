@@ -5,8 +5,9 @@
 
 package gravestone.structures;
 
-import java.util.Random;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 /**
  * GraveStone mod

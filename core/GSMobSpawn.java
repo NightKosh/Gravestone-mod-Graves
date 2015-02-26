@@ -1,9 +1,9 @@
 package gravestone.core;
 
-import gravestone.core.logger.GSLogger;
 import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumSpawner;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.logger.GSLogger;
 import gravestone.entity.monster.EntitySkullCrawler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;

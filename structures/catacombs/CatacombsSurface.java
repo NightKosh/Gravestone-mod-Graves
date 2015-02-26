@@ -1,14 +1,11 @@
 package gravestone.structures.catacombs;
 
 import gravestone.config.GraveStoneConfig;
-import gravestone.structures.catacombs.components.CatacombsBaseComponent;
-import gravestone.structures.catacombs.components.Fence;
-import gravestone.structures.catacombs.components.GraveYard;
-import gravestone.structures.catacombs.components.Mausoleum;
-import gravestone.structures.catacombs.components.MausoleumEntrance;
-import java.util.Random;
+import gravestone.structures.catacombs.components.*;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
+
+import java.util.Random;
 
 /**
  * GraveStone mod

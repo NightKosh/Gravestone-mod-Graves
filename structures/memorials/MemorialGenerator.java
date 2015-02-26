@@ -1,17 +1,17 @@
 package gravestone.structures.memorials;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Random;
-
-import gravestone.core.logger.GSLogger;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.logger.GSLogger;
 import gravestone.structures.GSStructureGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Random;
 
 /**
  * GraveStone mod

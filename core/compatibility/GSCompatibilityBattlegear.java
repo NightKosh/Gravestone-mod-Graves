@@ -1,11 +1,11 @@
 
 package gravestone.core.compatibility;
 
-import java.util.List;
-
 import gravestone.config.GraveStoneConfig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 /**
  * GraveStone mod

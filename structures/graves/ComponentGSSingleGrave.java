@@ -1,16 +1,16 @@
 package gravestone.structures.graves;
 
-import gravestone.core.logger.GSLogger;
-
-import java.util.Random;
 import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.block.GraveStoneHelper;
+import gravestone.core.logger.GSLogger;
 import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.GraveGenerationHelper;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
+
+import java.util.Random;
 
 /**
  * GraveStone mod

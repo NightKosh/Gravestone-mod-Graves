@@ -3,7 +3,6 @@ package gravestone.entity.monster;
 import gravestone.core.Resources;
 import gravestone.entity.ai.EntityAIAttackLivingHorse;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
