@@ -23,7 +23,7 @@ public class ItemGSChisel extends ItemTool {
         super(1, ToolMaterial.IRON, null);
         setMaxStackSize(1);
         setCreativeTab(GSTabs.otherItemsTab);
-        setUnlocalizedName("gravestone chisel");
+        setUnlocalizedName("gravestone.chisel");
         setMaxDamage(50);
     }
 

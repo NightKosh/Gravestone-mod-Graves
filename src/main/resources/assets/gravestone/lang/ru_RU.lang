@@ -1,7 +1,7 @@
 # Tabs
 itemGroup.tabGSGraveStone=Надгробия
 itemGroup.tabGSMemorials=Мемориалы
-itemGroup.tabGSOther=Предметы из Gravestone mod
+itemGroup.tabGSOther=Gravestone mod: Предметы
 
 
 # Blocks
@@ -68,7 +68,7 @@ tile.altar.name=Алтарь
 
 # Items
 ## Chisel
-item.gravestone chisel.name=Резец для надгробий
+item.gravestone.chisel.name=Резец для надгробий
 
 ## Graves
 item.grave.age=Прожил
@@ -179,8 +179,8 @@ commands.fill_grave.wrong_block=По указанным координатам �
 material.title=Сделан из
 material.mossy=Замшелый
 material.wood=Дерева
-material.sandstone=Песчанника
-material.red_sandstone=Red Sandstone
+material.sandstone=Песчаника
+material.red_sandstone=Красного песчаника
 material.stone=Камня
 material.diorite=Диорита
 material.andesite=Андезита
@@ -190,7 +190,7 @@ material.gold=Золота
 material.diamond=Алмазов
 material.emerald=Изумрудов
 material.lapis=Лазурита
-material.redstone=Редстоуна
+material.redstone=Красного камня
 material.obsidian=Обсидиана
 material.quartz=Кварца
 material.prizmarine=Призмарина
