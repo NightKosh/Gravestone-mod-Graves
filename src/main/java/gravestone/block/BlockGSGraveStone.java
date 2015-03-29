@@ -3,6 +3,7 @@ package gravestone.block;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GSConfig;
+import gravestone.core.GSGuiHandler;
 import gravestone.core.GSTabs;
 import gravestone.core.logger.GSLogger;
 import gravestone.tileentity.DeathMessageInfo;
@@ -23,10 +24,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemShears;
-import net.minecraft.item.ItemSpade;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -430,11 +428,11 @@ public class BlockGSGraveStone extends BlockContainer {
         if (te != null) {
             if (player.inventory.getCurrentItem() != null) {
                 ItemStack item = player.inventory.getCurrentItem();
-                if (item.getItem() instanceof ItemSpade) {
+                if (item.getItem().getToolClasses(item).contains("shovel")) {
                     if (!world.isRemote) {
                         if (te.canBeLooted(player.getUniqueID().toString())) {
-                            GSLogger.logInfoGrave(player.getName() + " loot grave at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
-                            te.dropAllItems();
+                            player.openGui(ModGraveStone.instance, GSGuiHandler.GRAVE_INVENTORY_GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
+                            GSLogger.logInfoGrave(player.getName() + " open grave inventory at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
                         } else {
                             player.addChatComponentMessage(new ChatComponentTranslation("grave.cant_be_looted").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                         }
@@ -530,7 +528,7 @@ public class BlockGSGraveStone extends BlockContainer {
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
 
         if (tileEntity != null) {
-            tileEntity.dropAllItems();
+            tileEntity.getInventory().dropAllItems();
         }
 
         super.breakBlock(world, pos, state);
@@ -731,7 +729,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 tileEntity.getDeathTextComponent().setName(deathInfo.getName());
                 tileEntity.getDeathTextComponent().setDeathText(deathInfo.getDeathMessage());
                 tileEntity.getDeathTextComponent().setKillerName(deathInfo.getKillerName());
-                tileEntity.setItems(items);
+                tileEntity.getInventory().setItems(items);
                 tileEntity.setGraveType(graveType);
                 tileEntity.setAge(age);
                 tileEntity.setEnchanted(isMagic);
