@@ -1,7 +1,7 @@
 # Tabs
 itemGroup.tabGSGraveStone=墓碑
 itemGroup.tabGSMemorials=Memorials
-itemGroup.tabGSOther=Gravestone mod items
+itemGroup.tabGSOther=Gravestone mod Items
 
 
 # Blocks
@@ -68,7 +68,7 @@ tile.altar.name=Altar
 
 # Items
 ## Chisel
-item.gravestone chisel.name=墓碑凿
+item.gravestone.chisel.name=墓碑凿
 
 ## Graves
 item.grave.age=已生活了
