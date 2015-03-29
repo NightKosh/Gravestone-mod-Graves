@@ -6,12 +6,15 @@ import gravestone.config.GSConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 
 import java.util.*;
@@ -22,14 +25,14 @@ import java.util.*;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GSGraveStoneItems {
+public class GSGraveStoneItems implements IInventory {
 
     private TileEntityGSGraveStone tileEntity;
-    // grave loot holder
+    //TODO make constants for every potion id
     private static final int[] POTION_LIST = {16273, 16307, 16341, 16310, 16281, 16318,
             32657, 32658, 32659, 32725, 32694, 32665, 32702
     };
-    protected List<ItemStack> graveContents = new ArrayList<ItemStack>();
+    protected List<ItemStack> items = new ArrayList<ItemStack>(54);
 
     public GSGraveStoneItems(TileEntityGSGraveStone tileEntity) {
         this.tileEntity = tileEntity;
@@ -37,13 +40,13 @@ public class GSGraveStoneItems {
 
     public void readItems(NBTTagCompound nbtTag) {
         NBTTagList ntbItemsList = nbtTag.getTagList("Items", 10);
-        graveContents = new ArrayList<ItemStack>();
+        items = new ArrayList<ItemStack>(54);
 
         for (int i = 0; i < ntbItemsList.tagCount(); ++i) {
             NBTTagCompound nbt = ntbItemsList.getCompoundTagAt(i);
             ItemStack stack = ItemStack.loadItemStackFromNBT(nbt);
             if (stack != null) {
-                graveContents.add(stack);
+                items.add(stack);
             }
         }
     }
@@ -51,7 +54,7 @@ public class GSGraveStoneItems {
     public void saveItems(NBTTagCompound nbtTag) {
         NBTTagList ntbList = new NBTTagList();
 
-        for (ItemStack stack : graveContents) {
+        for (ItemStack stack : items) {
             if (stack != null) {
                 NBTTagCompound nbt = new NBTTagCompound();
                 stack.writeToNBT(nbt);
@@ -62,25 +65,122 @@ public class GSGraveStoneItems {
         nbtTag.setTag("Items", ntbList);
     }
 
-    /**
-     * Sets the given item stack to the specified slot in the inventory (can be
-     * crafting or armor sections).
-     */
     public void addInventoryContent(ItemStack itemStack) {
         if (itemStack != null) {
-            graveContents.add(itemStack);
+            items.add(itemStack);
+        }
+    }
 
-            if (itemStack != null && itemStack.stackSize > getInventoryStackLimit()) {
-                itemStack.stackSize = getInventoryStackLimit();
+    @Override
+    public int getSizeInventory() {
+        return items.size();
+    }
+
+    @Override
+    public ItemStack getStackInSlot(int slot) {
+        if (slot < items.size()) {
+            return items.get(slot);
+        }
+        return null;
+    }
+
+    @Override
+    public ItemStack decrStackSize(int slot, int amount) {
+        ItemStack stack = getStackInSlot(slot);
+        if (stack != null) {
+            if (stack.stackSize <= amount) {
+                setInventorySlotContents(slot, null);
+            } else {
+                stack = stack.splitStack(amount);
+                if (stack.stackSize == 0) {
+                    setInventorySlotContents(slot, null);
+                }
             }
         }
+        return stack;
+    }
+
+    @Override
+    public ItemStack getStackInSlotOnClosing(int slot) {
+        ItemStack stack = getStackInSlot(slot);
+        if (stack != null) {
+            setInventorySlotContents(slot, null);
+        }
+        return stack;
+    }
+
+    @Override
+    public void setInventorySlotContents(int slot, ItemStack stack) {
+        this.items.add(slot, stack);
     }
 
     /**
      * Returns the maximum stack size for a inventory slot.
      */
-    public static int getInventoryStackLimit() {
+    @Override
+    public int getInventoryStackLimit() {
         return 64;
+    }
+
+    @Override
+    public void markDirty() {
+
+    }
+
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer player) {
+        return player.worldObj.getTileEntity(this.tileEntity.getPos()) == this.tileEntity &&
+                player.getDistanceSq(new BlockPos(this.tileEntity.getPos().getX() + 0.5, this.tileEntity.getPos().getY() + 0.5, this.tileEntity.getPos().getZ() + 0.5)) < 64;
+    }
+
+    @Override
+    public void openInventory(EntityPlayer player) {
+
+    }
+
+    @Override
+    public void closeInventory(EntityPlayer player) {
+
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int index, ItemStack stack) {
+        return false;
+    }
+
+    @Override
+    public int getField(int id) {
+        return 0;
+    }
+
+    @Override
+    public void setField(int id, int value) {
+
+    }
+
+    @Override
+    public int getFieldCount() {
+        return 0;
+    }
+
+    @Override
+    public void clear() {
+        this.items.clear();
+    }
+
+    @Override
+    public String getName() {
+        return "";
+    }
+
+    @Override
+    public boolean hasCustomName() {
+        return false;
+    }
+
+    @Override
+    public IChatComponent getDisplayName() {
+        return null;
     }
 
     /**
@@ -164,7 +264,7 @@ public class GSGraveStoneItems {
      * @param slot Item slot number
      */
     public void dropItem(int slot) {
-        dropItem(graveContents.get(slot), tileEntity.getWorld(), tileEntity.getPos());
+        dropItem(items.get(slot), tileEntity.getWorld(), tileEntity.getPos());
     }
 
     public void dropItem(ItemStack stack) {
@@ -175,14 +275,14 @@ public class GSGraveStoneItems {
      * Drop all holding items
      */
     public void dropAllItems() {
-        for (ItemStack stack : graveContents) {
+        for (ItemStack stack : items) {
             dropItem(stack);
         }
-        graveContents.clear();
+        items.clear();
     }
 
     public List<ItemStack> getGraveContent() {
-        return graveContents;
+        return items;
     }
 
     /**
@@ -653,4 +753,5 @@ public class GSGraveStoneItems {
                 return new ItemStack(Items.spawn_egg, 1, 120);
         }
     }
+
 }

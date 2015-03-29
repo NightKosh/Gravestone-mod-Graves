@@ -32,14 +32,14 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     public TileEntityGSGraveStone() {
         super();
         gsSpawn = new GSGraveStoneSpawn(this);
-        gSItems = new GSGraveStoneItems(this);
+        inventory = new GSGraveStoneItems(this);
     }
 
     public TileEntityGSGraveStone(World world) {
         super();
         this.worldObj = world;
         gsSpawn = new GSGraveStoneSpawn(this);
-        gSItems = new GSGraveStoneItems(this);
+        inventory = new GSGraveStoneItems(this);
     }
 
     /**
@@ -90,9 +90,9 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
         // age
         age = nbtTag.getInteger("Age");
         // grave loot
-        gSItems.readItems(nbtTag);
+        inventory.readItems(nbtTag);
         // death text
-        gSDeathText.readText(nbtTag);
+        deathText.readText(nbtTag);
         // sword
         readSwordInfo(nbtTag);
         // flower
@@ -110,9 +110,9 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
         // age
         nbtTag.setInteger("Age", age);
         // grave loot
-        gSItems.saveItems(nbtTag);
+        inventory.saveItems(nbtTag);
         // death text
-        gSDeathText.saveText(nbtTag);
+        deathText.saveText(nbtTag);
         // sword
         writeSwordInfo(nbtTag);
         // flower
@@ -126,7 +126,6 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
             sword = ItemStack.loadItemStackFromNBT(nbtTag.getCompoundTag("Sword"));
         }
     }
-
 
     private void writeSwordInfo(NBTTagCompound nbtTag) {
         if (sword != null) {
@@ -160,7 +159,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
 
     public void dropSword() {
         if (this.sword != null) {
-            this.gSItems.dropItem(this.sword, this.worldObj, this.pos);
+            this.inventory.dropItem(this.sword, this.worldObj, this.pos);
         }
     }
 
@@ -179,7 +178,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
 
     public void dropFlower() {
         if (this.flower != null) {
-            this.gSItems.dropItem(this.flower, this.worldObj, this.pos);
+            this.inventory.dropItem(this.flower, this.worldObj, this.pos);
         }
     }
 
@@ -192,7 +191,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     }
 
     public boolean isEmpty() {
-        return gSItems.graveContents.isEmpty();
+        return inventory.items.isEmpty();
     }
 
     @Override
@@ -215,6 +214,6 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     }
 
     public boolean canBeLooted(String playerId) {
-        return StringUtils.isBlank(this.playerId) || playerId.equals(this.playerId) || gSItems.getGraveContent().isEmpty();
+        return StringUtils.isBlank(this.playerId) || playerId.equals(this.playerId) || inventory.getGraveContent().isEmpty();
     }
 }

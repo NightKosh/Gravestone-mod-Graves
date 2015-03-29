@@ -7,7 +7,7 @@ import gravestone.core.event.GSClientTickEventHandler;
 import gravestone.core.event.GSRenderEventHandler;
 import gravestone.entity.monster.*;
 import gravestone.entity.monster.EntitySkullCrawler.SkullCrawlerType;
-import gravestone.gui.GSGuiGrave;
+import gravestone.gui.GSGraveTextGui;
 import gravestone.models.entity.ModelUndeadCat;
 import gravestone.models.entity.ModelUndeadDog;
 import gravestone.renderer.entity.RenderAltar;
@@ -126,8 +126,8 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void openGraveGui(TileEntityGSGrave tileEntity) {
-        FMLClientHandler.instance().getClient().displayGuiScreen(new GSGuiGrave(tileEntity));
+    public void openGraveTextGui(TileEntityGSGrave tileEntity) {
+        FMLClientHandler.instance().getClient().displayGuiScreen(new GSGraveTextGui(tileEntity));
     }
 
     @Override

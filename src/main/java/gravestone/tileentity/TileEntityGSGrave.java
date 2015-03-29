@@ -1,5 +1,6 @@
 package gravestone.tileentity;
 
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -20,8 +21,8 @@ import java.util.Random;
  */
 public abstract class TileEntityGSGrave extends TileEntity {
 
-    protected GSGraveStoneItems gSItems;
-    protected GSGraveStoneDeathText gSDeathText;
+    protected GSGraveStoneItems inventory;
+    protected GSGraveStoneDeathText deathText;
     protected boolean isEditable = true;
     protected boolean isEnchanted = false;
     protected boolean isMossy = false;
@@ -29,7 +30,7 @@ public abstract class TileEntityGSGrave extends TileEntity {
     protected int age = -1;
 
     public TileEntityGSGrave() {
-        gSDeathText = new GSGraveStoneDeathText(this);
+        deathText = new GSGraveStoneDeathText(this);
     }
 
     public void setGraveType(int graveType) {
@@ -41,36 +42,17 @@ public abstract class TileEntityGSGrave extends TileEntity {
     }
 
     public void setGraveContent(Random random, boolean isPetGrave, boolean allLoot) {
-        gSDeathText.setRandomDeathTextAndName(random, graveType, false, true);
-        gSItems.setRandomGraveContent(random, isPetGrave, allLoot);
+        deathText.setRandomDeathTextAndName(random, graveType, false, true);
+        inventory.setRandomGraveContent(random, isPetGrave, allLoot);
         setRandomAge();
     }
 
-    /**
-     * Returns the name of the inventory.
-     */
-    public String getInvName() {
-        return "container.gravestone";
-    }
-
-    public void setItems(List<ItemStack> items) {
-        gSItems.setItems(items);
-    }
-
-    public void setAdditionalItems(ItemStack[] items) {
-        gSItems.setAdditionalItems(items);
-    }
-
-    public void dropAllItems() {
-        gSItems.dropAllItems();
-    }
-
-    public void clearInventory() {
-        gSItems.graveContents.clear();
+    public GSGraveStoneItems getInventory() {
+        return inventory;
     }
 
     public GSGraveStoneDeathText getDeathTextComponent() {
-        return gSDeathText;
+        return deathText;
     }
 
     public int getAge() {

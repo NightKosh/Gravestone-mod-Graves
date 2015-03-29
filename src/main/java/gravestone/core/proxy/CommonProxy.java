@@ -24,7 +24,7 @@ public class CommonProxy {
         return str;
     }
 
-    public void openGraveGui(TileEntityGSGrave tileEntity) {
+    public void openGraveTextGui(TileEntityGSGrave tileEntity) {
     }
 
     public void registerHandlers() {

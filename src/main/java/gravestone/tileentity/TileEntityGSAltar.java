@@ -168,10 +168,6 @@ public class TileEntityGSAltar extends TileEntity implements IInventory {
     @Override
     public void setInventorySlotContents(int slot, ItemStack stack) {
         corpse = stack;
-//        inv[slot] = stack;
-//        if (stack != null && stack.stackSize > getInventoryStackLimit()) {
-//            stack.stackSize = getInventoryStackLimit();
-//        }
     }
 
     @Override

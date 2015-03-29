@@ -51,7 +51,7 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
     public void readFromNBT(NBTTagCompound nbtTag) {
         super.readFromNBT(nbtTag);
         // death text
-        gSDeathText.readText(nbtTag);
+        deathText.readText(nbtTag);
 
         hangedMob = EnumHangedMobs.getById(nbtTag.getByte("HangedMob"));
         hangedVillagerProfession = nbtTag.getInteger("HangedVillagerProfession");
@@ -76,7 +76,7 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
     public void writeToNBT(NBTTagCompound nbtTag) {
         super.writeToNBT(nbtTag);
         // death text
-        gSDeathText.saveText(nbtTag);
+        deathText.saveText(nbtTag);
 
         nbtTag.setByte("HangedMob", (byte) hangedMob.ordinal());
         nbtTag.setInteger("HangedVillagerProfession", hangedVillagerProfession);
@@ -89,7 +89,7 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
     }
 
     public void setMemorialContent(Random random) {
-        gSDeathText.setRandomDeathTextAndName(random, graveType, true, true);
+        deathText.setRandomDeathTextAndName(random, graveType, true, true);
     }
 
     public void setRandomMob(Random random) {
@@ -98,7 +98,7 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
 
     @Override
     public GSGraveStoneDeathText getDeathTextComponent() {
-        return gSDeathText;
+        return deathText;
     }
 
     public EnumMemorials getMemorialType() {

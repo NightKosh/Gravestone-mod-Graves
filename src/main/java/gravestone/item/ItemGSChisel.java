@@ -59,7 +59,7 @@ public class ItemGSChisel extends ItemTool {
         TileEntityGSGrave tileEntity = (TileEntityGSGrave) world.getTileEntity(pos);
 
         if (tileEntity != null && tileEntity.isEditable() && tileEntity.getDeathTextComponent().getDeathText().length() == 0) {
-            ModGraveStone.proxy.openGraveGui(tileEntity);
+            ModGraveStone.proxy.openGraveTextGui(tileEntity);
             if (isMemorial) {
                 stack.damageItem(5, player);
             } else {

@@ -15,7 +15,7 @@ import org.lwjgl.input.Keyboard;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GSGuiGrave extends GuiScreen {
+public class GSGraveTextGui extends GuiScreen {
 
     private final String titleStr = ModGraveStone.proxy.getLocalizedString("gui.edit_grave.title");
     private final String closeStr = ModGraveStone.proxy.getLocalizedString("gui.edit_grave.close");
@@ -26,7 +26,7 @@ public class GSGuiGrave extends GuiScreen {
     private TileEntityGSGrave teGrave;
     private boolean isRandomTextButtonClicked = false;
 
-    public GSGuiGrave(TileEntityGSGrave teGrave) {
+    public GSGraveTextGui(TileEntityGSGrave teGrave) {
         this.teGrave = teGrave;
     }
 

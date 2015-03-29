@@ -1,6 +1,7 @@
 package gravestone.block;
 
 import gravestone.ModGraveStone;
+import gravestone.core.GSGuiHandler;
 import gravestone.core.GSTabs;
 import gravestone.tileentity.TileEntityGSAltar;
 import net.minecraft.block.BlockContainer;
@@ -53,7 +54,7 @@ public class BlockGSAltar extends BlockContainer {
 //                    }
 //                }
 //            }
-            player.openGui(ModGraveStone.instance, 2, world, pos.getX(), pos.getY(), pos.getZ());
+            player.openGui(ModGraveStone.instance, GSGuiHandler.ALTAR_GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
             return true;
         }
         return false;

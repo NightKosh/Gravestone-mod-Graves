@@ -56,7 +56,7 @@ public class CommandCustomGraveItems extends CommandBase {
                                 items.add(item.copy());
                             }
                         }
-                        ((TileEntityGSGraveStone) graveTE).setAdditionalItems(items.toArray(new ItemStack[items.size()]));
+                        ((TileEntityGSGraveStone) graveTE).getInventory().setAdditionalItems(items.toArray(new ItemStack[items.size()]));
                     } else {
                         sender.addChatMessage(new ChatComponentTranslation("commands.fill_grave.wrong_block").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                     }
