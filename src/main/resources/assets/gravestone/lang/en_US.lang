@@ -159,7 +159,7 @@ entity.GSZombieRaider.name=Zombie Raider
 # Death Messages
 death.GS.Herobrine=%1$s was brutally murdered by Herobrine
 death.GS.death_sentence=%1$s received a death sentence
-death.GS.tortures=%1$s was die in cruel tortures
+death.GS.tortures=%1$s died from cruel torture
 death.GS.mom=Your mom
 
 # Console messages
