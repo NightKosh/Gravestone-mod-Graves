@@ -3,6 +3,7 @@ package gravestone.core.compatibility;
 import gravestone.config.GraveStoneConfig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.Iterator;
 import java.util.List;
@@ -20,6 +21,10 @@ public class GSCompatibilityTwilightForest {
     private GSCompatibilityTwilightForest() {
     }
 
+    /**
+     * Twilight Forest checks the players inventory on death, so we can't wipe it all.
+     * Only vanilla items will be supported otherwise some changes required.
+     */
     public static boolean handleCharmsOfKeeping(List<ItemStack> items, EntityPlayer player) {
         if (isInstalled() && GraveStoneConfig.enableTwilightForestKeeping) {
             byte[] keepingData = checkForCharmOfKeeping(player);
@@ -68,6 +73,47 @@ public class GSCompatibilityTwilightForest {
         }
 
         return false;
+    }
+
+    /**
+     * Ensure the slot tag is set. Mainly for TwilightForest, but could have other uses
+     */
+    public static void addSlotTags(List<ItemStack> items) {
+        if (isInstalled() && GraveStoneConfig.enableTwilightForestKeeping) {
+            for (byte i = 0; i < GraveStoneConfig.graveItemsCount; i++) {
+                ItemStack item = items.get(i);
+                if (item == null) continue;
+                NBTTagCompound nbt = item.getTagCompound();
+                if (nbt == null) {
+                    nbt = new NBTTagCompound();
+                    if (nbt.hasKey("slot")) {
+                        continue;
+                    }
+                }
+                nbt.setByte("slot", i);
+                item.setTagCompound(nbt);
+            }
+
+        }
+    }
+
+    /**
+     * remove the slot tag to avoid stacking issues, items.size() after the size was modified
+     */
+    public static void removeSlotTags(List<ItemStack> items) {
+        if (isInstalled() && GraveStoneConfig.enableTwilightForestKeeping && items.size() > 0) {
+            for (byte i = 0; i < items.size(); i++) {
+                ItemStack item = items.get(i);
+                if (item == null || !item.hasTagCompound()) {
+                    continue;
+                }
+                NBTTagCompound nbt = item.getTagCompound();
+                nbt.removeTag("slot");
+                if (nbt.hasNoTags()) {
+                    item.setTagCompound(null);
+                }
+            }
+        }
     }
 
     private static byte[] checkForCharmOfKeeping(EntityPlayer player) {

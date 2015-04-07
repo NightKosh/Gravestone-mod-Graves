@@ -26,6 +26,7 @@ public class GSCompatibilityBattlegear {
         if (isInstalled() && GraveStoneConfig.storeBattlegearItems) {
             for (int slot = FIRST_SLOT; slot <= LAST_SLOT; slot++) {
                 items.add(player.inventory.getStackInSlot(slot));
+                player.inventory.setInventorySlotContents(slot, null);
             }
         }
     }

@@ -509,25 +509,15 @@ public class GraveStoneHelper {
             items.addAll(Arrays.asList(player.inventory.mainInventory));
             items.addAll(Arrays.asList(player.inventory.armorInventory));
 
-            // Ensure the slot tag is set. Mainly for TwilightForest, but could have other uses
-            if (GraveStoneConfig.enableTwilightForestKeeping) {
-                for (byte i = 0; i < GraveStoneConfig.graveItemsCount; i++) {
-                    ItemStack item = items.get(i);
-                    if (item == null) continue;
-                    NBTTagCompound nbt = item.getTagCompound();
-                    if (nbt == null) {
-                        nbt = new NBTTagCompound();
-                        if (nbt.hasKey("slot")) {
-                            continue;
-                        }
-                    }
-                    nbt.setByte("slot", (byte) i);
-                    item.setTagCompound(nbt);
-                }
-            }
+            GSCompatibilityTwilightForest.addSlotTags(items);
 
             GSCompatibilityBattlegear.addItems(items, player);
-            GSCompatibilityTheCampingMod.addItems(items, player);
+
+            if (!GSCompatibilityTwilightForest.handleCharmsOfKeeping(items, player)) {
+                player.inventory.clearInventory(null, -1);
+            }
+
+            GSCompatibilityTheCampingMod.addItems(items, player);//TODO it doesn't work
             GSCompatibilityBaubles.addItems(items, player);
             GSCompatibilityMariculture.addItems(items, player);
             GSCompatibilityTinkerConstruct.addItems(items, player);
@@ -535,28 +525,11 @@ public class GraveStoneHelper {
             GSCompatibilityGalacticraft.addItems(items, player);
             GSCompatibilityBackpacksMod.addItems(items, player);
 
-            // Twilight Forest checks the players inventory on death, so we can't wipe it all
-            if (!GSCompatibilityTwilightForest.handleCharmsOfKeeping(items, player)) {
-                player.inventory.clearInventory(null, -1);
-            }
-
             GSCompatibilityisArsMagica.getSoulboundItemsBack(items, player);
             GSCompatibilityEnderIO.getSoulboundItemsBack(items, player);
 
-            // remove the slot tag to avoid stacking issues, items.size() after the size was modified
-            if (GraveStoneConfig.enableTwilightForestKeeping && items.size() > 0) {
-                for (byte i = 0; i < items.size(); i++) {
-                    ItemStack item = items.get(i);
-                    if (item == null || !item.hasTagCompound()) {
-                        continue;
-                    }
-                    NBTTagCompound nbt = item.getTagCompound();
-                    nbt.removeTag("slot");
-                    if (nbt.hasNoTags()) {
-                        item.setTagCompound(null);
-                    }
-                }
-            }
+            //TODO is it really required??
+            GSCompatibilityTwilightForest.removeSlotTags(items);
 
             createGrave(player, event, items, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES, false, spawnTime);
         } else {
