@@ -27,7 +27,7 @@ public class GSCompatibilityTwilightForest {
      */
     public static boolean handleCharmsOfKeeping(List<ItemStack> items, EntityPlayer player) {
         if (isInstalled() && GraveStoneConfig.enableTwilightForestKeeping) {
-            byte[] keepingData = checkForCharmOfKeeping(player);
+            int[] keepingData = checkForCharmOfKeeping(player);
 
             if (keepingData[0] > 0) {
                 Iterator<ItemStack> it = items.iterator();
@@ -80,9 +80,11 @@ public class GSCompatibilityTwilightForest {
      */
     public static void addSlotTags(List<ItemStack> items) {
         if (isInstalled() && GraveStoneConfig.enableTwilightForestKeeping) {
-            for (byte i = 0; i < GraveStoneConfig.graveItemsCount; i++) {
+            for (int i = 0; i < items.size(); i++) {
                 ItemStack item = items.get(i);
-                if (item == null) continue;
+                if (item == null) {
+                    continue;
+                }
                 NBTTagCompound nbt = item.getTagCompound();
                 if (nbt == null) {
                     nbt = new NBTTagCompound();
@@ -90,7 +92,7 @@ public class GSCompatibilityTwilightForest {
                         continue;
                     }
                 }
-                nbt.setByte("slot", i);
+                nbt.setByte("slot", (byte) i);
                 item.setTagCompound(nbt);
             }
 
@@ -102,7 +104,7 @@ public class GSCompatibilityTwilightForest {
      */
     public static void removeSlotTags(List<ItemStack> items) {
         if (isInstalled() && GraveStoneConfig.enableTwilightForestKeeping && items.size() > 0) {
-            for (byte i = 0; i < items.size(); i++) {
+            for (int i = 0; i < items.size(); i++) {
                 ItemStack item = items.get(i);
                 if (item == null || !item.hasTagCompound()) {
                     continue;
@@ -116,10 +118,10 @@ public class GSCompatibilityTwilightForest {
         }
     }
 
-    private static byte[] checkForCharmOfKeeping(EntityPlayer player) {
+    private static int[] checkForCharmOfKeeping(EntityPlayer player) {
         byte max = 0;
-        byte slot = -1;
-        for (byte i = 0; i < player.inventory.mainInventory.length; i++) {
+        int slot = -1;
+        for (int i = 0; i < player.inventory.mainInventory.length; i++) {
             ItemStack stack = player.inventory.mainInventory[i];
             if (stack == null) continue;
             if (stack.getItem() == twilightforest.item.TFItems.charmOfKeeping1) {
@@ -139,7 +141,7 @@ public class GSCompatibilityTwilightForest {
                 }
             }
         }
-        return new byte[]{max, slot};
+        return new int[]{max, slot};
     }
 
     public static boolean isInstalled() {
