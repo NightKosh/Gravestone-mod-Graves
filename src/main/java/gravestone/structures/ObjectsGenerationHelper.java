@@ -4,6 +4,7 @@ import gravestone.block.BlockGSHauntedChest;
 import gravestone.block.BlockGSSpawner;
 import gravestone.block.enums.EnumHauntedChest;
 import gravestone.core.GSBlock;
+import gravestone.core.GSPotion;
 import gravestone.tileentity.TileEntityGSHauntedChest;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockDispenser;
@@ -29,11 +30,11 @@ import java.util.Random;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class ObjectsGenerationHelper {
-
-    public static final int POISON_POTION_ID = 16420;
-    public static final int HARM_POTION_ID = 16428;
-    public static final int WEAKNESS_POTION_ID = 16424;
-    private static final int[] POTIONS = {POISON_POTION_ID, HARM_POTION_ID, WEAKNESS_POTION_ID};
+    private static final int[] POTIONS = {
+            GSPotion.SPLASH_POISON_2_POTION_ID, GSPotion.SPLASH_HARM_POTION_2_ID,
+            GSPotion.SPLASH_WEAKNESS_POTION_ID, GSPotion.SPLASH_SLOWNESS_POTION_ID,
+            GSPotion.SPLASH_INVISIBILITY_POTION_ID
+    };
 
     private ObjectsGenerationHelper() {
     }
@@ -217,7 +218,7 @@ public class ObjectsGenerationHelper {
      * Return random potions
      */
     private static int getRandomCount(Random random) {
-        return 5 + random.nextInt(5);
+        return 1 + random.nextInt(5);
     }
 
     public enum EnumChestTypes {

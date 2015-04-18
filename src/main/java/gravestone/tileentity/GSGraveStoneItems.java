@@ -3,6 +3,7 @@ package gravestone.tileentity;
 import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GSConfig;
+import gravestone.core.GSPotion;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.item.EntityItem;
@@ -28,9 +29,13 @@ import java.util.*;
 public class GSGraveStoneItems implements IInventory {
 
     private TileEntityGSGraveStone tileEntity;
-    //TODO make constants for every potion id
-    private static final int[] POTION_LIST = {16273, 16307, 16341, 16310, 16281, 16318,
-            32657, 32658, 32659, 32725, 32694, 32665, 32702
+    private static final int[] POTION_LIST = {
+            GSPotion.REGENERATION_POTION_ID, GSPotion.SWIFTNESS_POTION_ID, GSPotion.FIRE_RESISTANCE_POTION_ID,
+            GSPotion.HEALING_POTION_ID, GSPotion.NIGHT_VISION_POTION_ID, GSPotion.STRENGTH_POTION_ID,
+            GSPotion.INVISIBILITY_POTION_ID, GSPotion.WATER_BREATHING_POTION_ID, GSPotion.LEAPING_POTION_ID,
+            GSPotion.SPLASH_REGENERATION_POTION_ID, GSPotion.SPLASH_SWIFTNESS_POTION_ID, GSPotion.SPLASH_FIRE_RESISTANCE_POTION_ID,
+            GSPotion.SPLASH_HEALING_POTION_ID, GSPotion.SPLASH_NIGHT_VISION_POTION_ID, GSPotion.SPLASH_STRENGTH_POTION_ID,
+            GSPotion.SPLASH_INVISIBILITY_POTION_ID, GSPotion.SPLASH_WATER_BREATHING_POTION_ID, GSPotion.SPLASH_LEAPING_POTION_ID
     };
     protected List<ItemStack> items = new ArrayList<ItemStack>(54);
 
