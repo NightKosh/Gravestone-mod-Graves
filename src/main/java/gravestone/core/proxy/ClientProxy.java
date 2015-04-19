@@ -5,15 +5,13 @@ import gravestone.core.GSItem;
 import gravestone.core.Resources;
 import gravestone.core.event.GSClientTickEventHandler;
 import gravestone.core.event.GSRenderEventHandler;
+import gravestone.entity.EntityRaven;
 import gravestone.entity.monster.*;
 import gravestone.entity.monster.EntitySkullCrawler.SkullCrawlerType;
 import gravestone.gui.GSGraveTextGui;
 import gravestone.models.entity.ModelUndeadCat;
 import gravestone.models.entity.ModelUndeadDog;
-import gravestone.renderer.entity.RenderAltar;
-import gravestone.renderer.entity.RenderSkullCrawler;
-import gravestone.renderer.entity.RenderUndeadCat;
-import gravestone.renderer.entity.RenderUndeadDog;
+import gravestone.renderer.entity.*;
 import gravestone.renderer.item.*;
 import gravestone.renderer.tileentity.*;
 import gravestone.structures.village.undertaker.VillageHandlerGSUndertaker;
@@ -99,6 +97,9 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntitySkullCrawler.class, new RenderSkullCrawler(SkullCrawlerType.skeleton, Minecraft.getMinecraft().getRenderManager()));
         RenderingRegistry.registerEntityRenderingHandler(EntityWitherSkullCrawler.class, new RenderSkullCrawler(SkullCrawlerType.wither, Minecraft.getMinecraft().getRenderManager()));
         RenderingRegistry.registerEntityRenderingHandler(EntityZombieSkullCrawler.class, new RenderSkullCrawler(SkullCrawlerType.zombie, Minecraft.getMinecraft().getRenderManager()));
+
+        // raven
+        RenderingRegistry.registerEntityRenderingHandler(EntityRaven.class, new RenderRaven(Minecraft.getMinecraft().getRenderManager()));
     }
 
     @Override

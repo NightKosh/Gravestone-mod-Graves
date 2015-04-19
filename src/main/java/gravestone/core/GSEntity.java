@@ -1,6 +1,7 @@
 package gravestone.core;
 
 import gravestone.config.GSConfig;
+import gravestone.entity.EntityRaven;
 import gravestone.entity.monster.*;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraftforge.common.BiomeDictionary;
@@ -38,16 +39,19 @@ public class GSEntity {
     public static final String ZOMBIE_SKULL_CRAWLER_NAME = "GSZombieSkullCrawler";
     public static final String SKELETON_RAIDER_NAME = "GSSkeletonRaider";
     public static final String ZOMBIE_RAIDER_NAME = "GSZombieRaider";
+    public static final String RAVEN_NAME = "GSRaven";
 
     // eggs colors
     public static final int ZOMBIE_BACKGROUND_EGG_COLOR = 44975;
     public static final int SKELETON_BACKGROUND_EGG_COLOR = 12698049;
     public static final int CAT_BACKGROUND_EGG_COLOR = 15720061;
     public static final int DOG_BACKGROUND_EGG_COLOR = 14144467;
+    public static final int RAVEN_BACKGROUND_EGG_COLOR = 14144467;
     public static final int HORSE_FOREGROUND_EGG_COLOR = 15656192;
     public static final int SPIDER_FOREGROUND_EGG_COLOR = 11013646;
     public static final int ZOMBIE_FOREGROUND_EGG_COLOR = 7969893;
     public static final int SKELETON_FOREGROUND_EGG_COLOR = 4802889;
+    public static final int RAVEN_FOREGROUND_EGG_COLOR = 14144467;
 
     public void getEntity() {
         // zombie dog
@@ -91,6 +95,9 @@ public class GSEntity {
         if (GSConfig.spawnZombieRaiders) {
             EntityRegistry.addSpawn(EntityZombieRaider.class, 1, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.PLAINS));
         }
+
+        EntityRegistry.registerGlobalEntityID(EntityRaven.class, RAVEN_NAME, EntityRegistry.findGlobalUniqueEntityId(), RAVEN_BACKGROUND_EGG_COLOR, SPIDER_FOREGROUND_EGG_COLOR);
+        EntityRegistry.addSpawn(EntityRaven.class, 1, 3, 10, EnumCreatureType.AMBIENT);
 
         // ghosts
         // LostSoul
