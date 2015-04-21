@@ -12,8 +12,8 @@ import net.minecraft.entity.Entity;
  */
 public class ModelRaven extends ModelBase {
     private ModelRenderer body;
-    private ModelRenderer head;
     private ModelRenderer neck;
+    private ModelRenderer head;
     private ModelRenderer beakTop;
     private ModelRenderer beakBottom;
     private ModelRenderer leftWing;
@@ -27,79 +27,80 @@ public class ModelRaven extends ModelBase {
     public ModelRaven() {
         textureWidth = 32;
         textureHeight = 32;
+        setTextureOffset("head.head", 0, 23);
+        setTextureOffset("beakTop.beakTop", 0, 29);
+        setTextureOffset("beakBottom.beakBottom", 6, 29);
 
         body = new ModelRenderer(this, 0, 0);
         body.addBox(0, 0, 0, 4, 4, 8);
-        body.setRotationPoint(-2F, 16.5F, -1F);
+        body.setRotationPoint(-2, 16.5F, -1);
         body.setTextureSize(32, 32);
-        body.mirror = true;
-        setRotation(body, -0.4014257F, 0F, 0F);
-        head = new ModelRenderer(this, 0, 23);
-        head.addBox(0F, 0F, 0F, 3, 3, 3);
-        head.setRotationPoint(-1.5F, 15.5F, -4.2F);
-        head.setTextureSize(32, 32);
-        head.mirror = true;
-        setRotation(head, 0F, 0F, 0F);
+        setRotation(body, -0.4014257F, 0, 0);
+
         neck = new ModelRenderer(this, 12, 23);
         neck.addBox(0F, 0F, 0F, 3, 2, 2);
-        neck.setRotationPoint(-1.5F, 18F, -3.2F);
+        neck.setRotationPoint(-1.5F, 18, -3.2F);
         neck.setTextureSize(32, 32);
-        neck.mirror = true;
-        setRotation(neck, 0.3717861F, 0F, 0F);
-        beakTop = new ModelRenderer(this, 0, 29);
-        beakTop.addBox(0F, 0F, 0F, 1, 1, 2);
-        beakTop.setRotationPoint(-0.5F, 16.5F, -6F);
-        beakTop.setTextureSize(32, 32);
-        beakTop.mirror = true;
-        setRotation(beakTop, 0.2617994F, 0F, 0F);
-        beakBottom = new ModelRenderer(this, 6, 29);
-        beakBottom.addBox(0F, 0F, 0F, 1, 1, 2);
-        beakBottom.setRotationPoint(-0.5F, 16.5F, -5.7F);
-        beakBottom.setTextureSize(32, 32);
-        beakBottom.mirror = true;
-        setRotation(beakBottom, -0.2617994F, 0F, 0F);
+        setRotation(neck, 0.3717861F, 0, 0);
+
+        head = new ModelRenderer(this, "head");
+        head.setRotationPoint(-1.5F, 15.5F, -4.2F);
+        setRotation(head, 0, 0, 0);
+        head.addBox("head", 0, 0, 0, 3, 3, 3);
+
+        beakTop = new ModelRenderer(this, "beakTop");
+        beakTop.setRotationPoint(1, 1, -1.8F);
+        setRotation(beakTop, 0.2617994F, 0, 0);
+        beakTop.addBox("beakTop", 0, 0, 0, 1, 1, 2);
+        head.addChild(beakTop);
+
+        beakBottom = new ModelRenderer(this, "beakBottom");
+        beakBottom.setRotationPoint(1, 1, -1.5F);
+        setRotation(beakBottom, -0.2617994F, 0, 0);
+        beakBottom.addBox("beakBottom", 0, 0, 0, 1, 1, 2);
+        head.addChild(beakBottom);
+
         leftWing = new ModelRenderer(this, 0, 12);
-        leftWing.addBox(0F, 0F, 0F, 1, 3, 8);
-        leftWing.setRotationPoint(1.5F, 17F, -1F);
+        leftWing.addBox(0, 0, 0, 1, 3, 8);
+        leftWing.setRotationPoint(1.5F, 17, -1);
         leftWing.setTextureSize(32, 32);
-        leftWing.mirror = true;
-        setRotation(leftWing, -0.4014257F, 0F, 0F);
+        setRotation(leftWing, -0.4014257F, 0, 0);
+
         rightWing = new ModelRenderer(this, 0, 12);
-        rightWing.addBox(0F, 0F, 0F, 1, 3, 8);
-        rightWing.setRotationPoint(-2.5F, 17F, -1F);
+        rightWing.addBox(0, 0, 0, 1, 3, 8);
+        rightWing.setRotationPoint(-2.5F, 17, -1);
         rightWing.setTextureSize(32, 32);
-        rightWing.mirror = true;
-        setRotation(rightWing, -0.4014257F, 0F, 0F);
+        setRotation(rightWing, -0.4014257F, 0, 0);
+
         tail = new ModelRenderer(this, 18, 12);
-        tail.addBox(0F, 0F, 0F, 3, 1, 4);
-        tail.setRotationPoint(-1.5F, 20F, 6F);
+        tail.addBox(0, 0, 0, 3, 1, 4);
+        tail.setRotationPoint(-1.5F, 20, 6);
         tail.setTextureSize(32, 32);
-        tail.mirror = true;
-        setRotation(tail, -0.0872665F, 0F, 0F);
+        setRotation(tail, -0.0872665F, 0, 0);
+
         leftLeg = new ModelRenderer(this, 25, 0);
-        leftLeg.addBox(0F, 0F, 0F, 1, 2, 0);
-        leftLeg.setRotationPoint(0.5F, 22F, 2F);
+        leftLeg.addBox(0, 0, 0, 1, 2, 0);
+        leftLeg.setRotationPoint(0.5F, 22, 2);
         leftLeg.setTextureSize(32, 32);
-        leftLeg.mirror = true;
-        setRotation(leftLeg, 0F, 0F, 0F);
+        setRotation(leftLeg, 0, 0, 0);
+
         rightLeg = new ModelRenderer(this, 25, 0);
-        rightLeg.addBox(0F, 0F, 0F, 1, 2, 0);
-        rightLeg.setRotationPoint(-1.5F, 22F, 2F);
+        rightLeg.addBox(0, 0, 0, 1, 2, 0);
+        rightLeg.setRotationPoint(-1.5F, 22, 2);
         rightLeg.setTextureSize(32, 32);
-        rightLeg.mirror = true;
-        setRotation(rightLeg, 0F, 0F, 0F);
+        setRotation(rightLeg, 0, 0, 0);
+
         leftFoot = new ModelRenderer(this, 28, 0);
-        leftFoot.addBox(0F, 0F, 0F, 1, 0, 1);
-        leftFoot.setRotationPoint(0.5F, 24F, 1F);
+        leftFoot.addBox(0, 0, 0, 1, 0, 1);
+        leftFoot.setRotationPoint(0.5F, 24, 1);
         leftFoot.setTextureSize(32, 32);
-        leftFoot.mirror = true;
-        setRotation(leftFoot, 0F, 0F, 0F);
+        setRotation(leftFoot, 0, 0, 0);
+
         rightFoot = new ModelRenderer(this, 28, 0);
-        rightFoot.addBox(0F, 0F, 0F, 1, 0, 1);
-        rightFoot.setRotationPoint(-1.5F, 24F, 1F);
+        rightFoot.addBox(0, 0, 0, 1, 0, 1);
+        rightFoot.setRotationPoint(-1.5F, 24, 1);
         rightFoot.setTextureSize(32, 32);
-        rightFoot.mirror = true;
-        setRotation(rightFoot, 0F, 0F, 0F);
+        setRotation(rightFoot, 0, 0, 0);
     }
 
     @Override
@@ -109,8 +110,6 @@ public class ModelRaven extends ModelBase {
         body.render(f5);
         head.render(f5);
         neck.render(f5);
-        beakTop.render(f5);
-        beakBottom.render(f5);
         leftWing.render(f5);
         rightWing.render(f5);
         tail.render(f5);
@@ -129,5 +128,8 @@ public class ModelRaven extends ModelBase {
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+
+        this.head.rotateAngleX = f4 / (180 / (float) Math.PI);
+        this.head.rotateAngleY = f4 / (180 / (float) Math.PI);
     }
 }
