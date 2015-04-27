@@ -1,5 +1,5 @@
 # Tabs
-itemGroup.tabGraveStone=Gravestone(Náhrobek)
+itemGroup.tabGSGraveStone=Gravestone(Náhrobek)
 itemGroup.tabGSMemorials=Památníky
 itemGroup.tabGSOther=Předměty módu Gravestone
 
