@@ -75,8 +75,20 @@ public class UndertakerBackpack implements IBackpackDefinition {
     }
 
     @Override
-    public boolean isValidItem(EntityPlayer player, ItemStack itemstack) {
+    public void addValidItems(List<ItemStack> validItems) {
+        for (ItemStack stack : validItems) {
+            addValidItem(stack);
+        }
+    }
+
+    @Override
+    public boolean isValidItem(ItemStack itemstack) {
         return allowedBlocks.contains(Block.getBlockFromItem(itemstack.getItem())) ||
                 allowedItems.contains(itemstack.getItem());
+    }
+
+    @Override
+    public boolean isValidItem(EntityPlayer player, ItemStack itemstack) {
+        return isValidItem(itemstack);
     }
 }
