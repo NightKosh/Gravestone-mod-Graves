@@ -12,11 +12,11 @@ idea
 gradle
 build
 #api
+api
 src/main/java/baubles
 src/main/java/forestry
 src/main/java/mariculture
 src/main/java/micdoodle8
-src/main/java/sophisticated_wolves
 src/main/java/tconstruct
 src/main/java/thaumcraft
 
