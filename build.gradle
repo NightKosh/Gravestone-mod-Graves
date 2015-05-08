@@ -34,11 +34,15 @@ minecraft {
 }
 
 ext.apiSophisticatedWolves = "./api/sophisticated_wolves"
+ext.apiForestry = "./api/forestry"
+ext.apiBaubles = "./api/baubles"
 
 sourceSets {
     main {
         java {
             srcDir project.apiSophisticatedWolves
+            srcDir project.apiForestry
+            srcDir project.apiBaubles
         }
     }
 }

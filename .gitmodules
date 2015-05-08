@@ -1,3 +1,6 @@
-[submodule "api"]
-	path = api
+[submodule "api/sophisticated_wolves"]
+	path = api/sophisticated_wolves
 	url = https://github.com/NightKosh/Sophisticated-wolves-API
+[submodule "api/baubles"]
+	path = api/baubles
+	url = https://github.com/Azanor/Baubles
