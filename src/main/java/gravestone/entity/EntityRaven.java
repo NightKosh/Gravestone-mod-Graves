@@ -1,5 +1,6 @@
 package gravestone.entity;
 
+import gravestone.entity.ai.EntityRavenMoveHelper;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -24,10 +25,10 @@ public class EntityRaven extends EntityAnimal {
         this.setSize(0.5F, 0.9F);
 
         ((PathNavigateGround) this.getNavigator()).func_179690_a(true);
-        this.moveHelper = new EntityMoveHelper(this);
+        this.moveHelper = new EntityRavenMoveHelper(this);
 
         this.tasks.addTask(0, new EntityAISwimming(this));
-//        this.tasks.addTask(1, new EntityAIPanic(this, 1.5D));
+        this.tasks.addTask(1, new EntityAIPanic(this, 1.5D));
         this.tasks.addTask(2, new EntityAITempt(this, 0.9, Items.rotten_flesh, true));
         this.tasks.addTask(5, new EntityAIWander(this, 1));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 20));
@@ -112,5 +113,9 @@ public class EntityRaven extends EntityAnimal {
     @Override
     public float getEyeHeight() {
         return this.height / 2F;
+    }
+
+    public boolean isFlying() {
+        return false;
     }
 }
