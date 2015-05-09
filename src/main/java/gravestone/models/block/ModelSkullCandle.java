@@ -1,8 +1,9 @@
 package gravestone.models.block;
 
 import gravestone.core.Resources;
+import gravestone.models.ModelBaseAdapter;
+import gravestone.models.ModelRendererSkull;
 import gravestone.renderer.tileentity.TileEntityGSMemorialRenderer;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
@@ -13,16 +14,16 @@ import org.lwjgl.opengl.GL11;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ModelSkullCandle extends ModelBase {
+public class ModelSkullCandle extends ModelBaseAdapter {
 
-    private ModelSkull skull;
+    private ModelRenderer skull;
     private ModelCandle candle;
 
     public ModelSkullCandle() {
         textureWidth = 32;
         textureHeight = 32;
 
-        skull = new ModelSkull();
+        skull = new ModelRendererSkull(this);
 
         candle = new ModelCandle();
     }
@@ -35,18 +36,12 @@ public class ModelSkullCandle extends ModelBase {
         super.render(entity, f, f1, f2, f3, f4, f5);
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
-        skull.render(entity, f, f1, f2, f3, f4, f5);
+        skull.render(f5);
         candle.render(entity, f, f1, f2, f3, f4, f5);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z) {
-        model.rotateAngleX = x;
-        model.rotateAngleY = y;
-        model.rotateAngleZ = z;
-    }
-
     public void renderAll() {
-        skull.renderAll();
+        skull.render(0.0625F);
 
         TileEntityGSMemorialRenderer.instance.bindTextureByName(Resources.CANDLE);
 

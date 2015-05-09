@@ -1,11 +1,11 @@
 package gravestone.models.block.memorials;
 
 import gravestone.core.Resources;
-import gravestone.models.block.ModelSkull;
+import gravestone.models.IModelBaseAdapter;
+import gravestone.models.ModelRendererSkull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelSkeleton;
-import org.lwjgl.opengl.GL11;
 
 /**
  * GraveStone mod
@@ -13,9 +13,9 @@ import org.lwjgl.opengl.GL11;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ModelHangedSkeleton extends ModelSkeleton {
+public class ModelHangedSkeleton extends ModelSkeleton implements IModelBaseAdapter {
 
-    private ModelSkull skull;
+    private ModelRendererSkull skull;
 
     protected ModelRenderer rightArm;
     protected ModelRenderer leftArm;
@@ -37,7 +37,8 @@ public class ModelHangedSkeleton extends ModelSkeleton {
         this.isInStocks = isInStocks;
         this.isWitherSkeleton = isWitherSkeleton;
 
-        skull = new ModelSkull();
+        skull = new ModelRendererSkull(this, -4, -8, -4, 0, 0, 0);
+        setRotation(skull, 0.1745329F, 0, 0);
 
         // arms (should render only when creature in stocks)
         rightArm = new ModelRenderer(this, 40, 16);
@@ -88,10 +89,12 @@ public class ModelHangedSkeleton extends ModelSkeleton {
         }
 
         Minecraft.getMinecraft().renderEngine.bindTexture(isWitherSkeleton ? Resources.WITHER_SKULL_CANDLE : Resources.SKELETON_SKULL_CANDLE);
-        GL11.glPushMatrix();
-        GL11.glRotated(20, 1, 0, 0);
-        GL11.glTranslated(0, -1.5, 0);
-        skull.renderAll();
-        GL11.glPopMatrix();
+
+        skull.render(f5);
+    }
+
+    @Override
+    public void setTexturesOffset(String name, int xPos, int zPos) {
+        super.setTextureOffset(name, xPos, zPos);
     }
 }
