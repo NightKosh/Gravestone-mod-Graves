@@ -1,11 +1,8 @@
 package gravestone.models.block.memorials;
 
-import gravestone.core.Resources;
 import gravestone.models.IModelBaseAdapter;
-import gravestone.models.ModelRendererSkull;
-import net.minecraft.client.Minecraft;
+import gravestone.models.entity.ModelGSSkeleton;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.model.ModelSkeleton;
 
 /**
  * GraveStone mod
@@ -13,9 +10,7 @@ import net.minecraft.client.model.ModelSkeleton;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ModelHangedSkeleton extends ModelSkeleton implements IModelBaseAdapter {
-
-    private ModelRendererSkull skull;
+public class ModelHangedSkeleton extends ModelGSSkeleton implements IModelBaseAdapter {
 
     protected ModelRenderer rightArm;
     protected ModelRenderer leftArm;
@@ -30,15 +25,12 @@ public class ModelHangedSkeleton extends ModelSkeleton implements IModelBaseAdap
     }
 
     public ModelHangedSkeleton(boolean isInStocks, boolean isWitherSkeleton) {
-        //TODO
-//        super(0);
         super(0, false);
+
+        setRotation(skull, 0.1745329F, 0, 0);
 
         this.isInStocks = isInStocks;
         this.isWitherSkeleton = isWitherSkeleton;
-
-        skull = new ModelRendererSkull(this, -4, -8, -4, 0, 0, 0);
-        setRotation(skull, 0.1745329F, 0, 0);
 
         // arms (should render only when creature in stocks)
         rightArm = new ModelRenderer(this, 40, 16);
@@ -66,12 +58,6 @@ public class ModelHangedSkeleton extends ModelSkeleton implements IModelBaseAdap
         leftArm2.setTextureSize(textureWidth, textureHeight);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z) {
-        model.rotateAngleX = x;
-        model.rotateAngleY = y;
-        model.rotateAngleZ = z;
-    }
-
     public void renderAll() {
         float f5 = 0.0625F;
         this.bipedBody.render(f5);
@@ -88,9 +74,7 @@ public class ModelHangedSkeleton extends ModelSkeleton implements IModelBaseAdap
             this.bipedLeftArm.render(f5);
         }
 
-        Minecraft.getMinecraft().renderEngine.bindTexture(isWitherSkeleton ? Resources.WITHER_SKULL_CANDLE : Resources.SKELETON_SKULL_CANDLE);
-
-        skull.render(f5);
+        skull.renderWithTexture(f5, isWitherSkeleton);
     }
 
     @Override

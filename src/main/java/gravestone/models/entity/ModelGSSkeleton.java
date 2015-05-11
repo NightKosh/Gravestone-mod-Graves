@@ -14,7 +14,7 @@ import net.minecraft.entity.Entity;
  */
 public class ModelGSSkeleton extends ModelSkeleton implements IModelBaseAdapter {
 
-    private ModelRendererSkull skull;
+    protected ModelRendererSkull skull;
 
     public ModelGSSkeleton() {
         this(0.0F, false);

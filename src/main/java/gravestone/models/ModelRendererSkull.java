@@ -63,6 +63,15 @@ public class ModelRendererSkull extends ModelRenderer {
         Minecraft.getMinecraft().renderEngine.bindTexture(texture);
     }
 
+    public void bindTexture(boolean isWither) {
+        Minecraft.getMinecraft().renderEngine.bindTexture(isWither ? Resources.WITHER_SKULL_CANDLE : Resources.SKELETON_SKULL_CANDLE);
+    }
+
+    public void renderWithTexture(float p_78785_1_, boolean isWither) {
+        bindTexture(isWither);
+        this.render(p_78785_1_);
+    }
+
     public void renderWithTexture(float p_78785_1_, EnumSkullType skullType) {
         bindTexture(skullType);
         this.render(p_78785_1_);
