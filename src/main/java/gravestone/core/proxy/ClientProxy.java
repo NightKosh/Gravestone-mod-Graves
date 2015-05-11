@@ -98,6 +98,9 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityWitherSkullCrawler.class, new RenderSkullCrawler(SkullCrawlerType.wither, Minecraft.getMinecraft().getRenderManager()));
         RenderingRegistry.registerEntityRenderingHandler(EntityZombieSkullCrawler.class, new RenderSkullCrawler(SkullCrawlerType.zombie, Minecraft.getMinecraft().getRenderManager()));
 
+        // Skeleton Raider
+        RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonRaider.class, new RenderGSSkeleton(Minecraft.getMinecraft().getRenderManager()));
+
         // raven
         RenderingRegistry.registerEntityRenderingHandler(EntityRaven.class, new RenderRaven(Minecraft.getMinecraft().getRenderManager()));
     }

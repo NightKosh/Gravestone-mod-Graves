@@ -1,7 +1,10 @@
 package gravestone.models;
 
+import gravestone.core.Resources;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * GraveStone mod
@@ -11,6 +14,11 @@ import net.minecraft.client.model.ModelRenderer;
  */
 public class ModelRendererSkull extends ModelRenderer {
 
+    public static enum EnumSkullType {
+        SKELETON_SKULL,
+        WITHER_SKULL,
+        ZOMBIE_SKULL
+    }
     private final static String NAME = "skull";
     private ModelRenderer teeth;
 
@@ -36,6 +44,33 @@ public class ModelRendererSkull extends ModelRenderer {
         teeth.addBox("teeth", xPos, yPos, zPos, 4, 2, 1);
 
         this.addChild(teeth);
+    }
+
+    public void bindTexture(EnumSkullType skullType) {
+        ResourceLocation texture;
+        switch (skullType) {
+            case SKELETON_SKULL:
+            default:
+                texture = Resources.SKELETON_SKULL_CANDLE;
+                break;
+            case WITHER_SKULL:
+                texture = Resources.WITHER_SKULL_CANDLE;
+                break;
+            case ZOMBIE_SKULL:
+                texture = Resources.ZOMBIE_SKULL_CANDLE;
+                break;
+        }
+        Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+    }
+
+    public void renderWithTexture(float p_78785_1_, EnumSkullType skullType) {
+        bindTexture(skullType);
+        this.render(p_78785_1_);
+    }
+
+    @Override
+    public void render(float p_78785_1_) {
+        super.render(p_78785_1_);
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z) {
