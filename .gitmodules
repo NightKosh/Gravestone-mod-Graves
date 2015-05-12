@@ -8,3 +8,6 @@
 	path = api/forestry
 	url = https://github.com/ForestryMC/ForestryAPI
 	branch = mc-1.8
+[submodule "api/gravestone"]
+	path = api/gravestone
+	url = https://github.com/NightKosh/GraveStone-mod-API

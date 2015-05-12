@@ -33,6 +33,7 @@ minecraft {
     mappings = "snapshot_nodoc_20141130"
 }
 
+ext.apiGravestone = "./api/gravestone"
 ext.apiSophisticatedWolves = "./api/sophisticated_wolves"
 ext.apiForestry = "./api/forestry"
 ext.apiBaubles = "./api/baubles"
@@ -40,6 +41,7 @@ ext.apiBaubles = "./api/baubles"
 sourceSets {
     main {
         java {
+            srcDir project.apiGravestone
             srcDir project.apiSophisticatedWolves
             srcDir project.apiForestry
             srcDir project.apiBaubles
