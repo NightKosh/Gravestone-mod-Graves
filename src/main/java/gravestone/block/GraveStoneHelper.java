@@ -1,5 +1,6 @@
 package gravestone.block;
 
+import gravestone.api.IGraveStone;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GSConfig;
 import gravestone.core.GSBlock;
@@ -44,7 +45,7 @@ import java.util.*;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GraveStoneHelper {
+public class GraveStoneHelper implements IGraveStone {
     public static ArrayList<Item> swordsList = new ArrayList<Item>(
             Arrays.asList(
                     Items.wooden_sword,
@@ -179,7 +180,7 @@ public class GraveStoneHelper {
     public static final List<BlockFlower> FLOWERS = Arrays.asList(
             Blocks.yellow_flower, Blocks.red_flower);
 
-    private GraveStoneHelper() {
+    public GraveStoneHelper() {
     }
 
     /**
@@ -541,8 +542,7 @@ public class GraveStoneHelper {
         }
     }
 
-    //TODO
-    public static void addSwordToSwordsList(Item sword) {
+    public void addSwordToSwordsList(Item sword) {
         swordsList.add(sword);
     }
 

@@ -1,5 +1,8 @@
 package gravestone;
 
+import gravestone.api.GraveStoneAPI;
+import gravestone.api.IGraveStone;
+import gravestone.block.GraveStoneHelper;
 import gravestone.config.GSConfig;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -32,6 +35,8 @@ public class ModGraveStone {
     @SidedProxy(clientSide = "gravestone.core.proxy.ClientProxy", serverSide = "gravestone.core.proxy.CommonProxy")
     public static CommonProxy proxy;
 
+    public static final IGraveStone gravestoneHelper = new GraveStoneHelper();
+
     public ModGraveStone() {
         instance = this;
     }
@@ -42,6 +47,8 @@ public class ModGraveStone {
         GSStructures.preInit();
 
         gravestone.core.GSMessageHandler.init();
+
+        GraveStoneAPI.graveStone = gravestoneHelper;
     }
 
     @Mod.EventHandler

@@ -1,8 +1,8 @@
 package gravestone.core.compatibility;
 
+import gravestone.ModGraveStone;
 import gravestone.core.GSRecipes;
 import gravestone.core.logger.GSLogger;
-import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
 import gravestone.core.GSEntity;
 import gravestone.core.GSItem;
@@ -99,7 +99,7 @@ public class GSCompatibilityThaumcraft {
     }
 
     public static void addSwords() {
-//        GraveStoneHelper.swordsList.add(ItemApi.getItem("itemSwordThaumium", 0).getItem());
-//        GraveStoneHelper.swordsList.add(ItemApi.getItem("itemSwordElemental", 0).getItem());
+//        ModGraveStone.gravestoneHelper.addSwordToSwordsList(ItemApi.getItem("itemSwordThaumium", 0).getItem());
+//        ModGraveStone.gravestoneHelper.addSwordToSwordsList(ItemApi.getItem("itemSwordElemental", 0).getItem());
     }
 }
