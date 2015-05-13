@@ -37,6 +37,8 @@ public class GSEntity {
     public static final String SKULL_CRAWLER_NAME = "GSSkullCrawler";
     public static final String WITHER_SKULL_CRAWLER_NAME = "GSWitherSkullCrawler";
     public static final String ZOMBIE_SKULL_CRAWLER_NAME = "GSZombieSkullCrawler";
+    public static final String ZOMBIE_HORSE_NAME = "GSZombieHorse";
+    public static final String SKELETON_HORSE_NAME = "GSSkeletonHorse";
     public static final String SKELETON_RAIDER_NAME = "GSSkeletonRaider";
     public static final String ZOMBIE_RAIDER_NAME = "GSZombieRaider";
     public static final String RAVEN_NAME = "GSRaven";
@@ -86,6 +88,9 @@ public class GSEntity {
         // zombie
         EntityRegistry.registerGlobalEntityID(EntityZombieSkullCrawler.class, ZOMBIE_SKULL_CRAWLER_NAME, EntityRegistry.findGlobalUniqueEntityId(), ZOMBIE_BACKGROUND_EGG_COLOR, SPIDER_FOREGROUND_EGG_COLOR);
 
+        //TODO
+        EntityRegistry.registerGlobalEntityID(EntityZombieHorse.class, ZOMBIE_HORSE_NAME, EntityRegistry.findGlobalUniqueEntityId(), ZOMBIE_BACKGROUND_EGG_COLOR, HORSE_FOREGROUND_EGG_COLOR);
+        EntityRegistry.registerGlobalEntityID(EntitySkeletonHorse.class, SKELETON_HORSE_NAME, EntityRegistry.findGlobalUniqueEntityId(), SKELETON_BACKGROUND_EGG_COLOR, HORSE_FOREGROUND_EGG_COLOR);
 
         EntityRegistry.registerGlobalEntityID(EntitySkeletonRaider.class, SKELETON_RAIDER_NAME, EntityRegistry.findGlobalUniqueEntityId(), SKELETON_BACKGROUND_EGG_COLOR, HORSE_FOREGROUND_EGG_COLOR);
         if (GSConfig.spawnSkeletonRaiders) {

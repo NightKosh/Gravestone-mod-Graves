@@ -1,9 +1,9 @@
 package gravestone.entity.monster;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.*;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateGround;
@@ -27,14 +27,10 @@ public class EntityZombieRaider extends EntityZombie {
         this.setCurrentItemOrArmor(0, new ItemStack(Items.iron_sword));
         this.setChild(false);
 
-        EntityHorse horse = new EntityHorse(this.worldObj);
+        EntityUndeadHorse horse = new EntityZombieHorse(this.worldObj);
         ((PathNavigateGround)horse.getNavigator()).func_179690_a(false);
         horse.copyLocationAndAnglesFrom(this);
         horse.func_180482_a(difficulty, (IEntityLivingData) null);
-        horse.setHorseType(3);
-        horse.setHorseTamed(true);
-        horse.setHorseSaddled(true);
-
 
         this.worldObj.spawnEntityInWorld(horse);
         this.mountEntity(horse);
@@ -42,17 +38,16 @@ public class EntityZombieRaider extends EntityZombie {
         return super.func_180482_a(difficulty, data);
     }
 
-
     @Override
-    protected boolean func_175448_a(ItemStack p_175448_1_) {
-        return true;
+    public boolean shouldDismountInWater(Entity rider) {
+        return false;
     }
 
     @Override
     public void onLivingUpdate() {
-        if (this.isRiding() && this.getAttackTarget() != null && this.ridingEntity instanceof EntityHorse) {
-            ((EntityLiving) this.ridingEntity).getNavigator().setPath(this.getNavigator().getPath(), 1.5D);
-        }
+//        if (this.isRiding() && this.getAttackTarget() != null && this.ridingEntity instanceof EntityUndeadHorse) {
+//            ((EntityLiving) this.ridingEntity).getNavigator().setPath(this.getNavigator().getPath(), 1.5D);
+//        }
 
         super.onLivingUpdate();
     }

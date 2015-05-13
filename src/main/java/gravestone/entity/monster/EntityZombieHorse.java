@@ -1,22 +1,22 @@
 package gravestone.entity.monster;
 
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityMob;
+import gravestone.entity.ai.EntityAIAttackLivingHorse;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * GraveStone mod
@@ -24,79 +24,38 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public abstract class EntityUndeadPet extends EntityMob {
+public class EntityZombieHorse extends EntityUndeadHorse {
+    public EntityZombieHorse(World worldIn) {
+        super(worldIn);
 
-    protected ResourceLocation texture = null;
+        this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1));
+        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityVillager.class, 1, true));
+        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityWolf.class, 1, true));
+        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityOcelot.class, 1, true));
+        this.tasks.addTask(4, new EntityAIAttackLivingHorse(this, 1, false));
+        this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, 1, false));
 
-    public EntityUndeadPet(World world) {
-        super(world);
-        ((PathNavigateGround) this.getNavigator()).func_179690_a(true);
-        this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(7, new EntityAILeapAtTarget(this, 0.3F));
-        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(7, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-    }
-
-    /**
-     * Returns the texture's file path as a String.
-     */
-    @SideOnly(Side.CLIENT)
-    public ResourceLocation getTexture() {
-        return texture;
-    }
-
-    /**
-     * Determines if an entity can be despawned, used on idle far away entities
-     */
-    @Override
-    protected boolean canDespawn() {
-        return true;
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWolf.class, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityOcelot.class, false));
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityHorse.class, false));
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity entity) {
-        return entity.attackEntityFrom(DamageSource.causeMobDamage(this), 3);
+    public EnumHorseType getUndeadHorseType() {
+        return EnumHorseType.ZOMBIE_HORSE_TYPE;
     }
 
-    /**
-     * Drop 0-2 items of this living's type.
-     *
-     * @param par1 - Whether this entity has recently been hit by a player.
-     * @param par2 - Level of Looting used to kill this mob.
-     */
     @Override
-    protected void dropFewItems(boolean par1, int par2) {
-    }
+    public void onKillEntity(EntityLivingBase entityLiving) {
+        super.onKillEntity(entityLiving);
 
-    /**
-     * Called frequently so the entity can update its state every tick as
-     * required. For example, zombies and skeletons use this to react to
-     * sunlight and start to burn.
-     */
-    @Override
-    public void onLivingUpdate() {
-        if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
-            float f = this.getBrightness(1.0F);
-
-            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.worldObj.canBlockSeeSky(
-                    new BlockPos(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)))) {
-                this.setFire(8);
-            }
+        if (this.worldObj.getDifficulty() == EnumDifficulty.NORMAL || this.worldObj.getDifficulty() == EnumDifficulty.HARD) {
+            spawnZombieMob(entityLiving);
         }
-
-        super.onLivingUpdate();
     }
 
-    /**
-     * Get this Entity's EnumCreatureAttribute
-     */
-    @Override
-    public EnumCreatureAttribute getCreatureAttribute() {
-        return EnumCreatureAttribute.UNDEAD;
-    }
-
+    //TODO
     protected void spawnZombieMob(EntityLivingBase entityLivingBase) {
         if (entityLivingBase instanceof EntityLiving) {
             EntityLiving entity = (EntityLiving) entityLivingBase;
