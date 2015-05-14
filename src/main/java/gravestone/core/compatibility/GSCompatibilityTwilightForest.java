@@ -124,22 +124,23 @@ public class GSCompatibilityTwilightForest {
         for (int i = 0; i < player.inventory.mainInventory.length; i++) {
             ItemStack stack = player.inventory.mainInventory[i];
             if (stack == null) continue;
-            if (stack.getItem() == twilightforest.item.TFItems.charmOfKeeping1) {
-                if (max < 1) {
-                    max = 1;
-                    slot = i;
-                }
-            } else if (stack.getItem() == twilightforest.item.TFItems.charmOfKeeping2) {
-                if (max < 2) {
-                    max = 2;
-                    slot = i;
-                }
-            } else if (stack.getItem() == twilightforest.item.TFItems.charmOfKeeping3) {
-                if (max < 3) {
-                    max = 3;
-                    slot = i;
-                }
-            }
+            //TODO
+//            if (stack.getItem() == twilightforest.item.TFItems.charmOfKeeping1) {
+//                if (max < 1) {
+//                    max = 1;
+//                    slot = i;
+//                }
+//            } else if (stack.getItem() == twilightforest.item.TFItems.charmOfKeeping2) {
+//                if (max < 2) {
+//                    max = 2;
+//                    slot = i;
+//                }
+//            } else if (stack.getItem() == twilightforest.item.TFItems.charmOfKeeping3) {
+//                if (max < 3) {
+//                    max = 3;
+//                    slot = i;
+//                }
+//            }
         }
         return new int[]{max, slot};
     }
