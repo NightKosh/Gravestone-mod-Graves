@@ -1,7 +1,7 @@
 # Tabs
 itemGroup.tabGSGraveStone=墓碑
-itemGroup.tabGSMemorials=Memorials
-itemGroup.tabGSOther=Gravestone mod Items
+itemGroup.tabGSMemorials=纪念碑
+itemGroup.tabGSOther=墓碑模组的物品
 
 
 # Blocks
@@ -63,7 +63,7 @@ block.skull_candle.wither_skeleton.name=凋灵头颅蜡烛
 block.skull_candle.zombie.name=僵尸头颅蜡烛
 
 ## Altar
-tile.altar.name=Altar
+tile.altar.name=祭坛
 
 
 # Items
@@ -153,45 +153,45 @@ entity.GSSkullCrawler.name=爬行骷髅头颅
 entity.GSWitherSkullCrawler.name=爬行凋灵头颅
 entity.GSZombieSkullCrawler.name=爬行僵尸头颅
 entity.GSRaven.name=乌鸦
-entity.GSSkeletonRaider.name=Skeleton Raider
-entity.GSZombieRaider.name=Zombie Raider
+entity.GSSkeletonRaider.name=骷髅掠夺者
+entity.GSZombieRaider.name=僵尸掠夺者
 
 
 # Death Messages
 death.GS.Herobrine=%1$s 惨遭Herobrine杀害！
 death.GS.death_sentence=%1$s 受到死刑判决！
 death.GS.tortures=%1$s 死在残酷的折磨下！
-death.GS.mom=Your mom
+death.GS.mom=你妈妈
 
 # Console messages
-grave.cant_be_looted=You can't loot this grave!
+grave.cant_be_looted=你无法获得这块墓碑!
 ## Console commands
-commands.not_enough_parameters=Not enough parameters!
-commands.coordinate_error=Coordinate error!
-commands.direction_error=Direction error!
+commands.not_enough_parameters=没有足够的参数!
+commands.coordinate_error=坐标错误!
+commands.direction_error=方位错误!
 
-commands.generate.unknown_structure=Unknown structure!
+commands.generate.unknown_structure=未明建筑!
 
-commands.fill_grave.empty=There aren't any blocks at this coordinates!
-commands.fill_grave.wrong_block=This coordinates occupied by wrong blocks!
+commands.fill_grave.empty=在这个坐标上没有任何方块!
+commands.fill_grave.wrong_block=这个坐标上有错误的方块!
 
 # Materials
-material.title=Made of
-material.mossy=Mossy
-material.wood=Wood
-material.sandstone=Sandstone
-material.red_sandstone=Red Sandstone
-material.stone=Stone
-material.diorite=Diorite
-material.andesite=Andesite
-material.granite=Granite
-material.iron=Iron
-material.gold=Gold
-material.diamond=Diamond
-material.emerald=Emerald
-material.lapis=Lapis
-material.redstone=Redstone
-material.obsidian=Obsidian
-material.quartz=Quartz
-material.prizmarine=Prizmarine
-material.ice=Ice
+material.title=构成是
+material.mossy=苔藓
+material.wood=木头
+material.sandstone=沙石
+material.red_sandstone=红沙石
+material.stone=石头
+material.diorite=闪长岩
+material.andesite=安山岩
+material.granite=花岗岩
+material.iron=铁
+material.gold=金
+material.diamond=钻石
+material.emerald=绿宝石
+material.lapis=青金石
+material.redstone=红石
+material.obsidian=黑曜石
+material.quartz=石英
+material.prizmarine=海晶石
+material.ice=冰
