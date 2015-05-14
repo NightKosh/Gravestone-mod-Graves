@@ -1,3 +1,4 @@
+
 package gravestone.core.compatibility.forestry;
 
 import gravestone.config.GSConfig;
@@ -35,7 +36,7 @@ public class GSCompatibilityForestry {
     }
 
     public static int getApicultureVillagerID() {
-        if (ForestryAPI.forestryConstants != null) {
+        if (isInstalled && ForestryAPI.forestryConstants != null) {
             return ForestryAPI.forestryConstants.getApicultureVillagerID();
         } else {
             return DEFAULT_BEEKEEPER_ID;
@@ -43,7 +44,7 @@ public class GSCompatibilityForestry {
     }
 
     public static int getArboricultureVillagerID() {
-        if (ForestryAPI.forestryConstants != null) {
+        if (isInstalled && ForestryAPI.forestryConstants != null) {
             return ForestryAPI.forestryConstants.getArboricultureVillagerID();
         } else {
             return DEFAULT_LUMBERJACK_ID;
@@ -51,7 +52,7 @@ public class GSCompatibilityForestry {
     }
 
     public static void addBackpack() {
-        if (BackpackManager.backpackInterface != null) {
+        if (isInstalled && BackpackManager.backpackInterface != null) {
             if (GSConfig.enableForestryBackpacks) {
                 String backpackT1Name = "backpack.undertaker.t1";
                 backpackItemT1 = BackpackManager.backpackInterface.addBackpack(UndertakerBackpack.getInstance(), EnumBackpackType.T1);

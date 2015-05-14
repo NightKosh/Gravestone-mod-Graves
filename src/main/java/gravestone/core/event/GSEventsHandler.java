@@ -3,6 +3,7 @@ package gravestone.core.event;
 import gravestone.config.GSConfig;
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.block.GraveStoneHelper;
@@ -33,7 +34,8 @@ import net.minecraftforge.event.world.WorldEvent;
  */
 public class GSEventsHandler {
 
-    @SubscribeEvent
+    // Hopefully ensure we capture items before other things do (set to high so other mods can run before if they have more specialness
+    @SubscribeEvent(priority= EventPriority.HIGH)
     public void onEntityLivingDeath(LivingDeathEvent event) {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
             if (!GSConfig.generateGravesInLava && event.source.damageType.equals("lava")) {

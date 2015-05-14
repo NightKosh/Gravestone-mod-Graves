@@ -1,3 +1,4 @@
+
 package gravestone.structures.memorials;
 
 import gravestone.block.BlockGSMemorial;

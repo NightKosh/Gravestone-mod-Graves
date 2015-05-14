@@ -1,12 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package gravestone.structures;
-
 import java.util.Random;
-
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 

@@ -1,10 +1,10 @@
+
 package gravestone.structures;
 
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
-
 import java.util.Random;
 
 /**

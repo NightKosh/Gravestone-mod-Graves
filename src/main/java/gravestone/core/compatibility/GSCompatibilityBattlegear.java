@@ -2,7 +2,6 @@
 package gravestone.core.compatibility;
 
 import java.util.List;
-
 import gravestone.config.GSConfig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -26,6 +25,7 @@ public class GSCompatibilityBattlegear {
         if (isInstalled() && GSConfig.storeBattlegearItems) {
             for (int slot = FIRST_SLOT; slot <= LAST_SLOT; slot++) {
                 items.add(player.inventory.getStackInSlot(slot));
+                player.inventory.setInventorySlotContents(slot, null);
             }
         }
     }

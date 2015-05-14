@@ -1,18 +1,21 @@
 package gravestone.core.compatibility;
 
 import gravestone.config.GSConfig;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
+/**
+ * GraveStone mod
+ *
+ * @author CrazyPants
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ */
 public class GSCompatibilityEnderIO {
-
   
   protected static boolean isInstalled = false;
 

@@ -1,3 +1,4 @@
+
 package gravestone.structures;
 
 import gravestone.config.GSConfig;

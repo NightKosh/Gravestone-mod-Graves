@@ -57,38 +57,38 @@ public class GSEntity {
 
     public void getEntity() {
         // zombie dog
-        EntityRegistry.registerGlobalEntityID(EntityZombieDog.class, ZOMBIE_DOG_NAME, EntityRegistry.findGlobalUniqueEntityId(), DOG_BACKGROUND_EGG_COLOR, ZOMBIE_FOREGROUND_EGG_COLOR);
+        EntityRegistry.registerModEntity(EntityZombieDog.class, ZOMBIE_DOG_NAME, 0, ModInfo.ID, 100, 1, true);
         if (GSConfig.spawnZombieDogs) {
             EntityRegistry.addSpawn(EntityZombieDog.class, 2, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.FOREST));
         }
 
         // zombie cat
-        EntityRegistry.registerGlobalEntityID(EntityZombieCat.class, ZOMBIE_CAT_NAME, EntityRegistry.findGlobalUniqueEntityId(), CAT_BACKGROUND_EGG_COLOR, ZOMBIE_FOREGROUND_EGG_COLOR);
+        EntityRegistry.registerModEntity(EntityZombieCat.class, ZOMBIE_CAT_NAME, 1, ModInfo.ID, 100, 1, true);
         if (GSConfig.spawnZombieCats) {
             EntityRegistry.addSpawn(EntityZombieCat.class, 2, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.JUNGLE));
         }
 
         // skeleton dog
-        EntityRegistry.registerGlobalEntityID(EntitySkeletonDog.class, SKELETON_DOG_NAME, EntityRegistry.findGlobalUniqueEntityId(), DOG_BACKGROUND_EGG_COLOR, SKELETON_FOREGROUND_EGG_COLOR);
+        EntityRegistry.registerModEntity(EntitySkeletonDog.class, SKELETON_DOG_NAME, 2, ModInfo.ID, 100, 1, true);
         if (GSConfig.spawnSkeletonDogs) {
             EntityRegistry.addSpawn(EntityZombieDog.class, 2, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.FOREST));
         }
 
         // skeleton cat
-        EntityRegistry.registerGlobalEntityID(EntitySkeletonCat.class, SKELETON_CAT_NAME, EntityRegistry.findGlobalUniqueEntityId(), CAT_BACKGROUND_EGG_COLOR, SKELETON_FOREGROUND_EGG_COLOR);
+        EntityRegistry.registerModEntity(EntitySkeletonCat.class, SKELETON_CAT_NAME, 3, ModInfo.ID, 100, 1, true);
         if (GSConfig.spawnSkeletonCats) {
             EntityRegistry.addSpawn(EntityZombieCat.class, 2, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.JUNGLE));
         }
 
         // skullcrawler
-        EntityRegistry.registerGlobalEntityID(EntitySkullCrawler.class, SKULL_CRAWLER_NAME, EntityRegistry.findGlobalUniqueEntityId(), SKELETON_BACKGROUND_EGG_COLOR, SPIDER_FOREGROUND_EGG_COLOR);
+        EntityRegistry.registerModEntity(EntitySkullCrawler.class, SKULL_CRAWLER_NAME, 4, ModInfo.ID, 100, 1, true);
         // wither
-        EntityRegistry.registerGlobalEntityID(EntityWitherSkullCrawler.class, WITHER_SKULL_CRAWLER_NAME, EntityRegistry.findGlobalUniqueEntityId(), 0, SPIDER_FOREGROUND_EGG_COLOR);
+        EntityRegistry.registerModEntity(EntityWitherSkullCrawler.class, WITHER_SKULL_CRAWLER_NAME, 5, ModInfo.ID, 100, 1, true);
         EntityRegistry.addSpawn(EntityWitherSkullCrawler.class, 3, 1, 4, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.NETHER));
         // zombie
-        EntityRegistry.registerGlobalEntityID(EntityZombieSkullCrawler.class, ZOMBIE_SKULL_CRAWLER_NAME, EntityRegistry.findGlobalUniqueEntityId(), ZOMBIE_BACKGROUND_EGG_COLOR, SPIDER_FOREGROUND_EGG_COLOR);
+        EntityRegistry.registerModEntity(EntityZombieSkullCrawler.class, ZOMBIE_SKULL_CRAWLER_NAME, 6, ModInfo.ID, 100, 1, true);
 
-        //TODO
+        //TODO registerGlobalEntityID -> registerModEntity
         EntityRegistry.registerGlobalEntityID(EntityZombieHorse.class, ZOMBIE_HORSE_NAME, EntityRegistry.findGlobalUniqueEntityId(), ZOMBIE_BACKGROUND_EGG_COLOR, HORSE_FOREGROUND_EGG_COLOR);
         EntityRegistry.registerGlobalEntityID(EntitySkeletonHorse.class, SKELETON_HORSE_NAME, EntityRegistry.findGlobalUniqueEntityId(), SKELETON_BACKGROUND_EGG_COLOR, HORSE_FOREGROUND_EGG_COLOR);
 

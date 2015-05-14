@@ -81,5 +81,9 @@ public class GSCompatibility {
         if (Loader.isModLoaded("EnderIO")) {
             GSCompatibilityEnderIO.isInstalled = true;
         }
+
+        if (Loader.isModLoaded("TwilightForest")) {
+            GSCompatibilityTwilightForest.isInstalled = true;
+        }
     }
 }

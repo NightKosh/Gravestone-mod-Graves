@@ -1,3 +1,4 @@
+
 package gravestone.config;
 
 import gravestone.core.GSPotion;
@@ -247,6 +248,7 @@ public class GSConfig {
     public static boolean storeBackpacksItems;
     public static boolean enableArsMagicaSoulbound;
     public static boolean enableEnderIOSoulbound;
+    public static boolean enableTwilightForestKeeping;
 
     private static void compatibilityConfigs() {
         spawnMoCreaturesMobs = config.get(CATEGORY_COMPATIBILITY, "SpawnMoCreaturesMobs", true).getBoolean(true);
@@ -264,6 +266,7 @@ public class GSConfig {
 
         enableArsMagicaSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableArsMagicaSoulbound", true).getBoolean(true);
         enableEnderIOSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableEnderIOSoulbound", true).getBoolean(true);
+        enableTwilightForestKeeping = config.get(CATEGORY_COMPATIBILITY, "EnableTwilightForestCharmsOfKeeping", true).getBoolean(true);
     }
 
     // grave names

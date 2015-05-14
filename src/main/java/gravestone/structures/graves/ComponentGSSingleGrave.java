@@ -3,7 +3,6 @@ package gravestone.structures.graves;
 import gravestone.block.BlockGSGraveStone;
 import gravestone.core.GSBlock;
 import gravestone.core.logger.GSLogger;
-
 import java.util.Random;
 import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.block.GraveStoneHelper;

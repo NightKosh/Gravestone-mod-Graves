@@ -1,3 +1,4 @@
+
 package gravestone.block;
 
 import gravestone.api.IGraveStone;
@@ -393,7 +394,13 @@ public class GraveStoneHelper implements IGraveStone {
             items.addAll(Arrays.asList(player.inventory.mainInventory));
             items.addAll(Arrays.asList(player.inventory.armorInventory));
 
+            GSCompatibilityTwilightForest.addSlotTags(items);
             GSCompatibilityBattlegear.addItems(items, player);
+
+            if (!GSCompatibilityTwilightForest.handleCharmsOfKeeping(items, player)) {
+                player.inventory.clear();
+            }
+
             GSCompatibilityTheCampingMod.addItems(items, player);
             GSCompatibilityBaubles.addItems(items, player);
             GSCompatibilityMariculture.addItems(items, player);
@@ -401,10 +408,12 @@ public class GraveStoneHelper implements IGraveStone {
             GSCompatibilityRpgInventory.addItems(items, player);
             GSCompatibilityGalacticraft.addItems(items, player);
             GSCompatibilityBackpacksMod.addItems(items, player);
-            player.inventory.clear();
 
             GSCompatibilityisArsMagica.getSoulboundItemsBack(items, player);
             GSCompatibilityEnderIO.getSoulboundItemsBack(items, player);
+
+            //TODO is it really required??
+            GSCompatibilityTwilightForest.removeSlotTags(items);
 
             createGrave(player, event, items, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES, false, spawnTime);
         } else {

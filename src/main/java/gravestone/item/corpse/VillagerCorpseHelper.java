@@ -66,10 +66,12 @@ public class VillagerCorpseHelper extends CorpseHelper {
             NBTTagCompound recipeTag;
             for (int i = 0; i < recipes.size(); i++) {
                 recipe = (MerchantRecipe) recipes.get(i);
-                recipeTag = recipe.writeToTags();
-                recipeTag.setInteger("uses", 0);
-                recipeTag.setInteger("maxUses", 7);
-                recipe.readFromTags(recipeTag);
+                if (recipe != null) {
+                    recipeTag = recipe.writeToTags();
+                    recipeTag.setInteger("uses", 0);
+                    recipeTag.setInteger("maxUses", 7);
+                    recipe.readFromTags(recipeTag);
+                }
             }
             nbt.setTag("Offers", recipes.getRecipiesAsTags());
         }
