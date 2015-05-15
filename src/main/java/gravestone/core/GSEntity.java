@@ -88,20 +88,20 @@ public class GSEntity {
         // zombie
         EntityRegistry.registerModEntity(EntityZombieSkullCrawler.class, ZOMBIE_SKULL_CRAWLER_NAME, 6, ModInfo.ID, 100, 1, true);
 
-        //TODO registerGlobalEntityID -> registerModEntity
-        EntityRegistry.registerGlobalEntityID(EntityZombieHorse.class, ZOMBIE_HORSE_NAME, EntityRegistry.findGlobalUniqueEntityId(), ZOMBIE_BACKGROUND_EGG_COLOR, HORSE_FOREGROUND_EGG_COLOR);
-        EntityRegistry.registerGlobalEntityID(EntitySkeletonHorse.class, SKELETON_HORSE_NAME, EntityRegistry.findGlobalUniqueEntityId(), SKELETON_BACKGROUND_EGG_COLOR, HORSE_FOREGROUND_EGG_COLOR);
+        //TODO addSpawn
+        EntityRegistry.registerModEntity(EntityZombieHorse.class, ZOMBIE_HORSE_NAME, 7, ModInfo.ID, 100, 1, true);
+        EntityRegistry.registerModEntity(EntitySkeletonHorse.class, SKELETON_HORSE_NAME, 8, ModInfo.ID, 100, 1, true);
 
-        EntityRegistry.registerGlobalEntityID(EntitySkeletonRaider.class, SKELETON_RAIDER_NAME, EntityRegistry.findGlobalUniqueEntityId(), SKELETON_BACKGROUND_EGG_COLOR, HORSE_FOREGROUND_EGG_COLOR);
-        if (GSConfig.spawnSkeletonRaiders) {
-            EntityRegistry.addSpawn(EntitySkeletonRaider.class, 1, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.PLAINS));
-        }
-        EntityRegistry.registerGlobalEntityID(EntityZombieRaider.class, ZOMBIE_RAIDER_NAME, EntityRegistry.findGlobalUniqueEntityId(), ZOMBIE_BACKGROUND_EGG_COLOR, HORSE_FOREGROUND_EGG_COLOR);
+        EntityRegistry.registerModEntity(EntityZombieRaider.class, ZOMBIE_RAIDER_NAME, 10, ModInfo.ID, 100, 1, true);
         if (GSConfig.spawnZombieRaiders) {
             EntityRegistry.addSpawn(EntityZombieRaider.class, 1, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.PLAINS));
         }
+        EntityRegistry.registerModEntity(EntitySkeletonRaider.class, SKELETON_RAIDER_NAME, 9, ModInfo.ID, 100, 1, true);
+        if (GSConfig.spawnSkeletonRaiders) {
+            EntityRegistry.addSpawn(EntitySkeletonRaider.class, 1, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.PLAINS));
+        }
 
-        EntityRegistry.registerGlobalEntityID(EntityRaven.class, RAVEN_NAME, EntityRegistry.findGlobalUniqueEntityId(), RAVEN_BACKGROUND_EGG_COLOR, SPIDER_FOREGROUND_EGG_COLOR);
+        EntityRegistry.registerModEntity(EntityRaven.class, RAVEN_NAME, 11, ModInfo.ID, 100, 1, true);
         EntityRegistry.addSpawn(EntityRaven.class, 1, 3, 10, EnumCreatureType.AMBIENT);
 
         // ghosts
