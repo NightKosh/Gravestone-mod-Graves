@@ -1,19 +1,14 @@
 package gravestone.renderer.tileentity;
 
 import com.google.common.collect.Maps;
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import gravestone.block.enums.EnumGraveMaterial;
 import gravestone.block.enums.EnumMemorials;
-import gravestone.core.ModInfo;
 import gravestone.core.Resources;
 import gravestone.models.block.ModelMemorial;
 import gravestone.models.block.memorials.*;
 import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.LayeredTexture;
-import net.minecraft.client.resources.DefaultPlayerSkin;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -22,7 +17,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * GraveStone mod
@@ -36,7 +30,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
     private static final Map<EnumMemorials, ResourceLocation> mossyTextures = Maps.newHashMap();
     private static final Map<EnumGraveMaterial, ResourceLocation> mossyPedestalTextures = Maps.newHashMap();
     private static final Map<EnumGraveMaterial, ResourceLocation> mossyArmorTextures = Maps.newHashMap();
-//    private static final Map<String, ResourceLocation> steveTextures = Maps.newHashMap();
+    //    private static final Map<String, ResourceLocation> steveTextures = Maps.newHashMap();
     public static ModelMemorial cross = new ModelMemorialCross();
     public static ModelMemorial obelisk = new ModelMemorialObelisk();
     public static ModelMemorial steveStatue = new ModelSteveStatueMemorial();

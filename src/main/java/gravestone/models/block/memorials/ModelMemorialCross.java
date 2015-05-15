@@ -14,53 +14,53 @@ import net.minecraft.client.model.ModelRenderer;
 @SideOnly(Side.CLIENT)
 public class ModelMemorialCross extends ModelMemorial {
 
-    ModelRenderer BottomPlate;
-    ModelRenderer BottomPlate2;
-    ModelRenderer VerticalPart;
-    ModelRenderer RightHorisontalPart;
-    ModelRenderer LeftHorisontalPart;
+    private ModelRenderer bottomPlate;
+    private ModelRenderer bottomPlate2;
+    private ModelRenderer verticalPart;
+    private ModelRenderer rightHorizontalPart;
+    private ModelRenderer leftHorizontalPart;
 
     public ModelMemorialCross() {
         textureWidth = 256;
         textureHeight = 128;
-        BottomPlate = new ModelRenderer(this, 0, 0);
-        BottomPlate.addBox(0F, 0F, 0F, 48, 6, 48);
-        BottomPlate.setRotationPoint(-24F, 18F, -24F);
-        BottomPlate.setTextureSize(64, 32);
-        BottomPlate.mirror = true;
-        setRotation(BottomPlate, 0F, 0F, 0F);
-        BottomPlate2 = new ModelRenderer(this, 0, 54);
-        BottomPlate2.addBox(0F, 0F, 0F, 32, 6, 32);
-        BottomPlate2.setRotationPoint(-16F, 12F, -16F);
-        BottomPlate2.setTextureSize(64, 32);
-        BottomPlate2.mirror = true;
-        setRotation(BottomPlate2, 0F, 0F, 0F);
-        VerticalPart = new ModelRenderer(this, 192, 0);
-        VerticalPart.addBox(0F, 0F, 0F, 10, 68, 10);
-        VerticalPart.setRotationPoint(-5F, -55F, -5F);
-        VerticalPart.setTextureSize(64, 32);
-        VerticalPart.mirror = true;
-        setRotation(VerticalPart, 0F, 0F, 0F);
-        RightHorisontalPart = new ModelRenderer(this, 128, 54);
-        RightHorisontalPart.addBox(0F, 0F, 0F, 20, 10, 10);
-        RightHorisontalPart.setRotationPoint(5F, -36F, -5F);
-        RightHorisontalPart.setTextureSize(64, 32);
-        RightHorisontalPart.mirror = true;
-        setRotation(RightHorisontalPart, 0F, 0F, 0F);
-        LeftHorisontalPart = new ModelRenderer(this, 128, 54);
-        LeftHorisontalPart.addBox(0F, 0F, 0F, 20, 10, 10);
-        LeftHorisontalPart.setRotationPoint(-25F, -36F, -5F);
-        LeftHorisontalPart.setTextureSize(64, 32);
-        LeftHorisontalPart.mirror = true;
-        setRotation(LeftHorisontalPart, 0F, 0F, 0F);
+        bottomPlate = new ModelRenderer(this, 0, 0);
+        bottomPlate.addBox(0, 0, 0, 48, 6, 48);
+        bottomPlate.setRotationPoint(-24, 18, -24);
+        bottomPlate.setTextureSize(64, 32);
+        bottomPlate.mirror = true;
+        setRotation(bottomPlate, 0, 0, 0);
+        bottomPlate2 = new ModelRenderer(this, 0, 54);
+        bottomPlate2.addBox(0, 0, 0, 32, 6, 32);
+        bottomPlate2.setRotationPoint(-16, 12, -16);
+        bottomPlate2.setTextureSize(64, 32);
+        bottomPlate2.mirror = true;
+        setRotation(bottomPlate2, 0, 0, 0);
+        verticalPart = new ModelRenderer(this, 192, 0);
+        verticalPart.addBox(0, 0, 0, 10, 68, 10);
+        verticalPart.setRotationPoint(-5, -55, -5);
+        verticalPart.setTextureSize(64, 32);
+        verticalPart.mirror = true;
+        setRotation(verticalPart, 0, 0, 0);
+        rightHorizontalPart = new ModelRenderer(this, 128, 54);
+        rightHorizontalPart.addBox(0, 0, 0, 20, 10, 10);
+        rightHorizontalPart.setRotationPoint(5, -36, -5);
+        rightHorizontalPart.setTextureSize(64, 32);
+        rightHorizontalPart.mirror = true;
+        setRotation(rightHorizontalPart, 0, 0, 0);
+        leftHorizontalPart = new ModelRenderer(this, 128, 54);
+        leftHorizontalPart.addBox(0, 0, 0, 20, 10, 10);
+        leftHorizontalPart.setRotationPoint(-25, -36, -5);
+        leftHorizontalPart.setTextureSize(64, 32);
+        leftHorizontalPart.mirror = true;
+        setRotation(leftHorizontalPart, 0, 0, 0);
     }
 
     @Override
     public void renderAll() {
-        BottomPlate.render(0.0625F);
-        BottomPlate2.render(0.0625F);
-        VerticalPart.render(0.0625F);
-        RightHorisontalPart.render(0.0625F);
-        LeftHorisontalPart.render(0.0625F);
+        bottomPlate.render(0.0625F);
+        bottomPlate2.render(0.0625F);
+        verticalPart.render(0.0625F);
+        rightHorizontalPart.render(0.0625F);
+        leftHorizontalPart.render(0.0625F);
     }
 }

@@ -17,7 +17,7 @@ public class ModelGSSkeleton extends ModelSkeleton implements IModelBaseAdapter 
     protected ModelRendererSkull skull;
 
     public ModelGSSkeleton() {
-        this(0.0F, false);
+        this(0, false);
     }
 
     public ModelGSSkeleton(float p_i46303_1_, boolean p_i46303_2_) {

@@ -1,11 +1,11 @@
 package gravestone.core;
 
-import net.minecraft.client.Minecraft;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import gravestone.item.ItemGSChisel;
 import gravestone.item.ItemGSCorpse;
 import gravestone.item.ItemGSMonsterPlacer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * GraveStone mod

@@ -1,10 +1,10 @@
-
 package gravestone.core.compatibility;
 
-import java.util.List;
 import gravestone.config.GSConfig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 /**
  * GraveStone mod
@@ -17,7 +17,7 @@ public class GSCompatibilityBattlegear {
     private static final short FIRST_SLOT = 150;
     private static final short LAST_SLOT = 155;
     protected static boolean isInstalled = false;
-    
+
     private GSCompatibilityBattlegear() {
     }
 

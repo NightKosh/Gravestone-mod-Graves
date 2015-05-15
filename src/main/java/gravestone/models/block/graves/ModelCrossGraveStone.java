@@ -1,9 +1,9 @@
 package gravestone.models.block.graves;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import gravestone.models.block.ModelGraveStone;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * GraveStone mod
@@ -22,23 +22,23 @@ public class ModelCrossGraveStone extends ModelGraveStone {
         textureWidth = 32;
         textureHeight = 32;
         VerticalPart = new ModelRenderer(this, 0, 0);
-        VerticalPart.addBox(0F, 0F, 0F, 2, 16, 2);
-        VerticalPart.setRotationPoint(-1F, 8F, 5F);
+        VerticalPart.addBox(0, 0, 0, 2, 16, 2);
+        VerticalPart.setRotationPoint(-1, 8, 5);
         VerticalPart.setTextureSize(32, 32);
         VerticalPart.mirror = true;
-        setRotation(VerticalPart, 0F, 0F, 0F);
+        setRotation(VerticalPart, 0, 0, 0);
         RightPart = new ModelRenderer(this, 0, 0);
-        RightPart.addBox(0F, 0F, 0F, 5, 1, 1);
-        RightPart.setRotationPoint(1F, 13F, 5.5F);
+        RightPart.addBox(0, 0, 0, 5, 1, 1);
+        RightPart.setRotationPoint(1, 13, 5.5F);
         RightPart.setTextureSize(32, 32);
         RightPart.mirror = true;
-        setRotation(RightPart, 0F, 0F, 0F);
+        setRotation(RightPart, 0, 0, 0);
         LeftPart = new ModelRenderer(this, 0, 0);
-        LeftPart.addBox(0F, 0F, 0F, 5, 1, 1);
-        LeftPart.setRotationPoint(-6F, 13F, 5.5F);
+        LeftPart.addBox(0, 0, 0, 5, 1, 1);
+        LeftPart.setRotationPoint(-6, 13, 5.5F);
         LeftPart.setTextureSize(32, 32);
         LeftPart.mirror = true;
-        setRotation(LeftPart, 0F, 0F, 0F);
+        setRotation(LeftPart, 0, 0, 0);
     }
 
     @Override

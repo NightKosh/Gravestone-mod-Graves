@@ -1,7 +1,6 @@
 package gravestone.structures.village.undertaker;
 
 import gravestone.core.ModInfo;
-import gravestone.core.Resources;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 /**

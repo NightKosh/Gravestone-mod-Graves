@@ -1,8 +1,9 @@
-
 package gravestone.structures;
-import java.util.Random;
+
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 /**
  * GraveStone mod

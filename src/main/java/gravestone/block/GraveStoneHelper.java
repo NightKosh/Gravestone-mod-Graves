@@ -1,4 +1,3 @@
-
 package gravestone.block;
 
 import gravestone.api.IGraveStone;

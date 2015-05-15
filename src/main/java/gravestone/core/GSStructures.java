@@ -1,7 +1,5 @@
-
 package gravestone.core;
 
-import gravestone.ModGraveStone;
 import gravestone.config.GSConfig;
 import gravestone.core.logger.GSLogger;
 import gravestone.structures.GraveStoneWorldGenerator;
@@ -10,7 +8,6 @@ import gravestone.structures.village.cemetery.VillageHandlerGSCemetery;
 import gravestone.structures.village.memorial.ComponentGSVillageMemorial;
 import gravestone.structures.village.memorial.VillageHandlerGSMemorial;
 import gravestone.structures.village.undertaker.ComponentGSVillageUndertaker;
-import gravestone.structures.village.undertaker.UndertakerProfession;
 import gravestone.structures.village.undertaker.VillageHandlerGSUndertaker;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

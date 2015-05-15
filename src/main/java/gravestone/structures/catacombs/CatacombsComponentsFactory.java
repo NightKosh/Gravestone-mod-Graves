@@ -1,18 +1,6 @@
-
 package gravestone.structures.catacombs;
 
-import gravestone.structures.catacombs.components.Bridge;
-import gravestone.structures.catacombs.components.CatacombsBaseComponent;
-import gravestone.structures.catacombs.components.Corridor;
-import gravestone.structures.catacombs.components.CreeperRoom;
-import gravestone.structures.catacombs.components.Crossing;
-import gravestone.structures.catacombs.components.EnderHall;
-import gravestone.structures.catacombs.components.GraveCorridor;
-import gravestone.structures.catacombs.components.GraveHall;
-import gravestone.structures.catacombs.components.SpidersCorridor;
-import gravestone.structures.catacombs.components.StatuesHall;
-import gravestone.structures.catacombs.components.TrapCorridor;
-import gravestone.structures.catacombs.components.Treasury;
+import gravestone.structures.catacombs.components.*;
 import net.minecraft.util.EnumFacing;
 
 import java.lang.reflect.Constructor;
@@ -26,9 +14,9 @@ import java.util.Random;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class CatacombsComponentsFactory {
-    
+
     private CatacombsComponentsFactory() {
-        
+
     }
 
     /**
@@ -94,8 +82,8 @@ public class CatacombsComponentsFactory {
                 }
         }
     }
-    
-    
+
+
     public static Class getNextComponent(Class componentClass, CatacombsLevel.COMPONENT_SIDE componentSide, Random random, int level) {
         if (componentSide == CatacombsLevel.COMPONENT_SIDE.FRONT) {
             return CatacombsComponentsFactory.getNextComponentForLevel(componentClass, random, level);
@@ -107,7 +95,7 @@ public class CatacombsComponentsFactory {
             }
         }
     }
-    
+
     /**
      * Return ranfom class of corridor component
      */
@@ -122,7 +110,7 @@ public class CatacombsComponentsFactory {
             return TrapCorridor.class;
         }
     }
-    
+
     /**
      * Return ranfom class of crossing component
      */
@@ -133,7 +121,7 @@ public class CatacombsComponentsFactory {
             return CreeperRoom.class;
         }
     }
-    
+
     private static Class getHallType(Random random) {
         int hallChance = random.nextInt(10);
 

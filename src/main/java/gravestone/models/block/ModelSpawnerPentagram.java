@@ -28,8 +28,8 @@ public class ModelSpawnerPentagram extends ModelBase {
         textureHeight = 32;
 
         pentagram = new ModelRenderer(this, -32, -32);
-        pentagram.addBox(0F, 0F, 0F, 32, 0, 32);
-        pentagram.setRotationPoint(-16F, 24F, -16F);
+        pentagram.addBox(0, 0, 0, 32, 0, 32);
+        pentagram.setRotationPoint(-16, 24, -16);
 
         candle1 = new ModelSkullCandle();
         candle2 = new ModelSkullCandle();

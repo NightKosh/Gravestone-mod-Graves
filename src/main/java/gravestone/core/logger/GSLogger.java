@@ -1,4 +1,3 @@
-
 package gravestone.core.logger;
 
 import gravestone.core.ModInfo;

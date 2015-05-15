@@ -1,10 +1,10 @@
 package gravestone.models.block.memorials;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * GraveStone mod
@@ -34,7 +34,7 @@ public class ModelHangedVillager extends ModelBase {
         this.textureHeight = textureHeight;
 
         head = new ModelRenderer(this, 0, 0);
-        head.addBox(-4F, -8F, -4F, 8, 10, 8);
+        head.addBox(-4, -8, -4, 8, 10, 8);
         head.setRotationPoint(0, -2, 0);
         head.setTextureSize(textureWidth, textureHeight);
         setRotation(head, 0.20F, 0, 0);

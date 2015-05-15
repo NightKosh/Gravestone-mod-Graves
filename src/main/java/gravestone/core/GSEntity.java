@@ -80,7 +80,7 @@ public class GSEntity {
             EntityRegistry.addSpawn(EntityZombieCat.class, 2, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.JUNGLE));
         }
 
-        // skullcrawler
+        // skullcrawlers
         EntityRegistry.registerModEntity(EntitySkullCrawler.class, SKULL_CRAWLER_NAME, 4, ModInfo.ID, 100, 1, true);
         // wither
         EntityRegistry.registerModEntity(EntityWitherSkullCrawler.class, WITHER_SKULL_CRAWLER_NAME, 5, ModInfo.ID, 100, 1, true);

@@ -1,13 +1,12 @@
 package gravestone.models.block.memorials;
 
-import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.core.Resources;
 import gravestone.models.block.ModelMemorial;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -18,7 +17,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class ModelGibbet extends ModelMemorial {
 
-    private ModelRenderer horisontalPlank;
+    private ModelRenderer horizontalPlank;
     private ModelRenderer verticalPlank;
     private ModelRenderer plank1;
     private ModelRenderer plank2;
@@ -45,10 +44,10 @@ public class ModelGibbet extends ModelMemorial {
         textureWidth = 64;
         textureHeight = 128;
 
-        horisontalPlank = new ModelRenderer(this, 0, 0);
-        horisontalPlank.addBox(0, 0, 0, 4, 56, 4);
-        horisontalPlank.setRotationPoint(-2, -32, 3);
-        horisontalPlank.setTextureSize(this.textureWidth, this.textureHeight);
+        horizontalPlank = new ModelRenderer(this, 0, 0);
+        horizontalPlank.addBox(0, 0, 0, 4, 56, 4);
+        horizontalPlank.setRotationPoint(-2, -32, 3);
+        horizontalPlank.setTextureSize(this.textureWidth, this.textureHeight);
 
         verticalPlank = new ModelRenderer(this, 16, 0);
         verticalPlank.addBox(0, 0, 0, 4, 4, 20);
@@ -126,7 +125,7 @@ public class ModelGibbet extends ModelMemorial {
     }
 
     public void renderAllWithoutLoop() {
-        horisontalPlank.render(0.0625F);
+        horizontalPlank.render(0.0625F);
         verticalPlank.render(0.0625F);
         plank1.render(0.0625F);
         plank2.render(0.0625F);

@@ -24,13 +24,13 @@ import java.util.List;
  */
 public class ItemGSMonsterPlacer extends ItemMonsterPlacer {
     public static String[] eggs = {
-        GSEntity.ZOMBIE_DOG_NAME,
-        GSEntity.ZOMBIE_CAT_NAME,
-        GSEntity.SKELETON_DOG_NAME,
-        GSEntity.SKELETON_CAT_NAME,
-        GSEntity.SKULL_CRAWLER_NAME,
-        GSEntity.WITHER_SKULL_CRAWLER_NAME,
-        GSEntity.ZOMBIE_SKULL_CRAWLER_NAME
+            GSEntity.ZOMBIE_DOG_NAME,
+            GSEntity.ZOMBIE_CAT_NAME,
+            GSEntity.SKELETON_DOG_NAME,
+            GSEntity.SKELETON_CAT_NAME,
+            GSEntity.SKULL_CRAWLER_NAME,
+            GSEntity.WITHER_SKULL_CRAWLER_NAME,
+            GSEntity.ZOMBIE_SKULL_CRAWLER_NAME
     };
     public static int[][] eggColor = {
             {0xD7D3D3, 0x799C65},
@@ -49,13 +49,11 @@ public class ItemGSMonsterPlacer extends ItemMonsterPlacer {
 //TODO        this.iconString = "spawn_egg";
     }
 
-    public String getItemStackDisplayName(ItemStack p_77653_1_)
-    {
+    public String getItemStackDisplayName(ItemStack p_77653_1_) {
         String s = ("" + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name")).trim();
         String s1 = eggs[p_77653_1_.getItemDamage()];
 
-        if (s1 != null)
-        {
+        if (s1 != null) {
             s = s + " " + StatCollector.translateToLocal("entity." + s1 + ".name");
         }
 
@@ -64,7 +62,7 @@ public class ItemGSMonsterPlacer extends ItemMonsterPlacer {
 
     public int getColorFromItemStack(ItemStack item, int colorID) {
         int itemDamage = item.getItemDamage();
-        if(itemDamage >= 0 && itemDamage < eggColor.length) {
+        if (itemDamage >= 0 && itemDamage < eggColor.length) {
             return eggColor[itemDamage][colorID & 1];
         }
         return 0xFFFFFF;
@@ -75,14 +73,10 @@ public class ItemGSMonsterPlacer extends ItemMonsterPlacer {
      * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
      */
     @Override
-    public boolean onItemUse(ItemStack item, EntityPlayer player, World world, BlockPos blockPos, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
-        if (world.isRemote)
-        {
+    public boolean onItemUse(ItemStack item, EntityPlayer player, World world, BlockPos blockPos, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (world.isRemote) {
             return true;
-        }
-        else
-        {
+        } else {
             IBlockState block = world.getBlockState(blockPos);
             double d0 = 0;
             if (facing == EnumFacing.UP && block instanceof BlockFence) {
@@ -91,15 +85,12 @@ public class ItemGSMonsterPlacer extends ItemMonsterPlacer {
 
             blockPos = blockPos.offset(facing);
             Entity entity = spawnCreature(world, item.getItemDamage(), blockPos.getX() + 0.5, blockPos.getY() + d0, blockPos.getZ() + 0.5);
-            if (entity != null)
-            {
-                if (entity instanceof EntityLivingBase && item.hasDisplayName())
-                {
-                    ((EntityLiving)entity).setCustomNameTag(item.getDisplayName());
+            if (entity != null) {
+                if (entity instanceof EntityLivingBase && item.hasDisplayName()) {
+                    ((EntityLiving) entity).setCustomNameTag(item.getDisplayName());
                 }
 
-                if (!player.capabilities.isCreativeMode)
-                {
+                if (!player.capabilities.isCreativeMode) {
                     --item.stackSize;
                 }
             }
@@ -112,49 +103,35 @@ public class ItemGSMonsterPlacer extends ItemMonsterPlacer {
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
     @Override
-    public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player)
-    {
-        if (world.isRemote)
-        {
+    public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
+        if (world.isRemote) {
             return item;
-        }
-        else
-        {
+        } else {
             MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, player, true);
 
-            if (movingobjectposition == null)
-            {
+            if (movingobjectposition == null) {
                 return item;
-            }
-            else
-            {
-                if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
-                {
+            } else {
+                if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
 
-                    if (!world.canMineBlockBody(player, movingobjectposition.getBlockPos()))
-                    {
+                    if (!world.canMineBlockBody(player, movingobjectposition.getBlockPos())) {
                         return item;
                     }
 
-                    if (!player.canPlayerEdit(movingobjectposition.getBlockPos(), movingobjectposition.sideHit, item))
-                    {
+                    if (!player.canPlayerEdit(movingobjectposition.getBlockPos(), movingobjectposition.sideHit, item)) {
                         return item;
                     }
 
-                    if (world.getBlockState(movingobjectposition.getBlockPos()).getBlock() instanceof BlockLiquid)
-                    {
+                    if (world.getBlockState(movingobjectposition.getBlockPos()).getBlock() instanceof BlockLiquid) {
                         Entity entity = spawnCreature(world, item.getItemDamage(), movingobjectposition.getBlockPos().getX(),
                                 movingobjectposition.getBlockPos().getY(), movingobjectposition.getBlockPos().getZ());
 
-                        if (entity != null)
-                        {
-                            if (entity instanceof EntityLivingBase && item.hasDisplayName())
-                            {
+                        if (entity != null) {
+                            if (entity instanceof EntityLivingBase && item.hasDisplayName()) {
                                 entity.setCustomNameTag(item.getDisplayName());
                             }
 
-                            if (!player.capabilities.isCreativeMode)
-                            {
+                            if (!player.capabilities.isCreativeMode) {
                                 --item.stackSize;
                             }
                         }
@@ -167,16 +144,15 @@ public class ItemGSMonsterPlacer extends ItemMonsterPlacer {
     }
 
     public static Entity spawnCreature(World world, int damageValue, double x, double y, double z) {
-        if(world.isRemote || damageValue < 0 || damageValue >= eggs.length) {
+        if (world.isRemote || damageValue < 0 || damageValue >= eggs.length) {
             return null;
         }
 
         String fullEntityName = String.format("%s.%s", ModInfo.ID, eggs[damageValue]);
         Entity entity = EntityList.createEntityByName(fullEntityName, world);
 
-        if (entity != null && entity instanceof EntityLivingBase)
-        {
-            EntityLiving entityliving = (EntityLiving)entity;
+        if (entity != null && entity instanceof EntityLivingBase) {
+            EntityLiving entityliving = (EntityLiving) entity;
             entity.setLocationAndAngles(x, y, z, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F), 0.0F);
             entityliving.rotationYawHead = entityliving.rotationYaw;
             entityliving.renderYawOffset = entityliving.rotationYaw;
@@ -190,7 +166,7 @@ public class ItemGSMonsterPlacer extends ItemMonsterPlacer {
 
     @Override
     public void getSubItems(Item item, CreativeTabs tabs, List subitems) {
-        for(int i = 0; i < eggs.length; i++) {
+        for (int i = 0; i < eggs.length; i++) {
             subitems.add(new ItemStack(item, 1, i));
         }
     }

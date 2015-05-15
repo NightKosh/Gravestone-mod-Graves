@@ -1,11 +1,11 @@
 package gravestone.models.block.memorials;
 
 import gravestone.core.Resources;
+import gravestone.models.block.ModelGraveStone;
 import gravestone.renderer.tileentity.TileEntityGSMemorialRenderer;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import gravestone.models.block.ModelGraveStone;
-import net.minecraft.client.model.ModelRenderer;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -17,24 +17,24 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class ModelSmallPedestal extends ModelGraveStone {
 
-    protected ModelRenderer Pedestal;
-    protected ModelRenderer Pedestal2;
+    protected ModelRenderer pedestal;
+    protected ModelRenderer pedestal2;
 
     public ModelSmallPedestal() {
         textureWidth = 64;
         textureHeight = 32;
-        Pedestal = new ModelRenderer(this, 0, 0);
-        Pedestal.addBox(0F, 0F, 0F, 16, 4, 16);
-        Pedestal.setRotationPoint(-8F, 20F, -8F);
-        Pedestal.setTextureSize(64, 32);
-        Pedestal.mirror = true;
-        setRotation(Pedestal, 0F, 0F, 0F);
-        Pedestal2 = new ModelRenderer(this, 2, 2);
-        Pedestal2.addBox(0F, 0F, 0F, 14, 4, 14);
-        Pedestal2.setRotationPoint(-7F, 16F, -7F);
-        Pedestal2.setTextureSize(64, 32);
-        Pedestal2.mirror = true;
-        setRotation(Pedestal2, 0F, 0F, 0F);
+        pedestal = new ModelRenderer(this, 0, 0);
+        pedestal.addBox(0, 0, 0, 16, 4, 16);
+        pedestal.setRotationPoint(-8, 20, -8);
+        pedestal.setTextureSize(64, 32);
+        pedestal.mirror = true;
+        setRotation(pedestal, 0, 0, 0);
+        pedestal2 = new ModelRenderer(this, 2, 2);
+        pedestal2.addBox(0, 0, 0, 14, 4, 14);
+        pedestal2.setRotationPoint(-7, 16, -7);
+        pedestal2.setTextureSize(64, 32);
+        pedestal2.mirror = true;
+        setRotation(pedestal2, 0, 0, 0);
     }
 
     @Override
@@ -42,8 +42,8 @@ public class ModelSmallPedestal extends ModelGraveStone {
         unshiftModel();
         float par7 = 0.0625F;
         TileEntityGSMemorialRenderer.instance.bindTextureByName(Resources.SMALL_PEDESTAL);
-        Pedestal.render(par7);
-        Pedestal2.render(par7);
+        pedestal.render(par7);
+        pedestal2.render(par7);
     }
 
     public static void shiftModel() {

@@ -39,7 +39,7 @@ public class RenderSkullCrawler extends RenderLiving {
      */
     @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
-        switch(crawlerType) {
+        switch (crawlerType) {
             case wither:
                 return Resources.WITHER_SKULL_CRAWLER;
             case zombie:

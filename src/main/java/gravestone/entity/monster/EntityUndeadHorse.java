@@ -1,6 +1,8 @@
 package gravestone.entity.monster;
 
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
@@ -121,14 +123,14 @@ public abstract class EntityUndeadHorse extends EntityHorse {
         Object entityLivingData = super.func_180482_a(difficulty, livingData);
         int horseType = getUndeadHorseType().getId();
 
-        if(entityLivingData instanceof EntityHorse.GroupData) {
-            ((EntityHorse.GroupData)entityLivingData).field_111107_a = horseType;
+        if (entityLivingData instanceof EntityHorse.GroupData) {
+            ((EntityHorse.GroupData) entityLivingData).field_111107_a = horseType;
         } else {
             entityLivingData = new EntityHorse.GroupData(horseType, 0);
         }
 
         this.setHorseType(horseType);
-        return (IEntityLivingData)entityLivingData;
+        return (IEntityLivingData) entityLivingData;
     }
 
     @Override
@@ -136,26 +138,26 @@ public abstract class EntityUndeadHorse extends EntityHorse {
         ItemStack itemstack = player.inventory.getCurrentItem();
         if (itemstack != null && itemstack.getItem() == Items.spawn_egg) {
             return super.interact(player);
-        } else if(this.isTame() && this.isAdultHorse() && player.isSneaking()) {
+        } else if (this.isTame() && this.isAdultHorse() && player.isSneaking()) {
             this.openGUI(player);
             return true;
-        } else if(this.func_110253_bW() && this.riddenByEntity != null) {
+        } else if (this.func_110253_bW() && this.riddenByEntity != null) {
             return super.interact(player);
         } else {
-            if(itemstack != null) {
+            if (itemstack != null) {
                 boolean flag = false;
-                if(this.canWearArmor()) {
+                if (this.canWearArmor()) {
                     byte armorType = -1;
-                    if(itemstack.getItem() == Items.iron_horse_armor) {
+                    if (itemstack.getItem() == Items.iron_horse_armor) {
                         armorType = 1;
-                    } else if(itemstack.getItem() == Items.golden_horse_armor) {
+                    } else if (itemstack.getItem() == Items.golden_horse_armor) {
                         armorType = 2;
-                    } else if(itemstack.getItem() == Items.diamond_horse_armor) {
+                    } else if (itemstack.getItem() == Items.diamond_horse_armor) {
                         armorType = 3;
                     }
 
-                    if(armorType >= 0) {
-                        if(!this.isTame()) {
+                    if (armorType >= 0) {
+                        if (!this.isTame()) {
                             this.makeHorseRearWithSound();
                             return true;
                         }
@@ -186,8 +188,8 @@ public abstract class EntityUndeadHorse extends EntityHorse {
                 }
 
                 if (flag) {
-                    if(!player.capabilities.isCreativeMode && --itemstack.stackSize == 0) {
-                        player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+                    if (!player.capabilities.isCreativeMode && --itemstack.stackSize == 0) {
+                        player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack) null);
                     }
 
                     return true;
@@ -208,8 +210,8 @@ public abstract class EntityUndeadHorse extends EntityHorse {
                 }
             }
 
-            if(this.func_110253_bW() && this.riddenByEntity == null) {
-                if(itemstack != null && itemstack.interactWithEntity(player, this)) {
+            if (this.func_110253_bW() && this.riddenByEntity == null) {
+                if (itemstack != null && itemstack.interactWithEntity(player, this)) {
                     return true;
                 } else if (this.isTame()) {
                     this.mountHorse(player);
@@ -223,10 +225,10 @@ public abstract class EntityUndeadHorse extends EntityHorse {
     }
 
     public void onLivingUpdate() {
-        if(this.worldObj.isDaytime() && !this.worldObj.isRemote) {
+        if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
             float brightness = this.getBrightness(1);
-            BlockPos blockpos = new BlockPos(this.posX, (double)Math.round(this.posY), this.posZ);
-            if(brightness > 0.5 && this.rand.nextFloat() * 30 < (brightness - 0.4) * 2 && this.worldObj.canSeeSky(blockpos) && !this.hasArmor()) {
+            BlockPos blockpos = new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ);
+            if (brightness > 0.5 && this.rand.nextFloat() * 30 < (brightness - 0.4) * 2 && this.worldObj.canSeeSky(blockpos) && !this.hasArmor()) {
                 this.setFire(8);
             }
         }
@@ -239,13 +241,13 @@ public abstract class EntityUndeadHorse extends EntityHorse {
         player.rotationPitch = this.rotationPitch;
         this.setEatingHaystack(false);
         this.setRearing(false);
-        if(!this.worldObj.isRemote) {
+        if (!this.worldObj.isRemote) {
             player.mountEntity(this);
         }
     }
 
 
     protected boolean isMovementBlocked() {
-        return this.riddenByEntity != null && this.isHorseSaddled()?true:this.isEatingHaystack() || this.isRearing();
+        return this.riddenByEntity != null && this.isHorseSaddled() ? true : this.isEatingHaystack() || this.isRearing();
     }
 }

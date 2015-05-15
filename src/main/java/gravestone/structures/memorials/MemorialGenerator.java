@@ -1,4 +1,3 @@
-
 package gravestone.structures.memorials;
 
 import gravestone.config.GSConfig;
@@ -38,7 +37,7 @@ public class MemorialGenerator implements GSStructureGenerator {
         }
     }
 
-    public static final double CHANCE = 0.05D;
+    public static final double CHANCE = 0.05;
     public static final short RANGE = 400;
     private static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
 

@@ -1,12 +1,12 @@
 package gravestone.models.block.memorials;
 
-import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.core.Resources;
 import gravestone.models.block.ModelMemorial;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class ModelBurningStake extends ModelMemorial {
 
-    private ModelRenderer horisontalPlank;
+    private ModelRenderer horizontalPlank;
     private ModelRenderer plank1;
     private ModelRenderer plank2;
     private ModelRenderer plank3;
@@ -47,10 +47,10 @@ public class ModelBurningStake extends ModelMemorial {
         textureWidth = 64;
         textureHeight = 128;
 
-        horisontalPlank = new ModelRenderer(this, 0, 0);
-        horisontalPlank.addBox(0, 0, 0, 4, 56, 4);
-        horisontalPlank.setRotationPoint(-2, -32, -2);
-        horisontalPlank.setTextureSize(this.textureWidth, this.textureHeight);
+        horizontalPlank = new ModelRenderer(this, 0, 0);
+        horizontalPlank.addBox(0, 0, 0, 4, 56, 4);
+        horizontalPlank.setRotationPoint(-2, -32, -2);
+        horizontalPlank.setTextureSize(this.textureWidth, this.textureHeight);
 
         plank1 = new ModelRenderer(this, 17, 0);
         plank1.addBox(0, 0, 0, 3, 20, 3);
@@ -160,7 +160,7 @@ public class ModelBurningStake extends ModelMemorial {
     @Override
     public void renderAll() {
         float f5 = 0.0625F;
-        horisontalPlank.render(f5);
+        horizontalPlank.render(f5);
         plank1.render(f5);
         plank2.render(f5);
         plank3.render(f5);

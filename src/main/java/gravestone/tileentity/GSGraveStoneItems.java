@@ -1,4 +1,3 @@
-
 package gravestone.tileentity;
 
 import gravestone.block.GraveStoneHelper;

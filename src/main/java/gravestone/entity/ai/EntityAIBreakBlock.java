@@ -1,4 +1,3 @@
-
 package gravestone.entity.ai;
 
 import net.minecraft.block.Block;
@@ -15,7 +14,7 @@ import net.minecraft.world.EnumDifficulty;
 public class EntityAIBreakBlock extends EntityAIBlockInteract {
 
     private boolean isBlockBroken = false;
-    
+
     public EntityAIBreakBlock(EntityLiving entity, Block block) {
         super(entity, block);
     }

@@ -1,4 +1,3 @@
-
 package gravestone.gui;
 
 import gravestone.ModGraveStone;

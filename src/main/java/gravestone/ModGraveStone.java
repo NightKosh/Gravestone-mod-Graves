@@ -4,6 +4,13 @@ import gravestone.api.GraveStoneAPI;
 import gravestone.api.IGraveStone;
 import gravestone.block.GraveStoneHelper;
 import gravestone.config.GSConfig;
+import gravestone.core.*;
+import gravestone.core.commands.GSCommands;
+import gravestone.core.compatibility.GSCompatibility;
+import gravestone.core.event.GSEventHandlerNetwork;
+import gravestone.core.event.GSEventsHandler;
+import gravestone.core.proxy.CommonProxy;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -13,13 +20,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import gravestone.core.*;
-import gravestone.core.commands.GSCommands;
-import gravestone.core.compatibility.GSCompatibility;
-import gravestone.core.event.GSEventHandlerNetwork;
-import gravestone.core.event.GSEventsHandler;
-import gravestone.core.proxy.CommonProxy;
-import net.minecraftforge.common.MinecraftForge;
 
 /**
  * GraveStone mod

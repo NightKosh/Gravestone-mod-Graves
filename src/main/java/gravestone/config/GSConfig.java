@@ -1,4 +1,3 @@
-
 package gravestone.config;
 
 import gravestone.core.GSPotion;

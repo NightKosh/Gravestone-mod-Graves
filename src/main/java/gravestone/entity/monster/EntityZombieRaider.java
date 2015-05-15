@@ -1,7 +1,6 @@
 package gravestone.entity.monster;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.init.Items;
@@ -28,7 +27,7 @@ public class EntityZombieRaider extends EntityZombie {
         this.setChild(false);
 
         EntityUndeadHorse horse = new EntityZombieHorse(this.worldObj);
-        ((PathNavigateGround)horse.getNavigator()).func_179690_a(false);
+        ((PathNavigateGround) horse.getNavigator()).func_179690_a(false);
         horse.copyLocationAndAnglesFrom(this);
         horse.func_180482_a(difficulty, (IEntityLivingData) null);
 

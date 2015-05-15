@@ -15,11 +15,12 @@ import org.lwjgl.opengl.GL11;
  */
 public class ModelSkullCrawler extends ModelBase {
 
+    //TODO code style
     private static final float baseZ = 0.3490659F;
     private static final float advBaseZ = baseZ * 0.74F;
     private static final float baseY = 0.1047198F;
     private static final float advBaseY = baseY * 2;
-    
+
     private static final float rBaseY = (float) Math.PI + baseY;
     private static final float rAdvBaseY = (float) Math.PI + advBaseY;
 
@@ -38,7 +39,7 @@ public class ModelSkullCrawler extends ModelBase {
         textureHeight = 32;
 
         skull = new ModelSkull();
-        
+
         // Right legs
         rightLeg1 = new ModelRenderer(this, 0, 16);
         rightLeg1.addBox(0, 0, 0, 3, 1, 1);

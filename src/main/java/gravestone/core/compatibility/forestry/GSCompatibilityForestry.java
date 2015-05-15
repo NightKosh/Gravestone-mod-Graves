@@ -1,12 +1,10 @@
-
 package gravestone.core.compatibility.forestry;
 
-import gravestone.config.GSConfig;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import forestry.api.core.ForestryAPI;
 import forestry.api.recipes.RecipeManagers;
 import forestry.api.storage.BackpackManager;
 import forestry.api.storage.EnumBackpackType;
+import gravestone.config.GSConfig;
 import gravestone.core.GSItem;
 import gravestone.core.GSRecipes;
 import gravestone.core.GSTabs;
@@ -14,6 +12,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * GraveStone mod

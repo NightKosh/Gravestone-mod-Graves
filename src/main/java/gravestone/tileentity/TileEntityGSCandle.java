@@ -1,4 +1,3 @@
-
 package gravestone.tileentity;
 
 import net.minecraft.tileentity.TileEntity;

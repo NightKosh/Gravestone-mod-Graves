@@ -18,12 +18,12 @@ import org.lwjgl.opengl.GL11;
  */
 public class ModelBigPedestal extends ModelGraveStone {
 
-    protected ModelRenderer Pedestal1;
-    protected ModelRenderer Pedestal2;
-    protected ModelRenderer Pedestal3;
-    protected ModelRenderer Pedestal4;
-    protected ModelRenderer Pedestal5;
-    protected ModelRenderer Sign;
+    protected ModelRenderer pedestal1;
+    protected ModelRenderer pedestal2;
+    protected ModelRenderer pedestal3;
+    protected ModelRenderer pedestal4;
+    protected ModelRenderer pedestal5;
+    protected ModelRenderer sign;
 
     protected ResourceLocation texture = null;
 
@@ -31,42 +31,42 @@ public class ModelBigPedestal extends ModelGraveStone {
         textureWidth = 64;
         textureHeight = 64;
 
-        Pedestal1 = new ModelRenderer(this, 0, 24);
-        Pedestal1.addBox(0F, 0F, 0F, 16, 1, 16);
-        Pedestal1.setRotationPoint(-8F, 23F, -8F);
-        Pedestal1.setTextureSize(64, 64);
-        Pedestal1.mirror = true;
-        setRotation(Pedestal1, 0F, 0F, 0F);
-        Pedestal2 = new ModelRenderer(this, 0, 24);
-        Pedestal2.addBox(0F, 0F, 0F, 16, 1, 16);
-        Pedestal2.setRotationPoint(-8F, 8F, -8F);
-        Pedestal2.setTextureSize(64, 64);
-        Pedestal2.mirror = true;
-        setRotation(Pedestal2, 0F, 0F, 0F);
-        Pedestal3 = new ModelRenderer(this, 0, 41);
-        Pedestal3.addBox(0F, 0F, 0F, 14, 1, 14);
-        Pedestal3.setRotationPoint(-7F, 22F, -7F);
-        Pedestal3.setTextureSize(64, 64);
-        Pedestal3.mirror = true;
-        setRotation(Pedestal3, 0F, 0F, 0F);
-        Pedestal4 = new ModelRenderer(this, 0, 41);
-        Pedestal4.addBox(0F, 0F, 0F, 14, 1, 14);
-        Pedestal4.setRotationPoint(-7F, 9F, -7F);
-        Pedestal4.setTextureSize(64, 64);
-        Pedestal4.mirror = true;
-        setRotation(Pedestal4, 0F, 0F, 0F);
-        Pedestal5 = new ModelRenderer(this, 0, 0);
-        Pedestal5.addBox(0F, 0F, 0F, 12, 12, 12);
-        Pedestal5.setRotationPoint(-6F, 10F, -6F);
-        Pedestal5.setTextureSize(64, 64);
-        Pedestal5.mirror = true;
-        setRotation(Pedestal5, 0F, 0F, 0F);
-        Sign = new ModelRenderer(this, 42, 41);
-        Sign.addBox(0F, 0F, 0F, 10, 5, 1);
-        Sign.setRotationPoint(-5F, 13F, -6.5F);
-        Sign.setTextureSize(64, 64);
-        Sign.mirror = true;
-        setRotation(Sign, 0F, 0F, 0F);
+        pedestal1 = new ModelRenderer(this, 0, 24);
+        pedestal1.addBox(0, 0, 0, 16, 1, 16);
+        pedestal1.setRotationPoint(-8, 23, -8);
+        pedestal1.setTextureSize(64, 64);
+        pedestal1.mirror = true;
+        setRotation(pedestal1, 0, 0, 0);
+        pedestal2 = new ModelRenderer(this, 0, 24);
+        pedestal2.addBox(0, 0, 0, 16, 1, 16);
+        pedestal2.setRotationPoint(-8, 8, -8);
+        pedestal2.setTextureSize(64, 64);
+        pedestal2.mirror = true;
+        setRotation(pedestal2, 0, 0, 0);
+        pedestal3 = new ModelRenderer(this, 0, 41);
+        pedestal3.addBox(0, 0, 0, 14, 1, 14);
+        pedestal3.setRotationPoint(-7, 22, -7);
+        pedestal3.setTextureSize(64, 64);
+        pedestal3.mirror = true;
+        setRotation(pedestal3, 0, 0, 0);
+        pedestal4 = new ModelRenderer(this, 0, 41);
+        pedestal4.addBox(0, 0, 0, 14, 1, 14);
+        pedestal4.setRotationPoint(-7, 9, -7);
+        pedestal4.setTextureSize(64, 64);
+        pedestal4.mirror = true;
+        setRotation(pedestal4, 0, 0, 0);
+        pedestal5 = new ModelRenderer(this, 0, 0);
+        pedestal5.addBox(0, 0, 0, 12, 12, 12);
+        pedestal5.setRotationPoint(-6, 10, -6);
+        pedestal5.setTextureSize(64, 64);
+        pedestal5.mirror = true;
+        setRotation(pedestal5, 0, 0, 0);
+        sign = new ModelRenderer(this, 42, 41);
+        sign.addBox(0, 0, 0, 10, 5, 1);
+        sign.setRotationPoint(-5, 13, -6.5F);
+        sign.setTextureSize(64, 64);
+        sign.mirror = true;
+        setRotation(sign, 0, 0, 0);
     }
 
     @Override
@@ -74,12 +74,12 @@ public class ModelBigPedestal extends ModelGraveStone {
         unshiftModel();
         float f5 = 0.0625F;
         TileEntityGSMemorialRenderer.instance.bindTextureByName(this.texture);
-        Pedestal1.render(f5);
-        Pedestal2.render(f5);
-        Pedestal3.render(f5);
-        Pedestal4.render(f5);
-        Pedestal5.render(f5);
-        Sign.render(f5);
+        pedestal1.render(f5);
+        pedestal2.render(f5);
+        pedestal3.render(f5);
+        pedestal4.render(f5);
+        pedestal5.render(f5);
+        sign.render(f5);
     }
 
     public void setTexture(ResourceLocation texture) {

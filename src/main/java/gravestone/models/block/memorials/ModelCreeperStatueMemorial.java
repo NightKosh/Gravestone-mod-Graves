@@ -3,13 +3,12 @@ package gravestone.models.block.memorials;
 import gravestone.core.Resources;
 import gravestone.models.block.ModelMemorial;
 import gravestone.renderer.tileentity.TileEntityGSMemorialRenderer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import gravestone.models.block.ModelGraveStone;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -35,27 +34,29 @@ public class ModelCreeperStatueMemorial extends ModelMemorial {
         textureHeight = 32;
         float par1 = 0;
         byte b0 = 4;
+        byte b1 = (byte) (12 + b0);
+
         this.head = new ModelRenderer(this, 0, 0);
-        this.head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, par1);
-        this.head.setRotationPoint(0.0F, (float) b0, 0.0F);
+        this.head.addBox(-4, -8, -4, 8, 8, 8, par1);
+        this.head.setRotationPoint(0, b0, 0);
         this.field_78133_b = new ModelRenderer(this, 32, 0);
-        this.field_78133_b.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, par1 + 0.5F);
-        this.field_78133_b.setRotationPoint(0.0F, (float) b0, 0.0F);
+        this.field_78133_b.addBox(-4, -8, -4, 8, 8, 8, par1 + 0.5F);
+        this.field_78133_b.setRotationPoint(0, b0, 0);
         this.body = new ModelRenderer(this, 16, 16);
-        this.body.addBox(-4.0F, 0.0F, -2.0F, 8, 12, 4, par1);
-        this.body.setRotationPoint(0.0F, (float) b0, 0.0F);
+        this.body.addBox(-4, 0, -2, 8, 12, 4, par1);
+        this.body.setRotationPoint(0, b0, 0);
         this.leg1 = new ModelRenderer(this, 0, 16);
-        this.leg1.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, par1);
-        this.leg1.setRotationPoint(-2.0F, (float) (12 + b0), 4.0F);
+        this.leg1.addBox(-2, 0, -2, 4, 6, 4, par1);
+        this.leg1.setRotationPoint(-2, b1, 4);
         this.leg2 = new ModelRenderer(this, 0, 16);
-        this.leg2.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, par1);
-        this.leg2.setRotationPoint(2.0F, (float) (12 + b0), 4.0F);
+        this.leg2.addBox(-2, 0, -2, 4, 6, 4, par1);
+        this.leg2.setRotationPoint(2, b1, 4);
         this.leg3 = new ModelRenderer(this, 0, 16);
-        this.leg3.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, par1);
-        this.leg3.setRotationPoint(-2.0F, (float) (12 + b0), -4.0F);
+        this.leg3.addBox(-2, 0, -2, 4, 6, 4, par1);
+        this.leg3.setRotationPoint(-2, b1, -4);
         this.leg4 = new ModelRenderer(this, 0, 16);
-        this.leg4.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, par1);
-        this.leg4.setRotationPoint(2.0F, (float) (12 + b0), -4.0F);
+        this.leg4.addBox(-2, 0, -2, 4, 6, 4, par1);
+        this.leg4.setRotationPoint(2, b1, -4);
         pedestal = new ModelBigPedestal();
     }
 
@@ -104,7 +105,7 @@ public class ModelCreeperStatueMemorial extends ModelMemorial {
     }
 
     private void renderCreeperCharging() {
-        float tickModifier = (float) (Minecraft.getSystemTime() % 3000L) / 3000.0F * 48.0F;
+        float tickModifier = (float) (Minecraft.getSystemTime() % 3000L) / 3000 * 48;
         float scale = 1.2F;
         float f4 = 0.5F;
 
