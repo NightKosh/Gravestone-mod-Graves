@@ -1,7 +1,8 @@
 package gravestone.models.entity;
 
-import gravestone.models.block.ModelSkull;
-import net.minecraft.client.model.ModelBase;
+import gravestone.entity.monster.EntitySkullCrawler;
+import gravestone.models.ModelBaseAdapter;
+import gravestone.models.ModelRendererSkull;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
@@ -13,32 +14,37 @@ import org.lwjgl.opengl.GL11;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ModelSkullCrawler extends ModelBase {
+public class ModelSkullCrawler extends ModelBaseAdapter {
 
-    private static final float baseZ = 0.3490659F;
-    private static final float advBaseZ = baseZ * 0.74F;
-    private static final float baseY = 0.1047198F;
-    private static final float advBaseY = baseY * 2;
-    
-    private static final float rBaseY = (float) Math.PI + baseY;
-    private static final float rAdvBaseY = (float) Math.PI + advBaseY;
+    private static final float BASE_Z = 0.3490659F;
+    private static final float ADV_BASE_Z = BASE_Z * 0.74F;
+    private static final float BASE_Y = 0.1047198F;
+    private static final float ADV_BASE_Y = BASE_Y * 2;
 
-    private ModelSkull skull;
-    ModelRenderer rightLeg1;
-    ModelRenderer rightLeg2;
-    ModelRenderer rightLeg3;
-    ModelRenderer rightLeg4;
-    ModelRenderer leftLeg1;
-    ModelRenderer leftLeg2;
-    ModelRenderer leftLeg3;
-    ModelRenderer leftLeg4;
+    private static final float R_BASE_Y = (float) Math.PI + BASE_Y;
+    private static final float R_ADV_BASE_Y = (float) Math.PI + ADV_BASE_Y;
+
+    private ModelRenderer skull;
+    private ModelRenderer rightLegs;
+    private ModelRenderer leftLegs;
+
+    private ModelRenderer rightLeg1;
+    private ModelRenderer rightLeg2;
+    private ModelRenderer rightLeg3;
+    private ModelRenderer rightLeg4;
+    private ModelRenderer leftLeg1;
+    private ModelRenderer leftLeg2;
+    private ModelRenderer leftLeg3;
+    private ModelRenderer leftLeg4;
+
+    ModelRenderer legs;
 
     public ModelSkullCrawler() {
         textureWidth = 32;
         textureHeight = 32;
 
-        skull = new ModelSkull();
-        
+        skull = new ModelRendererSkull(this);
+
         // Right legs
         rightLeg1 = new ModelRenderer(this, 0, 16);
         rightLeg1.addBox(0, 0, 0, 3, 1, 1);
@@ -71,11 +77,16 @@ public class ModelSkullCrawler extends ModelBase {
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         super.render(entity, f, f1, f2, f3, f4, f5);
+
+        if (((EntitySkullCrawler) entity).isOnLadder()) {
+            GL11.glPushMatrix();
+            GL11.glRotatef(90, 1, 0, 0);
+        }
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
         GL11.glPushMatrix();
         GL11.glTranslated(0, -0.05, 0);
-        skull.render(entity, f, f1, f2, f3, f4, f5);
+        skull.render(0.0625F);
         GL11.glPopMatrix();
 
         rightLeg1.render(f5);
@@ -86,12 +97,10 @@ public class ModelSkullCrawler extends ModelBase {
         leftLeg2.render(f5);
         leftLeg3.render(f5);
         leftLeg4.render(f5);
-    }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z) {
-        model.rotateAngleX = x;
-        model.rotateAngleY = y;
-        model.rotateAngleZ = z;
+        if (((EntitySkullCrawler) entity).isOnLadder()) {
+            GL11.glPopMatrix();
+        }
     }
 
     /**
@@ -104,26 +113,26 @@ public class ModelSkullCrawler extends ModelBase {
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
-        this.rightLeg1.rotateAngleZ = -baseZ;
-        this.rightLeg2.rotateAngleZ = -advBaseZ;
-        this.rightLeg3.rotateAngleZ = -advBaseZ;
-        this.rightLeg4.rotateAngleZ = -baseZ;
+        this.rightLeg1.rotateAngleZ = -BASE_Z;
+        this.rightLeg2.rotateAngleZ = -ADV_BASE_Z;
+        this.rightLeg3.rotateAngleZ = -ADV_BASE_Z;
+        this.rightLeg4.rotateAngleZ = -BASE_Z;
 
-        this.rightLeg1.rotateAngleY = -rAdvBaseY;
-        this.rightLeg2.rotateAngleY = -rBaseY;
-        this.rightLeg3.rotateAngleY = rBaseY;
-        this.rightLeg4.rotateAngleY = rAdvBaseY;
+        this.rightLeg1.rotateAngleY = -R_ADV_BASE_Y;
+        this.rightLeg2.rotateAngleY = -R_BASE_Y;
+        this.rightLeg3.rotateAngleY = R_BASE_Y;
+        this.rightLeg4.rotateAngleY = R_ADV_BASE_Y;
 
 
-        this.leftLeg1.rotateAngleZ = baseZ;
-        this.leftLeg2.rotateAngleZ = advBaseZ;
-        this.leftLeg3.rotateAngleZ = advBaseZ;
-        this.leftLeg4.rotateAngleZ = baseZ;
+        this.leftLeg1.rotateAngleZ = BASE_Z;
+        this.leftLeg2.rotateAngleZ = ADV_BASE_Z;
+        this.leftLeg3.rotateAngleZ = ADV_BASE_Z;
+        this.leftLeg4.rotateAngleZ = BASE_Z;
 
-        this.leftLeg1.rotateAngleY = advBaseY;
-        this.leftLeg2.rotateAngleY = baseY;
-        this.leftLeg3.rotateAngleY = -baseY;
-        this.leftLeg4.rotateAngleY = -advBaseY;
+        this.leftLeg1.rotateAngleY = ADV_BASE_Y;
+        this.leftLeg2.rotateAngleY = BASE_Y;
+        this.leftLeg3.rotateAngleY = -BASE_Y;
+        this.leftLeg4.rotateAngleY = -ADV_BASE_Y;
 
         float firstY = -(MathHelper.cos(f * 0.6662F * 2) * 0.4F) * f1;
         float secondY = -(MathHelper.cos(f * 0.6662F * 2 + (float) Math.PI) * 0.4F) * f1;
