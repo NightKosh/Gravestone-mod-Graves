@@ -33,7 +33,10 @@ public class GSItem {
         GameRegistry.registerItem(corpse, "GSCorpse");
 
         spawnEgg = new ItemGSMonsterPlacer();
-        GameRegistry.registerItem(spawnEgg, "SpawnEgg");
+        GameRegistry.registerItem(spawnEgg, "GSSpawnEgg");
+        for (ItemGSMonsterPlacer.EnumEggs egg : ItemGSMonsterPlacer.EnumEggs.values()) {
+            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(spawnEgg, egg.ordinal(), Resources.spawnEggModel);
+        }
     }
 
     public static void registryExternalItems(Item item, String name) {

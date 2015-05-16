@@ -1,6 +1,7 @@
 package gravestone.item;
 
 import gravestone.core.GSEntity;
+import gravestone.core.GSTabs;
 import gravestone.core.ModInfo;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockLiquid;
@@ -13,6 +14,7 @@ import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -70,21 +72,16 @@ public class ItemGSMonsterPlacer extends ItemMonsterPlacer {
 
     public ItemGSMonsterPlacer() {
         this.setHasSubtypes(true);
-        this.setCreativeTab(CreativeTabs.tabMisc);
+        this.setCreativeTab(GSTabs.otherItemsTab);
         this.setUnlocalizedName("monsterPlacer");
         //TODO this.iconString = "spawn_egg";
     }
 
     @Override
     public String getItemStackDisplayName(ItemStack itemStack) {
-        String s = ("" + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name")).trim();
-        String s1 = EnumEggs.getById(itemStack.getItemDamage()).getName();
 
-        if (s1 != null) {
-            s = s + " " + StatCollector.translateToLocal("entity." + s1 + ".name");
         }
 
-        return s;
     }
 
     @Override
