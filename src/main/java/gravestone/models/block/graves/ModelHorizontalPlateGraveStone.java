@@ -1,9 +1,9 @@
 package gravestone.models.block.graves;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import gravestone.models.block.ModelGraveStone;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * GraveStone mod
@@ -12,19 +12,19 @@ import net.minecraft.client.model.ModelRenderer;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
-public class ModelHorisontalPlateGraveStone extends ModelGraveStone {
+public class ModelHorizontalPlateGraveStone extends ModelGraveStone {
 
     ModelRenderer Plate;
 
-    public ModelHorisontalPlateGraveStone() {
+    public ModelHorizontalPlateGraveStone() {
         textureWidth = 64;
         textureHeight = 32;
         Plate = new ModelRenderer(this, 0, 0);
-        Plate.addBox(0F, 0F, 0F, 12, 1, 14);
-        Plate.setRotationPoint(-6F, 23F, -7F);
+        Plate.addBox(0, 0, 0, 12, 1, 14);
+        Plate.setRotationPoint(-6, 23, -7);
         Plate.setTextureSize(64, 32);
         Plate.mirror = true;
-        setRotation(Plate, 0F, 0F, 0F);
+        setRotation(Plate, 0, 0, 0);
     }
 
     @Override

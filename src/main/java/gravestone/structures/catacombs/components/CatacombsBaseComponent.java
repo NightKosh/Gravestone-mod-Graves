@@ -192,6 +192,7 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
     protected void func_175808_b(World world, IBlockState blockState, int xCoord, int yCoord, int zCoord, StructureBoundingBox boundingBox) {
         fillDownwards(world, blockState, xCoord, yCoord, zCoord, boundingBox);
     }
+
     protected void fillDownwards(World world, IBlockState blockState, int xCoord, int yCoord, int zCoord, StructureBoundingBox boundingBox) {
         int x = this.getXWithOffset(xCoord, zCoord);
         int y = this.getYWithOffset(yCoord);

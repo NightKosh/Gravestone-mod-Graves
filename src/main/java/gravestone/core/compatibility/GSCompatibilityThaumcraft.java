@@ -1,12 +1,6 @@
 package gravestone.core.compatibility;
 
-import gravestone.ModGraveStone;
-import gravestone.core.GSRecipes;
 import gravestone.core.logger.GSLogger;
-import gravestone.core.GSBlock;
-import gravestone.core.GSEntity;
-import gravestone.core.GSItem;
-import net.minecraft.item.ItemStack;
 
 
 /**

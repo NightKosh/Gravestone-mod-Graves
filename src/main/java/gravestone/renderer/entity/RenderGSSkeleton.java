@@ -4,7 +4,6 @@ import gravestone.models.entity.ModelGSSkeleton;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSkeleton;
 import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 
 import java.util.Iterator;
 
@@ -15,8 +14,8 @@ import java.util.Iterator;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class RenderGSSkeleton extends RenderSkeleton {
-    public RenderGSSkeleton(RenderManager p_i46143_1_) {
-        super(p_i46143_1_);
+    public RenderGSSkeleton(RenderManager renderManager) {
+        super(renderManager);
 
         ModelGSSkeleton skeletonModel = new ModelGSSkeleton();
         this.mainModel = skeletonModel;

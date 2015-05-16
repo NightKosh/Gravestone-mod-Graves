@@ -1,6 +1,7 @@
 package gravestone.entity.monster;
 
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;

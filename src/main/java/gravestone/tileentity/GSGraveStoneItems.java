@@ -197,12 +197,12 @@ public class GSGraveStoneItems implements IInventory {
         if (items != null) {
             switch (GSConfig.graveItemsCount) {
                 case 0:
-                    for (byte i = 0; i < items.size(); i++) {
+                    for (int i = 0; i < items.size(); i++) {
                         dropItem(items.get(i), tileEntity.getWorld(), tileEntity.getPos());
                     }
                     break;
                 case 40:
-                    for (byte i = 0; i < items.size(); i++) {
+                    for (int i = 0; i < items.size(); i++) {
                         addInventoryContent(items.get(i));
                     }
                     break;
@@ -210,7 +210,7 @@ public class GSGraveStoneItems implements IInventory {
                     int savedItems = GSConfig.graveItemsCount;
                     Collections.shuffle(Arrays.asList(items.size()), new Random());
 
-                    for (byte i = 0; i < items.size(); i++) {
+                    for (int i = 0; i < items.size(); i++) {
                         if (items.get(i) != null && savedItems > 0) {
                             addInventoryContent(items.get(i));
                             savedItems--;
@@ -225,7 +225,7 @@ public class GSGraveStoneItems implements IInventory {
 
     public void setAdditionalItems(ItemStack[] items) {
         if (items != null) {
-            for (short i = 0; i < items.length; i++) {
+            for (int i = 0; i < items.length; i++) {
                 addInventoryContent(items[i]);
             }
         }

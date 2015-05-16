@@ -36,7 +36,7 @@ public class BlockGSAltar extends BlockContainer {
      */
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
-        ItemStack stack = player.getCurrentEquippedItem();
+//        ItemStack stack = player.getCurrentEquippedItem();
 
         TileEntityGSAltar tileEntity = (TileEntityGSAltar) world.getTileEntity(pos);
         if (tileEntity != null && !player.isSneaking()) {

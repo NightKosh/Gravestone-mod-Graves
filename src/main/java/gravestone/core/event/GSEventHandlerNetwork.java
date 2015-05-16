@@ -1,9 +1,9 @@
 package gravestone.core.event;
 
+import gravestone.core.MobHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import gravestone.core.MobHandler;
 
 /**
  * GraveStone mod

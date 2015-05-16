@@ -19,6 +19,7 @@ public class ModelRendererSkull extends ModelRenderer {
         WITHER_SKULL,
         ZOMBIE_SKULL
     }
+
     private final static String NAME = "skull";
     private ModelRenderer teeth;
 

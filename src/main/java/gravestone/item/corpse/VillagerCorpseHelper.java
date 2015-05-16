@@ -1,8 +1,7 @@
 package gravestone.item.corpse;
 
-import gravestone.config.GSConfig;
-import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import gravestone.ModGraveStone;
+import gravestone.config.GSConfig;
 import gravestone.core.compatibility.forestry.GSCompatibilityForestry;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
@@ -11,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -66,10 +66,12 @@ public class VillagerCorpseHelper extends CorpseHelper {
             NBTTagCompound recipeTag;
             for (int i = 0; i < recipes.size(); i++) {
                 recipe = (MerchantRecipe) recipes.get(i);
-                recipeTag = recipe.writeToTags();
-                recipeTag.setInteger("uses", 0);
-                recipeTag.setInteger("maxUses", 7);
-                recipe.readFromTags(recipeTag);
+                if (recipe != null) {
+                    recipeTag = recipe.writeToTags();
+                    recipeTag.setInteger("uses", 0);
+                    recipeTag.setInteger("maxUses", 7);
+                    recipe.readFromTags(recipeTag);
+                }
             }
             nbt.setTag("Offers", recipes.getRecipiesAsTags());
         }

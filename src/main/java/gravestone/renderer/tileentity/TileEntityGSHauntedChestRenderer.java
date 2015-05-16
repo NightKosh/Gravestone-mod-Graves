@@ -18,13 +18,7 @@ import java.util.Calendar;
  */
 public class TileEntityGSHauntedChestRenderer extends TileEntitySpecialRenderer {
 
-    /**
-     * The normal small chest model.
-     */
     private ModelChest chestModel = new ModelChest();
-    /**
-     * If true, chests will be rendered with the Christmas present textures.
-     */
     private boolean isChristmas;
 
     public TileEntityGSHauntedChestRenderer() {

@@ -3,6 +3,7 @@ package gravestone.models.entity;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 
 /**
  * GraveStone mod
@@ -38,7 +39,7 @@ public class ModelRaven extends ModelBase {
         setRotation(body, -0.4014257F, 0, 0);
 
         neck = new ModelRenderer(this, 12, 23);
-        neck.addBox(0F, 0F, 0F, 3, 2, 2);
+        neck.addBox(0, 0, 0, 3, 2, 2);
         neck.setRotationPoint(-1.5F, 18, -3.2F);
         neck.setTextureSize(32, 32);
         setRotation(neck, 0.3717861F, 0, 0);
@@ -131,5 +132,14 @@ public class ModelRaven extends ModelBase {
 
         this.head.rotateAngleX = f4 / (180 / (float) Math.PI);
         this.head.rotateAngleY = f4 / (180 / (float) Math.PI);
+
+//        float wingRotationY = -(MathHelper.cos(f * 0.6662F) * 0.1F) * f1;
+//        this.rightWing.rotateAngleY += wingRotationY;
+//        this.rightWing.rotateAngleX = -90;
+//        this.rightWing.rotateAngleZ = -105;
+
+//        this.leftWing.rotateAngleY -= wingRotationY;
+//        this.leftWing.rotateAngleY = 90;
+//        this.leftWing.rotateAngleZ = 105;
     }
 }

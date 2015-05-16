@@ -39,7 +39,7 @@ public class GSCompatibilityRpgInventory {
                         }
                     }
                 }
-            }catch (Exception e) {
+            } catch (Exception e) {
                 GSLogger.logError("Can't save RpgInventory items!!!");
             }
         }

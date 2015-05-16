@@ -43,6 +43,6 @@ public class ItemGSGraveStoneRenderer implements IItemRenderer {
             }
         }
 
-        TileEntityRendererDispatcher.instance.renderTileEntityAt(te, 0.0D, 0.0D, 0.0D, 0.0F);
+        TileEntityRendererDispatcher.instance.renderTileEntityAt(te, 0, 0, 0, 0.0F);
     }
 }

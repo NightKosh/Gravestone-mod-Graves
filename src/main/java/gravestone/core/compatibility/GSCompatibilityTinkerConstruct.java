@@ -20,6 +20,8 @@ public class GSCompatibilityTinkerConstruct {
 
     protected static boolean isInstalled = false;
 
+    private static final int ACCESSORIES_SLOTS_COUNT = 4;
+
     private GSCompatibilityTinkerConstruct() {
     }
 
@@ -43,7 +45,8 @@ public class GSCompatibilityTinkerConstruct {
 
                 IInventory accessoryInventory = inventoryWrapper.getAccessoryInventory(player);
                 if (accessoryInventory != null) {
-                    for (int slot = 0; slot < accessoryInventory.getSizeInventory(); slot++) {
+                    //Heart Canisters should not go in the grave as they are not supposed to be dropped on death, so only first 4 slots required
+                    for (int slot = 0; slot < ACCESSORIES_SLOTS_COUNT; slot++) {
                         ItemStack stack = accessoryInventory.getStackInSlot(slot);
                         if (stack != null) {
                             items.add(stack.copy());

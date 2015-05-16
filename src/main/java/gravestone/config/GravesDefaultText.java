@@ -21,38 +21,38 @@ public abstract class GravesDefaultText {
     };*/
     public static final String[] CATS_MEMORIAL_TEXT = {};
     public static final String[] NAMES = {
-        "Alex", "Alice", "Alan", "Ashley",
-        "Barry", "Bextrix", "Benjamin", "Billy",
-        "Calvin", "Carolyn", "Cate", "Chandler", "Chuck", "Clyde",
-        "David", "Denice", "Dorian",
-        "Edison", "Edna", "Edward", "Eliot", "Elisa", "Emily",
-        "Flynn",
-        "Garry", "Glen", "Gordon",
-        "Hall", "Hank",
-        "Jack", "Jacob", "Jenny", "Jimmy", "Joey",
-        "Kate", "Keeley",
-        "Leslie", "Lex", "Lucy",
-        "Mabel", "Madeline", "Marcus", "Max",
-        "Nick",
-        "Oliver",
-        "Quentin",
-        "Ralph", "Rex", "Ricky",
-        "Scotty", "Sherry", "Sophy",
-        "Tad", "Terence", "Toby",
-        "Wendy", "Willy"
+            "Alex", "Alice", "Alan", "Ashley",
+            "Barry", "Bextrix", "Benjamin", "Billy",
+            "Calvin", "Carolyn", "Cate", "Chandler", "Chuck", "Clyde",
+            "David", "Denice", "Dorian",
+            "Edison", "Edna", "Edward", "Eliot", "Elisa", "Emily",
+            "Flynn",
+            "Garry", "Glen", "Gordon",
+            "Hall", "Hank",
+            "Jack", "Jacob", "Jenny", "Jimmy", "Joey",
+            "Kate", "Keeley",
+            "Leslie", "Lex", "Lucy",
+            "Mabel", "Madeline", "Marcus", "Max",
+            "Nick",
+            "Oliver",
+            "Quentin",
+            "Ralph", "Rex", "Ricky",
+            "Scotty", "Sherry", "Sophy",
+            "Tad", "Terence", "Toby",
+            "Wendy", "Willy"
     };
     public static final String[] DOG_NAMES = {
-        "Buddy",
-        "Chomper",
-        "Max",
-        "Rex", "Rover", "Rusty",
-        "Spike", "Sparky"
+            "Buddy",
+            "Chomper",
+            "Max",
+            "Rex", "Rover", "Rusty",
+            "Spike", "Sparky"
     };
     public static final String[] CAT_NAMES = {
-        "Bella",
-        "Max", "Molly",
-        "Oscar",
-        "Sam",
-        "Tiger"
+            "Bella",
+            "Max", "Molly",
+            "Oscar",
+            "Sam",
+            "Tiger"
     };
 }

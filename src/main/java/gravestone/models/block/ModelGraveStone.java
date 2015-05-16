@@ -1,13 +1,13 @@
 package gravestone.models.block;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import gravestone.core.Resources;
 import gravestone.renderer.tileentity.TileEntityGSGraveStoneRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -51,7 +51,7 @@ public abstract class ModelGraveStone extends ModelBase {
     }
 
     protected void renderEnchantment() {
-        float tickModifier = (float) (Minecraft.getSystemTime() % 3000L) / 3000.0F * 48.0F;
+        float tickModifier = (float) (Minecraft.getSystemTime() % 3000L) / 3000F * 48;
         TileEntityGSGraveStoneRenderer.instance.bindTextureByName(Resources.SWORD_AURA);
 
         GL11.glEnable(GL11.GL_BLEND);
@@ -62,7 +62,7 @@ public abstract class ModelGraveStone extends ModelBase {
         for (int var21 = 0; var21 < 3; var21++) {
             GL11.glDisable(GL11.GL_LIGHTING);
             float var22 = 0.76F;
-            GL11.glColor4f(0.5F * var22, 0.25F * var22, 0.8F * var22, 1.0F);
+            GL11.glColor4f(0.5F * var22, 0.25F * var22, 0.8F * var22, 1);
             GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
             GL11.glMatrixMode(GL11.GL_TEXTURE);
             GL11.glLoadIdentity();

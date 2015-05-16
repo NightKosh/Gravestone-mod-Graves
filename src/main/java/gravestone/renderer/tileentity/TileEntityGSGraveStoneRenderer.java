@@ -33,7 +33,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
     private static final Map<EnumGraves, ResourceLocation> mossyTexturesMap = Maps.newHashMap();
     public static ModelGraveStone verticalPlate = new ModelVerticalPlateGraveStone();
     public static ModelGraveStone cross = new ModelCrossGraveStone();
-    public static ModelGraveStone horisontalPlate = new ModelHorisontalPlateGraveStone();
+    public static ModelGraveStone horizontalPlate = new ModelHorizontalPlateGraveStone();
     public static ModelGraveStone dogStatue = new ModelDogStatueGraveStone();
     public static ModelGraveStone catStatue = new ModelCatStatueGraveStone();
     public static ModelGraveStone horseStatue = new ModelHorseGraveStone();
@@ -125,7 +125,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
                 return Resources.GRAVE_MOSSY_VERTICAL_PLATE;
             case CROSS:
                 return Resources.GRAVE_MOSSY_CROSS;
-            case HORISONTAL_PLATE:
+            case HORIZONTAL_PLATE:
                 return Resources.GRAVE_MOSSY_HORISONTAL_PLATE;
             case DOG_STATUE:
                 return Resources.GRAVE_MOSSY_DOG_STATUE;
@@ -143,8 +143,8 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
                 return verticalPlate;
             case CROSS:
                 return cross;
-            case HORISONTAL_PLATE:
-                return horisontalPlate;
+            case HORIZONTAL_PLATE:
+                return horizontalPlate;
             case DOG_STATUE:
                 return dogStatue;
             case CAT_STATUE:

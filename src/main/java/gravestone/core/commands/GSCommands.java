@@ -1,8 +1,8 @@
 package gravestone.core.commands;
 
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraft.command.CommandHandler;
 import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 /**
  * GraveStone mod
@@ -12,12 +12,13 @@ import net.minecraft.server.MinecraftServer;
  */
 public class GSCommands {
     private static GSCommands instance;
+
     private GSCommands(FMLServerStartingEvent event) {
         instance = this;
-        
+
         initCommands(event.getServer());
     }
-    
+
     public static GSCommands getInstance(FMLServerStartingEvent event) {
         if (instance == null) {
             return new GSCommands(event);
@@ -25,7 +26,7 @@ public class GSCommands {
             return instance;
         }
     }
-    
+
     private void initCommands(MinecraftServer server) {
         CommandHandler commandManager = (CommandHandler) server.getCommandManager();
         commandManager.registerCommand(new CommandStructuresGenerator());

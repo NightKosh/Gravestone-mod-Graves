@@ -22,7 +22,7 @@ public class ModelHangedZombieVillager extends ModelZombieVillager {
     public ModelHangedZombieVillager(boolean isInStocks) {
         this.isInStocks = isInStocks;
 
-        setRotation(this.bipedHead, 0.20F, 0F, 0F);
+        setRotation(this.bipedHead, 0.20F, 0, 0);
 
         // arms (should render only when creature in stocks)
         rightArm = new ModelRenderer(this, 40, 16);

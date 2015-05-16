@@ -17,7 +17,7 @@ public class ModelHangedWitch extends ModelHangedVillager {
 
         this.witchHat = (new ModelRenderer(this)).setTextureSize(this.textureWidth, this.textureHeight);
         this.witchHat.setRotationPoint(-5, -10.03125F, -5);
-        this.witchHat.setTextureOffset(0, 64).addBox(0.0F, 0.0F, 0.0F, 10, 2, 10);
+        this.witchHat.setTextureOffset(0, 64).addBox(0, 0, 0, 10, 2, 10);
         this.head.addChild(this.witchHat);
 
         ModelRenderer modelrenderer = (new ModelRenderer(this)).setTextureSize(this.textureWidth, this.textureHeight);

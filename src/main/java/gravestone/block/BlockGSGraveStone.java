@@ -24,7 +24,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemShears;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -274,7 +276,7 @@ public class BlockGSGraveStone extends BlockContainer {
                         break;
                 }
                 break;
-            case HORISONTAL_PLATE:
+            case HORIZONTAL_PLATE:
                 switch (facing) {
                     case SOUTH:
                         this.setBlockBounds(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);

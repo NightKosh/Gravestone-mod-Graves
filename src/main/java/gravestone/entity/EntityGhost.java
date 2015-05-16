@@ -1,7 +1,5 @@
-
 package gravestone.entity;
 
-import java.util.Random;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -12,6 +10,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 /**
  * GraveStone mod
  *
@@ -19,7 +19,7 @@ import net.minecraft.world.World;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class EntityGhost extends EntityFlying implements IMob {
-    
+
     public EntityGhost(World world) {
         super(world);
     }

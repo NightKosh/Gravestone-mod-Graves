@@ -1,11 +1,11 @@
 package gravestone.core;
 
-import net.minecraft.client.Minecraft;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import gravestone.item.ItemGSChisel;
 import gravestone.item.ItemGSCorpse;
+import gravestone.item.ItemGSMonsterPlacer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * GraveStone mod
@@ -18,6 +18,7 @@ public class GSItem {
     // item chisel
     public static Item chisel;
     public static Item corpse;
+    public static Item spawnEgg;
 
     private GSItem() {
     }
@@ -30,6 +31,9 @@ public class GSItem {
 
         corpse = new ItemGSCorpse();
         GameRegistry.registerItem(corpse, "GSCorpse");
+
+        spawnEgg = new ItemGSMonsterPlacer();
+        GameRegistry.registerItem(spawnEgg, "SpawnEgg");
     }
 
     public static void registryExternalItems(Item item, String name) {

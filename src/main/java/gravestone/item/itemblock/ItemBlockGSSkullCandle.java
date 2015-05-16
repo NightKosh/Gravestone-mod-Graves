@@ -1,4 +1,3 @@
-
 package gravestone.item.itemblock;
 
 import gravestone.block.enums.EnumSkullCandle;

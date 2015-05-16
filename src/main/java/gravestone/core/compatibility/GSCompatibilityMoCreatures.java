@@ -1,12 +1,13 @@
 package gravestone.core.compatibility;
 
 import gravestone.config.GSConfig;
-import gravestone.core.logger.GSLogger;
 import gravestone.core.GSMobSpawn;
-import java.lang.reflect.Constructor;
-import java.util.List;
+import gravestone.core.logger.GSLogger;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.World;
+
+import java.lang.reflect.Constructor;
+import java.util.List;
 
 /**
  * GraveStone mod
@@ -23,22 +24,22 @@ public class GSCompatibilityMoCreatures {
     public static final String MO_CREATURES_WRAITH = "drzhark.mocreatures.entity.monster.MoCEntityWraith";
     public static final String MO_CREATURES_F_WRAITH = "drzhark.mocreatures.entity.monster.MoCEntityFlameWraith";
     public static final String MO_CREATURES_SCORPIONS = "drzhark.mocreatures.entity.monster.MoCEntityScorpion";
-    
+
     private GSCompatibilityMoCreatures() {
     }
 
     public static void addMobs() {
         if (GSConfig.spawnMoCreaturesMobs) {
-        GSLogger.logInfo("start Mo'Creatures mobs loading");
+            GSLogger.logInfo("start Mo'Creatures mobs loading");
 
-        addMobToList(GSMobSpawn.MOB_ID, "SilverSkeleton", getForeinMobConstructor(GSCompatibilityMoCreatures.MO_CREATURES_S_SKELETON));
-        addMobToList(GSMobSpawn.MOB_ID, "Wraith", getForeinMobConstructor(GSCompatibilityMoCreatures.MO_CREATURES_WRAITH));
-        addMobToList(GSMobSpawn.HELL_MOB_ID, "FlameWraith", getForeinMobConstructor(GSCompatibilityMoCreatures.MO_CREATURES_F_WRAITH));
-        
-        
-        addMobToList(GSMobSpawn.skeletonSpawnerMobs, "SilverSkeleton", getForeinMobConstructor(GSCompatibilityMoCreatures.MO_CREATURES_S_SKELETON));
+            addMobToList(GSMobSpawn.MOB_ID, "SilverSkeleton", getForeinMobConstructor(GSCompatibilityMoCreatures.MO_CREATURES_S_SKELETON));
+            addMobToList(GSMobSpawn.MOB_ID, "Wraith", getForeinMobConstructor(GSCompatibilityMoCreatures.MO_CREATURES_WRAITH));
+            addMobToList(GSMobSpawn.HELL_MOB_ID, "FlameWraith", getForeinMobConstructor(GSCompatibilityMoCreatures.MO_CREATURES_F_WRAITH));
 
-        GSLogger.logInfo("end Mo'Creatures mobs loading");
+
+            addMobToList(GSMobSpawn.skeletonSpawnerMobs, "SilverSkeleton", getForeinMobConstructor(GSCompatibilityMoCreatures.MO_CREATURES_S_SKELETON));
+
+            GSLogger.logInfo("end Mo'Creatures mobs loading");
         }
     }
 

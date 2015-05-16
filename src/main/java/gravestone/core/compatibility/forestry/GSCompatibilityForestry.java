@@ -1,11 +1,10 @@
 package gravestone.core.compatibility.forestry;
 
-import gravestone.config.GSConfig;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import forestry.api.core.ForestryAPI;
 import forestry.api.recipes.RecipeManagers;
 import forestry.api.storage.BackpackManager;
 import forestry.api.storage.EnumBackpackType;
+import gravestone.config.GSConfig;
 import gravestone.core.GSItem;
 import gravestone.core.GSRecipes;
 import gravestone.core.GSTabs;
@@ -13,6 +12,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * GraveStone mod
@@ -35,7 +35,7 @@ public class GSCompatibilityForestry {
     }
 
     public static int getApicultureVillagerID() {
-        if (ForestryAPI.forestryConstants != null) {
+        if (isInstalled && ForestryAPI.forestryConstants != null) {
             return ForestryAPI.forestryConstants.getApicultureVillagerID();
         } else {
             return DEFAULT_BEEKEEPER_ID;
@@ -43,7 +43,7 @@ public class GSCompatibilityForestry {
     }
 
     public static int getArboricultureVillagerID() {
-        if (ForestryAPI.forestryConstants != null) {
+        if (isInstalled && ForestryAPI.forestryConstants != null) {
             return ForestryAPI.forestryConstants.getArboricultureVillagerID();
         } else {
             return DEFAULT_LUMBERJACK_ID;
@@ -51,7 +51,7 @@ public class GSCompatibilityForestry {
     }
 
     public static void addBackpack() {
-        if (BackpackManager.backpackInterface != null) {
+        if (isInstalled && BackpackManager.backpackInterface != null) {
             if (GSConfig.enableForestryBackpacks) {
                 String backpackT1Name = "backpack.undertaker.t1";
                 backpackItemT1 = BackpackManager.backpackInterface.addBackpack(UndertakerBackpack.getInstance(), EnumBackpackType.T1);

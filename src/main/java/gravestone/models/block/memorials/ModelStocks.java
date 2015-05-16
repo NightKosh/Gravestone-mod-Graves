@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class ModelStocks extends ModelMemorial {
 
-    private ModelRenderer horisontalPlank;
+    private ModelRenderer horizontalPlank;
     private ModelRenderer verticalPlank1;
     private ModelRenderer verticalPlank2;
     private ModelRenderer headHole;
@@ -36,10 +36,10 @@ public class ModelStocks extends ModelMemorial {
         textureWidth = 128;
         textureHeight = 64;
 
-        horisontalPlank = new ModelRenderer(this, 0, 0);
-        horisontalPlank.addBox(0, 0, 0, 32, 12, 1);
-        horisontalPlank.setRotationPoint(-16, -2, 0);
-        horisontalPlank.setTextureSize(128, this.textureHeight);
+        horizontalPlank = new ModelRenderer(this, 0, 0);
+        horizontalPlank.addBox(0, 0, 0, 32, 12, 1);
+        horizontalPlank.setRotationPoint(-16, -2, 0);
+        horizontalPlank.setTextureSize(128, this.textureHeight);
 
         verticalPlank1 = new ModelRenderer(this, 0, 13);
         verticalPlank1.addBox(0, 0, 0, 3, 28, 2);
@@ -70,7 +70,7 @@ public class ModelStocks extends ModelMemorial {
 
     @Override
     public void renderAll() {
-        horisontalPlank.render(0.0625F);
+        horizontalPlank.render(0.0625F);
         verticalPlank1.render(0.0625F);
         verticalPlank2.render(0.0625F);
         headHole.render(0.0625F);

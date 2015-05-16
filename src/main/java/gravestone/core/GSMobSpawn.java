@@ -36,22 +36,22 @@ public class GSMobSpawn {
     /**
      * Provides a mapping between entity classes and a string
      */
-    public static Map<String, Constructor<EntityLiving>> mobNameToClassMapping = new HashMap();
-    public static List<String> MOB_ID = new ArrayList(Arrays.asList("Zombie", "Skeleton"));
-    public static List<String> DOG_ID = new ArrayList(Arrays.asList("GSZombieDog", "GSSkeletonDog"));
-    public static List<String> CAT_ID = new ArrayList(Arrays.asList("GSZombieCat", "GSSkeletonCat"));
-    public static List<String> HELL_MOB_ID = new ArrayList(Arrays.asList("PigZombie", "Skeleton"));
+    public static Map<String, Constructor<EntityLiving>> mobNameToClassMapping = new HashMap<String, Constructor<EntityLiving>>();
+    public static List<String> MOB_ID = new ArrayList<String>(Arrays.asList("Zombie", "Skeleton"));
+    public static List<String> DOG_ID = new ArrayList<String>(Arrays.asList("GraveStone.GSZombieDog", "GraveStone.GSSkeletonDog"));
+    public static List<String> CAT_ID = new ArrayList<String>(Arrays.asList("GraveStone.GSZombieCat", "GraveStone.GSSkeletonCat"));
+    public static List<String> HELL_MOB_ID = new ArrayList<String>(Arrays.asList("PigZombie", "Skeleton"));
     // spawner mobs
-    public static List<String> skeletonSpawnerMobs = new ArrayList(Arrays.asList(
+    public static List<String> skeletonSpawnerMobs = new ArrayList<String>(Arrays.asList(
             "Skeleton", "Skeleton", "Skeleton", "Skeleton",
-            "GSSkeletonDog",
-            "GSSkeletonCat"));
-    public static List<String> zombieSpawnerMobs = new ArrayList(Arrays.asList(
+            "GraveStone.GSSkeletonDog",
+            "GraveStone.GSSkeletonCat"));
+    public static List<String> zombieSpawnerMobs = new ArrayList<String>(Arrays.asList(
             "Zombie", "Zombie", "Zombie", "Zombie",
-            "GSZombieDog",
-            "GSZombieCat"));
+            "GraveStone.GSZombieDog",
+            "GraveStone.GSZombieCat"));
     // catacombs statues mobs
-    public static List<String> catacombsStatuesMobs = new ArrayList(Arrays.asList(
+    public static List<String> catacombsStatuesMobs = new ArrayList<String>(Arrays.asList(
             "Skeleton", "Zombie"));
 
     private GSMobSpawn() {
@@ -216,6 +216,9 @@ public class GSMobSpawn {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             GSLogger.logError("getForeinMob InvocationTargetException. mob name " + mobName);
+            e.getCause().printStackTrace();
+        } catch (NullPointerException e) {
+            GSLogger.logError("getForeinMob NullPointerException. mob name " + mobName);
             e.getCause().printStackTrace();
         }
 
