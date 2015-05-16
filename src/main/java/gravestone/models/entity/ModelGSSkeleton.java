@@ -5,6 +5,7 @@ import gravestone.models.ModelRendererSkull;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelSkeleton;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntitySkeleton;
 
 /**
  * GraveStone mod
@@ -37,10 +38,10 @@ public class ModelGSSkeleton extends ModelSkeleton implements IModelBaseAdapter 
     }
 
     @Override
-    public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_) {
-        super.render(p_78088_1_, p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, p_78088_7_);
+    public void render(Entity entity, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_) {
+        super.render(entity, p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, p_78088_7_);
 
-        skull.renderWithTexture(p_78088_7_, ModelRendererSkull.EnumSkullType.SKELETON_SKULL);
+        skull.renderWithTexture(p_78088_7_, ModelRendererSkull.EnumSkullType.values()[((EntitySkeleton) entity).getSkeletonType()]);
     }
 
     protected void setRotation(ModelRenderer model, float x, float y, float z) {

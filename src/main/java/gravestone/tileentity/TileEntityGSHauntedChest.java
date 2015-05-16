@@ -141,7 +141,7 @@ public class TileEntityGSHauntedChest extends TileEntity implements IUpdatePlaye
     public void spawnMobs(World world) {
         switch (getChestType()) {
             case SKELETON_CHEST:
-                EntitySkeleton skeleton = GSMobSpawn.getSkeleton(world, (byte) 1);
+                EntitySkeleton skeleton = GSMobSpawn.getSkeleton(world, false);
                 skeleton.setLocationAndAngles(this.pos.getX() + 0.5, this.pos.getY(), this.pos.getZ() + 0.5, 0, 0);
                 world.spawnEntityInWorld(skeleton);
                 break;

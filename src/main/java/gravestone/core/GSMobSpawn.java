@@ -4,6 +4,7 @@ import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumSpawner;
 import gravestone.config.GSConfig;
 import gravestone.core.logger.GSLogger;
+import gravestone.entity.monster.EntityGSSkeleton;
 import gravestone.entity.monster.EntitySkullCrawler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -37,13 +38,13 @@ public class GSMobSpawn {
      * Provides a mapping between entity classes and a string
      */
     public static Map<String, Constructor<EntityLiving>> mobNameToClassMapping = new HashMap<String, Constructor<EntityLiving>>();
-    public static List<String> MOB_ID = new ArrayList<String>(Arrays.asList("Zombie", "Skeleton"));
+    public static List<String> MOB_ID = new ArrayList<String>(Arrays.asList("Zombie", "GraveStone.GSSkeleton"));
     public static List<String> DOG_ID = new ArrayList<String>(Arrays.asList("GraveStone.GSZombieDog", "GraveStone.GSSkeletonDog"));
     public static List<String> CAT_ID = new ArrayList<String>(Arrays.asList("GraveStone.GSZombieCat", "GraveStone.GSSkeletonCat"));
-    public static List<String> HELL_MOB_ID = new ArrayList<String>(Arrays.asList("PigZombie", "Skeleton"));
+    public static List<String> HELL_MOB_ID = new ArrayList<String>(Arrays.asList("PigZombie", "GSSkeleton"));
     // spawner mobs
     public static List<String> skeletonSpawnerMobs = new ArrayList<String>(Arrays.asList(
-            "Skeleton", "Skeleton", "Skeleton", "Skeleton",
+            "GraveStone.GSSkeleton", "GraveStone.GSSkeleton", "GraveStone.GSSkeleton", "GraveStone.GSSkeleton",
             "GraveStone.GSSkeletonDog",
             "GraveStone.GSSkeletonCat"));
     public static List<String> zombieSpawnerMobs = new ArrayList<String>(Arrays.asList(
@@ -52,7 +53,7 @@ public class GSMobSpawn {
             "GraveStone.GSZombieCat"));
     // catacombs statues mobs
     public static List<String> catacombsStatuesMobs = new ArrayList<String>(Arrays.asList(
-            "Skeleton", "Zombie"));
+            "GraveStone.GSSkeleton", "Zombie"));
 
     private GSMobSpawn() {
     }
@@ -87,23 +88,25 @@ public class GSMobSpawn {
                 id = getMobID(world.rand, EnumMobType.UNDEAD_CATS);
                 break;
             case HORSE_STATUE:
+                //TODO
                 return null;
             default:
                 if (canSpawnHellCreatures(world, x, y, z) && world.rand.nextInt(10) == 0) {
                     id = getMobID(world.rand, EnumMobType.HELL_MOBS);
 
-                    if (id.equals("Skeleton")) {
-                        EntitySkeleton skeleton = getSkeleton(world);
+                    if (id.equals("GSSkeleton")) {
+                        EntityGSSkeleton skeleton = (EntityGSSkeleton) EntityList.createEntityByName("GSSkeleton", world);
                         skeleton.setSkeletonType(1);
                         return skeleton;
                     }
                 } else {
                     id = getMobID(world.rand, EnumMobType.DEFAULT_MOBS);
 
-                    if (id.equals("Skeleton")) {
-                        return getSkeleton(world);
+                    if (id.equals("GSSkeleton")) {
+                        return EntityList.createEntityByName("GSSkeleton", world);
                     }
                 }
+                break;
         }
 
         EntityLiving entity = (EntityLiving) EntityList.createEntityByName(id, world);
@@ -135,8 +138,8 @@ public class GSMobSpawn {
             case SKELETON_SPAWNER:
                 mobId = skeletonSpawnerMobs.get(world.rand.nextInt(skeletonSpawnerMobs.size()));
 
-                if (mobId.equals("Skeleton") && world.rand.nextInt(10) == 0) {
-                    EntitySkeleton skeleton = getSkeleton(world);
+                if (mobId.equals("GSSkeleton") && world.rand.nextInt(10) == 0) {
+                    EntityGSSkeleton skeleton = (EntityGSSkeleton) EntityList.createEntityByName("GSSkeleton", world);
                     skeleton.setSkeletonType(1);
                     return skeleton;
                 }
@@ -166,25 +169,10 @@ public class GSMobSpawn {
     /**
      * Return Skeleton with bow/sword
      */
-    private static EntitySkeleton getSkeleton(World world) {
-        EntitySkeleton skeleton = (EntitySkeleton) EntityList.createEntityByName("Skeleton", world);
+    public static EntityGSSkeleton getSkeleton(World world, boolean withBow) {
+        EntityGSSkeleton skeleton = (EntityGSSkeleton) EntityList.createEntityByName("GSSkeleton", world);
 
-        if (world.rand.nextInt(2) == 0) {
-            skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.stone_sword, 1, 0));
-        } else {
-            skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.bow, 1, 0));
-        }
-
-        return skeleton;
-    }
-
-    /**
-     * Return Skeleton with bow/sword
-     */
-    public static EntitySkeleton getSkeleton(World world, byte skeletonType) {
-        EntitySkeleton skeleton = (EntitySkeleton) EntityList.createEntityByName("Skeleton", world);
-
-        if (skeletonType == 0) {
+        if (withBow) {
             skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.bow, 1, 0));
         } else {
             skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.stone_sword, 1, 0));
