@@ -74,14 +74,19 @@ public class ItemGSMonsterPlacer extends ItemMonsterPlacer {
         this.setHasSubtypes(true);
         this.setCreativeTab(GSTabs.otherItemsTab);
         this.setUnlocalizedName("monsterPlacer");
-        //TODO this.iconString = "spawn_egg";
     }
 
     @Override
     public String getItemStackDisplayName(ItemStack itemStack) {
+        StringBuilder str = new StringBuilder();
+        str.append(StatCollector.translateToLocal(this.getUnlocalizedName() + ".name").trim());
 
+        String name = EnumEggs.getById(itemStack.getItemDamage()).getName();
+        if (StringUtils.isNotBlank(name) ) {
+            str.append(" ").append(StatCollector.translateToLocal("entity." + name + ".name"));
         }
 
+        return str.toString();
     }
 
     @Override

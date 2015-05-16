@@ -27,7 +27,7 @@ public class EntityGSSkeleton extends EntitySkeleton {
         } else {
             this.setCurrentItemOrArmor(0, new ItemStack(Items.bow, 1, 0));
         }
-        
+
         return livingData;
     }
 }
