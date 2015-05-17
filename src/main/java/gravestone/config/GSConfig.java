@@ -218,6 +218,7 @@ public class GSConfig {
     public static boolean spawnSkeletonCats;
     public static boolean spawnSkullCrawlersAtMobsDeath;
     public static boolean spawnSkullCrawlersAtBoneBlockDestruction;
+    public static boolean spawnSkullCrawlersAtPileBonesDestruction;
     public static boolean spawnSkeletonRaiders;
     public static boolean spawnZombieRaiders;
 
@@ -232,6 +233,7 @@ public class GSConfig {
 
         spawnSkullCrawlersAtMobsDeath = config.get(CATEGORY_MOBS, "SpawnSkullCrawlersAtMobsDeath", true).getBoolean(true);
         spawnSkullCrawlersAtBoneBlockDestruction = config.get(CATEGORY_MOBS, "SpawnSkullCrawlersAnBoneBlockDestruction", true).getBoolean(true);
+        spawnSkullCrawlersAtPileBonesDestruction = config.get(CATEGORY_MOBS, "SpawnSkullCrawlersAtPileBonesDestruction", true).getBoolean(true);
     }
 
     // COMPATIBILITY

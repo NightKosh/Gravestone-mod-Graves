@@ -1,6 +1,5 @@
 package gravestone.entity.ai;
 
-import gravestone.block.BlockGSBoneBlock;
 import gravestone.core.GSBlock;
 import gravestone.entity.monster.EntitySkullCrawler;
 import net.minecraft.block.state.IBlockState;
@@ -17,13 +16,12 @@ import java.util.Random;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class AIHideInBones extends EntityAIWander {
+public class AIHideInPilesOfBones extends EntityAIWander {
     private EntitySkullCrawler crawler;
     private EnumFacing enumFacing;
     private boolean field_179484_c;
-    private boolean isExecuting = false;
 
-    public AIHideInBones(EntitySkullCrawler crawler) {
+    public AIHideInPilesOfBones(EntitySkullCrawler crawler) {
         super(crawler, 1, 10);
         this.setMutexBits(1);
         this.crawler = crawler;
@@ -31,7 +29,7 @@ public class AIHideInBones extends EntityAIWander {
 
     @Override
     public boolean shouldExecute() {
-        if (crawler.canHideInBones()) {
+        if (crawler.canHideInBones() && !crawler.getHideInBonesAI().isExecuting()) {
             if (crawler.getAttackTarget() != null || !crawler.getNavigator().noPath()) {
                 return false;
             } else {
@@ -39,10 +37,11 @@ public class AIHideInBones extends EntityAIWander {
 
                 if (random.nextInt(10) == 0) {
                     this.enumFacing = EnumFacing.random(random);
+
                     BlockPos blockPos = (new BlockPos(crawler.posX, crawler.posY + 0.5, crawler.posZ)).offset(this.enumFacing);
                     IBlockState blockState = crawler.worldObj.getBlockState(blockPos);
 
-                    if (BlockGSBoneBlock.canContainCrawler(blockState)) {
+                    if (blockState.getBlock().isAir(crawler.worldObj, blockPos)) {
                         this.field_179484_c = true;
                         return true;
                     }
@@ -58,12 +57,7 @@ public class AIHideInBones extends EntityAIWander {
 
     @Override
     public boolean continueExecuting() {
-        boolean continueExecuting = !this.field_179484_c && super.continueExecuting();
-        if (!continueExecuting) {
-            isExecuting = false;
-        }
-
-        return continueExecuting;
+        return !this.field_179484_c && super.continueExecuting();
     }
 
     @Override
@@ -72,20 +66,12 @@ public class AIHideInBones extends EntityAIWander {
             if (!this.field_179484_c) {
                 super.startExecuting();
             } else {
-                isExecuting = true;
                 World world = crawler.worldObj;
                 BlockPos blockPos = (new BlockPos(crawler.posX, crawler.posY + 0.5D, crawler.posZ)).offset(this.enumFacing);
-                IBlockState blockState = world.getBlockState(blockPos);
-                if (BlockGSBoneBlock.canContainCrawler(blockState)) {
-                    world.setBlockState(blockPos, GSBlock.boneBlock.getCrawlerBlockState(blockState), 3);
-                    crawler.spawnExplosionParticle();
-                    crawler.setDead();
-                }
+                world.setBlockState(blockPos, GSBlock.pileOfBones.getCrawlerBlockState(), 3);
+                crawler.spawnExplosionParticle();
+                crawler.setDead();
             }
         }
-    }
-
-    public boolean isExecuting() {
-        return isExecuting;
     }
 }

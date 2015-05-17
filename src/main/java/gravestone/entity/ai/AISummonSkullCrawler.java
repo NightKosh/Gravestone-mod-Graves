@@ -2,7 +2,6 @@ package gravestone.entity.ai;
 
 import gravestone.core.GSBlock;
 import gravestone.entity.monster.EntitySkullCrawler;
-import net.minecraft.block.BlockSilverfish;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.BlockPos;
@@ -50,11 +49,10 @@ public class AISummonSkullCrawler extends EntityAIBase {
                         BlockPos blockPos = blockpos.add(j, i, k);
                         IBlockState state = world.getBlockState(blockPos);
 
-                        if (state.getBlock().equals(GSBlock.boneBlock) && GSBlock.boneBlock.isSkullCrawlerBlock(state)) {
+                        if ((state.getBlock().equals(GSBlock.boneBlock) && GSBlock.boneBlock.isSkullCrawlerBlock(state)) ||
+                                (state.getBlock().equals(GSBlock.pileOfBones) && GSBlock.pileOfBones.isSkullCrawlerBlock(state))) {
                             if (world.getGameRules().getGameRuleBooleanValue("mobGriefing")) {
                                 world.destroyBlock(blockPos, true);
-                            } else {
-                                world.setBlockState(blockPos, ((BlockSilverfish.EnumType) state.getValue(BlockSilverfish.VARIANT)).getModelBlock(), 3);
                             }
 
                             if (random.nextBoolean()) {

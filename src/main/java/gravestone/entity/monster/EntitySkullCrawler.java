@@ -2,6 +2,7 @@ package gravestone.entity.monster;
 
 import gravestone.core.GSBlock;
 import gravestone.entity.ai.AIHideInBones;
+import gravestone.entity.ai.AIHideInPilesOfBones;
 import gravestone.entity.ai.AISummonSkullCrawler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -34,6 +35,7 @@ import net.minecraft.world.World;
 public class EntitySkullCrawler extends EntityMob {
 
     private AISummonSkullCrawler summonAI;
+    private AIHideInBones hideInBonesAI;
 
     public EntitySkullCrawler(World world) {
         super(world);
@@ -42,7 +44,8 @@ public class EntitySkullCrawler extends EntityMob {
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(3, this.summonAI = new AISummonSkullCrawler(this));
         this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1, false));
-        this.tasks.addTask(5, new AIHideInBones(this));
+        this.tasks.addTask(5, this.hideInBonesAI = new AIHideInBones(this));
+        this.tasks.addTask(6, new AIHideInPilesOfBones(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[0]));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
     }
@@ -249,6 +252,10 @@ public class EntitySkullCrawler extends EntityMob {
 
     public boolean canHideInBones() {
         return true;
+    }
+
+    public AIHideInBones getHideInBonesAI() {
+        return hideInBonesAI;
     }
 
     public enum SkullCrawlerType {

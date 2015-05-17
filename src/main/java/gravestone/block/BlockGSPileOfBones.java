@@ -1,8 +1,10 @@
 package gravestone.block;
 
 import gravestone.block.enums.EnumPileOfBones;
+import gravestone.config.GSConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSTabs;
+import gravestone.entity.monster.EntitySkullCrawler;
 import gravestone.tileentity.TileEntityGSPileOfBones;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -79,7 +81,7 @@ public class BlockGSPileOfBones extends BlockContainer {
 
     @Override
     public Item getItemDropped(IBlockState state, Random random, int fortune) {
-        return Items.bone;
+        return this.isSkullCrawlerBlock(state) ? null : Items.bone;
     }
 
     @Override
@@ -107,6 +109,29 @@ public class BlockGSPileOfBones extends BlockContainer {
         return new BlockState(this, new IProperty[]{VARIANT});
     }
 
+    public boolean isSkullCrawlerBlock(IBlockState state) {
+        return (EnumPileOfBones) state.getValue(VARIANT) == EnumPileOfBones.PILE_OF_BONES_WITH_SKULL_CRAWLER;
+    }
+
+    public static IBlockState getCrawlerBlockState() {
+        return GSBlock.pileOfBones.getDefaultState().withProperty(BlockGSPileOfBones.VARIANT, EnumPileOfBones.PILE_OF_BONES_WITH_SKULL_CRAWLER);
+    }
+
+    /**
+     * Called right before the block is destroyed by a player. Args: world, x, y, z, metaData
+     */
+    @Override
+    public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
+        if (!world.isRemote && isSkullCrawlerBlock(state) && GSConfig.spawnSkullCrawlersAtPileBonesDestruction) {
+            EntitySkullCrawler skullCrawler = new EntitySkullCrawler(world);
+            skullCrawler.setLocationAndAngles(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0, 0);
+            world.spawnEntityInWorld(skullCrawler);
+            skullCrawler.spawnExplosionParticle();
+        }
+
+        super.onBlockDestroyedByPlayer(world, pos, state);
+    }
+
     protected ItemStack createStackedBlock(int meta) {
         return new ItemStack(GSBlock.pileOfBones, 1, meta);
     }
@@ -117,7 +142,7 @@ public class BlockGSPileOfBones extends BlockContainer {
 
         TileEntityGSPileOfBones te = (TileEntityGSPileOfBones) world.getTileEntity(pos);
         if (te != null) {
-            te.setDirection((byte) (MathHelper.floor_double((double) (entity.rotationYaw * 4F / 360F) + 0.5D) & 3));
+            te.setDirection((byte) (MathHelper.floor_double((double) (entity.rotationYaw * 4 / 360F) + 0.5D) & 3));
         }
     }
 

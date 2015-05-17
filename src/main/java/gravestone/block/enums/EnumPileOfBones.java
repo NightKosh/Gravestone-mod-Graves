@@ -11,7 +11,8 @@ import net.minecraft.util.IStringSerializable;
 public enum EnumPileOfBones implements IBlockEnum, IStringSerializable {
 
     PILE_OF_BONES("block.pile_of_bones", "pile_of_bones"),
-    PILE_OF_BONES_WITH_SKULL("block.pile_of_bones_with_skull", "pile_of_bones_with_skull");
+    PILE_OF_BONES_WITH_SKULL("block.pile_of_bones_with_skull", "pile_of_bones_with_skull"),
+    PILE_OF_BONES_WITH_SKULL_CRAWLER("block.pile_of_bones_with_skull_crawler", "pile_of_bones_with_skull_crawler");
 
     private String name;
     private String blockModelName;
