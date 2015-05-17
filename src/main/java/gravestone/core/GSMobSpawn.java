@@ -38,13 +38,13 @@ public class GSMobSpawn {
      * Provides a mapping between entity classes and a string
      */
     public static Map<String, Constructor<EntityLiving>> mobNameToClassMapping = new HashMap<String, Constructor<EntityLiving>>();
-    public static List<String> MOB_ID = new ArrayList<String>(Arrays.asList("Zombie", "GraveStone.GSSkeleton"));
-    public static List<String> DOG_ID = new ArrayList<String>(Arrays.asList("GraveStone.GSZombieDog", "GraveStone.GSSkeletonDog"));
-    public static List<String> CAT_ID = new ArrayList<String>(Arrays.asList("GraveStone.GSZombieCat", "GraveStone.GSSkeletonCat"));
-    public static List<String> HELL_MOB_ID = new ArrayList<String>(Arrays.asList("PigZombie", "GSSkeleton"));
+    public static List<String> MOB_ID = new ArrayList<String>(Arrays.asList("Zombie", "GraveStone.Skeleton"));
+    public static List<String> DOG_ID = new ArrayList<String>(Arrays.asList("GraveStone.GSZombieDog", "GraveStone.SkeletonDog"));
+    public static List<String> CAT_ID = new ArrayList<String>(Arrays.asList("GraveStone.GSZombieCat", "GraveStone.SkeletonCat"));
+    public static List<String> HELL_MOB_ID = new ArrayList<String>(Arrays.asList("PigZombie", "GraveStone.Skeleton"));
     // spawner mobs
     public static List<String> skeletonSpawnerMobs = new ArrayList<String>(Arrays.asList(
-            "GraveStone.GSSkeleton", "GraveStone.GSSkeleton", "GraveStone.GSSkeleton", "GraveStone.GSSkeleton",
+            "GraveStone.Skeleton", "GraveStone.Skeleton", "GraveStone.Skeleton", "GraveStone.Skeleton",
             "GraveStone.GSSkeletonDog",
             "GraveStone.GSSkeletonCat"));
     public static List<String> zombieSpawnerMobs = new ArrayList<String>(Arrays.asList(
@@ -53,7 +53,7 @@ public class GSMobSpawn {
             "GraveStone.GSZombieCat"));
     // catacombs statues mobs
     public static List<String> catacombsStatuesMobs = new ArrayList<String>(Arrays.asList(
-            "GraveStone.GSSkeleton", "Zombie"));
+            "GraveStone.Skeleton", "Zombie"));
 
     private GSMobSpawn() {
     }
