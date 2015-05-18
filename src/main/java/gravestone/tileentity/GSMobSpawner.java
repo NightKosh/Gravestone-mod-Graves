@@ -71,7 +71,7 @@ public class GSMobSpawner extends GSSpawner {
     }
 
     private boolean isBossSpawner() {
-        return BlockGSSpawner.BOSS_SPAWNERS.contains((byte) getSpawnerType().ordinal());
+        return BlockGSSpawner.BOSS_SPAWNERS.contains(getSpawnerType());
     }
 
     private EnumSpawner getSpawnerType() {
