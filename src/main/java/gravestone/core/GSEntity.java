@@ -46,6 +46,21 @@ public class GSEntity {
     public static final String ZOMBIE_RAIDER_NAME = "GSZombieRaider";
     public static final String RAVEN_NAME = "GSRaven";
 
+
+    public static final String SKELETON_ID = ModInfo.ID + "." + SKELETON_NAME;
+    public static final String ZOMBIE_DOG_ID = ModInfo.ID + "." + ZOMBIE_DOG_NAME;
+    public static final String ZOMBIE_CAT_ID = ModInfo.ID + "." + ZOMBIE_CAT_NAME;
+    public static final String SKELETON_DOG_ID = ModInfo.ID + "." + SKELETON_DOG_NAME;
+    public static final String SKELETON_CAT_ID = ModInfo.ID + "." + SKELETON_CAT_NAME;
+    public static final String SKULL_CRAWLER_ID = ModInfo.ID + "." + SKULL_CRAWLER_NAME;
+    public static final String WITHER_SKULL_CRAWLER_ID = ModInfo.ID + "." + WITHER_SKULL_CRAWLER_NAME;
+    public static final String ZOMBIE_SKULL_CRAWLER_ID = ModInfo.ID + "." + ZOMBIE_SKULL_CRAWLER_NAME;
+    public static final String ZOMBIE_HORSE_ID = ModInfo.ID + "." + ZOMBIE_HORSE_NAME;
+    public static final String SKELETON_HORSE_ID = ModInfo.ID + "." + SKELETON_HORSE_NAME;
+    public static final String SKELETON_RAIDER_ID = ModInfo.ID + "." + SKELETON_RAIDER_NAME;
+    public static final String ZOMBIE_RAIDER_ID = ModInfo.ID + "." + ZOMBIE_RAIDER_NAME;
+    public static final String RAVEN_ID = ModInfo.ID + "." + RAVEN_NAME;
+
     // eggs colors
     public static final int ZOMBIE_BACKGROUND_EGG_COLOR = 44975;
     public static final int SKELETON_BACKGROUND_EGG_COLOR = 12698049;

@@ -38,22 +38,27 @@ public class GSMobSpawn {
      * Provides a mapping between entity classes and a string
      */
     public static Map<String, Constructor<EntityLiving>> mobNameToClassMapping = new HashMap<String, Constructor<EntityLiving>>();
-    public static List<String> MOB_ID = new ArrayList<String>(Arrays.asList("Zombie", "GraveStone.Skeleton"));
-    public static List<String> DOG_ID = new ArrayList<String>(Arrays.asList("GraveStone.GSZombieDog", "GraveStone.SkeletonDog"));
-    public static List<String> CAT_ID = new ArrayList<String>(Arrays.asList("GraveStone.GSZombieCat", "GraveStone.SkeletonCat"));
-    public static List<String> HELL_MOB_ID = new ArrayList<String>(Arrays.asList("PigZombie", "GraveStone.Skeleton"));
+    public static List<String> MOB_ID = new ArrayList<String>(Arrays.asList("Zombie", GSEntity.SKELETON_ID));
+    public static List<String> DOG_ID = new ArrayList<String>(Arrays.asList(GSEntity.ZOMBIE_DOG_ID, GSEntity.SKELETON_DOG_ID));
+    public static List<String> CAT_ID = new ArrayList<String>(Arrays.asList(GSEntity.ZOMBIE_CAT_ID, GSEntity.SKELETON_CAT_ID));
+    public static List<String> HORSE_ID = new ArrayList<String>(Arrays.asList(GSEntity.ZOMBIE_HORSE_ID, GSEntity.SKELETON_HORSE_ID));
+    public static List<String> HELL_MOB_ID = new ArrayList<String>(Arrays.asList("PigZombie", GSEntity.SKELETON_ID));
     // spawner mobs
     public static List<String> skeletonSpawnerMobs = new ArrayList<String>(Arrays.asList(
-            "GraveStone.Skeleton", "GraveStone.Skeleton", "GraveStone.Skeleton", "GraveStone.Skeleton",
-            "GraveStone.GSSkeletonDog",
-            "GraveStone.GSSkeletonCat"));
+            GSEntity.SKELETON_ID, GSEntity.SKELETON_ID, GSEntity.SKELETON_ID, GSEntity.SKELETON_ID,
+            GSEntity.SKELETON_DOG_ID,
+            GSEntity.SKELETON_CAT_ID,
+            GSEntity.SKELETON_HORSE_ID,
+            GSEntity.SKELETON_RAIDER_ID));
     public static List<String> zombieSpawnerMobs = new ArrayList<String>(Arrays.asList(
             "Zombie", "Zombie", "Zombie", "Zombie",
-            "GraveStone.GSZombieDog",
-            "GraveStone.GSZombieCat"));
+            GSEntity.ZOMBIE_DOG_ID,
+            GSEntity.ZOMBIE_CAT_ID,
+            GSEntity.ZOMBIE_HORSE_ID,
+            GSEntity.ZOMBIE_RAIDER_ID));
     // catacombs statues mobs
     public static List<String> catacombsStatuesMobs = new ArrayList<String>(Arrays.asList(
-            "GraveStone.Skeleton", "Zombie"));
+            GSEntity.SKELETON_ID, "Zombie"));
 
     private GSMobSpawn() {
     }
@@ -88,8 +93,8 @@ public class GSMobSpawn {
                 id = getMobID(world.rand, EnumMobType.UNDEAD_CATS);
                 break;
             case HORSE_STATUE:
-                //TODO
-                return null;
+                id = getMobID(world.rand, EnumMobType.UNDEAD_HORSES);
+                break;
             default:
                 if (canSpawnHellCreatures(world, x, y, z) && world.rand.nextInt(10) == 0) {
                     id = getMobID(world.rand, EnumMobType.HELL_MOBS);
@@ -227,6 +232,8 @@ public class GSMobSpawn {
                 return DOG_ID.get(random.nextInt(DOG_ID.size()));
             case UNDEAD_CATS:
                 return CAT_ID.get(random.nextInt(CAT_ID.size()));
+            case UNDEAD_HORSES:
+                return HORSE_ID.get(random.nextInt(HORSE_ID.size()));
             case DEFAULT_MOBS:
             default:
                 return MOB_ID.get(random.nextInt(MOB_ID.size()));
@@ -343,6 +350,7 @@ public class GSMobSpawn {
         DEFAULT_MOBS,
         HELL_MOBS,
         UNDEAD_DOGS,
-        UNDEAD_CATS
+        UNDEAD_CATS,
+        UNDEAD_HORSES
     }
 }
