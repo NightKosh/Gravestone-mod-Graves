@@ -33,6 +33,16 @@ public class MobHandler {
         saveMobsSpawnTime(entity.worldObj);
     }
 
+    public static long getAndRemoveSpawnTime(Entity entity) {
+        if (mobsSpawnTime.containsKey(entity.getUniqueID().toString())) {
+            long time = mobsSpawnTime.get(entity.getUniqueID().toString());
+            clearMobsSpawnTime(entity);
+            return time;
+        } else {
+            return entity.worldObj.getWorldTime();
+        }
+    }
+
     public static long getMobSpawnTime(Entity entity) {
         if (!mobsSpawnTime.containsKey(entity.getUniqueID().toString())) {
             mobsSpawnTime.put(entity.getUniqueID().toString(), entity.worldObj.getWorldTime());
