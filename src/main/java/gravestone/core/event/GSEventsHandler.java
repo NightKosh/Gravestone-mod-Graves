@@ -42,24 +42,22 @@ public class GSEventsHandler {
                 return;
             }
 
-            long spawnTime = MobHandler.getMobSpawnTime(event.entity);
-            MobHandler.clearMobsSpawnTime(event.entity);
-
             if (GSConfig.generatePlayerGraves && event.entityLiving instanceof EntityPlayer) {
-                GraveStoneHelper.createPlayerGrave((EntityPlayer) event.entity, event, spawnTime);
+                GraveStoneHelper.createPlayerGrave((EntityPlayer) event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
             } else {
                 if (GSConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
-                    GraveStoneHelper.createGrave(event.entity, event, CorpseHelper.getCorpse(event.entity, EnumCorpse.VILLAGER), EnumGraveType.PLAYER_GRAVES, true, spawnTime);
+                    GraveStoneHelper.createGrave(event.entity, event, CorpseHelper.getCorpse(event.entity, EnumCorpse.VILLAGER),
+                            EnumGraveType.PLAYER_GRAVES, true, MobHandler.getAndRemoveSpawnTime(event.entity));
                     return;
                 }
 
                 if (GSConfig.generatePetGraves && event.entity instanceof EntityTameable) {
-                    GraveStoneHelper.createPetGrave(event.entity, event, spawnTime);
+                    GraveStoneHelper.createPetGrave(event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
                     return;
                 }
 
                 if (GSConfig.generatePetGraves && event.entity instanceof EntityHorse) {
-                    GraveStoneHelper.createHorseGrave((EntityHorse) event.entity, event, spawnTime);
+                    GraveStoneHelper.createHorseGrave((EntityHorse) event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
                     return;
                 }
             }
