@@ -1,0 +1,13 @@
+[submodule "api/sophisticated_wolves"]
+	path = api/sophisticated_wolves
+	url = https://github.com/NightKosh/Sophisticated-wolves-API
+[submodule "api/baubles"]
+	path = api/baubles
+	url = https://github.com/Azanor/Baubles
+[submodule "api/forestry"]
+	path = api/forestry
+	url = https://github.com/ForestryMC/ForestryAPI
+	branch = mc-1.8
+[submodule "api/gravestone"]
+	path = api/gravestone
+	url = https://github.com/NightKosh/GraveStone-mod-API

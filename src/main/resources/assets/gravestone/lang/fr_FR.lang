@@ -1,0 +1,197 @@
+# Tabs
+itemGroup.tabGSGraveStone=Gravestones
+itemGroup.tabGSMemorials=Memorials
+itemGroup.tabGSOther=Gravestone mod Items
+
+
+# Blocks
+## Graves
+block.gravestone.gravestone.name=Tombe
+block.gravestone.cross.name=Croix
+block.gravestone.plate.name=Pierre tombale
+block.gravestone.dog_statue.name=Tombe de chien
+block.gravestone.cat_statue.name=Tombe de chat
+block.gravestone.horse_statue.name=Statue de cheval
+block.gravestone.sword.name=Épée du guerrier vaincu
+
+## Memorials
+block.memorial.cross.name=Croix mémoriale
+block.memorial.obelisk.name=Obélisque
+block.memorial.steve_statue.name=Statue de Steve
+block.memorial.villager_statue.name=Statue de villageois
+block.memorial.angel_statue.name=Statue d'ange
+block.memorial.dog_statue.name=Statue de chien
+block.memorial.cat_statue.name=Statue de chat
+block.memorial.creeper_statue.name=Statue de creeper
+block.memorial.celtic_cross.name=Croix celtique
+block.memorial.gibbet.name=Gibbet
+block.memorial.stocks.name=Stocks
+block.memorial.burning_stake.name=Burning Stake
+
+## Traps
+block.trap.night.name=Pierre nocturne
+block.trap.thunder.name=Pierre de tonnerre
+block.trap.curse=Les ténèbres approchent !
+
+## Spawners
+block.spawner.wither.name=Spawner à sorcière
+block.spawner.skeleton.name=Spawner à squelette
+block.spawner.zombie.name=Spawner à zombie
+
+## Bone Blocks
+block.bone_block.default.name=Block d'os
+block.bone_block.skull.name=Block d'os avec crâne
+block.bone_block.crawler.name=Block d'os de crâne rampant
+block.bone_block.crawler_skull.name=Block d'os de  crâne rampant avec crâne
+tile.bone_slab.name=Dalle d'os
+tile.bone_stairs.name=Escalier d'os
+
+## Pile of Bones
+block.pile_of_bones.name=Pile of Bones
+block.pile_of_bones_with_skull.name=Pile of Bones with Skull
+
+## Chests
+block.haunted_chest.bats_chest.name=Coffre à chauve-souris
+block.haunted_chest.skeleton_chest.name=Coffre à squelette
+block.haunted_chest.raven_chest.name=Coffre à corbeau
+block.haunted_chest.ghost_chest.name=Coffre à fantômes
+
+## Candles
+tile.candle.name=Bougie
+block.skull_candle.skeleton.name=Bougie à tête de squelette
+block.skull_candle.wither_skeleton.name=Bougie à tête de wither
+block.skull_candle.zombie.name=Bougie à tête de zombie
+
+## Altar
+tile.altar.name=Altar
+
+
+# Items
+## Chisel
+item.gravestone.chisel.name=Gravestone Chisel
+
+## Graves
+item.grave.age=A vécu
+item.grave.days=jours
+item.grave.sword_name=Nom de l'épée
+item.grave.sword_damage=Dégats de l'épée
+
+## Corpses
+item.corpse.villager=Carcasse de villageois
+item.corpse.horse=Carcasse de cheval
+item.corpse.dog=Carcasse de chien
+item.corpse.cat=Carcasse de chat
+item.corpse.entity_name=Nom
+item.corpse.villager_type=Profession
+item.corpse.villager_type.farmer=Fermier
+item.corpse.villager_type.librarian=Bibliothécaire
+item.corpse.villager_type.priest=Prêtre
+item.corpse.villager_type.smith=Forgeron
+item.corpse.villager_type.butcher=Boucher
+item.corpse.villager_type.undertaker=Croque-mort
+item.corpse.villager_type.brewer=Brasseur
+item.corpse.villager_type.thaumaturge=Thaumaturge
+item.corpse.villager_type.beekeeper=Apiculteur
+item.corpse.villager_type.lumberjack=Bucheron
+item.corpse.villager_type.Unknown=Inconnu
+item.corpse.horse_type=Type de cheval
+item.corpse.horse_type.horse=Cheval
+item.corpse.horse_type.donkey=Âne
+item.corpse.horse_type.mule=Mûle
+item.corpse.horse_type.zombie=Cheval zombie
+item.corpse.horse_type.skeleton=Cheval squelette
+item.corpse.horse_type.unknown=Inconu
+item.corpse.horse_variant=Variante de cheval
+item.corpse.health=Vie max
+item.corpse.speed=Vitesse
+item.corpse.jump_strength=Force de saut
+item.corpse.collar=Collier
+item.corpse.collar.white=Blanc
+item.corpse.collar.orange=Orange
+item.corpse.collar.purple=Violet
+item.corpse.collar.azure=Azure
+item.corpse.collar.yellow=Jaune
+item.corpse.collar.lime=Citron
+item.corpse.collar.pink=Rose
+item.corpse.collar.grey=Gris
+item.corpse.collar.light_grey=Gris clair
+item.corpse.collar.turquoise=Turquoise
+item.corpse.collar.violet=Pourpre
+item.corpse.collar.blue=Bleu
+item.corpse.collar.brown=Marron
+item.corpse.collar.green=Vert
+item.corpse.collar.red=Rouge
+item.corpse.collar.black=Noir
+item.corpse.collar.unknown=Inconnu
+item.corpse.dog_type=Type de chien
+item.corpse.cat_type=Type de chat
+item.corpse.cat_type.ocelot=Ocelot
+item.corpse.cat_type.black=Noir
+item.corpse.cat_type.red=Rouge
+item.corpse.cat_type.siamese=Siamois
+item.corpse.cat_type.unknown=Inconnu
+
+##Backpacks
+item.backpack.undertaker.t1=Sac à dos du croque-mort
+item.backpack.undertaker.t2=Sac à dos tissé du croque-mort
+
+
+# GUI
+gui.edit_grave.title=Changer l'épitaphe
+gui.edit_grave.close=Fait
+gui.edit_grave.randomText=texte aléatoire
+gui.altar.resurrect=Ressusciter
+gui.altar.requirements=%d niveau demandé
+
+
+# Entity
+entity.GSZombieDog.name=Chien zombie
+entity.GSSkeletonDog.name=Squelette de chien
+entity.GSZombieCat.name=Chat zombie
+entity.GSSkeletonCat.name=Squelette de chat
+entity.GSSkullCrawler.name=Crâne rampant
+entity.GSWitherSkullCrawler.name=Crâne de wither rampant
+entity.GSZombieSkullCrawler.name=Crâne de zombie rampant
+entity.GSRaven.name=Corbeau
+entity.GSSkeletonRaider.name=Skeleton Raider
+entity.GSZombieRaider.name=Zombie Raider
+
+
+# Death Messages
+death.GS.Herobrine=%1$s a été violemment tué par Herobrine
+death.GS.death_sentence=%1$s a reçu une condamnation à mort
+death.GS.tortures=%1$s a été torturé à mort
+death.GS.mom=Votre mère
+
+# Console messages
+grave.cant_be_looted=You can't loot this grave!
+## Console commands
+commands.not_enough_parameters=Not enough parameters!
+commands.coordinate_error=Coordinate error!
+commands.direction_error=Direction error!
+
+commands.generate.unknown_structure=Unknown structure!
+
+commands.fill_grave.empty=There aren't any blocks at this coordinates!
+commands.fill_grave.wrong_block=This coordinates occupied by wrong blocks!
+
+# Materials
+material.title=Made of
+material.mossy=Mossy
+material.wood=Wood
+material.sandstone=Sandstone
+material.red_sandstone=Red Sandstone
+material.stone=Stone
+material.diorite=Diorite
+material.andesite=Andesite
+material.granite=Granite
+material.iron=Iron
+material.gold=Gold
+material.diamond=Diamond
+material.emerald=Emerald
+material.lapis=Lapis
+material.redstone=Redstone
+material.obsidian=Obsidian
+material.quartz=Quartz
+material.prizmarine=Prizmarine
+material.ice=Ice

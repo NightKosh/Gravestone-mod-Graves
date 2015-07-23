@@ -1,0 +1,200 @@
+# Tabs
+itemGroup.tabGSGraveStone=Gravestone(Náhrobek)
+itemGroup.tabGSMemorials=Památníky
+itemGroup.tabGSOther=Předměty módu Gravestone
+
+
+# Blocks
+## Graves
+block.gravestone.gravestone.name=Náhrobek
+block.gravestone.cross.name=Kříž
+block.gravestone.plate.name=Náhrobní kámenk
+block.gravestone.dog_statue.name=Socha psa
+block.gravestone.cat_statue.name=Socha kočky
+block.gravestone.horse_statue.name=Socha koně
+block.gravestone.sword.name=Meč padlého válečníka
+
+## Memorials
+block.memorial.cross.name=Křížový památník
+block.memorial.obelisk.name=Obelisk
+block.memorial.steve_statue.name=Socha Steva
+block.memorial.villager_statue.name=Socha vesničana
+block.memorial.angel_statue.name=Socha anděla
+block.memorial.dog_statue.name=Socha psa
+block.memorial.cat_statue.name=Socha kočky
+block.memorial.creeper_statue.name=Socha Syčáka
+block.memorial.celtic_cross.name=Keltský kříž
+block.memorial.gibbet.name=Šibenice
+block.memorial.stocks.name=Pranýř
+block.memorial.burning_stake.name=Upalovací hranice
+
+## Traps
+block.trap.night.name=Noční kámen
+block.trap.thunder.name=Bleskový kámen
+block.trap.curse=Temnota přichází!
+
+## Spawners
+block.spawner.wither.name=Spawner na withera
+block.spawner.skeleton.name=Spawner na kostlivce
+block.spawner.zombie.name=Spawner na zombie
+
+## Bone Blocks
+block.bone_block.default.name=Kostěný blok
+block.bone_block.skull.name=Kostěný blok s lebkou
+block.bone_block.crawler.name=Kostěný blok s Lebkokrabem uvnitř
+block.bone_block.crawler_skull_name=Kostěný blok s lebkou a Lebkokrabem uvnitř
+tile.bone_slab.name=Kostěný půlblok
+tile.bone_stairs.name=Kostěné schody
+
+## Pile of Bones
+block.pile_of_bones.name=Hromada kostí
+block.pile_of_bones_with_skull.name=Hromada kostí s lebkou
+
+## Chests
+block.haunted_chest.bats_chest.name=Bedna s netopýry
+block.haunted_chest.skeleton_chest.name=Bedna s kostlivcem
+block.haunted_chest.raven_chest.name=Bedna s havrany
+block.haunted_chest.ghost_chest.name=Bedna s duchem
+
+## Candles
+tile.candle.name=Svíčka
+block.skull_candle.skeleton.name=Lebka se svíčkou
+block.skull_candle.wither_skeleton.name=Lebka withera se svíčkou
+block.skull_candle.zombie.name=Zombie hlava se svíčkou
+
+## Altar
+tile.altar.name=Oltář
+
+
+# Items
+## Chisel
+item.gravestone.chisel.name=Hrobnické dláto
+
+## Graves
+item.grave.age=Žil
+item.grave.days=dní
+item.grave.sword_name=Jméno meče
+item.grave.sword_damage=Poškození meče
+
+## Corpses
+item.corpse.villager=Mrtvola vesničana
+item.corpse.horse=Mrtvola koně
+item.corpse.dog=Mrtvola psa
+item.corpse.cat=Mrtvola kočky
+item.corpse.entity_name=Jméno
+item.corpse.villager_type=Profese
+item.corpse.villager_type.farmer=Farmář
+item.corpse.villager_type.librarian=Knihovník
+item.corpse.villager_type.priest=Kněz
+item.corpse.villager_type.smith=Kovář
+item.corpse.villager_type.butcher=Pekař
+item.corpse.villager_type.undertaker=Hrobař
+item.corpse.villager_type.brewer=Sládek
+item.corpse.villager_type.thaumaturge=Divotvůrce
+item.corpse.villager_type.beekeeper=Včelař
+item.corpse.villager_type.lumberjack=Dřevorubec
+item.corpse.villager_type.Unknown=neznámý
+item.corpse.horse_type=Typ koně
+item.corpse.horse_type.horse=Kůň
+item.corpse.horse_type.donkey=Osel
+item.corpse.horse_type.mule=Mula
+item.corpse.horse_type.zombie=Zombie kůň
+item.corpse.horse_type.skeleton=Kostlivý kůň
+item.corpse.horse_type.unknown=Neznámý
+item.corpse.horse_variant=Typy koní
+item.corpse.health=Maximum života
+item.corpse.speed=Rychlost
+item.corpse.jump_strength=Síla skoku
+item.corpse.collar=Obojek
+item.corpse.collar.white=Bílý
+item.corpse.collar.orange=Oranžový
+item.corpse.collar.purple=Purpurový
+item.corpse.collar.azure=Azurový
+item.corpse.collar.yellow=Žlutý
+item.corpse.collar.lime=Limetkový
+item.corpse.collar.pink=Růžový
+item.corpse.collar.grey=Šedý
+item.corpse.collar.light_grey=Světle šedý
+item.corpse.collar.turquoise=Tyrkysový
+item.corpse.collar.violet=Fialový
+item.corpse.collar.blue=Modrý
+item.corpse.collar.brown=Hnědý
+item.corpse.collar.green=Zelený
+item.corpse.collar.red=Červený
+item.corpse.collar.black=Černý
+item.corpse.collar.unknown=Neznámý
+item.corpse.dog_type=Typ psa
+item.corpse.cat_type=Typ kočky
+item.corpse.cat_type.ocelot=Ocelot
+item.corpse.cat_type.black=Černá
+item.corpse.cat_type.red=Červená
+item.corpse.cat_type.siamese=Siamská
+item.corpse.cat_type.unknown=Neznámá
+
+##Backpacks
+item.backpack.undertaker.t1=Hrobníkův batoh
+item.backpack.undertaker.t2=Hrobníkův tkaný batoh
+
+
+# GUI
+gui.edit_grave.title=Nastav text náhrobku
+gui.edit_grave.close=Hotovo
+gui.edit_grave.randomText=Nastav náhodný text
+gui.altar.resurrect=Vzkřísit
+gui.altar.requirements=%d levelů je potřeba
+
+
+# Entity
+entity.GSZombieDog.name=Zombie pes
+entity.GSSkeletonDog.name=Kostlivý pes
+entity.GSZombieCat.name=Zombie kočka
+entity.GSSkeletonCat.name=Kostlivá kočka
+entity.GSSkullCrawler.name=Lebkokrab
+entity.GSWitherSkullCrawler.name=Witherský lebkokrab
+entity.GSZombieSkullCrawler.name=Zombie lebkokrab
+entity.GSRaven.name=Havran
+entity.GSSkeletonRaider.name=Kostlivý nájezdník
+entity.GSZombieRaider.name=Zombie nájezdník
+
+
+# Death Messages
+death.GS.Herobrine=%1$s byl brutálně zavražděn Herobrinem
+death.GS.death_sentence=%1$s obdržel rozsudek smrti
+death.GS.tortures=%1$s zemřel v krutých bolestech
+death.GS.mom=Tvoje maminka
+
+# Console messages
+grave.cant_be_looted=Nemůžeš vykrást tento hrob!
+## Console commands
+commands.not_enough_parameters=Není dost parametrů!
+commands.coordinate_error=Chyba souřadnic!
+commands.direction_error=Chyba umístění!
+
+commands.generate.unknown_structure=Neznámá struktura!
+
+commands.fill_grave.empty=Na souřadnicích není žádný blok!
+commands.fill_grave.wrong_block=Souřadnice jsou obsazeny špatnými bloky!
+
+# Materials
+material.title=Vyrobený z
+material.mossy=Mechu
+material.wood=Dřeva
+material.sandstone=Pískového kamene
+material.red_sandstone=Červeného písku
+material.stone=Kamene
+material.diorite=Dioritu
+material.andesite=Andesitu
+material.granite=Granitu
+material.iron=Železa
+material.gold=Zlata
+material.diamond=Diamantu
+material.emerald=Emeraldu
+material.lapis=Lapisu
+material.redstone=Ruditu
+material.obsidian=Obsidiánu
+material.quartz=Křemíku
+material.prizmarine=Prizmarínu
+material.ice=Ledu
+
+# Parent Language: en_US
+# corrections and additions missing translations by DeRigeurEx

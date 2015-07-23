@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=bottom": { "model": "gravestone:GSBoneSlab_half_slab" },
+        "half=top":    { "model": "gravestone:GSBoneSlab_upper_slab" }
+    }
+}
