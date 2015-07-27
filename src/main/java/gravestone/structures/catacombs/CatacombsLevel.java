@@ -97,15 +97,11 @@ public class CatacombsLevel {
             for (int i = 0; i < components.length; i++) {
                 component = components[i];
 
-                if (component.canGoOnlyForward()) {
-                    if (component.goForward) {
-                        resultComponentsCount += addComponent(newComponents, component, component.getDirection(), COMPONENT_SIDE.FRONT);
-                    }
-                } else {
-                    if (component.goForward) {
-                        resultComponentsCount += addComponent(newComponents, component, component.getDirection(), COMPONENT_SIDE.FRONT);
-                        resultComponentsCount += addComponent(newComponents, component, component.getLeftDirection(component.getDirection()), COMPONENT_SIDE.LEFT);
-                        resultComponentsCount += addComponent(newComponents, component, component.getRightDirection(component.getDirection()), COMPONENT_SIDE.RIGHT);
+                if (component.goForward) {
+                    resultComponentsCount += addComponent(newComponents, component, component.getDirection(), COMPONENT_SIDE.FRONT);
+                    if (!component.canGoOnlyForward()) {
+                        resultComponentsCount += addComponent(newComponents, component, component.getLeftDirection(), COMPONENT_SIDE.LEFT);
+                        resultComponentsCount += addComponent(newComponents, component, component.getRightDirection(), COMPONENT_SIDE.RIGHT);
                     }
                 }
             }
@@ -141,7 +137,8 @@ public class CatacombsLevel {
         LinkedList<CatacombsBaseComponent> components = currentComponents;
         CatacombsBaseComponent component, newComponent;
         Class componentClass;
-        int ends = 1 + random.nextInt(components.size() - 1);
+        int roomsCount = components.size();
+        int ends = (roomsCount < 2) ? 1 : 1 + random.nextInt(components.size() - 1);
         int endsCount = 0;
 
         if (level == 4) {
@@ -158,10 +155,10 @@ public class CatacombsLevel {
                 newComponent = tryCreateComponent(component, componentClass, component.getDirection(), level, COMPONENT_SIDE.FRONT);
 
                 if (newComponent == null) {
-                    newComponent = tryCreateComponent(component, componentClass, component.getLeftDirection(component.getDirection()), level, COMPONENT_SIDE.LEFT);
+                    newComponent = tryCreateComponent(component, componentClass, component.getLeftDirection(), level, COMPONENT_SIDE.LEFT);
 
                     if (newComponent == null) {
-                        newComponent = tryCreateComponent(component, componentClass, component.getRightDirection(component.getDirection()), level, COMPONENT_SIDE.RIGHT);
+                        newComponent = tryCreateComponent(component, componentClass, component.getRightDirection(), level, COMPONENT_SIDE.RIGHT);
 
                         if (newComponent != null) {
                             levelComponents.add(newComponent);

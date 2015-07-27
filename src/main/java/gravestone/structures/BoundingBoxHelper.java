@@ -38,13 +38,13 @@ public class BoundingBoxHelper {
         switch (direction) {
             case SOUTH:
                 minX = x - xShift;
-                maxX = x - xShift + xLength;
+                maxX = x + xLength - xShift;
                 minZ = z;
                 maxZ = z + zLength;
                 break;
             case NORTH:
                 minX = x - xShift;
-                maxX = x - xShift + xLength;
+                maxX = x + xLength - xShift;
                 minZ = z - zLength;
                 maxZ = z;
                 break;
@@ -52,13 +52,13 @@ public class BoundingBoxHelper {
                 minX = x;
                 maxX = x + zLength;
                 minZ = z - xShift;
-                maxZ = z - xShift + xLength;
+                maxZ = z + xLength - xShift;
                 break;
             case WEST:
                 minX = x - zLength;
                 maxX = x;
                 minZ = z - xShift;
-                maxZ = z - xShift + xLength;
+                maxZ = z + xLength - xShift;
                 break;
         }
 
