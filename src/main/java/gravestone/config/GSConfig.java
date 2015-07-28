@@ -132,6 +132,7 @@ public class GSConfig {
     public static int graveItemsCount;
     public static int graveSpawnRate;
     public static boolean canPlaceGravesEveryWhere;
+    public static boolean spawnMobsByGraves;
     public static boolean spawnMobAtGraveDestruction;
     public static boolean isFogEnabled;
     public static boolean generateSwordGraves;
@@ -168,6 +169,7 @@ public class GSConfig {
             graveSpawnRate = 600;
         }
 
+        spawnMobsByGraves = config.get(CATEGORY_GRAVES, "SpawnMobsByGraves", true).getBoolean(true);
         spawnMobAtGraveDestruction = config.get(CATEGORY_GRAVES, "SpawnMobAtGraveDestruction", true).getBoolean(true);
         spawnChance = config.get(CATEGORY_GRAVES, "GravesMobsSpawnChance", 80).getInt();
 

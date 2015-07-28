@@ -37,41 +37,44 @@ public class GSGraveStoneSpawn extends GSSpawner {
 
     @Override
     protected void clientUpdateLogic() {
+        //TODO do not used. Do not forget about GSConfig.spawnMobsByGraves
     }
 
     @Override
     protected void serverUpdateLogic() {
-        if (this.delay < 0) {
-            this.updateDelay();
-        }
+        if (GSConfig.spawnMobsByGraves) {
+            if (this.delay < 0) {
+                this.updateDelay();
+            }
 
-        if (this.delay > 0) {
-            this.delay--;
-        } else if (canSpawnMobs(tileEntity.getWorld()) && anyPlayerInRange()) {
-            if (this.getNewMob) {
-                this.spawnedMob = GSMobSpawn.getMobEntity(this.tileEntity.getWorld(), EnumGraves.getById(((TileEntityGSGraveStone) this.tileEntity).graveType),
-                        this.tileEntity.getPos().getX(), this.tileEntity.getPos().getY(), this.tileEntity.getPos().getZ());
+            if (this.delay > 0) {
+                this.delay--;
+            } else if (canSpawnMobs(tileEntity.getWorld()) && anyPlayerInRange()) {
+                if (this.getNewMob) {
+                    this.spawnedMob = GSMobSpawn.getMobEntity(this.tileEntity.getWorld(), EnumGraves.getById(((TileEntityGSGraveStone) this.tileEntity).graveType),
+                            this.tileEntity.getPos().getX(), this.tileEntity.getPos().getY(), this.tileEntity.getPos().getZ());
 
-                if (this.spawnedMob == null) {
+                    if (this.spawnedMob == null) {
+                        return;
+                    }
+
+                    this.getNewMob = false;
+                }
+
+                int nearbyEntitiesCount = tileEntity.getWorld().getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.fromBounds(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ(),
+                        tileEntity.getPos().getX() + 1, tileEntity.getPos().getY() + 1, tileEntity.getPos().getZ() + 1).expand(1.0D, 4.0D, SPAWN_RANGE * 2)).size();
+
+                if (nearbyEntitiesCount >= MAX_NEARBY_ENTITIES) {
+                    this.updateDelay();
                     return;
                 }
 
-                this.getNewMob = false;
-            }
-
-            int nearbyEntitiesCount = tileEntity.getWorld().getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.fromBounds(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ(),
-                    tileEntity.getPos().getX() + 1, tileEntity.getPos().getY() + 1, tileEntity.getPos().getZ() + 1).expand(1.0D, 4.0D, SPAWN_RANGE * 2)).size();
-
-            if (nearbyEntitiesCount >= MAX_NEARBY_ENTITIES) {
+                if (GSMobSpawn.checkChance(this.tileEntity.getWorld().rand) && GSMobSpawn.spawnMob(this.tileEntity.getWorld(), this.spawnedMob,
+                        this.tileEntity.getPos().getX(), this.tileEntity.getPos().getY(), this.tileEntity.getPos().getZ(), true)) {
+                    this.getNewMob = true;
+                }
                 this.updateDelay();
-                return;
             }
-
-            if (GSMobSpawn.checkChance(this.tileEntity.getWorld().rand) && GSMobSpawn.spawnMob(this.tileEntity.getWorld(), this.spawnedMob,
-                    this.tileEntity.getPos().getX(), this.tileEntity.getPos().getY(), this.tileEntity.getPos().getZ(), true)) {
-                this.getNewMob = true;
-            }
-            this.updateDelay();
         }
     }
 
