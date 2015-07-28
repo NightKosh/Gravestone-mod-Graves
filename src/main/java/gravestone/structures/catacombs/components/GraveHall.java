@@ -2,6 +2,7 @@ package gravestone.structures.catacombs.components;
 
 import gravestone.block.BlockGSGraveStone;
 import gravestone.block.GraveStoneHelper;
+import gravestone.config.GSConfig;
 import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.GraveGenerationHelper;
@@ -52,7 +53,9 @@ public class GraveHall extends CatacombsBaseComponent {
         // web
         this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 3, 1, 3, 13, 5, 15, Blocks.web.getDefaultState(), false);
         // piles of bones
-        this.fillWithRandomizedBlocks(world, boundingBox, 3, 1, 3, 13, 1, 15, false, random, getPileOfBonesSelector());
+        if (GSConfig.generatePilesOfBones) {
+            this.fillWithRandomizedBlocks(world, boundingBox, 3, 1, 3, 13, 1, 15, false, random, getPileOfBonesSelector());
+        }
 
         // nether floor
         this.fillWithBlocks(world, boundingBox, 1, 0, 1, 1, 0, 17, Blocks.nether_brick.getDefaultState(), false);

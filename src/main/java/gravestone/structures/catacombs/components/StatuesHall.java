@@ -1,6 +1,7 @@
 package gravestone.structures.catacombs.components;
 
 import gravestone.block.BlockGSMemorial;
+import gravestone.config.GSConfig;
 import gravestone.core.GSMobSpawn;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.MemorialGenerationHelper;
@@ -49,7 +50,9 @@ public class StatuesHall extends CatacombsBaseComponent {
         // web
         this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 1, 1, 1, 10, 4, 18, Blocks.web.getDefaultState(), false);
         // piles of bones
-        this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 1, 10, 1, 18, false, random, getPileOfBonesSelector());
+        if (GSConfig.generatePilesOfBones) {
+            this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 1, 10, 1, 18, false, random, getPileOfBonesSelector());
+        }
 
         // blocks wall
         this.fillWithRandomizedBlocks(world, boundingBox, 0, 1, 1, 0, 4, 17, false, random, getCemeteryCatacombsStones());
