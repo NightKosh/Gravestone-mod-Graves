@@ -7,7 +7,6 @@ import gravestone.core.TimeHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 /**
@@ -21,7 +20,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
     private static final int BASE_DELAY = 600;
     private static final int PLAYER_RANGE = 35;
     private static final int MIN_DELAY = 500;
-    private boolean getNewMob = true;
+    private boolean newMobRequired = true;
     /**
      * Maximum number of entities for limiting mob spawning
      */
@@ -50,7 +49,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
             if (this.delay > 0) {
                 this.delay--;
             } else if (canSpawnMobs(tileEntity.getWorld()) && anyPlayerInRange()) {
-                if (this.getNewMob) {
+                if (this.newMobRequired) {
                     this.spawnedMob = GSMobSpawn.getMobEntity(this.tileEntity.getWorld(), EnumGraves.getById(((TileEntityGSGraveStone) this.tileEntity).graveType),
                             this.tileEntity.getPos().getX(), this.tileEntity.getPos().getY(), this.tileEntity.getPos().getZ());
 
@@ -58,7 +57,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
                         return;
                     }
 
-                    this.getNewMob = false;
+                    this.newMobRequired = false;
                 }
 
                 int nearbyEntitiesCount = tileEntity.getWorld().getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.fromBounds(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ(),
@@ -71,7 +70,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
 
                 if (GSMobSpawn.checkChance(this.tileEntity.getWorld().rand) && GSMobSpawn.spawnMob(this.tileEntity.getWorld(), this.spawnedMob,
                         this.tileEntity.getPos().getX(), this.tileEntity.getPos().getY(), this.tileEntity.getPos().getZ(), true)) {
-                    this.getNewMob = true;
+                    this.newMobRequired = true;
                 }
                 this.updateDelay();
             }
