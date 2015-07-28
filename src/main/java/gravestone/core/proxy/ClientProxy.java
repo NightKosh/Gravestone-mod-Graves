@@ -3,7 +3,6 @@ package gravestone.core.proxy;
 import gravestone.core.GSBlock;
 import gravestone.core.GSItem;
 import gravestone.core.Resources;
-import gravestone.core.event.GSClientTickEventHandler;
 import gravestone.core.event.GSRenderEventHandler;
 import gravestone.entity.EntityRaven;
 import gravestone.entity.monster.*;
@@ -24,7 +23,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import org.apache.commons.lang3.StringUtils;
@@ -136,7 +134,6 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerHandlers() {
-        FMLCommonHandler.instance().bus().register(new GSClientTickEventHandler());
         MinecraftForge.EVENT_BUS.register(new GSRenderEventHandler());
     }
 }
