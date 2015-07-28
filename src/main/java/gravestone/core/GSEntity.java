@@ -2,6 +2,7 @@ package gravestone.core;
 
 import gravestone.config.GSConfig;
 import gravestone.entity.EntityRaven;
+import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
 import gravestone.entity.monster.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
@@ -45,6 +46,7 @@ public class GSEntity {
     public static final String SKELETON_RAIDER_NAME = "GSSkeletonRaider";
     public static final String ZOMBIE_RAIDER_NAME = "GSZombieRaider";
     public static final String RAVEN_NAME = "GSRaven";
+    public static final String SPAWNER_HELPER_NAME = "GSSpawnerHelper";
 
 
     public static final String SKELETON_ID = ModInfo.ID + "." + SKELETON_NAME;
@@ -132,6 +134,9 @@ public class GSEntity {
         // VengefulSpirit
         //EntityRegistry.registerGlobalEntityID(EntityVengefulSpirit.class, "GSVengefulSpirit", EntityRegistry.findGlobalUniqueEntityId(), 15720061, 4802889);
         //EntityRegistry.addSpawn(EntityVengefulSpirit.class, 3, 1, 3, EnumCreatureType.MONSTER, BiomeGenBase.jungle, BiomeGenBase.jungleHills);
+
+
+        registerModEntity(EntityGroupOfGravesMobSpawnerHelper.class, SPAWNER_HELPER_NAME);
     }
 
     private void registerModEntity(Class<? extends Entity> entityClass, String entityName) {

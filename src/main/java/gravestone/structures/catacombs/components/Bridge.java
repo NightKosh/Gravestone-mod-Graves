@@ -4,6 +4,7 @@ import gravestone.block.BlockGSGraveStone;
 import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
+import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.GraveGenerationHelper;
 import gravestone.structures.MobSpawnHelper;
@@ -84,8 +85,10 @@ public class Bridge extends CatacombsBaseComponent {
         IBlockState leftGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.getLeftDirection(this.coordBaseMode));
         IBlockState rightGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.getRightDirection(this.coordBaseMode));
 
-        GraveGenerationHelper.fillGraves(this, world, random, 1, 9, 1, 1, 9, 6, leftGraveState, graveType, sword, true);
-        GraveGenerationHelper.fillGraves(this, world, random, 11, 9, 1, 11, 9, 6, rightGraveState, graveType, sword, true);
+        EntityGroupOfGravesMobSpawnerHelper spawnerHelper = GraveGenerationHelper.createSpawnerHelper(world, this.boundingBox);
+
+        GraveGenerationHelper.fillGraves(this, world, random, 1, 9, 1, 1, 9, 6, leftGraveState, graveType, sword, spawnerHelper, true);
+        GraveGenerationHelper.fillGraves(this, world, random, 11, 9, 1, 11, 9, 6, rightGraveState, graveType, sword, spawnerHelper, true);
         // lava
         this.fillWithBlocks(world, boundingBox, 3, 1, 1, 9, 2, 6, Blocks.lava.getDefaultState(), Blocks.lava.getDefaultState(), false);
         // bridge

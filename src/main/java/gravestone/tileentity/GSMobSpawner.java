@@ -26,7 +26,7 @@ public class GSMobSpawner extends GSSpawner {
     private static final float MAX_LIGHT_VALUE = 0.46F;
     private EnumSpawner spawnerType = null;
 
-    public GSMobSpawner(TileEntity tileEntity) {
+    public GSMobSpawner(ISpawnerEntity tileEntity) {
         super(tileEntity, BASE_DELAY);
     }
 
@@ -50,21 +50,21 @@ public class GSMobSpawner extends GSSpawner {
     protected void serverUpdateLogic() {
         delay--;
         if (delay <= 0) {
-            if (canSpawnMobs(tileEntity.getWorld()) && anyPlayerInRange()) {
+            if (canSpawnMobs(spawnerEntity.getWorld()) && anyPlayerInRange()) {
                 EntityLiving entity = (EntityLiving) getMob();
                 if (entity == null) {
                     GSLogger.logError("Spanwer mob get 'null' as mob!!!");
                 } else {
-                    double x = tileEntity.getPos().getX() + 0.5;
-                    double y = tileEntity.getPos().getY();
-                    double z = tileEntity.getPos().getZ() + 0.5;
-                    entity.setLocationAndAngles(x, y, z, tileEntity.getWorld().rand.nextFloat() * 360, 0);
+                    double x = spawnerEntity.getPos().getX() + 0.5;
+                    double y = spawnerEntity.getPos().getY();
+                    double z = spawnerEntity.getPos().getZ() + 0.5;
+                    entity.setLocationAndAngles(x, y, z, spawnerEntity.getWorld().rand.nextFloat() * 360, 0);
                     if (isBossSpawner()) {
-                        tileEntity.getWorld().removeTileEntity(tileEntity.getPos());
-                        tileEntity.getWorld().setBlockToAir(tileEntity.getPos());
-                        tileEntity.getWorld().spawnEntityInWorld(entity);
-                    } else if (tileEntity.getWorld().getLightBrightness(tileEntity.getPos()) <= MAX_LIGHT_VALUE) {
-                        tileEntity.getWorld().spawnEntityInWorld(entity);
+                        spawnerEntity.getWorld().removeTileEntity(spawnerEntity.getPos());
+                        spawnerEntity.getWorld().setBlockToAir(spawnerEntity.getPos());
+                        spawnerEntity.getWorld().spawnEntityInWorld(entity);
+                    } else if (spawnerEntity.getWorld().getLightBrightness(spawnerEntity.getPos()) <= MAX_LIGHT_VALUE) {
+                        spawnerEntity.getWorld().spawnEntityInWorld(entity);
                     }
                 }
             }
@@ -78,11 +78,11 @@ public class GSMobSpawner extends GSSpawner {
 
     private EnumSpawner getSpawnerType() {
         if (spawnerType == null) {
-            if (tileEntity.getWorld() == null) {
+            if (spawnerEntity.getWorld() == null) {
                 GSLogger.logError("Spawner tileentity's world obj is null !!!!!");
                 return EnumSpawner.ZOMBIE_SPAWNER;
             } else {
-                spawnerType = EnumSpawner.getById((byte) tileEntity.getBlockMetadata());
+                spawnerType = EnumSpawner.getById((byte) ((TileEntity) spawnerEntity).getBlockMetadata());
                 return spawnerType;
             }
         }
@@ -101,8 +101,8 @@ public class GSMobSpawner extends GSSpawner {
 
     @Override
     protected Entity getMob() {
-        return GSMobSpawn.getMobEntityForSpawner(this.tileEntity.getWorld(), getSpawnerType(),
-                this.tileEntity.getPos().getX(), this.tileEntity.getPos().getY(), this.tileEntity.getPos().getZ());
+        return GSMobSpawn.getMobEntityForSpawner(this.spawnerEntity.getWorld(), getSpawnerType(),
+                this.spawnerEntity.getPos().getX(), this.spawnerEntity.getPos().getY(), this.spawnerEntity.getPos().getZ());
     }
 
     @Override
