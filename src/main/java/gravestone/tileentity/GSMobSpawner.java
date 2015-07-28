@@ -50,20 +50,22 @@ public class GSMobSpawner extends GSSpawner {
     protected void serverUpdateLogic() {
         delay--;
         if (delay <= 0) {
-            EntityLiving entity = (EntityLiving) getMob();
-            if (entity == null) {
-                GSLogger.logError("Spanwer mob get 'null' as mob!!!");
-            } else {
-                double x = tileEntity.getPos().getX() + 0.5;
-                double y = tileEntity.getPos().getY();
-                double z = tileEntity.getPos().getZ() + 0.5;
-                entity.setLocationAndAngles(x, y, z, tileEntity.getWorld().rand.nextFloat() * 360, 0);
-                if (isBossSpawner()) {
-                    tileEntity.getWorld().removeTileEntity(tileEntity.getPos());
-                    tileEntity.getWorld().setBlockToAir(tileEntity.getPos());
-                    tileEntity.getWorld().spawnEntityInWorld(entity);
-                } else if (tileEntity.getWorld().getLightBrightness(tileEntity.getPos()) <= MAX_LIGHT_VALUE) {
-                    tileEntity.getWorld().spawnEntityInWorld(entity);
+            if (canSpawnMobs(tileEntity.getWorld()) && anyPlayerInRange()) {
+                EntityLiving entity = (EntityLiving) getMob();
+                if (entity == null) {
+                    GSLogger.logError("Spanwer mob get 'null' as mob!!!");
+                } else {
+                    double x = tileEntity.getPos().getX() + 0.5;
+                    double y = tileEntity.getPos().getY();
+                    double z = tileEntity.getPos().getZ() + 0.5;
+                    entity.setLocationAndAngles(x, y, z, tileEntity.getWorld().rand.nextFloat() * 360, 0);
+                    if (isBossSpawner()) {
+                        tileEntity.getWorld().removeTileEntity(tileEntity.getPos());
+                        tileEntity.getWorld().setBlockToAir(tileEntity.getPos());
+                        tileEntity.getWorld().spawnEntityInWorld(entity);
+                    } else if (tileEntity.getWorld().getLightBrightness(tileEntity.getPos()) <= MAX_LIGHT_VALUE) {
+                        tileEntity.getWorld().spawnEntityInWorld(entity);
+                    }
                 }
             }
             this.updateDelay();

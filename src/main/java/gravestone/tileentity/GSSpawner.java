@@ -27,9 +27,9 @@ public abstract class GSSpawner {
      * Update entity state.
      */
     public void update() {
-        if (canSpawnMobs(tileEntity.getWorld()) && !tileEntity.getWorld().getDifficulty().equals(EnumDifficulty.PEACEFUL) && anyPlayerInRange()) {
+        if (!tileEntity.getWorld().getDifficulty().equals(EnumDifficulty.PEACEFUL)) {
             if (tileEntity.getWorld().isRemote) {
-                clientUpdateLogic();
+//                clientUpdateLogic(); TODO
             } else {
                 serverUpdateLogic();
             }
