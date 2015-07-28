@@ -9,6 +9,7 @@ import gravestone.core.commands.GSCommands;
 import gravestone.core.compatibility.GSCompatibility;
 import gravestone.core.event.GSEventHandlerNetwork;
 import gravestone.core.event.GSEventsHandler;
+import gravestone.core.event.GSServerTickEventHandler;
 import gravestone.core.proxy.CommonProxy;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -56,6 +57,7 @@ public class ModGraveStone {
         // register death event
         MinecraftForge.EVENT_BUS.register(new GSEventsHandler());
         FMLCommonHandler.instance().bus().register(new GSEventHandlerNetwork());
+        FMLCommonHandler.instance().bus().register(new GSServerTickEventHandler());
         proxy.registerHandlers();
 
         // tabs
