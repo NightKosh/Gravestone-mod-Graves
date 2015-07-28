@@ -17,6 +17,7 @@ import gravestone.renderer.tileentity.*;
 import gravestone.structures.village.undertaker.VillageHandlerGSUndertaker;
 import gravestone.tileentity.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelHorse;
 import net.minecraft.item.Item;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -100,6 +101,8 @@ public class ClientProxy extends CommonProxy {
 
         // Skeleton
         RenderingRegistry.registerEntityRenderingHandler(EntityGSSkeleton.class, new RenderGSSkeleton(Minecraft.getMinecraft().getRenderManager()));
+        // Horses
+        RenderingRegistry.registerEntityRenderingHandler(EntityUndeadHorse.class, new RenderUndeadHorse(Minecraft.getMinecraft().getRenderManager(), new ModelHorse(), 0));
 
         // raven
         RenderingRegistry.registerEntityRenderingHandler(EntityRaven.class, new RenderRaven(Minecraft.getMinecraft().getRenderManager()));
