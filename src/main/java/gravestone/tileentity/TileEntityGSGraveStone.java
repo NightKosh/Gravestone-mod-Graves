@@ -5,6 +5,7 @@ import gravestone.block.enums.EnumGraves;
 import gravestone.config.GSConfig;
 import gravestone.core.TimeHelper;
 import gravestone.core.event.GSRenderEventHandler;
+import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -21,12 +22,14 @@ import java.util.Random;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdatePlayerListBox {
+public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdatePlayerListBox, ISpawnerEntity {
 
     protected GSGraveStoneSpawn gsSpawn;
     protected ItemStack sword = null;
     protected ItemStack flower = null;
     protected String playerId = "";
+    protected int spawnerHelperId;
+    protected EntityGroupOfGravesMobSpawnerHelper spawnerHelper;
     public static final int FOG_RANGE = 30;
 
     public TileEntityGSGraveStone() {
@@ -49,6 +52,10 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
      */
     @Override
     public void update() {
+        if (spawnerHelperId != 0 && spawnerHelper == null) {
+            spawnerHelper = (EntityGroupOfGravesMobSpawnerHelper) this.getWorld().getEntityByID(spawnerHelperId);
+        }
+
         gsSpawn.update();
 
         if (this.worldObj.isRemote && GSConfig.isFogEnabled) {
@@ -99,6 +106,10 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
         readFlowerInfo(nbtTag);
         // owner
         playerId = nbtTag.getString("PlayerId");
+        //spawnerHelper
+        if (nbtTag.hasKey("SpawnerHelperId")) {
+            spawnerHelperId = nbtTag.getInteger("SpawnerHelperId");
+        }
     }
 
     /**
@@ -119,6 +130,11 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
         writeFlowerInfo(nbtTag);
         // owner
         nbtTag.setString("PlayerId", playerId);
+        //spawnerHelper
+        if (haveSpawnerHelper()) {
+            nbtTag.setInteger("SpawnerHelperId", spawnerHelper.getEntityId());
+        }
+
     }
 
     private void readSwordInfo(NBTTagCompound nbtTag) {
@@ -215,5 +231,19 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
 
     public boolean canBeLooted(String playerId) {
         return StringUtils.isBlank(this.playerId) || playerId.equals(this.playerId) || inventory.getGraveContent().isEmpty();
+    }
+
+    @Override
+    public boolean haveSpawnerHelper() {
+        return spawnerHelperId != 0;//spawnerHelper != null;
+    }
+
+    @Override
+    public EntityGroupOfGravesMobSpawnerHelper getSpawnerHelper() {
+        return spawnerHelper;
+    }
+
+    public void setSpawnerHelper(EntityGroupOfGravesMobSpawnerHelper spawnerHelper) {
+        this.spawnerHelper = spawnerHelper;
     }
 }

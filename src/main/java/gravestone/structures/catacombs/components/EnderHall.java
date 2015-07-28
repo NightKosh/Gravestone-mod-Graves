@@ -1,5 +1,6 @@
 package gravestone.structures.catacombs.components;
 
+import gravestone.config.GSConfig;
 import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.MobSpawnHelper;
@@ -44,7 +45,9 @@ public class EnderHall extends CatacombsBaseComponent {
         // web
         this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 1, 1, 1, 11, 3, 17, Blocks.web.getDefaultState(), false);
         // piles of bones
-        this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 1, 11, 1, 17, false, random, getPileOfBonesSelector());
+        if (GSConfig.generatePilesOfBones) {
+            this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 1, 11, 1, 17, false, random, getPileOfBonesSelector());
+        }
 
         // neter floor
         this.fillWithBlocks(world, boundingBox, 0, 0, 3, 12, 0, 3, Blocks.nether_brick.getDefaultState(), false);

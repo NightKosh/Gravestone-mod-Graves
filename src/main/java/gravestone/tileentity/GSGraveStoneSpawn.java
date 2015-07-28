@@ -3,8 +3,8 @@ package gravestone.tileentity;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GSConfig;
 import gravestone.core.GSMobSpawn;
+import gravestone.core.TimeHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -19,9 +19,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
     private static final int BASE_DELAY = 600;
     private static final int PLAYER_RANGE = 35;
     private static final int MIN_DELAY = 500;
-    private static final int START_TIME = 13500;
-    private static final int END_TIME = 22500;
-    private boolean getNewMob = true;
+    private boolean newMobRequired = true;
     /**
      * Maximum number of entities for limiting mob spawning
      */
@@ -31,63 +29,77 @@ public class GSGraveStoneSpawn extends GSSpawner {
      */
     private static final int SPAWN_RANGE = 1;
 
-    public GSGraveStoneSpawn(TileEntity tileEntity) {
+    public GSGraveStoneSpawn(ISpawnerEntity tileEntity) {
         super(tileEntity, BASE_DELAY);
     }
 
     @Override
     protected void clientUpdateLogic() {
+        //TODO do not used. Do not forget about GSConfig.spawnMobsByGraves
     }
 
     @Override
     protected void serverUpdateLogic() {
-        if (this.delay == -1) {
+        if (spawnerEntity.haveSpawnerHelper()) {
+            if (spawnerEntity.getSpawnerHelper().canMobsBeSpawned()) {
+                getAndSpawnMob();
+            }
+        } else if (isMobSpawnAllowed()) {
+            getAndSpawnMob();
+
             this.updateDelay();
         }
 
-        if (this.delay > 0) {
-            --this.delay;
-            return;
-        }
+    }
 
-        if (this.getNewMob) {
-            this.spawnedMob = GSMobSpawn.getMobEntity(this.tileEntity.getWorld(), EnumGraves.getById(((TileEntityGSGraveStone) this.tileEntity).graveType),
-                    this.tileEntity.getPos().getX(), this.tileEntity.getPos().getY(), this.tileEntity.getPos().getZ());
+    public boolean isMobSpawnAllowed() {
+        if (GSConfig.spawnMobsByGraves) {
+            if (this.delay < 0) {
+                this.updateDelay();
+            }
+
+            if (this.delay > 0) {
+                this.delay--;
+            } else if (canSpawnMobs(spawnerEntity.getWorld()) && anyPlayerInRange()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void getAndSpawnMob() {
+        if (this.newMobRequired) {
+            this.spawnedMob = GSMobSpawn.getMobEntity(this.spawnerEntity.getWorld(), EnumGraves.getById(((TileEntityGSGraveStone) this.spawnerEntity).graveType),
+                    this.spawnerEntity.getPos().getX(), this.spawnerEntity.getPos().getY(), this.spawnerEntity.getPos().getZ());
 
             if (this.spawnedMob == null) {
                 return;
             }
 
-            this.getNewMob = false;
+            this.newMobRequired = false;
         }
 
-        int nearbyEntitiesCount = tileEntity.getWorld().getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.fromBounds(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ(),
-                tileEntity.getPos().getX() + 1, tileEntity.getPos().getY() + 1, tileEntity.getPos().getZ() + 1).expand(1.0D, 4.0D, SPAWN_RANGE * 2)).size();
+        int nearbyEntitiesCount = spawnerEntity.getWorld().getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.fromBounds(spawnerEntity.getPos().getX(), spawnerEntity.getPos().getY(), spawnerEntity.getPos().getZ(),
+                spawnerEntity.getPos().getX() + 1, spawnerEntity.getPos().getY() + 1, spawnerEntity.getPos().getZ() + 1).expand(1.0D, 4.0D, SPAWN_RANGE * 2)).size();
 
         if (nearbyEntitiesCount >= MAX_NEARBY_ENTITIES) {
             this.updateDelay();
             return;
         }
 
-        if (GSMobSpawn.checkChance(this.tileEntity.getWorld().rand) && GSMobSpawn.spawnMob(this.tileEntity.getWorld(), this.spawnedMob,
-                this.tileEntity.getPos().getX(), this.tileEntity.getPos().getY(), this.tileEntity.getPos().getZ(), true)) {
-            this.getNewMob = true;
+        if (GSMobSpawn.checkChance(this.spawnerEntity.getWorld().rand) && GSMobSpawn.spawnMob(this.spawnerEntity.getWorld(), this.spawnedMob,
+                this.spawnerEntity.getPos().getX(), this.spawnerEntity.getPos().getY(), this.spawnerEntity.getPos().getZ(), true)) {
+            this.newMobRequired = true;
         }
-        this.updateDelay();
     }
+
 
     /*
      * Check time and weather
      */
     @Override
     protected boolean canSpawnMobs(World world) {
-        long time = world.getWorldTime() % 24000;
-
-        if (time > START_TIME && time < END_TIME || world.isThundering()) {
-            return true;
-        }
-
-        return false;
+        return TimeHelper.isGraveSpawnTime();
     }
 
     @Override
@@ -112,7 +124,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
 
     @Override
     protected Entity getMob() {
-        return GSMobSpawn.getMobEntity(this.tileEntity.getWorld(), EnumGraves.getById(((TileEntityGSGraveStone) this.tileEntity).graveType),
-                this.tileEntity.getPos().getX(), this.tileEntity.getPos().getY(), this.tileEntity.getPos().getZ());
+        return GSMobSpawn.getMobEntity(this.spawnerEntity.getWorld(), EnumGraves.getById(((TileEntityGSGraveStone) this.spawnerEntity).graveType),
+                this.spawnerEntity.getPos().getX(), this.spawnerEntity.getPos().getY(), this.spawnerEntity.getPos().getZ());
     }
 }

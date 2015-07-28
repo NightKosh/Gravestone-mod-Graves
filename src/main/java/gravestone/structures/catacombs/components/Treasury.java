@@ -3,6 +3,7 @@ package gravestone.structures.catacombs.components;
 import gravestone.block.BlockGSGraveStone;
 import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
+import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.GraveGenerationHelper;
 import gravestone.structures.ObjectsGenerationHelper;
@@ -75,12 +76,15 @@ public class Treasury extends CatacombsBaseComponent {
         IBlockState rightGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.getRightDirection(this.coordBaseMode));
 
         Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 2, leftGraveState, graveType, sword, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 4, leftGraveState, graveType, sword, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 6, leftGraveState, graveType, sword, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 2, rightGraveState, graveType, sword, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 4, rightGraveState, graveType, sword, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 6, rightGraveState, graveType, sword, true);
+
+        EntityGroupOfGravesMobSpawnerHelper spawnerHelper = GraveGenerationHelper.createSpawnerHelper(world, this.boundingBox);
+
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 2, leftGraveState, graveType, sword, spawnerHelper, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 4, leftGraveState, graveType, sword, spawnerHelper, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 6, leftGraveState, graveType, sword, spawnerHelper, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 2, rightGraveState, graveType, sword, spawnerHelper, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 4, rightGraveState, graveType, sword, spawnerHelper, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 6, rightGraveState, graveType, sword, spawnerHelper, true);
 
         // TNT
         this.fillWithBlocks(world, boundingBox, 0, 0, 3, 1, 0, 3, Blocks.tnt.getDefaultState(), false);

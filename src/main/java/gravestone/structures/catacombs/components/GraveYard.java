@@ -3,6 +3,7 @@ package gravestone.structures.catacombs.components;
 import gravestone.block.BlockGSGraveStone;
 import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
+import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
 import gravestone.structures.GraveGenerationHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -34,6 +35,8 @@ public class GraveYard extends CatacombsBaseComponent {
     public boolean addComponentParts(World world, Random random) {
         int positionX, positionZ, y;
 
+        EntityGroupOfGravesMobSpawnerHelper spawnerHelper = GraveGenerationHelper.createSpawnerHelper(world, this.boundingBox);
+
         for (int x = 0; x < 11; x += 2) {
             for (int z = 0; z < 11; z += 2) {
                 if (random.nextDouble() < 0.05) {
@@ -52,7 +55,7 @@ public class GraveYard extends CatacombsBaseComponent {
                         int graveType = GraveStoneHelper.getGraveType(world, new BlockPos(positionX, this.getYWithOffset(y), positionZ), random, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES);
                         IBlockState graveState = GSBlock.graveStone.getDefaultState().withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.getOpposite());
                         Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
-                        GraveGenerationHelper.placeGrave(this, world, random, x, y, z, graveState, graveType, sword, false);
+                        GraveGenerationHelper.placeGrave(this, world, random, x, y, z, graveState, graveType, sword, spawnerHelper, false);
                     }
                 }
             }

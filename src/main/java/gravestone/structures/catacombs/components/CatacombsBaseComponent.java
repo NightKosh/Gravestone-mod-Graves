@@ -48,6 +48,10 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
         this.level = level;
     }
 
+    public EnumFacing getLeftDirection() {
+        return getLeftDirection(this.getDirection());
+    }
+
     /**
      * Return left direction
      *
@@ -66,6 +70,11 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
                 return EnumFacing.WEST;
         }
 //        return direction.rotateYCCW(); TODO
+    }
+
+
+    public EnumFacing getRightDirection() {
+        return getRightDirection(this.getDirection());
     }
 
     /**
@@ -168,7 +177,7 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
      * @param boundingBox Component bounding box
      */
     public boolean canBePlacedHere(StructureBoundingBox boundingBox) {
-        if (coordBaseMode == EnumFacing.SOUTH || coordBaseMode == EnumFacing.EAST) {
+        if (coordBaseMode == EnumFacing.SOUTH || coordBaseMode == EnumFacing.NORTH) {
             return this.boundingBox.maxX > boundingBox.minX && this.boundingBox.minX < boundingBox.maxX
                     && this.boundingBox.maxZ - 1 > boundingBox.minZ && this.boundingBox.minZ + 1 < boundingBox.maxZ;
         } else {
@@ -178,7 +187,7 @@ public abstract class CatacombsBaseComponent extends ComponentGraveStone {
     }
 
     /**
-     * Is component have only forvard exit
+     * Is component have only forward exit
      */
     public boolean canGoOnlyForward() {
         return true;

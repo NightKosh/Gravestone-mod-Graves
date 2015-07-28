@@ -1,5 +1,6 @@
 package gravestone.core.event;
 
+import gravestone.core.TimeHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -12,7 +13,23 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GSClientTickEventHandler {
+public class GSTickEventHandler {
+
+    private static short ticCount = 0;
+
+    @SubscribeEvent
+    public void worldTick(TickEvent.WorldTickEvent event) {
+        if (event.phase == TickEvent.Phase.END) {
+            ticCount++;
+
+            if (ticCount >= 500) {
+                long time = TimeHelper.getDayTime(event.world);
+
+                TimeHelper.setIsGraveSpawnTime(time > TimeHelper.GRAVE_SPAWN_START_TIME && time < TimeHelper.GRAVE_SPAWN_END_TIME || event.world.isThundering());
+                ticCount = 0;
+            }
+        }
+    }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)

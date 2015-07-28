@@ -1,5 +1,6 @@
 package gravestone.structures.catacombs.components;
 
+import gravestone.config.GSConfig;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.ObjectsGenerationHelper;
 import net.minecraft.block.BlockStairs;
@@ -69,7 +70,9 @@ public class Crossing extends CatacombsBaseComponent {
         // web
         this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 1, 1, 1, 11, 4, 11, Blocks.web.getDefaultState(), false);
         // piles of bones
-        this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 1, 12, 1, 12, false, random, getPileOfBonesSelector());
+        if (GSConfig.generatePilesOfBones) {
+            this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 1, 12, 1, 12, false, random, getPileOfBonesSelector());
+        }
 
         // trap floor
         this.fillWithBlocks(world, boundingBox, 0, 0, 0, 0, 0, 12, Blocks.nether_brick.getDefaultState(), false);

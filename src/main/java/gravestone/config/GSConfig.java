@@ -81,6 +81,7 @@ public class GSConfig {
     public static int catacombsMaxRoomsCountAt3Level;
     public static int catacombsMinRoomsCountAt4Level;
     public static int catacombsMaxRoomsCountAt4Level;
+    public static boolean generatePilesOfBones;
     // other structures
     public static boolean generateGravesInMushroomBiomes;
     public static boolean generateSingleGraves;
@@ -98,6 +99,7 @@ public class GSConfig {
         maxCatacombsHeight = config.get(CATEGORY_STRUCTURES_CATACOMBS, "MaximumCatacombsGenerationHeight", 75).getInt();
         catacombsGenerationChance = config.get(CATEGORY_STRUCTURES_CATACOMBS, "CatacombsGenerationChance", CatacombsGenerator.DEFAULT_GENERATION_CHANCE).getDouble();
         generateCatacombsGraveyard = config.get(CATEGORY_STRUCTURES_CATACOMBS, "GenerateCatacombsGraveyard", true).getBoolean(true);
+        generatePilesOfBones = config.get(CATEGORY_STRUCTURES_CATACOMBS, "GeneratePilesOfBones", true).getBoolean(true);
 
         catacombsMinRoomsCountAt1Level = config.get(CATEGORY_STRUCTURES_CATACOMBS, "CatacombsMinRoomsCountAt1Level", CatacombsLevel.DEFAULT_MIN_ROOMS_COUNT_AT_1_LEVEL).getInt();
         catacombsMaxRoomsCountAt1Level = config.get(CATEGORY_STRUCTURES_CATACOMBS, "CatacombsMaxRoomsCountAt1Level", CatacombsLevel.DEFAULT_MAX_ROOMS_COUNT_AT_1_LEVEL).getInt();
@@ -130,6 +132,7 @@ public class GSConfig {
     public static int graveItemsCount;
     public static int graveSpawnRate;
     public static boolean canPlaceGravesEveryWhere;
+    public static boolean spawnMobsByGraves;
     public static boolean spawnMobAtGraveDestruction;
     public static boolean isFogEnabled;
     public static boolean generateSwordGraves;
@@ -166,6 +169,7 @@ public class GSConfig {
             graveSpawnRate = 600;
         }
 
+        spawnMobsByGraves = config.get(CATEGORY_GRAVES, "SpawnMobsByGraves", true).getBoolean(true);
         spawnMobAtGraveDestruction = config.get(CATEGORY_GRAVES, "SpawnMobAtGraveDestruction", true).getBoolean(true);
         spawnChance = config.get(CATEGORY_GRAVES, "GravesMobsSpawnChance", 80).getInt();
 

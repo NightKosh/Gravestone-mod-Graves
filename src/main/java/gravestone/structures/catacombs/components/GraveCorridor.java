@@ -3,7 +3,9 @@ package gravestone.structures.catacombs.components;
 import gravestone.block.BlockGSGraveStone;
 import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.block.GraveStoneHelper;
+import gravestone.config.GSConfig;
 import gravestone.core.GSBlock;
+import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.GraveGenerationHelper;
 import gravestone.structures.MobSpawnHelper;
@@ -52,7 +54,9 @@ public class GraveCorridor extends CatacombsBaseComponent {
         // web
         this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 2, 1, 2, 5, 3, 3, Blocks.web.getDefaultState(), false);
         // piles of bones
-        this.fillWithRandomizedBlocks(world, boundingBox, 2, 1, 2, 5, 1, 3, false, random, getPileOfBonesSelector());
+        if (GSConfig.generatePilesOfBones) {
+            this.fillWithRandomizedBlocks(world, boundingBox, 2, 1, 2, 5, 1, 3, false, random, getPileOfBonesSelector());
+        }
 
         // trap floor
         this.fillWithBlocks(world, boundingBox, 1, 0, 0, 5, 0, 0, GSBlock.trap.getDefaultState(), false);
@@ -82,8 +86,11 @@ public class GraveCorridor extends CatacombsBaseComponent {
         IBlockState graveState = GSBlock.graveStone.getDefaultState();
         IBlockState leftGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.getLeftDirection(this.coordBaseMode));
         IBlockState rightGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.getRightDirection(this.coordBaseMode));
-        GraveGenerationHelper.fillGraves(this, world, random, 1, 1, 1, 1, 1, 3, leftGraveState, graveType, sword, true);
-        GraveGenerationHelper.fillGraves(this, world, random, 5, 1, 1, 5, 1, 3, rightGraveState, graveType, sword, true);
+
+        EntityGroupOfGravesMobSpawnerHelper spawnerHelper = GraveGenerationHelper.createSpawnerHelper(world, this.boundingBox);
+
+        GraveGenerationHelper.fillGraves(this, world, random, 1, 1, 1, 1, 1, 3, leftGraveState, graveType, sword, spawnerHelper, true);
+        GraveGenerationHelper.fillGraves(this, world, random, 5, 1, 1, 5, 1, 3, rightGraveState, graveType, sword, spawnerHelper, true);
 
         // chest
         if (random.nextInt(5) < 2) {

@@ -1,5 +1,6 @@
 package gravestone.structures.catacombs.components;
 
+import gravestone.config.GSConfig;
 import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.MobSpawnHelper;
@@ -68,7 +69,9 @@ public class Corridor extends CatacombsBaseComponent {
         // web
         this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 1, 1, 0, 3, 3, 3, Blocks.web.getDefaultState(), false);
         //piles of bones
-        this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 1, 4, 1, 4, false, random, getPileOfBonesSelector());
+        if (GSConfig.generatePilesOfBones) {
+            this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 1, 4, 1, 4, false, random, getPileOfBonesSelector());
+        }
 
         // trap floor
         this.fillWithBlocks(world, boundingBox, 0, 0, 0, 4, 0, 0, GSBlock.trap.getDefaultState(), GSBlock.trap.getDefaultState(), false);

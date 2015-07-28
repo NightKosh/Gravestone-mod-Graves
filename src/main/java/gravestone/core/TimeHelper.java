@@ -1,5 +1,6 @@
 package gravestone.core;
 
+import gravestone.core.logger.GSLogger;
 import net.minecraft.world.World;
 
 /**
@@ -20,6 +21,11 @@ public class TimeHelper {
     public static final int SUN_SET = 13000;
     public static final int SUN_RISING = 23000;
 
+    public static final int GRAVE_SPAWN_START_TIME = 13500;
+    public static final int GRAVE_SPAWN_END_TIME = 22500;
+
+    private static boolean isGraveSpawnTime;
+
 
     public static long getDayTime(World world) {
         return world.getWorldTime() % 24000;
@@ -29,4 +35,11 @@ public class TimeHelper {
         return time % 24000;
     }
 
+    public static boolean isGraveSpawnTime() {
+        return isGraveSpawnTime;
+    }
+
+    public static void setIsGraveSpawnTime(boolean isValidTime) {
+        isGraveSpawnTime = isValidTime;
+    }
 }

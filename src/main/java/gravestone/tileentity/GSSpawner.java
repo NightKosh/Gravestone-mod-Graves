@@ -1,7 +1,6 @@
 package gravestone.tileentity;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
@@ -14,12 +13,12 @@ import net.minecraft.world.World;
  */
 public abstract class GSSpawner {
 
-    protected TileEntity tileEntity;
+    protected ISpawnerEntity spawnerEntity;
     protected int delay;
     protected Entity spawnedMob;
 
-    public GSSpawner(TileEntity tileEntity, int delay) {
-        this.tileEntity = tileEntity;
+    public GSSpawner(ISpawnerEntity tileEntity, int delay) {
+        this.spawnerEntity = tileEntity;
         this.delay = delay;
     }
 
@@ -27,9 +26,9 @@ public abstract class GSSpawner {
      * Update entity state.
      */
     public void update() {
-        if (canSpawnMobs(tileEntity.getWorld()) && !tileEntity.getWorld().getDifficulty().equals(EnumDifficulty.PEACEFUL) && anyPlayerInRange()) {
-            if (tileEntity.getWorld().isRemote) {
-                clientUpdateLogic();
+        if (!spawnerEntity.getWorld().getDifficulty().equals(EnumDifficulty.PEACEFUL)) {
+            if (spawnerEntity.getWorld().isRemote) {
+//                clientUpdateLogic(); TODO
             } else {
                 serverUpdateLogic();
             }
@@ -39,8 +38,8 @@ public abstract class GSSpawner {
     /**
      * Sets the delay before a new spawn.
      */
-    protected void updateDelay() {
-        delay = getMinDelay() + tileEntity.getWorld().rand.nextInt(getMaxDelay() - getMinDelay());
+    public void updateDelay() {
+        delay = getMinDelay() + spawnerEntity.getWorld().rand.nextInt(getMaxDelay() - getMinDelay());
     }
 
     protected void setMinDelay() {
@@ -48,12 +47,12 @@ public abstract class GSSpawner {
     }
 
     protected int getNearbyMobsCount() {
-        return tileEntity.getWorld().getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.fromBounds(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ(),
-                tileEntity.getPos().getX() + 1, tileEntity.getPos().getY() + 1, tileEntity.getPos().getZ() + 1).expand(1.0D, 4.0D, getSpawnRange() * 2)).size();
+        return spawnerEntity.getWorld().getEntitiesWithinAABB(this.spawnedMob.getClass(), AxisAlignedBB.fromBounds(spawnerEntity.getPos().getX(), spawnerEntity.getPos().getY(), spawnerEntity.getPos().getZ(),
+                spawnerEntity.getPos().getX() + 1, spawnerEntity.getPos().getY() + 1, spawnerEntity.getPos().getZ() + 1).expand(1.0D, 4.0D, getSpawnRange() * 2)).size();
     }
 
     protected boolean anyPlayerInRange() {
-        return tileEntity.getWorld().getClosestPlayer(tileEntity.getPos().getX() + 0.5D, tileEntity.getPos().getY() + 0.5D, tileEntity.getPos().getZ() + 0.5D, getPlayerRange()) != null;
+        return spawnerEntity.getWorld().getClosestPlayer(spawnerEntity.getPos().getX() + 0.5D, spawnerEntity.getPos().getY() + 0.5D, spawnerEntity.getPos().getZ() + 0.5D, getPlayerRange()) != null;
     }
 
     abstract protected boolean canSpawnMobs(World world);
