@@ -23,7 +23,6 @@ public class GSGuiHandler implements IGuiHandler {
     public static final int GRAVE_INVENTORY_GUI_ID = 0;
     public static final int ALTAR_GUI_ID = 2;
 
-    //returns an instance of the Container you made earlier
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tileEntity;
@@ -44,7 +43,6 @@ public class GSGuiHandler implements IGuiHandler {
         return null;
     }
 
-    //returns an instance of the Gui you made earlier
     @Override
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tileEntity;

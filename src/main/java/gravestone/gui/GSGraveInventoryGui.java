@@ -5,6 +5,8 @@ import gravestone.gui.container.GraveContainer;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -13,11 +15,12 @@ import org.lwjgl.opengl.GL11;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
+@SideOnly(Side.CLIENT)
 public class GSGraveInventoryGui extends GuiContainer {
 
     public GSGraveInventoryGui(InventoryPlayer inventoryPlayer, TileEntityGSGraveStone tileEntity) {
         super(new GraveContainer(inventoryPlayer, tileEntity));
-        this.ySize = 114 + 6 * 18;
+        this.ySize = 114 + GraveContainer.ROWS_COUNT * GraveContainer.SLOT_WIDTH;
     }
 
     @Override

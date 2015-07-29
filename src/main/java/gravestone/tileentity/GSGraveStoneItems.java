@@ -116,7 +116,9 @@ public class GSGraveStoneItems implements IInventory {
 
     @Override
     public void setInventorySlotContents(int slot, ItemStack stack) {
-        this.items.add(slot, stack);
+        if (slot < items.size()) {
+            this.items.set(slot, stack);
+        }
     }
 
     /**

@@ -230,7 +230,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     }
 
     public boolean canBeLooted(String playerId) {
-        return StringUtils.isBlank(this.playerId) || playerId.equals(this.playerId) || inventory.getGraveContent().isEmpty();
+        return !GSConfig.onlyOwnerCanLootGrave || StringUtils.isBlank(this.playerId) || playerId.equals(this.playerId) || inventory.getGraveContent().isEmpty();
     }
 
     @Override
