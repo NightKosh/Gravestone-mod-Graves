@@ -16,7 +16,7 @@ import java.util.Random;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGraveStone extends StructureComponent {
+public class ComponentGraveStone extends StructureComponent implements IComponentGraveStone {
 
     protected ComponentGraveStone(int componentType, EnumFacing facing) {
         super(componentType);
@@ -49,6 +49,7 @@ public class ComponentGraveStone extends StructureComponent {
     }
 
     // TODO Temporal fix
+    @Override
     public void placeBlockAtCurrentPosition(World world, IBlockState blockState, int x, int y, int z, StructureBoundingBox boundingBox) {
         func_175811_a(world, blockState, x, y, z, boundingBox);
     }

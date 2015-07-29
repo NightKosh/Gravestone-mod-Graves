@@ -2,9 +2,13 @@ package gravestone.structures.village.undertaker;
 
 import gravestone.block.BlockGSGraveStone;
 import gravestone.block.BlockGSSkullCandle;
+import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumSkullCandle;
 import gravestone.core.GSBlock;
+import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
 import gravestone.structures.BoundingBoxHelper;
+import gravestone.structures.GraveGenerationHelper;
+import gravestone.structures.IComponentGraveStone;
 import gravestone.tileentity.TileEntityGSSkullCandle;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
@@ -16,6 +20,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
@@ -29,12 +34,12 @@ import java.util.Random;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village {
+public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village implements IComponentGraveStone {
 
     private int averageGroundLevel = -1;
     private static final int HEIGHT = 7;
     private static final int X_LENGTH = 12;
-    private static final int Z_LENGTH = 6;
+    private static final int Z_LENGTH = 14;
 
     public ComponentGSVillageUndertaker() {
     }
@@ -65,7 +70,16 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
             this.boundingBox.offset(0, this.averageGroundLevel - this.boundingBox.maxY + 6 - 1, 0);
         }
 
-        this.fillWithAir(world, boundingBox, 0, 1, 0, 13, 7, 6);
+        this.fillWithAir(world, boundingBox, 0, 1, 0, X_LENGTH, HEIGHT, Z_LENGTH);
+
+        IBlockState groundState;
+        int biomeId = world.getBiomeGenForCoords(new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0))).biomeID;
+        if (biomeId == BiomeGenBase.desert.biomeID || biomeId == BiomeGenBase.desertHills.biomeID) {
+            groundState = Blocks.sand.getDefaultState();
+        } else {
+            groundState = Blocks.grass.getDefaultState();
+        }
+        this.func_175804_a(world, boundingBox, 0, 0, 6, X_LENGTH, 0, Z_LENGTH, groundState, groundState, false);
 
         IBlockState glassState = Blocks.stained_glass_pane.getDefaultState().withProperty(BlockStainedGlassPane.COLOR, EnumDyeColor.GRAY);
         IBlockState darkClayState = Blocks.stained_hardened_clay.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.BLACK);
@@ -73,18 +87,24 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
 
         // ground
         this.func_175804_a(world, boundingBox, 1, 0, 0, 11, 0, 5, darkClayState, darkClayState, false);
-        this.func_175804_a(world, boundingBox, 2, 0, 2, 4, 0, 4, Blocks.soul_sand.getDefaultState(), Blocks.soul_sand.getDefaultState(), false);
 
         // fence
-        this.func_175804_a(world, boundingBox, 1, 1, 1, 1, 1, 4, Blocks.dark_oak_fence.getDefaultState(), Blocks.dark_oak_fence.getDefaultState(), false);
+        this.func_175804_a(world, boundingBox, 1, 1, 1, 1, 1, 13, Blocks.dark_oak_fence.getDefaultState(), Blocks.dark_oak_fence.getDefaultState(), false);
         this.func_175804_a(world, boundingBox, 2, 1, 5, 4, 1, 5, Blocks.dark_oak_fence.getDefaultState(), Blocks.dark_oak_fence.getDefaultState(), false);
         this.func_175804_a(world, boundingBox, 1, 1, 0, 1, 3, 0, Blocks.dark_oak_fence.getDefaultState(), Blocks.dark_oak_fence.getDefaultState(), false);
         this.func_175804_a(world, boundingBox, 1, 1, 5, 1, 3, 5, Blocks.dark_oak_fence.getDefaultState(), Blocks.dark_oak_fence.getDefaultState(), false);
+
+        this.func_175804_a(world, boundingBox, 2, 1, 13, 11, 1, 13, Blocks.dark_oak_fence.getDefaultState(), Blocks.dark_oak_fence.getDefaultState(), false);
+        this.func_175804_a(world, boundingBox, 11, 1, 6, 11, 1, 12, Blocks.dark_oak_fence.getDefaultState(), Blocks.dark_oak_fence.getDefaultState(), false);
 
         this.func_175804_a(world, boundingBox, 6, 1, 0, 7, 1, 0, Blocks.dark_oak_fence.getDefaultState(), Blocks.dark_oak_fence.getDefaultState(), false);
         this.func_175804_a(world, boundingBox, 9, 1, 0, 10, 1, 0, Blocks.dark_oak_fence.getDefaultState(), Blocks.dark_oak_fence.getDefaultState(), false);
         this.func_175804_a(world, boundingBox, 5, 1, 0, 5, 3, 0, Blocks.dark_oak_fence.getDefaultState(), Blocks.dark_oak_fence.getDefaultState(), false);
         this.func_175804_a(world, boundingBox, 11, 1, 0, 11, 3, 0, Blocks.dark_oak_fence.getDefaultState(), Blocks.dark_oak_fence.getDefaultState(), false);
+
+        //gate
+        IBlockState gateState = Blocks.dark_oak_fence_gate.getDefaultState().withProperty(BlockFenceGate.FACING, this.coordBaseMode);
+        this.func_175811_a(world, gateState, 3, 1, 5, boundingBox);
 
         // candles
         this.func_175811_a(world, GSBlock.candle.getDefaultState(), 1, 2, 1, boundingBox);
@@ -93,10 +113,20 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
         this.func_175811_a(world, GSBlock.candle.getDefaultState(), 4, 2, 5, boundingBox);
         this.func_175811_a(world, GSBlock.candle.getDefaultState(), 7, 2, 0, boundingBox);
         this.func_175811_a(world, GSBlock.candle.getDefaultState(), 9, 2, 0, boundingBox);
+        this.func_175811_a(world, GSBlock.candle.getDefaultState(), 1, 2, 13, boundingBox);
+        this.func_175811_a(world, GSBlock.candle.getDefaultState(), 11, 2, 13, boundingBox);
 
         // graves
+        int graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveTypes(world,
+                new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0))), random);
+        EntityGroupOfGravesMobSpawnerHelper spawnerHelper = GraveGenerationHelper.createSpawnerHelper(world, boundingBox);
         IBlockState graveState = GSBlock.graveStone.getDefaultState().withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.getOpposite());
-        this.func_175804_a(world, boundingBox, 2, 1, 4, 4, 1, 4, graveState, graveState, false);
+
+        for (int x = 3; x < 11; x += 2) {
+            for (int z = 7; z < 13; z += 2) {
+                GraveGenerationHelper.placeGrave(this, world, random, x, 1, z, graveState, graveType, null, spawnerHelper, true);
+            }
+        }
 
         // walls
         this.func_175804_a(world, boundingBox, 5, 1, 2, 5, 3, 2, darkClayState, darkClayState, false);
@@ -165,10 +195,10 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
         this.func_175811_a(world, glassState, 11, 5, 3, boundingBox);
 
 
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 6; j++) {
-                this.clearCurrentPositionBlocksUpwards(world, j, 8, i, boundingBox);
-                this.func_175808_b(world, Blocks.cobblestone.getDefaultState(), j, -1, i, boundingBox);
+        for (int i = 0; i < X_LENGTH; i++) {
+            for (int j = 0; j < Z_LENGTH; j++) {
+                this.clearCurrentPositionBlocksUpwards(world, i, 8, j, boundingBox);
+                this.func_175808_b(world, Blocks.cobblestone.getDefaultState(), i, -1, j, boundingBox);
             }
         }
 
@@ -294,5 +324,25 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
         nbttagcompound.setInteger("GD", this.componentType);
         this.writeStructureToNBT(nbttagcompound);
         return nbttagcompound;
+    }
+
+    @Override
+    public void placeBlockAtCurrentPosition(World world, IBlockState blockState, int x, int y, int z, StructureBoundingBox boundingBox) {
+        func_175811_a(world, blockState, x, y, z, boundingBox);
+    }
+
+    @Override
+    public int getXWithOffset(int x, int z) {
+        return super.getXWithOffset(x, z);
+    }
+
+    @Override
+    public int getYWithOffset(int y) {
+        return super.getYWithOffset(y);
+    }
+
+    @Override
+    public int getZWithOffset(int x, int z) {
+        return super.getZWithOffset(x, z);
     }
 }

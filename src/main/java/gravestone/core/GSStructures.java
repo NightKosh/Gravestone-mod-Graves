@@ -43,14 +43,15 @@ public class GSStructures {
     }
 
     public static void preInit() {
-        if (GSConfig.generateCemeteries) {
-            try {
-                MapGenStructureIO.registerStructure(ComponentGSVillageCemetery.class, "GSVillageCemetery");
-            } catch (Throwable e) {
-                GSLogger.logError("Can not register ComponentGSVillageCemetery");
-                e.printStackTrace();
-            }
-        }
+//TODO remove!
+//        if (GSConfig.generateCemeteries) {
+//            try {
+//                MapGenStructureIO.registerStructure(ComponentGSVillageCemetery.class, "GSVillageCemetery");
+//            } catch (Throwable e) {
+//                GSLogger.logError("Can not register ComponentGSVillageCemetery");
+//                e.printStackTrace();
+//            }
+//        }
 
         // register memorials
         if (GSConfig.generateVillageMemorials) {
@@ -74,11 +75,12 @@ public class GSStructures {
     }
 
     private void generateStructures() {
+        //TODO remove!
         // register cemeteries
-        if (GSConfig.generateCemeteries) {
-            VillageHandlerGSCemetery villageCemeteryHandler = new VillageHandlerGSCemetery();
-            VillagerRegistry.instance().registerVillageCreationHandler(villageCemeteryHandler);
-        }
+//        if (GSConfig.generateCemeteries) {
+//            VillageHandlerGSCemetery villageCemeteryHandler = new VillageHandlerGSCemetery();
+//            VillagerRegistry.instance().registerVillageCreationHandler(villageCemeteryHandler);
+//        }
 
         // register memorials
         if (GSConfig.generateVillageMemorials) {
