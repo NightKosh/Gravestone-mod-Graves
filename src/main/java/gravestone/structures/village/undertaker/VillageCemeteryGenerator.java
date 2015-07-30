@@ -1,4 +1,4 @@
-package gravestone.structures.village.cemetery;
+package gravestone.structures.village.undertaker;
 
 import gravestone.structures.GSStructureGenerator;
 import net.minecraft.util.EnumFacing;
@@ -32,9 +32,9 @@ public class VillageCemeteryGenerator implements GSStructureGenerator {
     @Override
     public boolean generate(World world, Random rand, int x, int z, EnumFacing facing, double chance, boolean isCommand) {
         if (isCommand) {
-            StructureBoundingBox boundingBox = ComponentGSVillageCemetery.getBoundingBox(facing, x, z);
-            new ComponentGSVillageCemetery(new StructureVillagePieces.Start(), 0, rand, boundingBox, facing)
-                    .addComponentParts(world, rand, boundingBox);
+            StructureBoundingBox boundingBox = ComponentGSVillageUndertaker.getBoundingBox(facing, x, z);
+            new ComponentGSVillageUndertaker(new StructureVillagePieces.Start(), 0, rand, boundingBox, facing)
+                    .generateComponent(world, rand, boundingBox, true);
             return true;
         }
         return false;

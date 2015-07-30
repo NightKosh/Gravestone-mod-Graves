@@ -3,8 +3,6 @@ package gravestone.core;
 import gravestone.config.GSConfig;
 import gravestone.core.logger.GSLogger;
 import gravestone.structures.GraveStoneWorldGenerator;
-import gravestone.structures.village.cemetery.ComponentGSVillageCemetery;
-import gravestone.structures.village.cemetery.VillageHandlerGSCemetery;
 import gravestone.structures.village.memorial.ComponentGSVillageMemorial;
 import gravestone.structures.village.memorial.VillageHandlerGSMemorial;
 import gravestone.structures.village.undertaker.ComponentGSVillageUndertaker;
@@ -43,16 +41,6 @@ public class GSStructures {
     }
 
     public static void preInit() {
-//TODO remove!
-//        if (GSConfig.generateCemeteries) {
-//            try {
-//                MapGenStructureIO.registerStructure(ComponentGSVillageCemetery.class, "GSVillageCemetery");
-//            } catch (Throwable e) {
-//                GSLogger.logError("Can not register ComponentGSVillageCemetery");
-//                e.printStackTrace();
-//            }
-//        }
-
         // register memorials
         if (GSConfig.generateVillageMemorials) {
             try {
@@ -75,13 +63,6 @@ public class GSStructures {
     }
 
     private void generateStructures() {
-        //TODO remove!
-        // register cemeteries
-//        if (GSConfig.generateCemeteries) {
-//            VillageHandlerGSCemetery villageCemeteryHandler = new VillageHandlerGSCemetery();
-//            VillagerRegistry.instance().registerVillageCreationHandler(villageCemeteryHandler);
-//        }
-
         // register memorials
         if (GSConfig.generateVillageMemorials) {
             VillageHandlerGSMemorial villageMemorialHandler = new VillageHandlerGSMemorial();

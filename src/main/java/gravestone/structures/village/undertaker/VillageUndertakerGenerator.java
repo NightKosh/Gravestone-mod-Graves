@@ -34,7 +34,7 @@ public class VillageUndertakerGenerator implements GSStructureGenerator {
         if (isCommand) {
             StructureBoundingBox boundingBox = ComponentGSVillageUndertaker.getBoundingBox(facing, x, z);
             new ComponentGSVillageUndertaker(new StructureVillagePieces.Start(), 0, rand, boundingBox, facing)
-                    .addComponentParts(world, rand, boundingBox);
+                    .generateComponent(world, rand, boundingBox, false);
             return true;
         }
         return false;

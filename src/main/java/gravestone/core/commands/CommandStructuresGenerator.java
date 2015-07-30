@@ -5,7 +5,7 @@ import gravestone.structures.GSStructureGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
 import gravestone.structures.graves.SingleGraveGenerator;
 import gravestone.structures.memorials.MemorialGenerator;
-import gravestone.structures.village.cemetery.VillageCemeteryGenerator;
+import gravestone.structures.village.undertaker.VillageCemeteryGenerator;
 import gravestone.structures.village.undertaker.VillageUndertakerGenerator;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
