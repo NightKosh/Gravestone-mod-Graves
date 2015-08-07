@@ -2,6 +2,7 @@ package gravestone.item;
 
 import gravestone.ModGraveStone;
 import gravestone.core.GSBlock;
+import gravestone.core.GSGuiHandler;
 import gravestone.core.GSTabs;
 import gravestone.tileentity.TileEntityGSGrave;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,29 +45,31 @@ public class ItemGSChisel extends ItemTool {
      */
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-        if (world.isRemote) {
-            if (world.getBlockState(pos).getBlock().equals(GSBlock.graveStone)) {
-                return setGraveText(stack, player, world, pos, false);
-            } else if (world.getBlockState(pos).getBlock().equals(GSBlock.memorial)) {
-                return setGraveText(stack, player, world, pos, true);
-            }
+        if (world.getBlockState(pos).getBlock().equals(GSBlock.graveStone)) {
+            return setGraveText(stack, player, world, pos, false);
+        } else if (world.getBlockState(pos).getBlock().equals(GSBlock.memorial)) {
+            return setGraveText(stack, player, world, pos, true);
+        } else {
+            player.openGui(ModGraveStone.instance, GSGuiHandler.CHISEL_CRAFTING_GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
         }
 
-        return false;
+        return true;
     }
 
     private boolean setGraveText(ItemStack stack, EntityPlayer player, World world, BlockPos pos, boolean isMemorial) {
-        TileEntityGSGrave tileEntity = (TileEntityGSGrave) world.getTileEntity(pos);
+        if (world.isRemote) {
+            TileEntityGSGrave tileEntity = (TileEntityGSGrave) world.getTileEntity(pos);
 
-        if (tileEntity != null && tileEntity.isEditable() && tileEntity.getDeathTextComponent().getDeathText().length() == 0) {
-            ModGraveStone.proxy.openGraveTextGui(tileEntity);
-            if (isMemorial) {
-                stack.damageItem(5, player);
-            } else {
-                stack.damageItem(2, player);
+            if (tileEntity != null && tileEntity.isEditable() && tileEntity.getDeathTextComponent().getDeathText().length() == 0) {
+                ModGraveStone.proxy.openGraveTextGui(tileEntity);
+                if (isMemorial) {
+                    stack.damageItem(5, player);
+                } else {
+                    stack.damageItem(2, player);
+                }
+
+                return true;
             }
-
-            return true;
         }
 
         return false;

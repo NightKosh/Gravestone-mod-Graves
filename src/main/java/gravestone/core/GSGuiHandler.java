@@ -1,8 +1,10 @@
 package gravestone.core;
 
 import gravestone.gui.GSAltarGui;
+import gravestone.gui.GSChiselCraftingGui;
 import gravestone.gui.GSGraveInventoryGui;
 import gravestone.gui.container.AltarContainer;
+import gravestone.gui.container.ChiselContainer;
 import gravestone.gui.container.GraveContainer;
 import gravestone.tileentity.TileEntityGSAltar;
 import gravestone.tileentity.TileEntityGSGraveStone;
@@ -22,6 +24,7 @@ public class GSGuiHandler implements IGuiHandler {
 
     public static final int GRAVE_INVENTORY_GUI_ID = 0;
     public static final int ALTAR_GUI_ID = 2;
+    public static final int CHISEL_CRAFTING_GUI_ID = 3;
 
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
@@ -39,6 +42,8 @@ public class GSGuiHandler implements IGuiHandler {
                     return new AltarContainer(player.inventory, (TileEntityGSAltar) tileEntity);
                 }
                 break;
+            case CHISEL_CRAFTING_GUI_ID:
+                return new ChiselContainer(player.inventory);
         }
         return null;
     }
@@ -59,6 +64,8 @@ public class GSGuiHandler implements IGuiHandler {
                     return new GSAltarGui(player.inventory, (TileEntityGSAltar) tileEntity);
                 }
                 break;
+            case CHISEL_CRAFTING_GUI_ID:
+                return new GSChiselCraftingGui(player.inventory);
         }
         return null;
     }
