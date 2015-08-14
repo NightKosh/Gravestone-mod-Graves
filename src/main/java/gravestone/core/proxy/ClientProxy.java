@@ -5,6 +5,7 @@ import gravestone.core.GSItem;
 import gravestone.core.Resources;
 import gravestone.core.event.GSRenderEventHandler;
 import gravestone.entity.EntityRaven;
+import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
 import gravestone.entity.monster.*;
 import gravestone.entity.monster.EntitySkullCrawler.SkullCrawlerType;
 import gravestone.gui.GSGraveTextGui;
@@ -104,6 +105,9 @@ public class ClientProxy extends CommonProxy {
 
         // raven
         RenderingRegistry.registerEntityRenderingHandler(EntityRaven.class, new RenderRaven(Minecraft.getMinecraft().getRenderManager()));
+
+        // Spawner Helper
+        RenderingRegistry.registerEntityRenderingHandler(EntityGroupOfGravesMobSpawnerHelper.class, new RenderSpawnerHelper(Minecraft.getMinecraft().getRenderManager()));
     }
 
     @Override
