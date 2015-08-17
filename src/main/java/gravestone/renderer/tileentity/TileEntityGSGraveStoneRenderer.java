@@ -15,6 +15,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
@@ -53,46 +54,55 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         }
         EnumFacing facing = EnumFacing.values()[meta];
 
-        //texture
+        renderGrave(x, y, z, tileEntity.getWorld(), graveType, tileEntity.isEnchanted(), tileEntity.isMossy(),
+                tileEntity.hasFlower(), tileEntity.getFlower(), tileEntity.isSwordGrave(), tileEntity.getSword(), facing);
+    }
+
+    public void renderGrave(double x, double y, double z, World world, EnumGraves graveType, boolean isEnchanted, boolean isMossy, boolean isSwordGrave, ItemStack sword) {
+        renderGrave(x, y, z, world, graveType, isEnchanted, isMossy, false, null, isSwordGrave, sword, EnumFacing.NORTH);
+    }
+
+    public void renderGrave(double x, double y, double z, World world, EnumGraves graveType,
+                            boolean isEnchanted, boolean isMossy, boolean hasFlower, ItemStack flower, boolean isSwordGrave, ItemStack sword, EnumFacing facing) {
         GL11.glPushMatrix();
 
-        if (tileEntity.getWorld() == null && tileEntity.isSwordGrave()) {
-            GL11.glTranslatef((float) x + 0.5F, (float) y + 2, (float) z + 0.5F);
-            GL11.glScalef(1.5F, -1.5F, -1.5F);
-        } else {
-            GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-            GL11.glScalef(1, -1, -1);
-        }
+//        if (world == null && isSwordGrave) {
+//            GL11.glTranslatef((float) x + 0.5F, (float) y + 2, (float) z + 0.5F);
+//            GL11.glScalef(1.5F, -1.5F, -1.5F);
+//        } else {
+//            GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+//            GL11.glScalef(1, -1, -1);
+//        }
+//
+//        switch (facing) {
+//            case SOUTH:
+//                GL11.glRotatef(0, 0, 1, 0);
+//                break;
+//            case WEST:
+//                GL11.glRotatef(90, 0, 1, 0);
+//                break;
+//            case NORTH:
+//                GL11.glRotatef(180, 0, 1, 0);
+//                break;
+//            case EAST:
+//                GL11.glRotatef(270, 0, 1, 0);
+//                break;
+//        }
 
-        switch (facing) {
-            case SOUTH:
-                GL11.glRotatef(0, 0, 1, 0);
-                break;
-            case WEST:
-                GL11.glRotatef(90, 0, 1, 0);
-                break;
-            case NORTH:
-                GL11.glRotatef(180, 0, 1, 0);
-                break;
-            case EAST:
-                GL11.glRotatef(270, 0, 1, 0);
-                break;
-        }
-
-        if (tileEntity.isSwordGrave()) {
-            renderSword(tileEntity);
+        if (isSwordGrave) {
+            renderSword(world, sword, isEnchanted);
         } else {
             ModelGraveStone model = getModel(graveType.getGraveType());
 
-            bindTextureByName(getTexture(graveType, graveType.getTexture(), tileEntity.isMossy()));
-            if (tileEntity.isEnchanted()) {
+            bindTextureByName(getTexture(graveType, graveType.getTexture(), isMossy));
+            if (isEnchanted) {
                 model.renderEnchanted();
             } else {
                 model.renderAll();
             }
 
-            if (tileEntity.hasFlower()) {
-                renderFlower(tileEntity);
+            if (hasFlower) {
+                renderFlower(world, flower);
             }
         }
 
@@ -154,9 +164,8 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         }
     }
 
-    private void renderSword(TileEntityGSGraveStone te) {
-        ItemStack sword = te.getSword();
-        if (te.isEnchanted()) {
+    private void renderSword(World world, ItemStack sword, boolean isEnchanted) {
+        if (isEnchanted) {
             if (!sword.isItemEnchanted()) {
                 if (!sword.hasTagCompound()) {
                     sword.setTagCompound(new NBTTagCompound());
@@ -164,7 +173,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
                 sword.getTagCompound().setTag("ench", new NBTTagList());
             }
         }
-        EntityItem entityitem = new EntityItem(te.getWorld(), 0, 0, 0, sword);
+        EntityItem entityitem = new EntityItem(world, 0, 0, 0, sword);
         entityitem.hoverStart = 0;
         GL11.glTranslatef(-0.37F, 0.83F, 0);
         GL11.glScalef(1.5F, -1.5F, -1.5F);
@@ -173,8 +182,8 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
         Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
     }
 
-    private void renderFlower(TileEntityGSGraveStone te) {
-        EntityItem entityitem = new EntityItem(te.getWorld(), 0, 0, 0, te.getFlower());
+    private void renderFlower(World world, ItemStack flower) {
+        EntityItem entityitem = new EntityItem(world, 0, 0, 0, flower);
         entityitem.hoverStart = 0;
         GL11.glTranslatef(0, 1.6F, -0.1F);
         GL11.glScalef(1, -1, -1);
