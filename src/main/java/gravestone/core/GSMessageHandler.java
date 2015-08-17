@@ -2,6 +2,7 @@ package gravestone.core;
 
 import gravestone.packets.AltarMessageToClient;
 import gravestone.packets.AltarMessageToServer;
+import gravestone.packets.ChiselMessageToServer;
 import gravestone.packets.GraveDeathMessageToServer;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -20,5 +21,6 @@ public class GSMessageHandler {
         networkWrapper.registerMessage(GraveDeathMessageToServer.class, GraveDeathMessageToServer.class, 0, Side.SERVER);
         networkWrapper.registerMessage(AltarMessageToServer.class, AltarMessageToServer.class, 1, Side.SERVER);
         networkWrapper.registerMessage(AltarMessageToClient.class, AltarMessageToClient.class, 2, Side.CLIENT);
+        networkWrapper.registerMessage(ChiselMessageToServer.class, ChiselMessageToServer.class, 3, Side.SERVER);
     }
 }
