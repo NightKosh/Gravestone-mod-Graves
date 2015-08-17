@@ -18,20 +18,23 @@ import net.minecraft.nbt.NBTTagCompound;
 public class AltarContainer extends Container {
 
     protected TileEntityGSAltar tileEntity;
+    public static final int PLAYER_INVENTORY_ROWS_COUNT = 3;
+    public static final int COLUMNS_COUNT = 9;
+    public static final int SLOT_WIDTH = 18;
 
     public AltarContainer(InventoryPlayer inventoryPlayer, TileEntityGSAltar te) {
         tileEntity = te;
 
-        addSlotToContainer(new AltarSlot(tileEntity, 0, 27, 27));
+        this.addSlotToContainer(new AltarSlot(tileEntity, 0, 27, 27));
 
-        for (int row = 0; row < 3; ++row) {
-            for (int column = 0; column < 9; ++column) {
-                this.addSlotToContainer(new Slot(inventoryPlayer, column + row * 9 + 9, 8 + column * 18, 84 + row * 18));
+        for (int row = 0; row < PLAYER_INVENTORY_ROWS_COUNT; ++row) {
+            for (int column = 0; column < COLUMNS_COUNT; ++column) {
+                this.addSlotToContainer(new Slot(inventoryPlayer, column + row * COLUMNS_COUNT + COLUMNS_COUNT, 8 + column * SLOT_WIDTH, 84 + row * SLOT_WIDTH));
             }
         }
 
-        for (int column = 0; column < 9; ++column) {
-            this.addSlotToContainer(new Slot(inventoryPlayer, column, 8 + column * 18, 142));
+        for (int column = 0; column < COLUMNS_COUNT; ++column) {
+            this.addSlotToContainer(new Slot(inventoryPlayer, column, 8 + column * SLOT_WIDTH, 142));
         }
     }
 
