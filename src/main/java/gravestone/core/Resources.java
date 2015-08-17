@@ -39,6 +39,7 @@ public class Resources {
 
     // gui
     public static final ResourceLocation ALTAR = new ResourceLocation(GUI_LOCATION + "altar.png");
+    public static final ResourceLocation INVENTORY = new ResourceLocation(GUI_LOCATION + "inventory.png");
     public static final ResourceLocation CHEST_GUI = new ResourceLocation("textures/gui/container/generic_54.png");
 
     //potions
