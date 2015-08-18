@@ -58,37 +58,63 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
                 tileEntity.hasFlower(), tileEntity.getFlower(), tileEntity.isSwordGrave(), tileEntity.getSword(), facing);
     }
 
-    public void renderGrave(double x, double y, double z, World world, EnumGraves graveType, boolean isEnchanted, boolean isMossy, boolean isSwordGrave, ItemStack sword) {
-        renderGrave(x, y, z, world, graveType, isEnchanted, isMossy, false, null, isSwordGrave, sword, EnumFacing.NORTH);
+    public void renderGraveInGui(double x, double y, World world, EnumGraves graveType, boolean isEnchanted, boolean isMossy, boolean isSwordGrave, ItemStack sword) {
+        GL11.glPushMatrix();
+
+        if (world == null && isSwordGrave) {
+            GL11.glTranslatef((float) x + 0.5F, (float) y + 2, (float) 40 + 0.5F);
+            GL11.glScalef(1.5F, -1.5F, -1.5F);
+        } else {
+            GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) 40 + 0.5F);
+            GL11.glScalef(1, -1, -1);
+        }
+
+        float scale = 75f;
+        GL11.glScaled(scale, scale, -scale);
+
+        float s = -0.65f;
+        GL11.glRotatef(-10, 1f, 0f, 0f);
+        GL11.glTranslatef(-0.5f, -2.4f, 0f);
+        GL11.glTranslatef(-s, 0f, s);
+
+        renderGrave(world, graveType, isEnchanted, isMossy, false, null, isSwordGrave, sword);
+
+        GL11.glPopMatrix();
     }
 
     public void renderGrave(double x, double y, double z, World world, EnumGraves graveType,
                             boolean isEnchanted, boolean isMossy, boolean hasFlower, ItemStack flower, boolean isSwordGrave, ItemStack sword, EnumFacing facing) {
         GL11.glPushMatrix();
 
-//        if (world == null && isSwordGrave) {
-//            GL11.glTranslatef((float) x + 0.5F, (float) y + 2, (float) z + 0.5F);
-//            GL11.glScalef(1.5F, -1.5F, -1.5F);
-//        } else {
-//            GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-//            GL11.glScalef(1, -1, -1);
-//        }
-//
-//        switch (facing) {
-//            case SOUTH:
-//                GL11.glRotatef(0, 0, 1, 0);
-//                break;
-//            case WEST:
-//                GL11.glRotatef(90, 0, 1, 0);
-//                break;
-//            case NORTH:
-//                GL11.glRotatef(180, 0, 1, 0);
-//                break;
-//            case EAST:
-//                GL11.glRotatef(270, 0, 1, 0);
-//                break;
-//        }
+        if (world == null && isSwordGrave) {
+            GL11.glTranslatef((float) x + 0.5F, (float) y + 2, (float) z + 0.5F);
+            GL11.glScalef(1.5F, -1.5F, -1.5F);
+        } else {
+            GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+            GL11.glScalef(1, -1, -1);
+        }
 
+        switch (facing) {
+            case SOUTH:
+                GL11.glRotatef(0, 0, 1, 0);
+                break;
+            case WEST:
+                GL11.glRotatef(90, 0, 1, 0);
+                break;
+            case NORTH:
+                GL11.glRotatef(180, 0, 1, 0);
+                break;
+            case EAST:
+                GL11.glRotatef(270, 0, 1, 0);
+                break;
+        }
+
+        renderGrave(world, graveType, isEnchanted, isMossy, hasFlower, flower, isSwordGrave, sword);
+
+        GL11.glPopMatrix();
+    }
+
+    private void renderGrave(World world, EnumGraves graveType, boolean isEnchanted, boolean isMossy, boolean hasFlower, ItemStack flower, boolean isSwordGrave, ItemStack sword) {
         if (isSwordGrave) {
             renderSword(world, sword, isEnchanted);
         } else {
@@ -105,8 +131,6 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
                 renderFlower(world, flower);
             }
         }
-
-        GL11.glPopMatrix();
     }
 
     private ResourceLocation getTexture(EnumGraves graveType, ResourceLocation texture, boolean isMossy) {

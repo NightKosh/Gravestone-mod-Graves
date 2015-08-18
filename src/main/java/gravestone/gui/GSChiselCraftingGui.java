@@ -5,6 +5,7 @@ import gravestone.block.enums.EnumGraves;
 import gravestone.core.GSMessageHandler;
 import gravestone.core.Resources;
 import gravestone.gui.container.ChiselContainer;
+import gravestone.models.block.graves.ModelCrossGraveStone;
 import gravestone.packets.ChiselMessageToServer;
 import gravestone.renderer.tileentity.TileEntityGSGraveStoneRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -60,7 +61,7 @@ public class GSChiselCraftingGui extends GuiContainer {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX, mouseY, partialTicks);
 
-        TileEntityGSGraveStoneRenderer.instance.renderGrave((this.width / 2) - 150, (this.height / 2) - height, 40, player.worldObj, EnumGraves.ANDESITE_CROSS, false, false, false, null);
+        TileEntityGSGraveStoneRenderer.instance.renderGraveInGui(0, 0, player.worldObj, EnumGraves.ANDESITE_CROSS, false, false, false, null);
     }
 
     @Override
