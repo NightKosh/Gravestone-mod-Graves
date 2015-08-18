@@ -11,6 +11,8 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -19,6 +21,7 @@ import org.lwjgl.opengl.GL11;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
+@SideOnly(Side.CLIENT)
 public class GSChiselCraftingGui extends GuiContainer {
 
     private EntityPlayer player;
@@ -35,9 +38,11 @@ public class GSChiselCraftingGui extends GuiContainer {
         this.player = inventoryPlayer.player;
     }
 
+    @Override
     public void initGui() {
-//        this.buttonList.add(graveButton = new GuiButton(0, (width - xSize) / 2 + 100, (height - ySize) / 2 + 25, this.graveButtonStr));
-//        this.buttonList.add(memorialButton = new GuiButton(1, (width - xSize) / 2 + 100, (height - ySize) / 2 + 25, this.memorialButtonStr));
+        super.initGui();
+        this.buttonList.add(graveButton = new GuiButton(0, (width - xSize) / 2 + 100, (height - ySize) / 2 + 25, this.graveButtonStr));
+        this.buttonList.add(memorialButton = new GuiButton(1, (width - xSize) / 2 + 100, (height - ySize) / 2 + 25, this.memorialButtonStr));
     }
 
     @Override
@@ -48,8 +53,7 @@ public class GSChiselCraftingGui extends GuiContainer {
         int y = (height - ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
-//        this.drawString(this.fontRendererObj, this.typeStr, this.width / 2 - 40, (height - ySize) / 2 + 55, 16777215);
-
+        this.drawString(this.fontRendererObj, this.typeStr, this.width / 2 - 40, (height - ySize) / 2 + 55, 16777215);
     }
 
     @Override
@@ -69,6 +73,5 @@ public class GSChiselCraftingGui extends GuiContainer {
                 GSMessageHandler.networkWrapper.sendToServer(new ChiselMessageToServer(player, false));
                 break;
         }
-
     }
 }

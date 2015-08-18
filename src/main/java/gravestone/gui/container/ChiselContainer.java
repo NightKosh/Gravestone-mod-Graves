@@ -22,8 +22,8 @@ public class ChiselContainer extends Container {
     public static final int SLOT_WIDTH = 18;
     public static final int CRAFTING_SLOTS_COUNT = 4;
 
-//    public InventoryCrafting craftMatrix = new InventoryCrafting(this, CRAFTING_SLOTS_COUNT, 1);
-//    public IInventory craftResult = new InventoryCraftResult();
+    public InventoryCrafting craftMatrix = new InventoryCrafting(this, CRAFTING_SLOTS_COUNT, 1);
+    public IInventory craftResult = new InventoryCraftResult();
     private World world;
 
     private boolean isGravestone;
@@ -31,9 +31,7 @@ public class ChiselContainer extends Container {
     private EnumGraveMaterial material;
 
     public ChiselContainer(InventoryPlayer inventoryPlayer) {
-//        int i = 2 * SLOT_WIDTH;
-
-        world = inventoryPlayer.player.worldObj;
+//        world = inventoryPlayer.player.worldObj;
 //        this.addSlotToContainer(new SlotCrafting(inventoryPlayer.player, this.craftMatrix, this.craftResult, 0, 35, 35));
 
         for (int row = 0; row < PLAYER_INVENTORY_ROWS_COUNT; row++) {

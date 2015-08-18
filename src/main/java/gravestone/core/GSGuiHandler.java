@@ -23,8 +23,8 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 public class GSGuiHandler implements IGuiHandler {
 
     public static final int GRAVE_INVENTORY_GUI_ID = 0;
-    public static final int ALTAR_GUI_ID = 2;
-    public static final int CHISEL_CRAFTING_GUI_ID = 3;
+    public static final int ALTAR_GUI_ID = 1;
+    public static final int CHISEL_CRAFTING_GUI_ID = 2;
 
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
