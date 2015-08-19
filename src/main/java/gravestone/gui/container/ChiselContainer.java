@@ -29,6 +29,9 @@ public class ChiselContainer extends Container {
     private boolean isGravestone;
     private EnumGraves.EnumGraveType graveType;
     private EnumGraveMaterial material;
+    private boolean isEnchanted;
+    private boolean isMossy;
+    //TODO sword;
 
     public ChiselContainer(InventoryPlayer inventoryPlayer) {
 //        world = inventoryPlayer.player.worldObj;

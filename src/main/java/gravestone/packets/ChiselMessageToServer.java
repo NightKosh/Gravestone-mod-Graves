@@ -2,6 +2,7 @@ package gravestone.packets;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -19,15 +20,22 @@ public class ChiselMessageToServer implements IMessage, IMessageHandler<ChiselMe
     private int playerID;
     private int dimensionID;
     private boolean isGravestone;
+    private int graveType;
+    private int material;
+    private boolean isEnchanted;
+    private boolean isMossy;
 
     public ChiselMessageToServer() {
     }
 
-    public ChiselMessageToServer(EntityPlayer player, boolean isGravestone) {
+    public ChiselMessageToServer(EntityPlayer player, boolean isGravestone, int graveType, int material, boolean isEnchanted, boolean isMossy) {
         this.playerID = player.getEntityId();
         this.dimensionID = player.worldObj.provider.getDimensionId();
         this.isGravestone = isGravestone;
-
+        this.graveType = graveType;
+        this.material = material;
+        this.isEnchanted = isEnchanted;
+        this.isMossy = isMossy;
     }
 
     @Override
@@ -35,6 +43,10 @@ public class ChiselMessageToServer implements IMessage, IMessageHandler<ChiselMe
         this.playerID = buf.readInt();
         this.dimensionID = buf.readInt();
         this.isGravestone = buf.readBoolean();
+        this.graveType = buf.readInt();
+        this.material = buf.readInt();
+        this.isEnchanted = buf.readBoolean();
+        this.isMossy = buf.readBoolean();
     }
 
     @Override
@@ -42,6 +54,10 @@ public class ChiselMessageToServer implements IMessage, IMessageHandler<ChiselMe
         buf.writeInt(playerID);
         buf.writeInt(dimensionID);
         buf.writeBoolean(isGravestone);
+        buf.writeInt(graveType);
+        buf.writeInt(material);
+        buf.writeBoolean(isEnchanted);
+        buf.writeBoolean(isMossy);
     }
 
     @Override
@@ -52,6 +68,15 @@ public class ChiselMessageToServer implements IMessage, IMessageHandler<ChiselMe
                 return null;
             }
             EntityPlayer player = (EntityPlayer) world.getEntityByID(message.playerID);
+            NBTTagCompound nbt = new NBTTagCompound();
+            NBTTagCompound graveNbt = new NBTTagCompound();
+            graveNbt.setBoolean("IsGravestone", isGravestone);
+            graveNbt.setInteger("GraveType", graveType);
+            graveNbt.setInteger("Material", material);
+            graveNbt.setBoolean("IsEnchanted", isEnchanted);
+            graveNbt.setBoolean("IsMossy", isMossy);
+            nbt.setTag("GraveCrafting", graveNbt);
+            player.writeToNBT(nbt);
         }
         return null;
     }

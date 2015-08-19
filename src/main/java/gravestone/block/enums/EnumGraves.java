@@ -172,4 +172,13 @@ public enum EnumGraves implements IBlockEnum {
         }
         return STONE_VERTICAL_PLATE;
     }
+
+    public static EnumGraves getByTypeAndMaterial(EnumGraveType graveType, EnumGraveMaterial material) {
+        for (EnumGraves grave : EnumGraves.values()) {
+            if (grave.getGraveType().equals(graveType) && grave.getMaterial().equals(material)) {
+                return grave;
+            }
+        }
+        return STONE_VERTICAL_PLATE;
+    }
 }
