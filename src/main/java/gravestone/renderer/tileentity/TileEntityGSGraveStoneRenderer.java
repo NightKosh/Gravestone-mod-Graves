@@ -58,24 +58,17 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
                 tileEntity.hasFlower(), tileEntity.getFlower(), tileEntity.isSwordGrave(), tileEntity.getSword(), facing);
     }
 
-    public void renderGraveInGui(double x, double y, World world, EnumGraves graveType, boolean isEnchanted, boolean isMossy, boolean isSwordGrave, ItemStack sword) {
+    public void renderGraveInGui(float x, float y, World world, EnumGraves graveType, boolean isEnchanted,
+                                 boolean isMossy, boolean isSwordGrave, ItemStack sword, float partialTicks) {
         GL11.glPushMatrix();
 
-        if (world == null && isSwordGrave) {
-            GL11.glTranslatef((float) x + 0.5F, (float) y + 2, (float) 40 + 0.5F);
-            GL11.glScalef(1.5F, -1.5F, -1.5F);
-        } else {
-            GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) 40 + 0.5F);
-            GL11.glScalef(1, -1, -1);
-        }
+        GL11.glTranslatef(x, y, 40);
 
-        float scale = 75f;
-        GL11.glScaled(scale, scale, -scale);
+        float time = Minecraft.getMinecraft().theWorld.getTotalWorldTime() + partialTicks;
+        GL11.glRotatef(time % 360, 0, 1, 0);
 
-        float s = -0.65f;
-        GL11.glRotatef(-10, 1f, 0f, 0f);
-        GL11.glTranslatef(-0.5f, -2.4f, 0f);
-        GL11.glTranslatef(-s, 0f, s);
+        float scale = 75;
+        GL11.glScaled(scale, scale, scale);
 
         renderGrave(world, graveType, isEnchanted, isMossy, false, null, isSwordGrave, sword);
 
@@ -83,7 +76,8 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
     }
 
     public void renderGrave(double x, double y, double z, World world, EnumGraves graveType,
-                            boolean isEnchanted, boolean isMossy, boolean hasFlower, ItemStack flower, boolean isSwordGrave, ItemStack sword, EnumFacing facing) {
+                            boolean isEnchanted, boolean isMossy, boolean hasFlower, ItemStack flower,
+                            boolean isSwordGrave, ItemStack sword, EnumFacing facing) {
         GL11.glPushMatrix();
 
         if (world == null && isSwordGrave) {

@@ -55,14 +55,16 @@ public class GSChiselCraftingGui extends GuiContainer {
         this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
         this.drawString(this.fontRendererObj, this.typeStr, this.width / 2 - 40, (height - ySize) / 2 + 55, 16777215);
+
+        TileEntityGSGraveStoneRenderer.instance.renderGraveInGui(350, 0, player.worldObj, EnumGraves.GOLDEN_DOG_STATUE, false, false, false, null, par1);
     }
 
-    @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        super.drawScreen(mouseX, mouseY, partialTicks);
-
-        TileEntityGSGraveStoneRenderer.instance.renderGraveInGui(0, 0, player.worldObj, EnumGraves.ANDESITE_CROSS, false, false, false, null);
-    }
+//    @Override
+//    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+//        TileEntityGSGraveStoneRenderer.instance.renderGraveInGui(150, 150, player.worldObj, EnumGraves.GOLDEN_DOG_STATUE, false, false, false, null, partialTicks);
+//
+//        super.drawScreen(mouseX, mouseY, partialTicks);
+//    }
 
     @Override
     public void actionPerformed(GuiButton button) {
