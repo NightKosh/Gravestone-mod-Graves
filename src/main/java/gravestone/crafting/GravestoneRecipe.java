@@ -29,7 +29,7 @@ public class GravestoneRecipe {
     }
 
     public ItemStack getResultItem() {
-        return resultItem;
+        return resultItem.copy();
     }
 
     public List<ItemStack> getRequiredItems() {
@@ -58,13 +58,13 @@ public class GravestoneRecipe {
     }
 
     public boolean containItems(List<ItemStack> items) {
-        if (items == null || requiredItems.size() != items.size()) {
+        if (items == null || requiredItems.size() > items.size()) {
             return false;
         } else {
             for (ItemStack requiredItem : requiredItems) {
                 boolean haveItem = false;
                 for (ItemStack item : items) {
-                    if (requiredItem.getItem().equals(item.getItem()) && requiredItem.getMetadata() == item.getMetadata() &&
+                    if (item != null && requiredItem.getItem().equals(item.getItem()) && requiredItem.getMetadata() == item.getMetadata() &&
                             requiredItem.stackSize <= item.stackSize) {
                         haveItem = true;
                         break;

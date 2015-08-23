@@ -5,6 +5,7 @@ import gravestone.block.enums.EnumGraves;
 import gravestone.core.GSBlock;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -175,9 +176,14 @@ public class GravesCraftingManager {
 
     }
 
-    public ItemStack findMatchingRecipe(boolean isGravestone, EnumGraves.EnumGraveType graveType, EnumGraveMaterial material, List<ItemStack> requiredItems) {
+    public ItemStack findMatchingRecipe(List<ItemStack> requiredItems) {//} isGravestone, EnumGraves.EnumGraveType graveType, EnumGraveMaterial material, List<ItemStack> requiredItems) {
+//        for (GravestoneRecipe recipe : recipes) {
+//            if (recipe.match(isGravestone, graveType, material, requiredItems)) {
+//                return recipe.getResultItem();
+//            }
+//        }
         for (GravestoneRecipe recipe : recipes) {
-            if (recipe.match(isGravestone, graveType, material, requiredItems)) {
+            if (recipe.containItems(requiredItems)) {
                 return recipe.getResultItem();
             }
         }
