@@ -72,27 +72,18 @@ public class GSChiselCraftingGui extends GuiContainer {
         this.buttonList.add(memorialButton = new GuiButton(1, (width - xSize) / 2 + 100, 20, 75, 20, this.MEMORIAL_BUTTON_STR));
 
         //type
-        GuiSlider.ISlider iTypeSlider = new GuiSlider.ISlider() {
-
-            public void onChangeSliderValue(GuiSlider slider) {
-
-                graveType = EnumGraves.EnumGraveType.values()[typeSlider.getValueInt()];
-            }
-        };
-
         this.buttonList.add(typeSlider = new GuiSlider(TYPE_SLIDER_ID, (width - xSize) / 2, 45, 176, 20, "", "", 0,
-                EnumGraves.EnumGraveType.values().length - 1, 0, false, false, iTypeSlider));
+                EnumGraves.EnumGraveType.values().length - 1, 0, false, false, (slider) -> {
+
+            graveType = EnumGraves.EnumGraveType.values()[slider.getValueInt()];
+        }));
 
         //material
-        GuiSlider.ISlider iMaterialSlider = new GuiSlider.ISlider() {
-
-            public void onChangeSliderValue(GuiSlider slider) {
-
-                material = EnumGraveMaterial.values()[materialSlider.getValueInt()];
-            }
-        };
         this.buttonList.add(materialSlider = new GuiSlider(MATERIAL_SLIDER_ID, (width - xSize) / 2, 70, 176, 20, "", "", 0,
-                EnumGraveMaterial.values().length - 1, 0, false, false, iMaterialSlider));
+                EnumGraveMaterial.values().length - 1, 0, false, false, (slider) -> {
+
+            material = EnumGraveMaterial.values()[materialSlider.getValueInt()];
+        }));
 
         this.buttonList.add(isEnchantedButton = new GuiCheckBox(IS_ENCHANTED_CHECKBOX_ID, 125, 95, "Is Enchanted", false));
         this.buttonList.add(isMossyButton = new GuiCheckBox(IS_MOSSY_CHECKBOX_ID, 200, 95, "Is Mossy", false));
