@@ -38,10 +38,10 @@ public class ChiselContainer extends Container {
 
     public ChiselContainer(InventoryPlayer inventoryPlayer) {
         this.world = inventoryPlayer.player.worldObj;
-        this.addSlotToContainer(new SlotCrafting(inventoryPlayer.player, this.craftMatrix, this.craftResult, 0, 124, 85));
+        this.addSlotToContainer(new SlotCrafting(inventoryPlayer.player, this.craftMatrix, this.craftResult, 0, 135, 90));
 
         for (int column = 0; column < CRAFTING_SLOTS_COUNT; column++) {
-            this.addSlotToContainer(new Slot(this.craftMatrix, column, 30 + column * 18, 85));
+            this.addSlotToContainer(new Slot(this.craftMatrix, column, 23 + column * 18, 90));
         }
 
         for (int row = 0; row < PLAYER_INVENTORY_ROWS_COUNT; row++) {
