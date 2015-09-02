@@ -38,20 +38,20 @@ public class ChiselContainer extends Container {
 
     public ChiselContainer(InventoryPlayer inventoryPlayer) {
         this.world = inventoryPlayer.player.worldObj;
-        this.addSlotToContainer(new SlotCrafting(inventoryPlayer.player, this.craftMatrix, this.craftResult, 0, 124, 35));
+        this.addSlotToContainer(new SlotCrafting(inventoryPlayer.player, this.craftMatrix, this.craftResult, 0, 124, 85));
 
         for (int column = 0; column < CRAFTING_SLOTS_COUNT; column++) {
-            this.addSlotToContainer(new Slot(this.craftMatrix, column, 30 + column * 18, 35));
+            this.addSlotToContainer(new Slot(this.craftMatrix, column, 30 + column * 18, 85));
         }
 
         for (int row = 0; row < PLAYER_INVENTORY_ROWS_COUNT; row++) {
             for (int column = 0; column < COLUMNS_COUNT; column++) {
-                this.addSlotToContainer(new Slot(inventoryPlayer, column + row * COLUMNS_COUNT + COLUMNS_COUNT, 8 + column * SLOT_WIDTH, 84 + row * SLOT_WIDTH));
+                this.addSlotToContainer(new Slot(inventoryPlayer, column + row * COLUMNS_COUNT + COLUMNS_COUNT, 8 + column * SLOT_WIDTH, 114 + row * SLOT_WIDTH));
             }
         }
 
         for (int column = 0; column < COLUMNS_COUNT; column++) {
-            this.addSlotToContainer(new Slot(inventoryPlayer, column, 8 + column * SLOT_WIDTH, 142));
+            this.addSlotToContainer(new Slot(inventoryPlayer, column, 8 + column * SLOT_WIDTH, 172));
         }
 
         this.onCraftMatrixChanged(this.craftMatrix);

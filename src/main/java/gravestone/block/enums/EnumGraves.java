@@ -124,8 +124,8 @@ public enum EnumGraves implements IBlockEnum {
 
     public enum EnumGraveType {
         VERTICAL_PLATE,
-        HORIZONTAL_PLATE,
         CROSS,
+        HORIZONTAL_PLATE,
         DOG_STATUE,
         CAT_STATUE,
         HORSE_STATUE,

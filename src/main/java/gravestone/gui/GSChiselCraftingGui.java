@@ -5,6 +5,8 @@ import gravestone.block.enums.EnumGraves;
 import gravestone.core.GSMessageHandler;
 import gravestone.core.Resources;
 import gravestone.gui.container.ChiselContainer;
+import gravestone.gui.slider.ChiselMaterialSlider;
+import gravestone.gui.slider.ChiselTypeSlider;
 import gravestone.packets.ChiselMessageToServer;
 import gravestone.renderer.tileentity.TileEntityGSGraveStoneRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -68,22 +70,16 @@ public class GSChiselCraftingGui extends GuiContainer {
     @Override
     public void initGui() {
         super.initGui();
-        this.buttonList.add(graveButton = new GuiButton(GRAVE_BUTTON_ID, (width - xSize) / 2, 20, 75, 20, this.GRAVE_BUTTON_STR));
-        this.buttonList.add(memorialButton = new GuiButton(1, (width - xSize) / 2 + 100, 20, 75, 20, this.MEMORIAL_BUTTON_STR));
+        final int HALF_W = (width - xSize) / 2;
+
+        this.buttonList.add(graveButton = new GuiButton(GRAVE_BUTTON_ID, HALF_W, 20, 75, 20, this.GRAVE_BUTTON_STR));
+        this.buttonList.add(memorialButton = new GuiButton(1, HALF_W + 100, 20, 75, 20, this.MEMORIAL_BUTTON_STR));
 
         //type
-        this.buttonList.add(typeSlider = new GuiSlider(TYPE_SLIDER_ID, (width - xSize) / 2, 45, 176, 20, "", "", 0,
-                EnumGraves.EnumGraveType.values().length - 1, 0, false, false, (slider) -> {
-
-            graveType = EnumGraves.EnumGraveType.values()[slider.getValueInt()];
-        }));
+        this.buttonList.add(typeSlider = new ChiselTypeSlider(TYPE_SLIDER_ID, HALF_W, 45, 176, 20, 0, this));
 
         //material
-        this.buttonList.add(materialSlider = new GuiSlider(MATERIAL_SLIDER_ID, (width - xSize) / 2, 70, 176, 20, "", "", 0,
-                EnumGraveMaterial.values().length - 1, 0, false, false, (slider) -> {
-
-            material = EnumGraveMaterial.values()[materialSlider.getValueInt()];
-        }));
+        this.buttonList.add(materialSlider = new ChiselMaterialSlider(MATERIAL_SLIDER_ID, HALF_W, 70, 176, 20, 0, this));
 
         this.buttonList.add(isEnchantedButton = new GuiCheckBox(IS_ENCHANTED_CHECKBOX_ID, 125, 95, "Is Enchanted", false));
         this.buttonList.add(isMossyButton = new GuiCheckBox(IS_MOSSY_CHECKBOX_ID, 200, 95, "Is Mossy", false));
@@ -94,7 +90,7 @@ public class GSChiselCraftingGui extends GuiContainer {
         GL11.glColor4f(1, 1, 1, 1);
         this.mc.renderEngine.bindTexture(Resources.INVENTORY);
         int x = (width - xSize) / 2;
-        int y = (height - ySize) / 2;
+        int y = (height - ySize) / 2 + 30;
         this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
         this.drawString(this.fontRendererObj, this.GRAVE_STR, this.width / 2 - 150, 25, 16777215);
@@ -132,5 +128,17 @@ public class GSChiselCraftingGui extends GuiContainer {
                 isMossy = !isMossy;
                 break;
         }
+    }
+
+    public void setType(EnumGraves.EnumGraveType graveType) {
+        this.graveType = graveType;
+    }
+
+    public void setMaterial(EnumGraveMaterial material) {
+        this.material = material;
+    }
+
+    public EnumGraveMaterial getMaterial() {
+        return material;
     }
 }
