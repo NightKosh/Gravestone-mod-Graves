@@ -26,6 +26,7 @@ public class ChiselContainer extends Container {
     public static final int CRAFTING_SLOTS_COUNT = 4;
 
     public InventoryCrafting craftMatrix = new InventoryCrafting(this, CRAFTING_SLOTS_COUNT, 1);
+    public IInventory recipeMatrix = new InventoryCrafting(this, CRAFTING_SLOTS_COUNT, 1);
     public IInventory craftResult = new InventoryCraftResult();
     private World world;
 
@@ -42,6 +43,12 @@ public class ChiselContainer extends Container {
 
         for (int column = 0; column < CRAFTING_SLOTS_COUNT; column++) {
             this.addSlotToContainer(new Slot(this.craftMatrix, column, 23 + column * 18, 90));
+        }
+
+        for (int row = 0; row < 2; row++) {
+            for (int column = 0; column < 2; column++) {
+                this.addSlotToContainer(new GraveRecipeSlot(this.recipeMatrix, column + row * 2, 200 + column * 18, 86 + row * SLOT_WIDTH));
+            }
         }
 
         for (int row = 0; row < PLAYER_INVENTORY_ROWS_COUNT; row++) {

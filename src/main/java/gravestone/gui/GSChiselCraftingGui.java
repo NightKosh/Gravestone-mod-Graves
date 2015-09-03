@@ -81,8 +81,8 @@ public class GSChiselCraftingGui extends GuiContainer {
         //material
         this.buttonList.add(materialSlider = new ChiselMaterialSlider(MATERIAL_SLIDER_ID, HALF_W, 70, 176, 20, 0, this));
 
-        this.buttonList.add(isEnchantedButton = new GuiCheckBox(IS_ENCHANTED_CHECKBOX_ID, 125, 95, "Is Enchanted", false));
-        this.buttonList.add(isMossyButton = new GuiCheckBox(IS_MOSSY_CHECKBOX_ID, 200, 95, "Is Mossy", false));
+        this.buttonList.add(isEnchantedButton = new GuiCheckBox(IS_ENCHANTED_CHECKBOX_ID, 125, 95, "Enchanted", false));
+        this.buttonList.add(isMossyButton = new GuiCheckBox(IS_MOSSY_CHECKBOX_ID, 200, 95, "Mossy", false));
     }
 
     @Override
@@ -91,7 +91,8 @@ public class GSChiselCraftingGui extends GuiContainer {
         this.mc.renderEngine.bindTexture(Resources.CHISEL_GUI);
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2 + 30;
-        this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+
+        this.drawTexturedModalRect(x, y, 0, 0, 256, ySize);
 
         this.drawString(this.fontRendererObj, this.GRAVE_STR, this.width / 2 - 150, 25, 16777215);
         this.drawString(this.fontRendererObj, this.TYPE_STR, this.width / 2 - 150, 50, 16777215);
