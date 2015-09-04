@@ -5,6 +5,7 @@ import gravestone.renderer.tileentity.TileEntityGSGraveStoneRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -54,33 +55,36 @@ public abstract class ModelGraveStone extends ModelBase {
         float tickModifier = (float) (Minecraft.getSystemTime() % 3000L) / 3000F * 48;
         TileEntityGSGraveStoneRenderer.instance.bindTextureByName(Resources.SWORD_AURA);
 
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glDepthMask(true);
-        GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
-        GL11.glMatrixMode(GL11.GL_TEXTURE);
+        GlStateManager.enableBlend();
+        GlStateManager.depthFunc(GL11.GL_EQUAL);
+        GlStateManager.depthMask(false);
+        float color = 0.5F;
+        GlStateManager.color(color, color, color, 1);
 
-        for (int var21 = 0; var21 < 3; var21++) {
-            GL11.glDisable(GL11.GL_LIGHTING);
-            float var22 = 0.76F;
-            GL11.glColor4f(0.5F * var22, 0.25F * var22, 0.8F * var22, 1);
-            GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
-            GL11.glMatrixMode(GL11.GL_TEXTURE);
-            GL11.glLoadIdentity();
-            float var23 = tickModifier * (0.001F + (float) var21 * 0.0015F) * 15;
-            float var24 = 0.33333334F;
-            GL11.glScalef(var24, var24, var24);
-            GL11.glRotatef(30 - (float) var21 * 60, 0, 0, 1);
-            GL11.glTranslatef(0, var23, 0);
-            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        for (int i = 0; i < 3; i++) {
+            GlStateManager.disableLighting();
+            GlStateManager.blendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
+            float color2 = 0.76F;
+            GlStateManager.color(0.5F * color2, 0.25F * color2, 0.8F * color2, 1);
+            GlStateManager.matrixMode(GL11.GL_TEXTURE);
+            GlStateManager.loadIdentity();
+
+            float var23 = tickModifier * (0.001F + i * 0.0015F) * 15;
+            float scale = 0.33F;
+            GlStateManager.scale(scale, scale, scale);
+            GlStateManager.rotate(30 - i * 60, 0, 0, 1);
+            GlStateManager.translate(0, var23, 0);
+            GlStateManager.matrixMode(GL11.GL_MODELVIEW);
+
             renderAll();
         }
 
-        GL11.glMatrixMode(GL11.GL_TEXTURE);
-        GL11.glDepthMask(true);
-        GL11.glLoadIdentity();
-        GL11.glMatrixMode(GL11.GL_MODELVIEW);
-        GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glDepthFunc(GL11.GL_LEQUAL);
+        GlStateManager.matrixMode(GL11.GL_TEXTURE);
+        GlStateManager.loadIdentity();
+        GlStateManager.matrixMode(GL11.GL_MODELVIEW);
+        GlStateManager.enableLighting();
+        GlStateManager.depthMask(true);
+        GlStateManager.depthFunc(GL11.GL_LEQUAL);
+        GlStateManager.disableBlend();
     }
 }
