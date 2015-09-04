@@ -180,7 +180,7 @@ public enum EnumMemorials implements IBlockEnum {
     // burning stake
     BURNING_STAKE("block.memorial.burning_stake", Resources.BURNING_STAKE, null, EnumMemorialType.BURNING_STAKE, EnumGraveMaterial.OTHER);
 
-    public enum EnumMemorialType {
+    public enum EnumMemorialType implements IEnumGraveType {
         CROSS,
         OBELISK,
         STEVE_STATUE,

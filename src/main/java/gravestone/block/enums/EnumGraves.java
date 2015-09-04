@@ -122,7 +122,7 @@ public enum EnumGraves implements IBlockEnum {
     // SWORD
     SWORD("block.gravestone.sword", null, EnumGraveType.SWORD, EnumGraveMaterial.OTHER);
 
-    public enum EnumGraveType {
+    public enum EnumGraveType implements IEnumGraveType {
         VERTICAL_PLATE,
         CROSS,
         HORIZONTAL_PLATE,

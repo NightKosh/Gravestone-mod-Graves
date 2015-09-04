@@ -2,6 +2,7 @@ package gravestone.crafting;
 
 import gravestone.block.enums.EnumGraveMaterial;
 import gravestone.block.enums.EnumGraves;
+import gravestone.block.enums.IEnumGraveType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockVine;
 import net.minecraft.init.Blocks;
@@ -24,15 +25,15 @@ public class GravestoneRecipe {
     private ItemStack resultItem;
     private List<ItemStack> requiredItems;
     private boolean isGravestone;
-    private EnumGraves.EnumGraveType graveType;
+    private IEnumGraveType graveType;
     private EnumGraveMaterial material;
     private boolean canBeMossy;
 
-    public GravestoneRecipe(boolean isGravestone, EnumGraves.EnumGraveType graveType, EnumGraveMaterial material, List<ItemStack> requiredItems, ItemStack resultItem) {
+    public GravestoneRecipe(boolean isGravestone, IEnumGraveType graveType, EnumGraveMaterial material, List<ItemStack> requiredItems, ItemStack resultItem) {
         this(isGravestone, graveType, material, true, requiredItems, resultItem);
     }
 
-    public GravestoneRecipe(boolean isGravestone, EnumGraves.EnumGraveType graveType, EnumGraveMaterial material, boolean canBeMossy, List<ItemStack> requiredItems, ItemStack resultItem) {
+    public GravestoneRecipe(boolean isGravestone, IEnumGraveType graveType, EnumGraveMaterial material, boolean canBeMossy, List<ItemStack> requiredItems, ItemStack resultItem) {
         this.isGravestone = isGravestone;
         this.graveType = graveType;
         this.material = material;
@@ -96,7 +97,7 @@ public class GravestoneRecipe {
         return isGravestone;
     }
 
-    public EnumGraves.EnumGraveType getGraveType() {
+    public IEnumGraveType getGraveType() {
         return graveType;
     }
 
@@ -108,12 +109,12 @@ public class GravestoneRecipe {
         return this.match(recipe.isGravestone(), recipe.getGraveType(), recipe.getMaterial(), false, false, recipe.getRequiredItems());//TODO
     }
 
-    public boolean match(boolean isGravestone, EnumGraves.EnumGraveType graveType, EnumGraveMaterial material, boolean isEnchanted, boolean isMossy) {//TODO
+    public boolean match(boolean isGravestone, IEnumGraveType graveType, EnumGraveMaterial material, boolean isEnchanted, boolean isMossy) {//TODO
         return  this.isGravestone() == isGravestone && this.getGraveType() == graveType &&
                 this.getMaterial() == material;
     }
 
-    public boolean match(boolean isGravestone, EnumGraves.EnumGraveType graveType, EnumGraveMaterial material, boolean isEnchanted, boolean isMossy, List<ItemStack> requiredItems) {
+    public boolean match(boolean isGravestone, IEnumGraveType graveType, EnumGraveMaterial material, boolean isEnchanted, boolean isMossy, List<ItemStack> requiredItems) {
         return  this.match(isGravestone, graveType, material, isEnchanted, isMossy) && this.containItems(requiredItems);
     }
 
