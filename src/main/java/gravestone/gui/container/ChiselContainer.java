@@ -3,6 +3,7 @@ package gravestone.gui.container;
 import gravestone.block.enums.EnumGraveMaterial;
 import gravestone.block.enums.EnumGraves;
 import gravestone.crafting.GravesCraftingManager;
+import gravestone.inventory.GraveRecipeInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
@@ -26,28 +27,37 @@ public class ChiselContainer extends Container {
     public static final int CRAFTING_SLOTS_COUNT = 4;
 
     public InventoryCrafting craftMatrix = new InventoryCrafting(this, CRAFTING_SLOTS_COUNT, 1);
-    public IInventory recipeMatrix = new InventoryCrafting(this, CRAFTING_SLOTS_COUNT, 1);
+    public IInventory recipeMatrix = new GraveRecipeInventory(CRAFTING_SLOTS_COUNT);
     public IInventory craftResult = new InventoryCraftResult();
+
+    private EntityPlayer player;
     private World world;
 
-    private boolean isGravestone;
-    private EnumGraves.EnumGraveType graveType;
-    private EnumGraveMaterial material;
-    private boolean isEnchanted;
-    private boolean isMossy;
+    public static final boolean IS_GRAVESTONE = true;
+    public static final EnumGraves.EnumGraveType TYPE = EnumGraves.EnumGraveType.VERTICAL_PLATE;
+    public static final EnumGraveMaterial MATERIAL = EnumGraveMaterial.WOOD;
+    public static final boolean IS_ENCHANTED = false;
+    public static final boolean IS_MOSSY = false;
+
+    public boolean isGravestone = IS_GRAVESTONE;
+    public EnumGraves.EnumGraveType graveType = TYPE;
+    public EnumGraveMaterial material = MATERIAL;
+    public boolean isEnchanted = IS_ENCHANTED;
+    public boolean isMossy = IS_MOSSY;
     //TODO sword;
 
-    public ChiselContainer(InventoryPlayer inventoryPlayer) {
-        this.world = inventoryPlayer.player.worldObj;
+    public ChiselContainer(EntityPlayer player, InventoryPlayer inventoryPlayer) {
+        this.player = player;
+        this.world = player.worldObj;
         this.addSlotToContainer(new SlotCrafting(inventoryPlayer.player, this.craftMatrix, this.craftResult, 0, 135, 90));
 
         for (int column = 0; column < CRAFTING_SLOTS_COUNT; column++) {
-            this.addSlotToContainer(new Slot(this.craftMatrix, column, 23 + column * 18, 90));
+            this.addSlotToContainer(new Slot(this.craftMatrix, column, 23 + column * SLOT_WIDTH, 90));
         }
 
         for (int row = 0; row < 2; row++) {
             for (int column = 0; column < 2; column++) {
-                this.addSlotToContainer(new GraveRecipeSlot(this.recipeMatrix, column + row * 2, 200 + column * 18, 86 + row * SLOT_WIDTH));
+                this.addSlotToContainer(new GraveRecipeSlot(this.recipeMatrix, column + row * 2, 200 + column * SLOT_WIDTH, 86 + row * SLOT_WIDTH));
             }
         }
 
@@ -140,5 +150,34 @@ public class ChiselContainer extends Container {
     @Override
     public boolean canMergeSlot(ItemStack itemStack, Slot slot) {
         return slot.inventory != this.craftResult && super.canMergeSlot(itemStack, slot);
+    }
+
+    @Override
+    public void detectAndSendChanges() {
+        List<ItemStack> items = GravesCraftingManager.getInstance().findMatchingRecipe(isGravestone, graveType, material, isEnchanted, isMossy);
+        this.recipeMatrix.clear();
+        if (items != null) {
+            int slot = 0;
+            for (ItemStack stack : items) {
+                if (stack != null) {
+                    this.recipeMatrix.setInventorySlotContents(slot, stack.copy());
+                }
+                slot++;
+            }
+        }
+        super.detectAndSendChanges();
+
+//        if (player != null) {
+//            NBTTagCompound nbt = new NBTTagCompound();// = player.getEntityData();
+//            player.writeEntityToNBT(nbt);// = player.getEntityData().hasKey("GraveCrafting");
+//            if (nbt != null && nbt.hasKey("GraveCrafting")) {
+//                NBTTagCompound graveNbt = nbt.getCompoundTag("GraveCrafting");
+//                isGravestone = graveNbt.getBoolean("IsGravestone");
+//                graveType = EnumGraves.EnumGraveType.values()[graveNbt.getInteger("GraveType")];
+//                material = EnumGraveMaterial.values()[graveNbt.getInteger("Material")];
+//                isEnchanted = graveNbt.getBoolean("IsEnchanted");
+//                isMossy = graveNbt.getBoolean("IsMossy");
+//            }
+//        }
     }
 }
