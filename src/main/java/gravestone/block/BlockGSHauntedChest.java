@@ -2,7 +2,7 @@ package gravestone.block;
 
 import gravestone.block.enums.EnumHauntedChest;
 import gravestone.core.GSTabs;
-import gravestone.tileentity.GSGraveStoneItems;
+import gravestone.inventory.GraveInventory;
 import gravestone.tileentity.TileEntityGSHauntedChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -169,7 +169,7 @@ public class BlockGSHauntedChest extends BlockContainer {
         }
 
         if (itemStack != null) {
-            GSGraveStoneItems.dropItem(itemStack, world, pos);
+            GraveInventory.dropItem(itemStack, world, pos);
         }
     }
 

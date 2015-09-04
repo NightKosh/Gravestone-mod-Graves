@@ -1,9 +1,10 @@
-package gravestone.tileentity;
+package gravestone.inventory;
 
 import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GSConfig;
 import gravestone.core.GSPotion;
+import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.item.EntityItem;
@@ -26,7 +27,7 @@ import java.util.*;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GSGraveStoneItems implements IInventory {
+public class GraveInventory implements IInventory {
 
     private TileEntityGSGraveStone tileEntity;
     private static final int[] POTION_LIST = {
@@ -39,7 +40,7 @@ public class GSGraveStoneItems implements IInventory {
     };
     protected List<ItemStack> items = new ArrayList<ItemStack>(54);
 
-    public GSGraveStoneItems(TileEntityGSGraveStone tileEntity) {
+    public GraveInventory(TileEntityGSGraveStone tileEntity) {
         this.tileEntity = tileEntity;
     }
 
@@ -68,6 +69,10 @@ public class GSGraveStoneItems implements IInventory {
         }
 
         nbtTag.setTag("Items", ntbList);
+    }
+
+    public boolean isEmpty() {
+        return items.isEmpty();
     }
 
     public void addInventoryContent(ItemStack itemStack) {
@@ -302,7 +307,7 @@ public class GSGraveStoneItems implements IInventory {
         if (isPetGrave) {
             fillPetGrave(random);
         } else {
-            if (tileEntity.graveType != 3 && tileEntity.graveType != 4) {
+            if (tileEntity.getGraveTypeNum() != 3 && tileEntity.getGraveTypeNum() != 4) {
                 if (random.nextInt(50) == 0) {
                     if (random.nextInt(2) == 0) {
                         addInventoryContent(new ItemStack(Items.skull, 1, 0));

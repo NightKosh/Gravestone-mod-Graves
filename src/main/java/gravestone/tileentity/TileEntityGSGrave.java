@@ -1,5 +1,6 @@
 package gravestone.tileentity;
 
+import gravestone.inventory.GraveInventory;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -18,7 +19,7 @@ import java.util.Random;
  */
 public abstract class TileEntityGSGrave extends TileEntity {
 
-    protected GSGraveStoneItems inventory;
+    protected GraveInventory inventory;
     protected GSGraveStoneDeathText deathText;
     protected boolean isEditable = true;
     protected boolean isEnchanted = false;
@@ -44,7 +45,7 @@ public abstract class TileEntityGSGrave extends TileEntity {
         setRandomAge();
     }
 
-    public GSGraveStoneItems getInventory() {
+    public GraveInventory getInventory() {
         return inventory;
     }
 

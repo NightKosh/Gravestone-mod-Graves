@@ -4,11 +4,11 @@ import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.core.GSTabs;
+import gravestone.inventory.GraveInventory;
 import gravestone.item.ItemGSCorpse;
 import gravestone.item.corpse.VillagerCorpseHelper;
 import gravestone.item.enums.EnumCorpse;
 import gravestone.particle.EntityBigFlameFX;
-import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -675,7 +675,7 @@ public class BlockGSMemorial extends BlockContainer {
                     if (te.isMossy()) {
                         if (item.getItem() instanceof ItemShears) {
                             if (!world.isRemote) {
-                                GSGraveStoneItems.dropItem(new ItemStack(Blocks.vine, 1), world, pos);
+                                GraveInventory.dropItem(new ItemStack(Blocks.vine, 1), world, pos);
                             }
                             te.setMossy(false);
                             return false;
@@ -832,7 +832,7 @@ public class BlockGSMemorial extends BlockContainer {
         }
 
         if (itemStack != null) {
-            GSGraveStoneItems.dropItem(itemStack, world, pos);
+            GraveInventory.dropItem(itemStack, world, pos);
         }
     }
 
@@ -893,7 +893,7 @@ public class BlockGSMemorial extends BlockContainer {
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setInteger("Type", memorialType);
         itemStack.setTagCompound(nbt);
-        GSGraveStoneItems.dropItem(itemStack, world, pos);
+        GraveInventory.dropItem(itemStack, world, pos);
     }
 
     @Override

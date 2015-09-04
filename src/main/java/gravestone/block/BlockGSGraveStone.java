@@ -6,8 +6,8 @@ import gravestone.config.GSConfig;
 import gravestone.core.GSGuiHandler;
 import gravestone.core.GSTabs;
 import gravestone.core.logger.GSLogger;
+import gravestone.inventory.GraveInventory;
 import gravestone.tileentity.DeathMessageInfo;
-import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -444,7 +444,7 @@ public class BlockGSGraveStone extends BlockContainer {
                     if (te.isMossy()) {
                         if (item.getItem() instanceof ItemShears) {
                             if (!world.isRemote) {
-                                GSGraveStoneItems.dropItem(new ItemStack(Blocks.vine, 1), world, pos);
+                                GraveInventory.dropItem(new ItemStack(Blocks.vine, 1), world, pos);
                             }
                             te.setMossy(false);
                             return false;
@@ -612,7 +612,7 @@ public class BlockGSGraveStone extends BlockContainer {
         ItemStack itemStack = getBlockItemStack(world, pos, state);
 
         if (itemStack != null) {
-            GSGraveStoneItems.dropItem(itemStack, world, pos);
+            GraveInventory.dropItem(itemStack, world, pos);
         }
     }
 
@@ -629,7 +629,7 @@ public class BlockGSGraveStone extends BlockContainer {
                 nbt.setBoolean("Mossy", tileEntity.isMossy());
 
                 itemStack.setTagCompound(nbt);
-                GSGraveStoneItems.dropItem(itemStack, world, pos);
+                GraveInventory.dropItem(itemStack, world, pos);
             }
         }
     }
@@ -760,12 +760,12 @@ public class BlockGSGraveStone extends BlockContainer {
             }
 
             itemStack.setTagCompound(nbt);
-            GSGraveStoneItems.dropItem(itemStack, world, pos);
+            GraveInventory.dropItem(itemStack, world, pos);
 
             if (items != null) {
                 for (int i = 0; i < items.size(); i++) {
                     if (items.get(i) != null) {
-                        GSGraveStoneItems.dropItem(items.get(i), world, pos);
+                        GraveInventory.dropItem(items.get(i), world, pos);
                     }
                 }
             }

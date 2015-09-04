@@ -6,6 +6,7 @@ import gravestone.config.GSConfig;
 import gravestone.core.TimeHelper;
 import gravestone.core.event.GSRenderEventHandler;
 import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
+import gravestone.inventory.GraveInventory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -35,14 +36,14 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     public TileEntityGSGraveStone() {
         super();
         gsSpawn = new GSGraveStoneSpawn(this);
-        inventory = new GSGraveStoneItems(this);
+        inventory = new GraveInventory(this);
     }
 
     public TileEntityGSGraveStone(World world) {
         super();
         this.worldObj = world;
         gsSpawn = new GSGraveStoneSpawn(this);
-        inventory = new GSGraveStoneItems(this);
+        inventory = new GraveInventory(this);
     }
 
     /**
@@ -207,7 +208,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     }
 
     public boolean isEmpty() {
-        return inventory.items.isEmpty();
+        return inventory.isEmpty();
     }
 
     @Override
