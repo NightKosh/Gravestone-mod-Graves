@@ -1,7 +1,6 @@
 package gravestone.core;
 
 import gravestone.block.GraveStoneHelper;
-import gravestone.block.enums.EnumGraves;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.block.enums.EnumSkullCandle;
 import gravestone.block.enums.EnumSpawner;
@@ -44,87 +43,6 @@ public class GSRecipes {
         // Bone block to piles
         GameRegistry.addRecipe(new ItemStack(GSBlock.pileOfBones, 9, 0), "x", 'x', GSBlock.boneBlock);
 
-
-        // graves
-        // vertical plates
-        addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.WOODEN_VERTICAL_PLATE.ordinal(), "Type"), Blocks.planks);
-        addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.SANDSTONE_VERTICAL_PLATE.ordinal(), "Type"), Blocks.sandstone);
-        addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.STONE_VERTICAL_PLATE.ordinal(), "Type"), Blocks.stone);
-        addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.IRON_VERTICAL_PLATE.ordinal(), "Type"), Blocks.iron_block);
-        addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.GOLDEN_VERTICAL_PLATE.ordinal(), "Type"), Blocks.gold_block);
-        addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.DIAMOND_VERTICAL_PLATE.ordinal(), "Type"), Blocks.diamond_block);
-        addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.EMERALD_VERTICAL_PLATE.ordinal(), "Type"), Blocks.emerald_block);
-        addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.LAPIS_VERTICAL_PLATE.ordinal(), "Type"), Blocks.lapis_block);
-        addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.REDSTONE_VERTICAL_PLATE.ordinal(), "Type"), Blocks.redstone_block);
-        addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.QUARTZ_VERTICAL_PLATE.ordinal(), "Type"), Blocks.quartz_block);
-        addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.OBSIDIAN_VERTICAL_PLATE.ordinal(), "Type"), Blocks.obsidian);
-        addVerticalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.ICE_VERTICAL_PLATE.ordinal(), "Type"), Blocks.ice);
-        // crosses
-        addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.WOODEN_CROSS.ordinal(), "Type"), Blocks.planks);
-        addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.SANDSTONE_CROSS.ordinal(), "Type"), Blocks.sandstone);
-        addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.STONE_CROSS.ordinal(), "Type"), Blocks.stone);
-        addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.IRON_CROSS.ordinal(), "Type"), Blocks.iron_block);
-        addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.GOLDEN_CROSS.ordinal(), "Type"), Blocks.gold_block);
-        addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.DIAMOND_CROSS.ordinal(), "Type"), Blocks.diamond_block);
-        addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.EMERALD_CROSS.ordinal(), "Type"), Blocks.emerald_block);
-        addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.LAPIS_CROSS.ordinal(), "Type"), Blocks.lapis_block);
-        addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.REDSTONE_CROSS.ordinal(), "Type"), Blocks.redstone_block);
-        addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.QUARTZ_CROSS.ordinal(), "Type"), Blocks.quartz_block);
-        addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.OBSIDIAN_CROSS.ordinal(), "Type"), Blocks.obsidian);
-        addCrossGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.ICE_CROSS.ordinal(), "Type"), Blocks.ice);
-        // horisontal plates
-        addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.WOODEN_HORIZONTAL_PLATE.ordinal(), "Type"), Blocks.planks);
-        addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.SANDSTONE_HORIZONTAL_PLATE.ordinal(), "Type"), Blocks.sandstone);
-        addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.STONE_HORIZONTAL_PLATE.ordinal(), "Type"), Blocks.stone);
-        addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.IRON_HORIZONTAL_PLATE.ordinal(), "Type"), Blocks.iron_block);
-        addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.GOLDEN_HORIZONTAL_PLATE.ordinal(), "Type"), Blocks.gold_block);
-        addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.DIAMOND_HORIZONTAL_PLATE.ordinal(), "Type"), Blocks.diamond_block);
-        addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.EMERALD_HORIZONTAL_PLATE.ordinal(), "Type"), Blocks.emerald_block);
-        addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.LAPIS_HORIZONTAL_PLATE.ordinal(), "Type"), Blocks.lapis_block);
-        addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.REDSTONE_HORIZONTAL_PLATE.ordinal(), "Type"), Blocks.redstone_block);
-        addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.QUARTZ_HORIZONTAL_PLATE.ordinal(), "Type"), Blocks.quartz_block);
-        addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.OBSIDIAN_HORIZONTAL_PLATE.ordinal(), "Type"), Blocks.obsidian);
-        addHorisontalPlateGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.ICE_HORIZONTAL_PLATE.ordinal(), "Type"), Blocks.ice);
-        // pet graves
-        // dogs graves
-        addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.WOODEN_DOG_STATUE.ordinal(), "Type"), Blocks.planks);
-        addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.SANDSTONE_DOG_STATUE.ordinal(), "Type"), Blocks.sandstone);
-        addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.STONE_DOG_STATUE.ordinal(), "Type"), Blocks.stone);
-        addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.IRON_DOG_STATUE.ordinal(), "Type"), Blocks.iron_block);
-        addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.GOLDEN_DOG_STATUE.ordinal(), "Type"), Blocks.gold_block);
-        addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.DIAMOND_DOG_STATUE.ordinal(), "Type"), Blocks.diamond_block);
-        addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.EMERALD_DOG_STATUE.ordinal(), "Type"), Blocks.emerald_block);
-        addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.LAPIS_DOG_STATUE.ordinal(), "Type"), Blocks.lapis_block);
-        addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.REDSTONE_DOG_STATUE.ordinal(), "Type"), Blocks.redstone_block);
-        addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.QUARTZ_DOG_STATUE.ordinal(), "Type"), Blocks.quartz_block);
-        addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.OBSIDIAN_DOG_STATUE.ordinal(), "Type"), Blocks.obsidian);
-        addDogGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.ICE_DOG_STATUE.ordinal(), "Type"), Blocks.ice);
-        // cats graves
-        addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.WOODEN_CAT_STATUE.ordinal(), "Type"), Blocks.planks);
-        addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.SANDSTONE_CAT_STATUE.ordinal(), "Type"), Blocks.sandstone);
-        addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.STONE_CAT_STATUE.ordinal(), "Type"), Blocks.stone);
-        addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.IRON_CAT_STATUE.ordinal(), "Type"), Blocks.iron_block);
-        addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.GOLDEN_CAT_STATUE.ordinal(), "Type"), Blocks.gold_block);
-        addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.DIAMOND_CAT_STATUE.ordinal(), "Type"), Blocks.diamond_block);
-        addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.EMERALD_CAT_STATUE.ordinal(), "Type"), Blocks.emerald_block);
-        addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.LAPIS_CAT_STATUE.ordinal(), "Type"), Blocks.lapis_block);
-        addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.REDSTONE_CAT_STATUE.ordinal(), "Type"), Blocks.redstone_block);
-        addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.QUARTZ_CAT_STATUE.ordinal(), "Type"), Blocks.quartz_block);
-        addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.OBSIDIAN_CAT_STATUE.ordinal(), "Type"), Blocks.obsidian);
-        addCatGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.ICE_CAT_STATUE.ordinal(), "Type"), Blocks.ice);
-        // horses graves
-        addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.WOODEN_HORSE_STATUE.ordinal(), "Type"), Blocks.planks);
-        addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.SANDSTONE_HORSE_STATUE.ordinal(), "Type"), Blocks.sandstone);
-        addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.STONE_HORSE_STATUE.ordinal(), "Type"), Blocks.stone);
-        addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.IRON_HORSE_STATUE.ordinal(), "Type"), Blocks.iron_block);
-        addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.GOLDEN_HORSE_STATUE.ordinal(), "Type"), Blocks.gold_block);
-        addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.DIAMOND_HORSE_STATUE.ordinal(), "Type"), Blocks.diamond_block);
-        addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.EMERALD_HORSE_STATUE.ordinal(), "Type"), Blocks.emerald_block);
-        addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.LAPIS_HORSE_STATUE.ordinal(), "Type"), Blocks.lapis_block);
-        addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.REDSTONE_HORSE_STATUE.ordinal(), "Type"), Blocks.redstone_block);
-        addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.QUARTZ_HORSE_STATUE.ordinal(), "Type"), Blocks.quartz_block);
-        addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.OBSIDIAN_HORSE_STATUE.ordinal(), "Type"), Blocks.obsidian);
-        addHorseGravestoneRecipe(getStackWithNTB(GSBlock.graveStone, EnumGraves.ICE_HORSE_STATUE.ordinal(), "Type"), Blocks.ice);
 
         // memorials
         // crosses
@@ -241,7 +159,7 @@ public class GSRecipes {
         GameRegistry.addRecipe(getStackWithNTB(GSBlock.memorial, EnumMemorials.BURNING_STAKE.ordinal(), "Type"), " w ", "www", "hwh", 'w', Blocks.planks, 'h', Blocks.hay_block);
 
 
-        // sword graves
+        // sword graves TODO remove
         for (Item sword : GraveStoneHelper.swordsList) {
             GameRegistry.addRecipe(GraveStoneHelper.getSwordAsGrave(Item.getItemFromBlock(GSBlock.graveStone), new ItemStack(sword, 1)), "sc", 's', sword, 'c', GSItem.chisel);
         }
@@ -283,32 +201,6 @@ public class GSRecipes {
         nbt.setInteger(ntbName, graveType);
         stack.setTagCompound(nbt);
         return stack;
-    }
-
-    // player graves
-    private static void addVerticalPlateGravestoneRecipe(ItemStack gravestone, Block material) {
-        GameRegistry.addRecipe(gravestone, "mc", 'm', material, 'c', GSItem.chisel);
-    }
-
-    private static void addCrossGravestoneRecipe(ItemStack gravestone, Block material) {
-        GameRegistry.addRecipe(gravestone, " c", "m ", 'm', material, 'c', GSItem.chisel);
-    }
-
-    private static void addHorisontalPlateGravestoneRecipe(ItemStack gravestone, Block material) {
-        GameRegistry.addRecipe(gravestone, "c", "m", 'm', material, 'c', GSItem.chisel);
-    }
-
-    // pets graves
-    private static void addDogGravestoneRecipe(ItemStack gravestone, Block material) {
-        GameRegistry.addRecipe(gravestone, " c", "  ", "m ", 'm', material, 'c', GSItem.chisel);
-    }
-
-    private static void addCatGravestoneRecipe(ItemStack gravestone, Block material) {
-        GameRegistry.addRecipe(gravestone, " c", "  ", " m", 'm', material, 'c', GSItem.chisel);
-    }
-
-    private static void addHorseGravestoneRecipe(ItemStack gravestone, Block material) {
-        GameRegistry.addRecipe(gravestone, "  c", "   ", "m  ", 'm', material, 'c', GSItem.chisel);
     }
 
     // memorials
