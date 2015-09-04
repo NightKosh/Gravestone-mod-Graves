@@ -89,7 +89,7 @@ public class GravestoneRecipe {
         if (isMossy) {
             items.add(new ItemStack(Blocks.vine, 1));
         }
-        return requiredItems;
+        return items;
     }
 
     public boolean isGravestone() {
