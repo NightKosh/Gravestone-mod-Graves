@@ -64,62 +64,62 @@ public class GraveStoneHelper implements IGraveStone {
     public static final EnumGraves[] GENERATED_WOODEN_GRAVES = {
             EnumGraves.WOODEN_VERTICAL_PLATE,
             EnumGraves.WOODEN_CROSS,
-            EnumGraves.WOODEN_HORISONTAL_PLATE
+            EnumGraves.WOODEN_HORIZONTAL_PLATE
     };
     public static final EnumGraves[] GENERATED_SANDSTONE_GRAVES = {
             EnumGraves.SANDSTONE_VERTICAL_PLATE,
             EnumGraves.SANDSTONE_CROSS,
-            EnumGraves.SANDSTONE_HORISONTAL_PLATE
+            EnumGraves.SANDSTONE_HORIZONTAL_PLATE
     };
     public static final EnumGraves[] GENERATED_STONE_GRAVES = {
             EnumGraves.STONE_VERTICAL_PLATE,
             EnumGraves.STONE_CROSS,
-            EnumGraves.STONE_HORISONTAL_PLATE
+            EnumGraves.STONE_HORIZONTAL_PLATE
     };
     public static final EnumGraves[] GENERATED_IRON_GRAVES = {
             EnumGraves.IRON_VERTICAL_PLATE,
             EnumGraves.IRON_CROSS,
-            EnumGraves.IRON_HORISONTAL_PLATE
+            EnumGraves.IRON_HORIZONTAL_PLATE
     };
     public static final EnumGraves[] GENERATED_GOLDEN_GRAVES = {
             EnumGraves.GOLDEN_VERTICAL_PLATE,
             EnumGraves.GOLDEN_CROSS,
-            EnumGraves.GOLDEN_HORISONTAL_PLATE
+            EnumGraves.GOLDEN_HORIZONTAL_PLATE
     };
     public static final EnumGraves[] GENERATED_DIAMOND_GRAVES = {
             EnumGraves.DIAMOND_VERTICAL_PLATE,
             EnumGraves.DIAMOND_CROSS,
-            EnumGraves.DIAMOND_HORISONTAL_PLATE
+            EnumGraves.DIAMOND_HORIZONTAL_PLATE
     };
     public static final EnumGraves[] GENERATED_EMERALD_GRAVES = {
             EnumGraves.EMERALD_VERTICAL_PLATE,
             EnumGraves.EMERALD_CROSS,
-            EnumGraves.EMERALD_HORISONTAL_PLATE
+            EnumGraves.EMERALD_HORIZONTAL_PLATE
     };
     public static final EnumGraves[] GENERATED_LAPIS_GRAVES = {
             EnumGraves.LAPIS_VERTICAL_PLATE,
             EnumGraves.LAPIS_CROSS,
-            EnumGraves.LAPIS_HORISONTAL_PLATE
+            EnumGraves.LAPIS_HORIZONTAL_PLATE
     };
     public static final EnumGraves[] GENERATED_REDSTONE_GRAVES = {
             EnumGraves.REDSTONE_VERTICAL_PLATE,
             EnumGraves.REDSTONE_CROSS,
-            EnumGraves.REDSTONE_HORISONTAL_PLATE
+            EnumGraves.REDSTONE_HORIZONTAL_PLATE
     };
     public static final EnumGraves[] GENERATED_OBSIDIAN_GRAVES = {
             EnumGraves.OBSIDIAN_VERTICAL_PLATE,
             EnumGraves.OBSIDIAN_CROSS,
-            EnumGraves.OBSIDIAN_HORISONTAL_PLATE
+            EnumGraves.OBSIDIAN_HORIZONTAL_PLATE
     };
     public static final EnumGraves[] GENERATED_QUARTZ_GRAVES = {
             EnumGraves.QUARTZ_VERTICAL_PLATE,
             EnumGraves.QUARTZ_CROSS,
-            EnumGraves.QUARTZ_HORISONTAL_PLATE
+            EnumGraves.QUARTZ_HORIZONTAL_PLATE
     };
     public static final EnumGraves[] GENERATED_ICE_GRAVES = {
             EnumGraves.ICE_VERTICAL_PLATE,
             EnumGraves.ICE_CROSS,
-            EnumGraves.ICE_HORISONTAL_PLATE
+            EnumGraves.ICE_HORIZONTAL_PLATE
     };
     public static final int[] DOGS_GRAVES = {
             EnumGraves.WOODEN_DOG_STATUE.ordinal(),
