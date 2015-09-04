@@ -4,9 +4,9 @@ import gravestone.block.enums.EnumGraveMaterial;
 import gravestone.block.enums.EnumGraves;
 import gravestone.core.GSBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockVine;
+import net.minecraft.block.BlockStone;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -22,60 +22,65 @@ import java.util.List;
  */
 public class GravesCraftingManager {
 
+    private static final IBlockState DEFAULT_STONE_STATE = Blocks.stone.getDefaultState();
+    private static final int DIORITE_META = Blocks.stone.getMetaFromState(DEFAULT_STONE_STATE.withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH));
+    private static final int ANDESITE_META = Blocks.stone.getMetaFromState(DEFAULT_STONE_STATE.withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE_SMOOTH));
+    private static final int GRANITE_META = Blocks.stone.getMetaFromState(DEFAULT_STONE_STATE.withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE_SMOOTH));
+
     private static final GravesCraftingManager instance = new GravesCraftingManager();
     private List<GravestoneRecipe> recipes;
 
     private GravesCraftingManager() {
         recipes = new ArrayList<GravestoneRecipe>();//TODO set recipes count
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.WOOD, true,
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.WOOD,
                 new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.planks, 1))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.WOODEN_VERTICAL_PLATE.ordinal())));
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.SANDSTONE, true,
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.SANDSTONE,
                 new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.sandstone, 1))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.SANDSTONE_VERTICAL_PLATE.ordinal())));
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.RED_SANDSTONE, true,
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.RED_SANDSTONE,
                 new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.red_sandstone, 1))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.RED_SANDSTONE_VERTICAL_PLATE.ordinal())));
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.STONE, true,
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.STONE,
                 new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.stone, 1))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.STONE_VERTICAL_PLATE.ordinal())));
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.DIORITE, true,
-                new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.stone, 1))),//TODO DIORITE
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.DIORITE,
+                new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.stone, 1, DIORITE_META))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.DIORITE_VERTICAL_PLATE.ordinal())));
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.ANDESITE, true,
-                new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.stone, 1))),//TODO ANDESITE
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.ANDESITE,
+                new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.stone, 1, ANDESITE_META))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.ANDESITE_VERTICAL_PLATE.ordinal())));
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.GRANITE, true,
-                new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.stone, 1))),//TODO Granite
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.GRANITE,
+                new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.stone, 1, GRANITE_META))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.GRANITE_VERTICAL_PLATE.ordinal())));
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.IRON, true,
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.IRON,
                 new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.iron_block, 1))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.IRON_VERTICAL_PLATE.ordinal())));
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.GOLD, true,
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.GOLD,
                 new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.gold_block, 1))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.GOLDEN_VERTICAL_PLATE.ordinal())));
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.DIAMOND, true,
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.DIAMOND,
                 new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.diamond_block, 1))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.DIAMOND_VERTICAL_PLATE.ordinal())));
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.EMERALD, true,
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.EMERALD,
                 new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.emerald_block, 1))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.EMERALD_VERTICAL_PLATE.ordinal())));
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.LAPIS, true,
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.LAPIS,
                 new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.lapis_block, 1))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.LAPIS_VERTICAL_PLATE.ordinal())));
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.REDSTONE, true,
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.REDSTONE,
                 new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.redstone_block, 1))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.REDSTONE_VERTICAL_PLATE.ordinal())));
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.OBSIDIAN, true,
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.OBSIDIAN,
                 new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.obsidian, 1))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.OBSIDIAN_VERTICAL_PLATE.ordinal())));
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.QUARTZ, true,
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.QUARTZ,
                 new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.quartz_block, 1))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.QUARTZ_VERTICAL_PLATE.ordinal())));
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.PRIZMARINE, true,
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.PRIZMARINE,
                 new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.prismarine, 1))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.PRIZMARINE_VERTICAL_PLATE.ordinal())));
-        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.ICE, true,
+        recipes.add(new GravestoneRecipe(true, EnumGraves.EnumGraveType.VERTICAL_PLATE, EnumGraveMaterial.ICE,
                 new ArrayList<ItemStack>(Arrays.asList(new ItemStack(Blocks.ice, 1))),
                 getStackWithNTB(GSBlock.graveStone, EnumGraves.ICE_VERTICAL_PLATE.ordinal())));
         // CROSSES

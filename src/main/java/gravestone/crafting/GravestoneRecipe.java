@@ -28,6 +28,10 @@ public class GravestoneRecipe {
     private EnumGraveMaterial material;
     private boolean canBeMossy;
 
+    public GravestoneRecipe(boolean isGravestone, EnumGraves.EnumGraveType graveType, EnumGraveMaterial material, List<ItemStack> requiredItems, ItemStack resultItem) {
+        this(isGravestone, graveType, material, true, requiredItems, resultItem);
+    }
+
     public GravestoneRecipe(boolean isGravestone, EnumGraves.EnumGraveType graveType, EnumGraveMaterial material, boolean canBeMossy, List<ItemStack> requiredItems, ItemStack resultItem) {
         this.isGravestone = isGravestone;
         this.graveType = graveType;
