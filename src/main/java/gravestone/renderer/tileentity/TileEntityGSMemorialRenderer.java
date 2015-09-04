@@ -2,6 +2,7 @@ package gravestone.renderer.tileentity;
 
 import com.google.common.collect.Maps;
 import gravestone.block.enums.EnumGraveMaterial;
+import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.core.Resources;
 import gravestone.models.block.ModelMemorial;
@@ -12,6 +13,7 @@ import net.minecraft.client.renderer.texture.LayeredTexture;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
@@ -54,7 +56,7 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f, int par9) {
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) te;
-        EnumMemorials memorialType = tileEntity.getMemorialType();
+        EnumMemorials memorial = tileEntity.getMemorialType();
         int meta = 0;
 
         if (tileEntity.getWorld() != null) {
@@ -62,13 +64,38 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
         }
         EnumFacing facing = EnumFacing.values()[meta];
 
+        renderMemorial(x, y, z, tileEntity.getWorld(), memorial, memorial.getMemorialType(), tileEntity.isEnchanted(), tileEntity.isMossy(),
+                tileEntity.getHangedMob(), tileEntity.getHangedVillagerProfession(), facing);
+
+    }
+
+    public void renderMemorialInGui(float x, float y, EnumMemorials memorial, boolean isEnchanted, boolean isMossy,
+                                    EnumHangedMobs hangedMob, int hangedVillagerProfession, float partialTicks) {
         GL11.glPushMatrix();
 
-        if (tileEntity.getWorld() != null) {
+        GL11.glTranslatef(x, y, 80);
+
+        float time = Minecraft.getMinecraft().theWorld.getTotalWorldTime() + partialTicks;
+        GL11.glRotatef(time % 360, 0, 1, 0);
+
+        float scale = 75 / 4;
+        GL11.glScaled(scale, scale, scale);
+
+
+        renderMemorial(memorial, memorial.getMemorialType(), isEnchanted, isMossy, hangedMob, hangedVillagerProfession);
+
+        GL11.glPopMatrix();
+    }
+
+    private void renderMemorial(double x, double y, double z, World world, EnumMemorials memorial, EnumMemorials.EnumMemorialType memorialType,
+                                boolean isEnchanted, boolean isMossy, EnumHangedMobs hangedMob, int hangedVillagerProfession, EnumFacing facing) {
+        GL11.glPushMatrix();
+
+        if (world != null) {
             GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
             GL11.glScalef(1, -1, -1);
         } else {
-            switch (memorialType.getMemorialType()) {
+            switch (memorialType) {
                 case CROSS:
                 case OBELISK:
                     GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
@@ -95,38 +122,43 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
                 GL11.glRotatef(270, 0, 1, 0);
                 break;
         }
-//
+
+        renderMemorial(memorial, memorialType, isEnchanted, isMossy, hangedMob, hangedVillagerProfession);
+
+        GL11.glPopMatrix();
+    }
+
+    private void renderMemorial(EnumMemorials memorial, EnumMemorials.EnumMemorialType memorialType, boolean isEnchanted,
+                                boolean isMossy, EnumHangedMobs hangedMob, int hangedVillagerProfession) {
 //        if (memorialType == 9) {
 //            celticCross.renderAll();
 //        } else
-        boolean isMossy = tileEntity.isMossy();
-        ModelMemorial model = getModel(memorialType.getMemorialType());
-        model.setPedestalTexture(getPedestalTexture(memorialType, isMossy));
-        switch (memorialType.getMemorialType()) {
+        ModelMemorial model = getModel(memorialType);
+        model.setPedestalTexture(getPedestalTexture(memorial, isMossy));
+        switch (memorialType) {
             case CREEPER_STATUE:
-                bindTextureByName(getTexture(memorialType, memorialType.getTexture(), isMossy));
-                model.customRender(tileEntity.isEnchanted());
+                bindTextureByName(getTexture(memorial, memorial.getTexture(), isMossy));
+                model.customRender(isEnchanted);
                 break;
             case STEVE_STATUE:
-                bindTextureByName(getTexture(memorialType, memorialType.getTexture(), isMossy));
-                model.customRender(getArmorTexture(memorialType, isMossy), tileEntity.isEnchanted());
+                bindTextureByName(getTexture(memorial, memorial.getTexture(), isMossy));
+                model.customRender(getArmorTexture(memorial, isMossy), isEnchanted);
                 break;
             case GIBBET:
             case STOCKS:
             case BURNING_STAKE:
-                bindTextureByName(memorialType.getTexture());
-                model.customRender(memorialType, tileEntity.getHangedMob(), tileEntity.getHangedVillagerProfession());
+                bindTextureByName(memorial.getTexture());
+                model.customRender(memorial, hangedMob, hangedVillagerProfession);
                 break;
             default:
-                bindTextureByName(getTexture(memorialType, memorialType.getTexture(), isMossy));
-                if (tileEntity.isEnchanted()) {
+                bindTextureByName(getTexture(memorial, memorial.getTexture(), isMossy));
+                if (isEnchanted) {
                     model.renderEnchanted();
                 } else {
                     model.renderAll();
                 }
         }
 
-        GL11.glPopMatrix();
     }
 
     private static ResourceLocation getTexture(EnumMemorials memorialType, ResourceLocation texture, boolean isMossy) {

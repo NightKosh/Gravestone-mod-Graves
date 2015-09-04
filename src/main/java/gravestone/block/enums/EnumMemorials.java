@@ -242,4 +242,13 @@ public enum EnumMemorials implements IBlockEnum {
         }
         return STONE_CROSS;
     }
+
+    public static EnumMemorials getByTypeAndMaterial(EnumMemorialType memorialType, EnumGraveMaterial material) {
+        for (EnumMemorials memorial : EnumMemorials.values()) {
+            if (memorial.getMemorialType().equals(memorialType) && memorial.getMaterial().equals(material)) {
+                return memorial;
+            }
+        }
+        return STONE_CROSS;
+    }
 }

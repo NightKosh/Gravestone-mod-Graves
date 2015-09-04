@@ -62,7 +62,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
                                  boolean isMossy, boolean isSwordGrave, ItemStack sword, float partialTicks) {
         GL11.glPushMatrix();
 
-        GL11.glTranslatef(x, y, 40);
+        GL11.glTranslatef(x, y, 50);
 
         float time = Minecraft.getMinecraft().theWorld.getTotalWorldTime() + partialTicks;
         GL11.glRotatef(time % 360, 0, 1, 0);
