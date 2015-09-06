@@ -1,6 +1,5 @@
 package gravestone.core;
 
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -11,18 +10,15 @@ import net.minecraft.util.ResourceLocation;
  */
 public class Resources {
 
-    private Resources() {
-    }
-
-    private static final String MOD_NAME = ModInfo.ID.toLowerCase();
-    private static final String GUI_LOCATION = MOD_NAME + ":textures/gui/";
-    private static final String BLOCK_LOCATION = MOD_NAME + ":textures/blocks/";
-    private static final String POTIONS_LOCATION = MOD_NAME + ":textures/potions/";
-    private static final String ENTITY_LOCATION = MOD_NAME + ":textures/entities/";
-    private static final String GRAVES_LOCATION = MOD_NAME + ":textures/graves/";
-    private static final String MEMORIALS_LOCATION = MOD_NAME + ":textures/memorials/";
-    private static final String ARMOR_LOCATION = MOD_NAME + ":textures/memorials/armor/";
-    private static final String PEDESTALS_LOCATION = MOD_NAME + ":textures/memorials/pedestal/";
+    protected static final String MOD_NAME = ModInfo.ID.toLowerCase();
+    protected static final String GUI_LOCATION = MOD_NAME + ":textures/gui/";
+    protected static final String BLOCK_LOCATION = MOD_NAME + ":textures/blocks/";
+    protected static final String POTIONS_LOCATION = MOD_NAME + ":textures/potions/";
+    protected static final String ENTITY_LOCATION = MOD_NAME + ":textures/entities/";
+    protected static final String GRAVES_LOCATION = MOD_NAME + ":textures/graves/";
+    protected static final String MEMORIALS_LOCATION = MOD_NAME + ":textures/memorials/";
+    protected static final String ARMOR_LOCATION = MOD_NAME + ":textures/memorials/armor/";
+    protected static final String PEDESTALS_LOCATION = MOD_NAME + ":textures/memorials/pedestal/";
     // blocks
     public static final String NIGHT_STONE = "nether_brick";
     public static final String THUNDER_STONE = "stonebrick";
@@ -417,16 +413,4 @@ public class Resources {
     public static final ResourceLocation SKELETON_SKULL_CANDLE = new ResourceLocation(BLOCK_LOCATION + "SkeletonSkullCandle.png");
     public static final ResourceLocation WITHER_SKULL_CANDLE = new ResourceLocation(BLOCK_LOCATION + "WitherSkullCandle.png");
     public static final ResourceLocation ZOMBIE_SKULL_CANDLE = new ResourceLocation(BLOCK_LOCATION + "ZombieSkullCandle.png");
-
-    // MODEL RESOURCES
-    public static final ModelResourceLocation chiselModel = new ModelResourceLocation(CHISEL, "inventory");
-    public static final ModelResourceLocation spawnEggModel = new ModelResourceLocation(MOD_NAME + ":GSSpawnEgg", "inventory");
-
-    public static final ModelResourceLocation graveStoneModel = new ModelResourceLocation(MOD_NAME + ":GSGraveStone", "inventory");
-    public static final ModelResourceLocation trapModel = new ModelResourceLocation(MOD_NAME + ":GSTrap", "inventory");
-    public static final ModelResourceLocation boneBlockModel = new ModelResourceLocation(MOD_NAME + ":GSBoneBlock", "inventory");
-    public static final ModelResourceLocation boneSlabModel = new ModelResourceLocation(MOD_NAME + ":GSBoneSlab", "inventory");
-    public static final ModelResourceLocation boneStairsModel = new ModelResourceLocation(MOD_NAME + ":GSBoneStairs", "inventory");
-    public static final ModelResourceLocation hauntedChestModel = new ModelResourceLocation(MOD_NAME + ":GSHauntedChest", "inventory");
-    public static final ModelResourceLocation altarModel = new ModelResourceLocation(MOD_NAME + ":GSAltar", "inventory");
 }

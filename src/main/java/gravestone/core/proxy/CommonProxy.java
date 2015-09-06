@@ -29,4 +29,10 @@ public class CommonProxy {
 
     public void registerHandlers() {
     }
+
+    public void registerBlocksModels() {
+    }
+
+    public void registerItemsModels() {
+    }
 }

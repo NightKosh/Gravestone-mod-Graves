@@ -3,12 +3,14 @@ package gravestone.core.proxy;
 import gravestone.core.GSBlock;
 import gravestone.core.GSItem;
 import gravestone.core.Resources;
+import gravestone.core.ResourcesModes;
 import gravestone.core.event.GSRenderEventHandler;
 import gravestone.entity.EntityRaven;
 import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
 import gravestone.entity.monster.*;
 import gravestone.entity.monster.EntitySkullCrawler.SkullCrawlerType;
 import gravestone.gui.GSGraveTextGui;
+import gravestone.item.ItemGSMonsterPlacer;
 import gravestone.models.entity.ModelUndeadCat;
 import gravestone.models.entity.ModelUndeadDog;
 import gravestone.renderer.entity.*;
@@ -18,6 +20,7 @@ import gravestone.structures.village.undertaker.VillageHandlerGSUndertaker;
 import gravestone.tileentity.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelHorse;
+import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.item.Item;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -142,5 +145,38 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerHandlers() {
         MinecraftForge.EVENT_BUS.register(new GSRenderEventHandler());
+    }
+
+    @Override
+    public void registerBlocksModels() {
+//        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(graveStone), 0, Resources.graveStoneModel);
+
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.trap), 0, ResourcesModes.trapModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.trap), 1, ResourcesModes.trapModel);
+        ModelBakery.addVariantName(Item.getItemFromBlock(GSBlock.trap), new String[]{"gravestone:GSTrap_night_stone", "gravestone:GSTrap_thunder_stone"});
+
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 0, ResourcesModes.boneBlockModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 1, ResourcesModes.boneBlockModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 2, ResourcesModes.boneBlockModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 3, ResourcesModes.boneBlockModel);
+        ModelBakery.addVariantName(Item.getItemFromBlock(GSBlock.boneBlock), new String[]{"gravestone:GSBoneBlock", "gravestone:GSBoneBlock_with_skull",
+                "gravestone:GSBoneBlock_with_crawler", "gravestone:GSBoneBlock_with_skull_and_crawler"});
+
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneSlab), 0, ResourcesModes.boneSlabModel);
+
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneStairs), 0, ResourcesModes.boneStairsModel);
+
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.hauntedChest), 0, ResourcesModes.hauntedChestModel);
+
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.altar), 0, ResourcesModes.altarModel);
+    }
+
+    @Override
+    public void registerItemsModels() {
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(GSItem.chisel, 0, ResourcesModes.chiselModel);
+
+        for (ItemGSMonsterPlacer.EnumEggs egg : ItemGSMonsterPlacer.EnumEggs.values()) {
+            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(GSItem.spawnEgg, egg.ordinal(), ResourcesModes.spawnEggModel);
+        }
     }
 }
