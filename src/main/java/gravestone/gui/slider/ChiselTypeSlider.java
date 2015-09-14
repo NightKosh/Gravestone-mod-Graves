@@ -21,6 +21,7 @@ public class ChiselTypeSlider extends AbstractSlider {
         super(id, xPos, yPos, width, height, "", "", 0, EnumGraves.EnumGraveType.values().length - 2, currentVal, false, false, (slider) -> {
 
             gui.setType(EnumGraves.EnumGraveType.values()[slider.getValueInt()]);
+            gui.sendMessage();
         });
 
         this.gui = gui;

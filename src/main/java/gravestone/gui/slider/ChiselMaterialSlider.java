@@ -19,6 +19,7 @@ public class ChiselMaterialSlider extends AbstractSlider {
         super(id, xPos, yPos, width, height, "", "", 0, EnumGraveMaterial.values().length - 2, currentVal, false, false, (slider) -> {
 
             gui.setMaterial(EnumGraveMaterial.values()[slider.getValueInt()]);
+            gui.sendMessage();
         });
     }
 

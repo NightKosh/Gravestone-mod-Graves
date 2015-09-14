@@ -68,6 +68,8 @@ public class ChiselMessageToServer implements IMessage, IMessageHandler<ChiselMe
                 return null;
             }
             EntityPlayer player = (EntityPlayer) world.getEntityByID(message.playerID);
+            NBTTagCompound playerNbt = new NBTTagCompound();// = player.getEntityData();
+            player.writeEntityToNBT(playerNbt);
             NBTTagCompound nbt = new NBTTagCompound();
             NBTTagCompound graveNbt = new NBTTagCompound();
             graveNbt.setBoolean("IsGravestone", isGravestone);
@@ -75,8 +77,9 @@ public class ChiselMessageToServer implements IMessage, IMessageHandler<ChiselMe
             graveNbt.setInteger("Material", material);
             graveNbt.setBoolean("IsEnchanted", isEnchanted);
             graveNbt.setBoolean("IsMossy", isMossy);
-            nbt.setTag("GraveCrafting", graveNbt);
-            player.writeToNBT(nbt);
+            playerNbt.setTag("GraveCrafting", graveNbt);
+//            player.writeToNBT(nbt);
+            player.readEntityFromNBT(playerNbt);
         }
         return null;
     }
