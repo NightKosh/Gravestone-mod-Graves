@@ -47,20 +47,8 @@ public class GravestoneRecipe {
     }
 
     public ItemStack getResultItem(List<ItemStack> requiredItems) {
-        boolean isEnchanted = false;
-        boolean isMossy = false;
-        for (ItemStack item : requiredItems) {
-            if (item != null) {
-                if (item.getItem() instanceof ItemEnchantedBook) {
-                    isEnchanted = true;
-                    continue;
-                }
-                if (Block.getBlockFromItem(item.getItem()) instanceof BlockVine) {
-                    isMossy = true;
-                    continue;
-                }
-            }
-        }
+        boolean isEnchanted = requiredItems.stream().anyMatch((item) -> item != null && item.getItem() instanceof ItemEnchantedBook);
+        boolean isMossy = requiredItems.stream().anyMatch((item) -> item != null && Block.getBlockFromItem(item.getItem()) instanceof BlockVine);
         return this.getResultItem(isEnchanted, isMossy);
     }
 
@@ -106,12 +94,12 @@ public class GravestoneRecipe {
     }
 
     public boolean match(GravestoneRecipe recipe) {
-        return this.match(recipe.isGravestone(), recipe.getGraveType(), recipe.getMaterial(), false, false, recipe.getRequiredItems());//TODO
+        return this.match(recipe.isGravestone(), recipe.getGraveType(), recipe.getMaterial(), false, false, recipe.getRequiredItems());
     }
 
-    public boolean match(boolean isGravestone, IEnumGraveType graveType, EnumGraveMaterial material, boolean isEnchanted, boolean isMossy) {//TODO
+    public boolean match(boolean isGravestone, IEnumGraveType graveType, EnumGraveMaterial material, boolean isEnchanted, boolean isMossy) {
         return  this.isGravestone() == isGravestone && this.getGraveType() == graveType &&
-                this.getMaterial() == material;
+                this.getMaterial() == material && (this.canBeMossy || !isMossy);
     }
 
     public boolean match(boolean isGravestone, IEnumGraveType graveType, EnumGraveMaterial material, boolean isEnchanted, boolean isMossy, List<ItemStack> requiredItems) {
@@ -123,15 +111,8 @@ public class GravestoneRecipe {
             return false;
         } else {
             for (ItemStack requiredItem : requiredItems) {
-                boolean haveItem = false;
-                for (ItemStack item : items) {
-                    if (item != null && requiredItem.getItem().equals(item.getItem()) && requiredItem.getMetadata() == item.getMetadata() &&
-                            requiredItem.stackSize <= item.stackSize) {
-                        haveItem = true;
-                        break;
-                    }
-                }
-                if (!haveItem) {
+                if (!items.stream().anyMatch((item) -> item != null && requiredItem.getItem().equals(item.getItem()) &&
+                        requiredItem.getMetadata() == item.getMetadata() && requiredItem.stackSize <= item.stackSize)) {
                     return false;
                 }
             }
