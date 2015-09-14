@@ -86,7 +86,7 @@ public class ChiselContainer extends Container {
             items.add(inventory.getStackInSlot(i));
         }
 
-        this.craftResult.setInventorySlotContents(0, GravesCraftingManager.getInstance().findMatchingRecipe(items));//isGravestone, graveType, material, items));//TODO
+        this.craftResult.setInventorySlotContents(0, GravesCraftingManager.getInstance().findMatchingRecipe(items, isGravestone, graveType, material, isEnchanted, isMossy));
     }
 
     @Override
@@ -119,15 +119,15 @@ public class ChiselContainer extends Container {
                 }
 
                 slot.onSlotChange(itemstack1, itemstack);
-            } else if (index >= 10 && index < 37) {
-                if (!this.mergeItemStack(itemstack1, 37, 46, false)) {
+            } else if (index >= 9 && index < 36) {
+                if (!this.mergeItemStack(itemstack1, 36, 45, false)) {
                     return null;
                 }
-            } else if (index >= 37 && index < 46) {
-                if (!this.mergeItemStack(itemstack1, 10, 37, false)) {
+            } else if (index >= 36 && index < 45) {
+                if (!this.mergeItemStack(itemstack1, 9, 36, false)) {
                     return null;
                 }
-            } else if (!this.mergeItemStack(itemstack1, 10, 46, false)) {
+            } else if (!this.mergeItemStack(itemstack1, 9, 45, false)) {
                 return null;
             }
 
@@ -149,7 +149,7 @@ public class ChiselContainer extends Container {
 
     @Override
     public boolean canMergeSlot(ItemStack itemStack, Slot slot) {
-        return slot.inventory != this.craftResult && super.canMergeSlot(itemStack, slot);
+        return slot.inventory != this.craftResult && slot.inventory != this.recipeMatrix && super.canMergeSlot(itemStack, slot);
     }
 
     @Override
