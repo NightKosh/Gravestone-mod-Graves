@@ -29,11 +29,10 @@ public class TileEntityGSSpawnerRenderer extends TileEntityGSRenderer {
      * Render a skull tile entity.
      */
     public void renderSpawnerPentagramAt(TileEntityGSSpawner tileEntity, float x, float y, float z, float par8) {
-
         this.bindTexture(Resources.PENTAGRAM);
 
-        GL11.glPushMatrix();
-        if (tileEntity.getWorld() != null) {
+        GL11.glPushMatrix();//TODO tileEntity == null ??
+        if (tileEntity == null || tileEntity.getWorld() != null) {
             GL11.glTranslatef(x + 0.5F, y + 1.5F, z + 0.5F);
             GL11.glScalef(1, -1, -1);
         } else {
@@ -41,8 +40,9 @@ public class TileEntityGSSpawnerRenderer extends TileEntityGSRenderer {
             GL11.glScalef(0.6F, -0.6F, -0.6F);
         }
         GL11.glTranslated(0, -0.01, 0);
-
-        EnumSpawner spawnerType = EnumSpawner.getById((byte) tileEntity.getBlockMetadata());
+        //TODO tileEntity == null ??
+        byte type = (byte) ((tileEntity == null) ? 0 : tileEntity.getBlockMetadata());
+        EnumSpawner spawnerType = EnumSpawner.getById(type);
         ModelSpawnerPentagram spawner = getSpawnerModel(spawnerType);
         spawner.renderAll();
         GL11.glPopMatrix();

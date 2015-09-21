@@ -56,6 +56,10 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f, int par9) {
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) te;
+        //TODO temporal hack
+        if (tileEntity == null) {
+            tileEntity = new TileEntityGSMemorial();
+        }
         EnumMemorials memorial = tileEntity.getMemorialType();
         int meta = 0;
 

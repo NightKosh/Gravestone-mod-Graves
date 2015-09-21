@@ -47,7 +47,12 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f, int par9) {
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) te;
+        //TODO temporal hack
+        if (tileEntity == null) {
+            tileEntity = new TileEntityGSGraveStone();
+        }
         EnumGraves graveType = tileEntity.getGraveType();
+
         int meta = 0;
         if (tileEntity.getWorld() != null) {
             meta = tileEntity.getBlockMetadata();

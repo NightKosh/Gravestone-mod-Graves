@@ -25,12 +25,14 @@ public class TileEntityGSPileOfBonesRenderer extends TileEntitySpecialRenderer {
 
         int meta;
 
-        GL11.glPushMatrix();
-        if (tileEntity.getWorld() == null) {
+        GL11.glPushMatrix();//TODO tileEntity == null ???
+        if (tileEntity == null || tileEntity.getWorld() == null) {
             GL11.glTranslatef(x + 0.5F, y + 2.7F, z + 0.5F);
             GL11.glScalef(1.8F, -1.8F, -1.8F);
             GL11.glRotatef(-90, 0, 1, 0);
-            meta = tileEntity.getBlockMetadata();
+            //TODO tileEntity == null ???
+//            meta = tileEntity.getBlockMetadata();
+            meta = (tileEntity == null) ? 0 : tileEntity.getBlockMetadata();
         } else {
             GL11.glTranslatef(x + 0.5F, y + 1.5F, z + 0.5F);
             GL11.glScalef(1, -1, -1);
