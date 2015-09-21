@@ -5,9 +5,9 @@ Adds a gravestone to the game, which spawns after player's death.
 Read more on [official site](http://gravestone.nightkosh.com/) or on [minecraft forum](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1288082-gravestone-mod-v2-9-7)
 
 ##Requirements
-1. Forge (check "build.gradle" file to know required forge version)
-   * Latest versions of Forge requires **Gradle 2.0** or higher
-2. "Master branch" version of mod requires **jdk 1.8**(do not forget to enable java 8 support in your IDE)
+1. [Forge](http://files.minecraftforge.net/) (check "build.gradle" file to know required forge version)
+   * Latest versions of Forge requires [Gradle 2.0](https://gradle.org/) or higher
+2. "Master branch" version of mod requires [jdk 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)(do not forget to enable java 8 support in your IDE)
 
 ##Dependencies. (be careful some of those API may not be updated yet, or may be buggy) 
 1. [Gravestone Mod API](https://github.com/NightKosh/GraveStone-mod-API) (will be loaded as git submodule)
