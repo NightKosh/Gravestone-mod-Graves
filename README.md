@@ -19,6 +19,7 @@ Read more on [official site](http://gravestone.nightkosh.com/) or on [minecraft 
 5. [Mariculture API](https://github.com/joshiejack/Mariculture)
 6. [Galacticraft API](https://github.com/micdoodle8/Galacticraft-API)
 7. [TinkersConstruct API](https://github.com/SlimeKnights/TinkersConstruct)
+8. [Thaumcraft API](https://github.com/Azanor/thaumcraft-api)
 
 ##Get started
 1. [Set up forge](http://www.minecraftforge.net/wiki/Installation/Source)
