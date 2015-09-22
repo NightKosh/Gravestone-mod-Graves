@@ -21,20 +21,25 @@ public class TileEntityGSSkullCandleRenderer extends TileEntitySpecialRenderer {
 
     private ModelSkullCandle skullCandleModel = new ModelSkullCandle();
 
+    private static final TileEntityGSSkullCandle SKULL_CANDLE_TE = new TileEntityGSSkullCandle();//TODO temporal hack
+
     public void renderTileEntitySkullAt(TileEntityGSSkullCandle tileEntity, float x, float y, float z, float par8) {
         float rotation = 0;
-        byte meta; //TODO tileEntity != null ??
-        if (tileEntity != null && tileEntity.getWorld() != null) {
+        byte meta;
+        if (tileEntity == null) {//TODO temporal hack
+            tileEntity = SKULL_CANDLE_TE;
+        }
+        if (tileEntity.getWorld() != null) {
             rotation = (tileEntity.getRotation() * 360) / 8F;
             meta = (byte) tileEntity.getBlockMetadata();
-        } else {//TODO tileEntity == null ??
-            meta = (byte) ((tileEntity == null) ? 0 : tileEntity.getBlockMetadata());//(byte) tileEntity.blockMetadata;
+        } else {
+            meta = (byte) tileEntity.getBlockMetadata();
         }
 
         bindSkullCandleTexture(EnumSkullCandle.getById(meta));
 
-        GL11.glPushMatrix();  //TODO tileEntity == null ??
-        if (tileEntity == null || tileEntity.getWorld() == null) {
+        GL11.glPushMatrix();
+        if (tileEntity.getWorld() == null) {
             GL11.glTranslatef(x + 0.5F, y + 2.2F, z + 0.5F);
             GL11.glScalef(1.5F, -1.5F, -1.5F);
         } else {

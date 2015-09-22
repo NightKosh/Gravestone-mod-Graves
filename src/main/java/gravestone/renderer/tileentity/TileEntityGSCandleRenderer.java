@@ -5,6 +5,8 @@ import gravestone.models.block.ModelCandle;
 import gravestone.tileentity.TileEntityGSCandle;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -13,6 +15,7 @@ import org.lwjgl.opengl.GL11;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
+@SideOnly(Side.CLIENT)
 public class TileEntityGSCandleRenderer extends TileEntitySpecialRenderer {
 
     private ModelCandle candleModel = new ModelCandle();

@@ -2,7 +2,6 @@ package gravestone.tileentity;
 
 import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
-import net.minecraft.tileentity.TileEntity;
 
 /**
  * GraveStone mod
@@ -10,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class TileEntityGSSpawner extends TileEntity implements IUpdatePlayerListBox, ISpawnerEntity {
+public class TileEntityGSSpawner extends TileEntityBase implements IUpdatePlayerListBox, ISpawnerEntity {
 
     protected GSMobSpawner spawner;
 

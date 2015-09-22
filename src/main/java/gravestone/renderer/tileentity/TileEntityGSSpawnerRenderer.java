@@ -5,6 +5,8 @@ import gravestone.core.Resources;
 import gravestone.models.block.ModelSpawnerPentagram;
 import gravestone.tileentity.TileEntityGSSpawner;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -13,6 +15,7 @@ import org.lwjgl.opengl.GL11;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
+@SideOnly(Side.CLIENT)
 public class TileEntityGSSpawnerRenderer extends TileEntityGSRenderer {
 
     private static ModelSpawnerPentagram witherSpawnerModel = new ModelSpawnerPentagram(Resources.WITHER_SKULL_CANDLE);
@@ -20,6 +23,8 @@ public class TileEntityGSSpawnerRenderer extends TileEntityGSRenderer {
     private static ModelSpawnerPentagram zombieSpawnerModel = new ModelSpawnerPentagram(Resources.ZOMBIE_SKULL_CANDLE);
 
     public static TileEntityGSSpawnerRenderer instance;
+
+    private static final TileEntityGSSpawner SPAWNER_TE = new TileEntityGSSpawner();//TODO temporal hack
 
     public TileEntityGSSpawnerRenderer() {
         instance = this;
@@ -31,8 +36,11 @@ public class TileEntityGSSpawnerRenderer extends TileEntityGSRenderer {
     public void renderSpawnerPentagramAt(TileEntityGSSpawner tileEntity, float x, float y, float z, float par8) {
         this.bindTexture(Resources.PENTAGRAM);
 
-        GL11.glPushMatrix();//TODO tileEntity == null ??
-        if (tileEntity == null || tileEntity.getWorld() != null) {
+        if (tileEntity == null) {//TODO temporal hack
+            tileEntity = SPAWNER_TE;
+        }
+        GL11.glPushMatrix();
+        if (tileEntity.getWorld() != null) {
             GL11.glTranslatef(x + 0.5F, y + 1.5F, z + 0.5F);
             GL11.glScalef(1, -1, -1);
         } else {
@@ -40,8 +48,7 @@ public class TileEntityGSSpawnerRenderer extends TileEntityGSRenderer {
             GL11.glScalef(0.6F, -0.6F, -0.6F);
         }
         GL11.glTranslated(0, -0.01, 0);
-        //TODO tileEntity == null ??
-        byte type = (byte) ((tileEntity == null) ? 0 : tileEntity.getBlockMetadata());
+        byte type = (byte) tileEntity.getBlockMetadata();
         EnumSpawner spawnerType = EnumSpawner.getById(type);
         ModelSpawnerPentagram spawner = getSpawnerModel(spawnerType);
         spawner.renderAll();

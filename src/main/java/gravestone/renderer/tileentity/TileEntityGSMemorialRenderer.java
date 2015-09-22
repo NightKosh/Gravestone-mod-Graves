@@ -49,6 +49,11 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
 
     public static TileEntityGSMemorialRenderer instance;
 
+    private static final TileEntityGSMemorial MEMORIAL_TE = new TileEntityGSMemorial();//TODO temporal hack
+    static {
+        MEMORIAL_TE.setGraveType(EnumMemorials.QUARTZ_OBELISK.ordinal());
+    }
+
     public TileEntityGSMemorialRenderer() {
         instance = this;
     }
@@ -56,9 +61,9 @@ public class TileEntityGSMemorialRenderer extends TileEntityGSRenderer {
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f, int par9) {
         TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) te;
-        //TODO temporal hack
-        if (tileEntity == null) {
-            tileEntity = new TileEntityGSMemorial();
+
+        if (tileEntity == null) {//TODO temporal hack
+            tileEntity = MEMORIAL_TE;
         }
         EnumMemorials memorial = tileEntity.getMemorialType();
         int meta = 0;

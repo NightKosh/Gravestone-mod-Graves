@@ -40,6 +40,11 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
     public static ModelGraveStone horseStatue = new ModelHorseGraveStone();
     public static TileEntityGSGraveStoneRenderer instance;
 
+    private static final TileEntityGSGraveStone GRAVE_TE = new TileEntityGSGraveStone();//TODO temporal hack
+    static {
+        GRAVE_TE.setGraveType(EnumGraves.STONE_VERTICAL_PLATE.ordinal());
+    }
+
     public TileEntityGSGraveStoneRenderer() {
         instance = this;
     }
@@ -47,9 +52,9 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f, int par9) {
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) te;
-        //TODO temporal hack
-        if (tileEntity == null) {
-            tileEntity = new TileEntityGSGraveStone();
+
+        if (tileEntity == null) {//TODO temporal hack
+            tileEntity = GRAVE_TE;
         }
         EnumGraves graveType = tileEntity.getGraveType();
 

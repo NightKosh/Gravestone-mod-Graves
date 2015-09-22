@@ -4,7 +4,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
 /**
  * GraveStone mod
@@ -12,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class TileEntityGSPileOfBones extends TileEntity {
+public class TileEntityGSPileOfBones extends TileEntityBase {
 
     private byte direction = 0;
 
