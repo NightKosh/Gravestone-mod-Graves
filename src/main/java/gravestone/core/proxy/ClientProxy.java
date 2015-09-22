@@ -173,9 +173,9 @@ public class ClientProxy extends CommonProxy {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.spawner), num, ResourcesModes.spawnerModel);
         }
         //traps
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.trap), 0, ResourcesModes.trapModel);
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.trap), 1, ResourcesModes.trapModel);
-        ModelBakery.addVariantName(Item.getItemFromBlock(GSBlock.trap), new String[]{"gravestone:GSTrap_night_stone", "gravestone:GSTrap_thunder_stone"});
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.trap), 0, ResourcesModes.nightStoneModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.trap), 1, ResourcesModes.thunderStoneModel);
+        ModelBakery.addVariantName(Item.getItemFromBlock(GSBlock.trap), "gravestone:GSTrap_night_stone", "gravestone:GSTrap_thunder_stone");
         //piles of bones
         for (int num = 0; num < EnumPileOfBones.values().length; num++) {
             Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.pileOfBones), num, ResourcesModes.pileOfBonesModel);
@@ -184,11 +184,11 @@ public class ClientProxy extends CommonProxy {
         }
         //bone blocks
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 0, ResourcesModes.boneBlockModel);
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 1, ResourcesModes.boneBlockModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 1, ResourcesModes.boneBlockWithSkullModel);
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 2, ResourcesModes.boneBlockModel);
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 3, ResourcesModes.boneBlockModel);
-        ModelBakery.addVariantName(Item.getItemFromBlock(GSBlock.boneBlock), new String[]{"gravestone:GSBoneBlock", "gravestone:GSBoneBlock_with_skull",
-                "gravestone:GSBoneBlock_with_crawler", "gravestone:GSBoneBlock_with_skull_and_crawler"});
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 3, ResourcesModes.boneBlockWithSkullModel);
+        ModelBakery.addVariantName(Item.getItemFromBlock(GSBlock.boneBlock), "gravestone:GSBoneBlock", "gravestone:GSBoneBlock_with_skull",
+                "gravestone:GSBoneBlock", "gravestone:GSBoneBlock_with_skull");
 
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneSlab), 0, ResourcesModes.boneSlabModel);
 

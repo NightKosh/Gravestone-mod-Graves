@@ -20,11 +20,18 @@ public class ResourcesModes extends Resources {
     public static final ModelResourceLocation graveStoneModel = new ModelResourceLocation(MOD_NAME + ":GSGraveStone", "inventory");
     public static final ModelResourceLocation memorialModel = new ModelResourceLocation(MOD_NAME + ":GSMemorial", "inventory");
     public static final ModelResourceLocation spawnerModel = new ModelResourceLocation(MOD_NAME + ":GSSpawner", "inventory");
-    public static final ModelResourceLocation trapModel = new ModelResourceLocation(MOD_NAME + ":GSTrap", "inventory");
+    //trap
+    public static final ModelResourceLocation nightStoneModel = new ModelResourceLocation(MOD_NAME + ":GSTrap_night_stone", "inventory");
+    public static final ModelResourceLocation thunderStoneModel = new ModelResourceLocation(MOD_NAME + ":GSTrap_thunder_stone", "inventory");
+
     public static final ModelResourceLocation pileOfBonesModel = new ModelResourceLocation(MOD_NAME + ":GSPileOfBones", "inventory");
+    //bone blocks
     public static final ModelResourceLocation boneBlockModel = new ModelResourceLocation(MOD_NAME + ":GSBoneBlock", "inventory");
+    public static final ModelResourceLocation boneBlockWithSkullModel = new ModelResourceLocation(MOD_NAME + ":GSBoneBlock_with_skull", "inventory");
+
     public static final ModelResourceLocation boneSlabModel = new ModelResourceLocation(MOD_NAME + ":GSBoneSlab", "inventory");
     public static final ModelResourceLocation boneStairsModel = new ModelResourceLocation(MOD_NAME + ":GSBoneStairs", "inventory");
+
     public static final ModelResourceLocation hauntedChestModel = new ModelResourceLocation(MOD_NAME + ":GSHauntedChest", "inventory");
     public static final ModelResourceLocation candleModel = new ModelResourceLocation(MOD_NAME + ":GSCandle", "inventory");
     public static final ModelResourceLocation skullCandleModel = new ModelResourceLocation(MOD_NAME + ":GSSkullCandle", "inventory");
