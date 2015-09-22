@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
-public class ResourcesModes extends Resources {
+public class ResourcesModels extends Resources {
 
     // MODEL RESOURCES
     public static final ModelResourceLocation chiselModel = new ModelResourceLocation(CHISEL, "inventory");

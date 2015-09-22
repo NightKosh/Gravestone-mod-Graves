@@ -7,7 +7,7 @@ import gravestone.block.enums.EnumSpawner;
 import gravestone.core.GSBlock;
 import gravestone.core.GSItem;
 import gravestone.core.Resources;
-import gravestone.core.ResourcesModes;
+import gravestone.core.ResourcesModels;
 import gravestone.core.event.GSRenderEventHandler;
 import gravestone.entity.EntityRaven;
 import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
@@ -159,67 +159,67 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerBlocksModels() {
         //graves
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.graveStone), 0, ResourcesModes.graveStoneModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.graveStone), 0, ResourcesModels.graveStoneModel);
         ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(GSBlock.graveStone), 0, TileEntityGSGraveStone.class);
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.graveStone), 0, ResourcesModes.graveStoneModel);
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.graveStone), 0, ResourcesModels.graveStoneModel);
         //memorials
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.memorial), 0, ResourcesModes.memorialModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.memorial), 0, ResourcesModels.memorialModel);
         ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(GSBlock.memorial), 0, TileEntityGSMemorial.class);
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.memorial), 0, ResourcesModes.memorialModel);
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.memorial), 0, ResourcesModels.memorialModel);
         //spawners
         for (int num = 0; num < EnumSpawner.values().length; num++) {
-            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.spawner), num, ResourcesModes.spawnerModel);
+            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.spawner), num, ResourcesModels.spawnerModel);
             ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(GSBlock.spawner), num, TileEntityGSSpawner.class);
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.spawner), num, ResourcesModes.spawnerModel);
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.spawner), num, ResourcesModels.spawnerModel);
         }
         //traps
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.trap), 0, ResourcesModes.nightStoneModel);
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.trap), 1, ResourcesModes.thunderStoneModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.trap), 0, ResourcesModels.nightStoneModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.trap), 1, ResourcesModels.thunderStoneModel);
         ModelBakery.addVariantName(Item.getItemFromBlock(GSBlock.trap), "gravestone:GSTrap_night_stone", "gravestone:GSTrap_thunder_stone");
         //piles of bones
         for (int num = 0; num < EnumPileOfBones.values().length; num++) {
-            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.pileOfBones), num, ResourcesModes.pileOfBonesModel);
+            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.pileOfBones), num, ResourcesModels.pileOfBonesModel);
             ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(GSBlock.pileOfBones), num, TileEntityGSPileOfBones.class);
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.pileOfBones), num, ResourcesModes.pileOfBonesModel);
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.pileOfBones), num, ResourcesModels.pileOfBonesModel);
         }
         //bone blocks
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 0, ResourcesModes.boneBlockModel);
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 1, ResourcesModes.boneBlockWithSkullModel);
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 2, ResourcesModes.boneBlockModel);
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 3, ResourcesModes.boneBlockWithSkullModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 0, ResourcesModels.boneBlockModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 1, ResourcesModels.boneBlockWithSkullModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 2, ResourcesModels.boneBlockModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 3, ResourcesModels.boneBlockWithSkullModel);
         ModelBakery.addVariantName(Item.getItemFromBlock(GSBlock.boneBlock), "gravestone:GSBoneBlock", "gravestone:GSBoneBlock_with_skull",
                 "gravestone:GSBoneBlock", "gravestone:GSBoneBlock_with_skull");
 
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneSlab), 0, ResourcesModes.boneSlabModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneSlab), 0, ResourcesModels.boneSlabModel);
 
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneStairs), 0, ResourcesModes.boneStairsModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneStairs), 0, ResourcesModels.boneStairsModel);
         //haunted chest
         for (int num = 0; num < EnumHauntedChest.values().length; num++) {
-            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.hauntedChest), num, ResourcesModes.hauntedChestModel);
+            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.hauntedChest), num, ResourcesModels.hauntedChestModel);
             ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(GSBlock.hauntedChest), num, TileEntityGSHauntedChest.class);
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.hauntedChest), num, ResourcesModes.hauntedChestModel);
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.hauntedChest), num, ResourcesModels.hauntedChestModel);
         }
         //altar
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.altar), 0, ResourcesModes.altarModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.altar), 0, ResourcesModels.altarModel);
 
         //candle
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.candle), 0, ResourcesModes.candleModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.candle), 0, ResourcesModels.candleModel);
         ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(GSBlock.candle), 0, TileEntityGSCandle.class);
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.candle), 0, ResourcesModes.candleModel);
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.candle), 0, ResourcesModels.candleModel);
         //skull candle
         for (int num = 0; num < EnumSkullCandle.values().length; num++) {
-            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.skullCandle), num, ResourcesModes.skullCandleModel);
+            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.skullCandle), num, ResourcesModels.skullCandleModel);
             ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(GSBlock.skullCandle), num, TileEntityGSSkullCandle.class);
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.skullCandle), num, ResourcesModes.skullCandleModel);
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.skullCandle), num, ResourcesModels.skullCandleModel);
         }
     }
 
     @Override
     public void registerItemsModels() {
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(GSItem.chisel, 0, ResourcesModes.chiselModel);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(GSItem.chisel, 0, ResourcesModels.chiselModel);
 
         for (ItemGSMonsterPlacer.EnumEggs egg : ItemGSMonsterPlacer.EnumEggs.values()) {
-            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(GSItem.spawnEgg, egg.ordinal(), ResourcesModes.spawnEggModel);
+            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(GSItem.spawnEgg, egg.ordinal(), ResourcesModels.spawnEggModel);
         }
     }
 }
