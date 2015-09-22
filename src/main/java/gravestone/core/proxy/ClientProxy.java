@@ -1,5 +1,6 @@
 package gravestone.core.proxy;
 
+import gravestone.block.enums.EnumHauntedChest;
 import gravestone.block.enums.EnumPileOfBones;
 import gravestone.block.enums.EnumSkullCandle;
 import gravestone.block.enums.EnumSpawner;
@@ -7,7 +8,6 @@ import gravestone.core.GSBlock;
 import gravestone.core.GSItem;
 import gravestone.core.Resources;
 import gravestone.core.ResourcesModes;
-import gravestone.core.event.BakeEventHandler;
 import gravestone.core.event.GSRenderEventHandler;
 import gravestone.entity.EntityRaven;
 import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
@@ -193,9 +193,13 @@ public class ClientProxy extends CommonProxy {
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneSlab), 0, ResourcesModes.boneSlabModel);
 
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneStairs), 0, ResourcesModes.boneStairsModel);
-
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.hauntedChest), 0, ResourcesModes.hauntedChestModel);
-
+        //haunted chest
+        for (int num = 0; num < EnumHauntedChest.values().length; num++) {
+            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.hauntedChest), num, ResourcesModes.hauntedChestModel);
+            ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(GSBlock.hauntedChest), num, TileEntityGSHauntedChest.class);
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.hauntedChest), num, ResourcesModes.hauntedChestModel);
+        }
+        //altar
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.altar), 0, ResourcesModes.altarModel);
 
         //candle

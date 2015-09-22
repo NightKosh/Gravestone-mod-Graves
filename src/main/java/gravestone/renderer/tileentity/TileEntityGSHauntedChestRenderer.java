@@ -5,6 +5,8 @@ import gravestone.tileentity.TileEntityGSHauntedChest;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -16,10 +18,13 @@ import java.util.Calendar;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
+@SideOnly(Side.CLIENT)
 public class TileEntityGSHauntedChestRenderer extends TileEntitySpecialRenderer {
 
     private ModelChest chestModel = new ModelChest();
     private boolean isChristmas;
+
+    private static final TileEntityGSHauntedChest CHEST_TE = new TileEntityGSHauntedChest();//TODO temporal hack
 
     public TileEntityGSHauntedChestRenderer() {
         Calendar calendar = Calendar.getInstance();
@@ -34,6 +39,10 @@ public class TileEntityGSHauntedChestRenderer extends TileEntitySpecialRenderer 
      */
     public void renderTileEntityChestAt(TileEntityGSHauntedChest te, double par2, double par4, double par6, float par8) {
         int metadata = 0;
+
+        if(te == null) {//TODO temporal hack
+            te = CHEST_TE;
+        }
 
         if (te.hasWorldObj()) {
             metadata = te.getBlockMetadata();
