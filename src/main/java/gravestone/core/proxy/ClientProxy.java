@@ -22,9 +22,11 @@ import gravestone.renderer.item.*;
 import gravestone.renderer.tileentity.*;
 import gravestone.structures.village.undertaker.VillageHandlerGSUndertaker;
 import gravestone.tileentity.*;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelHorse;
 import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.ForgeHooksClient;
@@ -159,29 +161,17 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerBlocksModels() {
         //graves
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.graveStone), 0, ResourcesModels.graveStoneModel);
-        ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(GSBlock.graveStone), 0, TileEntityGSGraveStone.class);
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.graveStone), 0, ResourcesModels.graveStoneModel);
+        registerModelsForTEBlocks(1, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGSGraveStone.class);
         //memorials
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.memorial), 0, ResourcesModels.memorialModel);
-        ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(GSBlock.memorial), 0, TileEntityGSMemorial.class);
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.memorial), 0, ResourcesModels.memorialModel);
+        registerModelsForTEBlocks(1, GSBlock.memorial, ResourcesModels.memorialModel, TileEntityGSMemorial.class);
         //spawners
-        for (int num = 0; num < EnumSpawner.values().length; num++) {
-            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.spawner), num, ResourcesModels.spawnerModel);
-            ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(GSBlock.spawner), num, TileEntityGSSpawner.class);
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.spawner), num, ResourcesModels.spawnerModel);
-        }
+        registerModelsForTEBlocks(EnumSpawner.values().length, GSBlock.spawner, ResourcesModels.spawnerModel, TileEntityGSSpawner.class);
         //traps
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.trap), 0, ResourcesModels.nightStoneModel);
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.trap), 1, ResourcesModels.thunderStoneModel);
         ModelBakery.addVariantName(Item.getItemFromBlock(GSBlock.trap), "gravestone:GSTrap_night_stone", "gravestone:GSTrap_thunder_stone");
         //piles of bones
-        for (int num = 0; num < EnumPileOfBones.values().length; num++) {
-            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.pileOfBones), num, ResourcesModels.pileOfBonesModel);
-            ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(GSBlock.pileOfBones), num, TileEntityGSPileOfBones.class);
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.pileOfBones), num, ResourcesModels.pileOfBonesModel);
-        }
+        registerModelsForTEBlocks(EnumPileOfBones.values().length, GSBlock.pileOfBones, ResourcesModels.pileOfBonesModel, TileEntityGSPileOfBones.class);
         //bone blocks
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 0, ResourcesModels.boneBlockModel);
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneBlock), 1, ResourcesModels.boneBlockWithSkullModel);
@@ -194,11 +184,7 @@ public class ClientProxy extends CommonProxy {
 
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.boneStairs), 0, ResourcesModels.boneStairsModel);
         //haunted chest
-        for (int num = 0; num < EnumHauntedChest.values().length; num++) {
-            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.hauntedChest), num, ResourcesModels.hauntedChestModel);
-            ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(GSBlock.hauntedChest), num, TileEntityGSHauntedChest.class);
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.hauntedChest), num, ResourcesModels.hauntedChestModel);
-        }
+        registerModelsForTEBlocks(EnumHauntedChest.values().length, GSBlock.hauntedChest, ResourcesModels.hauntedChestModel, TileEntityGSHauntedChest.class);
         //altar
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.altar), 0, ResourcesModels.altarModel);
 
@@ -207,10 +193,14 @@ public class ClientProxy extends CommonProxy {
         ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(GSBlock.candle), 0, TileEntityGSCandle.class);
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.candle), 0, ResourcesModels.candleModel);
         //skull candle
-        for (int num = 0; num < EnumSkullCandle.values().length; num++) {
-            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.skullCandle), num, ResourcesModels.skullCandleModel);
-            ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(GSBlock.skullCandle), num, TileEntityGSSkullCandle.class);
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.skullCandle), num, ResourcesModels.skullCandleModel);
+        registerModelsForTEBlocks(EnumSkullCandle.values().length, GSBlock.skullCandle, ResourcesModels.skullCandleModel, TileEntityGSSkullCandle.class);
+    }
+
+    private void registerModelsForTEBlocks(int length, Block block, ModelResourceLocation model, Class TEClass) {
+        for (int num = 0; num < length; num++) {
+            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), num, model);
+            ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(block), num, TEClass);
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), num, model);
         }
     }
 
