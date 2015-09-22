@@ -87,7 +87,7 @@ public class ClientProxy extends CommonProxy {
         // corpses
         MinecraftForgeClient.registerItemRenderer(GSItem.corpse, new ItemGSCorpseRenderer());
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGSAltar.class, new RenderAltar());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGSAltar.class, new TileEntityGSRenderAltar());
 
 
     }

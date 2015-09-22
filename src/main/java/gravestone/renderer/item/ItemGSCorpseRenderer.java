@@ -51,34 +51,19 @@ public class ItemGSCorpseRenderer implements IItemRenderer {
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         GL11.glPushMatrix();
+        renderItem(item);
+        GL11.glPopMatrix();
+    }
+
+    public void renderItem(ItemStack item) {
         GL11.glRotatef(180, 1, 0, 0);
 
-        byte corpseType = (byte) item.getItemDamage();
         float xz = 0.0625F;
-        switch (EnumCorpse.getById(corpseType)) {
+        switch (EnumCorpse.getById((byte) item.getItemDamage())) {
             case VILLAGER:
                 GL11.glTranslatef(0, -0.5F, 0);
                 int profession = VillagerCorpseHelper.getVillagerType(item.getTagCompound());
-                switch (profession) {
-                    case 0:
-                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.VILLAGER_FARMER);
-                        break;
-                    case 1:
-                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.VILLAGER_LIBRARIAN);
-                        break;
-                    case 2:
-                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.VILLAGER_PRIEST);
-                        break;
-                    case 3:
-                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.VILLAGER_SMITH);
-                        break;
-                    case 4:
-                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.VILLAGER_BUTCHER);
-                        break;
-                    default:
-                        Minecraft.getMinecraft().renderEngine.bindTexture(VillagerRegistry.getVillagerSkin(profession, Resources.VILLAGER));
-                        break;
-                }
+                bindVillagerTexture(profession);
                 villagerModel.render(null, xz, xz, xz, xz, xz, xz);
                 break;
             case DOG:
@@ -93,21 +78,7 @@ public class ItemGSCorpseRenderer implements IItemRenderer {
             case CAT:
                 GL11.glTranslatef(0, -1, 0);
                 int catType = CatCorpseHelper.getCatType(item.getTagCompound());
-                switch (catType) {
-                    case 0:
-                    default:
-                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.OCELOT);
-                        break;
-                    case 1:
-                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.BLACK_CAT);
-                        break;
-                    case 2:
-                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.RED_CAT);
-                        break;
-                    case 3:
-                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.SIAMESE_CAT);
-                        break;
-                }
+                bindCatTexture(catType);
                 catModel.render(null, xz, xz, xz, xz, xz, xz);
                 break;
             case HORSE:
@@ -118,35 +89,79 @@ public class ItemGSCorpseRenderer implements IItemRenderer {
                 horse.setHorseType(HorseCorpseHelper.getHorseType(item.getTagCompound()));
                 horse.setHorseVariant(HorseCorpseHelper.getHorseVariant(item.getTagCompound()));
 
-                switch (HorseCorpseHelper.getHorseType(item.getTagCompound())) {
-                    case 0:
-                        String horseTexturePath = horse.getHorseTexture();
-                        ResourceLocation horseResourceLocation = (ResourceLocation) horsesTexturesMap.get(horseTexturePath);
-                        if (horseResourceLocation == null) {
-                            horseResourceLocation = new ResourceLocation(horseTexturePath);
-                            Minecraft.getMinecraft().getTextureManager().loadTexture(horseResourceLocation, new LayeredTexture(horse.getVariantTexturePaths()));
-                            horsesTexturesMap.put(horseTexturePath, horseResourceLocation);
-                        }
-                        Minecraft.getMinecraft().renderEngine.bindTexture(horseResourceLocation);
-                        break;
-                    case 1:
-                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.DONKEY);
-                        break;
-                    case 2:
-                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.MULE);
-                        break;
-                    case 3:
-                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.ZOMBIE_HORSE);
-                        break;
-                    case 4:
-                        Minecraft.getMinecraft().renderEngine.bindTexture(Resources.SKELETON_HORSE);
-                        break;
-                }
+                bindHorseTexture(HorseCorpseHelper.getHorseType(item.getTagCompound()));
 
                 horseModel.setLivingAnimations(horse, 0, 0, 0);
                 horseModel.render(horse, xz, xz, xz, xz, xz, xz);
                 break;
         }
-        GL11.glPopMatrix();
+    }
+
+    private static void bindVillagerTexture(int profession) {
+        switch (profession) {
+            case 0:
+                Minecraft.getMinecraft().renderEngine.bindTexture(Resources.VILLAGER_FARMER);
+                break;
+            case 1:
+                Minecraft.getMinecraft().renderEngine.bindTexture(Resources.VILLAGER_LIBRARIAN);
+                break;
+            case 2:
+                Minecraft.getMinecraft().renderEngine.bindTexture(Resources.VILLAGER_PRIEST);
+                break;
+            case 3:
+                Minecraft.getMinecraft().renderEngine.bindTexture(Resources.VILLAGER_SMITH);
+                break;
+            case 4:
+                Minecraft.getMinecraft().renderEngine.bindTexture(Resources.VILLAGER_BUTCHER);
+                break;
+            default:
+                Minecraft.getMinecraft().renderEngine.bindTexture(VillagerRegistry.getVillagerSkin(profession, Resources.VILLAGER));
+                break;
+        }
+    }
+
+    private static void bindCatTexture(int catType) {
+        switch (catType) {
+            case 0:
+            default:
+                Minecraft.getMinecraft().renderEngine.bindTexture(Resources.OCELOT);
+                break;
+            case 1:
+                Minecraft.getMinecraft().renderEngine.bindTexture(Resources.BLACK_CAT);
+                break;
+            case 2:
+                Minecraft.getMinecraft().renderEngine.bindTexture(Resources.RED_CAT);
+                break;
+            case 3:
+                Minecraft.getMinecraft().renderEngine.bindTexture(Resources.SIAMESE_CAT);
+                break;
+        }
+    }
+
+    private static void bindHorseTexture(int horseType) {
+        switch (horseType) {
+            case 0:
+                String horseTexturePath = horse.getHorseTexture();
+                ResourceLocation horseResourceLocation = (ResourceLocation) horsesTexturesMap.get(horseTexturePath);
+                if (horseResourceLocation == null) {
+                    horseResourceLocation = new ResourceLocation(horseTexturePath);
+                    Minecraft.getMinecraft().getTextureManager().loadTexture(horseResourceLocation, new LayeredTexture(horse.getVariantTexturePaths()));
+                    horsesTexturesMap.put(horseTexturePath, horseResourceLocation);
+                }
+                Minecraft.getMinecraft().renderEngine.bindTexture(horseResourceLocation);
+                break;
+            case 1:
+                Minecraft.getMinecraft().renderEngine.bindTexture(Resources.DONKEY);
+                break;
+            case 2:
+                Minecraft.getMinecraft().renderEngine.bindTexture(Resources.MULE);
+                break;
+            case 3:
+                Minecraft.getMinecraft().renderEngine.bindTexture(Resources.ZOMBIE_HORSE);
+                break;
+            case 4:
+                Minecraft.getMinecraft().renderEngine.bindTexture(Resources.SKELETON_HORSE);
+                break;
+        }
     }
 }
