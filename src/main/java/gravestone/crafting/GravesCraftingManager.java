@@ -28,6 +28,7 @@ public class GravesCraftingManager {
     private GravesCraftingManager() {
         addGravesRecipesForAllMaterials(EnumGraves.EnumGraveType.VERTICAL_PLATE);
         addGravesRecipesForAllMaterials(EnumGraves.EnumGraveType.CROSS);
+        addGravesRecipesForAllMaterials(EnumGraves.EnumGraveType.OBELISK);
         addGravesRecipesForAllMaterials(EnumGraves.EnumGraveType.HORIZONTAL_PLATE);
         addGravesRecipesForAllMaterials(EnumGraves.EnumGraveType.DOG_STATUE);
         addGravesRecipesForAllMaterials(EnumGraves.EnumGraveType.CAT_STATUE);

@@ -87,6 +87,24 @@ public class BlockGSGraveStone extends BlockContainer {
             EnumGraves.QUARTZ_CROSS.ordinal(),
             EnumGraves.PRIZMARINE_CROSS.ordinal(),
             EnumGraves.ICE_CROSS.ordinal(),
+            // obelisks
+            EnumGraves.WOODEN_OBELISK.ordinal(),
+            EnumGraves.SANDSTONE_OBELISK.ordinal(),
+            EnumGraves.RED_SANDSTONE_OBELISK.ordinal(),
+            EnumGraves.STONE_OBELISK.ordinal(),
+            EnumGraves.DIORITE_OBELISK.ordinal(),
+            EnumGraves.ANDESITE_OBELISK.ordinal(),
+            EnumGraves.GRANITE_OBELISK.ordinal(),
+            EnumGraves.IRON_OBELISK.ordinal(),
+            EnumGraves.GOLDEN_OBELISK.ordinal(),
+            EnumGraves.DIAMOND_OBELISK.ordinal(),
+            EnumGraves.EMERALD_OBELISK.ordinal(),
+            EnumGraves.LAPIS_OBELISK.ordinal(),
+            EnumGraves.REDSTONE_OBELISK.ordinal(),
+            EnumGraves.OBSIDIAN_OBELISK.ordinal(),
+            EnumGraves.QUARTZ_OBELISK.ordinal(),
+            EnumGraves.PRIZMARINE_OBELISK.ordinal(),
+            EnumGraves.ICE_OBELISK.ordinal(),
             // horisontal plates
             EnumGraves.WOODEN_HORIZONTAL_PLATE.ordinal(),
             EnumGraves.SANDSTONE_HORIZONTAL_PLATE.ordinal(),
@@ -275,6 +293,9 @@ public class BlockGSGraveStone extends BlockContainer {
                         this.setBlockBounds(0.8125F, 0, 0.125F, 0.9375F, 1, 0.875F);
                         break;
                 }
+                break;
+            case OBELISK:
+                this.setBlockBounds(0.35F, 0, 0.35F, 0.65F, 0.92F, 0.65F);
                 break;
             case HORIZONTAL_PLATE:
                 switch (facing) {
