@@ -3,6 +3,9 @@ package gravestone.core;
 import gravestone.ModGraveStone;
 import gravestone.block.*;
 import gravestone.item.itemblock.*;
+import net.minecraft.block.BlockStone;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
@@ -13,25 +16,26 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  */
 public class GSBlock {
 
-    // GraveStone
+    public static final IBlockState DEFAULT_STONE_STATE = Blocks.stone.getDefaultState();
+    public static final int DIORITE_META = Blocks.stone.getMetaFromState(DEFAULT_STONE_STATE.withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH));
+    public static final int ANDESITE_META = Blocks.stone.getMetaFromState(DEFAULT_STONE_STATE.withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE_SMOOTH));
+    public static final int GRANITE_META = Blocks.stone.getMetaFromState(DEFAULT_STONE_STATE.withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE_SMOOTH));
+
     public static BlockGSGraveStone graveStone;
-    // boss spawer
     public static BlockGSSpawner spawner;
-    // Trap stones
     public static BlockGSTrap trap;
-    // block memorial
     public static BlockGSMemorial memorial;
-    // bone blocks
     public static BlockGSPileOfBones pileOfBones;
+
     public static BlockGSBoneBlock boneBlock;
     public static BlockGSBoneSlab boneSlab;
     public static BlockGSBoneStairs boneStairs;
-    // Haunted Chest
+
     public static BlockGSHauntedChest hauntedChest;
-    // skull candle
+
     public static BlockGSCandle candle;
     public static BlockGSSkullCandle skullCandle;
-    // altar
+
     public static BlockGSAltar altar;
 
     private GSBlock() {
