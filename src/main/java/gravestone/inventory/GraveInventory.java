@@ -300,15 +300,17 @@ public class GraveInventory implements IInventory {
     /**
      * Set random itesm as grave loot
      */
-    public void setRandomGraveContent(Random random, boolean isPetGrave, boolean allLoot) {
-        addInventoryContent(new ItemStack(Items.bone, 1 + random.nextInt(5), 0));
-        addInventoryContent(new ItemStack(Items.rotten_flesh, 1 + random.nextInt(5), 0));
+    public void setRandomGraveContent(Random random, boolean isPetGrave, boolean allLoot, boolean canHaveSkullAndBones) {
+        if (canHaveSkullAndBones) {
+            addInventoryContent(new ItemStack(Items.bone, 1 + random.nextInt(5), 0));
+            addInventoryContent(new ItemStack(Items.rotten_flesh, 1 + random.nextInt(5), 0));
+        }
 
         if (isPetGrave) {
             fillPetGrave(random);
         } else {
             if (tileEntity.getGraveTypeNum() != 3 && tileEntity.getGraveTypeNum() != 4) {
-                if (random.nextInt(50) == 0) {
+                if (canHaveSkullAndBones && random.nextInt(50) == 0) {
                     if (random.nextInt(2) == 0) {
                         addInventoryContent(new ItemStack(Items.skull, 1, 0));
                     } else {

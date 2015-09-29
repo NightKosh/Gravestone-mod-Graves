@@ -1,11 +1,14 @@
 package gravestone.structures;
 
 import gravestone.block.BlockGSHauntedChest;
+import gravestone.block.BlockGSPileOfBones;
 import gravestone.block.BlockGSSpawner;
 import gravestone.block.enums.EnumHauntedChest;
+import gravestone.block.enums.EnumPileOfBones;
 import gravestone.core.GSBlock;
 import gravestone.core.GSPotion;
 import gravestone.tileentity.TileEntityGSHauntedChest;
+import gravestone.tileentity.TileEntityGSPileOfBones;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.init.Blocks;
@@ -37,6 +40,15 @@ public class ObjectsGenerationHelper {
     };
 
     private ObjectsGenerationHelper() {
+    }
+
+    public static void generatePileOfBones(ComponentGraveStone component, World world, int xCoord, int yCoord, int zCoord, EnumFacing facing, EnumPileOfBones type) {
+        BlockPos pos = new BlockPos(component.getXWithOffset(xCoord, zCoord), component.getYWithOffset(yCoord), component.getZWithOffset(xCoord, zCoord));
+        world.setBlockState(pos, GSBlock.pileOfBones.getDefaultState().withProperty(BlockGSPileOfBones.VARIANT, type), 2);
+        TileEntityGSPileOfBones te = (TileEntityGSPileOfBones) world.getTileEntity(pos);
+        if (te != null) {
+            te.setDirection((byte) facing.getHorizontalIndex());
+        }
     }
 
     /**

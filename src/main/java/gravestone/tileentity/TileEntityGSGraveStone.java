@@ -212,8 +212,8 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     }
 
     @Override
-    public void setGraveContent(Random random, boolean isPetGrave, boolean allLoot) {
-        super.setGraveContent(random, isPetGrave, allLoot);
+    public void setGraveContent(Random random, boolean isPetGrave, boolean allLoot, boolean canHaveSkullAndBones) {
+        super.setGraveContent(random, isPetGrave, allLoot, canHaveSkullAndBones);
         setRandomFlower(random);
     }
 

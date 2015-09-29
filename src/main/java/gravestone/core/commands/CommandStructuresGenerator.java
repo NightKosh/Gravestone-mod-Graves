@@ -3,6 +3,7 @@ package gravestone.core.commands;
 import gravestone.core.logger.GSLogger;
 import gravestone.structures.GSStructureGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
+import gravestone.structures.graves.OpenedGraveGenerator;
 import gravestone.structures.graves.SingleGraveGenerator;
 import gravestone.structures.memorials.MemorialGenerator;
 import gravestone.structures.village.undertaker.VillageCemeteryGenerator;
@@ -45,6 +46,8 @@ public class CommandStructuresGenerator extends CommandBase {
                 generateStructure(sender, sender.getEntityWorld(), args[1], args[2], args[3], MemorialGenerator.getInstance());
             } else if (args[0].equals("grave")) {
                 generateStructure(sender, sender.getEntityWorld(), args[1], args[2], args[3], SingleGraveGenerator.getInstance());
+            } else if (args[0].equals("opened_grave")) {
+                generateStructure(sender, sender.getEntityWorld(), args[1], args[2], args[3], OpenedGraveGenerator.getInstance());
             } else if (args[0].equals("cemetery")) {
                 generateStructure(sender, sender.getEntityWorld(), args[1], args[2], args[3], VillageCemeteryGenerator.getInstance());
             } else if (args[0].equals("undertaker")) {

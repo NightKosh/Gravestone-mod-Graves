@@ -20,33 +20,33 @@ import java.util.Random;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class SingleGraveGenerator implements GSStructureGenerator {
-    private static SingleGraveGenerator instance;
+    private static SingleGraveGenerator instance = new SingleGraveGenerator();
 
-    private SingleGraveGenerator() {
-        instance = this;
+    protected SingleGraveGenerator() {
+
     }
 
     public static SingleGraveGenerator getInstance() {
-        if (instance == null) {
-            return new SingleGraveGenerator();
-        } else {
-            return instance;
-        }
+        return instance;
     }
 
     // chance to generate a structure
     public static final double CHANCE = 0.1D;
     public static final byte RANGE = 100;
-    private static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList<ChunkCoordIntPair>();
+    protected static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList<ChunkCoordIntPair>();
 
     @Override
     public boolean generate(World world, Random rand, int x, int z, EnumFacing direction, double chance, boolean isCommand) {
+        if (!isCommand) {
+            x += 7;
+            z += 7;
+        }
         if (isCommand || (GSConfig.generateSingleGraves && canSpawnStructureAtCoords(world, x, z, chance))) {
-            if (!isCommand) {
-                x += 7;
-                z += 7;
+            if (!isCommand && rand.nextInt(4) == 3) {
+                new ComponentGSOpenedGrave(0, direction, rand, x, z).addComponentParts(world, rand);
+            } else {
+                new ComponentGSSingleGrave(0, direction, rand, x, z).addComponentParts(world, rand);
             }
-            new ComponentGSSingleGrave(0, direction, rand, x, z).addComponentParts(world, rand);
             structuresList.add(new ChunkCoordIntPair(x, z));
             return true;
         }

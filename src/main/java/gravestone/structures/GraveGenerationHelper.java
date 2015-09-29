@@ -36,7 +36,13 @@ public class GraveGenerationHelper {
         return spawnerHelper;
     }
 
-    public static void placeGrave(IComponentGraveStone component, World world, Random random, int x, int y, int z, IBlockState graveState, int graveType, Item sword, EntityGroupOfGravesMobSpawnerHelper spanwerHelper, boolean allLoot) {
+    public static void placeGrave(IComponentGraveStone component, World world, Random random, int x, int y, int z,
+                                  IBlockState graveState, int graveType, Item sword, EntityGroupOfGravesMobSpawnerHelper spanwerHelper, boolean allLoot) {
+        placeGrave(component, world, random, x, y, z, graveState, graveType, sword, spanwerHelper, allLoot, true);
+
+    }
+    public static void placeGrave(IComponentGraveStone component, World world, Random random, int x, int y, int z,
+                                  IBlockState graveState, int graveType, Item sword, EntityGroupOfGravesMobSpawnerHelper spanwerHelper, boolean allLoot, boolean canHaveSkullAndBones) {
         component.placeBlockAtCurrentPosition(world, graveState, x, y, z, component.getBoundingBox());
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(new BlockPos(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z)));
 
@@ -46,7 +52,7 @@ public class GraveGenerationHelper {
             }
 
             tileEntity.setGraveType(graveType);
-            tileEntity.setGraveContent(random, GraveStoneHelper.isPetGrave(graveType), allLoot);
+            tileEntity.setGraveContent(random, GraveStoneHelper.isPetGrave(graveType), allLoot, canHaveSkullAndBones);
             tileEntity.setSpawnerHelper(spanwerHelper);
         }
     }

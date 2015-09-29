@@ -38,9 +38,9 @@ public abstract class TileEntityGSGrave extends TileEntityBase {
         return graveType;
     }
 
-    public void setGraveContent(Random random, boolean isPetGrave, boolean allLoot) {
+    public void setGraveContent(Random random, boolean isPetGrave, boolean allLoot, boolean canHaveSkullAndBones) {
         deathText.setRandomDeathTextAndName(random, graveType, false, true);
-        inventory.setRandomGraveContent(random, isPetGrave, allLoot);
+        inventory.setRandomGraveContent(random, isPetGrave, allLoot, canHaveSkullAndBones);
         setRandomAge();
     }
 
