@@ -38,6 +38,8 @@ public class GSBlock {
 
     public static BlockGSAltar altar;
 
+    public static BlockGSInvisibleWall invisibleWall;
+
     private GSBlock() {
     }
 
@@ -87,6 +89,9 @@ public class GSBlock {
         // altar
         altar = new BlockGSAltar();
         GameRegistry.registerBlock(altar, "GSAltar");
+
+        invisibleWall = new BlockGSInvisibleWall();
+        GameRegistry.registerBlock(invisibleWall, "GSInvisibleWall");
 
         ModGraveStone.proxy.registerBlocksModels();
     }

@@ -3,6 +3,7 @@ package gravestone.block;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
+import gravestone.core.GSBlock;
 import gravestone.core.GSTabs;
 import gravestone.inventory.GraveInventory;
 import gravestone.item.ItemGSCorpse;
@@ -31,6 +32,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -584,6 +586,110 @@ public class BlockGSMemorial extends BlockContainer {
 
                 tileEntity.setHangedMob(EnumHangedMobs.getById(nbt.getByte("HangedMob")));
                 tileEntity.setHangedVillagerProfession(nbt.getInteger("HangedVillagerProfession"));
+
+                placeWalls(world, pos);
+            }
+        }
+    }
+
+    public static void placeWalls(World world, BlockPos pos) {
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
+
+        if (tileEntity != null) {
+            //TODO almost the same code in ItemBlockGSMemorial
+            byte maxY;
+            byte maxX = 1;
+            byte maxZ = 1;
+            byte startX = 0;
+            byte startZ = 0;
+
+            switch (tileEntity.getMemorialType().getMemorialType()) {
+                case CROSS:
+                case OBELISK:
+                    maxY = 5;
+                    maxX = 2;
+                    maxZ = 2;
+                    startX = -1;
+                    startZ = -1;
+                    break;
+                case DOG_STATUE:
+                case CAT_STATUE:
+                    maxY = 2;
+                    break;
+                case STEVE_STATUE:
+                case VILLAGER_STATUE:
+                case ANGEL_STATUE:
+                case CREEPER_STATUE:
+                default:
+                    maxY = 3;
+                    break;
+            }
+            for (byte shiftY = 0; shiftY < maxY; shiftY++) {
+                for (byte shiftZ = startZ; shiftZ < maxZ; shiftZ++) {
+                    for (byte shiftX = startX; shiftX < maxX; shiftX++) {
+                        BlockPos newPos = new BlockPos(pos.getX() + shiftX, pos.getY() + shiftY, pos.getZ() + shiftZ);
+                        if (world.getBlockState(newPos).getBlock() == Blocks.air) {
+                            world.setBlockState(newPos, GSBlock.invisibleWall.getDefaultState());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onBlockDestroyedByExplosion(World world, BlockPos pos, Explosion explosionIn) {
+        removeWalls(world, pos);
+        super.onBlockDestroyedByExplosion(world, pos, explosionIn);
+    }
+
+    @Override
+    public boolean removedByPlayer(World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+        removeWalls(world, pos);
+        return super.removedByPlayer(world, pos, player, willHarvest);
+    }
+
+    private static void removeWalls(World world, BlockPos pos) {
+        //TODO almost the same code in ItemBlockGSMemorial
+        byte maxY;
+        byte maxX = 1;
+        byte maxZ = 1;
+        byte startX = 0;
+        byte startZ = 0;
+
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(pos);
+
+        if (tileEntity != null) {
+            switch (tileEntity.getMemorialType().getMemorialType()) {
+                case CROSS:
+                case OBELISK:
+                    maxY = 5;
+                    maxX = 2;
+                    maxZ = 2;
+                    startX = -1;
+                    startZ = -1;
+                    break;
+                case DOG_STATUE:
+                case CAT_STATUE:
+                case CREEPER_STATUE:
+                    maxY = 2;
+                    break;
+                case STEVE_STATUE:
+                case VILLAGER_STATUE:
+                case ANGEL_STATUE:
+                default:
+                    maxY = 3;
+                    break;
+            }
+            for (byte shiftY = 0; shiftY < maxY; shiftY++) {
+                for (byte shiftZ = startZ; shiftZ < maxZ; shiftZ++) {
+                    for (byte shiftX = startX; shiftX < maxX; shiftX++) {
+                        BlockPos newPos = new BlockPos(pos.getX() + shiftX, pos.getY() + shiftY, pos.getZ() + shiftZ);
+                        if (world.getBlockState(newPos).getBlock() == GSBlock.invisibleWall) {
+                            world.setBlockState(new BlockPos(pos.getX() + shiftX, pos.getY() + shiftY, pos.getZ() + shiftZ), Blocks.air.getDefaultState());
+                        }
+                    }
+                }
             }
         }
     }

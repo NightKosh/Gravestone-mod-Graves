@@ -22,14 +22,7 @@ public class MemorialGenerationHelper {
     }
 
     public static void placeMemorial(ComponentGraveStone component, World world, Random random, int x, int y, int z, EnumFacing facing, int memorialType) {
-        IBlockState memorialState = GSBlock.memorial.getDefaultState().withProperty(BlockGSMemorial.FACING, facing);
-        component.placeBlockAtCurrentPosition(world, memorialState, x, y, z, component.getBoundingBox());
-        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(new BlockPos(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z)));
-
-        if (tileEntity != null) {
-            tileEntity.setGraveType(memorialType);
-            tileEntity.setMemorialContent(random);
-        }
+        placeMemorial(component, world, random, x, y, z, GSBlock.memorial.getDefaultState().withProperty(BlockGSMemorial.FACING, facing), memorialType);
     }
 
     public static void placeMemorial(ComponentGraveStone component, World world, Random random, int x, int y, int z, IBlockState memorialState, int memorialType) {
@@ -39,6 +32,8 @@ public class MemorialGenerationHelper {
         if (tileEntity != null) {
             tileEntity.setGraveType(memorialType);
             tileEntity.setMemorialContent(random);
+
+            BlockGSMemorial.placeWalls(world, tileEntity.getPos());
         }
     }
 }

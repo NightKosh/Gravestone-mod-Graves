@@ -127,19 +127,23 @@ public class ItemBlockGSMemorial extends ItemBlock {
             byte startX = 0;
             byte startZ = 0;
 
-            switch (memorialType) {
-                case STONE_CROSS:
-                case QUARTZ_OBELISK:
+            switch (memorialType.getMemorialType()) {
+                case CROSS:
+                case OBELISK:
                     maxY = 5;
                     maxX = 2;
                     maxZ = 2;
                     startX = -1;
                     startZ = -1;
                     break;
-                case STONE_DOG_STATUE:
-                case STONE_CAT_STATUE:
+                case DOG_STATUE:
+                case CAT_STATUE:
+                case CREEPER_STATUE:
                     maxY = 2;
                     break;
+                case STEVE_STATUE:
+                case VILLAGER_STATUE:
+                case ANGEL_STATUE:
                 default:
                     maxY = 3;
                     break;
