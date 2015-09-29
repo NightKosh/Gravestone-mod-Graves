@@ -15,6 +15,7 @@ import gravestone.entity.monster.*;
 import gravestone.entity.monster.EntitySkullCrawler.SkullCrawlerType;
 import gravestone.gui.GSGraveTextGui;
 import gravestone.item.ItemGSMonsterPlacer;
+import gravestone.item.enums.EnumCorpse;
 import gravestone.models.entity.ModelUndeadCat;
 import gravestone.models.entity.ModelUndeadDog;
 import gravestone.renderer.entity.*;
@@ -207,6 +208,12 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerItemsModels() {
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(GSItem.chisel, 0, ResourcesModels.chiselModel);
+
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(GSItem.corpse, EnumCorpse.VILLAGER.ordinal(), ResourcesModels.CORPSE_VILLAGER);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(GSItem.corpse, EnumCorpse.DOG.ordinal(), ResourcesModels.CORPSE_DOG);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(GSItem.corpse, EnumCorpse.CAT.ordinal(), ResourcesModels.CORPSE_CAT);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(GSItem.corpse, EnumCorpse.HORSE.ordinal(), ResourcesModels.CORPSE_HORSE);
+        ModelBakery.addVariantName(GSItem.corpse, "gravestone:GSCorpseVillager", "gravestone:GSCorpseDog", "gravestone:GSCorpseCat", "gravestone:GSCorpseHorse");
 
         for (ItemGSMonsterPlacer.EnumEggs egg : ItemGSMonsterPlacer.EnumEggs.values()) {
             Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(GSItem.spawnEgg, egg.ordinal(), ResourcesModels.spawnEggModel);
