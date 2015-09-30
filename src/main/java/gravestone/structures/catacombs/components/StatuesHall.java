@@ -51,7 +51,7 @@ public class StatuesHall extends CatacombsBaseComponent {
         this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 1, 1, 1, 10, 4, 18, Blocks.web.getDefaultState(), false);
         // piles of bones
         if (GSConfig.generatePilesOfBones) {
-            this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 1, 10, 1, 18, false, random, getPileOfBonesSelector());
+            this.fillWithRandomizedPilesOfBones(world, boundingBox, 1, 1, 1, 10, 1, 18, false, random);
         }
 
         // blocks wall

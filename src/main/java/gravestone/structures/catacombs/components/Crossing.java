@@ -71,7 +71,7 @@ public class Crossing extends CatacombsBaseComponent {
         this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 1, 1, 1, 11, 4, 11, Blocks.web.getDefaultState(), false);
         // piles of bones
         if (GSConfig.generatePilesOfBones) {
-            this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 1, 12, 1, 12, false, random, getPileOfBonesSelector());
+            this.fillWithRandomizedPilesOfBones(world, boundingBox, 1, 1, 1, 12, 1, 12, false, random);
         }
 
         // trap floor

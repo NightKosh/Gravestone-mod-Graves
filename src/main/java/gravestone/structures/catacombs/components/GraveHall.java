@@ -55,7 +55,7 @@ public class GraveHall extends CatacombsBaseComponent {
         this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 3, 1, 3, 13, 5, 15, Blocks.web.getDefaultState(), false);
         // piles of bones
         if (GSConfig.generatePilesOfBones) {
-            this.fillWithRandomizedBlocks(world, boundingBox, 3, 1, 3, 13, 1, 15, false, random, getPileOfBonesSelector());
+            this.fillWithRandomizedPilesOfBones(world, boundingBox, 3, 1, 3, 13, 1, 15, false, random);
         }
 
         // nether floor

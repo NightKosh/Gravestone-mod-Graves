@@ -27,14 +27,14 @@ public class CatacombsPileOfBonesSelector extends StructureComponent.BlockSelect
     @Override
     public void selectBlocks(Random random, int par2, int par3, int par4, boolean flag) {
         if (flag && random.nextFloat() <= PILE_OF_BONES_GENERATION_CHANCE) {
-            if (random.nextInt(10) < 7) {
-                this.field_151562_a = GSBlock.pileOfBones.getDefaultState().withProperty(BlockGSPileOfBones.VARIANT, EnumPileOfBones.PILE_OF_BONES);
-            } else {
+            if (random.nextInt(30) == 0) {
                 if (random.nextBoolean()) {
                     this.field_151562_a = GSBlock.pileOfBones.getDefaultState().withProperty(BlockGSPileOfBones.VARIANT, EnumPileOfBones.PILE_OF_BONES_WITH_SKULL_CRAWLER);
                 } else {
                     this.field_151562_a = GSBlock.pileOfBones.getDefaultState().withProperty(BlockGSPileOfBones.VARIANT, EnumPileOfBones.PILE_OF_BONES_WITH_SKULL);
                 }
+            } else {
+                this.field_151562_a = GSBlock.pileOfBones.getDefaultState().withProperty(BlockGSPileOfBones.VARIANT, EnumPileOfBones.PILE_OF_BONES);
             }
         } else {
             this.field_151562_a = Blocks.air.getDefaultState();

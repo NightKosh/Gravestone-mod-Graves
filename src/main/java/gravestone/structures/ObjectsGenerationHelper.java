@@ -11,6 +11,7 @@ import gravestone.tileentity.TileEntityGSHauntedChest;
 import gravestone.tileentity.TileEntityGSPileOfBones;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockDispenser;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -42,13 +43,21 @@ public class ObjectsGenerationHelper {
     private ObjectsGenerationHelper() {
     }
 
-    public static void generatePileOfBones(ComponentGraveStone component, World world, int xCoord, int yCoord, int zCoord, EnumFacing facing, EnumPileOfBones type) {
+    public static void generatePileOfBones(ComponentGraveStone component, World world, int xCoord, int yCoord, int zCoord, byte facing, IBlockState state) {
         BlockPos pos = new BlockPos(component.getXWithOffset(xCoord, zCoord), component.getYWithOffset(yCoord), component.getZWithOffset(xCoord, zCoord));
-        world.setBlockState(pos, GSBlock.pileOfBones.getDefaultState().withProperty(BlockGSPileOfBones.VARIANT, type), 2);
+        world.setBlockState(pos, state, 2);
         TileEntityGSPileOfBones te = (TileEntityGSPileOfBones) world.getTileEntity(pos);
         if (te != null) {
-            te.setDirection((byte) facing.getHorizontalIndex());
+            te.setDirection(facing);
         }
+    }
+
+    public static void generatePileOfBones(ComponentGraveStone component, World world, int xCoord, int yCoord, int zCoord, IBlockState state) {
+        generatePileOfBones(component, world, xCoord, yCoord, zCoord, (byte) world.rand.nextInt(4), state);
+    }
+
+    public static void generatePileOfBones(ComponentGraveStone component, World world, int xCoord, int yCoord, int zCoord, EnumFacing facing, EnumPileOfBones type) {
+        generatePileOfBones(component, world, xCoord, yCoord, zCoord, (byte) facing.getHorizontalIndex(), GSBlock.pileOfBones.getDefaultState().withProperty(BlockGSPileOfBones.VARIANT, type));
     }
 
     /**

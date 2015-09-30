@@ -46,7 +46,7 @@ public class EnderHall extends CatacombsBaseComponent {
         this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 1, 1, 1, 11, 3, 17, Blocks.web.getDefaultState(), false);
         // piles of bones
         if (GSConfig.generatePilesOfBones) {
-            this.fillWithRandomizedBlocks(world, boundingBox, 1, 1, 1, 11, 1, 17, false, random, getPileOfBonesSelector());
+            this.fillWithRandomizedPilesOfBones(world, boundingBox, 1, 1, 1, 11, 1, 17, false, random);
         }
 
         // neter floor

@@ -55,7 +55,7 @@ public class GraveCorridor extends CatacombsBaseComponent {
         this.randomlyFillWithBlocks(world, boundingBox, random, WEB_GENERATION_CHANCE, 2, 1, 2, 5, 3, 3, Blocks.web.getDefaultState(), false);
         // piles of bones
         if (GSConfig.generatePilesOfBones) {
-            this.fillWithRandomizedBlocks(world, boundingBox, 2, 1, 2, 5, 1, 3, false, random, getPileOfBonesSelector());
+            this.fillWithRandomizedPilesOfBones(world, boundingBox, 2, 1, 2, 5, 1, 3, false, random);
         }
 
         // trap floor
