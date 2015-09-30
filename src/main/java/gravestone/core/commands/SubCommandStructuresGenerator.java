@@ -8,7 +8,6 @@ import gravestone.structures.graves.SingleGraveGenerator;
 import gravestone.structures.memorials.MemorialGenerator;
 import gravestone.structures.village.undertaker.VillageCemeteryGenerator;
 import gravestone.structures.village.undertaker.VillageUndertakerGenerator;
-import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentTranslation;
@@ -23,37 +22,42 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class CommandStructuresGenerator extends CommandBase {
+public class SubCommandStructuresGenerator {
 
-    @Override
-    public String getName() {
-        return "generate";
-    }
+    public static final String COMMAND_NAME = "generate";
+    public static final String COMMAND_USAGE = CommandGS.MAIN_COMMAND_NAME + COMMAND_NAME + " <structure name> <x coordinate> <z coordinate> <direction>";
 
-    @Override
-    public String getCommandUsage(ICommandSender icommandsender) {
-        return "/" + getName() + " <structure name> <x coordinate> <z coordinate> <direction>";
-    }
 
-    @Override
-    public void execute(ICommandSender sender, String[] args) throws CommandException {
+    public static void execute(ICommandSender sender, String[] args) throws CommandException {
         GSLogger.logInfo("Structure generation command received");
 
-        if (args.length >= 4) {
-            if (args[0].equals("catacombs")) {
-                generateStructure(sender, sender.getEntityWorld(), args[1], args[2], args[3], CatacombsGenerator.getInstance());
-            } else if (args[0].equals("memorial")) {
-                generateStructure(sender, sender.getEntityWorld(), args[1], args[2], args[3], MemorialGenerator.getInstance());
-            } else if (args[0].equals("grave")) {
-                generateStructure(sender, sender.getEntityWorld(), args[1], args[2], args[3], SingleGraveGenerator.getInstance());
-            } else if (args[0].equals("opened_grave")) {
-                generateStructure(sender, sender.getEntityWorld(), args[1], args[2], args[3], OpenedGraveGenerator.getInstance());
-            } else if (args[0].equals("cemetery")) {
-                generateStructure(sender, sender.getEntityWorld(), args[1], args[2], args[3], VillageCemeteryGenerator.getInstance());
-            } else if (args[0].equals("undertaker")) {
-                generateStructure(sender, sender.getEntityWorld(), args[1], args[2], args[3], VillageUndertakerGenerator.getInstance());
-            } else {
-                sender.addChatMessage(new ChatComponentTranslation("commands.generate.unknown_structure").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+        if (args.length >= 5) {
+            String structureName = args[1];
+            String xCoord = args[2];
+            String zCoord = args[3];
+            String direction = args[4];
+            switch (structureName) {
+                case "catacombs":
+                    generateStructure(sender, sender.getEntityWorld(), xCoord, zCoord, direction, CatacombsGenerator.getInstance());
+                    break;
+                case "memorial":
+                    generateStructure(sender, sender.getEntityWorld(), xCoord, zCoord, direction, MemorialGenerator.getInstance());
+                    break;
+                case "grave":
+                    generateStructure(sender, sender.getEntityWorld(), xCoord, zCoord, direction, SingleGraveGenerator.getInstance());
+                    break;
+                case "opened_grave":
+                    generateStructure(sender, sender.getEntityWorld(), xCoord, zCoord, direction, OpenedGraveGenerator.getInstance());
+                    break;
+                case "cemetery":
+                    generateStructure(sender, sender.getEntityWorld(), xCoord, zCoord, direction, VillageCemeteryGenerator.getInstance());
+                    break;
+                case "undertaker":
+                    generateStructure(sender, sender.getEntityWorld(), xCoord, zCoord, direction, VillageUndertakerGenerator.getInstance());
+                    break;
+                default:
+                    sender.addChatMessage(new ChatComponentTranslation("commands.generate.unknown_structure").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                    break;
             }
         } else {
             sender.addChatMessage(new ChatComponentTranslation("commands.not_enough_parameters").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
