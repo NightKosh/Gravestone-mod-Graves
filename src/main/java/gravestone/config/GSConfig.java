@@ -4,6 +4,8 @@ import gravestone.core.GSPotion;
 import gravestone.structures.GraveStoneWorldGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
 import gravestone.structures.catacombs.CatacombsLevel;
+import gravestone.structures.graves.SingleGraveGenerator;
+import gravestone.structures.memorials.MemorialGenerator;
 import gravestone.structures.village.undertaker.VillageHandlerGSUndertaker;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
@@ -83,6 +85,8 @@ public class GSConfig {
     public static int catacombsMaxRoomsCountAt4Level;
     public static boolean generatePilesOfBones;
     // other structures
+    public static double gravesGenerationChance;
+    public static double memorialsGenerationChance;
     public static boolean generateGravesInMushroomBiomes;
     public static boolean generateSingleGraves;
     public static boolean generateMemorials;
@@ -114,6 +118,9 @@ public class GSConfig {
         catacombsMaxRoomsCountAt4Level = config.get(CATEGORY_STRUCTURES_CATACOMBS, "CatacombsMaxRoomsCountAt4Level", CatacombsLevel.DEFAULT_MAX_ROOMS_COUNT_AT_4_LEVEL).getInt();
 
         // other
+        gravesGenerationChance = config.get(CATEGORY_STRUCTURES_OTHER, "GravesGenerationChance", SingleGraveGenerator.DEFAULT_GENERATION_CHANCE).getDouble();
+        memorialsGenerationChance = config.get(CATEGORY_STRUCTURES_OTHER, "MemorialsGenerationChance", MemorialGenerator.DEFAULT_GENERATION_CHANCE).getDouble();
+
         generateGravesInMushroomBiomes = config.get(CATEGORY_STRUCTURES_OTHER, "GenerateGravesInMushroomBiomes", true).getBoolean(true);
         generateMemorials = config.get(CATEGORY_STRUCTURES_OTHER, "GenerateMemorials", true).getBoolean(true);
         generateSingleGraves = config.get(CATEGORY_STRUCTURES_OTHER, "GenerateSingleGraves", true).getBoolean(true);

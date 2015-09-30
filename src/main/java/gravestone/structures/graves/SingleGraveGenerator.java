@@ -31,7 +31,7 @@ public class SingleGraveGenerator implements GSStructureGenerator {
     }
 
     // chance to generate a structure
-    public static final double CHANCE = 0.1D;
+    public static final double DEFAULT_GENERATION_CHANCE = 0.1D;
     public static final byte RANGE = 100;
     protected static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList<ChunkCoordIntPair>();
 
@@ -55,7 +55,7 @@ public class SingleGraveGenerator implements GSStructureGenerator {
     }
 
     protected static boolean canSpawnStructureAtCoords(World world, int x, int z, double chance) {
-        return chance < CHANCE && isBiomeAllowed(world, x, z) && noAnyInRange(x, z);
+        return chance < GSConfig.gravesGenerationChance && isBiomeAllowed(world, x, z) && noAnyInRange(x, z);
     }
 
     protected static boolean isBiomeAllowed(World world, int x, int z) {

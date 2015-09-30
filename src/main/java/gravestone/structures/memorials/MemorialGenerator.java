@@ -37,7 +37,7 @@ public class MemorialGenerator implements GSStructureGenerator {
         }
     }
 
-    public static final double CHANCE = 0.05;
+    public static final double DEFAULT_GENERATION_CHANCE = 0.05;
     public static final short RANGE = 400;
     private static LinkedList<ChunkCoordIntPair> structuresList = new LinkedList();
 
@@ -58,7 +58,7 @@ public class MemorialGenerator implements GSStructureGenerator {
     }
 
     protected static boolean canSpawnStructureAtCoords(World world, int x, int z, double chance) {
-        return chance < CHANCE && isBiomeAllowed(world, x, z) && noAnyInRange(x, z);
+        return chance < GSConfig.memorialsGenerationChance && isBiomeAllowed(world, x, z) && noAnyInRange(x, z);
     }
 
     protected static boolean isBiomeAllowed(World world, int x, int z) {
