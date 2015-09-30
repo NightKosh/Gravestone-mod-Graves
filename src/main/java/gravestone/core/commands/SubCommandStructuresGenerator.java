@@ -31,29 +31,48 @@ public class SubCommandStructuresGenerator {
     public static void execute(ICommandSender sender, String[] args) throws CommandException {
         GSLogger.logInfo("Structure generation command received");
 
-        if (args.length >= 5) {
+        if (args.length >= 2) {
             String structureName = args[1];
-            String xCoord = args[2];
-            String zCoord = args[3];
-            String direction = args[4];
+            int x = sender.getPosition().getX();
+            int z = sender.getPosition().getZ();
+            EnumFacing facing = EnumFacing.NORTH;
+            try {
+                if (args.length >= 3) {
+                    x = Integer.parseInt(args[2]);
+                    if (args.length >= 4) {
+                        z = Integer.parseInt(args[3]);
+                        if (args.length >= 5) {
+                            facing = EnumFacing.byName(args[4]);
+                            if (facing == null) {
+                                sender.addChatMessage(new ChatComponentTranslation("commands.direction_error").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                                return;
+                            }
+                        }
+                    }
+                }
+            } catch (NumberFormatException e) {
+                sender.addChatMessage(new ChatComponentTranslation("commands.coordinate_error").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                return;
+            }
+
             switch (structureName) {
                 case "catacombs":
-                    generateStructure(sender, sender.getEntityWorld(), xCoord, zCoord, direction, CatacombsGenerator.getInstance());
+                    generateStructure(sender, sender.getEntityWorld(), x, z, facing, CatacombsGenerator.getInstance());
                     break;
                 case "memorial":
-                    generateStructure(sender, sender.getEntityWorld(), xCoord, zCoord, direction, MemorialGenerator.getInstance());
+                    generateStructure(sender, sender.getEntityWorld(), x, z, facing, MemorialGenerator.getInstance());
                     break;
                 case "grave":
-                    generateStructure(sender, sender.getEntityWorld(), xCoord, zCoord, direction, SingleGraveGenerator.getInstance());
+                    generateStructure(sender, sender.getEntityWorld(), x, z, facing, SingleGraveGenerator.getInstance());
                     break;
                 case "opened_grave":
-                    generateStructure(sender, sender.getEntityWorld(), xCoord, zCoord, direction, OpenedGraveGenerator.getInstance());
+                    generateStructure(sender, sender.getEntityWorld(), x, z, facing, OpenedGraveGenerator.getInstance());
                     break;
                 case "cemetery":
-                    generateStructure(sender, sender.getEntityWorld(), xCoord, zCoord, direction, VillageCemeteryGenerator.getInstance());
+                    generateStructure(sender, sender.getEntityWorld(), x, z, facing, VillageCemeteryGenerator.getInstance());
                     break;
                 case "undertaker":
-                    generateStructure(sender, sender.getEntityWorld(), xCoord, zCoord, direction, VillageUndertakerGenerator.getInstance());
+                    generateStructure(sender, sender.getEntityWorld(), x, z, facing, VillageUndertakerGenerator.getInstance());
                     break;
                 default:
                     sender.addChatMessage(new ChatComponentTranslation("commands.generate.unknown_structure").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
@@ -65,16 +84,7 @@ public class SubCommandStructuresGenerator {
 
     }
 
-    private static void generateStructure(ICommandSender sender, World world, String xStr, String zStr, String direction, GSStructureGenerator structure) {
-        EnumFacing facing = EnumFacing.byName(direction);
-        if (facing == null) {
-            sender.addChatMessage(new ChatComponentTranslation("commands.direction_error").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
-        } else {
-            try {
-                structure.generate(world, world.rand, Integer.parseInt(xStr), Integer.parseInt(zStr), EnumFacing.byName(direction), 0, true);
-            } catch (NumberFormatException e) {
-                sender.addChatMessage(new ChatComponentTranslation("commands.coordinate_error").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
-            }
-        }
+    private static void generateStructure(ICommandSender sender, World world, int x, int z, EnumFacing facing, GSStructureGenerator structure) {
+        structure.generate(world, world.rand, x, z, facing, 0, true);
     }
 }
