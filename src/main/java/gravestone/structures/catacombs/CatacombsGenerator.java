@@ -53,6 +53,7 @@ public class CatacombsGenerator implements GSStructureGenerator {
             }
 
             structuresList.add(new ChunkCoordIntPair(x, z));
+            GSLogger.logInfo("Catacombs was successfully generated!");
             return true;
         }
 
