@@ -88,12 +88,11 @@ public class GravesLogger extends AbstractLogger {
                 loggedStr.append(baos.toString());
             }
 
+
             try {
-                FileOutputStream fileoutputstream = new FileOutputStream(logFile);
-                fileoutputstream.write(loggedStr.toString().getBytes());
-                fileoutputstream.close();
+                PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(logFile, true)));
+                out.println(loggedStr.toString());
             } catch (IOException e) {
-                GSLogger.logError("Error while writing in graves log file!");
                 e.printStackTrace();
             }
         } else {
