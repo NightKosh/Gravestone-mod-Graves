@@ -5,6 +5,7 @@ import gravestone.block.enums.EnumGraves;
 import gravestone.config.GSConfig;
 import gravestone.core.TimeHelper;
 import gravestone.core.event.GSRenderEventHandler;
+import gravestone.core.event.GSTickEventHandler;
 import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
 import gravestone.inventory.GraveInventory;
 import net.minecraft.client.Minecraft;
@@ -59,20 +60,11 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
 
         gsSpawn.update();
 
-        if (this.worldObj.isRemote && GSConfig.isFogEnabled) {
+        if (this.worldObj.isRemote && GSConfig.isFogEnabled && GSTickEventHandler.getFogTicCount() == 0) {
             EntityPlayer player = this.worldObj.getClosestPlayer(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D, FOG_RANGE);
-            if (player != null && player.getCommandSenderEntity().equals(Minecraft.getMinecraft().thePlayer) && isFogTime(this.worldObj)) {
+            if (player != null && player.getCommandSenderEntity().equals(Minecraft.getMinecraft().thePlayer) && TimeHelper.isFogTime(this.worldObj)) {
                 GSRenderEventHandler.addFog();
             }
-        }
-    }
-
-    public static boolean isFogTime(World world) {
-        if (world.isRaining()) {
-            return false;
-        } else {
-            long dayTime = TimeHelper.getDayTime(world);
-            return dayTime > TimeHelper.FOG_START_TIME && dayTime < TimeHelper.FOG_END_TIME;
         }
     }
 
