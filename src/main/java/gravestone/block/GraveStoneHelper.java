@@ -7,6 +7,7 @@ import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
 import gravestone.core.compatibility.*;
 import gravestone.core.logger.GSLogger;
+import gravestone.inventory.GraveInventory;
 import gravestone.item.corpse.CorpseHelper;
 import gravestone.item.enums.EnumCorpse;
 import gravestone.tileentity.DeathMessageInfo;
@@ -402,7 +403,8 @@ public class GraveStoneHelper implements IGraveStone {
     }
 
     public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event, long spawnTime) {
-        if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GSConfig.graveItemsCount > 0) {
+        if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GSConfig.graveItemsCount > 0 &&
+                !isInRestrictedArea(player.getPosition())) {
             List<ItemStack> items = new LinkedList<ItemStack>();
 
             GSCompatibilityAntiqueAtlas.placeDeathMarkerAtDeath(player);
@@ -439,10 +441,21 @@ public class GraveStoneHelper implements IGraveStone {
     }
 
     public static void createGrave(Entity entity, LivingDeathEvent event, List<ItemStack> items, BlockGSGraveStone.EnumGraveType entityType, boolean isVillager, long spawnTime) {
-        int age = (int) (entity.worldObj.getWorldTime() - spawnTime) / 24000;
-        GSBlock.graveStone.createOnDeath(entity, entity.worldObj, new BlockPos(entity.posX, entity.posY, entity.posZ - 1),
-                getDeathMessage((EntityLivingBase) entity, event.source.damageType, isVillager),
-                items, age, entityType, event.source);
+        if (isInRestrictedArea(entity.getPosition())) {
+            GSLogger.logInfo("Can't generate " + entity.getName() + "'s grave in restricted area. " + entity.getPosition().toString());
+            if (items != null) {
+                for (int i = 0; i < items.size(); i++) {
+                    if (items.get(i) != null) {
+                        GraveInventory.dropItem(items.get(i), entity.worldObj, entity.getPosition());
+                    }
+                }
+            }
+        } else {
+            int age = (int) (entity.worldObj.getWorldTime() - spawnTime) / 24000;
+            GSBlock.graveStone.createOnDeath(entity, entity.worldObj, new BlockPos(entity.posX, entity.posY, entity.posZ - 1),
+                    getDeathMessage((EntityLivingBase) entity, event.source.damageType, isVillager),
+                    items, age, entityType, event.source);
+        }
     }
 
     public static void createPetGrave(Entity entity, LivingDeathEvent event, long spawnTime) {
@@ -847,5 +860,39 @@ public class GraveStoneHelper implements IGraveStone {
 
     public static boolean isMagicDamage(DamageSource damageSource, String damageType) {
         return DamageSource.magic.equals(damageSource) || damageType.toLowerCase().contains("magic");
+    }
+
+    private static boolean isInRestrictedArea(BlockPos pos) {
+        return GSConfig.restrictGraveGenerationInArea.stream().anyMatch((area) -> area.isInArea(pos));
+    }
+
+    public static class RestrictedArea {
+        private final BlockPos firstPoint;
+        private final BlockPos lastPoint;
+
+        public RestrictedArea(int startX, int startY, int startZ, int endX, int endY, int endZ) {
+            firstPoint = new BlockPos(startX, startY, startZ);
+            lastPoint = new BlockPos(endX, endY, endZ);
+        }
+
+        public boolean isInArea(BlockPos pos) {
+            return pos.getX() >= firstPoint.getX() && pos.getX() <= lastPoint.getX() &&
+                    pos.getY() >= firstPoint.getY() && pos.getY() <= lastPoint.getY() &&
+                    pos.getZ() >= firstPoint.getZ() && pos.getZ() <= lastPoint.getZ();
+        }
+
+        public static RestrictedArea getFromString(String area) {
+            String[] coordinates = area.split(",");
+            if (coordinates.length == 6) {
+                try {
+                    return new GraveStoneHelper.RestrictedArea(
+                            Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]), Integer.parseInt(coordinates[2]),
+                            Integer.parseInt(coordinates[3]), Integer.parseInt(coordinates[4]), Integer.parseInt(coordinates[5]));
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
     }
 }
