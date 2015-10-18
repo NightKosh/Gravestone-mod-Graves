@@ -405,6 +405,8 @@ public class GraveStoneHelper implements IGraveStone {
         if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GSConfig.graveItemsCount > 0) {
             List<ItemStack> items = new LinkedList<ItemStack>();
 
+            GSCompatibilityAntiqueAtlas.placeDeathMarkerAtDeath(player);
+
             items.addAll(Arrays.asList(player.inventory.mainInventory));
             items.addAll(Arrays.asList(player.inventory.armorInventory));
 
@@ -425,6 +427,7 @@ public class GraveStoneHelper implements IGraveStone {
 
             GSCompatibilityisArsMagica.getSoulboundItemsBack(items, player);
             GSCompatibilityEnderIO.getSoulboundItemsBack(items, player);
+
 
             //TODO is it really required??
             GSCompatibilityTwilightForest.removeSlotTags(items);
