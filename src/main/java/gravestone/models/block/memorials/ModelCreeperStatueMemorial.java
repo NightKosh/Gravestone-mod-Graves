@@ -5,6 +5,7 @@ import gravestone.models.block.ModelMemorial;
 import gravestone.renderer.tileentity.TileEntityGSMemorialRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -112,26 +113,27 @@ public class ModelCreeperStatueMemorial extends ModelMemorial {
         GL11.glTranslated(0, -0.5, 0);
         GL11.glScalef(scale, scale, scale);
         TileEntityGSMemorialRenderer.instance.bindTextureByName(Resources.CREEPER_AURA);
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glDepthMask(true);
-        GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
-        GL11.glMatrixMode(GL11.GL_TEXTURE);
+
+        GlStateManager.depthMask(true);
+        GlStateManager.matrixMode(GL11.GL_TEXTURE);
+        GlStateManager.enableBlend();
+        GlStateManager.disableLighting();
+        GlStateManager.blendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
 
         for (int var21 = 0; var21 < 3; ++var21) {
-            GL11.glLoadIdentity();
+            GlStateManager.loadIdentity();
             float var23 = tickModifier * (0.001F + (float) var21 * 0.0015F) * 15;
             GL11.glTranslatef(0, var23, 0);
             renderCreeper();
         }
 
-        GL11.glMatrixMode(GL11.GL_TEXTURE);
-        GL11.glLoadIdentity();
-        GL11.glMatrixMode(GL11.GL_MODELVIEW);
-        GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glDepthFunc(GL11.GL_LEQUAL);
-        GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
-
+        GlStateManager.matrixMode(GL11.GL_TEXTURE);
+        GlStateManager.loadIdentity();
+        GlStateManager.matrixMode(GL11.GL_MODELVIEW);
+        GlStateManager.enableLighting();
+        GlStateManager.disableBlend();
+        GlStateManager.depthFunc(GL11.GL_LEQUAL);
+        GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
 
         GL11.glTranslated(0, -0.19, 0);
     }
