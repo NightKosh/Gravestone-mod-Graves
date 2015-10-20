@@ -29,7 +29,7 @@ public class GravesLogger extends AbstractLogger {
         File logsDir = new File(worldDirectory, LOG_FILE_DIRECTORY);
 //        if (!logsDir..exists()) {
 //            try {
-                logsDir.mkdir();
+        logsDir.mkdir();
 //            } catch (IOException e) {
 //                GSLogger.logError("Can't create graves logger directory!");
 //                e.printStackTrace();
@@ -96,9 +96,8 @@ public class GravesLogger extends AbstractLogger {
             }
 
             try {
-                FileOutputStream fileoutputstream = new FileOutputStream(logFile);
-                fileoutputstream.write(loggedStr.toString().getBytes());
-                fileoutputstream.close();
+                PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(logFile, true)));
+                out.println(loggedStr.toString());
             } catch (IOException e) {
                 GSLogger.logError("Error while writing in graves log file!");
                 e.printStackTrace();
