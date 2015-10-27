@@ -48,7 +48,7 @@ public class GSTickEventHandler {
                 fogTicCount++;
                 if (fogTicCount > MAX_FOG_TICK_COUNT) {
                     fogTicCount = 0;
-                    GSRenderEventHandler.resetAmountOfFogSources();
+                    GSRenderEventHandler.resetAmountOfFogSources(event.player.worldObj);
                 }
             }
         }

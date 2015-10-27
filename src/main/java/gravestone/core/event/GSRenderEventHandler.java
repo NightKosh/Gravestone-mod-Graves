@@ -1,6 +1,8 @@
 package gravestone.core.event;
 
 import gravestone.config.GSConfig;
+import gravestone.core.TimeHelper;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -29,8 +31,11 @@ public class GSRenderEventHandler {
         updateFogDensity();
     }
 
-    public static void resetAmountOfFogSources() {
+    public static void resetAmountOfFogSources(World world) {
         amountOfFogSources = 0;
+        if (!TimeHelper.isFogTime(world)) {
+            fogDensityPerTick = 0;
+        }
     }
 
     private static void updateFogDensity() {
