@@ -9,7 +9,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import gravestone.core.GSBlock;
 import gravestone.core.GSItem;
 import gravestone.core.Resources;
-import gravestone.core.event.GSClientTickEventHandler;
+import gravestone.core.event.GSTickEventHandler;
 import gravestone.core.event.GSRenderEventHandler;
 import gravestone.entity.monster.*;
 import gravestone.entity.monster.EntitySkullCrawler.SkullCrawlerType;
@@ -132,7 +132,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerHandlers() {
-        FMLCommonHandler.instance().bus().register(new GSClientTickEventHandler());
+        FMLCommonHandler.instance().bus().register(new GSTickEventHandler());
         MinecraftForge.EVENT_BUS.register(new GSRenderEventHandler());
     }
 }

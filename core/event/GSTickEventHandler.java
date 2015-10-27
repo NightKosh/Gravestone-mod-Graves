@@ -12,14 +12,26 @@ import net.minecraft.client.Minecraft;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GSClientTickEventHandler {
+public class GSTickEventHandler {
+
+
+    private static short fogTicCount = 0;
+    public static final short MAX_FOG_TICK_COUNT = 100;
+
+    public static short getFogTicCount() {
+        return fogTicCount;
+    }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void playerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
-            if (event.player.getCommandSenderName().equals(Minecraft.getMinecraft().thePlayer.getCommandSenderName())) {
-                GSRenderEventHandler.fogDensityPerTick = 0;
+            if (event.player.equals(Minecraft.getMinecraft().thePlayer)) {
+                fogTicCount++;
+                if (fogTicCount > MAX_FOG_TICK_COUNT) {
+                    fogTicCount = 0;
+                    GSRenderEventHandler.resetAmountOfFogSources(event.player.worldObj);
+                }
             }
         }
     }

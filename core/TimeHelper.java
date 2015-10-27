@@ -29,4 +29,12 @@ public class TimeHelper {
         return time % 24000;
     }
 
+    public static boolean isFogTime(World world) {
+        if (world.isRaining()) {
+            return false;
+        } else {
+            long dayTime = getDayTime(world);
+            return dayTime > FOG_START_TIME && dayTime < FOG_END_TIME;
+        }
+    }
 }
