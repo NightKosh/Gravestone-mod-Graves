@@ -33,7 +33,7 @@ public class GSRenderEventHandler {
 
     public static void resetAmountOfFogSources(World world) {
         amountOfFogSources = 0;
-        if (!TimeHelper.isFogTime(world)) {
+        if (fogDensityPerTick != 0 && !TimeHelper.isFogTime(world)) {
             fogDensityPerTick = 0;
         }
     }
