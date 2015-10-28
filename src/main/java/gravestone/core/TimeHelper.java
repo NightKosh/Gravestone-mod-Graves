@@ -42,6 +42,12 @@ public class TimeHelper {
         isGraveSpawnTime = isValidTime;
     }
 
+    public static void updateIsGraveSpawnTime(World world) {
+        long time = TimeHelper.getDayTime(world);
+
+        setIsGraveSpawnTime(time > GRAVE_SPAWN_START_TIME && time < GRAVE_SPAWN_END_TIME || world.isThundering());
+    }
+
     public static boolean isFogTime(World world) {
         if (world.isRaining()) {
             return false;

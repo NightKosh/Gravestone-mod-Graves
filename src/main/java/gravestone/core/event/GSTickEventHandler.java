@@ -30,9 +30,7 @@ public class GSTickEventHandler {
             ticCount++;
 
             if (ticCount >= 500) {
-                long time = TimeHelper.getDayTime(event.world);
-
-                TimeHelper.setIsGraveSpawnTime(time > TimeHelper.GRAVE_SPAWN_START_TIME && time < TimeHelper.GRAVE_SPAWN_END_TIME || event.world.isThundering());
+                TimeHelper.updateIsGraveSpawnTime(event.world);
                 ticCount = 0;
             }
         }
