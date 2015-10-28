@@ -3,6 +3,7 @@ package gravestone.tileentity;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSMobSpawn;
+import gravestone.core.TimeHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -19,8 +20,6 @@ public class GSGraveStoneSpawn extends GSSpawner {
     private static final int BASE_DELAY = 600;
     private static final int PLAYER_RANGE = 35;
     private static final int MIN_DELAY = 500;
-    private static final int START_TIME = 13500;
-    private static final int END_TIME = 22500;
     private boolean getNewMob = true;
     /**
      * Maximum number of entities for limiting mob spawning
@@ -79,13 +78,7 @@ public class GSGraveStoneSpawn extends GSSpawner {
      */
     @Override
     protected boolean canSpawnMobs(World world) {
-        long time = world.getWorldTime() % 24000;
-
-        if (time > START_TIME && time < END_TIME || world.isThundering()) {
-            return true;
-        }
-
-        return false;
+        return TimeHelper.isGraveSpawnTime();
     }
 
     @Override
