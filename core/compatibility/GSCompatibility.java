@@ -85,5 +85,9 @@ public class GSCompatibility {
         if (Loader.isModLoaded("TwilightForest")) {
             GSCompatibilityTwilightForest.isInstalled = true;
         }
+
+        if (Loader.isModLoaded("antiqueatlas")) {
+            GSCompatibilityAntiqueAtlas.isInstalled = true;
+        }
     }
 }

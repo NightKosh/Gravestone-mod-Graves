@@ -112,6 +112,7 @@ public class GraveStoneConfig {
     public static boolean enableArsMagicaSoulbound;
     public static boolean enableEnderIOSoulbound;
     public static boolean enableTwilightForestKeeping;
+    public static boolean enableAntiqueAtlasDeathMarkers;
 
 
     private GraveStoneConfig(String path, File configFile) {
@@ -231,6 +232,8 @@ public class GraveStoneConfig {
         enableArsMagicaSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableArsMagicaSoulbound", true).getBoolean(true);
         enableEnderIOSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableEnderIOSoulbound", true).getBoolean(true);
         enableTwilightForestKeeping = config.get(CATEGORY_COMPATIBILITY, "EnableTwilightForestCharmsOfKeeping", true).getBoolean(true);
+
+        enableAntiqueAtlasDeathMarkers = config.get(CATEGORY_COMPATIBILITY, "EnableAntiqueAtlasDeathMarkers", true).getBoolean(true);
     }
 
     private void getGravesText() {

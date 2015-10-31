@@ -506,6 +506,8 @@ public class GraveStoneHelper {
         if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GraveStoneConfig.graveItemsCount > 0) {
             List<ItemStack> items = new LinkedList<ItemStack>();
 
+            GSCompatibilityAntiqueAtlas.placeDeathMarkerAtDeath(player);
+
             items.addAll(Arrays.asList(player.inventory.mainInventory));
             items.addAll(Arrays.asList(player.inventory.armorInventory));
 
