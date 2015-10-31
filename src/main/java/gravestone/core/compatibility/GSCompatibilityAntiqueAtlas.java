@@ -3,8 +3,6 @@ package gravestone.core.compatibility;
 import gravestone.config.GSConfig;
 import net.minecraft.entity.player.EntityPlayer;
 
-import java.util.List;
-
 /**
  * GraveStone mod
  *
@@ -20,13 +18,13 @@ public class GSCompatibilityAntiqueAtlas {
 
     public static void placeDeathMarkerAtDeath(EntityPlayer player) {
         if (isInstalled() && GSConfig.enableAntiqueAtlasDeathMarkers) {
-            List<Integer> atlasesIdList = AtlasAPI.getPlayerAtlases(player);
-            MarkerAPI markerAPI = AtlasAPI.getMarkerAPI();
-            if (markerAPI != null && atlasesIdList != null) {
-                for (Integer atlasId : atlasesIdList) {
-                    markerAPI.putMarker(player.worldObj, true, atlasId, "tomb", "", (int) player.getPosition().getX(), (int) player.getPosition().getZ());
-                }
-            }
+//            List<Integer> atlasesIdList = AtlasAPI.getPlayerAtlases(player);
+//            MarkerAPI markerAPI = AtlasAPI.getMarkerAPI();
+//            if (markerAPI != null && atlasesIdList != null) {
+//                for (Integer atlasId : atlasesIdList) {
+//                    markerAPI.putMarker(player.worldObj, true, atlasId, "tomb", player.getCombatTracker().getDeathMessage().getFormattedText(), (int) player.getPosition().getX(), (int) player.getPosition().getZ());
+//                }
+//            }
         }
 
     }
