@@ -9,6 +9,7 @@ import gravestone.core.logger.GSLogger;
 import gravestone.item.corpse.CorpseHelper;
 import gravestone.item.enums.EnumCorpse;
 import gravestone.tileentity.DeathMessageInfo;
+import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
@@ -29,6 +30,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
@@ -503,7 +505,8 @@ public class GraveStoneHelper {
     }
 
     public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event, long spawnTime) {
-        if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GraveStoneConfig.graveItemsCount > 0) {
+        if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GraveStoneConfig.graveItemsCount > 0&&
+                !isInRestrictedArea(player.getPosition(1))) {
             List<ItemStack> items = new LinkedList<ItemStack>();
 
             GSCompatibilityAntiqueAtlas.placeDeathMarkerAtDeath(player);
@@ -540,10 +543,22 @@ public class GraveStoneHelper {
     }
 
     public static void createGrave(Entity entity, LivingDeathEvent event, List<ItemStack> items, BlockGSGraveStone.EnumGraveType entityType, boolean isVillager, long spawnTime) {
-        int age = (int) (entity.worldObj.getWorldTime() - spawnTime) / 24000;
-        GSBlock.graveStone.createOnDeath(entity, entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
-                getDeathMessage((EntityLivingBase) entity, event.source.damageType, isVillager),
-                MathHelper.floor_float(entity.rotationYaw), items, age, entityType, event.source);
+        Vec3 position = Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ);
+        if (isInRestrictedArea(position)) {
+            GSLogger.logInfo("Can't generate " + entity.getCommandSenderName() + "'s grave in restricted area. " + position.toString());
+            if (items != null) {
+                for (int i = 0; i < items.size(); i++) {
+                    if (items.get(i) != null) {
+                        GSGraveStoneItems.dropItem(items.get(i), entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ);
+                    }
+                }
+            }
+        } else {
+            int age = (int) (entity.worldObj.getWorldTime() - spawnTime) / 24000;
+            GSBlock.graveStone.createOnDeath(entity, entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ - 1,
+                    getDeathMessage((EntityLivingBase) entity, event.source.damageType, isVillager),
+                    MathHelper.floor_float(entity.rotationYaw), items, age, entityType, event.source);
+        }
     }
 
     public static void createPetGrave(Entity entity, LivingDeathEvent event, long spawnTime) {
@@ -939,5 +954,44 @@ public class GraveStoneHelper {
 
     public static boolean isMagicDamage(DamageSource damageSource, String damageType) {
         return DamageSource.magic.equals(damageSource) || damageType.toLowerCase().contains("magic");
+    }
+
+    private static boolean isInRestrictedArea(Vec3 position) {
+        for (RestrictedArea area : GraveStoneConfig.restrictGraveGenerationInArea) {
+            if (area.isInArea(position)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static class RestrictedArea {
+        private final Vec3 firstPoint;
+        private final Vec3 lastPoint;
+
+        public RestrictedArea(int startX, int startY, int startZ, int endX, int endY, int endZ) {
+            this.firstPoint = Vec3.createVectorHelper(startX, startY, startZ);
+            this.lastPoint = Vec3.createVectorHelper(endX, endY, endZ);
+        }
+
+        public boolean isInArea(Vec3 position) {
+            return position.xCoord >= firstPoint.xCoord && position.xCoord <= lastPoint.xCoord &&
+                    position.yCoord >= firstPoint.yCoord && position.yCoord <= lastPoint.yCoord &&
+                    position.zCoord >= firstPoint.zCoord && position.zCoord <= lastPoint.zCoord;
+        }
+
+        public static RestrictedArea getFromString(String area) {
+            String[] coordinates = area.split(",");
+            if (coordinates.length == 6) {
+                try {
+                    return new GraveStoneHelper.RestrictedArea(
+                            Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]), Integer.parseInt(coordinates[2]),
+                            Integer.parseInt(coordinates[3]), Integer.parseInt(coordinates[4]), Integer.parseInt(coordinates[5]));
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
     }
 }

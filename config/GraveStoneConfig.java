@@ -1,6 +1,7 @@
 package gravestone.config;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSPotion;
 import gravestone.structures.GraveStoneWorldGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
@@ -11,6 +12,7 @@ import net.minecraftforge.common.config.Property;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * GraveStone mod
@@ -115,6 +117,10 @@ public class GraveStoneConfig {
     public static boolean enableAntiqueAtlasDeathMarkers;
 
 
+
+    public static List<GraveStoneHelper.RestrictedArea> restrictGraveGenerationInArea;
+
+
     private GraveStoneConfig(String path, File configFile) {
         this.config = new Configuration(configFile);
         this.path = path;
@@ -203,6 +209,19 @@ public class GraveStoneConfig {
 
         removeEmptyGraves = config.get(Configuration.CATEGORY_GENERAL, "RemoveEmptyGraves", false).getBoolean(false);
         showGravesRemovingMessages = config.get(Configuration.CATEGORY_GENERAL, "ShowGravesRemovingMessages", true).getBoolean(true);
+
+
+        Property restrictGraveGenerationInAreaProperty = config.get(Configuration.CATEGORY_GENERAL, "RestrictGraveGenerationInArea", "");
+        restrictGraveGenerationInAreaProperty.comment = "List of coordinates in which graves generation must be disabled. \"start_x,start_y,start_z,end_x,end_y,end_z;\"";
+        String ar = restrictGraveGenerationInAreaProperty.getString();
+        String[] areas = ar.split(";");
+        restrictGraveGenerationInArea = new ArrayList<GraveStoneHelper.RestrictedArea>(areas.length);
+        for (String area : areas) {
+            GraveStoneHelper.RestrictedArea restrictedArea = GraveStoneHelper.RestrictedArea.getFromString(area);
+            if (restrictedArea != null) {
+                restrictGraveGenerationInArea.add(restrictedArea);
+            }
+        }
     }
 
     private static void entityConfig() {
