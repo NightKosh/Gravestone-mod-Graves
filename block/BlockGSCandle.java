@@ -15,7 +15,6 @@ import net.minecraft.client.particle.EntityFX;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
-import thaumcraft.api.crafting.IInfusionStabiliser;
 
 import java.util.Random;
 
@@ -25,7 +24,7 @@ import java.util.Random;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class BlockGSCandle extends BlockContainer implements IInfusionStabiliser {
+public class BlockGSCandle extends BlockContainer {
 
     public BlockGSCandle() {
         super(Material.carpet);
@@ -135,8 +134,4 @@ public class BlockGSCandle extends BlockContainer implements IInfusionStabiliser
         return new TileEntityGSCandle();
     }
 
-    @Override
-    public boolean canStabaliseInfusion(World world, int x, int y, int z) {
-        return true;
-    }
 }

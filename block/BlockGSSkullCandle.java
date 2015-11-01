@@ -20,7 +20,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import thaumcraft.api.crafting.IInfusionStabiliser;
 
 import java.util.List;
 import java.util.Random;
@@ -31,7 +30,7 @@ import java.util.Random;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class BlockGSSkullCandle extends BlockContainer implements IInfusionStabiliser {
+public class BlockGSSkullCandle extends BlockContainer {
 
     public BlockGSSkullCandle() {
         super(Material.circuits);
@@ -142,10 +141,5 @@ public class BlockGSSkullCandle extends BlockContainer implements IInfusionStabi
 
             world.spawnParticle("smoke", xPos + dx, yPos, zPos + dz, 0, 0, 0);
         }
-    }
-
-    @Override
-    public boolean canStabaliseInfusion(World world, int x, int y, int z) {
-        return true;
     }
 }
