@@ -89,5 +89,9 @@ public class GSCompatibility {
         if (Loader.isModLoaded("antiqueatlas")) {
             GSCompatibilityAntiqueAtlas.isInstalled = true;
         }
+
+        if (Loader.isModLoaded("witchery")) {
+            GSCompatibilityWitchery.isInstalled = true;
+        }
     }
 }
