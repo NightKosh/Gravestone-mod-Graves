@@ -6,6 +6,7 @@ import gravestone.config.GSConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
 import gravestone.core.MobHandler;
+import gravestone.core.compatibility.GSCompatibilityWitchery;
 import gravestone.core.logger.GravesLogger;
 import gravestone.entity.monster.EntitySkullCrawler;
 import gravestone.entity.monster.EntityWitherSkullCrawler;
@@ -42,7 +43,8 @@ public class GSEventsHandler {
                 return;
             }
 
-            if (GSConfig.generatePlayerGraves && event.entityLiving instanceof EntityPlayer) {
+            if (GSConfig.generatePlayerGraves && event.entityLiving instanceof EntityPlayer &&
+                    !GSCompatibilityWitchery.isVampire((EntityPlayer) event.entity, event.source)) {
                 GraveStoneHelper.createPlayerGrave((EntityPlayer) event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
             } else {
                 if (GSConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
