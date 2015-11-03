@@ -116,16 +116,64 @@ public class ItemBlockGSMemorial extends ItemBlock {
             byte startZ = 0;
 
             switch (memorialType) {
+                case WOODEN_CROSS:
+                case SANDSTONE_CROSS:
                 case STONE_CROSS:
+                case MOSSY_CROSS:
+                case IRON_CROSS:
+                case GOLDEN_CROSS:
+                case DIAMOND_CROSS:
+                case EMERALD_CROSS:
+                case LAPIS_CROSS:
+                case REDSTONE_CROSS:
+                case OBSIDIAN_CROSS:
+                case QUARTZ_CROSS:
+                case ICE_CROSS:
+                case WOODEN_OBELISK:
+                case SANDSTONE_OBELISK:
+                case STONE_OBELISK:
+                case MOSSY_OBELISK:
+                case IRON_OBELISK:
+                case GOLDEN_OBELISK:
+                case DIAMOND_OBELISK:
+                case EMERALD_OBELISK:
+                case LAPIS_OBELISK:
+                case REDSTONE_OBELISK:
+                case OBSIDIAN_OBELISK:
                 case QUARTZ_OBELISK:
+                case ICE_OBELISK:
                     maxY = 5;
                     maxX = 2;
                     maxZ = 2;
                     startX = -1;
                     startZ = -1;
                     break;
+                case WOODEN_DOG_STATUE:
+                case WOODEN_CAT_STATUE:
+                case SANDSTONE_DOG_STATUE:
+                case SANDSTONE_CAT_STATUE:
                 case STONE_DOG_STATUE:
                 case STONE_CAT_STATUE:
+                case MOSSY_DOG_STATUE:
+                case MOSSY_CAT_STATUE:
+                case IRON_DOG_STATUE:
+                case IRON_CAT_STATUE:
+                case GOLDEN_DOG_STATUE:
+                case GOLDEN_CAT_STATUE:
+                case DIAMOND_DOG_STATUE:
+                case DIAMOND_CAT_STATUE:
+                case EMERALD_DOG_STATUE:
+                case EMERALD_CAT_STATUE:
+                case LAPIS_DOG_STATUE:
+                case LAPIS_CAT_STATUE:
+                case REDSTONE_DOG_STATUE:
+                case REDSTONE_CAT_STATUE:
+                case OBSIDIAN_DOG_STATUE:
+                case OBSIDIAN_CAT_STATUE:
+                case QUARTZ_DOG_STATUE:
+                case QUARTZ_CAT_STATUE:
+                case ICE_DOG_STATUE:
+                case ICE_CAT_STATUE:
                     maxY = 2;
                     break;
                 default:

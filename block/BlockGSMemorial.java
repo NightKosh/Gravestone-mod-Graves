@@ -7,6 +7,7 @@ import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSBlock;
 import gravestone.core.GSTabs;
 import gravestone.item.ItemGSCorpse;
 import gravestone.item.corpse.VillagerCorpseHelper;
@@ -22,6 +23,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -29,6 +31,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -593,6 +596,310 @@ public class BlockGSMemorial extends BlockContainer {
                 if (itemStack.stackTagCompound.hasKey("HangedMob")) {
                     tileEntity.setHangedMob(EnumHangedMobs.getByID(itemStack.stackTagCompound.getByte("HangedMob")));
                     tileEntity.setHangedVillagerProfession(itemStack.stackTagCompound.getInteger("HangedVillagerProfession"));
+                }
+
+                placeWalls(world, x, y, z);
+            }
+        }
+    }
+
+    public static void placeWalls(World world, int x, int y, int z) {
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
+
+        if (tileEntity != null) {
+            //TODO almost the same code in ItemBlockGSMemorial
+            byte maxY;
+            byte maxX = 1;
+            byte maxZ = 1;
+            byte startX = 0;
+            byte startZ = 0;
+
+            switch (tileEntity.getMemorialType()) {
+                case WOODEN_CROSS:
+                case SANDSTONE_CROSS:
+                case STONE_CROSS:
+                case MOSSY_CROSS:
+                case IRON_CROSS:
+                case GOLDEN_CROSS:
+                case DIAMOND_CROSS:
+                case EMERALD_CROSS:
+                case LAPIS_CROSS:
+                case REDSTONE_CROSS:
+                case OBSIDIAN_CROSS:
+                case QUARTZ_CROSS:
+                case ICE_CROSS:
+                case WOODEN_OBELISK:
+                case SANDSTONE_OBELISK:
+                case STONE_OBELISK:
+                case MOSSY_OBELISK:
+                case IRON_OBELISK:
+                case GOLDEN_OBELISK:
+                case DIAMOND_OBELISK:
+                case EMERALD_OBELISK:
+                case LAPIS_OBELISK:
+                case REDSTONE_OBELISK:
+                case OBSIDIAN_OBELISK:
+                case QUARTZ_OBELISK:
+                case ICE_OBELISK:
+                    maxY = 5;
+                    maxX = 2;
+                    maxZ = 2;
+                    startX = -1;
+                    startZ = -1;
+                    break;
+                case WOODEN_DOG_STATUE:
+                case WOODEN_CAT_STATUE:
+                case SANDSTONE_DOG_STATUE:
+                case SANDSTONE_CAT_STATUE:
+                case STONE_DOG_STATUE:
+                case STONE_CAT_STATUE:
+                case MOSSY_DOG_STATUE:
+                case MOSSY_CAT_STATUE:
+                case IRON_DOG_STATUE:
+                case IRON_CAT_STATUE:
+                case GOLDEN_DOG_STATUE:
+                case GOLDEN_CAT_STATUE:
+                case DIAMOND_DOG_STATUE:
+                case DIAMOND_CAT_STATUE:
+                case EMERALD_DOG_STATUE:
+                case EMERALD_CAT_STATUE:
+                case LAPIS_DOG_STATUE:
+                case LAPIS_CAT_STATUE:
+                case REDSTONE_DOG_STATUE:
+                case REDSTONE_CAT_STATUE:
+                case OBSIDIAN_DOG_STATUE:
+                case OBSIDIAN_CAT_STATUE:
+                case QUARTZ_DOG_STATUE:
+                case QUARTZ_CAT_STATUE:
+                case ICE_DOG_STATUE:
+                case ICE_CAT_STATUE:
+                    maxY = 2;
+                    break;
+                case WOODEN_STEVE_STATUE:
+                case SANDSTONE_STEVE_STATUE:
+                case STONE_STEVE_STATUE:
+                case MOSSY_STEVE_STATUE:
+                case IRON_STEVE_STATUE:
+                case GOLDEN_STEVE_STATUE:
+                case DIAMOND_STEVE_STATUE:
+                case EMERALD_STEVE_STATUE:
+                case LAPIS_STEVE_STATUE:
+                case REDSTONE_STEVE_STATUE:
+                case OBSIDIAN_STEVE_STATUE:
+                case QUARTZ_STEVE_STATUE:
+                case ICE_STEVE_STATUE:
+                    // villager
+                case WOODEN_VILLAGER_STATUE:
+                case SANDSTONE_VILLAGER_STATUE:
+                case STONE_VILLAGER_STATUE:
+                case MOSSY_VILLAGER_STATUE:
+                case IRON_VILLAGER_STATUE:
+                case GOLDEN_VILLAGER_STATUE:
+                case DIAMOND_VILLAGER_STATUE:
+                case EMERALD_VILLAGER_STATUE:
+                case LAPIS_VILLAGER_STATUE:
+                case REDSTONE_VILLAGER_STATUE:
+                case OBSIDIAN_VILLAGER_STATUE:
+                case QUARTZ_VILLAGER_STATUE:
+                case ICE_VILLAGER_STATUE:
+                    //angel
+                case WOODEN_ANGEL_STATUE:
+                case SANDSTONE_ANGEL_STATUE:
+                case STONE_ANGEL_STATUE:
+                case MOSSY_ANGEL_STATUE:
+                case IRON_ANGEL_STATUE:
+                case GOLDEN_ANGEL_STATUE:
+                case DIAMOND_ANGEL_STATUE:
+                case EMERALD_ANGEL_STATUE:
+                case LAPIS_ANGEL_STATUE:
+                case REDSTONE_ANGEL_STATUE:
+                case OBSIDIAN_ANGEL_STATUE:
+                case QUARTZ_ANGEL_STATUE:
+                case ICE_ANGEL_STATUE:
+                case WOODEN_CREEPER_STATUE:
+                case SANDSTONE_CREEPER_STATUE:
+                case STONE_CREEPER_STATUE:
+                case MOSSY_CREEPER_STATUE:
+                case IRON_CREEPER_STATUE:
+                case GOLDEN_CREEPER_STATUE:
+                case DIAMOND_CREEPER_STATUE:
+                case EMERALD_CREEPER_STATUE:
+                case LAPIS_CREEPER_STATUE:
+                case REDSTONE_CREEPER_STATUE:
+                case OBSIDIAN_CREEPER_STATUE:
+                case QUARTZ_CREEPER_STATUE:
+                case ICE_CREEPER_STATUE:
+                default:
+                    maxY = 3;
+                    break;
+            }
+            for (byte shiftY = 0; shiftY < maxY; shiftY++) {
+                for (byte shiftZ = startZ; shiftZ < maxZ; shiftZ++) {
+                    for (byte shiftX = startX; shiftX < maxX; shiftX++) {
+                        int newX = x + shiftX;
+                        int newY = y + shiftY;
+                        int newZ = z + shiftZ;
+                        if (world.getBlock(newX, newY, newZ) == Blocks.air) {
+                            world.setBlock(newX, newY, newZ, GSBlock.invisibleWall);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion explosionIn) {
+        removeWalls(world, x, y, z);
+        super.onBlockDestroyedByExplosion(world, x, y, z, explosionIn);
+    }
+
+    @Override
+    public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest) {
+        removeWalls(world, x, y, z);
+        return super.removedByPlayer(world, player, x, y, z, willHarvest);
+    }
+
+    private static void removeWalls(World world, int x, int y, int z) {
+        //TODO almost the same code in ItemBlockGSMemorial
+        byte maxY;
+        byte maxX = 1;
+        byte maxZ = 1;
+        byte startX = 0;
+        byte startZ = 0;
+
+        TileEntityGSMemorial tileEntity = (TileEntityGSMemorial) world.getTileEntity(x, y, z);
+
+        if (tileEntity != null) {
+            switch (tileEntity.getMemorialType()) {
+                case WOODEN_CROSS:
+                case SANDSTONE_CROSS:
+                case STONE_CROSS:
+                case MOSSY_CROSS:
+                case IRON_CROSS:
+                case GOLDEN_CROSS:
+                case DIAMOND_CROSS:
+                case EMERALD_CROSS:
+                case LAPIS_CROSS:
+                case REDSTONE_CROSS:
+                case OBSIDIAN_CROSS:
+                case QUARTZ_CROSS:
+                case ICE_CROSS:
+                case WOODEN_OBELISK:
+                case SANDSTONE_OBELISK:
+                case STONE_OBELISK:
+                case MOSSY_OBELISK:
+                case IRON_OBELISK:
+                case GOLDEN_OBELISK:
+                case DIAMOND_OBELISK:
+                case EMERALD_OBELISK:
+                case LAPIS_OBELISK:
+                case REDSTONE_OBELISK:
+                case OBSIDIAN_OBELISK:
+                case QUARTZ_OBELISK:
+                case ICE_OBELISK:
+                    maxY = 5;
+                    maxX = 2;
+                    maxZ = 2;
+                    startX = -1;
+                    startZ = -1;
+                    break;
+                case WOODEN_DOG_STATUE:
+                case WOODEN_CAT_STATUE:
+                case SANDSTONE_DOG_STATUE:
+                case SANDSTONE_CAT_STATUE:
+                case STONE_DOG_STATUE:
+                case STONE_CAT_STATUE:
+                case MOSSY_DOG_STATUE:
+                case MOSSY_CAT_STATUE:
+                case IRON_DOG_STATUE:
+                case IRON_CAT_STATUE:
+                case GOLDEN_DOG_STATUE:
+                case GOLDEN_CAT_STATUE:
+                case DIAMOND_DOG_STATUE:
+                case DIAMOND_CAT_STATUE:
+                case EMERALD_DOG_STATUE:
+                case EMERALD_CAT_STATUE:
+                case LAPIS_DOG_STATUE:
+                case LAPIS_CAT_STATUE:
+                case REDSTONE_DOG_STATUE:
+                case REDSTONE_CAT_STATUE:
+                case OBSIDIAN_DOG_STATUE:
+                case OBSIDIAN_CAT_STATUE:
+                case QUARTZ_DOG_STATUE:
+                case QUARTZ_CAT_STATUE:
+                case ICE_DOG_STATUE:
+                case ICE_CAT_STATUE:
+                    maxY = 2;
+                    break;
+                case WOODEN_STEVE_STATUE:
+                case SANDSTONE_STEVE_STATUE:
+                case STONE_STEVE_STATUE:
+                case MOSSY_STEVE_STATUE:
+                case IRON_STEVE_STATUE:
+                case GOLDEN_STEVE_STATUE:
+                case DIAMOND_STEVE_STATUE:
+                case EMERALD_STEVE_STATUE:
+                case LAPIS_STEVE_STATUE:
+                case REDSTONE_STEVE_STATUE:
+                case OBSIDIAN_STEVE_STATUE:
+                case QUARTZ_STEVE_STATUE:
+                case ICE_STEVE_STATUE:
+                    // villager
+                case WOODEN_VILLAGER_STATUE:
+                case SANDSTONE_VILLAGER_STATUE:
+                case STONE_VILLAGER_STATUE:
+                case MOSSY_VILLAGER_STATUE:
+                case IRON_VILLAGER_STATUE:
+                case GOLDEN_VILLAGER_STATUE:
+                case DIAMOND_VILLAGER_STATUE:
+                case EMERALD_VILLAGER_STATUE:
+                case LAPIS_VILLAGER_STATUE:
+                case REDSTONE_VILLAGER_STATUE:
+                case OBSIDIAN_VILLAGER_STATUE:
+                case QUARTZ_VILLAGER_STATUE:
+                case ICE_VILLAGER_STATUE:
+                    //angel
+                case WOODEN_ANGEL_STATUE:
+                case SANDSTONE_ANGEL_STATUE:
+                case STONE_ANGEL_STATUE:
+                case MOSSY_ANGEL_STATUE:
+                case IRON_ANGEL_STATUE:
+                case GOLDEN_ANGEL_STATUE:
+                case DIAMOND_ANGEL_STATUE:
+                case EMERALD_ANGEL_STATUE:
+                case LAPIS_ANGEL_STATUE:
+                case REDSTONE_ANGEL_STATUE:
+                case OBSIDIAN_ANGEL_STATUE:
+                case QUARTZ_ANGEL_STATUE:
+                case ICE_ANGEL_STATUE:
+                case WOODEN_CREEPER_STATUE:
+                case SANDSTONE_CREEPER_STATUE:
+                case STONE_CREEPER_STATUE:
+                case MOSSY_CREEPER_STATUE:
+                case IRON_CREEPER_STATUE:
+                case GOLDEN_CREEPER_STATUE:
+                case DIAMOND_CREEPER_STATUE:
+                case EMERALD_CREEPER_STATUE:
+                case LAPIS_CREEPER_STATUE:
+                case REDSTONE_CREEPER_STATUE:
+                case OBSIDIAN_CREEPER_STATUE:
+                case QUARTZ_CREEPER_STATUE:
+                case ICE_CREEPER_STATUE:
+                default:
+                    maxY = 3;
+                    break;
+            }
+            for (byte shiftY = 0; shiftY < maxY; shiftY++) {
+                for (byte shiftZ = startZ; shiftZ < maxZ; shiftZ++) {
+                    for (byte shiftX = startX; shiftX < maxX; shiftX++) {
+                        int newX = x + shiftX;
+                        int newY = y + shiftY;
+                        int newZ = z + shiftZ;
+                        if (world.getBlock(newX, newY, newZ) == GSBlock.invisibleWall) {
+                            world.setBlock(newX, newY, newZ, Blocks.air);
+                        }
+                    }
                 }
             }
         }

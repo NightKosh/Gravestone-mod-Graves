@@ -1,5 +1,6 @@
 package gravestone.structures;
 
+import gravestone.block.BlockGSMemorial;
 import gravestone.core.GSBlock;
 import gravestone.tileentity.TileEntityGSMemorial;
 import net.minecraft.world.World;
@@ -36,6 +37,8 @@ public class MemorialGenerationHelper {
         if (tileEntity != null) {
             tileEntity.setGraveType(memorialType);
             tileEntity.setMemorialContent(random);
+
+            BlockGSMemorial.placeWalls(world, x, y, z);
         }
     }
 }

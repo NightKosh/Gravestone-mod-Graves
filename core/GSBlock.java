@@ -25,6 +25,7 @@ public class GSBlock {
     public static BlockGSTrap trap;
     // block memorial
     public static BlockGSMemorial memorial;
+    public static BlockGSInvisibleWall invisibleWall;
     // bone blocks
     public static BlockGSPileOfBones pileOfBones;
     public static BlockGSBoneBlock boneBlock;
@@ -62,6 +63,9 @@ public class GSBlock {
         // memorials
         memorial = new BlockGSMemorial();
         advancedNTBBlockRegistration(memorial, "GSMemorial", "Memorial", EnumMemorials.values(), "GraveType", ItemBlockGSMemorial.class);
+
+        invisibleWall = new BlockGSInvisibleWall();
+        GameRegistry.registerBlock(invisibleWall, "GSInvisibleWall");
 
         // wither spawner
         spawner = new BlockGSSpawner();
