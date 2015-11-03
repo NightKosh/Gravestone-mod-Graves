@@ -671,12 +671,12 @@ public class BlockGSMemorial extends BlockContainer {
                     break;
                 case DOG_STATUE:
                 case CAT_STATUE:
-                case CREEPER_STATUE:
                     maxY = 2;
                     break;
                 case STEVE_STATUE:
                 case VILLAGER_STATUE:
                 case ANGEL_STATUE:
+                case CREEPER_STATUE:
                 default:
                     maxY = 3;
                     break;
