@@ -7,6 +7,7 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
@@ -309,4 +310,42 @@ public abstract class EntityUndeadHorse extends EntityHorse {
         return this.variantTexturePaths;
     }
 
+    @Override
+    public void setHorseType(int horseType) {
+        this.dataWatcher.updateObject(19, (byte) horseType);
+        this.resetTexturePrefix();
+    }
+
+    @Override
+    public void setHorseVariant(int horseVariant) {
+        this.dataWatcher.updateObject(20, horseVariant);
+        this.resetTexturePrefix();
+    }
+
+    @Override
+    public void setHorseArmorStack(ItemStack itemStack) {
+        this.dataWatcher.updateObject(22, this.getHorseArmorIndex(itemStack));
+        this.resetTexturePrefix();
+    }
+
+    protected void resetTexturePrefix() {
+        this.texturePrefix = null;
+    }
+
+    public int getHorseArmorIndex(ItemStack itemStack) {
+        if (itemStack == null) {
+            return 0;
+        } else {
+            Item item = itemStack.getItem();
+            return item == Items.iron_horse_armor ? 1 : (item == Items.golden_horse_armor ? 2 : (item == Items.diamond_horse_armor ? 3 : 0));
+        }
+    }
+
+    @Override
+    public void onUpdate() {
+        if (this.worldObj.isRemote && this.dataWatcher.hasObjectChanged()) {
+            this.resetTexturePrefix();
+        }
+        super.onUpdate();
+    }
 }
