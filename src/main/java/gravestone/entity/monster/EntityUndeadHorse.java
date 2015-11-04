@@ -12,6 +12,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Iterator;
 
@@ -22,6 +24,19 @@ import java.util.Iterator;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public abstract class EntityUndeadHorse extends EntityHorse {
+
+    protected String texturePrefix;
+    protected String variantTexturePaths;
+    protected static final String[] horseArmorTextures = new String[]{
+            null,
+            "textures/entity/horse/armor/horse_armor_iron.png",
+            "textures/entity/horse/armor/horse_armor_gold.png",
+            "textures/entity/horse/armor/horse_armor_diamond.png"
+    };
+    protected static final String[] horseArmorPrefix = new String[]{"", "meo", "goo", "dio"};
+
+
+    protected boolean field_175508_bO = false;
 
     public static enum EnumHorseType {
         ZOMBIE_HORSE_TYPE(3),
@@ -94,7 +109,7 @@ public abstract class EntityUndeadHorse extends EntityHorse {
     }
 
     public boolean hasArmor() {
-        return false;//TODO
+        return false;//TODO !!!!!!!!!!!!!!!
     }
 
     @Override
@@ -224,6 +239,7 @@ public abstract class EntityUndeadHorse extends EntityHorse {
         return false;
     }
 
+    @Override
     public void onLivingUpdate() {
         if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
             float brightness = this.getBrightness(1);
@@ -246,8 +262,51 @@ public abstract class EntityUndeadHorse extends EntityHorse {
         }
     }
 
-
+    @Override
     protected boolean isMovementBlocked() {
         return this.riddenByEntity != null && this.isHorseSaddled() ? true : this.isEatingHaystack() || this.isRearing();
     }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean func_175507_cI() {
+        return this.field_175508_bO;
+    }
+
+    @SideOnly(Side.CLIENT)
+    private void setHorseTexturePaths() {
+        this.texturePrefix = "horse/";
+        int horseType = this.getHorseType();
+
+        this.texturePrefix = this.texturePrefix + horseType + "_";
+        int horseArmorTextureNum = this.func_110241_cb();
+
+        if (horseArmorTextureNum >= horseArmorTextures.length) {
+            this.field_175508_bO = false;
+        } else {
+            this.variantTexturePaths = horseArmorTextures[horseArmorTextureNum];
+            this.texturePrefix = this.texturePrefix + horseArmorPrefix[horseArmorTextureNum];
+            this.field_175508_bO = true;
+        }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public String getHorseTexture() {
+        if (this.texturePrefix == null) {
+            this.setHorseTexturePaths();
+        }
+
+        return this.texturePrefix;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public String getArmorTexturePaths() {
+        if (this.texturePrefix == null) {
+            this.setHorseTexturePaths();
+        }
+
+        return this.variantTexturePaths;
+    }
+
 }
