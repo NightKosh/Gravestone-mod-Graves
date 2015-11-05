@@ -1,8 +1,7 @@
 package gravestone.entity.monster;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -85,13 +85,39 @@ public abstract class EntityUndeadHorse extends EntityHorse {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        //TODO this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4);
+
+        this.getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
     }
 
     @Override
     public boolean attackEntityAsMob(Entity entity) {
-        return entity.attackEntityFrom(DamageSource.causeMobDamage(this), 4);
-        //TODO return entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue());
+        float f = (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+        int i = 0;
+
+        if (entity instanceof EntityLivingBase) {
+            f += EnchantmentHelper.func_152377_a(this.getHeldItem(), ((EntityLivingBase) entity).getCreatureAttribute());
+            i += EnchantmentHelper.getKnockbackModifier(this);
+        }
+
+        boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), f);
+
+        if (flag) {
+            if (i > 0) {
+                entity.addVelocity((double) (-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180F) * (float) i * 0.5F), 0.1, (double) (MathHelper.cos(this.rotationYaw * (float) Math.PI / 180F) * (float) i * 0.5F));
+                this.motionX *= 0.6;
+                this.motionZ *= 0.6;
+            }
+
+            int j = EnchantmentHelper.getFireAspectModifier(this);
+
+            if (j > 0) {
+                entity.setFire(j * 4);
+            }
+
+            this.func_174815_a(this, entity);
+        }
+
+        return flag;
     }
 
     @Override

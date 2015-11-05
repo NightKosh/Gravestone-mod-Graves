@@ -4,6 +4,7 @@ import gravestone.entity.ai.EntityAIAttackLivingHorse;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
@@ -113,5 +114,11 @@ public class EntityZombieHorse extends EntityUndeadHorse {
                 zombie.setCustomNameTag(entity.getCustomNameTag());
             }
         }
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5);
     }
 }

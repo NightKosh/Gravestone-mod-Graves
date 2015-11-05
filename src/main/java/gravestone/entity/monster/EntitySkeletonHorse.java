@@ -1,5 +1,6 @@
 package gravestone.entity.monster;
 
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.world.World;
 
 /**
@@ -17,5 +18,11 @@ public class EntitySkeletonHorse extends EntityUndeadHorse {
     @Override
     public EnumHorseType getUndeadHorseType() {
         return EnumHorseType.SKELETON_HORSE_TYPE;
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(3);
     }
 }
