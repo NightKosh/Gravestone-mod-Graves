@@ -1,6 +1,10 @@
 package gravestone.entity.monster;
 
+import com.google.common.base.Predicate;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.world.World;
 
 /**
@@ -13,6 +17,17 @@ public class EntitySkeletonHorse extends EntityUndeadHorse {
 
     public EntitySkeletonHorse(World worldIn) {
         super(worldIn);
+
+        this.tasks.addTask(3, new EntityAIAvoidEntity(this, new Predicate() {
+            public boolean func_179945_a(Entity entity) {
+                return entity instanceof EntityWolf;
+            }
+
+            @Override
+            public boolean apply(Object obj) {
+                return this.func_179945_a((Entity) obj);
+            }
+        }, 6.0F, 1.0D, 1.2D));
     }
 
     @Override
