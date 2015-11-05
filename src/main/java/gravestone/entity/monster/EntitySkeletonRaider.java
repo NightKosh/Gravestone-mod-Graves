@@ -2,7 +2,6 @@ package gravestone.entity.monster;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
@@ -12,7 +11,7 @@ import net.minecraft.world.World;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class EntitySkeletonRaider extends EntitySkeleton {
+public class EntitySkeletonRaider extends EntityGSSkeleton {
 
     public EntitySkeletonRaider(World worldIn) {
         super(worldIn);
