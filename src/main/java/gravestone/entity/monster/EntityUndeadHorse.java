@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -136,7 +137,10 @@ public abstract class EntityUndeadHorse extends EntityHorse {
     }
 
     public boolean hasArmor() {
-        return false;//TODO !!!!!!!!!!!!!!!
+        NBTTagCompound nbt = new NBTTagCompound();
+        this.writeEntityToNBT(nbt);
+
+        return nbt.hasKey("ArmorItem", 10);
     }
 
     @Override
