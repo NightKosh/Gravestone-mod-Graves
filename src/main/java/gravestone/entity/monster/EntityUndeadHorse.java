@@ -291,7 +291,7 @@ public abstract class EntityUndeadHorse extends EntityHorse {
 
     @Override
     protected boolean isMovementBlocked() {
-        return this.riddenByEntity != null && this.isHorseSaddled() ? true : this.isEatingHaystack() || this.isRearing();
+        return this.riddenByEntity != null && this.isHorseSaddled() || this.isEatingHaystack() || this.isRearing();
     }
 
     @Override

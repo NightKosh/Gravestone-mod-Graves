@@ -53,14 +53,14 @@ public class GSEventsHandler {
                     return;
                 }
 
-                if (GSConfig.generatePetGraves && event.entity instanceof EntityTameable) {
-                    GraveStoneHelper.createPetGrave(event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
-                    return;
-                }
-
-                if (GSConfig.generatePetGraves && event.entity instanceof EntityHorse) {
-                    GraveStoneHelper.createHorseGrave((EntityHorse) event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
-                    return;
+                if (GSConfig.generatePetGraves) {
+                    if (event.entity instanceof EntityTameable) {
+                        GraveStoneHelper.createPetGrave(event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
+                        return;
+                    } else if (event.entity instanceof EntityHorse) {
+                        GraveStoneHelper.createHorseGrave((EntityHorse) event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
+                        return;
+                    }
                 }
             }
 
