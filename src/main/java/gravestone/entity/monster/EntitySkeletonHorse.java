@@ -27,7 +27,7 @@ public class EntitySkeletonHorse extends EntityUndeadHorse {
             public boolean apply(Object obj) {
                 return this.func_179945_a((Entity) obj);
             }
-        }, 6.0F, 1.0D, 1.2D));
+        }, 6, 1, 1.2));
     }
 
     @Override
