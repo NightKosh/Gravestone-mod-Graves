@@ -506,7 +506,7 @@ public class GraveStoneHelper {
 
     public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event, long spawnTime) {
         if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GraveStoneConfig.graveItemsCount > 0&&
-                !isInRestrictedArea(player.getPosition(1))) {
+                !isInRestrictedArea(Vec3.createVectorHelper(player.posX, player.posY, player.posZ))) {
             List<ItemStack> items = new LinkedList<ItemStack>();
 
             GSCompatibilityAntiqueAtlas.placeDeathMarkerAtDeath(player);
