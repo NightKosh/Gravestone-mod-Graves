@@ -22,7 +22,7 @@ public class GSCompatibilityAntiqueAtlas {
 //            MarkerAPI markerAPI = AtlasAPI.getMarkerAPI();
 //            if (markerAPI != null && atlasesIdList != null) {
 //                for (Integer atlasId : atlasesIdList) {
-//                    markerAPI.putMarker(player.worldObj, true, atlasId, "tomb", player.getCombatTracker().getDeathMessage().getFormattedText(), (int) player.getPosition().getX(), (int) player.getPosition().getZ());
+//                    markerAPI.putMarker(player.worldObj, true, atlasId, "tomb", player.getCombatTracker().getDeathMessage().getUnformattedText(), (int) player.getPosition().getX(), (int) player.getPosition().getZ());
 //                }
 //            }
         }
