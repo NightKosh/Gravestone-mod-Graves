@@ -26,7 +26,7 @@ public class GSCompatibilityAntiqueAtlas {
             MarkerAPI markerAPI = AtlasAPI.getMarkerAPI();
             if (markerAPI != null && atlasesIdList != null) {
                 for (Integer atlasId : atlasesIdList) {
-                    markerAPI.putMarker(player.worldObj, true, atlasId, "tomb", player.func_110142_aN().func_151521_b().getFormattedText(), (int) player.posX, (int) player.posZ);
+                    markerAPI.putMarker(player.worldObj, true, atlasId, "tomb", player.func_110142_aN().func_151521_b().getUnformattedText(), (int) player.posX, (int) player.posZ);
                 }
             }
         }
