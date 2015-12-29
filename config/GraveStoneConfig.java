@@ -30,6 +30,7 @@ public class GraveStoneConfig {
     public static final String CATEGORY_COMPATIBILITY = "compatibility";
     public static final String CATEGORY_POTIONS = "potions";
     public static final String CATEGORY_STRUCTURES_CATACOMBS = "structures_catacombs";
+    public static final String CATEGORY_RECIPES = "recipes";
     // renderer Id
     public static int graveRenderID = RenderingRegistry.getNextAvailableRenderId();
     public static int memorialRenderID = RenderingRegistry.getNextAvailableRenderId();
@@ -71,6 +72,12 @@ public class GraveStoneConfig {
     // spawner reciepes
     public static boolean enableBossSpawnerCraftingRecipe;
     public static boolean enableSpawnerCraftingRecipe;
+    // nightstone
+    public static boolean craftableNightStone;
+    public static boolean craftableThunderStone;
+    // altar recipe
+    public static boolean hardAltarRecipe;
+
     // haunted chest
     public static boolean replaceHauntedChest;
     // grave names
@@ -248,6 +255,10 @@ public class GraveStoneConfig {
                 restrictGraveGenerationInArea.add(restrictedArea);
             }
         }
+
+        craftableNightStone = config.get(CATEGORY_RECIPES, "CraftableNightStone", true).getBoolean(true);
+        craftableThunderStone = config.get(CATEGORY_RECIPES, "CraftableThunderStone", true).getBoolean(true);
+        hardAltarRecipe = config.get(CATEGORY_RECIPES, "HardAltarRecipe", false).getBoolean(false);
     }
 
     private static void entityConfig() {

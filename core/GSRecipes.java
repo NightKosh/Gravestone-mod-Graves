@@ -283,9 +283,17 @@ public class GSRecipes {
         GameRegistry.addRecipe(new ItemStack(Items.skull, 1, 1), "c", 'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.WITHER_SKULL.ordinal()));
         GameRegistry.addRecipe(new ItemStack(Items.skull, 1, 2), "c", 'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.ZOMBIE_SKULL.ordinal()));
 
+        if (GraveStoneConfig.craftableNightStone) {
+            GameRegistry.addRecipe(new ItemStack(GSBlock.trap, 1, 0), " p ", "rnr", " s ", 'n', Blocks.nether_brick, 'p', Blocks.stone_pressure_plate, 'r', Items.redstone, 's', Blocks.soul_sand);
+        }
+        if (GraveStoneConfig.craftableThunderStone) {
+            GameRegistry.addRecipe(new ItemStack(GSBlock.trap, 1, 1), " p ", "rnr", " s ", 'n', Blocks.stonebrick, 'p', Blocks.stone_pressure_plate, 'r', Items.redstone, 's', Blocks.soul_sand);
+        }
+
         // altar
+        Item altarCrystal = (GraveStoneConfig.hardAltarRecipe) ? Items.nether_star : Items.diamond;
         GameRegistry.addRecipe(new ItemStack(GSBlock.altar), " h ", "sns", "bbb",
-                'h', Items.nether_star,
+                'h', altarCrystal,
                 's', new ItemStack(Items.skull, 1, 0),
                 'n', new ItemStack(GSBlock.trap, 1, 0),
                 'b', new ItemStack(GSBlock.boneBlock, 1, 0));
