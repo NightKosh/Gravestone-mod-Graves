@@ -1,6 +1,6 @@
 package gravestone.config;
 
-import gravestone.block.GraveStoneHelper;
+import gravestone.helper.GraveStoneHelper;
 import gravestone.core.GSPotion;
 import gravestone.structures.GraveStoneWorldGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
@@ -226,17 +226,24 @@ public class GSConfig {
     }
 
     // recipes
-    public static boolean enableCreeperStatuesRecipes;
-    public static boolean enableBossSpawnerCraftingRecipe;
-    public static boolean enableSpawnerCraftingRecipe;
+    public static boolean craftableCreeperStatues;
+    public static boolean craftableWitherSpawner;
+    public static boolean craftableSpawners;
+    public static boolean craftableNightStone;
+    public static boolean craftableThunderStone;
+    public static boolean hardAltarRecipe;
 
     private static void recipesConfigs() {
         // creeper statues
-        enableCreeperStatuesRecipes = config.get(CATEGORY_RECIPES, "EnableCreeperStatuesRecipes", false).getBoolean(false);
+        craftableCreeperStatues = config.get(CATEGORY_RECIPES, "CraftableCreeperStatues", false).getBoolean(false);
 
         // spawners recipes
-        enableBossSpawnerCraftingRecipe = config.get(CATEGORY_RECIPES, "EnableBossSpawnerCraftingRecipe", true).getBoolean(true);
-        enableSpawnerCraftingRecipe = config.get(CATEGORY_RECIPES, "EnableMonsterSpawnerCraftingRecipe", true).getBoolean(true);
+        craftableWitherSpawner = config.get(CATEGORY_RECIPES, "CraftableWitherSpawner", true).getBoolean(true);
+        craftableSpawners = config.get(CATEGORY_RECIPES, "CraftableSpawners", true).getBoolean(true);
+
+        craftableNightStone = config.get(CATEGORY_RECIPES, "CraftableNightStone", true).getBoolean(true);
+        craftableThunderStone = config.get(CATEGORY_RECIPES, "CraftableThunderStone", true).getBoolean(true);
+        hardAltarRecipe = config.get(CATEGORY_RECIPES, "HardAltarRecipe", false).getBoolean(false);
     }
 
     // mobs

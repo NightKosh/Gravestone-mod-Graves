@@ -44,7 +44,7 @@ public class GravesCraftingManager {
         addMemorialsRecipesForAllMaterials(EnumMemorials.EnumMemorialType.DOG_STATUE, 2);
         addMemorialsRecipesForAllMaterials(EnumMemorials.EnumMemorialType.CAT_STATUE, 2);
         // CREEPER_STATUE
-        if (GSConfig.enableCreeperStatuesRecipes) {
+        if (GSConfig.craftableCreeperStatues) {
             addMemorialsRecipesForAllMaterials(EnumMemorials.EnumMemorialType.CREEPER_STATUE, 3);
         }
     }

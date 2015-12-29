@@ -1,6 +1,6 @@
 package gravestone.core;
 
-import gravestone.block.GraveStoneHelper;
+import gravestone.helper.GraveStoneHelper;
 import gravestone.block.enums.EnumMemorials;
 import gravestone.block.enums.EnumSkullCandle;
 import gravestone.block.enums.EnumSpawner;
@@ -59,12 +59,12 @@ public class GSRecipes {
         }
 
         // spawners
-        if (GSConfig.enableBossSpawnerCraftingRecipe) {
+        if (GSConfig.craftableWitherSpawner) {
             GameRegistry.addRecipe(new ItemStack(GSBlock.spawner, 1, EnumSpawner.WITHER_SPAWNER.ordinal()), "bcb", "cec", "cbc",
                     'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.WITHER_SKULL.ordinal()),
                     'b', new ItemStack(Items.dye, 1, 15), 'e', Items.ender_eye);
         }
-        if (GSConfig.enableSpawnerCraftingRecipe) {
+        if (GSConfig.craftableSpawners) {
             GameRegistry.addRecipe(new ItemStack(GSBlock.spawner, 1, EnumSpawner.SKELETON_SPAWNER.ordinal()), "bcb", "cec", "cbc",
                     'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.SKELETON_SKULL.ordinal()),
                     'b', new ItemStack(Items.dye, 1, 15), 'e', Items.ender_eye);
@@ -81,9 +81,17 @@ public class GSRecipes {
         GameRegistry.addRecipe(new ItemStack(Items.skull, 1, 1), "c", 'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.WITHER_SKULL.ordinal()));
         GameRegistry.addRecipe(new ItemStack(Items.skull, 1, 2), "c", 'c', new ItemStack(GSBlock.skullCandle, 1, EnumSkullCandle.ZOMBIE_SKULL.ordinal()));
 
+        if (GSConfig.craftableNightStone) {
+            GameRegistry.addRecipe(new ItemStack(GSBlock.trap, 1, 0), " p ", "rnr", " s ", 'n', Blocks.nether_brick, 'p', Blocks.stone_pressure_plate, 'r', Items.redstone, 's', Blocks.soul_sand);
+        }
+        if (GSConfig.craftableThunderStone) {
+            GameRegistry.addRecipe(new ItemStack(GSBlock.trap, 1, 1), " p ", "rnr", " s ", 'n', Blocks.stonebrick, 'p', Blocks.stone_pressure_plate, 'r', Items.redstone, 's', Blocks.soul_sand);
+        }
+
         // altar
+        Item altarCrystal = (GSConfig.hardAltarRecipe) ? Items.nether_star : Items.diamond;
         GameRegistry.addRecipe(new ItemStack(GSBlock.altar), " h ", "sns", "bbb",
-                'h', Items.nether_star,
+                'h', altarCrystal,
                 's', new ItemStack(Items.skull, 1, 0),
                 'n', new ItemStack(GSBlock.trap, 1, 0),
                 'b', new ItemStack(GSBlock.boneBlock, 1, 0));
