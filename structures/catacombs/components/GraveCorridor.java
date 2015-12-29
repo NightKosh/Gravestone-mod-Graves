@@ -2,6 +2,7 @@ package gravestone.structures.catacombs.components;
 
 import gravestone.block.BlockGSGraveStone.EnumGraveType;
 import gravestone.block.GraveStoneHelper;
+import gravestone.config.GraveStoneConfig;
 import gravestone.core.GSBlock;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.GraveGenerationHelper;
@@ -45,7 +46,9 @@ public class GraveCorridor extends CatacombsBaseComponent {
         // block floor
         this.fillWithRandomizedBlocks(world, boundingBox, 2, 0, 1, 4, 0, 3, false, random, getCemeteryCatacombsStones());
 
-        this.randomlyFillWithBlocks(world, boundingBox, random, PILE_OF_BONES_GENERATION_CHANCE, 2, 1, 2, 5, 1, 3, GSBlock.pileOfBones, GSBlock.pileOfBones, false);
+        if (GraveStoneConfig.generatePilesOfBones) {
+            this.randomlyFillWithBlocks(world, boundingBox, random, PILE_OF_BONES_GENERATION_CHANCE, 2, 1, 2, 5, 1, 3, GSBlock.pileOfBones, GSBlock.pileOfBones, false);
+        }
 
         // trap floor
         this.fillWithBlocks(world, boundingBox, 1, 0, 0, 5, 0, 0, GSBlock.trap, GSBlock.trap, false);

@@ -5,6 +5,7 @@ import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSPotion;
 import gravestone.structures.GraveStoneWorldGenerator;
 import gravestone.structures.catacombs.CatacombsGenerator;
+import gravestone.structures.catacombs.CatacombsLevel;
 import gravestone.structures.village.VillageHandlerGSUndertaker;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
@@ -28,6 +29,7 @@ public class GraveStoneConfig {
     // CATEGORIES
     public static final String CATEGORY_COMPATIBILITY = "compatibility";
     public static final String CATEGORY_POTIONS = "potions";
+    public static final String CATEGORY_STRUCTURES_CATACOMBS = "structures_catacombs";
     // renderer Id
     public static int graveRenderID = RenderingRegistry.getNextAvailableRenderId();
     public static int memorialRenderID = RenderingRegistry.getNextAvailableRenderId();
@@ -94,6 +96,15 @@ public class GraveStoneConfig {
     public static boolean showGravesRemovingMessages;
     //structures
     public static boolean generateCatacombsGraveyard;
+    public static int catacombsMinRoomsCountAt1Level;
+    public static int catacombsMaxRoomsCountAt1Level;
+    public static int catacombsMinRoomsCountAt2Level;
+    public static int catacombsMaxRoomsCountAt2Level;
+    public static int catacombsMinRoomsCountAt3Level;
+    public static int catacombsMaxRoomsCountAt3Level;
+    public static int catacombsMinRoomsCountAt4Level;
+    public static int catacombsMaxRoomsCountAt4Level;
+    public static boolean generatePilesOfBones;
     public static boolean generateGravesInMushroomBiomes;
     // villager
     public static int undertakerId;
@@ -158,6 +169,21 @@ public class GraveStoneConfig {
         generateVillageMemorials = config.get(Configuration.CATEGORY_GENERAL, "GenerateVillageMemorials", true).getBoolean(true);
         generateUndertaker = config.get(Configuration.CATEGORY_GENERAL, "GenerateUndertaker", true).getBoolean(true);
         undertakerId = config.get(Configuration.CATEGORY_GENERAL, "undertakerId", VillageHandlerGSUndertaker.UNDERTAKER_ID).getInt();
+
+        generatePilesOfBones = config.get(CATEGORY_STRUCTURES_CATACOMBS, "GeneratePilesOfBones", true).getBoolean(true);
+
+        catacombsMinRoomsCountAt1Level = config.get(CATEGORY_STRUCTURES_CATACOMBS, "CatacombsMinRoomsCountAt1Level", CatacombsLevel.DEFAULT_MIN_ROOMS_COUNT_AT_1_LEVEL).getInt();
+        catacombsMaxRoomsCountAt1Level = config.get(CATEGORY_STRUCTURES_CATACOMBS, "CatacombsMaxRoomsCountAt1Level", CatacombsLevel.DEFAULT_MAX_ROOMS_COUNT_AT_1_LEVEL).getInt();
+
+        catacombsMinRoomsCountAt2Level = config.get(CATEGORY_STRUCTURES_CATACOMBS, "CatacombsMinRoomsCountAt2Level", CatacombsLevel.DEFAULT_MIN_ROOMS_COUNT_AT_2_LEVEL).getInt();
+        catacombsMaxRoomsCountAt2Level = config.get(CATEGORY_STRUCTURES_CATACOMBS, "CatacombsMaxRoomsCountAt2Level", CatacombsLevel.DEFAULT_MAX_ROOMS_COUNT_AT_2_LEVEL).getInt();
+
+        catacombsMinRoomsCountAt3Level = config.get(CATEGORY_STRUCTURES_CATACOMBS, "CatacombsMinRoomsCountAt3Level", CatacombsLevel.DEFAULT_MIN_ROOMS_COUNT_AT_3_LEVEL).getInt();
+        catacombsMaxRoomsCountAt3Level = config.get(CATEGORY_STRUCTURES_CATACOMBS, "CatacombsMaxRoomsCountAt3Level", CatacombsLevel.DEFAULT_MAX_ROOMS_COUNT_AT_3_LEVEL).getInt();
+
+        catacombsMinRoomsCountAt4Level = config.get(CATEGORY_STRUCTURES_CATACOMBS, "CatacombsMinRoomsCountAt4Level", CatacombsLevel.DEFAULT_MIN_ROOMS_COUNT_AT_4_LEVEL).getInt();
+        catacombsMaxRoomsCountAt4Level = config.get(CATEGORY_STRUCTURES_CATACOMBS, "CatacombsMaxRoomsCountAt4Level", CatacombsLevel.DEFAULT_MAX_ROOMS_COUNT_AT_4_LEVEL).getInt();
+
     }
 
     private static void gravesConfig() {
