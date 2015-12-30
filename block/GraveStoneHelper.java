@@ -6,10 +6,10 @@ import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
 import gravestone.core.compatibility.*;
 import gravestone.core.logger.GSLogger;
+import gravestone.inventory.GraveInventory;
 import gravestone.item.corpse.CorpseHelper;
 import gravestone.item.enums.EnumCorpse;
 import gravestone.tileentity.DeathMessageInfo;
-import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
@@ -505,7 +505,7 @@ public class GraveStoneHelper {
     }
 
     public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event, long spawnTime) {
-        if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GraveStoneConfig.graveItemsCount > 0&&
+        if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GraveStoneConfig.graveItemsCount > 0 &&
                 !isInRestrictedArea(Vec3.createVectorHelper(player.posX, player.posY, player.posZ))) {
             List<ItemStack> items = new LinkedList<ItemStack>();
 
@@ -549,7 +549,7 @@ public class GraveStoneHelper {
             if (items != null) {
                 for (int i = 0; i < items.size(); i++) {
                     if (items.get(i) != null) {
-                        GSGraveStoneItems.dropItem(items.get(i), entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ);
+                        GraveInventory.dropItem(items.get(i), entity.worldObj, (int) entity.posX, (int) entity.posY, (int) entity.posZ);
                     }
                 }
             }

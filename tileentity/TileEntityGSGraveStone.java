@@ -7,6 +7,7 @@ import gravestone.core.TimeHelper;
 import gravestone.core.event.GSRenderEventHandler;
 import gravestone.core.event.GSTickEventHandler;
 import gravestone.core.logger.GSLogger;
+import gravestone.inventory.GraveInventory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -33,14 +34,14 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
     public TileEntityGSGraveStone() {
         super();
         gsSpawn = new GSGraveStoneSpawn(this);
-        gSItems = new GSGraveStoneItems(this);
+        inventory = new GraveInventory(this);
     }
 
     public TileEntityGSGraveStone(World world) {
         super();
         this.worldObj = world;
         gsSpawn = new GSGraveStoneSpawn(this);
-        gSItems = new GSGraveStoneItems(this);
+        inventory = new GraveInventory(this);
     }
 
     /**
@@ -91,7 +92,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         // grave type
         readType(nbtTag);
         // grave loot
-        gSItems.readItems(nbtTag);
+        inventory.readItems(nbtTag);
         // death text
         gSDeathText.readText(nbtTag);
 
@@ -117,7 +118,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
         // grave type
         saveType(nbtTag);
         // grave loot
-        gSItems.saveItems(nbtTag);
+        inventory.saveItems(nbtTag);
         // death text
         gSDeathText.saveText(nbtTag);
         // age
@@ -172,7 +173,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
     public void dropSword() {
         if (this.sword != null) {
-            this.gSItems.dropItem(this.sword, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+            this.inventory.dropItem(this.sword, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
         }
     }
 
@@ -191,7 +192,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
 
     public void dropFlower() {
         if (this.flower != null) {
-            this.gSItems.dropItem(this.flower, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+            this.inventory.dropItem(this.flower, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
         }
     }
 
@@ -204,7 +205,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave {
     }
 
     public boolean isEmpty() {
-        return gSItems.graveContents.isEmpty();
+        return inventory.isEmpty();
     }
 
     private void convertSword(NBTTagCompound nbtTag) {

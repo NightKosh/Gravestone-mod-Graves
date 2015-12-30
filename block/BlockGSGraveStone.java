@@ -5,10 +5,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gravestone.ModGraveStone;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GraveStoneConfig;
+import gravestone.core.GSGuiHandler;
 import gravestone.core.GSTabs;
 import gravestone.core.logger.GSLogger;
+import gravestone.inventory.GraveInventory;
 import gravestone.tileentity.DeathMessageInfo;
-import gravestone.tileentity.GSGraveStoneItems;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -500,7 +501,8 @@ public class BlockGSGraveStone extends BlockContainer {
                 if (item.getItem() instanceof ItemSpade) {
                     if (!world.isRemote) {
                         GSLogger.logInfoGrave(player.getCommandSenderName() + " loot grave at " + x + "/" + y + "/" + z);
-                        te.dropAllItems();
+//                        te.dropAllItems();
+                        player.openGui(ModGraveStone.instance, GSGuiHandler.GRAVE_INVENTORY_GUI_ID, world, x, y, z);
                     }
                     return false;
                 } else {
@@ -795,7 +797,7 @@ public class BlockGSGraveStone extends BlockContainer {
             if (items != null) {
                 for (int i = 0; i < items.size(); i++) {
                     if (items.get(i) != null) {
-                        GSGraveStoneItems.dropItem(items.get(i), world, x, y, z);
+                        GraveInventory.dropItem(items.get(i), world, x, y, z);
                     }
                 }
             }

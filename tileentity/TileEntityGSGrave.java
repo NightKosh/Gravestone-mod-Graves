@@ -2,6 +2,7 @@ package gravestone.tileentity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gravestone.inventory.GraveInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -20,7 +21,7 @@ import java.util.Random;
  */
 public abstract class TileEntityGSGrave extends TileEntity {
 
-    protected GSGraveStoneItems gSItems;
+    protected GraveInventory inventory;
     protected GSGraveStoneDeathText gSDeathText;
     protected boolean isEditable = true;
     protected boolean isEnchanted = false;
@@ -49,8 +50,12 @@ public abstract class TileEntityGSGrave extends TileEntity {
 
     public void setGraveContent(Random random, boolean isPetGrave, boolean allLoot) {
         gSDeathText.setRandomDeathTextAndName(random, graveType, false, true);
-        gSItems.setRandomGraveContent(random, isPetGrave, allLoot);
+        inventory.setRandomGraveContent(inventory, random, isPetGrave, allLoot);
         setRandomAge();
+    }
+
+    public GraveInventory getInventory() {
+        return inventory;
     }
 
     /**
@@ -61,19 +66,15 @@ public abstract class TileEntityGSGrave extends TileEntity {
     }
 
     public void setItems(List<ItemStack> items) {
-        gSItems.setItems(items);
+        inventory.setItems(items);
     }
 
     public void setAdditionalItems(ItemStack[] items) {
-        gSItems.setAdditionalItems(items);
+        inventory.setAdditionalItems(items);
     }
 
     public void dropAllItems() {
-        gSItems.dropAllItems();
-    }
-
-    public void clearInventory() {
-        gSItems.graveContents.clear();
+        inventory.dropAllItems();
     }
 
     public GSGraveStoneDeathText getDeathTextComponent() {
