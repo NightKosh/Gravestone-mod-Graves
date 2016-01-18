@@ -20,10 +20,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 /**
@@ -36,6 +33,8 @@ public class EntitySkullCrawler extends EntityMob {
 
     private AISummonSkullCrawler summonAI;
     private AIHideInBones hideInBonesAI;
+
+    protected WallSide wallSide;
 
     public EntitySkullCrawler(World world) {
         super(world);
@@ -213,6 +212,44 @@ public class EntitySkullCrawler extends EntityMob {
         }
 
         this.dataWatcher.updateObject(16, Byte.valueOf(b0));
+//        switch (getHorizontalFacing()) {
+//            case WEST:
+//                if (worldObj.isSideSolid(getPosition().south(), EnumFacing.NORTH)) {
+//                    wallSide = WallSide.LEFT;
+//                } else if (worldObj.isSideSolid(getPosition().north(), EnumFacing.SOUTH)) {
+//                    wallSide = WallSide.RIGHT;
+//                } else {
+//                    wallSide = WallSide.FORWARD;
+//                }
+//                break;
+//            case NORTH:
+//                if (worldObj.isSideSolid(getPosition().west(), EnumFacing.EAST)) {
+//                    wallSide = WallSide.LEFT;
+//                } else if (worldObj.isSideSolid(getPosition().east(), EnumFacing.WEST)) {
+//                    wallSide = WallSide.RIGHT;
+//                } else {
+//                    wallSide = WallSide.FORWARD;
+//                }
+//                break;
+//            case EAST:
+//                if (worldObj.isSideSolid(getPosition().north(), EnumFacing.SOUTH)) {
+//                    wallSide = WallSide.LEFT;
+//                } else if (worldObj.isSideSolid(getPosition().south(), EnumFacing.NORTH)) {
+//                    wallSide = WallSide.RIGHT;
+//                } else {
+//                    wallSide = WallSide.FORWARD;
+//                }
+//                break;
+//            case SOUTH:
+//                if (worldObj.isSideSolid(getPosition().east(), EnumFacing.WEST)) {
+//                    wallSide = WallSide.LEFT;
+//                } else if (worldObj.isSideSolid(getPosition().west(), EnumFacing.EAST)) {
+//                    wallSide = WallSide.RIGHT;
+//                } else {
+//                    wallSide = WallSide.FORWARD;
+//                }
+//                break;
+//        }
     }
 
     @Override
@@ -258,9 +295,20 @@ public class EntitySkullCrawler extends EntityMob {
         return hideInBonesAI;
     }
 
+    public WallSide getWallSide() {
+        return wallSide;
+    }
+
     public enum SkullCrawlerType {
         skeleton,
         wither,
         zombie
+    }
+
+    public enum WallSide {
+        FORWARD,
+        LEFT,
+        RIGHT,
+        BEHIND
     }
 }

@@ -1,6 +1,5 @@
 package gravestone.models.entity;
 
-import gravestone.entity.monster.EntitySkullCrawler;
 import gravestone.models.ModelBaseAdapter;
 import gravestone.models.ModelRendererSkull;
 import net.minecraft.client.model.ModelRenderer;
@@ -78,16 +77,25 @@ public class ModelSkullCrawler extends ModelBaseAdapter {
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         super.render(entity, f, f1, f2, f3, f4, f5);
 
-        if (((EntitySkullCrawler) entity).isOnLadder()) {
-            GL11.glPushMatrix();
-            GL11.glRotatef(90, 1, 0, 0);
-        }
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-
         GL11.glPushMatrix();
+//        if (((EntitySkullCrawler) entity).isOnLadder()) {
+//            System.out.println(entity.getHorizontalFacing().getName());//TODO
+//            switch (((EntitySkullCrawler) entity).getWallSide()) {
+//                case FORWARD:
+//                    GL11.glRotatef(90, -1, 0, 0);
+//                    break;
+//                case LEFT:
+//                    GL11.glRotatef(90, 0, -1, 0);
+//                    break;
+//                case RIGHT:
+//                    GL11.glRotatef(90, 0, 1, 0);
+//                    break;
+//            }
+//        }
+
         GL11.glTranslated(0, -0.05, 0);
         skull.render(0.0625F);
-        GL11.glPopMatrix();
 
         rightLeg1.render(f5);
         rightLeg2.render(f5);
@@ -97,10 +105,11 @@ public class ModelSkullCrawler extends ModelBaseAdapter {
         leftLeg2.render(f5);
         leftLeg3.render(f5);
         leftLeg4.render(f5);
+        GL11.glPopMatrix();
 
-        if (((EntitySkullCrawler) entity).isOnLadder()) {
-            GL11.glPopMatrix();
-        }
+//        if (((EntitySkullCrawler) entity).isOnLadder()) {
+//            GL11.glPopMatrix();
+//        }
     }
 
     /**
