@@ -2,7 +2,7 @@ package gravestone;
 
 import gravestone.api.GraveStoneAPI;
 import gravestone.api.IGraveStone;
-import gravestone.block.GraveStoneHelper;
+import gravestone.helper.GraveStoneHelper;
 import gravestone.config.GSConfig;
 import gravestone.core.*;
 import gravestone.core.commands.GSCommands;

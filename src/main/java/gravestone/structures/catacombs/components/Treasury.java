@@ -1,16 +1,15 @@
 package gravestone.structures.catacombs.components;
 
 import gravestone.block.BlockGSGraveStone;
-import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
 import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
+import gravestone.helper.GraveGenerationHelper.EnumGraveTypeByEntity;
+import gravestone.helper.GraveInventoryHelper;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.GraveGenerationHelper;
 import gravestone.structures.ObjectsGenerationHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
@@ -70,21 +69,18 @@ public class Treasury extends CatacombsBaseComponent {
         this.fillWithBlocks(world, boundingBox, 5, 1, 0, 5, 3, 0, Blocks.nether_brick.getDefaultState(), false);
 
         // graves
-        int graveType = GraveStoneHelper.getGraveType(world, new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0)), random, BlockGSGraveStone.EnumGraveType.ALL_GRAVES);
         IBlockState graveState = GSBlock.graveStone.getDefaultState();
         IBlockState leftGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.getLeftDirection(this.coordBaseMode));
         IBlockState rightGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.getRightDirection(this.coordBaseMode));
 
-        Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
-
         EntityGroupOfGravesMobSpawnerHelper spawnerHelper = GraveGenerationHelper.createSpawnerHelper(world, this.boundingBox);
 
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 2, leftGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 4, leftGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 6, leftGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 2, rightGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 4, rightGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 6, rightGraveState, graveType, sword, spawnerHelper, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 2, leftGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES, GraveInventoryHelper.GraveContentType.TREASURY);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 4, leftGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES, GraveInventoryHelper.GraveContentType.TREASURY);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 6, leftGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES, GraveInventoryHelper.GraveContentType.TREASURY);
+        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 2, rightGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES, GraveInventoryHelper.GraveContentType.TREASURY);
+        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 4, rightGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES, GraveInventoryHelper.GraveContentType.TREASURY);
+        GraveGenerationHelper.placeGrave(this, world, random, 5, 1, 6, rightGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES, GraveInventoryHelper.GraveContentType.TREASURY);
 
         // TNT
         this.fillWithBlocks(world, boundingBox, 0, 0, 3, 1, 0, 3, Blocks.tnt.getDefaultState(), false);

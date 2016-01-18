@@ -1,13 +1,13 @@
 package gravestone.structures.catacombs.components;
 
 import gravestone.block.BlockGSGraveStone;
-import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
 import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
+import gravestone.helper.GraveGenerationHelper.EnumGraveTypeByEntity;
+import gravestone.helper.GraveInventoryHelper;
 import gravestone.structures.GraveGenerationHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -52,10 +52,8 @@ public class GraveYard extends CatacombsBaseComponent {
                     y = world.getTopSolidOrLiquidBlock(new BlockPos(positionX, 0, positionZ)).getY() - boundingBox.minY;
 
                     if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
-                        int graveType = GraveStoneHelper.getGraveType(world, new BlockPos(positionX, this.getYWithOffset(y), positionZ), random, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES);
                         IBlockState graveState = GSBlock.graveStone.getDefaultState().withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.getOpposite());
-                        Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
-                        GraveGenerationHelper.placeGrave(this, world, random, x, y, z, graveState, graveType, sword, spawnerHelper, false);
+                        GraveGenerationHelper.placeGrave(this, world, random, x, y, z, graveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES, GraveInventoryHelper.GraveContentType.JUNK);
                     }
                 }
             }

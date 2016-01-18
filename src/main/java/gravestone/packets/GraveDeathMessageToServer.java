@@ -1,5 +1,8 @@
 package gravestone.packets;
 
+import gravestone.block.enums.EnumGraves;
+import gravestone.block.enums.EnumMemorials;
+import gravestone.helper.DeathTextHelper;
 import gravestone.tileentity.TileEntityGSGrave;
 import gravestone.tileentity.TileEntityGSMemorial;
 import io.netty.buffer.ByteBuf;
@@ -73,7 +76,11 @@ public class GraveDeathMessageToServer implements IMessage, IMessageHandler<Grav
                     TileEntityGSGrave tileEntity = (TileEntityGSGrave) te;
 
                     if (message.randomText) {
-                        tileEntity.getDeathTextComponent().setRandomDeathTextAndName(new Random(), tileEntity.getGraveTypeNum(), tileEntity instanceof TileEntityGSMemorial, false);
+                        if (tileEntity instanceof TileEntityGSMemorial) {
+                            tileEntity.setDeathTextComponent(DeathTextHelper.getRandomDeathTextAndNameForMemorial(new Random(), EnumMemorials.getById(tileEntity.getGraveTypeNum())));
+                        } else {
+                            tileEntity.setDeathTextComponent(DeathTextHelper.getRandomDeathTextAndNameForGrave(new Random(), EnumGraves.getById(tileEntity.getGraveTypeNum()).getGraveType()));
+                        }
                     } else {
                         tileEntity.getDeathTextComponent().setDeathText(message.text);
                     }

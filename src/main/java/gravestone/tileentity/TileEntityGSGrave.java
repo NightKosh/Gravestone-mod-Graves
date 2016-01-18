@@ -19,7 +19,7 @@ import java.util.Random;
 public abstract class TileEntityGSGrave extends TileEntityBase {
 
     protected GraveInventory inventory;
-    protected GSGraveStoneDeathText deathText;
+    protected GSGraveStoneDeathText deathText = new GSGraveStoneDeathText();//TODO is required ????
     protected boolean isEditable = true;
     protected boolean isEnchanted = false;
     protected boolean isMossy = false;
@@ -27,7 +27,6 @@ public abstract class TileEntityGSGrave extends TileEntityBase {
     protected int age = -1;
 
     public TileEntityGSGrave() {
-        deathText = new GSGraveStoneDeathText(this);
     }
 
     public void setGraveType(int graveType) {
@@ -38,18 +37,16 @@ public abstract class TileEntityGSGrave extends TileEntityBase {
         return graveType;
     }
 
-    public void setGraveContent(Random random, boolean isPetGrave, boolean allLoot, boolean canHaveSkullAndBones) {
-        deathText.setRandomDeathTextAndName(random, graveType, false, true);
-        inventory.setRandomGraveContent(random, isPetGrave, allLoot, canHaveSkullAndBones);
-        setRandomAge();
-    }
-
     public GraveInventory getInventory() {
         return inventory;
     }
 
     public GSGraveStoneDeathText getDeathTextComponent() {
         return deathText;
+    }
+
+    public void setDeathTextComponent(GSGraveStoneDeathText deathText) {
+        this.deathText = deathText;
     }
 
     public int getAge() {

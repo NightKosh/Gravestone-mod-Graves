@@ -5,6 +5,7 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import gravestone.block.enums.EnumHangedMobs;
 import gravestone.block.enums.EnumMemorials;
+import gravestone.helper.DeathTextHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.server.MinecraftServer;
@@ -89,7 +90,7 @@ public class TileEntityGSMemorial extends TileEntityGSGrave {
     }
 
     public void setMemorialContent(Random random) {
-        deathText.setRandomDeathTextAndName(random, graveType, true, true);
+        deathText = DeathTextHelper.getRandomDeathTextAndNameForMemorial(random, EnumMemorials.getById(graveType));
     }
 
     public void setRandomMob(Random random) {

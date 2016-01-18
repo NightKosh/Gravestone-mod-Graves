@@ -1,13 +1,14 @@
 package gravestone.structures;
 
-import gravestone.block.GraveStoneHelper;
 import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
+import gravestone.helper.GraveGenerationHelper.EnumGraveTypeByEntity;
+import gravestone.helper.GraveInventoryHelper;
+import gravestone.helper.GraveStoneHelper;
+import gravestone.helper.GraveWorldGenerationHelper;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
@@ -37,45 +38,62 @@ public class GraveGenerationHelper {
     }
 
     public static void placeGrave(IComponentGraveStone component, World world, Random random, int x, int y, int z,
-                                  IBlockState graveState, int graveType, Item sword, EntityGroupOfGravesMobSpawnerHelper spanwerHelper, boolean allLoot) {
-        placeGrave(component, world, random, x, y, z, graveState, graveType, sword, spanwerHelper, allLoot, true);
-
+                                  IBlockState graveState, EntityGroupOfGravesMobSpawnerHelper spanwerHelper) {
+        placeGrave(component, world, random, x, y, z, graveState, spanwerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
     }
+
     public static void placeGrave(IComponentGraveStone component, World world, Random random, int x, int y, int z,
-                                  IBlockState graveState, int graveType, Item sword, EntityGroupOfGravesMobSpawnerHelper spanwerHelper, boolean allLoot, boolean canHaveSkullAndBones) {
+                                  IBlockState graveState, EntityGroupOfGravesMobSpawnerHelper spanwerHelper, EnumGraveTypeByEntity graveTypeByEntity) {
+        placeGrave(component, world, random, x, y, z, graveState, spanwerHelper, graveTypeByEntity, GraveInventoryHelper.GraveContentType.RANDOM);
+    }
+
+    public static void placeGrave(IComponentGraveStone component, World world, Random random, int x, int y, int z,
+                                  IBlockState graveState, EntityGroupOfGravesMobSpawnerHelper spanwerHelper, EnumGraveTypeByEntity graveTypeByEntity,
+                                  GraveInventoryHelper.GraveContentType contentType) {
+        GraveWorldGenerationHelper.GraveGenerationInfo graveInfo = GraveWorldGenerationHelper.getGrave(world, random,
+                new BlockPos(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z)),
+                graveTypeByEntity, contentType);
+        placeGrave(component, world, x, y, z, graveState, graveInfo, spanwerHelper);
+    }
+
+    private static void placeGrave(IComponentGraveStone component, World world, int x, int y, int z,
+                                  IBlockState graveState, GraveWorldGenerationHelper.GraveGenerationInfo graveInfo, EntityGroupOfGravesMobSpawnerHelper spanwerHelper) {
         component.placeBlockAtCurrentPosition(world, graveState, x, y, z, component.getBoundingBox());
         TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(new BlockPos(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z)));
 
         if (tileEntity != null) {
-            if (GraveStoneHelper.isSwordGrave(graveType)) {
-                tileEntity.setSword(new ItemStack(sword));
-            }
-
-            tileEntity.setGraveType(graveType);
-            tileEntity.setGraveContent(random, GraveStoneHelper.isPetGrave(graveType), allLoot, canHaveSkullAndBones);
+            tileEntity.setGraveInfo(graveInfo);
             tileEntity.setSpawnerHelper(spanwerHelper);
         }
     }
 
-    public static void fillGraves(ComponentGraveStone component, World world, Random random, int xStart, int yStart, int zStart, int xEnd, int yEnd, int zEnd, IBlockState graveState, int graveType, Item sword, EntityGroupOfGravesMobSpawnerHelper spanwerHelper, boolean allLoot) {
-        for (int y = yStart; y <= yEnd; ++y) {
-            for (int x = xStart; x <= xEnd; ++x) {
-                for (int z = zStart; z <= zEnd; ++z) {
-                    placeGrave(component, world, random, x, y, z, graveState, graveType, sword, spanwerHelper, allLoot);
+    public static void fillGraves(ComponentGraveStone component, World world, Random random, int xStart, int yStart, int zStart,
+                                  int xEnd, int yEnd, int zEnd, IBlockState graveState, EntityGroupOfGravesMobSpawnerHelper spanwerHelper) {
+        fillGraves(component, world, random, xStart, yStart, zStart, xEnd, yEnd, zEnd, graveState, spanwerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+    }
+
+    public static void fillGraves(ComponentGraveStone component, World world, Random random, int xStart, int yStart, int zStart,
+                                  int xEnd, int yEnd, int zEnd, IBlockState graveState, EntityGroupOfGravesMobSpawnerHelper spanwerHelper,
+                                  EnumGraveTypeByEntity graveTypeByEntity) {
+        fillGraves(component, world, random, xStart, yStart, zStart, xEnd, yEnd, zEnd, graveState, spanwerHelper, graveTypeByEntity,
+                GraveInventoryHelper.GraveContentType.RANDOM);
+    }
+
+    public static void fillGraves(ComponentGraveStone component, World world, Random random, int xStart, int yStart, int zStart,
+                                  int xEnd, int yEnd, int zEnd, IBlockState graveState, EntityGroupOfGravesMobSpawnerHelper spanwerHelper,
+                                  EnumGraveTypeByEntity graveTypeByEntity, GraveInventoryHelper.GraveContentType contentType) {
+        for (int y = yStart; y <= yEnd; y++) {
+            for (int x = xStart; x <= xEnd; x++) {
+                for (int z = zStart; z <= zEnd; z++) {
+                    GraveWorldGenerationHelper.GraveGenerationInfo graveInfo = GraveWorldGenerationHelper.getGrave(world, random,
+                            new BlockPos(component.getXWithOffset(x, z), component.getYWithOffset(y), component.getZWithOffset(x, z)),
+                            graveTypeByEntity, contentType);
+                    placeGrave(component, world, x, y, z, graveState, graveInfo, spanwerHelper);
                 }
             }
         }
     }
 
-    /**
-     * Check can be grave placed here
-     *
-     * @param world World object
-     * @param x     X coord
-     * @param minY  Min y coord
-     * @param z     Z coord
-     * @param maxY  Max y coord
-     */
     public static boolean canPlaceGrave(World world, int x, int minY, int z, int maxY) {
         Block block;
 

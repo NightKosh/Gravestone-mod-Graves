@@ -1,15 +1,15 @@
 package gravestone.structures.graves;
 
 import gravestone.block.BlockGSGraveStone;
-import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumPileOfBones;
 import gravestone.core.GSBlock;
 import gravestone.core.logger.GSLogger;
+import gravestone.helper.GraveGenerationHelper.EnumGraveTypeByEntity;
+import gravestone.helper.GraveInventoryHelper;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.GraveGenerationHelper;
 import gravestone.structures.ObjectsGenerationHelper;
-import net.minecraft.item.Item;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -38,11 +38,10 @@ public class ComponentGSOpenedGrave extends ComponentGraveStone {
         if (GraveGenerationHelper.canPlaceGrave(world, gravePositionX, boundingBox.minY + y, gravePositionZ, boundingBox.maxY)) {
             GSLogger.logInfo("Generate opened grave at " + gravePositionX + "x" + gravePositionZ);
 
-            int graveType = GraveStoneHelper.getGraveType(world, new BlockPos(gravePositionX, y, gravePositionZ), random, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES);
-            Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
             GraveGenerationHelper.placeGrave(this, world, random, 0, y, 2,
                     GSBlock.graveStone.getDefaultState().withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.getOpposite()),
-                    graveType, sword, null, true, false);
+                    null, EnumGraveTypeByEntity.HUMAN_GRAVES, GraveInventoryHelper.GraveContentType.RANDOM);
+                    //, GraveInventory.GraveCorpseContentType.EMPTY); TODO
 
             this.fillWithAir(world, this.boundingBox, 0, y - 1, 0, 0, y + 1, 1);
             ObjectsGenerationHelper.generatePileOfBones(this, world, 0, y - 2, 0, this.coordBaseMode, EnumPileOfBones.PILE_OF_BONES);

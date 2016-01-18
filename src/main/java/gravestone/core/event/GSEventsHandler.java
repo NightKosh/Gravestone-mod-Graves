@@ -1,7 +1,5 @@
 package gravestone.core.event;
 
-import gravestone.block.BlockGSGraveStone.EnumGraveType;
-import gravestone.block.GraveStoneHelper;
 import gravestone.config.GSConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.GSMobSpawn;
@@ -11,6 +9,7 @@ import gravestone.core.logger.GravesLogger;
 import gravestone.entity.monster.EntitySkullCrawler;
 import gravestone.entity.monster.EntityWitherSkullCrawler;
 import gravestone.entity.monster.EntityZombieSkullCrawler;
+import gravestone.helper.GraveGenerationHelper;
 import gravestone.item.corpse.CorpseHelper;
 import gravestone.item.enums.EnumCorpse;
 import net.minecraft.entity.Entity;
@@ -45,20 +44,20 @@ public class GSEventsHandler {
 
             if (GSConfig.generatePlayerGraves && event.entityLiving instanceof EntityPlayer &&
                     !GSCompatibilityWitchery.isVampire((EntityPlayer) event.entity, event.source)) {
-                GraveStoneHelper.createPlayerGrave((EntityPlayer) event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
+                GraveGenerationHelper.createPlayerGrave((EntityPlayer) event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
             } else {
                 if (GSConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
-                    GraveStoneHelper.createGrave(event.entity, event, CorpseHelper.getCorpse(event.entity, EnumCorpse.VILLAGER),
-                            EnumGraveType.PLAYER_GRAVES, true, MobHandler.getAndRemoveSpawnTime(event.entity));
+                    GraveGenerationHelper.createGrave(event.entity, event, CorpseHelper.getCorpse(event.entity, EnumCorpse.VILLAGER),
+                            GraveGenerationHelper.EnumGraveTypeByEntity.VILLAGERS_GRAVES, true, MobHandler.getAndRemoveSpawnTime(event.entity));
                     return;
                 }
 
                 if (GSConfig.generatePetGraves) {
                     if (event.entity instanceof EntityTameable) {
-                        GraveStoneHelper.createPetGrave(event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
+                        GraveGenerationHelper.createPetGrave(event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
                         return;
                     } else if (event.entity instanceof EntityHorse) {
-                        GraveStoneHelper.createHorseGrave((EntityHorse) event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
+                        GraveGenerationHelper.createHorseGrave((EntityHorse) event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
                         return;
                     }
                 }

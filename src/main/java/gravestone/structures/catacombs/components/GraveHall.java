@@ -1,18 +1,16 @@
 package gravestone.structures.catacombs.components;
 
 import gravestone.block.BlockGSGraveStone;
-import gravestone.block.GraveStoneHelper;
 import gravestone.config.GSConfig;
 import gravestone.core.GSBlock;
 import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
+import gravestone.helper.GraveGenerationHelper.EnumGraveTypeByEntity;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.GraveGenerationHelper;
 import gravestone.structures.MobSpawnHelper;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
@@ -151,54 +149,52 @@ public class GraveHall extends CatacombsBaseComponent {
         buildColumn(world, 11, 12);
 
         // graves
-        int graveType = GraveStoneHelper.getGraveType(world, new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0)), random, BlockGSGraveStone.EnumGraveType.PLAYER_GRAVES);
         IBlockState graveState = GSBlock.graveStone.getDefaultState();
         IBlockState leftGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.getLeftDirection(this.coordBaseMode));
         IBlockState rightGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.getRightDirection(this.coordBaseMode));
         IBlockState topGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.getOpposite());
         IBlockState botGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.coordBaseMode);
-        Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
 
         EntityGroupOfGravesMobSpawnerHelper spawnerHelper = GraveGenerationHelper.createSpawnerHelper(world, this.boundingBox);
 
         // left wall
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 2, leftGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 5, leftGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 8, leftGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 10, leftGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 13, leftGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 16, leftGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 2, leftGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 5, leftGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 8, leftGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 10, leftGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 13, leftGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 16, leftGraveState, graveType, sword, spawnerHelper, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 2, leftGraveState, spawnerHelper);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 5, leftGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 8, leftGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 10, leftGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 13, leftGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 1, 16, leftGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 2, leftGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 5, leftGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 8, leftGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 10, leftGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 13, leftGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 1, 4, 16, leftGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
 
         // right wall
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 2, rightGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 5, rightGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 8, rightGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 10, rightGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 13, rightGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 16, rightGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 2, rightGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 5, rightGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 8, rightGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 10, rightGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 13, rightGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 16, rightGraveState, graveType, sword, spawnerHelper, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 2, rightGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 5, rightGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 8, rightGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 10, rightGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 13, rightGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 1, 16, rightGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 2, rightGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 5, rightGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 8, rightGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 10, rightGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 13, rightGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 15, 4, 16, rightGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
         // top walls
-        GraveGenerationHelper.placeGrave(this, world, random, 3, 1, 17, topGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 13, 1, 17, topGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 3, 4, 17, topGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 13, 4, 17, topGraveState, graveType, sword, spawnerHelper, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 3, 1, 17, topGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 13, 1, 17, topGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 3, 4, 17, topGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 13, 4, 17, topGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
 
         // bot walls
-        GraveGenerationHelper.placeGrave(this, world, random, 3, 1, 1, botGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 13, 1, 1, botGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 3, 4, 1, botGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.placeGrave(this, world, random, 13, 4, 1, botGraveState, graveType, sword, spawnerHelper, true);
+        GraveGenerationHelper.placeGrave(this, world, random, 3, 1, 1, botGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 13, 1, 1, botGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 3, 4, 1, botGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
+        GraveGenerationHelper.placeGrave(this, world, random, 13, 4, 1, botGraveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
 
         // trap floor
         this.fillWithBlocks(world, boundingBox, 7, 0, 6, 9, 0, 6, GSBlock.trap.getDefaultState(), false);

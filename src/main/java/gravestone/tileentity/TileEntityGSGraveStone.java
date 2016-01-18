@@ -1,12 +1,12 @@
 package gravestone.tileentity;
 
-import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GSConfig;
 import gravestone.core.TimeHelper;
 import gravestone.core.event.GSRenderEventHandler;
 import gravestone.core.event.GSTickEventHandler;
 import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
+import gravestone.helper.GraveWorldGenerationHelper;
 import gravestone.inventory.GraveInventory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,8 +15,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.Random;
 
 /**
  * GraveStone mod
@@ -203,18 +201,28 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
         return inventory.isEmpty();
     }
 
-    @Override
-    public void setGraveContent(Random random, boolean isPetGrave, boolean allLoot, boolean canHaveSkullAndBones) {
-        super.setGraveContent(random, isPetGrave, allLoot, canHaveSkullAndBones);
-        setRandomFlower(random);
-    }
+    //    @Override
+    //    public void setGraveContent(Random random, boolean isPetGrave, GraveInventory.GraveContentType contentType, GraveInventory.GraveCorpseContentType corpseType) {
+    ////        deathText.setRandomDeathTextAndName(random, graveType, false, true);
+    ////        inventory.setRandomGraveContent(random, isPetGrave, contentType, corpseType);
+    ////        setRandomAge();
+    ////        setRandomFlower(random);
+    //    }
 
-    public void setRandomFlower(Random random) {
-        if (random.nextInt(4) == 0) {
-            ItemStack flower = new ItemStack(GraveStoneHelper.FLOWERS.get(random.nextInt(GraveStoneHelper.FLOWERS.size())), 1);
-            if (GraveStoneHelper.canFlowerBePlaced(this.worldObj, this.pos, flower, this)) {
-                setFlower(flower);
-            }
+    public void setGraveInfo(GraveWorldGenerationHelper.GraveGenerationInfo graveInfo) {
+        //super.setGraveContent(random, isPetGrave, contentType, corpseType);
+
+        if (graveInfo.getSword() != null) {
+            this.setSword(graveInfo.getSword());
+        }
+        this.setGraveType(graveInfo.getGrave().ordinal());
+
+        deathText = graveInfo.getDeathText();
+        inventory.setAdditionalItems(graveInfo.getItems());
+        setRandomAge();//TODO
+
+        if (graveInfo.getFlower() != null) {
+            setFlower(graveInfo.getFlower());
         }
     }
 

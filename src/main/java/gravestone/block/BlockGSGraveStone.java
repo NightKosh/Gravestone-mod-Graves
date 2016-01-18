@@ -6,8 +6,8 @@ import gravestone.config.GSConfig;
 import gravestone.core.GSGuiHandler;
 import gravestone.core.GSTabs;
 import gravestone.core.logger.GSLogger;
+import gravestone.helper.GraveStoneHelper;
 import gravestone.inventory.GraveInventory;
-import gravestone.tileentity.DeathMessageInfo;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -21,7 +21,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -181,8 +180,6 @@ public class BlockGSGraveStone extends BlockContainer {
             EnumGraves.PRIZMARINE_HORSE_STATUE.ordinal(),
             EnumGraves.ICE_HORSE_STATUE.ordinal()
     };
-
-    private static final Random rand = new Random();
 
     public BlockGSGraveStone() {
         super(Material.rock);
@@ -388,9 +385,9 @@ public class BlockGSGraveStone extends BlockContainer {
             }
 
             if (EnchantmentHelper.getSilkTouchModifier(player)) {
-                dropBlock(world, pos, state);
+                GraveStoneHelper.dropBlock(world, pos, state);
             } else {
-                dropBlockWithoutInfo(world, pos, state);
+                GraveStoneHelper.dropBlockWithoutInfo(world, pos, state);
             }
         }
     }
@@ -401,7 +398,7 @@ public class BlockGSGraveStone extends BlockContainer {
     @Override
     public List<ItemStack> getDrops(IBlockAccess access, BlockPos pos, IBlockState state, int fortune) {
         List<ItemStack> ret = new ArrayList<ItemStack>();
-        ret.add(getBlockItemStack(access, pos, state));
+        ret.add(GraveStoneHelper.getBlockItemStack(access, pos, state));
         return ret;
     }
 
@@ -563,7 +560,7 @@ public class BlockGSGraveStone extends BlockContainer {
             TileEntityGSGraveStone te = (TileEntityGSGraveStone) world.getTileEntity(pos);
             if (te != null) {
                 if (te.canBeLooted("")) {
-                    this.dropBlockWithoutInfo(world, pos, state);
+                    GraveStoneHelper.dropBlockWithoutInfo(world, pos, state);
                     world.setBlockToAir(pos);
                 }
             }
@@ -623,174 +620,6 @@ public class BlockGSGraveStone extends BlockContainer {
                 GSLogger.logError("Can't create enchanted sword gravestone");
                 exception.printStackTrace();
             }
-        }
-    }
-
-    /**
-     * Drop grave as item block
-     */
-    private void dropBlock(World world, BlockPos pos, IBlockState state) {
-        ItemStack itemStack = getBlockItemStack(world, pos, state);
-
-        if (itemStack != null) {
-            GraveInventory.dropItem(itemStack, world, pos);
-        }
-    }
-
-    private void dropBlockWithoutInfo(World world, BlockPos pos, IBlockState state) {
-        ItemStack itemStack = this.createStackedBlock(this.getDefaultState());
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
-
-        if (tileEntity != null) {
-            if (tileEntity.isSwordGrave()) {
-                tileEntity.dropSword();
-            } else if (itemStack != null) {
-                NBTTagCompound nbt = new NBTTagCompound();
-                nbt.setInteger("Type", tileEntity.getGraveTypeNum());
-                nbt.setBoolean("Mossy", tileEntity.isMossy());
-
-                itemStack.setTagCompound(nbt);
-                GraveInventory.dropItem(itemStack, world, pos);
-            }
-        }
-    }
-
-    /**
-     * Get grave block as item block
-     */
-    private ItemStack getBlockItemStack(IBlockAccess access, BlockPos pos, IBlockState state) {
-        ItemStack itemStack = this.createStackedBlock(this.getDefaultState());
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) access.getTileEntity(pos);
-
-        if (tileEntity != null) {
-            NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setInteger("Type", tileEntity.getGraveTypeNum());
-
-            if (tileEntity.getDeathTextComponent().isLocalized()) {
-                nbt.setBoolean("isLocalized", true);
-                nbt.setString("name", tileEntity.getDeathTextComponent().getName());
-                nbt.setString("KillerName", tileEntity.getDeathTextComponent().getKillerName());
-            }
-
-            nbt.setString("DeathText", tileEntity.getDeathTextComponent().getDeathText());
-            nbt.setInteger("Age", tileEntity.getAge());
-
-            if (tileEntity.isSwordGrave()) {
-                GraveStoneHelper.addSwordInfo(nbt, tileEntity.getSword());
-            }
-
-            nbt.setBoolean("Enchanted", tileEntity.isEnchanted());
-            nbt.setBoolean("Mossy", tileEntity.isMossy());
-
-            itemStack.setTagCompound(nbt);
-        }
-
-        return itemStack;
-    }
-
-    /**
-     * Create grave on death
-     */
-    public void createOnDeath(Entity entity, World world, BlockPos pos, DeathMessageInfo deathInfo, List<ItemStack> items, int age, EnumGraveType entityType, DamageSource damageSource) {
-        EnumFacing direction = EnumFacing.getHorizontal(MathHelper.floor_double((double) (entity.rotationYaw * 4 / 360F) + 0.5D) & 3);
-
-        int graveType = 0;
-        ItemStack sword = null;
-
-        if (GSConfig.generateSwordGraves && world.rand.nextInt(4) == 0 && entityType.equals(EnumGraveType.PLAYER_GRAVES)) {
-            sword = GraveStoneHelper.checkSword(items);
-        }
-
-        switch (entityType) {
-            case PLAYER_GRAVES:
-                graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveForLevel(entity), rand);
-                if (graveType == 0) {
-                    if (sword == null) {
-                        graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveForDeath(damageSource, damageSource.damageType), rand);
-                        if (graveType == 0) {
-                            graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveTypes(world, pos), rand);
-                        }
-                    } else {
-                        graveType = EnumGraves.SWORD.ordinal();
-                    }
-                }
-                break;
-            case DOGS_GRAVES:
-                graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getDogGraveForDeath(damageSource, damageSource.damageType), rand);
-                if (graveType == 0) {
-                    graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getDogGraveTypes(world, pos), rand);
-                }
-                break;
-            case CATS_GRAVES:
-                graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getCatGraveForDeath(damageSource, damageSource.damageType), rand);
-                if (graveType == 0) {
-                    graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getCatGraveTypes(world, pos), rand);
-                }
-                break;
-            case HORSE_GRAVES:
-                graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getHorseGraveForDeath(damageSource, damageSource.damageType), rand);
-                if (graveType == 0) {
-                    graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getHorseGraveTypes(world, pos), rand);
-                }
-                break;
-        }
-
-        boolean isMagic = GraveStoneHelper.isMagicDamage(damageSource, damageSource.damageType);
-        boolean isMossy = false; //TODO
-
-        BlockPos newPos = GraveStoneHelper.findPlaceForGrave(world, pos);
-        if (newPos != null) {
-            world.setBlockState(newPos, this.getDefaultState().withProperty(FACING, direction), 2);
-            TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(newPos);
-
-            if (tileEntity != null) {
-                if (sword != null) {
-                    tileEntity.setSword(sword);
-                }
-
-                tileEntity.getDeathTextComponent().setLocalized();
-                tileEntity.getDeathTextComponent().setName(deathInfo.getName());
-                tileEntity.getDeathTextComponent().setDeathText(deathInfo.getDeathMessage());
-                tileEntity.getDeathTextComponent().setKillerName(deathInfo.getKillerName());
-                tileEntity.getInventory().setItems(items);
-                tileEntity.setGraveType(graveType);
-                tileEntity.setAge(age);
-                tileEntity.setEnchanted(isMagic);
-                tileEntity.setMossy(isMossy);
-                if (entity instanceof EntityPlayer) {
-                    tileEntity.setOwner(entity.getUniqueID().toString());
-                } else if (entity instanceof EntityTameable && ((EntityTameable) entity).isTamed()) {
-                    tileEntity.setOwner(((EntityTameable) entity).getOwner().getUniqueID().toString());
-                }
-            }
-            GSLogger.logInfoGrave("Create " + deathInfo.getName() + "'s grave at " + newPos.getX() + "x" + newPos.getY() + "x" + newPos.getZ());
-        } else {
-            ItemStack itemStack = this.createStackedBlock(this.getDefaultState());
-            NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setInteger("Type", graveType);
-            nbt.setBoolean("isLocalized", true);
-            nbt.setString("name", deathInfo.getName());
-            nbt.setString("DeathText", deathInfo.getDeathMessage());
-            nbt.setString("KillerName", deathInfo.getKillerNameForTE());
-            nbt.setBoolean("Enchanted", isMagic);
-            nbt.setBoolean("Mossy", isMossy);
-            nbt.setInteger("Age", age);
-
-            if (graveType == EnumGraves.SWORD.ordinal()) {
-                GraveStoneHelper.addSwordInfo(nbt, sword);
-            }
-
-            itemStack.setTagCompound(nbt);
-            GraveInventory.dropItem(itemStack, world, pos);
-
-            if (items != null) {
-                for (int i = 0; i < items.size(); i++) {
-                    if (items.get(i) != null) {
-                        GraveInventory.dropItem(items.get(i), world, pos);
-                    }
-                }
-            }
-            GSLogger.logInfoGrave("Can not create " + deathInfo.getName() + "'s grave at " + pos.getX() + "x" + pos.getY() + "x" + pos.getZ());
         }
     }
 
@@ -858,12 +687,8 @@ public class BlockGSGraveStone extends BlockContainer {
         return new BlockState(this, new IProperty[]{FACING});
     }
 
-    public enum EnumGraveType {
-        ALL_GRAVES,
-        PLAYER_GRAVES,
-        PETS_GRAVES,
-        DOGS_GRAVES,
-        CATS_GRAVES,
-        HORSE_GRAVES
+    @Override
+    public ItemStack createStackedBlock(IBlockState state) {
+        return super.createStackedBlock(state);
     }
 }

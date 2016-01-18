@@ -1,8 +1,6 @@
 package gravestone.structures.catacombs.components;
 
 import gravestone.block.BlockGSGraveStone;
-import gravestone.block.BlockGSGraveStone.EnumGraveType;
-import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
 import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
 import gravestone.structures.BoundingBoxHelper;
@@ -12,8 +10,6 @@ import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStoneSlab;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
@@ -77,9 +73,6 @@ public class Bridge extends CatacombsBaseComponent {
         this.fillWithRandomizedBlocks(world, boundingBox, 10, 9, 0, 11, 10, 0, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 10, 9, 7, 11, 10, 7, false, random, getCemeteryCatacombsStones());
         this.fillWithRandomizedBlocks(world, boundingBox, 10, 9, 7, 11, 10, 7, false, random, getCemeteryCatacombsStones());
-        // graves
-        int graveType = GraveStoneHelper.getGraveType(world, new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0)), random, EnumGraveType.PLAYER_GRAVES);
-        Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
 
         IBlockState graveState = GSBlock.graveStone.getDefaultState();
         IBlockState leftGraveState = graveState.withProperty(BlockGSGraveStone.FACING, this.getLeftDirection(this.coordBaseMode));
@@ -87,8 +80,8 @@ public class Bridge extends CatacombsBaseComponent {
 
         EntityGroupOfGravesMobSpawnerHelper spawnerHelper = GraveGenerationHelper.createSpawnerHelper(world, this.boundingBox);
 
-        GraveGenerationHelper.fillGraves(this, world, random, 1, 9, 1, 1, 9, 6, leftGraveState, graveType, sword, spawnerHelper, true);
-        GraveGenerationHelper.fillGraves(this, world, random, 11, 9, 1, 11, 9, 6, rightGraveState, graveType, sword, spawnerHelper, true);
+        GraveGenerationHelper.fillGraves(this, world, random, 1, 9, 1, 1, 9, 6, leftGraveState, spawnerHelper);
+        GraveGenerationHelper.fillGraves(this, world, random, 11, 9, 1, 11, 9, 6, rightGraveState, spawnerHelper);
         // lava
         this.fillWithBlocks(world, boundingBox, 3, 1, 1, 9, 2, 6, Blocks.lava.getDefaultState(), Blocks.lava.getDefaultState(), false);
         // bridge

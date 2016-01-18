@@ -1,13 +1,10 @@
 package gravestone.structures.graves;
 
 import gravestone.block.BlockGSGraveStone;
-import gravestone.block.BlockGSGraveStone.EnumGraveType;
-import gravestone.block.GraveStoneHelper;
 import gravestone.core.GSBlock;
 import gravestone.core.logger.GSLogger;
 import gravestone.structures.ComponentGraveStone;
 import gravestone.structures.GraveGenerationHelper;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -42,10 +39,8 @@ public class ComponentGSSingleGrave extends ComponentGraveStone {
         if (GraveGenerationHelper.canPlaceGrave(world, positionX, boundingBox.minY + y, positionZ, boundingBox.maxY)) {
             GSLogger.logInfo("Generate grave at " + positionX + "x" + positionZ);
 
-            int graveType = GraveStoneHelper.getGraveType(world, new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(y), this.getZWithOffset(0, 0)), random, EnumGraveType.ALL_GRAVES);
-            Item sword = GraveStoneHelper.getRandomSwordForGeneration(graveType, random);
             GraveGenerationHelper.placeGrave(this, world, random, 0, y, 0,
-                    GSBlock.graveStone.getDefaultState().withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.getOpposite()), graveType, sword, null, true);
+                    GSBlock.graveStone.getDefaultState().withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.getOpposite()), null);
         }
 
         return true;

@@ -2,11 +2,11 @@ package gravestone.structures.village.undertaker;
 
 import gravestone.block.BlockGSGraveStone;
 import gravestone.block.BlockGSSkullCandle;
-import gravestone.block.GraveStoneHelper;
 import gravestone.block.enums.EnumSkullCandle;
 import gravestone.config.GSConfig;
 import gravestone.core.GSBlock;
 import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
+import gravestone.helper.GraveGenerationHelper.EnumGraveTypeByEntity;
 import gravestone.structures.BoundingBoxHelper;
 import gravestone.structures.GraveGenerationHelper;
 import gravestone.structures.IComponentGraveStone;
@@ -244,14 +244,12 @@ public class ComponentGSVillageUndertaker extends StructureVillagePieces.Village
 
         this.func_175811_a(world, gateState, startX + 6, 1, startZ + 9, structureBoundingBox);
 
-        int graveType = GraveStoneHelper.getRandomGrave(GraveStoneHelper.getPlayerGraveTypes(world,
-                new BlockPos(this.getXWithOffset(0, 0), this.getYWithOffset(0), this.getZWithOffset(0, 0))), random);
         IBlockState graveState = GSBlock.graveStone.getDefaultState().withProperty(BlockGSGraveStone.FACING, this.coordBaseMode.getOpposite());
         EntityGroupOfGravesMobSpawnerHelper spawnerHelper = GraveGenerationHelper.createSpawnerHelper(world, boundingBox);
 
         for (int x = startX + 3; x < startX + 11; x += 2) {
             for (int z = 3 + startZ; z < 9 + startZ; z += 2) {
-                GraveGenerationHelper.placeGrave(this, world, random, x, 1, z, graveState, graveType, null, spawnerHelper, true);
+                GraveGenerationHelper.placeGrave(this, world, random, x, 1, z, graveState, spawnerHelper, EnumGraveTypeByEntity.HUMAN_GRAVES);
             }
         }
 
