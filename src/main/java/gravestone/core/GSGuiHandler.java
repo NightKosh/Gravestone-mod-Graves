@@ -43,7 +43,7 @@ public class GSGuiHandler implements IGuiHandler {
                 }
                 break;
             case CHISEL_CRAFTING_GUI_ID:
-                return new ChiselContainer(player.inventory);
+                return new ChiselContainer(player, player.inventory);
         }
         return null;
     }
@@ -65,7 +65,7 @@ public class GSGuiHandler implements IGuiHandler {
                 }
                 break;
             case CHISEL_CRAFTING_GUI_ID:
-                return new GSChiselCraftingGui(player.inventory);
+                return new GSChiselCraftingGui(player, player.inventory);
         }
         return null;
     }

@@ -110,6 +110,8 @@ public class GSEntity {
 
         registerModEntity(EntityGSSkeleton.class, SKELETON_NAME);
         EntityRegistry.addSpawn(EntityGSSkeleton.class, 1, 1, 3, EnumCreatureType.MONSTER);
+//        EntityRegistry.removeSpawn(EntitySkeleton.class, new BiomeGenBase.SpawnListEntry(EntitySkeleton.class, 100, 4, 4));
+        //this.spawnableMonsterList.add(new BiomeGenBase.SpawnListEntry(EntitySkeleton.class, 100, 4, 4));
         //TODO addSpawn
         registerModEntity(EntityZombieHorse.class, ZOMBIE_HORSE_NAME);
         registerModEntity(EntitySkeletonHorse.class, SKELETON_HORSE_NAME);
