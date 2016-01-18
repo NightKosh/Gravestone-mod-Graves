@@ -5,8 +5,7 @@ import gravestone.config.GSConfig;
 import gravestone.core.TimeHelper;
 import gravestone.core.event.GSRenderEventHandler;
 import gravestone.core.event.GSTickEventHandler;
-import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
-import gravestone.helper.GraveWorldGenerationHelper;
+import gravestone.entity.helper.GroupOfGravesSpawnerHelper;
 import gravestone.inventory.GraveInventory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,25 +23,29 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdatePlayerListBox, ISpawnerEntity {
 
-    protected GSGraveStoneSpawn gsSpawn;
+    protected GSSpawner gsSpawn;
     protected ItemStack sword = null;
     protected ItemStack flower = null;
     protected String playerId = "";
     protected int spawnerHelperId;
-    protected EntityGroupOfGravesMobSpawnerHelper spawnerHelper;
+    protected GroupOfGravesSpawnerHelper spawnerHelper;
     public static final int FOG_RANGE = 30;
 
     public TileEntityGSGraveStone() {
         super();
-        gsSpawn = new GSGraveStoneSpawn(this);
+        gsSpawn = getSpawner();
         inventory = new GraveInventory(this);
     }
 
     public TileEntityGSGraveStone(World world) {
         super();
         this.worldObj = world;
-        gsSpawn = new GSGraveStoneSpawn(this);
+        gsSpawn = getSpawner();
         inventory = new GraveInventory(this);
+    }
+
+    private GSSpawner getSpawner() {
+        return null;//new GSGraveStoneSpawn(this)TODO !!!!!!
     }
 
     /**
@@ -53,10 +56,12 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     @Override
     public void update() {
         if (spawnerHelperId != 0 && spawnerHelper == null) {
-            spawnerHelper = (EntityGroupOfGravesMobSpawnerHelper) this.getWorld().getEntityByID(spawnerHelperId);
+            spawnerHelper = (GroupOfGravesSpawnerHelper) this.getWorld().getEntityByID(spawnerHelperId);
         }
 
-        gsSpawn.update();
+        if (gsSpawn != null) {
+            gsSpawn.update();
+        }
 
         if (this.worldObj.isRemote && GSConfig.isFogEnabled && GSTickEventHandler.getFogTicCount() == 0) {
             EntityPlayer player = this.worldObj.getClosestPlayer(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D, FOG_RANGE);
@@ -72,7 +77,7 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
      */
     @Override
     public boolean receiveClientEvent(int par1, int par2) {
-        if (par1 == 1 && this.worldObj.isRemote) {
+        if (par1 == 1 && this.worldObj.isRemote && gsSpawn != null) {
             gsSpawn.setMinDelay();
         }
 
@@ -209,22 +214,23 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     ////        setRandomFlower(random);
     //    }
 
-    public void setGraveInfo(GraveWorldGenerationHelper.GraveGenerationInfo graveInfo) {
-        //super.setGraveContent(random, isPetGrave, contentType, corpseType);
-
-        if (graveInfo.getSword() != null) {
-            this.setSword(graveInfo.getSword());
-        }
-        this.setGraveType(graveInfo.getGrave().ordinal());
-
-        deathText = graveInfo.getDeathText();
-        inventory.setAdditionalItems(graveInfo.getItems());
-        setRandomAge();//TODO
-
-        if (graveInfo.getFlower() != null) {
-            setFlower(graveInfo.getFlower());
-        }
-    }
+    //TODO
+//    public void setGraveInfo(GraveWorldGenerationHelper.GraveGenerationInfo graveInfo) {
+//        //super.setGraveContent(random, isPetGrave, contentType, corpseType);
+//
+//        if (graveInfo.getSword() != null) {
+//            this.setSword(graveInfo.getSword());
+//        }
+//        this.setGraveType(graveInfo.getGrave().ordinal());
+//
+//        deathText = graveInfo.getDeathText();
+//        inventory.setAdditionalItems(graveInfo.getItems());
+//        setRandomAge();//TODO
+//
+//        if (graveInfo.getFlower() != null) {
+//            setFlower(graveInfo.getFlower());
+//        }
+//    }
 
     public void setOwner(String playerId) {
         this.playerId = playerId;
@@ -240,11 +246,11 @@ public class TileEntityGSGraveStone extends TileEntityGSGrave implements IUpdate
     }
 
     @Override
-    public EntityGroupOfGravesMobSpawnerHelper getSpawnerHelper() {
+    public GroupOfGravesSpawnerHelper getSpawnerHelper() {
         return spawnerHelper;
     }
 
-    public void setSpawnerHelper(EntityGroupOfGravesMobSpawnerHelper spawnerHelper) {
+    public void setSpawnerHelper(GroupOfGravesSpawnerHelper spawnerHelper) {
         this.spawnerHelper = spawnerHelper;
     }
 }

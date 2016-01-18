@@ -1,6 +1,5 @@
 package gravestone.models.block.graves;
 
-import gravestone.models.block.memorials.ModelMemorialObelisk;
 import org.lwjgl.opengl.GL11;
 
 /**

@@ -1,7 +1,5 @@
 package gravestone.core.proxy;
 
-import gravestone.tileentity.TileEntityGSGrave;
-
 /**
  * GraveStone mod
  *
@@ -13,9 +11,6 @@ public class CommonProxy {
     public void registerRenderers() {
     }
 
-    public void registerVillagers() {
-    }
-
     public String getLocalizedString(String str) {
         return str;
     }
@@ -24,15 +19,9 @@ public class CommonProxy {
         return str;
     }
 
-    public void openGraveTextGui(TileEntityGSGrave tileEntity) {
-    }
-
     public void registerHandlers() {
     }
 
     public void registerBlocksModels() {
-    }
-
-    public void registerItemsModels() {
     }
 }

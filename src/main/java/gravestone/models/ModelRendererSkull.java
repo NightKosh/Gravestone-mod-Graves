@@ -1,7 +1,5 @@
 package gravestone.models;
 
-import gravestone.core.Resources;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -49,23 +47,24 @@ public class ModelRendererSkull extends ModelRenderer {
 
     public void bindTexture(EnumSkullType skullType) {
         ResourceLocation texture;
-        switch (skullType) {
-            case SKELETON_SKULL:
-            default:
-                texture = Resources.SKELETON_SKULL_CANDLE;
-                break;
-            case WITHER_SKULL:
-                texture = Resources.WITHER_SKULL_CANDLE;
-                break;
-            case ZOMBIE_SKULL:
-                texture = Resources.ZOMBIE_SKULL_CANDLE;
-                break;
-        }
-        Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+//        switch (skullType) {//TODO
+//            case SKELETON_SKULL:
+//            default:
+//                texture = Resources.SKELETON_SKULL_CANDLE;
+//                break;
+//            case WITHER_SKULL:
+//                texture = Resources.WITHER_SKULL_CANDLE;
+//                break;
+//            case ZOMBIE_SKULL:
+//                texture = Resources.ZOMBIE_SKULL_CANDLE;
+//                break;
+//        }
+//        Minecraft.getMinecraft().renderEngine.bindTexture(texture);
     }
 
     public void bindTexture(boolean isWither) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(isWither ? Resources.WITHER_SKULL_CANDLE : Resources.SKELETON_SKULL_CANDLE);
+        //TODO
+//        Minecraft.getMinecraft().renderEngine.bindTexture(isWither ? Resources.WITHER_SKULL_CANDLE : Resources.SKELETON_SKULL_CANDLE);
     }
 
     public void renderWithTexture(float p_78785_1_, boolean isWither) {

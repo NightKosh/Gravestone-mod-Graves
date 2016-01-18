@@ -32,9 +32,10 @@ public class CommandGS extends CommandBase {
         if (args.length >= 1) {
             String command = args[0];
             switch (command) {
-                case SubCommandStructuresGenerator.COMMAND_NAME:
-                    SubCommandStructuresGenerator.execute(sender, args);
-                    break;
+                //TODO
+//                case SubCommandStructuresGenerator.COMMAND_NAME:
+//                    SubCommandStructuresGenerator.execute(sender, args);
+//                    break;
                 case SubCommandCustomGraveItems.COMMAND_NAME:
                     SubCommandCustomGraveItems.execute(sender, args);
                     break;

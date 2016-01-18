@@ -17,19 +17,5 @@ public class GSTileEntity {
 
     public static void registration() {
         GameRegistry.registerTileEntity(TileEntityGSGraveStone.class, "GraveStoneTE");
-
-        GameRegistry.registerTileEntity(TileEntityGSMemorial.class, "Memorial");
-
-        GameRegistry.registerTileEntity(TileEntityGSSpawner.class, "GS Spawner");
-
-        GameRegistry.registerTileEntity(TileEntityGSHauntedChest.class, "GSHaunted Chest");
-
-        GameRegistry.registerTileEntity(TileEntityGSCandle.class, "GSTECandle");
-
-        GameRegistry.registerTileEntity(TileEntityGSSkullCandle.class, "GSSkull Candle");
-
-        GameRegistry.registerTileEntity(TileEntityGSPileOfBones.class, "GSTEPileOfBones");
-
-        GameRegistry.registerTileEntity(TileEntityGSAltar.class, "GSAltarTE");
     }
 }

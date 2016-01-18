@@ -8,8 +8,6 @@ import gravestone.core.GSBlock;
 import gravestone.core.compatibility.*;
 import gravestone.core.logger.GSLogger;
 import gravestone.inventory.GraveInventory;
-import gravestone.item.corpse.CorpseHelper;
-import gravestone.item.enums.EnumCorpse;
 import gravestone.tileentity.DeathMessageInfo;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.entity.Entity;
@@ -97,7 +95,7 @@ public class GraveGenerationHelper {
                 !isInRestrictedArea(player.getPosition())) {
             List<ItemStack> items = new ArrayList<>(40);
 
-            GSCompatibilityAntiqueAtlas.placeDeathMarkerAtDeath(player);
+//            GSCompatibilityAntiqueAtlas.placeDeathMarkerAtDeath(player); //TODO !!!!!!!!!!!!
 
             items.addAll(Arrays.asList(player.inventory.mainInventory));
             items.addAll(Arrays.asList(player.inventory.armorInventory));
@@ -134,17 +132,25 @@ public class GraveGenerationHelper {
 
         if (pet.isTamed()) {
             if (pet instanceof EntityWolf) {
-                createGrave(entity, event, CorpseHelper.getCorpse(entity, EnumCorpse.DOG), EnumGraveTypeByEntity.DOGS_GRAVES, false, spawnTime);
+                createGrave(entity, event, getDogsItems(), EnumGraveTypeByEntity.DOGS_GRAVES, false, spawnTime);
             } else if (pet instanceof EntityOcelot) {
-                createGrave(entity, event, CorpseHelper.getCorpse(entity, EnumCorpse.CAT), EnumGraveTypeByEntity.CATS_GRAVES, false, spawnTime);
+                createGrave(entity, event, getCatsItems(), EnumGraveTypeByEntity.CATS_GRAVES, false, spawnTime);
             }
         }
+    }
+
+    private static List<ItemStack> getDogsItems() {
+        return null;//CorpseHelper.getCorpse(entity, EnumCorpse.DOG); //TODO
+    }
+
+    private static List<ItemStack> getCatsItems() {
+        return null;//CorpseHelper.getCorpse(entity, EnumCorpse.CAT); //TODO
     }
 
     public static void createHorseGrave(EntityHorse horse, LivingDeathEvent event, long spawnTime) {
         if (horse.isTame()) {
             List<ItemStack> items = new ArrayList<>();
-            items.addAll(CorpseHelper.getCorpse(horse, EnumCorpse.HORSE));
+//            items.addAll(CorpseHelper.getCorpse(horse, EnumCorpse.HORSE));//TODO
             items.addAll(getHorseItems(horse));
 
             createGrave(horse, event, items, EnumGraveTypeByEntity.HORSE_GRAVES, false, spawnTime);

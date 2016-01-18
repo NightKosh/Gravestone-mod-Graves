@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "variant=night_stone":   { "model": "gravestone:GSTrap_night_stone" },
-        "variant=thunder_stone": { "model": "gravestone:GSTrap_thunder_stone" }
-    }
-}

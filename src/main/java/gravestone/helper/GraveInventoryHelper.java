@@ -1,6 +1,5 @@
 package gravestone.helper;
 
-import gravestone.core.GSPotion;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Items;
@@ -18,12 +17,13 @@ import java.util.Random;
  */
 public class GraveInventoryHelper {
     private static final int[] POTION_LIST = {
-            GSPotion.REGENERATION_POTION_ID, GSPotion.SWIFTNESS_POTION_ID, GSPotion.FIRE_RESISTANCE_POTION_ID,
-            GSPotion.HEALING_POTION_ID, GSPotion.NIGHT_VISION_POTION_ID, GSPotion.STRENGTH_POTION_ID,
-            GSPotion.INVISIBILITY_POTION_ID, GSPotion.WATER_BREATHING_POTION_ID, GSPotion.LEAPING_POTION_ID,
-            GSPotion.SPLASH_REGENERATION_POTION_ID, GSPotion.SPLASH_SWIFTNESS_POTION_ID, GSPotion.SPLASH_FIRE_RESISTANCE_POTION_ID,
-            GSPotion.SPLASH_HEALING_POTION_ID, GSPotion.SPLASH_NIGHT_VISION_POTION_ID, GSPotion.SPLASH_STRENGTH_POTION_ID,
-            GSPotion.SPLASH_INVISIBILITY_POTION_ID, GSPotion.SPLASH_WATER_BREATHING_POTION_ID, GSPotion.SPLASH_LEAPING_POTION_ID
+            //TODO
+//            GSPotion.REGENERATION_POTION_ID, GSPotion.SWIFTNESS_POTION_ID, GSPotion.FIRE_RESISTANCE_POTION_ID,
+//            GSPotion.HEALING_POTION_ID, GSPotion.NIGHT_VISION_POTION_ID, GSPotion.STRENGTH_POTION_ID,
+//            GSPotion.INVISIBILITY_POTION_ID, GSPotion.WATER_BREATHING_POTION_ID, GSPotion.LEAPING_POTION_ID,
+//            GSPotion.SPLASH_REGENERATION_POTION_ID, GSPotion.SPLASH_SWIFTNESS_POTION_ID, GSPotion.SPLASH_FIRE_RESISTANCE_POTION_ID,
+//            GSPotion.SPLASH_HEALING_POTION_ID, GSPotion.SPLASH_NIGHT_VISION_POTION_ID, GSPotion.SPLASH_STRENGTH_POTION_ID,
+//            GSPotion.SPLASH_INVISIBILITY_POTION_ID, GSPotion.SPLASH_WATER_BREATHING_POTION_ID, GSPotion.SPLASH_LEAPING_POTION_ID
     };
 
     public static GraveContentType getRandomGraveContentType(Random random) {

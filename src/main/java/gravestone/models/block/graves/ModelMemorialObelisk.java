@@ -1,6 +1,6 @@
-package gravestone.models.block.memorials;
+package gravestone.models.block.graves;
 
-import gravestone.models.block.ModelMemorial;
+import gravestone.models.block.ModelGraveStone;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
-public class ModelMemorialObelisk extends ModelMemorial {
+public class ModelMemorialObelisk extends ModelGraveStone {
 
     private ModelRenderer plate1;
     private ModelRenderer plate2;

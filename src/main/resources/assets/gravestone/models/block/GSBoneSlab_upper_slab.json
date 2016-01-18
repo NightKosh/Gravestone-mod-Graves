@@ -1,8 +1,0 @@
-{
-    "parent": "block/upper_slab",
-    "textures": {
-        "bottom": "gravestone:blocks/bone_block",
-        "top": "gravestone:blocks/bone_block",
-        "side": "gravestone:blocks/bone_block"
-    }
-}

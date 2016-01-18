@@ -1,7 +1,6 @@
 package gravestone.core;
 
 import gravestone.block.enums.EnumGraves;
-import gravestone.block.enums.EnumMemorials;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,8 +19,6 @@ public class GSTabs {
     }
 
     public static CreativeTabs gravesTab;
-    public static CreativeTabs memorialsTab;
-    public static CreativeTabs otherItemsTab;
 
     public static void registration() {
         gravesTab = new CreativeTabs("tabGSGraveStone") {
@@ -38,36 +35,6 @@ public class GSTabs {
             @SideOnly(Side.CLIENT)
             public Item getTabIconItem() {
                 return Item.getItemFromBlock(GSBlock.graveStone);
-            }
-        };
-
-        memorialsTab = new CreativeTabs("tabGSMemorials") {
-            @Override
-            public ItemStack getIconItemStack() {
-                ItemStack stack = new ItemStack(GSBlock.memorial, 1, 0);
-                NBTTagCompound nbt = new NBTTagCompound();
-                nbt.setInteger("Type", EnumMemorials.STONE_CREEPER_STATUE.ordinal());
-                stack.setTagCompound(nbt);
-                return stack;
-            }
-
-            @Override
-            @SideOnly(Side.CLIENT)
-            public Item getTabIconItem() {
-                return Item.getItemFromBlock(GSBlock.memorial);
-            }
-        };
-
-        otherItemsTab = new CreativeTabs("tabGSOther") {
-            @Override
-            public ItemStack getIconItemStack() {
-                return new ItemStack(GSBlock.skullCandle, 1, 1);
-            }
-
-            @Override
-            @SideOnly(Side.CLIENT)
-            public Item getTabIconItem() {
-                return Item.getItemFromBlock(GSBlock.skullCandle);
             }
         };
     }

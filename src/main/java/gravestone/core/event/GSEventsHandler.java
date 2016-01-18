@@ -1,24 +1,13 @@
 package gravestone.core.event;
 
 import gravestone.config.GSConfig;
-import gravestone.core.GSBlock;
-import gravestone.core.GSMobSpawn;
 import gravestone.core.MobHandler;
 import gravestone.core.compatibility.GSCompatibilityWitchery;
 import gravestone.core.logger.GravesLogger;
-import gravestone.entity.monster.EntitySkullCrawler;
-import gravestone.entity.monster.EntityWitherSkullCrawler;
-import gravestone.entity.monster.EntityZombieSkullCrawler;
 import gravestone.helper.GraveGenerationHelper;
-import gravestone.item.corpse.CorpseHelper;
-import gravestone.item.enums.EnumCorpse;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.BlockPos;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -47,7 +36,8 @@ public class GSEventsHandler {
                 GraveGenerationHelper.createPlayerGrave((EntityPlayer) event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
             } else {
                 if (GSConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
-                    GraveGenerationHelper.createGrave(event.entity, event, CorpseHelper.getCorpse(event.entity, EnumCorpse.VILLAGER),
+                    //CorpseHelper.getCorpse(event.entity, EnumCorpse.VILLAGER) //TODO
+                    GraveGenerationHelper.createGrave(event.entity, event, null,
                             GraveGenerationHelper.EnumGraveTypeByEntity.VILLAGERS_GRAVES, true, MobHandler.getAndRemoveSpawnTime(event.entity));
                     return;
                 }
@@ -63,23 +53,24 @@ public class GSEventsHandler {
                 }
             }
 
-            if (GSConfig.spawnSkullCrawlersAtMobsDeath) {
-                if (event.entity instanceof EntitySkeleton) {
-                    EntitySkullCrawler crawler;
-                    if (GSMobSpawn.isWitherSkeleton((EntitySkeleton) event.entity)) {
-                        crawler = new EntityWitherSkullCrawler(event.entity.worldObj);
-                    } else {
-                        crawler = new EntitySkullCrawler(event.entity.worldObj);
-                    }
-                    GSMobSpawn.spawnCrawler(event.entity, crawler);
-                } else if (event.entity instanceof EntityZombie) {
-                    GSMobSpawn.spawnCrawler(event.entity, new EntityZombieSkullCrawler(event.entity.worldObj));
-                }
-            }
-            if (event.entity instanceof EntityCreeper && ((EntityCreeper) event.entity).getPowered()) {
-                // drop creeper statue if entity is a charged creeper
-                GSBlock.memorial.dropCreeperMemorial(event.entity.worldObj, new BlockPos(event.entity));
-            }
+            //TODO
+//            if (GSConfig.spawnSkullCrawlersAtMobsDeath) {
+//                if (event.entity instanceof EntitySkeleton) {
+//                    EntitySkullCrawler crawler;
+//                    if (GSMobSpawn.isWitherSkeleton((EntitySkeleton) event.entity)) {
+//                        crawler = new EntityWitherSkullCrawler(event.entity.worldObj);
+//                    } else {
+//                        crawler = new EntitySkullCrawler(event.entity.worldObj);
+//                    }
+//                    GSMobSpawn.spawnCrawler(event.entity, crawler);
+//                } else if (event.entity instanceof EntityZombie) {
+//                    GSMobSpawn.spawnCrawler(event.entity, new EntityZombieSkullCrawler(event.entity.worldObj));
+//                }
+//            }
+//            if (event.entity instanceof EntityCreeper && ((EntityCreeper) event.entity).getPowered()) {
+//                // drop creeper statue if entity is a charged creeper
+//                GSBlock.memorial.dropCreeperMemorial(event.entity.worldObj, new BlockPos(event.entity));
+//            }
         }
     }
 

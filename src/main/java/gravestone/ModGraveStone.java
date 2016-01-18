@@ -2,7 +2,6 @@ package gravestone;
 
 import gravestone.api.GraveStoneAPI;
 import gravestone.api.IGraveStone;
-import gravestone.helper.GraveStoneHelper;
 import gravestone.config.GSConfig;
 import gravestone.core.*;
 import gravestone.core.commands.GSCommands;
@@ -11,6 +10,7 @@ import gravestone.core.event.GSEventHandlerNetwork;
 import gravestone.core.event.GSEventsHandler;
 import gravestone.core.event.GSTickEventHandler;
 import gravestone.core.proxy.CommonProxy;
+import gravestone.helper.GraveStoneHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -45,9 +45,6 @@ public class ModGraveStone {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         GSConfig.getInstance(event.getModConfigurationDirectory().getAbsolutePath() + "/GraveStoneMod/", "GraveStone.cfg");
-        GSStructures.preInit();
-
-        gravestone.core.GSMessageHandler.init();
 
         GraveStoneAPI.graveStone = gravestoneHelper;
     }
@@ -66,22 +63,9 @@ public class ModGraveStone {
         // blocks registration
         GSBlock.registration();
 
-        // items registration
-        GSItem.registration();
-
-        // reciepes registration
-        GSRecipes.registration();
 
         // tileEntities registration
         GSTileEntity.registration();
-
-        // register structures
-        GSStructures.getInstance();
-
-        // register entities
-        GSEntity.getInstance();
-
-        GSPotion.init();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GSGuiHandler());
 

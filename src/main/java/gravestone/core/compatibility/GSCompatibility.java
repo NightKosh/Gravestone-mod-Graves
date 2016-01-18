@@ -1,6 +1,5 @@
 package gravestone.core.compatibility;
 
-import gravestone.core.compatibility.forestry.GSCompatibilityForestry;
 import net.minecraftforge.fml.common.Loader;
 
 /**
@@ -22,11 +21,6 @@ public class GSCompatibility {
     }
 
     public void checkMods() {
-        if (Loader.isModLoaded("MoCreatures")) {
-            GSCompatibilityMoCreatures.isInstalled = true;
-            GSCompatibilityMoCreatures.addMobs();
-        }
-
         if (Loader.isModLoaded("battlegear2")) {
             GSCompatibilityBattlegear.isInstalled = true;
         }
@@ -41,12 +35,6 @@ public class GSCompatibility {
 
         if (Loader.isModLoaded("Backpack")) {
             GSCompatibilityBackpacksMod.isInstalled = true;
-        }
-
-        if (Loader.isModLoaded("Thaumcraft")) {
-            GSCompatibilityThaumcraft.addReciepes();
-            GSCompatibilityThaumcraft.addAspects();
-            GSCompatibilityThaumcraft.addSwords();
         }
 
         if (Loader.isModLoaded("Baubles")) {
@@ -69,25 +57,12 @@ public class GSCompatibility {
             GSCompatibilityGalacticraft.isInstalled = true;
         }
 
-        if (Loader.isModLoaded("Forestry")) {
-            GSCompatibilityForestry.isInstalled = true;
-            GSCompatibilityForestry.addBackpack();
-        }
-
-        if (Loader.isModLoaded("SophisticatedWolves")) {
-            GSCompatibilitySophisticatedWolves.isInstalled = true;
-        }
-
         if (Loader.isModLoaded("EnderIO")) {
             GSCompatibilityEnderIO.isInstalled = true;
         }
 
         if (Loader.isModLoaded("TwilightForest")) {
             GSCompatibilityTwilightForest.isInstalled = true;
-        }
-
-        if (Loader.isModLoaded("antiqueatlas")) {
-            GSCompatibilityAntiqueAtlas.isInstalled = true;
         }
 
         if (Loader.isModLoaded("witchery")) {

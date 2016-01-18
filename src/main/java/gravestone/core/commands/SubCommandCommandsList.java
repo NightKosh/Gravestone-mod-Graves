@@ -18,7 +18,8 @@ public class SubCommandCommandsList {
     public static final String COMMAND_USAGE = CommandGS.MAIN_COMMAND_NAME + COMMAND_NAME;
 
     public static void execute(ICommandSender sender, String[] args) throws CommandException {
-        sender.addChatMessage(new ChatComponentText(SubCommandStructuresGenerator.COMMAND_USAGE).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+        //TODO
+//        sender.addChatMessage(new ChatComponentText(SubCommandStructuresGenerator.COMMAND_USAGE).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
         sender.addChatMessage(new ChatComponentText(SubCommandCustomGraveItems.COMMAND_USAGE).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
     }
 }

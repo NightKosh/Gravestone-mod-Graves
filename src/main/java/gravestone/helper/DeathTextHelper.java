@@ -1,7 +1,6 @@
 package gravestone.helper;
 
 import gravestone.block.enums.EnumGraves;
-import gravestone.block.enums.EnumMemorials;
 import gravestone.config.GSConfig;
 import gravestone.tileentity.DeathMessageInfo;
 import gravestone.tileentity.GSGraveStoneDeathText;
@@ -125,25 +124,26 @@ public class DeathTextHelper {
             "entity.WitherBoss.name"
     };
 
-    public static GSGraveStoneDeathText getRandomDeathTextAndNameForMemorial(Random random, EnumMemorials memorialType) {
-        GSGraveStoneDeathText deathText = new GSGraveStoneDeathText();//TODO te
-        deathText.setLocalized();
-        switch (memorialType.getMemorialType()) {
-            case DOG_STATUE:
-                getRandomMemorialContent(deathText, random, GSConfig.graveDogsNames, GSConfig.dogsMemorialText);//TODO
-                break;
-            case CAT_STATUE:
-                getRandomMemorialContent(deathText, random, GSConfig.graveCatsNames, GSConfig.catsMemorialText);//TODO
-                break;
-            case CREEPER_STATUE:
-                deathText.setDeathText("Sssssssssssssss...");
-                break;
-            default:
-                getRandomMemorialContent(deathText, random, GSConfig.graveNames, GSConfig.memorialText);//TODO
-                break;
-        }
-        return deathText;
-    }
+    //TODO
+//    public static GSGraveStoneDeathText getRandomDeathTextAndNameForMemorial(Random random, EnumMemorials memorialType) {
+//        GSGraveStoneDeathText deathText = new GSGraveStoneDeathText();//TODO te
+//        deathText.setLocalized();
+//        switch (memorialType.getMemorialType()) {
+//            case DOG_STATUE:
+//                getRandomMemorialContent(deathText, random, GSConfig.graveDogsNames, GSConfig.dogsMemorialText);//TODO
+//                break;
+//            case CAT_STATUE:
+//                getRandomMemorialContent(deathText, random, GSConfig.graveCatsNames, GSConfig.catsMemorialText);//TODO
+//                break;
+//            case CREEPER_STATUE:
+//                deathText.setDeathText("Sssssssssssssss...");
+//                break;
+//            default:
+//                getRandomMemorialContent(deathText, random, GSConfig.graveNames, GSConfig.memorialText);//TODO
+//                break;
+//        }
+//        return deathText;
+//    }
 
     public static GSGraveStoneDeathText getRandomDeathTextAndNameForGrave(Random random, EnumGraves.EnumGraveType graveType) {
         switch (graveType) {

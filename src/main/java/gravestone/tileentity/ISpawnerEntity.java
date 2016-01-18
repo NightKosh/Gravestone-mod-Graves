@@ -1,6 +1,6 @@
 package gravestone.tileentity;
 
-import gravestone.entity.helper.EntityGroupOfGravesMobSpawnerHelper;
+import gravestone.entity.helper.GroupOfGravesSpawnerHelper;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
@@ -18,5 +18,5 @@ public interface ISpawnerEntity {
 
     public boolean haveSpawnerHelper();
 
-    public EntityGroupOfGravesMobSpawnerHelper getSpawnerHelper();
+    public GroupOfGravesSpawnerHelper getSpawnerHelper();
 }

@@ -165,7 +165,7 @@ public class TileEntityGSGraveStoneRenderer extends TileEntityGSRenderer {
             case CROSS:
                 return Resources.GRAVE_MOSSY_CROSS;
             case OBELISK:
-                return Resources.MEMORIAL_MOSSY_OBELISK;
+                return Resources.GRAVE_MOSSY_OBELISK;
             case HORIZONTAL_PLATE:
                 return Resources.GRAVE_MOSSY_HORISONTAL_PLATE;
             case DOG_STATUE:
