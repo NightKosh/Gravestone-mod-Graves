@@ -12,12 +12,18 @@ import net.minecraft.util.EnumChatFormatting;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class SubCommandCommandsList {
+public class SubCommandCommandsList implements ISubCommand {
 
     public static final String COMMAND_NAME = "commands_list";
     public static final String COMMAND_USAGE = CommandGS.MAIN_COMMAND_NAME + COMMAND_NAME;
 
-    public static void execute(ICommandSender sender, String[] args) throws CommandException {
+    @Override
+    public String getCommandName() {
+        return COMMAND_NAME;
+    }
+
+    @Override
+    public void execute(ICommandSender sender, String[] args) throws CommandException {
         //TODO
 //        sender.addChatMessage(new ChatComponentText(SubCommandStructuresGenerator.COMMAND_USAGE).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
         sender.addChatMessage(new ChatComponentText(SubCommandCustomGraveItems.COMMAND_USAGE).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));

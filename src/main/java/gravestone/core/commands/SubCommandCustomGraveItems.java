@@ -20,12 +20,18 @@ import java.util.ArrayList;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class SubCommandCustomGraveItems {
+public class SubCommandCustomGraveItems implements ISubCommand {
 
     public static final String COMMAND_NAME = "fill_grave";
     public static final String COMMAND_USAGE = CommandGS.MAIN_COMMAND_NAME + COMMAND_NAME + " <grave x coordinate> <grave y coordinate> <grave z coordinate>  <chest x coordinate> <chest y coordinate> <chest z coordinate>";
 
-    public static void execute(ICommandSender sender, String[] args) throws CommandException {
+    @Override
+    public String getCommandName() {
+        return COMMAND_NAME;
+    }
+
+    @Override
+    public void execute(ICommandSender sender, String[] args) throws CommandException {
         GSLogger.logInfo("Custom grave items command received");
 
         if (args.length >= 7) {

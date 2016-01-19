@@ -7,6 +7,9 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * GraveStone mod
  *
@@ -15,7 +18,12 @@ import net.minecraft.util.EnumChatFormatting;
  */
 public class CommandGS extends CommandBase {
     public static final String MAIN_COMMAND_NAME = "/GS ";
-    public static final String HELP = "Type \"" + SubCommandCommandsList.COMMAND_USAGE  + "\" for commands list";
+    public static final String HELP = "Type \"" + SubCommandCommandsList.COMMAND_USAGE + "\" for commands list";
+
+    private static final SubCommandCustomGraveItems CUSTOM_GRAVES_ITEMS = new SubCommandCustomGraveItems();
+    private static final SubCommandCommandsList COMMANDS_LIST = new SubCommandCommandsList();
+
+    private static final List<ISubCommand> ADDITIONAL_COMMANDS_LIST = new ArrayList<>();
 
     @Override
     public String getName() {
@@ -37,18 +45,34 @@ public class CommandGS extends CommandBase {
 //                    SubCommandStructuresGenerator.execute(sender, args);
 //                    break;
                 case SubCommandCustomGraveItems.COMMAND_NAME:
-                    SubCommandCustomGraveItems.execute(sender, args);
+                    CUSTOM_GRAVES_ITEMS.execute(sender, args);
                     break;
                 case SubCommandCommandsList.COMMAND_NAME:
-                    SubCommandCommandsList.execute(sender, args);
+                    COMMANDS_LIST.execute(sender, args);
                     break;
                 default:
-                    sender.addChatMessage(new ChatComponentText("Unknown command!").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
-                    sender.addChatMessage(new ChatComponentText(HELP).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+                    boolean unknownCommand = true;
+                    for (ISubCommand additionalCommand : ADDITIONAL_COMMANDS_LIST) {
+                        if (additionalCommand.getCommandName().equals(command)) {
+                            additionalCommand.execute(sender, args);
+                            unknownCommand = false;
+                            break;
+                        }
+                    }
+                    if (unknownCommand) {
+                        sender.addChatMessage(new ChatComponentText("Unknown command!").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                        sender.addChatMessage(new ChatComponentText(HELP).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+                    }
                     break;
             }
         } else {
             sender.addChatMessage(new ChatComponentText(HELP).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+        }
+    }
+
+    public static void addCommand(ISubCommand command) {
+        if (command != null) {
+            ADDITIONAL_COMMANDS_LIST.add(command);
         }
     }
 }
