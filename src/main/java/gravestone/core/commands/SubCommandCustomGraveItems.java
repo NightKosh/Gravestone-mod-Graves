@@ -31,6 +31,11 @@ public class SubCommandCustomGraveItems implements ISubCommand {
     }
 
     @Override
+    public String getCommandUsage() {
+        return COMMAND_USAGE;
+    }
+
+    @Override
     public void execute(ICommandSender sender, String[] args) throws CommandException {
         GSLogger.logInfo("Custom grave items command received");
 

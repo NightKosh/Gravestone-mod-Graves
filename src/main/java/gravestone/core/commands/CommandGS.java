@@ -17,13 +17,14 @@ import java.util.List;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class CommandGS extends CommandBase {
-    public static final String MAIN_COMMAND_NAME = "/GS ";
-    public static final String HELP = "Type \"" + SubCommandCommandsList.COMMAND_USAGE + "\" for commands list";
 
     private static final SubCommandCustomGraveItems CUSTOM_GRAVES_ITEMS = new SubCommandCustomGraveItems();
     private static final SubCommandCommandsList COMMANDS_LIST = new SubCommandCommandsList();
 
-    private static final List<ISubCommand> ADDITIONAL_COMMANDS_LIST = new ArrayList<>();
+    public static final String MAIN_COMMAND_NAME = "/GS ";
+    public static final String HELP = "Type \"" + COMMANDS_LIST.getCommandUsage() + "\" for commands list";
+
+    public static final List<ISubCommand> ADDITIONAL_COMMANDS_LIST = new ArrayList<>();
 
     @Override
     public String getName() {
@@ -40,10 +41,6 @@ public class CommandGS extends CommandBase {
         if (args.length >= 1) {
             String command = args[0];
             switch (command) {
-                //TODO
-//                case SubCommandStructuresGenerator.COMMAND_NAME:
-//                    SubCommandStructuresGenerator.execute(sender, args);
-//                    break;
                 case SubCommandCustomGraveItems.COMMAND_NAME:
                     CUSTOM_GRAVES_ITEMS.execute(sender, args);
                     break;

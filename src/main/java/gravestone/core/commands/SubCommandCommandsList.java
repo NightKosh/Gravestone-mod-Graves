@@ -15,7 +15,6 @@ import net.minecraft.util.EnumChatFormatting;
 public class SubCommandCommandsList implements ISubCommand {
 
     public static final String COMMAND_NAME = "commands_list";
-    public static final String COMMAND_USAGE = CommandGS.MAIN_COMMAND_NAME + COMMAND_NAME;
 
     @Override
     public String getCommandName() {
@@ -24,8 +23,10 @@ public class SubCommandCommandsList implements ISubCommand {
 
     @Override
     public void execute(ICommandSender sender, String[] args) throws CommandException {
-        //TODO
-//        sender.addChatMessage(new ChatComponentText(SubCommandStructuresGenerator.COMMAND_USAGE).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
-        sender.addChatMessage(new ChatComponentText(SubCommandCustomGraveItems.COMMAND_USAGE).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+        sender.addChatMessage(new ChatComponentText(getCommandUsage()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+
+        for (ISubCommand additionalCommand : CommandGS.ADDITIONAL_COMMANDS_LIST) {
+            sender.addChatMessage(new ChatComponentText(additionalCommand.getCommandUsage()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+        }
     }
 }
