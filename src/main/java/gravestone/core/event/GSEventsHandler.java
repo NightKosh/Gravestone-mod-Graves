@@ -1,10 +1,11 @@
 package gravestone.core.event;
 
+import gravestone.api.death_handler.*;
 import gravestone.config.GSConfig;
 import gravestone.core.MobHandler;
-import gravestone.core.compatibility.GSCompatibilityWitchery;
 import gravestone.core.logger.GravesLogger;
 import gravestone.helper.GraveGenerationHelper;
+import gravestone.helper.api.APIGraveGeneration;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,46 +32,54 @@ public class GSEventsHandler {
                 return;
             }
 
-            if (GSConfig.generatePlayerGraves && event.entityLiving instanceof EntityPlayer &&
-                    !GSCompatibilityWitchery.isVampire((EntityPlayer) event.entity, event.source)) {
-                GraveGenerationHelper.createPlayerGrave((EntityPlayer) event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
-            } else {
-                if (GSConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
-                    //CorpseHelper.getCorpse(event.entity, EnumCorpse.VILLAGER) //TODO
-                    GraveGenerationHelper.createGrave(event.entity, event, null,
-                            GraveGenerationHelper.EnumGraveTypeByEntity.VILLAGERS_GRAVES, true, MobHandler.getAndRemoveSpawnTime(event.entity));
-                    return;
-                }
-
-                if (GSConfig.generatePetGraves) {
-                    if (event.entity instanceof EntityTameable) {
-                        GraveGenerationHelper.createPetGrave(event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
-                        return;
-                    } else if (event.entity instanceof EntityHorse) {
-                        GraveGenerationHelper.createHorseGrave((EntityHorse) event.entity, event, MobHandler.getAndRemoveSpawnTime(event.entity));
+            if (GSConfig.generatePlayerGraves && event.entityLiving instanceof EntityPlayer) {
+                EntityPlayer player = (EntityPlayer) event.entity;
+                for (IPlayerDeathHandler playerDeathHandler : APIGraveGeneration.PLAYER_DEATH_HANDLERS) {
+                    if (playerDeathHandler.beforePlayerDeath(player, event.source)) {
                         return;
                     }
                 }
-            }
 
-            //TODO
-//            if (GSConfig.spawnSkullCrawlersAtMobsDeath) {
-//                if (event.entity instanceof EntitySkeleton) {
-//                    EntitySkullCrawler crawler;
-//                    if (GSMobSpawn.isWitherSkeleton((EntitySkeleton) event.entity)) {
-//                        crawler = new EntityWitherSkullCrawler(event.entity.worldObj);
-//                    } else {
-//                        crawler = new EntitySkullCrawler(event.entity.worldObj);
-//                    }
-//                    GSMobSpawn.spawnCrawler(event.entity, crawler);
-//                } else if (event.entity instanceof EntityZombie) {
-//                    GSMobSpawn.spawnCrawler(event.entity, new EntityZombieSkullCrawler(event.entity.worldObj));
-//                }
-//            }
-//            if (event.entity instanceof EntityCreeper && ((EntityCreeper) event.entity).getPowered()) {
-//                // drop creeper statue if entity is a charged creeper
-//                GSBlock.memorial.dropCreeperMemorial(event.entity.worldObj, new BlockPos(event.entity));
-//            }
+                GraveGenerationHelper.createPlayerGrave(player, event, MobHandler.getAndRemoveSpawnTime(event.entity));
+            } else {
+                if (GSConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
+                    EntityVillager villager = (EntityVillager) event.entity;
+                    for (IVillagerDeathHandler villagerDeathHandler : APIGraveGeneration.VILLAGER_DEATH_HANDLERS) {
+                        if (villagerDeathHandler.beforeVillagerDeath(villager, event.source)) {
+                            return;
+                        }
+                    }
+                    GraveGenerationHelper.createVillagerGrave(villager, event);
+                } else if (GSConfig.generatePetGraves) {
+                    if (event.entity instanceof EntityTameable) {
+                        if (event.entity instanceof EntityWolf) {
+                            EntityWolf dog = (EntityWolf) event.entity;
+                            for (IDogDeathHandler dogDeathHandler : APIGraveGeneration.DOG_DEATH_HANDLERS) {
+                                if (dogDeathHandler.beforeDogDeath(dog, event.source)) {
+                                    return;
+                                }
+                            }
+                            GraveGenerationHelper.createDogGrave(dog, event);
+                        } else if (event.entity instanceof EntityOcelot) {
+                            EntityOcelot cat = (EntityOcelot) event.entity;
+                            for (ICatDeathHandler catDeathHandler : APIGraveGeneration.CAT_DEATH_HANDLERS) {
+                                if (catDeathHandler.beforeCatDeath(cat, event.source)) {
+                                    return;
+                                }
+                            }
+                            GraveGenerationHelper.createCatGrave(cat, event);
+                        }
+                    } else if (event.entity instanceof EntityHorse) {
+                        EntityHorse horse = (EntityHorse) event.entity;
+                        for (IHorseDeathHandler horseDeathHandler : APIGraveGeneration.HORSE_DEATH_HANDLERS) {
+                            if (horseDeathHandler.beforeHorseDeath(horse, event.source)) {
+                                return;
+                            }
+                        }
+                        GraveGenerationHelper.createHorseGrave(horse, event);
+                    }
+                }
+            }
         }
     }
 

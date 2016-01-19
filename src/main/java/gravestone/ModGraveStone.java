@@ -1,6 +1,7 @@
 package gravestone;
 
 import gravestone.api.GraveStoneAPI;
+import gravestone.api.IGraveGeneration;
 import gravestone.api.IGraveStone;
 import gravestone.config.GSConfig;
 import gravestone.core.*;
@@ -11,6 +12,7 @@ import gravestone.core.event.GSEventsHandler;
 import gravestone.core.event.GSTickEventHandler;
 import gravestone.core.proxy.CommonProxy;
 import gravestone.helper.GraveStoneHelper;
+import gravestone.helper.api.APIGraveGeneration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -37,6 +39,7 @@ public class ModGraveStone {
     public static CommonProxy proxy;
 
     public static final IGraveStone gravestoneHelper = new GraveStoneHelper();
+    public static final IGraveGeneration apiGraveGeneration = new APIGraveGeneration();
 
     public ModGraveStone() {
         instance = this;
@@ -46,7 +49,9 @@ public class ModGraveStone {
     public void preInit(FMLPreInitializationEvent event) {
         GSConfig.getInstance(event.getModConfigurationDirectory().getAbsolutePath() + "/GraveStoneMod/", "GraveStone.cfg");
 
+        // API
         GraveStoneAPI.graveStone = gravestoneHelper;
+        GraveStoneAPI.graveGenerationAtDeath = apiGraveGeneration;
     }
 
     @Mod.EventHandler

@@ -1,22 +1,22 @@
 package gravestone.helper;
 
+import gravestone.api.grave_items.*;
 import gravestone.block.BlockGSGraveStone;
 import gravestone.block.enums.EnumGraveMaterial;
 import gravestone.block.enums.EnumGraves;
 import gravestone.config.GSConfig;
 import gravestone.core.GSBlock;
+import gravestone.core.MobHandler;
 import gravestone.core.compatibility.*;
 import gravestone.core.logger.GSLogger;
+import gravestone.helper.api.APIGraveGeneration;
 import gravestone.inventory.GraveInventory;
 import gravestone.tileentity.DeathMessageInfo;
 import gravestone.tileentity.TileEntityGSGraveStone;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntityHorse;
-import net.minecraft.entity.passive.EntityOcelot;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.passive.EntityWolf;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -115,6 +115,10 @@ public class GraveGenerationHelper {
             GSCompatibilityGalacticraft.addItems(items, player);
             GSCompatibilityBackpacksMod.addItems(items, player);
 
+            for (IPlayerItems additionalItems : APIGraveGeneration.PLAYER_ITEMS) {
+                items.addAll(additionalItems.addItemsToPlayerGrave(player, event.source));
+            }
+
             GSCompatibilityisArsMagica.getSoulboundItemsBack(items, player);
             GSCompatibilityEnderIO.getSoulboundItemsBack(items, player);
 
@@ -127,32 +131,58 @@ public class GraveGenerationHelper {
         }
     }
 
-    public static void createPetGrave(Entity entity, LivingDeathEvent event, long spawnTime) {
-        EntityTameable pet = (EntityTameable) entity;
+    public static void createVillagerGrave(EntityVillager villager, LivingDeathEvent event) {
+        List<ItemStack> items = new ArrayList<>(5);
+        for (IVillagerItems additionalItems : APIGraveGeneration.VILLAGER_ITEMS) {
+            items.addAll(additionalItems.addItemsToVillagerGrave(villager, event.source));
+        }
+        //CorpseHelper.getCorpse(event.entity, EnumCorpse.VILLAGER) //TODO external module
 
-        if (pet.isTamed()) {
-            if (pet instanceof EntityWolf) {
-                createGrave(entity, event, getDogsItems(), EnumGraveTypeByEntity.DOGS_GRAVES, false, spawnTime);
-            } else if (pet instanceof EntityOcelot) {
-                createGrave(entity, event, getCatsItems(), EnumGraveTypeByEntity.CATS_GRAVES, false, spawnTime);
-            }
+        long spawnTime = MobHandler.getAndRemoveSpawnTime(event.entity);
+        createGrave(villager, event, items, GraveGenerationHelper.EnumGraveTypeByEntity.VILLAGERS_GRAVES, true, spawnTime);
+    }
+
+    public static void createDogGrave(EntityWolf dog, LivingDeathEvent event) {
+        if (dog.isTamed()) {
+            long spawnTime = MobHandler.getAndRemoveSpawnTime(event.entity);
+            createGrave(dog, event, getDogsItems(dog, event), EnumGraveTypeByEntity.DOGS_GRAVES, false, spawnTime);
         }
     }
 
-    private static List<ItemStack> getDogsItems() {
-        return null;//CorpseHelper.getCorpse(entity, EnumCorpse.DOG); //TODO
+    public static void createCatGrave(EntityOcelot cat, LivingDeathEvent event) {
+        if (cat.isTamed()) {
+            long spawnTime = MobHandler.getAndRemoveSpawnTime(event.entity);
+            createGrave(cat, event, getCatsItems(cat, event), EnumGraveTypeByEntity.CATS_GRAVES, false, spawnTime);
+        }
     }
 
-    private static List<ItemStack> getCatsItems() {
-        return null;//CorpseHelper.getCorpse(entity, EnumCorpse.CAT); //TODO
+    private static List<ItemStack> getDogsItems(EntityWolf dog, LivingDeathEvent event) {
+        List<ItemStack> items = new ArrayList<>(5);
+        for (IDogItems additionalItems : APIGraveGeneration.DOG_ITEMS) {
+            items.addAll(additionalItems.addItemsToDogGrave(dog, event.source));
+        }
+        return items;//CorpseHelper.getCorpse(entity, EnumCorpse.DOG); //TODO external module
     }
 
-    public static void createHorseGrave(EntityHorse horse, LivingDeathEvent event, long spawnTime) {
+    private static List<ItemStack> getCatsItems(EntityOcelot cat, LivingDeathEvent event) {
+        List<ItemStack> items = new ArrayList<>(5);
+        for (ICatItems additionalItems : APIGraveGeneration.CAT_ITEMS) {
+            items.addAll(additionalItems.addItemsToCatGrave(cat, event.source));
+        }
+        return items;//CorpseHelper.getCorpse(entity, EnumCorpse.CAT); //TODO external module
+    }
+
+    public static void createHorseGrave(EntityHorse horse, LivingDeathEvent event) {
         if (horse.isTame()) {
             List<ItemStack> items = new ArrayList<>();
-//            items.addAll(CorpseHelper.getCorpse(horse, EnumCorpse.HORSE));//TODO
             items.addAll(getHorseItems(horse));
 
+            for (IHorseItems additionalItems : APIGraveGeneration.HORSE_ITEMS) {
+                items.addAll(additionalItems.addItemsToHorseGrave(horse, event.source));
+            }
+//            items.addAll(CorpseHelper.getCorpse(horse, EnumCorpse.HORSE));//TODO external module
+
+            long spawnTime = MobHandler.getAndRemoveSpawnTime(event.entity);
             createGrave(horse, event, items, EnumGraveTypeByEntity.HORSE_GRAVES, false, spawnTime);
         }
     }
