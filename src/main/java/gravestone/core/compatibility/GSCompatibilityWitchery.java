@@ -16,38 +16,34 @@ import java.lang.reflect.Method;
  */
 public class GSCompatibilityWitchery {
 
-    protected static boolean isInstalled = false;
+    public static final String MOD_ID = "witchery";
 
-    private GSCompatibilityWitchery() {
+    public GSCompatibilityWitchery() {
         ModGraveStone.apiGraveGeneration.addPlayerDeathHandler((player, source) -> {
-            if (isInstalled()) {
-                try {
-                    Class playerClass = Class.forName("com.emoniph.witchery.common.ExtendedPlayer");
-                    Method getPlayerMethod = playerClass.getDeclaredMethod("get", EntityPlayer.class);
-                    Object extendedPlayer = getPlayerMethod.invoke(null, player);
+                    try {
+                        Class playerClass = Class.forName("com.emoniph.witchery.common.ExtendedPlayer");
+                        Method getPlayerMethod = playerClass.getDeclaredMethod("get", EntityPlayer.class);
+                        Object extendedPlayer = getPlayerMethod.invoke(null, player);
 
-                    Method isVampireMethod = playerClass.getDeclaredMethod("isVampire");
+                        Method isVampireMethod = playerClass.getDeclaredMethod("isVampire");
 
-                    if ((Boolean) isVampireMethod.invoke(extendedPlayer)) {
-                        Class utilClass = Class.forName("com.emoniph.witchery.util.CreatureUtil");
-                        Method checkForDeathMethod = utilClass.getDeclaredMethod("checkForVampireDeath", EntityLivingBase.class, DamageSource.class);
-                        return !(Boolean) checkForDeathMethod.invoke(null, player, source);
+                        if ((Boolean) isVampireMethod.invoke(extendedPlayer)) {
+                            Class utilClass = Class.forName("com.emoniph.witchery.util.CreatureUtil");
+                            Method checkForDeathMethod = utilClass.getDeclaredMethod("checkForVampireDeath", EntityLivingBase.class, DamageSource.class);
+                            return !(Boolean) checkForDeathMethod.invoke(null, player, source);
+                        }
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchMethodException e) {
+                        e.printStackTrace();
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
                     }
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-            return false;
-        });
-    }
 
-    public static boolean isInstalled() {
-        return isInstalled;
+                    return false;
+                }
+        );
     }
 }

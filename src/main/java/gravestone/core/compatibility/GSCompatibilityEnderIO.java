@@ -1,10 +1,13 @@
 package gravestone.core.compatibility;
 
+import gravestone.ModGraveStone;
+import gravestone.api.grave_items.IPlayerItems;
 import gravestone.config.GSConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 
 import java.util.Iterator;
 import java.util.List;
@@ -18,21 +21,29 @@ import java.util.Map;
  */
 public class GSCompatibilityEnderIO {
 
-    protected static boolean isInstalled = false;
+    public static final String MOD_ID = "EnderIO";
 
-    private GSCompatibilityEnderIO() {
-    }
+    public GSCompatibilityEnderIO() {
+        if (GSConfig.enableEnderIOSoulbound) {
+            ModGraveStone.apiGraveGeneration.addPlayerItemsHandler(new IPlayerItems() {
 
-    public static void getSoulboundItemsBack(List<ItemStack> items, EntityPlayer player) {
-        if (isInstalled() && GSConfig.enableEnderIOSoulbound) {
-            Iterator<ItemStack> it = items.iterator();
-            while (it.hasNext()) {
-                ItemStack stack = it.next();
-                if (stack != null && hasSoulbound(stack)) {
-                    player.inventory.addItemStackToInventory(stack.copy());
-                    it.remove();
+                @Override
+                public List<ItemStack> addItems(EntityPlayer player, DamageSource source) {
+                    return null;
                 }
-            }
+
+                @Override
+                public void getItems(EntityPlayer player, DamageSource source, List<ItemStack> items) {
+                    Iterator<ItemStack> it = items.iterator();
+                    while (it.hasNext()) {
+                        ItemStack stack = it.next();
+                        if (stack != null && hasSoulbound(stack)) {
+                            player.inventory.addItemStackToInventory(stack.copy());
+                            it.remove();
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -46,9 +57,4 @@ public class GSCompatibilityEnderIO {
         }
         return false;
     }
-
-    public static boolean isInstalled() {
-        return isInstalled;
-    }
-
 }

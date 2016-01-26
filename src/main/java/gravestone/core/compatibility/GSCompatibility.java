@@ -21,52 +21,56 @@ public class GSCompatibility {
     }
 
     public void checkMods() {
-        if (Loader.isModLoaded("battlegear2")) {
+        if (isModLoaded("battlegear2")) {
             GSCompatibilityBattlegear.isInstalled = true;
         }
 
-        if (Loader.isModLoaded("camping")) {
+        if (isModLoaded("camping")) {
             GSCompatibilityTheCampingMod.isInstalled = true;
         }
 
-        if (Loader.isModLoaded("arsmagica2")) {
+        if (isModLoaded("arsmagica2")) {
             GSCompatibilityisArsMagica.isInstalled = true;
         }
 
-        if (Loader.isModLoaded("Backpack")) {
+        if (isModLoaded("Backpack")) {
             GSCompatibilityBackpacksMod.isInstalled = true;
         }
 
-        if (Loader.isModLoaded("Baubles")) {
+        if (isModLoaded("Baubles")) {
             GSCompatibilityBaubles.isInstalled = true;
         }
 
-        if (Loader.isModLoaded("Mariculture")) {
+        if (isModLoaded("Mariculture")) {
             GSCompatibilityMariculture.isInstalled = true;
         }
 
-        if (Loader.isModLoaded("rpginventorymod")) {
+        if (isModLoaded("rpginventorymod")) {
             GSCompatibilityRpgInventory.isInstalled = true;
         }
 
-        if (Loader.isModLoaded("TConstruct")) {
+        if (isModLoaded("TConstruct")) {
             GSCompatibilityTinkerConstruct.isInstalled = true;
         }
 
-        if (Loader.isModLoaded("GalacticraftCore")) {
+        if (isModLoaded("GalacticraftCore")) {
             GSCompatibilityGalacticraft.isInstalled = true;
         }
 
-        if (Loader.isModLoaded("EnderIO")) {
-            GSCompatibilityEnderIO.isInstalled = true;
+        if (isModLoaded(GSCompatibilityEnderIO.MOD_ID)) {
+            new GSCompatibilityEnderIO();
         }
 
-        if (Loader.isModLoaded("TwilightForest")) {
+        if (isModLoaded("TwilightForest")) {
             GSCompatibilityTwilightForest.isInstalled = true;
         }
 
-        if (Loader.isModLoaded("witchery")) {
-            GSCompatibilityWitchery.isInstalled = true;
+        if (isModLoaded(GSCompatibilityWitchery.MOD_ID)) {
+            new GSCompatibilityWitchery();
         }
+    }
+
+    public boolean isModLoaded(String modId) {
+        return Loader.isModLoaded(modId);
     }
 }

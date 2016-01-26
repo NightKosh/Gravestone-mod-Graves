@@ -119,11 +119,13 @@ public class GraveGenerationHelper {
                 items.addAll(additionalItems.addItems(player, event.source));
             }
 
-            GSCompatibilityisArsMagica.getSoulboundItemsBack(items, player);
-            GSCompatibilityEnderIO.getSoulboundItemsBack(items, player);
-
             //TODO is it really required??
             GSCompatibilityTwilightForest.removeSlotTags(items);
+
+
+            for (IPlayerItems additionalItems : APIGraveGeneration.PLAYER_ITEMS) {
+                additionalItems.getItems(player, event.source, items);
+            }
 
             createGrave(player, event, items, EnumGraveTypeByEntity.PLAYER_GRAVES, false, spawnTime);
         } else {
