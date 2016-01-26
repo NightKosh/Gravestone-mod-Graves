@@ -17,6 +17,8 @@ import java.util.List;
  */
 public class GSCompatibilityBackpacksMod {
 
+    public static final String MOD_ID = "Backpack";
+
     protected static boolean isInstalled = false;
 
     private GSCompatibilityBackpacksMod() {

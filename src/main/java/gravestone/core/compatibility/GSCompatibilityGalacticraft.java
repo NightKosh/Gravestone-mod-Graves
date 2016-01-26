@@ -18,6 +18,8 @@ import java.util.List;
  */
 public class GSCompatibilityGalacticraft {
 
+    public static final String MOD_ID = "GalacticraftCore";
+
     protected static boolean isInstalled = false;
 
     private GSCompatibilityGalacticraft() {

@@ -16,6 +16,8 @@ import java.util.List;
  */
 public class GSCompatibilityTwilightForest {
 
+    public static final String MOD_ID = "TwilightForest";
+
     protected static boolean isInstalled = false;
 
     private GSCompatibilityTwilightForest() {

@@ -21,39 +21,39 @@ public class GSCompatibility {
     }
 
     public void checkMods() {
-        if (isModLoaded("battlegear2")) {
+        if (isModLoaded(GSCompatibilityBattlegear.MOD_ID)) {
             GSCompatibilityBattlegear.isInstalled = true;
         }
 
-        if (isModLoaded("camping")) {
+        if (isModLoaded(GSCompatibilityTheCampingMod.MOD_ID)) {
             GSCompatibilityTheCampingMod.isInstalled = true;
         }
 
-        if (isModLoaded("arsmagica2")) {
+        if (isModLoaded(GSCompatibilityisArsMagica.MOD_ID)) {
             GSCompatibilityisArsMagica.isInstalled = true;
         }
 
-        if (isModLoaded("Backpack")) {
+        if (isModLoaded(GSCompatibilityBackpacksMod.MOD_ID)) {
             GSCompatibilityBackpacksMod.isInstalled = true;
         }
 
-        if (isModLoaded("Baubles")) {
+        if (isModLoaded(GSCompatibilityBaubles.MOD_ID)) {
             GSCompatibilityBaubles.isInstalled = true;
         }
 
-        if (isModLoaded("Mariculture")) {
+        if (isModLoaded(GSCompatibilityMariculture.MOD_ID)) {
             GSCompatibilityMariculture.isInstalled = true;
         }
 
-        if (isModLoaded("rpginventorymod")) {
+        if (isModLoaded(GSCompatibilityRpgInventory.MOD_ID)) {
             GSCompatibilityRpgInventory.isInstalled = true;
         }
 
-        if (isModLoaded("TConstruct")) {
+        if (isModLoaded(GSCompatibilityTinkerConstruct.MOD_ID)) {
             GSCompatibilityTinkerConstruct.isInstalled = true;
         }
 
-        if (isModLoaded("GalacticraftCore")) {
+        if (isModLoaded(GSCompatibilityGalacticraft.MOD_ID)) {
             GSCompatibilityGalacticraft.isInstalled = true;
         }
 
@@ -61,7 +61,7 @@ public class GSCompatibility {
             new GSCompatibilityEnderIO();
         }
 
-        if (isModLoaded("TwilightForest")) {
+        if (isModLoaded(GSCompatibilityTwilightForest.MOD_ID)) {
             GSCompatibilityTwilightForest.isInstalled = true;
         }
 

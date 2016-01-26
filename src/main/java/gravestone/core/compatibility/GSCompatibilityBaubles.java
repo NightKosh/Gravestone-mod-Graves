@@ -16,6 +16,8 @@ import java.util.List;
  */
 public class GSCompatibilityBaubles {
 
+    public static final String MOD_ID = "Baubles";
+
     protected static boolean isInstalled = false;
 
     private GSCompatibilityBaubles() {

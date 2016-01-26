@@ -21,6 +21,8 @@ import java.util.Map;
  */
 public class GSCompatibilityisArsMagica {
 
+    public static final String MOD_ID = "arsmagica2";
+
     protected static boolean isInstalled = false;
 
     private GSCompatibilityisArsMagica() {

@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class GSCompatibilityBattlegear {
 
+    public static final String MOD_ID = "battlegear2";
+
     private static final short FIRST_SLOT = 150;
     private static final short LAST_SLOT = 155;
     protected static boolean isInstalled = false;

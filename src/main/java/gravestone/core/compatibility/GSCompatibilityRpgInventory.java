@@ -17,6 +17,8 @@ import java.util.List;
  */
 public class GSCompatibilityRpgInventory {
 
+    public static final String MOD_ID = "rpginventorymod";
+
     protected static boolean isInstalled = false;
 
     private GSCompatibilityRpgInventory() {

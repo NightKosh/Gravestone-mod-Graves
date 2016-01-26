@@ -17,6 +17,8 @@ import java.util.List;
  */
 public class GSCompatibilityTheCampingMod {
 
+    public static final String MOD_ID = "camping";
+
     protected static boolean isInstalled = false;
 
     private GSCompatibilityTheCampingMod() {

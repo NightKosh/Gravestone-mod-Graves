@@ -15,6 +15,8 @@ import java.util.List;
  */
 public class GSCompatibilityMariculture {
 
+    public static final String MOD_ID = "Mariculture";
+
     protected static boolean isInstalled = false;
 
     private GSCompatibilityMariculture() {

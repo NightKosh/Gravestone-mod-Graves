@@ -18,6 +18,8 @@ import java.util.List;
  */
 public class GSCompatibilityTinkerConstruct {
 
+    public static final String MOD_ID = "TConstruct";
+
     protected static boolean isInstalled = false;
 
     private static final int ACCESSORIES_SLOTS_COUNT = 4;
