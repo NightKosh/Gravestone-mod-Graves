@@ -116,7 +116,7 @@ public class GraveGenerationHelper {
             GSCompatibilityBackpacksMod.addItems(items, player);
 
             for (IPlayerItems additionalItems : APIGraveGeneration.PLAYER_ITEMS) {
-                items.addAll(additionalItems.addItemsToPlayerGrave(player, event.source));
+                items.addAll(additionalItems.addItems(player, event.source));
             }
 
             GSCompatibilityisArsMagica.getSoulboundItemsBack(items, player);
@@ -134,7 +134,7 @@ public class GraveGenerationHelper {
     public static void createVillagerGrave(EntityVillager villager, LivingDeathEvent event) {
         List<ItemStack> items = new ArrayList<>(5);
         for (IVillagerItems additionalItems : APIGraveGeneration.VILLAGER_ITEMS) {
-            items.addAll(additionalItems.addItemsToVillagerGrave(villager, event.source));
+            items.addAll(additionalItems.addItems(villager, event.source));
         }
         //CorpseHelper.getCorpse(event.entity, EnumCorpse.VILLAGER) //TODO external module
 
@@ -159,7 +159,7 @@ public class GraveGenerationHelper {
     private static List<ItemStack> getDogsItems(EntityWolf dog, LivingDeathEvent event) {
         List<ItemStack> items = new ArrayList<>(5);
         for (IDogItems additionalItems : APIGraveGeneration.DOG_ITEMS) {
-            items.addAll(additionalItems.addItemsToDogGrave(dog, event.source));
+            items.addAll(additionalItems.addItems(dog, event.source));
         }
         return items;//CorpseHelper.getCorpse(entity, EnumCorpse.DOG); //TODO external module
     }
@@ -167,7 +167,7 @@ public class GraveGenerationHelper {
     private static List<ItemStack> getCatsItems(EntityOcelot cat, LivingDeathEvent event) {
         List<ItemStack> items = new ArrayList<>(5);
         for (ICatItems additionalItems : APIGraveGeneration.CAT_ITEMS) {
-            items.addAll(additionalItems.addItemsToCatGrave(cat, event.source));
+            items.addAll(additionalItems.addItems(cat, event.source));
         }
         return items;//CorpseHelper.getCorpse(entity, EnumCorpse.CAT); //TODO external module
     }
@@ -178,7 +178,7 @@ public class GraveGenerationHelper {
             items.addAll(getHorseItems(horse));
 
             for (IHorseItems additionalItems : APIGraveGeneration.HORSE_ITEMS) {
-                items.addAll(additionalItems.addItemsToHorseGrave(horse, event.source));
+                items.addAll(additionalItems.addItems(horse, event.source));
             }
 //            items.addAll(CorpseHelper.getCorpse(horse, EnumCorpse.HORSE));//TODO external module
 
