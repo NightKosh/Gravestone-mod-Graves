@@ -15,9 +15,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class GSTabs {
-    private GSTabs() {
-    }
-
     public static CreativeTabs gravesTab;
 
     public static void registration() {

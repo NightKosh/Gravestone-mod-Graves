@@ -23,9 +23,6 @@ public class GSBlock {
 
     public static BlockGSGraveStone graveStone;
 
-    private GSBlock() {
-    }
-
     public static void registration() {
         // gravestone
         graveStone = new BlockGSGraveStone();

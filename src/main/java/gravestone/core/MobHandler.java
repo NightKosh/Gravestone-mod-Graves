@@ -26,7 +26,7 @@ public class MobHandler {
     public static final String MOBS_SPAWN_TIME_FILE_NAME = "mobsSpawnTime.gs";
     public static final String MOBS_SPAWN_TIME_BACKUP_FILE_NAME = "mobsSpawnTimeBackup.gs";
 
-    private static HashMap<String, Long> mobsSpawnTime = new HashMap<String, Long>();
+    private static HashMap<String, Long> mobsSpawnTime = new HashMap<>();
 
     public static void clearMobsSpawnTime(Entity entity) {
         mobsSpawnTime.remove(entity.getUniqueID().toString());
