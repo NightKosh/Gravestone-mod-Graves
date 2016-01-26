@@ -19,14 +19,12 @@ import java.util.Map;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GSCompatibilityisArsMagica {
+public class GSCompatibilityisArsMagica implements ICompatibility {
 
     public static final String MOD_ID = "arsmagica2";
 
-    protected static boolean isInstalled = false;
-
-    private GSCompatibilityisArsMagica() {
-        if (isInstalled() && GSConfig.enableArsMagicaSoulbound) {
+    protected GSCompatibilityisArsMagica() {
+        if (isModLoaded(MOD_ID) && GSConfig.enableArsMagicaSoulbound) {
             ModGraveStone.apiGraveGeneration.addPlayerItemsHandler(new IPlayerItems() {
 
                 @Override
@@ -58,9 +56,5 @@ public class GSCompatibilityisArsMagica {
             }
         }
         return false;
-    }
-
-    public static boolean isInstalled() {
-        return isInstalled;
     }
 }

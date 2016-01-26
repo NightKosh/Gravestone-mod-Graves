@@ -1,7 +1,5 @@
 package gravestone.core.compatibility;
 
-import net.minecraftforge.fml.common.Loader;
-
 /**
  * GraveStone mod
  *
@@ -21,56 +19,24 @@ public class GSCompatibility {
     }
 
     public void checkMods() {
-        if (isModLoaded(GSCompatibilityBattlegear.MOD_ID)) {
-            GSCompatibilityBattlegear.isInstalled = true;
-        }
+        new GSCompatibilityTheCampingMod();
 
-        if (isModLoaded(GSCompatibilityTheCampingMod.MOD_ID)) {
-            GSCompatibilityTheCampingMod.isInstalled = true;
-        }
+        new GSCompatibilityisArsMagica();
 
-        if (isModLoaded(GSCompatibilityisArsMagica.MOD_ID)) {
-            GSCompatibilityisArsMagica.isInstalled = true;
-        }
+        new GSCompatibilityBackpacksMod();
 
-        if (isModLoaded(GSCompatibilityBackpacksMod.MOD_ID)) {
-            GSCompatibilityBackpacksMod.isInstalled = true;
-        }
+        new GSCompatibilityBaubles();
 
-        if (isModLoaded(GSCompatibilityBaubles.MOD_ID)) {
-            GSCompatibilityBaubles.isInstalled = true;
-        }
+        new GSCompatibilityMariculture();
 
-        if (isModLoaded(GSCompatibilityMariculture.MOD_ID)) {
-            GSCompatibilityMariculture.isInstalled = true;
-        }
+        new GSCompatibilityRpgInventory();
 
-        if (isModLoaded(GSCompatibilityRpgInventory.MOD_ID)) {
-            GSCompatibilityRpgInventory.isInstalled = true;
-        }
+        new GSCompatibilityTinkerConstruct();
 
-        if (isModLoaded(GSCompatibilityTinkerConstruct.MOD_ID)) {
-            GSCompatibilityTinkerConstruct.isInstalled = true;
-        }
+        new GSCompatibilityGalacticraft();
 
-        if (isModLoaded(GSCompatibilityGalacticraft.MOD_ID)) {
-            GSCompatibilityGalacticraft.isInstalled = true;
-        }
+        new GSCompatibilityEnderIO();
 
-        if (isModLoaded(GSCompatibilityEnderIO.MOD_ID)) {
-            new GSCompatibilityEnderIO();
-        }
-
-        if (isModLoaded(GSCompatibilityTwilightForest.MOD_ID)) {
-            GSCompatibilityTwilightForest.isInstalled = true;
-        }
-
-        if (isModLoaded(GSCompatibilityWitchery.MOD_ID)) {
-            new GSCompatibilityWitchery();
-        }
-    }
-
-    public boolean isModLoaded(String modId) {
-        return Loader.isModLoaded(modId);
+        new GSCompatibilityWitchery();
     }
 }

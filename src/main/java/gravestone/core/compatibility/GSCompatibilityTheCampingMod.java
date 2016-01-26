@@ -1,7 +1,7 @@
 package gravestone.core.compatibility;
 
+import gravestone.ModGraveStone;
 import gravestone.config.GSConfig;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -15,35 +15,24 @@ import java.util.List;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GSCompatibilityTheCampingMod {
+public class GSCompatibilityTheCampingMod implements ICompatibility {
 
     public static final String MOD_ID = "camping";
 
-    protected static boolean isInstalled = false;
-
-    private GSCompatibilityTheCampingMod() {
-    }
-
-    public static void addItems(List<ItemStack> items, EntityPlayer player) {
-        if (isInstalled() && GSConfig.storeTheCampingModItems) {
-            items.addAll(getItems(player));
+    protected GSCompatibilityTheCampingMod() {
+        if (isModLoaded(MOD_ID) && GSConfig.storeTheCampingModItems) {
+            ModGraveStone.apiGraveGeneration.addPlayerItemsHandler((player, source) -> {
+                List<ItemStack> items = new LinkedList<>();
+                NBTTagCompound tag = player.getEntityData().getCompoundTag("campInv");
+                NBTTagList inventory = tag.getTagList("Items", 10);
+                for (int i = 0; i < inventory.tagCount(); ++i) {
+                    NBTTagCompound Slots = inventory.getCompoundTagAt(i);
+                    Slots.getByte("Slot");
+                    items.add(ItemStack.loadItemStackFromNBT(Slots).copy());
+                }
+                player.getEntityData().setTag("campInv", new NBTTagCompound());
+                return items;
+            });
         }
-    }
-
-    private static List<ItemStack> getItems(EntityPlayer player) {
-        List<ItemStack> items = new LinkedList<ItemStack>();
-        NBTTagCompound tag = player.getEntityData().getCompoundTag("campInv");
-        NBTTagList inventory = tag.getTagList("Items", 10);
-        for (int i = 0; i < inventory.tagCount(); ++i) {
-            NBTTagCompound Slots = inventory.getCompoundTagAt(i);
-            Slots.getByte("Slot");
-            items.add(ItemStack.loadItemStackFromNBT(Slots).copy());
-        }
-        player.getEntityData().setTag("campInv", new NBTTagCompound());
-        return items;
-    }
-
-    public static boolean isInstalled() {
-        return isInstalled;
     }
 }

@@ -14,36 +14,38 @@ import java.lang.reflect.Method;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GSCompatibilityWitchery {
+public class GSCompatibilityWitchery implements ICompatibility {
 
     public static final String MOD_ID = "witchery";
 
-    public GSCompatibilityWitchery() {
-        ModGraveStone.apiGraveGeneration.addPlayerDeathHandler((player, source) -> {
-                    try {
-                        Class playerClass = Class.forName("com.emoniph.witchery.common.ExtendedPlayer");
-                        Method getPlayerMethod = playerClass.getDeclaredMethod("get", EntityPlayer.class);
-                        Object extendedPlayer = getPlayerMethod.invoke(null, player);
+    protected GSCompatibilityWitchery() {
+        if (isModLoaded(MOD_ID)) {
+            ModGraveStone.apiGraveGeneration.addPlayerDeathHandler((player, source) -> {
+                        try {
+                            Class playerClass = Class.forName("com.emoniph.witchery.common.ExtendedPlayer");
+                            Method getPlayerMethod = playerClass.getDeclaredMethod("get", EntityPlayer.class);
+                            Object extendedPlayer = getPlayerMethod.invoke(null, player);
 
-                        Method isVampireMethod = playerClass.getDeclaredMethod("isVampire");
+                            Method isVampireMethod = playerClass.getDeclaredMethod("isVampire");
 
-                        if ((Boolean) isVampireMethod.invoke(extendedPlayer)) {
-                            Class utilClass = Class.forName("com.emoniph.witchery.util.CreatureUtil");
-                            Method checkForDeathMethod = utilClass.getDeclaredMethod("checkForVampireDeath", EntityLivingBase.class, DamageSource.class);
-                            return !(Boolean) checkForDeathMethod.invoke(null, player, source);
+                            if ((Boolean) isVampireMethod.invoke(extendedPlayer)) {
+                                Class utilClass = Class.forName("com.emoniph.witchery.util.CreatureUtil");
+                                Method checkForDeathMethod = utilClass.getDeclaredMethod("checkForVampireDeath", EntityLivingBase.class, DamageSource.class);
+                                return !(Boolean) checkForDeathMethod.invoke(null, player, source);
+                            }
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
                         }
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (NoSuchMethodException e) {
-                        e.printStackTrace();
-                    } catch (InvocationTargetException e) {
-                        e.printStackTrace();
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
 
-                    return false;
-                }
-        );
+                        return false;
+                    }
+            );
+        }
     }
 }

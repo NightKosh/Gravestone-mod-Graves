@@ -19,12 +19,12 @@ import java.util.Map;
  * @author CrazyPants
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GSCompatibilityEnderIO {
+public class GSCompatibilityEnderIO implements ICompatibility {
 
     public static final String MOD_ID = "EnderIO";
 
-    public GSCompatibilityEnderIO() {
-        if (GSConfig.enableEnderIOSoulbound) {
+    protected GSCompatibilityEnderIO() {
+        if (isModLoaded(MOD_ID) && GSConfig.enableEnderIOSoulbound) {
             ModGraveStone.apiGraveGeneration.addPlayerItemsHandler(new IPlayerItems() {
 
                 @Override

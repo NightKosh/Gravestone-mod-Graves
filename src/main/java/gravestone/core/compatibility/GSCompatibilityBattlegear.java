@@ -12,7 +12,7 @@ import java.util.List;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GSCompatibilityBattlegear {
+public class GSCompatibilityBattlegear implements ICompatibility {
 
     public static final String MOD_ID = "battlegear2";
 
@@ -20,11 +20,10 @@ public class GSCompatibilityBattlegear {
     private static final short LAST_SLOT = 155;
     protected static boolean isInstalled = false;
 
-    private GSCompatibilityBattlegear() {
-    }
+    private static final GSCompatibilityBattlegear INSTANCE = new GSCompatibilityBattlegear();
 
     public static void addItems(List<ItemStack> items, EntityPlayer player) {
-        if (isInstalled() && GSConfig.storeBattlegearItems) {
+        if (INSTANCE.isModLoaded(MOD_ID) && GSConfig.storeBattlegearItems) {
             for (int slot = FIRST_SLOT; slot <= LAST_SLOT; slot++) {
                 items.add(player.inventory.getStackInSlot(slot));
                 player.inventory.setInventorySlotContents(slot, null);

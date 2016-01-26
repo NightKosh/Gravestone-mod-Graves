@@ -7,7 +7,8 @@ import gravestone.block.enums.EnumGraves;
 import gravestone.config.GSConfig;
 import gravestone.core.GSBlock;
 import gravestone.core.MobHandler;
-import gravestone.core.compatibility.*;
+import gravestone.core.compatibility.GSCompatibilityBattlegear;
+import gravestone.core.compatibility.GSCompatibilityTwilightForest;
 import gravestone.core.logger.GSLogger;
 import gravestone.helper.api.APIGraveGeneration;
 import gravestone.inventory.GraveInventory;
@@ -106,14 +107,6 @@ public class GraveGenerationHelper {
             if (!GSCompatibilityTwilightForest.handleCharmsOfKeeping(items, player)) {
                 player.inventory.clear();
             }
-
-            GSCompatibilityTheCampingMod.addItems(items, player);
-            GSCompatibilityBaubles.addItems(items, player);
-            GSCompatibilityMariculture.addItems(items, player);
-            GSCompatibilityTinkerConstruct.addItems(items, player);
-            GSCompatibilityRpgInventory.addItems(items, player);
-            GSCompatibilityGalacticraft.addItems(items, player);
-            GSCompatibilityBackpacksMod.addItems(items, player);
 
             for (IPlayerItems additionalItems : APIGraveGeneration.PLAYER_ITEMS) {
                 items.addAll(additionalItems.addItems(player, event.source));

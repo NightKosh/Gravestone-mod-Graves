@@ -14,21 +14,18 @@ import java.util.List;
  * @author DA3DSOUL
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GSCompatibilityTwilightForest {
+public class GSCompatibilityTwilightForest implements ICompatibility {
 
     public static final String MOD_ID = "TwilightForest";
 
-    protected static boolean isInstalled = false;
-
-    private GSCompatibilityTwilightForest() {
-    }
+    private static final GSCompatibilityTwilightForest INSTANCE = new GSCompatibilityTwilightForest();
 
     /**
      * Twilight Forest checks the players inventory on death, so we can't wipe it all.
      * Only vanilla items will be supported otherwise some changes required.
      */
     public static boolean handleCharmsOfKeeping(List<ItemStack> items, EntityPlayer player) {
-        if (isInstalled() && GSConfig.enableTwilightForestKeeping) {
+        if (INSTANCE.isModLoaded(MOD_ID) && GSConfig.enableTwilightForestKeeping) {
             int[] keepingData = checkForCharmOfKeeping(player);
 
             if (keepingData[0] > 0) {
@@ -81,7 +78,7 @@ public class GSCompatibilityTwilightForest {
      * Ensure the slot tag is set. Mainly for TwilightForest, but could have other uses
      */
     public static void addSlotTags(List<ItemStack> items) {
-        if (isInstalled() && GSConfig.enableTwilightForestKeeping) {
+        if (INSTANCE.isModLoaded(MOD_ID) && GSConfig.enableTwilightForestKeeping) {
             for (int i = 0; i < items.size(); i++) {
                 ItemStack item = items.get(i);
                 if (item == null) {
@@ -105,7 +102,7 @@ public class GSCompatibilityTwilightForest {
      * remove the slot tag to avoid stacking issues, items.size() after the size was modified
      */
     public static void removeSlotTags(List<ItemStack> items) {
-        if (isInstalled() && GSConfig.enableTwilightForestKeeping && items.size() > 0) {
+        if (INSTANCE.isModLoaded(MOD_ID) && GSConfig.enableTwilightForestKeeping && items.size() > 0) {
             for (int i = 0; i < items.size(); i++) {
                 ItemStack item = items.get(i);
                 if (item == null || !item.hasTagCompound()) {
@@ -145,9 +142,5 @@ public class GSCompatibilityTwilightForest {
 //            }
         }
         return new int[]{max, slot};
-    }
-
-    public static boolean isInstalled() {
-        return isInstalled;
     }
 }
