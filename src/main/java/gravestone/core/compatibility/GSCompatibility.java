@@ -8,17 +8,9 @@ package gravestone.core.compatibility;
  */
 public class GSCompatibility {
 
-    private static GSCompatibility instance;
+    private static final GSCompatibility INSTANCE = new GSCompatibility();
 
     private GSCompatibility() {
-        instance = this;
-    }
-
-    public static GSCompatibility getInstance() {
-        return (instance == null) ? new GSCompatibility() : instance;
-    }
-
-    public void checkMods() {
         new GSCompatibilityTheCampingMod();
 
         new GSCompatibilityisArsMagica();
@@ -38,5 +30,9 @@ public class GSCompatibility {
         new GSCompatibilityEnderIO();
 
         new GSCompatibilityWitchery();
+    }
+
+    public static GSCompatibility getInstance() {
+        return INSTANCE;
     }
 }

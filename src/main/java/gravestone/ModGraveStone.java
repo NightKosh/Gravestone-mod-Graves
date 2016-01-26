@@ -79,7 +79,7 @@ public class ModGraveStone {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        GSCompatibility.getInstance().checkMods();
+        GSCompatibility.getInstance();
     }
 
     @Mod.EventHandler
