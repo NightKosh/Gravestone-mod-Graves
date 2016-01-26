@@ -41,7 +41,7 @@ minecraft {
     mappings = "snapshot_nodoc_20141130"
 }
 
-ext.apiGravestone = "./api/gravestone"
+ext.apiGravestone = "./api/nightkosh.gravestone"
 ext.apiSophisticatedWolves = "./api/sophisticated_wolves"
 ext.apiForestry = "./api/forestry"
 ext.apiBaubles = "./api/baubles"
@@ -84,7 +84,7 @@ jar {
     exclude('tconstruct/**')
     //TODO exclude Thaumcraft API
     exclude('**/*.db')
-    exclude('assets/gravestone/techne_models/**')
+    exclude('assets/nightkosh.gravestone/techne_models/**')
 }
 
 processResources {

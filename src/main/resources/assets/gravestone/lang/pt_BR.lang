@@ -6,13 +6,13 @@ itemGroup.tabGSOther=Gravestone mod Items
 
 # Blocks
 ## Graves
-block.gravestone.gravestone.name=Lápide
-block.gravestone.cross.name=Cruz
-block.gravestone.plate.name=Chapa de Túmulo
-block.gravestone.dog_statue.name=Estátua de Cachorro
-block.gravestone.cat_statue.name=Estátua de Gato
-block.gravestone.horse_statue.name=Estátua de Cavalo
-block.gravestone.sword.name=Sword of a fallen warrior
+block.nightkosh.gravestone.nightkosh.gravestone.name=Lápide
+block.nightkosh.gravestone.cross.name=Cruz
+block.nightkosh.gravestone.plate.name=Chapa de Túmulo
+block.nightkosh.gravestone.dog_statue.name=Estátua de Cachorro
+block.nightkosh.gravestone.cat_statue.name=Estátua de Gato
+block.nightkosh.gravestone.horse_statue.name=Estátua de Cavalo
+block.nightkosh.gravestone.sword.name=Sword of a fallen warrior
 
 ## Memorials
 block.memorial.cross.name=Memorial em Cruz
@@ -68,7 +68,7 @@ tile.altar.name=Altar
 
 # Items
 ## Chisel
-item.gravestone.chisel.name=Gravestone Chisel
+item.nightkosh.gravestone.chisel.name=Gravestone Chisel
 
 ## Graves
 item.grave.age=Havia vivido

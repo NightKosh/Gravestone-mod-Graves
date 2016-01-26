@@ -6,13 +6,13 @@ itemGroup.tabGSOther=Gravestone mod: Предметы
 
 # Blocks
 ## Graves
-block.gravestone.gravestone.name=Надгробный камень
-block.gravestone.cross.name=Могильный крест
-block.gravestone.plate.name=Надгробная плита
-block.gravestone.dog_statue.name=Статуя для могилы собаки
-block.gravestone.cat_statue.name=Статуя для могилы кошки
-block.gravestone.horse_statue.name=Статуя для могилы лошади
-block.gravestone.sword.name=Меч павшего воина
+block.nightkosh.gravestone.nightkosh.gravestone.name=Надгробный камень
+block.nightkosh.gravestone.cross.name=Могильный крест
+block.nightkosh.gravestone.plate.name=Надгробная плита
+block.nightkosh.gravestone.dog_statue.name=Статуя для могилы собаки
+block.nightkosh.gravestone.cat_statue.name=Статуя для могилы кошки
+block.nightkosh.gravestone.horse_statue.name=Статуя для могилы лошади
+block.nightkosh.gravestone.sword.name=Меч павшего воина
 
 ## Memorials
 block.memorial.cross.name=Мемориальный крест
@@ -68,7 +68,7 @@ tile.altar.name=Алтарь
 
 # Items
 ## Chisel
-item.gravestone.chisel.name=Резец для надгробий
+item.nightkosh.gravestone.chisel.name=Резец для надгробий
 
 ## Graves
 item.grave.age=Прожил

@@ -6,13 +6,13 @@ itemGroup.tabGSOther=Předměty módu Gravestone
 
 # Blocks
 ## Graves
-block.gravestone.gravestone.name=Náhrobek
-block.gravestone.cross.name=Kříž
-block.gravestone.plate.name=Náhrobní kámenk
-block.gravestone.dog_statue.name=Socha psa
-block.gravestone.cat_statue.name=Socha kočky
-block.gravestone.horse_statue.name=Socha koně
-block.gravestone.sword.name=Meč padlého válečníka
+block.nightkosh.gravestone.nightkosh.gravestone.name=Náhrobek
+block.nightkosh.gravestone.cross.name=Kříž
+block.nightkosh.gravestone.plate.name=Náhrobní kámenk
+block.nightkosh.gravestone.dog_statue.name=Socha psa
+block.nightkosh.gravestone.cat_statue.name=Socha kočky
+block.nightkosh.gravestone.horse_statue.name=Socha koně
+block.nightkosh.gravestone.sword.name=Meč padlého válečníka
 
 ## Memorials
 block.memorial.cross.name=Křížový památník
@@ -68,7 +68,7 @@ tile.altar.name=Oltář
 
 # Items
 ## Chisel
-item.gravestone.chisel.name=Hrobnické dláto
+item.nightkosh.gravestone.chisel.name=Hrobnické dláto
 
 ## Graves
 item.grave.age=Žil

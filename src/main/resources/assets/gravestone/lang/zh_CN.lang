@@ -6,13 +6,13 @@ itemGroup.tabGSOther=墓碑模组的物品
 
 # Blocks
 ## Graves
-block.gravestone.gravestone.name=墓碑
-block.gravestone.cross.name=十字架
-block.gravestone.plate.name=墓碑板
-block.gravestone.dog_statue.name=狗雕像
-block.gravestone.cat_statue.name=猫雕像
-block.gravestone.horse_statue.name=马雕像
-block.gravestone.sword.name=战魂之剑
+block.nightkosh.gravestone.nightkosh.gravestone.name=墓碑
+block.nightkosh.gravestone.cross.name=十字架
+block.nightkosh.gravestone.plate.name=墓碑板
+block.nightkosh.gravestone.dog_statue.name=狗雕像
+block.nightkosh.gravestone.cat_statue.name=猫雕像
+block.nightkosh.gravestone.horse_statue.name=马雕像
+block.nightkosh.gravestone.sword.name=战魂之剑
 
 ## Memorials
 block.memorial.cross.name=十字纪念碑
@@ -68,7 +68,7 @@ tile.altar.name=祭坛
 
 # Items
 ## Chisel
-item.gravestone.chisel.name=墓碑凿
+item.nightkosh.gravestone.chisel.name=墓碑凿
 
 ## Graves
 item.grave.age=已生活了
