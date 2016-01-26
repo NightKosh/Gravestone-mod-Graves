@@ -35,7 +35,7 @@ public class GSEventsHandler {
             if (GSConfig.generatePlayerGraves && event.entityLiving instanceof EntityPlayer) {
                 EntityPlayer player = (EntityPlayer) event.entity;
                 for (IPlayerDeathHandler playerDeathHandler : APIGraveGeneration.PLAYER_DEATH_HANDLERS) {
-                    if (playerDeathHandler.beforePlayerDeath(player, event.source)) {
+                    if (playerDeathHandler.cancelGraveGeneration(player, event.source)) {
                         return;
                     }
                 }
@@ -45,7 +45,7 @@ public class GSEventsHandler {
                 if (GSConfig.generateVillagerGraves && event.entity instanceof EntityVillager) {
                     EntityVillager villager = (EntityVillager) event.entity;
                     for (IVillagerDeathHandler villagerDeathHandler : APIGraveGeneration.VILLAGER_DEATH_HANDLERS) {
-                        if (villagerDeathHandler.beforeVillagerDeath(villager, event.source)) {
+                        if (villagerDeathHandler.cancelGraveGeneration(villager, event.source)) {
                             return;
                         }
                     }
@@ -55,7 +55,7 @@ public class GSEventsHandler {
                         if (event.entity instanceof EntityWolf) {
                             EntityWolf dog = (EntityWolf) event.entity;
                             for (IDogDeathHandler dogDeathHandler : APIGraveGeneration.DOG_DEATH_HANDLERS) {
-                                if (dogDeathHandler.beforeDogDeath(dog, event.source)) {
+                                if (dogDeathHandler.cancelGraveGeneration(dog, event.source)) {
                                     return;
                                 }
                             }
@@ -63,7 +63,7 @@ public class GSEventsHandler {
                         } else if (event.entity instanceof EntityOcelot) {
                             EntityOcelot cat = (EntityOcelot) event.entity;
                             for (ICatDeathHandler catDeathHandler : APIGraveGeneration.CAT_DEATH_HANDLERS) {
-                                if (catDeathHandler.beforeCatDeath(cat, event.source)) {
+                                if (catDeathHandler.cancelGraveGeneration(cat, event.source)) {
                                     return;
                                 }
                             }
@@ -72,7 +72,7 @@ public class GSEventsHandler {
                     } else if (event.entity instanceof EntityHorse) {
                         EntityHorse horse = (EntityHorse) event.entity;
                         for (IHorseDeathHandler horseDeathHandler : APIGraveGeneration.HORSE_DEATH_HANDLERS) {
-                            if (horseDeathHandler.beforeHorseDeath(horse, event.source)) {
+                            if (horseDeathHandler.cancelGraveGeneration(horse, event.source)) {
                                 return;
                             }
                         }
