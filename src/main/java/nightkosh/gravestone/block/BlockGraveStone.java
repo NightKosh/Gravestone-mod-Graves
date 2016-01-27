@@ -456,6 +456,7 @@ public class BlockGraveStone extends BlockContainer {
                         if (te.canBeLooted(player.getUniqueID().toString())) {
                             player.openGui(ModGraveStone.instance, GuiHandler.GRAVE_INVENTORY_GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
                             GSLogger.logInfoGrave(player.getName() + " open grave inventory at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
+                            GraveStoneHelper.replaceGround(world, pos.down());
                         } else {
                             player.addChatComponentMessage(new ChatComponentTranslation("grave.cant_be_looted").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                         }
