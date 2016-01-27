@@ -1,8 +1,16 @@
-
-// for people who want stable
-plugins {
-    id "net.minecraftforge.gradle.forge" version "2.0.1"
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+    }
 }
+apply plugin: 'net.minecraftforge.gradle.forge'
 
 tasks.withType(JavaCompile) {
     sourceCompatibility = "1.8"
@@ -14,18 +22,11 @@ group = "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming
 archivesBaseName = "GraveStone"
 
 minecraft {
-    version = "1.8-11.14.3.1532"
+    version = "1.8.9-11.15.1.1723"
     runDir = "idea"
 
-    mappings = "snapshot_nodoc_20141130"
+    mappings = "stable_20"
 }
-
-//minecraft {
-//    version = "1.8.9-11.15.1.1723"
-//    runDir = "idea"
-//
-//    mappings = "snapshot_nodoc_20160121"
-//}
 
 ext.apiGravestone = "./api/gravestone"
 ext.apiBaubles = "./api/baubles"
@@ -54,17 +55,10 @@ dependencies {
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
 }
 
 jar {
     exclude('baubles/**')
-    exclude('forestry/**')
-    exclude('sophisticated_wolves/**')
-    exclude('mariculture/**')
-    exclude('micdoodle8/**')
-    exclude('tconstruct/**')
-    //TODO exclude Thaumcraft API
     exclude('**/*.db')
     exclude('assets/nightkosh.gravestone/techne_models/**')
 }
