@@ -685,7 +685,7 @@ public class BlockGraveStone extends BlockContainer {
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return ((EnumFacing) state.getValue(FACING)).getIndex();
+        return state.getValue(FACING).getIndex();
     }
 
     @Override
@@ -695,6 +695,6 @@ public class BlockGraveStone extends BlockContainer {
 
     @Override
     public ItemStack createStackedBlock(IBlockState state) {
-        return super.createStackedBlock(state);
+        return new ItemStack(Item.getItemFromBlock(this), 1);
     }
 }
