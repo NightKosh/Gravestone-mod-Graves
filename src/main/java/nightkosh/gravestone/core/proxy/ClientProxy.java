@@ -2,10 +2,10 @@ package nightkosh.gravestone.core.proxy;
 
 import nightkosh.gravestone.core.GSBlock;
 import nightkosh.gravestone.core.ResourcesModels;
-import nightkosh.gravestone.core.event.GSRenderEventHandler;
-import nightkosh.gravestone.renderer.item.ItemGSGraveStoneRenderer;
-import nightkosh.gravestone.renderer.tileentity.TileEntityGSGraveStoneRenderer;
-import nightkosh.gravestone.tileentity.TileEntityGSGraveStone;
+import nightkosh.gravestone.core.event.RenderEventHandler;
+import nightkosh.gravestone.renderer.item.ItemGraveStoneRenderer;
+import nightkosh.gravestone.renderer.tileentity.TileEntityGraveStoneRenderer;
+import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -32,8 +32,8 @@ public class ClientProxy extends CommonProxy {
         // blocks renderers
 
         // graves renderer
-        ClientRegistry.registerTileEntity(TileEntityGSGraveStone.class, "GSGraveStone", new TileEntityGSGraveStoneRenderer());
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(GSBlock.graveStone), new ItemGSGraveStoneRenderer());
+        ClientRegistry.registerTileEntity(TileEntityGraveStone.class, "GSGraveStone", new TileEntityGraveStoneRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(GSBlock.graveStone), new ItemGraveStoneRenderer());
     }
 
     @Override
@@ -57,13 +57,13 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerHandlers() {
-        MinecraftForge.EVENT_BUS.register(new GSRenderEventHandler());
+        MinecraftForge.EVENT_BUS.register(new RenderEventHandler());
     }
 
     @Override
     public void registerBlocksModels() {
         //graves
-        registerModelsForTEBlocks(1, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGSGraveStone.class);
+        registerModelsForTEBlocks(1, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.class);
     }
 
     private void registerModelsForTEBlocks(int length, Block block, ModelResourceLocation model, Class TEClass) {

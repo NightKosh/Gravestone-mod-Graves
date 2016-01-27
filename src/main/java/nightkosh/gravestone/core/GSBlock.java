@@ -1,8 +1,8 @@
 package nightkosh.gravestone.core;
 
 import nightkosh.gravestone.ModGraveStone;
-import nightkosh.gravestone.block.BlockGSGraveStone;
-import nightkosh.gravestone.item.itemblock.ItemBlockGSGraveStone;
+import nightkosh.gravestone.block.BlockGraveStone;
+import nightkosh.gravestone.item.itemblock.ItemBlockGraveStone;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -21,12 +21,12 @@ public class GSBlock {
     public static final int ANDESITE_META = Blocks.stone.getMetaFromState(DEFAULT_STONE_STATE.withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE_SMOOTH));
     public static final int GRANITE_META = Blocks.stone.getMetaFromState(DEFAULT_STONE_STATE.withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE_SMOOTH));
 
-    public static BlockGSGraveStone graveStone;
+    public static BlockGraveStone graveStone;
 
     public static void registration() {
         // nightkosh.gravestone
-        graveStone = new BlockGSGraveStone();
-        GameRegistry.registerBlock(graveStone, ItemBlockGSGraveStone.class, "GSGraveStone");
+        graveStone = new BlockGraveStone();
+        GameRegistry.registerBlock(graveStone, ItemBlockGraveStone.class, "GSGraveStone");
 
         ModGraveStone.proxy.registerBlocksModels();
     }

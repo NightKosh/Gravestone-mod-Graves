@@ -1,7 +1,7 @@
 package nightkosh.gravestone.inventory;
 
-import nightkosh.gravestone.config.GSConfig;
-import nightkosh.gravestone.tileentity.TileEntityGSGraveStone;
+import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -23,10 +23,10 @@ import java.util.*;
 public class GraveInventory implements IInventory {
 
     public static final int DEFAULT_INVENTORY_SIZE = 54;
-    private TileEntityGSGraveStone tileEntity;
+    private TileEntityGraveStone tileEntity;
     protected List<ItemStack> items = new ArrayList<>(DEFAULT_INVENTORY_SIZE);
 
-    public GraveInventory(TileEntityGSGraveStone tileEntity) {
+    public GraveInventory(TileEntityGraveStone tileEntity) {
         this.tileEntity = tileEntity;
     }
 
@@ -192,7 +192,7 @@ public class GraveInventory implements IInventory {
      */
     public void setItems(List<ItemStack> items) {
         if (items != null) {
-            switch (GSConfig.graveItemsCount) {
+            switch (Config.graveItemsCount) {
                 case 0:
                     for (ItemStack item : items) {
                         dropItem(item, tileEntity.getWorld(), tileEntity.getPos());
@@ -204,7 +204,7 @@ public class GraveInventory implements IInventory {
                     }
                     break;
                 default:
-                    int savedItems = GSConfig.graveItemsCount;
+                    int savedItems = Config.graveItemsCount;
                     Collections.shuffle(Arrays.asList(items.size()), new Random());
 
                     for (ItemStack item : items) {

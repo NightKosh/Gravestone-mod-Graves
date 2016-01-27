@@ -1,7 +1,7 @@
 package nightkosh.gravestone.models.block;
 
 import nightkosh.gravestone.core.Resources;
-import nightkosh.gravestone.renderer.tileentity.TileEntityGSGraveStoneRenderer;
+import nightkosh.gravestone.renderer.tileentity.TileEntityGraveStoneRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -53,7 +53,7 @@ public abstract class ModelGraveStone extends ModelBase {
 
     protected void renderEnchantment() {
         float tickModifier = (float) (Minecraft.getSystemTime() % 3000L) / 3000F * 48;
-        TileEntityGSGraveStoneRenderer.instance.bindTextureByName(Resources.SWORD_AURA);
+        TileEntityGraveStoneRenderer.instance.bindTextureByName(Resources.SWORD_AURA);
 
         GlStateManager.enableBlend();
         GlStateManager.depthFunc(GL11.GL_EQUAL);

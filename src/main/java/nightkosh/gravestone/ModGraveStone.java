@@ -3,13 +3,13 @@ package nightkosh.gravestone;
 import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.api.IGraveGeneration;
 import nightkosh.gravestone.api.IGraveStone;
-import nightkosh.gravestone.config.GSConfig;
+import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.core.*;
-import nightkosh.gravestone.core.commands.GSCommands;
-import nightkosh.gravestone.core.compatibility.GSCompatibility;
-import nightkosh.gravestone.core.event.GSEventHandlerNetwork;
-import nightkosh.gravestone.core.event.GSEventsHandler;
-import nightkosh.gravestone.core.event.GSTickEventHandler;
+import nightkosh.gravestone.core.commands.Commands;
+import nightkosh.gravestone.core.compatibility.Compatibility;
+import nightkosh.gravestone.core.event.EventHandlerNetwork;
+import nightkosh.gravestone.core.event.EventsHandler;
+import nightkosh.gravestone.core.event.TickEventHandler;
 import nightkosh.gravestone.core.proxy.CommonProxy;
 import nightkosh.gravestone.helper.GraveStoneHelper;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
@@ -47,7 +47,7 @@ public class ModGraveStone {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        GSConfig.getInstance(event.getModConfigurationDirectory().getAbsolutePath() + "/GraveStoneMod/", "GraveStone.cfg");
+        Config.getInstance(event.getModConfigurationDirectory().getAbsolutePath() + "/GraveStoneMod/", "GraveStone.cfg");
 
         // API
         GraveStoneAPI.graveStone = gravestoneHelper;
@@ -57,13 +57,13 @@ public class ModGraveStone {
     @Mod.EventHandler
     public void load(FMLInitializationEvent event) {
         // register death event
-        MinecraftForge.EVENT_BUS.register(new GSEventsHandler());
-        FMLCommonHandler.instance().bus().register(new GSEventHandlerNetwork());
-        FMLCommonHandler.instance().bus().register(new GSTickEventHandler());
+        MinecraftForge.EVENT_BUS.register(new EventsHandler());
+        FMLCommonHandler.instance().bus().register(new EventHandlerNetwork());
+        FMLCommonHandler.instance().bus().register(new TickEventHandler());
         proxy.registerHandlers();
 
         // tabs
-        GSTabs.registration();
+        Tabs.registration();
 
         // blocks registration
         GSBlock.registration();
@@ -72,18 +72,18 @@ public class ModGraveStone {
         // tileEntities registration
         GSTileEntity.registration();
 
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GSGuiHandler());
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
         proxy.registerRenderers();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        GSCompatibility.getInstance();
+        Compatibility.getInstance();
     }
 
     @Mod.EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
-        GSCommands.getInstance(event);
+        Commands.getInstance(event);
     }
 }

@@ -25,7 +25,7 @@ public class SubCommandCommandsList implements ISubCommand {
     public void execute(ICommandSender sender, String[] args) throws CommandException {
         sender.addChatMessage(new ChatComponentText(getCommandUsage()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
 
-        for (ISubCommand additionalCommand : CommandGS.ADDITIONAL_COMMANDS_LIST) {
+        for (ISubCommand additionalCommand : Command.ADDITIONAL_COMMANDS_LIST) {
             sender.addChatMessage(new ChatComponentText(additionalCommand.getCommandUsage()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
         }
     }

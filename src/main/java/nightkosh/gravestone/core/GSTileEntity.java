@@ -12,6 +12,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class GSTileEntity {
 
     public static void registration() {
-        GameRegistry.registerTileEntity(TileEntityGSGraveStone.class, "GraveStoneTE");
+        GameRegistry.registerTileEntity(TileEntityGraveStone.class, "GraveStoneTE");
     }
 }

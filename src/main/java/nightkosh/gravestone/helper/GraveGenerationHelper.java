@@ -1,19 +1,19 @@
 package nightkosh.gravestone.helper;
 
 import nightkosh.gravestone.api.grave_items.*;
-import nightkosh.gravestone.block.BlockGSGraveStone;
+import nightkosh.gravestone.block.BlockGraveStone;
 import nightkosh.gravestone.block.enums.EnumGraveMaterial;
 import nightkosh.gravestone.block.enums.EnumGraves;
-import nightkosh.gravestone.config.GSConfig;
+import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.core.GSBlock;
 import nightkosh.gravestone.core.MobHandler;
-import nightkosh.gravestone.core.compatibility.GSCompatibilityBattlegear;
-import nightkosh.gravestone.core.compatibility.GSCompatibilityTwilightForest;
+import nightkosh.gravestone.core.compatibility.CompatibilityBattlegear;
+import nightkosh.gravestone.core.compatibility.CompatibilityTwilightForest;
 import nightkosh.gravestone.core.logger.GSLogger;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
 import nightkosh.gravestone.inventory.GraveInventory;
 import nightkosh.gravestone.tileentity.DeathMessageInfo;
-import nightkosh.gravestone.tileentity.TileEntityGSGraveStone;
+import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -92,7 +92,7 @@ public class GraveGenerationHelper {
     private static final EnumGraves.EnumGraveType[] GENERATED_CREEPER_STATUES_GRAVES_TYPES = {EnumGraves.EnumGraveType.OBELISK};//TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event, long spawnTime) {
-        if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GSConfig.graveItemsCount > 0 &&
+        if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && Config.graveItemsCount > 0 &&
                 !isInRestrictedArea(player.getPosition())) {
             List<ItemStack> items = new ArrayList<>(40);
 
@@ -101,10 +101,10 @@ public class GraveGenerationHelper {
             items.addAll(Arrays.asList(player.inventory.mainInventory));
             items.addAll(Arrays.asList(player.inventory.armorInventory));
 
-            GSCompatibilityTwilightForest.addSlotTags(items);
-            GSCompatibilityBattlegear.addItems(items, player);
+            CompatibilityTwilightForest.addSlotTags(items);
+            CompatibilityBattlegear.addItems(items, player);
 
-            if (!GSCompatibilityTwilightForest.handleCharmsOfKeeping(items, player)) {
+            if (!CompatibilityTwilightForest.handleCharmsOfKeeping(items, player)) {
                 player.inventory.clear();
             }
 
@@ -113,7 +113,7 @@ public class GraveGenerationHelper {
             }
 
             //TODO is it really required??
-            GSCompatibilityTwilightForest.removeSlotTags(items);
+            CompatibilityTwilightForest.removeSlotTags(items);
 
 
             for (IPlayerItems additionalItems : APIGraveGeneration.PLAYER_ITEMS) {
@@ -261,7 +261,7 @@ public class GraveGenerationHelper {
         } else {
             grave = getGraveByDeath(damageSource, graveTypeByEntity);
             if (grave == null) {
-                if (graveTypeByEntity == EnumGraveTypeByEntity.PLAYER_GRAVES && GSConfig.generateSwordGraves &&
+                if (graveTypeByEntity == EnumGraveTypeByEntity.PLAYER_GRAVES && Config.generateSwordGraves &&
                         world.rand.nextInt(4) == 0 && graveTypeByEntity.equals(EnumGraveTypeByEntity.PLAYER_GRAVES)) {
                     sword = getSwordFromInventory(items);
                     grave = EnumGraves.SWORD;
@@ -276,8 +276,8 @@ public class GraveGenerationHelper {
 
         BlockPos newPos = findPlaceForGrave(world, pos);
         if (newPos != null) {
-            world.setBlockState(newPos, GSBlock.graveStone.getDefaultState().withProperty(BlockGSGraveStone.FACING, direction), 2);
-            TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(newPos);
+            world.setBlockState(newPos, GSBlock.graveStone.getDefaultState().withProperty(BlockGraveStone.FACING, direction), 2);
+            TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(newPos);
 
             if (tileEntity != null) {
                 if (sword != null) {
@@ -366,7 +366,7 @@ public class GraveGenerationHelper {
     }
 
     private static boolean isInRestrictedArea(BlockPos pos) {
-        return GSConfig.restrictGraveGenerationInArea.stream().anyMatch((area) -> area.isInArea(pos));
+        return Config.restrictGraveGenerationInArea.stream().anyMatch((area) -> area.isInArea(pos));
     }
 
     private static boolean isMagicDamage(DamageSource damageSource) {

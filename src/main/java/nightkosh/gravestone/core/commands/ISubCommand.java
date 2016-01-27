@@ -14,7 +14,7 @@ public interface ISubCommand {
     public String getCommandName();
 
     public default String getCommandUsage() {
-        return CommandGS.MAIN_COMMAND_NAME + getCommandName();
+        return Command.MAIN_COMMAND_NAME + getCommandName();
     }
 
     public void execute(ICommandSender sender, String[] args) throws CommandException;

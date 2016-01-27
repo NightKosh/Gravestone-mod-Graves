@@ -1,9 +1,9 @@
 package nightkosh.gravestone.helper;
 
 import nightkosh.gravestone.block.enums.EnumGraves;
-import nightkosh.gravestone.config.GSConfig;
+import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.tileentity.DeathMessageInfo;
-import nightkosh.gravestone.tileentity.GSGraveStoneDeathText;
+import nightkosh.gravestone.tileentity.GraveStoneDeathText;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -145,7 +145,7 @@ public class DeathTextHelper {
 //        return deathText;
 //    }
 
-    public static GSGraveStoneDeathText getRandomDeathTextAndNameForGrave(Random random, EnumGraves.EnumGraveType graveType) {
+    public static GraveStoneDeathText getRandomDeathTextAndNameForGrave(Random random, EnumGraves.EnumGraveType graveType) {
         switch (graveType) {
             case DOG_STATUE:
                 return getRandomDeathTextAndNameForGrave(random, GraveGenerationHelper.EnumGraveTypeByEntity.DOGS_GRAVES);
@@ -158,23 +158,23 @@ public class DeathTextHelper {
         }
     }
 
-    public static GSGraveStoneDeathText getRandomDeathTextAndNameForGrave(Random random, GraveGenerationHelper.EnumGraveTypeByEntity graveTypeByEntity) {
-        GSGraveStoneDeathText deathText = new GSGraveStoneDeathText();
+    public static GraveStoneDeathText getRandomDeathTextAndNameForGrave(Random random, GraveGenerationHelper.EnumGraveTypeByEntity graveTypeByEntity) {
+        GraveStoneDeathText deathText = new GraveStoneDeathText();
         deathText.setLocalized();
 
         if (getDeathMessage(deathText, random)) {
             switch (graveTypeByEntity) {
                 case DOGS_GRAVES:
-                    deathText.setName(getValue(random, GSConfig.graveDogsNames));
+                    deathText.setName(getValue(random, Config.graveDogsNames));
                     break;
                 case CATS_GRAVES:
-                    deathText.setName(getValue(random, GSConfig.graveCatsNames));
+                    deathText.setName(getValue(random, Config.graveCatsNames));
                     break;
                 case HORSE_GRAVES:
                     //TODO
                     break;
                 default:
-                    deathText.setName(getValue(random, GSConfig.graveNames));
+                    deathText.setName(getValue(random, Config.graveNames));
                     break;
             }
         }
@@ -189,13 +189,13 @@ public class DeathTextHelper {
         }
     }
 
-    private static void getRandomMemorialContent(GSGraveStoneDeathText deathText, Random random, ArrayList<String> nameList, ArrayList<String> textList) {
+    private static void getRandomMemorialContent(GraveStoneDeathText deathText, Random random, ArrayList<String> nameList, ArrayList<String> textList) {
         if (getDeathMessage(deathText, random)) {
             deathText.setDeathText(getValue(random, nameList));
         }
     }
 
-    private static boolean getDeathMessage(GSGraveStoneDeathText deathText, Random random) {
+    private static boolean getDeathMessage(GraveStoneDeathText deathText, Random random) {
         DeathMessageInfo deathMessageInfo = getRandomDeathMessage(random);
         deathText.setDeathText(deathMessageInfo.getDeathMessage());
         deathText.setDeathText(deathMessageInfo.getKillerNameForTE());

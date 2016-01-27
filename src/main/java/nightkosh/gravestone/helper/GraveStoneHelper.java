@@ -2,10 +2,10 @@ package nightkosh.gravestone.helper;
 
 import nightkosh.gravestone.api.IGraveStone;
 import nightkosh.gravestone.block.enums.EnumGraves;
-import nightkosh.gravestone.config.GSConfig;
+import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.core.GSBlock;
 import nightkosh.gravestone.inventory.GraveInventory;
-import nightkosh.gravestone.tileentity.TileEntityGSGraveStone;
+import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.state.IBlockState;
@@ -140,8 +140,8 @@ public class GraveStoneHelper implements IGraveStone {
      * Spawn mob
      */
     public static void spawnMob(World world, BlockPos pos) {
-        if (GSConfig.spawnMobAtGraveDestruction && world.rand.nextInt(10) == 0) {
-            TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
+        if (Config.spawnMobAtGraveDestruction && world.rand.nextInt(10) == 0) {
+            TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
 
             if (tileEntity != null) {
                 //TODO
@@ -162,7 +162,7 @@ public class GraveStoneHelper implements IGraveStone {
     }
 
     public static boolean canPlaceBlockAt(World world, Block block, BlockPos pos) {
-        if (GSConfig.canPlaceGravesEveryWhere) {
+        if (Config.canPlaceGravesEveryWhere) {
             return true;
         } else {
             String tool = block.getHarvestTool(world.getBlockState(pos));
@@ -211,7 +211,7 @@ public class GraveStoneHelper implements IGraveStone {
         }
     }
 
-    public static boolean canFlowerBePlaced(World world, BlockPos pos, ItemStack itemStack, TileEntityGSGraveStone te) {
+    public static boolean canFlowerBePlaced(World world, BlockPos pos, ItemStack itemStack, TileEntityGraveStone te) {
         if (canFlowerBePlacedOnGrave(te)) {
             Item item = itemStack.getItem();
             if (Block.getBlockFromItem(item) instanceof BlockFlower) {
@@ -223,7 +223,7 @@ public class GraveStoneHelper implements IGraveStone {
         return false;
     }
 
-    public static boolean canFlowerBePlacedOnGrave(TileEntityGSGraveStone te) {
+    public static boolean canFlowerBePlacedOnGrave(TileEntityGraveStone te) {
         return !te.isSwordGrave() && (te.getGraveType().getGraveType() == EnumGraves.EnumGraveType.VERTICAL_PLATE ||
                 te.getGraveType().getGraveType() == EnumGraves.EnumGraveType.CROSS);
         //TODO celtic cross ????
@@ -272,7 +272,7 @@ public class GraveStoneHelper implements IGraveStone {
 
     public static void dropBlockWithoutInfo(World world, BlockPos pos, IBlockState state) {
         ItemStack itemStack = GSBlock.graveStone.createStackedBlock(GSBlock.graveStone.getDefaultState());
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) world.getTileEntity(pos);
+        TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
 
         if (tileEntity != null) {
             if (tileEntity.isSwordGrave()) {
@@ -293,7 +293,7 @@ public class GraveStoneHelper implements IGraveStone {
      */
     public static ItemStack getBlockItemStack(IBlockAccess access, BlockPos pos, IBlockState state) {
         ItemStack itemStack = GSBlock.graveStone.createStackedBlock(GSBlock.graveStone.getDefaultState());
-        TileEntityGSGraveStone tileEntity = (TileEntityGSGraveStone) access.getTileEntity(pos);
+        TileEntityGraveStone tileEntity = (TileEntityGraveStone) access.getTileEntity(pos);
 
         if (tileEntity != null) {
             NBTTagCompound nbt = new NBTTagCompound();

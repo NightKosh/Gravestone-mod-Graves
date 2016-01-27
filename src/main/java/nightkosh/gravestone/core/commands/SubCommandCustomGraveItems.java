@@ -1,7 +1,7 @@
 package nightkosh.gravestone.core.commands;
 
 import nightkosh.gravestone.core.logger.GSLogger;
-import nightkosh.gravestone.tileentity.TileEntityGSGraveStone;
+import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.item.ItemStack;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class SubCommandCustomGraveItems implements ISubCommand {
 
     public static final String COMMAND_NAME = "fill_grave";
-    public static final String COMMAND_USAGE = CommandGS.MAIN_COMMAND_NAME + COMMAND_NAME + " <grave x coordinate> <grave y coordinate> <grave z coordinate>  <chest x coordinate> <chest y coordinate> <chest z coordinate>";
+    public static final String COMMAND_USAGE = Command.MAIN_COMMAND_NAME + COMMAND_NAME + " <grave x coordinate> <grave y coordinate> <grave z coordinate>  <chest x coordinate> <chest y coordinate> <chest z coordinate>";
 
     @Override
     public String getCommandName() {
@@ -52,7 +52,7 @@ public class SubCommandCustomGraveItems implements ISubCommand {
                 TileEntity graveTE = sender.getEntityWorld().getTileEntity(new BlockPos(graveXCoord, graveYCoord, graveZCoord));
                 TileEntity chestTE = sender.getEntityWorld().getTileEntity(new BlockPos(chestXCoord, chestYCoord, chestZCoord));
                 if (graveTE != null && chestTE != null) {
-                    if (graveTE instanceof TileEntityGSGraveStone && chestTE instanceof TileEntityChest) {
+                    if (graveTE instanceof TileEntityGraveStone && chestTE instanceof TileEntityChest) {
                         ArrayList<ItemStack> items = new ArrayList<ItemStack>();
                         ItemStack item;
                         for (int slot = 0; slot < ((TileEntityChest) chestTE).getSizeInventory(); slot++) {
@@ -61,7 +61,7 @@ public class SubCommandCustomGraveItems implements ISubCommand {
                                 items.add(item.copy());
                             }
                         }
-                        ((TileEntityGSGraveStone) graveTE).getInventory().setAdditionalItems(items.toArray(new ItemStack[items.size()]));
+                        ((TileEntityGraveStone) graveTE).getInventory().setAdditionalItems(items.toArray(new ItemStack[items.size()]));
                     } else {
                         sender.addChatMessage(new ChatComponentTranslation("commands.fill_grave.wrong_block").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                     }

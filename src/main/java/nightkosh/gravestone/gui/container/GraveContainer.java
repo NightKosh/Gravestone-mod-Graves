@@ -1,7 +1,7 @@
 package nightkosh.gravestone.gui.container;
 
 import nightkosh.gravestone.inventory.GraveInventory;
-import nightkosh.gravestone.tileentity.TileEntityGSGraveStone;
+import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -22,7 +22,7 @@ public class GraveContainer extends Container {
     public static final int SLOT_WIDTH = 18;
     private GraveInventory graveInventory;
 
-    public GraveContainer(InventoryPlayer inventoryPlayer, TileEntityGSGraveStone te) {
+    public GraveContainer(InventoryPlayer inventoryPlayer, TileEntityGraveStone te) {
         int i = 2 * SLOT_WIDTH;
 
         graveInventory = te.getInventory();
