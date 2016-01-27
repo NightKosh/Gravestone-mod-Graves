@@ -27,6 +27,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements IUpdatePlay
     protected ItemStack sword = null;
     protected ItemStack flower = null;
     protected String playerId = "";
+    protected boolean isPurified = false;
     protected int spawnerHelperId;
     protected GroupOfGravesSpawnerHelper spawnerHelper;
     public static final int FOG_RANGE = 30;
@@ -102,6 +103,9 @@ public class TileEntityGraveStone extends TileEntityGrave implements IUpdatePlay
         readFlowerInfo(nbtTag);
         // owner
         playerId = nbtTag.getString("PlayerId");
+
+        isPurified = nbtTag.getBoolean("Purified");
+
         //spawnerHelper
         if (nbtTag.hasKey("SpawnerHelperId")) {
             spawnerHelperId = nbtTag.getInteger("SpawnerHelperId");
@@ -126,6 +130,9 @@ public class TileEntityGraveStone extends TileEntityGrave implements IUpdatePlay
         writeFlowerInfo(nbtTag);
         // owner
         nbtTag.setString("PlayerId", playerId);
+
+        nbtTag.setBoolean("Purified", isPurified);
+
         //spawnerHelper
         if (haveSpawnerHelper()) {
             nbtTag.setInteger("SpawnerHelperId", spawnerHelper.getEntityId());
@@ -252,5 +259,13 @@ public class TileEntityGraveStone extends TileEntityGrave implements IUpdatePlay
 
     public void setSpawnerHelper(GroupOfGravesSpawnerHelper spawnerHelper) {
         this.spawnerHelper = spawnerHelper;
+    }
+
+    public boolean isPurified() {
+        return isPurified;
+    }
+
+    public void setPurified(boolean isPurified) {
+        this.isPurified = isPurified;
     }
 }

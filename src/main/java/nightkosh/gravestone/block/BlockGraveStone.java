@@ -225,6 +225,8 @@ public class BlockGraveStone extends BlockContainer {
 
                 tileEntity.setMossy(nbt.getBoolean("Mossy"));
 
+                tileEntity.setPurified(nbt.getBoolean("Purified"));
+
                 if (nbt.hasKey("Sword")) {
                     tileEntity.setSword(ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("Sword")));
                 }
@@ -585,20 +587,22 @@ public class BlockGraveStone extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item gravestone, CreativeTabs tabs, List list) {
-        for (int i = 0; i < TAB_PLAYER_GRAVES.length; i++) {
+        for (int TAB_PLAYER_GRAVE : TAB_PLAYER_GRAVES) {
             ItemStack stack = new ItemStack(gravestone, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setInteger("Type", TAB_PLAYER_GRAVES[i]);
+            nbt.setInteger("Type", TAB_PLAYER_GRAVE);
+            nbt.setBoolean("Purified", false);
 
             stack.setTagCompound(nbt);
             list.add(stack);
         }
 
         // pets graves
-        for (int i = 0; i < TAB_PETS_GRAVES.length; i++) {
+        for (int TAB_PETS_GRAVE : TAB_PETS_GRAVES) {
             ItemStack stack = new ItemStack(gravestone, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setInteger("Type", TAB_PETS_GRAVES[i]);
+            nbt.setInteger("Type", TAB_PETS_GRAVE);
+            nbt.setBoolean("Purified", false);
 
             stack.setTagCompound(nbt);
             list.add(stack);
