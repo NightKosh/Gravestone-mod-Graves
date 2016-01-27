@@ -3,6 +3,7 @@ package nightkosh.gravestone.core.compatibility;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import nightkosh.gravestone.api.GraveStoneAPI;
+import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.core.GSBlock;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
@@ -23,9 +24,11 @@ public class CompatibilityThaumcraft implements ICompatibility {
             ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.graveStone), new AspectList().add(Aspect.SOUL, 3)
                     .add(Aspect.DEATH, 3).add(Aspect.UNDEAD, 3));
 
-            GraveStoneAPI.graveStone.addSwordToSwordsList(GameRegistry.findItem(MOD_ID, "thaumium_sword"));
-            GraveStoneAPI.graveStone.addSwordToSwordsList(GameRegistry.findItem(MOD_ID, "elemental_sword"));
-            GraveStoneAPI.graveStone.addSwordToSwordsList(GameRegistry.findItem(MOD_ID, "void_sword"));
+            if (Config.addThaumcraftSwordsAsGravestones) {
+                GraveStoneAPI.graveStone.addSwordToSwordsList(GameRegistry.findItem(MOD_ID, "thaumium_sword"));
+                GraveStoneAPI.graveStone.addSwordToSwordsList(GameRegistry.findItem(MOD_ID, "elemental_sword"));
+                GraveStoneAPI.graveStone.addSwordToSwordsList(GameRegistry.findItem(MOD_ID, "void_sword"));
+            }
         }
     }
 }
