@@ -30,12 +30,14 @@ minecraft {
 
 ext.apiGravestone = "./api/gravestone"
 ext.apiBaubles = "./api/baubles"
+ext.apiThaumcraft = "./api/thaumcraft"
 
 sourceSets {
     main {
         java {
             srcDir project.apiGravestone
             srcDir project.apiBaubles
+            srcDir project.apiThaumcraft
         }
     }
 }
@@ -62,7 +64,7 @@ jar {
     exclude('mariculture/**')
     exclude('micdoodle8/**')
     exclude('tconstruct/**')
-    //TODO exclude Thaumcraft API
+    exclude('thaumcraft/**')
     exclude('**/*.db')
     exclude('assets/nightkosh.gravestone/techne_models/**')
 }
