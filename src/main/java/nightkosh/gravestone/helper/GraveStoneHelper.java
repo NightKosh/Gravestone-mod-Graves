@@ -202,7 +202,9 @@ public class GraveStoneHelper implements IGraveStone {
 
     @Override
     public void addSwordToSwordsList(Item sword) {
-        swordsList.add(sword);
+        if (sword != null) {
+            swordsList.add(sword);
+        }
     }
 
     public static EnumGraves getRandomGrave(List<EnumGraves> graveTypes, Random rand) {

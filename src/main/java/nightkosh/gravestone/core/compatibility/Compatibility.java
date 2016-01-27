@@ -30,6 +30,8 @@ public class Compatibility {
         new CompatibilityEnderIO();
 
         new CompatibilityWitchery();
+
+        new CompatibilityThaumcraft();
     }
 
     public static Compatibility getInstance() {
