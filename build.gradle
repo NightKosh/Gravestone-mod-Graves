@@ -59,6 +59,10 @@ dependencies {
 
 jar {
     exclude('baubles/**')
+    exclude('mariculture/**')
+    exclude('micdoodle8/**')
+    exclude('tconstruct/**')
+    //TODO exclude Thaumcraft API
     exclude('**/*.db')
     exclude('assets/nightkosh.gravestone/techne_models/**')
 }
