@@ -4,3 +4,6 @@
 [submodule "api/gravestone"]
 	path = api/gravestone
 	url = https://github.com/NightKosh/GraveStone-mod-API
+[submodule "api/thaumcraft/thaumcraft/api"]
+	path = api/thaumcraft/thaumcraft/api
+	url = https://github.com/Azanor/thaumcraft-5-api
