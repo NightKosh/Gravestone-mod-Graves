@@ -27,8 +27,6 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerRenderers() {
-        // blocks renderers
-
         // graves renderer
         ClientRegistry.registerTileEntity(TileEntityGraveStone.class, "GSGraveStone", new TileEntityGraveStoneRenderer());
     }
