@@ -1,11 +1,5 @@
 package nightkosh.gravestone.helper;
 
-import nightkosh.gravestone.api.IGraveStone;
-import nightkosh.gravestone.block.enums.EnumGraves;
-import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.core.GSBlock;
-import nightkosh.gravestone.inventory.GraveInventory;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.state.IBlockState;
@@ -19,6 +13,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
+import nightkosh.gravestone.api.IGraveStone;
+import nightkosh.gravestone.api.grave.EnumGraveType;
+import nightkosh.gravestone.block.enums.EnumGraves;
+import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.core.GSBlock;
+import nightkosh.gravestone.inventory.GraveInventory;
+import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -121,8 +122,8 @@ public class GraveStoneHelper implements IGraveStone {
      * @param graveType Grave type
      */
     public static boolean isPetGrave(int graveType) {
-        return EnumGraves.getById(graveType).getGraveType() == EnumGraves.EnumGraveType.DOG_STATUE ||
-                EnumGraves.getById(graveType).getGraveType() == EnumGraves.EnumGraveType.CAT_STATUE;
+        return EnumGraves.getById(graveType).getGraveType() == EnumGraveType.DOG_STATUE ||
+                EnumGraves.getById(graveType).getGraveType() == EnumGraveType.CAT_STATUE;
     }
 
     /**
@@ -184,6 +185,7 @@ public class GraveStoneHelper implements IGraveStone {
         ItemStack graveStoneStack = new ItemStack(grave, 1, 0);
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setInteger("Type", EnumGraves.SWORD.ordinal());
+        nbt.setBoolean("Purified", false);
         GraveStoneHelper.addSwordInfo(nbt, sword);
 
         graveStoneStack.setTagCompound(nbt);
@@ -224,8 +226,8 @@ public class GraveStoneHelper implements IGraveStone {
     }
 
     public static boolean canFlowerBePlacedOnGrave(TileEntityGraveStone te) {
-        return !te.isSwordGrave() && (te.getGraveType().getGraveType() == EnumGraves.EnumGraveType.VERTICAL_PLATE ||
-                te.getGraveType().getGraveType() == EnumGraves.EnumGraveType.CROSS);
+        return !te.isSwordGrave() && (te.getGraveType().getGraveType() == EnumGraveType.VERTICAL_PLATE ||
+                te.getGraveType().getGraveType() == EnumGraveType.CROSS);
         //TODO celtic cross ????
     }
 
@@ -281,6 +283,7 @@ public class GraveStoneHelper implements IGraveStone {
                 NBTTagCompound nbt = new NBTTagCompound();
                 nbt.setInteger("Type", tileEntity.getGraveTypeNum());
                 nbt.setBoolean("Mossy", tileEntity.isMossy());
+                nbt.setBoolean("Purified", true);
 
                 itemStack.setTagCompound(nbt);
                 GraveInventory.dropItem(itemStack, world, pos);
@@ -314,6 +317,8 @@ public class GraveStoneHelper implements IGraveStone {
 
             nbt.setBoolean("Enchanted", tileEntity.isEnchanted());
             nbt.setBoolean("Mossy", tileEntity.isMossy());
+
+            nbt.setBoolean("Purified", true);
 
             itemStack.setTagCompound(nbt);
         }

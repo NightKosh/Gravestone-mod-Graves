@@ -1,14 +1,5 @@
 package nightkosh.gravestone.block;
 
-import nightkosh.gravestone.ModGraveStone;
-import nightkosh.gravestone.block.enums.EnumGraves;
-import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.core.GuiHandler;
-import nightkosh.gravestone.core.Tabs;
-import nightkosh.gravestone.core.logger.GSLogger;
-import nightkosh.gravestone.helper.GraveStoneHelper;
-import nightkosh.gravestone.inventory.GraveInventory;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockVine;
@@ -34,6 +25,16 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import nightkosh.gravestone.ModGraveStone;
+import nightkosh.gravestone.api.grave.EnumGraveType;
+import nightkosh.gravestone.block.enums.EnumGraves;
+import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.core.GuiHandler;
+import nightkosh.gravestone.core.Tabs;
+import nightkosh.gravestone.core.logger.GSLogger;
+import nightkosh.gravestone.helper.GraveStoneHelper;
+import nightkosh.gravestone.inventory.GraveInventory;
+import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -251,13 +252,13 @@ public class BlockGraveStone extends BlockContainer {
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess access, BlockPos pos) {
         EnumFacing facing = (EnumFacing) access.getBlockState(pos).getValue(FACING);
-        EnumGraves.EnumGraveType graveType;
+        EnumGraveType graveType;
         TileEntityGraveStone tileEntity = (TileEntityGraveStone) access.getTileEntity(pos);
 
         if (tileEntity != null) {
             graveType = tileEntity.getGraveType().getGraveType();
         } else {
-            graveType = EnumGraves.EnumGraveType.VERTICAL_PLATE;
+            graveType = EnumGraveType.VERTICAL_PLATE;
         }
 
         switch (graveType) {

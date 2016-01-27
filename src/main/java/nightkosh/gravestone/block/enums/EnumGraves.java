@@ -1,7 +1,9 @@
 package nightkosh.gravestone.block.enums;
 
-import nightkosh.gravestone.core.Resources;
 import net.minecraft.util.ResourceLocation;
+import nightkosh.gravestone.api.grave.EnumGraveMaterial;
+import nightkosh.gravestone.api.grave.EnumGraveType;
+import nightkosh.gravestone.core.Resources;
 
 /**
  * GraveStone mod
@@ -140,16 +142,6 @@ public enum EnumGraves implements IBlockEnum {
     // SWORD
     SWORD("block.nightkosh.gravestone.sword", null, EnumGraveType.SWORD, EnumGraveMaterial.OTHER);
 
-    public enum EnumGraveType implements IEnumGraveType {
-        VERTICAL_PLATE,
-        CROSS,
-        OBELISK,
-        HORIZONTAL_PLATE,
-        DOG_STATUE,
-        CAT_STATUE,
-        HORSE_STATUE,
-        SWORD
-    }
 
     private String name;
     private ResourceLocation texture;

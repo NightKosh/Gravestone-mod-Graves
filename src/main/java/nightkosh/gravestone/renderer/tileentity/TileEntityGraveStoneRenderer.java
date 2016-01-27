@@ -1,11 +1,6 @@
 package nightkosh.gravestone.renderer.tileentity;
 
 import com.google.common.collect.Maps;
-import nightkosh.gravestone.block.enums.EnumGraves;
-import nightkosh.gravestone.core.Resources;
-import nightkosh.gravestone.models.block.ModelGraveStone;
-import nightkosh.gravestone.models.block.graves.*;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.LayeredTexture;
 import net.minecraft.entity.item.EntityItem;
@@ -18,6 +13,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import nightkosh.gravestone.api.grave.EnumGraveType;
+import nightkosh.gravestone.block.enums.EnumGraves;
+import nightkosh.gravestone.core.Resources;
+import nightkosh.gravestone.models.block.ModelGraveStone;
+import nightkosh.gravestone.models.block.graves.*;
+import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Map;
@@ -42,6 +43,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     public static TileEntityGraveStoneRenderer instance;
 
     private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();//TODO temporal hack
+
     static {
         GRAVE_TE.setGraveType(EnumGraves.STONE_VERTICAL_PLATE.ordinal());
     }
@@ -157,7 +159,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         }
     }
 
-    private ResourceLocation getMossyTexture(EnumGraves.EnumGraveType graveType) {
+    private ResourceLocation getMossyTexture(EnumGraveType graveType) {
         switch (graveType) {
             case VERTICAL_PLATE:
             default:
@@ -177,7 +179,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         }
     }
 
-    private ModelGraveStone getModel(EnumGraves.EnumGraveType graveType) {
+    private ModelGraveStone getModel(EnumGraveType graveType) {
         switch (graveType) {
             case VERTICAL_PLATE:
             default:

@@ -1,19 +1,5 @@
 package nightkosh.gravestone.helper;
 
-import nightkosh.gravestone.api.grave_items.*;
-import nightkosh.gravestone.block.BlockGraveStone;
-import nightkosh.gravestone.block.enums.EnumGraveMaterial;
-import nightkosh.gravestone.block.enums.EnumGraves;
-import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.core.GSBlock;
-import nightkosh.gravestone.core.MobHandler;
-import nightkosh.gravestone.core.compatibility.CompatibilityBattlegear;
-import nightkosh.gravestone.core.compatibility.CompatibilityTwilightForest;
-import nightkosh.gravestone.core.logger.GSLogger;
-import nightkosh.gravestone.helper.api.APIGraveGeneration;
-import nightkosh.gravestone.inventory.GraveInventory;
-import nightkosh.gravestone.tileentity.DeathMessageInfo;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -27,6 +13,21 @@ import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import nightkosh.gravestone.api.grave.EnumGraveMaterial;
+import nightkosh.gravestone.api.grave.EnumGraveType;
+import nightkosh.gravestone.api.grave_items.*;
+import nightkosh.gravestone.block.BlockGraveStone;
+import nightkosh.gravestone.block.enums.EnumGraves;
+import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.core.GSBlock;
+import nightkosh.gravestone.core.MobHandler;
+import nightkosh.gravestone.core.compatibility.CompatibilityBattlegear;
+import nightkosh.gravestone.core.compatibility.CompatibilityTwilightForest;
+import nightkosh.gravestone.core.logger.GSLogger;
+import nightkosh.gravestone.helper.api.APIGraveGeneration;
+import nightkosh.gravestone.inventory.GraveInventory;
+import nightkosh.gravestone.tileentity.DeathMessageInfo;
+import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,18 +79,18 @@ public class GraveGenerationHelper {
         }
     }
 
-    private static final EnumGraves.EnumGraveType[] GENERATED_PLAYER_GRAVES_TYPES = {
-            EnumGraves.EnumGraveType.VERTICAL_PLATE,
-            EnumGraves.EnumGraveType.CROSS,
-            EnumGraves.EnumGraveType.OBELISK,
-            EnumGraves.EnumGraveType.HORIZONTAL_PLATE
+    private static final EnumGraveType[] GENERATED_PLAYER_GRAVES_TYPES = {
+            EnumGraveType.VERTICAL_PLATE,
+            EnumGraveType.CROSS,
+            EnumGraveType.OBELISK,
+            EnumGraveType.HORIZONTAL_PLATE
             //TODO celtic cross
     };
-    private static final EnumGraves.EnumGraveType[] GENERATED_VILLAGERS_GRAVES_TYPES = {EnumGraves.EnumGraveType.OBELISK};//TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    private static final EnumGraves.EnumGraveType[] GENERATED_DOGS_GRAVES_TYPES = {EnumGraves.EnumGraveType.DOG_STATUE};
-    private static final EnumGraves.EnumGraveType[] GENERATED_CAT_GRAVES_TYPES = {EnumGraves.EnumGraveType.CAT_STATUE};
-    private static final EnumGraves.EnumGraveType[] GENERATED_HORSE_GRAVES_TYPES = {EnumGraves.EnumGraveType.HORSE_STATUE};
-    private static final EnumGraves.EnumGraveType[] GENERATED_CREEPER_STATUES_GRAVES_TYPES = {EnumGraves.EnumGraveType.OBELISK};//TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private static final EnumGraveType[] GENERATED_VILLAGERS_GRAVES_TYPES = {EnumGraveType.OBELISK};//TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private static final EnumGraveType[] GENERATED_DOGS_GRAVES_TYPES = {EnumGraveType.DOG_STATUE};
+    private static final EnumGraveType[] GENERATED_CAT_GRAVES_TYPES = {EnumGraveType.CAT_STATUE};
+    private static final EnumGraveType[] GENERATED_HORSE_GRAVES_TYPES = {EnumGraveType.HORSE_STATUE};
+    private static final EnumGraveType[] GENERATED_CREEPER_STATUES_GRAVES_TYPES = {EnumGraveType.OBELISK};//TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event, long spawnTime) {
         if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && Config.graveItemsCount > 0 &&
@@ -250,7 +251,7 @@ public class GraveGenerationHelper {
         ItemStack sword = null;
         if (chooseGraveTypeByAgeOrLevel(entity, graveTypeByEntity)) {
             EnumGraveMaterial material = getGraveMaterialByAgeOrLevel(entity, age, graveTypeByEntity);
-            EnumGraves.EnumGraveType[] type;
+            EnumGraveType[] type;
             if (isExplosionDamage(damageSource)) {
                 type = GENERATED_CREEPER_STATUES_GRAVES_TYPES;
             } else {
@@ -415,7 +416,7 @@ public class GraveGenerationHelper {
         return null;//TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
-    protected static EnumGraves.EnumGraveType[] getDefaultGraveTypes(EnumGraveTypeByEntity graveTypeByEntity) {
+    protected static EnumGraveType[] getDefaultGraveTypes(EnumGraveTypeByEntity graveTypeByEntity) {
         switch (graveTypeByEntity) {
             case VILLAGERS_GRAVES:
                 return GENERATED_VILLAGERS_GRAVES_TYPES;
@@ -432,7 +433,7 @@ public class GraveGenerationHelper {
     }
 
     public static EnumGraves getGraveByDeath(DamageSource damageSource, EnumGraveTypeByEntity graveTypeByEntity) {
-        EnumGraves.EnumGraveType[] graveTypes = null;
+        EnumGraveType[] graveTypes = null;
         EnumGraveMaterial material = null;
 
         if (isFireDamage(damageSource, damageSource.damageType) || isLavaDamage(damageSource, damageSource.damageType)) {
@@ -518,7 +519,7 @@ public class GraveGenerationHelper {
             materials.add(EnumGraveMaterial.STONE);
         }
 
-        EnumGraves.EnumGraveType[] type;
+        EnumGraveType[] type;
         if (damageSource != null && isExplosionDamage(damageSource)) {
             type = GENERATED_CREEPER_STATUES_GRAVES_TYPES;
         } else {
@@ -606,8 +607,8 @@ public class GraveGenerationHelper {
                 (world.isAirBlock(pos) || world.getBlockState(pos).getBlock().getMaterial().isLiquid() || world.getBlockState(pos).getBlock().getMaterial().isReplaceable());
     }
 
-    protected static EnumGraves getGraveType(EnumGraves.EnumGraveType[] graveTypes, EnumGraveMaterial... materials) {
-        EnumGraves.EnumGraveType graveType = graveTypes[rand.nextInt(graveTypes.length)];
+    protected static EnumGraves getGraveType(EnumGraveType[] graveTypes, EnumGraveMaterial... materials) {
+        EnumGraveType graveType = graveTypes[rand.nextInt(graveTypes.length)];
         EnumGraveMaterial material = materials[rand.nextInt(materials.length)];
 
         return EnumGraves.getByTypeAndMaterial(graveType, material);

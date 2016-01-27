@@ -1,6 +1,6 @@
 package nightkosh.gravestone.helper;
 
-import nightkosh.gravestone.block.enums.EnumGraves;
+import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.tileentity.DeathMessageInfo;
 import nightkosh.gravestone.tileentity.GraveStoneDeathText;
@@ -145,7 +145,7 @@ public class DeathTextHelper {
 //        return deathText;
 //    }
 
-    public static GraveStoneDeathText getRandomDeathTextAndNameForGrave(Random random, EnumGraves.EnumGraveType graveType) {
+    public static GraveStoneDeathText getRandomDeathTextAndNameForGrave(Random random, EnumGraveType graveType) {
         switch (graveType) {
             case DOG_STATUE:
                 return getRandomDeathTextAndNameForGrave(random, GraveGenerationHelper.EnumGraveTypeByEntity.DOGS_GRAVES);

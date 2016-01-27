@@ -1,7 +1,7 @@
 package nightkosh.gravestone.item.itemblock;
 
 import nightkosh.gravestone.ModGraveStone;
-import nightkosh.gravestone.block.enums.EnumGraveMaterial;
+import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -83,7 +83,7 @@ public class ItemBlockGraveStone extends ItemBlock {
                 StringBuilder materialStr = new StringBuilder();
                 materialStr.append(ModGraveStone.proxy.getLocalizedString("material.title"))
                         .append(" ")
-                        .append(material.getLocalizedMaterial());
+                        .append(ModGraveStone.proxy.getLocalizedMaterial(material));
                 if (nbt.getBoolean("Mossy")) {
                     materialStr.append(", ")
                             .append(ModGraveStone.proxy.getLocalizedString("material.mossy"));

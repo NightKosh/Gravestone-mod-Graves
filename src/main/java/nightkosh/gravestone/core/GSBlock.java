@@ -16,11 +16,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  */
 public class GSBlock {
 
-    public static final IBlockState DEFAULT_STONE_STATE = Blocks.stone.getDefaultState();
-    public static final int DIORITE_META = Blocks.stone.getMetaFromState(DEFAULT_STONE_STATE.withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH));
-    public static final int ANDESITE_META = Blocks.stone.getMetaFromState(DEFAULT_STONE_STATE.withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE_SMOOTH));
-    public static final int GRANITE_META = Blocks.stone.getMetaFromState(DEFAULT_STONE_STATE.withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE_SMOOTH));
-
     public static BlockGraveStone graveStone;
 
     public static void registration() {

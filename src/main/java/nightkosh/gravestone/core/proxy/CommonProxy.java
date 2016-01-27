@@ -1,5 +1,7 @@
 package nightkosh.gravestone.core.proxy;
 
+import nightkosh.gravestone.api.grave.EnumGraveMaterial;
+
 /**
  * GraveStone mod
  *
@@ -23,5 +25,9 @@ public class CommonProxy {
     }
 
     public void registerBlocksModels() {
+    }
+
+    public String getLocalizedMaterial(EnumGraveMaterial material) {
+        return getLocalizedString("material." + material.toString().toLowerCase());
     }
 }
