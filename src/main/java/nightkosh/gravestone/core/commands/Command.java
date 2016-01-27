@@ -27,17 +27,18 @@ public class Command extends CommandBase {
     public static final List<ISubCommand> ADDITIONAL_COMMANDS_LIST = new ArrayList<>();
 
     @Override
-    public String getName() {
+    public String getCommandName() {
         return "GS";
     }
 
     @Override
     public String getCommandUsage(ICommandSender icommandsender) {
-        return "/" + getName() + " <command> <command parameters> (" + HELP + ")";
+        return "/" + getCommandName() + " <command> <command parameters> (" + HELP + ")";
     }
 
+
     @Override
-    public void execute(ICommandSender sender, String[] args) throws CommandException {
+    public void processCommand(ICommandSender sender, String[] args) throws CommandException {
         if (args.length >= 1) {
             String command = args[0];
             switch (command) {

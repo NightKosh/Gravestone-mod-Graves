@@ -1,7 +1,5 @@
 package nightkosh.gravestone.inventory;
 
-import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -11,6 +9,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
+import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 
 import java.util.*;
 
@@ -101,7 +101,7 @@ public class GraveInventory implements IInventory {
     }
 
     @Override
-    public ItemStack getStackInSlotOnClosing(int slot) {
+    public ItemStack removeStackFromSlot(int slot) {
         ItemStack stack = getStackInSlot(slot);
         if (stack != null) {
             setInventorySlotContents(slot, null);

@@ -9,7 +9,7 @@ package nightkosh.gravestone.core.commands;
 public class CommandGravestoneLowerCase extends CommandGravestone {
 
     @Override
-    public String getName() {
+    public String getCommandName() {
         return "gravestone";
     }
 }

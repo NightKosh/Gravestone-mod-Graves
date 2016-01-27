@@ -1,5 +1,11 @@
 package nightkosh.gravestone.tileentity;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ITickable;
+import net.minecraft.world.World;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.core.TimeHelper;
@@ -7,12 +13,6 @@ import nightkosh.gravestone.core.event.RenderEventHandler;
 import nightkosh.gravestone.core.event.TickEventHandler;
 import nightkosh.gravestone.entity.helper.GroupOfGravesSpawnerHelper;
 import nightkosh.gravestone.inventory.GraveInventory;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
-import net.minecraft.world.World;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -21,7 +21,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class TileEntityGraveStone extends TileEntityGrave implements IUpdatePlayerListBox, ISpawnerEntity {
+public class TileEntityGraveStone extends TileEntityGrave implements ITickable, ISpawnerEntity {
 
     protected Spawner gsSpawn;
     protected ItemStack sword = null;

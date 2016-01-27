@@ -93,7 +93,7 @@ public class GraveGenerationHelper {
     private static final EnumGraveType[] GENERATED_CREEPER_STATUES_GRAVES_TYPES = {EnumGraveType.OBELISK};//TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event, long spawnTime) {
-        if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && Config.graveItemsCount > 0 &&
+        if (player.worldObj != null && !player.worldObj.getGameRules().getBoolean("keepInventory") && Config.graveItemsCount > 0 &&
                 !isInRestrictedArea(player.getPosition())) {
             List<ItemStack> items = new ArrayList<>(40);
 
