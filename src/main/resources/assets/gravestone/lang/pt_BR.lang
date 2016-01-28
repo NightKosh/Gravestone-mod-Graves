@@ -6,7 +6,7 @@ itemGroup.tabGSOther=Gravestone mod Items
 
 # Blocks
 ## Graves
-block.gravestone.nightkosh.gravestone.name=Lápide
+block.gravestone.gravestone.name=Lápide
 block.gravestone.cross.name=Cruz
 block.gravestone.obelisk.name=Obelisco
 block.gravestone.plate.name=Chapa de Túmulo

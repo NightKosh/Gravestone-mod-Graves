@@ -4,7 +4,7 @@ itemGroup.tabGSGraveStone=墓碑
 
 # Blocks
 ## Graves
-block.gravestone.nightkosh.gravestone.name=墓碑
+block.gravestone.gravestone.name=墓碑
 block.gravestone.cross.name=十字架
 block.gravestone.obelisk.name=方尖碑
 block.gravestone.plate.name=墓碑板

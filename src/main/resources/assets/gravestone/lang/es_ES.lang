@@ -3,7 +3,7 @@ itemGroup.tabGSGraveStone=Lapida
 
 # Blocks
 ## Graves
-block.gravestone.nightkosh.gravestone.name=Lapida
+block.gravestone.gravestone.name=Lapida
 block.gravestone.cross.name=Cruz
 block.gravestone.obelisk.name=Obelisco
 block.gravestone.plate.name=Placa

@@ -3,7 +3,7 @@ itemGroup.tabGSGraveStone=Gravestone(Náhrobek)
 
 # Blocks
 ## Graves
-block.gravestone.nightkosh.gravestone.name=Náhrobek
+block.gravestone.gravestone.name=Náhrobek
 block.gravestone.cross.name=Kříž
 block.gravestone.obelisk.name=Obelisk
 block.gravestone.plate.name=Náhrobní kámenk

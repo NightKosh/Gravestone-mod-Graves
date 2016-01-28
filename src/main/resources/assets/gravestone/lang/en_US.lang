@@ -3,7 +3,7 @@ itemGroup.tabGSGraveStone=Gravestones
 
 # Blocks
 ## Graves
-block.gravestone.nightkosh.gravestone.name=Gravestone
+block.gravestone.gravestone.name=Gravestone
 block.gravestone.cross.name=Cross
 block.gravestone.obelisk.name=Obelisk
 block.gravestone.plate.name=Grave Plate

@@ -3,7 +3,7 @@ itemGroup.tabGSGraveStone=Надгробия
 
 # Blocks
 ## Graves
-block.gravestone.nightkosh.gravestone.name=Надгробный камень
+block.gravestone.gravestone.name=Надгробный камень
 block.gravestone.cross.name=Могильный крест
 block.gravestone.obelisk.name=Обелиск
 block.gravestone.plate.name=Надгробная плита
