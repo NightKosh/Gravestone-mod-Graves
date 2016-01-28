@@ -1,6 +1,6 @@
 package nightkosh.gravestone.tileentity;
 
-import nightkosh.gravestone.entity.helper.GroupOfGravesSpawnerHelper;
+import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 

@@ -11,7 +11,7 @@ import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.core.TimeHelper;
 import nightkosh.gravestone.core.event.RenderEventHandler;
 import nightkosh.gravestone.core.event.TickEventHandler;
-import nightkosh.gravestone.entity.helper.GroupOfGravesSpawnerHelper;
+import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
 import nightkosh.gravestone.inventory.GraveInventory;
 import org.apache.commons.lang3.StringUtils;
 
