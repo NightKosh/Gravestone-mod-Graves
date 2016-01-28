@@ -1,4 +1,4 @@
-package nightkosh.gravestone.entity.helper;
+package nightkosh.gravestone.helper;
 
 import nightkosh.gravestone.tileentity.ISpawnerEntity;
 import net.minecraft.entity.Entity;
