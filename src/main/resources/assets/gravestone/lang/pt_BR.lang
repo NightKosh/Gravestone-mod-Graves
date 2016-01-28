@@ -6,155 +6,26 @@ itemGroup.tabGSOther=Gravestone mod Items
 
 # Blocks
 ## Graves
-block.nightkosh.gravestone.nightkosh.gravestone.name=Lápide
-block.nightkosh.gravestone.cross.name=Cruz
-block.nightkosh.gravestone.plate.name=Chapa de Túmulo
-block.nightkosh.gravestone.dog_statue.name=Estátua de Cachorro
-block.nightkosh.gravestone.cat_statue.name=Estátua de Gato
-block.nightkosh.gravestone.horse_statue.name=Estátua de Cavalo
-block.nightkosh.gravestone.sword.name=Sword of a fallen warrior
+block.gravestone.nightkosh.gravestone.name=Lápide
+block.gravestone.cross.name=Cruz
+block.gravestone.obelisk.name=Obelisco
+block.gravestone.plate.name=Chapa de Túmulo
+block.gravestone.dog_statue.name=Estátua de Cachorro
+block.gravestone.cat_statue.name=Estátua de Gato
+block.gravestone.horse_statue.name=Estátua de Cavalo
+block.gravestone.sword.name=Sword of a fallen warrior
 
 ## Memorials
-block.memorial.cross.name=Memorial em Cruz
-block.memorial.obelisk.name=Obelisco
-block.memorial.steve_statue.name=Estátua do Steve
 block.memorial.villager_statue.name=Estátua de Aldeão
 block.memorial.angel_statue.name=Estátua de Anjo
-block.memorial.dog_statue.name=Estátua de Cachorro
-block.memorial.cat_statue.name=Estátua de Gato
 block.memorial.creeper_statue.name=Estátua de Creeper
 block.memorial.celtic_cross.name=Cruz Celta
-block.memorial.gibbet.name=Gibbet
-block.memorial.stocks.name=Stocks
-block.memorial.burning_stake.name=Burning Stake
-
-## Traps
-block.trap.night.name=Pedra da Noite
-block.trap.thunder.name=Pedra do Trovão
-block.trap.curse=A escuridão está vindo!
-
-## Spawners
-block.spawner.wither.name=Spawner de Wither
-block.spawner.skeleton.name=Spawner de Esqueleto
-block.spawner.zombie.name=Spawner de Zumbi
-
-## Bone Blocks
-block.bone_block.default.name=Bloco de Ossos
-block.bone_block.skull.name=Bloco de Ossos com Cabeça
-block.bone_block.crawler.name=Bloco de Ossos do Rastejador Caveira
-block.bone_block.crawler_skull.name=Blco ode Ossos com Cabeça do Rastejador Caveira
-tile.bone_slab.name=Laje de Ossos
-tile.bone_stairs.name=Escada de Ossos
-
-## Pile of Bones
-block.pile_of_bones.name=Pile of Bones
-block.pile_of_bones_with_skull.name=Pile of Bones with Skull
-
-## Chests
-block.haunted_chest.bats_chest.name=Baú com Morcegos
-block.haunted_chest.skeleton_chest.name=Baú com Esqueleto
-block.haunted_chest.raven_chest.name=Baú com Corvos
-block.haunted_chest.ghost_chest.name=Baú com Fantasma
-
-## Candles
-tile.candle.name=Vela
-block.skull_candle.skeleton.name=Vela de Cabeça
-block.skull_candle.wither_skeleton.name=Vela de Cabeça Wither
-block.skull_candle.zombie.name=Vela de Cabeça de Zumbi
-
-## Altar
-tile.altar.name=Altar
-
-
-# Items
-## Chisel
-item.nightkosh.gravestone.chisel.name=Gravestone Chisel
 
 ## Graves
 item.grave.age=Havia vivido
 item.grave.days=dias
 item.grave.sword_name=Nome da espada
 item.grave.sword_damage=Dano da espada
-
-## Corpses
-item.corpse.villager=Cadáver de Aldeão
-item.corpse.horse=Cadáver de Cavalo
-item.corpse.dog=Cadáver de Cachorro
-item.corpse.cat=Cadáver de Gato
-item.corpse.entity_name=Nome
-item.corpse.villager_type=Profissão
-item.corpse.villager_type.farmer=Fazendeiro
-item.corpse.villager_type.librarian=Bibliotecário
-item.corpse.villager_type.priest=Padre
-item.corpse.villager_type.smith=Ferreiro
-item.corpse.villager_type.butcher=Açougueiro
-item.corpse.villager_type.undertaker=Agente Funerário
-item.corpse.villager_type.brewer=Cervejeiro
-item.corpse.villager_type.thaumaturge=Taumaturgo
-item.corpse.villager_type.beekeeper=Apicultor
-item.corpse.villager_type.lumberjack=Lenhador
-item.corpse.villager_type.Unknown=desconhecido
-item.corpse.horse_type=Tipo de Cavalo
-item.corpse.horse_type.horse=Cavalo
-item.corpse.horse_type.donkey=Jumento
-item.corpse.horse_type.mule=Mula
-item.corpse.horse_type.zombie=Cavalo Zumbi
-item.corpse.horse_type.skeleton=Cavalo Esqueleto
-item.corpse.horse_type.unknown=Desconhecido
-item.corpse.horse_variant=Variante de Cavalo
-item.corpse.health=Saúde Máxima
-item.corpse.speed=Velocidade
-item.corpse.jump_strength=Força do Pulo
-item.corpse.collar=Colarinho
-item.corpse.collar.white=Branco
-item.corpse.collar.orange=Laranja
-item.corpse.collar.purple=Roxo
-item.corpse.collar.azure=Índigo
-item.corpse.collar.yellow=Amarelo
-item.corpse.collar.lime=Lima
-item.corpse.collar.pink=Rosa
-item.corpse.collar.grey=Cinza
-item.corpse.collar.light_grey=Cinza Fraco
-item.corpse.collar.turquoise=Turquesa
-item.corpse.collar.violet=Violeta
-item.corpse.collar.blue=Azul
-item.corpse.collar.brown=Marrom
-item.corpse.collar.green=Verde
-item.corpse.collar.red=Vermelho
-item.corpse.collar.black=Preto
-item.corpse.collar.unknown=Desconhecido
-item.corpse.dog_type=Tipo de Cachorro
-item.corpse.cat_type=Tipo de Gato
-item.corpse.cat_type.ocelot=Ocelot
-item.corpse.cat_type.black=Preto
-item.corpse.cat_type.red=Vermelho
-item.corpse.cat_type.siamese=Siamês
-item.corpse.cat_type.unknown=Desconhecido
-
-##Backpacks
-item.backpack.undertaker.t1=Undertaker's Backpack
-item.backpack.undertaker.t2=Undertaker's Woven Backpack
-
-
-# GUI
-gui.edit_grave.title=Defina o texto do túmulo
-gui.edit_grave.close=Done
-gui.edit_grave.randomText=Set random text
-gui.altar.resurrect=Resurrect
-gui.altar.requirements=%d levels required
-
-
-# Entity
-entity.GSZombieDog.name=Cachorro Zumbi
-entity.GSSkeletonDog.name=Cachorro Esqueleto
-entity.GSZombieCat.name=Gato Zumbi
-entity.GSSkeletonCat.name=Gato Esqueleto
-entity.GSSkullCrawler.name=Rastejador Caveira
-entity.GSWitherSkullCrawler.name=Rastejador Caveira Wither
-entity.GSZombieSkullCrawler.name=Rastejador Caveira Zumbi
-entity.GSRaven.name=Corvo
-entity.GSSkeletonRaider.name=Skeleton Raider
-entity.GSZombieRaider.name=Zombie Raider
 
 
 # Death Messages
@@ -165,13 +36,10 @@ death.GS.mom=Your mom
 
 # Console messages
 grave.cant_be_looted=You can't loot this grave!
+
 ## Console commands
 commands.not_enough_parameters=Not enough parameters!
 commands.coordinate_error=Coordinate error!
-commands.direction_error=Direction error!
-
-commands.generate.unknown_structure=Unknown structure!
-
 commands.fill_grave.empty=There aren't any blocks at this coordinates!
 commands.fill_grave.wrong_block=This coordinates occupied by wrong blocks!
 

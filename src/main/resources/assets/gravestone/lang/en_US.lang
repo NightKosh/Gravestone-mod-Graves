@@ -1,159 +1,28 @@
 # Tabs
 itemGroup.tabGSGraveStone=Gravestones
-itemGroup.tabGSMemorials=Memorials
-itemGroup.tabGSOther=Gravestone mod Items
-
 
 # Blocks
 ## Graves
-block.nightkosh.gravestone.nightkosh.gravestone.name=Gravestone
-block.nightkosh.gravestone.cross.name=Cross
-block.nightkosh.gravestone.plate.name=Grave Plate
-block.nightkosh.gravestone.dog_statue.name=Dog Statue
-block.nightkosh.gravestone.cat_statue.name=Cat Statue
-block.nightkosh.gravestone.horse_statue.name=Horse Statue
-block.nightkosh.gravestone.sword.name=Sword of A Fallen Warrior
+block.gravestone.nightkosh.gravestone.name=Gravestone
+block.gravestone.cross.name=Cross
+block.gravestone.obelisk.name=Obelisk
+block.gravestone.plate.name=Grave Plate
+block.gravestone.dog_statue.name=Dog Statue
+block.gravestone.cat_statue.name=Cat Statue
+block.gravestone.horse_statue.name=Horse Statue
+block.gravestone.sword.name=Sword of A Fallen Warrior
 
-## Memorials
-block.memorial.cross.name=Cross Memorial
-block.memorial.obelisk.name=Obelisk
-block.memorial.steve_statue.name=Steve Statue
 block.memorial.villager_statue.name=Villager Statue
 block.memorial.angel_statue.name=Angel Statue
-block.memorial.dog_statue.name=Dog Statue
-block.memorial.cat_statue.name=Cat Statue
 block.memorial.creeper_statue.name=Creeper Statue
 block.memorial.celtic_cross.name=Celtic Cross
-block.memorial.gibbet.name=Gibbet
-block.memorial.stocks.name=Stocks
-block.memorial.burning_stake.name=Burning Stake
 
-## Traps
-block.trap.night.name=Night Stone
-block.trap.thunder.name=Thunder Stone
-block.trap.curse=Darkness is coming!
-
-## Spawners
-block.spawner.wither.name=Wither Spawner
-block.spawner.skeleton.name=Skeleton Spawner
-block.spawner.zombie.name=Zombie Spawner
-
-## Bone Blocks
-block.bone_block.default.name=Bone Block
-block.bone_block.skull.name=Bone Block with Skull
-block.bone_block.crawler.name=Skull Crawler's Bone Block
-block.bone_block.crawler_skull.name=Skull Crawler's Bone Block with Skull
-tile.bone_slab.name=Bone Slab
-tile.bone_stairs.name=Bone Stairs
-
-## Pile of Bones
-block.pile_of_bones.name=Pile of Bones
-block.pile_of_bones_with_skull.name=Pile of Bones with Skull
-
-## Chests
-block.haunted_chest.bats_chest.name=Chest with Bats
-block.haunted_chest.skeleton_chest.name=Chest with Skeleton
-block.haunted_chest.raven_chest.name=Chest with Ravens
-block.haunted_chest.ghost_chest.name=Chest with Ghost
-
-## Candles
-tile.candle.name=Candle
-block.skull_candle.skeleton.name=Skull Candle
-block.skull_candle.wither_skeleton.name=Wither Skull Candle
-block.skull_candle.zombie.name=Zombie Skull Candle
-
-## Altar
-tile.altar.name=Altar
-
-# Items
-## Chisel
-item.nightkosh.gravestone.chisel.name=Gravestone Chisel
 
 ## Graves
 item.grave.age=Had lived
 item.grave.days=days
 item.grave.sword_name=Sword Name
 item.grave.sword_damage=Sword Damage
-
-## Corpses
-item.corpse.villager=Villager Corpse
-item.corpse.horse=Horse Corpse
-item.corpse.dog=Dog Corpse
-item.corpse.cat=Cat Corpse
-item.corpse.entity_name=Name
-item.corpse.villager_type=Profession
-item.corpse.villager_type.farmer=Farmer
-item.corpse.villager_type.librarian=Librarian
-item.corpse.villager_type.priest=Priest
-item.corpse.villager_type.smith=Smith
-item.corpse.villager_type.butcher=Butcher
-item.corpse.villager_type.undertaker=Undertaker
-item.corpse.villager_type.brewer=Brewer
-item.corpse.villager_type.thaumaturge=Thaumaturge
-item.corpse.villager_type.beekeeper=Beekeeper
-item.corpse.villager_type.lumberjack=Lumberjack
-item.corpse.villager_type.Unknown=Unknown
-item.corpse.horse_type=Horse Type
-item.corpse.horse_type.horse=Horse
-item.corpse.horse_type.donkey=Donkey
-item.corpse.horse_type.mule=Mule
-item.corpse.horse_type.zombie=Zombie Horse
-item.corpse.horse_type.skeleton=Skeleton Horse
-item.corpse.horse_type.unknown=Unknown
-item.corpse.horse_variant=Horse Variant
-item.corpse.health=Max Health
-item.corpse.speed=Speed
-item.corpse.jump_strength=Jump Strength
-item.corpse.collar=Collar
-item.corpse.collar.white=White
-item.corpse.collar.orange=Orange
-item.corpse.collar.purple=Purple
-item.corpse.collar.azure=Azure
-item.corpse.collar.yellow=Yellow
-item.corpse.collar.lime=Lime
-item.corpse.collar.pink=Pink
-item.corpse.collar.grey=Grey
-item.corpse.collar.light_grey=Light Gray
-item.corpse.collar.turquoise=Turquoise
-item.corpse.collar.violet=Violet
-item.corpse.collar.blue=Blue
-item.corpse.collar.brown=Brown
-item.corpse.collar.green=Green
-item.corpse.collar.red=Red
-item.corpse.collar.black=Black
-item.corpse.collar.unknown=Unknown
-item.corpse.dog_type=Dog type
-item.corpse.cat_type=Cat type
-item.corpse.cat_type.ocelot=Ocelot
-item.corpse.cat_type.black=Black
-item.corpse.cat_type.red=Red
-item.corpse.cat_type.siamese=Siamese
-item.corpse.cat_type.unknown=Unknown
-
-##Backpacks
-item.backpack.undertaker.t1=Undertaker's Backpack
-item.backpack.undertaker.t2=Undertaker's Woven Backpack
-
-
-# GUI
-gui.edit_grave.title=Set grave text
-gui.edit_grave.close=Done
-gui.edit_grave.randomText=Set random text
-gui.altar.resurrect=Resurrect
-gui.altar.requirements=%d levels required
-
-
-# Entity
-entity.GSZombieDog.name=Zombie Dog
-entity.GSSkeletonDog.name=Skeleton Dog
-entity.GSZombieCat.name=Zombie Cat
-entity.GSSkeletonCat.name=Skeleton Cat
-entity.GSSkullCrawler.name=Skull Crawler
-entity.GSWitherSkullCrawler.name=Wither Skull Crawler
-entity.GSZombieSkullCrawler.name=Zombie Skull Crawler
-entity.GSRaven.name=Raven
-entity.GSSkeletonRaider.name=Skeleton Raider
-entity.GSZombieRaider.name=Zombie Raider
 
 
 # Death Messages
@@ -164,13 +33,10 @@ death.GS.mom=Your mom
 
 # Console messages
 grave.cant_be_looted=You can't loot this grave!
+
 ## Console commands
 commands.not_enough_parameters=Not enough parameters!
 commands.coordinate_error=Coordinate error!
-commands.direction_error=Direction error!
-
-commands.generate.unknown_structure=Unknown structure!
-
 commands.fill_grave.empty=There aren't any blocks at this coordinates!
 commands.fill_grave.wrong_block=This coordinates occupied by wrong blocks!
 

@@ -1,160 +1,28 @@
 # Tabs
 itemGroup.tabGSGraveStone=Lapida
-itemGroup.tabGSMemorials=Memorials
-itemGroup.tabGSOther=Gravestone mod Items
-
 
 # Blocks
 ## Graves
-block.nightkosh.gravestone.nightkosh.gravestone.name=Lapida
-block.nightkosh.gravestone.cross.name=Cruz
-block.nightkosh.gravestone.plate.name=Placa
-block.nightkosh.gravestone.dog_statue.name=Estatua de perro
-block.nightkosh.gravestone.cat_statue.name=Estatua de gato
-block.nightkosh.gravestone.horse_statue.name=Horse Statue
-block.nightkosh.gravestone.sword.name=Sword of A Fallen Warrior
+block.gravestone.nightkosh.gravestone.name=Lapida
+block.gravestone.cross.name=Cruz
+block.gravestone.obelisk.name=Obelisco
+block.gravestone.plate.name=Placa
+block.gravestone.dog_statue.name=Estatua de perro
+block.gravestone.cat_statue.name=Estatua de gato
+block.gravestone.horse_statue.name=Horse Statue
+block.gravestone.sword.name=Sword of A Fallen Warrior
 
 ## Memorials
-block.memorial.cross.name=Memorial Cruz
-block.memorial.obelisk.name=Obelisco
-block.memorial.steve_statue.name=Estatua de Steve
 block.memorial.villager_statue.name=Estatua de aldeano
 block.memorial.angel_statue.name=Estatua de angel
-block.memorial.dog_statue.name=Estatua de perro
-block.memorial.cat_statue.name=Estatua de gato
 block.memorial.creeper_statue.name=Estatua de creeper
 block.memorial.celtic_cross.name=Cruz céltica
-block.memorial.gibbet.name=Gibbet
-block.memorial.stocks.name=Stocks
-block.memorial.burning_stake.name=Burning Stake
-
-## Traps
-block.trap.night.name=Piedra nocturna
-block.trap.thunder.name=Piedra del trueno
-block.trap.curse=¡La oscuridad de aproxima!
-
-## Spawners
-block.spawner.wither.name=Engendrador de wither
-block.spawner.skeleton.name=Skeleton Spawner
-block.spawner.zombie.name=Zombie Spawner
-
-## Bone Blocks
-block.bone_block.default.name=Bloque de hueso
-block.bone_block.skull.name=Bloque de hueso con craneo
-block.bone_block.crawler.name=Bloque de hueso con craneo del arranca craneos
-block.bone_block.crawler_skull.name=Bloque de hueso con craneo de
-tile.bone_slab.name=Losa de hueso
-tile.bone_stairs.name=Escaleras de hueso
-
-## Pile of Bones
-block.pile_of_bones.name=Pile of Bones
-block.pile_of_bones_with_skull.name=Pile of Bones with Skull
-
-## Chests
-block.haunted_chest.bats_chest.name=Cofre con Murciélagos
-block.haunted_chest.skeleton_chest.name=Cofre con Esqueletos
-block.haunted_chest.raven_chest.name=Cofre con Cuervos
-block.haunted_chest.ghost_chest.name=Cofre con Fantasmas
-
-## Candles
-tile.candle.name=Candle
-block.skull_candle.skeleton.name=Vela en Cráneo
-block.skull_candle.wither_skeleton.name=Vela en Cráneo de Wither
-block.skull_candle.zombie.name=Vela en Cabeza de Zombi
-
-## Altar
-tile.altar.name=Altar
-
-
-# Items
-## Chisel
-item.nightkosh.gravestone.chisel.name=Gravestone Chisel
 
 ## Graves
 item.grave.age=Vivió
 item.grave.days=dias
 item.grave.sword_name=Nombre
 item.grave.sword_damage=Daño
-
-## Corpses
-item.corpse.villager=Villager Corpse
-item.corpse.horse=Horse Corpse
-item.corpse.dog=Dog Corpse
-item.corpse.cat=Cat Corpse
-item.corpse.entity_name=Name
-item.corpse.villager_type=Profession
-item.corpse.villager_type.farmer=Farmer
-item.corpse.villager_type.librarian=Librarian
-item.corpse.villager_type.priest=Priest
-item.corpse.villager_type.smith=Smith
-item.corpse.villager_type.butcher=Butcher
-item.corpse.villager_type.undertaker=Undertaker
-item.corpse.villager_type.brewer=Brewer
-item.corpse.villager_type.thaumaturge=Thaumaturge
-item.corpse.villager_type.beekeeper=Beekeeper
-item.corpse.villager_type.lumberjack=Lumberjack
-item.corpse.villager_type.Unknown=Unknown
-item.corpse.horse_type=Horse Type
-item.corpse.horse_type.horse=Horse
-item.corpse.horse_type.donkey=Donkey
-item.corpse.horse_type.mule=Mule
-item.corpse.horse_type.zombie=Zombie Horse
-item.corpse.horse_type.skeleton=Skeleton Horse
-item.corpse.horse_type.unknown=Unknown
-item.corpse.horse_variant=Horse Variant
-item.corpse.health=Max Health
-item.corpse.speed=Speed
-item.corpse.jump_strength=Jump Strength
-item.corpse.collar=Collar
-item.corpse.collar.white=White
-item.corpse.collar.orange=Orange
-item.corpse.collar.purple=Purple
-item.corpse.collar.azure=Azure
-item.corpse.collar.yellow=Yellow
-item.corpse.collar.lime=Lime
-item.corpse.collar.pink=Pink
-item.corpse.collar.grey=Grey
-item.corpse.collar.light_grey=Light Gray
-item.corpse.collar.turquoise=Turquoise
-item.corpse.collar.violet=Violet
-item.corpse.collar.blue=Blue
-item.corpse.collar.brown=Brown
-item.corpse.collar.green=Green
-item.corpse.collar.red=Red
-item.corpse.collar.black=Black
-item.corpse.collar.unknown=Unknown
-item.corpse.dog_type=Dog type
-item.corpse.cat_type=Cat type
-item.corpse.cat_type.ocelot=Ocelot
-item.corpse.cat_type.black=Black
-item.corpse.cat_type.red=Red
-item.corpse.cat_type.siamese=Siamese
-item.corpse.cat_type.unknown=Unknown
-
-##Backpacks
-item.backpack.undertaker.t1=Undertaker's Backpack
-item.backpack.undertaker.t2=Undertaker's Woven Backpack
-
-
-# GUI
-gui.edit_grave.title=Ponga nombre a la lapida
-gui.edit_grave.close=Done
-gui.edit_grave.randomText=Set random text
-gui.altar.resurrect=Resurrect
-gui.altar.requirements=%d levels required
-
-
-# Entity
-entity.GSZombieDog.name=Perro Zombi
-entity.GSSkeletonDog.name=Perro Esqueleto
-entity.GSZombieCat.name=Gato Zombi
-entity.GSSkeletonCat.name=Gato Esqueleto
-entity.GSSkullCrawler.name=Arranca cráneos
-entity.GSWitherSkullCrawler.name=Arranca Cráneos Wither
-entity.GSZombieSkullCrawler.name=Arranca Cráneos Zombi
-entity.GSRaven.name=Cuervo
-entity.GSSkeletonRaider.name=Skeleton Raider
-entity.GSZombieRaider.name=Zombie Raider
 
 
 # Death Messages
@@ -165,13 +33,10 @@ death.GS.mom=Your mom
 
 # Console messages
 grave.cant_be_looted=You can't loot this grave!
+
 ## Console commands
 commands.not_enough_parameters=Not enough parameters!
 commands.coordinate_error=Coordinate error!
-commands.direction_error=Direction error!
-
-commands.generate.unknown_structure=Unknown structure!
-
 commands.fill_grave.empty=There aren't any blocks at this coordinates!
 commands.fill_grave.wrong_block=This coordinates occupied by wrong blocks!
 
