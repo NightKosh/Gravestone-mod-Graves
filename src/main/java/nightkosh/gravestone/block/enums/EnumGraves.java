@@ -139,6 +139,24 @@ public enum EnumGraves implements IBlockEnum {
     QUARTZ_HORSE_STATUE("block.nightkosh.gravestone.horse_statue", Resources.GRAVE_QUARTZ_HORSE_STATUE, EnumGraveType.HORSE_STATUE, EnumGraveMaterial.QUARTZ),
     PRIZMARINE_HORSE_STATUE("block.nightkosh.gravestone.horse_statue", Resources.GRAVE_PRIZMARINE_HORSE_STATUE, EnumGraveType.HORSE_STATUE, EnumGraveMaterial.PRIZMARINE),
     ICE_HORSE_STATUE("block.nightkosh.gravestone.horse_statue", Resources.GRAVE_ICE_HORSE_STATUE, EnumGraveType.HORSE_STATUE, EnumGraveMaterial.ICE),
+    // CREEPER STATUES
+    WOODEN_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.WOODEN_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.WOOD),
+    SANDSTONE_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.SANDSTONE_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.SANDSTONE),
+    RED_SANDSTONE_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.RED_SANDSTONE_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.RED_SANDSTONE),
+    STONE_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.STONE_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.STONE),
+    DIORITE_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.DIORITE_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.DIORITE),
+    ANDESITE_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.ANDESITE_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.ANDESITE),
+    GRANITE_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.GRANITE_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.GRANITE),
+    IRON_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.IRON_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.IRON),
+    GOLDEN_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.GOLDEN_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.GOLD),
+    DIAMOND_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.DIAMOND_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.DIAMOND),
+    EMERALD_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.EMERALD_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.EMERALD),
+    LAPIS_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.LAPIS_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.LAPIS),
+    REDSTONE_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.REDSTONE_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.REDSTONE),
+    OBSIDIAN_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.OBSIDIAN_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.OBSIDIAN),
+    QUARTZ_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.QUARTZ_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.QUARTZ),
+    PRIZMARINE_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.PRIZMARINE_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.PRIZMARINE),
+    ICE_CREEPER_STATUE("block.nightkosh.gravestone.creeper_statue", Resources.ICE_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.ICE),
     // SWORD
     SWORD("block.nightkosh.gravestone.sword", null, EnumGraveType.SWORD, EnumGraveMaterial.OTHER);
 

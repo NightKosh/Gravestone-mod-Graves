@@ -1,6 +1,5 @@
-package nightkosh.gravestone.models.block.graves;
+package nightkosh.gravestone.models.block;
 
-import nightkosh.gravestone.models.block.ModelGraveStone;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -12,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
-public class ModelMemorialObelisk extends ModelGraveStone {
+public class ModelObelisk extends ModelGraveStone {
 
     private ModelRenderer plate1;
     private ModelRenderer plate2;
@@ -20,7 +19,7 @@ public class ModelMemorialObelisk extends ModelGraveStone {
     private ModelRenderer pillar2;
     private ModelRenderer pillar3;
 
-    public ModelMemorialObelisk() {
+    public ModelObelisk() {
         textureWidth = 256;
         textureHeight = 128;
         plate1 = new ModelRenderer(this, 0, 0);

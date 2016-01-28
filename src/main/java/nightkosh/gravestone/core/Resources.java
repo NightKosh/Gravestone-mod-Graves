@@ -153,6 +153,25 @@ public class Resources {
     public static final ResourceLocation PRIZMARINE_CAT_STATUE = new ResourceLocation(STATUES_LOCATION + "Cat/Prizmarine.png");
     public static final ResourceLocation ICE_CAT_STATUE = new ResourceLocation(STATUES_LOCATION + "Cat/Ice.png");
     public static final ResourceLocation MOSSY_CAT_STATUE = new ResourceLocation(STATUES_LOCATION + "Cat/Mossy.png");
+    // creepers statues
+    public static final ResourceLocation WOODEN_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Wooden.png");
+    public static final ResourceLocation SANDSTONE_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Sandstone.png");
+    public static final ResourceLocation RED_SANDSTONE_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/RedSandstone.png");
+    public static final ResourceLocation STONE_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Stone.png");
+    public static final ResourceLocation DIORITE_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Diorite.png");
+    public static final ResourceLocation ANDESITE_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Andesite.png");
+    public static final ResourceLocation GRANITE_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Granite.png");
+    public static final ResourceLocation IRON_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Iron.png");
+    public static final ResourceLocation GOLDEN_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Golden.png");
+    public static final ResourceLocation DIAMOND_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Diamond.png");
+    public static final ResourceLocation EMERALD_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Emerald.png");
+    public static final ResourceLocation LAPIS_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Lapis.png");
+    public static final ResourceLocation REDSTONE_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Redstone.png");
+    public static final ResourceLocation OBSIDIAN_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Obsidian.png");
+    public static final ResourceLocation QUARTZ_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Quartz.png");
+    public static final ResourceLocation PRIZMARINE_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Prizmarine.png");
+    public static final ResourceLocation ICE_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Ice.png");
+    public static final ResourceLocation MOSSY_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Mossy.png");
 
     // models - parts
     public static final ResourceLocation CREEPER_AURA = new ResourceLocation("textures/entity/creeper/creeper_armor.png");

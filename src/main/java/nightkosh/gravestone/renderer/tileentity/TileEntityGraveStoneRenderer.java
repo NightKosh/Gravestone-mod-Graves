@@ -40,6 +40,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     public static ModelGraveStone dogStatue = new ModelDogStatueGraveStone();
     public static ModelGraveStone catStatue = new ModelCatStatueGraveStone();
     public static ModelGraveStone horseStatue = new ModelHorseGraveStone();
+    public static ModelGraveStone creeperStatue = new ModelCreeperStatueGravestone();
     public static TileEntityGraveStoneRenderer instance;
 
     private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();//TODO temporal hack
@@ -128,10 +129,14 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
             ModelGraveStone model = getModel(graveType.getGraveType());
 
             bindTextureByName(getTexture(graveType, graveType.getTexture(), isMossy));
-            if (isEnchanted) {
-                model.renderEnchanted();
+            if (graveType.getGraveType() == EnumGraveType.CREEPER_STATUE) {
+                model.customRender(isEnchanted);
             } else {
-                model.renderAll();
+                if (isEnchanted) {
+                    model.renderEnchanted();
+                } else {
+                    model.renderAll();
+                }
             }
 
             if (hasFlower) {
@@ -196,6 +201,8 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
                 return catStatue;
             case HORSE_STATUE:
                 return horseStatue;
+            case CREEPER_STATUE:
+                return creeperStatue;
         }
     }
 

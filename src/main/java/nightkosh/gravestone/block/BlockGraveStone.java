@@ -50,138 +50,6 @@ public class BlockGraveStone extends BlockContainer {
 
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
-    public static final int[] TAB_PLAYER_GRAVES = {
-            // vertical plates
-            EnumGraves.WOODEN_VERTICAL_PLATE.ordinal(),
-            EnumGraves.SANDSTONE_VERTICAL_PLATE.ordinal(),
-            EnumGraves.RED_SANDSTONE_VERTICAL_PLATE.ordinal(),
-            EnumGraves.STONE_VERTICAL_PLATE.ordinal(),
-            EnumGraves.DIORITE_VERTICAL_PLATE.ordinal(),
-            EnumGraves.ANDESITE_VERTICAL_PLATE.ordinal(),
-            EnumGraves.GRANITE_VERTICAL_PLATE.ordinal(),
-            EnumGraves.IRON_VERTICAL_PLATE.ordinal(),
-            EnumGraves.GOLDEN_VERTICAL_PLATE.ordinal(),
-            EnumGraves.DIAMOND_VERTICAL_PLATE.ordinal(),
-            EnumGraves.EMERALD_VERTICAL_PLATE.ordinal(),
-            EnumGraves.LAPIS_VERTICAL_PLATE.ordinal(),
-            EnumGraves.REDSTONE_VERTICAL_PLATE.ordinal(),
-            EnumGraves.OBSIDIAN_VERTICAL_PLATE.ordinal(),
-            EnumGraves.QUARTZ_VERTICAL_PLATE.ordinal(),
-            EnumGraves.PRIZMARINE_VERTICAL_PLATE.ordinal(),
-            EnumGraves.ICE_VERTICAL_PLATE.ordinal(),
-            // crosses
-            EnumGraves.WOODEN_CROSS.ordinal(),
-            EnumGraves.SANDSTONE_CROSS.ordinal(),
-            EnumGraves.RED_SANDSTONE_CROSS.ordinal(),
-            EnumGraves.STONE_CROSS.ordinal(),
-            EnumGraves.DIORITE_CROSS.ordinal(),
-            EnumGraves.ANDESITE_CROSS.ordinal(),
-            EnumGraves.GRANITE_CROSS.ordinal(),
-            EnumGraves.IRON_CROSS.ordinal(),
-            EnumGraves.GOLDEN_CROSS.ordinal(),
-            EnumGraves.DIAMOND_CROSS.ordinal(),
-            EnumGraves.EMERALD_CROSS.ordinal(),
-            EnumGraves.LAPIS_CROSS.ordinal(),
-            EnumGraves.REDSTONE_CROSS.ordinal(),
-            EnumGraves.OBSIDIAN_CROSS.ordinal(),
-            EnumGraves.QUARTZ_CROSS.ordinal(),
-            EnumGraves.PRIZMARINE_CROSS.ordinal(),
-            EnumGraves.ICE_CROSS.ordinal(),
-            // obelisks
-            EnumGraves.WOODEN_OBELISK.ordinal(),
-            EnumGraves.SANDSTONE_OBELISK.ordinal(),
-            EnumGraves.RED_SANDSTONE_OBELISK.ordinal(),
-            EnumGraves.STONE_OBELISK.ordinal(),
-            EnumGraves.DIORITE_OBELISK.ordinal(),
-            EnumGraves.ANDESITE_OBELISK.ordinal(),
-            EnumGraves.GRANITE_OBELISK.ordinal(),
-            EnumGraves.IRON_OBELISK.ordinal(),
-            EnumGraves.GOLDEN_OBELISK.ordinal(),
-            EnumGraves.DIAMOND_OBELISK.ordinal(),
-            EnumGraves.EMERALD_OBELISK.ordinal(),
-            EnumGraves.LAPIS_OBELISK.ordinal(),
-            EnumGraves.REDSTONE_OBELISK.ordinal(),
-            EnumGraves.OBSIDIAN_OBELISK.ordinal(),
-            EnumGraves.QUARTZ_OBELISK.ordinal(),
-            EnumGraves.PRIZMARINE_OBELISK.ordinal(),
-            EnumGraves.ICE_OBELISK.ordinal(),
-            // horisontal plates
-            EnumGraves.WOODEN_HORIZONTAL_PLATE.ordinal(),
-            EnumGraves.SANDSTONE_HORIZONTAL_PLATE.ordinal(),
-            EnumGraves.RED_SANDSTONE_HORIZONTAL_PLATE.ordinal(),
-            EnumGraves.STONE_HORIZONTAL_PLATE.ordinal(),
-            EnumGraves.DIORITE_HORIZONTAL_PLATE.ordinal(),
-            EnumGraves.ANDESITE_HORIZONTAL_PLATE.ordinal(),
-            EnumGraves.GRANITE_HORIZONTAL_PLATE.ordinal(),
-            EnumGraves.IRON_HORIZONTAL_PLATE.ordinal(),
-            EnumGraves.GOLDEN_HORIZONTAL_PLATE.ordinal(),
-            EnumGraves.DIAMOND_HORIZONTAL_PLATE.ordinal(),
-            EnumGraves.EMERALD_HORIZONTAL_PLATE.ordinal(),
-            EnumGraves.LAPIS_HORIZONTAL_PLATE.ordinal(),
-            EnumGraves.REDSTONE_HORIZONTAL_PLATE.ordinal(),
-            EnumGraves.OBSIDIAN_HORIZONTAL_PLATE.ordinal(),
-            EnumGraves.QUARTZ_HORIZONTAL_PLATE.ordinal(),
-            EnumGraves.PRIZMARINE_HORIZONTAL_PLATE.ordinal(),
-            EnumGraves.ICE_HORIZONTAL_PLATE.ordinal()
-    };
-
-    public static final int[] TAB_PETS_GRAVES = {
-            // dogs graves
-            EnumGraves.WOODEN_DOG_STATUE.ordinal(),
-            EnumGraves.SANDSTONE_DOG_STATUE.ordinal(),
-            EnumGraves.RED_SANDSTONE_DOG_STATUE.ordinal(),
-            EnumGraves.STONE_DOG_STATUE.ordinal(),
-            EnumGraves.DIORITE_DOG_STATUE.ordinal(),
-            EnumGraves.ANDESITE_DOG_STATUE.ordinal(),
-            EnumGraves.GRANITE_DOG_STATUE.ordinal(),
-            EnumGraves.IRON_DOG_STATUE.ordinal(),
-            EnumGraves.GOLDEN_DOG_STATUE.ordinal(),
-            EnumGraves.DIAMOND_DOG_STATUE.ordinal(),
-            EnumGraves.EMERALD_DOG_STATUE.ordinal(),
-            EnumGraves.LAPIS_DOG_STATUE.ordinal(),
-            EnumGraves.REDSTONE_DOG_STATUE.ordinal(),
-            EnumGraves.OBSIDIAN_DOG_STATUE.ordinal(),
-            EnumGraves.QUARTZ_DOG_STATUE.ordinal(),
-            EnumGraves.PRIZMARINE_DOG_STATUE.ordinal(),
-            EnumGraves.ICE_DOG_STATUE.ordinal(),
-            // cats graves
-            EnumGraves.WOODEN_CAT_STATUE.ordinal(),
-            EnumGraves.SANDSTONE_CAT_STATUE.ordinal(),
-            EnumGraves.RED_SANDSTONE_CAT_STATUE.ordinal(),
-            EnumGraves.STONE_CAT_STATUE.ordinal(),
-            EnumGraves.DIORITE_CAT_STATUE.ordinal(),
-            EnumGraves.ANDESITE_CAT_STATUE.ordinal(),
-            EnumGraves.GRANITE_CAT_STATUE.ordinal(),
-            EnumGraves.IRON_CAT_STATUE.ordinal(),
-            EnumGraves.GOLDEN_CAT_STATUE.ordinal(),
-            EnumGraves.DIAMOND_CAT_STATUE.ordinal(),
-            EnumGraves.EMERALD_CAT_STATUE.ordinal(),
-            EnumGraves.LAPIS_CAT_STATUE.ordinal(),
-            EnumGraves.REDSTONE_CAT_STATUE.ordinal(),
-            EnumGraves.OBSIDIAN_CAT_STATUE.ordinal(),
-            EnumGraves.QUARTZ_CAT_STATUE.ordinal(),
-            EnumGraves.PRIZMARINE_CAT_STATUE.ordinal(),
-            EnumGraves.ICE_CAT_STATUE.ordinal(),
-            // horses graves
-            EnumGraves.WOODEN_HORSE_STATUE.ordinal(),
-            EnumGraves.SANDSTONE_HORSE_STATUE.ordinal(),
-            EnumGraves.RED_SANDSTONE_HORSE_STATUE.ordinal(),
-            EnumGraves.STONE_HORSE_STATUE.ordinal(),
-            EnumGraves.DIORITE_HORSE_STATUE.ordinal(),
-            EnumGraves.ANDESITE_HORSE_STATUE.ordinal(),
-            EnumGraves.GRANITE_HORSE_STATUE.ordinal(),
-            EnumGraves.IRON_HORSE_STATUE.ordinal(),
-            EnumGraves.GOLDEN_HORSE_STATUE.ordinal(),
-            EnumGraves.DIAMOND_HORSE_STATUE.ordinal(),
-            EnumGraves.EMERALD_HORSE_STATUE.ordinal(),
-            EnumGraves.LAPIS_HORSE_STATUE.ordinal(),
-            EnumGraves.REDSTONE_HORSE_STATUE.ordinal(),
-            EnumGraves.OBSIDIAN_HORSE_STATUE.ordinal(),
-            EnumGraves.QUARTZ_HORSE_STATUE.ordinal(),
-            EnumGraves.PRIZMARINE_HORSE_STATUE.ordinal(),
-            EnumGraves.ICE_HORSE_STATUE.ordinal()
-    };
-
     public BlockGraveStone() {
         super(Material.rock);
         this.isBlockContainer = true;
@@ -295,6 +163,7 @@ public class BlockGraveStone extends BlockContainer {
                 }
                 break;
             case OBELISK:
+            case CREEPER_STATUE:
                 this.setBlockBounds(0.35F, 0, 0.35F, 0.65F, 0.92F, 0.65F);
                 break;
             case HORIZONTAL_PLATE:
@@ -589,21 +458,10 @@ public class BlockGraveStone extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item gravestone, CreativeTabs tabs, List list) {
-        for (int TAB_PLAYER_GRAVE : TAB_PLAYER_GRAVES) {
+        for (int i = 0; i < EnumGraves.values().length - 1; i++) {
             ItemStack stack = new ItemStack(gravestone, 1, 0);
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setInteger("Type", TAB_PLAYER_GRAVE);
-            nbt.setBoolean("Purified", false);
-
-            stack.setTagCompound(nbt);
-            list.add(stack);
-        }
-
-        // pets graves
-        for (int TAB_PETS_GRAVE : TAB_PETS_GRAVES) {
-            ItemStack stack = new ItemStack(gravestone, 1, 0);
-            NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setInteger("Type", TAB_PETS_GRAVE);
+            nbt.setInteger("Type", i);
             nbt.setBoolean("Purified", false);
 
             stack.setTagCompound(nbt);
