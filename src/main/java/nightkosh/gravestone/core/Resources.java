@@ -115,7 +115,26 @@ public class Resources {
     public static final ResourceLocation PRIZMARINE_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Prizmarine.png");
     public static final ResourceLocation ICE_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Ice.png");
     public static final ResourceLocation MOSSY_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Mossy.png");
-    // dog statues
+    // villagers statues
+    public static final ResourceLocation WOODEN_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Wooden.png");
+    public static final ResourceLocation SANDSTONE_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Sandstone.png");
+    public static final ResourceLocation RED_SANDSTONE_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/RedSandstone.png");
+    public static final ResourceLocation STONE_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Stone.png");
+    public static final ResourceLocation DIORITE_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Diorite.png");
+    public static final ResourceLocation ANDESITE_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Andesite.png");
+    public static final ResourceLocation GRANITE_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Granite.png");
+    public static final ResourceLocation IRON_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Iron.png");
+    public static final ResourceLocation GOLDEN_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Golden.png");
+    public static final ResourceLocation DIAMOND_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Diamond.png");
+    public static final ResourceLocation EMERALD_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Emerald.png");
+    public static final ResourceLocation LAPIS_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Lapis.png");
+    public static final ResourceLocation REDSTONE_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Redstone.png");
+    public static final ResourceLocation OBSIDIAN_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Obsidian.png");
+    public static final ResourceLocation QUARTZ_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Quartz.png");
+    public static final ResourceLocation PRIZMARINE_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Prizmarine.png");
+    public static final ResourceLocation ICE_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Ice.png");
+    public static final ResourceLocation MOSSY_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Mossy.png");
+    // dogs statues
     public static final ResourceLocation WOODEN_DOG_STATUE = new ResourceLocation(STATUES_LOCATION + "Dog/Wooden.png");
     public static final ResourceLocation SANDSTONE_DOG_STATUE = new ResourceLocation(STATUES_LOCATION + "Dog/Sandstone.png");
     public static final ResourceLocation RED_SANDSTONE_DOG_STATUE = new ResourceLocation(STATUES_LOCATION + "Dog/RedSandstone.png");

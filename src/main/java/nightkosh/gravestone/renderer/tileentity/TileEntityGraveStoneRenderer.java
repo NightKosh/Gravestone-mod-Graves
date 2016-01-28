@@ -37,6 +37,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     public static ModelGraveStone cross = new ModelCrossGraveStone();
     public static ModelGraveStone obelisk = new ModelObeliskGravestone();
     public static ModelGraveStone horizontalPlate = new ModelHorizontalPlateGraveStone();
+    public static ModelGraveStone villagerStatue = new ModelVillagerStatueGravestone();
     public static ModelGraveStone dogStatue = new ModelDogStatueGraveStone();
     public static ModelGraveStone catStatue = new ModelCatStatueGraveStone();
     public static ModelGraveStone horseStatue = new ModelHorseGraveStone();
@@ -175,12 +176,16 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
                 return Resources.MOSSY_OBELISK;
             case HORIZONTAL_PLATE:
                 return Resources.GRAVE_MOSSY_HORISONTAL_PLATE;
+            case VILLAGER_STATUE:
+                return Resources.MOSSY_VILLAGER_STATUE;
             case DOG_STATUE:
                 return Resources.MOSSY_DOG_STATUE;
             case CAT_STATUE:
                 return Resources.MOSSY_CAT_STATUE;
             case HORSE_STATUE:
                 return Resources.GRAVE_MOSSY_HORSE_STATUE;
+            case CREEPER_STATUE:
+                return Resources.MOSSY_CREEPER_STATUE;
         }
     }
 
@@ -195,6 +200,8 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
                 return obelisk;
             case HORIZONTAL_PLATE:
                 return horizontalPlate;
+            case VILLAGER_STATUE:
+                return villagerStatue;
             case DOG_STATUE:
                 return dogStatue;
             case CAT_STATUE:

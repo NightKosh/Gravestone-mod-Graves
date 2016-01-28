@@ -164,6 +164,7 @@ public class BlockGraveStone extends BlockContainer {
                 break;
             case OBELISK:
             case CREEPER_STATUE:
+            case VILLAGER_STATUE:
                 this.setBlockBounds(0.35F, 0, 0.35F, 0.65F, 0.92F, 0.65F);
                 break;
             case HORIZONTAL_PLATE:
