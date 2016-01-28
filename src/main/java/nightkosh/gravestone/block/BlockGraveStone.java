@@ -270,7 +270,7 @@ public class BlockGraveStone extends BlockContainer {
      */
     @Override
     public List<ItemStack> getDrops(IBlockAccess access, BlockPos pos, IBlockState state, int fortune) {
-        List<ItemStack> ret = new ArrayList<ItemStack>();
+        List<ItemStack> ret = new ArrayList<>();
         ret.add(GraveStoneHelper.getBlockItemStack(access, pos, state));
         return ret;
     }
@@ -475,7 +475,7 @@ public class BlockGraveStone extends BlockContainer {
 
                 list.add(graveStoneStack);
             } catch (IllegalArgumentException exception) {
-                GSLogger.logError("Can't create enchanted sword nightkosh.gravestone");
+                GSLogger.logError("Can't create enchanted sword gravestone");
                 exception.printStackTrace();
             }
         }
