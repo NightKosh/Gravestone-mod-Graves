@@ -14,12 +14,8 @@ block.gravestone.dog_statue.name=Estátua de Cachorro
 block.gravestone.cat_statue.name=Estátua de Gato
 block.gravestone.horse_statue.name=Estátua de Cavalo
 block.gravestone.sword.name=Sword of a fallen warrior
-
-## Memorials
-block.memorial.villager_statue.name=Estátua de Aldeão
-block.memorial.angel_statue.name=Estátua de Anjo
-block.memorial.creeper_statue.name=Estátua de Creeper
-block.memorial.celtic_cross.name=Cruz Celta
+block.gravestone.villager_statue.name=Estátua de Aldeão
+block.gravestone.creeper_statue.name=Estátua de Creeper
 
 ## Graves
 item.grave.age=Havia vivido

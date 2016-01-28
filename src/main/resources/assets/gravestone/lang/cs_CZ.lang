@@ -11,11 +11,8 @@ block.gravestone.dog_statue.name=Socha psa
 block.gravestone.cat_statue.name=Socha kočky
 block.gravestone.horse_statue.name=Socha koně
 block.gravestone.sword.name=Meč padlého válečníka
-
-block.memorial.villager_statue.name=Socha vesničana
-block.memorial.angel_statue.name=Socha anděla
-block.memorial.creeper_statue.name=Socha Syčáka
-block.memorial.celtic_cross.name=Keltský kříž
+block.gravestone.villager_statue.name=Socha vesničana
+block.gravestone.creeper_statue.name=Socha Syčáka
 
 ## Graves
 item.grave.age=Žil

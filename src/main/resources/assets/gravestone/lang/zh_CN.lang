@@ -12,12 +12,8 @@ block.gravestone.dog_statue.name=狗雕像
 block.gravestone.cat_statue.name=猫雕像
 block.gravestone.horse_statue.name=马雕像
 block.gravestone.sword.name=战魂之剑
-
-## Memorials
-block.memorial.villager_statue.name=村民纪念碑
-block.memorial.angel_statue.name=天使纪念碑
-block.memorial.creeper_statue.name=爬行者纪念碑
-block.memorial.celtic_cross.name=凯尔特十字架
+block.gravestone.villager_statue.name=村民纪念碑
+block.gravestone.creeper_statue.name=爬行者纪念碑
 
 ## Graves
 item.grave.age=已生活了

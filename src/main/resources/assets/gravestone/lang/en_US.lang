@@ -11,11 +11,8 @@ block.gravestone.dog_statue.name=Dog Statue
 block.gravestone.cat_statue.name=Cat Statue
 block.gravestone.horse_statue.name=Horse Statue
 block.gravestone.sword.name=Sword of A Fallen Warrior
-
-block.memorial.villager_statue.name=Villager Statue
-block.memorial.angel_statue.name=Angel Statue
-block.memorial.creeper_statue.name=Creeper Statue
-block.memorial.celtic_cross.name=Celtic Cross
+block.gravestone.villager_statue.name=Villager Statue
+block.gravestone.creeper_statue.name=Creeper Statue
 
 
 ## Graves

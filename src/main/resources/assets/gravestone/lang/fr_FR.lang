@@ -11,12 +11,8 @@ block.gravestone.dog_statue.name=Tombe de chien
 block.nightkosh.gravestone.cat_statue.name=Tombe de chat
 block.nightkosh.gravestone.horse_statue.name=Statue de cheval
 block.nightkosh.gravestone.sword.name=Épée du guerrier vaincu
-
-## Memorials
-block.memorial.villager_statue.name=Statue de villageois
-block.memorial.angel_statue.name=Statue d'ange
-block.memorial.creeper_statue.name=Statue de creeper
-block.memorial.celtic_cross.name=Croix celtique
+block.gravestone.villager_statue.name=Statue de villageois
+block.gravestone.creeper_statue.name=Statue de creeper
 
 ## Graves
 item.grave.age=A vécu

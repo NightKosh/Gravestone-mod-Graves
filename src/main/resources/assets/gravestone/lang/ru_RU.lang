@@ -11,12 +11,8 @@ block.gravestone.dog_statue.name=Статуя для могилы собаки
 block.gravestone.cat_statue.name=Статуя для могилы кошки
 block.gravestone.horse_statue.name=Статуя для могилы лошади
 block.gravestone.sword.name=Меч павшего воина
-
-## Memorials
-block.memorial.villager_statue.name=Статуя жителя
-block.memorial.angel_statue.name=Статуя ангела
-block.memorial.creeper_statue.name=Статуя крипера
-block.memorial.celtic_cross.name=Кельтский крест
+block.gravestone.villager_statue.name=Статуя жителя
+block.gravestone.creeper_statue.name=Статуя крипера
 
 
 ## Graves

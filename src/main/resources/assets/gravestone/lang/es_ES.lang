@@ -11,12 +11,8 @@ block.gravestone.dog_statue.name=Estatua de perro
 block.gravestone.cat_statue.name=Estatua de gato
 block.gravestone.horse_statue.name=Horse Statue
 block.gravestone.sword.name=Sword of A Fallen Warrior
-
-## Memorials
-block.memorial.villager_statue.name=Estatua de aldeano
-block.memorial.angel_statue.name=Estatua de angel
-block.memorial.creeper_statue.name=Estatua de creeper
-block.memorial.celtic_cross.name=Cruz céltica
+block.gravestone.villager_statue.name=Estatua de aldeano
+block.gravestone.creeper_statue.name=Estatua de creeper
 
 ## Graves
 item.grave.age=Vivió
