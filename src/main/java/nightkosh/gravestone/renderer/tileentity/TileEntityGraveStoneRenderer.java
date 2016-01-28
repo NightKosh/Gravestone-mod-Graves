@@ -171,9 +171,9 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
             case HORIZONTAL_PLATE:
                 return Resources.GRAVE_MOSSY_HORISONTAL_PLATE;
             case DOG_STATUE:
-                return Resources.GRAVE_MOSSY_DOG_STATUE;
+                return Resources.MOSSY_DOG_STATUE;
             case CAT_STATUE:
-                return Resources.GRAVE_MOSSY_CAT_STATUE;
+                return Resources.MOSSY_CAT_STATUE;
             case HORSE_STATUE:
                 return Resources.GRAVE_MOSSY_HORSE_STATUE;
         }
