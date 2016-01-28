@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.LayeredTexture;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -44,7 +45,8 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     public static ModelGraveStone creeperStatue = new ModelCreeperStatueGravestone();
     public static TileEntityGraveStoneRenderer instance;
 
-    private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();//TODO temporal hack
+    private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+    private static final ItemStack SWORD = new ItemStack(Items.iron_sword);
 
     static {
         GRAVE_TE.setGraveType(EnumGraves.STONE_VERTICAL_PLATE.ordinal());
@@ -57,9 +59,19 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f, int par9) {
         TileEntityGraveStone tileEntity = (TileEntityGraveStone) te;
+        boolean isSwordGrave;
+        boolean isEnchanted;
+        ItemStack sword;
 
-        if (tileEntity == null) {//TODO temporal hack
-            tileEntity = GRAVE_TE;
+        if (tileEntity == null) {
+            tileEntity = getDefaultTE();
+            isSwordGrave =  isSwordGrave();
+            isEnchanted = false;
+            sword = SWORD;
+        } else {
+            isSwordGrave = tileEntity.isSwordGrave();
+            sword = tileEntity.getSword();
+            isEnchanted = tileEntity.isEnchanted();
         }
         EnumGraves graveType = tileEntity.getGraveType();
 
@@ -69,8 +81,8 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         }
         EnumFacing facing = EnumFacing.values()[meta];
 
-        renderGrave(x, y, z, tileEntity.getWorld(), graveType, tileEntity.isEnchanted(), tileEntity.isMossy(),
-                tileEntity.hasFlower(), tileEntity.getFlower(), tileEntity.isSwordGrave(), tileEntity.getSword(), facing);
+        renderGrave(x, y, z, tileEntity.getWorld(), graveType, isEnchanted, tileEntity.isMossy(),
+                tileEntity.hasFlower(), tileEntity.getFlower(), isSwordGrave, sword, facing);
     }
 
     public void renderGraveInGui(float x, float y, World world, EnumGraves graveType, boolean isEnchanted,
@@ -242,5 +254,140 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
         GL11.glRotatef(-90, 0, 1, 0);
         Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
+    }
+
+
+
+    protected TileEntityGraveStone getDefaultTE() {
+        return GRAVE_TE;
+    }
+
+    protected boolean isSwordGrave() {
+        return false;
+    }
+
+    public static class VerticalPlateRenderer extends TileEntityGraveStoneRenderer {
+        private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+        static {
+            GRAVE_TE.setGraveType(EnumGraves.STONE_VERTICAL_PLATE.ordinal());
+        }
+
+        @Override
+        protected TileEntityGraveStone getDefaultTE() {
+            return GRAVE_TE;
+        }
+    }
+
+    public static class CrossRenderer extends TileEntityGraveStoneRenderer {
+        private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+        static {
+            GRAVE_TE.setGraveType(EnumGraves.STONE_CROSS.ordinal());
+        }
+
+        @Override
+        protected TileEntityGraveStone getDefaultTE() {
+            return GRAVE_TE;
+        }
+    }
+
+    public static class ObeliskRenderer extends TileEntityGraveStoneRenderer {
+        private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+        static {
+            GRAVE_TE.setGraveType(EnumGraves.STONE_OBELISK.ordinal());
+        }
+
+        @Override
+        protected TileEntityGraveStone getDefaultTE() {
+            return GRAVE_TE;
+        }
+    }
+
+    public static class HorizontalPlateRenderer extends TileEntityGraveStoneRenderer {
+        private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+        static {
+            GRAVE_TE.setGraveType(EnumGraves.STONE_HORIZONTAL_PLATE.ordinal());
+        }
+
+        @Override
+        protected TileEntityGraveStone getDefaultTE() {
+            return GRAVE_TE;
+        }
+    }
+
+    public static class VillagerStatueRenderer extends TileEntityGraveStoneRenderer {
+        private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+        static {
+            GRAVE_TE.setGraveType(EnumGraves.STONE_VILLAGER_STATUE.ordinal());
+        }
+
+        @Override
+        protected TileEntityGraveStone getDefaultTE() {
+            return GRAVE_TE;
+        }
+    }
+
+    public static class DogStatueRenderer extends TileEntityGraveStoneRenderer {
+        private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+        static {
+            GRAVE_TE.setGraveType(EnumGraves.STONE_DOG_STATUE.ordinal());
+        }
+
+        @Override
+        protected TileEntityGraveStone getDefaultTE() {
+            return GRAVE_TE;
+        }
+    }
+
+    public static class CatStatueRenderer extends TileEntityGraveStoneRenderer {
+        private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+        static {
+            GRAVE_TE.setGraveType(EnumGraves.STONE_CAT_STATUE.ordinal());
+        }
+
+        @Override
+        protected TileEntityGraveStone getDefaultTE() {
+            return GRAVE_TE;
+        }
+    }
+
+    public static class HorseStatueRenderer extends TileEntityGraveStoneRenderer {
+        private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+        static {
+            GRAVE_TE.setGraveType(EnumGraves.STONE_HORSE_STATUE.ordinal());
+        }
+
+        @Override
+        protected TileEntityGraveStone getDefaultTE() {
+            return GRAVE_TE;
+        }
+    }
+
+    public static class CreeperStatueRenderer extends TileEntityGraveStoneRenderer {
+        private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+        static {
+            GRAVE_TE.setGraveType(EnumGraves.STONE_CREEPER_STATUE.ordinal());
+        }
+
+        @Override
+        protected TileEntityGraveStone getDefaultTE() {
+            return GRAVE_TE;
+        }
+    }
+
+    public static class SwordRenderer extends TileEntityGraveStoneRenderer {
+        private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+        static {
+            GRAVE_TE.setGraveType(EnumGraves.SWORD.ordinal());
+        }
+
+        @Override
+        protected TileEntityGraveStone getDefaultTE() {
+            return GRAVE_TE;
+        }
+
+        @Override
+        protected boolean isSwordGrave() {
+            return true;
+        }
     }
 }

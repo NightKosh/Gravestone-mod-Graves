@@ -182,9 +182,8 @@ public class GraveStoneHelper implements IGraveStone {
     }
 
     public static ItemStack getSwordAsGrave(Item grave, ItemStack sword) {
-        ItemStack graveStoneStack = new ItemStack(grave, 1, 0);
+        ItemStack graveStoneStack = new ItemStack(grave, 1, EnumGraves.SWORD.ordinal());
         NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setInteger("Type", EnumGraves.SWORD.ordinal());
         nbt.setBoolean("Purified", false);
         GraveStoneHelper.addSwordInfo(nbt, sword);
 
@@ -283,7 +282,7 @@ public class GraveStoneHelper implements IGraveStone {
                 tileEntity.dropSword();
             } else if (itemStack != null) {
                 NBTTagCompound nbt = new NBTTagCompound();
-                nbt.setInteger("Type", tileEntity.getGraveTypeNum());
+                itemStack.setItemDamage(tileEntity.getGraveTypeNum());
                 nbt.setBoolean("Mossy", tileEntity.isMossy());
                 nbt.setBoolean("Purified", true);
 
@@ -302,7 +301,7 @@ public class GraveStoneHelper implements IGraveStone {
 
         if (tileEntity != null) {
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setInteger("Type", tileEntity.getGraveTypeNum());
+            itemStack.setItemDamage(tileEntity.getGraveTypeNum());
 
             if (tileEntity.getDeathTextComponent().isLocalized()) {
                 nbt.setBoolean("isLocalized", true);

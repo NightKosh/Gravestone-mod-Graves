@@ -21,9 +21,8 @@ public class Tabs {
         gravesTab = new CreativeTabs("tabGSGraveStone") {
             @Override
             public ItemStack getIconItemStack() {
-                ItemStack stack = new ItemStack(GSBlock.graveStone, 1, 0);
+                ItemStack stack = new ItemStack(GSBlock.graveStone, 1, EnumGraves.STONE_VERTICAL_PLATE.ordinal());
                 NBTTagCompound nbt = new NBTTagCompound();
-                nbt.setInteger("Type", EnumGraves.STONE_VERTICAL_PLATE.ordinal());
                 stack.setTagCompound(nbt);
                 return stack;
             }

@@ -75,7 +75,7 @@ public class BlockGraveStone extends BlockContainer {
         if (tileEntity != null) {
             NBTTagCompound nbt = itemStack.getTagCompound();
             if (nbt != null) {
-                tileEntity.setGraveType(nbt.getInteger("Type"));
+                tileEntity.setGraveType(itemStack.getItemDamage());
 
                 if (nbt.hasKey("isLocalized") && nbt.getBoolean("isLocalized")) {
                     tileEntity.getDeathTextComponent().setLocalized();
@@ -454,9 +454,8 @@ public class BlockGraveStone extends BlockContainer {
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item gravestone, CreativeTabs tabs, List list) {
         for (int i = 0; i < EnumGraves.values().length - 1; i++) {
-            ItemStack stack = new ItemStack(gravestone, 1, 0);
+            ItemStack stack = new ItemStack(gravestone, 1, i);
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setInteger("Type", i);
             nbt.setBoolean("Purified", false);
 
             stack.setTagCompound(nbt);
@@ -490,7 +489,7 @@ public class BlockGraveStone extends BlockContainer {
         if (tileEntity != null) {
             if (itemStack != null) {
                 NBTTagCompound nbt = new NBTTagCompound();
-                nbt.setInteger("Type", tileEntity.getGraveTypeNum());
+                itemStack.setItemDamage(tileEntity.getGraveTypeNum());
                 nbt.setBoolean("Mossy", tileEntity.isMossy());
 
                 itemStack.setTagCompound(nbt);

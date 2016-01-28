@@ -303,8 +303,8 @@ public class GraveGenerationHelper {
             GSLogger.logInfoGrave("Create " + deathInfo.getName() + "'s grave at " + newPos.getX() + "x" + newPos.getY() + "x" + newPos.getZ());
         } else {
             ItemStack itemStack = GSBlock.graveStone.createStackedBlock(GSBlock.graveStone.getDefaultState());
+            itemStack.setItemDamage(grave.ordinal());
             NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setInteger("Type", grave.ordinal());
             nbt.setBoolean("isLocalized", true);
             nbt.setString("name", deathInfo.getName());
             nbt.setString("DeathText", deathInfo.getDeathMessage());

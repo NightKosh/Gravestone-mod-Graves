@@ -29,6 +29,16 @@ public class ClientProxy extends CommonProxy {
     public void registerRenderers() {
         // graves renderer
         ClientRegistry.registerTileEntity(TileEntityGraveStone.class, "GSGraveStone", new TileEntityGraveStoneRenderer());
+        ClientRegistry.registerTileEntity(TileEntityGraveStone.VerticalPlate.class, "GSGraveStoneVerticalPlate", new TileEntityGraveStoneRenderer.VerticalPlateRenderer());
+        ClientRegistry.registerTileEntity(TileEntityGraveStone.Cross.class, "GSGraveStoneCross", new TileEntityGraveStoneRenderer.CrossRenderer());
+        ClientRegistry.registerTileEntity(TileEntityGraveStone.Obelisk.class, "GSGraveStoneObelisk", new TileEntityGraveStoneRenderer.ObeliskRenderer());
+        ClientRegistry.registerTileEntity(TileEntityGraveStone.HorizontalPlate.class, "GSGraveStoneHorizontalPlate", new TileEntityGraveStoneRenderer.HorizontalPlateRenderer());
+        ClientRegistry.registerTileEntity(TileEntityGraveStone.VillagerStatue.class, "GSGraveStoneVillagerStatue", new TileEntityGraveStoneRenderer.VillagerStatueRenderer());
+        ClientRegistry.registerTileEntity(TileEntityGraveStone.DogStatue.class, "GSGraveStoneDogStatue", new TileEntityGraveStoneRenderer.DogStatueRenderer());
+        ClientRegistry.registerTileEntity(TileEntityGraveStone.CatStatue.class, "GSGraveStoneCatStatue", new TileEntityGraveStoneRenderer.CatStatueRenderer());
+        ClientRegistry.registerTileEntity(TileEntityGraveStone.HorseStatue.class, "GSGraveStoneHorseStatue", new TileEntityGraveStoneRenderer.HorseStatueRenderer());
+        ClientRegistry.registerTileEntity(TileEntityGraveStone.CreeperStatue.class, "GSGraveStoneCreeperStatue", new TileEntityGraveStoneRenderer.CreeperStatueRenderer());
+        ClientRegistry.registerTileEntity(TileEntityGraveStone.Sword.class, "GSGraveStoneSword", new TileEntityGraveStoneRenderer.SwordRenderer());
     }
 
     @Override
@@ -58,11 +68,21 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerBlocksModels() {
         //graves
-        registerModelsForTEBlocks(1, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.class);
+        registerModelsForTEBlocks(0, 1, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.class);
+        registerModelsForTEBlocks(1, 17, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.VerticalPlate.class);
+        registerModelsForTEBlocks(17, 34, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.Cross.class);
+        registerModelsForTEBlocks(34, 51, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.Obelisk.class);
+        registerModelsForTEBlocks(51, 68, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.HorizontalPlate.class);
+        registerModelsForTEBlocks(68, 85, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.VillagerStatue.class);
+        registerModelsForTEBlocks(85, 102, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.DogStatue.class);
+        registerModelsForTEBlocks(102, 119, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.CatStatue.class);
+        registerModelsForTEBlocks(119, 136, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.HorseStatue.class);
+        registerModelsForTEBlocks(136, 153, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.CreeperStatue.class);
+        registerModelsForTEBlocks(153, 154, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.Sword.class);
     }
 
-    private void registerModelsForTEBlocks(int length, Block block, ModelResourceLocation model, Class TEClass) {
-        for (int num = 0; num < length; num++) {
+    private void registerModelsForTEBlocks(int startMeta, int endMeta, Block block, ModelResourceLocation model, Class TEClass) {
+        for (int num = startMeta; num < endMeta; num++) {
             Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), num, model);
             ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(block), num, TEClass);
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), num, model);
