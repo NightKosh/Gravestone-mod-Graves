@@ -86,11 +86,11 @@ public class GraveGenerationHelper {
             EnumGraveType.HORIZONTAL_PLATE
             //TODO celtic cross
     };
-    private static final EnumGraveType[] GENERATED_VILLAGERS_GRAVES_TYPES = {EnumGraveType.OBELISK};//TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private static final EnumGraveType[] GENERATED_VILLAGERS_GRAVES_TYPES = {EnumGraveType.VILLAGER_STATUE};
     private static final EnumGraveType[] GENERATED_DOGS_GRAVES_TYPES = {EnumGraveType.DOG_STATUE};
     private static final EnumGraveType[] GENERATED_CAT_GRAVES_TYPES = {EnumGraveType.CAT_STATUE};
     private static final EnumGraveType[] GENERATED_HORSE_GRAVES_TYPES = {EnumGraveType.HORSE_STATUE};
-    private static final EnumGraveType[] GENERATED_CREEPER_STATUES_GRAVES_TYPES = {EnumGraveType.OBELISK};//TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private static final EnumGraveType[] GENERATED_CREEPER_STATUES_GRAVES_TYPES = {EnumGraveType.CREEPER_STATUE};
 
     public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event, long spawnTime) {
         if (player.worldObj != null && !player.worldObj.getGameRules().getBoolean("keepInventory") && Config.graveItemsCount > 0 &&
@@ -249,7 +249,7 @@ public class GraveGenerationHelper {
 
         EnumGraves grave;
         ItemStack sword = null;
-        if (chooseGraveTypeByAgeOrLevel(entity, graveTypeByEntity)) {
+        if (chooseGraveTypeByAgeOrLevel(entity, graveTypeByEntity, age)) {
             EnumGraveMaterial material = getGraveMaterialByAgeOrLevel(entity, age, graveTypeByEntity);
             EnumGraveType[] type;
             if (isExplosionDamage(damageSource)) {
@@ -260,7 +260,7 @@ public class GraveGenerationHelper {
 
             grave = getGraveType(type, material);
         } else {
-            grave = getGraveByDeath(damageSource, graveTypeByEntity);
+            grave = getGraveByDeath(damageSource, graveTypeByEntity, entity, age);
             if (grave == null) {
                 if (graveTypeByEntity == EnumGraveTypeByEntity.PLAYER_GRAVES && Config.generateSwordGraves &&
                         world.rand.nextInt(4) == 0 && graveTypeByEntity.equals(EnumGraveTypeByEntity.PLAYER_GRAVES)) {
@@ -379,11 +379,11 @@ public class GraveGenerationHelper {
         return grave.getMaterial() != EnumGraveMaterial.OTHER && (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP));
     }
 
-    public static boolean chooseGraveTypeByAgeOrLevel(Entity entity, EnumGraveTypeByEntity graveTypeByEntity) {
+    public static boolean chooseGraveTypeByAgeOrLevel(Entity entity, EnumGraveTypeByEntity graveTypeByEntity, int age) {
         if (graveTypeByEntity == EnumGraveTypeByEntity.PLAYER_GRAVES) {
             return ((EntityPlayer) entity).experienceLevel >= 15;
         } else {
-            return false;//TODO check pet age !!!!!!!!!!
+            return age > 30;
         }
     }
 
@@ -432,26 +432,31 @@ public class GraveGenerationHelper {
         }
     }
 
-    public static EnumGraves getGraveByDeath(DamageSource damageSource, EnumGraveTypeByEntity graveTypeByEntity) {
+    public static EnumGraves getGraveByDeath(DamageSource damageSource, EnumGraveTypeByEntity graveTypeByEntity, Entity entity, int age) {
         EnumGraveType[] graveTypes = null;
-        EnumGraveMaterial material = null;
+        EnumGraveMaterial material;
 
         if (isFireDamage(damageSource, damageSource.damageType) || isLavaDamage(damageSource, damageSource.damageType)) {
             material = EnumGraveMaterial.OBSIDIAN;
-            graveTypes = getDefaultGraveTypes(graveTypeByEntity);
         } else if (graveTypeByEntity == EnumGraveTypeByEntity.PLAYER_GRAVES) {
             if (DamageSource.drown.equals(damageSource)) {
-                //TODO drown
+                //TODO graveTypes
                 material = EnumGraveMaterial.OTHER;
             } else if (DamageSource.starve.equals(damageSource)) {
-                //TODO starve
+                //TODO graveTypes
                 material = EnumGraveMaterial.OTHER;
             } else if (DamageSource.wither.equals(damageSource)) {
-                //TODO wither
+                //TODO graveTypes
                 material = EnumGraveMaterial.OTHER;
+            } else {
+                return null;
             }
         } else {
             return null;
+        }
+
+        if (graveTypes == null) {
+            graveTypes = getDefaultGraveTypes(graveTypeByEntity);
         }
 
         return getGraveType(graveTypes, material);
