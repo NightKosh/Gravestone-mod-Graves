@@ -289,12 +289,6 @@ public class BlockGraveStone extends BlockContainer {
         return false;
     }
 
-    //TODO
-//    @Override
-//    public int getRenderType() {
-//        return GraveStoneConfig.graveRenderID;
-//    }
-
     @Override
     public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
         GraveStoneHelper.spawnMob(world, pos);
