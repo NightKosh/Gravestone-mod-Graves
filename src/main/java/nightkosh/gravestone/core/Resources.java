@@ -10,8 +10,9 @@ import net.minecraft.util.ResourceLocation;
  */
 public class Resources {
 
-    protected static final String MOD_NAME = ModInfo.ID.toLowerCase();
-    protected static final String GRAVES_LOCATION = MOD_NAME + ":textures/graves/";
+    public static final String MOD_NAME = ModInfo.ID.toLowerCase();
+    public static final String GRAVES_LOCATION = MOD_NAME + ":textures/graves/";
+    public static final String STATUES_LOCATION = MOD_NAME + ":textures/statues/";
 
     // gui
     public static final ResourceLocation CHEST_GUI = new ResourceLocation("textures/gui/container/generic_54.png");
@@ -55,25 +56,6 @@ public class Resources {
     public static final ResourceLocation GRAVE_PRIZMARINE_CROSS = new ResourceLocation(GRAVES_LOCATION + "Cross/Prizmarine.png");
     public static final ResourceLocation GRAVE_ICE_CROSS = new ResourceLocation(GRAVES_LOCATION + "Cross/Ice.png");
     public static final ResourceLocation GRAVE_MOSSY_CROSS = new ResourceLocation(GRAVES_LOCATION + "Cross/Mossy.png");
-    // obelisk //TODO rename textures
-    public static final ResourceLocation GRAVE_WOODEN_OBELISK = new ResourceLocation(GRAVES_LOCATION + "WoodenObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_SANDSTONE_OBELISK = new ResourceLocation(GRAVES_LOCATION + "SandstoneObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_RED_SANDSTONE_OBELISK = new ResourceLocation(GRAVES_LOCATION + "RedSandstoneObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_STONE_OBELISK = new ResourceLocation(GRAVES_LOCATION + "StoneObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_DIORITE_OBELISK = new ResourceLocation(GRAVES_LOCATION + "DioriteObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_ANDESITE_OBELISK = new ResourceLocation(GRAVES_LOCATION + "AndesiteObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_GRANITE_OBELISK = new ResourceLocation(GRAVES_LOCATION + "GraniteObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_IRON_OBELISK = new ResourceLocation(GRAVES_LOCATION + "IronObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_GOLDEN_OBELISK = new ResourceLocation(GRAVES_LOCATION + "GoldenObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_DIAMOND_OBELISK = new ResourceLocation(GRAVES_LOCATION + "DiamondObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_EMERALD_OBELISK = new ResourceLocation(GRAVES_LOCATION + "EmeraldObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_LAPIS_OBELISK = new ResourceLocation(GRAVES_LOCATION + "LapisObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_REDSTONE_OBELISK = new ResourceLocation(GRAVES_LOCATION + "RedstoneObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_OBSIDIAN_OBELISK = new ResourceLocation(GRAVES_LOCATION + "ObsidianObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_QUARTZ_OBELISK = new ResourceLocation(GRAVES_LOCATION + "QuartzObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_PRIZMARINE_OBELISK = new ResourceLocation(GRAVES_LOCATION + "PrizmarineObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_ICE_OBELISK = new ResourceLocation(GRAVES_LOCATION + "IceObeliskMemorial.png");
-    public static final ResourceLocation GRAVE_MOSSY_OBELISK = new ResourceLocation(GRAVES_LOCATION + "MossyObeliskMemorial.png");
     // horisontal plates
     public static final ResourceLocation GRAVE_WOODEN_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "HorizontalPlate/Wooden.png");
     public static final ResourceLocation GRAVE_SANDSTONE_HORISONTAL_PLATE = new ResourceLocation(GRAVES_LOCATION + "HorizontalPlate/Sandstone.png");
@@ -150,6 +132,27 @@ public class Resources {
     public static final ResourceLocation GRAVE_PRIZMARINE_HORSE_STATUE = new ResourceLocation(GRAVES_LOCATION + "Horse/Prizmarine.png");
     public static final ResourceLocation GRAVE_ICE_HORSE_STATUE = new ResourceLocation(GRAVES_LOCATION + "Horse/Ice.png");
     public static final ResourceLocation GRAVE_MOSSY_HORSE_STATUE = new ResourceLocation(GRAVES_LOCATION + "Horse/Mossy.png");
+
+
+    // obelisk
+    public static final ResourceLocation WOODEN_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Wooden.png");
+    public static final ResourceLocation SANDSTONE_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Sandstone.png");
+    public static final ResourceLocation RED_SANDSTONE_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/RedSandstone.png");
+    public static final ResourceLocation STONE_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Stone.png");
+    public static final ResourceLocation DIORITE_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Diorite.png");
+    public static final ResourceLocation ANDESITE_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Andesite.png");
+    public static final ResourceLocation GRANITE_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Granite.png");
+    public static final ResourceLocation IRON_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Iron.png");
+    public static final ResourceLocation GOLDEN_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Golden.png");
+    public static final ResourceLocation DIAMOND_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Diamond.png");
+    public static final ResourceLocation EMERALD_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Emerald.png");
+    public static final ResourceLocation LAPIS_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Lapis.png");
+    public static final ResourceLocation REDSTONE_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Redstone.png");
+    public static final ResourceLocation OBSIDIAN_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Obsidian.png");
+    public static final ResourceLocation QUARTZ_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Quartz.png");
+    public static final ResourceLocation PRIZMARINE_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Prizmarine.png");
+    public static final ResourceLocation ICE_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Ice.png");
+    public static final ResourceLocation MOSSY_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Mossy.png");
 
     // models - parts
     public static final ResourceLocation CREEPER_AURA = new ResourceLocation("textures/entity/creeper/creeper_armor.png");
