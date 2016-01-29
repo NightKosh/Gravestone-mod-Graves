@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -190,14 +191,20 @@ public class GraveGenerationHelper {
         horse.writeEntityToNBT(nbt);
         NBTTagList nbtItemsList = nbt.getTagList("Items", 10);
 
-//        if (horse.isHorseSaddled()) {
-//            items.add(new ItemStack(Items.saddle));
-//            nbt.removeTag("SaddleItem");
-//        }
-//        if (nbt.hasKey("ArmorItem", 10)) {
-//            items.add(ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("ArmorItem")));
-//            nbt.setTag("ArmorItem", new ItemStack(Blocks.air).writeToNBT(new NBTTagCompound()));
-//        }
+        if (Config.storeHorseSaddleAndArmor) {
+            if (horse.isHorseSaddled()) {
+                items.add(new ItemStack(Items.saddle));
+                nbt.removeTag("SaddleItem");
+
+                horse.horseChest.setInventorySlotContents(0, null);
+            }
+            if (nbt.hasKey("ArmorItem", 10)) {
+                items.add(ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("ArmorItem")));
+                nbt.removeTag("ArmorItem");
+
+                horse.horseChest.setInventorySlotContents(1, null);
+            }
+        }
         if (horse.isChested()) {
             for (int i = 0; i < nbtItemsList.tagCount(); i++) {
                 items.add(ItemStack.loadItemStackFromNBT(nbtItemsList.getCompoundTagAt(i)));

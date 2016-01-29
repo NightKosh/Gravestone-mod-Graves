@@ -72,6 +72,7 @@ public class Config {
     public static boolean removeEmptyGraves;
     public static boolean showGravesRemovingMessages;
     public static boolean onlyOwnerCanLootGrave;
+    public static boolean storeHorseSaddleAndArmor;
 
     public static List<GraveStoneHelper.RestrictedArea> restrictGraveGenerationInArea;
 
@@ -112,6 +113,7 @@ public class Config {
 
         isFogEnabled = config.get(CATEGORY_GRAVES, "CemeteryFogEnabled", true).getBoolean(true);
 
+        storeHorseSaddleAndArmor = config.get(CATEGORY_GRAVES, "StoreHorseSaddleAndArmor", true).getBoolean(true);
 
         Property restrictGraveGenerationInAreaProperty = config.get(CATEGORY_GRAVES, "RestrictGraveGenerationInArea", "");
         restrictGraveGenerationInAreaProperty.comment = "List of coordinates in which graves generation must be disabled. \"start_x,start_y,start_z,end_x,end_y,end_z;\"";
