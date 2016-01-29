@@ -351,7 +351,7 @@ public class GraveGenerationHelper {
         if (killer != null) {
             String killerName;
             if (killer instanceof EntityPlayer) {
-                killerName = "KILLER_NAME";//TODO ((EntityPlayer) killer).getDisplayName();
+                killerName = killer.getDisplayName().getFormattedText();
                 if (isVillager) {
                     GSLogger.logInfoGrave("Villager was killed by " + killerName);
                 }
