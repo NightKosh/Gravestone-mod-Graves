@@ -538,6 +538,7 @@ public class GraveGenerationHelper {
             type = getDefaultGraveTypes(graveTypeByEntity);
         }
         EnumGraveMaterial[] materialsArray = new EnumGraveMaterial[materials.size()];
+        materialsArray = materials.toArray(materialsArray);
         return getGraveType(type, materialsArray);
     }
 
