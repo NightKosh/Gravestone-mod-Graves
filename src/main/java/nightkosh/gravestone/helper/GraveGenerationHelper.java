@@ -390,7 +390,7 @@ public class GraveGenerationHelper {
         if (graveTypeByEntity == EnumGraveTypeByEntity.PLAYER_GRAVES) {
             return ((EntityPlayer) entity).experienceLevel >= 15;
         } else {
-            return age > 30;
+            return age >= 30;
         }
     }
 
@@ -420,7 +420,19 @@ public class GraveGenerationHelper {
     }
 
     private static EnumGraveMaterial getGraveMaterialByAge(Entity entity, int age, EnumGraveTypeByEntity graveTypeByEntity) {
-        return null;//TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        if (age > 180) {
+            return EnumGraveMaterial.EMERALD;
+        } else if (age > 150) {
+            return EnumGraveMaterial.DIAMOND;
+        } else if (age > 120) {
+            return EnumGraveMaterial.REDSTONE;
+        } else if (age > 90) {
+            return EnumGraveMaterial.GOLD;
+        } else if (age > 60) {
+            return EnumGraveMaterial.LAPIS;
+        } else {
+            return EnumGraveMaterial.IRON;
+        }
     }
 
     protected static EnumGraveType[] getDefaultGraveTypes(EnumGraveTypeByEntity graveTypeByEntity) {
