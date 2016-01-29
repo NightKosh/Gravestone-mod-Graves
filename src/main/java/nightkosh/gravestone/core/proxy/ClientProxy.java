@@ -7,12 +7,10 @@ import net.minecraft.item.Item;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import nightkosh.gravestone.core.GSBlock;
 import nightkosh.gravestone.core.ResourcesModels;
-import nightkosh.gravestone.core.event.RenderEventHandler;
 import nightkosh.gravestone.renderer.tileentity.TileEntityGraveStoneRenderer;
 import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 import org.apache.commons.lang3.StringUtils;
@@ -62,7 +60,6 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerHandlers() {
-        MinecraftForge.EVENT_BUS.register(new RenderEventHandler());
     }
 
     @Override

@@ -1,11 +1,8 @@
 package nightkosh.gravestone.core.event;
 
-import nightkosh.gravestone.core.TimeHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import nightkosh.gravestone.core.TimeHelper;
 
 /**
  * GraveStone mod
@@ -37,18 +34,18 @@ public class TickEventHandler {
     }
 
 
-
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public void playerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase == TickEvent.Phase.END) {
-            if (event.player.equals(Minecraft.getMinecraft().thePlayer)) {
-                fogTicCount++;
-                if (fogTicCount > MAX_FOG_TICK_COUNT) {
-                    fogTicCount = 0;
-                    RenderEventHandler.resetAmountOfFogSources(event.player.worldObj);
-                }
-            }
-        }
-    }
+// TODO
+//    @SubscribeEvent
+//    @SideOnly(Side.CLIENT)
+//    public void playerTick(TickEvent.PlayerTickEvent event) {
+//        if (event.phase == TickEvent.Phase.END) {
+//            if (event.player.equals(Minecraft.getMinecraft().thePlayer)) {
+//                fogTicCount++;
+//                if (fogTicCount > MAX_FOG_TICK_COUNT) {
+//                    fogTicCount = 0;
+//                    RenderEventHandler.resetAmountOfFogSources(event.player.worldObj);
+//                }
+//            }
+//        }
+//    }
 }

@@ -54,7 +54,6 @@ public class Config {
     public static boolean generateGravesInLava;
     public static int graveItemsCount;
     public static boolean canPlaceGravesEveryWhere;
-    public static boolean isFogEnabled;
     public static boolean generateSwordGraves;
     public static boolean removeEmptyGraves;
     public static boolean showGravesRemovingMessages;
@@ -88,8 +87,6 @@ public class Config {
 
         removeEmptyGraves = config.get(CATEGORY_GRAVES, "RemoveEmptyGraves", false).getBoolean(false);
         showGravesRemovingMessages = config.get(CATEGORY_GRAVES, "ShowGravesRemovingMessages", true).getBoolean(true);
-
-        isFogEnabled = config.get(CATEGORY_GRAVES, "CemeteryFogEnabled", true).getBoolean(true);
 
         storeHorseSaddleAndArmor = config.get(CATEGORY_GRAVES, "StoreHorseSaddleAndArmor", true).getBoolean(true);
 

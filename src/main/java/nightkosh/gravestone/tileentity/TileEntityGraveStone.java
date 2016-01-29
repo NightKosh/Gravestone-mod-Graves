@@ -1,17 +1,13 @@
 package nightkosh.gravestone.tileentity;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.core.TimeHelper;
-import nightkosh.gravestone.core.event.RenderEventHandler;
-import nightkosh.gravestone.core.event.TickEventHandler;
 import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
+import nightkosh.gravestone.helper.IFog;
 import nightkosh.gravestone.inventory.GraveInventory;
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,7 +26,8 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
     protected boolean isPurified = false;
     protected int spawnerHelperId;
     protected GroupOfGravesSpawnerHelper spawnerHelper;
-    public static final int FOG_RANGE = 30;
+    public static IFog fogHandler;
+//    public static final int FOG_RANGE = 30; TODO
 
     public TileEntityGraveStone() {
         super();
@@ -64,12 +61,14 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
             gsSpawn.update();
         }
 
-        if (this.worldObj.isRemote && Config.isFogEnabled && TickEventHandler.getFogTicCount() == 0) {
-            EntityPlayer player = this.worldObj.getClosestPlayer(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D, FOG_RANGE);
-            if (player != null && player.getCommandSenderEntity().equals(Minecraft.getMinecraft().thePlayer) && TimeHelper.isFogTime(this.worldObj)) {
-                RenderEventHandler.addFog();
-            }
-        }
+        fogHandler.addFog(this.worldObj, this.pos);
+        //TODO
+//            if (this.worldObj.isRemote && Config.isFogEnabled && TickEventHandler.getFogTicCount() == 0) {
+//                EntityPlayer player = this.worldObj.getClosestPlayer(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D, FOG_RANGE);
+//                if (player != null && player.getCommandSenderEntity().equals(Minecraft.getMinecraft().thePlayer) && TimeHelper.isFogTime(this.worldObj)) {
+//                    RenderEventHandler.addFog();
+//                }
+//            }
     }
 
     /**
