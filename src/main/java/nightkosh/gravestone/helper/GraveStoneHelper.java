@@ -141,18 +141,19 @@ public class GraveStoneHelper implements IGraveStone {
      * Spawn mob
      */
     public static void spawnMob(World world, BlockPos pos) {
-        if (Config.spawnMobAtGraveDestruction && world.rand.nextInt(10) == 0) {
-            TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
-
-            if (tileEntity != null) {
+        //TODO !!!
+//        if (Config.spawnMobAtGraveDestruction && world.rand.nextInt(10) == 0) {
+//            TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
+//
+//            if (tileEntity != null) {
                 //TODO
 //                Entity mob = GSMobSpawn.getMobEntity(world, tileEntity.getGraveType(), pos.getX(), pos.getY(), pos.getZ());
 //
 //                if (mob != null) {
 //                    GSMobSpawn.spawnMob(world, mob, pos.getX(), pos.getY(), pos.getZ(), false);
 //                }
-            }
-        }
+//            }
+//        }
     }
 
     /**
