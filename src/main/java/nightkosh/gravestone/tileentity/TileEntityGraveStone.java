@@ -8,6 +8,7 @@ import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
 import nightkosh.gravestone.helper.IFog;
+import nightkosh.gravestone.helper.ISpawner;
 import nightkosh.gravestone.inventory.GraveInventory;
 import org.apache.commons.lang3.StringUtils;
 
@@ -19,31 +20,28 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class TileEntityGraveStone extends TileEntityGrave implements ITickable, ISpawnerEntity {
 
-    protected Spawner gsSpawn;
     protected ItemStack sword = null;
     protected ItemStack flower = null;
     protected String playerId = "";
     protected boolean isPurified = false;
     protected int spawnerHelperId;
     protected GroupOfGravesSpawnerHelper spawnerHelper;
-    public static IFog fogHandler;
-//    public static final int FOG_RANGE = 30; TODO
+    protected ISpawner spawner = new ISpawner() {
+    };
+    public static IFog fogHandler = new IFog() {
+    };
 
     public TileEntityGraveStone() {
         super();
-        gsSpawn = getSpawner();
+        spawner = spawner.getSpawner(this);
         inventory = new GraveInventory(this);
     }
 
     public TileEntityGraveStone(World world) {
         super();
         this.worldObj = world;
-        gsSpawn = getSpawner();
+        spawner = spawner.getSpawner(this);
         inventory = new GraveInventory(this);
-    }
-
-    private Spawner getSpawner() {
-        return null;//new GSGraveStoneSpawn(this)TODO !!!!!!
     }
 
     /**
@@ -57,18 +55,9 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
             spawnerHelper = (GroupOfGravesSpawnerHelper) this.getWorld().getEntityByID(spawnerHelperId);
         }
 
-        if (gsSpawn != null) {
-            gsSpawn.update();
-        }
+        spawner.update();
 
         fogHandler.addFog(this.worldObj, this.pos);
-        //TODO
-//            if (this.worldObj.isRemote && Config.isFogEnabled && TickEventHandler.getFogTicCount() == 0) {
-//                EntityPlayer player = this.worldObj.getClosestPlayer(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D, FOG_RANGE);
-//                if (player != null && player.getCommandSenderEntity().equals(Minecraft.getMinecraft().thePlayer) && TimeHelper.isFogTime(this.worldObj)) {
-//                    RenderEventHandler.addFog();
-//                }
-//            }
     }
 
     /**
@@ -77,8 +66,8 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
      */
     @Override
     public boolean receiveClientEvent(int par1, int par2) {
-        if (par1 == 1 && this.worldObj.isRemote && gsSpawn != null) {
-            gsSpawn.setMinDelay();
+        if (par1 == 1 && this.worldObj.isRemote) {
+            spawner.setMinDelay();
         }
 
         return true;
