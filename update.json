@@ -1,8 +1,8 @@
 {
   "homepage": "http://gravestone.nightkosh.com/",
   "promos": {
-    "1.8-latest": "3.0.0",
-    "1.8-recommended": "3.0.0"
+    "1.8-latest": "3.0.1",
+    "1.8-recommended": "3.0.1"
   },
   "1.8": {
     "3.0.0": ""
