@@ -29,7 +29,7 @@ import nightkosh.gravestone.helper.api.APIGraveGeneration;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-@Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, updateJSON = "http://gravestone.nightkosh.com/update.json")
+@Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, updateJSON = "https://raw.githubusercontent.com/NightKosh/GraveStone-mod/master/update.json")
 public class ModGraveStone {
 
     @Instance("GraveStone")
