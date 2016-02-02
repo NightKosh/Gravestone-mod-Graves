@@ -84,8 +84,8 @@ public class GraveGenerationHelper {
             EnumGraveType.VERTICAL_PLATE,
             EnumGraveType.CROSS,
             EnumGraveType.OBELISK,
+            EnumGraveType.CELTIC_CROSS,
             EnumGraveType.HORIZONTAL_PLATE
-            //TODO celtic cross
     };
     private static final EnumGraveType[] GENERATED_VILLAGERS_GRAVES_TYPES = {EnumGraveType.VILLAGER_STATUE};
     private static final EnumGraveType[] GENERATED_DOGS_GRAVES_TYPES = {EnumGraveType.DOG_STATUE};

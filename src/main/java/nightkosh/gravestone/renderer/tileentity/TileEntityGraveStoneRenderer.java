@@ -37,6 +37,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     public static ModelGraveStone verticalPlate = new ModelVerticalPlateGraveStone();
     public static ModelGraveStone cross = new ModelCrossGraveStone();
     public static ModelGraveStone obelisk = new ModelObeliskGravestone();
+    public static ModelGraveStone celticCross = new ModelCelticCrossGravestone();
     public static ModelGraveStone horizontalPlate = new ModelHorizontalPlateGraveStone();
     public static ModelGraveStone villagerStatue = new ModelVillagerStatueGravestone();
     public static ModelGraveStone dogStatue = new ModelDogStatueGraveStone();
@@ -186,6 +187,8 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
                 return Resources.GRAVE_MOSSY_CROSS;
             case OBELISK:
                 return Resources.MOSSY_OBELISK;
+            case CELTIC_CROSS:
+                return Resources.MOSSY_CELTIC_CROSS;
             case HORIZONTAL_PLATE:
                 return Resources.GRAVE_MOSSY_HORISONTAL_PLATE;
             case VILLAGER_STATUE:
@@ -210,6 +213,8 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
                 return cross;
             case OBELISK:
                 return obelisk;
+            case CELTIC_CROSS:
+                return celticCross;
             case HORIZONTAL_PLATE:
                 return horizontalPlate;
             case VILLAGER_STATUE:
@@ -294,6 +299,18 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
         static {
             GRAVE_TE.setGraveType(EnumGraves.STONE_OBELISK.ordinal());
+        }
+
+        @Override
+        protected TileEntityGraveStone getDefaultTE() {
+            return GRAVE_TE;
+        }
+    }
+
+    public static class CelticCrossRenderer extends TileEntityGraveStoneRenderer {
+        private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+        static {
+            GRAVE_TE.setGraveType(EnumGraves.STONE_CELTIC_CROSS.ordinal());
         }
 
         @Override

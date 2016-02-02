@@ -147,6 +147,7 @@ public class BlockGraveStone extends BlockContainer {
                 }
                 break;
             case CROSS:
+            case CELTIC_CROSS:
                 switch (facing) {
                     case SOUTH:
                         this.setBlockBounds(0.125F, 0, 0.0625F, 0.875F, 1, 0.1875F);

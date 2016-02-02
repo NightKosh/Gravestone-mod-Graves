@@ -115,6 +115,25 @@ public class Resources {
     public static final ResourceLocation PRIZMARINE_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Prizmarine.png");
     public static final ResourceLocation ICE_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Ice.png");
     public static final ResourceLocation MOSSY_OBELISK = new ResourceLocation(STATUES_LOCATION + "Obelisk/Mossy.png");
+    // celtic crosses
+    public static final ResourceLocation WOODEN_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Wooden.png");
+    public static final ResourceLocation SANDSTONE_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Sandstone.png");
+    public static final ResourceLocation RED_SANDSTONE_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/RedSandstone.png");
+    public static final ResourceLocation STONE_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Stone.png");
+    public static final ResourceLocation DIORITE_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Diorite.png");
+    public static final ResourceLocation ANDESITE_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Andesite.png");
+    public static final ResourceLocation GRANITE_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Granite.png");
+    public static final ResourceLocation IRON_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Iron.png");
+    public static final ResourceLocation GOLDEN_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Golden.png");
+    public static final ResourceLocation DIAMOND_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Diamond.png");
+    public static final ResourceLocation EMERALD_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Emerald.png");
+    public static final ResourceLocation LAPIS_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Lapis.png");
+    public static final ResourceLocation REDSTONE_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Redstone.png");
+    public static final ResourceLocation OBSIDIAN_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Obsidian.png");
+    public static final ResourceLocation QUARTZ_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Quartz.png");
+    public static final ResourceLocation PRIZMARINE_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Prizmarine.png");
+    public static final ResourceLocation ICE_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Ice.png");
+    public static final ResourceLocation MOSSY_CELTIC_CROSS = new ResourceLocation(STATUES_LOCATION + "CelticCross/Mossy.png");
     // villagers statues
     public static final ResourceLocation WOODEN_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Wooden.png");
     public static final ResourceLocation SANDSTONE_VILLAGER_STATUE = new ResourceLocation(STATUES_LOCATION + "Villager/Sandstone.png");

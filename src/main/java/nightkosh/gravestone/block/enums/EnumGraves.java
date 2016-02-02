@@ -67,6 +67,24 @@ public enum EnumGraves implements IBlockEnum {
     QUARTZ_OBELISK(Resources.QUARTZ_OBELISK, EnumGraveType.OBELISK, EnumGraveMaterial.QUARTZ),
     PRIZMARINE_OBELISK(Resources.PRIZMARINE_OBELISK, EnumGraveType.OBELISK, EnumGraveMaterial.PRIZMARINE),
     ICE_OBELISK(Resources.ICE_OBELISK, EnumGraveType.OBELISK, EnumGraveMaterial.ICE),
+    // CELTIC CROSSES
+    WOODEN_CELTIC_CROSS(Resources.WOODEN_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.WOOD),
+    SANDSTONE_CELTIC_CROSS(Resources.SANDSTONE_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.SANDSTONE),
+    RED_SANDSTONE_CELTIC_CROSS(Resources.RED_SANDSTONE_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.RED_SANDSTONE),
+    STONE_CELTIC_CROSS(Resources.STONE_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.STONE),
+    DIORITE_CELTIC_CROSS(Resources.DIORITE_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.DIORITE),
+    ANDESITE_CELTIC_CROSS(Resources.ANDESITE_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.ANDESITE),
+    GRANITE_CELTIC_CROSS(Resources.GRANITE_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.GRANITE),
+    IRON_CELTIC_CROSS(Resources.IRON_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.IRON),
+    GOLDEN_CELTIC_CROSS(Resources.GOLDEN_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.GOLD),
+    DIAMOND_CELTIC_CROSS(Resources.DIAMOND_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.DIAMOND),
+    EMERALD_CELTIC_CROSS(Resources.EMERALD_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.EMERALD),
+    LAPIS_CELTIC_CROSS(Resources.LAPIS_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.LAPIS),
+    REDSTONE_CELTIC_CROSS(Resources.REDSTONE_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.REDSTONE),
+    OBSIDIAN_CELTIC_CROSS(Resources.OBSIDIAN_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.OBSIDIAN),
+    QUARTZ_CELTIC_CROSS(Resources.QUARTZ_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.QUARTZ),
+    PRIZMARINE_CELTIC_CROSS(Resources.PRIZMARINE_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.PRIZMARINE),
+    ICE_CELTIC_CROSS(Resources.ICE_CELTIC_CROSS, EnumGraveType.CELTIC_CROSS, EnumGraveMaterial.ICE),
     // HORISONTAL PLATES
     WOODEN_HORIZONTAL_PLATE(Resources.GRAVE_WOODEN_HORISONTAL_PLATE, EnumGraveType.HORIZONTAL_PLATE, EnumGraveMaterial.WOOD),
     SANDSTONE_HORIZONTAL_PLATE(Resources.GRAVE_SANDSTONE_HORISONTAL_PLATE, EnumGraveType.HORIZONTAL_PLATE, EnumGraveMaterial.SANDSTONE),
@@ -238,6 +256,8 @@ public enum EnumGraves implements IBlockEnum {
                 return "block.gravestone.cross";
             case OBELISK:
                 return "block.gravestone.obelisk";
+            case CELTIC_CROSS:
+                return "block.gravestone.celtic_cross";
             case HORIZONTAL_PLATE:
                 return "block.gravestone.plate";
             case VILLAGER_STATUE:

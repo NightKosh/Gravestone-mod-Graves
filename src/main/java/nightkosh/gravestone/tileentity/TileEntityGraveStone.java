@@ -267,6 +267,9 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
     public static class Obelisk extends TileEntityGraveStone {
     }
 
+    public static class CelticCross extends TileEntityGraveStone {
+    }
+
     public static class HorizontalPlate extends TileEntityGraveStone {
     }
 
