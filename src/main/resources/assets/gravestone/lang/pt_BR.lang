@@ -9,6 +9,7 @@ itemGroup.tabGSOther=Gravestone mod Items
 block.gravestone.gravestone.name=Lápide
 block.gravestone.cross.name=Cruz
 block.gravestone.obelisk.name=Obelisco
+block.gravestone.celtic_cross.name=Celtic Cross
 block.gravestone.plate.name=Chapa de Túmulo
 block.gravestone.dog_statue.name=Estátua de Cachorro
 block.gravestone.cat_statue.name=Estátua de Gato

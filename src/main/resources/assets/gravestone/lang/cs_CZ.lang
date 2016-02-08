@@ -6,6 +6,7 @@ itemGroup.tabGSGraveStone=Gravestone(Náhrobek)
 block.gravestone.gravestone.name=Náhrobek
 block.gravestone.cross.name=Kříž
 block.gravestone.obelisk.name=Obelisk
+block.gravestone.celtic_cross.name=Celtic Cross
 block.gravestone.plate.name=Náhrobní kámenk
 block.gravestone.dog_statue.name=Socha psa
 block.gravestone.cat_statue.name=Socha kočky

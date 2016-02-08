@@ -6,6 +6,7 @@ itemGroup.tabGSGraveStone=Lapida
 block.gravestone.gravestone.name=Lapida
 block.gravestone.cross.name=Cruz
 block.gravestone.obelisk.name=Obelisco
+block.gravestone.celtic_cross.name=Celtic Cross
 block.gravestone.plate.name=Placa
 block.gravestone.dog_statue.name=Estatua de perro
 block.gravestone.cat_statue.name=Estatua de gato

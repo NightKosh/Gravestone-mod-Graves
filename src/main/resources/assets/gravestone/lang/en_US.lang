@@ -6,12 +6,13 @@ itemGroup.tabGSGraveStone=Gravestones
 block.gravestone.gravestone.name=Gravestone
 block.gravestone.cross.name=Cross
 block.gravestone.obelisk.name=Obelisk
+block.gravestone.celtic_cross.name=Celtic Cross
 block.gravestone.plate.name=Grave Plate
 block.gravestone.dog_statue.name=Dog Statue
 block.gravestone.cat_statue.name=Cat Statue
 block.gravestone.horse_statue.name=Horse Statue
 block.gravestone.sword.name=Sword of A Fallen Warrior
-block.gravestone.villager_statue.name=Villager Statue
+block.gravestone.villager_statue.name=Villager Statuevillager_statue
 block.gravestone.creeper_statue.name=Creeper Statue
 
 

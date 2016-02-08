@@ -6,6 +6,7 @@ itemGroup.tabGSGraveStone=Gravestones
 block.gravestone.gravestone.name=Tombe
 block.gravestone.cross.name=Croix
 block.gravestone.obelisk.name=Obélisque
+block.gravestone.celtic_cross.name=Celtic Cross
 block.gravestone.plate.name=Pierre tombale
 block.gravestone.dog_statue.name=Tombe de chien
 block.nightkosh.gravestone.cat_statue.name=Tombe de chat
