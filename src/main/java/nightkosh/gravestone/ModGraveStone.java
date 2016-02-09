@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.api.IGraveGeneration;
 import nightkosh.gravestone.api.IGraveStone;
+import nightkosh.gravestone.api.ModInfo;
 import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.core.*;
 import nightkosh.gravestone.core.commands.Commands;

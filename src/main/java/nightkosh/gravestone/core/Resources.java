@@ -1,6 +1,7 @@
 package nightkosh.gravestone.core;
 
 import net.minecraft.util.ResourceLocation;
+import nightkosh.gravestone.api.ModInfo;
 
 /**
  * GraveStone mod

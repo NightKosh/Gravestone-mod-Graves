@@ -1,6 +1,6 @@
 package nightkosh.gravestone.core.logger;
 
-import nightkosh.gravestone.core.ModInfo;
+import nightkosh.gravestone.api.ModInfo;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
