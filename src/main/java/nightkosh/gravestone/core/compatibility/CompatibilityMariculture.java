@@ -1,9 +1,9 @@
 package nightkosh.gravestone.core.compatibility;
 
-import nightkosh.gravestone.ModGraveStone;
-import nightkosh.gravestone.config.Config;
 import mariculture.api.core.MaricultureHandlers;
 import net.minecraft.item.ItemStack;
+import nightkosh.gravestone.api.GraveStoneAPI;
+import nightkosh.gravestone.config.Config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ public class CompatibilityMariculture implements ICompatibility {
     protected CompatibilityMariculture() {
         if (isModLoaded(MOD_ID) && Config.storeMaricultureItems) {
             if (MaricultureHandlers.mirror != null) {
-                ModGraveStone.apiGraveGeneration.addPlayerItemsHandler((player, source) -> {
+                GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler((player, source) -> {
                     List<ItemStack> items = new ArrayList<>();
                     ItemStack[] mirrorItems = MaricultureHandlers.mirror.getMirrorContents(player);
                     if (mirrorItems != null) {

@@ -1,10 +1,10 @@
 package nightkosh.gravestone.core.compatibility;
 
-import nightkosh.gravestone.ModGraveStone;
-import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.core.logger.GSLogger;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import nightkosh.gravestone.api.GraveStoneAPI;
+import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.core.logger.GSLogger;
 import tconstruct.api.IPlayerExtendedInventoryWrapper;
 import tconstruct.api.TConstructAPI;
 
@@ -25,7 +25,7 @@ public class CompatibilityTinkerConstruct implements ICompatibility {
 
     protected CompatibilityTinkerConstruct() {
         if (isModLoaded(MOD_ID) && Config.storeTinkerConstructItems) {
-            ModGraveStone.apiGraveGeneration.addPlayerItemsHandler((player, source) -> {
+            GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler((player, source) -> {
                 List<ItemStack> items = new ArrayList<>();
                 IPlayerExtendedInventoryWrapper inventoryWrapper = TConstructAPI.getInventoryWrapper(player);
                 if (inventoryWrapper != null) {

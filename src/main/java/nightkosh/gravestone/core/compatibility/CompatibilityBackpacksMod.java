@@ -1,10 +1,10 @@
 package nightkosh.gravestone.core.compatibility;
 
-import nightkosh.gravestone.ModGraveStone;
-import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.core.logger.GSLogger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import nightkosh.gravestone.api.GraveStoneAPI;
+import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.core.logger.GSLogger;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -23,7 +23,7 @@ public class CompatibilityBackpacksMod implements ICompatibility {
 
     protected CompatibilityBackpacksMod() {
         if (isModLoaded(MOD_ID) && Config.storeBackpacksItems) {
-            ModGraveStone.apiGraveGeneration.addPlayerItemsHandler((player, source) -> {
+            GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler((player, source) -> {
                 try {
                     List<ItemStack> items = new ArrayList<>();
                     Class<?> PlayerSaveClass = Class.forName("de.eydamos.backpack.saves.PlayerSave");

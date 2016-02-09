@@ -1,13 +1,13 @@
 package nightkosh.gravestone.core.compatibility;
 
-import nightkosh.gravestone.ModGraveStone;
-import nightkosh.gravestone.api.grave_items.IPlayerItems;
-import nightkosh.gravestone.config.Config;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import nightkosh.gravestone.api.GraveStoneAPI;
+import nightkosh.gravestone.api.grave_items.IPlayerItems;
+import nightkosh.gravestone.config.Config;
 
 import java.util.Iterator;
 import java.util.List;
@@ -25,7 +25,7 @@ public class CompatibilityEnderIO implements ICompatibility {
 
     protected CompatibilityEnderIO() {
         if (isModLoaded(MOD_ID) && Config.enableEnderIOSoulbound) {
-            ModGraveStone.apiGraveGeneration.addPlayerItemsHandler(new IPlayerItems() {
+            GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler(new IPlayerItems() {
 
                 @Override
                 public List<ItemStack> addItems(EntityPlayer player, DamageSource source) {

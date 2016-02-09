@@ -2,7 +2,7 @@ package nightkosh.gravestone.core.compatibility;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import nightkosh.gravestone.ModGraveStone;
+import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.config.Config;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class CompatibilityBaubles implements ICompatibility {
 
     protected CompatibilityBaubles() {
         if (isModLoaded(MOD_ID) && Config.storeBaublesItems) {
-            ModGraveStone.apiGraveGeneration.addPlayerItemsHandler((player, source) -> {
+            GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler((player, source) -> {
                 List<ItemStack> items = new ArrayList<>();
                 IInventory inventory = baubles.api.BaublesApi.getBaubles(player);
                 if (inventory != null) {

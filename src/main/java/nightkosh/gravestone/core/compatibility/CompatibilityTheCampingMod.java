@@ -1,10 +1,10 @@
 package nightkosh.gravestone.core.compatibility;
 
-import nightkosh.gravestone.ModGraveStone;
-import nightkosh.gravestone.config.Config;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import nightkosh.gravestone.api.GraveStoneAPI;
+import nightkosh.gravestone.config.Config;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,7 +21,7 @@ public class CompatibilityTheCampingMod implements ICompatibility {
 
     protected CompatibilityTheCampingMod() {
         if (isModLoaded(MOD_ID) && Config.storeTheCampingModItems) {
-            ModGraveStone.apiGraveGeneration.addPlayerItemsHandler((player, source) -> {
+            GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler((player, source) -> {
                 List<ItemStack> items = new LinkedList<>();
                 NBTTagCompound tag = player.getEntityData().getCompoundTag("campInv");
                 NBTTagList inventory = tag.getTagList("Items", 10);

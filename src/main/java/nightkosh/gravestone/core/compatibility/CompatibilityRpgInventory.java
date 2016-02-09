@@ -1,11 +1,11 @@
 package nightkosh.gravestone.core.compatibility;
 
-import nightkosh.gravestone.ModGraveStone;
-import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.core.logger.GSLogger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import nightkosh.gravestone.api.GraveStoneAPI;
+import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.core.logger.GSLogger;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class CompatibilityRpgInventory implements ICompatibility {
 
     protected CompatibilityRpgInventory() {
         if (isModLoaded(MOD_ID) && Config.storeRpgInventoryItems) {
-            ModGraveStone.apiGraveGeneration.addPlayerItemsHandler((player, source) -> {
+            GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler((player, source) -> {
                 List<ItemStack> items = new ArrayList<ItemStack>();
                 try {
                     Class<?> clazz = Class.forName("rpgInventory.gui.rpginv.PlayerRpgInventory");
