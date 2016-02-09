@@ -1,5 +1,6 @@
 package nightkosh.gravestone.core;
 
+import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -33,5 +34,7 @@ public class Tabs {
                 return Item.getItemFromBlock(GSBlock.graveStone);
             }
         };
+
+        GraveStoneAPI.gravesTab = gravesTab;
     }
 }
