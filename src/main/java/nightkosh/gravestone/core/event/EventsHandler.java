@@ -88,7 +88,7 @@ public class EventsHandler {
 
             for (ICustomEntityDeathHandler customEntityDeathHandler : APIGraveGeneration.CUSTOM_ENTITY_DEATH_HANDLERS) {
                 if (event.entity.getClass().equals(customEntityDeathHandler.getEntityClass()) &&
-                        customEntityDeathHandler.generateGrave(event.entity, event.source)) {
+                        customEntityDeathHandler.canGenerateGrave(event.entity, event.source)) {
                     GraveGenerationHelper.createCustomGrave(event.entity, event, customEntityDeathHandler);
                     return;
                 }

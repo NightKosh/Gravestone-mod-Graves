@@ -255,9 +255,9 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 });
             }
         } else {
-            int age = customEntityDeathHandler.getAge();//(int) (entity.worldObj.getWorldTime() - spawnTime) / 24000;
+            int age = customEntityDeathHandler.getAge();
             GraveInfoOnDeath graveInfo = new GraveInfoOnDeath();
-            graveInfo.grave = EnumGraves.getByTypeAndMaterial(customEntityDeathHandler.getGraveType(), customEntityDeathHandler.getGraveMaterial());
+            graveInfo.grave = EnumGraves.getByTypeAndMaterial(customEntityDeathHandler.getGraveType(entity, event.source), customEntityDeathHandler.getGraveMaterial(entity, event.source));
             graveInfo.sword = customEntityDeathHandler.getSword();
 
             BlockPos pos = new BlockPos(entity.posX, entity.posY, entity.posZ - 1);
