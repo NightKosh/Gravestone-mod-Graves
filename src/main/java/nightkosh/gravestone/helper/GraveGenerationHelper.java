@@ -420,14 +420,14 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
     public static EnumGraveMaterial getGraveMaterialByAgeOrLevel(Entity entity, int age, EnumGraveTypeByEntity graveTypeByEntity) {
         if (graveTypeByEntity == EnumGraveTypeByEntity.PLAYER_GRAVES) {
-            return INSTANCE.getPlayerGraveMaterialByLevel(((EntityPlayer) entity).experienceLevel);
+            return INSTANCE.getGraveMaterialByLevel(((EntityPlayer) entity).experienceLevel);
         } else {
             return INSTANCE.getGraveMaterialByAge(age);
         }
     }
 
     @Override
-    public EnumGraveMaterial getPlayerGraveMaterialByLevel(int level) {
+    public EnumGraveMaterial getGraveMaterialByLevel(int level) {
         if (level >= 65) {
             return EnumGraveMaterial.EMERALD;
         } else if (level >= 55) {
