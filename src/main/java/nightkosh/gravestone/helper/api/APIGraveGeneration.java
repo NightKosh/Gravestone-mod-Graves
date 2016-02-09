@@ -14,12 +14,15 @@ import java.util.List;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class APIGraveGeneration implements IGraveGeneration {
+    public static final IGraveGeneration INSTANCE = new APIGraveGeneration();
 
     public static final List<IPlayerDeathHandler> PLAYER_DEATH_HANDLERS = new ArrayList<>();
     public static final List<IVillagerDeathHandler> VILLAGER_DEATH_HANDLERS = new ArrayList<>();
     public static final List<IDogDeathHandler> DOG_DEATH_HANDLERS = new ArrayList<>();
     public static final List<ICatDeathHandler> CAT_DEATH_HANDLERS = new ArrayList<>();
     public static final List<IHorseDeathHandler> HORSE_DEATH_HANDLERS = new ArrayList<>();
+
+    public static final List<ICustomEntityDeathHandler> CUSTOM_ENTITY_DEATH_HANDLERS = new ArrayList<>();
 
     @Override
     public void addPlayerDeathHandler(IPlayerDeathHandler playerDeathHandler) {
@@ -95,6 +98,13 @@ public class APIGraveGeneration implements IGraveGeneration {
     public void addHorseItemsHandler(IHorseItems horseItems) {
         if (horseItems != null) {
             HORSE_ITEMS.add(horseItems);
+        }
+    }
+
+    @Override
+    public void addCustomEntityDeathHandler(ICustomEntityDeathHandler customEntityDeathHandler) {
+        if (customEntityDeathHandler != null) {
+            CUSTOM_ENTITY_DEATH_HANDLERS.add(customEntityDeathHandler);
         }
     }
 }

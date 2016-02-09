@@ -12,16 +12,19 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.api.IGraveGeneration;
-import nightkosh.gravestone.api.IGraveStone;
+import nightkosh.gravestone.api.IGraveStoneHelper;
 import nightkosh.gravestone.api.ModInfo;
 import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.core.*;
+import nightkosh.gravestone.core.GSBlock;
+import nightkosh.gravestone.core.GSTileEntity;
+import nightkosh.gravestone.core.GuiHandler;
+import nightkosh.gravestone.core.Tabs;
 import nightkosh.gravestone.core.commands.Commands;
 import nightkosh.gravestone.core.compatibility.Compatibility;
 import nightkosh.gravestone.core.event.EventHandlerNetwork;
 import nightkosh.gravestone.core.event.EventsHandler;
 import nightkosh.gravestone.core.proxy.CommonProxy;
-import nightkosh.gravestone.helper.GraveStoneHelper;
+import nightkosh.gravestone.helper.GraveGenerationHelper;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
 
 /**
@@ -38,8 +41,8 @@ public class ModGraveStone {
     @SidedProxy(clientSide = "nightkosh.gravestone.core.proxy.ClientProxy", serverSide = "nightkosh.gravestone.core.proxy.CommonProxy")
     public static CommonProxy proxy;
 
-    public static final IGraveStone gravestoneHelper = new GraveStoneHelper();
-    public static final IGraveGeneration apiGraveGeneration = new APIGraveGeneration();
+    public static final IGraveStoneHelper gravestoneHelper = GraveGenerationHelper.INSTANCE;
+    public static final IGraveGeneration apiGraveGeneration = APIGraveGeneration.INSTANCE;
 
     public ModGraveStone() {
         instance = this;

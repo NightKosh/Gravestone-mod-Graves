@@ -32,6 +32,7 @@ import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.core.GuiHandler;
 import nightkosh.gravestone.core.Tabs;
 import nightkosh.gravestone.core.logger.GSLogger;
+import nightkosh.gravestone.helper.GraveGenerationHelper;
 import nightkosh.gravestone.helper.GraveStoneHelper;
 import nightkosh.gravestone.inventory.GraveInventory;
 import nightkosh.gravestone.tileentity.TileEntityGraveStone;
@@ -475,10 +476,10 @@ public class BlockGraveStone extends BlockContainer {
         }
 
         // custom swords
-        for (Item sword : GraveStoneHelper.swordsList) {
+        for (Item sword : GraveGenerationHelper.swordsList) {
             list.add(GraveStoneHelper.getSwordAsGrave(gravestone, new ItemStack(sword, 1)));
         }
-        for (Item sword : GraveStoneHelper.swordsList) {
+        for (Item sword : GraveGenerationHelper.swordsList) {
             try {
                 ItemStack swordStack = new ItemStack(sword, 1);
                 EnchantmentHelper.addRandomEnchantment(new Random(), swordStack, 5);

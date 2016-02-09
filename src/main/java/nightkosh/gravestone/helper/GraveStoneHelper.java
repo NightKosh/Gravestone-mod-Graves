@@ -13,7 +13,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
-import nightkosh.gravestone.api.IGraveStone;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.Config;
@@ -32,16 +31,7 @@ import java.util.Random;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GraveStoneHelper implements IGraveStone {
-    public static ArrayList<Item> swordsList = new ArrayList<Item>(
-            Arrays.asList(
-                    Items.wooden_sword,
-                    Items.stone_sword,
-                    Items.iron_sword,
-                    Items.golden_sword,
-                    Items.diamond_sword
-            )
-    );
+public class GraveStoneHelper {
 
     public static final Item[] GENERATED_SWORD_GRAVES = {
             Items.wooden_sword,
@@ -146,7 +136,7 @@ public class GraveStoneHelper implements IGraveStone {
 //            TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
 //
 //            if (tileEntity != null) {
-                //TODO
+        //TODO
 //                Entity mob = GSMobSpawn.getMobEntity(world, tileEntity.getGraveType(), pos.getX(), pos.getY(), pos.getZ());
 //
 //                if (mob != null) {
@@ -197,13 +187,6 @@ public class GraveStoneHelper implements IGraveStone {
             return GENERATED_SWORD_GRAVES[random.nextInt(GENERATED_SWORD_GRAVES.length)];
         } else {
             return null;
-        }
-    }
-
-    @Override
-    public void addSwordToSwordsList(Item sword) {
-        if (sword != null) {
-            swordsList.add(sword);
         }
     }
 

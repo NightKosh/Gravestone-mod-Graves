@@ -1,11 +1,5 @@
 package nightkosh.gravestone.core.event;
 
-import nightkosh.gravestone.api.death_handler.*;
-import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.core.MobHandler;
-import nightkosh.gravestone.core.logger.GravesLogger;
-import nightkosh.gravestone.helper.GraveGenerationHelper;
-import nightkosh.gravestone.helper.api.APIGraveGeneration;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +9,12 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import nightkosh.gravestone.api.death_handler.*;
+import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.core.MobHandler;
+import nightkosh.gravestone.core.logger.GravesLogger;
+import nightkosh.gravestone.helper.GraveGenerationHelper;
+import nightkosh.gravestone.helper.api.APIGraveGeneration;
 
 /**
  * GraveStone mod
@@ -41,6 +41,7 @@ public class EventsHandler {
                 }
 
                 GraveGenerationHelper.createPlayerGrave(player, event, MobHandler.getAndRemoveSpawnTime(event.entity));
+                return;
             } else {
                 if (Config.generateVillagerGraves && event.entity instanceof EntityVillager) {
                     EntityVillager villager = (EntityVillager) event.entity;
@@ -50,6 +51,7 @@ public class EventsHandler {
                         }
                     }
                     GraveGenerationHelper.createVillagerGrave(villager, event);
+                    return;
                 } else if (Config.generatePetGraves) {
                     if (event.entity instanceof EntityTameable) {
                         if (event.entity instanceof EntityWolf) {
@@ -60,6 +62,7 @@ public class EventsHandler {
                                 }
                             }
                             GraveGenerationHelper.createDogGrave(dog, event);
+                            return;
                         } else if (event.entity instanceof EntityOcelot) {
                             EntityOcelot cat = (EntityOcelot) event.entity;
                             for (ICatDeathHandler catDeathHandler : APIGraveGeneration.CAT_DEATH_HANDLERS) {
@@ -68,6 +71,7 @@ public class EventsHandler {
                                 }
                             }
                             GraveGenerationHelper.createCatGrave(cat, event);
+                            return;
                         }
                     } else if (event.entity instanceof EntityHorse) {
                         EntityHorse horse = (EntityHorse) event.entity;
@@ -77,7 +81,16 @@ public class EventsHandler {
                             }
                         }
                         GraveGenerationHelper.createHorseGrave(horse, event);
+                        return;
                     }
+                }
+            }
+
+            for (ICustomEntityDeathHandler customEntityDeathHandler : APIGraveGeneration.CUSTOM_ENTITY_DEATH_HANDLERS) {
+                if (event.entity.getClass().equals(customEntityDeathHandler.getEntityClass()) &&
+                        customEntityDeathHandler.generateGrave(event.entity, event.source)) {
+                    GraveGenerationHelper.createCustomGrave(event.entity, event, customEntityDeathHandler);
+                    return;
                 }
             }
         }
