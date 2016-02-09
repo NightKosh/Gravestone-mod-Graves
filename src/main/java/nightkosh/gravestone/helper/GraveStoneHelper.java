@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,10 +19,8 @@ import nightkosh.gravestone.core.GSBlock;
 import nightkosh.gravestone.inventory.GraveInventory;
 import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 /**
  * GraveStone mod
@@ -33,88 +30,9 @@ import java.util.Random;
  */
 public class GraveStoneHelper {
 
-    public static final Item[] GENERATED_SWORD_GRAVES = {
-            Items.wooden_sword,
-            Items.stone_sword
-    };
 
+    public static final List<BlockFlower> FLOWERS = Arrays.asList(Blocks.yellow_flower, Blocks.red_flower);
 
-    public static final List<Block> FLOWERS_GROUND = Arrays.asList(
-            Blocks.grass, Blocks.dirt);
-    public static final List<BlockFlower> FLOWERS = Arrays.asList(
-            Blocks.yellow_flower, Blocks.red_flower);
-
-    public GraveStoneHelper() {
-    }
-
-    /**
-     * Check is grave - sword grave
-     *
-     * @param graveType Grave type
-     */
-    public static boolean isSwordGrave(int graveType) {
-        return graveType == EnumGraves.SWORD.ordinal();
-    }
-
-    /**
-     * Return random grave type
-     *
-     * @param random
-     * @param graveType
-     */
-    public static int getGraveType(World world, BlockPos pos, Random random, GraveGenerationHelper.EnumGraveTypeByEntity graveType) {
-        ArrayList<EnumGraves> petsGravesList;
-        switch (graveType) {
-            case PLAYER_GRAVES:
-                if (random.nextFloat() > 0.1) {
-                    return 0;//TODO getRandomGrave(GraveGenerationHelper.getPlayerGraveTypesByBiomes(world, pos), random).ordinal();
-                } else {
-                    return EnumGraves.SWORD.ordinal();
-                }
-            case PETS_GRAVES:
-                petsGravesList = new ArrayList<>();
-                //TODO petsGravesList.addAll(GraveGenerationHelper.getDogGraveTypesByBiome(world, pos));
-                //TODO petsGravesList.addAll(GraveGenerationHelper.getCatGraveTypesByBiome(world, pos));
-                return getRandomGrave(petsGravesList, random).ordinal();
-            case DOGS_GRAVES:
-                return 0;//TODO getRandomGrave(GraveGenerationHelper.getDogGraveTypesByBiome(world, pos), random).ordinal();
-            case CATS_GRAVES:
-                return 0;//TODO getRandomGrave(GraveGenerationHelper.getCatGraveTypesByBiome(world, pos), random).ordinal();
-            case ALL_GRAVES:
-            default:
-                if (random.nextFloat() > 0.2) {
-                    if (random.nextFloat() > 0.1) {
-                        return 0;//TODO getRandomGrave(GraveGenerationHelper.getPlayerGraveTypesByBiomes(world, pos), random).ordinal();
-                    } else {
-                        return EnumGraves.SWORD.ordinal();
-                    }
-                } else {
-                    petsGravesList = new ArrayList<>();
-                    //TODO petsGravesList.addAll(GraveGenerationHelper.getDogGraveTypesByBiome(world, pos));
-                    //TODO petsGravesList.addAll(GraveGenerationHelper.getCatGraveTypesByBiome(world, pos));
-                    return getRandomGrave(petsGravesList, random).ordinal();
-                }
-        }
-    }
-
-    public static int getTreasuryGraveType(World world, BlockPos pos, Random random) {
-        ArrayList<EnumGraves> petsGravesList;
-        if (random.nextFloat() > 0.1) {
-            return 0;//TODO !!!!!!!!!!!!!getRandomGrave(GraveGenerationHelper.getPlayerGraveTypesByBiomes(world, pos), random).ordinal();
-        } else {
-            return EnumGraves.SWORD.ordinal();
-        }
-    }
-
-    /**
-     * Check is grave - pet grave
-     *
-     * @param graveType Grave type
-     */
-    public static boolean isPetGrave(int graveType) {
-        return EnumGraves.getById(graveType).getGraveType() == EnumGraveType.DOG_STATUE ||
-                EnumGraves.getById(graveType).getGraveType() == EnumGraveType.CAT_STATUE;
-    }
 
     /**
      * Check ground type and replace it on dirt if it grass or mycelium
@@ -158,11 +76,7 @@ public class GraveStoneHelper {
             return true;
         } else {
             String tool = block.getHarvestTool(world.getBlockState(pos));
-            if (tool != null) {
-                return tool.equals("shovel");
-            } else {
-                return false;
-            }
+            return tool != null && tool.equals("shovel");
         }
     }
 
@@ -182,22 +96,6 @@ public class GraveStoneHelper {
         return graveStoneStack;
     }
 
-    public static Item getRandomSwordForGeneration(int graveType, Random random) {
-        if (graveType == EnumGraves.SWORD.ordinal()) {
-            return GENERATED_SWORD_GRAVES[random.nextInt(GENERATED_SWORD_GRAVES.length)];
-        } else {
-            return null;
-        }
-    }
-
-    public static EnumGraves getRandomGrave(List<EnumGraves> graveTypes, Random rand) {
-        if (graveTypes.size() > 0) {
-            return graveTypes.get(rand.nextInt(graveTypes.size()));
-        } else {
-            return EnumGraves.WOODEN_VERTICAL_PLATE;
-        }
-    }
-
     public static boolean canFlowerBePlaced(World world, BlockPos pos, ItemStack itemStack, TileEntityGraveStone te) {
         if (canFlowerBePlacedOnGrave(te)) {
             Item item = itemStack.getItem();
@@ -212,8 +110,8 @@ public class GraveStoneHelper {
 
     public static boolean canFlowerBePlacedOnGrave(TileEntityGraveStone te) {
         return !te.isSwordGrave() && (te.getGraveType().getGraveType() == EnumGraveType.VERTICAL_PLATE ||
-                te.getGraveType().getGraveType() == EnumGraveType.CROSS);
-        //TODO celtic cross ????
+                te.getGraveType().getGraveType() == EnumGraveType.CROSS ||
+                te.getGraveType().getGraveType() == EnumGraveType.CELTIC_CROSS);
     }
 
     public static class RestrictedArea {

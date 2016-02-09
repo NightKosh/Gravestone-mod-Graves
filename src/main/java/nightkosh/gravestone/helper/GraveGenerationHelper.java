@@ -77,30 +77,6 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         }
     }
 
-    protected static EnumGraveTypeByEntity getRandomGraveType(Random random) {
-        if (random.nextInt(5) < 4) {
-            return getRandomHumanGraveType(random);
-        } else {
-            return getRandomPetGraveType(random);
-        }
-    }
-
-    protected static EnumGraveTypeByEntity getRandomHumanGraveType(Random random) {
-        return random.nextBoolean() ? EnumGraveTypeByEntity.PLAYER_GRAVES : EnumGraveTypeByEntity.VILLAGERS_GRAVES;
-    }
-
-    protected static EnumGraveTypeByEntity getRandomPetGraveType(Random random) {
-        switch (random.nextInt(3)) {
-            case 0:
-            default:
-                return EnumGraveTypeByEntity.DOGS_GRAVES;
-            case 1:
-                return EnumGraveTypeByEntity.CATS_GRAVES;
-            case 2:
-                return EnumGraveTypeByEntity.HORSE_GRAVES;
-        }
-    }
-
     private static final EnumGraveType[] GENERATED_PLAYER_GRAVES_TYPES = {
             EnumGraveType.VERTICAL_PLATE,
             EnumGraveType.CROSS,
