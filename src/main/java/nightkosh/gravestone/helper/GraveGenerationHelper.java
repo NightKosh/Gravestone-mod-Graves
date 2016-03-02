@@ -293,9 +293,14 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             if (graveInfo.grave == null) {
                 if (graveTypeByEntity == EnumGraveTypeByEntity.PLAYER_GRAVES && Config.generateSwordGraves &&
                         world.rand.nextInt(4) == 0 && graveTypeByEntity.equals(EnumGraveTypeByEntity.PLAYER_GRAVES)) {
-                    graveInfo.sword = getSwordFromInventory(items);
-                    graveInfo.grave = EnumGraves.SWORD;
-                } else {
+                    ItemStack sword = getSwordFromInventory(items);
+                    if (sword != null) {
+                        graveInfo.sword = sword;
+                        graveInfo.grave = EnumGraves.SWORD;
+                    }
+                }
+
+                if (graveInfo.grave == null) {
                     graveInfo.grave = getGraveTypeByBiomes(world, pos, graveTypeByEntity, damageSource);
                 }
             }
