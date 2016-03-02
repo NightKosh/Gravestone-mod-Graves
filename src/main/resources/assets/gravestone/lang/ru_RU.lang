@@ -14,6 +14,8 @@ block.gravestone.horse_statue.name=Статуя для могилы лошади
 block.gravestone.sword.name=Меч павшего воина
 block.gravestone.villager_statue.name=Статуя жителя
 block.gravestone.creeper_statue.name=Статуя крипера
+block.gravestone.starved_corpse.name=Труп умершего с голоду
+block.gravestone.withered_corpse.name=Иссушёный труп
 
 
 ## Graves

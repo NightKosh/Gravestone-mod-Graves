@@ -228,6 +228,10 @@ public class BlockGraveStone extends BlockContainer {
                         break;
                 }
                 break;
+            case STARVED_CORPSE:
+            case WITHERED_CORPSE:
+                this.setBlockBounds(0, 0, 0, 1, 0.3F, 1);
+                break;
             case SWORD:
                 switch (facing) {
                     case SOUTH:

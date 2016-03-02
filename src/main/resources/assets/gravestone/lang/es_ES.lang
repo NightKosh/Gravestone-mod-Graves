@@ -6,7 +6,7 @@ itemGroup.tabGSGraveStone=Lapida
 block.gravestone.gravestone.name=Lapida
 block.gravestone.cross.name=Cruz
 block.gravestone.obelisk.name=Obelisco
-block.gravestone.celtic_cross.name=Celtic Cross
+block.gravestone.celtic_cross.name=Celtic Cross     ## TODO!!!!
 block.gravestone.plate.name=Placa
 block.gravestone.dog_statue.name=Estatua de perro
 block.gravestone.cat_statue.name=Estatua de gato
@@ -14,6 +14,8 @@ block.gravestone.horse_statue.name=Horse Statue
 block.gravestone.sword.name=Sword of A Fallen Warrior
 block.gravestone.villager_statue.name=Estatua de aldeano
 block.gravestone.creeper_statue.name=Estatua de creeper
+block.gravestone.starved_corpse.name=Starved corpse     ## TODO!!!!
+block.gravestone.withered_corpse.name=Withered corpse     ## TODO!!!!
 
 ## Graves
 item.grave.age=Vivió
@@ -29,15 +31,15 @@ death.GS.tortures=%1$s murió a causa de terribles torturas.
 death.GS.mom=Your mom
 
 # Console messages
-grave.cant_be_looted=You can't loot this grave!
+grave.cant_be_looted=You can't loot this grave!     ## TODO!!!!
 
-## Console commands
+## Console commands     ## TODO!!!!
 commands.not_enough_parameters=Not enough parameters!
 commands.coordinate_error=Coordinate error!
 commands.fill_grave.empty=There aren't any blocks at this coordinates!
 commands.fill_grave.wrong_block=This coordinates occupied by wrong blocks!
 
-# Materials
+# Materials     ## TODO!!!!
 material.title=Made of
 material.mossy=Mossy
 material.wood=Wood

@@ -6,7 +6,7 @@ itemGroup.tabGSGraveStone=Gravestones
 block.gravestone.gravestone.name=Tombe
 block.gravestone.cross.name=Croix
 block.gravestone.obelisk.name=Obélisque
-block.gravestone.celtic_cross.name=Celtic Cross
+block.gravestone.celtic_cross.name=Celtic Cross     ## TODO!!!!
 block.gravestone.plate.name=Pierre tombale
 block.gravestone.dog_statue.name=Tombe de chien
 block.nightkosh.gravestone.cat_statue.name=Tombe de chat
@@ -14,6 +14,8 @@ block.nightkosh.gravestone.horse_statue.name=Statue de cheval
 block.nightkosh.gravestone.sword.name=Épée du guerrier vaincu
 block.gravestone.villager_statue.name=Statue de villageois
 block.gravestone.creeper_statue.name=Statue de creeper
+block.gravestone.starved_corpse.name=Starved corpse     ## TODO!!!!
+block.gravestone.withered_corpse.name=Withered corpse     ## TODO!!!!
 
 ## Graves
 item.grave.age=A vécu
@@ -28,15 +30,15 @@ death.GS.tortures=%1$s a été torturé à mort
 death.GS.mom=Votre mère
 
 # Console messages
-grave.cant_be_looted=You can't loot this grave!
+grave.cant_be_looted=You can't loot this grave!     ## TODO!!!!
 
-## Console commands
+## Console commands     ## TODO!!!!
 commands.not_enough_parameters=Not enough parameters!
 commands.coordinate_error=Coordinate error!
 commands.fill_grave.empty=There aren't any blocks at this coordinates!
 commands.fill_grave.wrong_block=This coordinates occupied by wrong blocks!
 
-# Materials
+# Materials     ## TODO!!!!
 material.title=Made of
 material.mossy=Mossy
 material.wood=Wood

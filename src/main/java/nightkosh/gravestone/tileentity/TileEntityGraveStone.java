@@ -288,6 +288,12 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
     public static class CreeperStatue extends TileEntityGraveStone {
     }
 
+    public static class StarvedCorpse extends TileEntityGraveStone {
+    }
+
+    public static class WitheredCorpse extends TileEntityGraveStone {
+    }
+
     public static class Sword extends TileEntityGraveStone {
     }
 }

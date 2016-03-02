@@ -84,6 +84,12 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             EnumGraveType.CELTIC_CROSS,
             EnumGraveType.HORIZONTAL_PLATE
     };
+    private static final EnumGraveType[] STARVED_PLAYER_GRAVES_TYPES = {
+            EnumGraveType.STARVED_CORPSE,
+    };
+    private static final EnumGraveType[] WITHERED_PLAYER_GRAVES_TYPES = {
+            EnumGraveType.WITHERED_CORPSE,
+    };
     private static final EnumGraveType[] GENERATED_VILLAGERS_GRAVES_TYPES = {EnumGraveType.VILLAGER_STATUE};
     private static final EnumGraveType[] GENERATED_DOGS_GRAVES_TYPES = {EnumGraveType.DOG_STATUE};
     private static final EnumGraveType[] GENERATED_CAT_GRAVES_TYPES = {EnumGraveType.CAT_STATUE};
@@ -483,14 +489,12 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         if (isFireDamage(damageSource, damageSource.damageType) || isLavaDamage(damageSource, damageSource.damageType)) {
             material = EnumGraveMaterial.OBSIDIAN;
         } else if (graveTypeByEntity == EnumGraveTypeByEntity.PLAYER_GRAVES) {
-            if (DamageSource.drown.equals(damageSource)) {
-                //TODO graveTypes
-                material = EnumGraveMaterial.OTHER;
-            } else if (DamageSource.starve.equals(damageSource)) {
-                //TODO graveTypes
+            //TODO drown
+            if (DamageSource.starve.equals(damageSource)) {
+                graveTypes = STARVED_PLAYER_GRAVES_TYPES;
                 material = EnumGraveMaterial.OTHER;
             } else if (DamageSource.wither.equals(damageSource)) {
-                //TODO graveTypes
+                graveTypes = WITHERED_PLAYER_GRAVES_TYPES;
                 material = EnumGraveMaterial.OTHER;
             } else {
                 return null;

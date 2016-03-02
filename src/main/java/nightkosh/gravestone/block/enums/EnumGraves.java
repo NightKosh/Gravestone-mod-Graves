@@ -193,6 +193,9 @@ public enum EnumGraves implements IBlockEnum {
     QUARTZ_CREEPER_STATUE(Resources.QUARTZ_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.QUARTZ),
     PRIZMARINE_CREEPER_STATUE(Resources.PRIZMARINE_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.PRIZMARINE),
     ICE_CREEPER_STATUE(Resources.ICE_CREEPER_STATUE, EnumGraveType.CREEPER_STATUE, EnumGraveMaterial.ICE),
+    // CORPSES
+    STARVED_CORPSE(Resources.SKELETON, EnumGraveType.STARVED_CORPSE, EnumGraveMaterial.OTHER),
+    WITHERED_CORPSE(Resources.WITHER_SKELETON, EnumGraveType.WITHERED_CORPSE, EnumGraveMaterial.OTHER),
     // SWORD
     SWORD(null, EnumGraveType.SWORD, EnumGraveMaterial.OTHER);
 
@@ -270,6 +273,10 @@ public enum EnumGraves implements IBlockEnum {
                 return "block.gravestone.horse_statue";
             case CREEPER_STATUE:
                 return "block.gravestone.creeper_statue";
+            case STARVED_CORPSE:
+                return "block.gravestone.starved_corpse";
+            case WITHERED_CORPSE:
+                return "block.gravestone.withered_corpse";
             case SWORD:
                 return "block.gravestone.sword";
         }

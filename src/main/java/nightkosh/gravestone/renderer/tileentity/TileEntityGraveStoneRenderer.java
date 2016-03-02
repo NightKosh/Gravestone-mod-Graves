@@ -44,6 +44,8 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     public static ModelGraveStone catStatue = new ModelCatStatueGraveStone();
     public static ModelGraveStone horseStatue = new ModelHorseGraveStone();
     public static ModelGraveStone creeperStatue = new ModelCreeperStatueGravestone();
+    public static ModelGraveStone skeletonCorpse = new ModelSkeletonCorpseGravestone(false);
+    public static ModelGraveStone witheredSkeletonCorpse = new ModelSkeletonCorpseGravestone(true);
     public static TileEntityGraveStoneRenderer instance;
 
     private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
@@ -227,6 +229,10 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
                 return horseStatue;
             case CREEPER_STATUE:
                 return creeperStatue;
+            case STARVED_CORPSE:
+                return skeletonCorpse;
+            case WITHERED_CORPSE:
+                return witheredSkeletonCorpse;
         }
     }
 
@@ -383,6 +389,31 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
         static {
             GRAVE_TE.setGraveType(EnumGraves.STONE_CREEPER_STATUE.ordinal());
+        }
+
+        @Override
+        protected TileEntityGraveStone getDefaultTE() {
+            return GRAVE_TE;
+        }
+    }
+
+
+    public static class StarvedCorpseRenderer extends TileEntityGraveStoneRenderer {
+        private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+        static {
+            GRAVE_TE.setGraveType(EnumGraves.STARVED_CORPSE.ordinal());
+        }
+
+        @Override
+        protected TileEntityGraveStone getDefaultTE() {
+            return GRAVE_TE;
+        }
+    }
+
+    public static class WitheredCorpseRenderer extends TileEntityGraveStoneRenderer {
+        private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+        static {
+            GRAVE_TE.setGraveType(EnumGraves.WITHERED_CORPSE.ordinal());
         }
 
         @Override

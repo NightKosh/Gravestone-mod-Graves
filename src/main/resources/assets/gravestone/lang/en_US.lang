@@ -14,6 +14,8 @@ block.gravestone.horse_statue.name=Horse Statue
 block.gravestone.sword.name=Sword of A Fallen Warrior
 block.gravestone.villager_statue.name=Villager Statuevillager_statue
 block.gravestone.creeper_statue.name=Creeper Statue
+block.gravestone.starved_corpse.name=Starved corpse
+block.gravestone.withered_corpse.name=Withered corpse
 
 
 ## Graves

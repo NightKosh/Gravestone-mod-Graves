@@ -12,11 +12,21 @@ import nightkosh.gravestone.api.ModInfo;
 public class Resources {
 
     public static final String MOD_NAME = ModInfo.ID.toLowerCase();
+    public static final String BLOCK_LOCATION = MOD_NAME + ":textures/blocks/";
     public static final String GRAVES_LOCATION = MOD_NAME + ":textures/graves/";
     public static final String STATUES_LOCATION = MOD_NAME + ":textures/statues/";
 
     // gui
     public static final ResourceLocation CHEST_GUI = new ResourceLocation("textures/gui/container/generic_54.png");
+
+    // skull
+    public static final ResourceLocation SKELETON_SKULL = new ResourceLocation(BLOCK_LOCATION + "SkeletonSkull.png");
+    public static final ResourceLocation WITHER_SKULL = new ResourceLocation(BLOCK_LOCATION + "WitherSkull.png");
+    public static final ResourceLocation ZOMBIE_SKULL = new ResourceLocation(BLOCK_LOCATION + "ZombieSkull.png");
+
+    // entities
+    public static final ResourceLocation SKELETON = new ResourceLocation("textures/entity/skeleton/skeleton.png");
+    public static final ResourceLocation WITHER_SKELETON = new ResourceLocation("textures/entity/skeleton/wither_skeleton.png");
 
     // models - graves
     // vertical plates

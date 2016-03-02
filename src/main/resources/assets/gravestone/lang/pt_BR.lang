@@ -1,7 +1,5 @@
 # Tabs
 itemGroup.tabGSGraveStone=Gravestones
-itemGroup.tabGSMemorials=Memorials
-itemGroup.tabGSOther=Gravestone mod Items
 
 
 # Blocks
@@ -9,7 +7,7 @@ itemGroup.tabGSOther=Gravestone mod Items
 block.gravestone.gravestone.name=Lápide
 block.gravestone.cross.name=Cruz
 block.gravestone.obelisk.name=Obelisco
-block.gravestone.celtic_cross.name=Celtic Cross
+block.gravestone.celtic_cross.name=Celtic Cross     ## TODO!!!!
 block.gravestone.plate.name=Chapa de Túmulo
 block.gravestone.dog_statue.name=Estátua de Cachorro
 block.gravestone.cat_statue.name=Estátua de Gato
@@ -17,6 +15,8 @@ block.gravestone.horse_statue.name=Estátua de Cavalo
 block.gravestone.sword.name=Sword of a fallen warrior
 block.gravestone.villager_statue.name=Estátua de Aldeão
 block.gravestone.creeper_statue.name=Estátua de Creeper
+block.gravestone.starved_corpse.name=Starved corpse     ## TODO!!!!
+block.gravestone.withered_corpse.name=Withered corpse     ## TODO!!!!
 
 ## Graves
 item.grave.age=Havia vivido
@@ -32,15 +32,15 @@ death.GS.tortures=%1$s morreu em torturas cruéis
 death.GS.mom=Your mom
 
 # Console messages
-grave.cant_be_looted=You can't loot this grave!
+grave.cant_be_looted=You can't loot this grave!     ## TODO!!!!
 
 ## Console commands
-commands.not_enough_parameters=Not enough parameters!
-commands.coordinate_error=Coordinate error!
-commands.fill_grave.empty=There aren't any blocks at this coordinates!
-commands.fill_grave.wrong_block=This coordinates occupied by wrong blocks!
+commands.not_enough_parameters=Not enough parameters!     ## TODO!!!!
+commands.coordinate_error=Coordinate error!     ## TODO!!!!
+commands.fill_grave.empty=There aren't any blocks at this coordinates!     ## TODO!!!!
+commands.fill_grave.wrong_block=This coordinates occupied by wrong blocks!     ## TODO!!!!
 
-# Materials
+# Materials     ## TODO!!!!
 material.title=Made of
 material.mossy=Mossy
 material.wood=Wood

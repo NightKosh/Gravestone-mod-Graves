@@ -36,6 +36,8 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.registerTileEntity(TileEntityGraveStone.CatStatue.class, "GSGraveStoneCatStatue", new TileEntityGraveStoneRenderer.CatStatueRenderer());
         ClientRegistry.registerTileEntity(TileEntityGraveStone.HorseStatue.class, "GSGraveStoneHorseStatue", new TileEntityGraveStoneRenderer.HorseStatueRenderer());
         ClientRegistry.registerTileEntity(TileEntityGraveStone.CreeperStatue.class, "GSGraveStoneCreeperStatue", new TileEntityGraveStoneRenderer.CreeperStatueRenderer());
+        ClientRegistry.registerTileEntity(TileEntityGraveStone.StarvedCorpse.class, "GSGraveStoneStarvedCorpse", new TileEntityGraveStoneRenderer.StarvedCorpseRenderer());
+        ClientRegistry.registerTileEntity(TileEntityGraveStone.WitheredCorpse.class, "GSGraveStoneWitheredCorpse", new TileEntityGraveStoneRenderer.WitheredCorpseRenderer());
         ClientRegistry.registerTileEntity(TileEntityGraveStone.Sword.class, "GSGraveStoneSword", new TileEntityGraveStoneRenderer.SwordRenderer());
     }
 
@@ -75,6 +77,8 @@ public class ClientProxy extends CommonProxy {
         registerModelsForTEBlocks(EnumGraves.WOODEN_CAT_STATUE.ordinal(), EnumGraves.ICE_CAT_STATUE.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.CatStatue.class);
         registerModelsForTEBlocks(EnumGraves.WOODEN_HORSE_STATUE.ordinal(), EnumGraves.ICE_HORSE_STATUE.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.HorseStatue.class);
         registerModelsForTEBlocks(EnumGraves.WOODEN_CREEPER_STATUE.ordinal(), EnumGraves.ICE_CREEPER_STATUE.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.CreeperStatue.class);
+        registerModelsForTEBlocks(EnumGraves.STARVED_CORPSE.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.StarvedCorpse.class);
+        registerModelsForTEBlocks(EnumGraves.WITHERED_CORPSE.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.WitheredCorpse.class);
         registerModelsForTEBlocks(EnumGraves.SWORD.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.Sword.class);
     }
 
