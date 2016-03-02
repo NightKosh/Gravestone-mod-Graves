@@ -88,23 +88,6 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
                 tileEntity.hasFlower(), tileEntity.getFlower(), isSwordGrave, sword, facing);
     }
 
-    public void renderGraveInGui(float x, float y, World world, EnumGraves graveType, boolean isEnchanted,
-                                 boolean isMossy, boolean isSwordGrave, ItemStack sword, float partialTicks) {
-        GL11.glPushMatrix();
-
-        GL11.glTranslatef(x, y, 50);
-
-        float time = Minecraft.getMinecraft().theWorld.getTotalWorldTime() + partialTicks;
-        GL11.glRotatef(time % 360, 0, 1, 0);
-
-        float scale = 75;
-        GL11.glScaled(scale, scale, scale);
-
-        renderGrave(world, graveType, isEnchanted, isMossy, false, null, isSwordGrave, sword);
-
-        GL11.glPopMatrix();
-    }
-
     public void renderGrave(double x, double y, double z, World world, EnumGraves graveType,
                             boolean isEnchanted, boolean isMossy, boolean hasFlower, ItemStack flower,
                             boolean isSwordGrave, ItemStack sword, EnumFacing facing) {
