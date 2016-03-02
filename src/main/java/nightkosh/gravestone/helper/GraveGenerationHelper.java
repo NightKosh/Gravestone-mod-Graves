@@ -263,8 +263,11 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         } else {
             int age = customEntityDeathHandler.getAge();
             GraveInfoOnDeath graveInfo = new GraveInfoOnDeath();
-            graveInfo.grave = EnumGraves.getByTypeAndMaterial(customEntityDeathHandler.getGraveType(entity, event.source), customEntityDeathHandler.getGraveMaterial(entity, event.source));
-            graveInfo.sword = customEntityDeathHandler.getSword();
+            graveInfo.setGrave(EnumGraves.getByTypeAndMaterial(customEntityDeathHandler.getGraveType(entity, event.source),
+                    customEntityDeathHandler.getGraveMaterial(entity, event.source)));
+            graveInfo.setSword(customEntityDeathHandler.getSword());
+            graveInfo.setEnchanted(customEntityDeathHandler.isEnchanted(entity, event.source));
+            graveInfo.setMossy(customEntityDeathHandler.isMossy(entity, event.source));
 
             BlockPos pos = new BlockPos(entity.posX, entity.posY, entity.posZ - 1);
             DeathMessageInfo messageInfo = getDeathMessage((EntityLivingBase) entity, event.source.damageType, false);
@@ -273,7 +276,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     private static GraveInfoOnDeath getGraveOnDeath(World world, BlockPos pos, Entity entity, EnumGraveTypeByEntity graveTypeByEntity,
-                                              List<ItemStack> items, int age, DamageSource damageSource) {
+                                                    List<ItemStack> items, int age, DamageSource damageSource) {
         GraveInfoOnDeath graveInfo = new GraveInfoOnDeath();
         if (chooseGraveTypeByAgeOrLevel(entity, graveTypeByEntity, age)) {
             EnumGraveMaterial material = getGraveMaterialByAgeOrLevel(entity, age, graveTypeByEntity);
@@ -297,20 +300,55 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 }
             }
         }
+
+        graveInfo.setMossy(isMossyGrave(world, pos, graveInfo.grave));
+        graveInfo.setEnchanted(INSTANCE.isMagicDamage(damageSource));
+
         return graveInfo;
     }
 
     private static class GraveInfoOnDeath {
-        EnumGraves grave;
-        ItemStack sword;
+        private EnumGraves grave;
+        private ItemStack sword;
+        private boolean enchanted;
+        private boolean mossy;
+
+        public EnumGraves getGrave() {
+            return grave;
+        }
+
+        public ItemStack getSword() {
+            return sword;
+        }
+
+        public boolean isEnchanted() {
+            return enchanted;
+        }
+
+        public boolean isMossy() {
+            return mossy;
+        }
+
+        public void setGrave(EnumGraves grave) {
+            this.grave = grave;
+        }
+
+        public void setSword(ItemStack sword) {
+            this.sword = sword;
+        }
+
+        public void setEnchanted(boolean enchanted) {
+            this.enchanted = enchanted;
+        }
+
+        public void setMossy(boolean mossy) {
+            this.mossy = mossy;
+        }
     }
 
     private static void createOnDeath(Entity entity, World world, BlockPos pos, DeathMessageInfo deathInfo, List<ItemStack> items,
                                       int age, GraveInfoOnDeath graveInfo, DamageSource damageSource) {
         EnumFacing direction = EnumFacing.getHorizontal(MathHelper.floor_double((double) (entity.rotationYaw * 4 / 360F) + 0.5) & 3);
-
-        boolean enchanted = isMagicDamage(damageSource);
-        boolean mossy = isMossyGrave(world, pos, graveInfo.grave);
 
         BlockPos newPos = findPlaceForGrave(world, pos);
         if (newPos != null) {
@@ -318,8 +356,8 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(newPos);
 
             if (tileEntity != null) {
-                if (graveInfo.sword != null) {
-                    tileEntity.setSword(graveInfo.sword);
+                if (graveInfo.getSword() != null) {
+                    tileEntity.setSword(graveInfo.getSword());
                 }
 
                 tileEntity.getDeathTextComponent().setLocalized();
@@ -327,10 +365,10 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 tileEntity.getDeathTextComponent().setDeathText(deathInfo.getDeathMessage());
                 tileEntity.getDeathTextComponent().setKillerName(deathInfo.getKillerName());
                 tileEntity.getInventory().setItems(items);
-                tileEntity.setGraveType(graveInfo.grave.ordinal());
+                tileEntity.setGraveType(graveInfo.getGrave().ordinal());
                 tileEntity.setAge(age);
-                tileEntity.setEnchanted(enchanted);
-                tileEntity.setMossy(mossy);
+                tileEntity.setEnchanted(graveInfo.isEnchanted());
+                tileEntity.setMossy(graveInfo.isMossy());
                 if (entity instanceof EntityPlayer) {
                     tileEntity.setOwner(entity.getUniqueID().toString());
                 } else if (entity instanceof EntityTameable && ((EntityTameable) entity).isTamed()) {
@@ -340,18 +378,18 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             GSLogger.logInfoGrave("Create " + deathInfo.getName() + "'s grave at " + newPos.getX() + "x" + newPos.getY() + "x" + newPos.getZ());
         } else {
             ItemStack itemStack = GSBlock.graveStone.createStackedBlock(GSBlock.graveStone.getDefaultState());
-            itemStack.setItemDamage(graveInfo.grave.ordinal());
+            itemStack.setItemDamage(graveInfo.getGrave().ordinal());
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setBoolean("isLocalized", true);
             nbt.setString("name", deathInfo.getName());
             nbt.setString("DeathText", deathInfo.getDeathMessage());
             nbt.setString("KillerName", deathInfo.getKillerNameForTE());
-            nbt.setBoolean("Enchanted", enchanted);
-            nbt.setBoolean("Mossy", mossy);
+            nbt.setBoolean("Enchanted", graveInfo.isEnchanted());
+            nbt.setBoolean("Mossy", graveInfo.isMossy());
             nbt.setInteger("Age", age);
 
-            if (graveInfo.grave == EnumGraves.SWORD) {
-                GraveStoneHelper.addSwordInfo(nbt, graveInfo.sword);
+            if (graveInfo.getGrave() == EnumGraves.SWORD) {
+                GraveStoneHelper.addSwordInfo(nbt, graveInfo.getSword());
             }
 
             itemStack.setTagCompound(nbt);
@@ -407,11 +445,17 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         return Config.restrictGraveGenerationInArea.stream().anyMatch((area) -> area.isInArea(pos));
     }
 
-    private static boolean isMagicDamage(DamageSource damageSource) {
+    @Override
+    public boolean isMagicDamage(DamageSource damageSource) {
         return DamageSource.magic.equals(damageSource) || damageSource.damageType.toLowerCase().contains("magic");
     }
 
-    protected static boolean isMossyGrave(World world, BlockPos pos, EnumGraves grave) {
+    @Override
+    public boolean isMossyGrave(World world, BlockPos pos, EnumGraveMaterial graveMaterial, EnumGraveType graveType) {
+        return isMossyGrave(world, pos, EnumGraves.getByTypeAndMaterial(graveType, graveMaterial));
+    }
+
+    public static boolean isMossyGrave(World world, BlockPos pos, EnumGraves grave) {
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(pos))));
         return grave.getMaterial() != EnumGraveMaterial.OTHER && (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP));
     }
