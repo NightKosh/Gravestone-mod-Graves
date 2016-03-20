@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import gravestone.ModGraveStone;
 import gravestone.config.GraveStoneConfig;
 import gravestone.core.compatibility.forestry.GSCompatibilityForestry;
+import gravestone.core.logger.GSLogger;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -62,18 +63,24 @@ public class VillagerCorpseHelper extends CorpseHelper {
 
         MerchantRecipeList recipes = villager.getRecipes(null);
         if (recipes != null) {
-            MerchantRecipe recipe;
             NBTTagCompound recipeTag;
-            for (int i = 0; i < recipes.size(); i++) {
-                recipe = (MerchantRecipe) recipes.get(i);
+            boolean correctRecipes = true;
+            for (Object recipeObj : recipes) {
+                MerchantRecipe recipe = (MerchantRecipe) recipeObj;
                 if (recipe != null) {
                     recipeTag = recipe.writeToTags();
                     recipeTag.setInteger("uses", 0);
                     recipeTag.setInteger("maxUses", 7);
                     recipe.readFromTags(recipeTag);
+                } else {
+                    correctRecipes = false;
                 }
             }
-            nbt.setTag("Offers", recipes.getRecipiesAsTags());
+            if (recipes.size() > 0 && correctRecipes) {
+                nbt.setTag("Offers", recipes.getRecipiesAsTags());
+            } else {
+                GSLogger.logError("Can't get villager recipes!");
+            }
         }
     }
 
@@ -83,7 +90,7 @@ public class VillagerCorpseHelper extends CorpseHelper {
 
         NBTTagCompound nbt = new NBTTagCompound();
         villager.writeEntityToNBT(nbt);
-        if (nbtTag.hasKey("Offers")) {
+        if (hasTrades(nbtTag)) {
             nbt.setTag("Offers", nbtTag.getCompoundTag("Offers"));
         }
         villager.readEntityFromNBT(nbt);
@@ -151,16 +158,18 @@ public class VillagerCorpseHelper extends CorpseHelper {
     }
 
     private static void addTrades(List list, NBTTagCompound nbtTag) {
-        MerchantRecipeList trades = new MerchantRecipeList(nbtTag.getCompoundTag("Offers"));
-        for (int i = 0; i < trades.size(); i++) {
-            MerchantRecipe recipe = (MerchantRecipe) trades.get(i);
-            StringBuilder str = new StringBuilder();
-            str.append(recipe.getItemToBuy().stackSize).append(" ").append(recipe.getItemToBuy().getDisplayName());
-            if (recipe.getSecondItemToBuy() != null) {
-                str.append(" + ").append(recipe.getSecondItemToBuy().stackSize).append(" ").append(recipe.getItemToBuy().getDisplayName());
+        if (hasTrades(nbtTag)) {
+            MerchantRecipeList trades = new MerchantRecipeList(nbtTag.getCompoundTag("Offers"));
+            for (Object trade : trades) {
+                MerchantRecipe recipe = (MerchantRecipe) trade;
+                StringBuilder str = new StringBuilder();
+                str.append(recipe.getItemToBuy().stackSize).append(" ").append(recipe.getItemToBuy().getDisplayName());
+                if (recipe.getSecondItemToBuy() != null) {
+                    str.append(" + ").append(recipe.getSecondItemToBuy().stackSize).append(" ").append(recipe.getItemToBuy().getDisplayName());
+                }
+                str.append(" -> ").append(recipe.getItemToSell().stackSize).append(" ").append(recipe.getItemToSell().getDisplayName());
+                list.add(str.toString());
             }
-            str.append(" -> ").append(recipe.getItemToSell().stackSize).append(" ").append(recipe.getItemToSell().getDisplayName());
-            list.add(str.toString());
         }
     }
 }
