@@ -67,8 +67,7 @@ public class VillagerCorpseHelper extends CorpseHelper {
             boolean correctRecipes = true;
             for (Object recipeObj : recipes) {
                 MerchantRecipe recipe = (MerchantRecipe) recipeObj;
-                if (recipe != null && recipe.getItemToBuy() != null && recipe.getItemToSell() != null &&
-                        recipe.getSecondItemToBuy() != null) {
+                if (recipe != null && recipe.getItemToBuy() != null && recipe.getItemToSell() != null) {
                     recipeTag = recipe.writeToTags();
                     recipeTag.setInteger("uses", 0);
                     recipeTag.setInteger("maxUses", 7);
