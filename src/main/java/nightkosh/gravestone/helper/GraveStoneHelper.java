@@ -45,9 +45,6 @@ public class GraveStoneHelper {
         }
     }
 
-    /**
-     * Spawn mob
-     */
     public static void spawnMob(World world, BlockPos pos) {
         //TODO !!!
 //        if (Config.spawnMobAtGraveDestruction && world.rand.nextInt(10) == 0) {

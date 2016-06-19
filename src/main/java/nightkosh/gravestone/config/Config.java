@@ -81,10 +81,6 @@ public class Config {
             graveItemsCount = 40;
         }
 
-        // spawn rate
-        Property graveSpawnRateProperty = config.get(CATEGORY_GRAVES, "GravesMobsSpawnRate", 1000);
-        graveSpawnRateProperty.comment = "This value must be bigger than 600!";
-
         removeEmptyGraves = config.get(CATEGORY_GRAVES, "RemoveEmptyGraves", false).getBoolean(false);
         showGravesRemovingMessages = config.get(CATEGORY_GRAVES, "ShowGravesRemovingMessages", true).getBoolean(true);
 
