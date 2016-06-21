@@ -65,7 +65,7 @@ jar {
     exclude('tconstruct/**')
     exclude('thaumcraft/**')
     exclude('**/*.db')
-    exclude('assets/nightkosh.gravestone/techne_models/**')
+    exclude('assets/gravestone/techne_models/**')
 
     manifest {
         attributes 'FMLAT': 'Gravestone_mod_Graves_at.cfg'
