@@ -1,5 +1,6 @@
 package nightkosh.gravestone.models.block;
 
+import net.minecraft.util.ResourceLocation;
 import nightkosh.gravestone.core.Resources;
 import nightkosh.gravestone.renderer.tileentity.TileEntityGraveStoneRenderer;
 import net.minecraft.client.Minecraft;
@@ -86,5 +87,8 @@ public abstract class ModelGraveStone extends ModelBase {
         GlStateManager.depthMask(true);
         GlStateManager.depthFunc(GL11.GL_LEQUAL);
         GlStateManager.disableBlend();
+    }
+
+    public void setPedestalTexture(ResourceLocation texture) {
     }
 }
