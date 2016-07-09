@@ -1,5 +1,6 @@
 package nightkosh.gravestone.core.proxy;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -66,31 +67,31 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerBlocksModels() {
-        registerModelsForTEBlocks(0, ResourcesModels.graveStoneModel, TileEntityGraveStone.class);
-        registerModelsForTEBlocks(EnumGraves.WOODEN_VERTICAL_PLATE.ordinal() + 1, EnumGraves.ICE_VERTICAL_PLATE.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.VerticalPlate.class);
-        registerModelsForTEBlocks(EnumGraves.WOODEN_CROSS.ordinal(), EnumGraves.ICE_CROSS.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.Cross.class);
-        registerModelsForTEBlocks(EnumGraves.WOODEN_OBELISK.ordinal(), EnumGraves.ICE_OBELISK.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.Obelisk.class);
-        registerModelsForTEBlocks(EnumGraves.WOODEN_CELTIC_CROSS.ordinal(), EnumGraves.ICE_CELTIC_CROSS.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.CelticCross.class);
-        registerModelsForTEBlocks(EnumGraves.WOODEN_HORIZONTAL_PLATE.ordinal(), EnumGraves.ICE_HORIZONTAL_PLATE.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.HorizontalPlate.class);
-        registerModelsForTEBlocks(EnumGraves.WOODEN_VILLAGER_STATUE.ordinal(), EnumGraves.ICE_VILLAGER_STATUE.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.VillagerStatue.class);
-        registerModelsForTEBlocks(EnumGraves.WOODEN_DOG_STATUE.ordinal(), EnumGraves.ICE_DOG_STATUE.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.DogStatue.class);
-        registerModelsForTEBlocks(EnumGraves.WOODEN_CAT_STATUE.ordinal(), EnumGraves.ICE_CAT_STATUE.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.CatStatue.class);
-        registerModelsForTEBlocks(EnumGraves.WOODEN_HORSE_STATUE.ordinal(), EnumGraves.ICE_HORSE_STATUE.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.HorseStatue.class);
-        registerModelsForTEBlocks(EnumGraves.WOODEN_CREEPER_STATUE.ordinal(), EnumGraves.ICE_CREEPER_STATUE.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.CreeperStatue.class);
-        registerModelsForTEBlocks(EnumGraves.STARVED_CORPSE.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.StarvedCorpse.class);
-        registerModelsForTEBlocks(EnumGraves.WITHERED_CORPSE.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.WitheredCorpse.class);
-        registerModelsForTEBlocks(EnumGraves.SWORD.ordinal(), ResourcesModels.graveStoneModel, TileEntityGraveStone.Sword.class);
+        registerModelsForTEBlocks(0, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.class);
+        registerModelsForTEBlocks(EnumGraves.WOODEN_VERTICAL_PLATE.ordinal() + 1, EnumGraves.ICE_VERTICAL_PLATE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.VerticalPlate.class);
+        registerModelsForTEBlocks(EnumGraves.WOODEN_CROSS.ordinal(), EnumGraves.ICE_CROSS.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.Cross.class);
+        registerModelsForTEBlocks(EnumGraves.WOODEN_OBELISK.ordinal(), EnumGraves.ICE_OBELISK.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.Obelisk.class);
+        registerModelsForTEBlocks(EnumGraves.WOODEN_CELTIC_CROSS.ordinal(), EnumGraves.ICE_CELTIC_CROSS.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.CelticCross.class);
+        registerModelsForTEBlocks(EnumGraves.WOODEN_HORIZONTAL_PLATE.ordinal(), EnumGraves.ICE_HORIZONTAL_PLATE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.HorizontalPlate.class);
+        registerModelsForTEBlocks(EnumGraves.WOODEN_VILLAGER_STATUE.ordinal(), EnumGraves.ICE_VILLAGER_STATUE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.VillagerStatue.class);
+        registerModelsForTEBlocks(EnumGraves.WOODEN_DOG_STATUE.ordinal(), EnumGraves.ICE_DOG_STATUE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.DogStatue.class);
+        registerModelsForTEBlocks(EnumGraves.WOODEN_CAT_STATUE.ordinal(), EnumGraves.ICE_CAT_STATUE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.CatStatue.class);
+        registerModelsForTEBlocks(EnumGraves.WOODEN_HORSE_STATUE.ordinal(), EnumGraves.ICE_HORSE_STATUE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.HorseStatue.class);
+        registerModelsForTEBlocks(EnumGraves.WOODEN_CREEPER_STATUE.ordinal(), EnumGraves.ICE_CREEPER_STATUE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.CreeperStatue.class);
+        registerModelsForTEBlocks(EnumGraves.STARVED_CORPSE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.StarvedCorpse.class);
+        registerModelsForTEBlocks(EnumGraves.WITHERED_CORPSE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.WitheredCorpse.class);
+        registerModelsForTEBlocks(EnumGraves.SWORD.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.Sword.class);
     }
 
-    private void registerModelsForTEBlocks(int startMeta, int endMeta, ModelResourceLocation model, Class TEClass) {
+    private void registerModelsForTEBlocks(int startMeta, int endMeta, Block block, ModelResourceLocation model, Class TEClass) {
         for (int meta = startMeta; meta <= endMeta; meta++) {
-            registerModelsForTEBlocks(meta, model, TEClass);
+            registerModelsForTEBlocks(meta, block, model, TEClass);
         }
     }
 
-    private void registerModelsForTEBlocks(int meta, ModelResourceLocation model, Class TEClass) {
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.graveStone), meta, model);
-        ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(GSBlock.graveStone), meta, TEClass);
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.graveStone), meta, model);
+    private void registerModelsForTEBlocks(int meta, Block block, ModelResourceLocation model, Class TEClass) {
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), meta, model);
+        ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(block), meta, TEClass);
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta, model);
     }
 }
