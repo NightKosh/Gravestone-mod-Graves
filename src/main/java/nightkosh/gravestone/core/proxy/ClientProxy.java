@@ -83,13 +83,13 @@ public class ClientProxy extends CommonProxy {
         registerModelsForTEBlocks(EnumGraves.SWORD.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.Sword.class);
     }
 
-    private void registerModelsForTEBlocks(int startMeta, int endMeta, Block block, ModelResourceLocation model, Class TEClass) {
+    public void registerModelsForTEBlocks(int startMeta, int endMeta, Block block, ModelResourceLocation model, Class TEClass) {
         for (int meta = startMeta; meta <= endMeta; meta++) {
             registerModelsForTEBlocks(meta, block, model, TEClass);
         }
     }
 
-    private void registerModelsForTEBlocks(int meta, Block block, ModelResourceLocation model, Class TEClass) {
+    public void registerModelsForTEBlocks(int meta, Block block, ModelResourceLocation model, Class TEClass) {
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), meta, model);
         ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(block), meta, TEClass);
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta, model);

@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.LayeredTexture;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -22,6 +23,7 @@ import nightkosh.gravestone.models.block.graves.*;
 import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 import org.lwjgl.opengl.GL11;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -50,6 +52,8 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
     private static final ItemStack SWORD = new ItemStack(Items.iron_sword);
+
+    public static final Map<Item, EntityItem> flowersMap = new HashMap<>();
 
     static {
         GRAVE_TE.setGraveType(EnumGraves.STONE_VERTICAL_PLATE.ordinal());
@@ -238,16 +242,21 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     }
 
     private void renderFlower(World world, ItemStack flower) {
-        EntityItem entityitem = new EntityItem(world, 0, 0, 0, flower);
-        entityitem.hoverStart = 0;
+        EntityItem entityItem = flowersMap.get(flower.getItem());
+        if (entityItem == null) {
+            entityItem = new EntityItem(world, 0, 0, 0, flower);
+            flowersMap.put(flower.getItem(), entityItem);
+        }
+
+        entityItem.hoverStart = 0;
         GL11.glTranslatef(0, 1.6F, -0.1F);
         GL11.glScalef(1, -1, -1);
         GL11.glRotatef(45, 0, 1, 0);
 
-        Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
+        Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityItem, 0, 0, 0, 0, 0);
 
         GL11.glRotatef(-90, 0, 1, 0);
-        Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
+        Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityItem, 0, 0, 0, 0, 0);
     }
 
 
