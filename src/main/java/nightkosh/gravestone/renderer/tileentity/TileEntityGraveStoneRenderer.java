@@ -2,7 +2,14 @@ package nightkosh.gravestone.renderer.tileentity;
 
 import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderEntityItem;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.LayeredTexture;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -25,6 +32,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -34,6 +42,8 @@ import java.util.Map;
  */
 @SideOnly(Side.CLIENT)
 public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
+
+    private Random random = new Random();
 
     private static final Map<EnumGraves, ResourceLocation> mossyTexturesMap = Maps.newHashMap();
     public static ModelGraveStone verticalPlate = new ModelVerticalPlateGraveStone();
@@ -72,7 +82,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
         if (tileEntity == null) {
             tileEntity = getDefaultTE();
-            isSwordGrave =  isSwordGrave();
+            isSwordGrave = isSwordGrave();
             isEnchanted = false;
             sword = SWORD;
         } else {
@@ -232,13 +242,13 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
                 sword.getTagCompound().setTag("ench", new NBTTagList());
             }
         }
-        EntityItem entityitem = new EntityItem(world, 0, 0, 0, sword);
-        entityitem.hoverStart = 0;
+        EntityItem entityItem = new EntityItem(world, 0, 0, 0, sword);
+        entityItem.hoverStart = 0;
         GL11.glTranslatef(-0.37F, 0.83F, 0);
         GL11.glScalef(1.5F, -1.5F, -1.5F);
         GL11.glRotatef(225, 0, 0, 1);
 
-        Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityitem, 0, 0, 0, 0, 0);
+        renderItem(sword, entityItem);
     }
 
     private void renderFlower(World world, ItemStack flower) {
@@ -253,12 +263,44 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         GL11.glScalef(1, -1, -1);
         GL11.glRotatef(45, 0, 1, 0);
 
-        Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityItem, 0, 0, 0, 0, 0);
+        renderItem(flower, entityItem);
 
         GL11.glRotatef(-90, 0, 1, 0);
-        Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityItem, 0, 0, 0, 0, 0);
+
+        renderItem(flower, entityItem);
     }
 
+    protected void renderItem(ItemStack itemstack, EntityItem entityItem) {
+        RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
+        Render<EntityItem> render = Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(entityItem);
+        if (render != null && render instanceof RenderEntityItem) {
+            RenderEntityItem renderItem = (RenderEntityItem) render;
+
+            if (renderItem.bindEntityTexture(entityItem)) {
+                renderManager.renderEngine.getTexture(TextureMap.locationBlocksTexture).setBlurMipmap(false, false);
+            }
+
+            GlStateManager.enableRescaleNormal();
+            GlStateManager.alphaFunc(516, 0.1F);
+            GlStateManager.enableBlend();
+            GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+            GlStateManager.pushMatrix();
+            IBakedModel ibakedmodel = renderItem.itemRenderer.getItemModelMesher().getItemModel(itemstack);
+
+            GlStateManager.translate(0, 0.35F, 0);
+
+            if (ibakedmodel.isGui3d()) {
+                GlStateManager.scale(0.5F, 0.5F, 0.5F);
+            }
+            ibakedmodel = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(ibakedmodel, ItemCameraTransforms.TransformType.GROUND);
+            renderItem.itemRenderer.renderItem(itemstack, ibakedmodel);
+            GlStateManager.popMatrix();
+
+            GlStateManager.popMatrix();
+            GlStateManager.disableRescaleNormal();
+            GlStateManager.disableBlend();
+        }
+    }
 
 
     protected TileEntityGraveStone getDefaultTE() {
@@ -271,6 +313,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static class VerticalPlateRenderer extends TileEntityGraveStoneRenderer {
         private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+
         static {
             GRAVE_TE.setGraveType(EnumGraves.STONE_VERTICAL_PLATE.ordinal());
         }
@@ -283,6 +326,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static class CrossRenderer extends TileEntityGraveStoneRenderer {
         private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+
         static {
             GRAVE_TE.setGraveType(EnumGraves.STONE_CROSS.ordinal());
         }
@@ -295,6 +339,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static class ObeliskRenderer extends TileEntityGraveStoneRenderer {
         private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+
         static {
             GRAVE_TE.setGraveType(EnumGraves.STONE_OBELISK.ordinal());
         }
@@ -307,6 +352,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static class CelticCrossRenderer extends TileEntityGraveStoneRenderer {
         private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+
         static {
             GRAVE_TE.setGraveType(EnumGraves.STONE_CELTIC_CROSS.ordinal());
         }
@@ -319,6 +365,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static class HorizontalPlateRenderer extends TileEntityGraveStoneRenderer {
         private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+
         static {
             GRAVE_TE.setGraveType(EnumGraves.STONE_HORIZONTAL_PLATE.ordinal());
         }
@@ -331,6 +378,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static class VillagerStatueRenderer extends TileEntityGraveStoneRenderer {
         private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+
         static {
             GRAVE_TE.setGraveType(EnumGraves.STONE_VILLAGER_STATUE.ordinal());
         }
@@ -343,6 +391,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static class DogStatueRenderer extends TileEntityGraveStoneRenderer {
         private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+
         static {
             GRAVE_TE.setGraveType(EnumGraves.STONE_DOG_STATUE.ordinal());
         }
@@ -355,6 +404,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static class CatStatueRenderer extends TileEntityGraveStoneRenderer {
         private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+
         static {
             GRAVE_TE.setGraveType(EnumGraves.STONE_CAT_STATUE.ordinal());
         }
@@ -367,6 +417,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static class HorseStatueRenderer extends TileEntityGraveStoneRenderer {
         private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+
         static {
             GRAVE_TE.setGraveType(EnumGraves.STONE_HORSE_STATUE.ordinal());
         }
@@ -379,6 +430,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static class CreeperStatueRenderer extends TileEntityGraveStoneRenderer {
         private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+
         static {
             GRAVE_TE.setGraveType(EnumGraves.STONE_CREEPER_STATUE.ordinal());
         }
@@ -392,6 +444,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static class StarvedCorpseRenderer extends TileEntityGraveStoneRenderer {
         private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+
         static {
             GRAVE_TE.setGraveType(EnumGraves.STARVED_CORPSE.ordinal());
         }
@@ -404,6 +457,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static class WitheredCorpseRenderer extends TileEntityGraveStoneRenderer {
         private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+
         static {
             GRAVE_TE.setGraveType(EnumGraves.WITHERED_CORPSE.ordinal());
         }
@@ -416,6 +470,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static class SwordRenderer extends TileEntityGraveStoneRenderer {
         private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+
         static {
             GRAVE_TE.setGraveType(EnumGraves.SWORD.ordinal());
         }
