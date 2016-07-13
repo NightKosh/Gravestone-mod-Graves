@@ -3,19 +3,14 @@ package nightkosh.gravestone.renderer.tileentity;
 import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderEntityItem;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.LayeredTexture;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -24,6 +19,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.enums.EnumGraves;
+import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.core.Resources;
 import nightkosh.gravestone.models.block.ModelGraveStone;
 import nightkosh.gravestone.models.block.graves.*;
@@ -64,6 +60,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     private static final ItemStack SWORD = new ItemStack(Items.iron_sword);
 
     public static final Map<Item, EntityItem> flowersMap = new HashMap<>();
+    public static final Map<Item, EntityItem> swordsMap = new HashMap<>();
 
     static {
         GRAVE_TE.setGraveType(EnumGraves.STONE_VERTICAL_PLATE.ordinal());
@@ -137,7 +134,11 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     private void renderGrave(World world, EnumGraves graveType, boolean isEnchanted, boolean isMossy, boolean hasFlower, ItemStack flower, boolean isSwordGrave, ItemStack sword) {
         if (isSwordGrave) {
-            renderSword(world, sword, isEnchanted);
+            if (Config.vanillaRendererForSwordsGraves) {
+                renderSword(world, sword);
+            } else {
+                //TODO !!!!!!
+            }
         } else {
             ModelGraveStone model = getModel(graveType.getGraveType());
 
@@ -233,16 +234,13 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         }
     }
 
-    private void renderSword(World world, ItemStack sword, boolean isEnchanted) {
-        if (isEnchanted) {
-            if (!sword.isItemEnchanted()) {
-                if (!sword.hasTagCompound()) {
-                    sword.setTagCompound(new NBTTagCompound());
-                }
-                sword.getTagCompound().setTag("ench", new NBTTagList());
-            }
+    private void renderSword(World world, ItemStack sword) {
+        EntityItem entityItem = swordsMap.get(sword.getItem());
+        if (entityItem == null) {
+            entityItem = new EntityItem(world, 0, 0, 0, sword);
+            swordsMap.put(sword.getItem(), entityItem);
         }
-        EntityItem entityItem = new EntityItem(world, 0, 0, 0, sword);
+
         entityItem.hoverStart = 0;
         GL11.glTranslatef(-0.37F, 0.83F, 0);
         GL11.glScalef(1.5F, -1.5F, -1.5F);
@@ -252,39 +250,38 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     }
 
     private void renderFlower(World world, ItemStack flower) {
-        EntityItem entityItem = flowersMap.get(flower.getItem());
-        if (entityItem == null) {
-            entityItem = new EntityItem(world, 0, 0, 0, flower);
-            flowersMap.put(flower.getItem(), entityItem);
+        if (Config.renderGravesFlowers) {
+            EntityItem entityItem = flowersMap.get(flower.getItem());
+            if (entityItem == null) {
+                entityItem = new EntityItem(world, 0, 0, 0, flower);
+                flowersMap.put(flower.getItem(), entityItem);
+            }
+
+            entityItem.hoverStart = 0;
+            GL11.glTranslatef(0, 1.6F, -0.1F);
+            GL11.glScalef(1, -1, -1);
+            GL11.glRotatef(45, 0, 1, 0);
+
+            renderItem(flower, entityItem);
+
+            GL11.glRotatef(-90, 0, 1, 0);
+
+            renderItem(flower, entityItem);
         }
-
-        entityItem.hoverStart = 0;
-        GL11.glTranslatef(0, 1.6F, -0.1F);
-        GL11.glScalef(1, -1, -1);
-        GL11.glRotatef(45, 0, 1, 0);
-
-        renderItem(flower, entityItem);
-
-        GL11.glRotatef(-90, 0, 1, 0);
-
-        renderItem(flower, entityItem);
     }
 
     protected void renderItem(ItemStack itemstack, EntityItem entityItem) {
-        RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
         Render<EntityItem> render = Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(entityItem);
         if (render != null && render instanceof RenderEntityItem) {
-            RenderEntityItem renderItem = (RenderEntityItem) render;
+            GlStateManager.pushMatrix();
 
-            if (renderItem.bindEntityTexture(entityItem)) {
-                renderManager.renderEngine.getTexture(TextureMap.locationBlocksTexture).setBlurMipmap(false, false);
-            }
+            RenderEntityItem renderItem = (RenderEntityItem) render;
+            renderItem.bindEntityTexture(entityItem);
 
             GlStateManager.enableRescaleNormal();
             GlStateManager.alphaFunc(516, 0.1F);
             GlStateManager.enableBlend();
             GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-            GlStateManager.pushMatrix();
             IBakedModel ibakedmodel = renderItem.itemRenderer.getItemModelMesher().getItemModel(itemstack);
 
             GlStateManager.translate(0, 0.35F, 0);
@@ -292,13 +289,11 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
             if (ibakedmodel.isGui3d()) {
                 GlStateManager.scale(0.5F, 0.5F, 0.5F);
             }
-            ibakedmodel = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(ibakedmodel, ItemCameraTransforms.TransformType.GROUND);
             renderItem.itemRenderer.renderItem(itemstack, ibakedmodel);
-            GlStateManager.popMatrix();
 
-            GlStateManager.popMatrix();
             GlStateManager.disableRescaleNormal();
             GlStateManager.disableBlend();
+            GlStateManager.popMatrix();
         }
     }
 
