@@ -98,7 +98,11 @@ public class BlockGraveStone extends BlockContainer {
                 tileEntity.setPurified(nbt.getBoolean("Purified"));
 
                 if (nbt.hasKey("Sword")) {
-                    tileEntity.setSword(ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("Sword")));
+                    ItemStack sword = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("Sword"));
+                    tileEntity.setSword(sword);
+                    if (sword.isItemEnchanted()) {
+                        tileEntity.setEnchanted(true);
+                    }
                 }
             }
         }

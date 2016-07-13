@@ -15,6 +15,7 @@ public class Resources {
     public static final String BLOCK_LOCATION = MOD_NAME + ":textures/blocks/";
     public static final String GRAVES_LOCATION = MOD_NAME + ":textures/graves/";
     public static final String STATUES_LOCATION = MOD_NAME + ":textures/statues/";
+    public static final String SWORDS_LOCATION = MOD_NAME + ":textures/swords/";
 
     // gui
     public static final ResourceLocation CHEST_GUI = new ResourceLocation("textures/gui/container/generic_54.png");
@@ -221,6 +222,12 @@ public class Resources {
     public static final ResourceLocation PRIZMARINE_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Prizmarine.png");
     public static final ResourceLocation ICE_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Ice.png");
     public static final ResourceLocation MOSSY_CREEPER_STATUE = new ResourceLocation(STATUES_LOCATION + "Creeper/Mossy.png");
+    // swords
+    public static final ResourceLocation WOODEN_SWORD = new ResourceLocation(SWORDS_LOCATION + "Wooden.png");
+    public static final ResourceLocation STONE_SWORD = new ResourceLocation(SWORDS_LOCATION + "Stone.png");
+    public static final ResourceLocation IRON_SWORD = new ResourceLocation(SWORDS_LOCATION + "Iron.png");
+    public static final ResourceLocation GOLDEN_SWORD = new ResourceLocation(SWORDS_LOCATION + "Golden.png");
+    public static final ResourceLocation DIAMOND_SWORD = new ResourceLocation(SWORDS_LOCATION + "Diamond.png");
 
     // models - parts
     public static final ResourceLocation CREEPER_AURA = new ResourceLocation("textures/entity/creeper/creeper_armor.png");

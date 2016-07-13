@@ -54,6 +54,9 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     public static ModelGraveStone creeperStatue = new ModelCreeperStatueGravestone();
     public static ModelGraveStone skeletonCorpse = new ModelSkeletonCorpseGravestone(false);
     public static ModelGraveStone witheredSkeletonCorpse = new ModelSkeletonCorpseGravestone(true);
+
+    public static ModelGraveStone swordModel = new ModelSwordGraveStone();
+
     public static TileEntityGraveStoneRenderer instance;
 
     private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
@@ -61,6 +64,15 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static final Map<Item, EntityItem> flowersMap = new HashMap<>();
     public static final Map<Item, EntityItem> swordsMap = new HashMap<>();
+
+    public static final Map<Item, ResourceLocation> swordsTextureMap = new HashMap<>();
+    static {
+        swordsTextureMap.put(Items.wooden_sword, Resources.WOODEN_SWORD);
+        swordsTextureMap.put(Items.stone_sword, Resources.STONE_SWORD);
+        swordsTextureMap.put(Items.iron_sword, Resources.IRON_SWORD);
+        swordsTextureMap.put(Items.golden_sword, Resources.GOLDEN_SWORD);
+        swordsTextureMap.put(Items.diamond_sword, Resources.DIAMOND_SWORD);
+    }
 
     static {
         GRAVE_TE.setGraveType(EnumGraves.STONE_VERTICAL_PLATE.ordinal());
@@ -134,10 +146,17 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     private void renderGrave(World world, EnumGraves graveType, boolean isEnchanted, boolean isMossy, boolean hasFlower, ItemStack flower, boolean isSwordGrave, ItemStack sword) {
         if (isSwordGrave) {
-            if (Config.vanillaRendererForSwordsGraves) {
+            ResourceLocation swordTexture = swordsTextureMap.get(sword.getItem());
+            if (Config.vanillaRendererForSwordsGraves || swordTexture == null) {
                 renderSword(world, sword);
             } else {
-                //TODO !!!!!!
+                ModelGraveStone model = getModel(graveType.getGraveType());
+                bindTextureByName(swordTexture);
+                if (isEnchanted) {
+                    model.renderEnchanted();
+                } else {
+                    model.renderAll();
+                }
             }
         } else {
             ModelGraveStone model = getModel(graveType.getGraveType());
@@ -231,6 +250,8 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
                 return skeletonCorpse;
             case WITHERED_CORPSE:
                 return witheredSkeletonCorpse;
+            case SWORD:
+                return swordModel;
         }
     }
 
