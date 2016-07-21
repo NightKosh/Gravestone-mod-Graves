@@ -1,7 +1,5 @@
 package nightkosh.gravestone.helper;
 
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
-
 /**
  * GraveStone mod
  *
@@ -10,20 +8,9 @@ import nightkosh.gravestone.tileentity.TileEntityGraveStone;
  */
 public interface ISpawner {
 
-    public static ISpawner spawner = new ISpawner() {
-        @Override
-        public ISpawner getSpawner(TileEntityGraveStone te) {
-            return this;
-        }
-    };
-
     public default void update() {
     }
 
     public default void setMinDelay() {
-    }
-
-    public default ISpawner getSpawner(TileEntityGraveStone te) {
-        return spawner;
     }
 }

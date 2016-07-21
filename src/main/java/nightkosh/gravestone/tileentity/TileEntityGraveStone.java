@@ -6,6 +6,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.helper.GraveSpawnerHelper;
 import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
 import nightkosh.gravestone.helper.IFog;
 import nightkosh.gravestone.helper.ISpawner;
@@ -20,28 +21,27 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class TileEntityGraveStone extends TileEntityGrave implements ITickable, ISpawnerEntity {
 
+    public static GraveSpawnerHelper graveSpawnerHelper = new GraveSpawnerHelper();
+
     protected ItemStack sword = null;
     protected ItemStack flower = null;
     protected String playerId = "";
     protected boolean isPurified = false;
     protected int spawnerHelperId;
     protected GroupOfGravesSpawnerHelper spawnerHelper;
-    protected ISpawner spawner = new ISpawner() {
-    };
+    protected ISpawner spawner;
     public static IFog fogHandler = new IFog() {
     };
 
     public TileEntityGraveStone() {
         super();
-        spawner = spawner.getSpawner(this);
+        spawner = graveSpawnerHelper.getSpawner(this);
         inventory = new GraveInventory(this);
     }
 
     public TileEntityGraveStone(World world) {
-        super();
+        this();
         this.worldObj = world;
-        spawner = spawner.getSpawner(this);
-        inventory = new GraveInventory(this);
     }
 
     /**
