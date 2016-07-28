@@ -18,9 +18,7 @@ Read more on [official site](http://gravestone.nightkosh.com/) or on [minecraft 
 **Be careful some of these API may not be updated yet, or may be bugged!**
 
 1. [Gravestone Mod API](https://github.com/NightKosh/GraveStone-mod-API) (will be loaded as git submodule)
-2. ~~[Sophisticated wolves API](https://github.com/NightKosh/Sophisticated-wolves-API) (will be loaded as git submodule)~~
 3. [Baubles API](https://github.com/Azanor/Baubles) (will be loaded as git submodule)
-4. ~~[Forestry API](https://github.com/ForestryMC/ForestryAPI) (will be loaded as git submodule)~~
 5. [Mariculture API](https://github.com/joshiejack/Mariculture)
 6. [Galacticraft API](https://github.com/micdoodle8/Galacticraft-API)
 7. [TinkersConstruct API](https://github.com/SlimeKnights/TinkersConstruct)
