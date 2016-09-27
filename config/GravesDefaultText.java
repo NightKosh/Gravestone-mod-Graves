@@ -22,7 +22,7 @@ public abstract class GravesDefaultText {
     public static final String[] CATS_MEMORIAL_TEXT = {};
     public static final String[] NAMES = {
         "Alex", "Alice", "Alan", "Ashley", "Alexander", "Amy", "Amelia", "Aurora", "Abigail",
-        "Barry", "Bextrix", "Benjamin", "Billy", "Beatrice", "Betty", "Brady", "Blake",
+        "Barry", "Bextrix", "Benjamin", "Billy", "Beatrice", "Betty", "Brady", "Blake", "Brandon",
         "Calvin", "Carolyn", "Cate", "Chandler", "Chuck", "Clyde", "Caleb", "Corey", "Christian", "Charles", "Chere",
         "David", "Denice", "Dorian", "Daniel", "Daffodil", "Daedalus", "Daiva", "Dalia",
         "Edison", "Edna", "Edward", "Eliot", "Elisa", "Emily", "Ethan", "Emma", "Ezra",
