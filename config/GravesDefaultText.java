@@ -23,7 +23,7 @@ public abstract class GravesDefaultText {
     public static final String[] NAMES = {
         "Alex", "Alice", "Alan", "Ashley", "Alexander", "Amy", "Amelia", "Aurora", "Abigail",
         "Barry", "Bextrix", "Benjamin", "Billy", "Beatrice", "Betty", "Brady", "Blake", "Brandon",
-        "Calvin", "Carolyn", "Cate", "Chandler", "Chuck", "Clyde", "Caleb", "Corey", "Christian", "Charles", "Chere",
+        "Calvin", "Carolyn", "Cate", "Chandler", "Chuck", "Clyde", "Caleb", "Corey", "Christian", "Charles", "Chere", "Caesar",
         "David", "Denice", "Dorian", "Daniel", "Daffodil", "Daedalus", "Daiva", "Dalia",
         "Edison", "Edna", "Edward", "Eliot", "Elisa", "Emily", "Ethan", "Emma", "Ezra",
         "Flynn", "Faith", "Fabia", "Francis", "Fabien", "Fathi", "Frederick", "Febe",
