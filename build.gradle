@@ -17,7 +17,8 @@ tasks.withType(JavaCompile) {
     targetCompatibility = "1.8"
 }
 
-version = "1.0.0"
+version = "1.0.1"
+group = "nightkosh.gravestone"
 archivesBaseName = "GraveStone-1.8.9-Graves"
 
 minecraft {
@@ -35,6 +36,10 @@ sourceSets {
     main {
         java {
             srcDir project.apiGravestone
+        }
+    }
+    api {
+        java {
             srcDir project.apiBaubles
             srcDir project.apiThaumcraft
         }
@@ -59,11 +64,9 @@ dependencies {
 }
 
 jar {
-    exclude('baubles/**')
     exclude('mariculture/**')
     exclude('micdoodle8/**')
     exclude('tconstruct/**')
-    exclude('thaumcraft/**')
     exclude('**/*.db')
     exclude('assets/gravestone/techne_models/**')
 
