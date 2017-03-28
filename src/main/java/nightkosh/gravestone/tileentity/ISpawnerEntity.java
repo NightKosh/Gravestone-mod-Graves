@@ -1,8 +1,8 @@
 package nightkosh.gravestone.tileentity;
 
-import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
 
 /**
  * GraveStone mod
@@ -12,9 +12,9 @@ import net.minecraft.world.World;
  */
 public interface ISpawnerEntity {
 
-    public BlockPos getPos();
+    public BlockPos getIPos();
 
-    public World getWorld();
+    public World getIWorld();
 
     public boolean haveSpawnerHelper();
 

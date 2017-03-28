@@ -1,5 +1,6 @@
 package nightkosh.gravestone.helper;
 
+import net.minecraft.util.BlockPos;
 import nightkosh.gravestone.tileentity.ISpawnerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
@@ -14,5 +15,15 @@ public abstract class GroupOfGravesSpawnerHelper extends Entity implements ISpaw
 
     public GroupOfGravesSpawnerHelper(World worldIn) {
         super(worldIn);
+    }
+
+    @Override
+    public World getIWorld() {
+        return getEntityWorld();
+    }
+
+    @Override
+    public BlockPos getIPos() {
+        return getPosition();
     }
 }

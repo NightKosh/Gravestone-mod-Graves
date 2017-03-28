@@ -2,6 +2,7 @@ package nightkosh.gravestone.tileentity;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import nightkosh.gravestone.block.enums.EnumGraves;
@@ -58,6 +59,16 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
         spawner.update();
 
         fogHandler.addFog(this.worldObj, this.pos);
+    }
+
+    @Override
+    public World getIWorld() {
+        return getWorld();
+    }
+
+    @Override
+    public BlockPos getIPos() {
+        return getPos();
     }
 
     /**
