@@ -172,6 +172,7 @@ public class DeathTextHelper {
                     break;
                 case HORSE_GRAVES:
                     //TODO
+                    deathText.setName(getValue(random, Config.graveDogsNames));
                     break;
                 default:
                     deathText.setName(getValue(random, Config.graveNames));
@@ -198,7 +199,7 @@ public class DeathTextHelper {
     private static boolean getDeathMessage(GraveStoneDeathText deathText, Random random) {
         DeathMessageInfo deathMessageInfo = getRandomDeathMessage(random);
         deathText.setDeathText(deathMessageInfo.getDeathMessage());
-        deathText.setDeathText(deathMessageInfo.getKillerNameForTE());
+        deathText.setKillerName(deathMessageInfo.getKillerNameForTE());
         if (deathMessageInfo.getName().length() != 0) {
             deathText.setDeathText(deathMessageInfo.getName());
             return false;
