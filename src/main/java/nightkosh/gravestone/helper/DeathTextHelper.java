@@ -124,27 +124,6 @@ public class DeathTextHelper {
             "entity.WitherBoss.name"
     };
 
-    //TODO
-//    public static GSGraveStoneDeathText getRandomDeathTextAndNameForMemorial(Random random, EnumMemorials memorialType) {
-//        GSGraveStoneDeathText deathText = new GSGraveStoneDeathText();//TODO te
-//        deathText.setLocalized();
-//        switch (memorialType.getMemorialType()) {
-//            case DOG_STATUE:
-//                getRandomMemorialContent(deathText, random, GSConfig.graveDogsNames, GSConfig.dogsMemorialText);//TODO
-//                break;
-//            case CAT_STATUE:
-//                getRandomMemorialContent(deathText, random, GSConfig.graveCatsNames, GSConfig.catsMemorialText);//TODO
-//                break;
-//            case CREEPER_STATUE:
-//                deathText.setDeathText("Sssssssssssssss...");
-//                break;
-//            default:
-//                getRandomMemorialContent(deathText, random, GSConfig.graveNames, GSConfig.memorialText);//TODO
-//                break;
-//        }
-//        return deathText;
-//    }
-
     public static GraveStoneDeathText getRandomDeathTextAndNameForGrave(Random random, EnumGraveType graveType) {
         switch (graveType) {
             case DOG_STATUE:
@@ -190,7 +169,7 @@ public class DeathTextHelper {
         }
     }
 
-    private static void getRandomMemorialContent(GraveStoneDeathText deathText, Random random, ArrayList<String> nameList, ArrayList<String> textList) {
+    private static void getRandomMemorialContent(GraveStoneDeathText deathText, Random random, ArrayList<String> nameList) {
         if (getDeathMessage(deathText, random)) {
             deathText.setDeathText(getValue(random, nameList));
         }
