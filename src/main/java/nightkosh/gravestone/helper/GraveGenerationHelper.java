@@ -306,7 +306,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             }
         }
 
-        graveInfo.setMossy(isMossyGrave(world, pos, graveInfo.grave));
+        graveInfo.setMossy(isMossyGrave(world, pos, graveInfo.grave.getMaterial()));
         graveInfo.setEnchanted(INSTANCE.isMagicDamage(damageSource));
 
         return graveInfo;
@@ -457,12 +457,12 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
     @Override
     public boolean isMossyGrave(World world, BlockPos pos, EnumGraveMaterial graveMaterial, EnumGraveType graveType) {
-        return isMossyGrave(world, pos, EnumGraves.getByTypeAndMaterial(graveType, graveMaterial));
+        return isMossyGrave(world, pos, EnumGraves.getByTypeAndMaterial(graveType, graveMaterial).getMaterial());
     }
 
-    public static boolean isMossyGrave(World world, BlockPos pos, EnumGraves grave) {
+    public static boolean isMossyGrave(World world, BlockPos pos, EnumGraveMaterial graveMaterial) {
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(pos))));
-        return grave.getMaterial() != EnumGraveMaterial.OTHER && (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP));
+        return graveMaterial != EnumGraveMaterial.OTHER && (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP));
     }
 
     public static boolean chooseGraveTypeByAgeOrLevel(Entity entity, EnumGraveTypeByEntity graveTypeByEntity, int age) {
@@ -559,28 +559,39 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         return getGraveType(graveTypes, material);
     }
 
-    private static boolean isFireDamage(DamageSource damageSource, String damageType) {
-        return DamageSource.inFire.equals(damageSource) || DamageSource.onFire.equals(damageSource) ||
-                damageType.toLowerCase().contains("nFire");
+    public static boolean isFireDamage(DamageSource damageSource, String damageType) {
+        return DamageSource.inFire.equals(damageSource) || DamageSource.onFire.equals(damageSource) || isFireDamage(damageType);
     }
 
-    private static boolean isLavaDamage(DamageSource damageSource, String damageType) {
-        return DamageSource.lava.equals(damageSource) || damageType.toLowerCase().contains("lava");
+    public static boolean isFireDamage(String damageType) {
+        return damageType.toLowerCase().contains("nfire");
     }
 
-    private static boolean isExplosionDamage(DamageSource damageSource) {
+    public static boolean isLavaDamage(DamageSource damageSource, String damageType) {
+        return DamageSource.lava.equals(damageSource) || isLavaDamage(damageType);
+    }
+
+    public static boolean isLavaDamage(String damageType) {
+        return damageType.toLowerCase().contains("lava");
+    }
+
+    public static boolean isMagicDamage(String damageText) {
+        return damageText.toLowerCase().contains("magic");
+    }
+
+    public static boolean isExplosionDamage(DamageSource damageSource) {
         return isBlastDamage(damageSource.damageType) || isFireballDamage(damageSource.damageType);
     }
 
-    private static boolean isBlastDamage(String damageType) {
+    public static boolean isBlastDamage(String damageType) {
         return damageType.toLowerCase().contains("explosion");
     }
 
-    private static boolean isFireballDamage(String damageType) {
+    public static boolean isFireballDamage(String damageType) {
         return damageType.toLowerCase().contains("fireball");
     }
 
-    public static EnumGraves getGraveTypeByBiomes(World world, BlockPos pos, EnumGraveTypeByEntity graveTypeByEntity, DamageSource damageSource) {
+    public static EnumGraveMaterial[] getGraveMaterialByBiomes(World world, BlockPos pos) {
         ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(pos))));
 
         ArrayList<EnumGraveMaterial> materials = new ArrayList<>();
@@ -621,14 +632,19 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             materials.add(EnumGraveMaterial.STONE);
         }
 
+        EnumGraveMaterial[] materialsArray = new EnumGraveMaterial[materials.size()];
+        return materials.toArray(materialsArray);
+    }
+
+    public static EnumGraves getGraveTypeByBiomes(World world, BlockPos pos, EnumGraveTypeByEntity graveTypeByEntity, DamageSource damageSource) {
+        EnumGraveMaterial[] materialsArray = getGraveMaterialByBiomes(world, pos);
+
         EnumGraveType[] type;
         if (damageSource != null && isExplosionDamage(damageSource)) {
             type = GENERATED_CREEPER_STATUES_GRAVES_TYPES;
         } else {
             type = getDefaultGraveTypes(graveTypeByEntity);
         }
-        EnumGraveMaterial[] materialsArray = new EnumGraveMaterial[materials.size()];
-        materialsArray = materials.toArray(materialsArray);
         return getGraveType(type, materialsArray);
     }
 
