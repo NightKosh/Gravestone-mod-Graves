@@ -122,6 +122,9 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         } else {
             GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
             GL11.glScalef(1, -1, -1);
+            if (world == null) {
+                GL11.glRotatef(35, 0, 1, 0);
+            }
         }
 
         switch (facing) {
@@ -148,6 +151,13 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         if (isSwordGrave) {
             ResourceLocation swordTexture = swordsTextureMap.get(sword.getItem());
             if (Config.vanillaRendererForSwordsGraves || swordTexture == null) {
+                if (world == null) {
+                    GL11.glScalef(0.5F, -0.5F, -0.5F);
+                    GL11.glTranslatef(-0.37F, -1.7F, 0);
+                } else {
+                    GL11.glScalef(1, -1, -1);
+                    GL11.glTranslatef(-0.27F, -0.83F, 0);
+                }
                 renderSword(world, sword);
             } else {
                 ModelGraveStone model = getModel(graveType.getGraveType());
@@ -263,8 +273,6 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         }
 
         entityItem.hoverStart = 0;
-        GL11.glTranslatef(-0.37F, 0.83F, 0);
-        GL11.glScalef(1.5F, -1.5F, -1.5F);
         GL11.glRotatef(225, 0, 0, 1);
 
         renderItem(sword, entityItem);
