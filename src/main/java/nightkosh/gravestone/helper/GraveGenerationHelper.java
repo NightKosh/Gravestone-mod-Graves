@@ -15,6 +15,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -437,7 +438,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                     killerName = "entity." + killerName + ".name";
                 }
             }
-            if (StatCollector.canTranslate(fullString)) {
+            if (I18n.canTranslate(fullString)) {
                 return new DeathMessageInfo(entityName, fullString, killerName);
             } else {
                 return new DeathMessageInfo(entityName, shortString, killerName);

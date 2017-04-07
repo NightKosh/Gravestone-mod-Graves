@@ -1,10 +1,13 @@
 {
   "homepage": "http://gravestone.nightkosh.com/",
   "promos": {
-    "1.8-latest": "3.0.0",
-    "1.8-recommended": "3.0.0"
+    "1.8-latest": "1.0.1",
+    "1.8-recommended": "1.0.1"
   },
-  "1.8": {
-    "3.0.0": "Update to Minecraft Version 1.8, some bugfixes & new features."
+  "1.8.9": {
+    "1.0.1": "Update to Minecraft Version 1.8.9, some bugfixes & new features."
+  },
+  "1.9.4": {
+    "1.0.1": "Update to Minecraft Version 1.9.4, some bugfixes & new features."
   }
 }

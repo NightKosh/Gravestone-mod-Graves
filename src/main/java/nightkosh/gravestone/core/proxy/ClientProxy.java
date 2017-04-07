@@ -1,5 +1,6 @@
 package nightkosh.gravestone.core.proxy;
 
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.core.GSBlock;
@@ -50,7 +51,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public String getLocalizedEntityName(String name) {
-        return StatCollector.translateToLocal(name);
+        return I18n.translateToLocal(name);
     }
 
     @Override

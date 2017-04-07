@@ -132,8 +132,9 @@ public class BlockGraveStone extends BlockContainer {
         return null;
     }
 
+    //TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Create constants !!!!!!!!!!!!!!!!!!!!!!!!!!
     @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess access, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess access, BlockPos pos) {
         EnumFacing facing = (EnumFacing) access.getBlockState(pos).getValue(FACING);
         EnumGraveType graveType;
         TileEntityGraveStone tileEntity = (TileEntityGraveStone) access.getTileEntity(pos);
@@ -148,129 +149,102 @@ public class BlockGraveStone extends BlockContainer {
             case VERTICAL_PLATE:
                 switch (facing) {
                     case SOUTH:
-                        this.setBlockBounds(0.125F, 0, 0.0625F, 0.875F, 0.9375F, 0.1875F);
-                        break;
+                        return new AxisAlignedBB(0.125, 0, 0.0625, 0.875, 0.9375, 0.1875);
                     case NORTH:
-                        this.setBlockBounds(0.125F, 0, 0.8125F, 0.875F, 0.9375F, 0.9375F);
-                        break;
+                        return new AxisAlignedBB(0.125F, 0, 0.8125F, 0.875F, 0.9375F, 0.9375F);
                     case EAST:
-                        this.setBlockBounds(0.0625F, 0, 0.125F, 0.1875F, 0.9375F, 0.875F);
-                        break;
+                        return new AxisAlignedBB(0.0625F, 0, 0.125F, 0.1875F, 0.9375F, 0.875F);
                     case WEST:
-                        this.setBlockBounds(0.8125F, 0, 0.125F, 0.9375F, 0.9375F, 0.875F);
-                        break;
+                        return new AxisAlignedBB(0.8125F, 0, 0.125F, 0.9375F, 0.9375F, 0.875F);
                 }
                 break;
             case CROSS:
                 switch (facing) {
                     case SOUTH:
-                        this.setBlockBounds(0.125F, 0, 0.0625F, 0.875F, 1, 0.1875F);
-                        break;
+                        return new AxisAlignedBB(0.125F, 0, 0.0625F, 0.875F, 1, 0.1875F);
                     case NORTH:
-                        this.setBlockBounds(0.125F, 0, 0.8125F, 0.875F, 1, 0.9375F);
-                        break;
+                        return new AxisAlignedBB(0.125F, 0, 0.8125F, 0.875F, 1, 0.9375F);
                     case EAST:
-                        this.setBlockBounds(0.0625F, 0, 0.125F, 0.1875F, 1, 0.875F);
-                        break;
+                        return new AxisAlignedBB(0.0625F, 0, 0.125F, 0.1875F, 1, 0.875F);
                     case WEST:
-                        this.setBlockBounds(0.8125F, 0, 0.125F, 0.9375F, 1, 0.875F);
-                        break;
+                        return new AxisAlignedBB(0.8125F, 0, 0.125F, 0.9375F, 1, 0.875F);
                 }
                 break;
             case CELTIC_CROSS:
                 switch (facing) {
                     case SOUTH:
                     case NORTH:
-                        this.setBlockBounds(0.125F, 0, 0.35F, 0.875F, 1.3F, 0.65F);
-                        break;
+                        return new AxisAlignedBB(0.125F, 0, 0.35F, 0.875F, 1.3F, 0.65F);
                     case EAST:
                     case WEST:
-                        this.setBlockBounds(0.35F, 0, 0.125F, 0.65F, 1.3F, 0.875F);
-                        break;
+                        return new AxisAlignedBB(0.35F, 0, 0.125F, 0.65F, 1.3F, 0.875F);
                 }
                 break;
             case OBELISK:
             case CREEPER_STATUE:
             case VILLAGER_STATUE:
-                this.setBlockBounds(0.35F, 0, 0.35F, 0.65F, 0.92F, 0.65F);
-                break;
+                return new AxisAlignedBB(0.35F, 0, 0.35F, 0.65F, 0.92F, 0.65F);
             case HORIZONTAL_PLATE:
                 switch (facing) {
                     case SOUTH:
-                        this.setBlockBounds(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
-                        break;
+                        return new AxisAlignedBB(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
                     case NORTH:
-                        this.setBlockBounds(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
-                        break;
+                        return new AxisAlignedBB(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
                     case EAST:
-                        this.setBlockBounds(0.0625F, 0, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
-                        break;
+                        return new AxisAlignedBB(0.0625F, 0, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
                     case WEST:
-                        this.setBlockBounds(0.0625F, 0, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
-                        break;
+                        return new AxisAlignedBB(0.0625F, 0, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
                 }
                 break;
             case DOG_STATUE:
                 switch (facing) {
                     case SOUTH:
-                        this.setBlockBounds(0.35F, 0, 0.3F, 0.6F, 0.5F, 0.9F);
-                        break;
+                        return new AxisAlignedBB(0.35F, 0, 0.3F, 0.6F, 0.5F, 0.9F);
                     case NORTH:
-                        this.setBlockBounds(0.35F, 0, 0.7F, 0.6F, 0.5F, 0.1F);
-                        break;
+                        return new AxisAlignedBB(0.35F, 0, 0.7F, 0.6F, 0.5F, 0.1F);
                     case EAST:
-                        this.setBlockBounds(0.3F, 0, 0.35F, 0.9F, 0.5F, 0.6F);
-                        break;
+                        return new AxisAlignedBB(0.3F, 0, 0.35F, 0.9F, 0.5F, 0.6F);
                     case WEST:
-                        this.setBlockBounds(0.7F, 0, 0.35F, 0.1F, 0.5F, 0.6F);
-                        break;
+                        return new AxisAlignedBB(0.7F, 0, 0.35F, 0.1F, 0.5F, 0.6F);
                 }
                 break;
             case CAT_STATUE:
                 switch (facing) {
                     case SOUTH:
-                        this.setBlockBounds(0.43F, 0, 0.3F, 0.57F, 0.5F, 0.75F);
-                        break;
+                        return new AxisAlignedBB(0.43F, 0, 0.3F, 0.57F, 0.5F, 0.75F);
                     case NORTH:
-                        this.setBlockBounds(0.43F, 0, 0.7F, 0.57F, 0.5F, 0.25F);
-                        break;
+                        return new AxisAlignedBB(0.43F, 0, 0.7F, 0.57F, 0.5F, 0.25F);
                     case EAST:
-                        this.setBlockBounds(0.3F, 0, 0.43F, 0.75F, 0.5F, 0.57F);
-                        break;
+                        return new AxisAlignedBB(0.3F, 0, 0.43F, 0.75F, 0.5F, 0.57F);
                     case WEST:
-                        this.setBlockBounds(0.7F, 0, 0.43F, 0.25F, 0.5F, 0.57F);
-                        break;
+                        return new AxisAlignedBB(0.7F, 0, 0.43F, 0.25F, 0.5F, 0.57F);
                 }
                 break;
             case STARVED_CORPSE:
             case WITHERED_CORPSE:
-                this.setBlockBounds(0, 0, 0, 1, 0.3F, 1);
-                break;
+                return new AxisAlignedBB(0, 0, 0, 1, 0.3F, 1);
             case SWORD:
                 switch (facing) {
                     case SOUTH:
                     case NORTH:
-                        this.setBlockBounds(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
-                        break;
+                        return new AxisAlignedBB(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
                     case EAST:
                     case WEST:
-                        this.setBlockBounds(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
-                        break;
+                        return new AxisAlignedBB(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
                 }
                 break;
             case HORSE_STATUE:
                 switch (facing) {
                     case SOUTH:
                     case NORTH:
-                        this.setBlockBounds(0.375F, 0, 0.275F, 0.625F, 0.85F, 0.725F);
-                        break;
+                        return new AxisAlignedBB(0.375F, 0, 0.275F, 0.625F, 0.85F, 0.725F);
                     case EAST:
                     case WEST:
-                        this.setBlockBounds(0.275F, 0, 0.375F, 0.725F, 0.85F, 0.625F);
-                        break;
+                        return new AxisAlignedBB(0.275F, 0, 0.375F, 0.725F, 0.85F, 0.625F);
                 }
                 break;
         }
+        return new AxisAlignedBB(0, 0, 0, 1, 1, 1);
     }
 
     /**
@@ -459,8 +433,8 @@ public class BlockGraveStone extends BlockContainer {
             TileEntityGraveStone te = (TileEntityGraveStone) world.getTileEntity(pos);
             if (te != null) {
                 if (te.canBeLooted("")) {
-                    GraveStoneHelper.dropBlockWithoutInfo(world, pos, world.getBlockState(pos));
-                    world.setBlockToAir(pos);
+                    GraveStoneHelper.dropBlockWithoutInfo(te.getWorld(), pos, world.getBlockState(pos));
+                    te.getWorld().setBlockToAir(pos);
                 }
             }
         }
