@@ -105,7 +105,7 @@ public abstract class TileEntityGrave extends TileEntityBase {
      */
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbtTag) {
-        super.writeToNBT(nbtTag);
+        nbtTag = super.writeToNBT(nbtTag);
 
         nbtTag.setInteger("Type", graveType);
         nbtTag.setBoolean("Enchanted", isEnchanted);

@@ -7,7 +7,6 @@ import nightkosh.gravestone.core.GSBlock;
 import nightkosh.gravestone.core.ResourcesModels;
 import nightkosh.gravestone.renderer.tileentity.TileEntityGraveStoneRenderer;
 import nightkosh.gravestone.tileentity.TileEntityGraveStone;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * GraveStone mod
@@ -37,16 +36,17 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public String getLocalizedString(String str) {
-        String localizedString = null;
-        try {
-            localizedString = LanguageRegistry.instance().getStringLocalization(str);
-        } catch (Exception e) {
-        }
-        if (StringUtils.isBlank(localizedString)) {
-            return LanguageRegistry.instance().getStringLocalization(str, "en_US");
-        } else {
-            return localizedString;
-        }
+//        String localizedString = null;
+//        try {
+//            localizedString = LanguageRegistry.instance().getStringLocalization(str);
+//        } catch (Exception e) {
+//        }
+//        if (StringUtils.isBlank(localizedString)) {
+//            return LanguageRegistry.instance().getStringLocalization(str, "en_US");
+//        } else {
+//            return localizedString;
+//        }
+        return I18n.translateToLocal(str);
     }
 
     @Override

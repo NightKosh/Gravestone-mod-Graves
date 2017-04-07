@@ -414,7 +414,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     private static DeathMessageInfo getDeathMessage(EntityLivingBase entity, String damageType, boolean isVillager) {
-        EntityLivingBase killer = entity.func_94060_bK();
+        EntityLivingBase killer = entity.getAttackingEntity();//.func_94060_bK();
         String shortString = "death.attack." + damageType;
         String fullString = shortString + ".player";
 
@@ -716,16 +716,16 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     private static int getGround(World world, int x, int y, int z) {
-        while ((world.isAirBlock(new BlockPos(x, y - 1, z)) || world.getBlockState(new BlockPos(x, y - 1, z)).getBlock().getMaterial().isLiquid() ||
-                world.getBlockState(new BlockPos(x, y - 1, z)).getBlock().getMaterial().isReplaceable()) && y > 1) {
+        while ((world.isAirBlock(new BlockPos(x, y - 1, z)) || world.getBlockState(new BlockPos(x, y - 1, z)).getBlock().getMaterial(null).isLiquid() ||
+                world.getBlockState(new BlockPos(x, y - 1, z)).getBlock().getMaterial(null).isReplaceable()) && y > 1) {
             y--;
         }
         return y;
     }
 
     private static boolean canGenerateGraveAtCoordinates(World world, BlockPos pos) {
-        return world.getBlockState(pos.down()).getBlock().getMaterial().isSolid() &&
-                (world.isAirBlock(pos) || world.getBlockState(pos).getBlock().getMaterial().isLiquid() || world.getBlockState(pos).getBlock().getMaterial().isReplaceable());
+        return world.getBlockState(pos.down()).getBlock().getMaterial(null).isSolid() &&
+                (world.isAirBlock(pos) || world.getBlockState(pos).getBlock().getMaterial(null).isLiquid() || world.getBlockState(pos).getBlock().getMaterial(null).isReplaceable());
     }
 
     protected static EnumGraves getGraveType(EnumGraveType[] graveTypes, EnumGraveMaterial... materials) {

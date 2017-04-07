@@ -116,7 +116,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
      */
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbtTag) {
-        super.writeToNBT(nbtTag);
+        nbtTag = super.writeToNBT(nbtTag);
         // age
         nbtTag.setInteger("Age", age);
         // grave loot

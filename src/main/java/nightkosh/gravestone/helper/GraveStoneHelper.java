@@ -99,7 +99,8 @@ public class GraveStoneHelper {
             if (Block.getBlockFromItem(item) instanceof BlockFlower) {
                 return true;
             } else if (item instanceof IPlantable) {
-                return Block.getBlockFromItem(item).canSustainPlant(world, pos.down(), EnumFacing.UP, (IPlantable) item);
+                IBlockState soil = world.getBlockState(pos.down());
+                return Block.getBlockFromItem(item).canSustainPlant(soil, world, pos.down(), EnumFacing.UP, (IPlantable) item);
             }
         }
         return false;
