@@ -1,9 +1,9 @@
 package nightkosh.gravestone.helper;
 
-import net.minecraft.util.BlockPos;
-import nightkosh.gravestone.tileentity.ISpawnerEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import nightkosh.gravestone.tileentity.ISpawnerEntity;
 
 /**
  * GraveStone mod

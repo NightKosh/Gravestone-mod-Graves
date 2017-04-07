@@ -11,7 +11,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -51,11 +54,11 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
     public static ArrayList<Item> swordsList = new ArrayList<>(
             Arrays.asList(
-                    Items.wooden_sword,
-                    Items.stone_sword,
-                    Items.iron_sword,
-                    Items.golden_sword,
-                    Items.diamond_sword
+                    Items.WOODEN_SWORD,
+                    Items.STONE_SWORD,
+                    Items.IRON_SWORD,
+                    Items.GOLDEN_SWORD,
+                    Items.DIAMOND_SWORD
             )
     );
 
@@ -114,7 +117,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             }
 
             for (IPlayerItems additionalItems : APIGraveGeneration.PLAYER_ITEMS) {
-                items.addAll(additionalItems.addItems(player, event.source));
+                items.addAll(additionalItems.addItems(player, event.getSource()));
             }
 
             //TODO is it really required??
@@ -122,7 +125,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
 
             for (IPlayerItems additionalItems : APIGraveGeneration.PLAYER_ITEMS) {
-                additionalItems.getItems(player, event.source, items);
+                additionalItems.getItems(player, event.getSource(), items);
             }
 
             createGrave(player, event, items, EnumGraveTypeByEntity.PLAYER_GRAVES, false, spawnTime);
@@ -134,24 +137,23 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     public static void createVillagerGrave(EntityVillager villager, LivingDeathEvent event) {
         List<ItemStack> items = new ArrayList<>(5);
         for (IVillagerItems additionalItems : APIGraveGeneration.VILLAGER_ITEMS) {
-            items.addAll(additionalItems.addItems(villager, event.source));
+            items.addAll(additionalItems.addItems(villager, event.getSource()));
         }
-        //CorpseHelper.getCorpse(event.entity, EnumCorpse.VILLAGER) //TODO external module
 
-        long spawnTime = MobHandler.getAndRemoveSpawnTime(event.entity);
+        long spawnTime = MobHandler.getAndRemoveSpawnTime(event.getEntity());
         createGrave(villager, event, items, GraveGenerationHelper.EnumGraveTypeByEntity.VILLAGERS_GRAVES, true, spawnTime);
     }
 
     public static void createDogGrave(EntityWolf dog, LivingDeathEvent event) {
         if (dog.isTamed()) {
-            long spawnTime = MobHandler.getAndRemoveSpawnTime(event.entity);
+            long spawnTime = MobHandler.getAndRemoveSpawnTime(event.getEntity());
             createGrave(dog, event, getDogsItems(dog, event), EnumGraveTypeByEntity.DOGS_GRAVES, false, spawnTime);
         }
     }
 
     public static void createCatGrave(EntityOcelot cat, LivingDeathEvent event) {
         if (cat.isTamed()) {
-            long spawnTime = MobHandler.getAndRemoveSpawnTime(event.entity);
+            long spawnTime = MobHandler.getAndRemoveSpawnTime(event.getEntity());
             createGrave(cat, event, getCatsItems(cat, event), EnumGraveTypeByEntity.CATS_GRAVES, false, spawnTime);
         }
     }
@@ -159,17 +161,17 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     private static List<ItemStack> getDogsItems(EntityWolf dog, LivingDeathEvent event) {
         List<ItemStack> items = new ArrayList<>(5);
         for (IDogItems additionalItems : APIGraveGeneration.DOG_ITEMS) {
-            items.addAll(additionalItems.addItems(dog, event.source));
+            items.addAll(additionalItems.addItems(dog, event.getSource()));
         }
-        return items;//CorpseHelper.getCorpse(entity, EnumCorpse.DOG); //TODO external module
+        return items;
     }
 
     private static List<ItemStack> getCatsItems(EntityOcelot cat, LivingDeathEvent event) {
         List<ItemStack> items = new ArrayList<>(5);
         for (ICatItems additionalItems : APIGraveGeneration.CAT_ITEMS) {
-            items.addAll(additionalItems.addItems(cat, event.source));
+            items.addAll(additionalItems.addItems(cat, event.getSource()));
         }
-        return items;//CorpseHelper.getCorpse(entity, EnumCorpse.CAT); //TODO external module
+        return items;
     }
 
     public static void createHorseGrave(EntityHorse horse, LivingDeathEvent event) {
@@ -178,11 +180,10 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             items.addAll(getHorseItems(horse));
 
             for (IHorseItems additionalItems : APIGraveGeneration.HORSE_ITEMS) {
-                items.addAll(additionalItems.addItems(horse, event.source));
+                items.addAll(additionalItems.addItems(horse, event.getSource()));
             }
-//            items.addAll(CorpseHelper.getCorpse(horse, EnumCorpse.HORSE));//TODO external module
 
-            long spawnTime = MobHandler.getAndRemoveSpawnTime(event.entity);
+            long spawnTime = MobHandler.getAndRemoveSpawnTime(event.getEntity());
             createGrave(horse, event, items, EnumGraveTypeByEntity.HORSE_GRAVES, false, spawnTime);
         }
     }
@@ -196,7 +197,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
         if (Config.storeHorseSaddleAndArmor) {
             if (horse.isHorseSaddled()) {
-                items.add(new ItemStack(Items.saddle));
+                items.add(new ItemStack(Items.SADDLE));
                 nbt.removeTag("SaddleItem");
 
                 horse.horseChest.setInventorySlotContents(0, null);
@@ -213,7 +214,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 items.add(ItemStack.loadItemStackFromNBT(nbtItemsList.getCompoundTagAt(i)));
             }
 
-            items.add(new ItemStack(Blocks.chest));
+            items.add(new ItemStack(Blocks.CHEST));
         }
 
         // new chest inventory
@@ -221,7 +222,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         for (int slot = 2; slot < 17; slot++) {
             NBTTagCompound nbtTagCompound = new NBTTagCompound();
             nbtTagCompound.setByte("Slot", (byte) slot);
-            new ItemStack(Blocks.air).writeToNBT(nbtTagCompound);
+            new ItemStack(Blocks.AIR).writeToNBT(nbtTagCompound);
             nbtItemsList.appendTag(nbtTagCompound);
         }
 
@@ -246,9 +247,9 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         } else {
             int age = (int) (entity.worldObj.getWorldTime() - spawnTime) / 24000;
             BlockPos pos = new BlockPos(entity.posX, entity.posY, entity.posZ - 1);
-            GraveInfoOnDeath graveInfo = getGraveOnDeath(entity.worldObj, pos, entity, graveTypeByEntity, items, age, event.source);
-            DeathMessageInfo messageInfo = getDeathMessage((EntityLivingBase) entity, event.source.damageType, isVillager);
-            createOnDeath(entity, entity.worldObj, pos, messageInfo, items, age, graveInfo, event.source);
+            GraveInfoOnDeath graveInfo = getGraveOnDeath(entity.worldObj, pos, entity, graveTypeByEntity, items, age, event.getSource());
+            DeathMessageInfo messageInfo = getDeathMessage((EntityLivingBase) entity, event.getSource().damageType, isVillager);
+            createOnDeath(entity, entity.worldObj, pos, messageInfo, items, age, graveInfo, event.getSource());
         }
     }
 
@@ -263,15 +264,15 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         } else {
             int age = customEntityDeathHandler.getAge();
             GraveInfoOnDeath graveInfo = new GraveInfoOnDeath();
-            graveInfo.setGrave(EnumGraves.getByTypeAndMaterial(customEntityDeathHandler.getGraveType(entity, event.source),
-                    customEntityDeathHandler.getGraveMaterial(entity, event.source)));
+            graveInfo.setGrave(EnumGraves.getByTypeAndMaterial(customEntityDeathHandler.getGraveType(entity, event.getSource()),
+                    customEntityDeathHandler.getGraveMaterial(entity, event.getSource())));
             graveInfo.setSword(customEntityDeathHandler.getSword());
-            graveInfo.setEnchanted(customEntityDeathHandler.isEnchanted(entity, event.source));
-            graveInfo.setMossy(customEntityDeathHandler.isMossy(entity, event.source));
+            graveInfo.setEnchanted(customEntityDeathHandler.isEnchanted(entity, event.getSource()));
+            graveInfo.setMossy(customEntityDeathHandler.isMossy(entity, event.getSource()));
 
             BlockPos pos = new BlockPos(entity.posX, entity.posY, entity.posZ - 1);
-            DeathMessageInfo messageInfo = getDeathMessage((EntityLivingBase) entity, event.source.damageType, false);
-            createOnDeath(entity, entity.worldObj, pos, messageInfo, customEntityDeathHandler.getItems(), age, graveInfo, event.source);
+            DeathMessageInfo messageInfo = getDeathMessage((EntityLivingBase) entity, event.getSource().damageType, false);
+            createOnDeath(entity, entity.worldObj, pos, messageInfo, customEntityDeathHandler.getItems(), age, graveInfo, event.getSource());
         }
     }
 

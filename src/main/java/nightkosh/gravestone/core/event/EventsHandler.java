@@ -28,55 +28,55 @@ public class EventsHandler {
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void onEntityLivingDeath(LivingDeathEvent event) {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-            if (!Config.generateGravesInLava && event.source.damageType.equals("lava")) {
+            if (!Config.generateGravesInLava && event.getSource().damageType.equals("lava")) {
                 return;
             }
 
-            if (Config.generatePlayerGraves && event.entityLiving instanceof EntityPlayer) {
-                EntityPlayer player = (EntityPlayer) event.entity;
+            if (Config.generatePlayerGraves && event.getEntityLiving() instanceof EntityPlayer) {
+                EntityPlayer player = (EntityPlayer) event.getEntity();
                 for (IPlayerDeathHandler playerDeathHandler : APIGraveGeneration.PLAYER_DEATH_HANDLERS) {
-                    if (playerDeathHandler.cancelGraveGeneration(player, event.source)) {
+                    if (playerDeathHandler.cancelGraveGeneration(player, event.getSource())) {
                         return;
                     }
                 }
 
-                GraveGenerationHelper.createPlayerGrave(player, event, MobHandler.getAndRemoveSpawnTime(event.entity));
+                GraveGenerationHelper.createPlayerGrave(player, event, MobHandler.getAndRemoveSpawnTime(event.getEntity()));
                 return;
             } else {
-                if (Config.generateVillagerGraves && event.entity instanceof EntityVillager) {
-                    EntityVillager villager = (EntityVillager) event.entity;
+                if (Config.generateVillagerGraves && event.getEntity() instanceof EntityVillager) {
+                    EntityVillager villager = (EntityVillager) event.getEntity();
                     for (IVillagerDeathHandler villagerDeathHandler : APIGraveGeneration.VILLAGER_DEATH_HANDLERS) {
-                        if (villagerDeathHandler.cancelGraveGeneration(villager, event.source)) {
+                        if (villagerDeathHandler.cancelGraveGeneration(villager, event.getSource())) {
                             return;
                         }
                     }
                     GraveGenerationHelper.createVillagerGrave(villager, event);
                     return;
                 } else if (Config.generatePetGraves) {
-                    if (event.entity instanceof EntityTameable) {
-                        if (event.entity instanceof EntityWolf) {
-                            EntityWolf dog = (EntityWolf) event.entity;
+                    if (event.getEntity() instanceof EntityTameable) {
+                        if (event.getEntity() instanceof EntityWolf) {
+                            EntityWolf dog = (EntityWolf) event.getEntity();
                             for (IDogDeathHandler dogDeathHandler : APIGraveGeneration.DOG_DEATH_HANDLERS) {
-                                if (dogDeathHandler.cancelGraveGeneration(dog, event.source)) {
+                                if (dogDeathHandler.cancelGraveGeneration(dog, event.getSource())) {
                                     return;
                                 }
                             }
                             GraveGenerationHelper.createDogGrave(dog, event);
                             return;
-                        } else if (event.entity instanceof EntityOcelot) {
-                            EntityOcelot cat = (EntityOcelot) event.entity;
+                        } else if (event.getEntity() instanceof EntityOcelot) {
+                            EntityOcelot cat = (EntityOcelot) event.getEntity();
                             for (ICatDeathHandler catDeathHandler : APIGraveGeneration.CAT_DEATH_HANDLERS) {
-                                if (catDeathHandler.cancelGraveGeneration(cat, event.source)) {
+                                if (catDeathHandler.cancelGraveGeneration(cat, event.getSource())) {
                                     return;
                                 }
                             }
                             GraveGenerationHelper.createCatGrave(cat, event);
                             return;
                         }
-                    } else if (event.entity instanceof EntityHorse) {
-                        EntityHorse horse = (EntityHorse) event.entity;
+                    } else if (event.getEntity() instanceof EntityHorse) {
+                        EntityHorse horse = (EntityHorse) event.getEntity();
                         for (IHorseDeathHandler horseDeathHandler : APIGraveGeneration.HORSE_DEATH_HANDLERS) {
-                            if (horseDeathHandler.cancelGraveGeneration(horse, event.source)) {
+                            if (horseDeathHandler.cancelGraveGeneration(horse, event.getSource())) {
                                 return;
                             }
                         }
@@ -87,9 +87,9 @@ public class EventsHandler {
             }
 
             for (ICustomEntityDeathHandler customEntityDeathHandler : APIGraveGeneration.CUSTOM_ENTITY_DEATH_HANDLERS) {
-                if (event.entity.getClass().equals(customEntityDeathHandler.getEntityClass()) &&
-                        customEntityDeathHandler.canGenerateGrave(event.entity, event.source)) {
-                    GraveGenerationHelper.createCustomGrave(event.entity, event, customEntityDeathHandler);
+                if (event.getEntity().getClass().equals(customEntityDeathHandler.getEntityClass()) &&
+                        customEntityDeathHandler.canGenerateGrave(event.getEntity(), event.getSource())) {
+                    GraveGenerationHelper.createCustomGrave(event.getEntity(), event, customEntityDeathHandler);
                     return;
                 }
             }
@@ -99,12 +99,12 @@ public class EventsHandler {
     @SubscribeEvent
     public void entityJoinWorldEvent(EntityJoinWorldEvent event) {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-            Entity entity = event.entity;
+            Entity entity = event.getEntity();
             if (entity instanceof EntityVillager ||
                     entity instanceof EntityWolf ||
                     entity instanceof EntityOcelot ||
                     entity instanceof EntityHorse) {
-                MobHandler.setMobSpawnTime(event.entity);
+                MobHandler.setMobSpawnTime(event.getEntity());
             }
         }
     }
@@ -114,8 +114,8 @@ public class EventsHandler {
     @SubscribeEvent
     public void worldLoading(WorldEvent.Load event) {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-            MobHandler.loadMobsSpawnTime(event.world);
-            GravesLogger.setWorldDirectory(event.world.getSaveHandler().getWorldDirectory());
+            MobHandler.loadMobsSpawnTime(event.getWorld());
+            GravesLogger.setWorldDirectory(event.getWorld().getSaveHandler().getWorldDirectory());
         }
     }
 }

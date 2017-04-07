@@ -1,12 +1,11 @@
 package nightkosh.gravestone.tileentity;
 
-import nightkosh.gravestone.inventory.GraveInventory;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import nightkosh.gravestone.inventory.GraveInventory;
 
 import java.util.Random;
 
@@ -105,12 +104,14 @@ public abstract class TileEntityGrave extends TileEntityBase {
      * Writes a tile entity to NBT.
      */
     @Override
-    public void writeToNBT(NBTTagCompound nbtTag) {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbtTag) {
         super.writeToNBT(nbtTag);
 
         nbtTag.setInteger("Type", graveType);
         nbtTag.setBoolean("Enchanted", isEnchanted);
         nbtTag.setBoolean("Mossy", isMossy);
+
+        return nbtTag;
     }
 
     /**
@@ -123,14 +124,14 @@ public abstract class TileEntityGrave extends TileEntityBase {
      * @param packet The data packet
      */
     @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
         readFromNBT(packet.getNbtCompound());
     }
 
     @Override
-    public Packet getDescriptionPacket() {
+    public SPacketUpdateTileEntity getUpdatePacket() {
         NBTTagCompound nbtTag = new NBTTagCompound();
         this.writeToNBT(nbtTag);
-        return new S35PacketUpdateTileEntity(this.pos, 1, nbtTag);
+        return new SPacketUpdateTileEntity(this.pos, 1, nbtTag);
     }
 }

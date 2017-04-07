@@ -3,9 +3,10 @@ package nightkosh.gravestone.core.commands;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,35 +37,34 @@ public class Command extends CommandBase {
         return "/" + getCommandName() + " <command> <command parameters> (" + HELP + ")";
     }
 
-
     @Override
-    public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
         if (args.length >= 1) {
             String command = args[0];
             switch (command) {
                 case SubCommandCustomGraveItems.COMMAND_NAME:
-                    CUSTOM_GRAVES_ITEMS.execute(sender, args);
+                    CUSTOM_GRAVES_ITEMS.execute(server, sender, args);
                     break;
                 case SubCommandCommandsList.COMMAND_NAME:
-                    COMMANDS_LIST.execute(sender, args);
+                    COMMANDS_LIST.execute(server, sender, args);
                     break;
                 default:
                     boolean unknownCommand = true;
                     for (ISubCommand additionalCommand : ADDITIONAL_COMMANDS_LIST) {
                         if (additionalCommand.getCommandName().equals(command)) {
-                            additionalCommand.execute(sender, args);
+                            additionalCommand.execute(server, sender, args);
                             unknownCommand = false;
                             break;
                         }
                     }
                     if (unknownCommand) {
-                        sender.addChatMessage(new ChatComponentText("Unknown command!").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
-                        sender.addChatMessage(new ChatComponentText(HELP).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+                        sender.addChatMessage(new TextComponentTranslation("Unknown command!").setStyle(new Style().setColor(TextFormatting.RED)));
+                        sender.addChatMessage(new TextComponentTranslation(HELP).setStyle(new Style().setColor(TextFormatting.GREEN)));
                     }
                     break;
             }
         } else {
-            sender.addChatMessage(new ChatComponentText(HELP).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+            sender.addChatMessage(new TextComponentTranslation(HELP).setStyle(new Style().setColor(TextFormatting.GREEN)));
         }
     }
 

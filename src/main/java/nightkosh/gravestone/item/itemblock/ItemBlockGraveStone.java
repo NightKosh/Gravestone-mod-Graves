@@ -1,8 +1,5 @@
 package nightkosh.gravestone.item.itemblock;
 
-import nightkosh.gravestone.ModGraveStone;
-import nightkosh.gravestone.api.grave.EnumGraveMaterial;
-import nightkosh.gravestone.block.enums.EnumGraves;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,10 +7,13 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import nightkosh.gravestone.ModGraveStone;
+import nightkosh.gravestone.api.grave.EnumGraveMaterial;
+import nightkosh.gravestone.block.enums.EnumGraves;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -65,9 +65,9 @@ public class ItemBlockGraveStone extends ItemBlock {
                     String name = ModGraveStone.proxy.getLocalizedEntityName(nbt.getString("name"));
                     String killerName = ModGraveStone.proxy.getLocalizedEntityName(nbt.getString("KillerName"));
                     if (killerName.length() == 0) {
-                        list.add(new ChatComponentTranslation(deathText, new Object[]{name}).getFormattedText());
+                        list.add(new TextComponentTranslation(deathText, new Object[]{name}).getFormattedText());
                     } else {
-                        list.add(new ChatComponentTranslation(deathText, new Object[]{name, killerName.toLowerCase()}).getFormattedText());
+                        list.add(new TextComponentTranslation(deathText, new Object[]{name, killerName.toLowerCase()}).getFormattedText());
                     }
                 }
             } else {
@@ -111,8 +111,8 @@ public class ItemBlockGraveStone extends ItemBlock {
                             short enchantmentLvl = enchantments.getCompoundTagAt(i).getShort("lvl");
 
                             try {
-                                if (Enchantment.enchantmentsBookList[enchantmentId] != null) {
-                                    list.add(Enchantment.enchantmentsBookList[enchantmentId].getTranslatedName(enchantmentLvl));
+                                if (Enchantment.getEnchantmentByID(enchantmentId) != null) {
+                                    list.add(Enchantment.getEnchantmentByID(enchantmentId).getTranslatedName(enchantmentLvl));
                                 }
                             } catch (Exception e) {
 

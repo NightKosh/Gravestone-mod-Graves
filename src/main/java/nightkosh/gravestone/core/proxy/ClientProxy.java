@@ -1,8 +1,6 @@
 package nightkosh.gravestone.core.proxy;
 
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.core.GSBlock;
 import nightkosh.gravestone.core.ResourcesModels;

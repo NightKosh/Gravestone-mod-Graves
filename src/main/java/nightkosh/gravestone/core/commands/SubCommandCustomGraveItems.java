@@ -1,16 +1,17 @@
 package nightkosh.gravestone.core.commands;
 
-import nightkosh.gravestone.core.logger.GSLogger;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
+import nightkosh.gravestone.core.logger.GSLogger;
+import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ public class SubCommandCustomGraveItems implements ISubCommand {
     }
 
     @Override
-    public void execute(ICommandSender sender, String[] args) throws CommandException {
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
         GSLogger.logInfo("Custom grave items command received");
 
         if (args.length >= 7) {
@@ -63,16 +64,16 @@ public class SubCommandCustomGraveItems implements ISubCommand {
                         }
                         ((TileEntityGraveStone) graveTE).getInventory().setAdditionalItems(items.toArray(new ItemStack[items.size()]));
                     } else {
-                        sender.addChatMessage(new ChatComponentTranslation("commands.fill_grave.wrong_block").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                        sender.addChatMessage(new TextComponentTranslation("commands.fill_grave.wrong_block").setStyle(new Style().setColor(TextFormatting.RED)));
                     }
                 } else {
-                    sender.addChatMessage(new ChatComponentTranslation("commands.fill_grave.empty").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                    sender.addChatMessage(new TextComponentTranslation("commands.fill_grave.empty").setStyle(new Style().setColor(TextFormatting.RED)));
                 }
             } catch (NumberFormatException e) {
-                sender.addChatMessage(new ChatComponentTranslation("commands.coordinate_error").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                sender.addChatMessage(new TextComponentTranslation("commands.coordinate_error").setStyle(new Style().setColor(TextFormatting.RED)));
             }
         } else {
-            sender.addChatMessage(new ChatComponentTranslation("commands.not_enough_parameters").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+            sender.addChatMessage(new TextComponentTranslation("commands.not_enough_parameters").setStyle(new Style().setColor(TextFormatting.RED)));
         }
     }
 }

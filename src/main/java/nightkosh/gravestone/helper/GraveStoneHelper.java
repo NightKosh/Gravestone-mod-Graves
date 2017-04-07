@@ -7,8 +7,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
@@ -31,7 +31,7 @@ import java.util.List;
 public class GraveStoneHelper {
 
 
-    public static final List<BlockFlower> FLOWERS = Arrays.asList(Blocks.yellow_flower, Blocks.red_flower);
+    public static final List<BlockFlower> FLOWERS = Arrays.asList(Blocks.YELLOW_FLOWER, Blocks.RED_FLOWER);
 
 
     /**
@@ -40,8 +40,8 @@ public class GraveStoneHelper {
     public static void replaceGround(World world, BlockPos pos) {
         Block botBlock = world.getBlockState(pos).getBlock();
 
-        if (botBlock.equals(Blocks.grass) || botBlock.equals(Blocks.mycelium)) {
-            world.setBlockState(pos, Blocks.dirt.getBlockState().getBaseState());
+        if (botBlock.equals(Blocks.GRASS) || botBlock.equals(Blocks.MYCELIUM)) {
+            world.setBlockState(pos, Blocks.DIRT.getBlockState().getBaseState());
         }
     }
 

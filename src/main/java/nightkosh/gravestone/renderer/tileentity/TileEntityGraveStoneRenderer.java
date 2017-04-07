@@ -3,10 +3,10 @@ package nightkosh.gravestone.renderer.tileentity;
 import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderEntityItem;
 import net.minecraft.client.renderer.texture.LayeredTexture;
-import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -60,18 +60,18 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     public static TileEntityGraveStoneRenderer instance;
 
     private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
-    private static final ItemStack SWORD = new ItemStack(Items.iron_sword);
+    private static final ItemStack SWORD = new ItemStack(Items.IRON_SWORD);
 
     public static final Map<Item, EntityItem> flowersMap = new HashMap<>();
     public static final Map<Item, EntityItem> swordsMap = new HashMap<>();
 
     public static final Map<Item, ResourceLocation> swordsTextureMap = new HashMap<>();
     static {
-        swordsTextureMap.put(Items.wooden_sword, Resources.WOODEN_SWORD);
-        swordsTextureMap.put(Items.stone_sword, Resources.STONE_SWORD);
-        swordsTextureMap.put(Items.iron_sword, Resources.IRON_SWORD);
-        swordsTextureMap.put(Items.golden_sword, Resources.GOLDEN_SWORD);
-        swordsTextureMap.put(Items.diamond_sword, Resources.DIAMOND_SWORD);
+        swordsTextureMap.put(Items.WOODEN_SWORD, Resources.WOODEN_SWORD);
+        swordsTextureMap.put(Items.STONE_SWORD, Resources.STONE_SWORD);
+        swordsTextureMap.put(Items.IRON_SWORD, Resources.IRON_SWORD);
+        swordsTextureMap.put(Items.GOLDEN_SWORD, Resources.GOLDEN_SWORD);
+        swordsTextureMap.put(Items.DIAMOND_SWORD, Resources.DIAMOND_SWORD);
     }
 
     static {

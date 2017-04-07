@@ -2,6 +2,7 @@ package nightkosh.gravestone.core.commands;
 
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.server.MinecraftServer;
 
 /**
  * GraveStone mod
@@ -17,5 +18,5 @@ public interface ISubCommand {
         return Command.MAIN_COMMAND_NAME + getCommandName();
     }
 
-    public void execute(ICommandSender sender, String[] args) throws CommandException;
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException;
 }

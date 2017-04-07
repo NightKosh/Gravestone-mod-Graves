@@ -2,9 +2,10 @@ package nightkosh.gravestone.core.commands;
 
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 
 /**
  * GraveStone mod
@@ -22,11 +23,11 @@ public class SubCommandCommandsList implements ISubCommand {
     }
 
     @Override
-    public void execute(ICommandSender sender, String[] args) throws CommandException {
-        sender.addChatMessage(new ChatComponentText(getCommandUsage()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+        sender.addChatMessage(new TextComponentTranslation(getCommandUsage()).setStyle(new Style().setColor(TextFormatting.GREEN)));
 
         for (ISubCommand additionalCommand : Command.ADDITIONAL_COMMANDS_LIST) {
-            sender.addChatMessage(new ChatComponentText(additionalCommand.getCommandUsage()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+            sender.addChatMessage(new TextComponentTranslation(additionalCommand.getCommandUsage()).setStyle(new Style().setColor(TextFormatting.GREEN)));
         }
     }
 }

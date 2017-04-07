@@ -2,8 +2,8 @@ package nightkosh.gravestone.tileentity;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.Config;
@@ -115,7 +115,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
      * Writes a tile entity to NBT.
      */
     @Override
-    public void writeToNBT(NBTTagCompound nbtTag) {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbtTag) {
         super.writeToNBT(nbtTag);
         // age
         nbtTag.setInteger("Age", age);
@@ -136,7 +136,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
         if (haveSpawnerHelper()) {
             nbtTag.setInteger("SpawnerHelperId", spawnerHelper.getEntityId());
         }
-
+        return nbtTag;
     }
 
     private void readSwordInfo(NBTTagCompound nbtTag) {

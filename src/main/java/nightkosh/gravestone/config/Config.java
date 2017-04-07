@@ -76,7 +76,7 @@ public class Config {
 
         // store items
         Property graveItemsCountProperty = config.get(CATEGORY_GRAVES, "SavedItemsCount", 40);
-        graveItemsCountProperty.comment = "This value must be between 0 an 40(in this case all items will be stored)!";
+        graveItemsCountProperty.setComment("This value must be between 0 an 40(in this case all items will be stored)!");
         graveItemsCount = graveItemsCountProperty.getInt();
 
         if (graveItemsCount > 40 || graveItemsCount < 0) {
@@ -92,7 +92,7 @@ public class Config {
         vanillaRendererForSwordsGraves = config.get(CATEGORY_GRAVES, "VanillaRendererForSwordsGraves", true).getBoolean(true);
 
         Property restrictGraveGenerationInAreaProperty = config.get(CATEGORY_GRAVES, "RestrictGraveGenerationInArea", "");
-        restrictGraveGenerationInAreaProperty.comment = "List of coordinates in which graves generation must be disabled. \"start_x,start_y,start_z,end_x,end_y,end_z;\"";
+        restrictGraveGenerationInAreaProperty.setComment("List of coordinates in which graves generation must be disabled. \"start_x,start_y,start_z,end_x,end_y,end_z;\"");
         String ar = restrictGraveGenerationInAreaProperty.getString();
         String[] areas = ar.split(";");
         restrictGraveGenerationInArea = new ArrayList<GraveStoneHelper.RestrictedArea>(areas.length);
