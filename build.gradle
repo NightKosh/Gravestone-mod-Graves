@@ -19,7 +19,7 @@ tasks.withType(JavaCompile) {
 
 version = "1.0.1"
 group = "nightkosh.gravestone"
-archivesBaseName = "GraveStone-1.8.9-Graves"
+archivesBaseName = "GraveStone-1.9.4-Graves"
 
 minecraft {
     version = "1.9.4-12.17.0.2051"
