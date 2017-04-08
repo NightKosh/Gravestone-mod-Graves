@@ -255,18 +255,20 @@ public class BlockGraveStone extends BlockContainer {
     public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
         player.addExhaustion(0.025F);
 
-        TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
-        if (tileEntity != null && tileEntity.canBeLooted(player.getUniqueID().toString())) {
-            GraveStoneHelper.spawnMob(world, pos);
+        if (!world.isRemote && !world.restoringBlockSnapshots) {
+            TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
+            if (tileEntity != null && tileEntity.canBeLooted(player.getUniqueID().toString())) {
+                GraveStoneHelper.spawnMob(world, pos);
 
-            if (tileEntity.hasFlower()) {
-                tileEntity.dropFlower();
-            }
+                if (tileEntity.hasFlower()) {
+                    tileEntity.dropFlower();
+                }
 
-            if (EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, player.getHeldItemMainhand()) > 0) {
-                GraveStoneHelper.dropBlock(world, pos, state);
-            } else {
-                GraveStoneHelper.dropBlockWithoutInfo(world, pos, state);
+                if (EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, player.getHeldItemMainhand()) > 0) {
+                    GraveStoneHelper.dropBlock(world, pos, state);
+                } else {
+                    GraveStoneHelper.dropBlockWithoutInfo(world, pos, state);
+                }
             }
         }
     }
@@ -429,7 +431,7 @@ public class BlockGraveStone extends BlockContainer {
     }
 
     @Override
-    public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block) {
         if (!world.isSideSolid(pos.down(), EnumFacing.DOWN, true)) {
             TileEntityGraveStone te = (TileEntityGraveStone) world.getTileEntity(pos);
             if (te != null) {

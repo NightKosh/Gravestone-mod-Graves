@@ -108,8 +108,7 @@ public class GraveStoneHelper {
 
     public static boolean canFlowerBePlacedOnGrave(TileEntityGraveStone te) {
         return !te.isSwordGrave() && (te.getGraveType().getGraveType() == EnumGraveType.VERTICAL_PLATE ||
-                te.getGraveType().getGraveType() == EnumGraveType.CROSS ||
-                te.getGraveType().getGraveType() == EnumGraveType.CELTIC_CROSS);
+                te.getGraveType().getGraveType() == EnumGraveType.CROSS);
     }
 
     public static class RestrictedArea {

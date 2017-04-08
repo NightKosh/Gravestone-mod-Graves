@@ -214,29 +214,10 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
 
     //    @Override
     //    public void setGraveContent(Random random, boolean isPetGrave, GraveInventory.GraveContentType contentType, GraveInventory.GraveCorpseContentType corpseType) {
-    ////        deathText.setRandomDeathTextAndName(random, graveType, false, true);
-    ////        inventory.setRandomGraveContent(random, isPetGrave, contentType, corpseType);
-    ////        setRandomAge();
-    ////        setRandomFlower(random);
+    ////        setRandomAge();//TODO
+    ////        setRandomFlower(random);//TODO
     //    }
 
-    //TODO
-//    public void setGraveInfo(GraveWorldGenerationHelper.GraveGenerationInfo graveInfo) {
-//        //super.setGraveContent(random, isPetGrave, contentType, corpseType);
-//
-//        if (graveInfo.getSword() != null) {
-//            this.setSword(graveInfo.getSword());
-//        }
-//        this.setGraveType(graveInfo.getGrave().ordinal());
-//
-//        deathText = graveInfo.getDeathText();
-//        inventory.setAdditionalItems(graveInfo.getItems());
-//        setRandomAge();//TODO
-//
-//        if (graveInfo.getFlower() != null) {
-//            setFlower(graveInfo.getFlower());
-//        }
-//    }
 
     public void setOwner(String playerId) {
         this.playerId = playerId;
