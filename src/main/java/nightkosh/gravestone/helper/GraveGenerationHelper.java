@@ -414,7 +414,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     private static DeathMessageInfo getDeathMessage(EntityLivingBase entity, String damageType, boolean isVillager) {
-        EntityLivingBase killer = entity.getAttackingEntity();//.func_94060_bK();
+        EntityLivingBase killer = entity.getAttackingEntity();
         String shortString = "death.attack." + damageType;
         String fullString = shortString + ".player";
 
