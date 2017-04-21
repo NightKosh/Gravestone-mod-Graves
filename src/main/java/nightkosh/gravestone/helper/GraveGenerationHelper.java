@@ -463,7 +463,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     public static boolean isMossyGrave(World world, BlockPos pos, EnumGraveMaterial graveMaterial) {
-        ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(pos))));
+        ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiome(pos))));
         return graveMaterial != EnumGraveMaterial.OTHER && (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP));
     }
 
@@ -594,7 +594,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     public static EnumGraveMaterial[] getGraveMaterialByBiomes(World world, BlockPos pos) {
-        ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiomeGenForCoords(pos))));
+        ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiome(pos))));
 
         ArrayList<EnumGraveMaterial> materials = new ArrayList<>();
         if (biomeTypesList.contains(BiomeDictionary.Type.SANDY) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {
