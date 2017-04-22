@@ -109,6 +109,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
             items.addAll(Arrays.asList(player.inventory.mainInventory));
             items.addAll(Arrays.asList(player.inventory.armorInventory));
+            items.addAll(Arrays.asList(player.inventory.offHandInventory));
 
             CompatibilityTwilightForest.addSlotTags(items);
             CompatibilityBattlegear.addItems(items, player);
