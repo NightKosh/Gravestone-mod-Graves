@@ -49,9 +49,8 @@ public class CompatibilityEnderIO implements ICompatibility {
 
     private static boolean hasSoulbound(ItemStack stack) {
         Map enchantments = EnchantmentHelper.getEnchantments(stack);
-        for (Object id : enchantments.keySet()) {
-            Enchantment ench = Enchantment.getEnchantmentByID(((Integer) id).shortValue());
-            if (ench != null && ench.getName().equals("enchantment.enderio.soulBound")) {
+        for (Object ench : enchantments.keySet()) {
+            if (ench != null && ((Enchantment) ench).getName().equals("enchantment.soulBound")) {
                 return true;
             }
         }

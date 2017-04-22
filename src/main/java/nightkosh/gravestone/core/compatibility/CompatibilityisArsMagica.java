@@ -49,9 +49,8 @@ public class CompatibilityisArsMagica implements ICompatibility {
 
     private static boolean hasSoulbound(ItemStack stack) {
         Map enchantments = EnchantmentHelper.getEnchantments(stack);
-        for (Object id : enchantments.keySet()) {
-            Enchantment ench = Enchantment.getEnchantmentByID(((Integer) id).shortValue());
-            if (ench != null && ench.getClass().getName().equals("am2.enchantments.EnchantmentSoulbound")) {
+        for (Object ench : enchantments.keySet()) {
+            if (ench != null && ((Enchantment) ench).getName().equals("enchantment.EnchantmentSoulbound")) {
                 return true;
             }
         }

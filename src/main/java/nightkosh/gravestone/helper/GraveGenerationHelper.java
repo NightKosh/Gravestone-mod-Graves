@@ -118,7 +118,15 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             }
 
             for (IPlayerItems additionalItems : APIGraveGeneration.PLAYER_ITEMS) {
-                items.addAll(additionalItems.addItems(player, event.getSource()));
+                try {
+                    List<ItemStack> modItems = additionalItems.addItems(player, event.getSource());
+                    if (modItems != null && modItems.size() != 0) {
+                        items.addAll(modItems);
+                    }
+                } catch (Exception e) {
+                    GSLogger.logError("Compatibility error occurred in additionalItems.addItems");
+                    e.printStackTrace();
+                }
             }
 
             //TODO is it really required??
@@ -126,7 +134,12 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
 
             for (IPlayerItems additionalItems : APIGraveGeneration.PLAYER_ITEMS) {
-                additionalItems.getItems(player, event.getSource(), items);
+                try {
+                    additionalItems.getItems(player, event.getSource(), items);
+                } catch (Exception e) {
+                    GSLogger.logError("Compatibility error occurred in additionalItems.getItems");
+                    e.printStackTrace();
+                }
             }
 
             createGrave(player, event, items, EnumGraveTypeByEntity.PLAYER_GRAVES, false, spawnTime);
