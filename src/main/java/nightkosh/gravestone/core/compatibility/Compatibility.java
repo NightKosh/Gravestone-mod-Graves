@@ -19,7 +19,7 @@ public class Compatibility {
 
         new CompatibilityBaubles();
 
-        new CompatibilityMariculture();
+//        new CompatibilityMariculture();
 
         new CompatibilityRpgInventory();
 
