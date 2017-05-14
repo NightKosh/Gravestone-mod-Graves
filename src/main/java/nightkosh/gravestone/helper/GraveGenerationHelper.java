@@ -392,7 +392,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 tileEntity.setMossy(graveInfo.isMossy());
                 if (entity instanceof EntityPlayer) {
                     tileEntity.setOwner(entity.getUniqueID().toString());
-                } else if (entity instanceof EntityTameable && ((EntityTameable) entity).isTamed()) {
+                } else if (entity instanceof EntityTameable && ((EntityTameable) entity).isTamed() && ((EntityTameable) entity).getOwner() != null) {
                     tileEntity.setOwner(((EntityTameable) entity).getOwner().getUniqueID().toString());
                 }
             }
