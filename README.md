@@ -1,4 +1,5 @@
-#Gravestone mod - Graves
+
+# Gravestone mod - Graves
 
 Adds a gravestone to the game, which spawns after player's death.
 
@@ -9,12 +10,12 @@ Read more on [official site](http://gravestone.nightkosh.com/) or on [minecraft 
 #API
 [Gravestone Mod API](https://github.com/NightKosh/GraveStone-mod-API)
 
-##Requirements
+## Requirements
 1. [Forge](http://files.minecraftforge.net/) (check "build.gradle" file to know required forge version)
    * Latest versions of Forge requires [Gradle 2.0](https://gradle.org/) or higher
 2. "Master branch" version of mod requires [jdk 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)(do not forget to enable java 8 support in your IDE)
 
-##Dependencies.
+## Dependencies.
 **Be careful some of these API may not be updated yet, or may be bugged!**
 
 1. [Gravestone Mod API](https://github.com/NightKosh/GraveStone-mod-API) (will be loaded as git submodule)
@@ -24,7 +25,7 @@ Read more on [official site](http://gravestone.nightkosh.com/) or on [minecraft 
 7. [TinkersConstruct API](https://github.com/SlimeKnights/TinkersConstruct)
 8. [Thaumcraft API](https://github.com/Azanor/thaumcraft-api) (will be loaded as git submodule)
 
-##Get started
+## Get started
 1. [Set up forge](http://www.minecraftforge.net/wiki/Installation/Source)
 2. Clone mod repository into the Forge folder
 3. Download mod's API
