@@ -17,7 +17,8 @@ public class ModelRendererSkull extends ModelRenderer {
     public static enum EnumSkullType {
         SKELETON_SKULL,
         WITHER_SKULL,
-        ZOMBIE_SKULL
+        ZOMBIE_SKULL,
+        STRAY_SKULL
     }
 
     private final static String NAME = "skull";
@@ -59,6 +60,9 @@ public class ModelRendererSkull extends ModelRenderer {
                 break;
             case ZOMBIE_SKULL:
                 texture = Resources.ZOMBIE_SKULL;
+                break;
+            case STRAY_SKULL:
+                texture = Resources.STRAY_SKULL;
                 break;
         }
         Minecraft.getMinecraft().renderEngine.bindTexture(texture);

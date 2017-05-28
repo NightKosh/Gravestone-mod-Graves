@@ -24,6 +24,7 @@ public class Resources {
     public static final ResourceLocation SKELETON_SKULL = new ResourceLocation(BLOCK_LOCATION + "SkeletonSkull.png");
     public static final ResourceLocation WITHER_SKULL = new ResourceLocation(BLOCK_LOCATION + "WitherSkull.png");
     public static final ResourceLocation ZOMBIE_SKULL = new ResourceLocation(BLOCK_LOCATION + "ZombieSkull.png");
+    public static final ResourceLocation STRAY_SKULL = new ResourceLocation(BLOCK_LOCATION + "StraySkull.png");
 
     // entities
     public static final ResourceLocation SKELETON = new ResourceLocation("textures/entity/skeleton/skeleton.png");
