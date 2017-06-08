@@ -44,7 +44,7 @@ public abstract class GravesDefaultText {
         "Wendy", "Willy", "William", "Wilfred", "Winfred", "Wyatt", "Wulfstan"
     };
     public static final String[] DOG_NAMES = {
-        "Buddy", "Brady"
+        "Buddy", "Brady",
         "Chomper",
         "Max",
         "Rex", "Rover", "Rusty",
