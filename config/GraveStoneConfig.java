@@ -53,6 +53,8 @@ public class GraveStoneConfig {
     public static boolean generatePlayerGraves;
     public static boolean generateVillagerGraves;
     public static boolean generatePetGraves;
+    public static boolean renderGravesFlowers;
+    public static boolean vanillaRendererForSwordsGraves;
     // graves by damage
     public static boolean generateGravesInLava;
     // saved items count
@@ -200,6 +202,8 @@ public class GraveStoneConfig {
         generatePetGraves = config.get(Configuration.CATEGORY_GENERAL, "GeneratePetGraves", true).getBoolean(true);
         generateGravesInLava = config.get(Configuration.CATEGORY_GENERAL, "GenerateGravesInLava", true).getBoolean(true);
         generateSwordGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateSwordGraves", true).getBoolean(true);
+        renderGravesFlowers = config.get(Configuration.CATEGORY_GENERAL, "RenderGravesFlowers", true).getBoolean(true);
+        vanillaRendererForSwordsGraves = config.get(Configuration.CATEGORY_GENERAL, "VanillaRendererForSwordsGraves", true).getBoolean(true);
         
         // store items
         Property graveItemsCountProperty = config.get(Configuration.CATEGORY_GENERAL, "SavedItemsCount", 40);
