@@ -16,13 +16,13 @@ public class CompatibilityThaumcraft implements ICompatibility {
 
     protected CompatibilityThaumcraft() {
         if (isModLoaded(MOD_ID)) {
-//            ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.graveStone), new AspectList().add(Aspect.SOUL, 3)
+//            ThaumcraftApi.registerObjectTag(new ItemStack(GSBlock.GRAVE_STONE), new AspectList().add(Aspect.SOUL, 3)
 //                    .add(Aspect.DEATH, 3).add(Aspect.UNDEAD, 3));
 //
 //            if (Config.addThaumcraftSwordsAsGravestones) {
-//                GraveStoneAPI.graveStone.addSwordToSwordsList(GameRegistry.findItem(MOD_ID, "thaumium_sword"));
-//                GraveStoneAPI.graveStone.addSwordToSwordsList(GameRegistry.findItem(MOD_ID, "elemental_sword"));
-//                GraveStoneAPI.graveStone.addSwordToSwordsList(GameRegistry.findItem(MOD_ID, "void_sword"));
+//                GraveStoneAPI.GRAVE_STONE.addSwordToSwordsList(GameRegistry.findItem(MOD_ID, "thaumium_sword"));
+//                GraveStoneAPI.GRAVE_STONE.addSwordToSwordsList(GameRegistry.findItem(MOD_ID, "elemental_sword"));
+//                GraveStoneAPI.GRAVE_STONE.addSwordToSwordsList(GameRegistry.findItem(MOD_ID, "void_sword"));
 //            }
         }
     }

@@ -1,7 +1,6 @@
 package nightkosh.gravestone.core;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -21,13 +20,13 @@ public class Tabs {
         gravesTab = new CreativeTabs("tabGSGraveStone") {
             @Override
             public ItemStack getIconItemStack() {
-                return new ItemStack(GSBlock.graveStone, 1, EnumGraves.STONE_VERTICAL_PLATE.ordinal());
+                return new ItemStack(GSBlock.GRAVE_STONE, 1, EnumGraves.STONE_VERTICAL_PLATE.ordinal());
             }
 
             @Override
             @SideOnly(Side.CLIENT)
-            public Item getTabIconItem() {
-                return Item.getItemFromBlock(GSBlock.graveStone);
+            public ItemStack getTabIconItem() {
+                return new ItemStack(GSBlock.GRAVE_STONE, 1, EnumGraves.STONE_VERTICAL_PLATE.ordinal());
             }
         };
 

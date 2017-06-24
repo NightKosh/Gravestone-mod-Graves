@@ -5,12 +5,10 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -19,6 +17,8 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import nightkosh.gravestone.api.IGraveStoneHelper;
 import nightkosh.gravestone.api.death_handler.ICustomEntityDeathHandler;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
@@ -37,10 +37,7 @@ import nightkosh.gravestone.inventory.GraveInventory;
 import nightkosh.gravestone.tileentity.DeathMessageInfo;
 import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * GraveStone mod
@@ -101,14 +98,15 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     private static final EnumGraveType[] GENERATED_CREEPER_STATUES_GRAVES_TYPES = {EnumGraveType.CREEPER_STATUE};
 
     public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event, long spawnTime) {
-        if (player.worldObj != null && !player.worldObj.getGameRules().getBoolean("keepInventory") && Config.graveItemsCount > 0 &&
+        if (player.getEntityWorld() != null && !player.getEntityWorld().getGameRules().getBoolean("keepInventory") && Config.graveItemsCount > 0 &&
                 !isInRestrictedArea(player.getPosition())) {
             List<ItemStack> items = new ArrayList<>(40);
 
 //            GSCompatibilityAntiqueAtlas.placeDeathMarkerAtDeath(player); //TODO !!!!!!!!!!!!
 
-            items.addAll(Arrays.asList(player.inventory.mainInventory));
-            items.addAll(Arrays.asList(player.inventory.armorInventory));
+            items.addAll(player.inventory.mainInventory);
+            items.addAll(player.inventory.armorInventory);
+            items.addAll(player.inventory.offHandInventory);
 
             CompatibilityTwilightForest.addSlotTags(items);
             CompatibilityBattlegear.addItems(items, player);
@@ -154,6 +152,16 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             items.addAll(additionalItems.addItems(villager, event.getSource()));
         }
 
+        IItemHandler itemHandler =  villager.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, villager.getHorizontalFacing());
+        if (villager.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, villager.getHorizontalFacing())) {
+            for (int slot = 0 ; slot < itemHandler.getSlots(); slot++) {
+                ItemStack stack = itemHandler.extractItem(slot, 100500, false);
+                if (stack != null && !stack.isEmpty()) {
+                    items.add(stack);
+                }
+            }
+        }
+
         long spawnTime = MobHandler.getAndRemoveSpawnTime(event.getEntity());
         createGrave(villager, event, items, GraveGenerationHelper.EnumGraveTypeByEntity.VILLAGERS_GRAVES, true, spawnTime);
     }
@@ -177,6 +185,16 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         for (IDogItems additionalItems : APIGraveGeneration.DOG_ITEMS) {
             items.addAll(additionalItems.addItems(dog, event.getSource()));
         }
+
+        IItemHandler itemHandler =  dog.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, dog.getHorizontalFacing());
+        if (dog.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, dog.getHorizontalFacing())) {
+            for (int slot = 0 ; slot < itemHandler.getSlots(); slot++) {
+                ItemStack stack = itemHandler.extractItem(slot, 100500, false);
+                if (stack != null && !stack.isEmpty()) {
+                    items.add(stack);
+                }
+            }
+        }
         return items;
     }
 
@@ -185,10 +203,20 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         for (ICatItems additionalItems : APIGraveGeneration.CAT_ITEMS) {
             items.addAll(additionalItems.addItems(cat, event.getSource()));
         }
+
+        IItemHandler itemHandler =  cat.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, cat.getHorizontalFacing());
+        if (cat.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, cat.getHorizontalFacing())) {
+            for (int slot = 0 ; slot < itemHandler.getSlots(); slot++) {
+                ItemStack stack = itemHandler.extractItem(slot, 100500, false);
+                if (stack != null && !stack.isEmpty()) {
+                    items.add(stack);
+                }
+            }
+        }
         return items;
     }
 
-    public static void createHorseGrave(EntityHorse horse, LivingDeathEvent event) {
+    public static void createHorseGrave(AbstractHorse horse, LivingDeathEvent event) {
         if (horse.isTame()) {
             List<ItemStack> items = new ArrayList<>();
             items.addAll(getHorseItems(horse));
@@ -202,50 +230,18 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         }
     }
 
-    private static List<ItemStack> getHorseItems(EntityHorse horse) {
+    private static List<ItemStack> getHorseItems(AbstractHorse horse) {
         List<ItemStack> items = new ArrayList<>();
 
-        NBTTagCompound nbt = new NBTTagCompound();
-        horse.writeEntityToNBT(nbt);
-        NBTTagList nbtItemsList = nbt.getTagList("Items", 10);
-
-        if (Config.storeHorseSaddleAndArmor) {
-            if (horse.isHorseSaddled()) {
-                items.add(new ItemStack(Items.SADDLE));
-                nbt.removeTag("SaddleItem");
-
-                horse.horseChest.setInventorySlotContents(0, null);
-            }
-            if (nbt.hasKey("ArmorItem", 10)) {
-                items.add(ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("ArmorItem")));
-                nbt.removeTag("ArmorItem");
-
-                horse.horseChest.setInventorySlotContents(1, null);
+        IItemHandler itemHandler =  horse.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, horse.getHorizontalFacing());
+        if (horse.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, horse.getHorizontalFacing())) {
+            for (int slot = 0 ; slot < itemHandler.getSlots(); slot++) {
+                ItemStack stack = itemHandler.extractItem(slot, 100500, false);
+                if (stack != null && !stack.isEmpty()) {
+                    items.add(stack);
+                }
             }
         }
-        if (horse.isChested()) {
-            for (int i = 0; i < nbtItemsList.tagCount(); i++) {
-                items.add(ItemStack.loadItemStackFromNBT(nbtItemsList.getCompoundTagAt(i)));
-            }
-
-            items.add(new ItemStack(Blocks.CHEST));
-        }
-
-        // new chest inventory
-        nbtItemsList = new NBTTagList();
-        for (int slot = 2; slot < 17; slot++) {
-            NBTTagCompound nbtTagCompound = new NBTTagCompound();
-            nbtTagCompound.setByte("Slot", (byte) slot);
-            new ItemStack(Blocks.AIR).writeToNBT(nbtTagCompound);
-            nbtItemsList.appendTag(nbtTagCompound);
-        }
-
-        nbt.removeTag("Items");
-        nbt.setTag("Items", nbtItemsList);
-        horse.readEntityFromNBT(nbt);
-
-        // must be invoked after "readEntityFromNBT" otherwise items in chest will not be cleared
-        horse.setChested(false);
 
         return items;
     }
@@ -255,15 +251,15 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             GSLogger.logInfo("Can't generate " + entity.getName() + "'s grave in restricted area. " + entity.getPosition().toString());
             if (items != null) {
                 items.stream().filter(item -> item != null).forEach(item -> {
-                    GraveInventory.dropItem(item, entity.worldObj, entity.getPosition());
+                    GraveInventory.dropItem(item, entity.getEntityWorld(), entity.getPosition());
                 });
             }
         } else {
-            int age = (int) (entity.worldObj.getWorldTime() - spawnTime) / 24000;
+            int age = (int) (entity.getEntityWorld().getWorldTime() - spawnTime) / 24000;
             BlockPos pos = new BlockPos(entity.posX, entity.posY, entity.posZ - 1);
-            GraveInfoOnDeath graveInfo = getGraveOnDeath(entity.worldObj, pos, entity, graveTypeByEntity, items, age, event.getSource());
+            GraveInfoOnDeath graveInfo = getGraveOnDeath(entity.getEntityWorld(), pos, entity, graveTypeByEntity, items, age, event.getSource());
             DeathMessageInfo messageInfo = getDeathMessage((EntityLivingBase) entity, event.getSource().damageType, isVillager);
-            createOnDeath(entity, entity.worldObj, pos, messageInfo, items, age, graveInfo, event.getSource());
+            createOnDeath(entity, entity.getEntityWorld(), pos, messageInfo, items, age, graveInfo, event.getSource());
         }
     }
 
@@ -272,7 +268,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             GSLogger.logInfo("Can't generate " + entity.getName() + "'s grave in restricted area. " + entity.getPosition().toString());
             if (customEntityDeathHandler.getItems() != null) {
                 customEntityDeathHandler.getItems().stream().filter(item -> item != null).forEach(item -> {
-                    GraveInventory.dropItem(item, entity.worldObj, entity.getPosition());
+                    GraveInventory.dropItem(item, entity.getEntityWorld(), entity.getPosition());
                 });
             }
         } else {
@@ -286,7 +282,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
             BlockPos pos = new BlockPos(entity.posX, entity.posY, entity.posZ - 1);
             DeathMessageInfo messageInfo = getDeathMessage((EntityLivingBase) entity, event.getSource().damageType, false);
-            createOnDeath(entity, entity.worldObj, pos, messageInfo, customEntityDeathHandler.getItems(), age, graveInfo, event.getSource());
+            createOnDeath(entity, entity.getEntityWorld(), pos, messageInfo, customEntityDeathHandler.getItems(), age, graveInfo, event.getSource());
         }
     }
 
@@ -368,11 +364,11 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
     private static void createOnDeath(Entity entity, World world, BlockPos pos, DeathMessageInfo deathInfo, List<ItemStack> items,
                                       int age, GraveInfoOnDeath graveInfo, DamageSource damageSource) {
-        EnumFacing direction = EnumFacing.getHorizontal(MathHelper.floor_double((double) (entity.rotationYaw * 4 / 360F) + 0.5) & 3);
+        EnumFacing direction = EnumFacing.getHorizontal(MathHelper.floor((double) (entity.rotationYaw * 4 / 360F) + 0.5) & 3);
 
         BlockPos newPos = findPlaceForGrave(world, pos);
         if (newPos != null) {
-            world.setBlockState(newPos, GSBlock.graveStone.getDefaultState().withProperty(BlockGraveStone.FACING, direction), 2);
+            world.setBlockState(newPos, GSBlock.GRAVE_STONE.getDefaultState().withProperty(BlockGraveStone.FACING, direction), 2);
             TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(newPos);
 
             if (tileEntity != null) {
@@ -391,13 +387,13 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 tileEntity.setMossy(graveInfo.isMossy());
                 if (entity instanceof EntityPlayer) {
                     tileEntity.setOwner(entity.getUniqueID().toString());
-                } else if (entity instanceof EntityTameable && ((EntityTameable) entity).isTamed()) {
+                } else if (entity instanceof EntityTameable && ((EntityTameable) entity).isTamed() && ((EntityTameable) entity).getOwner() != null) {
                     tileEntity.setOwner(((EntityTameable) entity).getOwner().getUniqueID().toString());
                 }
             }
             GSLogger.logInfoGrave("Create " + deathInfo.getName() + "'s grave at " + newPos.getX() + "x" + newPos.getY() + "x" + newPos.getZ());
         } else {
-            ItemStack itemStack = GSBlock.graveStone.createStackedBlock(GSBlock.graveStone.getDefaultState());
+            ItemStack itemStack = new ItemStack(Item.getItemFromBlock(GSBlock.GRAVE_STONE), 1);
             itemStack.setItemDamage(graveInfo.getGrave().ordinal());
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setBoolean("isLocalized", true);
@@ -467,7 +463,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
     @Override
     public boolean isMagicDamage(DamageSource damageSource) {
-        return DamageSource.magic.equals(damageSource) || damageSource.damageType.toLowerCase().contains("magic");
+        return DamageSource.MAGIC.equals(damageSource) || damageSource.damageType.toLowerCase().contains("magic");
     }
 
     @Override
@@ -476,7 +472,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     public static boolean isMossyGrave(World world, BlockPos pos, EnumGraveMaterial graveMaterial) {
-        ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiome(pos))));
+        Set<BiomeDictionary.Type> biomeTypesList = BiomeDictionary.getTypes(world.getBiome(pos));
         return graveMaterial != EnumGraveMaterial.OTHER && (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP));
     }
 
@@ -554,10 +550,10 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             material = EnumGraveMaterial.OBSIDIAN;
         } else if (graveTypeByEntity == EnumGraveTypeByEntity.PLAYER_GRAVES) {
             //TODO drown
-            if (DamageSource.starve.equals(damageSource)) {
+            if (DamageSource.STARVE.equals(damageSource)) {
                 graveTypes = STARVED_PLAYER_GRAVES_TYPES;
                 material = EnumGraveMaterial.OTHER;
-            } else if (DamageSource.wither.equals(damageSource)) {
+            } else if (DamageSource.WITHER.equals(damageSource)) {
                 graveTypes = WITHERED_PLAYER_GRAVES_TYPES;
                 material = EnumGraveMaterial.OTHER;
             } else {
@@ -575,7 +571,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     public static boolean isFireDamage(DamageSource damageSource, String damageType) {
-        return DamageSource.inFire.equals(damageSource) || DamageSource.onFire.equals(damageSource) || isFireDamage(damageType);
+        return DamageSource.IN_FIRE.equals(damageSource) || DamageSource.ON_FIRE.equals(damageSource) || isFireDamage(damageType);
     }
 
     public static boolean isFireDamage(String damageType) {
@@ -583,7 +579,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     public static boolean isLavaDamage(DamageSource damageSource, String damageType) {
-        return DamageSource.lava.equals(damageSource) || isLavaDamage(damageType);
+        return DamageSource.LAVA.equals(damageSource) || isLavaDamage(damageType);
     }
 
     public static boolean isLavaDamage(String damageType) {
@@ -607,7 +603,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     public static EnumGraveMaterial[] getGraveMaterialByBiomes(World world, BlockPos pos) {
-        ArrayList<BiomeDictionary.Type> biomeTypesList = new ArrayList<>(Arrays.asList(BiomeDictionary.getTypesForBiome(world.getBiome(pos))));
+        Set<BiomeDictionary.Type> biomeTypesList = BiomeDictionary.getTypes(world.getBiome(pos));
 
         ArrayList<EnumGraveMaterial> materials = new ArrayList<>();
         if (biomeTypesList.contains(BiomeDictionary.Type.SANDY) || biomeTypesList.contains(BiomeDictionary.Type.BEACH)) {

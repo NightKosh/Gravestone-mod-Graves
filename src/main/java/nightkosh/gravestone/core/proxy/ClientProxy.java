@@ -1,5 +1,7 @@
 package nightkosh.gravestone.core.proxy;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.item.Item;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import nightkosh.gravestone.block.enums.EnumGraves;
@@ -18,7 +20,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerRenderers() {
-        ClientRegistry.registerTileEntity(TileEntityGraveStone.class, "GSGraveStone", new TileEntityGraveStoneRenderer());
+//        ClientRegistry.registerTileEntity(TileEntityGraveStone.class, "GSGraveStone", new TileEntityGraveStoneRenderer());
         ClientRegistry.registerTileEntity(TileEntityGraveStone.VerticalPlate.class, "GSGraveStoneVerticalPlate", new TileEntityGraveStoneRenderer.VerticalPlateRenderer());
         ClientRegistry.registerTileEntity(TileEntityGraveStone.Cross.class, "GSGraveStoneCross", new TileEntityGraveStoneRenderer.CrossRenderer());
         ClientRegistry.registerTileEntity(TileEntityGraveStone.Obelisk.class, "GSGraveStoneObelisk", new TileEntityGraveStoneRenderer.ObeliskRenderer());
@@ -36,16 +38,6 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public String getLocalizedString(String str) {
-//        String localizedString = null;
-//        try {
-//            localizedString = LanguageRegistry.instance().getStringLocalization(str);
-//        } catch (Exception e) {
-//        }
-//        if (StringUtils.isBlank(localizedString)) {
-//            return LanguageRegistry.instance().getStringLocalization(str, "en_US");
-//        } else {
-//            return localizedString;
-//        }
         return I18n.translateToLocal(str);
     }
 
@@ -60,19 +52,23 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerBlocksModels() {
-        ProxyHelper.registerModelsForTEBlocks(0, GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.class);
-        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_VERTICAL_PLATE.ordinal() + 1, EnumGraves.ICE_VERTICAL_PLATE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.VerticalPlate.class);
-        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_CROSS.ordinal(), EnumGraves.ICE_CROSS.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.Cross.class);
-        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_OBELISK.ordinal(), EnumGraves.ICE_OBELISK.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.Obelisk.class);
-        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_CELTIC_CROSS.ordinal(), EnumGraves.ICE_CELTIC_CROSS.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.CelticCross.class);
-        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_HORIZONTAL_PLATE.ordinal(), EnumGraves.ICE_HORIZONTAL_PLATE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.HorizontalPlate.class);
-        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_VILLAGER_STATUE.ordinal(), EnumGraves.ICE_VILLAGER_STATUE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.VillagerStatue.class);
-        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_DOG_STATUE.ordinal(), EnumGraves.ICE_DOG_STATUE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.DogStatue.class);
-        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_CAT_STATUE.ordinal(), EnumGraves.ICE_CAT_STATUE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.CatStatue.class);
-        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_HORSE_STATUE.ordinal(), EnumGraves.ICE_HORSE_STATUE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.HorseStatue.class);
-        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_CREEPER_STATUE.ordinal(), EnumGraves.ICE_CREEPER_STATUE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.CreeperStatue.class);
-        ProxyHelper.registerModelsForTEBlocks(EnumGraves.STARVED_CORPSE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.StarvedCorpse.class);
-        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WITHERED_CORPSE.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.WitheredCorpse.class);
-        ProxyHelper.registerModelsForTEBlocks(EnumGraves.SWORD.ordinal(), GSBlock.graveStone, ResourcesModels.graveStoneModel, TileEntityGraveStone.Sword.class);
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.GRAVE_STONE), 0, ResourcesModels.GRAVE_STONE_MODEL);
+
+//        ProxyHelper.registerModelsForTEBlocks(0, GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.class);
+        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_VERTICAL_PLATE.ordinal(), EnumGraves.ICE_VERTICAL_PLATE.ordinal(), GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.VerticalPlate.class);
+        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_CROSS.ordinal(), EnumGraves.ICE_CROSS.ordinal(), GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.Cross.class);
+        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_OBELISK.ordinal(), EnumGraves.ICE_OBELISK.ordinal(), GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.Obelisk.class);
+        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_CELTIC_CROSS.ordinal(), EnumGraves.ICE_CELTIC_CROSS.ordinal(), GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.CelticCross.class);
+        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_HORIZONTAL_PLATE.ordinal(), EnumGraves.ICE_HORIZONTAL_PLATE.ordinal(), GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.HorizontalPlate.class);
+        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_VILLAGER_STATUE.ordinal(), EnumGraves.ICE_VILLAGER_STATUE.ordinal(), GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.VillagerStatue.class);
+        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_DOG_STATUE.ordinal(), EnumGraves.ICE_DOG_STATUE.ordinal(), GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.DogStatue.class);
+        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_CAT_STATUE.ordinal(), EnumGraves.ICE_CAT_STATUE.ordinal(), GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.CatStatue.class);
+        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_HORSE_STATUE.ordinal(), EnumGraves.ICE_HORSE_STATUE.ordinal(), GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.HorseStatue.class);
+        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_CREEPER_STATUE.ordinal(), EnumGraves.ICE_CREEPER_STATUE.ordinal(), GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.CreeperStatue.class);
+        ProxyHelper.registerModelsForTEBlocks(EnumGraves.STARVED_CORPSE.ordinal(), GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.StarvedCorpse.class);
+        ProxyHelper.registerModelsForTEBlocks(EnumGraves.WITHERED_CORPSE.ordinal(), GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.WitheredCorpse.class);
+        ProxyHelper.registerModelsForTEBlocks(EnumGraves.SWORD.ordinal(), GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.Sword.class);
+
+
     }
 }

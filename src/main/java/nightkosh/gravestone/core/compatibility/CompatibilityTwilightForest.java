@@ -59,7 +59,7 @@ public class CompatibilityTwilightForest implements ICompatibility {
                     if (slot == keepingData[1]) {
                         //make sure there is a charm of keeping left for TwilightForest to detect
                         player.inventory.setInventorySlotContents(slot, item.splitStack(1));
-                        if (item.stackSize <= 0) {
+                        if (item.getCount() <= 0) {
                             item = null;
                         }
                     } else {
@@ -120,8 +120,8 @@ public class CompatibilityTwilightForest implements ICompatibility {
     private static int[] checkForCharmOfKeeping(EntityPlayer player) {
         byte max = 0;
         int slot = -1;
-        for (int i = 0; i < player.inventory.mainInventory.length; i++) {
-            ItemStack stack = player.inventory.mainInventory[i];
+        for (int i = 0; i < player.inventory.mainInventory.size(); i++) {
+            ItemStack stack = player.inventory.mainInventory.get(i);
             if (stack == null) continue;
             //TODO
 //            if (stack.getItem() == twilightforest.item.TFItems.charmOfKeeping1) {

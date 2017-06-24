@@ -42,7 +42,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
 
     public TileEntityGraveStone(World world) {
         this();
-        this.worldObj = world;
+        this.setWorld(world);
     }
 
     /**
@@ -58,7 +58,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
 
         spawner.update();
 
-        fogHandler.addFog(this.worldObj, this.pos);
+        fogHandler.addFog(this.getWorld(), this.pos);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
      */
     @Override
     public boolean receiveClientEvent(int par1, int par2) {
-        if (par1 == 1 && this.worldObj.isRemote) {
+        if (par1 == 1 && this.getWorld().isRemote) {
             spawner.setMinDelay();
         }
 
@@ -141,7 +141,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
 
     private void readSwordInfo(NBTTagCompound nbtTag) {
         if (nbtTag.hasKey("Sword")) {
-            sword = ItemStack.loadItemStackFromNBT(nbtTag.getCompoundTag("Sword"));
+            sword = new ItemStack(nbtTag.getCompoundTag("Sword"));
         }
     }
 
@@ -155,7 +155,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
 
     private void readFlowerInfo(NBTTagCompound nbtTag) {
         if (nbtTag.hasKey("Flower")) {
-            flower = ItemStack.loadItemStackFromNBT(nbtTag.getCompoundTag("Flower"));
+            flower = new ItemStack(nbtTag.getCompoundTag("Flower"));
         }
     }
 
@@ -177,7 +177,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
 
     public void dropSword() {
         if (this.sword != null) {
-            this.inventory.dropItem(this.sword, this.worldObj, this.pos);
+            this.inventory.dropItem(this.sword, this.getWorld(), this.pos);
         }
     }
 
@@ -196,7 +196,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
 
     public void dropFlower() {
         if (this.flower != null) {
-            this.inventory.dropItem(this.flower, this.worldObj, this.pos);
+            this.inventory.dropItem(this.flower, this.getWorld(), this.pos);
         }
     }
 

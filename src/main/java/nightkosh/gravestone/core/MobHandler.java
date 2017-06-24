@@ -30,7 +30,7 @@ public class MobHandler {
 
     public static void clearMobsSpawnTime(Entity entity) {
         mobsSpawnTime.remove(entity.getUniqueID().toString());
-        saveMobsSpawnTime(entity.worldObj);
+        saveMobsSpawnTime(entity.getEntityWorld());
     }
 
     public static long getAndRemoveSpawnTime(Entity entity) {
@@ -39,22 +39,22 @@ public class MobHandler {
             clearMobsSpawnTime(entity);
             return time;
         } else {
-            return entity.worldObj.getWorldTime();
+            return entity.getEntityWorld().getWorldTime();
         }
     }
 
     public static long getMobSpawnTime(Entity entity) {
         if (!mobsSpawnTime.containsKey(entity.getUniqueID().toString())) {
-            mobsSpawnTime.put(entity.getUniqueID().toString(), entity.worldObj.getWorldTime());
-            saveMobsSpawnTime(entity.worldObj);
+            mobsSpawnTime.put(entity.getUniqueID().toString(), entity.getEntityWorld().getWorldTime());
+            saveMobsSpawnTime(entity.getEntityWorld());
         }
         return mobsSpawnTime.get(entity.getUniqueID().toString());
     }
 
     public static void setMobSpawnTime(Entity entity) {
         if (!mobsSpawnTime.containsKey(entity.getUniqueID().toString())) {
-            mobsSpawnTime.put(entity.getUniqueID().toString(), entity.worldObj.getWorldTime());
-            saveMobsSpawnTime(entity.worldObj);
+            mobsSpawnTime.put(entity.getUniqueID().toString(), entity.getEntityWorld().getWorldTime());
+            saveMobsSpawnTime(entity.getEntityWorld());
         }
     }
 

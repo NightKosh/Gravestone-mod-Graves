@@ -73,8 +73,8 @@ public class EventsHandler {
                             GraveGenerationHelper.createCatGrave(cat, event);
                             return;
                         }
-                    } else if (event.getEntity() instanceof EntityHorse) {
-                        EntityHorse horse = (EntityHorse) event.getEntity();
+                    } else if (event.getEntity() instanceof AbstractHorse) {
+                        AbstractHorse horse = (AbstractHorse) event.getEntity();
                         for (IHorseDeathHandler horseDeathHandler : APIGraveGeneration.HORSE_DEATH_HANDLERS) {
                             if (horseDeathHandler.cancelGraveGeneration(horse, event.getSource())) {
                                 return;

@@ -1,5 +1,6 @@
 package nightkosh.gravestone.core;
 
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import nightkosh.gravestone.ModGraveStone;
 import nightkosh.gravestone.block.BlockGraveStone;
@@ -13,11 +14,12 @@ import nightkosh.gravestone.item.itemblock.ItemBlockGraveStone;
  */
 public class GSBlock {
 
-    public static BlockGraveStone graveStone;
+    public static final BlockGraveStone GRAVE_STONE = new BlockGraveStone();
+    public static final ItemBlock GRAVE_STONE_IB = new ItemBlockGraveStone(GRAVE_STONE);
 
     public static void registration() {
-        graveStone = new BlockGraveStone();
-        GameRegistry.registerBlock(graveStone, ItemBlockGraveStone.class, "GSGraveStone");
+        GameRegistry.register(GRAVE_STONE);
+        GameRegistry.register(GRAVE_STONE_IB);
 
         ModGraveStone.proxy.registerBlocksModels();
     }

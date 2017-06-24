@@ -51,8 +51,8 @@ public class GraveContainer extends Container {
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
-        ItemStack stack = null;
-        Slot slotObject = (Slot) inventorySlots.get(slot);
+        ItemStack stack = ItemStack.EMPTY;
+        Slot slotObject = inventorySlots.get(slot);
 
         if (slotObject != null && slotObject.getHasStack()) {
             ItemStack stackInSlot = slotObject.getStack();
@@ -60,22 +60,22 @@ public class GraveContainer extends Container {
 
             if (slot < graveInventory.getSizeInventoryForGui()) {
                 if (!this.mergeItemStack(stackInSlot, graveInventory.getSizeInventoryForGui(), 36 + graveInventory.getSizeInventoryForGui(), true)) {
-                    return null;
+                    return ItemStack.EMPTY;
                 }
             } else {
-                return null;
+                return ItemStack.EMPTY;
             }
 
-            if (stackInSlot.stackSize == 0) {
-                slotObject.putStack(null);
+            if (stackInSlot.getCount() == 0) {
+                slotObject.putStack(ItemStack.EMPTY);
             } else {
                 slotObject.onSlotChanged();
             }
 
-            if (stackInSlot.stackSize == stack.stackSize) {
-                return null;
+            if (stackInSlot.getCount() == stack.getCount()) {
+                return ItemStack.EMPTY;
             }
-            slotObject.onPickupFromSlot(player, stackInSlot);
+            slotObject.onTake(player, stackInSlot);
         }
         return stack;
     }

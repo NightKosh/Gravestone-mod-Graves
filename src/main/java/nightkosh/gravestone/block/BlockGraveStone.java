@@ -23,6 +23,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -70,6 +71,7 @@ public class BlockGraveStone extends BlockContainer {
         this.setResistance(5);
         this.setCreativeTab(Tabs.gravesTab);
         this.setTickRandomly(Config.removeEmptyGraves);
+        this.setRegistryName("GSGraveStone");
     }
 
     /**
@@ -79,7 +81,7 @@ public class BlockGraveStone extends BlockContainer {
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase player, ItemStack itemStack) {
         GraveStoneHelper.replaceGround(world, pos.down());
 
-        EnumFacing enumfacing = EnumFacing.getHorizontal(MathHelper.floor_double((double) (player.rotationYaw * 4 / 360F) + 0.5D) & 3).getOpposite();
+        EnumFacing enumfacing = EnumFacing.getHorizontal(MathHelper.floor((double) (player.rotationYaw * 4 / 360F) + 0.5D) & 3).getOpposite();
         state = state.withProperty(FACING, enumfacing);
         world.setBlockState(pos, state, 2);
         TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
@@ -109,7 +111,7 @@ public class BlockGraveStone extends BlockContainer {
                 tileEntity.setPurified(nbt.getBoolean("Purified"));
 
                 if (nbt.hasKey("Sword")) {
-                    ItemStack sword = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("Sword"));
+                    ItemStack sword = new ItemStack(nbt.getCompoundTag("Sword"));
                     tileEntity.setSword(sword);
                     if (sword.isItemEnchanted()) {
                         tileEntity.setEnchanted(true);
@@ -128,8 +130,9 @@ public class BlockGraveStone extends BlockContainer {
         return GraveStoneHelper.canPlaceBlockAt(world, pos.down());
     }
 
+    @Nullable
     @Override
-    public AxisAlignedBB getCollisionBoundingBox( IBlockState state, World world, BlockPos pos) {
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return null;
     }
 
@@ -317,7 +320,7 @@ public class BlockGraveStone extends BlockContainer {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         TileEntityGraveStone te = (TileEntityGraveStone) world.getTileEntity(pos);
 
         if (te != null) {
@@ -330,7 +333,7 @@ public class BlockGraveStone extends BlockContainer {
                             GSLogger.logInfoGrave(player.getName() + " open grave inventory at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
                             GraveStoneHelper.replaceGround(world, pos.down());
                         } else {
-                            player.addChatComponentMessage(new TextComponentTranslation("grave.cant_be_looted").setStyle(new Style().setColor(TextFormatting.RED)));
+                            player.sendMessage(new TextComponentTranslation("grave.cant_be_looted").setStyle(new Style().setColor(TextFormatting.RED)));
                         }
                     }
                     return false;
@@ -346,7 +349,7 @@ public class BlockGraveStone extends BlockContainer {
                     } else {
                         if (!te.isSwordGrave() && Block.getBlockFromItem(item.getItem()) instanceof BlockVine) {
                             te.setMossy(true);
-                            player.inventory.getCurrentItem().stackSize--;
+                            player.inventory.getCurrentItem().setCount(player.inventory.getCurrentItem().getCount() - 1);
                             return true;
                         }
                     }
@@ -362,7 +365,7 @@ public class BlockGraveStone extends BlockContainer {
                         if (GraveStoneHelper.FLOWERS.contains(Block.getBlockFromItem(item.getItem())) &&
                                 GraveStoneHelper.canFlowerBePlaced(world, pos, item, te)) {
                             te.setFlower(new ItemStack(item.getItem(), 1, item.getItemDamage()));
-                            player.inventory.getCurrentItem().stackSize--;
+                            player.inventory.getCurrentItem().setCount(player.inventory.getCurrentItem().getCount() - 1);
                             return true;
                         }
                     }
@@ -380,12 +383,12 @@ public class BlockGraveStone extends BlockContainer {
                         killerName = ModGraveStone.proxy.getLocalizedEntityName(te.getDeathTextComponent().getKillerName());
 
                         if (killerName.length() == 0) {
-                            player.addChatComponentMessage(new TextComponentTranslation(deathText, new Object[]{name}));
+                            player.sendMessage(new TextComponentTranslation(deathText, new Object[]{name}));
                         } else {
-                            player.addChatComponentMessage(new TextComponentTranslation(deathText, new Object[]{name, killerName}));
+                            player.sendMessage(new TextComponentTranslation(deathText, new Object[]{name, killerName}));
                         }
                     } else {
-                        player.addChatComponentMessage(new TextComponentTranslation(deathText));
+                        player.sendMessage(new TextComponentTranslation(deathText));
                     }
 
                     if (te.getAge() > 0) {
@@ -395,7 +398,7 @@ public class BlockGraveStone extends BlockContainer {
                                 .append(te.getAge())
                                 .append(" ")
                                 .append(ModGraveStone.proxy.getLocalizedString("item.grave.days"));
-                        player.addChatComponentMessage(new TextComponentTranslation(ageStr.toString()));
+                        player.sendMessage(new TextComponentTranslation(ageStr.toString()));
                     }
                 }
             }
@@ -431,7 +434,7 @@ public class BlockGraveStone extends BlockContainer {
     }
 
     @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block) {
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block,  BlockPos fromPos) {
         if (!world.isSideSolid(pos.down(), EnumFacing.DOWN, true)) {
             TileEntityGraveStone te = (TileEntityGraveStone) world.getTileEntity(pos);
             if (te != null) {
@@ -447,7 +450,7 @@ public class BlockGraveStone extends BlockContainer {
     public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
         TileEntityGraveStone te = (TileEntityGraveStone) world.getTileEntity(pos);
         if (te != null && !te.canBeLooted(player.getUniqueID().toString())) {
-            player.addChatComponentMessage(new TextComponentTranslation("grave.cant_be_looted").setStyle(new Style().setColor(TextFormatting.RED)));
+            player.sendMessage(new TextComponentTranslation("grave.cant_be_looted").setStyle(new Style().setColor(TextFormatting.RED)));
             return false;
         }
         return super.removedByPlayer(state, world, pos, player, willHarvest);
@@ -460,7 +463,7 @@ public class BlockGraveStone extends BlockContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item gravestone, CreativeTabs tabs, List list) {
+    public void getSubBlocks(Item gravestone, CreativeTabs tabs, NonNullList<ItemStack> list) {
         for (int i = 0; i < EnumGraves.values().length - 1; i++) {
             ItemStack stack = new ItemStack(gravestone, 1, i);
             NBTTagCompound nbt = new NBTTagCompound();
@@ -491,7 +494,7 @@ public class BlockGraveStone extends BlockContainer {
 
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        ItemStack itemStack = this.createStackedBlock(this.getDefaultState());
+        ItemStack itemStack = new ItemStack(Item.getItemFromBlock(this), 1);
         TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
 
         if (tileEntity != null) {
@@ -553,8 +556,8 @@ public class BlockGraveStone extends BlockContainer {
         return new BlockStateContainer(this, new IProperty[]{FACING});
     }
 
-    @Override
-    public ItemStack createStackedBlock(IBlockState state) {
-        return new ItemStack(Item.getItemFromBlock(this), 1);
-    }
+//    @Override
+//    public ItemStack createStackedBlock(IBlockState state) {
+//        return new ItemStack(Item.getItemFromBlock(this), 1);
+//    }
 }

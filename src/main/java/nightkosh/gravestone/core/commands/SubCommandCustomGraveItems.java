@@ -64,16 +64,16 @@ public class SubCommandCustomGraveItems implements ISubCommand {
                         }
                         ((TileEntityGraveStone) graveTE).getInventory().setAdditionalItems(items.toArray(new ItemStack[items.size()]));
                     } else {
-                        sender.addChatMessage(new TextComponentTranslation("commands.fill_grave.wrong_block").setStyle(new Style().setColor(TextFormatting.RED)));
+                        sender.sendMessage(new TextComponentTranslation("commands.fill_grave.wrong_block").setStyle(new Style().setColor(TextFormatting.RED)));
                     }
                 } else {
-                    sender.addChatMessage(new TextComponentTranslation("commands.fill_grave.empty").setStyle(new Style().setColor(TextFormatting.RED)));
+                    sender.sendMessage(new TextComponentTranslation("commands.fill_grave.empty").setStyle(new Style().setColor(TextFormatting.RED)));
                 }
             } catch (NumberFormatException e) {
-                sender.addChatMessage(new TextComponentTranslation("commands.coordinate_error").setStyle(new Style().setColor(TextFormatting.RED)));
+                sender.sendMessage(new TextComponentTranslation("commands.coordinate_error").setStyle(new Style().setColor(TextFormatting.RED)));
             }
         } else {
-            sender.addChatMessage(new TextComponentTranslation("commands.not_enough_parameters").setStyle(new Style().setColor(TextFormatting.RED)));
+            sender.sendMessage(new TextComponentTranslation("commands.not_enough_parameters").setStyle(new Style().setColor(TextFormatting.RED)));
         }
     }
 }

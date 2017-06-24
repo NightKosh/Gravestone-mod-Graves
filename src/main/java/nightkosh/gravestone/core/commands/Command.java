@@ -28,13 +28,13 @@ public class Command extends CommandBase {
     public static final List<ISubCommand> ADDITIONAL_COMMANDS_LIST = new ArrayList<>();
 
     @Override
-    public String getCommandName() {
+    public String getName() {
         return "GS";
     }
 
     @Override
-    public String getCommandUsage(ICommandSender icommandsender) {
-        return "/" + getCommandName() + " <command> <command parameters> (" + HELP + ")";
+    public String getUsage(ICommandSender icommandsender) {
+        return "/" + getName() + " <command> <command parameters> (" + HELP + ")";
     }
 
     @Override
@@ -58,13 +58,13 @@ public class Command extends CommandBase {
                         }
                     }
                     if (unknownCommand) {
-                        sender.addChatMessage(new TextComponentTranslation("Unknown command!").setStyle(new Style().setColor(TextFormatting.RED)));
-                        sender.addChatMessage(new TextComponentTranslation(HELP).setStyle(new Style().setColor(TextFormatting.GREEN)));
+                        sender.sendMessage(new TextComponentTranslation("Unknown command!").setStyle(new Style().setColor(TextFormatting.RED)));
+                        sender.sendMessage(new TextComponentTranslation(HELP).setStyle(new Style().setColor(TextFormatting.GREEN)));
                     }
                     break;
             }
         } else {
-            sender.addChatMessage(new TextComponentTranslation(HELP).setStyle(new Style().setColor(TextFormatting.GREEN)));
+            sender.sendMessage(new TextComponentTranslation(HELP).setStyle(new Style().setColor(TextFormatting.GREEN)));
         }
     }
 

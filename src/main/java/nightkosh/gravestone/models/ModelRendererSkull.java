@@ -3,6 +3,8 @@ package nightkosh.gravestone.models;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.util.ResourceLocation;
 import nightkosh.gravestone.core.Resources;
 
@@ -17,7 +19,15 @@ public class ModelRendererSkull extends ModelRenderer {
     public static enum EnumSkullType {
         SKELETON_SKULL,
         WITHER_SKULL,
-        ZOMBIE_SKULL
+        ZOMBIE_SKULL;
+
+        public static EnumSkullType getTypeByClass(Entity entity) {
+            if (entity instanceof EntityWitherSkeleton) {
+                return WITHER_SKULL;
+            } else {//if (entity instanceof EntitySkeleton) {
+                return SKELETON_SKULL;
+            }
+        }
     }
 
     private final static String NAME = "skull";

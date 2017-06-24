@@ -24,10 +24,10 @@ public class SubCommandCommandsList implements ISubCommand {
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-        sender.addChatMessage(new TextComponentTranslation(getCommandUsage()).setStyle(new Style().setColor(TextFormatting.GREEN)));
+        sender.sendMessage(new TextComponentTranslation(getCommandUsage()).setStyle(new Style().setColor(TextFormatting.GREEN)));
 
         for (ISubCommand additionalCommand : Command.ADDITIONAL_COMMANDS_LIST) {
-            sender.addChatMessage(new TextComponentTranslation(additionalCommand.getCommandUsage()).setStyle(new Style().setColor(TextFormatting.GREEN)));
+            sender.sendMessage(new TextComponentTranslation(additionalCommand.getCommandUsage()).setStyle(new Style().setColor(TextFormatting.GREEN)));
         }
     }
 }

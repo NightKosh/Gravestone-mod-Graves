@@ -35,11 +35,7 @@ public class GraveInventory implements IInventory {
         items = new ArrayList<>(DEFAULT_INVENTORY_SIZE);
 
         for (int i = 0; i < ntbItemsList.tagCount(); ++i) {
-            NBTTagCompound nbt = ntbItemsList.getCompoundTagAt(i);
-            ItemStack stack = ItemStack.loadItemStackFromNBT(nbt);
-            if (stack != null) {
-                items.add(stack);
-            }
+            items.add(new ItemStack(ntbItemsList.getCompoundTagAt(i)));
         }
     }
 
@@ -47,7 +43,7 @@ public class GraveInventory implements IInventory {
         NBTTagList ntbList = new NBTTagList();
 
         for (ItemStack stack : items) {
-            if (stack != null) {
+            if (stack != null && stack != ItemStack.EMPTY) {
                 NBTTagCompound nbt = new NBTTagCompound();
                 stack.writeToNBT(nbt);
                 ntbList.appendTag(nbt);
@@ -57,13 +53,14 @@ public class GraveInventory implements IInventory {
         nbtTag.setTag("Items", ntbList);
     }
 
+    @Override
     public boolean isEmpty() {
         return items.isEmpty();
     }
 
-    public void addInventoryContent(ItemStack itemStack) {
-        if (itemStack != null) {
-            items.add(itemStack);
+    public void addInventoryContent(ItemStack stack) {
+        if (stack != null && stack != ItemStack.EMPTY) {
+            items.add(stack);
         }
     }
 
@@ -81,19 +78,19 @@ public class GraveInventory implements IInventory {
         if (slot < items.size()) {
             return items.get(slot);
         }
-        return null;
+        return ItemStack.EMPTY;
     }
 
     @Override
     public ItemStack decrStackSize(int slot, int amount) {
         ItemStack stack = getStackInSlot(slot);
-        if (stack != null) {
-            if (stack.stackSize <= amount) {
-                setInventorySlotContents(slot, null);
+        if (stack != null && stack != ItemStack.EMPTY) {
+            if (stack.getCount() <= amount) {
+                setInventorySlotContents(slot, ItemStack.EMPTY);
             } else {
                 stack = stack.splitStack(amount);
-                if (stack.stackSize == 0) {
-                    setInventorySlotContents(slot, null);
+                if (stack.getCount() == 0) {
+                    setInventorySlotContents(slot, ItemStack.EMPTY);
                 }
             }
         }
@@ -103,8 +100,8 @@ public class GraveInventory implements IInventory {
     @Override
     public ItemStack removeStackFromSlot(int slot) {
         ItemStack stack = getStackInSlot(slot);
-        if (stack != null) {
-            setInventorySlotContents(slot, null);
+        if (stack != null && stack != ItemStack.EMPTY) {
+            setInventorySlotContents(slot, ItemStack.EMPTY);
         }
         return stack;
     }
@@ -130,8 +127,8 @@ public class GraveInventory implements IInventory {
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer player) {
-        return player.worldObj.getTileEntity(this.tileEntity.getPos()) == this.tileEntity &&
+    public boolean isUsableByPlayer(EntityPlayer player) {
+        return player.getEntityWorld().getTileEntity(this.tileEntity.getPos()) == this.tileEntity &&
                 player.getDistanceSq(new BlockPos(this.tileEntity.getPos().getX() + 0.5, this.tileEntity.getPos().getY() + 0.5, this.tileEntity.getPos().getZ() + 0.5)) < 64;
     }
 
@@ -208,7 +205,7 @@ public class GraveInventory implements IInventory {
                     Collections.shuffle(Arrays.asList(items.size()), new Random());
 
                     for (ItemStack item : items) {
-                        if (item != null && savedItems > 0) {
+                        if (item != null && item != ItemStack.EMPTY && savedItems > 0) {
                             addInventoryContent(item);
                             savedItems--;
                         } else {
@@ -248,14 +245,14 @@ public class GraveInventory implements IInventory {
             float var11 = random.nextFloat() * 0.8F + 0.1F;
             EntityItem entityItem;
 
-            for (float var12 = random.nextFloat() * 0.8F + 0.1F; items.stackSize > 0; world.spawnEntityInWorld(entityItem)) {
+            for (float var12 = random.nextFloat() * 0.8F + 0.1F; items.getCount() > 0; world.spawnEntity(entityItem)) {
                 int var13 = random.nextInt(21) + 10;
 
-                if (var13 > items.stackSize) {
-                    var13 = items.stackSize;
+                if (var13 > items.getCount()) {
+                    var13 = items.getCount();
                 }
 
-                items.stackSize -= var13;
+                items.setCount(items.getCount() - var13);
                 entityItem = new EntityItem(world, pos.getX() + var10, pos.getY() + var11, pos.getZ() + var12, new ItemStack(items.getItem(), var13, items.getItemDamage()));
                 entityItem.motionX = random.nextGaussian() * 0.05F;
                 entityItem.motionY = random.nextGaussian() * 0.15F;

@@ -14,6 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import nightkosh.gravestone.ModGraveStone;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.block.enums.EnumGraves;
+import nightkosh.gravestone.core.GSBlock;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -28,7 +29,8 @@ public class ItemBlockGraveStone extends ItemBlock {
 
     public ItemBlockGraveStone(Block block) {
         super(block);
-        setHasSubtypes(true);
+        this.setHasSubtypes(true);
+        this.setRegistryName(GSBlock.GRAVE_STONE.getRegistryName());
     }
 
     @Override
@@ -92,7 +94,7 @@ public class ItemBlockGraveStone extends ItemBlock {
             }
 
             if (nbt.hasKey("Sword")) {
-                ItemStack sword = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("Sword"));
+                ItemStack sword = new ItemStack(nbt.getCompoundTag("Sword"));
 
                 if (StringUtils.isNotBlank(sword.getDisplayName())) {
                     list.add(ModGraveStone.proxy.getLocalizedString("item.grave.sword_name") + " - " + sword.getDisplayName());

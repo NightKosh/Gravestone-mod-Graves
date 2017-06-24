@@ -3,7 +3,6 @@ package nightkosh.gravestone.models.entity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelSkeleton;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.EntitySkeleton;
 import nightkosh.gravestone.models.IModelBaseAdapter;
 import nightkosh.gravestone.models.ModelRendererSkull;
 
@@ -41,7 +40,7 @@ public class ModelGSSkeleton extends ModelSkeleton implements IModelBaseAdapter 
     public void render(Entity entity, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_) {
         super.render(entity, p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, p_78088_7_);
 
-        skull.renderWithTexture(p_78088_7_, ModelRendererSkull.EnumSkullType.values()[((EntitySkeleton) entity).getSkeletonType().ordinal()]);
+        skull.renderWithTexture(p_78088_7_, ModelRendererSkull.EnumSkullType.getTypeByClass(entity));
     }
 
     protected void setRotation(ModelRenderer model, float x, float y, float z) {

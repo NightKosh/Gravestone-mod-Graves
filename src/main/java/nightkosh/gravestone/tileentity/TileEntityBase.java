@@ -12,7 +12,7 @@ public class TileEntityBase extends TileEntity {
 
     @Override
     public int getBlockMetadata() {//It should prevent some potential Null pointers in Minecraft
-        if (this.worldObj == null) {
+        if (this.hasWorld()) {
             try {
                 return super.getBlockMetadata();
             } catch (NullPointerException e) {
