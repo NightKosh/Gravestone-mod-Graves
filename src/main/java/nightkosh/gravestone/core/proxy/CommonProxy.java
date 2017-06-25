@@ -21,9 +21,6 @@ public class CommonProxy {
         return str;
     }
 
-    public void registerHandlers() {
-    }
-
     public void registerBlocksModels() {
     }
 

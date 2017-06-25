@@ -1,7 +1,5 @@
 package nightkosh.gravestone.core.proxy;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.Item;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import nightkosh.gravestone.block.enums.EnumGraves;
@@ -20,7 +18,6 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerRenderers() {
-//        ClientRegistry.registerTileEntity(TileEntityGraveStone.class, "GSGraveStone", new TileEntityGraveStoneRenderer());
         ClientRegistry.registerTileEntity(TileEntityGraveStone.VerticalPlate.class, "GSGraveStoneVerticalPlate", new TileEntityGraveStoneRenderer.VerticalPlateRenderer());
         ClientRegistry.registerTileEntity(TileEntityGraveStone.Cross.class, "GSGraveStoneCross", new TileEntityGraveStoneRenderer.CrossRenderer());
         ClientRegistry.registerTileEntity(TileEntityGraveStone.Obelisk.class, "GSGraveStoneObelisk", new TileEntityGraveStoneRenderer.ObeliskRenderer());
@@ -47,14 +44,7 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void registerHandlers() {
-    }
-
-    @Override
     public void registerBlocksModels() {
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(GSBlock.GRAVE_STONE), 0, ResourcesModels.GRAVE_STONE_MODEL);
-
-//        ProxyHelper.registerModelsForTEBlocks(0, GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.class);
         ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_VERTICAL_PLATE.ordinal(), EnumGraves.ICE_VERTICAL_PLATE.ordinal(), GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.VerticalPlate.class);
         ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_CROSS.ordinal(), EnumGraves.ICE_CROSS.ordinal(), GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.Cross.class);
         ProxyHelper.registerModelsForTEBlocks(EnumGraves.WOODEN_OBELISK.ordinal(), EnumGraves.ICE_OBELISK.ordinal(), GSBlock.GRAVE_STONE, ResourcesModels.GRAVE_STONE_MODEL, TileEntityGraveStone.Obelisk.class);
