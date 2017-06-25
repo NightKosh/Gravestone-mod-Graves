@@ -10,9 +10,6 @@ import nightkosh.gravestone.api.grave.EnumGraveMaterial;
  */
 public class CommonProxy {
 
-    public void registerRenderers() {
-    }
-
     public String getLocalizedString(String str) {
         return str;
     }

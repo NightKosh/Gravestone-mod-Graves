@@ -70,7 +70,6 @@ public class ModGraveStone {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
         proxy.registerBlocksModels();
-        proxy.registerRenderers();
     }
 
     @Mod.EventHandler
