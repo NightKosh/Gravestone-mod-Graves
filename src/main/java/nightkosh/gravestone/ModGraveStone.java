@@ -1,5 +1,7 @@
 package nightkosh.gravestone;
 
+import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -9,16 +11,14 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.api.IGraveGeneration;
 import nightkosh.gravestone.api.IGraveStoneHelper;
 import nightkosh.gravestone.api.ModInfo;
 import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.core.GSBlock;
-import nightkosh.gravestone.core.GSTileEntity;
-import nightkosh.gravestone.core.GuiHandler;
-import nightkosh.gravestone.core.Tabs;
+import nightkosh.gravestone.core.*;
 import nightkosh.gravestone.core.commands.Commands;
 import nightkosh.gravestone.core.compatibility.Compatibility;
 import nightkosh.gravestone.core.event.EventHandlerNetwork;
@@ -77,6 +77,14 @@ public class ModGraveStone {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
         proxy.registerRenderers();
+    }
+
+    //    @Mod.EventHandler
+    @SubscribeEvent
+    public static void onModelBake(ModelBakeEvent event) {
+        IBakedModel chestVoidModel = event.getModelRegistry().getObject(ResourcesModels.GRAVE_STONE_MODEL);
+
+        event.getModelRegistry().putObject(ResourcesModels.GRAVE_STONE_MODEL, chestVoidModel);
     }
 
     @Mod.EventHandler
