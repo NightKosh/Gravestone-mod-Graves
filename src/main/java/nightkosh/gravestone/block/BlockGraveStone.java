@@ -347,7 +347,7 @@ public class BlockGraveStone extends BlockContainer {
                             return false;
                         }
                     } else {
-                        if (!te.isSwordGrave() && Block.getBlockFromItem(item.getItem()) instanceof BlockVine) {
+                        if (Block.getBlockFromItem(item.getItem()) instanceof BlockVine && te.canBeMossy()) {
                             te.setMossy(true);
                             player.inventory.getCurrentItem().setCount(player.inventory.getCurrentItem().getCount() - 1);
                             return true;

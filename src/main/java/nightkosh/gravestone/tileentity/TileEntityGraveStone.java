@@ -185,6 +185,10 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
         return sword != null;
     }
 
+    public boolean canBeMossy() {
+        return !isSwordGrave() && this.getGraveType() != EnumGraves.STARVED_CORPSE && this.getGraveType() != EnumGraves.WITHERED_CORPSE;
+    }
+
 
     public ItemStack getFlower() {
         return this.flower;
