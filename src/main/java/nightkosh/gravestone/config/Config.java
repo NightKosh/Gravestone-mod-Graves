@@ -75,12 +75,12 @@ public class Config {
 
 
         // store items
-        Property graveItemsCountProperty = config.get(CATEGORY_GRAVES, "SavedItemsCount", 40);
-        graveItemsCountProperty.setComment("This value must be between 0 an 40(in this case all items will be stored)!");
+        Property graveItemsCountProperty = config.get(CATEGORY_GRAVES, "AmountOfSavedItems", 100);
+        graveItemsCountProperty.setComment("This value is amount of items which should be saved in percents. It should be in range of 0 an 100!");
         graveItemsCount = graveItemsCountProperty.getInt();
 
-        if (graveItemsCount > 40 || graveItemsCount < 0) {
-            graveItemsCount = 40;
+        if (graveItemsCount > 100 || graveItemsCount < 0) {
+            graveItemsCount = 100;
         }
 
         removeEmptyGraves = config.get(CATEGORY_GRAVES, "RemoveEmptyGraves", false).getBoolean(false);

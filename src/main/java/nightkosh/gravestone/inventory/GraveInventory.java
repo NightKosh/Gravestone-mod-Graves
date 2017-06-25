@@ -189,30 +189,21 @@ public class GraveInventory implements IInventory {
      */
     public void setItems(List<ItemStack> items) {
         if (items != null) {
-            switch (Config.graveItemsCount) {
-                case 0:
-                    for (ItemStack item : items) {
-                        dropItem(item, tileEntity.getWorld(), tileEntity.getPos());
-                    }
-                    break;
-                case 40:
-                    for (ItemStack item : items) {
-                        addInventoryContent(item);
-                    }
-                    break;
-                default:
-                    int savedItems = Config.graveItemsCount;
-                    Collections.shuffle(Arrays.asList(items.size()), new Random());
+            int savedItems;
+            if (Config.graveItemsCount == 100) {
+                savedItems = items.size();
+            } else {
+                savedItems = items.size() * Config.graveItemsCount / 100;
+            }
+            Collections.shuffle(Arrays.asList(items.size()), new Random());
 
-                    for (ItemStack item : items) {
-                        if (item != null && item != ItemStack.EMPTY && savedItems > 0) {
-                            addInventoryContent(item);
-                            savedItems--;
-                        } else {
-                            dropItem(item, tileEntity.getWorld(), tileEntity.getPos());
-                        }
-                    }
-                    break;
+            for (ItemStack item : items) {
+                if (item != null && item != ItemStack.EMPTY && savedItems > 0) {
+                    addInventoryContent(item);
+                    savedItems--;
+                } else {
+                    dropItem(item, tileEntity.getWorld(), tileEntity.getPos());
+                }
             }
         }
     }
