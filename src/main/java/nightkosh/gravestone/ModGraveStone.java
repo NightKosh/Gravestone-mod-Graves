@@ -86,6 +86,6 @@ public class ModGraveStone {
 
     @Mod.EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
-        Commands.getInstance(event);
+        Commands.registration(event);
     }
 }
