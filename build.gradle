@@ -17,15 +17,15 @@ tasks.withType(JavaCompile) {
     targetCompatibility = "1.8"
 }
 
-version = "1.0.2"
+version = "1.0.6"
 group = "nightkosh.gravestone"
-archivesBaseName = "GraveStone-1.10.2-Graves"
+archivesBaseName = "GraveStone-1.11.2-Graves"
 
 minecraft {
-    version = "1.10.2-12.18.3.2281"
+    version = "1.11.2-13.20.0.2315"
     runDir = "idea"
 
-    mappings = "snapshot_20161111"
+    mappings = "snapshot_20161220"
 }
 
 ext.apiGravestone = "./api/gravestone"
