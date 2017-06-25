@@ -112,23 +112,39 @@ public class GraveStoneHelper {
     }
 
     public static class RestrictedArea {
+        private final int dimensionId;
         private final BlockPos firstPoint;
         private final BlockPos lastPoint;
 
         public RestrictedArea(int startX, int startY, int startZ, int endX, int endY, int endZ) {
-            firstPoint = new BlockPos(startX, startY, startZ);
-            lastPoint = new BlockPos(endX, endY, endZ);
+            this(0, startX, startY, startZ, endX, endY, endZ);
         }
 
-        public boolean isInArea(BlockPos pos) {
-            return pos.getX() >= firstPoint.getX() && pos.getX() <= lastPoint.getX() &&
+        public RestrictedArea(int dimensionId, int startX, int startY, int startZ, int endX, int endY, int endZ) {
+            this.dimensionId = dimensionId;
+            this.firstPoint = new BlockPos(startX, startY, startZ);
+            this.lastPoint = new BlockPos(endX, endY, endZ);
+        }
+
+        public boolean isInArea(World world, BlockPos pos) {
+            return world.provider.getDimension() == dimensionId &&
+                    pos.getX() >= firstPoint.getX() && pos.getX() <= lastPoint.getX() &&
                     pos.getY() >= firstPoint.getY() && pos.getY() <= lastPoint.getY() &&
                     pos.getZ() >= firstPoint.getZ() && pos.getZ() <= lastPoint.getZ();
         }
 
         public static RestrictedArea getFromString(String area) {
             String[] coordinates = area.split(",");
-            if (coordinates.length == 6) {
+            if (coordinates.length == 7) {
+                try {
+                    return new GraveStoneHelper.RestrictedArea(
+                            Integer.parseInt(coordinates[0]),
+                            Integer.parseInt(coordinates[1]), Integer.parseInt(coordinates[2]), Integer.parseInt(coordinates[3]),
+                            Integer.parseInt(coordinates[4]), Integer.parseInt(coordinates[5]), Integer.parseInt(coordinates[6]));
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            } else if (coordinates.length == 6) {
                 try {
                     return new GraveStoneHelper.RestrictedArea(
                             Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]), Integer.parseInt(coordinates[2]),

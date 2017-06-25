@@ -92,10 +92,9 @@ public class Config {
         vanillaRendererForSwordsGraves = config.get(CATEGORY_GRAVES, "VanillaRendererForSwordsGraves", true).getBoolean(true);
 
         Property restrictGraveGenerationInAreaProperty = config.get(CATEGORY_GRAVES, "RestrictGraveGenerationInArea", "");
-        restrictGraveGenerationInAreaProperty.setComment("List of coordinates in which graves generation must be disabled. \"start_x,start_y,start_z,end_x,end_y,end_z;\"");
         String ar = restrictGraveGenerationInAreaProperty.getString();
         String[] areas = ar.split(";");
-        restrictGraveGenerationInArea = new ArrayList<GraveStoneHelper.RestrictedArea>(areas.length);
+        restrictGraveGenerationInArea = new ArrayList<>(areas.length);
         for (String area : areas) {
             GraveStoneHelper.RestrictedArea restrictedArea = GraveStoneHelper.RestrictedArea.getFromString(area);
             if (restrictedArea != null) {

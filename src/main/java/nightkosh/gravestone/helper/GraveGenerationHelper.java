@@ -99,7 +99,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
     public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event, long spawnTime) {
         if (player.getEntityWorld() != null && !player.getEntityWorld().getGameRules().getBoolean("keepInventory") && Config.graveItemsCount > 0 &&
-                !isInRestrictedArea(player.getPosition())) {
+                !isInRestrictedArea(player.getEntityWorld(), player.getPosition())) {
             List<ItemStack> items = new ArrayList<>(40);
 
 //            GSCompatibilityAntiqueAtlas.placeDeathMarkerAtDeath(player); //TODO !!!!!!!!!!!!
@@ -247,7 +247,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     public static void createGrave(Entity entity, LivingDeathEvent event, List<ItemStack> items, EnumGraveTypeByEntity graveTypeByEntity, boolean isVillager, long spawnTime) {
-        if (isInRestrictedArea(entity.getPosition())) {
+        if (isInRestrictedArea(entity.getEntityWorld(), entity.getPosition())) {
             GSLogger.logInfo("Can't generate " + entity.getName() + "'s grave in restricted area. " + entity.getPosition().toString());
             if (items != null) {
                 items.stream().filter(item -> item != null).forEach(item -> {
@@ -264,7 +264,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     public static void createCustomGrave(Entity entity, LivingDeathEvent event, ICustomEntityDeathHandler customEntityDeathHandler) {
-        if (isInRestrictedArea(entity.getPosition())) {
+        if (isInRestrictedArea(entity.getEntityWorld(), entity.getPosition())) {
             GSLogger.logInfo("Can't generate " + entity.getName() + "'s grave in restricted area. " + entity.getPosition().toString());
             if (customEntityDeathHandler.getItems() != null) {
                 customEntityDeathHandler.getItems().stream().filter(item -> item != null).forEach(item -> {
@@ -457,8 +457,8 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         }
     }
 
-    private static boolean isInRestrictedArea(BlockPos pos) {
-        return Config.restrictGraveGenerationInArea.stream().anyMatch((area) -> area.isInArea(pos));
+    private static boolean isInRestrictedArea(World world, BlockPos pos) {
+        return Config.restrictGraveGenerationInArea.stream().anyMatch((area) -> area.isInArea(world, pos));
     }
 
     @Override
