@@ -100,7 +100,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event, long spawnTime) {
         if (player.getEntityWorld() != null && !player.getEntityWorld().getGameRules().getBoolean("keepInventory") && Config.graveItemsCount > 0 &&
                 !isInRestrictedArea(player.getEntityWorld(), player.getPosition())) {
-            List<ItemStack> items = new ArrayList<>(40);
+            List<ItemStack> items = new ArrayList<>(41);
 
 //            GSCompatibilityAntiqueAtlas.placeDeathMarkerAtDeath(player); //TODO !!!!!!!!!!!!
 

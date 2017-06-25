@@ -236,32 +236,20 @@ public class GraveInventory implements IInventory {
     /**
      * Drop item
      *
-     * @param items Dropping item
+     * @param stack Dropping item
      */
-    public static void dropItem(ItemStack items, World world, BlockPos pos) {
-        if (items != null) {
+    public static void dropItem(ItemStack stack, World world, BlockPos pos) {
+        if (stack != null && stack != ItemStack.EMPTY) {
             Random random = new Random();
-            float var10 = random.nextFloat() * 0.8F + 0.1F;
-            float var11 = random.nextFloat() * 0.8F + 0.1F;
-            EntityItem entityItem;
+            EntityItem entityItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack.copy());
+            entityItem.motionX = random.nextGaussian() * 0.2;
+            entityItem.motionY = random.nextGaussian() * 0.2;
+            entityItem.motionZ = random.nextGaussian() * 0.2;
 
-            for (float var12 = random.nextFloat() * 0.8F + 0.1F; items.getCount() > 0; world.spawnEntity(entityItem)) {
-                int var13 = random.nextInt(21) + 10;
-
-                if (var13 > items.getCount()) {
-                    var13 = items.getCount();
-                }
-
-                items.setCount(items.getCount() - var13);
-                entityItem = new EntityItem(world, pos.getX() + var10, pos.getY() + var11, pos.getZ() + var12, new ItemStack(items.getItem(), var13, items.getItemDamage()));
-                entityItem.motionX = random.nextGaussian() * 0.05F;
-                entityItem.motionY = random.nextGaussian() * 0.15F;
-                entityItem.motionZ = random.nextGaussian() * 0.05F;
-
-                if (items.hasTagCompound()) {
-                    entityItem.getEntityItem().setTagCompound((NBTTagCompound) items.getTagCompound().copy());
-                }
+            if (stack.hasTagCompound()) {
+                entityItem.getEntityItem().setTagCompound(stack.getTagCompound().copy());
             }
+            world.spawnEntity(entityItem);
         }
     }
 
