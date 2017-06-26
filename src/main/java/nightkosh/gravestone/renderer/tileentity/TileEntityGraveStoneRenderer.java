@@ -28,7 +28,6 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * GraveStone mod
@@ -38,8 +37,6 @@ import java.util.Random;
  */
 @SideOnly(Side.CLIENT)
 public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
-
-    private Random random = new Random();
 
     private static final Map<EnumGraves, ResourceLocation> mossyTexturesMap = Maps.newHashMap();
     public static ModelGraveStone verticalPlate = new ModelVerticalPlateGraveStone();
@@ -66,6 +63,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     public static final Map<Item, EntityItem> swordsMap = new HashMap<>();
 
     public static final Map<Item, ResourceLocation> swordsTextureMap = new HashMap<>();
+
     static {
         swordsTextureMap.put(Items.WOODEN_SWORD, Resources.WOODEN_SWORD);
         swordsTextureMap.put(Items.STONE_SWORD, Resources.STONE_SWORD);
