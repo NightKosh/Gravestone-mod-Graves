@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class CompatibilityBackpacksMod implements ICompatibility {
 
-    public static final String MOD_ID = "Backpack";
+    public static final String MOD_ID = "backpack";
 
     protected CompatibilityBackpacksMod() {
         if (isModLoaded(MOD_ID) && Config.storeBackpacksItems) {
@@ -38,7 +38,7 @@ public class CompatibilityBackpacksMod implements ICompatibility {
                             Object backpackObject = getPersonalBackpackMethod.invoke(playerSave);
                             if (backpackObject != null && backpackObject instanceof ItemStack) {
                                 items.add(((ItemStack) backpackObject).copy());
-                                setPersonalBackpackMethod.invoke(playerSave, (ItemStack) null);
+                                setPersonalBackpackMethod.invoke(playerSave, ItemStack.EMPTY);
                             }
                         }
                     }

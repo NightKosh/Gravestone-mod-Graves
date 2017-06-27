@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class CompatibilityTwilightForest implements ICompatibility {
 
-    public static final String MOD_ID = "TwilightForest";
+    public static final String MOD_ID = "twilightforest";
 
     private static final CompatibilityTwilightForest INSTANCE = new CompatibilityTwilightForest();
 
@@ -32,38 +32,33 @@ public class CompatibilityTwilightForest implements ICompatibility {
                 Iterator<ItemStack> it = items.iterator();
                 while (it.hasNext()) {
                     ItemStack item = it.next();
-                    if (item == null || !item.hasTagCompound()) {
-                        continue;
-                    }
-                    byte slot = item.getTagCompound().getByte("slot");
-                    if (keepingData[0] == 1) {
-                        if (slot == player.inventory.currentItem) {
-                            it.remove();
-                            break;
-                        }
-                    } else if (keepingData[0] == 2) {
-                        if (slot < 9) {
-                            it.remove();
-                        }
-                    } else if (keepingData[0] == 3) {
-                        if (slot < 40) {
-                            it.remove();
+                    if (item != null && !item.isEmpty() && item.hasTagCompound()) {
+                        byte slot = item.getTagCompound().getByte("slot");
+                        if (keepingData[0] == 1) {
+                            if (slot == player.inventory.currentItem) {
+                                it.remove();
+                                break;
+                            }
+                        } else if (keepingData[0] == 2) {
+                            if (slot < 9) {
+                                it.remove();
+                            }
+                        } else if (keepingData[0] == 3) {
+                            if (slot < 40) {
+                                it.remove();
+                            }
                         }
                     }
                 }
                 for (ItemStack item : items) {
-                    if (item == null || !item.hasTagCompound()) {
-                        continue;
-                    }
-                    byte slot = item.getTagCompound().getByte("slot");
-                    if (slot == keepingData[1]) {
-                        //make sure there is a charm of keeping left for TwilightForest to detect
-                        player.inventory.setInventorySlotContents(slot, item.splitStack(1));
-                        if (item.getCount() <= 0) {
-                            item = null;
+                    if (item != null && !item.isEmpty() && item.hasTagCompound()) {
+                        byte slot = item.getTagCompound().getByte("slot");
+                        if (slot == keepingData[1]) {
+                            //make sure there is a charm of keeping left for TwilightForest to detect
+                            player.inventory.setInventorySlotContents(slot, item.splitStack(1));
+                        } else {
+                            player.inventory.setInventorySlotContents(slot, ItemStack.EMPTY);
                         }
-                    } else {
-                        player.inventory.setInventorySlotContents(slot, null);
                     }
                 }
 

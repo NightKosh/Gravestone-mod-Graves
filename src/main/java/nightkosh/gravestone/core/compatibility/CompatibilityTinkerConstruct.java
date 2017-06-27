@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class CompatibilityTinkerConstruct implements ICompatibility {
 
-    public static final String MOD_ID = "TConstruct";
+    public static final String MOD_ID = "tconstruct";
 
     private static final int ACCESSORIES_SLOTS_COUNT = 4;
 
@@ -33,11 +33,10 @@ public class CompatibilityTinkerConstruct implements ICompatibility {
                     if (knapsackInventory != null) {
                         for (int slot = 0; slot < knapsackInventory.getSizeInventory(); slot++) {
                             ItemStack stack = knapsackInventory.getStackInSlot(slot);
-                            if (stack != null) {
+                            if (stack != null && !stack.isEmpty()) {
                                 items.add(stack.copy());
-                                knapsackInventory.setInventorySlotContents(slot, null);
+                                knapsackInventory.setInventorySlotContents(slot, ItemStack.EMPTY);
                             }
-
                         }
                     } else {
                         GSLogger.logError("Can't get Tinkers Construct knapsack items!!!");
@@ -48,11 +47,10 @@ public class CompatibilityTinkerConstruct implements ICompatibility {
                         //Heart Canisters should not go in the grave as they are not supposed to be dropped on death, so only first 4 slots required
                         for (int slot = 0; slot < ACCESSORIES_SLOTS_COUNT; slot++) {
                             ItemStack stack = accessoryInventory.getStackInSlot(slot);
-                            if (stack != null) {
+                            if (stack != null && !stack.isEmpty()) {
                                 items.add(stack.copy());
-                                accessoryInventory.setInventorySlotContents(slot, null);
+                                accessoryInventory.setInventorySlotContents(slot, ItemStack.EMPTY);
                             }
-
                         }
                     } else {
                         GSLogger.logError("Can't get Tinkers Construct accessory items!!!");

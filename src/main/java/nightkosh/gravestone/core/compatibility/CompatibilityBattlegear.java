@@ -26,7 +26,7 @@ public class CompatibilityBattlegear implements ICompatibility {
         if (INSTANCE.isModLoaded(MOD_ID) && Config.storeBattlegearItems) {
             for (int slot = FIRST_SLOT; slot <= LAST_SLOT; slot++) {
                 items.add(player.inventory.getStackInSlot(slot));
-                player.inventory.setInventorySlotContents(slot, null);
+                player.inventory.setInventorySlotContents(slot, ItemStack.EMPTY);
             }
         }
     }

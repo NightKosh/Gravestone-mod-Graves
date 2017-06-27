@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class CompatibilityGalacticraft implements ICompatibility {
 
-    public static final String MOD_ID = "GalacticraftCore";
+    public static final String MOD_ID = "galacticraftcore";
 
     protected CompatibilityGalacticraft() {
         if (isModLoaded(MOD_ID) && Config.storeGalacticraftItems) {
@@ -29,9 +29,9 @@ public class CompatibilityGalacticraft implements ICompatibility {
                 if (inventory != null) {
                     for (int slot = 0; slot < inventory.getSizeInventory(); slot++) {
                         ItemStack stack = inventory.getStackInSlot(slot);
-                        if (stack != null) {
+                        if (stack != null && !stack.isEmpty()) {
                             items.add(stack.copy());
-                            inventory.setInventorySlotContents(slot, null);
+                            inventory.setInventorySlotContents(slot, ItemStack.EMPTY);
                         }
                     }
                 } else {

@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public class CompatibilityEnderIO implements ICompatibility {
 
-    public static final String MOD_ID = "EnderIO";
+    public static final String MOD_ID = "enderio";
 
     protected CompatibilityEnderIO() {
         if (isModLoaded(MOD_ID) && Config.enableEnderIOSoulbound) {

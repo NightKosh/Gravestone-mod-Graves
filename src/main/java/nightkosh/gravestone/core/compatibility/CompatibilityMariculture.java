@@ -11,7 +11,7 @@ import nightkosh.gravestone.config.Config;
  */
 public class CompatibilityMariculture implements ICompatibility {
 
-    public static final String MOD_ID = "Mariculture";
+    public static final String MOD_ID = "mariculture";
 
     // IT will not be updated
     protected CompatibilityMariculture() {

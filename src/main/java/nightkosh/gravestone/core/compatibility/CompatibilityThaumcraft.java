@@ -12,7 +12,7 @@ package nightkosh.gravestone.core.compatibility;
  */
 public class CompatibilityThaumcraft implements ICompatibility {
 
-    public static final String MOD_ID = "Thaumcraft";
+    public static final String MOD_ID = "thaumcraft";
 
     protected CompatibilityThaumcraft() {
         if (isModLoaded(MOD_ID)) {

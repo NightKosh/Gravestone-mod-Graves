@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class CompatibilityBaubles implements ICompatibility {
 
-    public static final String MOD_ID = "Baubles";
+    public static final String MOD_ID = "baubles";
 
     protected CompatibilityBaubles() {
         if (isModLoaded(MOD_ID) && Config.storeBaublesItems) {
@@ -26,9 +26,9 @@ public class CompatibilityBaubles implements ICompatibility {
                 if (inventory != null) {
                     for (int slot = 0; slot < inventory.getSizeInventory(); slot++) {
                         ItemStack stack = inventory.getStackInSlot(slot);
-                        if (stack != null) {
+                        if (stack != null && !stack.isEmpty()) {
                             items.add(stack.copy());
-                            inventory.setInventorySlotContents(slot, null);
+                            inventory.setInventorySlotContents(slot, ItemStack.EMPTY);
                         }
 
                     }

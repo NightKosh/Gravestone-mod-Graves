@@ -24,7 +24,7 @@ public class CompatibilityRpgInventory implements ICompatibility {
     protected CompatibilityRpgInventory() {
         if (isModLoaded(MOD_ID) && Config.storeRpgInventoryItems) {
             GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler((player, source) -> {
-                List<ItemStack> items = new ArrayList<ItemStack>();
+                List<ItemStack> items = new ArrayList<>();
                 try {
                     Class<?> clazz = Class.forName("rpgInventory.gui.rpginv.PlayerRpgInventory");
                     Method m = clazz.getDeclaredMethod("get", EntityPlayer.class);
@@ -34,9 +34,9 @@ public class CompatibilityRpgInventory implements ICompatibility {
                     if (inventory != null) {
                         for (int slot = 0; slot < inventory.getSizeInventory(); slot++) {
                             ItemStack stack = inventory.getStackInSlot(slot);
-                            if (stack != null) {
+                            if (stack != null && !stack.isEmpty()) {
                                 items.add(stack.copy());
-                                inventory.setInventorySlotContents(slot, null);
+                                inventory.setInventorySlotContents(slot, ItemStack.EMPTY);
                             }
                         }
                     }
