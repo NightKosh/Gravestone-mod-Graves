@@ -23,8 +23,6 @@ public class Compatibility {
 
         new CompatibilityRpgInventory();
 
-        new CompatibilityTinkerConstruct();
-
         new CompatibilityGalacticraft();
 
         new CompatibilityEnderIO();

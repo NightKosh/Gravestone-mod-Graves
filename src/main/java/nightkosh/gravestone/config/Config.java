@@ -110,7 +110,6 @@ public class Config {
     public static boolean storeTheCampingModItems;
     public static boolean storeBaublesItems;
     public static boolean storeMaricultureItems;
-    public static boolean storeTinkerConstructItems;
     public static boolean storeRpgInventoryItems;
     public static boolean storeGalacticraftItems;
     public static boolean storeBackpacksItems;
@@ -125,7 +124,6 @@ public class Config {
         storeTheCampingModItems = config.get(CATEGORY_COMPATIBILITY, "StoreTheCampingModItems", true).getBoolean(true);
         storeBaublesItems = config.get(CATEGORY_COMPATIBILITY, "StoreBaublesItems", true).getBoolean(true);
         storeMaricultureItems = config.get(CATEGORY_COMPATIBILITY, "StoreMaricultureItems", true).getBoolean(true);
-        storeTinkerConstructItems = config.get(CATEGORY_COMPATIBILITY, "StoreTinkerConstructItems", true).getBoolean(true);
         storeRpgInventoryItems = config.get(CATEGORY_COMPATIBILITY, "StoreRpgInventoryItems", true).getBoolean(true);
         storeGalacticraftItems = config.get(CATEGORY_COMPATIBILITY, "StoreGalacticraftItems", true).getBoolean(true);
         storeBackpacksItems = config.get(CATEGORY_COMPATIBILITY, "StoreBackpacksItems", true).getBoolean(true);
