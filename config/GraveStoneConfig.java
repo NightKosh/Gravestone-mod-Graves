@@ -249,7 +249,7 @@ public class GraveStoneConfig {
 
 
         Property restrictGraveGenerationInAreaProperty = config.get(Configuration.CATEGORY_GENERAL, "RestrictGraveGenerationInArea", "");
-        restrictGraveGenerationInAreaProperty.comment = "List of coordinates in which graves generation must be disabled. \"start_x,start_y,start_z,end_x,end_y,end_z;\"";
+        restrictGraveGenerationInAreaProperty.comment  = "List of coordinates in which graves generation must be disabled. \"dimension_id,start_x,start_y,start_z,end_x,end_y,end_z;\". Dimension id is optional - it will be set to 0 by default.";
         String ar = restrictGraveGenerationInAreaProperty.getString();
         String[] areas = ar.split(";");
         restrictGraveGenerationInArea = new ArrayList<GraveStoneHelper.RestrictedArea>(areas.length);

@@ -506,7 +506,7 @@ public class GraveStoneHelper {
 
     public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event, long spawnTime) {
         if (player.worldObj != null && !player.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory") && GraveStoneConfig.graveItemsCount > 0 &&
-                !isInRestrictedArea(Vec3.createVectorHelper(player.posX, player.posY, player.posZ))) {
+                !isInRestrictedArea(player.worldObj, Vec3.createVectorHelper(player.posX, player.posY, player.posZ))) {
             List<ItemStack> items = new LinkedList<ItemStack>();
 
             GSCompatibilityAntiqueAtlas.placeDeathMarkerAtDeath(player);
@@ -544,7 +544,7 @@ public class GraveStoneHelper {
 
     public static void createGrave(Entity entity, LivingDeathEvent event, List<ItemStack> items, BlockGSGraveStone.EnumGraveType entityType, boolean isVillager, long spawnTime) {
         Vec3 position = Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ);
-        if (isInRestrictedArea(position)) {
+        if (isInRestrictedArea(entity.worldObj, position)) {
             GSLogger.logInfo("Can't generate " + entity.getCommandSenderName() + "'s grave in restricted area. " + position.toString());
             if (items != null) {
                 for (int i = 0; i < items.size(); i++) {
@@ -956,9 +956,9 @@ public class GraveStoneHelper {
         return DamageSource.magic.equals(damageSource) || damageType.toLowerCase().contains("magic");
     }
 
-    private static boolean isInRestrictedArea(Vec3 position) {
+    private static boolean isInRestrictedArea(World world, Vec3 position) {
         for (RestrictedArea area : GraveStoneConfig.restrictGraveGenerationInArea) {
-            if (area.isInArea(position)) {
+            if (area.isInArea(world, position)) {
                 return true;
             }
         }
@@ -966,23 +966,39 @@ public class GraveStoneHelper {
     }
 
     public static class RestrictedArea {
+        private final int dimensionId;
         private final Vec3 firstPoint;
         private final Vec3 lastPoint;
 
         public RestrictedArea(int startX, int startY, int startZ, int endX, int endY, int endZ) {
+            this(0, startX, startY, startZ, endX, endY, endZ);
+        }
+
+        public RestrictedArea(int dimensionId, int startX, int startY, int startZ, int endX, int endY, int endZ) {
+            this.dimensionId = dimensionId;
             this.firstPoint = Vec3.createVectorHelper(startX, startY, startZ);
             this.lastPoint = Vec3.createVectorHelper(endX, endY, endZ);
         }
 
-        public boolean isInArea(Vec3 position) {
-            return position.xCoord >= firstPoint.xCoord && position.xCoord <= lastPoint.xCoord &&
+        public boolean isInArea(World world, Vec3 position) {
+            return world.provider.dimensionId == dimensionId &&
+                    position.xCoord >= firstPoint.xCoord && position.xCoord <= lastPoint.xCoord &&
                     position.yCoord >= firstPoint.yCoord && position.yCoord <= lastPoint.yCoord &&
                     position.zCoord >= firstPoint.zCoord && position.zCoord <= lastPoint.zCoord;
         }
 
         public static RestrictedArea getFromString(String area) {
             String[] coordinates = area.split(",");
-            if (coordinates.length == 6) {
+            if (coordinates.length == 7) {
+                try {
+                    return new GraveStoneHelper.RestrictedArea(
+                            Integer.parseInt(coordinates[0]),
+                            Integer.parseInt(coordinates[1]), Integer.parseInt(coordinates[2]), Integer.parseInt(coordinates[3]),
+                            Integer.parseInt(coordinates[4]), Integer.parseInt(coordinates[5]), Integer.parseInt(coordinates[6]));
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            } else if (coordinates.length == 6) {
                 try {
                     return new GraveStoneHelper.RestrictedArea(
                             Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]), Integer.parseInt(coordinates[2]),
