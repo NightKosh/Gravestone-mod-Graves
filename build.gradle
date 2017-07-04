@@ -17,7 +17,7 @@ tasks.withType(JavaCompile) {
     targetCompatibility = "1.8"
 }
 
-version = "1.0.9"
+version = "1.0.10"
 group = "nightkosh.gravestone"
 archivesBaseName = "GraveStone-1.11.2-Graves"
 
@@ -64,9 +64,7 @@ dependencies {
 }
 
 jar {
-    exclude('mariculture/**')
     exclude('micdoodle8/**')
-    exclude('tconstruct/**')
     exclude('**/*.db')
     exclude('assets/gravestone/techne_models/**')
 
