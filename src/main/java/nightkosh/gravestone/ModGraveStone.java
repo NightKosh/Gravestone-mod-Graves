@@ -15,7 +15,6 @@ import nightkosh.gravestone.api.IGraveGeneration;
 import nightkosh.gravestone.api.IGraveStoneHelper;
 import nightkosh.gravestone.api.ModInfo;
 import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.core.GSBlock;
 import nightkosh.gravestone.core.GSTileEntity;
 import nightkosh.gravestone.core.GuiHandler;
 import nightkosh.gravestone.core.Tabs;
@@ -57,7 +56,6 @@ public class ModGraveStone {
         GraveStoneAPI.graveGenerationAtDeath = apiGraveGeneration;
 
         Tabs.registration();
-        GSBlock.registration();
         GSTileEntity.registration();
     }
 

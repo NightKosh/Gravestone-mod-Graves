@@ -238,7 +238,7 @@ public class GraveInventory implements IInventory {
             entityItem.motionZ = random.nextGaussian() * 0.2;
 
             if (stack.hasTagCompound()) {
-                entityItem.getEntityItem().setTagCompound(stack.getTagCompound().copy());
+                entityItem.getItem().setTagCompound(stack.getTagCompound().copy());
             }
             world.spawnEntity(entityItem);
         }

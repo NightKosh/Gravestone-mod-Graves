@@ -38,32 +38,87 @@ public class GravesLogger extends AbstractLogger {
     }
 
     @Override
-    protected boolean isEnabled(Level level, Marker marker, Message data, Throwable t) {
+    public boolean isEnabled(Level level, Marker marker, Message message, Throwable t) {
         return true;
     }
 
     @Override
-    protected boolean isEnabled(Level level, Marker marker, Object data, Throwable t) {
+    public boolean isEnabled(Level level, Marker marker, CharSequence message, Throwable t) {
         return true;
     }
 
     @Override
-    protected boolean isEnabled(Level level, Marker marker, String data) {
+    public boolean isEnabled(Level level, Marker marker, Object message, Throwable t) {
         return true;
     }
 
     @Override
-    protected boolean isEnabled(Level level, Marker marker, String data, Object... p1) {
+    public boolean isEnabled(Level level, Marker marker, String message, Throwable t) {
         return true;
     }
 
     @Override
-    protected boolean isEnabled(Level level, Marker marker, String data, Throwable t) {
+    public boolean isEnabled(Level level, Marker marker, String message) {
         return true;
     }
 
     @Override
-    public void log(Marker marker, String fqcn, Level level, Message msg, Throwable throwable) {
+    public boolean isEnabled(Level level, Marker marker, String message, Object... params) {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled(Level level, Marker marker, String message, Object p0) {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1) {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1, Object p2) {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3) {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4) {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5) {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6) {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7) {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7, Object p8) {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7, Object p8, Object p9) {
+        return true;
+    }
+
+    @Override
+    public void logMessage(String fqcn, Level level, Marker marker, Message msg, Throwable throwable) {
         if (logFile != null) {
             StringBuilder loggedStr = new StringBuilder();
             loggedStr.append(DATE_FORMAT.format(new Date()));
@@ -76,7 +131,7 @@ public class GravesLogger extends AbstractLogger {
 
             final Object[] params = msg.getParameters();
             Throwable t;
-            if (throwable == null && params != null && params[params.length - 1] instanceof Throwable) {
+            if (throwable == null && params != null && params.length != 0 && params[params.length - 1] instanceof Throwable) {
                 t = (Throwable) params[params.length - 1];
             } else {
                 t = throwable;
@@ -98,6 +153,10 @@ public class GravesLogger extends AbstractLogger {
         } else {
             GSLogger.logError("Graves logs file doesn't exists");
         }
+    }
 
+    @Override
+    public Level getLevel() {
+        return null;
     }
 }

@@ -136,10 +136,36 @@ public class BlockGraveStone extends BlockContainer {
         return null;
     }
 
-    //TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Create constants !!!!!!!!!!!!!!!!!!!!!!!!!!
+    private static final AxisAlignedBB VP_SOUTH_BB = new AxisAlignedBB(0.125, 0, 0.0625, 0.875, 0.9375, 0.1875);
+    private static final AxisAlignedBB VP_NORTH_BB = new AxisAlignedBB(0.125F, 0, 0.8125F, 0.875F, 0.9375F, 0.9375F);
+    private static final AxisAlignedBB VP_EAST_BB = new AxisAlignedBB(0.0625F, 0, 0.125F, 0.1875F, 0.9375F, 0.875F);
+    private static final AxisAlignedBB VP_WEST_BB = new AxisAlignedBB(0.8125F, 0, 0.125F, 0.9375F, 0.9375F, 0.875F);
+    private static final AxisAlignedBB CROSS_SOUTH_BB = new AxisAlignedBB(0.125F, 0, 0.0625F, 0.875F, 1, 0.1875F);
+    private static final AxisAlignedBB CROSS_NORTH_BB = new AxisAlignedBB(0.125F, 0, 0.8125F, 0.875F, 1, 0.9375F);
+    private static final AxisAlignedBB CROSS_EAST_BB = new AxisAlignedBB(0.0625F, 0, 0.125F, 0.1875F, 1, 0.875F);
+    private static final AxisAlignedBB CROSS_WEST_BB = new AxisAlignedBB(0.8125F, 0, 0.125F, 0.9375F, 1, 0.875F);
+    private static final AxisAlignedBB CC_NORTH_SOUTH_BB = new AxisAlignedBB(0.125F, 0, 0.35F, 0.875F, 1.3F, 0.65F);
+    private static final AxisAlignedBB CC_EAST_WEST_BB = new AxisAlignedBB(0.35F, 0, 0.125F, 0.65F, 1.3F, 0.875F);
+    private static final AxisAlignedBB PL_STATUES_BB = new AxisAlignedBB(0.35F, 0, 0.35F, 0.65F, 0.92F, 0.65F);
+    private static final AxisAlignedBB HP_NORTH_SOUTH_BB = new AxisAlignedBB(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
+    private static final AxisAlignedBB HP_EAST_WEST_BB = new AxisAlignedBB(0.0625F, 0, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
+    private static final AxisAlignedBB DOG_SOUTH_BB = new AxisAlignedBB(0.35F, 0, 0.3F, 0.6F, 0.5F, 0.9F);
+    private static final AxisAlignedBB DOG_NORTH_BB = new AxisAlignedBB(0.35F, 0, 0.7F, 0.6F, 0.5F, 0.1F);
+    private static final AxisAlignedBB DOG_EAST_BB = new AxisAlignedBB(0.3F, 0, 0.35F, 0.9F, 0.5F, 0.6F);
+    private static final AxisAlignedBB DOG_WEST_BB = new AxisAlignedBB(0.7F, 0, 0.35F, 0.1F, 0.5F, 0.6F);
+    private static final AxisAlignedBB CAT_SOUTH_BB = new AxisAlignedBB(0.43F, 0, 0.3F, 0.57F, 0.5F, 0.75F);
+    private static final AxisAlignedBB CAT_NORTH_BB = new AxisAlignedBB(0.43F, 0, 0.7F, 0.57F, 0.5F, 0.25F);
+    private static final AxisAlignedBB CAT_EAST_BB = new AxisAlignedBB(0.3F, 0, 0.43F, 0.75F, 0.5F, 0.57F);
+    private static final AxisAlignedBB CAT_WEST_BB = new AxisAlignedBB(0.7F, 0, 0.43F, 0.25F, 0.5F, 0.57F);
+    private static final AxisAlignedBB CORPSE_BB = new AxisAlignedBB(0, 0, 0, 1, 0.3F, 1);
+    private static final AxisAlignedBB SWORD_SOUTH_NORTH_BB = new AxisAlignedBB(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
+    private static final AxisAlignedBB SWORD_EAST_WEST_BB = new AxisAlignedBB(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
+    private static final AxisAlignedBB HS_SOUTH_NORTH_BB = new AxisAlignedBB(0.375F, 0, 0.275F, 0.625F, 0.85F, 0.725F);
+    private static final AxisAlignedBB HS_EAST_WEST_BB = new AxisAlignedBB(0.275F, 0, 0.375F, 0.725F, 0.85F, 0.625F);
+
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess access, BlockPos pos) {
-        EnumFacing facing = (EnumFacing) access.getBlockState(pos).getValue(FACING);
+        EnumFacing facing = access.getBlockState(pos).getValue(FACING);
         EnumGraveType graveType;
         TileEntityGraveStone tileEntity = (TileEntityGraveStone) access.getTileEntity(pos);
 
@@ -153,98 +179,96 @@ public class BlockGraveStone extends BlockContainer {
             case VERTICAL_PLATE:
                 switch (facing) {
                     case SOUTH:
-                        return new AxisAlignedBB(0.125, 0, 0.0625, 0.875, 0.9375, 0.1875);
+                        return VP_SOUTH_BB;
                     case NORTH:
-                        return new AxisAlignedBB(0.125F, 0, 0.8125F, 0.875F, 0.9375F, 0.9375F);
+                        return VP_NORTH_BB;
                     case EAST:
-                        return new AxisAlignedBB(0.0625F, 0, 0.125F, 0.1875F, 0.9375F, 0.875F);
+                        return VP_EAST_BB;
                     case WEST:
-                        return new AxisAlignedBB(0.8125F, 0, 0.125F, 0.9375F, 0.9375F, 0.875F);
+                        return VP_WEST_BB;
                 }
                 break;
             case CROSS:
                 switch (facing) {
                     case SOUTH:
-                        return new AxisAlignedBB(0.125F, 0, 0.0625F, 0.875F, 1, 0.1875F);
+                        return CROSS_SOUTH_BB;
                     case NORTH:
-                        return new AxisAlignedBB(0.125F, 0, 0.8125F, 0.875F, 1, 0.9375F);
+                        return CROSS_NORTH_BB;
                     case EAST:
-                        return new AxisAlignedBB(0.0625F, 0, 0.125F, 0.1875F, 1, 0.875F);
+                        return CROSS_EAST_BB;
                     case WEST:
-                        return new AxisAlignedBB(0.8125F, 0, 0.125F, 0.9375F, 1, 0.875F);
+                        return CROSS_WEST_BB;
                 }
                 break;
             case CELTIC_CROSS:
                 switch (facing) {
                     case SOUTH:
                     case NORTH:
-                        return new AxisAlignedBB(0.125F, 0, 0.35F, 0.875F, 1.3F, 0.65F);
+                        return CC_NORTH_SOUTH_BB;
                     case EAST:
                     case WEST:
-                        return new AxisAlignedBB(0.35F, 0, 0.125F, 0.65F, 1.3F, 0.875F);
+                        return CC_EAST_WEST_BB;
                 }
                 break;
             case OBELISK:
             case CREEPER_STATUE:
             case VILLAGER_STATUE:
-                return new AxisAlignedBB(0.35F, 0, 0.35F, 0.65F, 0.92F, 0.65F);
+                return PL_STATUES_BB;
             case HORIZONTAL_PLATE:
                 switch (facing) {
                     case SOUTH:
-                        return new AxisAlignedBB(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
                     case NORTH:
-                        return new AxisAlignedBB(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
+                        return HP_NORTH_SOUTH_BB;
                     case EAST:
-                        return new AxisAlignedBB(0.0625F, 0, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
                     case WEST:
-                        return new AxisAlignedBB(0.0625F, 0, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
+                        return HP_EAST_WEST_BB;
                 }
                 break;
             case DOG_STATUE:
                 switch (facing) {
                     case SOUTH:
-                        return new AxisAlignedBB(0.35F, 0, 0.3F, 0.6F, 0.5F, 0.9F);
+                        return DOG_SOUTH_BB;
                     case NORTH:
-                        return new AxisAlignedBB(0.35F, 0, 0.7F, 0.6F, 0.5F, 0.1F);
+                        return DOG_NORTH_BB;
                     case EAST:
-                        return new AxisAlignedBB(0.3F, 0, 0.35F, 0.9F, 0.5F, 0.6F);
+                        return DOG_EAST_BB;
                     case WEST:
-                        return new AxisAlignedBB(0.7F, 0, 0.35F, 0.1F, 0.5F, 0.6F);
+                        return DOG_WEST_BB;
                 }
                 break;
             case CAT_STATUE:
                 switch (facing) {
                     case SOUTH:
-                        return new AxisAlignedBB(0.43F, 0, 0.3F, 0.57F, 0.5F, 0.75F);
+                        return CAT_SOUTH_BB;
                     case NORTH:
-                        return new AxisAlignedBB(0.43F, 0, 0.7F, 0.57F, 0.5F, 0.25F);
+                        return CAT_NORTH_BB;
                     case EAST:
-                        return new AxisAlignedBB(0.3F, 0, 0.43F, 0.75F, 0.5F, 0.57F);
+                        return CAT_EAST_BB;
                     case WEST:
-                        return new AxisAlignedBB(0.7F, 0, 0.43F, 0.25F, 0.5F, 0.57F);
+                        return CAT_WEST_BB;
                 }
                 break;
             case STARVED_CORPSE:
             case WITHERED_CORPSE:
-                return new AxisAlignedBB(0, 0, 0, 1, 0.3F, 1);
+                return CORPSE_BB;
             case SWORD:
                 switch (facing) {
                     case SOUTH:
                     case NORTH:
-                        return new AxisAlignedBB(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
+                        return SWORD_SOUTH_NORTH_BB;
                     case EAST:
                     case WEST:
-                        return new AxisAlignedBB(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
+                        return SWORD_EAST_WEST_BB;
                 }
                 break;
             case HORSE_STATUE:
                 switch (facing) {
                     case SOUTH:
                     case NORTH:
-                        return new AxisAlignedBB(0.375F, 0, 0.275F, 0.625F, 0.85F, 0.725F);
+                        return HS_SOUTH_NORTH_BB;
                     case EAST:
                     case WEST:
-                        return new AxisAlignedBB(0.275F, 0, 0.375F, 0.725F, 0.85F, 0.625F);
+                        return HS_EAST_WEST_BB;
                 }
                 break;
         }
@@ -463,9 +487,9 @@ public class BlockGraveStone extends BlockContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item gravestone, CreativeTabs tabs, NonNullList<ItemStack> list) {
+    public void getSubBlocks(CreativeTabs tabs, NonNullList<ItemStack> list) {
         for (int i = 0; i < EnumGraves.values().length - 1; i++) {
-            ItemStack stack = new ItemStack(gravestone, 1, i);
+            ItemStack stack = new ItemStack(this, 1, i);
             NBTTagCompound nbt = new NBTTagCompound();
             nbt.setBoolean("Purified", false);
 
@@ -475,14 +499,14 @@ public class BlockGraveStone extends BlockContainer {
 
         // custom swords
         for (Item sword : GraveGenerationHelper.swordsList) {
-            list.add(GraveStoneHelper.getSwordAsGrave(gravestone, new ItemStack(sword, 1)));
+            list.add(GraveStoneHelper.getSwordAsGrave(Item.getItemFromBlock(this), new ItemStack(sword, 1)));
         }
         for (Item sword : GraveGenerationHelper.swordsList) {
             try {
                 ItemStack swordStack = new ItemStack(sword, 1);
                 EnchantmentHelper.addRandomEnchantment(new Random(), swordStack, 5, true);
 
-                ItemStack graveStoneStack = GraveStoneHelper.getSwordAsGrave(gravestone, swordStack);
+                ItemStack graveStoneStack = GraveStoneHelper.getSwordAsGrave(Item.getItemFromBlock(this), swordStack);
 
                 list.add(graveStoneStack);
             } catch (IllegalArgumentException exception) {

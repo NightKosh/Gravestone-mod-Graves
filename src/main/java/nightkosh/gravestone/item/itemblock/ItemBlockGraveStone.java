@@ -1,6 +1,7 @@
 package nightkosh.gravestone.item.itemblock;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -17,6 +18,7 @@ import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.core.GSBlock;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -51,7 +53,7 @@ public class ItemBlockGraveStone extends ItemBlock {
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltipList, ITooltipFlag flag) {
         if (!stack.hasTagCompound()) {
             stack.setTagCompound(new NBTTagCompound());
         } else {
@@ -67,17 +69,17 @@ public class ItemBlockGraveStone extends ItemBlock {
                     String name = ModGraveStone.proxy.getLocalizedEntityName(nbt.getString("name"));
                     String killerName = ModGraveStone.proxy.getLocalizedEntityName(nbt.getString("KillerName"));
                     if (killerName.length() == 0) {
-                        list.add(new TextComponentTranslation(deathText, new Object[]{name}).getFormattedText());
+                        tooltipList.add(new TextComponentTranslation(deathText, new Object[]{name}).getFormattedText());
                     } else {
-                        list.add(new TextComponentTranslation(deathText, new Object[]{name, killerName.toLowerCase()}).getFormattedText());
+                        tooltipList.add(new TextComponentTranslation(deathText, new Object[]{name, killerName.toLowerCase()}).getFormattedText());
                     }
                 }
             } else {
-                list.add(deathText);
+                tooltipList.add(deathText);
             }
 
             if (nbt.getInteger("Age") > 0) {
-                list.add(ModGraveStone.proxy.getLocalizedString("item.grave.age") + " " + nbt.getInteger("Age") + " " + ModGraveStone.proxy.getLocalizedString("item.grave.days"));
+                tooltipList.add(ModGraveStone.proxy.getLocalizedString("item.grave.age") + " " + nbt.getInteger("Age") + " " + ModGraveStone.proxy.getLocalizedString("item.grave.days"));
             }
 
             EnumGraveMaterial material = EnumGraves.getById(stack.getItemDamage()).getMaterial();
@@ -90,18 +92,18 @@ public class ItemBlockGraveStone extends ItemBlock {
                     materialStr.append(", ")
                             .append(ModGraveStone.proxy.getLocalizedString("material.mossy"));
                 }
-                list.add(materialStr.toString());
+                tooltipList.add(materialStr.toString());
             }
 
             if (nbt.hasKey("Sword")) {
                 ItemStack sword = new ItemStack(nbt.getCompoundTag("Sword"));
 
                 if (StringUtils.isNotBlank(sword.getDisplayName())) {
-                    list.add(ModGraveStone.proxy.getLocalizedString("item.grave.sword_name") + " - " + sword.getDisplayName());
+                    tooltipList.add(ModGraveStone.proxy.getLocalizedString("item.grave.sword_name") + " - " + sword.getDisplayName());
                 }
 
                 if (sword.getItemDamage() != 0) {
-                    list.add(ModGraveStone.proxy.getLocalizedString("item.grave.sword_damage") + " - " + sword.getItemDamage());
+                    tooltipList.add(ModGraveStone.proxy.getLocalizedString("item.grave.sword_damage") + " - " + sword.getItemDamage());
                 }
 
                 if (sword.getTagCompound() != null && sword.getTagCompound().hasKey("ench")) {
@@ -114,7 +116,7 @@ public class ItemBlockGraveStone extends ItemBlock {
 
                             try {
                                 if (Enchantment.getEnchantmentByID(enchantmentId) != null) {
-                                    list.add(Enchantment.getEnchantmentByID(enchantmentId).getTranslatedName(enchantmentLvl));
+                                    tooltipList.add(Enchantment.getEnchantmentByID(enchantmentId).getTranslatedName(enchantmentLvl));
                                 }
                             } catch (Exception e) {
 
