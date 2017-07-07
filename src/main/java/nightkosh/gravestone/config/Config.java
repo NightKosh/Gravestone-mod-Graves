@@ -58,7 +58,6 @@ public class Config {
     public static boolean removeEmptyGraves;
     public static boolean showGravesRemovingMessages;
     public static boolean onlyOwnerCanLootGrave;
-    public static boolean storeHorseSaddleAndArmor;
     public static boolean renderGravesFlowers;
     public static boolean vanillaRendererForSwordsGraves;
 
@@ -85,8 +84,6 @@ public class Config {
 
         removeEmptyGraves = config.get(CATEGORY_GRAVES, "RemoveEmptyGraves", false).getBoolean(false);
         showGravesRemovingMessages = config.get(CATEGORY_GRAVES, "ShowGravesRemovingMessages", true).getBoolean(true);
-
-        storeHorseSaddleAndArmor = config.get(CATEGORY_GRAVES, "StoreHorseSaddleAndArmor", true).getBoolean(true);
 
         renderGravesFlowers = config.get(CATEGORY_GRAVES, "RenderGravesFlowers", true).getBoolean(true);
         vanillaRendererForSwordsGraves = config.get(CATEGORY_GRAVES, "VanillaRendererForSwordsGraves", true).getBoolean(true);
