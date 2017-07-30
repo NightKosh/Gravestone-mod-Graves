@@ -1,5 +1,6 @@
 package nightkosh.gravestone.helper;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -725,16 +726,23 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     private static int getGround(World world, int x, int y, int z) {
-        while ((world.isAirBlock(new BlockPos(x, y - 1, z)) || world.getBlockState(new BlockPos(x, y - 1, z)).getBlock().getMaterial(null).isLiquid() ||
-                world.getBlockState(new BlockPos(x, y - 1, z)).getBlock().getMaterial(null).isReplaceable()) && y > 1) {
-            y--;
+        while (true) {
+            BlockPos pos = new BlockPos(x, y - 1, z);
+            IBlockState state = world.getBlockState(pos);
+            if ((world.isAirBlock(pos) || state.getBlock().getMaterial(state).isLiquid() ||
+                    state.getBlock().getMaterial(state).isReplaceable()) && y > 1) {
+                y--;
+            } else {
+                return y;
+            }
         }
-        return y;
     }
 
     private static boolean canGenerateGraveAtCoordinates(World world, BlockPos pos) {
-        return world.getBlockState(pos.down()).getBlock().getMaterial(null).isSolid() &&
-                (world.isAirBlock(pos) || world.getBlockState(pos).getBlock().getMaterial(null).isLiquid() || world.getBlockState(pos).getBlock().getMaterial(null).isReplaceable());
+        IBlockState state = world.getBlockState(pos);
+        IBlockState stateDown = world.getBlockState(pos.down());
+        return stateDown.getBlock().getMaterial(stateDown).isSolid() &&
+                (world.isAirBlock(pos) || state.getBlock().getMaterial(state).isLiquid() || state.getBlock().getMaterial(state).isReplaceable());
     }
 
     protected static EnumGraves getGraveType(EnumGraveType[] graveTypes, EnumGraveMaterial... materials) {
