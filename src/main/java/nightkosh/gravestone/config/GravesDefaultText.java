@@ -41,7 +41,7 @@ public abstract class GravesDefaultText {
         "Scotty", "Sherry", "Sophy", "Sofia", "Sasha", "Samantha", "Sam", "Stanley", "Samuel", "Simon", "Seth", "Sean", "Saffron", "Sapphire",
         "Tad", "Terence", "Toby", "Theodore", "Theodora", "Ted", "Taylor", "Tony", "Timmy", "Timothy", "Tamara", "Tracy",
         "Victoria", "Vlad", "Valdemar", "Valentine", "Valerie", "Vance", "Vangelis", "Vanessa", "Valencia", "Venus", "Val",
-        "Wendy", "Willy", "William", "Wilfred", "Winfred", "Wyatt", "Wulfstan", "Warren", "Wren", "Wayne", "Wayde", "Walter",
+        "Wendy", "Willy", "William", "Wilfred", "Winfred", "Wyatt", "Wulfstan", "Warren", "Wren", "Wayne", "Wayde", "Walter", "Wallace",
     };
     public static final String[] DOG_NAMES = {
             "Buddy", "Brady", "Bolt",
