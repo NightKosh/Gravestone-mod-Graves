@@ -44,20 +44,29 @@ public abstract class GravesDefaultText {
         "Wendy", "Willy", "William", "Wilfred", "Winfred", "Wyatt", "Wulfstan", "Warren", "Wren", "Wayne", "Wayde", "Walter", "Wallace",
     };
     public static final String[] DOG_NAMES = {
-            "Buddy", "Brady", "Bolt",
-            "Chomper",
-            "Max",
-            "Rex", "Rover", "Rusty",
-            "Spike", "Sparky",
-            "Tango"
+            "Ana", "Abuwtiyuw",
+            "Buddy", "Brady", "Bolt", "Boye", "Barry", "Bully",
+            "Chomper", "Chinook",
+            "Dakota",
+            "George",
+            "Lucca", "Laika",
+            "Max", "Moustache", "Mkombozi",
+            "Rex", "Rover", "Rusty", "Rip", "Rajah",
+            "Spike", "Sparky", "Smoky", "Saihu",
+            "Tango",
+            "Willie",
+            "Zanjeer", "Zuyaqui"
     };
     public static final String[] CAT_NAMES = {
+            "All Ball",
             "Bella",
+            "Faith",
             "Kiki",
             "Max", "Molly",
             "Oscar",
             "Rusik",
-            "Sam", "Sylvester",
-            "Tiger"
+            "Sam", "Sylvester", "Scarlett", "Simon",
+            "Tiger",
+            "Winnie"
     };
 }
