@@ -46,6 +46,7 @@ public abstract class GravesDefaultText {
         "Wendy", "Willy", "William", "Wilfred", "Winfred", "Wyatt", "Wulfstan", "Warren", "Wren", "Wayne", "Wayde", "Walter", "Wallace",
         "Xander", "Xalvador", "Xenophon", "Xerxes", "Xavier", "Xylia", "Xochitl", "Xiomara", "Xenon", "Xarles", "Ximen", "Xyliana",
         "Yolanda", "Yakub", "Yaseen", "Yigael", "Yohann", "York", "Ygerne", "Yoko", "Yoshiko", "Yvanna", "Yukio", "Yadava", "Yukiko",
+        "Zacharie", "Zoe", "Zach", "Zander", "Zico", "Zidane", "Zoya", "Zahra", "Zaine", "Zelig", "Zephyr", "Zayan", "Zenobio", "Zeus"
     };
     public static final String[] DOG_NAMES = {
             "Ana", "Abuwtiyuw",
