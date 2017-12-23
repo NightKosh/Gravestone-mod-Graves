@@ -17,7 +17,7 @@ tasks.withType(JavaCompile) {
     targetCompatibility = "1.8"
 }
 
-version = "1.0.12"
+version = "1.0.13"
 group = "nightkosh.gravestone"
 archivesBaseName = "GraveStone-1.12-Graves"
 
