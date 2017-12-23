@@ -1,12 +1,11 @@
 package nightkosh.gravestone.gui;
 
-import nightkosh.gravestone.core.Resources;
-import nightkosh.gravestone.gui.container.GraveContainer;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import nightkosh.gravestone.core.Resources;
+import nightkosh.gravestone.gui.container.GraveContainer;
+import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -16,7 +15,7 @@ import org.lwjgl.opengl.GL11;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
-public class GraveInventoryGui extends GuiContainer {
+public class GraveInventoryGui extends GuiContainerBase {
 
     public GraveInventoryGui(InventoryPlayer inventoryPlayer, TileEntityGraveStone tileEntity) {
         super(new GraveContainer(inventoryPlayer, tileEntity));
