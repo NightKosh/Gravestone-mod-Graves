@@ -36,7 +36,7 @@ public class CompatibilityBackpacksMod implements ICompatibility {
 
                         if (getPersonalBackpackMethod != null && setPersonalBackpackMethod != null) {
                             Object backpackObject = getPersonalBackpackMethod.invoke(playerSave);
-                            if (backpackObject != null && backpackObject instanceof ItemStack) {
+                            if (backpackObject != null && backpackObject instanceof ItemStack && !((ItemStack) backpackObject).isEmpty()) {
                                 items.add(((ItemStack) backpackObject).copy());
                                 setPersonalBackpackMethod.invoke(playerSave, ItemStack.EMPTY);
                             }

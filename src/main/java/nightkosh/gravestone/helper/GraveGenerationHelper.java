@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.translation.I18n;
@@ -98,6 +99,15 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     private static final EnumGraveType[] GENERATED_HORSE_GRAVES_TYPES = {EnumGraveType.HORSE_STATUE};
     private static final EnumGraveType[] GENERATED_CREEPER_STATUES_GRAVES_TYPES = {EnumGraveType.CREEPER_STATUE};
 
+
+    private static void addNonEmptyItems(List<ItemStack> items, NonNullList<ItemStack> itemsToAdd) {
+        for (ItemStack stack : itemsToAdd) {
+            if (!stack.isEmpty()) {
+                items.add(stack);
+            }
+        }
+    }
+
     public static void createPlayerGrave(EntityPlayer player, LivingDeathEvent event, long spawnTime) {
         if (player.getEntityWorld() != null && !player.getEntityWorld().getGameRules().getBoolean("keepInventory") && Config.graveItemsCount > 0 &&
                 !isInRestrictedArea(player.getEntityWorld(), player.getPosition())) {
@@ -105,9 +115,12 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
 //            GSCompatibilityAntiqueAtlas.placeDeathMarkerAtDeath(player); //TODO !!!!!!!!!!!!
 
-            items.addAll(player.inventory.mainInventory);
-            items.addAll(player.inventory.armorInventory);
-            items.addAll(player.inventory.offHandInventory);
+            addNonEmptyItems(items, player.inventory.mainInventory);
+            addNonEmptyItems(items, player.inventory.armorInventory);
+            addNonEmptyItems(items, player.inventory.offHandInventory);
+//            items.addAll(player.inventory.mainInventory);
+//            items.addAll(player.inventory.armorInventory);
+//            items.addAll(player.inventory.offHandInventory);
 
             CompatibilityTwilightForest.addSlotTags(items);
             CompatibilityBattlegear.addItems(items, player);
@@ -119,7 +132,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             for (IPlayerItems additionalItems : APIGraveGeneration.PLAYER_ITEMS) {
                 try {
                     List<ItemStack> modItems = additionalItems.addItems(player, event.getSource());
-                    if (modItems != null && modItems.size() != 0) {
+                    if (modItems != null && !modItems.isEmpty() && modItems.size() != 0) {
                         items.addAll(modItems);
                     }
                 } catch (Exception e) {
@@ -140,9 +153,10 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                     e.printStackTrace();
                 }
             }
-
-            createGrave(player, event, items, EnumGraveTypeByEntity.PLAYER_GRAVES, false, spawnTime);
-        } else {
+            if (Config.generateEmptyPlayerGraves || items.size() != 0) {
+                createGrave(player, event, items, EnumGraveTypeByEntity.PLAYER_GRAVES, false, spawnTime);
+            }
+        } else if (Config.generateEmptyPlayerGraves) {
             createGrave(player, event, null, EnumGraveTypeByEntity.PLAYER_GRAVES, false, spawnTime);
         }
     }

@@ -60,6 +60,7 @@ public class Config {
     public static boolean onlyOwnerCanLootGrave;
     public static boolean renderGravesFlowers;
     public static boolean vanillaRendererForSwordsGraves;
+    public static boolean generateEmptyPlayerGraves;
 
     public static List<GraveStoneHelper.RestrictedArea> restrictGraveGenerationInArea;
 
@@ -70,6 +71,7 @@ public class Config {
         generatePetGraves = config.get(CATEGORY_GRAVES, "GeneratePetsGraves", true).getBoolean(true);
         generateGravesInLava = config.get(CATEGORY_GRAVES, "GenerateGravesInLava", true).getBoolean(true);
         generateSwordGraves = config.get(CATEGORY_GRAVES, "GenerateSwordGraves", true).getBoolean(true);
+        generateEmptyPlayerGraves = config.get(CATEGORY_GRAVES, "GenerateEmptyPlayerGraves", true).getBoolean(true);
         onlyOwnerCanLootGrave = config.get(CATEGORY_GRAVES, "OnlyOwnerCanLootGrave", false).getBoolean(false);
 
 
