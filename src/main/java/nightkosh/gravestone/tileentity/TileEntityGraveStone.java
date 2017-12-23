@@ -1,5 +1,6 @@
 package nightkosh.gravestone.tileentity;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
@@ -227,8 +228,15 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
         this.playerId = playerId;
     }
 
-    public boolean canBeLooted(String playerId) {
-        return !Config.onlyOwnerCanLootGrave || StringUtils.isBlank(this.playerId) || playerId.equals(this.playerId) || inventory.getGraveContent().isEmpty();
+    public boolean canBeLooted(EntityPlayer player) {
+        if (Config.onlyOwnerCanLootGrave) {
+            if (player != null) {
+                String playerId = player.getUniqueID().toString();
+                return player.isCreative() || StringUtils.isBlank(this.playerId) || playerId.equals(this.playerId) || inventory.getGraveContent().isEmpty();
+            }
+            return false;
+        }
+        return true;
     }
 
     @Override

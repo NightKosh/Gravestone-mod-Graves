@@ -285,7 +285,7 @@ public class BlockGraveStone extends BlockContainer {
 
         if (!world.isRemote && !world.restoringBlockSnapshots) {
             TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
-            if (tileEntity != null && tileEntity.canBeLooted(player.getUniqueID().toString())) {
+            if (tileEntity != null && tileEntity.canBeLooted(player)) {
                 GraveStoneHelper.spawnMob(world, pos);
 
                 if (tileEntity.hasFlower()) {
@@ -358,7 +358,7 @@ public class BlockGraveStone extends BlockContainer {
                 ItemStack item = player.inventory.getCurrentItem();
                 if (item.getItem().getToolClasses(item).contains("shovel")) {
                     if (!world.isRemote) {
-                        if (te.canBeLooted(player.getUniqueID().toString())) {
+                        if (te.canBeLooted(player)) {
                             player.openGui(ModGraveStone.instance, GuiHandler.GRAVE_INVENTORY_GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
                             GSLogger.logInfoGrave(player.getName() + " open grave inventory at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
                             GraveStoneHelper.replaceGround(world, pos.down());
@@ -468,7 +468,7 @@ public class BlockGraveStone extends BlockContainer {
         if (!world.isSideSolid(pos.down(), EnumFacing.DOWN, true)) {
             TileEntityGraveStone te = (TileEntityGraveStone) world.getTileEntity(pos);
             if (te != null) {
-                if (te.canBeLooted("")) {
+                if (te.canBeLooted(null)) {
                     GraveStoneHelper.dropBlockWithoutInfo(te.getWorld(), pos, world.getBlockState(pos));
                     te.getWorld().setBlockToAir(pos);
                 }
@@ -479,7 +479,7 @@ public class BlockGraveStone extends BlockContainer {
     @Override
     public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
         TileEntityGraveStone te = (TileEntityGraveStone) world.getTileEntity(pos);
-        if (te != null && !te.canBeLooted(player.getUniqueID().toString())) {
+        if (te != null && !te.canBeLooted(player)) {
             player.sendMessage(new TextComponentTranslation("grave.cant_be_looted").setStyle(new Style().setColor(TextFormatting.RED)));
             return false;
         }
