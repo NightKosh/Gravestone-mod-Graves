@@ -337,7 +337,7 @@ public class BlockGraveStone extends BlockContainer {
 
     @Override
     public float getExplosionResistance(Entity entity) {
-        return 18000000F;
+        return Float.MAX_VALUE;
     }
 
     /**
