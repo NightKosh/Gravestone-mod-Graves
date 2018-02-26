@@ -7,6 +7,9 @@ For more information visit [official site](http://gravestone.nightkosh.com/) or 
 
 **Since minecraft 1.8 this mod splitted on 2 parts - "Graves" and "[Extended](https://github.com/NightKosh/Gravestone-mod-Extended)".**
 
+## Minecraft versions
+"Master branch" contains mod sources for the latest version of the Minecraft I'm working on. Any previous versions contains in an own branches.
+
 # API
 [Gravestone Mod API](https://github.com/NightKosh/GraveStone-mod-API)
 
@@ -18,12 +21,11 @@ For more information visit [official site](http://gravestone.nightkosh.com/) or 
 ## Dependencies.
 **Be careful some of these API may not be updated yet, or may be bugged!**
 
-1. [Gravestone Mod API](https://github.com/NightKosh/GraveStone-mod-API) (will be loaded as git submodule)
-3. [Baubles API](https://github.com/Azanor/Baubles) (will be loaded as git submodule)
-5. [Mariculture API](https://github.com/joshiejack/Mariculture)
-6. [Galacticraft API](https://github.com/micdoodle8/Galacticraft-API)
-7. [TinkersConstruct API](https://github.com/SlimeKnights/TinkersConstruct)
-8. [Thaumcraft API](https://github.com/Azanor/thaumcraft-api) (will be loaded as git submodule)
+1. [Gravestone mod - Graves API](https://github.com/NightKosh/Gravestone-mod-Graves-API) (will be loaded as git submodule)
+2. [Baubles API](https://github.com/Azanor/Baubles) (will be loaded as git submodule)
+3. [Galacticraft API](https://github.com/micdoodle8/Galacticraft-API)
+4. ~~[Mariculture API](https://github.com/joshiejack/Mariculture)~~
+5. ~~[Thaumcraft API](https://github.com/Azanor/thaumcraft-api) (will be loaded as git submodule)~~
 
 ## Get started
 1. [Set up forge](http://www.minecraftforge.net/wiki/Installation/Source)
