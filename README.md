@@ -1,5 +1,5 @@
 
-# Gravestone mod - Graves
+# Gravestone mod - Graves [![Curseforge](http://cf.way2muchnoise.eu/full_gravestone-mod-graves_downloads.svg)](https://minecraft.curseforge.com/projects/gravestone-mod-graves) [![Curseforge](http://cf.way2muchnoise.eu/versions/For%20MC_gravestone-mod-graves_all.svg)](https://minecraft.curseforge.com/projects/gravestone-mod-graves)
 
 Adds a gravestone to the game, which spawns after player's death.
 
