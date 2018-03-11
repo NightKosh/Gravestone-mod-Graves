@@ -151,7 +151,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     private void renderGrave(World world, EnumGraves graveType, boolean isEnchanted, boolean isMossy, boolean hasFlower, ItemStack flower, boolean isSwordGrave, ItemStack sword) {
         if (isSwordGrave) {
             ResourceLocation swordTexture = swordsTextureMap.get(sword.getItem());
-            if (Config.vanillaRendererForSwordsGraves || swordTexture == null) {
+            if (Config.vanillaRendererForSwordsGraves) {
                 if (world == null) {
                     GL11.glScalef(0.5F, -0.5F, -0.5F);
                     GL11.glTranslatef(-0.37F, -1.7F, 0);
@@ -160,9 +160,15 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
                     GL11.glTranslatef(-0.27F, -0.83F, 0);
                 }
                 renderSword(world, sword);
-            } else {
-                ModelGraveStone model = getModel(graveType.getGraveType());
-                bindTextureByName(swordTexture);
+            } else  {
+                ModelGraveStone model;
+                if (swordTexture != null ) {
+                    model = getModel(graveType.getGraveType());
+                    bindTextureByName(swordTexture);
+                } else {
+                    model = getModel(EnumGraveType.VERTICAL_PLATE);
+                    bindTextureByName(graveType.getTexture());
+                }
                 if (isEnchanted) {
                     model.renderEnchanted();
                 } else {
