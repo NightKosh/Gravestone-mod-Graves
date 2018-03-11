@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -144,7 +145,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             //TODO is it really required??
             CompatibilityTwilightForest.removeSlotTags(items);
 
-
+            // remove some items by other mods
             for (IPlayerItems additionalItems : APIGraveGeneration.PLAYER_ITEMS) {
                 try {
                     additionalItems.getItems(player, event.getSource(), items);
@@ -153,6 +154,16 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                     e.printStackTrace();
                 }
             }
+
+            // remove items with Curse of Vanishing enchantment
+            if (Config.removeCurseOfVanishingItems) {
+                for (int i = 0; i < items.size(); i++) {
+                    if (EnchantmentHelper.hasEnchantment(items.get(i), Enchantments.VANISHING_CURSE)) {
+                        items.set(i, ItemStack.EMPTY);
+                    }
+                }
+            }
+
             if (Config.generateEmptyPlayerGraves || items.size() != 0) {
                 createGrave(player, event, items, EnumGraveTypeByEntity.PLAYER_GRAVES, false, spawnTime);
             }

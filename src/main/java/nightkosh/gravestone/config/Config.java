@@ -61,6 +61,7 @@ public class Config {
     public static boolean renderGravesFlowers;
     public static boolean vanillaRendererForSwordsGraves;
     public static boolean generateEmptyPlayerGraves;
+    public static boolean removeCurseOfVanishingItems;
 
     public static List<GraveStoneHelper.RestrictedArea> restrictGraveGenerationInArea;
 
@@ -101,6 +102,8 @@ public class Config {
                 restrictGraveGenerationInArea.add(restrictedArea);
             }
         }
+
+        removeCurseOfVanishingItems = config.get(CATEGORY_GRAVES, "RemoveCurseOfVanishingItems", true).getBoolean();
     }
 
 
