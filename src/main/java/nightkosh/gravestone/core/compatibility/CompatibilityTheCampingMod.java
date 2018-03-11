@@ -25,10 +25,8 @@ public class CompatibilityTheCampingMod implements ICompatibility {
                 List<ItemStack> items = new LinkedList<>();
                 NBTTagCompound tag = player.getEntityData().getCompoundTag("campInv");
                 NBTTagList inventory = tag.getTagList("Items", 10);
-                for (int i = 0; i < inventory.tagCount(); ++i) {
-                    NBTTagCompound slots = inventory.getCompoundTagAt(i);
-                    slots.getByte("Slot");
-                    ItemStack stack = new ItemStack(slots);
+                for (int i = 0; i < inventory.tagCount(); i++) {
+                    ItemStack stack = new ItemStack(inventory.getCompoundTagAt(i));
                     if (!stack.isEmpty()) {
                         items.add(stack);
                     }
