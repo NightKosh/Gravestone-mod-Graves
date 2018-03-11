@@ -66,7 +66,6 @@ public class BlockGraveStone extends BlockContainer {
 
     public BlockGraveStone() {
         super(Material.ROCK);
-        this.isBlockContainer = true;
         this.setSoundType(SoundType.STONE);
         this.setHardness(0.5F);
         this.setResistance(5);
