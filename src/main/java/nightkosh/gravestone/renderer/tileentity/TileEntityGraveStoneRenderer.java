@@ -102,6 +102,9 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         int meta = 0;
         if (tileEntity.getWorld() != null) {
             meta = tileEntity.getBlockMetadata();
+            if (meta > 3) {
+                meta = 0;
+            }
         }
         EnumFacing facing = EnumFacing.values()[meta];
 
