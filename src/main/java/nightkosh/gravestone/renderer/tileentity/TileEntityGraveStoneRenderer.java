@@ -38,7 +38,7 @@ import java.util.Map;
 @SideOnly(Side.CLIENT)
 public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
-    private static final Map<EnumGraves, ResourceLocation> mossyTexturesMap = Maps.newHashMap();
+    protected static final Map<EnumGraves, ResourceLocation> mossyTexturesMap = Maps.newHashMap();
     public static ModelGraveStone verticalPlate = new ModelVerticalPlateGraveStone();
     public static ModelGraveStone cross = new ModelCrossGraveStone();
     public static ModelGraveStone obelisk = new ModelObeliskGravestone();
@@ -56,8 +56,8 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static TileEntityGraveStoneRenderer instance;
 
-    private static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
-    private static final ItemStack SWORD = new ItemStack(Items.IRON_SWORD);
+    protected static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+    protected static final ItemStack SWORD = new ItemStack(Items.IRON_SWORD);
 
     public static final Map<Item, EntityItem> flowersMap = new HashMap<>();
     public static final Map<Item, EntityItem> swordsMap = new HashMap<>();
@@ -148,7 +148,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         GL11.glPopMatrix();
     }
 
-    private void renderGrave(World world, EnumGraves graveType, boolean isEnchanted, boolean isMossy, boolean hasFlower, ItemStack flower, boolean isSwordGrave, ItemStack sword) {
+    public void renderGrave(World world, EnumGraves graveType, boolean isEnchanted, boolean isMossy, boolean hasFlower, ItemStack flower, boolean isSwordGrave, ItemStack sword) {
         if (isSwordGrave) {
             ResourceLocation swordTexture = swordsTextureMap.get(sword.getItem());
             if (Config.vanillaRendererForSwordsGraves) {
@@ -195,7 +195,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         }
     }
 
-    private ResourceLocation getTexture(EnumGraves graveType, ResourceLocation texture, boolean isMossy) {
+    protected ResourceLocation getTexture(EnumGraves graveType, ResourceLocation texture, boolean isMossy) {
         if (isMossy) {
             ResourceLocation mixedMossyTexture = mossyTexturesMap.get(graveType);
             if (mixedMossyTexture == null) {
@@ -214,7 +214,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         }
     }
 
-    private ResourceLocation getMossyTexture(EnumGraveType graveType) {
+    protected ResourceLocation getMossyTexture(EnumGraveType graveType) {
         switch (graveType) {
             case VERTICAL_PLATE:
             default:
@@ -240,7 +240,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         }
     }
 
-    private ModelGraveStone getModel(EnumGraveType graveType) {
+    protected ModelGraveStone getModel(EnumGraveType graveType) {
         switch (graveType) {
             case VERTICAL_PLATE:
             default:
@@ -272,7 +272,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         }
     }
 
-    private void renderSword(World world, ItemStack sword) {
+    protected void renderSword(World world, ItemStack sword) {
         EntityItem entityItem = swordsMap.get(sword.getItem());
         if (entityItem == null) {
             entityItem = new EntityItem(world, 0, 0, 0, sword);
@@ -285,7 +285,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         renderItem(sword, entityItem);
     }
 
-    private void renderFlower(World world, ItemStack flower) {
+    protected void renderFlower(World world, ItemStack flower) {
         if (Config.renderGravesFlowers) {
             EntityItem entityItem = flowersMap.get(flower.getItem());
             if (entityItem == null) {
@@ -332,7 +332,6 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
             GlStateManager.popMatrix();
         }
     }
-
 
     protected TileEntityGraveStone getDefaultTE() {
         return GRAVE_TE;
