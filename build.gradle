@@ -17,9 +17,9 @@ tasks.withType(JavaCompile) {
     targetCompatibility = "1.8"
 }
 
-version = "1.0.14"
+version = "1.0.15"
 group = "nightkosh.gravestone"
-archivesBaseName = "GraveStone-1.12-Graves"
+archivesBaseName = "GraveStone-1.12.2-Graves"
 
 minecraft {
     version = "1.12.2-14.23.2.2611"
