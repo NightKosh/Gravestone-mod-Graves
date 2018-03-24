@@ -49,7 +49,7 @@ public abstract class GravesDefaultText {
         "Zacharie", "Zoe", "Zach", "Zander", "Zico", "Zidane", "Zoya", "Zahra", "Zaine", "Zelig", "Zephyr", "Zayan", "Zenobio", "Zeus"
     };
     public static final String[] DOG_NAMES = {
-            "Ana", "Abuwtiyuw",
+            "Ana", "Abuwtiyuw", "Argos",
             "Buddy", "Brady", "Bolt", "Boye", "Barry", "Bully", "Balto", "Beethoven",
             "Chomper", "Chinook", "Cerberus", "Chips",
             "Dakota",
