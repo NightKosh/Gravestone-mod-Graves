@@ -282,7 +282,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             }
         } else {
             int age = (int) (entity.getEntityWorld().getWorldTime() - spawnTime) / 24000;
-            BlockPos pos = new BlockPos(entity.posX, entity.posY, entity.posZ - 1);
+            BlockPos pos = new BlockPos(entity.posX, Math.round(entity.posY), entity.posZ - 1);
             GraveInfoOnDeath graveInfo = getGraveOnDeath(entity.getEntityWorld(), pos, entity, graveTypeByEntity, items, age, event.getSource());
             DeathMessageInfo messageInfo = getDeathMessage((EntityLivingBase) entity, event.getSource().damageType, isVillager);
             createOnDeath(entity, entity.getEntityWorld(), pos, messageInfo, items, age, graveInfo, event.getSource());
@@ -306,7 +306,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             graveInfo.setEnchanted(customEntityDeathHandler.isEnchanted(entity, event.getSource()));
             graveInfo.setMossy(customEntityDeathHandler.isMossy(entity, event.getSource()));
 
-            BlockPos pos = new BlockPos(entity.posX, entity.posY, entity.posZ - 1);
+            BlockPos pos = new BlockPos(entity.posX, Math.round(entity.posY), entity.posZ - 1);
             DeathMessageInfo messageInfo = getDeathMessage((EntityLivingBase) entity, event.getSource().damageType, false);
             createOnDeath(entity, entity.getEntityWorld(), pos, messageInfo, customEntityDeathHandler.getItems(), age, graveInfo, event.getSource());
         }
