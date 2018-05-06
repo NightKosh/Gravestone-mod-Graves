@@ -41,6 +41,7 @@ import nightkosh.gravestone.ModGraveStone;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.core.GSBlock;
 import nightkosh.gravestone.core.GuiHandler;
 import nightkosh.gravestone.core.Tabs;
 import nightkosh.gravestone.core.logger.GSLogger;
@@ -165,112 +166,114 @@ public class BlockGraveStone extends BlockContainer {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess access, BlockPos pos) {
-        EnumFacing facing = access.getBlockState(pos).getValue(FACING);
-        EnumGraveType graveType;
-        TileEntityGraveStone tileEntity = (TileEntityGraveStone) access.getTileEntity(pos);
+        if (state.getBlock() == GSBlock.GRAVE_STONE) {
+            EnumFacing facing = access.getBlockState(pos).getValue(FACING);
+            EnumGraveType graveType;
+            TileEntityGraveStone tileEntity = (TileEntityGraveStone) access.getTileEntity(pos);
 
-        if (tileEntity != null) {
-            graveType = tileEntity.getGraveType().getGraveType();
-        } else {
-            graveType = EnumGraveType.VERTICAL_PLATE;
-        }
+            if (tileEntity != null) {
+                graveType = tileEntity.getGraveType().getGraveType();
+            } else {
+                graveType = EnumGraveType.VERTICAL_PLATE;
+            }
 
-        switch (graveType) {
-            case VERTICAL_PLATE:
-                switch (facing) {
-                    case SOUTH:
-                        return VP_SOUTH_BB;
-                    case NORTH:
-                        return VP_NORTH_BB;
-                    case EAST:
-                        return VP_EAST_BB;
-                    case WEST:
-                        return VP_WEST_BB;
-                }
-                break;
-            case CROSS:
-                switch (facing) {
-                    case SOUTH:
-                        return CROSS_SOUTH_BB;
-                    case NORTH:
-                        return CROSS_NORTH_BB;
-                    case EAST:
-                        return CROSS_EAST_BB;
-                    case WEST:
-                        return CROSS_WEST_BB;
-                }
-                break;
-            case CELTIC_CROSS:
-                switch (facing) {
-                    case SOUTH:
-                    case NORTH:
-                        return CC_NORTH_SOUTH_BB;
-                    case EAST:
-                    case WEST:
-                        return CC_EAST_WEST_BB;
-                }
-                break;
-            case OBELISK:
-            case CREEPER_STATUE:
-            case VILLAGER_STATUE:
-                return PL_STATUES_BB;
-            case HORIZONTAL_PLATE:
-                switch (facing) {
-                    case SOUTH:
-                    case NORTH:
-                        return HP_NORTH_SOUTH_BB;
-                    case EAST:
-                    case WEST:
-                        return HP_EAST_WEST_BB;
-                }
-                break;
-            case DOG_STATUE:
-                switch (facing) {
-                    case SOUTH:
-                        return DOG_SOUTH_BB;
-                    case NORTH:
-                        return DOG_NORTH_BB;
-                    case EAST:
-                        return DOG_EAST_BB;
-                    case WEST:
-                        return DOG_WEST_BB;
-                }
-                break;
-            case CAT_STATUE:
-                switch (facing) {
-                    case SOUTH:
-                        return CAT_SOUTH_BB;
-                    case NORTH:
-                        return CAT_NORTH_BB;
-                    case EAST:
-                        return CAT_EAST_BB;
-                    case WEST:
-                        return CAT_WEST_BB;
-                }
-                break;
-            case STARVED_CORPSE:
-            case WITHERED_CORPSE:
-                return CORPSE_BB;
-            case SWORD:
-                switch (facing) {
-                    case SOUTH:
-                    case NORTH:
-                        return SWORD_SOUTH_NORTH_BB;
-                    case EAST:
-                    case WEST:
-                        return SWORD_EAST_WEST_BB;
-                }
-                break;
-            case HORSE_STATUE:
-                switch (facing) {
-                    case SOUTH:
-                    case NORTH:
-                        return HS_SOUTH_NORTH_BB;
-                    case EAST:
-                    case WEST:
-                        return HS_EAST_WEST_BB;
-                }
-                break;
+            switch (graveType) {
+                case VERTICAL_PLATE:
+                    switch (facing) {
+                        case SOUTH:
+                            return VP_SOUTH_BB;
+                        case NORTH:
+                            return VP_NORTH_BB;
+                        case EAST:
+                            return VP_EAST_BB;
+                        case WEST:
+                            return VP_WEST_BB;
+                    }
+                    break;
+                case CROSS:
+                    switch (facing) {
+                        case SOUTH:
+                            return CROSS_SOUTH_BB;
+                        case NORTH:
+                            return CROSS_NORTH_BB;
+                        case EAST:
+                            return CROSS_EAST_BB;
+                        case WEST:
+                            return CROSS_WEST_BB;
+                    }
+                    break;
+                case CELTIC_CROSS:
+                    switch (facing) {
+                        case SOUTH:
+                        case NORTH:
+                            return CC_NORTH_SOUTH_BB;
+                        case EAST:
+                        case WEST:
+                            return CC_EAST_WEST_BB;
+                    }
+                    break;
+                case OBELISK:
+                case CREEPER_STATUE:
+                case VILLAGER_STATUE:
+                    return PL_STATUES_BB;
+                case HORIZONTAL_PLATE:
+                    switch (facing) {
+                        case SOUTH:
+                        case NORTH:
+                            return HP_NORTH_SOUTH_BB;
+                        case EAST:
+                        case WEST:
+                            return HP_EAST_WEST_BB;
+                    }
+                    break;
+                case DOG_STATUE:
+                    switch (facing) {
+                        case SOUTH:
+                            return DOG_SOUTH_BB;
+                        case NORTH:
+                            return DOG_NORTH_BB;
+                        case EAST:
+                            return DOG_EAST_BB;
+                        case WEST:
+                            return DOG_WEST_BB;
+                    }
+                    break;
+                case CAT_STATUE:
+                    switch (facing) {
+                        case SOUTH:
+                            return CAT_SOUTH_BB;
+                        case NORTH:
+                            return CAT_NORTH_BB;
+                        case EAST:
+                            return CAT_EAST_BB;
+                        case WEST:
+                            return CAT_WEST_BB;
+                    }
+                    break;
+                case STARVED_CORPSE:
+                case WITHERED_CORPSE:
+                    return CORPSE_BB;
+                case SWORD:
+                    switch (facing) {
+                        case SOUTH:
+                        case NORTH:
+                            return SWORD_SOUTH_NORTH_BB;
+                        case EAST:
+                        case WEST:
+                            return SWORD_EAST_WEST_BB;
+                    }
+                    break;
+                case HORSE_STATUE:
+                    switch (facing) {
+                        case SOUTH:
+                        case NORTH:
+                            return HS_SOUTH_NORTH_BB;
+                        case EAST:
+                        case WEST:
+                            return HS_EAST_WEST_BB;
+                    }
+                    break;
+            }
         }
         return new AxisAlignedBB(0, 0, 0, 1, 1, 1);
     }
