@@ -117,6 +117,7 @@ public class Config {
     public static boolean storeBackpacksItems;
     public static boolean enableArsMagicaSoulbound;
     public static boolean enableEnderIOSoulbound;
+    public static boolean enableTconstructSoulbound;
     public static boolean enableTwilightForestKeeping;
     public static boolean addThaumcraftSwordsAsGravestones;
 
@@ -132,6 +133,7 @@ public class Config {
 
         enableArsMagicaSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableArsMagicaSoulbound", true).getBoolean(true);
         enableEnderIOSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableEnderIOSoulbound", true).getBoolean(true);
+        enableTconstructSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableTconstructSoulbound", true).getBoolean(true);
         enableTwilightForestKeeping = config.get(CATEGORY_COMPATIBILITY, "EnableTwilightForestCharmsOfKeeping", true).getBoolean(true);
 
         addThaumcraftSwordsAsGravestones = config.get(CATEGORY_COMPATIBILITY, "AddThaumcraftSwordsAsGravestones", true).getBoolean(true);
