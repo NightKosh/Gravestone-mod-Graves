@@ -30,7 +30,6 @@ minecraft {
 
 ext.apiGravestone = "./api/gravestone"
 ext.apiBaubles = "./api/baubles"
-ext.apiThaumcraft = "./api/thaumcraft"
 
 sourceSets {
     main {
@@ -41,7 +40,6 @@ sourceSets {
     api {
         java {
             srcDir project.apiBaubles
-            srcDir project.apiThaumcraft
         }
     }
 }
