@@ -29,8 +29,6 @@ public class Compatibility {
 
         new CompatibilityWitchery();
 
-        new CompatibilityThaumcraft();
-
         new CompatibilityTinkerConstruct();
     }
 
