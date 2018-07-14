@@ -62,6 +62,7 @@ public class Config {
     public static boolean vanillaRendererForSwordsGraves;
     public static boolean generateEmptyPlayerGraves;
     public static boolean removeCurseOfVanishingItems;
+    public static List<Integer> playerGravesDimensionalBlackList;
 
     public static List<GraveStoneHelper.RestrictedArea> restrictGraveGenerationInArea;
 
@@ -104,6 +105,9 @@ public class Config {
         }
 
         removeCurseOfVanishingItems = config.get(CATEGORY_GRAVES, "RemoveCurseOfVanishingItems", true).getBoolean();
+
+        playerGravesDimensionalBlackList = ConfigsHelper.getDimensionList(config, CATEGORY_GRAVES, "PlayerGravesDimensionalBlackList", "",
+                "List of dimension ids in which player's graves will not be generated at death");
     }
 
 

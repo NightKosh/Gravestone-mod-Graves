@@ -34,13 +34,15 @@ public class EventsHandler {
 
             if (Config.generatePlayerGraves && event.getEntityLiving() instanceof EntityPlayer) {
                 EntityPlayer player = (EntityPlayer) event.getEntity();
-                for (IPlayerDeathHandler playerDeathHandler : APIGraveGeneration.PLAYER_DEATH_HANDLERS) {
-                    if (playerDeathHandler.cancelGraveGeneration(player, event.getSource())) {
-                        return;
+                if (!Config.playerGravesDimensionalBlackList.contains(player.dimension)) {
+                    for (IPlayerDeathHandler playerDeathHandler : APIGraveGeneration.PLAYER_DEATH_HANDLERS) {
+                        if (playerDeathHandler.cancelGraveGeneration(player, event.getSource())) {
+                            return;
+                        }
                     }
-                }
 
-                GraveGenerationHelper.createPlayerGrave(player, event, MobHandler.getAndRemoveSpawnTime(event.getEntity()));
+                    GraveGenerationHelper.createPlayerGrave(player, event, MobHandler.getAndRemoveSpawnTime(event.getEntity()));
+                }
                 return;
             } else {
                 if (Config.generateVillagerGraves && event.getEntity() instanceof EntityVillager) {
