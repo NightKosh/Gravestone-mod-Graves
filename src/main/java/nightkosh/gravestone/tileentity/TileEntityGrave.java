@@ -40,6 +40,10 @@ public abstract class TileEntityGrave extends TileEntityBase {
         return inventory;
     }
 
+    public void setInventory(GraveInventory inventory) {
+        this.inventory = inventory;
+    }
+
     public GraveStoneDeathText getDeathTextComponent() {
         return deathText;
     }

@@ -120,4 +120,16 @@ public class EventsHandler {
             GravesLogger.setWorldDirectory(event.getWorld().getSaveHandler().getWorldDirectory());
         }
     }
+
+    //TODO remove #245 !!!!!!!!!!!!!!!!!!!!!!!
+//    @SubscribeEvent
+//    public void onChunkLoad(ChunkEvent.Load event) {
+//        if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+//            Chunk chunk = event.getChunk();
+//            chunk.getTileEntityMap().entrySet().stream().filter(entry -> entry.getValue() instanceof TileEntityGrave).forEach(entry -> {
+//                GraveStoneHelper.replaceOldGraveByNew(event.getWorld(), entry.getKey());
+//            });
+//        }
+//
+//    }
 }

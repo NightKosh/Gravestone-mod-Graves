@@ -221,4 +221,33 @@ public class GraveStoneHelper {
 
         return itemStack;
     }
+
+//TODO #245
+//    public static void replaceOldGraveByNew(World world, BlockPos pos) {
+//        IBlockState oldState = world.getBlockState(pos);
+//        TileEntity oldTe = world.getTileEntity(pos);
+//        //TODO !!!!!!!!!!!!!!!!!
+//
+//        IBlockState newState = GSBlock.GRAVE_STONE.getStateFromMeta(GSBlock.GRAVE_STONE.getMetaFromState(oldState));//= GSBlock.GRAVE_STONE.getDefaultState();
+//
+//        world.setBlockState(pos, newState);
+//        TileEntity newTe = world.getTileEntity(pos);
+//        if (oldTe  != null && newTe != null && oldTe instanceof TileEntityGraveStone && newTe instanceof TileEntityGraveStone) {
+//            TileEntityGraveStone oldTeGS = (TileEntityGraveStone) oldTe;
+//            TileEntityGraveStone newTeGS = (TileEntityGraveStone) newTe;
+//
+//            newTeGS.setGraveType(oldTeGS.getGraveTypeNum());
+//            newTeGS.setEnchanted(oldTeGS.isEnchanted());
+//            newTeGS.setMossy(oldTeGS.isMossy());
+//            newTeGS.setAge(oldTeGS.getAge());
+//            newTeGS.setDeathTextComponent(oldTeGS.getDeathTextComponent());
+//            newTeGS.setInventory(oldTeGS.getInventory());
+//
+//            newTeGS.setSword(oldTeGS.getSword());
+//            newTeGS.setFlower(oldTeGS.getFlower());
+//            newTeGS.setOwner(oldTeGS.getOwner());
+//            newTeGS.setPurified(oldTeGS.isPurified());
+//            newTeGS.setSpawnerHelper(oldTeGS.getSpawnerHelper());
+//        }
+//    }
 }

@@ -35,7 +35,7 @@ import nightkosh.gravestone.helper.api.APIGraveGeneration;
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, updateJSON = "https://raw.githubusercontent.com/NightKosh/GraveStone-mod/master/update.json")
 public class ModGraveStone {
 
-    @Instance("GraveStone")
+    @Instance(ModInfo.ID)
     public static ModGraveStone instance;
     @SidedProxy(clientSide = "nightkosh.gravestone.core.proxy.ClientProxy", serverSide = "nightkosh.gravestone.core.proxy.CommonProxy")
     public static CommonProxy proxy;
