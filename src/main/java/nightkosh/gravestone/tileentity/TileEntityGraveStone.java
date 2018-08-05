@@ -245,7 +245,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
 
     @Override
     public boolean haveSpawnerHelper() {
-        return spawnerHelperId != 0;//spawnerHelper != null;
+        return spawnerHelper != null;
     }
 
     @Override
