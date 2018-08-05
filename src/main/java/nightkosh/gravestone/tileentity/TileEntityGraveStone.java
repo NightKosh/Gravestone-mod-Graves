@@ -255,7 +255,9 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
 
     public void setSpawnerHelper(GroupOfGravesSpawnerHelper spawnerHelper) {
         this.spawnerHelper = spawnerHelper;
-        this.spawnerHelperId = spawnerHelper.getEntityId();
+        if (spawnerHelper != null) {
+            this.spawnerHelperId = spawnerHelper.getEntityId();
+        }
     }
 
     public boolean isPurified() {
