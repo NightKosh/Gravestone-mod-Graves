@@ -16,7 +16,6 @@ import java.util.List;
  */
 public class ConfigsHelper {
 
-
     public static List<Integer> getDimensionList(Configuration config, String category, String ConfigID, String defaultValue, String comment) {
         Property dimensionIdProperty = config.get(category, ConfigID, defaultValue);
         dimensionIdProperty.setComment(comment);
@@ -25,7 +24,9 @@ public class ConfigsHelper {
         List<Integer> dimensionIds = new ArrayList<>(ids.length);
         for (String id : ids) {
             try {
-                dimensionIds.add(Integer.parseInt(id));
+                if (StringUtils.isNotBlank(id)) {
+                    dimensionIds.add(Integer.parseInt(id));
+                }
             } catch (NumberFormatException e) {
                 GSLogger.logError("Can't parse Dimension Id list!!!");
                 e.printStackTrace();
