@@ -1,5 +1,6 @@
 package nightkosh.gravestone.tileentity;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -46,15 +47,14 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
         this.setWorld(world);
     }
 
-    /**
-     * Allows the entity to update its state. Overridden in most subclasses,
-     * e.g. the mob spawner uses this to count ticks and creates a new spawn
-     * inside its implementation.
-     */
     @Override
     public void update() {
         if (spawnerHelperId != 0 && spawnerHelper == null) {
-            spawnerHelper = (GroupOfGravesSpawnerHelper) this.getWorld().getEntityByID(spawnerHelperId);
+            Entity entity = this.getWorld().getEntityByID(spawnerHelperId);
+
+            if (entity instanceof GroupOfGravesSpawnerHelper) {
+                spawnerHelper = (GroupOfGravesSpawnerHelper) entity;
+            }
         }
 
         spawner.update();
@@ -72,10 +72,6 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
         return getPos();
     }
 
-    /**
-     * Called when a client event is received with the event number and
-     * argument, see World.sendClientEvent
-     */
     @Override
     public boolean receiveClientEvent(int par1, int par2) {
         if (par1 == 1 && this.getWorld().isRemote) {
@@ -85,9 +81,6 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
         return true;
     }
 
-    /**
-     * Reads a tile entity from NBT.
-     */
     @Override
     public void readFromNBT(NBTTagCompound nbtTag) {
         super.readFromNBT(nbtTag);
@@ -112,9 +105,6 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
         }
     }
 
-    /**
-     * Writes a tile entity to NBT.
-     */
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbtTag) {
         nbtTag = super.writeToNBT(nbtTag);
