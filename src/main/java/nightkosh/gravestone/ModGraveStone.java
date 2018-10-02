@@ -66,8 +66,6 @@ public class ModGraveStone {
         FMLCommonHandler.instance().bus().register(new EventHandlerNetwork());
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-
-        proxy.registerBlocksModels();
     }
 
     @Mod.EventHandler

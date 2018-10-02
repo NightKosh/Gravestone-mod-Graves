@@ -39,6 +39,6 @@ public class ModGraveStoneOld {
 
     //@Mod.EventHandler
     public void load(FMLInitializationEvent event) {
-        proxy.registerBlocksModels();
+        proxy.registerTEISR();
     }
 }

@@ -267,44 +267,4 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
     public void setPurified(boolean isPurified) {
         this.isPurified = isPurified;
     }
-
-
-    public static class VerticalPlate extends TileEntityGraveStone {
-    }
-
-    public static class Cross extends TileEntityGraveStone {
-    }
-
-    public static class Obelisk extends TileEntityGraveStone {
-    }
-
-    public static class CelticCross extends TileEntityGraveStone {
-    }
-
-    public static class HorizontalPlate extends TileEntityGraveStone {
-    }
-
-    public static class VillagerStatue extends TileEntityGraveStone {
-    }
-
-    public static class DogStatue extends TileEntityGraveStone {
-    }
-
-    public static class CatStatue extends TileEntityGraveStone {
-    }
-
-    public static class HorseStatue extends TileEntityGraveStone {
-    }
-
-    public static class CreeperStatue extends TileEntityGraveStone {
-    }
-
-    public static class StarvedCorpse extends TileEntityGraveStone {
-    }
-
-    public static class WitheredCorpse extends TileEntityGraveStone {
-    }
-
-    public static class Sword extends TileEntityGraveStone {
-    }
 }

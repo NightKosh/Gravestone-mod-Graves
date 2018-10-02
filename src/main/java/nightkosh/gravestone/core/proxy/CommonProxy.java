@@ -22,22 +22,9 @@ public class CommonProxy {
 
     public void registerTERenderers() {
         GameRegistry.registerTileEntity(TileEntityGraveStone.class, "GraveStoneTE");
-        GameRegistry.registerTileEntity(TileEntityGraveStone.VerticalPlate.class, "GraveStoneVerticalPlateTE");
-        GameRegistry.registerTileEntity(TileEntityGraveStone.Cross.class, "GraveStoneCrossTE");
-        GameRegistry.registerTileEntity(TileEntityGraveStone.Obelisk.class, "GraveStoneObeliskTE");
-        GameRegistry.registerTileEntity(TileEntityGraveStone.CelticCross.class, "GraveStoneCelticCrossTE");
-        GameRegistry.registerTileEntity(TileEntityGraveStone.HorizontalPlate.class, "GraveStoneHorizontalPlateTE");
-        GameRegistry.registerTileEntity(TileEntityGraveStone.VillagerStatue.class, "GraveStoneVillagerStatueTE");
-        GameRegistry.registerTileEntity(TileEntityGraveStone.DogStatue.class, "GraveStoneDogStatueTE");
-        GameRegistry.registerTileEntity(TileEntityGraveStone.CatStatue.class, "GraveStoneCatStatueTE");
-        GameRegistry.registerTileEntity(TileEntityGraveStone.HorseStatue.class, "GraveStoneHorseStatueTE");
-        GameRegistry.registerTileEntity(TileEntityGraveStone.CreeperStatue.class, "GraveStoneCreeperStatueTE");
-        GameRegistry.registerTileEntity(TileEntityGraveStone.StarvedCorpse.class, "GraveStoneStarvedCorpseTE");
-        GameRegistry.registerTileEntity(TileEntityGraveStone.WitheredCorpse.class, "GraveStoneWitheredCorpseTE");
-        GameRegistry.registerTileEntity(TileEntityGraveStone.Sword.class, "GraveStoneSwordTE");
     }
 
-    public void registerBlocksModels() {
+    public void registerTEISR() {
     }
 
     public String getLocalizedMaterial(EnumGraveMaterial material) {

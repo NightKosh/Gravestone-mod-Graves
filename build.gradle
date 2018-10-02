@@ -22,7 +22,7 @@ group = "nightkosh.gravestone"
 archivesBaseName = "GraveStone-1.12.2-Graves"
 
 minecraft {
-    version = "1.12.2-14.23.2.2611"
+    version = "1.12.2-14.23.4.2749"
     runDir = "idea"
 
     mappings = "snapshot_20171003"
