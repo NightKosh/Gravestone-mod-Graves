@@ -2,11 +2,11 @@ package nightkosh.gravestone.core.compatibility;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.core.logger.GSLogger;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,19 +26,21 @@ public class CompatibilityBackpacksMod implements ICompatibility {
             GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler((player, source) -> {
                 try {
                     List<ItemStack> items = new ArrayList<>();
-                    Class<?> PlayerSaveClass = Class.forName("de.eydamos.backpack.saves.PlayerSave");
+                    Class<?> PlayerSaveClass = Class.forName("de.eydamos.backpack.data.PlayerSave");
                     if (PlayerSaveClass != null) {
-                        Constructor constructor = PlayerSaveClass.getConstructor(EntityPlayer.class);
-                        Object playerSave = constructor.newInstance(player);
+                        Method loadPlayerMethod = PlayerSaveClass.getDeclaredMethod("loadPlayer", World.class, EntityPlayer.class);
+                        if (loadPlayerMethod != null) {
+                            Object playerSave = loadPlayerMethod.invoke(null, player.getEntityWorld(), player);
 
-                        Method getPersonalBackpackMethod = playerSave.getClass().getDeclaredMethod("getPersonalBackpack");
-                        Method setPersonalBackpackMethod = playerSave.getClass().getDeclaredMethod("setPersonalBackpack", ItemStack.class);
+                            Method getBackpackMethod = playerSave.getClass().getDeclaredMethod("getBackpack");
+                            Method removeStackFromSlotMethod = playerSave.getClass().getDeclaredMethod("removeStackFromSlot", int.class);
 
-                        if (getPersonalBackpackMethod != null && setPersonalBackpackMethod != null) {
-                            Object backpackObject = getPersonalBackpackMethod.invoke(playerSave);
-                            if (backpackObject != null && backpackObject instanceof ItemStack && !((ItemStack) backpackObject).isEmpty()) {
-                                items.add(((ItemStack) backpackObject).copy());
-                                setPersonalBackpackMethod.invoke(playerSave, ItemStack.EMPTY);
+                            if (getBackpackMethod != null && removeStackFromSlotMethod != null) {
+                                Object backpackObject = getBackpackMethod.invoke(playerSave);
+                                if (backpackObject != null && backpackObject instanceof ItemStack && !((ItemStack) backpackObject).isEmpty()) {
+                                    items.add(((ItemStack) backpackObject).copy());
+                                    removeStackFromSlotMethod.invoke(playerSave, 0);
+                                }
                             }
                         }
                     }
