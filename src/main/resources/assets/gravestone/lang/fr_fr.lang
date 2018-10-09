@@ -6,7 +6,7 @@ itemGroup.tabGSGraveStone=Gravestones
 block.gravestone.gravestone.name=Tombe
 block.gravestone.cross.name=Croix
 block.gravestone.obelisk.name=Obélisque
-block.gravestone.celtic_cross.name=Celtic Cross     ## TODO!!!!
+block.gravestone.celtic_cross.name=Croix celtique
 block.gravestone.plate.name=Pierre tombale
 block.gravestone.dog_statue.name=Tombe de chien
 block.nightkosh.gravestone.cat_statue.name=Tombe de chat
@@ -14,8 +14,8 @@ block.nightkosh.gravestone.horse_statue.name=Statue de cheval
 block.nightkosh.gravestone.sword.name=Épée du guerrier vaincu
 block.gravestone.villager_statue.name=Statue de villageois
 block.gravestone.creeper_statue.name=Statue de creeper
-block.gravestone.starved_corpse.name=Starved corpse     ## TODO!!!!
-block.gravestone.withered_corpse.name=Withered corpse     ## TODO!!!!
+block.gravestone.starved_corpse.name=Cadavre famélique
+block.gravestone.withered_corpse.name=Cadavre flétri
 
 ## Graves
 item.grave.age=A vécu
@@ -30,31 +30,31 @@ death.GS.tortures=%1$s a été torturé à mort
 death.GS.mom=Votre mère
 
 # Console messages
-grave.cant_be_looted=You can't loot this grave!     ## TODO!!!!
+grave.cant_be_looted=Vous ne pouvez pas piller cette tombe !
 
-## Console commands     ## TODO!!!!
-commands.not_enough_parameters=Not enough parameters!
-commands.coordinate_error=Coordinate error!
-commands.fill_grave.empty=There aren't any blocks at this coordinates!
-commands.fill_grave.wrong_block=This coordinates occupied by wrong blocks!
+## Console commands
+commands.not_enough_parameters=Nombre de paramètres insuffisant!
+commands.coordinate_error=Erreur dans les coordonnées !
+commands.fill_grave.empty=Il n'y a pas de blocs à cet emplacement!
+commands.fill_grave.wrong_block=Cet emplacement est occupé par de mauvais blocs!
 
-# Materials     ## TODO!!!!
-material.title=Made of
-material.mossy=Mossy
-material.wood=Wood
-material.sandstone=Sandstone
-material.red_sandstone=Red Sandstone
-material.stone=Stone
+# Materials
+material.title=Fait de
+material.mossy=Moussu
+material.wood=Bois
+material.sandstone=Grès
+material.red_sandstone=Grès rouge
+material.stone=Pierre
 material.diorite=Diorite
-material.andesite=Andesite
+material.andesite=Andésite
 material.granite=Granite
-material.iron=Iron
-material.gold=Gold
-material.diamond=Diamond
-material.emerald=Emerald
+material.iron=Fer
+material.gold=Or
+material.diamond=Diamant
+material.emerald=Émeraude
 material.lapis=Lapis
-material.redstone=Redstone
-material.obsidian=Obsidian
+material.redstone=Pierre rouge
+material.obsidian=Obsidienne
 material.quartz=Quartz
-material.prizmarine=Prizmarine
-material.ice=Ice
+material.prizmarine=Prismarine
+material.ice=Glace
