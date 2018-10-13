@@ -1,5 +1,5 @@
-# Translate by: Dorzar / VeryHardChamp
-# Última actualización: 23/07/2017
+# Translate by: Dorzar / VeryHardChamp /violetadev
+# Última actualización: 13/10/2018
 
 # Tabs
 itemGroup.tabGSGraveStone=Lápida
@@ -15,7 +15,7 @@ block.gravestone.plate.name=Placa
 block.gravestone.dog_statue.name=Estatua de perro
 block.gravestone.cat_statue.name=Estatua de gato
 block.gravestone.horse_statue.name=Estatua de caballo
-block.gravestone.sword.name=Espada de un caballero caido
+block.gravestone.sword.name=Espada de un caballero caído
 block.gravestone.villager_statue.name=Estatua de aldeano
 block.gravestone.creeper_statue.name=Estatua de creeper
 block.gravestone.starved_corpse.name=Cadáver muerto de hambre
@@ -32,19 +32,19 @@ item.grave.sword_damage=Daño
 death.GS.Herobrine=%1$s fue brutalmente asesinado por Herobrine.
 death.GS.death_sentence=%1$s recibió una sentencia de muerte.
 death.GS.tortures=%1$s murió a causa de terribles torturas.
-death.GS.mom=Your mom
+death.GS.mom=Tu jefa
 
 # Console messages
 grave.cant_be_looted=¡No puedes robar esta tumba!
 
-## Console commands ## TODO!!!!
-commands.not_enough_parameters=Not enough parameters!
-commands.coordinate_error=Coordinate error!
-commands.fill_grave.empty=There aren't any blocks at this coordinates!
-commands.fill_grave.wrong_block=This coordinates occupied by wrong blocks!
+## Console commands
+commands.not_enough_parameters=¡No hay suficientes parámetros!
+commands.coordinate_error=¡Coordenadas erróneas!
+commands.fill_grave.empty=¡No hay ningún bloque en estas coordenadas!
+commands.fill_grave.wrong_block=¡Estas coordenadas están ocupadas por bloques erróneos!
 
 
-# Materials ## TODO!!!!
+# Materials
 material.title=Hecho de
 material.mossy=Musgo
 material.wood=Madera
@@ -64,4 +64,3 @@ material.obsidian=Obsidiana
 material.quartz=Cuarzo
 material.prizmarine=Prismarina
 material.ice=Hielo
-
