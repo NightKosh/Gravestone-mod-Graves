@@ -10,8 +10,8 @@ block.gravestone.celtic_cross.name=Cruz Celta
 block.gravestone.plate.name=Placa
 block.gravestone.dog_statue.name=Estatua de perro
 block.gravestone.cat_statue.name=Estatua de gato
-block.gravestone.horse_statue.name=Horse Statue
-block.gravestone.sword.name=Sword of A Fallen Warrior
+block.gravestone.horse_statue.name=Estatua de caballo
+block.gravestone.sword.name=Espada de un Caballero Caído
 block.gravestone.villager_statue.name=Estatua de aldeano
 block.gravestone.creeper_statue.name=Estatua de creeper
 block.gravestone.starved_corpse.name=Cadáver famélico
@@ -28,7 +28,7 @@ item.grave.sword_damage=Daño
 death.GS.Herobrine=%1$s fue brutalmente asesinado por Herobrine.
 death.GS.death_sentence=%1$s recibió una sentencia de muerte.
 death.GS.tortures=%1$s murió a causa de terribles torturas.
-death.GS.mom=Your mom
+death.GS.mom=Tu madre
 
 # Console messages
 grave.cant_be_looted=¡No puedes saquear esta tumba!
