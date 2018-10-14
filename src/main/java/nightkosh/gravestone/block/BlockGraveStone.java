@@ -588,8 +588,8 @@ public class BlockGraveStone extends BlockContainer {
         return new BlockStateContainer(this, new IProperty[]{FACING});
     }
 
-//    @Override
-//    public ItemStack createStackedBlock(IBlockState state) {
-//        return new ItemStack(Item.getItemFromBlock(this), 1);
-//    }
+    @Override
+    public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
+        return false;
+    }
 }
