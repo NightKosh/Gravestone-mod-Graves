@@ -47,7 +47,6 @@ public class Config {
     }
 
 
-    // graves for entities
     public static boolean generatePlayerGraves;
     public static boolean generateVillagerGraves;
     public static boolean generatePetGraves;
@@ -62,6 +61,7 @@ public class Config {
     public static boolean vanillaRendererForSwordsGraves;
     public static boolean generateEmptyPlayerGraves;
     public static boolean removeCurseOfVanishingItems;
+    public static boolean dropGraveBlockAtDestruction;
     public static List<Integer> playerGravesDimensionalBlackList;
 
     public static List<GraveStoneHelper.RestrictedArea> restrictGraveGenerationInArea;
@@ -74,6 +74,7 @@ public class Config {
         generateGravesInLava = config.get(CATEGORY_GRAVES, "GenerateGravesInLava", true).getBoolean(true);
         generateSwordGraves = config.get(CATEGORY_GRAVES, "GenerateSwordGraves", true).getBoolean(true);
         generateEmptyPlayerGraves = config.get(CATEGORY_GRAVES, "GenerateEmptyPlayerGraves", true).getBoolean(true);
+        onlyOwnerCanLootGrave = config.get(CATEGORY_GRAVES, "OnlyOwnerCanLootGrave", false).getBoolean(false);
         onlyOwnerCanLootGrave = config.get(CATEGORY_GRAVES, "OnlyOwnerCanLootGrave", false).getBoolean(false);
 
 
@@ -88,6 +89,7 @@ public class Config {
 
         removeEmptyGraves = config.get(CATEGORY_GRAVES, "RemoveEmptyGraves", false).getBoolean(false);
         showGravesRemovingMessages = config.get(CATEGORY_GRAVES, "ShowGravesRemovingMessages", true).getBoolean(true);
+        dropGraveBlockAtDestruction = config.get(CATEGORY_GRAVES, "DropGraveBlockAtDestruction", true).getBoolean(true);
 
         renderGravesFlowers = config.get(CATEGORY_GRAVES, "RenderGravesFlowers", true).getBoolean(true);
         vanillaRendererForSwordsGraves = config.get(CATEGORY_GRAVES, "VanillaRendererForSwordsGraves", true).getBoolean(true);

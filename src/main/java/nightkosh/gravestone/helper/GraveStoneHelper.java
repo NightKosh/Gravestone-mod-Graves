@@ -169,20 +169,22 @@ public class GraveStoneHelper {
     }
 
     public static void dropBlockWithoutInfo(World world, BlockPos pos, IBlockState state) {
-        ItemStack itemStack = new ItemStack(Item.getItemFromBlock(GSBlock.GRAVE_STONE), 1);
-        TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
+        if (Config.dropGraveBlockAtDestruction) {
+            ItemStack itemStack = new ItemStack(Item.getItemFromBlock(GSBlock.GRAVE_STONE), 1);
+            TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
 
-        if (tileEntity != null) {
-            if (tileEntity.isSwordGrave()) {
-                tileEntity.dropSword();
-            } else if (itemStack != null) {
-                NBTTagCompound nbt = new NBTTagCompound();
-                itemStack.setItemDamage(tileEntity.getGraveTypeNum());
-                nbt.setBoolean("Mossy", tileEntity.isMossy());
-                nbt.setBoolean("Purified", true);
+            if (tileEntity != null) {
+                if (tileEntity.isSwordGrave()) {
+                    tileEntity.dropSword();
+                } else if (itemStack != null) {
+                    NBTTagCompound nbt = new NBTTagCompound();
+                    itemStack.setItemDamage(tileEntity.getGraveTypeNum());
+                    nbt.setBoolean("Mossy", tileEntity.isMossy());
+                    nbt.setBoolean("Purified", true);
 
-                itemStack.setTagCompound(nbt);
-                GraveInventory.dropItem(itemStack, world, pos);
+                    itemStack.setTagCompound(nbt);
+                    GraveInventory.dropItem(itemStack, world, pos);
+                }
             }
         }
     }
@@ -191,35 +193,39 @@ public class GraveStoneHelper {
      * Get grave block as item block
      */
     public static ItemStack getBlockItemStack(IBlockAccess access, BlockPos pos, IBlockState state) {
-        ItemStack itemStack = new ItemStack(Item.getItemFromBlock(GSBlock.GRAVE_STONE), 1);
-        TileEntityGraveStone tileEntity = (TileEntityGraveStone) access.getTileEntity(pos);
+        if (Config.dropGraveBlockAtDestruction) {
+            ItemStack itemStack = new ItemStack(Item.getItemFromBlock(GSBlock.GRAVE_STONE), 1);
+            TileEntityGraveStone tileEntity = (TileEntityGraveStone) access.getTileEntity(pos);
 
-        if (tileEntity != null) {
-            NBTTagCompound nbt = new NBTTagCompound();
-            itemStack.setItemDamage(tileEntity.getGraveTypeNum());
+            if (tileEntity != null) {
+                NBTTagCompound nbt = new NBTTagCompound();
+                itemStack.setItemDamage(tileEntity.getGraveTypeNum());
 
-            if (tileEntity.getDeathTextComponent().isLocalized()) {
-                nbt.setBoolean("isLocalized", true);
-                nbt.setString("name", tileEntity.getDeathTextComponent().getName());
-                nbt.setString("KillerName", tileEntity.getDeathTextComponent().getKillerName());
+                if (tileEntity.getDeathTextComponent().isLocalized()) {
+                    nbt.setBoolean("isLocalized", true);
+                    nbt.setString("name", tileEntity.getDeathTextComponent().getName());
+                    nbt.setString("KillerName", tileEntity.getDeathTextComponent().getKillerName());
+                }
+
+                nbt.setString("DeathText", tileEntity.getDeathTextComponent().getDeathText());
+                nbt.setInteger("Age", tileEntity.getAge());
+
+                if (tileEntity.isSwordGrave()) {
+                    GraveStoneHelper.addSwordInfo(nbt, tileEntity.getSword());
+                }
+
+                nbt.setBoolean("Enchanted", tileEntity.isEnchanted());
+                nbt.setBoolean("Mossy", tileEntity.isMossy());
+
+                nbt.setBoolean("Purified", true);
+
+                itemStack.setTagCompound(nbt);
             }
 
-            nbt.setString("DeathText", tileEntity.getDeathTextComponent().getDeathText());
-            nbt.setInteger("Age", tileEntity.getAge());
-
-            if (tileEntity.isSwordGrave()) {
-                GraveStoneHelper.addSwordInfo(nbt, tileEntity.getSword());
-            }
-
-            nbt.setBoolean("Enchanted", tileEntity.isEnchanted());
-            nbt.setBoolean("Mossy", tileEntity.isMossy());
-
-            nbt.setBoolean("Purified", true);
-
-            itemStack.setTagCompound(nbt);
+            return itemStack;
+        } else {
+            return ItemStack.EMPTY;
         }
-
-        return itemStack;
     }
 
 //TODO #245
