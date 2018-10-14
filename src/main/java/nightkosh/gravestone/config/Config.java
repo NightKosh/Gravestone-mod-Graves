@@ -75,7 +75,6 @@ public class Config {
         generateSwordGraves = config.get(CATEGORY_GRAVES, "GenerateSwordGraves", true).getBoolean(true);
         generateEmptyPlayerGraves = config.get(CATEGORY_GRAVES, "GenerateEmptyPlayerGraves", true).getBoolean(true);
         onlyOwnerCanLootGrave = config.get(CATEGORY_GRAVES, "OnlyOwnerCanLootGrave", false).getBoolean(false);
-        onlyOwnerCanLootGrave = config.get(CATEGORY_GRAVES, "OnlyOwnerCanLootGrave", false).getBoolean(false);
 
 
         // store items
