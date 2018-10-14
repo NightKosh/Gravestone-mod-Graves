@@ -167,7 +167,7 @@ public class BlockGraveStone extends BlockContainer {
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess access, BlockPos pos) {
         if (state.getBlock() == GSBlock.GRAVE_STONE) {
-            EnumFacing facing = access.getBlockState(pos).getValue(FACING);
+            EnumFacing facing = state.getValue(FACING);
             EnumGraveType graveType;
             TileEntityGraveStone tileEntity = (TileEntityGraveStone) access.getTileEntity(pos);
 
