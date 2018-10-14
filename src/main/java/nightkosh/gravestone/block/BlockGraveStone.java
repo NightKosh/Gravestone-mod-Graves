@@ -16,7 +16,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
@@ -294,11 +293,7 @@ public class BlockGraveStone extends BlockContainer {
                     tileEntity.dropFlower();
                 }
 
-                if (EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, player.getHeldItemMainhand()) > 0) {
-                    GraveStoneHelper.dropBlock(world, pos, state);
-                } else {
-                    GraveStoneHelper.dropBlockWithoutInfo(world, pos, state);
-                }
+                GraveStoneHelper.dropBlock(world, pos, state);
             }
         }
     }
@@ -466,7 +461,7 @@ public class BlockGraveStone extends BlockContainer {
     }
 
     @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block,  BlockPos fromPos) {
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
         if (!world.isSideSolid(pos.down(), EnumFacing.DOWN, true)) {
             TileEntityGraveStone te = (TileEntityGraveStone) world.getTileEntity(pos);
             if (te != null) {
