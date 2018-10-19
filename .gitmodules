@@ -1,6 +1,3 @@
-[submodule "api/baubles"]
-	path = api/baubles
-	url = https://github.com/Azanor/Baubles
 [submodule "api/gravestone"]
 	path = api/gravestone
 	url = https://github.com/NightKosh/GraveStone-mod-API
