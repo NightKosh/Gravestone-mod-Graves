@@ -29,17 +29,11 @@ minecraft {
 }
 
 ext.apiGravestone = "./api/gravestone"
-ext.apiBaubles = "./api/baubles"
 
 sourceSets {
     main {
         java {
             srcDir project.apiGravestone
-        }
-    }
-    api {
-        java {
-            srcDir project.apiBaubles
         }
     }
 }
