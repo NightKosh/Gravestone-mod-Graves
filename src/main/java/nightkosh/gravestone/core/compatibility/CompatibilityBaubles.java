@@ -1,6 +1,5 @@
 package nightkosh.gravestone.core.compatibility;
 
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.config.Config;
@@ -22,17 +21,17 @@ public class CompatibilityBaubles implements ICompatibility {
         if (isModLoaded(MOD_ID) && Config.storeBaublesItems) {
             GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler((player, source) -> {
                 List<ItemStack> items = new ArrayList<>();
-                IInventory inventory = baubles.api.BaublesApi.getBaubles(player);
-                if (inventory != null) {
-                    for (int slot = 0; slot < inventory.getSizeInventory(); slot++) {
-                        ItemStack stack = inventory.getStackInSlot(slot);
-                        if (stack != null && !stack.isEmpty()) {
-                            items.add(stack.copy());
-                            inventory.setInventorySlotContents(slot, ItemStack.EMPTY);
-                        }
-
-                    }
-                }
+//                IInventory inventory = baubles.api.BaublesApi.getBaubles(player);
+//                if (inventory != null) {
+//                    for (int slot = 0; slot < inventory.getSizeInventory(); slot++) {
+//                        ItemStack stack = inventory.getStackInSlot(slot);
+//                        if (stack != null && !stack.isEmpty()) {
+//                            items.add(stack.copy());
+//                            inventory.setInventorySlotContents(slot, ItemStack.EMPTY);
+//                        }
+//
+//                    }
+//                }
                 return items;
             });
         }
