@@ -22,8 +22,8 @@ For more information visit [official site](http://gravestone.nightkosh.com/) or 
 **Be careful some of these API may not be updated yet, or may be bugged!**
 
 1. [Gravestone mod - Graves API](https://github.com/NightKosh/Gravestone-mod-Graves-API) (will be loaded as git submodule)
-2. [Baubles API](https://github.com/Azanor/Baubles) (will be loaded as git submodule)
-3. [Galacticraft API](https://github.com/micdoodle8/Galacticraft-API)
+2. ~~[Baubles API](https://github.com/Azanor/Baubles) (will be loaded as git submodule)~~
+3. ~~[Galacticraft API](https://github.com/micdoodle8/Galacticraft-API)~~
 4. ~~[Mariculture API](https://github.com/joshiejack/Mariculture)~~
 5. ~~[Thaumcraft API](https://github.com/Azanor/thaumcraft-api) (will be loaded as git submodule)~~
 
