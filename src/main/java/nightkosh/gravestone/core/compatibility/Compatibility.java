@@ -13,23 +13,23 @@ public class Compatibility {
     private Compatibility() {
         new CompatibilityTheCampingMod();
 
-        new CompatibilityisArsMagica();
+//        new CompatibilityisArsMagica();
 
-        new CompatibilityBackpacksMod();
+//        new CompatibilityBackpacksMod();
 
-        new CompatibilityBaubles();
+//        new CompatibilityBaubles();
 
 //        new CompatibilityMariculture();
 
-        new CompatibilityRpgInventory();
+//        new CompatibilityRpgInventory();
 
-        new CompatibilityGalacticraft();
+//        new CompatibilityGalacticraft();
 
-        new CompatibilityEnderIO();
+//        new CompatibilityEnderIO();
 
         new CompatibilityWitchery();
 
-        new CompatibilityTinkerConstruct();
+//        new CompatibilityTinkerConstruct();
     }
 
     public static Compatibility getInstance() {

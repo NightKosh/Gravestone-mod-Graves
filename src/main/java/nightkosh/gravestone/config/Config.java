@@ -60,7 +60,6 @@ public class Config {
     public static boolean renderGravesFlowers;
     public static boolean vanillaRendererForSwordsGraves;
     public static boolean generateEmptyPlayerGraves;
-    public static boolean removeCurseOfVanishingItems;
     public static boolean dropGraveBlockAtDestruction;
     public static List<Integer> playerGravesDimensionalBlackList;
 
@@ -105,8 +104,6 @@ public class Config {
             }
         }
 
-        removeCurseOfVanishingItems = config.get(CATEGORY_GRAVES, "RemoveCurseOfVanishingItems", true).getBoolean();
-
         playerGravesDimensionalBlackList = ConfigsHelper.getDimensionList(config, CATEGORY_GRAVES, "PlayerGravesDimensionalBlackList", "",
                 "List of dimension ids in which player's graves will not be generated at death");
     }
@@ -128,18 +125,18 @@ public class Config {
 
     private static void compatibilityConfigs() {
 
-        storeBattlegearItems = config.get(CATEGORY_COMPATIBILITY, "StoreBattlegearItems", true).getBoolean(true);
+//        storeBattlegearItems = config.get(CATEGORY_COMPATIBILITY, "StoreBattlegearItems", true).getBoolean(true);
         storeTheCampingModItems = config.get(CATEGORY_COMPATIBILITY, "StoreTheCampingModItems", true).getBoolean(true);
-        storeBaublesItems = config.get(CATEGORY_COMPATIBILITY, "StoreBaublesItems", true).getBoolean(true);
-        storeMaricultureItems = config.get(CATEGORY_COMPATIBILITY, "StoreMaricultureItems", true).getBoolean(true);
-        storeRpgInventoryItems = config.get(CATEGORY_COMPATIBILITY, "StoreRpgInventoryItems", true).getBoolean(true);
-        storeGalacticraftItems = config.get(CATEGORY_COMPATIBILITY, "StoreGalacticraftItems", true).getBoolean(true);
-        storeBackpacksItems = config.get(CATEGORY_COMPATIBILITY, "StoreBackpacksItems", true).getBoolean(true);
+//        storeBaublesItems = config.get(CATEGORY_COMPATIBILITY, "StoreBaublesItems", true).getBoolean(true);
+//        storeMaricultureItems = config.get(CATEGORY_COMPATIBILITY, "StoreMaricultureItems", true).getBoolean(true);
+//        storeRpgInventoryItems = config.get(CATEGORY_COMPATIBILITY, "StoreRpgInventoryItems", true).getBoolean(true);
+//        storeGalacticraftItems = config.get(CATEGORY_COMPATIBILITY, "StoreGalacticraftItems", true).getBoolean(true);
+//        storeBackpacksItems = config.get(CATEGORY_COMPATIBILITY, "StoreBackpacksItems", true).getBoolean(true);
 
-        enableArsMagicaSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableArsMagicaSoulbound", true).getBoolean(true);
-        enableEnderIOSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableEnderIOSoulbound", true).getBoolean(true);
-        enableTconstructSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableTconstructSoulbound", true).getBoolean(true);
-        enableTwilightForestKeeping = config.get(CATEGORY_COMPATIBILITY, "EnableTwilightForestCharmsOfKeeping", true).getBoolean(true);
+//        enableArsMagicaSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableArsMagicaSoulbound", true).getBoolean(true);
+//        enableEnderIOSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableEnderIOSoulbound", true).getBoolean(true);
+//        enableTconstructSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableTconstructSoulbound", true).getBoolean(true);
+//        enableTwilightForestKeeping = config.get(CATEGORY_COMPATIBILITY, "EnableTwilightForestCharmsOfKeeping", true).getBoolean(true);
 
         addThaumcraftSwordsAsGravestones = config.get(CATEGORY_COMPATIBILITY, "AddThaumcraftSwordsAsGravestones", true).getBoolean(true);
     }
