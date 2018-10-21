@@ -6,7 +6,7 @@ itemGroup.tabGSGraveStone=Gravestone(Náhrobek)
 block.gravestone.gravestone.name=Náhrobek
 block.gravestone.cross.name=Kříž
 block.gravestone.obelisk.name=Obelisk
-block.gravestone.celtic_cross.name=Celtic Cross     ## TODO!!!!
+block.gravestone.celtic_cross.name=Keltský kříž
 block.gravestone.plate.name=Náhrobní kámenk
 block.gravestone.dog_statue.name=Socha psa
 block.gravestone.cat_statue.name=Socha kočky
@@ -14,8 +14,8 @@ block.gravestone.horse_statue.name=Socha koně
 block.gravestone.sword.name=Meč padlého válečníka
 block.gravestone.villager_statue.name=Socha vesničana
 block.gravestone.creeper_statue.name=Socha Syčáka
-block.gravestone.starved_corpse.name=Starved corpse     ## TODO!!!!
-block.gravestone.withered_corpse.name=Withered corpse     ## TODO!!!!
+block.gravestone.starved_corpse.name=Vyhladovělá mrtvola
+block.gravestone.withered_corpse.name=Vyschlá mrtvola
 
 ## Graves
 item.grave.age=Žil
