@@ -27,6 +27,7 @@ import nightkosh.gravestone.api.death_handler.ICustomEntityDeathHandler;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.api.grave_items.*;
+import nightkosh.gravestone.api.grave_position.IGravePositionHandler;
 import nightkosh.gravestone.block.BlockGraveStone;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.Config;
@@ -48,6 +49,8 @@ import java.util.*;
  */
 public class GraveGenerationHelper implements IGraveStoneHelper {
     public static final IGraveStoneHelper INSTANCE = new GraveGenerationHelper();
+
+
 
     protected static final Random rand = new Random();
 
@@ -369,7 +372,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                                       int age, GraveInfoOnDeath graveInfo, DamageSource damageSource) {
         EnumFacing direction = EnumFacing.getHorizontal(MathHelper.floor((double) (entity.rotationYaw * 4 / 360F) + 0.5) & 3);
 
-        BlockPos newPos = findPlaceForGrave(world, pos);
+        BlockPos newPos = findPlaceForGrave(world, entity, pos, damageSource);
         if (newPos != null) {
             world.setBlockState(newPos, GSBlock.GRAVE_STONE.getDefaultState().withProperty(BlockGraveStone.FACING, direction), 2);
             TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(newPos);
@@ -662,7 +665,13 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         return getGraveType(type, materialsArray);
     }
 
-    private static BlockPos findPlaceForGrave(World world, BlockPos pos) {
+    private static BlockPos findPlaceForGrave(World world, Entity entity, BlockPos pos, DamageSource damageSource) {
+        for (IGravePositionHandler position : APIGraveGeneration.GRAVE_POSITION_HANDLERS) {
+            if (position.condition(world, entity, pos, damageSource)) {
+                return position.gravePosition();
+            }
+        }
+
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();

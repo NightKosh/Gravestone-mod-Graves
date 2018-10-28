@@ -3,6 +3,7 @@ package nightkosh.gravestone.helper.api;
 import nightkosh.gravestone.api.IGraveGeneration;
 import nightkosh.gravestone.api.death_handler.*;
 import nightkosh.gravestone.api.grave_items.*;
+import nightkosh.gravestone.api.grave_position.IGravePositionHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,6 +106,15 @@ public class APIGraveGeneration implements IGraveGeneration {
     public void addCustomEntityDeathHandler(ICustomEntityDeathHandler customEntityDeathHandler) {
         if (customEntityDeathHandler != null) {
             CUSTOM_ENTITY_DEATH_HANDLERS.add(customEntityDeathHandler);
+        }
+    }
+
+    public static final List<IGravePositionHandler> GRAVE_POSITION_HANDLERS = new ArrayList<>();
+
+    @Override
+    public void addGravePositionHandler(IGravePositionHandler gravePositionHandler) {
+        if (gravePositionHandler != null) {
+            GRAVE_POSITION_HANDLERS.add(gravePositionHandler);
         }
     }
 }
