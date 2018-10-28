@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,6 +18,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -669,6 +671,14 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         for (IGravePositionHandler position : APIGraveGeneration.GRAVE_POSITION_HANDLERS) {
             if (position.condition(world, entity, pos, damageSource)) {
                 return position.gravePosition();
+            }
+        }
+
+        if (world.provider.getDimensionType() == DimensionType.THE_END && pos.getY() <= 0) {
+            BlockPos groundPos = new BlockPos(pos.getX(), 0, pos.getZ());
+            if (world.isAirBlock(pos)) {
+                world.setBlockState(groundPos, Blocks.END_STONE.getDefaultState());
+                return groundPos.up();
             }
         }
 
