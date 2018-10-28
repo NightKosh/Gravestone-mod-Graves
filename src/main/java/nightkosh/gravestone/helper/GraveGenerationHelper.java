@@ -375,6 +375,15 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         EnumFacing direction = EnumFacing.getHorizontal(MathHelper.floor((double) (entity.rotationYaw * 4 / 360F) + 0.5) & 3);
 
         BlockPos newPos = findPlaceForGrave(world, entity, pos, damageSource);
+
+        if (Config.createBackups && entity instanceof EntityPlayer) {
+            try {
+                BackupsHandler.BACKUPS.put(entity.getName(), new BackupsHandler.Backup(world.provider.getDimension(), newPos, items));
+            } catch (Exception e) {
+                GSLogger.logError("Can't create backup!");
+            }
+        }
+
         if (newPos != null) {
             world.setBlockState(newPos, GSBlock.GRAVE_STONE.getDefaultState().withProperty(BlockGraveStone.FACING, direction), 2);
             TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(newPos);

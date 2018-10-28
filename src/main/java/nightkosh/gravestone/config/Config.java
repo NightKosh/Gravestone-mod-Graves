@@ -62,6 +62,7 @@ public class Config {
     public static boolean generateEmptyPlayerGraves;
     public static boolean dropGraveBlockAtDestruction;
     public static List<Integer> playerGravesDimensionalBlackList;
+    public static boolean createBackups;
 
     public static List<GraveStoneHelper.RestrictedArea> restrictGraveGenerationInArea;
 
@@ -106,6 +107,8 @@ public class Config {
 
         playerGravesDimensionalBlackList = ConfigsHelper.getDimensionList(config, CATEGORY_GRAVES, "PlayerGravesDimensionalBlackList", "",
                 "List of dimension ids in which player's graves will not be generated at death");
+
+        createBackups = config.get(CATEGORY_GRAVES, "CreateBackups", true).getBoolean();
     }
 
 
