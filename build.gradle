@@ -56,7 +56,6 @@ dependencies {
 }
 
 jar {
-    exclude('micdoodle8/**')
     exclude('**/*.db')
     exclude('assets/gravestone/techne_models/**')
 
