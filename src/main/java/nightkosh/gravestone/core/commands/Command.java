@@ -22,6 +22,7 @@ public class Command extends CommandBase {
     private static final SubCommandCustomGraveItems CUSTOM_GRAVES_ITEMS = new SubCommandCustomGraveItems();
     private static final SubCommandCommandsList COMMANDS_LIST = new SubCommandCommandsList();
     private static final SubCommandGravePosition GRAVE_POS = new SubCommandGravePosition();
+    private static final SubCommandRestoreItems GRAVE_ITEMS = new SubCommandRestoreItems();
 
     public static final String MAIN_COMMAND_NAME = "/GS ";
     public static final String HELP = "Type \"" + COMMANDS_LIST.getCommandUsage() + "\" for commands list";
@@ -51,6 +52,9 @@ public class Command extends CommandBase {
                     break;
                 case SubCommandGravePosition.COMMAND_NAME:
                     GRAVE_POS.execute(server, sender, args);
+                    break;
+                case SubCommandRestoreItems.COMMAND_NAME:
+                    GRAVE_ITEMS.execute(server, sender, args);
                     break;
                 default:
                     boolean unknownCommand = true;
