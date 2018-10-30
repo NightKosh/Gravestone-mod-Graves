@@ -372,9 +372,23 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
     private static void createOnDeath(Entity entity, World world, BlockPos pos, DeathMessageInfo deathInfo, List<ItemStack> items,
                                       int age, GraveInfoOnDeath graveInfo, DamageSource damageSource) {
-        EnumFacing direction = EnumFacing.getHorizontal(MathHelper.floor((double) (entity.rotationYaw * 4 / 360F) + 0.5) & 3);
+        BlockPos newPos = null;
+        EnumFacing direction = null;
 
-        BlockPos newPos = findPlaceForGrave(world, entity, pos, damageSource);
+        boolean hasCustomLocation = false;
+        for (IGravePositionHandler position : APIGraveGeneration.GRAVE_POSITION_HANDLERS) {
+            if (position.condition(world, entity, pos, damageSource)) {
+                hasCustomLocation = true;
+                newPos = position.gravePosition(world, entity, pos, damageSource);
+                direction = position.graveFacing(world, entity, pos, damageSource);
+                break;
+            }
+        }
+
+        if (!hasCustomLocation) {
+            direction = EnumFacing.getHorizontal(MathHelper.floor((double) (entity.rotationYaw * 4 / 360F) + 0.5) & 3);
+            newPos = findPlaceForGrave(world, entity, pos, damageSource);
+        }
 
         if (Config.createBackups && entity instanceof EntityPlayer) {
             try {
@@ -677,12 +691,6 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     private static BlockPos findPlaceForGrave(World world, Entity entity, BlockPos pos, DamageSource damageSource) {
-        for (IGravePositionHandler position : APIGraveGeneration.GRAVE_POSITION_HANDLERS) {
-            if (position.condition(world, entity, pos, damageSource)) {
-                return position.gravePosition();
-            }
-        }
-
         if (world.provider.getDimensionType() == DimensionType.THE_END && pos.getY() <= 0) {
             BlockPos groundPos = new BlockPos(pos.getX(), 0, pos.getZ());
             if (world.isAirBlock(pos)) {
