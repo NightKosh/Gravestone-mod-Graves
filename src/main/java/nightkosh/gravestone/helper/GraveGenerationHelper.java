@@ -18,7 +18,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.translation.I18n;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -691,11 +690,13 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     private static BlockPos findPlaceForGrave(World world, Entity entity, BlockPos pos, DamageSource damageSource) {
-        if (world.provider.getDimensionType() == DimensionType.THE_END && pos.getY() <= 0) {
+        if (pos.getY() <= 0) {
             BlockPos groundPos = new BlockPos(pos.getX(), 0, pos.getZ());
-            if (world.isAirBlock(pos)) {
-                world.setBlockState(groundPos, Blocks.END_STONE.getDefaultState());
+            if (world.isAirBlock(groundPos) && world.isAirBlock(groundPos.up()) ) {
+                world.setBlockState(groundPos, Blocks.GRASS.getDefaultState());
                 return groundPos.up();
+            } else {
+                GSLogger.logInfoGrave("Can't find position for grave on death in the void!");
             }
         }
 
