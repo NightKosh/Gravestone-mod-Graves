@@ -384,7 +384,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             }
         }
 
-        if (!hasCustomLocation) {
+        if (!hasCustomLocation || newPos == null) {
             direction = EnumFacing.getHorizontal(MathHelper.floor((double) (entity.rotationYaw * 4 / 360F) + 0.5) & 3);
             newPos = findPlaceForGrave(world, entity, pos, damageSource);
         }
@@ -764,7 +764,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         return null;
     }
 
-    private static int getGround(World world, int x, int y, int z) {
+    public static int getGround(World world, int x, int y, int z) {
         while (true) {
             BlockPos pos = new BlockPos(x, y - 1, z);
             IBlockState state = world.getBlockState(pos);
@@ -777,7 +777,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         }
     }
 
-    private static boolean canGenerateGraveAtCoordinates(World world, BlockPos pos) {
+    public static boolean canGenerateGraveAtCoordinates(World world, BlockPos pos) {
         IBlockState state = world.getBlockState(pos);
         IBlockState stateDown = world.getBlockState(pos.down());
         return stateDown.getBlock().getMaterial(stateDown).isSolid() &&
