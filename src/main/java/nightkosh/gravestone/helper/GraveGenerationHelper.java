@@ -780,7 +780,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     public static boolean canGenerateGraveAtCoordinates(World world, BlockPos pos) {
         IBlockState state = world.getBlockState(pos);
         IBlockState stateDown = world.getBlockState(pos.down());
-        return stateDown.getBlock().getMaterial(stateDown).isSolid() &&
+        return stateDown.getBlock().getMaterial(stateDown).isSolid() && stateDown.getBlock().isFullCube(stateDown) &&
                 (world.isAirBlock(pos) || state.getBlock().getMaterial(state).isLiquid() || state.getBlock().getMaterial(state).isReplaceable());
     }
 
