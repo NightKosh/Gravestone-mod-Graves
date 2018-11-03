@@ -373,33 +373,44 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                                       int age, GraveInfoOnDeath graveInfo, DamageSource damageSource) {
         BlockPos newPos = null;
         EnumFacing direction = null;
+        World newWorld = null;
 
         boolean hasCustomLocation = false;
-        for (IGravePositionHandler position : APIGraveGeneration.GRAVE_POSITION_HANDLERS) {
-            if (position.condition(world, entity, pos, damageSource)) {
-                hasCustomLocation = true;
-                newPos = position.gravePosition(world, entity, pos, damageSource);
-                direction = position.graveFacing(world, entity, pos, damageSource);
-                break;
+        try {
+            for (IGravePositionHandler position : APIGraveGeneration.GRAVE_POSITION_HANDLERS) {
+                if (position.condition(world, entity, pos, damageSource)) {
+                    newPos = position.gravePosition(world, entity, pos, damageSource);
+                    if (newPos != null) {
+                        hasCustomLocation = true;
+                        direction = position.graveFacing(world, entity, pos, damageSource);
+                        newWorld = position.getWorld(world, entity, pos, damageSource);
+                        break;
+                    }
+                }
             }
+        } catch (Exception e) {
+            GSLogger.logError("Can't get custom position of grave!");
         }
 
-        if (!hasCustomLocation || newPos == null) {
+        if (hasCustomLocation) {
+            GSLogger.logInfo("Position of grave was changed by other mod");
+        } else {
             direction = EnumFacing.getHorizontal(MathHelper.floor((double) (entity.rotationYaw * 4 / 360F) + 0.5) & 3);
             newPos = findPlaceForGrave(world, entity, pos, damageSource);
+            newWorld = world;
         }
 
         if (Config.createBackups && entity instanceof EntityPlayer) {
             try {
-                BackupsHandler.BACKUPS.put(entity.getName(), new BackupsHandler.Backup(world.provider.getDimension(), newPos, items));
+                BackupsHandler.BACKUPS.put(entity.getName(), new BackupsHandler.Backup(newWorld.provider.getDimension(), newPos, items));
             } catch (Exception e) {
                 GSLogger.logError("Can't create backup!");
             }
         }
 
         if (newPos != null) {
-            world.setBlockState(newPos, GSBlock.GRAVE_STONE.getDefaultState().withProperty(BlockGraveStone.FACING, direction), 2);
-            TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(newPos);
+            newWorld.setBlockState(newPos, GSBlock.GRAVE_STONE.getDefaultState().withProperty(BlockGraveStone.FACING, direction), 2);
+            TileEntityGraveStone tileEntity = (TileEntityGraveStone) newWorld.getTileEntity(newPos);
 
             if (tileEntity != null) {
                 if (graveInfo.getSword() != null) {
