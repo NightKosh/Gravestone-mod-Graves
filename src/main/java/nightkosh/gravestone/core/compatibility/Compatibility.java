@@ -1,5 +1,7 @@
 package nightkosh.gravestone.core.compatibility;
 
+import net.minecraftforge.fml.common.Loader;
+
 /**
  * GraveStone mod
  *
@@ -9,6 +11,8 @@ package nightkosh.gravestone.core.compatibility;
 public class Compatibility {
 
     private static final Compatibility INSTANCE = new Compatibility();
+
+    public static boolean IS_WOLF_ARMOR_INSTALLED;
 
     private Compatibility() {
         new CompatibilityTheCampingMod();
@@ -30,6 +34,8 @@ public class Compatibility {
         new CompatibilityWitchery();
 
 //        new CompatibilityTinkerConstruct();
+
+        IS_WOLF_ARMOR_INSTALLED = Loader.isModLoaded("wolfarmor");
     }
 
     public static Compatibility getInstance() {

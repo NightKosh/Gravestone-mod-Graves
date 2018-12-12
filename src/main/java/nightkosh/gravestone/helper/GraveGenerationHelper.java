@@ -34,6 +34,8 @@ import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.core.GSBlock;
 import nightkosh.gravestone.core.MobHandler;
+import nightkosh.gravestone.core.compatibility.Compatibility;
+import nightkosh.gravestone.core.compatibility.CompatibilityWolfArmor;
 import nightkosh.gravestone.core.logger.GSLogger;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
 import nightkosh.gravestone.inventory.GraveInventory;
@@ -50,8 +52,6 @@ import java.util.*;
  */
 public class GraveGenerationHelper implements IGraveStoneHelper {
     public static final IGraveStoneHelper INSTANCE = new GraveGenerationHelper();
-
-
 
     protected static final Random rand = new Random();
 
@@ -159,9 +159,9 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             items.addAll(additionalItems.addItems(villager, damageSource));
         }
 
-        IItemHandler itemHandler =  villager.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, villager.getHorizontalFacing());
+        IItemHandler itemHandler = villager.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, villager.getHorizontalFacing());
         if (villager.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, villager.getHorizontalFacing())) {
-            for (int slot = 0 ; slot < itemHandler.getSlots(); slot++) {
+            for (int slot = 0; slot < itemHandler.getSlots(); slot++) {
                 ItemStack stack = itemHandler.extractItem(slot, 100500, false);
                 if (stack != null && !stack.isEmpty()) {
                     items.add(stack);
@@ -193,15 +193,10 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             items.addAll(additionalItems.addItems(dog, damageSource));
         }
 
-        IItemHandler itemHandler =  dog.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, dog.getHorizontalFacing());
-        if (dog.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, dog.getHorizontalFacing())) {
-            for (int slot = 0 ; slot < itemHandler.getSlots(); slot++) {
-                ItemStack stack = itemHandler.extractItem(slot, 100500, false);
-                if (stack != null && !stack.isEmpty()) {
-                    items.add(stack);
-                }
-            }
+        if (Compatibility.IS_WOLF_ARMOR_INSTALLED) {
+            items.addAll(CompatibilityWolfArmor.getWolfItems(dog));
         }
+
         return items;
     }
 
@@ -211,9 +206,9 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             items.addAll(additionalItems.addItems(cat, damageSource));
         }
 
-        IItemHandler itemHandler =  cat.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, cat.getHorizontalFacing());
+        IItemHandler itemHandler = cat.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, cat.getHorizontalFacing());
         if (cat.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, cat.getHorizontalFacing())) {
-            for (int slot = 0 ; slot < itemHandler.getSlots(); slot++) {
+            for (int slot = 0; slot < itemHandler.getSlots(); slot++) {
                 ItemStack stack = itemHandler.extractItem(slot, 100500, false);
                 if (stack != null && !stack.isEmpty()) {
                     items.add(stack);
@@ -240,9 +235,9 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     private static List<ItemStack> getHorseItems(AbstractHorse horse) {
         List<ItemStack> items = new ArrayList<>();
 
-        IItemHandler itemHandler =  horse.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, horse.getHorizontalFacing());
+        IItemHandler itemHandler = horse.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, horse.getHorizontalFacing());
         if (horse.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, horse.getHorizontalFacing())) {
-            for (int slot = 0 ; slot < itemHandler.getSlots(); slot++) {
+            for (int slot = 0; slot < itemHandler.getSlots(); slot++) {
                 ItemStack stack = itemHandler.extractItem(slot, 100500, false);
                 if (stack != null && !stack.isEmpty()) {
                     items.add(stack);
@@ -703,7 +698,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     private static BlockPos findPlaceForGrave(World world, Entity entity, BlockPos pos, DamageSource damageSource) {
         if (pos.getY() <= 0) {
             BlockPos groundPos = new BlockPos(pos.getX(), 0, pos.getZ());
-            if (world.isAirBlock(groundPos) && world.isAirBlock(groundPos.up()) ) {
+            if (world.isAirBlock(groundPos) && world.isAirBlock(groundPos.up())) {
                 world.setBlockState(groundPos, Blocks.GRASS.getDefaultState());
                 return groundPos.up();
             } else {
