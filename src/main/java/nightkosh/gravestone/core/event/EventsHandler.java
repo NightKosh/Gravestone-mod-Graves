@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -14,6 +15,7 @@ import nightkosh.gravestone.api.death_handler.*;
 import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.core.MobHandler;
 import nightkosh.gravestone.core.logger.GravesLogger;
+import nightkosh.gravestone.helper.BackupsHelper;
 import nightkosh.gravestone.helper.GraveGenerationHelper;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
 
@@ -25,7 +27,13 @@ import nightkosh.gravestone.helper.api.APIGraveGeneration;
  */
 public class EventsHandler {
 
-    // Hopefully ensure we capture items before other things do (set to high so other mods can run before if they have more specialness
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void onPlayerClone(PlayerEvent.Clone event) {
+        if (event.isWasDeath()) {
+            BackupsHelper.clonePlayer(event.getOriginal(), event.getEntityPlayer());
+        }
+    }
+
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void onEntityLivingDeath(LivingDeathEvent event) {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {

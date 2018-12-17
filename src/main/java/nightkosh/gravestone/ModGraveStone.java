@@ -1,6 +1,7 @@
 package nightkosh.gravestone;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -14,7 +15,11 @@ import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.api.IGraveGeneration;
 import nightkosh.gravestone.api.IGraveStoneHelper;
 import nightkosh.gravestone.api.ModInfo;
+import nightkosh.gravestone.capability.BackupStorage;
+import nightkosh.gravestone.capability.Backups;
+import nightkosh.gravestone.capability.IBackups;
 import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.core.CapabilityHandler;
 import nightkosh.gravestone.core.GSTileEntity;
 import nightkosh.gravestone.core.GuiHandler;
 import nightkosh.gravestone.core.Tabs;
@@ -57,12 +62,15 @@ public class ModGraveStone {
 
         Tabs.registration();
         GSTileEntity.registration();
+
+        CapabilityManager.INSTANCE.register(IBackups.class, new BackupStorage(), Backups.class);
     }
 
     @Mod.EventHandler
     public void load(FMLInitializationEvent event) {
         // register death event
         MinecraftForge.EVENT_BUS.register(new EventsHandler());
+        MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
         FMLCommonHandler.instance().bus().register(new EventHandlerNetwork());
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());

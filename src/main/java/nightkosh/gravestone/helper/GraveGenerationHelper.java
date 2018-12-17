@@ -395,13 +395,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             newWorld = world;
         }
 
-        if (Config.createBackups && entity instanceof EntityPlayer) {
-            try {
-                BackupsHandler.BACKUPS.put(entity.getName(), new BackupsHandler.Backup(newWorld.provider.getDimension(), newPos, items));
-            } catch (Exception e) {
-                GSLogger.logError("Can't create backup!");
-            }
-        }
+        BackupsHelper.addBackup(entity, newWorld, newPos, items);
 
         if (newPos != null) {
             newWorld.setBlockState(newPos, GSBlock.GRAVE_STONE.getDefaultState().withProperty(BlockGraveStone.FACING, direction), 2);
