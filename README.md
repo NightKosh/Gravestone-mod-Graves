@@ -26,10 +26,19 @@ For more information visit [official site](http://gravestone.nightkosh.com/) or 
 3. ~~[Galacticraft API](https://github.com/micdoodle8/Galacticraft-API)~~
 4. ~~[Mariculture API](https://github.com/joshiejack/Mariculture)~~
 5. ~~[Thaumcraft API](https://github.com/Azanor/thaumcraft-api) (will be loaded as git submodule)~~
+6. [wolfarmor-api](https://github.com/satyrnidae/wolfarmor-api) (will be loaded as git submodule)
 
 ## Get started
-1. [Set up forge](http://www.minecraftforge.net/wiki/Installation/Source)
-2. Clone mod repository into the Forge folder
+1. Clone mod repository 
+2. [Download forge](http://files.minecraftforge.net/) and copy "gradlew.bat", "gradlew" files and "gradle" directory to mod folder
 3. Download mod's API
    * Download [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
-   * Download other API's manually and place them into "src/main/java" folder
+      * Run next commands from mod folder:
+      ```
+        git submodule init
+        git submodule update
+      ```
+   * ~~Download other API's manually and place them into "src/main/java" folder~~
+5. Run "./gradlew setupDecompWorkspace idea" from mod folder
+6. Import mod to your ide as "new Gradle project"
+
