@@ -39,6 +39,6 @@ For more information visit [official site](http://gravestone.nightkosh.com/) or 
         git submodule update
       ```
    * ~~Download other API's manually and place them into "src/main/java" folder~~
-5. Run "./gradlew setupDecompWorkspace idea" from mod folder
-6. Import mod to your ide as "new Gradle project"
+4. Run "./gradlew setupDecompWorkspace idea" from mod folder
+5. Import mod to your ide as "new Gradle project"
 
