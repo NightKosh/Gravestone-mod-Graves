@@ -43,6 +43,7 @@ import nightkosh.gravestone.tileentity.DeathMessageInfo;
 import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * GraveStone mod
@@ -51,6 +52,7 @@ import java.util.*;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class GraveGenerationHelper implements IGraveStoneHelper {
+
     public static final IGraveStoneHelper INSTANCE = new GraveGenerationHelper();
 
     protected static final Random rand = new Random();
@@ -111,45 +113,52 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         }
     }
 
-    public static void createPlayerGrave(EntityPlayer player, List<EntityItem> entityItems, DamageSource damageSource, long spawnTime) {
-        if (player.getEntityWorld() != null && !player.getEntityWorld().getGameRules().getBoolean("keepInventory") && Config.graveItemsCount > 0 &&
-                !isInRestrictedArea(player.getEntityWorld(), player.getPosition())) {
-            List<ItemStack> items = new ArrayList<>(41);
+    public static boolean createPlayerGrave(EntityPlayer player, List<EntityItem> entityItems, DamageSource damageSource, long spawnTime) {
+        try {
+            if (player.getEntityWorld() != null && !player.getEntityWorld().getGameRules().getBoolean("keepInventory") && Config.graveItemsCount > 0 &&
+                    !isInRestrictedArea(player.getEntityWorld(), player.getPosition())) {
+                List<ItemStack> items = new ArrayList<>(41);
 
-            for (EntityItem entityItem : entityItems) {
-                items.add(entityItem.getItem());
-                entityItem.setDead();
-            }
+
+                for (EntityItem entityItem : entityItems) {
+                    items.add(entityItem.getItem());
+                    //entityItem.setDead();
+                }
 
 //            GSCompatibilityAntiqueAtlas.placeDeathMarkerAtDeath(player); //TODO !!!!!!!!!!!!
 
-            for (IPlayerItems additionalItems : APIGraveGeneration.PLAYER_ITEMS) {
-                try {
-                    List<ItemStack> modItems = additionalItems.addItems(player, damageSource);
-                    if (modItems != null && !modItems.isEmpty() && modItems.size() != 0) {
-                        items.addAll(modItems);
+                for (IPlayerItems additionalItems : APIGraveGeneration.PLAYER_ITEMS) {
+                    try {
+                        List<ItemStack> modItems = additionalItems.addItems(player, damageSource);
+                        if (modItems != null && !modItems.isEmpty() && modItems.size() != 0) {
+                            items.addAll(modItems);
+                        }
+                    } catch (Exception e) {
+                        GSLogger.logError("Compatibility error occurred in additionalItems.addItems");
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    GSLogger.logError("Compatibility error occurred in additionalItems.addItems");
-                    e.printStackTrace();
                 }
-            }
 
-            // remove some items by other mods
-            for (IPlayerItems additionalItems : APIGraveGeneration.PLAYER_ITEMS) {
-                try {
-                    additionalItems.getItems(player, damageSource, items);
-                } catch (Exception e) {
-                    GSLogger.logError("Compatibility error occurred in additionalItems.getItems");
-                    e.printStackTrace();
+                // remove some items by other mods
+                for (IPlayerItems additionalItems : APIGraveGeneration.PLAYER_ITEMS) {
+                    try {
+                        additionalItems.getItems(player, damageSource, items);
+                    } catch (Exception e) {
+                        GSLogger.logError("Compatibility error occurred in additionalItems.getItems");
+                        e.printStackTrace();
+                    }
                 }
-            }
 
-            if (Config.generateEmptyPlayerGraves || items.size() != 0) {
-                createGrave(player, damageSource, items, EnumGraveTypeByEntity.PLAYER_GRAVES, false, spawnTime);
+                if (Config.generateEmptyPlayerGraves || items.size() != 0) {
+                    createGrave(player, damageSource, items, EnumGraveTypeByEntity.PLAYER_GRAVES, false, spawnTime);
+                }
+            } else if (Config.generateEmptyPlayerGraves) {
+                createGrave(player, damageSource, null, EnumGraveTypeByEntity.PLAYER_GRAVES, false, spawnTime);
             }
-        } else if (Config.generateEmptyPlayerGraves) {
-            createGrave(player, damageSource, null, EnumGraveTypeByEntity.PLAYER_GRAVES, false, spawnTime);
+            return true;
+        } catch (Exception e) {
+            GSLogger.logError(e.getMessage());
+            return false;
         }
     }
 
