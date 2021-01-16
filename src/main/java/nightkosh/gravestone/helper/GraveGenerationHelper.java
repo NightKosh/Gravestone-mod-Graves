@@ -113,20 +113,19 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         }
     }
 
-    public static boolean createPlayerGrave(EntityPlayer player, List<EntityItem> entityItems, DamageSource damageSource, long spawnTime) {
+    public static void createPlayerGrave(EntityPlayer player, List<EntityItem> entityItems, DamageSource damageSource, long spawnTime) {
         try {
-            if (player.getEntityWorld() != null && !player.getEntityWorld().getGameRules().getBoolean("keepInventory") && Config.graveItemsCount > 0 &&
-                    !isInRestrictedArea(player.getEntityWorld(), player.getPosition())) {
-                List<ItemStack> items = new ArrayList<>(41);
-
+            if (player.getEntityWorld() != null &&
+                    !player.getEntityWorld().getGameRules().getBoolean("keepInventory") &&
+                    Config.graveItemsCount > 0 &&
+                    !isInRestrictedArea(player)) {
+                List<ItemStack> items = new ArrayList<>();
 
                 for (EntityItem entityItem : entityItems) {
                     items.add(entityItem.getItem());
-                    //entityItem.setDead();
                 }
 
-//            GSCompatibilityAntiqueAtlas.placeDeathMarkerAtDeath(player); //TODO !!!!!!!!!!!!
-
+                //GSCompatibilityAntiqueAtlas.placeDeathMarkerAtDeath(player); //TODO !!!!!!!!!!!!
                 for (IPlayerItems additionalItems : APIGraveGeneration.PLAYER_ITEMS) {
                     try {
                         List<ItemStack> modItems = additionalItems.addItems(player, damageSource);
@@ -155,10 +154,10 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             } else if (Config.generateEmptyPlayerGraves) {
                 createGrave(player, damageSource, null, EnumGraveTypeByEntity.PLAYER_GRAVES, false, spawnTime);
             }
-            return true;
         } catch (Exception e) {
             GSLogger.logError(e.getMessage());
-            return false;
+        } finally {
+            entityItems.clear();
         }
     }
 
@@ -258,8 +257,8 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     public static void createGrave(Entity entity, DamageSource damageSource, List<ItemStack> items, EnumGraveTypeByEntity graveTypeByEntity, boolean isVillager, long spawnTime) {
-        if (isInRestrictedArea(entity.getEntityWorld(), entity.getPosition())) {
-            GSLogger.logInfo("Can't generate " + entity.getName() + "'s grave in restricted area. " + entity.getPosition().toString());
+        if (isInRestrictedArea(entity)) {
+            GSLogger.logInfo("Can't generate " + entity.getName() + "'s grave in restricted area. " + entity.getPosition());
             if (items != null) {
                 items.stream().filter(item -> item != null).forEach(item -> {
                     GraveInventory.dropItem(item, entity.getEntityWorld(), entity.getPosition());
@@ -267,7 +266,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             }
         } else {
             int age = (int) (entity.getEntityWorld().getWorldTime() - spawnTime) / 24000;
-            BlockPos pos = new BlockPos(entity.posX, Math.round(entity.posY), entity.posZ - 1);
+            BlockPos pos = new BlockPos(entity.posX, Math.ceil(entity.posY), entity.posZ);
             GraveInfoOnDeath graveInfo = getGraveOnDeath(entity.getEntityWorld(), pos, entity, graveTypeByEntity, items, age, damageSource);
             DeathMessageInfo messageInfo = getDeathMessage((EntityLivingBase) entity, damageSource.damageType, isVillager);
             createOnDeath(entity, entity.getEntityWorld(), pos, messageInfo, items, age, graveInfo, damageSource);
@@ -275,8 +274,8 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     public static void createCustomGrave(Entity entity, LivingDeathEvent event, ICustomEntityDeathHandler customEntityDeathHandler) {
-        if (isInRestrictedArea(entity.getEntityWorld(), entity.getPosition())) {
-            GSLogger.logInfo("Can't generate " + entity.getName() + "'s grave in restricted area. " + entity.getPosition().toString());
+        if (isInRestrictedArea(entity)) {
+            GSLogger.logInfo("Can't generate " + entity.getName() + "'s grave in restricted area. " + entity.getPosition());
             if (customEntityDeathHandler.getItems() != null) {
                 customEntityDeathHandler.getItems().stream().filter(item -> item != null).forEach(item -> {
                     GraveInventory.dropItem(item, entity.getEntityWorld(), entity.getPosition());
@@ -401,6 +400,22 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         } else {
             direction = EnumFacing.getHorizontal(MathHelper.floor((double) (entity.rotationYaw * 4 / 360F) + 0.5) & 3);
             newPos = findPlaceForGrave(world, entity, pos, damageSource);
+            if (newPos == null)
+            {
+                newPos = findPlaceForGrave(world, entity, pos.north(), damageSource);
+            }
+            if (newPos == null)
+            {
+                newPos = findPlaceForGrave(world, entity, pos.east(), damageSource);
+            }
+            if (newPos == null)
+            {
+                newPos = findPlaceForGrave(world, entity, pos.south(), damageSource);
+            }
+            if (newPos == null)
+            {
+                newPos = findPlaceForGrave(world, entity, pos.west(), damageSource);
+            }
             newWorld = world;
         }
 
@@ -430,7 +445,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                     tileEntity.setOwner(((EntityTameable) entity).getOwner().getUniqueID().toString());
                 }
             }
-            GSLogger.logInfoGrave("Create " + deathInfo.getName() + "'s grave at " + newPos.getX() + "x" + newPos.getY() + "x" + newPos.getZ());
+            GSLogger.logInfo("Create " + deathInfo.getName() + "'s grave at " + newPos);
         } else {
             ItemStack itemStack = new ItemStack(Item.getItemFromBlock(GSBlock.GRAVE_STONE), 1);
             itemStack.setItemDamage(graveInfo.getGrave().ordinal());
@@ -457,7 +472,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                     }
                 }
             }
-            GSLogger.logInfoGrave("Can not create " + deathInfo.getName() + "'s grave at " + pos.getX() + "x" + pos.getY() + "x" + pos.getZ());
+            GSLogger.logInfo("Can not create " + deathInfo.getName() + "'s grave at " + pos);
         }
     }
 
@@ -476,7 +491,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             if (killer instanceof EntityPlayer) {
                 killerName = killer.getDisplayName().getFormattedText();
                 if (isVillager) {
-                    GSLogger.logInfoGrave("Villager was killed by " + killerName);
+                    GSLogger.logInfo("Villager was killed by " + killerName);
                 }
             } else {
                 killerName = EntityList.getEntityString(killer);
@@ -496,8 +511,8 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         }
     }
 
-    private static boolean isInRestrictedArea(World world, BlockPos pos) {
-        return Config.restrictGraveGenerationInArea.stream().anyMatch((area) -> area.isInArea(world, pos));
+    private static boolean isInRestrictedArea(Entity entity) {
+        return Config.restrictGraveGenerationInArea.stream().anyMatch((area) -> area.isInArea(entity.getEntityWorld(), entity.getPosition()));
     }
 
     @Override
@@ -699,99 +714,71 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     private static BlockPos findPlaceForGrave(World world, Entity entity, BlockPos pos, DamageSource damageSource) {
-        if (pos.getY() <= 0) {
-            BlockPos groundPos = new BlockPos(pos.getX(), 0, pos.getZ());
-            if (world.isAirBlock(groundPos) && world.isAirBlock(groundPos.up())) {
-                world.setBlockState(groundPos, Blocks.GRASS.getDefaultState());
-                return groundPos.up();
-            } else {
-                GSLogger.logInfoGrave("Can't find position for grave on death in the void!");
-            }
+
+        BlockPos fixPos = new BlockPos(pos.getX(), Math.min(250, Math.max(pos.getY(), 6)), pos.getZ());
+
+        if ((world.isOutsideBuildHeight(pos) || pos.getY() < world.getHeight())) {
+            BlockPos groundPos = trySetGround(world, fixPos);
+            if (groundPos != null) return groundPos;
+            GSLogger.logInfo("Can't find position for grave on death in the void!" + pos);
         }
 
-        int x = pos.getX();
-        int y = pos.getY();
-        int z = pos.getZ();
-        int newY = getGround(world, x, y, z);
-
-        if (canGenerateGraveAtCoordinates(world, new BlockPos(x, newY, z))) {
-            return new BlockPos(x, newY, z);
-        } else {
-            int dx = 1;
-            int dz = 1;
-
-            while (Math.abs(dx) < 9 && Math.abs(dz) < 9) {
-                if (dx < 0) {
-                    for (int newX = x - 1; newX >= x + dx; newX--) {
-                        newY = getGround(world, newX, y, z);
-                        if (canGenerateGraveAtCoordinates(world, new BlockPos(newX, newY, z))) {
-                            return new BlockPos(newX, newY, z);
-                        }
-                    }
-                } else {
-                    for (int newX = x + 1; newX <= x + dx; newX++) {
-                        newY = getGround(world, newX, y, z);
-                        if (canGenerateGraveAtCoordinates(world, new BlockPos(newX, newY, z))) {
-                            return new BlockPos(newX, newY, z);
-                        }
-                    }
-                }
-                x += dx;
-
-                if (dz < 0) {
-                    for (int newZ = z - 1; newZ >= z + dz; newZ--) {
-                        newY = getGround(world, x, y, newZ);
-                        if (canGenerateGraveAtCoordinates(world, new BlockPos(x, newY, newZ))) {
-                            return new BlockPos(x, newY, newZ);
-                        }
-                    }
-                } else {
-                    for (int newZ = z + 1; newZ <= z + dz; newZ++) {
-                        newY = getGround(world, x, y, newZ);
-                        if (canGenerateGraveAtCoordinates(world, new BlockPos(x, newY, newZ))) {
-                            return new BlockPos(x, newY, newZ);
-                        }
-                    }
-                }
-                z += dz;
-
-                if (dx < 0) {
-                    dx = Math.abs(dx) + 1;
-                } else {
-                    dx = (dx + 1) * -1;
-                }
-
-                if (dz < 0) {
-                    dz = Math.abs(dz) + 1;
-                } else {
-                    dz = (dz + 1) * -1;
-                }
-
-            }
+        int newY = getGround(world, fixPos);
+        if (newY == -1) {
+            GSLogger.logInfo("Can't find position for grave on death at" + pos);
+            return null;
         }
-
+        BlockPos newPos = new BlockPos(fixPos.getX(), newY, fixPos.getZ());
+        BlockPos groundPos = trySetGround(world, newPos);
+        if (groundPos != null) return groundPos;
+        GSLogger.logInfo("Can't find position for grave on death at" + newPos);
         return null;
     }
 
-    public static int getGround(World world, int x, int y, int z) {
-        while (true) {
-            BlockPos pos = new BlockPos(x, y - 1, z);
-            IBlockState state = world.getBlockState(pos);
-            if ((world.isAirBlock(pos) || state.getBlock().getMaterial(state).isLiquid() ||
-                    state.getBlock().getMaterial(state).isReplaceable()) && y > 1) {
-                y--;
-            } else {
-                return y;
-            }
-        }
+    private static BlockPos trySetGround(World world, BlockPos pos) {
+        if (isReplaceable(world, pos)) {
+            world.setBlockState(pos, Blocks.GRASS.getDefaultState());
+            GSLogger.logInfo("Grave set grass at " + pos.toString());
+            return pos.up();
+        } else return null;
     }
 
+    private static boolean isReplaceable(World world, BlockPos pos) {
+        return isReplaceableBlock(world, pos) && isReplaceableBlock(world, pos.up());
+    }
+
+    private static boolean isReplaceableBlock(World world, BlockPos pos) {
+        IBlockState state = world.getBlockState(pos);
+        return world.isAirBlock(pos) || state.getBlock().getMaterial(state).isLiquid() || state.getBlock().getMaterial(state).isReplaceable();
+    }
+
+    public static int getGround(World world, BlockPos pos) {
+        int orginY = pos.getY();
+        while (pos.getY() < 250) {
+            if (isReplaceable(world, pos)) {
+                return pos.getY();
+            } else {
+                pos = pos.up();
+            }
+        }
+        pos = new BlockPos(pos.getX(), orginY, pos.getZ());
+        while (pos.getY() >= 6) {
+            if (isReplaceable(world, pos)) {
+                return pos.getY();
+            } else {
+                pos = pos.down();
+            }
+        }
+        return -1;
+    }
+
+    /*
     public static boolean canGenerateGraveAtCoordinates(World world, BlockPos pos) {
         IBlockState state = world.getBlockState(pos);
         IBlockState stateDown = world.getBlockState(pos.down());
         return stateDown.getBlock().getMaterial(stateDown).isSolid() && stateDown.getBlock().isFullCube(stateDown) &&
                 (world.isAirBlock(pos) || state.getBlock().getMaterial(state).isLiquid() || state.getBlock().getMaterial(state).isReplaceable());
-    }
+    }*/
 
     protected static EnumGraves getGraveType(EnumGraveType[] graveTypes, EnumGraveMaterial... materials) {
         EnumGraveType graveType = graveTypes[rand.nextInt(graveTypes.length)];

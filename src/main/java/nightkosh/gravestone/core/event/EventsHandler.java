@@ -117,12 +117,7 @@ public class EventsHandler {
                             return;
                         }
                     }
-
-                    List<EntityItem> drops = event.getDrops();
-                    if (GraveGenerationHelper.createPlayerGrave(player, drops, event.getSource(), MobHandler.getAndRemoveSpawnTime(player)))
-                    {
-                        drops.clear();
-                    }
+                    GraveGenerationHelper.createPlayerGrave(player, event.getDrops(), event.getSource(), MobHandler.getAndRemoveSpawnTime(player));
                 }
             }
         }
