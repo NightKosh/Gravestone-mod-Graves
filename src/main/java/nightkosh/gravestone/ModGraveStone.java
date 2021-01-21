@@ -27,6 +27,7 @@ import nightkosh.gravestone.core.commands.Commands;
 import nightkosh.gravestone.core.compatibility.Compatibility;
 import nightkosh.gravestone.core.event.EventHandlerNetwork;
 import nightkosh.gravestone.core.event.EventsHandler;
+import nightkosh.gravestone.core.logger.GSLogger;
 import nightkosh.gravestone.core.proxy.CommonProxy;
 import nightkosh.gravestone.helper.GraveGenerationHelper;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
@@ -59,10 +60,8 @@ public class ModGraveStone {
         // API
         GraveStoneAPI.graveStone = gravestoneHelper;
         GraveStoneAPI.graveGenerationAtDeath = apiGraveGeneration;
-
         Tabs.registration();
         GSTileEntity.registration();
-
         CapabilityManager.INSTANCE.register(IBackups.class, new BackupStorage(), Backups.class);
     }
 

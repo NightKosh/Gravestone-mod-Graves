@@ -1,6 +1,7 @@
 package nightkosh.gravestone.core.event;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -18,6 +19,8 @@ import nightkosh.gravestone.core.logger.GravesLogger;
 import nightkosh.gravestone.helper.BackupsHelper;
 import nightkosh.gravestone.helper.GraveGenerationHelper;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
+
+import java.util.List;
 
 /**
  * GraveStone mod
@@ -96,6 +99,11 @@ public class EventsHandler {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onPlayerDrops(PlayerDropsEvent event) {
+
+        if (event.isCanceled()) {
+            return;
+        }
+
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
             if (!Config.generateGravesInLava && event.getSource().damageType.equals("lava")) {
                 return;
@@ -109,7 +117,6 @@ public class EventsHandler {
                             return;
                         }
                     }
-
                     GraveGenerationHelper.createPlayerGrave(player, event.getDrops(), event.getSource(), MobHandler.getAndRemoveSpawnTime(player));
                 }
             }
