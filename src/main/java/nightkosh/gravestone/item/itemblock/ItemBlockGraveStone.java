@@ -1,19 +1,8 @@
 package nightkosh.gravestone.item.itemblock;
 
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import nightkosh.gravestone.ModGraveStone;
-import nightkosh.gravestone.api.grave.EnumGraveMaterial;
-import nightkosh.gravestone.block.enums.EnumGraves;
-import nightkosh.gravestone.core.GSBlock;
-import org.apache.commons.lang3.StringUtils;
-
-import javax.annotation.Nullable;
-import java.util.List;
+import nightkosh.gravestone.core.GSBlocks;
 
 /**
  * GraveStone mod
@@ -23,8 +12,8 @@ import java.util.List;
  */
 public class ItemBlockGraveStone extends BlockItem {
 
-    public ItemBlockGraveStone(Block block) {
-        super(GSBlock.getGraveStone(), new Item.Properties().stacksTo(64));
+    public ItemBlockGraveStone() {
+        super(GSBlocks.getGraveStone(), new Item.Properties().stacksTo(64));
     }
 
     //TODO
@@ -46,15 +35,15 @@ public class ItemBlockGraveStone extends BlockItem {
 //        if (!stack.hasTagCompound()) {
 //            stack.setTagCompound(new CompoundTag());
 //        } else {
-//            CompoundTag nbt = stack.getTagCompound();
+//            CompoundTag nbt = stack.getTag();
 //
 //            String deathText = "";
-//            if (nbt.hasKey("DeathText") && StringUtils.isNotBlank(nbt.getString("DeathText"))) {
+//            if (nbt.contains("DeathText") && StringUtils.isNotBlank(nbt.getString("DeathText"))) {
 //                deathText = nbt.getString("DeathText");
 //            }
 //
-//            if (nbt.hasKey("isLocalized") && nbt.getBoolean("isLocalized")) {
-//                if (nbt.hasKey("name")) {
+//            if (nbt.contains("isLocalized") && nbt.getBoolean("isLocalized")) {
+//                if (nbt.contains("name")) {
 //                    String name = ModGraveStone.proxy.getLocalizedEntityName(nbt.getString("name"));
 //                    String killerName = ModGraveStone.proxy.getLocalizedEntityName(nbt.getString("KillerName"));
 //                    if (killerName.length() == 0) {
@@ -67,8 +56,8 @@ public class ItemBlockGraveStone extends BlockItem {
 //                tooltipList.add(deathText);
 //            }
 //
-//            if (nbt.getInteger("Age") > 0) {
-//                tooltipList.add(ModGraveStone.proxy.getLocalizedString("item.grave.age") + " " + nbt.getInteger("Age") + " " + ModGraveStone.proxy.getLocalizedString("item.grave.days"));
+//            if (nbt.getInt("Age") > 0) {
+//                tooltipList.add(ModGraveStone.proxy.getLocalizedString("item.grave.age") + " " + nbt.getInt("Age") + " " + ModGraveStone.proxy.getLocalizedString("item.grave.days"));
 //            }
 //
 //            EnumGraveMaterial material = EnumGraves.getById(stack.getItemDamage()).getMaterial();
@@ -84,7 +73,7 @@ public class ItemBlockGraveStone extends BlockItem {
 //                tooltipList.add(materialStr.toString());
 //            }
 //
-//            if (nbt.hasKey("Sword")) {
+//            if (nbt.contains("Sword")) {
 //                ItemStack sword = new ItemStack(nbt.getCompoundTag("Sword"));
 //
 //                if (StringUtils.isNotBlank(sword.getDisplayName())) {
@@ -95,8 +84,8 @@ public class ItemBlockGraveStone extends BlockItem {
 //                    tooltipList.add(ModGraveStone.proxy.getLocalizedString("item.grave.sword_damage") + " - " + sword.getItemDamage());
 //                }
 //
-//                if (sword.getTagCompound() != null && sword.getTagCompound().hasKey("ench")) {
-//                    NBTTagList enchantments = sword.getTagCompound().getTagList("ench", 10);
+//                if (sword.getTag() != null && sword.getTag().contains("ench")) {
+//                    NBTTagList enchantments = sword.getTag().getTagList("ench", 10);
 //
 //                    if (enchantments.tagCount() != 0) {
 //                        for (int i = 0; i < enchantments.tagCount(); i++) {
@@ -120,7 +109,7 @@ public class ItemBlockGraveStone extends BlockItem {
 //    @Override
 //    @SideOnly(Side.CLIENT)
 //    public boolean hasEffect(ItemStack stack) {
-//        return stack.hasTagCompound() && stack.getTagCompound().hasKey("Enchanted");
+//        return stack.hasTagCompound() && stack.getTag().contains("Enchanted");
 //    }
 
 }

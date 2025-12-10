@@ -1,6 +1,5 @@
 package nightkosh.gravestone.core.proxy;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
 
@@ -20,9 +19,11 @@ public class CommonProxy {
         return str;
     }
 
-    public void registerTERenderers() {
-        GameRegistry.registerTileEntity(GraveStoneBlockEntity.class, "GraveStoneTE");
-    }
+
+    //TODO
+//    public void registerTERenderers() {
+//        GameRegistry.registerTileEntity(GraveStoneBlockEntity.class, "GraveStoneTE");
+//    }
 
     public String getLocalizedMaterial(EnumGraveMaterial material) {
         return getLocalizedString("material." + material.toString().toLowerCase());

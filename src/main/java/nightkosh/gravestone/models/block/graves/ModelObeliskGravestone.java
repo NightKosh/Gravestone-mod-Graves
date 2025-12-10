@@ -11,10 +11,11 @@ import org.lwjgl.opengl.GL11;
  */
 public class ModelObeliskGravestone extends ModelObelisk {
 
-    @Override
-    public void renderAll() {
-        GL11.glTranslatef(0, 1.12F, 0);
-        GL11.glScalef(0.25f, 0.25f, 0.25f);
-        super.renderAll();
-    }
+    //TODO
+//    @Override
+//    public void renderAll() {
+//        GL11.glTranslatef(0, 1.12F, 0);
+//        GL11.glScalef(0.25f, 0.25f, 0.25f);
+//        super.renderAll();
+//    }
 }

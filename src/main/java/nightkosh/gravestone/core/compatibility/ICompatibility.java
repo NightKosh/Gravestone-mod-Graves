@@ -1,6 +1,5 @@
 package nightkosh.gravestone.core.compatibility;
 
-import net.minecraftforge.fml.common.Loader;
 
 /**
  * GraveStone mod
@@ -11,7 +10,7 @@ import net.minecraftforge.fml.common.Loader;
 public interface ICompatibility {
 
     default boolean isModLoaded(String modId) {
-        return Loader.isModLoaded(modId);
+        return false;//TODO Loader.isModLoaded(modId);
     }
 
 }

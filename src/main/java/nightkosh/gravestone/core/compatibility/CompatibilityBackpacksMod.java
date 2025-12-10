@@ -23,36 +23,37 @@ public class CompatibilityBackpacksMod implements ICompatibility {
     public static final String MOD_ID = "backpack";
 
     protected CompatibilityBackpacksMod() {
-        if (isModLoaded(MOD_ID) && GSConfigs.storeBackpacksItems) {
-            GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler((player, source) -> {
-                try {
-                    List<ItemStack> items = new ArrayList<>();
-                    Class<?> PlayerSaveClass = Class.forName("de.eydamos.backpack.data.PlayerSave");
-                    if (PlayerSaveClass != null) {
-                        Method loadPlayerMethod = PlayerSaveClass.getDeclaredMethod("loadPlayer", Level.class, Player.class);
-                        if (loadPlayerMethod != null) {
-                            Object playerSave = loadPlayerMethod.invoke(null, player.getEntityWorld(), player);
-
-                            Method getBackpackMethod = playerSave.getClass().getDeclaredMethod("getBackpack");
-                            Method removeStackFromSlotMethod = playerSave.getClass().getDeclaredMethod("removeStackFromSlot", int.class);
-
-                            if (getBackpackMethod != null && removeStackFromSlotMethod != null) {
-                                Object backpackObject = getBackpackMethod.invoke(playerSave);
-                                if (backpackObject != null && backpackObject instanceof ItemStack && !((ItemStack) backpackObject).isEmpty()) {
-                                    items.add(((ItemStack) backpackObject).copy());
-                                    removeStackFromSlotMethod.invoke(playerSave, 0);
-                                }
-                            }
-                        }
-                    }
-                    return items;
-                } catch (Exception e) {
-                    LOGGER.error("Can't save Backpacks items!!!");
-                    e.printStackTrace();
-                    return null;
-                }
-            });
-        }
+        //TODO
+//        if (isModLoaded(MOD_ID) && GSConfigs.storeBackpacksItems) {
+//            GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler((player, source) -> {
+//                try {
+//                    List<ItemStack> items = new ArrayList<>();
+//                    Class<?> PlayerSaveClass = Class.forName("de.eydamos.backpack.data.PlayerSave");
+//                    if (PlayerSaveClass != null) {
+//                        Method loadPlayerMethod = PlayerSaveClass.getDeclaredMethod("loadPlayer", Level.class, Player.class);
+//                        if (loadPlayerMethod != null) {
+//                            Object playerSave = loadPlayerMethod.invoke(null, player.getEntityWorld(), player);
+//
+//                            Method getBackpackMethod = playerSave.getClass().getDeclaredMethod("getBackpack");
+//                            Method removeStackFromSlotMethod = playerSave.getClass().getDeclaredMethod("removeStackFromSlot", int.class);
+//
+//                            if (getBackpackMethod != null && removeStackFromSlotMethod != null) {
+//                                Object backpackObject = getBackpackMethod.invoke(playerSave);
+//                                if (backpackObject != null && backpackObject instanceof ItemStack && !((ItemStack) backpackObject).isEmpty()) {
+//                                    items.add(((ItemStack) backpackObject).copy());
+//                                    removeStackFromSlotMethod.invoke(playerSave, 0);
+//                                }
+//                            }
+//                        }
+//                    }
+//                    return items;
+//                } catch (Exception e) {
+//                    LOGGER.error("Can't save Backpacks items!!!");
+//                    e.printStackTrace();
+//                    return null;
+//                }
+//            });
+//        }
     }
 
 }

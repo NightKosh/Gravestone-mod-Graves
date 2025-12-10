@@ -22,12 +22,13 @@ public class SubCommandCommandsList implements ISubCommand {
         return COMMAND_NAME;
     }
 
-    @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-        sender.sendMessage(new TextComponentTranslation(getCommandUsage()).setStyle(new Style().setColor(TextFormatting.GREEN)));
-
-        for (ISubCommand additionalCommand : Command.ADDITIONAL_COMMANDS_LIST) {
-            sender.sendMessage(new TextComponentTranslation(additionalCommand.getCommandUsage()).setStyle(new Style().setColor(TextFormatting.GREEN)));
-        }
-    }
+    //TODO
+//    @Override
+//    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+//        sender.sendMessage(new TextComponentTranslation(getCommandUsage()).setStyle(new Style().setColor(TextFormatting.GREEN)));
+//
+//        for (ISubCommand additionalCommand : Command.ADDITIONAL_COMMANDS_LIST) {
+//            sender.sendMessage(new TextComponentTranslation(additionalCommand.getCommandUsage()).setStyle(new Style().setColor(TextFormatting.GREEN)));
+//        }
+//    }
 }

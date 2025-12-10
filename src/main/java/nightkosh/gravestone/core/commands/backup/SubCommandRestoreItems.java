@@ -1,10 +1,5 @@
 package nightkosh.gravestone.core.commands.backup;
 
-import net.minecraft.command.ICommandSender;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import nightkosh.gravestone.capability.Backup;
 import nightkosh.gravestone.core.commands.Command;
 import nightkosh.gravestone.inventory.GraveInventory;
@@ -32,19 +27,20 @@ public class SubCommandRestoreItems extends SubCommandBackup {
         return COMMAND_USAGE;
     }
 
-    @Override
-    protected void execute(Backup backup, ICommandSender sender, String name) {
-        List<ItemStack> items = backup.getItems();
-
-        if (items != null && !items.isEmpty()) {
-            for (ItemStack item : items) {
-                if (item != null) {
-                    GraveInventory.dropItem(item, sender.getEntityWorld(), sender.getPosition());
-                }
-            }
-        } else {
-            sender.sendMessage(new TextComponentTranslation("There are no items for player " + name)
-                    .setStyle(new Style().setColor(TextFormatting.RED)));
-        }
-    }
+    //TODO
+//    @Override
+//    protected void execute(Backup backup, ICommandSender sender, String name) {
+//        List<ItemStack> items = backup.getItems();
+//
+//        if (items != null && !items.isEmpty()) {
+//            for (ItemStack item : items) {
+//                if (item != null) {
+//                    GraveInventory.dropItem(item, sender.getEntityWorld(), sender.getPosition());
+//                }
+//            }
+//        } else {
+//            sender.sendMessage(new TextComponentTranslation("There are no items for player " + name)
+//                    .setStyle(new Style().setColor(TextFormatting.RED)));
+//        }
+//    }
 }

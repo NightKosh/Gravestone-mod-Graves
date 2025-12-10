@@ -24,37 +24,39 @@ public class CompatibilityEnderIO implements ICompatibility {
     public static final String MOD_ID = "enderio";
 
     protected CompatibilityEnderIO() {
-        if (isModLoaded(MOD_ID) && GSConfigs.enableEnderIOSoulbound) {
-            GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler(new IPlayerItems() {
-
-                @Override
-                public List<ItemStack> addItems(Player player, DamageSource source) {
-                    return null;
-                }
-
-                @Override
-                public void getItems(Player player, DamageSource source, List<ItemStack> items) {
-                    Iterator<ItemStack> it = items.iterator();
-                    while (it.hasNext()) {
-                        ItemStack stack = it.next();
-                        if (stack != null && hasSoulbound(stack)) {
-                            player.inventory.addItemStackToInventory(stack.copy());
-                            it.remove();
-                        }
-                    }
-                }
-            });
-        }
+        //TODO
+//        if (isModLoaded(MOD_ID) && GSConfigs.enableEnderIOSoulbound) {
+//            GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler(new IPlayerItems() {
+//
+//                @Override
+//                public List<ItemStack> addItems(Player player, DamageSource source) {
+//                    return null;
+//                }
+//
+//                @Override
+//                public void getItems(Player player, DamageSource source, List<ItemStack> items) {
+//                    Iterator<ItemStack> it = items.iterator();
+//                    while (it.hasNext()) {
+//                        ItemStack stack = it.next();
+//                        if (stack != null && hasSoulbound(stack)) {
+//                            player.inventory.addItemStackToInventory(stack.copy());
+//                            it.remove();
+//                        }
+//                    }
+//                }
+//            });
+//        }
     }
 
-    private static boolean hasSoulbound(ItemStack stack) {
-        Map enchantments = EnchantmentHelper.getEnchantments(stack);
-        for (Object ench : enchantments.keySet()) {
-            if (ench != null && ((Enchantment) ench).getName().equals("enchantment.enderio.soulbound")) {
-                return true;
-            }
-        }
-        return false;
-    }
+    //TODO
+//    private static boolean hasSoulbound(ItemStack stack) {
+//        Map enchantments = EnchantmentHelper.getEnchantments(stack);
+//        for (Object ench : enchantments.keySet()) {
+//            if (ench != null && ((Enchantment) ench).getName().equals("enchantment.enderio.soulbound")) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
 }

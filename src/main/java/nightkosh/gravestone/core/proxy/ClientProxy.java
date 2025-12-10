@@ -1,9 +1,5 @@
 package nightkosh.gravestone.core.proxy;
 
-import net.minecraft.item.Item;
-import net.minecraft.util.text.translation.I18n;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import nightkosh.gravestone.renderer.tileentity.TileEntityGraveStoneRenderer;
 import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
 
@@ -15,19 +11,22 @@ import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
  */
 public class ClientProxy extends CommonProxy {
 
-    @Override
-    public void registerTERenderers() {
-        ClientRegistry.registerTileEntity(GraveStoneBlockEntity.class, "GraveStoneTE", new TileEntityGraveStoneRenderer());
-    }
+    //TODO
+//    @Override
+//    public void registerTERenderers() {
+//        ClientRegistry.registerTileEntity(GraveStoneBlockEntity.class, "GraveStoneTE", new TileEntityGraveStoneRenderer());
+//    }
 
     @Override
     public String getLocalizedString(String str) {
-        return I18n.translateToLocal(str);
+        //TODO
+        return "";//return I18n.translateToLocal(str);
     }
 
     @Override
     public String getLocalizedEntityName(String name) {
-        return I18n.translateToLocal(name);
+        //TODO
+        return "";//return I18n.translateToLocal(name);
     }
 
 }

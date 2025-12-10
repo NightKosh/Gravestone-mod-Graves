@@ -21,43 +21,46 @@ public class CompatibilityTinkerConstruct implements ICompatibility {
     public static final String MOD_ID = "tconstruct";
 
     protected CompatibilityTinkerConstruct() {
-        if (isModLoaded(MOD_ID) && GSConfigs.enableTconstructSoulbound) {
-            GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler(new IPlayerItems() {
 
-                @Override
-                public List<ItemStack> addItems(Player player, DamageSource source) {
-                    return null;
-                }
-
-                @Override
-                public void getItems(Player player, DamageSource source, List<ItemStack> items) {
-                    Iterator<ItemStack> it = items.iterator();
-                    while (it.hasNext()) {
-                        ItemStack stack = it.next();
-                        if (stack != null && hasSoulbound(stack)) {
-                            player.inventory.addItemStackToInventory(stack.copy());
-                            it.remove();
-                        }
-                    }
-                }
-            });
-        }
+        //TODO
+//        if (isModLoaded(MOD_ID) && GSConfigs.enableTconstructSoulbound) {
+//            GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler(new IPlayerItems() {
+//
+//                @Override
+//                public List<ItemStack> addItems(Player player, DamageSource source) {
+//                    return null;
+//                }
+//
+//                @Override
+//                public void getItems(Player player, DamageSource source, List<ItemStack> items) {
+//                    Iterator<ItemStack> it = items.iterator();
+//                    while (it.hasNext()) {
+//                        ItemStack stack = it.next();
+//                        if (stack != null && hasSoulbound(stack)) {
+//                            player.inventory.addItemStackToInventory(stack.copy());
+//                            it.remove();
+//                        }
+//                    }
+//                }
+//            });
+//        }
     }
 
-    private static boolean hasSoulbound(ItemStack stack) {
-        if (stack.hasTagCompound()) {
-            CompoundTag nbt = stack.getTagCompound();
-            if (nbt.hasKey("Modifiers")) {
-                NBTTagList nbtList = nbt.getTagList("Modifiers", 10);
-                for (int i = 0; i < nbtList.tagCount(); i++) {
-                    CompoundTag tag = nbtList.getCompoundTagAt(i);
-                    if (tag.hasKey("identifier") && tag.getString("identifier").equals("soulbound")) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
+    //TODO
+//    private static boolean hasSoulbound(ItemStack stack) {
+//        if (stack.hasTagCompound()) {
+//            CompoundTag nbt = stack.getTag();
+//            if (nbt.contains("Modifiers")) {
+//                NBTTagList nbtList = nbt.getTagList("Modifiers", 10);
+//                for (int i = 0; i < nbtList.tagCount(); i++) {
+//                    CompoundTag tag = nbtList.getCompoundTagAt(i);
+//                    if (tag.contains("identifier") && tag.getString("identifier").equals("soulbound")) {
+//                        return true;
+//                    }
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
 }

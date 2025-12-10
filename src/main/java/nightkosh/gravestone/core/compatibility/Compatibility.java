@@ -1,6 +1,5 @@
 package nightkosh.gravestone.core.compatibility;
 
-import net.minecraftforge.fml.common.Loader;
 
 /**
  * GraveStone mod
@@ -13,19 +12,12 @@ public class Compatibility {
     private static final Compatibility INSTANCE = new Compatibility();
 
     private Compatibility() {
-        new CompatibilityTheCampingMod();
-
-//        new CompatibilityisArsMagica();
+        //TODO
+//        new CompatibilityTheCampingMod();
 
 //        new CompatibilityBackpacksMod();
 
-//        new CompatibilityBaubles();
-
-//        new CompatibilityMariculture();
-
 //        new CompatibilityRpgInventory();
-
-//        new CompatibilityGalacticraft();
 
 //        new CompatibilityEnderIO();
 

@@ -24,10 +24,11 @@ public class BackupsHelper {
 
     public static void clonePlayer(Player playerOld, Player playerNew) {
         try {
-            IBackups backupsOld = playerOld.getCapability(BackupProvider.BACKUP_CAP, null);
-            IBackups backupsNew = playerNew.getCapability(BackupProvider.BACKUP_CAP, null);
-
-            backupsNew.setBackups(backupsOld.getBackups());
+            //TODO
+//            IBackups backupsOld = playerOld.getCapability(BackupProvider.BACKUP_CAP, null);
+//            IBackups backupsNew = playerNew.getCapability(BackupProvider.BACKUP_CAP, null);
+//
+//            backupsNew.setBackups(backupsOld.getBackups());
         } catch (Exception e) {
             LOGGER.error("Can't restore backups at player death!");
         }
@@ -36,8 +37,10 @@ public class BackupsHelper {
     public static void addBackup(Entity entity, Level level, BlockPos pos, List<ItemStack> items) {
         if (GSConfigs.CREATE_BACKUPS.get() && entity instanceof Player) {
             try {
-                entity.getCapability(BackupProvider.BACKUP_CAP, null)
-                        .addBackup(new Backup(level.provider.getDimension(), pos, items));
+
+                //TODO
+//                entity.getCapability(BackupProvider.BACKUP_CAP, null)
+//                        .addBackup(new Backup(level.provider.getDimension(), pos, items));
             } catch (Exception e) {
                 LOGGER.error("Can't create backup!");
             }

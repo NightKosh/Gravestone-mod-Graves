@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.api.IGraveGeneration;
 import nightkosh.gravestone.api.IGraveStoneHelper;
@@ -20,10 +21,7 @@ import nightkosh.gravestone.capability.BackupStorage;
 import nightkosh.gravestone.capability.Backups;
 import nightkosh.gravestone.capability.IBackups;
 import nightkosh.gravestone.config.GSConfigs;
-import nightkosh.gravestone.core.CapabilityHandler;
-import nightkosh.gravestone.core.GSTileEntity;
-import nightkosh.gravestone.core.GuiHandler;
-import nightkosh.gravestone.core.GSTabs;
+import nightkosh.gravestone.core.*;
 import nightkosh.gravestone.core.commands.Commands;
 import nightkosh.gravestone.core.compatibility.Compatibility;
 import nightkosh.gravestone.core.event.EventHandlerNetwork;
@@ -59,6 +57,12 @@ public class ModGraveStone {
         INSTANCE = this;
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GSConfigs.SPEC, ModInfo.ID + ".toml");
+
+        var eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        GSBlocks.register(eventBus);
+
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     @Mod.EventHandler

@@ -11,10 +11,11 @@ import org.lwjgl.opengl.GL11;
  */
 public class ModelVillagerStatueGravestone extends ModelVillagerStatue {
 
-    @Override
-    public void renderAll() {
-        GL11.glTranslatef(0, 0.75F, 0);
-        GL11.glScalef(0.5f, 0.5f, 0.5f);
-        super.renderAll();
-    }
+    //TODO
+//    @Override
+//    public void renderAll() {
+//        GL11.glTranslatef(0, 0.75F, 0);
+//        GL11.glScalef(0.5f, 0.5f, 0.5f);
+//        super.renderAll();
+//    }
 }

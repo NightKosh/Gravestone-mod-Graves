@@ -2,6 +2,7 @@ package nightkosh.gravestone.inventory;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +18,9 @@ import java.util.*;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GraveInventory implements IInventory {
+
+//TODO
+public class GraveInventory {//implements IInventory {
 
     public static final int DEFAULT_INVENTORY_SIZE = 54;
     private GraveStoneBlockEntity tileEntity;
@@ -27,30 +30,33 @@ public class GraveInventory implements IInventory {
         this.tileEntity = tileEntity;
     }
 
-    public void readItems(CompoundTag nbtTag) {
-        NBTTagList ntbItemsList = nbtTag.getTagList("Items", 10);
+    public void readItems(CompoundTag tag) {
+        var tagList = tag.getList("Items", 10);
         items = new ArrayList<>(DEFAULT_INVENTORY_SIZE);
 
-        for (int i = 0; i < ntbItemsList.tagCount(); ++i) {
-            items.add(new ItemStack(ntbItemsList.getCompoundTagAt(i)));
+        for (int i = 0; i < tagList.size(); i++) {
+            //TODO
+//            items.add(new ItemStack(tagList.get(i)));
         }
     }
 
     public void saveItems(CompoundTag tag) {
-        var ntbList = new NBTTagList();
+        var ntbList = new ListTag();
 
         for (var stack : items) {
             if (stack != null && stack != ItemStack.EMPTY) {
                 var nbt = new CompoundTag();
-                stack.writeToNBT(nbt);
-                ntbList.appendTag(nbt);
+                //TODO
+//                stack.writeToNBT(nbt);
+//                ntbList.appendTag(nbt);
             }
         }
 
-        tag.setTag("Items", ntbList);
+        tag.put("Items", ntbList);
     }
 
-    @Override
+    //TODO
+//    @Override
     public boolean isEmpty() {
         return items.isEmpty();
     }
@@ -61,7 +67,8 @@ public class GraveInventory implements IInventory {
         }
     }
 
-    @Override
+    //TODO
+//    @Override
     public int getSizeInventory() {
         return items.size();
     }
@@ -70,7 +77,8 @@ public class GraveInventory implements IInventory {
         return (items.size() > DEFAULT_INVENTORY_SIZE) ? items.size() : DEFAULT_INVENTORY_SIZE;
     }
 
-    @Override
+    //TODO
+//    @Override
     public ItemStack getStackInSlot(int slot) {
         if (slot < items.size()) {
             return items.get(slot);
@@ -78,7 +86,8 @@ public class GraveInventory implements IInventory {
         return ItemStack.EMPTY;
     }
 
-    @Override
+    //TODO
+//    @Override
     public ItemStack decrStackSize(int slot, int amount) {
         ItemStack stack = getStackInSlot(slot);
         if (stack != null && stack != ItemStack.EMPTY) {
@@ -94,7 +103,8 @@ public class GraveInventory implements IInventory {
         return stack;
     }
 
-    @Override
+    //TODO
+//    @Override
     public ItemStack removeStackFromSlot(int slot) {
         ItemStack stack = getStackInSlot(slot);
         if (stack != null && stack != ItemStack.EMPTY) {
@@ -103,84 +113,87 @@ public class GraveInventory implements IInventory {
         return stack;
     }
 
-    @Override
+    //TODO
+//    @Override
     public void setInventorySlotContents(int slot, ItemStack stack) {
         if (slot < items.size()) {
             this.items.set(slot, stack);
         }
     }
 
+    //TODO
     /**
      * Returns the maximum stack size for a inventory slot.
      */
-    @Override
-    public int getInventoryStackLimit() {
-        return 64;
-    }
+//    @Override
+//    public int getInventoryStackLimit() {
+//        return 64;
+//    }
+//
+//    @Override
+//    public void markDirty() {
+//
+//    }
+//
+//    @Override
+//    public boolean isUsableByPlayer(Player player) {
+//        return player.getEntityWorld().getBlockEntity(this.tileEntity.getBlockPos()) == this.tileEntity &&
+//                player.getDistanceSq(new BlockPos(
+//                        this.tileEntity.getBlockPos().getX() + 0.5,
+//                        this.tileEntity.getBlockPos().getY() + 0.5,
+//                        this.tileEntity.getBlockPos().getZ() + 0.5)) < 64;
+//    }
+//
+//    @Override
+//    public void openInventory(Player player) {
+//
+//    }
 
-    @Override
-    public void markDirty() {
-
-    }
-
-    @Override
-    public boolean isUsableByPlayer(Player player) {
-        return player.getEntityWorld().getTileEntity(this.tileEntity.getBlockPos()) == this.tileEntity &&
-                player.getDistanceSq(new BlockPos(
-                        this.tileEntity.getBlockPos().getX() + 0.5,
-                        this.tileEntity.getBlockPos().getY() + 0.5,
-                        this.tileEntity.getBlockPos().getZ() + 0.5)) < 64;
-    }
-
-    @Override
-    public void openInventory(Player player) {
-
-    }
-
-    @Override
-    public void closeInventory(Player player) {
-
-    }
-
-    @Override
-    public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return false;
-    }
-
-    @Override
-    public int getField(int id) {
-        return 0;
-    }
-
-    @Override
-    public void setField(int id, int value) {
-
-    }
-
-    @Override
-    public int getFieldCount() {
-        return 0;
-    }
-
-    @Override
-    public void clear() {
-        this.items.clear();
-    }
-
-    @Override
-    public String getName() {
-        return "";
-    }
-
-    @Override
-    public boolean hasCustomName() {
-        return false;
-    }
-
-    @Override
-    public ITextComponent getDisplayName() {
-        return null;
-    }
+    //TODO
+//    @Override
+//    public void closeInventory(Player player) {
+//
+//    }
+//
+//    @Override
+//    public boolean isItemValidForSlot(int index, ItemStack stack) {
+//        return false;
+//    }
+//
+//    @Override
+//    public int getField(int id) {
+//        return 0;
+//    }
+//
+//    @Override
+//    public void setField(int id, int value) {
+//
+//    }
+//
+//    @Override
+//    public int getFieldCount() {
+//        return 0;
+//    }
+//
+//    @Override
+//    public void clear() {
+//        this.items.clear();
+//    }
+//
+//    @Override
+//    public String getName() {
+//        return "";
+//    }
+//
+//    @Override
+//    public boolean hasCustomName() {
+//        return false;
+//    }
+//
+//    @Override
+//    public ITextComponent getDisplayName() {
+//        return null;
+//    }
 
     /**
      * Set items as grave loot
@@ -232,14 +245,17 @@ public class GraveInventory implements IInventory {
     public static void dropItem(ItemStack stack, Level level, BlockPos pos) {
         if (stack != null && stack != ItemStack.EMPTY) {
             var entityItem = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack.copy());
-            entityItem.motionX = level.getRandom().nextGaussian() * 0.2;
-            entityItem.motionY = level.getRandom().nextGaussian() * 0.2;
-            entityItem.motionZ = level.getRandom().nextGaussian() * 0.2;
 
-            if (stack.hasTagCompound()) {
-                entityItem.getItem().setTagCompound(stack.getTagCompound().copy());
+            //TODO
+//            entityItem.motionX = level.getRandom().nextGaussian() * 0.2;
+//            entityItem.motionY = level.getRandom().nextGaussian() * 0.2;
+//            entityItem.motionZ = level.getRandom().nextGaussian() * 0.2;
+
+            if (stack.hasTag()) {
+                entityItem.getItem().setTag(stack.getTag().copy());
             }
-            level.spawnEntity(entityItem);
+            //TODO
+//            level.spawnEntity(entityItem);
         }
     }
 

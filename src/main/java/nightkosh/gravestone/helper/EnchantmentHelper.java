@@ -1,10 +1,8 @@
 package nightkosh.gravestone.helper;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 
 /**
  * GraveStone mod
@@ -19,14 +17,14 @@ public class EnchantmentHelper {
     }
 
     public static boolean hasEnchantment(ItemStack item, Enchantment enchantment, int lvl) {
-        return hasEnchantment(item, Enchantment.getEnchantmentID(enchantment), lvl);
+        return false;//TODO hasEnchantment(item, Enchantment.getEnchantmentID(enchantment), lvl);
     }
 
     public static boolean hasEnchantment(ItemStack item, int id, int lvl) {
-        NBTTagList nbtList = item.getEnchantmentTagList();
-        for (NBTBase nbt : nbtList) {
-            if (((CompoundTag) nbt).getInteger("id") == id) {
-                return lvl == 0 || lvl == ((CompoundTag) nbt).getShort("lvl");
+        var tags = item.getEnchantmentTags();
+        for (var tag : tags) {
+            if (((CompoundTag) tag).getInt("id") == id) {
+                return lvl == 0 || lvl == ((CompoundTag) tag).getShort("lvl");
             }
         }
         return false;

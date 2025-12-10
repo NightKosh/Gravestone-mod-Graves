@@ -11,10 +11,11 @@ import org.lwjgl.opengl.GL11;
  */
 public class ModelCreeperStatueGravestone extends ModelCreeperStatue {
 
-    @Override
-    public void customRender(boolean enchanted) {
-        GL11.glTranslatef(0, 0.82F, 0);
-        GL11.glScalef(0.5f, 0.5f, 0.5f);
-        super.customRender(enchanted);
-    }
+    //TODO
+//    @Override
+//    public void customRender(boolean enchanted) {
+//        GL11.glTranslatef(0, 0.82F, 0);
+//        GL11.glScalef(0.5f, 0.5f, 0.5f);
+//        super.customRender(enchanted);
+//    }
 }

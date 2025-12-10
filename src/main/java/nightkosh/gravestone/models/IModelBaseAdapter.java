@@ -8,5 +8,6 @@ package nightkosh.gravestone.models;
  */
 public interface IModelBaseAdapter {
 
-    public void setTexturesOffset(String name, int xPos, int zPos);
+    void setTexturesOffset(String name, int xPos, int zPos);
+
 }

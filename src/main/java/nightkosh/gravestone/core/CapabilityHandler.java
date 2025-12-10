@@ -4,7 +4,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import nightkosh.gravestone.api.ModInfo;
 import nightkosh.gravestone.capability.BackupProvider;
 
@@ -20,11 +19,12 @@ public class CapabilityHandler {
 
     public static final ResourceLocation BACKUP_CAP = fromNamespaceAndPath(ModInfo.ID, "backup");
 
-    @SubscribeEvent
-    public void attachPlayerCapability(AttachCapabilitiesEvent<Entity> event) {
-        if (event.getObject() instanceof Player) {
-            event.addCapability(BACKUP_CAP, new BackupProvider());
-        }
-    }
+    //TODO
+//    @SubscribeEvent
+//    public void attachPlayerCapability(AttachCapabilitiesEvent<Entity> event) {
+//        if (event.getObject() instanceof Player) {
+//            event.addCapability(BACKUP_CAP, new BackupProvider());
+//        }
+//    }
 
 }

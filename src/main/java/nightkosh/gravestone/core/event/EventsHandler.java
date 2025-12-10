@@ -31,16 +31,19 @@ public class EventsHandler {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onPlayerClone(PlayerEvent.Clone event) {
         if (event.isWasDeath()) {
-            BackupsHelper.clonePlayer(event.getOriginal(), event.getPlayer());
+            //TODO
+//            BackupsHelper.clonePlayer(event.getOriginal(), event.getPlayer());
         }
     }
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void onEntityLivingDeath(LivingDeathEvent event) {
-        if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-            if (!GSConfigs.GENERATE_GRAVES_IN_LAVA.get() && event.getSource().damageType.equals("lava")) {
-                return;
-            }
+        if (true) {//TODO FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+
+            //TODO
+//            if (!GSConfigs.GENERATE_GRAVES_IN_LAVA.get() && event.getSource().damageType.equals("lava")) {
+//                return;
+//            }
 
             if (GSConfigs.GENERATE_VILLAGER_GRAVES.get() && event.getEntity() instanceof Villager villager) {
                 for (IVillagerDeathHandler villagerDeathHandler : APIGraveGeneration.VILLAGER_DEATH_HANDLERS) {
@@ -90,51 +93,52 @@ public class EventsHandler {
         }
     }
 
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void onPlayerDrops(PlayerDropsEvent event) {
-        if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-            if (!GSConfigs.GENERATE_GRAVES_IN_LAVA.get() && event.getSource().damageType.equals("lava")) {
-                return;
-            }
-
-            if (GSConfigs.GENERATE_PLAYER_GRAVES.get() && event.getEntityLiving() instanceof Player player) {
-//                if (!GSConfigs.playerGravesDimensionalBlackList.contains(player.dimension)) {//TODO
-                if (true) {
-                    for (IPlayerDeathHandler playerDeathHandler : APIGraveGeneration.PLAYER_DEATH_HANDLERS) {
-                        if (playerDeathHandler.cancelGraveGeneration(player, event.getSource())) {
-                            return;
-                        }
-                    }
-
-                    GraveGenerationHelper.createPlayerGrave(player, event.getDrops(), event.getSource(), MobHandler.getAndRemoveSpawnTime(player));
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public void entityJoinWorldEvent(EntityJoinWorldEvent event) {
-        if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-            Entity entity = event.getEntity();
-            if (entity instanceof Villager ||
-                    entity instanceof Wolf ||
-                    entity instanceof Cat ||
-                    entity instanceof Horse) {
-                MobHandler.setMobSpawnTime(event.getEntity());
-            }
-        }
-    }
-
-    // TODO remove mobs info at despawn
-
-    @SubscribeEvent
-    public void worldLoading(WorldEvent.Load event) {
-        if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-            MobHandler.loadMobsSpawnTime(event.getWorld());
-            GravesLogger.setWorldDirectory(event.getWorld().getSaveHandler().getWorldDirectory());
-        }
-    }
+    //TODO
+//
+//    @SubscribeEvent(priority = EventPriority.LOWEST)
+//    public void onPlayerDrops(PlayerDropsEvent event) {
+//        if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+//            if (!GSConfigs.GENERATE_GRAVES_IN_LAVA.get() && event.getSource().damageType.equals("lava")) {
+//                return;
+//            }
+//
+//            if (GSConfigs.GENERATE_PLAYER_GRAVES.get() && event.getEntityLiving() instanceof Player player) {
+////                if (!GSConfigs.playerGravesDimensionalBlackList.contains(player.dimension)) {//TODO
+//                if (true) {
+//                    for (IPlayerDeathHandler playerDeathHandler : APIGraveGeneration.PLAYER_DEATH_HANDLERS) {
+//                        if (playerDeathHandler.cancelGraveGeneration(player, event.getSource())) {
+//                            return;
+//                        }
+//                    }
+//
+//                    GraveGenerationHelper.createPlayerGrave(player, event.getDrops(), event.getSource(), MobHandler.getAndRemoveSpawnTime(player));
+//                }
+//            }
+//        }
+//    }
+//
+//    @SubscribeEvent
+//    public void entityJoinWorldEvent(EntityJoinWorldEvent event) {
+//        if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+//            Entity entity = event.getEntity();
+//            if (entity instanceof Villager ||
+//                    entity instanceof Wolf ||
+//                    entity instanceof Cat ||
+//                    entity instanceof Horse) {
+//                MobHandler.setMobSpawnTime(event.getEntity());
+//            }
+//        }
+//    }
+//
+//    // TODO remove mobs info at despawn
+//
+//    @SubscribeEvent
+//    public void worldLoading(WorldEvent.Load event) {
+//        if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+//            MobHandler.loadMobsSpawnTime(event.getWorld());
+//            GravesLogger.setWorldDirectory(event.getWorld().getSaveHandler().getWorldDirectory());
+//        }
+//    }
 
     //TODO remove #245 !!!!!!!!!!!!!!!!!!!!!!!
 //    @SubscribeEvent

@@ -46,20 +46,21 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
         this.setLevel(level);
     }
 
-    @Override
-    public void update() {
-        if (spawnerHelperId != 0 && spawnerHelper == null) {
-            Entity entity = this.getLevel().getEntityByID(spawnerHelperId);
-
-            if (entity instanceof GroupOfGravesSpawnerHelper) {
-                spawnerHelper = (GroupOfGravesSpawnerHelper) entity;
-            }
-        }
-
-        spawner.update();
-
-        fogHandler.addFog(this.getLevel(), this.getBlockPos());
-    }
+    //TODO
+//    @Override
+//    public void update() {
+//        if (spawnerHelperId != 0 && spawnerHelper == null) {
+//            var entity = this.getLevel().getEntity(spawnerHelperId);
+//
+//            if (entity instanceof GroupOfGravesSpawnerHelper) {
+//                spawnerHelper = (GroupOfGravesSpawnerHelper) entity;
+//            }
+//        }
+//
+//        spawner.update();
+//
+//        fogHandler.addFog(this.getLevel(), this.getBlockPos());
+//    }
 
     @Override
     public Level getIWorld() {
@@ -71,36 +72,37 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
         return getBlockPos();
     }
 
-    @Override
-    public boolean receiveClientEvent(int par1, int par2) {
-        if (par1 == 1 && this.getLevel().isClientSide()) {
-            spawner.setMinDelay();
-        }
+    //TODO
+//    @Override
+//    public boolean receiveClientEvent(int par1, int par2) {
+//        if (par1 == 1 && this.getLevel().isClientSide()) {
+//            spawner.setMinDelay();
+//        }
+//
+//        return true;
+//    }
 
-        return true;
-    }
-
     @Override
-    public void readFromNBT(CompoundTag nbtTag) {
-        super.readFromNBT(nbtTag);
+    public void readFromNBT(CompoundTag tag) {
+        super.readFromNBT(tag);
         // age
-        age = nbtTag.getInteger("Age");
+        age = tag.getInt("Age");
         // grave loot
-        inventory.readItems(nbtTag);
+        inventory.readItems(tag);
         // death text
-        deathText.readText(nbtTag);
+        deathText.readText(tag);
         // sword
-        readSwordInfo(nbtTag);
+        readSwordInfo(tag);
         // flower
-        readFlowerInfo(nbtTag);
+        readFlowerInfo(tag);
         // owner
-        playerId = nbtTag.getString("PlayerId");
+        playerId = tag.getString("PlayerId");
 
-        isPurified = nbtTag.getBoolean("Purified");
+        isPurified = tag.getBoolean("Purified");
 
         //spawnerHelper
-        if (nbtTag.hasKey("SpawnerHelperId")) {
-            spawnerHelperId = nbtTag.getInteger("SpawnerHelperId");
+        if (tag.contains("SpawnerHelperId")) {
+            spawnerHelperId = tag.getInt("SpawnerHelperId");
         }
     }
 
@@ -108,7 +110,7 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
     public CompoundTag writeToNBT(CompoundTag tag) {
         tag = super.writeToNBT(tag);
         // age
-        tag.setInteger("Age", age);
+        tag.putInt("Age", age);
         // grave loot
         inventory.saveItems(tag);
         // death text
@@ -124,36 +126,39 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
 
         //spawnerHelper
         if (haveSpawnerHelper()) {
-            tag.setInteger("SpawnerHelperId", spawnerHelper.getEntityId());
+            //TODO
+//            tag.putInt("SpawnerHelperId", spawnerHelper.getEntityId());
         }
         return tag;
     }
 
-    private void readSwordInfo(CompoundTag nbtTag) {
-        if (nbtTag.hasKey("Sword")) {
-            sword = new ItemStack(nbtTag.getCompoundTag("Sword"));
+    private void readSwordInfo(CompoundTag tag) {
+        if (tag.contains("Sword")) {
+            //TODO
+//            sword = new ItemStack(tag.get("Sword"));
         }
     }
 
-    private void writeSwordInfo(CompoundTag nbtTag) {
+    private void writeSwordInfo(CompoundTag tag) {
         if (sword != null) {
-            var swordNBT = new CompoundTag();
-            sword.writeToNBT(swordNBT);
-            nbtTag.setTag("Sword", swordNBT);
+            var swordTag = new CompoundTag();
+            sword.save(swordTag);
+            tag.put("Sword", swordTag);
         }
     }
 
     private void readFlowerInfo(CompoundTag tag) {
-        if (tag.hasKey("Flower")) {
-            flower = new ItemStack(tag.getCompoundTag("Flower"));
+        if (tag.contains("Flower")) {
+            //TODO
+//            flower = new ItemStack(tag.get("Flower"));
         }
     }
 
     private void writeFlowerInfo(CompoundTag nbtTag) {
         if (flower != null) {
-            var flowerNBT = new CompoundTag();
-            flower.writeToNBT(flowerNBT);
-            nbtTag.setTag("Flower", flowerNBT);
+            var flowerTag = new CompoundTag();
+            flower.save(flowerTag);
+            nbtTag.put("Flower", flowerTag);
         }
     }
 
@@ -223,8 +228,9 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
     public boolean canBeLooted(Player player) {
         if (GSConfigs.ONLY_OWNER_CAN_LOOT_GRAVE.get()) {
             if (player != null) {
-                String playerId = player.getUniqueID().toString();
-                return player.isCreative() || StringUtils.isBlank(this.playerId) || playerId.equals(this.playerId) || inventory.getGraveContent().isEmpty();
+                return false;//TODO
+//                String playerId = player.getUniqueID().toString();
+//                return player.isCreative() || StringUtils.isBlank(this.playerId) || playerId.equals(this.playerId) || inventory.getGraveContent().isEmpty();
             }
             return false;
         }
@@ -244,7 +250,8 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
     public void setSpawnerHelper(GroupOfGravesSpawnerHelper spawnerHelper) {
         this.spawnerHelper = spawnerHelper;
         if (spawnerHelper != null) {
-            this.spawnerHelperId = spawnerHelper.getEntityId();
+            //TODO
+//            this.spawnerHelperId = spawnerHelper.getEntityId();
         }
     }
 

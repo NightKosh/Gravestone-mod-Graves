@@ -1,6 +1,7 @@
 package nightkosh.gravestone.core.compatibility;
 
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import nightkosh.gravestone.api.GraveStoneAPI;
 
@@ -29,7 +30,7 @@ public class CompatibilityWitchery implements ICompatibility {
 
                             if ((Boolean) isVampireMethod.invoke(extendedPlayer)) {
                                 Class utilClass = Class.forName("com.emoniph.witchery.util.CreatureUtil");
-                                Method checkForDeathMethod = utilClass.getDeclaredMethod("checkForVampireDeath", EntityLivingBase.class, DamageSource.class);
+                                Method checkForDeathMethod = utilClass.getDeclaredMethod("checkForVampireDeath", LivingEntity.class, DamageSource.class);
                                 return !(Boolean) checkForDeathMethod.invoke(null, player, source);
                             }
                         } catch (ClassNotFoundException e) {

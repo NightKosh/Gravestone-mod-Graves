@@ -1,7 +1,5 @@
 package nightkosh.gravestone.core.commands;
 
-import net.minecraft.command.CommandHandler;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 /**
  * GraveStone mod
@@ -11,11 +9,12 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
  */
 public class Commands {
 
-    public static void registration(FMLServerStartingEvent event) {
-        CommandHandler commandManager = (CommandHandler) event.getServer().getCommandManager();
-        commandManager.registerCommand(new Command());
-        commandManager.registerCommand(new CommandLowerCase());
-        commandManager.registerCommand(new CommandGravestone());
-        commandManager.registerCommand(new CommandGravestoneLowerCase());
-    }
+    //TODO
+//    public static void registration(FMLServerStartingEvent event) {
+//        CommandHandler commandManager = (CommandHandler) event.getServer().getCommandManager();
+//        commandManager.registerCommand(new Command());
+//        commandManager.registerCommand(new CommandLowerCase());
+//        commandManager.registerCommand(new CommandGravestone());
+//        commandManager.registerCommand(new CommandGravestoneLowerCase());
+//    }
 }

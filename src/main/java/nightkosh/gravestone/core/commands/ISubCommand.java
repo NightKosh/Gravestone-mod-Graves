@@ -1,7 +1,5 @@
 package nightkosh.gravestone.core.commands;
 
-import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 
 /**
@@ -12,11 +10,14 @@ import net.minecraft.server.MinecraftServer;
  */
 public interface ISubCommand {
 
-    public String getCommandName();
+    String getCommandName();
 
-    public default String getCommandUsage() {
+    default String getCommandUsage() {
         return Command.MAIN_COMMAND_NAME + getCommandName();
     }
 
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException;
+
+    //TODO
+//    void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException;
+
 }

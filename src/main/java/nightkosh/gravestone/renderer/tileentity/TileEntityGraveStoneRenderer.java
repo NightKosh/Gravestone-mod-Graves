@@ -2,21 +2,13 @@ package nightkosh.gravestone.renderer.tileentity;
 
 import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderEntityItem;
-import net.minecraft.client.renderer.texture.LayeredTexture;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.GSConfigs;
@@ -35,7 +27,9 @@ import java.util.Map;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-@SideOnly(Side.CLIENT)
+
+//TODO
+//@SideOnly(Side.CLIENT)
 public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     protected static final Map<EnumGraves, ResourceLocation> mossyTexturesMap = Maps.newHashMap();
@@ -59,8 +53,8 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     protected static final GraveStoneBlockEntity GRAVE_TE = new GraveStoneBlockEntity();
     protected static final ItemStack SWORD = new ItemStack(Items.IRON_SWORD);
 
-    public static final Map<Item, EntityItem> flowersMap = new HashMap<>();
-    public static final Map<Item, EntityItem> swordsMap = new HashMap<>();
+    public static final Map<Item, ItemEntity> flowersMap = new HashMap<>();
+    public static final Map<Item, ItemEntity> swordsMap = new HashMap<>();
 
     public static final Map<Item, ResourceLocation> swordsTextureMap = new HashMap<>();
 
@@ -78,65 +72,67 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         instance = this;
     }
 
-    @Override
-    public void render(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        GraveStoneBlockEntity tileEntity = (GraveStoneBlockEntity) te;
-        boolean isSwordGrave;
-        boolean isEnchanted;
-        ItemStack sword;
-
-        if (tileEntity == null) {
-            tileEntity = GRAVE_TE;
-            isSwordGrave = isSwordGrave();
-            isEnchanted = false;
-            sword = SWORD;
-        } else {
-            isSwordGrave = tileEntity.isSwordGrave();
-            sword = tileEntity.getSword();
-            isEnchanted = tileEntity.isEnchanted();
-        }
-        EnumGraves graveType = tileEntity.getGraveType();
-
-        int meta = 0;
-        if (tileEntity.getWorld() != null) {
-            meta = tileEntity.getBlockMetadata();
-            if (meta > 5) {
-                meta = 0;
-            }
-        }
-        EnumFacing facing = EnumFacing.values()[meta];
-
-        renderGrave(x, y, z, tileEntity.getWorld(), graveType, isEnchanted, tileEntity.isMossy(),
-                tileEntity.hasFlower(), tileEntity.getFlower(), isSwordGrave, sword, facing);
-    }
-
-    public void renderGrave(double x, double y, double z, World world, EnumGraves graveType,
-                            boolean isEnchanted, boolean isMossy, boolean hasFlower, ItemStack flower,
-                            boolean isSwordGrave, ItemStack sword, EnumFacing facing) {
-        GL11.glPushMatrix();
-
-        GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-        GL11.glScalef(1, -1, -1);
-
-        switch (facing) {
-            case SOUTH:
-                GL11.glRotatef(0, 0, 1, 0);
-                break;
-            case WEST:
-                GL11.glRotatef(90, 0, 1, 0);
-                break;
-            case NORTH:
-                GL11.glRotatef(180, 0, 1, 0);
-                break;
-            case EAST:
-                GL11.glRotatef(270, 0, 1, 0);
-                break;
-        }
-
-        renderGrave(world, graveType, isEnchanted, isMossy, hasFlower, flower, isSwordGrave, sword);
-
-        GL11.glPopMatrix();
-    }
+    //TODO
+//
+//    @Override
+//    public void render(BlockEntity blockEntity, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+//        var tileEntity = (GraveStoneBlockEntity) blockEntity;
+//        boolean isSwordGrave;
+//        boolean isEnchanted;
+//        ItemStack sword;
+//
+//        if (tileEntity == null) {
+//            tileEntity = GRAVE_TE;
+//            isSwordGrave = isSwordGrave();
+//            isEnchanted = false;
+//            sword = SWORD;
+//        } else {
+//            isSwordGrave = tileEntity.isSwordGrave();
+//            sword = tileEntity.getSword();
+//            isEnchanted = tileEntity.isEnchanted();
+//        }
+//        EnumGraves graveType = tileEntity.getGraveType();
+//
+//        int meta = 0;
+//        if (tileEntity.getLevel() != null) {
+//            meta = tileEntity.getBlockMetadata();
+//            if (meta > 5) {
+//                meta = 0;
+//            }
+//        }
+//        var facing = EnumFacing.values()[meta];
+//
+//        renderGrave(x, y, z, tileEntity.getLevel(), graveType, isEnchanted, tileEntity.isMossy(),
+//                tileEntity.hasFlower(), tileEntity.getFlower(), isSwordGrave, sword, facing);
+//    }
+//
+//    public void renderGrave(double x, double y, double z, Level level, EnumGraves graveType,
+//                            boolean isEnchanted, boolean isMossy, boolean hasFlower, ItemStack flower,
+//                            boolean isSwordGrave, ItemStack sword, EnumFacing facing) {
+//        GL11.glPushMatrix();
+//
+//        GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+//        GL11.glScalef(1, -1, -1);
+//
+//        switch (facing) {
+//            case SOUTH:
+//                GL11.glRotatef(0, 0, 1, 0);
+//                break;
+//            case WEST:
+//                GL11.glRotatef(90, 0, 1, 0);
+//                break;
+//            case NORTH:
+//                GL11.glRotatef(180, 0, 1, 0);
+//                break;
+//            case EAST:
+//                GL11.glRotatef(270, 0, 1, 0);
+//                break;
+//        }
+//
+//        renderGrave(level, graveType, isEnchanted, isMossy, hasFlower, flower, isSwordGrave, sword);
+//
+//        GL11.glPopMatrix();
+//    }
 
     public void renderGraveAsItem(EnumGraves graveType, boolean isEnchanted, boolean isMossy, boolean isSwordGrave, ItemStack sword) {
         GL11.glPushMatrix();
@@ -155,37 +151,39 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         GL11.glPopMatrix();
     }
 
-    public void renderGrave(World world, EnumGraves graveType, boolean isEnchanted, boolean isMossy, boolean hasFlower, ItemStack flower, boolean isSwordGrave, ItemStack sword) {
+    public void renderGrave(Level level, EnumGraves graveType, boolean isEnchanted, boolean isMossy, boolean hasFlower, ItemStack flower, boolean isSwordGrave, ItemStack sword) {
         if (isSwordGrave) {
             ResourceLocation swordTexture = swordsTextureMap.get(sword.getItem());
             if (GSConfigs.VANILLA_RENDERER_FOR_SWORDS_GRAVES.get()) {
-                if (world == null) {
+                if (level == null) {
                     GL11.glScalef(0.5F, -0.5F, -0.5F);
                     GL11.glTranslatef(-0.37F, -1.7F, 0);
                 } else {
                     GL11.glScalef(1, -1, -1);
                     GL11.glTranslatef(-0.27F, -0.83F, 0);
                 }
-                renderSword(world, sword);
+                renderSword(level, sword);
             } else {
                 ModelGraveStone model;
-                if (swordTexture != null) {
-                    model = getModel(graveType.getGraveType());
-                    bindTextureByName(swordTexture);
-                } else {
-                    model = getModel(EnumGraveType.VERTICAL_PLATE);
-                    bindTextureByName(graveType.getTexture());
-                }
-                if (isEnchanted) {
-                    model.renderEnchanted();
-                } else {
-                    model.renderAll();
-                }
+                //TODO
+//                if (swordTexture != null) {
+//                    model = getModel(graveType.getGraveType());
+//                    bindTextureByName(swordTexture);
+//                } else {
+//                    model = getModel(EnumGraveType.VERTICAL_PLATE);
+//                    bindTextureByName(graveType.getTexture());
+//                }
+//                if (isEnchanted) {
+//                    model.renderEnchanted();
+//                } else {
+//                    model.renderAll();
+//                }
             }
         } else {
             ModelGraveStone model = getModel(graveType.getGraveType());
 
-            bindTextureByName(getTexture(graveType, graveType.getTexture(), isMossy));
+            //TODO
+//            bindTextureByName(getTexture(graveType, graveType.getTexture(), isMossy));
             if (graveType.getGraveType() == EnumGraveType.CREEPER_STATUE) {
                 model.customRender(isEnchanted);
             } else {
@@ -197,7 +195,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
             }
 
             if (hasFlower) {
-                renderFlower(world, flower);
+                renderFlower(level, flower);
             }
         }
     }
@@ -207,10 +205,12 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
             ResourceLocation mixedMossyTexture = mossyTexturesMap.get(graveType);
             if (mixedMossyTexture == null) {
                 ResourceLocation mossyTexture = getMossyTexture(graveType.getGraveType());
-                mixedMossyTexture = new ResourceLocation(texture.getResourceDomain() + ":mossy_" + texture.getResourcePath());
-                Minecraft.getMinecraft().getTextureManager().loadTexture(mixedMossyTexture,
-                        new LayeredTexture(texture.getResourceDomain() + ":" + texture.getResourcePath(),
-                                mossyTexture.getResourceDomain() + ":" + mossyTexture.getResourcePath()));
+
+                //TODO
+//                mixedMossyTexture = new ResourceLocation(texture.getResourceDomain() + ":mossy_" + texture.getResourcePath());
+//                Minecraft.getMinecraft().getTextureManager().loadTexture(mixedMossyTexture,
+//                        new LayeredTexture(texture.getResourceDomain() + ":" + texture.getResourcePath(),
+//                                mossyTexture.getResourceDomain() + ":" + mossyTexture.getResourcePath()));
                 mossyTexturesMap.put(graveType, mixedMossyTexture);
                 return mixedMossyTexture;
             } else {
@@ -279,28 +279,30 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         }
     }
 
-    protected void renderSword(World world, ItemStack sword) {
-        EntityItem entityItem = swordsMap.get(sword.getItem());
+    protected void renderSword(Level level, ItemStack sword) {
+        var entityItem = swordsMap.get(sword.getItem());
         if (entityItem == null) {
-            entityItem = new EntityItem(world, 0, 0, 0, sword);
+            entityItem = new ItemEntity(level, 0, 0, 0, sword);
             swordsMap.put(sword.getItem(), entityItem);
         }
 
-        entityItem.hoverStart = 0;
+        //TODO
+//        entityItem.hoverStart = 0;
         GL11.glRotatef(225, 0, 0, 1);
 
         renderItem(sword, entityItem);
     }
 
-    protected void renderFlower(World world, ItemStack flower) {
+    protected void renderFlower(Level level, ItemStack flower) {
         if (GSConfigs.RENDER_GRAVES_FLOWERS.get()) {
-            EntityItem entityItem = flowersMap.get(flower.getItem());
+            var entityItem = flowersMap.get(flower.getItem());
             if (entityItem == null) {
-                entityItem = new EntityItem(world, 0, 0, 0, flower);
+                entityItem = new ItemEntity(level, 0, 0, 0, flower);
                 flowersMap.put(flower.getItem(), entityItem);
             }
 
-            entityItem.hoverStart = 0;
+            //TODO
+//            entityItem.hoverStart = 0;
             GL11.glTranslatef(0, 1.4F, -0.1F);
             GL11.glScalef(0.6F, -0.6F, -0.6F);
             GL11.glRotatef(45, 0, 1, 0);
@@ -313,31 +315,33 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         }
     }
 
-    protected void renderItem(ItemStack itemstack, EntityItem entityItem) {
-        Render<EntityItem> render = Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(entityItem);
-        if (render != null && render instanceof RenderEntityItem) {
-            GlStateManager.pushMatrix();
+    protected void renderItem(ItemStack itemstack, ItemEntity entityItem) {
 
-            RenderEntityItem renderItem = (RenderEntityItem) render;
-            renderItem.bindEntityTexture(entityItem);
-
-            GlStateManager.enableRescaleNormal();
-            GlStateManager.alphaFunc(516, 0.1F);
-            GlStateManager.enableBlend();
-            GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-            IBakedModel ibakedmodel = renderItem.itemRenderer.getItemModelMesher().getItemModel(itemstack);
-
-            GlStateManager.translate(0, 0.35F, 0);
-
-            if (ibakedmodel.isGui3d()) {
-                GlStateManager.scale(0.5F, 0.5F, 0.5F);
-            }
-            renderItem.itemRenderer.renderItem(itemstack, ibakedmodel);
-
-            GlStateManager.disableRescaleNormal();
-            GlStateManager.disableBlend();
-            GlStateManager.popMatrix();
-        }
+        //TODO
+//        Render<ItemEntity> render = Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(entityItem);
+//        if (render != null && render instanceof RenderEntityItem) {
+//            GlStateManager.pushMatrix();
+//
+//            RenderEntityItem renderItem = (RenderEntityItem) render;
+//            renderItem.bindEntityTexture(entityItem);
+//
+//            GlStateManager.enableRescaleNormal();
+//            GlStateManager.alphaFunc(516, 0.1F);
+//            GlStateManager.enableBlend();
+//            GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+//            IBakedModel ibakedmodel = renderItem.itemRenderer.getItemModelMesher().getItemModel(itemstack);
+//
+//            GlStateManager.translate(0, 0.35F, 0);
+//
+//            if (ibakedmodel.isGui3d()) {
+//                GlStateManager.scale(0.5F, 0.5F, 0.5F);
+//            }
+//            renderItem.itemRenderer.renderItem(itemstack, ibakedmodel);
+//
+//            GlStateManager.disableRescaleNormal();
+//            GlStateManager.disableBlend();
+//            GlStateManager.popMatrix();
+//        }
     }
 
     protected boolean isSwordGrave() {
