@@ -1,6 +1,9 @@
 {
   "pack": {
-    "pack_format": 1,
-    "description": "Resources used for Gravestone"
+    "description": {
+      "text": "Resources used for Gravestone mod - Graves"
+    },
+    "forge:server_data_pack_format": 12,
+    "pack_format": 13
   }
 }

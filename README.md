@@ -5,7 +5,7 @@ Adds a gravestone to the game, which spawns after player's death.
 
 For more information visit [official site](http://gravestone.nightkosh.com/) or [minecraft forum](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1288082)
 
-**Since minecraft 1.8 this mod splitted on 2 parts - "Graves" and "[Extended](https://github.com/NightKosh/Gravestone-mod-Extended)".**
+**Since minecraft 1.8 this mod split on 2 parts - "Graves" and "[Extended](https://github.com/NightKosh/Gravestone-mod-Extended)".**
 
 ## Minecraft versions
 "Master branch" contains mod sources for the latest version of the Minecraft I'm working on. Any previous versions contains in an own branches.
@@ -15,22 +15,16 @@ For more information visit [official site](http://gravestone.nightkosh.com/) or 
 
 ## Requirements
 1. [Forge](http://files.minecraftforge.net/) (check "build.gradle" file to know required forge version)
-   * Latest versions of Forge requires [Gradle 2.0](https://gradle.org/) or higher
-2. "Master branch" version of mod requires [jdk 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)(do not forget to enable java 8 support in your IDE)
+2. [jdk 1.17](https://jdk.java.net/archive/) (do not forget to enable its support in your IDE)
+3. [Gradle 8.14.3](https://gradle.org/releases/)
 
 ## Dependencies.
 **Be careful some of these API may not be updated yet, or may be bugged!**
-
 1. [Gravestone mod - Graves API](https://github.com/NightKosh/Gravestone-mod-Graves-API) (will be loaded as git submodule)
-2. ~~[Baubles API](https://github.com/Azanor/Baubles) (will be loaded as git submodule)~~
-3. ~~[Galacticraft API](https://github.com/micdoodle8/Galacticraft-API)~~
-4. ~~[Mariculture API](https://github.com/joshiejack/Mariculture)~~
-5. ~~[Thaumcraft API](https://github.com/Azanor/thaumcraft-api) (will be loaded as git submodule)~~
-6. [wolfarmor-api](https://github.com/satyrnidae/wolfarmor-api) (will be loaded as git submodule)
 
 ## Get started
-1. Clone mod repository 
-2. [Download forge](http://files.minecraftforge.net/) and copy "gradlew.bat", "gradlew" files and "gradle" directory to mod folder
+1. Clone mod repository
+2. Download forge and copy "gradlew.bat", "gradlew" files and "gradle" directory to mod folder(and any other files which may requires)
 3. Download mod's API
    * Download [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
       * Run next commands from mod folder:
@@ -39,6 +33,30 @@ For more information visit [official site](http://gravestone.nightkosh.com/) or 
         git submodule update
       ```
    * ~~Download other API's manually and place them into "src/main/java" folder~~
-4. Run "./gradlew setupDecompWorkspace idea" from mod folder
+4. Download MDK from forge
 5. Import mod to your ide as "new Gradle project"
 
+## Gradle commands
+1. Download MDK from forge
+   for eclipse:
+    ```
+        gradlew genEclipseRuns
+    ```
+   for IntelliJ IDEA:
+    ```
+        gradlew genIntellijRuns
+    ```
+2. Running client
+    ```
+        gradlew runClient
+    ```
+3. Running Server
+    ```
+        gradlew runServer
+    ```
+4. Build mod as .jar file
+    ```
+        gradlew build
+    ```
+
+For more information, look at "minecraft forge" README.txt file (it's not included to this repository) or [this link](https://gist.github.com/mcenderdragon/6c7af2daf6f72b0cadf0c63169a87583)
