@@ -11,11 +11,12 @@ eclipse
 idea
 gradle
 build
+run/*
+
 #api
 src/main/java/mariculture
 src/main/java/micdoodle8
 src/main/java/tconstruct
-run/*
 
 # Package Files #
 *.jar
