@@ -11,7 +11,7 @@ eclipse
 idea
 gradle
 build
-run/*
+run
 
 #api
 src/main/java/mariculture
@@ -22,6 +22,3 @@ src/main/java/tconstruct
 *.jar
 *.war
 *.ear
-
-!run/gameteststructures/
-!run/gameteststructures/*
