@@ -1,9 +1,8 @@
 package nightkosh.gravestone.core.compatibility;
 
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import nightkosh.gravestone.config.Config;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.Iterator;
 import java.util.List;
@@ -24,7 +23,7 @@ public class CompatibilityTwilightForest implements ICompatibility {
      * Twilight Forest checks the players inventory on death, so we can't wipe it all.
      * Only vanilla items will be supported otherwise some changes required.
      */
-    public static boolean handleCharmsOfKeeping(List<ItemStack> items, EntityPlayer player) {
+    public static boolean handleCharmsOfKeeping(List<ItemStack> items, Player player) {
         if (INSTANCE.isModLoaded(MOD_ID) && Config.enableTwilightForestKeeping) {
             int[] keepingData = checkForCharmOfKeeping(player);
 
@@ -112,7 +111,7 @@ public class CompatibilityTwilightForest implements ICompatibility {
         }
     }
 
-    private static int[] checkForCharmOfKeeping(EntityPlayer player) {
+    private static int[] checkForCharmOfKeeping(Player player) {
         byte max = 0;
         int slot = -1;
         for (int i = 0; i < player.inventory.mainInventory.size(); i++) {
@@ -138,4 +137,5 @@ public class CompatibilityTwilightForest implements ICompatibility {
         }
         return new int[]{max, slot};
     }
+
 }

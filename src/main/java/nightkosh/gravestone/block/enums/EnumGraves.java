@@ -1,6 +1,6 @@
 package nightkosh.gravestone.block.enums;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.core.Resources;
@@ -281,4 +281,5 @@ public enum EnumGraves implements IBlockEnum {
                 return "block.gravestone.sword";
         }
     }
+
 }

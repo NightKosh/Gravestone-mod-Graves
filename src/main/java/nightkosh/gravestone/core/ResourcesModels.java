@@ -13,5 +13,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ResourcesModels extends Resources {
 
-    public static final ModelResourceLocation GRAVE_STONE_MODEL = new ModelResourceLocation(GSBlock.GRAVE_STONE.getRegistryName(), "inventory");
+    public static final ModelResourceLocation GRAVE_STONE_MODEL = new ModelResourceLocation(GSBlock.getGraveStone().getRegistryName(), "inventory");
+
 }

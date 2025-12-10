@@ -1,16 +1,11 @@
 package nightkosh.gravestone.core.event;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import nightkosh.gravestone.api.death_handler.*;
 import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.core.MobHandler;
@@ -30,7 +25,7 @@ public class EventsHandler {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onPlayerClone(PlayerEvent.Clone event) {
         if (event.isWasDeath()) {
-            BackupsHelper.clonePlayer(event.getOriginal(), event.getEntityPlayer());
+            BackupsHelper.clonePlayer(event.getOriginal(), event.getPlayer());
         }
     }
 
@@ -101,8 +96,8 @@ public class EventsHandler {
                 return;
             }
 
-            if (Config.generatePlayerGraves && event.getEntityLiving() instanceof EntityPlayer) {
-                EntityPlayer player = (EntityPlayer) event.getEntity();
+            if (Config.generatePlayerGraves && event.getEntityLiving() instanceof Player) {
+                Player player = (Player) event.getEntity();
                 if (!Config.playerGravesDimensionalBlackList.contains(player.dimension)) {
                     for (IPlayerDeathHandler playerDeathHandler : APIGraveGeneration.PLAYER_DEATH_HANDLERS) {
                         if (playerDeathHandler.cancelGraveGeneration(player, event.getSource())) {

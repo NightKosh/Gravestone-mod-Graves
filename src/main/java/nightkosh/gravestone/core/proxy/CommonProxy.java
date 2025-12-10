@@ -30,4 +30,5 @@ public class CommonProxy {
     public String getLocalizedMaterial(EnumGraveMaterial material) {
         return getLocalizedString("material." + material.toString().toLowerCase());
     }
+
 }

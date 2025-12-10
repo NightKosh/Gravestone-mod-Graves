@@ -1,10 +1,8 @@
 package nightkosh.gravestone.core;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import nightkosh.gravestone.gui.GraveInventoryGui;
 import nightkosh.gravestone.gui.container.GraveContainer;
 import nightkosh.gravestone.tileentity.TileEntityGraveStone;
@@ -20,11 +18,11 @@ public class GuiHandler implements IGuiHandler {
     public static final int GRAVE_INVENTORY_GUI_ID = 0;
 
     @Override
-    public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+    public Object getServerGuiElement(int id, Player player, Level level, int x, int y, int z) {
         TileEntity tileEntity;
         switch (id) {
             case GRAVE_INVENTORY_GUI_ID:
-                tileEntity = world.getTileEntity(new BlockPos(x, y, z));
+                tileEntity = level.getTileEntity(new BlockPos(x, y, z));
                 if (tileEntity instanceof TileEntityGraveStone) {
                     return new GraveContainer(player.inventory, (TileEntityGraveStone) tileEntity);
                 }
@@ -34,11 +32,11 @@ public class GuiHandler implements IGuiHandler {
     }
 
     @Override
-    public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+    public Object getClientGuiElement(int id, Player player, Level level, int x, int y, int z) {
         TileEntity tileEntity;
         switch (id) {
             case GRAVE_INVENTORY_GUI_ID:
-                tileEntity = world.getTileEntity(new BlockPos(x, y, z));
+                tileEntity = level.getTileEntity(new BlockPos(x, y, z));
                 if (tileEntity instanceof TileEntityGraveStone) {
                     return new GraveInventoryGui(player.inventory, (TileEntityGraveStone) tileEntity);
                 }
@@ -46,4 +44,5 @@ public class GuiHandler implements IGuiHandler {
         }
         return null;
     }
+
 }

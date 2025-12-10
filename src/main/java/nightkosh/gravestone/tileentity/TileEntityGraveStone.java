@@ -1,12 +1,9 @@
 package nightkosh.gravestone.tileentity;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.helper.GraveSpawnerHelper;
@@ -168,7 +165,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
 
     public void dropSword() {
         if (this.sword != null) {
-            this.inventory.dropItem(this.sword, this.getWorld(), this.pos);
+            GraveInventory.dropItem(this.sword, this.getWorld(), this.pos);
         }
     }
 
@@ -191,7 +188,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
 
     public void dropFlower() {
         if (this.flower != null) {
-            this.inventory.dropItem(this.flower, this.getWorld(), this.pos);
+            GraveInventory.dropItem(this.flower, this.getWorld(), this.pos);
         }
     }
 
@@ -209,11 +206,10 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
 
     //    @Override
     //    public void setGraveContent(Random random, boolean isPetGrave, GraveInventory.GraveContentType contentType, GraveInventory.GraveCorpseContentType corpseType) {
-    ////        setRandomAge();//TODO
-    ////        setRandomFlower(random);//TODO
+
+    /// /        setRandomAge();//TODO
+    /// /        setRandomFlower(random);//TODO
     //    }
-
-
     public String getOwner() {
         return this.playerId;
     }
@@ -222,7 +218,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
         this.playerId = playerId;
     }
 
-    public boolean canBeLooted(EntityPlayer player) {
+    public boolean canBeLooted(Player player) {
         if (Config.onlyOwnerCanLootGrave) {
             if (player != null) {
                 String playerId = player.getUniqueID().toString();
@@ -257,4 +253,5 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
     public void setPurified(boolean isPurified) {
         this.isPurified = isPurified;
     }
+
 }

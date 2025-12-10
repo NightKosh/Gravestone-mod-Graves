@@ -1,12 +1,10 @@
 package nightkosh.gravestone.gui.container;
 
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import nightkosh.gravestone.inventory.GraveInventory;
 import nightkosh.gravestone.tileentity.TileEntityGraveStone;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 
 /**
  * GraveStone mod
@@ -20,7 +18,7 @@ public class GraveContainer extends Container {
     public static final int ROWS_COUNT = 6;
     public static final int COLUMNS_COUNT = 9;
     public static final int SLOT_WIDTH = 18;
-    private GraveInventory graveInventory;
+    private final GraveInventory graveInventory;
 
     public GraveContainer(InventoryPlayer inventoryPlayer, TileEntityGraveStone te) {
         int i = 2 * SLOT_WIDTH;
@@ -44,13 +42,13 @@ public class GraveContainer extends Container {
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer player) {
+    public boolean canInteractWith(Player player) {
         return true;
     }
 
 
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
+    public ItemStack transferStackInSlot(Player player, int slot) {
         ItemStack stack = ItemStack.EMPTY;
         Slot slotObject = inventorySlots.get(slot);
 
@@ -79,4 +77,5 @@ public class GraveContainer extends Container {
         }
         return stack;
     }
+
 }

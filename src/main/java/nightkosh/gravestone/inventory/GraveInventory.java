@@ -1,14 +1,8 @@
 package nightkosh.gravestone.inventory;
 
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 
@@ -127,18 +121,18 @@ public class GraveInventory implements IInventory {
     }
 
     @Override
-    public boolean isUsableByPlayer(EntityPlayer player) {
+    public boolean isUsableByPlayer(Player player) {
         return player.getEntityWorld().getTileEntity(this.tileEntity.getPos()) == this.tileEntity &&
                 player.getDistanceSq(new BlockPos(this.tileEntity.getPos().getX() + 0.5, this.tileEntity.getPos().getY() + 0.5, this.tileEntity.getPos().getZ() + 0.5)) < 64;
     }
 
     @Override
-    public void openInventory(EntityPlayer player) {
+    public void openInventory(Player player) {
 
     }
 
     @Override
-    public void closeInventory(EntityPlayer player) {
+    public void closeInventory(Player player) {
 
     }
 

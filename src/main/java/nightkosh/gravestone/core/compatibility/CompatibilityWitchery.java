@@ -1,8 +1,7 @@
 package nightkosh.gravestone.core.compatibility;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.DamageSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.player.Player;
 import nightkosh.gravestone.api.GraveStoneAPI;
 
 import java.lang.reflect.InvocationTargetException;
@@ -23,7 +22,7 @@ public class CompatibilityWitchery implements ICompatibility {
             GraveStoneAPI.graveGenerationAtDeath.addPlayerDeathHandler((player, source) -> {
                         try {
                             Class playerClass = Class.forName("com.emoniph.witchery.common.ExtendedPlayer");
-                            Method getPlayerMethod = playerClass.getDeclaredMethod("get", EntityPlayer.class);
+                            Method getPlayerMethod = playerClass.getDeclaredMethod("get", Player.class);
                             Object extendedPlayer = getPlayerMethod.invoke(null, player);
 
                             Method isVampireMethod = playerClass.getDeclaredMethod("isVampire");
@@ -48,4 +47,5 @@ public class CompatibilityWitchery implements ICompatibility {
             );
         }
     }
+
 }

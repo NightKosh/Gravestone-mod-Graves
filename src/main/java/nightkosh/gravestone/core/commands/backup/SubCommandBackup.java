@@ -1,12 +1,7 @@
 package nightkosh.gravestone.core.commands.backup;
 
-import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.entity.player.Player;
 import nightkosh.gravestone.capability.Backup;
 import nightkosh.gravestone.capability.BackupProvider;
 import nightkosh.gravestone.capability.IBackups;
@@ -18,7 +13,7 @@ import nightkosh.gravestone.core.commands.ISubCommand;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public abstract class SubCommandBackup  implements ISubCommand {
+public abstract class SubCommandBackup implements ISubCommand {
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
@@ -26,7 +21,7 @@ public abstract class SubCommandBackup  implements ISubCommand {
         try {
             int num = (args.length >= 3) ? Integer.parseInt(args[2]) - 1 : 0;
 
-            IBackups backups = ((EntityPlayer) sender).getCapability(BackupProvider.BACKUP_CAP, null);
+            IBackups backups = ((Player) sender).getCapability(BackupProvider.BACKUP_CAP, null);
             Backup backup = backups.getBackup(num);
 
             if (backup != null) {
@@ -42,4 +37,5 @@ public abstract class SubCommandBackup  implements ISubCommand {
     }
 
     protected abstract void execute(Backup backup, ICommandSender sender, String name);
+
 }

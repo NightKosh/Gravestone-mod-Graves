@@ -214,4 +214,5 @@ public class DeathTextHelper {
                 return ALL_KILLER_NAMES[random.nextInt(ALL_KILLER_NAMES.length)];
         }
     }
+
 }

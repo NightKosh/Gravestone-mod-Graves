@@ -8,6 +8,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mojang.text2speech.Narrator.LOGGER;
+
 /**
  * GraveStone mod
  *
@@ -28,7 +30,7 @@ public class ConfigsHelper {
                     dimensionIds.add(Integer.parseInt(id));
                 }
             } catch (NumberFormatException e) {
-                GSLogger.logError("Can't parse Dimension Id list!!!");
+                LOGGER.error("Can't parse Dimension Id list!!!");
                 e.printStackTrace();
             }
         }
@@ -36,7 +38,7 @@ public class ConfigsHelper {
             try {
                 dimensionIds.add(Integer.parseInt(defaultValue));
             } catch (NumberFormatException e) {
-                GSLogger.logError("Can't parse Dimension Id list!!!");
+                LOGGER.error("Can't parse Dimension Id list!!!");
                 e.printStackTrace();
             }
         }

@@ -138,8 +138,8 @@ public abstract class TileEntityGrave extends TileEntityBase {
     }
 
     @Override
-    public NBTTagCompound getUpdateTag()
-    {
+    public NBTTagCompound getUpdateTag() {
         return this.writeToNBT(new NBTTagCompound());
     }
+
 }

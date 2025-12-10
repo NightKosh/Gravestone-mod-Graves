@@ -4,7 +4,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -22,14 +21,17 @@ import nightkosh.gravestone.config.Config;
 import nightkosh.gravestone.core.CapabilityHandler;
 import nightkosh.gravestone.core.GSTileEntity;
 import nightkosh.gravestone.core.GuiHandler;
-import nightkosh.gravestone.core.Tabs;
+import nightkosh.gravestone.core.GSTabs;
 import nightkosh.gravestone.core.commands.Commands;
 import nightkosh.gravestone.core.compatibility.Compatibility;
 import nightkosh.gravestone.core.event.EventHandlerNetwork;
 import nightkosh.gravestone.core.event.EventsHandler;
+import nightkosh.gravestone.core.logger.GravesLogger;
 import nightkosh.gravestone.core.proxy.CommonProxy;
 import nightkosh.gravestone.helper.GraveGenerationHelper;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * GraveStone mod
@@ -37,11 +39,14 @@ import nightkosh.gravestone.helper.api.APIGraveGeneration;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-@Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, updateJSON = "https://raw.githubusercontent.com/NightKosh/GraveStone-mod/master/update.json")
+@Mod(ModInfo.ID)
 public class ModGraveStone {
 
-    @Instance(ModInfo.ID)
-    public static ModGraveStone instance;
+    public static ModGraveStone INSTANCE;
+
+    public static final Logger LOGGER = LogManager.getLogger(ModInfo.ID);
+    public static final Logger GRAVE_LOGGER = new GravesLogger();
+
     @SidedProxy(clientSide = "nightkosh.gravestone.core.proxy.ClientProxy", serverSide = "nightkosh.gravestone.core.proxy.CommonProxy")
     public static CommonProxy proxy;
 
@@ -49,7 +54,7 @@ public class ModGraveStone {
     public static final IGraveGeneration apiGraveGeneration = APIGraveGeneration.INSTANCE;
 
     public ModGraveStone() {
-        instance = this;
+        INSTANCE = this;
     }
 
     @Mod.EventHandler
@@ -60,7 +65,7 @@ public class ModGraveStone {
         GraveStoneAPI.graveStone = gravestoneHelper;
         GraveStoneAPI.graveGenerationAtDeath = apiGraveGeneration;
 
-        Tabs.registration();
+        GSTabs.registration();
         GSTileEntity.registration();
 
         CapabilityManager.INSTANCE.register(IBackups.class, new BackupStorage(), Backups.class);
@@ -85,4 +90,5 @@ public class ModGraveStone {
     public void serverStarting(FMLServerStartingEvent event) {
         Commands.registration(event);
     }
+
 }

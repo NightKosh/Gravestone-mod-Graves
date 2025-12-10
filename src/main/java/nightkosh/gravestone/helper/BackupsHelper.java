@@ -1,17 +1,17 @@
 package nightkosh.gravestone.helper;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import nightkosh.gravestone.capability.Backup;
 import nightkosh.gravestone.capability.BackupProvider;
 import nightkosh.gravestone.capability.IBackups;
 import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.core.logger.GSLogger;
 
 import java.util.List;
+
+import static com.mojang.text2speech.Narrator.LOGGER;
 
 /**
  * GraveStone mod
@@ -21,25 +21,26 @@ import java.util.List;
  */
 public class BackupsHelper {
 
-    public static void clonePlayer(EntityPlayer playerOld, EntityPlayer playerNew) {
+    public static void clonePlayer(Player playerOld, Player playerNew) {
         try {
             IBackups backupsOld = playerOld.getCapability(BackupProvider.BACKUP_CAP, null);
             IBackups backupsNew = playerNew.getCapability(BackupProvider.BACKUP_CAP, null);
 
             backupsNew.setBackups(backupsOld.getBackups());
         } catch (Exception e) {
-            GSLogger.logError("Can't restore backups at player death!");
+            LOGGER.error("Can't restore backups at player death!");
         }
     }
 
     public static void addBackup(Entity entity, World world, BlockPos pos, List<ItemStack> items) {
-        if (Config.createBackups && entity instanceof EntityPlayer) {
+        if (Config.createBackups && entity instanceof Player) {
             try {
                 entity.getCapability(BackupProvider.BACKUP_CAP, null)
                         .addBackup(new Backup(world.provider.getDimension(), pos, items));
             } catch (Exception e) {
-                GSLogger.logError("Can't create backup!");
+                LOGGER.error("Can't create backup!");
             }
         }
     }
+
 }

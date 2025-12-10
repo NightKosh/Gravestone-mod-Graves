@@ -1,15 +1,15 @@
 package nightkosh.gravestone.core.compatibility;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.core.logger.GSLogger;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mojang.text2speech.Narrator.LOGGER;
 
 /**
  * GraveStone mod
@@ -27,7 +27,7 @@ public class CompatibilityRpgInventory implements ICompatibility {
                 List<ItemStack> items = new ArrayList<>();
                 try {
                     Class<?> clazz = Class.forName("rpgInventory.gui.rpginv.PlayerRpgInventory");
-                    Method m = clazz.getDeclaredMethod("get", EntityPlayer.class);
+                    Method m = clazz.getDeclaredMethod("get", Player.class);
                     Object result = m.invoke(null, player);
 
                     IInventory inventory = (IInventory) result;
@@ -41,10 +41,11 @@ public class CompatibilityRpgInventory implements ICompatibility {
                         }
                     }
                 } catch (Exception e) {
-                    GSLogger.logError("Can't save RpgInventory items!!!");
+                    LOGGER.error("Can't save RpgInventory items!!!");
                 }
                 return items;
             });
         }
     }
+
 }

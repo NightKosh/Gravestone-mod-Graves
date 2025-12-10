@@ -10,7 +10,8 @@ import net.minecraftforge.fml.common.Loader;
  */
 public interface ICompatibility {
 
-    public default boolean isModLoaded(String modId) {
+    default boolean isModLoaded(String modId) {
         return Loader.isModLoaded(modId);
     }
+
 }

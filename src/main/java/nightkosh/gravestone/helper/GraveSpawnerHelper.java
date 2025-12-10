@@ -14,6 +14,8 @@ public class GraveSpawnerHelper {
     }
 
     public ISpawner getSpawner(TileEntityGraveStone te) {
-        return new ISpawner() {};
+        return new ISpawner() {
+        };
     }
+
 }

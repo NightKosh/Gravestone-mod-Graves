@@ -1,7 +1,7 @@
 package nightkosh.gravestone.tileentity;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
 
 /**
@@ -12,11 +12,12 @@ import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
  */
 public interface ISpawnerEntity {
 
-    public BlockPos getIPos();
+    BlockPos getIPos();
 
-    public World getIWorld();
+    Level getIWorld();
 
-    public boolean haveSpawnerHelper();
+    boolean haveSpawnerHelper();
 
-    public GroupOfGravesSpawnerHelper getSpawnerHelper();
+    GroupOfGravesSpawnerHelper getSpawnerHelper();
+
 }

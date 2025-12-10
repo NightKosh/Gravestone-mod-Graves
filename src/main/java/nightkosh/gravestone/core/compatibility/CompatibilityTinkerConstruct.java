@@ -1,10 +1,8 @@
 package nightkosh.gravestone.core.compatibility;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.DamageSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.api.grave_items.IPlayerItems;
 import nightkosh.gravestone.config.Config;
@@ -27,12 +25,12 @@ public class CompatibilityTinkerConstruct implements ICompatibility {
             GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler(new IPlayerItems() {
 
                 @Override
-                public List<ItemStack> addItems(EntityPlayer player, DamageSource source) {
+                public List<ItemStack> addItems(Player player, DamageSource source) {
                     return null;
                 }
 
                 @Override
-                public void getItems(EntityPlayer player, DamageSource source, List<ItemStack> items) {
+                public void getItems(Player player, DamageSource source, List<ItemStack> items) {
                     Iterator<ItemStack> it = items.iterator();
                     while (it.hasNext()) {
                         ItemStack stack = it.next();
@@ -61,4 +59,5 @@ public class CompatibilityTinkerConstruct implements ICompatibility {
         }
         return false;
     }
+
 }

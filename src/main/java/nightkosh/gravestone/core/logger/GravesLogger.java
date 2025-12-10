@@ -10,6 +10,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.mojang.text2speech.Narrator.LOGGER;
+
 /**
  * GraveStone mod
  *
@@ -147,11 +149,11 @@ public class GravesLogger extends AbstractLogger {
                 PrintWriter out = new PrintWriter(new FileWriter(logFile, true), true);
                 out.println(loggedStr.toString());
             } catch (IOException e) {
-                GSLogger.logError("Error while writing in graves log file!");
+                LOGGER.error("Error while writing in graves log file!");
                 e.printStackTrace();
             }
         } else {
-            GSLogger.logError("Graves logs file doesn't exists");
+            LOGGER.error("Graves logs file doesn't exists");
         }
     }
 

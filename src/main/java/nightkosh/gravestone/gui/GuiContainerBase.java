@@ -37,4 +37,5 @@ public abstract class GuiContainerBase extends GuiContainer {
             this.renderToolTip(slot.getStack(), p_191948_1_, p_191948_2_);
         }
     }
+
 }

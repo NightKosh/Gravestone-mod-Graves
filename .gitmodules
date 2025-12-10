@@ -1,6 +1,3 @@
 [submodule "api/gravestone"]
 	path = api/gravestone
 	url = https://github.com/NightKosh/GraveStone-mod-API
-[submodule "api/wolfarmor"]
-	path = api/wolfarmor
-	url = https://github.com/CenturionFox/wolfarmor-api.git

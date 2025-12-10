@@ -10,11 +10,11 @@ import nightkosh.gravestone.helper.DeathTextHelper;
  */
 public class DeathMessageInfo {
 
-    private String name;
-    private String deathMessage;
+    private final String name;
+    private final String deathMessage;
     private String killerName;
-    private String itemName;
-    private DeathTextHelper.DeathType deathType;
+    private final String itemName;
+    private final DeathTextHelper.DeathType deathType;
 
     public DeathMessageInfo(String name, String deathMessage, String killerName) {
         this(name, deathMessage, killerName, null, null);
@@ -59,4 +59,5 @@ public class DeathMessageInfo {
     public DeathTextHelper.DeathType getDeathType() {
         return deathType;
     }
+
 }

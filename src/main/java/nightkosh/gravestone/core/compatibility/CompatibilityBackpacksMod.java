@@ -1,15 +1,16 @@
 package nightkosh.gravestone.core.compatibility;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.core.logger.GSLogger;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mojang.text2speech.Narrator.LOGGER;
 
 /**
  * GraveStone mod
@@ -28,7 +29,7 @@ public class CompatibilityBackpacksMod implements ICompatibility {
                     List<ItemStack> items = new ArrayList<>();
                     Class<?> PlayerSaveClass = Class.forName("de.eydamos.backpack.data.PlayerSave");
                     if (PlayerSaveClass != null) {
-                        Method loadPlayerMethod = PlayerSaveClass.getDeclaredMethod("loadPlayer", World.class, EntityPlayer.class);
+                        Method loadPlayerMethod = PlayerSaveClass.getDeclaredMethod("loadPlayer", Level.class, Player.class);
                         if (loadPlayerMethod != null) {
                             Object playerSave = loadPlayerMethod.invoke(null, player.getEntityWorld(), player);
 
@@ -46,11 +47,12 @@ public class CompatibilityBackpacksMod implements ICompatibility {
                     }
                     return items;
                 } catch (Exception e) {
-                    GSLogger.logError("Can't save Backpacks items!!!");
+                    LOGGER.error("Can't save Backpacks items!!!");
                     e.printStackTrace();
                     return null;
                 }
             });
         }
     }
+
 }

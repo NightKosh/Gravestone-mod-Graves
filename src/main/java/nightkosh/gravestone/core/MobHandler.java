@@ -1,11 +1,11 @@
 package nightkosh.gravestone.core;
 
 import com.google.common.io.Files;
+import net.minecraft.world.level.Level;
 import nightkosh.gravestone.core.logger.GSLogger;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+
+import static com.mojang.text2speech.Narrator.LOGGER;
 
 /**
  * GraveStone mod
@@ -58,10 +60,10 @@ public class MobHandler {
         }
     }
 
-    public static void loadMobsSpawnTime(World world) {
+    public static void loadMobsSpawnTime(Level level) {
         try {
-            File file = new File(world.getSaveHandler().getWorldDirectory(), MOBS_SPAWN_TIME_FILE_NAME);
-            File backup = new File(world.getSaveHandler().getWorldDirectory(), MOBS_SPAWN_TIME_BACKUP_FILE_NAME);
+            File file = new File(level.getSaveHandler().getWorldDirectory(), MOBS_SPAWN_TIME_FILE_NAME);
+            File backup = new File(level.getSaveHandler().getWorldDirectory(), MOBS_SPAWN_TIME_BACKUP_FILE_NAME);
 
             NBTTagCompound data = null;
             boolean save = false;
@@ -69,7 +71,7 @@ public class MobHandler {
                 data = getDataFromFile(file);
             }
             if (file == null || !file.exists() || data == null || data.hasNoTags()) {
-                GSLogger.logError("Data not found. Trying to load backup data.");
+                LOGGER.error("Data not found. Trying to load backup data.");
                 if (backup != null && backup.exists()) {
                     data = getDataFromFile(backup);
                     save = true;
@@ -83,11 +85,11 @@ public class MobHandler {
                     mobsSpawnTime.put(tagName, data.getLong(tagName));
                 }
                 if (save) {
-                    saveMobsSpawnTime(world);
+                    saveMobsSpawnTime(level);
                 }
             }
         } catch (Exception e) {
-            GSLogger.logError("Error loading mobs spawn time");
+            LOGGER.error("Error loading mobs spawn time");
             e.printStackTrace();
         }
     }
@@ -102,7 +104,7 @@ public class MobHandler {
                     try {
                         Files.copy(file, backup);
                     } catch (Exception e) {
-                        GSLogger.logError("Could not backup old spawn time file");
+                        LOGGER.error("Could not backup old spawn time file");
                     }
                 }
                 try {
@@ -118,7 +120,7 @@ public class MobHandler {
                         fileoutputstream.close();
                     }
                 } catch (Exception e) {
-                    GSLogger.logError("Could not save spawn time file");
+                    LOGGER.error("Could not save spawn time file");
                     e.printStackTrace();
                     if (file.exists()) {
                         try {
@@ -128,7 +130,7 @@ public class MobHandler {
                     }
                 }
             } catch (Exception e) {
-                GSLogger.logError("Error saving mobs spawn time");
+                LOGGER.error("Error saving mobs spawn time");
                 e.printStackTrace();
             }
         }

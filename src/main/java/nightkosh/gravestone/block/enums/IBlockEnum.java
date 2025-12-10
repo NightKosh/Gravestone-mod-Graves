@@ -8,5 +8,6 @@ package nightkosh.gravestone.block.enums;
  */
 public interface IBlockEnum {
 
-    public String getUnLocalizedName();
+    String getUnLocalizedName();
+
 }

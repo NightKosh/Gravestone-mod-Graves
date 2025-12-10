@@ -1,17 +1,9 @@
 package nightkosh.gravestone.item.itemblock;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import nightkosh.gravestone.ModGraveStone;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.block.enums.EnumGraves;
@@ -32,7 +24,7 @@ public class ItemBlockGraveStone extends ItemBlock {
     public ItemBlockGraveStone(Block block) {
         super(block);
         this.setHasSubtypes(true);
-        this.setRegistryName(GSBlock.GRAVE_STONE.getRegistryName());
+        this.setRegistryName(GSBlock.getGraveStone().getRegistryName());
     }
 
     @Override
@@ -46,14 +38,14 @@ public class ItemBlockGraveStone extends ItemBlock {
     }
 
     @Override
-    public void onCreated(ItemStack stack, World world, EntityPlayer player) {
+    public void onCreated(ItemStack stack, Level level, Player player) {
         if (!stack.hasTagCompound()) {
             stack.setTagCompound(new NBTTagCompound());
         }
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltipList, ITooltipFlag flag) {
+    public void addInformation(ItemStack stack, @Nullable Level level, List<String> tooltipList, ITooltipFlag flag) {
         if (!stack.hasTagCompound()) {
             stack.setTagCompound(new NBTTagCompound());
         } else {
@@ -133,4 +125,5 @@ public class ItemBlockGraveStone extends ItemBlock {
     public boolean hasEffect(ItemStack stack) {
         return stack.hasTagCompound() && stack.getTagCompound().hasKey("Enchanted");
     }
+
 }

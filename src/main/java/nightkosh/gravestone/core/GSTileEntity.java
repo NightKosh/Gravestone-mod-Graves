@@ -13,4 +13,5 @@ public class GSTileEntity {
     public static void registration() {
         ModGraveStone.proxy.registerTERenderers();
     }
+
 }

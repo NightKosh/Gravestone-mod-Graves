@@ -1,12 +1,14 @@
 package nightkosh.gravestone.core;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import nightkosh.gravestone.api.ModInfo;
 import nightkosh.gravestone.capability.BackupProvider;
+
+import static net.minecraft.resources.ResourceLocation.fromNamespaceAndPath;
 
 /**
  * GraveStone mod
@@ -15,12 +17,14 @@ import nightkosh.gravestone.capability.BackupProvider;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class CapabilityHandler {
-    public static final ResourceLocation BACKUP_CAP = new ResourceLocation(ModInfo.ID, "backup");
+
+    public static final ResourceLocation BACKUP_CAP = fromNamespaceAndPath(ModInfo.ID, "backup");
 
     @SubscribeEvent
     public void attachPlayerCapability(AttachCapabilitiesEvent<Entity> event) {
-        if (event.getObject() instanceof EntityPlayer) {
+        if (event.getObject() instanceof Player) {
             event.addCapability(BACKUP_CAP, new BackupProvider());
         }
     }
+
 }

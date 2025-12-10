@@ -170,7 +170,7 @@ public class GraveStoneHelper {
 
     public static void dropBlockWithoutInfo(World world, BlockPos pos, IBlockState state) {
         if (Config.dropGraveBlockAtDestruction) {
-            ItemStack itemStack = new ItemStack(Item.getItemFromBlock(GSBlock.GRAVE_STONE), 1);
+            ItemStack itemStack = new ItemStack(Item.getItemFromBlock(GSBlock.getGraveStone()), 1);
             TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
 
             if (tileEntity != null) {
@@ -194,7 +194,7 @@ public class GraveStoneHelper {
      */
     public static ItemStack getBlockItemStack(IBlockAccess access, BlockPos pos, IBlockState state) {
         if (Config.dropGraveBlockAtDestruction) {
-            ItemStack itemStack = new ItemStack(Item.getItemFromBlock(GSBlock.GRAVE_STONE), 1);
+            ItemStack itemStack = new ItemStack(Item.getItemFromBlock(GSBlock.getGraveStone()), 1);
             TileEntityGraveStone tileEntity = (TileEntityGraveStone) access.getTileEntity(pos);
 
             if (tileEntity != null) {

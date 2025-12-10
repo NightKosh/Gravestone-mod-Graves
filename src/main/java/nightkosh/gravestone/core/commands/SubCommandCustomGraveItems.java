@@ -1,19 +1,14 @@
 package nightkosh.gravestone.core.commands;
 
-import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.item.ItemStack;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
-import nightkosh.gravestone.core.logger.GSLogger;
+import net.minecraft.world.item.ItemStack;
 import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.mojang.text2speech.Narrator.LOGGER;
 
 /**
  * GraveStone mod
@@ -38,7 +33,7 @@ public class SubCommandCustomGraveItems implements ISubCommand {
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-        GSLogger.logInfo("Custom grave items command received");
+        LOGGER.info("Custom grave items command received");
 
         if (args.length >= 7) {
             try {
@@ -54,7 +49,7 @@ public class SubCommandCustomGraveItems implements ISubCommand {
                 TileEntity chestTE = sender.getEntityWorld().getTileEntity(new BlockPos(chestXCoord, chestYCoord, chestZCoord));
                 if (graveTE != null && chestTE != null) {
                     if (graveTE instanceof TileEntityGraveStone && chestTE instanceof TileEntityChest) {
-                        ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+                        List<ItemStack> items = new ArrayList<ItemStack>();
                         ItemStack item;
                         for (int slot = 0; slot < ((TileEntityChest) chestTE).getSizeInventory(); slot++) {
                             item = ((TileEntityChest) chestTE).getStackInSlot(slot);

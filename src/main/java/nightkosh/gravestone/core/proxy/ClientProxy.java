@@ -38,7 +38,7 @@ public class ClientProxy extends CommonProxy {
     public void registerTEISR() {
         GSBlock.GRAVE_STONE_IB.setTileEntityItemStackRenderer(new TEISRGravestone());
         for (int meta = EnumGraves.WOODEN_VERTICAL_PLATE.ordinal(); meta <= EnumGraves.SWORD.ordinal(); meta++) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.GRAVE_STONE), meta, ResourcesModels.GRAVE_STONE_MODEL);
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(GSBlock.getGraveStone()), meta, ResourcesModels.GRAVE_STONE_MODEL);
         }
     }
 }

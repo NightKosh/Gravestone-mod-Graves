@@ -25,4 +25,5 @@ public class GraveSlot extends Slot {
     public boolean isItemValid(ItemStack stack) {
         return false;
     }
+
 }
