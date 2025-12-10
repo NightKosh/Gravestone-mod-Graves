@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Blocks;
 import nightkosh.gravestone.ModGraveStone;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.enums.EnumGraves;
-import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.GSBlock;
 import nightkosh.gravestone.core.GSTabs;
 import nightkosh.gravestone.core.GuiHandler;
@@ -44,7 +44,7 @@ public class BlockGraveStone extends BlockContainer {
         this.setHardness(0.5F);
         this.setResistance(5);
         this.setCreativeTab(GSTabs.GS_TAB);
-        this.setTickRandomly(Config.removeEmptyGraves);
+        this.setTickRandomly(GSConfigs.REMOVE_EMPTY_GRAVES.get());
         this.setRegistryName("GSGraveStone");
     }
 
@@ -519,12 +519,12 @@ public class BlockGraveStone extends BlockContainer {
      */
     @Override
     public void updateTick(Level level, BlockPos pos, IBlockState state, Random random) {
-        if (Config.removeEmptyGraves) {
+        if (GSConfigs.REMOVE_EMPTY_GRAVES.get()) {
             if (!level.isRemote) {
                 TileEntityGraveStone tileEntity = (TileEntityGraveStone) level.getTileEntity(pos);
                 if (tileEntity != null) {
                     if (!tileEntity.isSwordGrave() && tileEntity.isEmpty()) {
-                        if (Config.showGravesRemovingMessages) {
+                        if (GSConfigs.SHOW_GRAVE_REMOVAL_MESSAGES.get()) {
                             GRAVE_LOGGER.info("Remove empty grave at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
                         }
 

@@ -2,6 +2,7 @@ package nightkosh.gravestone;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -10,6 +11,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.config.ModConfig;
 import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.api.IGraveGeneration;
 import nightkosh.gravestone.api.IGraveStoneHelper;
@@ -17,7 +19,7 @@ import nightkosh.gravestone.api.ModInfo;
 import nightkosh.gravestone.capability.BackupStorage;
 import nightkosh.gravestone.capability.Backups;
 import nightkosh.gravestone.capability.IBackups;
-import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.CapabilityHandler;
 import nightkosh.gravestone.core.GSTileEntity;
 import nightkosh.gravestone.core.GuiHandler;
@@ -55,11 +57,13 @@ public class ModGraveStone {
 
     public ModGraveStone() {
         INSTANCE = this;
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GSConfigs.SPEC, ModInfo.ID + ".toml");
     }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        Config.getInstance(event.getModConfigurationDirectory().getAbsolutePath() + "/GraveStoneMod/", "GraveStone.cfg");
+        GSConfigs.getInstance(event.getModConfigurationDirectory().getAbsolutePath() + "/GraveStoneMod/", "GraveStone.cfg");
 
         // API
         GraveStoneAPI.graveStone = gravestoneHelper;

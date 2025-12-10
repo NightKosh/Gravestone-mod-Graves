@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.enums.EnumGraves;
-import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.Resources;
 import nightkosh.gravestone.models.block.ModelGraveStone;
 import nightkosh.gravestone.models.block.graves.*;
@@ -158,7 +158,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     public void renderGrave(World world, EnumGraves graveType, boolean isEnchanted, boolean isMossy, boolean hasFlower, ItemStack flower, boolean isSwordGrave, ItemStack sword) {
         if (isSwordGrave) {
             ResourceLocation swordTexture = swordsTextureMap.get(sword.getItem());
-            if (Config.vanillaRendererForSwordsGraves) {
+            if (GSConfigs.VANILLA_RENDERER_FOR_SWORDS_GRAVES.get()) {
                 if (world == null) {
                     GL11.glScalef(0.5F, -0.5F, -0.5F);
                     GL11.glTranslatef(-0.37F, -1.7F, 0);
@@ -293,7 +293,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     }
 
     protected void renderFlower(World world, ItemStack flower) {
-        if (Config.renderGravesFlowers) {
+        if (GSConfigs.RENDER_GRAVES_FLOWERS.get()) {
             EntityItem entityItem = flowersMap.get(flower.getItem());
             if (entityItem == null) {
                 entityItem = new EntityItem(world, 0, 0, 0, flower);

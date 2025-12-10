@@ -4,10 +4,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -19,7 +24,7 @@ import nightkosh.gravestone.api.grave_items.*;
 import nightkosh.gravestone.api.grave_position.IGravePositionHandler;
 import nightkosh.gravestone.block.BlockGraveStone;
 import nightkosh.gravestone.block.enums.EnumGraves;
-import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.GSBlock;
 import nightkosh.gravestone.core.MobHandler;
 import nightkosh.gravestone.core.compatibility.Compatibility;
@@ -102,7 +107,9 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     public static void createPlayerGrave(Player player, List<EntityItem> entityItems, DamageSource damageSource, long spawnTime) {
-        if (player.getEntityWorld() != null && !player.getEntityWorld().getGameRules().getBoolean("keepInventory") && Config.graveItemsCount > 0 &&
+        if (player.getEntityWorld() != null &&
+                !player.getEntityWorld().getGameRules().getBoolean("keepInventory") &&
+                GSConfigs.GRAVE_ITEMS_COUNT.get() > 0 &&
                 !isInRestrictedArea(player.getEntityWorld(), player.getPosition())) {
             List<ItemStack> items = new ArrayList<>(41);
 
@@ -135,15 +142,15 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 }
             }
 
-            if (Config.generateEmptyPlayerGraves || items.size() != 0) {
+            if (GSConfigs.GENERATE_EMPTY_PLAYER_GRAVES.get() || items.size() != 0) {
                 createGrave(player, damageSource, items, EnumGraveTypeByEntity.PLAYER_GRAVES, false, spawnTime);
             }
-        } else if (Config.generateEmptyPlayerGraves) {
+        } else if (GSConfigs.GENERATE_EMPTY_PLAYER_GRAVES.get()) {
             createGrave(player, damageSource, null, EnumGraveTypeByEntity.PLAYER_GRAVES, false, spawnTime);
         }
     }
 
-    public static void createVillagerGrave(EntityVillager villager, DamageSource damageSource) {
+    public static void createVillagerGrave(Villager villager, DamageSource damageSource) {
         List<ItemStack> items = new ArrayList<>(5);
         for (IVillagerItems additionalItems : APIGraveGeneration.VILLAGER_ITEMS) {
             items.addAll(additionalItems.addItems(villager, damageSource));
@@ -163,34 +170,30 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         createGrave(villager, damageSource, items, GraveGenerationHelper.EnumGraveTypeByEntity.VILLAGERS_GRAVES, true, spawnTime);
     }
 
-    public static void createDogGrave(EntityWolf dog, DamageSource damageSource) {
+    public static void createDogGrave(Wolf dog, DamageSource damageSource) {
         if (dog.isTamed()) {
             long spawnTime = MobHandler.getAndRemoveSpawnTime(dog);
             createGrave(dog, damageSource, getDogsItems(dog, damageSource), EnumGraveTypeByEntity.DOGS_GRAVES, false, spawnTime);
         }
     }
 
-    public static void createCatGrave(EntityOcelot cat, DamageSource damageSource) {
+    public static void createCatGrave(Cat cat, DamageSource damageSource) {
         if (cat.isTamed()) {
             long spawnTime = MobHandler.getAndRemoveSpawnTime(cat);
             createGrave(cat, damageSource, getCatsItems(cat, damageSource), EnumGraveTypeByEntity.CATS_GRAVES, false, spawnTime);
         }
     }
 
-    private static List<ItemStack> getDogsItems(EntityWolf dog, DamageSource damageSource) {
+    private static List<ItemStack> getDogsItems(Wolf dog, DamageSource damageSource) {
         List<ItemStack> items = new ArrayList<>(5);
         for (IDogItems additionalItems : APIGraveGeneration.DOG_ITEMS) {
             items.addAll(additionalItems.addItems(dog, damageSource));
         }
 
-        if (Compatibility.IS_WOLF_ARMOR_INSTALLED) {
-            items.addAll(CompatibilityWolfArmor.getWolfItems(dog));
-        }
-
         return items;
     }
 
-    private static List<ItemStack> getCatsItems(EntityOcelot cat, DamageSource damageSource) {
+    private static List<ItemStack> getCatsItems(Cat cat, DamageSource damageSource) {
         List<ItemStack> items = new ArrayList<>(5);
         for (ICatItems additionalItems : APIGraveGeneration.CAT_ITEMS) {
             items.addAll(additionalItems.addItems(cat, damageSource));
@@ -278,7 +281,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         }
     }
 
-    private static GraveInfoOnDeath getGraveOnDeath(World world, BlockPos pos, Entity entity, EnumGraveTypeByEntity graveTypeByEntity,
+    private static GraveInfoOnDeath getGraveOnDeath(Level level, BlockPos pos, Entity entity, EnumGraveTypeByEntity graveTypeByEntity,
                                                     List<ItemStack> items, int age, DamageSource damageSource) {
         GraveInfoOnDeath graveInfo = new GraveInfoOnDeath();
         if (chooseGraveTypeByAgeOrLevel(entity, graveTypeByEntity, age)) {
@@ -294,8 +297,9 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         } else {
             graveInfo.grave = getGraveByDeath(damageSource, graveTypeByEntity, entity, age);
             if (graveInfo.grave == null) {
-                if (graveTypeByEntity == EnumGraveTypeByEntity.PLAYER_GRAVES && Config.generateSwordGraves &&
-                        world.rand.nextInt(4) == 0 && graveTypeByEntity.equals(EnumGraveTypeByEntity.PLAYER_GRAVES)) {
+                if (graveTypeByEntity == EnumGraveTypeByEntity.PLAYER_GRAVES &&
+                        GSConfigs.GENERATE_SWORD_GRAVES.get() &&
+                        level.random.nextInt(4) == 0 && graveTypeByEntity.equals(EnumGraveTypeByEntity.PLAYER_GRAVES)) {
                     ItemStack sword = getSwordFromInventory(items);
                     if (sword != null) {
                         graveInfo.sword = sword;
@@ -304,12 +308,12 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 }
 
                 if (graveInfo.grave == null) {
-                    graveInfo.grave = getGraveTypeByBiomes(world, pos, graveTypeByEntity, damageSource);
+                    graveInfo.grave = getGraveTypeByBiomes(level, pos, graveTypeByEntity, damageSource);
                 }
             }
         }
 
-        graveInfo.setMossy(isMossyGrave(world, pos, graveInfo.grave.getMaterial()));
+        graveInfo.setMossy(isMossyGrave(level, pos, graveInfo.grave.getMaterial()));
         graveInfo.setEnchanted(INSTANCE.isMagicDamage(damageSource));
 
         return graveInfo;
@@ -478,7 +482,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     private static boolean isInRestrictedArea(World world, BlockPos pos) {
-        return Config.restrictGraveGenerationInArea.stream().anyMatch((area) -> area.isInArea(world, pos));
+        return GSConfigs.restrictGraveGenerationInArea.stream().anyMatch((area) -> area.isInArea(world, pos));
     }
 
     @Override

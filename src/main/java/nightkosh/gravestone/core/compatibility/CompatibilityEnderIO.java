@@ -7,7 +7,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.api.grave_items.IPlayerItems;
-import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.config.GSConfigs;
 
 import java.util.Iterator;
 import java.util.List;
@@ -24,7 +24,7 @@ public class CompatibilityEnderIO implements ICompatibility {
     public static final String MOD_ID = "enderio";
 
     protected CompatibilityEnderIO() {
-        if (isModLoaded(MOD_ID) && Config.enableEnderIOSoulbound) {
+        if (isModLoaded(MOD_ID) && GSConfigs.enableEnderIOSoulbound) {
             GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler(new IPlayerItems() {
 
                 @Override

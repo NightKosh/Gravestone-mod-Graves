@@ -3,7 +3,7 @@ package nightkosh.gravestone.inventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.tileentity.TileEntityGraveStone;
 
 import java.util.*;
@@ -184,10 +184,10 @@ public class GraveInventory implements IInventory {
     public void setItems(List<ItemStack> items) {
         if (items != null) {
             int savedItems;
-            if (Config.graveItemsCount == 100) {
+            if (GSConfigs.GRAVE_ITEMS_COUNT.get() == 100) {
                 savedItems = items.size();
             } else {
-                savedItems = items.size() * Config.graveItemsCount / 100;
+                savedItems = items.size() * GSConfigs.GRAVE_ITEMS_COUNT.get() / 100;
             }
             Collections.shuffle(Arrays.asList(items.size()), new Random());
 

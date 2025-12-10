@@ -4,7 +4,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import nightkosh.gravestone.api.GraveStoneAPI;
-import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.config.GSConfigs;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class CompatibilityBackpacksMod implements ICompatibility {
     public static final String MOD_ID = "backpack";
 
     protected CompatibilityBackpacksMod() {
-        if (isModLoaded(MOD_ID) && Config.storeBackpacksItems) {
+        if (isModLoaded(MOD_ID) && GSConfigs.storeBackpacksItems) {
             GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler((player, source) -> {
                 try {
                     List<ItemStack> items = new ArrayList<>();

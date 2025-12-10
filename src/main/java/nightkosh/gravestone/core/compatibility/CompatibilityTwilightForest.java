@@ -2,7 +2,7 @@ package nightkosh.gravestone.core.compatibility;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.config.GSConfigs;
 
 import java.util.Iterator;
 import java.util.List;
@@ -24,7 +24,7 @@ public class CompatibilityTwilightForest implements ICompatibility {
      * Only vanilla items will be supported otherwise some changes required.
      */
     public static boolean handleCharmsOfKeeping(List<ItemStack> items, Player player) {
-        if (INSTANCE.isModLoaded(MOD_ID) && Config.enableTwilightForestKeeping) {
+        if (INSTANCE.isModLoaded(MOD_ID) && GSConfigs.enableTwilightForestKeeping) {
             int[] keepingData = checkForCharmOfKeeping(player);
 
             if (keepingData[0] > 0) {
@@ -72,7 +72,7 @@ public class CompatibilityTwilightForest implements ICompatibility {
      * Ensure the slot tag is set. Mainly for TwilightForest, but could have other uses
      */
     public static void addSlotTags(List<ItemStack> items) {
-        if (INSTANCE.isModLoaded(MOD_ID) && Config.enableTwilightForestKeeping) {
+        if (INSTANCE.isModLoaded(MOD_ID) && GSConfigs.enableTwilightForestKeeping) {
             for (int i = 0; i < items.size(); i++) {
                 ItemStack item = items.get(i);
                 if (item == null) {
@@ -96,7 +96,7 @@ public class CompatibilityTwilightForest implements ICompatibility {
      * remove the slot tag to avoid stacking issues, items.size() after the size was modified
      */
     public static void removeSlotTags(List<ItemStack> items) {
-        if (INSTANCE.isModLoaded(MOD_ID) && Config.enableTwilightForestKeeping && items.size() > 0) {
+        if (INSTANCE.isModLoaded(MOD_ID) && GSConfigs.enableTwilightForestKeeping && items.size() > 0) {
             for (int i = 0; i < items.size(); i++) {
                 ItemStack item = items.get(i);
                 if (item == null || !item.hasTagCompound()) {

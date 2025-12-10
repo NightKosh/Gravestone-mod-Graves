@@ -1,11 +1,12 @@
 package nightkosh.gravestone.helper;
 
 import nightkosh.gravestone.api.grave.EnumGraveType;
-import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.tileentity.DeathMessageInfo;
 import nightkosh.gravestone.tileentity.GraveStoneDeathText;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -144,24 +145,24 @@ public class DeathTextHelper {
         if (getDeathMessage(deathText, random)) {
             switch (graveTypeByEntity) {
                 case DOGS_GRAVES:
-                    deathText.setName(getValue(random, Config.graveDogsNames));
+                    deathText.setName(getValue(random, GSConfigs.graveDogsNames));
                     break;
                 case CATS_GRAVES:
-                    deathText.setName(getValue(random, Config.graveCatsNames));
+                    deathText.setName(getValue(random, GSConfigs.graveCatsNames));
                     break;
                 case HORSE_GRAVES:
                     //TODO
-                    deathText.setName(getValue(random, Config.graveDogsNames));
+                    deathText.setName(getValue(random, GSConfigs.graveDogsNames));
                     break;
                 default:
-                    deathText.setName(getValue(random, Config.graveNames));
+                    deathText.setName(getValue(random, GSConfigs.graveNames));
                     break;
             }
         }
         return deathText;
     }
 
-    private static String getValue(Random random, ArrayList<String> list) {
+    private static String getValue(Random random, List<String> list) {
         if (list != null && list.size() > 0) {
             return list.get(random.nextInt(list.size()));
         } else {

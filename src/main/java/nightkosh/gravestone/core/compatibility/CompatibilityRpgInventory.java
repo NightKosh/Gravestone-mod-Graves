@@ -3,7 +3,7 @@ package nightkosh.gravestone.core.compatibility;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import nightkosh.gravestone.api.GraveStoneAPI;
-import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.config.GSConfigs;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class CompatibilityRpgInventory implements ICompatibility {
     public static final String MOD_ID = "rpginventorymod";
 
     protected CompatibilityRpgInventory() {
-        if (isModLoaded(MOD_ID) && Config.storeRpgInventoryItems) {
+        if (isModLoaded(MOD_ID) && GSConfigs.storeRpgInventoryItems) {
             GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler((player, source) -> {
                 List<ItemStack> items = new ArrayList<>();
                 try {

@@ -4,10 +4,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import nightkosh.gravestone.capability.Backup;
 import nightkosh.gravestone.capability.BackupProvider;
 import nightkosh.gravestone.capability.IBackups;
-import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.config.GSConfigs;
 
 import java.util.List;
 
@@ -32,11 +33,11 @@ public class BackupsHelper {
         }
     }
 
-    public static void addBackup(Entity entity, World world, BlockPos pos, List<ItemStack> items) {
-        if (Config.createBackups && entity instanceof Player) {
+    public static void addBackup(Entity entity, Level level, BlockPos pos, List<ItemStack> items) {
+        if (GSConfigs.CREATE_BACKUPS.get() && entity instanceof Player) {
             try {
                 entity.getCapability(BackupProvider.BACKUP_CAP, null)
-                        .addBackup(new Backup(world.provider.getDimension(), pos, items));
+                        .addBackup(new Backup(level.provider.getDimension(), pos, items));
             } catch (Exception e) {
                 LOGGER.error("Can't create backup!");
             }

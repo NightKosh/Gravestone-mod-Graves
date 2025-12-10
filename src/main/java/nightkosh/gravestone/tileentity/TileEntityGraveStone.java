@@ -5,7 +5,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import nightkosh.gravestone.block.enums.EnumGraves;
-import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.helper.GraveSpawnerHelper;
 import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
 import nightkosh.gravestone.helper.IFog;
@@ -219,7 +219,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
     }
 
     public boolean canBeLooted(Player player) {
-        if (Config.onlyOwnerCanLootGrave) {
+        if (GSConfigs.ONLY_OWNER_CAN_LOOT_GRAVE.get()) {
             if (player != null) {
                 String playerId = player.getUniqueID().toString();
                 return player.isCreative() || StringUtils.isBlank(this.playerId) || playerId.equals(this.playerId) || inventory.getGraveContent().isEmpty();

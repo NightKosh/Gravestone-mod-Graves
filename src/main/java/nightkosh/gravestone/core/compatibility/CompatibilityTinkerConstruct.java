@@ -5,7 +5,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.api.grave_items.IPlayerItems;
-import nightkosh.gravestone.config.Config;
+import nightkosh.gravestone.config.GSConfigs;
 
 import java.util.Iterator;
 import java.util.List;
@@ -21,7 +21,7 @@ public class CompatibilityTinkerConstruct implements ICompatibility {
     public static final String MOD_ID = "tconstruct";
 
     protected CompatibilityTinkerConstruct() {
-        if (isModLoaded(MOD_ID) && Config.enableTconstructSoulbound) {
+        if (isModLoaded(MOD_ID) && GSConfigs.enableTconstructSoulbound) {
             GraveStoneAPI.graveGenerationAtDeath.addPlayerItemsHandler(new IPlayerItems() {
 
                 @Override
