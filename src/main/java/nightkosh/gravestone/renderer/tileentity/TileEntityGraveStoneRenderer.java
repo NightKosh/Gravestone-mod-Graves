@@ -20,10 +20,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.GSConfigs;
-import nightkosh.gravestone.core.Resources;
+import nightkosh.gravestone.core.GSResources;
 import nightkosh.gravestone.models.block.ModelGraveStone;
 import nightkosh.gravestone.models.block.graves.*;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
+import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
 import org.lwjgl.opengl.GL11;
 
 import java.util.HashMap;
@@ -56,7 +56,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static TileEntityGraveStoneRenderer instance;
 
-    protected static final TileEntityGraveStone GRAVE_TE = new TileEntityGraveStone();
+    protected static final GraveStoneBlockEntity GRAVE_TE = new GraveStoneBlockEntity();
     protected static final ItemStack SWORD = new ItemStack(Items.IRON_SWORD);
 
     public static final Map<Item, EntityItem> flowersMap = new HashMap<>();
@@ -65,11 +65,11 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
     public static final Map<Item, ResourceLocation> swordsTextureMap = new HashMap<>();
 
     static {
-        swordsTextureMap.put(Items.WOODEN_SWORD, Resources.WOODEN_SWORD);
-        swordsTextureMap.put(Items.STONE_SWORD, Resources.STONE_SWORD);
-        swordsTextureMap.put(Items.IRON_SWORD, Resources.IRON_SWORD);
-        swordsTextureMap.put(Items.GOLDEN_SWORD, Resources.GOLDEN_SWORD);
-        swordsTextureMap.put(Items.DIAMOND_SWORD, Resources.DIAMOND_SWORD);
+        swordsTextureMap.put(Items.WOODEN_SWORD, GSResources.WOODEN_SWORD);
+        swordsTextureMap.put(Items.STONE_SWORD, GSResources.STONE_SWORD);
+        swordsTextureMap.put(Items.IRON_SWORD, GSResources.IRON_SWORD);
+        swordsTextureMap.put(Items.GOLDEN_SWORD, GSResources.GOLDEN_SWORD);
+        swordsTextureMap.put(Items.DIAMOND_SWORD, GSResources.DIAMOND_SWORD);
 
         GRAVE_TE.setGraveType(EnumGraves.STONE_VERTICAL_PLATE.ordinal());
     }
@@ -80,7 +80,7 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     @Override
     public void render(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        TileEntityGraveStone tileEntity = (TileEntityGraveStone) te;
+        GraveStoneBlockEntity tileEntity = (GraveStoneBlockEntity) te;
         boolean isSwordGrave;
         boolean isEnchanted;
         ItemStack sword;
@@ -225,25 +225,25 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         switch (graveType) {
             case VERTICAL_PLATE:
             default:
-                return Resources.GRAVE_MOSSY_VERTICAL_PLATE;
+                return GSResources.GRAVE_MOSSY_VERTICAL_PLATE;
             case CROSS:
-                return Resources.GRAVE_MOSSY_CROSS;
+                return GSResources.GRAVE_MOSSY_CROSS;
             case OBELISK:
-                return Resources.MOSSY_OBELISK;
+                return GSResources.MOSSY_OBELISK;
             case CELTIC_CROSS:
-                return Resources.MOSSY_CELTIC_CROSS;
+                return GSResources.MOSSY_CELTIC_CROSS;
             case HORIZONTAL_PLATE:
-                return Resources.GRAVE_MOSSY_HORISONTAL_PLATE;
+                return GSResources.GRAVE_MOSSY_HORISONTAL_PLATE;
             case VILLAGER_STATUE:
-                return Resources.MOSSY_VILLAGER_STATUE;
+                return GSResources.MOSSY_VILLAGER_STATUE;
             case DOG_STATUE:
-                return Resources.MOSSY_DOG_STATUE;
+                return GSResources.MOSSY_DOG_STATUE;
             case CAT_STATUE:
-                return Resources.MOSSY_CAT_STATUE;
+                return GSResources.MOSSY_CAT_STATUE;
             case HORSE_STATUE:
-                return Resources.GRAVE_MOSSY_HORSE_STATUE;
+                return GSResources.GRAVE_MOSSY_HORSE_STATUE;
             case CREEPER_STATUE:
-                return Resources.MOSSY_CREEPER_STATUE;
+                return GSResources.MOSSY_CREEPER_STATUE;
         }
     }
 

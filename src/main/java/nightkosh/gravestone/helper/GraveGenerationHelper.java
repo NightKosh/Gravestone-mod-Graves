@@ -2,6 +2,7 @@ package nightkosh.gravestone.helper;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Cat;
@@ -27,11 +28,10 @@ import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.GSBlock;
 import nightkosh.gravestone.core.MobHandler;
-import nightkosh.gravestone.core.compatibility.Compatibility;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
 import nightkosh.gravestone.inventory.GraveInventory;
 import nightkosh.gravestone.tileentity.DeathMessageInfo;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
+import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
 
 import java.util.*;
 
@@ -393,7 +393,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
         if (newPos != null) {
             newWorld.setBlockState(newPos, GSBlock.getGraveStone().getDefaultState().withProperty(BlockGraveStone.FACING, direction), 2);
-            TileEntityGraveStone tileEntity = (TileEntityGraveStone) newWorld.getTileEntity(newPos);
+            GraveStoneBlockEntity tileEntity = (GraveStoneBlockEntity) newWorld.getTileEntity(newPos);
 
             if (tileEntity != null) {
                 if (graveInfo.getSword() != null) {
@@ -417,22 +417,22 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             }
             GRAVE_LOGGER.info("Create " + deathInfo.getName() + "'s grave at " + newPos.getX() + "x" + newPos.getY() + "x" + newPos.getZ());
         } else {
-            ItemStack itemStack = new ItemStack(Item.getItemFromBlock(GSBlock.getGraveStone()), 1);
+            var itemStack = new ItemStack(Item.getItemFromBlock(GSBlock.getGraveStone()), 1);
             itemStack.setItemDamage(graveInfo.getGrave().ordinal());
-            NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setBoolean("isLocalized", true);
-            nbt.setString("name", deathInfo.getName());
-            nbt.setString("DeathText", deathInfo.getDeathMessage());
-            nbt.setString("KillerName", deathInfo.getKillerNameForTE());
-            nbt.setBoolean("Enchanted", graveInfo.isEnchanted());
-            nbt.setBoolean("Mossy", graveInfo.isMossy());
-            nbt.setInteger("Age", age);
+            var tag = new CompoundTag();
+            tag.putBoolean("isLocalized", true);
+            tag.CompoundTag("name", deathInfo.getName());
+            tag.putString("DeathText", deathInfo.getDeathMessage());
+            tag.putString("KillerName", deathInfo.getKillerNameForTE());
+            tag.putBoolean("Enchanted", graveInfo.isEnchanted());
+            tag.putBoolean("Mossy", graveInfo.isMossy());
+            tag.setInteger("Age", age);
 
             if (graveInfo.getGrave() == EnumGraves.SWORD) {
-                GraveStoneHelper.addSwordInfo(nbt, graveInfo.getSword());
+                GraveStoneHelper.addSwordInfo(tag, graveInfo.getSword());
             }
 
-            itemStack.setTagCompound(nbt);
+            itemStack.setTagCompound(tag);
             GraveInventory.dropItem(itemStack, world, pos);
 
             if (items != null) {
@@ -491,12 +491,12 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     @Override
-    public boolean isMossyGrave(World world, BlockPos pos, EnumGraveMaterial graveMaterial, EnumGraveType graveType) {
-        return isMossyGrave(world, pos, EnumGraves.getByTypeAndMaterial(graveType, graveMaterial).getMaterial());
+    public boolean isMossyGrave(Level level, BlockPos pos, EnumGraveMaterial graveMaterial, EnumGraveType graveType) {
+        return isMossyGrave(level, pos, EnumGraves.getByTypeAndMaterial(graveType, graveMaterial).getMaterial());
     }
 
-    public static boolean isMossyGrave(World world, BlockPos pos, EnumGraveMaterial graveMaterial) {
-        Set<BiomeDictionary.Type> biomeTypesList = BiomeDictionary.getTypes(world.getBiome(pos));
+    public static boolean isMossyGrave(Level level, BlockPos pos, EnumGraveMaterial graveMaterial) {
+        Set<BiomeDictionary.Type> biomeTypesList = BiomeDictionary.getTypes(level.getBiome(pos));
         return graveMaterial != EnumGraveMaterial.OTHER && (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP));
     }
 

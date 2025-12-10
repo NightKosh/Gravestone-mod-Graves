@@ -1,6 +1,6 @@
 package nightkosh.gravestone.tileentity;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundTag;
 
 /**
  * GraveStone mod
@@ -15,30 +15,30 @@ public class GraveStoneDeathText {
     private String killerName = "";
     private boolean isLocalized = false;
 
-    public void readText(NBTTagCompound nbtTag) {
-        if (nbtTag.hasKey("isLocalized")) {
-            isLocalized = nbtTag.getBoolean("isLocalized");
+    public void readText(CompoundTag tag) {
+        if (tag.contains("isLocalized")) {
+            isLocalized = tag.getBoolean("isLocalized");
         }
 
         if (isLocalized) {
-            name = nbtTag.getString("name");
-            deathText = nbtTag.getString("DeathText");
-            killerName = nbtTag.getString("KillerName");
+            name = tag.getString("name");
+            deathText = tag.getString("DeathText");
+            killerName = tag.getString("KillerName");
         } else {
-            deathText = nbtTag.getString("DeathText");
+            deathText = tag.getString("DeathText");
         }
     }
 
-    public void saveText(NBTTagCompound nbtTag) {
+    public void saveText(CompoundTag tag) {
         if (isLocalized) {
-            nbtTag.setString("name", name);
-            nbtTag.setString("DeathText", deathText);
-            nbtTag.setString("KillerName", killerName);
+            tag.putString("name", name);
+            tag.putString("DeathText", deathText);
+            tag.putString("KillerName", killerName);
         } else {
-            nbtTag.setString("DeathText", deathText);
+            tag.putString("DeathText", deathText);
         }
 
-        nbtTag.setBoolean("isLocalized", isLocalized);
+        tag.putBoolean("isLocalized", isLocalized);
     }
 
     public boolean isLocalized() {

@@ -2,7 +2,7 @@ package nightkosh.gravestone.core.proxy;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
+import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
 
 /**
  * GraveStone mod
@@ -21,10 +21,7 @@ public class CommonProxy {
     }
 
     public void registerTERenderers() {
-        GameRegistry.registerTileEntity(TileEntityGraveStone.class, "GraveStoneTE");
-    }
-
-    public void registerTEISR() {
+        GameRegistry.registerTileEntity(GraveStoneBlockEntity.class, "GraveStoneTE");
     }
 
     public String getLocalizedMaterial(EnumGraveMaterial material) {

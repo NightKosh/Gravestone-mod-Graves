@@ -11,7 +11,7 @@ import static net.minecraft.resources.ResourceLocation.fromNamespaceAndPath;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class Resources {
+public class GSResources {
 
     public static final String BLOCK_LOCATION = "textures/blocks/";
     public static final String GRAVES_LOCATION = "textures/graves/";

@@ -37,16 +37,16 @@ public class ItemBlockGraveStone extends BlockItem {
 //    @Override
 //    public void onCreated(ItemStack stack, Level level, Player player) {
 //        if (!stack.hasTagCompound()) {
-//            stack.setTagCompound(new NBTTagCompound());
+//            stack.setTagCompound(new CompoundTag());
 //        }
 //    }
 //
 //    @Override
 //    public void addInformation(ItemStack stack, @Nullable Level level, List<String> tooltipList, ITooltipFlag flag) {
 //        if (!stack.hasTagCompound()) {
-//            stack.setTagCompound(new NBTTagCompound());
+//            stack.setTagCompound(new CompoundTag());
 //        } else {
-//            NBTTagCompound nbt = stack.getTagCompound();
+//            CompoundTag nbt = stack.getTagCompound();
 //
 //            String deathText = "";
 //            if (nbt.hasKey("DeathText") && StringUtils.isNotBlank(nbt.getString("DeathText"))) {

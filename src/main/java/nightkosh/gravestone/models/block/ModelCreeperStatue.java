@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import nightkosh.gravestone.core.Resources;
+import nightkosh.gravestone.core.GSResources;
 import nightkosh.gravestone.renderer.tileentity.TileEntityGraveStoneRenderer;
 import org.lwjgl.opengl.GL11;
 
@@ -98,7 +98,7 @@ public class ModelCreeperStatue extends ModelGraveStone {
 
         GL11.glTranslated(0, 0.3, 0);
         GL11.glScalef(scale, scale, scale);
-        TileEntityGraveStoneRenderer.instance.bindTextureByName(Resources.CREEPER_AURA);
+        TileEntityGraveStoneRenderer.instance.bindTextureByName(GSResources.CREEPER_AURA);
 
         GlStateManager.depthMask(true);
         GlStateManager.matrixMode(GL11.GL_TEXTURE);

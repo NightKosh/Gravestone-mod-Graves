@@ -4,7 +4,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import nightkosh.gravestone.inventory.GraveInventory;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
+import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
 
 /**
  * GraveStone mod
@@ -20,7 +20,7 @@ public class GraveContainer extends Container {
     public static final int SLOT_WIDTH = 18;
     private final GraveInventory graveInventory;
 
-    public GraveContainer(InventoryPlayer inventoryPlayer, TileEntityGraveStone te) {
+    public GraveContainer(InventoryPlayer inventoryPlayer, GraveStoneBlockEntity te) {
         int i = 2 * SLOT_WIDTH;
 
         graveInventory = te.getInventory();

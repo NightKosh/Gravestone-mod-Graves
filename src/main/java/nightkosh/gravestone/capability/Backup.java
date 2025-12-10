@@ -1,7 +1,7 @@
 package nightkosh.gravestone.capability;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class Backup {
 
     private int dimensionId;
     private BlockPos pos;
-    private List<ItemStack> items = new ArrayList<>();
+    private final List<ItemStack> items = new ArrayList<>();
 
     public Backup() {
     }
@@ -48,10 +48,11 @@ public class Backup {
     }
 
     public void setItems(List<ItemStack> items) {
-        for (ItemStack stack : items) {
+        for (var stack : items) {
             if (stack != null && !stack.isEmpty()) {
                 this.items.add(stack.copy());
             }
         }
     }
+
 }

@@ -3,7 +3,7 @@ package nightkosh.gravestone.core.commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.ItemStack;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
+import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class SubCommandCustomGraveItems implements ISubCommand {
                 TileEntity graveTE = sender.getEntityWorld().getTileEntity(new BlockPos(graveXCoord, graveYCoord, graveZCoord));
                 TileEntity chestTE = sender.getEntityWorld().getTileEntity(new BlockPos(chestXCoord, chestYCoord, chestZCoord));
                 if (graveTE != null && chestTE != null) {
-                    if (graveTE instanceof TileEntityGraveStone && chestTE instanceof TileEntityChest) {
+                    if (graveTE instanceof GraveStoneBlockEntity && chestTE instanceof TileEntityChest) {
                         List<ItemStack> items = new ArrayList<ItemStack>();
                         ItemStack item;
                         for (int slot = 0; slot < ((TileEntityChest) chestTE).getSizeInventory(); slot++) {
@@ -57,7 +57,7 @@ public class SubCommandCustomGraveItems implements ISubCommand {
                                 items.add(item.copy());
                             }
                         }
-                        ((TileEntityGraveStone) graveTE).getInventory().setAdditionalItems(items.toArray(new ItemStack[items.size()]));
+                        ((GraveStoneBlockEntity) graveTE).getInventory().setAdditionalItems(items.toArray(new ItemStack[items.size()]));
                     } else {
                         sender.sendMessage(new TextComponentTranslation("commands.fill_grave.wrong_block").setStyle(new Style().setColor(TextFormatting.RED)));
                     }

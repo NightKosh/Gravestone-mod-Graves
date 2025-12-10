@@ -1,10 +1,13 @@
 package nightkosh.gravestone.inventory;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import nightkosh.gravestone.config.GSConfigs;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
+import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
 
 import java.util.*;
 
@@ -17,14 +20,14 @@ import java.util.*;
 public class GraveInventory implements IInventory {
 
     public static final int DEFAULT_INVENTORY_SIZE = 54;
-    private TileEntityGraveStone tileEntity;
+    private GraveStoneBlockEntity tileEntity;
     protected List<ItemStack> items = new ArrayList<>(DEFAULT_INVENTORY_SIZE);
 
-    public GraveInventory(TileEntityGraveStone tileEntity) {
+    public GraveInventory(GraveStoneBlockEntity tileEntity) {
         this.tileEntity = tileEntity;
     }
 
-    public void readItems(NBTTagCompound nbtTag) {
+    public void readItems(CompoundTag nbtTag) {
         NBTTagList ntbItemsList = nbtTag.getTagList("Items", 10);
         items = new ArrayList<>(DEFAULT_INVENTORY_SIZE);
 
@@ -33,18 +36,18 @@ public class GraveInventory implements IInventory {
         }
     }
 
-    public void saveItems(NBTTagCompound nbtTag) {
-        NBTTagList ntbList = new NBTTagList();
+    public void saveItems(CompoundTag tag) {
+        var ntbList = new NBTTagList();
 
-        for (ItemStack stack : items) {
+        for (var stack : items) {
             if (stack != null && stack != ItemStack.EMPTY) {
-                NBTTagCompound nbt = new NBTTagCompound();
+                var nbt = new CompoundTag();
                 stack.writeToNBT(nbt);
                 ntbList.appendTag(nbt);
             }
         }
 
-        nbtTag.setTag("Items", ntbList);
+        tag.setTag("Items", ntbList);
     }
 
     @Override
@@ -82,7 +85,7 @@ public class GraveInventory implements IInventory {
             if (stack.getCount() <= amount) {
                 setInventorySlotContents(slot, ItemStack.EMPTY);
             } else {
-                stack = stack.splitStack(amount);
+                stack = stack.split(amount);
                 if (stack.getCount() == 0) {
                     setInventorySlotContents(slot, ItemStack.EMPTY);
                 }
@@ -122,8 +125,11 @@ public class GraveInventory implements IInventory {
 
     @Override
     public boolean isUsableByPlayer(Player player) {
-        return player.getEntityWorld().getTileEntity(this.tileEntity.getPos()) == this.tileEntity &&
-                player.getDistanceSq(new BlockPos(this.tileEntity.getPos().getX() + 0.5, this.tileEntity.getPos().getY() + 0.5, this.tileEntity.getPos().getZ() + 0.5)) < 64;
+        return player.getEntityWorld().getTileEntity(this.tileEntity.getBlockPos()) == this.tileEntity &&
+                player.getDistanceSq(new BlockPos(
+                        this.tileEntity.getBlockPos().getX() + 0.5,
+                        this.tileEntity.getBlockPos().getY() + 0.5,
+                        this.tileEntity.getBlockPos().getZ() + 0.5)) < 64;
     }
 
     @Override
@@ -196,7 +202,7 @@ public class GraveInventory implements IInventory {
                     addInventoryContent(item);
                     savedItems--;
                 } else {
-                    dropItem(item, tileEntity.getWorld(), tileEntity.getPos());
+                    dropItem(item, tileEntity.getLevel(), tileEntity.getBlockPos());
                 }
             }
         }
@@ -223,18 +229,17 @@ public class GraveInventory implements IInventory {
      *
      * @param stack Dropping item
      */
-    public static void dropItem(ItemStack stack, World world, BlockPos pos) {
+    public static void dropItem(ItemStack stack, Level level, BlockPos pos) {
         if (stack != null && stack != ItemStack.EMPTY) {
-            Random random = new Random();
-            EntityItem entityItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack.copy());
-            entityItem.motionX = random.nextGaussian() * 0.2;
-            entityItem.motionY = random.nextGaussian() * 0.2;
-            entityItem.motionZ = random.nextGaussian() * 0.2;
+            var entityItem = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack.copy());
+            entityItem.motionX = level.getRandom().nextGaussian() * 0.2;
+            entityItem.motionY = level.getRandom().nextGaussian() * 0.2;
+            entityItem.motionZ = level.getRandom().nextGaussian() * 0.2;
 
             if (stack.hasTagCompound()) {
                 entityItem.getItem().setTagCompound(stack.getTagCompound().copy());
             }
-            world.spawnEntity(entityItem);
+            level.spawnEntity(entityItem);
         }
     }
 
@@ -244,11 +249,11 @@ public class GraveInventory implements IInventory {
      * @param slot Item slot number
      */
     public void dropItem(int slot) {
-        dropItem(items.get(slot), tileEntity.getWorld(), tileEntity.getPos());
+        dropItem(items.get(slot), tileEntity.getLevel(), tileEntity.getBlockPos());
     }
 
     public void dropItem(ItemStack stack) {
-        dropItem(stack, tileEntity.getWorld(), tileEntity.getPos());
+        dropItem(stack, tileEntity.getLevel(), tileEntity.getBlockPos());
     }
 
     /*

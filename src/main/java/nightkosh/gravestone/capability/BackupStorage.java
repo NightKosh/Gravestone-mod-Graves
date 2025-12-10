@@ -1,11 +1,8 @@
 package nightkosh.gravestone.capability;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 
 import javax.annotation.Nullable;
@@ -22,37 +19,37 @@ public class BackupStorage implements Capability.IStorage<IBackups> {
     @Nullable
     @Override
     public NBTBase writeNBT(Capability<IBackups> capability, IBackups backups, EnumFacing side) {
-        NBTTagCompound nbt = new NBTTagCompound();
+        var tag = new CompoundTag();
 
         Deque<Backup> backupDeque = backups.getBackups();
         if (backupDeque != null) {
-            nbt.setTag("Backups", getBackupsNBT(backupDeque));
+            tag.put("Backups", getBackupsNBT(backupDeque));
         }
 
-        return nbt;
+        return tag;
     }
 
     private static NBTTagList getBackupsNBT(Deque<Backup> backups) {
-        NBTTagList list = new NBTTagList();
+        var list = new NBTTagList();
 
         for (Backup backup : backups) {
-            NBTTagCompound backupNbt = new NBTTagCompound();
-            backupNbt.setInteger("Dimension", backup.getDimensionId());
-            backupNbt.setInteger("PosX", backup.getPos().getX());
-            backupNbt.setInteger("PosY", backup.getPos().getY());
-            backupNbt.setInteger("PosZ", backup.getPos().getZ());
+            var backupNbt = new CompoundTag();
+            backupNbt.putInt("Dimension", backup.getDimensionId());
+            backupNbt.putInt("PosX", backup.getPos().getX());
+            backupNbt.putInt("PosY", backup.getPos().getY());
+            backupNbt.putInt("PosZ", backup.getPos().getZ());
 
-            NBTTagList ntbList = new NBTTagList();
+            var ntbList = new NBTTagList();
 
-            for (ItemStack stack : backup.getItems()) {
+            for (var stack : backup.getItems()) {
                 if (stack != null && stack != ItemStack.EMPTY) {
-                    NBTTagCompound nbt = new NBTTagCompound();
+                    CompoundTag nbt = new CompoundTag();
                     stack.writeToNBT(nbt);
                     ntbList.appendTag(nbt);
                 }
             }
 
-            backupNbt.setTag("Items", ntbList);
+            backupNbt.put("Items", ntbList);
 
             list.appendTag(backupNbt);
         }
@@ -62,8 +59,8 @@ public class BackupStorage implements Capability.IStorage<IBackups> {
 
     @Override
     public void readNBT(Capability<IBackups> capability, IBackups backups, EnumFacing side, NBTBase nbt) {
-        if (((NBTTagCompound) nbt).hasKey("Backups")) {
-            backups.setBackups(getBackups((NBTTagList) ((NBTTagCompound) nbt).getTag("Backups")));
+        if (((CompoundTag) nbt).hasKey("Backups")) {
+            backups.setBackups(getBackups((NBTTagList) ((CompoundTag) nbt).getTag("Backups")));
 
         }
     }
@@ -72,17 +69,17 @@ public class BackupStorage implements Capability.IStorage<IBackups> {
         Deque<Backup> backups = new ArrayDeque<>(5);
 
         for (int index = 0; index < 5; index++ ) {
-            NBTTagCompound nbt = backupsNbt.getCompoundTagAt(index);
+            CompoundTag tag = backupsNbt.getCompoundTagAt(index);
 
             Backup backup = new Backup();
-            backup.setDimensionId(nbt.getInteger("Dimension"));
+            backup.setDimensionId(tag.getInt("Dimension"));
             backup.setPos(new BlockPos(
-                    nbt.getInteger("PosX"),
-                    nbt.getInteger("PosY"),
-                    nbt.getInteger("PosZ")
+                    tag.getInt("PosX"),
+                    tag.getInt("PosY"),
+                    tag.getInt("PosZ")
             ));
 
-            NBTTagList ntbItemsList = nbt.getTagList("Items", 10);
+            NBTTagList ntbItemsList = tag.getTagList("Items", 10);
             List<ItemStack> items = new ArrayList<>();
 
             for (int i = 0; i < ntbItemsList.tagCount(); ++i) {

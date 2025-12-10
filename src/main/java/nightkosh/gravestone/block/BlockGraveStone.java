@@ -1,8 +1,11 @@
 package nightkosh.gravestone.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -18,7 +21,7 @@ import nightkosh.gravestone.core.GuiHandler;
 import nightkosh.gravestone.helper.GraveGenerationHelper;
 import nightkosh.gravestone.helper.GraveStoneHelper;
 import nightkosh.gravestone.inventory.GraveInventory;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
+import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -58,10 +61,10 @@ public class BlockGraveStone extends BlockContainer {
         var enumfacing = EnumFacing.getHorizontal(MathHelper.floor((double) (player.rotationYaw * 4 / 360F) + 0.5D) & 3).getOpposite();
         state = state.withProperty(FACING, enumfacing);
         level.setBlockState(pos, state, 2);
-        TileEntityGraveStone tileEntity = (TileEntityGraveStone) level.getTileEntity(pos);
+        GraveStoneBlockEntity tileEntity = (GraveStoneBlockEntity) level.getTileEntity(pos);
 
         if (tileEntity != null) {
-            NBTTagCompound nbt = itemStack.getTagCompound();
+            CompoundTag nbt = itemStack.getTagCompound();
             if (nbt != null) {
                 tileEntity.setGraveType(itemStack.getItemDamage());
 
@@ -142,7 +145,7 @@ public class BlockGraveStone extends BlockContainer {
         if (state.getBlock() == GSBlock.getGraveStone()) {
             EnumFacing facing = state.getValue(FACING);
             EnumGraveType graveType;
-            TileEntityGraveStone tileEntity = (TileEntityGraveStone) access.getTileEntity(pos);
+            GraveStoneBlockEntity tileEntity = (GraveStoneBlockEntity) access.getTileEntity(pos);
 
             if (tileEntity != null) {
                 graveType = tileEntity.getGraveType().getGraveType();
@@ -258,8 +261,8 @@ public class BlockGraveStone extends BlockContainer {
     public void onBlockHarvested(Level level, BlockPos pos, IBlockState state, Player player) {
         player.addExhaustion(0.025F);
 
-        if (!level.isRemote && !level.restoringBlockSnapshots) {
-            TileEntityGraveStone tileEntity = (TileEntityGraveStone) level.getTileEntity(pos);
+        if (!level.isClientSide() && !level.restoringBlockSnapshots) {
+            GraveStoneBlockEntity tileEntity = (GraveStoneBlockEntity) level.getTileEntity(pos);
             if (tileEntity != null && tileEntity.canBeLooted(player)) {
                 GraveStoneHelper.spawnMob(level, pos);
 
@@ -323,13 +326,13 @@ public class BlockGraveStone extends BlockContainer {
     @Override
     public boolean onBlockActivated(Level level, BlockPos pos, IBlockState state, Player player,
                                     EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-        TileEntityGraveStone te = (TileEntityGraveStone) level.getTileEntity(pos);
+        GraveStoneBlockEntity te = (GraveStoneBlockEntity) level.getTileEntity(pos);
 
         if (te != null) {
             if (player.inventory.getCurrentItem() != null) {
                 ItemStack item = player.inventory.getCurrentItem();
                 if (item.getItem().getToolClasses(item).contains("shovel")) {
-                    if (!level.isRemote) {
+                    if (!level.isClientSide()) {
                         if (te.canBeLooted(player)) {
                             player.openGui(ModGraveStone.INSTANCE, GuiHandler.GRAVE_INVENTORY_GUI_ID, level, pos.getX(), pos.getY(), pos.getZ());
                             GRAVE_LOGGER.info(player.getName() + " open grave inventory at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
@@ -342,7 +345,7 @@ public class BlockGraveStone extends BlockContainer {
                 } else {
                     if (te.isMossy()) {
                         if (item.getItem() instanceof ItemShears) {
-                            if (!level.isRemote) {
+                            if (!level.isClientSide()) {
                                 GraveInventory.dropItem(new ItemStack(Blocks.VINE, 1), level, pos);
                             }
                             te.setMossy(false);
@@ -357,7 +360,7 @@ public class BlockGraveStone extends BlockContainer {
                     }
                     if (te.hasFlower()) {
                         if (item.getItem() instanceof ItemShears) {
-                            if (!level.isRemote) {
+                            if (!level.isClientSide()) {
                                 te.dropFlower();
                             }
                             te.setFlower(null);
@@ -373,7 +376,7 @@ public class BlockGraveStone extends BlockContainer {
                     }
                 }
             }
-            if (level.isRemote) {
+            if (level.isClientSide()) {
                 String name;
                 String deathText;
                 String killerName;
@@ -410,7 +413,7 @@ public class BlockGraveStone extends BlockContainer {
 
     @Override
     public TileEntity createNewTileEntity(Level level, int var2) {
-        return new TileEntityGraveStone(level);
+        return new GraveStoneBlockEntity(level);
     }
 
     @Override
@@ -425,7 +428,7 @@ public class BlockGraveStone extends BlockContainer {
      */
     @Override
     public void breakBlock(Level level, BlockPos pos, IBlockState state) {
-        TileEntityGraveStone tileEntity = (TileEntityGraveStone) level.getTileEntity(pos);
+        GraveStoneBlockEntity tileEntity = (GraveStoneBlockEntity) level.getTileEntity(pos);
 
         if (tileEntity != null) {
             tileEntity.getInventory().dropAllItems();
@@ -437,7 +440,7 @@ public class BlockGraveStone extends BlockContainer {
     @Override
     public void neighborChanged(IBlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos) {
         if (!level.isSideSolid(pos.down(), EnumFacing.DOWN, true)) {
-            TileEntityGraveStone te = (TileEntityGraveStone) level.getTileEntity(pos);
+            GraveStoneBlockEntity te = (GraveStoneBlockEntity) level.getTileEntity(pos);
             if (te != null) {
                 if (te.canBeLooted(null)) {
                     GraveStoneHelper.dropBlockWithoutInfo(te.getWorld(), pos, level.getBlockState(pos));
@@ -449,7 +452,7 @@ public class BlockGraveStone extends BlockContainer {
 
     @Override
     public boolean removedByPlayer(IBlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-        TileEntityGraveStone te = (TileEntityGraveStone) level.getTileEntity(pos);
+        GraveStoneBlockEntity te = (GraveStoneBlockEntity) level.getTileEntity(pos);
         if (te != null && !te.canBeLooted(player)) {
             player.sendMessage(new TextComponentTranslation("grave.cant_be_looted").setStyle(new Style().setColor(TextFormatting.RED)));
             return false;
@@ -464,21 +467,21 @@ public class BlockGraveStone extends BlockContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(CreativeTabs tabs, NonNullList<ItemStack> list) {
+    public void getSubBlocks(CreativeModeTab tabs, NonNullList<ItemStack> list) {
         for (int i = 0; i < EnumGraves.values().length - 1; i++) {
-            ItemStack stack = new ItemStack(this, 1, i);
-            NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setBoolean("Purified", false);
+            var stack = new ItemStack(this, 1, i);
+            var tag = new CompoundTag();
+            tag.putBoolean("Purified", false);
 
-            stack.setTagCompound(nbt);
+            stack.setTagCompound(tag);
             list.add(stack);
         }
 
         // custom swords
-        for (Item sword : GraveGenerationHelper.swordsList) {
+        for (var sword : GraveGenerationHelper.swordsList) {
             list.add(GraveStoneHelper.getSwordAsGrave(Item.getItemFromBlock(this), new ItemStack(sword, 1)));
         }
-        for (Item sword : GraveGenerationHelper.swordsList) {
+        for (var sword : GraveGenerationHelper.swordsList) {
             try {
                 ItemStack swordStack = new ItemStack(sword, 1);
                 EnchantmentHelper.addRandomEnchantment(new Random(), swordStack, 5, true);
@@ -496,17 +499,17 @@ public class BlockGraveStone extends BlockContainer {
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, Level level, BlockPos pos, Player player) {
         ItemStack itemStack = new ItemStack(Item.getItemFromBlock(this), 1);
-        TileEntityGraveStone tileEntity = (TileEntityGraveStone) level.getTileEntity(pos);
+        GraveStoneBlockEntity tileEntity = (GraveStoneBlockEntity) level.getTileEntity(pos);
 
         if (tileEntity != null) {
             if (itemStack != null) {
-                NBTTagCompound nbt = new NBTTagCompound();
+                var tag = new CompoundTag();
                 itemStack.setItemDamage(tileEntity.getGraveTypeNum());
-                nbt.setBoolean("Mossy", tileEntity.isMossy());
+                tag.putBoolean("Mossy", tileEntity.isMossy());
 
-                itemStack.setTagCompound(nbt);
+                itemStack.setTagCompound(tag);
                 if (tileEntity.isSwordGrave()) {
-                    GraveStoneHelper.addSwordInfo(nbt, tileEntity.getSword());
+                    GraveStoneHelper.addSwordInfo(tag, tileEntity.getSword());
                 }
             }
         }
@@ -520,8 +523,8 @@ public class BlockGraveStone extends BlockContainer {
     @Override
     public void updateTick(Level level, BlockPos pos, IBlockState state, Random random) {
         if (GSConfigs.REMOVE_EMPTY_GRAVES.get()) {
-            if (!level.isRemote) {
-                TileEntityGraveStone tileEntity = (TileEntityGraveStone) level.getTileEntity(pos);
+            if (!level.isClientSide()) {
+                GraveStoneBlockEntity tileEntity = (GraveStoneBlockEntity) level.getTileEntity(pos);
                 if (tileEntity != null) {
                     if (!tileEntity.isSwordGrave() && tileEntity.isEmpty()) {
                         if (GSConfigs.SHOW_GRAVE_REMOVAL_MESSAGES.get()) {

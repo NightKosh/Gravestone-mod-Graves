@@ -1,9 +1,11 @@
 package nightkosh.gravestone.tileentity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.helper.GraveSpawnerHelper;
@@ -19,7 +21,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class TileEntityGraveStone extends TileEntityGrave implements ITickable, ISpawnerEntity {
+public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerEntity {
 
     public static GraveSpawnerHelper graveSpawnerHelper = new GraveSpawnerHelper();
 
@@ -33,21 +35,21 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
     public static IFog fogHandler = new IFog() {
     };
 
-    public TileEntityGraveStone() {
+    public GraveStoneBlockEntity() {
         super();
         spawner = graveSpawnerHelper.getSpawner(this);
         inventory = new GraveInventory(this);
     }
 
-    public TileEntityGraveStone(World world) {
+    public GraveStoneBlockEntity(Level level) {
         this();
-        this.setWorld(world);
+        this.setLevel(level);
     }
 
     @Override
     public void update() {
         if (spawnerHelperId != 0 && spawnerHelper == null) {
-            Entity entity = this.getWorld().getEntityByID(spawnerHelperId);
+            Entity entity = this.getLevel().getEntityByID(spawnerHelperId);
 
             if (entity instanceof GroupOfGravesSpawnerHelper) {
                 spawnerHelper = (GroupOfGravesSpawnerHelper) entity;
@@ -56,22 +58,22 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
 
         spawner.update();
 
-        fogHandler.addFog(this.getWorld(), this.pos);
+        fogHandler.addFog(this.getLevel(), this.getBlockPos());
     }
 
     @Override
-    public World getIWorld() {
-        return getWorld();
+    public Level getIWorld() {
+        return getLevel();
     }
 
     @Override
     public BlockPos getIPos() {
-        return getPos();
+        return getBlockPos();
     }
 
     @Override
     public boolean receiveClientEvent(int par1, int par2) {
-        if (par1 == 1 && this.getWorld().isRemote) {
+        if (par1 == 1 && this.getLevel().isClientSide()) {
             spawner.setMinDelay();
         }
 
@@ -79,7 +81,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbtTag) {
+    public void readFromNBT(CompoundTag nbtTag) {
         super.readFromNBT(nbtTag);
         // age
         age = nbtTag.getInteger("Age");
@@ -103,53 +105,53 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
     }
 
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound nbtTag) {
-        nbtTag = super.writeToNBT(nbtTag);
+    public CompoundTag writeToNBT(CompoundTag tag) {
+        tag = super.writeToNBT(tag);
         // age
-        nbtTag.setInteger("Age", age);
+        tag.setInteger("Age", age);
         // grave loot
-        inventory.saveItems(nbtTag);
+        inventory.saveItems(tag);
         // death text
-        deathText.saveText(nbtTag);
+        deathText.saveText(tag);
         // sword
-        writeSwordInfo(nbtTag);
+        writeSwordInfo(tag);
         // flower
-        writeFlowerInfo(nbtTag);
+        writeFlowerInfo(tag);
         // owner
-        nbtTag.setString("PlayerId", playerId);
+        tag.putString("PlayerId", playerId);
 
-        nbtTag.setBoolean("Purified", isPurified);
+        tag.putBoolean("Purified", isPurified);
 
         //spawnerHelper
         if (haveSpawnerHelper()) {
-            nbtTag.setInteger("SpawnerHelperId", spawnerHelper.getEntityId());
+            tag.setInteger("SpawnerHelperId", spawnerHelper.getEntityId());
         }
-        return nbtTag;
+        return tag;
     }
 
-    private void readSwordInfo(NBTTagCompound nbtTag) {
+    private void readSwordInfo(CompoundTag nbtTag) {
         if (nbtTag.hasKey("Sword")) {
             sword = new ItemStack(nbtTag.getCompoundTag("Sword"));
         }
     }
 
-    private void writeSwordInfo(NBTTagCompound nbtTag) {
+    private void writeSwordInfo(CompoundTag nbtTag) {
         if (sword != null) {
-            NBTTagCompound swordNBT = new NBTTagCompound();
+            var swordNBT = new CompoundTag();
             sword.writeToNBT(swordNBT);
             nbtTag.setTag("Sword", swordNBT);
         }
     }
 
-    private void readFlowerInfo(NBTTagCompound nbtTag) {
-        if (nbtTag.hasKey("Flower")) {
-            flower = new ItemStack(nbtTag.getCompoundTag("Flower"));
+    private void readFlowerInfo(CompoundTag tag) {
+        if (tag.hasKey("Flower")) {
+            flower = new ItemStack(tag.getCompoundTag("Flower"));
         }
     }
 
-    private void writeFlowerInfo(NBTTagCompound nbtTag) {
+    private void writeFlowerInfo(CompoundTag nbtTag) {
         if (flower != null) {
-            NBTTagCompound flowerNBT = new NBTTagCompound();
+            var flowerNBT = new CompoundTag();
             flower.writeToNBT(flowerNBT);
             nbtTag.setTag("Flower", flowerNBT);
         }
@@ -165,7 +167,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
 
     public void dropSword() {
         if (this.sword != null) {
-            GraveInventory.dropItem(this.sword, this.getWorld(), this.pos);
+            GraveInventory.dropItem(this.sword, this.getLevel(), this.getBlockPos());
         }
     }
 
@@ -188,7 +190,7 @@ public class TileEntityGraveStone extends TileEntityGrave implements ITickable, 
 
     public void dropFlower() {
         if (this.flower != null) {
-            GraveInventory.dropItem(this.flower, this.getWorld(), this.pos);
+            GraveInventory.dropItem(this.flower, this.getLevel(), this.getBlockPos());
         }
     }
 

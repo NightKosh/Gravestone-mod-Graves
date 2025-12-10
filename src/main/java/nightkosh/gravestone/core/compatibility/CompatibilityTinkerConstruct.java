@@ -46,11 +46,11 @@ public class CompatibilityTinkerConstruct implements ICompatibility {
 
     private static boolean hasSoulbound(ItemStack stack) {
         if (stack.hasTagCompound()) {
-            NBTTagCompound nbt = stack.getTagCompound();
+            CompoundTag nbt = stack.getTagCompound();
             if (nbt.hasKey("Modifiers")) {
                 NBTTagList nbtList = nbt.getTagList("Modifiers", 10);
                 for (int i = 0; i < nbtList.tagCount(); i++) {
-                    NBTTagCompound tag = nbtList.getCompoundTagAt(i);
+                    CompoundTag tag = nbtList.getCompoundTagAt(i);
                     if (tag.hasKey("identifier") && tag.getString("identifier").equals("soulbound")) {
                         return true;
                     }

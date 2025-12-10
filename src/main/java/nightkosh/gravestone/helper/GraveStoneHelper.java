@@ -1,6 +1,7 @@
 package nightkosh.gravestone.helper;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -12,7 +13,7 @@ import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.GSBlock;
 import nightkosh.gravestone.inventory.GraveInventory;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
+import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -72,25 +73,25 @@ public class GraveStoneHelper {
         }
     }
 
-    public static void addSwordInfo(NBTTagCompound nbt, ItemStack sword) {
-        NBTTagCompound swordNBT = new NBTTagCompound();
-        sword.writeToNBT(swordNBT);
-        nbt.setTag("Sword", swordNBT);
+    public static void addSwordInfo(CompoundTag tag, ItemStack sword) {
+        var swordTag = new CompoundTag();
+        sword.writeToNBT(swordTag);
+        tag.put("Sword", swordTag);
     }
 
     public static ItemStack getSwordAsGrave(Item grave, ItemStack sword) {
         ItemStack graveStoneStack = new ItemStack(grave, 1, EnumGraves.SWORD.ordinal());
-        NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setBoolean("Purified", false);
-        GraveStoneHelper.addSwordInfo(nbt, sword);
+        var tag = new CompoundTag();
+        tag.putBoolean("Purified", false);
+        GraveStoneHelper.addSwordInfo(tag, sword);
 
-        graveStoneStack.setTagCompound(nbt);
+        graveStoneStack.setTagCompound(tag);
         return graveStoneStack;
     }
 
-    public static boolean canFlowerBePlaced(Level level, BlockPos pos, ItemStack itemStack, TileEntityGraveStone te) {
+    public static boolean canFlowerBePlaced(Level level, BlockPos pos, ItemStack itemStack, GraveStoneBlockEntity te) {
         if (canFlowerBePlacedOnGrave(te)) {
-            Item item = itemStack.getItem();
+            var item = itemStack.getItem();
             if (Block.getBlockFromItem(item) instanceof BlockFlower) {
                 return true;
             } else if (item instanceof IPlantable) {
@@ -101,7 +102,7 @@ public class GraveStoneHelper {
         return false;
     }
 
-    public static boolean canFlowerBePlacedOnGrave(TileEntityGraveStone te) {
+    public static boolean canFlowerBePlacedOnGrave(GraveStoneBlockEntity te) {
         return !te.isSwordGrave() && (te.getGraveType().getGraveType() == EnumGraveType.VERTICAL_PLATE ||
                 te.getGraveType().getGraveType() == EnumGraveType.CROSS);
     }
@@ -166,18 +167,18 @@ public class GraveStoneHelper {
     public static void dropBlockWithoutInfo(Level level, BlockPos pos, IBlockState state) {
         if (GSConfigs.DROP_GRAVE_BLOCK_AT_DESTRUCTION.get()) {
             ItemStack itemStack = new ItemStack(Item.getItemFromBlock(GSBlock.getGraveStone()), 1);
-            TileEntityGraveStone tileEntity = (TileEntityGraveStone) level.getTileEntity(pos);
+            GraveStoneBlockEntity tileEntity = (GraveStoneBlockEntity) level.getTileEntity(pos);
 
             if (tileEntity != null) {
                 if (tileEntity.isSwordGrave()) {
                     tileEntity.dropSword();
                 } else if (itemStack != null) {
-                    NBTTagCompound nbt = new NBTTagCompound();
+                    var tag = new CompoundTag();
                     itemStack.setItemDamage(tileEntity.getGraveTypeNum());
-                    nbt.setBoolean("Mossy", tileEntity.isMossy());
-                    nbt.setBoolean("Purified", true);
+                    tag.putBoolean("Mossy", tileEntity.isMossy());
+                    tag.putBoolean("Purified", true);
 
-                    itemStack.setTagCompound(nbt);
+                    itemStack.setTagCompound(tag);
                     GraveInventory.dropItem(itemStack, level, pos);
                 }
             }
@@ -190,31 +191,31 @@ public class GraveStoneHelper {
     public static ItemStack getBlockItemStack(IBlockAccess access, BlockPos pos, IBlockState state) {
         if (GSConfigs.DROP_GRAVE_BLOCK_AT_DESTRUCTION.get()) {
             ItemStack itemStack = new ItemStack(Item.getItemFromBlock(GSBlock.getGraveStone()), 1);
-            TileEntityGraveStone tileEntity = (TileEntityGraveStone) access.getTileEntity(pos);
+            GraveStoneBlockEntity tileEntity = (GraveStoneBlockEntity) access.getTileEntity(pos);
 
             if (tileEntity != null) {
-                NBTTagCompound nbt = new NBTTagCompound();
+                var tag = new CompoundTag();
                 itemStack.setItemDamage(tileEntity.getGraveTypeNum());
 
                 if (tileEntity.getDeathTextComponent().isLocalized()) {
-                    nbt.setBoolean("isLocalized", true);
-                    nbt.setString("name", tileEntity.getDeathTextComponent().getName());
-                    nbt.setString("KillerName", tileEntity.getDeathTextComponent().getKillerName());
+                    tag.putBoolean("isLocalized", true);
+                    tag.putString("name", tileEntity.getDeathTextComponent().getName());
+                    tag.putString("KillerName", tileEntity.getDeathTextComponent().getKillerName());
                 }
 
-                nbt.setString("DeathText", tileEntity.getDeathTextComponent().getDeathText());
-                nbt.setInteger("Age", tileEntity.getAge());
+                tag.putString("DeathText", tileEntity.getDeathTextComponent().getDeathText());
+                tag.setInteger("Age", tileEntity.getAge());
 
                 if (tileEntity.isSwordGrave()) {
-                    GraveStoneHelper.addSwordInfo(nbt, tileEntity.getSword());
+                    GraveStoneHelper.addSwordInfo(tag, tileEntity.getSword());
                 }
 
-                nbt.setBoolean("Enchanted", tileEntity.isEnchanted());
-                nbt.setBoolean("Mossy", tileEntity.isMossy());
+                tag.putBoolean("Enchanted", tileEntity.isEnchanted());
+                tag.putBoolean("Mossy", tileEntity.isMossy());
 
-                nbt.setBoolean("Purified", true);
+                tag.putBoolean("Purified", true);
 
-                itemStack.setTagCompound(nbt);
+                itemStack.setTagCompound(tag);
             }
 
             return itemStack;

@@ -6,7 +6,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.util.ResourceLocation;
-import nightkosh.gravestone.core.Resources;
+import nightkosh.gravestone.core.GSResources;
 
 /**
  * GraveStone mod
@@ -63,23 +63,23 @@ public class ModelRendererSkull extends ModelRenderer {
         switch (skullType) {//TODO
             case SKELETON_SKULL:
             default:
-                texture = Resources.SKELETON_SKULL;
+                texture = GSResources.SKELETON_SKULL;
                 break;
             case WITHER_SKULL:
-                texture = Resources.WITHER_SKULL;
+                texture = GSResources.WITHER_SKULL;
                 break;
             case ZOMBIE_SKULL:
-                texture = Resources.ZOMBIE_SKULL;
+                texture = GSResources.ZOMBIE_SKULL;
                 break;
             case STRAY_SKULL:
-                texture = Resources.STRAY_SKULL;
+                texture = GSResources.STRAY_SKULL;
                 break;
         }
         Minecraft.getMinecraft().renderEngine.bindTexture(texture);
     }
 
     public void bindTexture(boolean isWither) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(isWither ? Resources.WITHER_SKULL : Resources.SKELETON_SKULL);
+        Minecraft.getMinecraft().renderEngine.bindTexture(isWither ? GSResources.WITHER_SKULL : GSResources.SKELETON_SKULL);
     }
 
     public void renderWithTexture(float p_78785_1_, boolean isWither) {

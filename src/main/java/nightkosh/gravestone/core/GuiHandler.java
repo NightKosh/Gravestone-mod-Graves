@@ -5,7 +5,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import nightkosh.gravestone.gui.GraveInventoryGui;
 import nightkosh.gravestone.gui.container.GraveContainer;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
+import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
 
 /**
  * GraveStone mod
@@ -23,8 +23,8 @@ public class GuiHandler implements IGuiHandler {
         switch (id) {
             case GRAVE_INVENTORY_GUI_ID:
                 tileEntity = level.getTileEntity(new BlockPos(x, y, z));
-                if (tileEntity instanceof TileEntityGraveStone) {
-                    return new GraveContainer(player.inventory, (TileEntityGraveStone) tileEntity);
+                if (tileEntity instanceof GraveStoneBlockEntity) {
+                    return new GraveContainer(player.inventory, (GraveStoneBlockEntity) tileEntity);
                 }
                 break;
         }
@@ -37,8 +37,8 @@ public class GuiHandler implements IGuiHandler {
         switch (id) {
             case GRAVE_INVENTORY_GUI_ID:
                 tileEntity = level.getTileEntity(new BlockPos(x, y, z));
-                if (tileEntity instanceof TileEntityGraveStone) {
-                    return new GraveInventoryGui(player.inventory, (TileEntityGraveStone) tileEntity);
+                if (tileEntity instanceof GraveStoneBlockEntity) {
+                    return new GraveInventoryGui(player.inventory, (GraveStoneBlockEntity) tileEntity);
                 }
                 break;
         }

@@ -5,7 +5,7 @@ import net.minecraft.world.level.Level;
 import nightkosh.gravestone.core.logger.GSLogger;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundTag;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -65,7 +65,7 @@ public class MobHandler {
             File file = new File(level.getSaveHandler().getWorldDirectory(), MOBS_SPAWN_TIME_FILE_NAME);
             File backup = new File(level.getSaveHandler().getWorldDirectory(), MOBS_SPAWN_TIME_BACKUP_FILE_NAME);
 
-            NBTTagCompound data = null;
+            CompoundTag data = null;
             boolean save = false;
             if (file != null && file.exists()) {
                 data = getDataFromFile(file);
@@ -95,7 +95,7 @@ public class MobHandler {
     }
 
     public static void saveMobsSpawnTime(World world) {
-        if (world != null && !world.isRemote && mobsSpawnTime != null) {
+        if (world != null && !world.isClientSide() && mobsSpawnTime != null) {
             try {
                 File file = new File(world.getSaveHandler().getWorldDirectory(), MOBS_SPAWN_TIME_FILE_NAME);
                 File backup = new File(world.getSaveHandler().getWorldDirectory(), MOBS_SPAWN_TIME_BACKUP_FILE_NAME);
@@ -109,7 +109,7 @@ public class MobHandler {
                 }
                 try {
                     if (file != null) {
-                        NBTTagCompound data = new NBTTagCompound();
+                        CompoundTag data = new CompoundTag();
                         for (Map.Entry<String, Long> entry : mobsSpawnTime.entrySet()) {
                             if (entry != null) {
                                 data.setLong(entry.getKey(), entry.getValue());
@@ -136,8 +136,8 @@ public class MobHandler {
         }
     }
 
-    private static NBTTagCompound getDataFromFile(File file) {
-        NBTTagCompound data = null;
+    private static CompoundTag getDataFromFile(File file) {
+        CompoundTag data = null;
         try {
             FileInputStream fileinputstream = new FileInputStream(file);
             data = CompressedStreamTools.readCompressed(fileinputstream);

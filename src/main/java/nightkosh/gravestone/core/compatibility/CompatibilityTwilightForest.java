@@ -78,9 +78,9 @@ public class CompatibilityTwilightForest implements ICompatibility {
                 if (item == null) {
                     continue;
                 }
-                NBTTagCompound nbt = item.getTagCompound();
+                CompoundTag nbt = item.getTagCompound();
                 if (nbt == null) {
-                    nbt = new NBTTagCompound();
+                    nbt = new CompoundTag();
                     if (nbt.hasKey("slot")) {
                         continue;
                     }
@@ -102,7 +102,7 @@ public class CompatibilityTwilightForest implements ICompatibility {
                 if (item == null || !item.hasTagCompound()) {
                     continue;
                 }
-                NBTTagCompound nbt = item.getTagCompound();
+                CompoundTag nbt = item.getTagCompound();
                 nbt.removeTag("slot");
                 if (nbt.hasNoTags()) {
                     item.setTagCompound(null);

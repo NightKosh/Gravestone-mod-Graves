@@ -2,7 +2,7 @@ package nightkosh.gravestone.renderer.item;
 
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundTag;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.renderer.tileentity.TileEntityGraveStoneRenderer;
 
@@ -23,7 +23,7 @@ public class TEISRGravestone extends TileEntityItemStackRenderer {
         ItemStack sword = null;
 
         if (stack.hasTagCompound()) {
-            NBTTagCompound nbt = stack.getTagCompound();
+            CompoundTag nbt = stack.getTagCompound();
             isEnchanted = nbt.hasKey("Enchanted") && nbt.getBoolean("Enchanted");
             isMossy = nbt.hasKey("Mossy") && nbt.getBoolean("Mossy");
             if (nbt.hasKey("Sword")) {

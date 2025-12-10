@@ -1,10 +1,6 @@
 package nightkosh.gravestone.tileentity;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.nbt.CompoundTag;
 import nightkosh.gravestone.inventory.GraveInventory;
 
 import java.util.Random;
@@ -15,7 +11,7 @@ import java.util.Random;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public abstract class TileEntityGrave extends TileEntityBase {
+public abstract class GraveBlockEntity extends BlockEntityBase {
 
     protected GraveInventory inventory;
     protected GraveStoneDeathText deathText = new GraveStoneDeathText();//TODO is required ????
@@ -25,7 +21,7 @@ public abstract class TileEntityGrave extends TileEntityBase {
     protected int graveType = 0;
     protected int age = -1;
 
-    public TileEntityGrave() {
+    public GraveBlockEntity() {
     }
 
     public void setGraveType(int graveType) {
@@ -96,10 +92,10 @@ public abstract class TileEntityGrave extends TileEntityBase {
      * Reads a tile entity from NBT.
      */
     @Override
-    public void readFromNBT(NBTTagCompound nbtTag) {
+    public void readFromNBT(CompoundTag nbtTag) {
         super.readFromNBT(nbtTag);
 
-        graveType = nbtTag.getInteger("Type");
+        graveType = nbtTag.getInt("Type");
         isEnchanted = nbtTag.getBoolean("Enchanted");
         isMossy = nbtTag.getBoolean("Mossy");
     }
@@ -108,14 +104,14 @@ public abstract class TileEntityGrave extends TileEntityBase {
      * Writes a tile entity to NBT.
      */
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound nbtTag) {
-        nbtTag = super.writeToNBT(nbtTag);
+    public CompoundTag writeToNBT(CompoundTag tag) {
+        tag = super.writeToNBT(tag);
 
-        nbtTag.setInteger("Type", graveType);
-        nbtTag.setBoolean("Enchanted", isEnchanted);
-        nbtTag.setBoolean("Mossy", isMossy);
+        tag.putInt("Type", graveType);
+        tag.putBoolean("Enchanted", isEnchanted);
+        tag.putBoolean("Mossy", isMossy);
 
-        return nbtTag;
+        return tag;
     }
 
     /**
@@ -138,8 +134,8 @@ public abstract class TileEntityGrave extends TileEntityBase {
     }
 
     @Override
-    public NBTTagCompound getUpdateTag() {
-        return this.writeToNBT(new NBTTagCompound());
+    public CompoundTag getUpdateTag() {
+        return this.writeToNBT(new CompoundTag());
     }
 
 }
