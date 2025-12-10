@@ -1,6 +1,5 @@
 package nightkosh.gravestone.models;
 
-import net.minecraft.client.model.ModelBase;
 
 /**
  * GraveStone mod

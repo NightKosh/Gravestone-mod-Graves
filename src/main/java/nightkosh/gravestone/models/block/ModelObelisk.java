@@ -8,7 +8,7 @@ package nightkosh.gravestone.models.block;
  */
 //TODO
 //@SideOnly(Side.CLIENT)
-public class ModelObelisk extends ModelGraveStone {
+public class ModelObelisk {//extends ModelGraveStone {
 
 //    private ModelRenderer plate1;
 //    private ModelRenderer plate2;

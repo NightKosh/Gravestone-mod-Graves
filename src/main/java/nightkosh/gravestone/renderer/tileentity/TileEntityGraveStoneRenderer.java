@@ -33,20 +33,22 @@ import java.util.Map;
 public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     protected static final Map<EnumGraves, ResourceLocation> mossyTexturesMap = Maps.newHashMap();
-    public static ModelGraveStone verticalPlate = new ModelVerticalPlateGraveStone();
-    public static ModelGraveStone cross = new ModelCrossGraveStone();
-    public static ModelGraveStone obelisk = new ModelObeliskGravestone();
-    public static ModelGraveStone celticCross = new ModelCelticCrossGravestone();
-    public static ModelGraveStone horizontalPlate = new ModelHorizontalPlateGraveStone();
-    public static ModelGraveStone villagerStatue = new ModelVillagerStatueGravestone();
-    public static ModelGraveStone dogStatue = new ModelDogStatueGraveStone();
-    public static ModelGraveStone catStatue = new ModelCatStatueGraveStone();
-    public static ModelGraveStone horseStatue = new ModelHorseGraveStone();
-    public static ModelGraveStone creeperStatue = new ModelCreeperStatueGravestone();
+    //TODO
+//    public static ModelGraveStone verticalPlate = new ModelVerticalPlateGraveStone();
+//    public static ModelGraveStone cross = new ModelCrossGraveStone();
+//    public static ModelGraveStone obelisk = new ModelObeliskGravestone();
+//    public static ModelGraveStone celticCross = new ModelCelticCrossGravestone();
+//    public static ModelGraveStone horizontalPlate = new ModelHorizontalPlateGraveStone();
+//    public static ModelGraveStone villagerStatue = new ModelVillagerStatueGravestone();
+//    public static ModelGraveStone dogStatue = new ModelDogStatueGraveStone();
+//    public static ModelGraveStone catStatue = new ModelCatStatueGraveStone();
+//    public static ModelGraveStone horseStatue = new ModelHorseGraveStone();
+//    public static ModelGraveStone creeperStatue = new ModelCreeperStatueGravestone();
     public static ModelGraveStone skeletonCorpse = new ModelSkeletonCorpseGravestone(false);
     public static ModelGraveStone witheredSkeletonCorpse = new ModelSkeletonCorpseGravestone(true);
 
-    public static ModelGraveStone swordModel = new ModelSwordGraveStone();
+    //TODO
+//    public static ModelGraveStone swordModel = new ModelSwordGraveStone();
 
     public static TileEntityGraveStoneRenderer instance;
 
@@ -180,19 +182,20 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 //                }
             }
         } else {
-            ModelGraveStone model = getModel(graveType.getGraveType());
-
             //TODO
-//            bindTextureByName(getTexture(graveType, graveType.getTexture(), isMossy));
-            if (graveType.getGraveType() == EnumGraveType.CREEPER_STATUE) {
-                model.customRender(isEnchanted);
-            } else {
-                if (isEnchanted) {
-                    model.renderEnchanted();
-                } else {
-                    model.renderAll();
-                }
-            }
+//            ModelGraveStone model = getModel(graveType.getGraveType());
+//
+//            //TODO
+////            bindTextureByName(getTexture(graveType, graveType.getTexture(), isMossy));
+//            if (graveType.getGraveType() == EnumGraveType.CREEPER_STATUE) {
+//                model.customRender(isEnchanted);
+//            } else {
+//                if (isEnchanted) {
+//                    model.renderEnchanted();
+//                } else {
+//                    model.renderAll();
+//                }
+//            }
 
             if (hasFlower) {
                 renderFlower(level, flower);
@@ -247,37 +250,38 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         }
     }
 
-    protected ModelGraveStone getModel(EnumGraveType graveType) {
-        switch (graveType) {
-            case VERTICAL_PLATE:
-            default:
-                return verticalPlate;
-            case CROSS:
-                return cross;
-            case OBELISK:
-                return obelisk;
-            case CELTIC_CROSS:
-                return celticCross;
-            case HORIZONTAL_PLATE:
-                return horizontalPlate;
-            case VILLAGER_STATUE:
-                return villagerStatue;
-            case DOG_STATUE:
-                return dogStatue;
-            case CAT_STATUE:
-                return catStatue;
-            case HORSE_STATUE:
-                return horseStatue;
-            case CREEPER_STATUE:
-                return creeperStatue;
-            case STARVED_CORPSE:
-                return skeletonCorpse;
-            case WITHERED_CORPSE:
-                return witheredSkeletonCorpse;
-            case SWORD:
-                return swordModel;
-        }
-    }
+    //TODO
+//    protected ModelGraveStone getModel(EnumGraveType graveType) {
+//        switch (graveType) {
+//            case VERTICAL_PLATE:
+//            default:
+//                return verticalPlate;
+//            case CROSS:
+//                return cross;
+//            case OBELISK:
+//                return obelisk;
+//            case CELTIC_CROSS:
+//                return celticCross;
+//            case HORIZONTAL_PLATE:
+//                return horizontalPlate;
+//            case VILLAGER_STATUE:
+//                return villagerStatue;
+//            case DOG_STATUE:
+//                return dogStatue;
+//            case CAT_STATUE:
+//                return catStatue;
+//            case HORSE_STATUE:
+//                return horseStatue;
+//            case CREEPER_STATUE:
+//                return creeperStatue;
+//            case STARVED_CORPSE:
+//                return skeletonCorpse;
+//            case WITHERED_CORPSE:
+//                return witheredSkeletonCorpse;
+//            case SWORD:
+//                return swordModel;
+//        }
+//    }
 
     protected void renderSword(Level level, ItemStack sword) {
         var entityItem = swordsMap.get(sword.getItem());

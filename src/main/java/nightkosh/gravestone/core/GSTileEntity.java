@@ -11,7 +11,8 @@ import nightkosh.gravestone.ModGraveStone;
 public class GSTileEntity {
 
     public static void registration() {
-        ModGraveStone.proxy.registerTERenderers();
+        //TODO
+//        ModGraveStone.proxy.registerTERenderers();
     }
 
 }

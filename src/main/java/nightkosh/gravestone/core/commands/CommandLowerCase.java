@@ -8,7 +8,8 @@ package nightkosh.gravestone.core.commands;
  */
 public class CommandLowerCase extends Command {
 
-    @Override
+    //TODO
+//    @Override
     public String getName() {
         return "gs";
     }
