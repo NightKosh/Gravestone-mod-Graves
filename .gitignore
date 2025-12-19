@@ -25,7 +25,7 @@ gradle/
 
 # other
 eclipse
-run/*
+run
 
 # Files from Forge MDK
 changelog.txt
@@ -33,6 +33,3 @@ CREDITS.txt
 LICENSE.txt
 README.txt
 forge*changelog.txt
-
-!run/gameteststructures/
-!run/gameteststructures/*
