@@ -14,7 +14,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import static com.mojang.text2speech.Narrator.LOGGER;
+import static nightkosh.gravestone.ModGraveStone.LOGGER;
 
 /**
  * GraveStone mod

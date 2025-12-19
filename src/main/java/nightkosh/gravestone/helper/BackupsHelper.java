@@ -12,7 +12,7 @@ import nightkosh.gravestone.config.GSConfigs;
 
 import java.util.List;
 
-import static com.mojang.text2speech.Narrator.LOGGER;
+import static nightkosh.gravestone.ModGraveStone.LOGGER;
 
 /**
  * GraveStone mod

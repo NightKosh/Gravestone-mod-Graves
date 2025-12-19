@@ -59,10 +59,10 @@ public class ModelCreeperStatue {//extends ModelGraveStone {
 //    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6) {
 //        this.head.rotateAngleY = par4 / (180F / (float) Math.PI);
 //        this.head.rotateAngleX = par5 / (180F / (float) Math.PI);
-//        this.leg1.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-//        this.leg2.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2;
-//        this.leg3.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2;
-//        this.leg4.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
+//        this.leg1.rotateAngleX = Mth.cos(par1 * 0.6662F) * 1.4F * par2;
+//        this.leg2.rotateAngleX = Mth.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2;
+//        this.leg3.rotateAngleX = Mth.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2;
+//        this.leg4.rotateAngleX = Mth.cos(par1 * 0.6662F) * 1.4F * par2;
 //    }
 //
 //    @Override

@@ -55,8 +55,8 @@ public class ModelVillagerStatue  {//extends ModelGraveStone {
 //        this.villagerArms.rotationPointY = 3;
 //        this.villagerArms.rotationPointZ = -1;
 //        this.villagerArms.rotateAngleX = -0.75F;
-//        this.rightVillagerLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2 * 0.5F;
-//        this.leftVillagerLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2 * 0.5F;
+//        this.rightVillagerLeg.rotateAngleX = Mth.cos(par1 * 0.6662F) * 1.4F * par2 * 0.5F;
+//        this.leftVillagerLeg.rotateAngleX = Mth.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2 * 0.5F;
 //        this.rightVillagerLeg.rotateAngleY = 0;
 //        this.leftVillagerLeg.rotateAngleY = 0;
 //    }
