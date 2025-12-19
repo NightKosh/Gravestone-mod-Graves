@@ -1,6 +1,7 @@
 package nightkosh.gravestone.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
@@ -10,12 +11,17 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShearsItem;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Material;
 import nightkosh.gravestone.ModGraveStone;
 import nightkosh.gravestone.api.grave.EnumGraveType;
@@ -34,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static com.mojang.text2speech.Narrator.LOGGER;
+import static nightkosh.gravestone.ModGraveStone.LOGGER;
 import static nightkosh.gravestone.ModGraveStone.GRAVE_LOGGER;
 
 /**
@@ -45,8 +51,7 @@ import static nightkosh.gravestone.ModGraveStone.GRAVE_LOGGER;
  */
 public class BlockGraveStone extends Block {//BlockContainer {
 
-    //TODO
-//    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public BlockGraveStone() {
         super(BlockBehaviour.Properties.of(Material.STONE));
@@ -55,6 +60,19 @@ public class BlockGraveStone extends Block {//BlockContainer {
 //        this.setHardness(0.5F);
 //        this.setResistance(5);
 //        this.setTickRandomly(GSConfigs.REMOVE_EMPTY_GRAVES.get());
+
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(FACING, Direction.NORTH));
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateBuilder) {
+        stateBuilder.add(FACING);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     /**
@@ -65,7 +83,7 @@ public class BlockGraveStone extends Block {//BlockContainer {
 //    public void onBlockPlacedBy(Level level, BlockPos pos, IBlockState state, EntityLivingBase player, ItemStack itemStack) {
 //        GraveStoneHelper.replaceGround(level, pos.below());
 //
-//        var enumfacing = EnumFacing.getHorizontal(Mth.floor((double) (player.rotationYaw * 4 / 360F) + 0.5D) & 3).getOpposite();
+//        var enumfacing = EnumFacing.getHorizontal(Mth.floor((double) (player.getYRot() * 4 / 360F) + 0.5D) & 3).getOpposite();
 //        state = state.withProperty(FACING, enumfacing);
 //        level.setBlockState(pos, state, 2);
 //        var blockEntity = (GraveStoneBlockEntity) level.getBlockEntity(pos);
@@ -557,10 +575,6 @@ public class BlockGraveStone extends Block {//BlockContainer {
 //        return this.getDefaultState().withProperty(FACING, enumfacing);
 //    }
 //
-//    @Override
-//    public int getMetaFromState(IBlockState state) {
-//        return state.getValue(FACING).getIndex();
-//    }
 //
 //    @Override
 //    protected BlockStateContainer createBlockState() {
