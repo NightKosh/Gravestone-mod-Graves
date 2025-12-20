@@ -1,7 +1,6 @@
 package nightkosh.gravestone.core.proxy;
 
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
-import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
 
 /**
  * GraveStone mod

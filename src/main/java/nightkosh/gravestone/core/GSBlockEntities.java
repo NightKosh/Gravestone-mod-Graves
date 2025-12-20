@@ -6,7 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import nightkosh.gravestone.api.ModInfo;
-import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
+import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 
 public class GSBlockEntities {
 
