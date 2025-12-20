@@ -39,6 +39,7 @@ public class GSTabs {
         if (event.getTab() == GS_TAB) {
             event.accept(new ItemStack(GSBlocks.getGraveStone()));
             event.accept(new ItemStack(GSBlocks.getGravePlate()));
+            event.accept(new ItemStack(GSBlocks.getCross()));
         }
     }
 

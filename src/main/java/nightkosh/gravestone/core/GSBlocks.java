@@ -32,6 +32,9 @@ public class GSBlocks {
     private static final RegistryObject<BlockGraveStone> GRAVE_PLATE = registerBlock("grave_plate",
             BlockGraveStone::new);
 
+    private static final RegistryObject<BlockGraveStone> CROSS = registerBlock("cross",
+            BlockGraveStone::new);
+
     private static <T extends Block> RegistryObject<T> registerBlock(
             String name, Supplier<T> supplier) {
         var block = BLOCKS_REGISTER.register(name, supplier);
@@ -50,6 +53,10 @@ public class GSBlocks {
 
     public static Block getGravePlate() {
         return GRAVE_PLATE.get();
+    }
+
+    public static Block getCross() {
+        return CROSS.get();
     }
 
 }

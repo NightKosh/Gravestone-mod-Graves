@@ -18,7 +18,8 @@ public class GSBlockEntities {
                     "grave_stone_entity",
                     () -> BlockEntityType.Builder.of(GraveStoneBlockEntity::new,
                                     GSBlocks.getGraveStone(),
-                                    GSBlocks.getGravePlate())
+                                    GSBlocks.getGravePlate(),
+                                    GSBlocks.getCross())
                             .build(null));
 
     public static void register(IEventBus eventBus) {
