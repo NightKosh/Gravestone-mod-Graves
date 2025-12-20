@@ -12,6 +12,8 @@ import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
 
 import java.util.*;
 
+import static nightkosh.gravestone.ModGraveStone.LOGGER;
+
 /**
  * GraveStone mod
  *
@@ -89,7 +91,7 @@ public class GraveInventory {//implements IInventory {
     //TODO
 //    @Override
     public ItemStack decrStackSize(int slot, int amount) {
-        ItemStack stack = getStackInSlot(slot);
+        var stack = getStackInSlot(slot);
         if (stack != null && stack != ItemStack.EMPTY) {
             if (stack.getCount() <= amount) {
                 setInventorySlotContents(slot, ItemStack.EMPTY);
@@ -106,7 +108,7 @@ public class GraveInventory {//implements IInventory {
     //TODO
 //    @Override
     public ItemStack removeStackFromSlot(int slot) {
-        ItemStack stack = getStackInSlot(slot);
+        var stack = getStackInSlot(slot);
         if (stack != null && stack != ItemStack.EMPTY) {
             setInventorySlotContents(slot, ItemStack.EMPTY);
         }
@@ -210,7 +212,7 @@ public class GraveInventory {//implements IInventory {
             }
             Collections.shuffle(Arrays.asList(items.size()), new Random());
 
-            for (ItemStack item : items) {
+            for (var item : items) {
                 if (item != null && item != ItemStack.EMPTY && savedItems > 0) {
                     addInventoryContent(item);
                     savedItems--;
@@ -223,7 +225,7 @@ public class GraveInventory {//implements IInventory {
 
     public void setAdditionalItems(ItemStack[] items) {
         if (items != null) {
-            for (ItemStack item : items) {
+            for (var item : items) {
                 addInventoryContent(item);
             }
         }
@@ -231,7 +233,7 @@ public class GraveInventory {//implements IInventory {
 
     public void setAdditionalItems(List<ItemStack> items) {
         if (items != null) {
-            for (ItemStack item : items) {
+            for (var item : items) {
                 addInventoryContent(item);
             }
         }
@@ -244,18 +246,21 @@ public class GraveInventory {//implements IInventory {
      */
     public static void dropItem(ItemStack stack, Level level, BlockPos pos) {
         if (stack != null && stack != ItemStack.EMPTY) {
+            if (GSConfigs.DEBUG_MODE.get()) {
+                LOGGER.info("Grave drop: {} x {}, at {}", stack.getHoverName().getString(), stack.getCount(), pos.toShortString());
+            }
+
             var entityItem = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack.copy());
+            entityItem.setDeltaMovement(
+                    level.getRandom().nextGaussian() * 0.2,
+                    level.getRandom().nextGaussian() * 0.2,
+                    level.getRandom().nextGaussian() * 0.2);
 
-            //TODO
-//            entityItem.motionX = level.getRandom().nextGaussian() * 0.2;
-//            entityItem.motionY = level.getRandom().nextGaussian() * 0.2;
-//            entityItem.motionZ = level.getRandom().nextGaussian() * 0.2;
-
+            //TODO redundant ???
             if (stack.hasTag()) {
                 entityItem.getItem().setTag(stack.getTag().copy());
             }
-            //TODO
-//            level.spawnEntity(entityItem);
+            level.addFreshEntity(entityItem);
         }
     }
 

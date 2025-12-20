@@ -52,7 +52,8 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
 
     public static TileEntityGraveStoneRenderer instance;
 
-    protected static final GraveStoneBlockEntity GRAVE_TE = new GraveStoneBlockEntity();
+    //TODO
+//    protected static final GraveStoneBlockEntity GRAVE_TE = new GraveStoneBlockEntity();
     protected static final ItemStack SWORD = new ItemStack(Items.IRON_SWORD);
 
     public static final Map<Item, ItemEntity> flowersMap = new HashMap<>();
@@ -67,7 +68,8 @@ public class TileEntityGraveStoneRenderer extends TileEntityRenderer {
         swordsTextureMap.put(Items.GOLDEN_SWORD, GSResources.GOLDEN_SWORD);
         swordsTextureMap.put(Items.DIAMOND_SWORD, GSResources.DIAMOND_SWORD);
 
-        GRAVE_TE.setGraveType(EnumGraves.STONE_VERTICAL_PLATE.ordinal());
+        //TODO
+//        GRAVE_TE.setGraveType(EnumGraves.STONE_VERTICAL_PLATE.ordinal());
     }
 
     public TileEntityGraveStoneRenderer() {

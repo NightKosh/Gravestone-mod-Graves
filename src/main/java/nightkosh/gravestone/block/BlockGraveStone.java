@@ -12,11 +12,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.VineBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -33,9 +31,9 @@ import nightkosh.gravestone.helper.GraveGenerationHelper;
 import nightkosh.gravestone.helper.GraveStoneHelper;
 import nightkosh.gravestone.inventory.GraveInventory;
 import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -49,12 +47,14 @@ import static nightkosh.gravestone.ModGraveStone.GRAVE_LOGGER;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class BlockGraveStone extends Block {//BlockContainer {
+public class BlockGraveStone extends BaseEntityBlock {
 
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public BlockGraveStone() {
-        super(BlockBehaviour.Properties.of(Material.STONE));
+        super(BlockBehaviour.Properties.of(Material.STONE)
+                .strength(-1, Float.MAX_VALUE)//explosion protection - TODO test
+                .noOcclusion());
         //TODO
 //        this.setSoundType(SoundType.STONE);
 //        this.setHardness(0.5F);
@@ -299,63 +299,27 @@ public class BlockGraveStone extends Block {//BlockContainer {
 //            }
 //        }
 //    }
-//
-//    /**
-//     * This returns a complete list of items dropped from this block.
-//     */
-//    @Override
-//    public List<ItemStack> getDrops(IBlockAccess access, BlockPos pos, IBlockState state, int fortune) {
-//        List<ItemStack> ret = new ArrayList<>();
-//        ret.add(GraveStoneHelper.getBlockItemStack(access, pos, state));
-//        return ret;
-//    }
-//
-//    @Override
-//    public void harvestBlock(Level level, Player player, BlockPos pos, IBlockState state, @Nullable BlockEntity te, @Nullable ItemStack stack) {
-//    }
-//
-//    @Override
-//    public boolean isOpaqueCube(IBlockState state) {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean isFullCube(IBlockState state) {
-//        return false;
-//    }
-//
+
 //    @Override
 //    public BlockFaceShape getBlockFaceShape(IBlockAccess access, IBlockState state, BlockPos pos, EnumFacing facing) {
 //        return BlockFaceShape.UNDEFINED;
 //    }
-//
+
 //    @Override
-//    public void onBlockDestroyedByPlayer(Level level, BlockPos pos, IBlockState state) {
-//        GraveStoneHelper.spawnMob(level, pos);
+//    public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
+//        if (!level.isClientSide) {
+//            GraveStoneHelper.spawnMob(level, pos);
+//        }
 //    }
-//
-//    @Override
-//    public float getExplosionResistance(Entity entity) {
-//        return Float.MAX_VALUE;
-//    }
-//
-//    /**
-//     * Called when the block is destroyed by an explosion. Useful for allowing
-//     * the block to take into account tile entities, metadata, etc. when
-//     * exploded, before it is removed.
-//     */
-//    @Override
-//    public void onBlockExploded(Level level, BlockPos pos, Explosion explosion) {
-//    }
-//
+
 //    @Override
 //    public boolean onBlockActivated(Level level, BlockPos pos, IBlockState state, Player player,
 //                                    EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-//        GraveStoneBlockEntity te = (GraveStoneBlockEntity) level.getBlockEntity(pos);
+//        var te = (GraveStoneBlockEntity) level.getBlockEntity(pos);
 //
 //        if (te != null) {
 //            if (player.getInventory().getCurrentItem() != null) {
-//                ItemStack item = player.getInventory().getCurrentItem();
+//                var item = player.getInventory().getCurrentItem();
 //                if (item.getItem().getToolClasses(item).contains("shovel")) {
 //                    if (!level.isClientSide()) {
 //                        if (te.canBeLooted(player)) {
@@ -437,31 +401,38 @@ public class BlockGraveStone extends Block {//BlockContainer {
 //    }
 //
 //    @Override
-//    public BlockEntity createNewTileEntity(Level level, int var2) {
-//        return new GraveStoneBlockEntity(level);
-//    }
-//
-//    @Override
 //    public void onBlockAdded(Level level, BlockPos pos, IBlockState state) {
 //        super.onBlockAdded(level, pos, state);
 //        GraveStoneHelper.replaceGround(level, pos.below());
 //    }
-//
-//    /**
-//     * ejects contained items into the level, and notifies neighbours of an
-//     * update, as appropriate
-//     */
-//    @Override
-//    public void breakBlock(Level level, BlockPos pos, IBlockState state) {
-//        GraveStoneBlockEntity tileEntity = (GraveStoneBlockEntity) level.getBlockEntity(pos);
-//
-//        if (tileEntity != null) {
-//            tileEntity.getInventory().dropAllItems();
-//        }
-//
-//        super.breakBlock(level, pos, state);
-//    }
-//
+
+    /**
+     * ejects contained items into the level, and notifies neighbours of an
+     * update, as appropriate
+     */
+    @Override
+    public void onRemove(BlockState state1, Level level, BlockPos pos, BlockState state2, boolean xz) {
+        var blockEntity = level.getBlockEntity(pos);
+
+        if (blockEntity != null && blockEntity instanceof GraveStoneBlockEntity graveEntity) {
+            if (GSConfigs.DEBUG_MODE.get()) {
+                LOGGER.info("Grave destroyed. Going to drop all stored items");
+            }
+            graveEntity.getInventory().dropAllItems();
+        }
+
+        //TODO from othe method - drop grave block
+        List<ItemStack> ret = new ArrayList<>();
+        ret.add(GraveStoneHelper.getBlockItemStack(level, pos, state1));
+
+        super.onRemove(state1, level, pos, state2, xz);
+    }
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new GraveStoneBlockEntity(pos, state);
+    }
+
 //    @Override
 //    public void neighborChanged(IBlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos) {
 //        if (!level.isSideSolid(pos.below(), EnumFacing.DOWN, true)) {

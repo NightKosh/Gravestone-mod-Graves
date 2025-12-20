@@ -136,7 +136,7 @@ public class EventsHandler {
                     for (var playerDeathHandler : APIGraveGeneration.PLAYER_DEATH_HANDLERS) {
                         if (playerDeathHandler.cancelGraveGeneration(player, event.getSource())) {
                             if (GSConfigs.DEBUG_MODE.get()) {
-                                LOGGER.info("Player grave generation cancelled");
+                                LOGGER.info("Player {} grave generation cancelled", player.getScoreboardName());
                             }
                             return;
                         }

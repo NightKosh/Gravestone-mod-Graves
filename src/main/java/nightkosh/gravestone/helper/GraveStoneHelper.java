@@ -8,6 +8,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.GSBlocks;
@@ -185,45 +186,45 @@ public class GraveStoneHelper {
 //            }
 //        }
 //    }
-//
-//    /**
-//     * Get grave block as item block
-//     */
-//    public static ItemStack getBlockItemStack(Level level, BlockPos pos, IBlockState state) {
-//        if (GSConfigs.DROP_GRAVE_BLOCK_AT_DESTRUCTION.get()) {
-//            var itemStack = new ItemStack(Item.getItemFromBlock(GSBlocks.getGraveStone()), 1);
-//            var tileEntity = (GraveStoneBlockEntity) level.getBlockEntity(pos);
-//
-//            if (tileEntity != null) {
-//                var tag = new CompoundTag();
-//                itemStack.setDamageValue(tileEntity.getGraveTypeNum());
-//
-//                if (tileEntity.getDeathTextComponent().isLocalized()) {
-//                    tag.putBoolean("isLocalized", true);
-//                    tag.putString("name", tileEntity.getDeathTextComponent().getName());
-//                    tag.putString("KillerName", tileEntity.getDeathTextComponent().getKillerName());
-//                }
-//
-//                tag.putString("DeathText", tileEntity.getDeathTextComponent().getDeathText());
-//                tag.putInt("Age", tileEntity.getAge());
-//
-//                if (tileEntity.isSwordGrave()) {
-//                    GraveStoneHelper.addSwordInfo(tag, tileEntity.getSword());
-//                }
-//
-//                tag.putBoolean("Enchanted", tileEntity.isEnchanted());
-//                tag.putBoolean("Mossy", tileEntity.isMossy());
-//
-//                tag.putBoolean("Purified", true);
-//
-//                itemStack.setTag(tag);
-//            }
-//
-//            return itemStack;
-//        } else {
-//            return ItemStack.EMPTY;
-//        }
-//    }
+
+    /**
+     * Get grave block as item block
+     */
+    public static ItemStack getBlockItemStack(Level level, BlockPos pos, BlockState state) {
+        if (GSConfigs.DROP_GRAVE_BLOCK_AT_DESTRUCTION.get()) {
+            var itemStack = new ItemStack(GSBlocks.getGraveStone().asItem());
+            var tileEntity = (GraveStoneBlockEntity) level.getBlockEntity(pos);
+
+            if (tileEntity != null) {
+                var tag = new CompoundTag();
+                itemStack.setDamageValue(tileEntity.getGraveTypeNum());
+
+                if (tileEntity.getDeathTextComponent().isLocalized()) {
+                    tag.putBoolean("isLocalized", true);
+                    tag.putString("name", tileEntity.getDeathTextComponent().getName());
+                    tag.putString("KillerName", tileEntity.getDeathTextComponent().getKillerName());
+                }
+
+                tag.putString("DeathText", tileEntity.getDeathTextComponent().getDeathText());
+                tag.putInt("Age", tileEntity.getAge());
+
+                if (tileEntity.isSwordGrave()) {
+                    GraveStoneHelper.addSwordInfo(tag, tileEntity.getSword());
+                }
+
+                tag.putBoolean("Enchanted", tileEntity.isEnchanted());
+                tag.putBoolean("Mossy", tileEntity.isMossy());
+
+                tag.putBoolean("Purified", true);
+
+                itemStack.setTag(tag);
+            }
+
+            return itemStack;
+        } else {
+            return ItemStack.EMPTY;
+        }
+    }
 
 //TODO #245
 //    public static void replaceOldGraveByNew(World world, BlockPos pos) {

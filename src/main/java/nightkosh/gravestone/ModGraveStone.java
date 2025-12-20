@@ -55,6 +55,7 @@ public class ModGraveStone {
         var eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         GSBlocks.register(eventBus);
+        GSBlockEntities.register(eventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }

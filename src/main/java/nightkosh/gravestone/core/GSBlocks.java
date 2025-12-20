@@ -29,7 +29,7 @@ public class GSBlocks {
     private static final RegistryObject<BlockGraveStone> GRAVE_STONE = registerBlock("grave_stone",
             BlockGraveStone::new, ItemBlockGraveStone::new);
 
-    private static <T extends net.minecraft.world.level.block.Block> RegistryObject<T> registerBlock(
+    private static <T extends Block> RegistryObject<T> registerBlock(
             String name, Supplier<T> block, Supplier<Item> itemBlock) {
         ITEMS_REGISTER.register(name, itemBlock);
         return BLOCKS_REGISTER.register(name, block);

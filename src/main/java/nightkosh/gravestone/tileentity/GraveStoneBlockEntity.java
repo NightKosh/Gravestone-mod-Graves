@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.helper.GraveSpawnerHelper;
@@ -35,15 +36,10 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
     public static IFog fogHandler = new IFog() {
     };
 
-    public GraveStoneBlockEntity() {
-        super();
+    public GraveStoneBlockEntity(BlockPos blockPos, BlockState state) {
+        super(blockPos, state);
         spawner = graveSpawnerHelper.getSpawner(this);
         inventory = new GraveInventory(this);
-    }
-
-    public GraveStoneBlockEntity(Level level) {
-        this();
-        this.setLevel(level);
     }
 
     //TODO
