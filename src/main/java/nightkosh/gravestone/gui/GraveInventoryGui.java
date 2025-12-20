@@ -1,10 +1,5 @@
 package nightkosh.gravestone.gui;
 
-import nightkosh.gravestone.core.GSResources;
-import nightkosh.gravestone.gui.container.GraveContainer;
-import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
-import org.lwjgl.opengl.GL11;
-
 /**
  * GraveStone mod
  *

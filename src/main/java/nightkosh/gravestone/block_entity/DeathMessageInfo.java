@@ -1,4 +1,4 @@
-package nightkosh.gravestone.tileentity;
+package nightkosh.gravestone.block_entity;
 
 import nightkosh.gravestone.helper.DeathTextHelper;
 

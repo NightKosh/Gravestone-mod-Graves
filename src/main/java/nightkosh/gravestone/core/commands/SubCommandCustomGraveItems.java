@@ -1,15 +1,5 @@
 package nightkosh.gravestone.core.commands;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.item.ItemStack;
-import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static nightkosh.gravestone.ModGraveStone.LOGGER;
-
 /**
  * GraveStone mod
  *

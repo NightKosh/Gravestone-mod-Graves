@@ -1,4 +1,4 @@
-package nightkosh.gravestone.tileentity;
+package nightkosh.gravestone.block_entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;

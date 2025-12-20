@@ -4,11 +4,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import nightkosh.gravestone.config.GSConfigs;
-import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
+import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 
 import java.util.*;
 

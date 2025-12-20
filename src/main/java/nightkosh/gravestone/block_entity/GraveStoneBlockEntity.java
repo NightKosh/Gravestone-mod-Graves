@@ -1,8 +1,7 @@
-package nightkosh.gravestone.tileentity;
+package nightkosh.gravestone.block_entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -14,7 +13,6 @@ import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
 import nightkosh.gravestone.helper.IFog;
 import nightkosh.gravestone.helper.ISpawner;
 import nightkosh.gravestone.inventory.GraveInventory;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * GraveStone mod

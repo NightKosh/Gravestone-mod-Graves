@@ -1,8 +1,5 @@
 package nightkosh.gravestone.core.proxy;
 
-import nightkosh.gravestone.renderer.tileentity.TileEntityGraveStoneRenderer;
-import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
-
 /**
  * GraveStone mod
  *

@@ -1,6 +1,6 @@
 package nightkosh.gravestone.helper;
 
-import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
+import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 
 /**
  * GraveStone mod

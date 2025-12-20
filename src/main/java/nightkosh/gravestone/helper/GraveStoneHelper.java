@@ -7,13 +7,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.GSBlocks;
 import nightkosh.gravestone.inventory.GraveInventory;
-import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
+import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 
 import java.util.List;
 
@@ -123,11 +122,10 @@ public class GraveStoneHelper {
         }
 
         public boolean isInArea(Level level, BlockPos pos) {
-            return false;///TODO
-//            return level.provider.getDimension() == dimensionId &&
-//                    pos.getX() >= firstPoint.getX() && pos.getX() <= lastPoint.getX() &&
-//                    pos.getY() >= firstPoint.getY() && pos.getY() <= lastPoint.getY() &&
-//                    pos.getZ() >= firstPoint.getZ() && pos.getZ() <= lastPoint.getZ();
+            return //TODO level.provider.getDimension() == dimensionId &&
+                    pos.getX() >= firstPoint.getX() && pos.getX() <= lastPoint.getX() &&
+                    pos.getY() >= firstPoint.getY() && pos.getY() <= lastPoint.getY() &&
+                    pos.getZ() >= firstPoint.getZ() && pos.getZ() <= lastPoint.getZ();
         }
 
         public static RestrictedArea getFromString(String area) {
@@ -154,38 +152,25 @@ public class GraveStoneHelper {
         }
     }
 
-    //TODO
-//    /**
-//     * Drop grave as item block
-//     */
-//    public static void dropBlock(Level level, BlockPos pos, IBlockState state) {
-//        var itemStack = getBlockItemStack(level, pos, state);
-//
-//        if (itemStack != null) {
-//            GraveInventory.dropItem(itemStack, level, pos);
-//        }
-//    }
-//
-//    public static void dropBlockWithoutInfo(Level level, BlockPos pos, IBlockState state) {
-//        if (GSConfigs.DROP_GRAVE_BLOCK_AT_DESTRUCTION.get()) {
-//            var itemStack = new ItemStack(Item.getItemFromBlock(GSBlocks.getGraveStone()), 1);
-//            var blockEntity = (GraveStoneBlockEntity) level.getBlockEntity(pos);
-//
-//            if (blockEntity != null) {
-//                if (blockEntity.isSwordGrave()) {
-//                    blockEntity.dropSword();
-//                } else if (itemStack != null) {
-//                    var tag = new CompoundTag();
-//                    itemStack.setDamageValue(blockEntity.getGraveTypeNum());
-//                    tag.putBoolean("Mossy", blockEntity.isMossy());
-//                    tag.putBoolean("Purified", true);
-//
-//                    itemStack.setTag(tag);
-//                    GraveInventory.dropItem(itemStack, level, pos);
-//                }
-//            }
-//        }
-//    }
+    public static void dropBlockWithoutInfo(Level level, GraveStoneBlockEntity graveEntity) {
+        if (GSConfigs.DROP_GRAVE_BLOCK_AT_DESTRUCTION.get()) {
+            var itemStack = new ItemStack(GSBlocks.getGraveStone().asItem());
+
+            if (graveEntity != null) {
+                if (graveEntity.isSwordGrave()) {
+                    graveEntity.dropSword();
+                } else {
+                    var tag = new CompoundTag();
+                    itemStack.setDamageValue(graveEntity.getGraveTypeNum());
+                    tag.putBoolean("Mossy", graveEntity.isMossy());
+                    tag.putBoolean("Purified", true);
+
+                    itemStack.setTag(tag);
+                    GraveInventory.dropItem(itemStack, level, graveEntity.getBlockPos());
+                }
+            }
+        }
+    }
 
     /**
      * Get grave block as item block

@@ -1,21 +1,18 @@
 package nightkosh.gravestone.renderer.tileentity;
 
 import com.google.common.collect.Maps;
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.GSResources;
 import nightkosh.gravestone.models.block.ModelGraveStone;
 import nightkosh.gravestone.models.block.graves.*;
-import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
 import org.lwjgl.opengl.GL11;
 
 import java.util.HashMap;

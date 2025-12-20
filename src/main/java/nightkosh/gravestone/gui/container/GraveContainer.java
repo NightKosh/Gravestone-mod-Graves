@@ -1,11 +1,5 @@
 package nightkosh.gravestone.gui.container;
 
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
-import nightkosh.gravestone.inventory.GraveInventory;
-import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
-
 /**
  * GraveStone mod
  *

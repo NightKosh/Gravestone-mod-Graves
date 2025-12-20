@@ -2,8 +2,8 @@ package nightkosh.gravestone.helper;
 
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.config.GSConfigs;
-import nightkosh.gravestone.tileentity.DeathMessageInfo;
-import nightkosh.gravestone.tileentity.GraveStoneDeathText;
+import nightkosh.gravestone.block_entity.DeathMessageInfo;
+import nightkosh.gravestone.block_entity.GraveStoneDeathText;
 
 import java.util.ArrayList;
 import java.util.List;

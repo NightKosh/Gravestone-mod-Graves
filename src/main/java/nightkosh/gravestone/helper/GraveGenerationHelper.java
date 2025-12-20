@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,9 +27,6 @@ import nightkosh.gravestone.api.IGraveStoneHelper;
 import nightkosh.gravestone.api.death_handler.ICustomEntityDeathHandler;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
-import nightkosh.gravestone.api.grave_items.ICatItems;
-import nightkosh.gravestone.api.grave_items.IDogItems;
-import nightkosh.gravestone.api.grave_items.IVillagerItems;
 import nightkosh.gravestone.block.BlockGraveStone;
 import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.GSConfigs;
@@ -36,8 +34,8 @@ import nightkosh.gravestone.core.GSBlocks;
 import nightkosh.gravestone.core.MobHandler;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
 import nightkosh.gravestone.inventory.GraveInventory;
-import nightkosh.gravestone.tileentity.DeathMessageInfo;
-import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
+import nightkosh.gravestone.block_entity.DeathMessageInfo;
+import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 
 import java.util.*;
 
@@ -514,12 +512,13 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     private static boolean isInRestrictedArea(Level level, BlockPos pos) {
-        return false;//GSConfigs.restrictGraveGenerationInArea.stream().anyMatch((area) -> area.isInArea(level, pos));
+        return GSConfigs.restrictGraveGenerationInArea.stream()
+                .anyMatch((area) -> area.isInArea(level, pos));
     }
 
     @Override
     public boolean isMagicDamage(DamageSource damageSource) {
-        return false;//TODO DamageSource.MAGIC.equals(damageSource) || damageSource.damageType.toLowerCase().contains("magic");
+        return damageSource.is(DamageTypes.MAGIC);//TODO || damageSource.damageType.toLowerCase().contains("magic");
     }
 
     @Override
@@ -632,26 +631,26 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 //    public static boolean isFireDamage(DamageSource damageSource, String damageType) {
 //        return DamageSource.IN_FIRE.equals(damageSource) || DamageSource.ON_FIRE.equals(damageSource) || isFireDamage(damageType);
 //    }
-//
-//    public static boolean isFireDamage(String damageType) {
-//        return damageType.toLowerCase().contains("nfire");
-//    }
-//
-//    public static boolean isLavaDamage(DamageSource damageSource, String damageType) {
-//        return DamageSource.LAVA.equals(damageSource) || isLavaDamage(damageType);
-//    }
-//
-//    public static boolean isLavaDamage(String damageType) {
-//        return damageType.toLowerCase().contains("lava");
-//    }
-//
-//    public static boolean isMagicDamage(String damageText) {
-//        return damageText.toLowerCase().contains("magic");
-//    }
-//
-//    public static boolean isExplosionDamage(DamageSource damageSource) {
-//        return isBlastDamage(damageSource.damageType) || isFireballDamage(damageSource.damageType);
-//    }
+
+    public static boolean isFireDamage(String damageType) {
+        return damageType.toLowerCase().contains("nfire");
+    }
+
+    public static boolean isLavaDamage(DamageSource damageSource, String damageType) {
+        return damageSource.is(DamageTypes.LAVA) || isLavaDamage(damageType);
+    }
+
+    public static boolean isLavaDamage(String damageType) {
+        return damageType.toLowerCase().contains("lava");
+    }
+
+    public static boolean isMagicDamage(String damageText) {
+        return damageText.toLowerCase().contains("magic");
+    }
+
+    public static boolean isExplosionDamage(DamageSource damageSource) {
+        return false;//TODO isBlastDamage(damageSource.damageType) || isFireballDamage(damageSource.damageType);
+    }
 
     public static boolean isBlastDamage(String damageType) {
         return damageType.toLowerCase().contains("explosion");

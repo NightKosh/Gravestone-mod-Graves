@@ -2,17 +2,7 @@ package nightkosh.gravestone.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -21,25 +11,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Material;
-import nightkosh.gravestone.ModGraveStone;
-import nightkosh.gravestone.api.grave.EnumGraveType;
-import nightkosh.gravestone.block.enums.EnumGraves;
 import nightkosh.gravestone.config.GSConfigs;
-import nightkosh.gravestone.core.GSBlocks;
-import nightkosh.gravestone.core.GuiHandler;
-import nightkosh.gravestone.helper.GraveGenerationHelper;
 import nightkosh.gravestone.helper.GraveStoneHelper;
 import nightkosh.gravestone.inventory.GraveInventory;
-import nightkosh.gravestone.tileentity.GraveStoneBlockEntity;
+import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.MixinEnvironment;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 import static nightkosh.gravestone.ModGraveStone.LOGGER;
-import static nightkosh.gravestone.ModGraveStone.GRAVE_LOGGER;
 
 /**
  * GraveStone mod
@@ -431,18 +409,21 @@ public class BlockGraveStone extends BaseEntityBlock {
         return new GraveStoneBlockEntity(pos, state);
     }
 
-//    @Override
-//    public void neighborChanged(IBlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos) {
-//        if (!level.isSideSolid(pos.below(), EnumFacing.DOWN, true)) {
-//            var blockEntity = (GraveStoneBlockEntity) level.getBlockEntity(pos);
-//            if (blockEntity != null) {
-//                if (blockEntity.canBeLooted(null)) {
-//                    GraveStoneHelper.dropBlockWithoutInfo(blockEntity.getLevel(), pos, level.getBlockState(pos));
-//                    blockEntity.getLevel().setBlockToAir(pos);
-//                }
-//            }
-//        }
-//    }
+    @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos fromPos, boolean isMoving) {
+        if (!level.isClientSide) {
+            var belowPos = pos.below();
+            if (!level.getBlockState(belowPos).isFaceSturdy(level, belowPos, Direction.UP)) {
+                var blockEntity = level.getBlockEntity(pos);
+                if (blockEntity != null && blockEntity instanceof GraveStoneBlockEntity graveEntity) {
+                    if (graveEntity.canBeLooted(null)) {
+                        GraveStoneHelper.dropBlockWithoutInfo(level, graveEntity);
+                        level.removeBlock(pos, false);
+                    }
+                }
+            }
+        }
+    }
 //
 //    @Override
 //    public boolean removedByPlayer(IBlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
@@ -452,11 +433,6 @@ public class BlockGraveStone extends BaseEntityBlock {
 //            return false;
 //        }
 //        return super.removedByPlayer(state, level, pos, player, willHarvest);
-//    }
-//
-//    @Override
-//    public int damageDropped(IBlockState state) {
-//        return 0;
 //    }
 //
 //    @Override
@@ -531,23 +507,6 @@ public class BlockGraveStone extends BaseEntityBlock {
 //                }
 //            }
 //        }
-//    }
-//
-//    @Override
-//    public IBlockState getStateFromMeta(int meta) {
-//        var enumfacing = EnumFacing.getFront(meta);
-//
-//        if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
-//            enumfacing = EnumFacing.NORTH;
-//        }
-//
-//        return this.getDefaultState().withProperty(FACING, enumfacing);
-//    }
-//
-//
-//    @Override
-//    protected BlockStateContainer createBlockState() {
-//        return new BlockStateContainer(this, new IProperty[]{FACING});
 //    }
 //
 //    @Override
