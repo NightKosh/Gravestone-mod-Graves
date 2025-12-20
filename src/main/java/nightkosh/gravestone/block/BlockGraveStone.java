@@ -80,7 +80,7 @@ public class BlockGraveStone extends BaseEntityBlock {
      */
     //TODO
 //    @Override
-//    public void onBlockPlacedBy(Level level, BlockPos pos, IBlockState state, EntityLivingBase player, ItemStack itemStack) {
+//    public void onBlockPlacedBy(Level level, BlockPos pos, IBlockState state, LivingEntity player, ItemStack itemStack) {
 //        GraveStoneHelper.replaceGround(level, pos.below());
 //
 //        var enumfacing = EnumFacing.getHorizontal(Mth.floor((double) (player.getYRot() * 4 / 360F) + 0.5D) & 3).getOpposite();
@@ -421,9 +421,7 @@ public class BlockGraveStone extends BaseEntityBlock {
             graveEntity.getInventory().dropAllItems();
         }
 
-        //TODO from othe method - drop grave block
-        List<ItemStack> ret = new ArrayList<>();
-        ret.add(GraveStoneHelper.getBlockItemStack(level, pos, state1));
+        GraveInventory.dropItem(GraveStoneHelper.getBlockItemStack(level, pos, state1), level, pos);
 
         super.onRemove(state1, level, pos, state2, xz);
     }
