@@ -2,6 +2,7 @@ package nightkosh.gravestone.item.itemblock;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import nightkosh.gravestone.core.GSBlocks;
 
 /**
@@ -12,8 +13,8 @@ import nightkosh.gravestone.core.GSBlocks;
  */
 public class ItemBlockGraveStone extends BlockItem {
 
-    public ItemBlockGraveStone() {
-        super(GSBlocks.getGraveStone(), new Item.Properties().stacksTo(64));
+    public ItemBlockGraveStone(Block block) {
+        super(block, new Item.Properties().stacksTo(64));
     }
 
     //TODO

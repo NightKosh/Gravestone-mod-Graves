@@ -24,7 +24,7 @@ public abstract class GraveBlockEntity extends BlockEntityBase {
     protected int age = -1;
 
     public GraveBlockEntity(BlockPos blockPos, BlockState state) {
-        super(GSBlockEntities.GRAVESTONE.get(), blockPos, state);
+        super(GSBlockEntities.getGravestone(), blockPos, state);
     }
 
     public void setGraveType(int graveType) {

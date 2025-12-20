@@ -38,6 +38,7 @@ public class GSTabs {
     public static void buildContents(CreativeModeTabEvent.BuildContents event) {
         if (event.getTab() == GS_TAB) {
             event.accept(new ItemStack(GSBlocks.getGraveStone()));
+            event.accept(new ItemStack(GSBlocks.getGravePlate()));
         }
     }
 

@@ -15,15 +15,17 @@ public class GSBlockEntities {
 
     public static final RegistryObject<BlockEntityType<GraveStoneBlockEntity>> GRAVESTONE =
             BLOCK_ENTITIES_REGISTER.register(
-                    "gravestone_entity",
-                    () -> BlockEntityType.Builder.of(GraveStoneBlockEntity::new, GSBlocks.getGraveStone())
+                    "grave_stone_entity",
+                    () -> BlockEntityType.Builder.of(GraveStoneBlockEntity::new,
+                                    GSBlocks.getGraveStone(),
+                                    GSBlocks.getGravePlate())
                             .build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES_REGISTER.register(eventBus);
     }
 
-    public static BlockEntityType<GraveStoneBlockEntity> getGravestone(IEventBus eventBus) {
+    public static BlockEntityType<GraveStoneBlockEntity> getGravestone() {
         return GRAVESTONE.get();
     }
 

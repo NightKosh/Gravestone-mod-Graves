@@ -27,12 +27,16 @@ public class GSBlocks {
             DeferredRegister.create(ForgeRegistries.ITEMS, ModInfo.ID);
 
     private static final RegistryObject<BlockGraveStone> GRAVE_STONE = registerBlock("grave_stone",
-            BlockGraveStone::new, ItemBlockGraveStone::new);
+            BlockGraveStone::new);
+
+    private static final RegistryObject<BlockGraveStone> GRAVE_PLATE = registerBlock("grave_plate",
+            BlockGraveStone::new);
 
     private static <T extends Block> RegistryObject<T> registerBlock(
-            String name, Supplier<T> block, Supplier<Item> itemBlock) {
-        ITEMS_REGISTER.register(name, itemBlock);
-        return BLOCKS_REGISTER.register(name, block);
+            String name, Supplier<T> supplier) {
+        var block = BLOCKS_REGISTER.register(name, supplier);
+        ITEMS_REGISTER.register(name, () -> new ItemBlockGraveStone(block.get()));
+        return block;
     }
 
     public static void register(IEventBus eventBus) {
@@ -42,6 +46,10 @@ public class GSBlocks {
 
     public static Block getGraveStone() {
         return GRAVE_STONE.get();
+    }
+
+    public static Block getGravePlate() {
+        return GRAVE_PLATE.get();
     }
 
 }

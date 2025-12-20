@@ -5,7 +5,7 @@
   "block.gravestone.cross.name": "Croix",
   "block.gravestone.obelisk.name": "Obélisque",
   "block.gravestone.celtic_cross.name": "Croix celtique",
-  "block.gravestone.plate.name": "Pierre tombale",
+  "block.gravestone.grave_plate.name": "Pierre tombale",
   "block.gravestone.dog_statue.name": "Tombe de chien",
   "block.gravestone.cat_statue.name": "Tombe de chat",
   "block.gravestone.horse_statue.name": "Statue de cheval",

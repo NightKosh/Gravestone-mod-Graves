@@ -5,7 +5,7 @@
   "block.gravestone.cross.name": "Croce",
   "block.gravestone.obelisk.name": "Obelisco",
   "block.gravestone.celtic_cross.name": "Croce Celtiva",
-  "block.gravestone.plate.name": "Lapide",
+  "block.gravestone.grave_plate.name": "Lapide",
   "block.gravestone.dog_statue.name": "Statua del Cane",
   "block.gravestone.cat_statue.name": "Statua del Gatto",
   "block.gravestone.horse_statue.name": "Statua del Cavallo",

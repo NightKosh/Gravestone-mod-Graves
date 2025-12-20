@@ -5,7 +5,7 @@
   "block.gravestone.cross.name": "Могильный крест",
   "block.gravestone.obelisk.name": "Обелиск",
   "block.gravestone.celtic_cross.name": "Кельтский крест",
-  "block.gravestone.plate.name": "Надгробная плита",
+  "block.gravestone.grave_plate.name": "Надгробная плита",
   "block.gravestone.dog_statue.name": "Статуя для могилы собаки",
   "block.gravestone.cat_statue.name": "Статуя для могилы кошки",
   "block.gravestone.horse_statue.name": "Статуя для могилы лошади",

@@ -3,6 +3,7 @@ package nightkosh.gravestone.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -11,11 +12,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.helper.GraveStoneHelper;
 import nightkosh.gravestone.inventory.GraveInventory;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nonnull;
 
 import static nightkosh.gravestone.ModGraveStone.LOGGER;
 
@@ -32,7 +37,7 @@ public class BlockGraveStone extends BaseEntityBlock {
     public BlockGraveStone() {
         super(BlockBehaviour.Properties.of(Material.STONE)
                 .strength(-1, Float.MAX_VALUE)//explosion protection - TODO test
-                .noOcclusion());
+                .noCollission());
         //TODO
 //        this.setSoundType(SoundType.STONE);
 //        this.setHardness(0.5F);
@@ -43,6 +48,13 @@ public class BlockGraveStone extends BaseEntityBlock {
                 .setValue(FACING, Direction.NORTH));
     }
 
+//    @Override
+//    public VoxelShape getShape(
+//            @Nonnull BlockState blockState, @Nonnull BlockGetter blockGetter,
+//            @Nonnull BlockPos blockPos, @Nonnull CollisionContext collisionContext) {
+//        return SHAPE;
+//    }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateBuilder) {
         stateBuilder.add(FACING);
@@ -51,6 +63,12 @@ public class BlockGraveStone extends BaseEntityBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+    }
+
+    @Nonnull
+    @Override
+    public RenderShape getRenderShape(@Nonnull BlockState state) {
+        return RenderShape.MODEL;
     }
 
     /**
