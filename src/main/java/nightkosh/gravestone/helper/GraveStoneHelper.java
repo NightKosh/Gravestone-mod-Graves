@@ -8,7 +8,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
+import nightkosh.gravestone.block.BlockGraveStone;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.GSBlocks;
 import nightkosh.gravestone.inventory.GraveInventory;
@@ -102,7 +104,7 @@ public class GraveStoneHelper {
     }
 
     public static boolean canFlowerBePlacedOnGrave(GraveStoneBlockEntity te) {
-        return !te.isSwordGrave() && (te.getGraveType().getGraveType() == EnumGraveType.VERTICAL_PLATE ||
+        return !te.isSwordGrave() && (te.getGraveType().getGraveType() == EnumGraveType.GRAVE_STONE ||
                 te.getGraveType().getGraveType() == EnumGraveType.CROSS);
     }
 
@@ -154,7 +156,7 @@ public class GraveStoneHelper {
 
     public static void dropBlockWithoutInfo(Level level, GraveStoneBlockEntity graveEntity) {
         if (GSConfigs.DROP_GRAVE_BLOCK_AT_DESTRUCTION.get()) {
-            var itemStack = new ItemStack(GSBlocks.getGraveStone().asItem());
+            var itemStack = new ItemStack(GSBlocks.getGraveStone(EnumGraveMaterial.STONE).asItem());//TODO EnumGraveMaterial
 
             if (graveEntity != null) {
                 if (graveEntity.isSwordGrave()) {
@@ -177,7 +179,8 @@ public class GraveStoneHelper {
      */
     public static ItemStack getBlockItemStack(Level level, BlockPos pos, BlockState state) {
         if (GSConfigs.DROP_GRAVE_BLOCK_AT_DESTRUCTION.get()) {
-            var itemStack = new ItemStack(GSBlocks.getGraveStone().asItem());
+            var block = state.getBlock();
+            var itemStack = new ItemStack(GSBlocks.getGraveStone(((BlockGraveStone) block).material).asItem());
             var tileEntity = (GraveStoneBlockEntity) level.getBlockEntity(pos);
 
             if (tileEntity != null) {

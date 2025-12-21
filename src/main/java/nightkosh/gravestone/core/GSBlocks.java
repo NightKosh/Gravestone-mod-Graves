@@ -7,9 +7,15 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import nightkosh.gravestone.api.ModInfo;
+import nightkosh.gravestone.api.grave.EnumGraveMaterial;
+import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.BlockGraveStone;
 import nightkosh.gravestone.item.itemblock.ItemBlockGraveStone;
 
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 /**
@@ -26,19 +32,38 @@ public class GSBlocks {
     public static final DeferredRegister<Item> ITEMS_REGISTER =
             DeferredRegister.create(ForgeRegistries.ITEMS, ModInfo.ID);
 
-    private static final RegistryObject<BlockGraveStone> GRAVE_STONE = registerBlock("grave_stone",
-            BlockGraveStone::new);
+    public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
+    public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> GRAVE_PLATES = new EnumMap<>(EnumGraveMaterial.class);
+    public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> CROSSES = new EnumMap<>(EnumGraveMaterial.class);
 
-    private static final RegistryObject<BlockGraveStone> GRAVE_PLATE = registerBlock("grave_plate",
-            BlockGraveStone::new);
+    public static final List<RegistryObject<BlockGraveStone>> GRAVE_LIST = new ArrayList<>();
 
-    private static final RegistryObject<BlockGraveStone> CROSS = registerBlock("cross",
-            BlockGraveStone::new);
+    static {
+        for (var mat : EnumGraveMaterial.values()) {
+            var graveStone = registerBlock(
+                    "grave_stone_" + mat.name().toLowerCase(),
+                    () -> new BlockGraveStone(EnumGraveType.GRAVE_STONE, mat));
+            GRAVE_STONES.put(mat, graveStone);
+            GRAVE_LIST.add(graveStone);
+
+            var cross = registerBlock(
+                    "cross_" + mat.name().toLowerCase(),
+                    () -> new BlockGraveStone(EnumGraveType.CROSS, mat));
+            CROSSES.put(mat, cross);
+            GRAVE_LIST.add(cross);
+
+            var gravePlate = registerBlock(
+                    "grave_plate_" + mat.name().toLowerCase(),
+                    () -> new BlockGraveStone(EnumGraveType.GRAVE_PLATE, mat));
+            GRAVE_PLATES.put(mat, gravePlate);
+            GRAVE_LIST.add(gravePlate);
+        }
+    }
 
     private static <T extends Block> RegistryObject<T> registerBlock(
             String name, Supplier<T> supplier) {
         var block = BLOCKS_REGISTER.register(name, supplier);
-        ITEMS_REGISTER.register(name, () -> new ItemBlockGraveStone(block.get()));
+        ITEMS_REGISTER.register(name, () -> new ItemBlockGraveStone((BlockGraveStone) block.get()));
         return block;
     }
 
@@ -47,16 +72,16 @@ public class GSBlocks {
         ITEMS_REGISTER.register(eventBus);
     }
 
-    public static Block getGraveStone() {
-        return GRAVE_STONE.get();
+    public static Block getGraveStone(EnumGraveMaterial material) {
+        return GRAVE_STONES.get(material).get();
     }
 
-    public static Block getGravePlate() {
-        return GRAVE_PLATE.get();
+    public static Block getGravePlate(EnumGraveMaterial material) {
+        return GRAVE_PLATES.get(material).get();
     }
 
-    public static Block getCross() {
-        return CROSS.get();
+    public static Block getCross(EnumGraveMaterial material) {
+        return CROSSES.get(material).get();
     }
 
 }

@@ -1,7 +1,9 @@
 package nightkosh.gravestone.block;
 
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -14,6 +16,8 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import nightkosh.gravestone.api.grave.EnumGraveMaterial;
+import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.helper.GraveStoneHelper;
 import nightkosh.gravestone.inventory.GraveInventory;
@@ -33,11 +37,15 @@ import static nightkosh.gravestone.ModGraveStone.LOGGER;
 public class BlockGraveStone extends BaseEntityBlock {
 
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
+    public final EnumGraveMaterial material;
+    public final EnumGraveType graveType;
 
-    public BlockGraveStone() {
+    public BlockGraveStone(EnumGraveType graveType, EnumGraveMaterial material) {
         super(BlockBehaviour.Properties.of(Material.STONE)
                 .strength(-1, Float.MAX_VALUE)//explosion protection - TODO test
                 .noCollission());
+        this.graveType = graveType;
+        this.material = material;
         //TODO
 //        this.setSoundType(SoundType.STONE);
 //        this.setHardness(0.5F);
@@ -69,6 +77,20 @@ public class BlockGraveStone extends BaseEntityBlock {
     @Override
     public RenderShape getRenderShape(@Nonnull BlockState state) {
         return RenderShape.MODEL;
+    }
+
+    @Nonnull
+    @Override
+    public String getDescriptionId() {
+        return switch (graveType) {
+            case GRAVE_STONE -> "block.gravestone.grave_stone";
+            case GRAVE_PLATE -> "block.gravestone.grave_plate";
+            case CROSS -> "block.gravestone.cross";
+            case OBELISK -> "block.gravestone.obelisk";
+            case CELTIC_CROSS -> "block.gravestone.celtic_cross";
+            case PET_GRAVE_STONE -> "block.gravestone.pet_grave_stone";
+            default -> "block.gravestone.grave_stone";
+        };
     }
 
     /**
@@ -297,11 +319,6 @@ public class BlockGraveStone extends BaseEntityBlock {
 //    }
 
 //    @Override
-//    public BlockFaceShape getBlockFaceShape(IBlockAccess access, IBlockState state, BlockPos pos, EnumFacing facing) {
-//        return BlockFaceShape.UNDEFINED;
-//    }
-
-//    @Override
 //    public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
 //        if (!level.isClientSide) {
 //            GraveStoneHelper.spawnMob(level, pos);
@@ -453,36 +470,6 @@ public class BlockGraveStone extends BaseEntityBlock {
 //        return super.removedByPlayer(state, level, pos, player, willHarvest);
 //    }
 //
-//    @Override
-//    @SideOnly(MixinEnvironment.Side.CLIENT)
-//    public void getSubBlocks(CreativeModeTab tabs, NonNullList<ItemStack> list) {
-//        for (int i = 0; i < EnumGraves.values().length - 1; i++) {
-//            var stack = new ItemStack(this, 1, i);
-//            var tag = new CompoundTag();
-//            tag.putBoolean("Purified", false);
-//
-//            stack.setTag(tag);
-//            list.add(stack);
-//        }
-//
-//        // custom swords
-//        for (var sword : GraveGenerationHelper.swordsList) {
-//            list.add(GraveStoneHelper.getSwordAsGrave(Item.getItemFromBlock(this), new ItemStack(sword, 1)));
-//        }
-//        for (var sword : GraveGenerationHelper.swordsList) {
-//            try {
-//                var swordStack = new ItemStack(sword);
-//                EnchantmentHelper.addRandomEnchantment(new Random(), swordStack, 5, true);
-//
-//                ItemStack graveStoneStack = GraveStoneHelper.getSwordAsGrave(Item.getItemFromBlock(this), swordStack);
-//
-//                list.add(graveStoneStack);
-//            } catch (IllegalArgumentException exception) {
-//                LOGGER.error("Can't create enchanted sword gravestone");
-//                exception.printStackTrace();
-//            }
-//        }
-//    }
 //
 //    @Override
 //    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, Level level, BlockPos pos, Player player) {

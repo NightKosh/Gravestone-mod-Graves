@@ -9,6 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.api.ModInfo;
+import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 
 /**
  * GraveStone mod
@@ -24,9 +25,9 @@ public class GSTabs {
     @SubscribeEvent
     public static void registerTabs(CreativeModeTabEvent.Register event) {
         GS_TAB = event.registerCreativeModeTab(
-                ResourceLocation.fromNamespaceAndPath(ModInfo.ID, "sophisticated_wolves"),
+                ResourceLocation.fromNamespaceAndPath(ModInfo.ID, "gravestone"),
                 builder -> builder
-                        .icon(() -> new ItemStack(GSBlocks.getGraveStone()))
+                        .icon(() -> new ItemStack(GSBlocks.getGraveStone(EnumGraveMaterial.STONE)))
                         .title(Component.translatable("itemGroup." + ModInfo.ID))
                 .build()
         );
@@ -37,9 +38,15 @@ public class GSTabs {
     @SubscribeEvent
     public static void buildContents(CreativeModeTabEvent.BuildContents event) {
         if (event.getTab() == GS_TAB) {
-            event.accept(new ItemStack(GSBlocks.getGraveStone()));
-            event.accept(new ItemStack(GSBlocks.getGravePlate()));
-            event.accept(new ItemStack(GSBlocks.getCross()));
+            for (var mat : EnumGraveMaterial.values()) {
+                event.accept(new ItemStack(GSBlocks.getGraveStone(mat)));
+            }
+            for (var mat : EnumGraveMaterial.values()) {
+                event.accept(new ItemStack(GSBlocks.getCross(mat)));
+            }
+            for (var mat : EnumGraveMaterial.values()) {
+                event.accept(new ItemStack(GSBlocks.getGravePlate(mat)));
+            }
         }
     }
 

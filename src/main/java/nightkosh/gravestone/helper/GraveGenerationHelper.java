@@ -37,6 +37,7 @@ import nightkosh.gravestone.inventory.GraveInventory;
 import nightkosh.gravestone.block_entity.DeathMessageInfo;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 import static nightkosh.gravestone.ModGraveStone.GRAVE_LOGGER;
@@ -83,23 +84,17 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     private static final EnumGraveType[] GENERATED_PLAYER_GRAVES_TYPES = {
-            EnumGraveType.VERTICAL_PLATE,
+            EnumGraveType.GRAVE_STONE,
             EnumGraveType.CROSS,
             EnumGraveType.OBELISK,
             EnumGraveType.CELTIC_CROSS,
-            EnumGraveType.HORIZONTAL_PLATE
+            EnumGraveType.GRAVE_PLATE
     };
-    private static final EnumGraveType[] STARVED_PLAYER_GRAVES_TYPES = {
-            EnumGraveType.STARVED_CORPSE,
-    };
-    private static final EnumGraveType[] WITHERED_PLAYER_GRAVES_TYPES = {
-            EnumGraveType.WITHERED_CORPSE,
-    };
-    private static final EnumGraveType[] GENERATED_VILLAGERS_GRAVES_TYPES = {EnumGraveType.VILLAGER_STATUE};
-    private static final EnumGraveType[] GENERATED_DOGS_GRAVES_TYPES = {EnumGraveType.DOG_STATUE};
-    private static final EnumGraveType[] GENERATED_CAT_GRAVES_TYPES = {EnumGraveType.CAT_STATUE};
-    private static final EnumGraveType[] GENERATED_HORSE_GRAVES_TYPES = {EnumGraveType.HORSE_STATUE};
-    private static final EnumGraveType[] GENERATED_CREEPER_STATUES_GRAVES_TYPES = {EnumGraveType.CREEPER_STATUE};
+    private static final EnumGraveType[] GENERATED_VILLAGERS_GRAVES_TYPES = {EnumGraveType.VILLAGER_GRAVE_STONE};
+    //TODO ????
+    private static final EnumGraveType[] GENERATED_DOGS_GRAVES_TYPES = {EnumGraveType.PET_GRAVE_STONE};
+    private static final EnumGraveType[] GENERATED_CAT_GRAVES_TYPES = {EnumGraveType.PET_GRAVE_STONE};
+    private static final EnumGraveType[] GENERATED_HORSE_GRAVES_TYPES = {EnumGraveType.PET_GRAVE_STONE};
 
 
     private static void addNonEmptyItems(List<ItemStack> items, NonNullList<ItemStack> itemsToAdd) {
@@ -416,8 +411,8 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 LOGGER.info("Trying to place grave at {}", newPos.toShortString());
             }
             level.setBlock(
-                    newPos,
-                    GSBlocks.getGraveStone().defaultBlockState().setValue(BlockGraveStone.FACING, direction),
+                    newPos,//TODO EnumGraveMaterial
+                    GSBlocks.getGraveStone(EnumGraveMaterial.STONE).defaultBlockState().setValue(BlockGraveStone.FACING, direction),
                     2
             );
             var tileEntity = newLevel.getBlockEntity(newPos);
@@ -450,7 +445,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 //            GRAVE_LOGGER.info("Create " + deathInfo.getName() + "'s grave at " + newPos.getX() + "x" + newPos.getY() + "x" + newPos.getZ());
             return false;
         } else {
-            var itemStack = new ItemStack(GSBlocks.getGraveStone().asItem());
+            var itemStack = new ItemStack(GSBlocks.getGraveStone(EnumGraveMaterial.STONE).asItem());//TODO EnumGraveMaterial
             //TODO remove
 //            itemStack.setDamageValue(graveInfo.getGrave().ordinal());
             var tag = new CompoundTag();
@@ -461,10 +456,10 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             tag.putBoolean("Enchanted", graveInfo.isEnchanted());
             tag.putBoolean("Mossy", graveInfo.isMossy());
             tag.putInt("Age", age);
-
-            if (graveInfo.getGrave() == EnumGraves.SWORD) {
-                GraveStoneHelper.addSwordInfo(tag, graveInfo.getSword());
-            }
+//TODO
+//            if (graveInfo.getGrave() == EnumGraves.SWORD) {
+//                GraveStoneHelper.addSwordInfo(tag, graveInfo.getSword());
+//            }
 
             itemStack.setTag(tag);
             GraveInventory.dropItem(itemStack, level, pos);
@@ -548,38 +543,26 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         }
     }
 
+    @Nullable
     @Override
     public EnumGraveMaterial getGraveMaterialByLevel(int level) {
-        if (level >= 65) {
-            return EnumGraveMaterial.EMERALD;
-        } else if (level >= 55) {
+        if (level >= 60) {
             return EnumGraveMaterial.DIAMOND;
         } else if (level >= 45) {
-            return EnumGraveMaterial.REDSTONE;
-        } else if (level >= 35) {
             return EnumGraveMaterial.GOLD;
-        } else if (level >= 25) {
-            return EnumGraveMaterial.LAPIS;
-        } else {
-            return EnumGraveMaterial.IRON;
         }
+        return null;
     }
 
+    @Nullable
     @Override
     public EnumGraveMaterial getGraveMaterialByAge(int age) {
-        if (age > 180) {
-            return EnumGraveMaterial.EMERALD;
-        } else if (age > 150) {
+        if (age > 200) {
             return EnumGraveMaterial.DIAMOND;
-        } else if (age > 120) {
-            return EnumGraveMaterial.REDSTONE;
-        } else if (age > 90) {
+        } else if (age > 100) {
             return EnumGraveMaterial.GOLD;
-        } else if (age > 60) {
-            return EnumGraveMaterial.LAPIS;
-        } else {
-            return EnumGraveMaterial.IRON;
         }
+        return null;
     }
 
     protected static EnumGraveType[] getDefaultGraveTypes(EnumGraveTypeByEntity graveTypeByEntity) {
