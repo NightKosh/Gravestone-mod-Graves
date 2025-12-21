@@ -19,12 +19,6 @@ public class ItemBlockGraveStone extends BlockItem {
     }
 
     //TODO
-
-//    @Override
-//    public String getUnlocalizedName(ItemStack itemStack) {
-//        return EnumGraves.getById(itemStack.getItemDamage()).getUnLocalizedName();
-//    }
-//
 //    @Override
 //    public void onCreated(ItemStack stack, Level level, Player player) {
 //        if (!stack.hasTagCompound()) {
@@ -62,16 +56,12 @@ public class ItemBlockGraveStone extends BlockItem {
 //                tooltipList.add(ModGraveStone.proxy.getLocalizedString("item.grave.age") + " " + nbt.getInt("Age") + " " + ModGraveStone.proxy.getLocalizedString("item.grave.days"));
 //            }
 //
-//            EnumGraveMaterial material = EnumGraves.getById(stack.getItemDamage()).getMaterial();
+//            var material = EnumGraves.getById(stack.getItemDamage()).getMaterial();
 //            if (material != EnumGraveMaterial.OTHER) {
 //                StringBuilder materialStr = new StringBuilder();
 //                materialStr.append(ModGraveStone.proxy.getLocalizedString("material.title"))
 //                        .append(" ")
 //                        .append(ModGraveStone.proxy.getLocalizedMaterial(material));
-//                if (nbt.getBoolean("Mossy")) {
-//                    materialStr.append(", ")
-//                            .append(ModGraveStone.proxy.getLocalizedString("material.mossy"));
-//                }
 //                tooltipList.add(materialStr.toString());
 //            }
 //

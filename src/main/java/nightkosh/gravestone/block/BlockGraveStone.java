@@ -1,7 +1,14 @@
 package nightkosh.gravestone.block;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -43,14 +50,13 @@ public class BlockGraveStone extends BaseEntityBlock {
 
     public BlockGraveStone(EnumGraveType graveType, EnumGraveMaterial material) {
         super(BlockBehaviour.Properties.of(Material.STONE)
-                .strength(-1, Float.MAX_VALUE)//explosion protection - TODO test
+                .strength(1.5F, 6)
+                .explosionResistance(Float.MAX_VALUE)
+                .requiresCorrectToolForDrops()
                 .noCollission());
         this.graveType = graveType;
         this.material = material;
         //TODO
-//        this.setSoundType(SoundType.STONE);
-//        this.setHardness(0.5F);
-//        this.setResistance(5);
 //        this.setTickRandomly(GSConfigs.REMOVE_EMPTY_GRAVES.get());
 
         this.registerDefaultState(this.stateDefinition.any()
@@ -87,53 +93,37 @@ public class BlockGraveStone extends BaseEntityBlock {
         };
     }
 
-    /**
-     * Called when the block is placed in the level
-     */
-    //TODO
-//    @Override
-//    public void onBlockPlacedBy(Level level, BlockPos pos, IBlockState state, LivingEntity player, ItemStack itemStack) {
-//        GraveStoneHelper.replaceGround(level, pos.below());
-//
-//        var enumfacing = EnumFacing.getHorizontal(Mth.floor((double) (player.getYRot() * 4 / 360F) + 0.5D) & 3).getOpposite();
-//        state = state.withProperty(FACING, enumfacing);
-//        level.setBlockState(pos, state, 2);
-//        var blockEntity = (GraveStoneBlockEntity) level.getBlockEntity(pos);
-//
-//        if (blockEntity != null) {
-//            if (itemStack.hasTag()) {
-//                var tag = itemStack.getTag();
-//                blockEntity.setGraveType(itemStack.getDamageValue());//TODO no damage
-//
-//                if (tag.contains("isLocalized") && tag.getBoolean("isLocalized")) {
-//                    blockEntity.getDeathTextComponent().setLocalized();
-//
-//                    if (tag.contains("name") && tag.contains("KillerName")) {
-//                        blockEntity.getDeathTextComponent().setName(tag.getString("name"));
-//                        blockEntity.getDeathTextComponent().setKillerName(tag.getString("KillerName"));
-//                    }
-//                }
-//
-//                blockEntity.getDeathTextComponent().setDeathText(tag.getString("DeathText"));
-//
-//                blockEntity.setAge(tag.getInt("Age"));
-//
-//                blockEntity.setEnchanted(tag.getBoolean("Enchanted"));
-//
-//                blockEntity.setMossy(tag.getBoolean("Mossy"));
-//
-//                blockEntity.setPurified(tag.getBoolean("Purified"));
-//
-//                if (tag.contains("Sword")) {
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+        if (!level.isClientSide) {
+            level.setBlock(pos, state, 2);
+            var blockEntity = level.getBlockEntity(pos);
+
+            if (blockEntity instanceof GraveStoneBlockEntity grave) {
+                if (stack.hasTag()) {
+                    var tag = stack.getTag();
+                    if (tag.contains("isLocalized") && tag.getBoolean("isLocalized")) {
+                        grave.getDeathTextComponent().setLocalized();
+
+                        if (tag.contains("name") && tag.contains("KillerName")) {
+                            grave.getDeathTextComponent().setName(tag.getString("name"));
+                            grave.getDeathTextComponent().setKillerName(tag.getString("KillerName"));
+                        }
+                    }
+
+                    grave.getDeathTextComponent().setDeathText(tag.getString("DeathText"));
+                    grave.setAge(tag.getInt("Age"));
+                    grave.setPurified(tag.getBoolean("Purified"));
+
+                    if (tag.contains("Sword")) {
+                        //TODO
 //                    var sword = new ItemStack(tag.get("Sword"));
-//                    blockEntity.setSword(sword);
-//                    if (sword.isEnchanted()) {
-//                        blockEntity.setEnchanted(true);
-//                    }
-//                }
-//            }
-//        }
-//    }
+//                    grave.setSword(sword);
+                    }
+                }
+            }
+        }
+    }
 //
 //    /**
 //     * Checks to see if its valid to put this block at the specified
@@ -204,34 +194,27 @@ public class BlockGraveStone extends BaseEntityBlock {
             };
         };
     }
-//
-//    /**
-//     * Called when the block is attempted to be harvested
-//     */
-//    @Override
-//    public void onBlockHarvested(Level level, BlockPos pos, IBlockState state, Player player) {
-//        player.causeFoodExhaustion(0.025F);
-//
-//        if (!level.isClientSide() && !level.restoringBlockSnapshots) {
-//            var tileEntity = (GraveStoneBlockEntity) level.getBlockEntity(pos);
-//            if (tileEntity != null && tileEntity.canBeLooted(player)) {
-//                GraveStoneHelper.spawnMob(level, pos);
-//
-//                if (tileEntity.hasFlower()) {
-//                    tileEntity.dropFlower();
-//                }
-//
-//                GraveStoneHelper.dropBlock(level, pos, state);
-//            }
-//        }
-//    }
 
-//    @Override
-//    public void onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-//        if (!level.isClientSide) {
-//            GraveStoneHelper.spawnMob(level, pos);
-//        }
-//    }
+    @Override
+    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide) {
+            player.causeFoodExhaustion(0.025F);
+
+            if (!level.isClientSide() && !level.restoringBlockSnapshots) {
+                if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave && grave.canBeLooted(player)) {
+                    GraveStoneHelper.spawnMob(level, pos);
+
+                    if (grave.hasFlower()) {
+                        grave.dropFlower();
+                    }
+
+                    //TODO
+//                    GraveStoneHelper.dropBlock(level, pos, state);
+                }
+            }
+        }
+        super.playerWillDestroy(level, pos, state, player);
+    }
 
 //    @Override
 //    public boolean onBlockActivated(Level level, BlockPos pos, IBlockState state, Player player,
@@ -320,12 +303,15 @@ public class BlockGraveStone extends BaseEntityBlock {
 //
 //        return false;
 //    }
-//
-//    @Override
-//    public void onBlockAdded(Level level, BlockPos pos, IBlockState state) {
-//        super.onBlockAdded(level, pos, state);
-//        GraveStoneHelper.replaceGround(level, pos.below());
-//    }
+
+    @Override
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+        super.onPlace(state, level, pos, oldState, isMoving);
+
+        if (!level.isClientSide) {
+            GraveStoneHelper.replaceGround(level, pos.below());
+        }
+    }
 
     /**
      * ejects contained items into the level, and notifies neighbours of an
@@ -367,38 +353,42 @@ public class BlockGraveStone extends BaseEntityBlock {
             }
         }
     }
-//
-//    @Override
-//    public boolean removedByPlayer(IBlockState state, Level level, BlockPos pos, Player player, boolean willHarvest) {
-//        GraveStoneBlockEntity te = (GraveStoneBlockEntity) level.getBlockEntity(pos);
-//        if (te != null && !te.canBeLooted(player)) {
-//            player.sendMessage(new TextComponentTranslation("grave.cant_be_looted").setStyle(new Style().setColor(TextFormatting.RED)));
-//            return false;
-//        }
-//        return super.removedByPlayer(state, level, pos, player, willHarvest);
-//    }
-//
-//
+
+    @Override
+    public void attack(BlockState state, Level level, BlockPos pos, Player player) {
+        if (!level.isClientSide) {
+            var be = level.getBlockEntity(pos);
+            if (be instanceof GraveStoneBlockEntity grave && !grave.canBeLooted(player)) {
+                player.displayClientMessage(
+                        Component.translatable("grave.cant_be_looted")
+                                .withStyle(ChatFormatting.RED),
+                        true);
+                return;
+            }
+        }
+        super.attack(state, level, pos, player);
+    }
+
+//TODO
 //    @Override
 //    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, Level level, BlockPos pos, Player player) {
-//        var itemStack = new ItemStack(Item.getItemFromBlock(this), 1);
-//        var tileEntity = (GraveStoneBlockEntity) level.getBlockEntity(pos);
+//        var itemStack = new ItemStack(this.asItem(), 1);
 //
-//        if (tileEntity != null) {
+//        if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave) {
 //            if (itemStack != null) {
 //                var tag = new CompoundTag();
-//                itemStack.setDamageValue(tileEntity.getGraveTypeNum());
-//                tag.putBoolean("Mossy", tileEntity.isMossy());
 //
 //                itemStack.setTag(tag);
-//                if (tileEntity.isSwordGrave()) {
-//                    GraveStoneHelper.addSwordInfo(tag, tileEntity.getSword());
+//                if (grave.isSwordGrave()) {
+//                    GraveStoneHelper.addSwordInfo(tag, grave.getSword());
 //                }
 //            }
 //        }
 //        return itemStack;
 //    }
-//
+
+
+    //TODO
 //    /**
 //     * A randomly called display update to be able to add particles or other
 //     * items for display
@@ -421,10 +411,10 @@ public class BlockGraveStone extends BaseEntityBlock {
 //            }
 //        }
 //    }
-//
-//    @Override
-//    public boolean canEntityDestroy(IBlockState state, IBlockAccess blockAccess, BlockPos pos, Entity entity) {
-//        return false;
-//    }
+
+    @Override
+    public boolean canEntityDestroy(BlockState state, BlockGetter blockGetter, BlockPos pos, Entity entity) {
+        return false;
+    }
 
 }

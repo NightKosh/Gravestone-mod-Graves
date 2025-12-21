@@ -18,21 +18,10 @@ public abstract class GraveBlockEntity extends BlockEntityBase {
     protected GraveInventory inventory;
     protected GraveStoneDeathText deathText = new GraveStoneDeathText();//TODO is required ????
     protected boolean isEditable = true;
-    protected boolean isEnchanted = false;
-    protected boolean isMossy = false;
-    protected int graveType = 0;
     protected int age = -1;
 
     public GraveBlockEntity(BlockPos blockPos, BlockState state) {
         super(GSBlockEntities.getGravestone(), blockPos, state);
-    }
-
-    public void setGraveType(int graveType) {
-        this.graveType = graveType;
-    }
-
-    public int getGraveTypeNum() {
-        return graveType;
     }
 
     public GraveInventory getInventory() {
@@ -66,23 +55,6 @@ public abstract class GraveBlockEntity extends BlockEntityBase {
     public boolean isEditable() {
         return isEditable;
     }
-
-    public boolean isEnchanted() {
-        return this.isEnchanted;
-    }
-
-    public void setEnchanted(boolean isEnchanted) {
-        this.isEnchanted = isEnchanted;
-    }
-
-    public boolean isMossy() {
-        return this.isMossy;
-    }
-
-    public void setMossy(boolean isMossy) {
-        this.isMossy = isMossy;
-    }
-
 
     //TODO
 //    /**

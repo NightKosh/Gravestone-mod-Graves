@@ -6,7 +6,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import nightkosh.gravestone.block.enums.EnumGraves;
+import nightkosh.gravestone.api.grave.EnumGraveType;
+import nightkosh.gravestone.block.BlockGraveStone;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.helper.GraveSpawnerHelper;
 import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
@@ -172,11 +173,7 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
     }
 
     public boolean isSwordGrave() {
-        return sword != null;
-    }
-
-    public boolean canBeMossy() {
-        return !isSwordGrave() && this.getGraveType() != EnumGraves.STARVED_CORPSE && this.getGraveType() != EnumGraves.WITHERED_CORPSE;
+        return this.getGraveType() == EnumGraveType.SWORD;
     }
 
 
@@ -198,8 +195,8 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
         return flower != null;
     }
 
-    public EnumGraves getGraveType() {
-        return EnumGraves.getById(graveType);
+    public EnumGraveType getGraveType() {
+        return ((BlockGraveStone) this.getBlockState().getBlock()).graveType;
     }
 
     public boolean isEmpty() {

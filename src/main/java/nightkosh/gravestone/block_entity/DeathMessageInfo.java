@@ -1,7 +1,5 @@
 package nightkosh.gravestone.block_entity;
 
-import nightkosh.gravestone.helper.DeathTextHelper;
-
 /**
  * GraveStone mod
  *
@@ -14,7 +12,15 @@ public class DeathMessageInfo {
     private final String deathMessage;
     private String killerName;
     private final String itemName;
-    private final DeathTextHelper.DeathType deathType;
+    private final DeathType deathType;
+
+    public enum DeathType {
+        ALL,
+        ARROW,
+        FIREBALL,
+        BLOW,
+        MAGIC
+    }
 
     public DeathMessageInfo(String name, String deathMessage, String killerName) {
         this(name, deathMessage, killerName, null, null);
@@ -24,7 +30,7 @@ public class DeathMessageInfo {
         this(name, deathMessage, killerName, itemName, null);
     }
 
-    public DeathMessageInfo(String name, String deathMessage, String killerName, String itemName, DeathTextHelper.DeathType deathType) {
+    public DeathMessageInfo(String name, String deathMessage, String killerName, String itemName, DeathType deathType) {
         this.name = name;
         this.deathMessage = deathMessage;
         this.killerName = killerName;
@@ -56,7 +62,7 @@ public class DeathMessageInfo {
         return itemName;
     }
 
-    public DeathTextHelper.DeathType getDeathType() {
+    public DeathType getDeathType() {
         return deathType;
     }
 

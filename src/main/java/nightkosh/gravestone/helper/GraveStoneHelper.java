@@ -1,12 +1,14 @@
 package nightkosh.gravestone.helper;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
@@ -32,22 +34,22 @@ public class GraveStoneHelper {
      * Check ground type and replace it on dirt if it grass or mycelium
      */
     public static void replaceGround(Level level, BlockPos pos) {
-        var botBlock = level.getBlockState(pos).getBlock();
+        var block = level.getBlockState(pos).getBlock();
 
-        if (botBlock.equals(Blocks.GRASS) || botBlock.equals(Blocks.MYCELIUM)) {
-            //TODO
-//            level.setBlockState(pos, Blocks.DIRT.getBlockState().getBaseState());
+        if (block.equals(Blocks.GRASS_BLOCK) ||
+                block.equals(Blocks.MYCELIUM) ||
+                block.equals(Blocks.DIRT_PATH) ||
+                block.equals(Blocks.PODZOL)) {
+            level.setBlock(pos, Blocks.DIRT.defaultBlockState(), 3);
         }
     }
 
     public static void spawnMob(Level level, BlockPos pos) {
         //TODO !!!
-//        if (Config.spawnMobAtGraveDestruction && level.rand.nextInt(10) == 0) {
-//            TileEntityGraveStone tileEntity = (TileEntityGraveStone) level.getBlockEntity(pos);
-//
-//            if (tileEntity != null) {
-        //TODO
-//                Entity mob = GSMobSpawn.getMobEntity(world, tileEntity.getGraveType(), pos.getX(), pos.getY(), pos.getZ());
+//        if (GSConfigs.spawnMobAtGraveDestruction && level.random.nextInt(10) == 0) {
+//            if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave) {
+////        TODO
+//                var mob = GSMobSpawn.getMobEntity(level, grave.getGraveType(), pos.getX(), pos.getY(), pos.getZ());
 //
 //                if (mob != null) {
 //                    GSMobSpawn.spawnMob(level, mob, pos.getX(), pos.getY(), pos.getZ(), false);
@@ -89,23 +91,20 @@ public class GraveStoneHelper {
         return graveStoneStack;
     }
 
-    public static boolean canFlowerBePlaced(Level level, BlockPos pos, ItemStack itemStack, GraveStoneBlockEntity te) {
-        if (canFlowerBePlacedOnGrave(te)) {
-            var item = itemStack.getItem();
-            return false; //TODO
-//            if (Block.getBlockFromItem(item) instanceof FlowerBlock) {
-//                return true;
-//            } else if (item instanceof IPlantable) {
-//                IBlockState soil = level.getBlockState(pos.below());
-//                return Block.getBlockFromItem(item).canSustainPlant(soil, level, pos.below(), EnumFacing.UP, (IPlantable) item);
-//            }
+    public static boolean canFlowerBePlaced(Level level, BlockPos pos, ItemStack itemStack, GraveStoneBlockEntity entity) {
+        if (canFlowerBePlacedOnGrave(entity)) {
+            if (Block.byItem(itemStack.getItem()) instanceof FlowerBlock flower) {
+                var posBelow = pos.below();
+                var soil = level.getBlockState(posBelow);
+                return soil.canSustainPlant(level, posBelow, Direction.UP, flower);
+            }
         }
         return false;
     }
 
-    public static boolean canFlowerBePlacedOnGrave(GraveStoneBlockEntity te) {
-        return !te.isSwordGrave() && (te.getGraveType().getGraveType() == EnumGraveType.GRAVE_STONE ||
-                te.getGraveType().getGraveType() == EnumGraveType.CROSS);
+    public static boolean canFlowerBePlacedOnGrave(GraveStoneBlockEntity entity) {
+        return entity.getGraveType() == EnumGraveType.GRAVE_STONE ||
+                entity.getGraveType() == EnumGraveType.CROSS;
     }
 
     public static class RestrictedArea {
@@ -163,8 +162,6 @@ public class GraveStoneHelper {
                     graveEntity.dropSword();
                 } else {
                     var tag = new CompoundTag();
-                    itemStack.setDamageValue(graveEntity.getGraveTypeNum());
-                    tag.putBoolean("Mossy", graveEntity.isMossy());
                     tag.putBoolean("Purified", true);
 
                     itemStack.setTag(tag);
@@ -185,7 +182,6 @@ public class GraveStoneHelper {
 
             if (tileEntity != null) {
                 var tag = new CompoundTag();
-                itemStack.setDamageValue(tileEntity.getGraveTypeNum());
 
                 if (tileEntity.getDeathTextComponent().isLocalized()) {
                     tag.putBoolean("isLocalized", true);
@@ -200,9 +196,6 @@ public class GraveStoneHelper {
                     GraveStoneHelper.addSwordInfo(tag, tileEntity.getSword());
                 }
 
-                tag.putBoolean("Enchanted", tileEntity.isEnchanted());
-                tag.putBoolean("Mossy", tileEntity.isMossy());
-
                 tag.putBoolean("Purified", true);
 
                 itemStack.setTag(tag);
@@ -214,32 +207,28 @@ public class GraveStoneHelper {
         }
     }
 
-//TODO #245
-//    public static void replaceOldGraveByNew(World world, BlockPos pos) {
-//        IBlockState oldState = world.getBlockState(pos);
-//        BlockEntity oldTe = world.getBlockEntity(pos);
+//TODO #245 whf???
+//    public static void replaceOldGraveByNew(Level level, BlockPos pos) {
+//        var oldState = level.getBlockState(pos);
+//        var oldEntity = level.getBlockEntity(pos);
 //        //TODO !!!!!!!!!!!!!!!!!
 //
-//        IBlockState newState = GSBlock.GRAVE_STONE.getStateFromMeta(GSBlock.GRAVE_STONE.getMetaFromState(oldState));//= GSBlock.GRAVE_STONE.getDefaultState();
+//        var newState = GSBlocks.GRAVE_STONE.getStateFromMeta(GSBlock.GRAVE_STONE.getMetaFromState(oldState));//= GSBlock.GRAVE_STONE.getDefaultState();
 //
-//        world.setBlockState(pos, newState);
-//        BlockEntity newTe = world.getBlockEntity(pos);
-//        if (oldTe  != null && newTe != null && oldTe instanceof TileEntityGraveStone && newTe instanceof TileEntityGraveStone) {
-//            TileEntityGraveStone oldTeGS = (TileEntityGraveStone) oldTe;
-//            TileEntityGraveStone newTeGS = (TileEntityGraveStone) newTe;
+//        level.setBlockState(pos, newState);
+//        var newTe = level.getBlockEntity(pos);
+//        if (oldEntity instanceof GraveStoneBlockEntity oldGrave &&
+//                newTe instanceof GraveStoneBlockEntity newTeGS) {
 //
-//            newTeGS.setGraveType(oldTeGS.getGraveTypeNum());
-//            newTeGS.setEnchanted(oldTeGS.isEnchanted());
-//            newTeGS.setMossy(oldTeGS.isMossy());
-//            newTeGS.setAge(oldTeGS.getAge());
-//            newTeGS.setDeathTextComponent(oldTeGS.getDeathTextComponent());
-//            newTeGS.setInventory(oldTeGS.getInventory());
+//            newTeGS.setAge(oldGrave.getAge());
+//            newTeGS.setDeathTextComponent(oldGrave.getDeathTextComponent());
+//            newTeGS.setInventory(oldGrave.getInventory());
 //
-//            newTeGS.setSword(oldTeGS.getSword());
-//            newTeGS.setFlower(oldTeGS.getFlower());
-//            newTeGS.setOwner(oldTeGS.getOwner());
-//            newTeGS.setPurified(oldTeGS.isPurified());
-//            newTeGS.setSpawnerHelper(oldTeGS.getSpawnerHelper());
+//            newTeGS.setSword(oldGrave.getSword());
+//            newTeGS.setFlower(oldGrave.getFlower());
+//            newTeGS.setOwner(oldGrave.getOwner());
+//            newTeGS.setPurified(oldGrave.isPurified());
+//            newTeGS.setSpawnerHelper(oldGrave.getSpawnerHelper());
 //        }
 //    }
 }

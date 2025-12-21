@@ -35,6 +35,10 @@ public class GSBlocks {
     public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
     public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> GRAVE_PLATES = new EnumMap<>(EnumGraveMaterial.class);
     public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> CROSSES = new EnumMap<>(EnumGraveMaterial.class);
+    public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> OBELISKS = new EnumMap<>(EnumGraveMaterial.class);
+    public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> CELTIC_CROSSES = new EnumMap<>(EnumGraveMaterial.class);
+    public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> PET_GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
+    public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> VILLAGER_GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
 
     public static final List<RegistryObject<BlockGraveStone>> GRAVE_LIST = new ArrayList<>();
 
@@ -52,11 +56,35 @@ public class GSBlocks {
             CROSSES.put(mat, cross);
             GRAVE_LIST.add(cross);
 
+            var obelisk = registerBlock(
+                    "obelisk_" + mat.name().toLowerCase(),
+                    () -> new BlockGraveStone(EnumGraveType.OBELISK, mat));
+            OBELISKS.put(mat, obelisk);
+            GRAVE_LIST.add(obelisk);
+
+            var celticCross = registerBlock(
+                    "celtic_cross_" + mat.name().toLowerCase(),
+                    () -> new BlockGraveStone(EnumGraveType.CELTIC_CROSS, mat));
+            CELTIC_CROSSES.put(mat, celticCross);
+            GRAVE_LIST.add(celticCross);
+
             var gravePlate = registerBlock(
                     "grave_plate_" + mat.name().toLowerCase(),
                     () -> new BlockGraveStone(EnumGraveType.GRAVE_PLATE, mat));
             GRAVE_PLATES.put(mat, gravePlate);
             GRAVE_LIST.add(gravePlate);
+
+            var petGrave = registerBlock(
+                    "pet_grave_stone_" + mat.name().toLowerCase(),
+                    () -> new BlockGraveStone(EnumGraveType.PET_GRAVE_STONE, mat));
+            PET_GRAVE_STONES.put(mat, petGrave);
+            GRAVE_LIST.add(petGrave);
+
+            var villagerGrave = registerBlock(
+                    "villager_grave_stone_" + mat.name().toLowerCase(),
+                    () -> new BlockGraveStone(EnumGraveType.VILLAGER_GRAVE_STONE, mat));
+            VILLAGER_GRAVE_STONES.put(mat, villagerGrave);
+            GRAVE_LIST.add(villagerGrave);
         }
     }
 
@@ -65,6 +93,19 @@ public class GSBlocks {
         var block = BLOCKS_REGISTER.register(name, supplier);
         ITEMS_REGISTER.register(name, () -> new ItemBlockGraveStone((BlockGraveStone) block.get()));
         return block;
+    }
+
+    public static Block getGraveBlock(EnumGraveType graveType, EnumGraveMaterial material) {
+        return switch (graveType) {
+            case GRAVE_STONE -> getGraveStone(material);
+            case GRAVE_PLATE -> getGravePlate(material);
+            case CROSS -> getCross(material);
+            case OBELISK -> getObelisk(material);
+            case CELTIC_CROSS -> getCelticCross(material);
+            case PET_GRAVE_STONE -> getPetGraveStone(material);
+            case VILLAGER_GRAVE_STONE -> getVillagerGraveStone(material);
+            case SWORD -> getGravePlate(material);//TODO
+        };
     }
 
     public static void register(IEventBus eventBus) {
@@ -82,6 +123,22 @@ public class GSBlocks {
 
     public static Block getCross(EnumGraveMaterial material) {
         return CROSSES.get(material).get();
+    }
+
+    public static Block getObelisk(EnumGraveMaterial material) {
+        return OBELISKS.get(material).get();
+    }
+
+    public static Block getCelticCross(EnumGraveMaterial material) {
+        return CELTIC_CROSSES.get(material).get();
+    }
+
+    public static Block getPetGraveStone(EnumGraveMaterial material) {
+        return PET_GRAVE_STONES.get(material).get();
+    }
+
+    public static Block getVillagerGraveStone(EnumGraveMaterial material) {
+        return VILLAGER_GRAVE_STONES.get(material).get();
     }
 
 }
