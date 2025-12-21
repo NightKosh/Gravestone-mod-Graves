@@ -1,18 +1,18 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=south": {
       "model": "gravestone:block/grave_plate/stone",
       "y": 0
     },
-    "facing=east": {
+    "facing=west": {
       "model": "gravestone:block/grave_plate/stone",
       "y": 90
     },
-    "facing=south": {
+    "facing=north": {
       "model": "gravestone:block/grave_plate/stone",
       "y": 180
     },
-    "facing=west": {
+    "facing=east": {
       "model": "gravestone:block/grave_plate/stone",
       "y": 270
     }
