@@ -1,13 +1,14 @@
 package nightkosh.gravestone.block;
 
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,10 +19,10 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
+import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.helper.GraveStoneHelper;
 import nightkosh.gravestone.inventory.GraveInventory;
-import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
@@ -55,13 +56,6 @@ public class BlockGraveStone extends BaseEntityBlock {
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH));
     }
-
-//    @Override
-//    public VoxelShape getShape(
-//            @Nonnull BlockState blockState, @Nonnull BlockGetter blockGetter,
-//            @Nonnull BlockPos blockPos, @Nonnull CollisionContext collisionContext) {
-//        return SHAPE;
-//    }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateBuilder) {
@@ -150,152 +144,66 @@ public class BlockGraveStone extends BaseEntityBlock {
 //        return GraveStoneHelper.canPlaceBlockAt(level, pos.below());
 //    }
 //
-//    @Nullable
-//    @Override
-//    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-//        return null;
-//    }
-//
-//    private static final AxisAlignedBB VP_SOUTH_BB = new AxisAlignedBB(0.125, 0, 0.0625, 0.875, 0.9375, 0.1875);
-//    private static final AxisAlignedBB VP_NORTH_BB = new AxisAlignedBB(0.125F, 0, 0.8125F, 0.875F, 0.9375F, 0.9375F);
-//    private static final AxisAlignedBB VP_EAST_BB = new AxisAlignedBB(0.0625F, 0, 0.125F, 0.1875F, 0.9375F, 0.875F);
-//    private static final AxisAlignedBB VP_WEST_BB = new AxisAlignedBB(0.8125F, 0, 0.125F, 0.9375F, 0.9375F, 0.875F);
-//    private static final AxisAlignedBB CROSS_SOUTH_BB = new AxisAlignedBB(0.125F, 0, 0.0625F, 0.875F, 1, 0.1875F);
-//    private static final AxisAlignedBB CROSS_NORTH_BB = new AxisAlignedBB(0.125F, 0, 0.8125F, 0.875F, 1, 0.9375F);
-//    private static final AxisAlignedBB CROSS_EAST_BB = new AxisAlignedBB(0.0625F, 0, 0.125F, 0.1875F, 1, 0.875F);
-//    private static final AxisAlignedBB CROSS_WEST_BB = new AxisAlignedBB(0.8125F, 0, 0.125F, 0.9375F, 1, 0.875F);
-//    private static final AxisAlignedBB CC_NORTH_SOUTH_BB = new AxisAlignedBB(0.125F, 0, 0.35F, 0.875F, 1.3F, 0.65F);
-//    private static final AxisAlignedBB CC_EAST_WEST_BB = new AxisAlignedBB(0.35F, 0, 0.125F, 0.65F, 1.3F, 0.875F);
-//    private static final AxisAlignedBB PL_STATUES_BB = new AxisAlignedBB(0.35F, 0, 0.35F, 0.65F, 0.92F, 0.65F);
-//    private static final AxisAlignedBB HP_NORTH_SOUTH_BB = new AxisAlignedBB(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
-//    private static final AxisAlignedBB HP_EAST_WEST_BB = new AxisAlignedBB(0.0625F, 0, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
-//    private static final AxisAlignedBB DOG_SOUTH_BB = new AxisAlignedBB(0.35F, 0, 0.3F, 0.6F, 0.5F, 0.9F);
-//    private static final AxisAlignedBB DOG_NORTH_BB = new AxisAlignedBB(0.35F, 0, 0.7F, 0.6F, 0.5F, 0.1F);
-//    private static final AxisAlignedBB DOG_EAST_BB = new AxisAlignedBB(0.3F, 0, 0.35F, 0.9F, 0.5F, 0.6F);
-//    private static final AxisAlignedBB DOG_WEST_BB = new AxisAlignedBB(0.7F, 0, 0.35F, 0.1F, 0.5F, 0.6F);
-//    private static final AxisAlignedBB CAT_SOUTH_BB = new AxisAlignedBB(0.43F, 0, 0.3F, 0.57F, 0.5F, 0.75F);
-//    private static final AxisAlignedBB CAT_NORTH_BB = new AxisAlignedBB(0.43F, 0, 0.7F, 0.57F, 0.5F, 0.25F);
-//    private static final AxisAlignedBB CAT_EAST_BB = new AxisAlignedBB(0.3F, 0, 0.43F, 0.75F, 0.5F, 0.57F);
-//    private static final AxisAlignedBB CAT_WEST_BB = new AxisAlignedBB(0.7F, 0, 0.43F, 0.25F, 0.5F, 0.57F);
-//    private static final AxisAlignedBB CORPSE_BB = new AxisAlignedBB(0, 0, 0, 1, 0.3F, 1);
-//    private static final AxisAlignedBB SWORD_SOUTH_NORTH_BB = new AxisAlignedBB(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
-//    private static final AxisAlignedBB SWORD_EAST_WEST_BB = new AxisAlignedBB(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
-//    private static final AxisAlignedBB HS_SOUTH_NORTH_BB = new AxisAlignedBB(0.375F, 0, 0.275F, 0.625F, 0.85F, 0.725F);
-//    private static final AxisAlignedBB HS_EAST_WEST_BB = new AxisAlignedBB(0.275F, 0, 0.375F, 0.725F, 0.85F, 0.625F);
-//
-//    @Override
-//    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess access, BlockPos pos) {
-//        if (state.getBlock() == GSBlocks.getGraveStone()) {
-//            EnumFacing facing = state.getValue(FACING);
-//            EnumGraveType graveType;
-//            GraveStoneBlockEntity tileEntity = (GraveStoneBlockEntity) access.getBlockEntity(pos);
-//
-//            if (tileEntity != null) {
-//                graveType = tileEntity.getGraveType().getGraveType();
-//            } else {
-//                graveType = EnumGraveType.VERTICAL_PLATE;
-//            }
-//
-//            switch (graveType) {
-//                case VERTICAL_PLATE:
-//                    switch (facing) {
-//                        case SOUTH:
-//                            return VP_SOUTH_BB;
-//                        case NORTH:
-//                            return VP_NORTH_BB;
-//                        case EAST:
-//                            return VP_EAST_BB;
-//                        case WEST:
-//                            return VP_WEST_BB;
-//                    }
-//                    break;
-//                case CROSS:
-//                    switch (facing) {
-//                        case SOUTH:
-//                            return CROSS_SOUTH_BB;
-//                        case NORTH:
-//                            return CROSS_NORTH_BB;
-//                        case EAST:
-//                            return CROSS_EAST_BB;
-//                        case WEST:
-//                            return CROSS_WEST_BB;
-//                    }
-//                    break;
-//                case CELTIC_CROSS:
-//                    switch (facing) {
-//                        case SOUTH:
-//                        case NORTH:
-//                            return CC_NORTH_SOUTH_BB;
-//                        case EAST:
-//                        case WEST:
-//                            return CC_EAST_WEST_BB;
-//                    }
-//                    break;
-//                case OBELISK:
-//                case CREEPER_STATUE:
-//                case VILLAGER_STATUE:
-//                    return PL_STATUES_BB;
-//                case HORIZONTAL_PLATE:
-//                    switch (facing) {
-//                        case SOUTH:
-//                        case NORTH:
-//                            return HP_NORTH_SOUTH_BB;
-//                        case EAST:
-//                        case WEST:
-//                            return HP_EAST_WEST_BB;
-//                    }
-//                    break;
-//                case DOG_STATUE:
-//                    switch (facing) {
-//                        case SOUTH:
-//                            return DOG_SOUTH_BB;
-//                        case NORTH:
-//                            return DOG_NORTH_BB;
-//                        case EAST:
-//                            return DOG_EAST_BB;
-//                        case WEST:
-//                            return DOG_WEST_BB;
-//                    }
-//                    break;
-//                case CAT_STATUE:
-//                    switch (facing) {
-//                        case SOUTH:
-//                            return CAT_SOUTH_BB;
-//                        case NORTH:
-//                            return CAT_NORTH_BB;
-//                        case EAST:
-//                            return CAT_EAST_BB;
-//                        case WEST:
-//                            return CAT_WEST_BB;
-//                    }
-//                    break;
-//                case STARVED_CORPSE:
-//                case WITHERED_CORPSE:
-//                    return CORPSE_BB;
-//                case SWORD:
-//                    switch (facing) {
-//                        case SOUTH:
-//                        case NORTH:
-//                            return SWORD_SOUTH_NORTH_BB;
-//                        case EAST:
-//                        case WEST:
-//                            return SWORD_EAST_WEST_BB;
-//                    }
-//                    break;
-//                case HORSE_STATUE:
-//                    switch (facing) {
-//                        case SOUTH:
-//                        case NORTH:
-//                            return HS_SOUTH_NORTH_BB;
-//                        case EAST:
-//                        case WEST:
-//                            return HS_EAST_WEST_BB;
-//                    }
-//                    break;
-//            }
-//        }
-//        return new AxisAlignedBB(0, 0, 0, 1, 1, 1);
-//    }
+    private static final VoxelShape GS_SOUTH = Block.box(2, 0, 2, 14, 16, 4);
+    private static final VoxelShape GS_NORTH = Block.box(2, 0, 12, 14, 16, 14);
+    private static final VoxelShape GS_EAST = Block.box(2, 0, 2, 4, 16, 14);
+    private static final VoxelShape GS_WEST = Block.box(12, 0, 2, 14, 16, 14);
+
+    private static final VoxelShape CROSS_SOUTH = Block.box(2, 0, 2, 14, 16, 4);
+    private static final VoxelShape CROSS_NORTH = Block.box(2, 0, 12, 14, 16, 14);
+    private static final VoxelShape CROSS_EAST = Block.box(2, 0, 2, 4, 16, 14);
+    private static final VoxelShape CROSS_WEST = Block.box(12, 0, 2, 14, 16, 14);
+
+    private static final VoxelShape CC_NORTH_SOUTH = Block.box(0.125F, 0, 0.35F, 0.875F, 1.3F, 0.65F);
+    private static final VoxelShape CC_EAST_WEST = Block.box(0.35F, 0, 0.125F, 0.65F, 1.3F, 0.875F);
+
+    private static final VoxelShape OBELISK = Block.box(0.35F, 0, 0.35F, 0.65F, 0.92F, 0.65F);
+
+    private static final VoxelShape GP_NORTH_SOUTH = Block.box(2, 0, 1, 14, 1, 15);
+    private static final VoxelShape GP_EAST_WEST = Block.box(1, 0, 2, 15, 1, 14);
+    //TODO
+    private static final VoxelShape SWORD_SOUTH_NORTH = Block.box(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
+    private static final VoxelShape SWORD_EAST_WEST = Block.box(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
+
+    @Override
+    public VoxelShape getShape(
+            @Nonnull BlockState blockState, @Nonnull BlockGetter blockGetter,
+            @Nonnull BlockPos blockPos, @Nonnull CollisionContext collisionContext) {
+        var facing = blockState.getValue(FACING);
+
+        return switch (graveType) {
+            case GRAVE_STONE, VILLAGER_GRAVE_STONE, PET_GRAVE_STONE -> switch (facing) {
+                case SOUTH -> GS_SOUTH;
+                case EAST -> GS_EAST;
+                case WEST -> GS_WEST;
+                case NORTH -> GS_NORTH;
+                default -> GS_NORTH;
+            };
+            case CROSS -> switch (facing) {
+                case SOUTH -> CROSS_SOUTH;
+                case EAST -> CROSS_EAST;
+                case WEST -> CROSS_WEST;
+                case NORTH -> CROSS_NORTH;
+                default -> CROSS_NORTH;
+            };
+            case CELTIC_CROSS -> switch (facing) {
+                case EAST, WEST -> CC_EAST_WEST;
+                case SOUTH, NORTH -> CC_NORTH_SOUTH;
+                default -> CC_NORTH_SOUTH;
+            };
+            case OBELISK -> OBELISK;
+            case GRAVE_PLATE -> switch (facing) {
+                case EAST, WEST -> GP_EAST_WEST;
+                case SOUTH, NORTH -> GP_NORTH_SOUTH;
+                default -> GP_NORTH_SOUTH;
+            };
+            case SWORD -> switch (facing) {
+                case EAST, WEST -> SWORD_EAST_WEST;
+                case SOUTH, NORTH -> SWORD_SOUTH_NORTH;
+                default -> SWORD_SOUTH_NORTH;
+            };
+        };
+    }
 //
 //    /**
 //     * Called when the block is attempted to be harvested
