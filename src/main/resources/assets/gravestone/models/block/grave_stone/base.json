@@ -3,7 +3,7 @@
   "credit": "Made with Blockbench",
   "texture_size": [32, 32],
   "textures": {
-    "1": "gravestone:block/grave_stone/stone",
+    "texture": "gravestone:block/grave_stone/stone",
     "particle": "gravestone:block/grave_stone/stone"
   },
   "elements": [
@@ -11,12 +11,12 @@
       "from": [2, 0, 12],
       "to": [14, 16, 14],
       "faces": {
-        "north": {"uv": [1, 1, 7, 9], "texture": "#1"},
-        "east": {"uv": [0, 1, 1, 9], "texture": "#1"},
-        "south": {"uv": [8, 1, 14, 9], "texture": "#1"},
-        "west": {"uv": [7, 1, 8, 9], "texture": "#1"},
-        "up": {"uv": [1, 0, 7, 1], "texture": "#1"},
-        "down": {"uv": [7, 0, 13, 1], "texture": "#1"}
+        "north": {"uv": [1, 1, 7, 9], "texture": "#texture"},
+        "east": {"uv": [0, 1, 1, 9], "texture": "#texture"},
+        "south": {"uv": [8, 1, 14, 9], "texture": "#texture"},
+        "west": {"uv": [7, 1, 8, 9], "texture": "#texture"},
+        "up": {"uv": [1, 0, 7, 1], "texture": "#texture"},
+        "down": {"uv": [7, 0, 13, 1], "texture": "#texture"}
       }
     }
   ],

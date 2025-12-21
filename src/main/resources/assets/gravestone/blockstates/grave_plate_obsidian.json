@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "gravestone:block/grave_plate/obsidian",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "gravestone:block/grave_plate/obsidian",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "gravestone:block/grave_plate/obsidian",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "gravestone:block/grave_plate/obsidian",
+      "y": 270
+    }
+  }
+}
