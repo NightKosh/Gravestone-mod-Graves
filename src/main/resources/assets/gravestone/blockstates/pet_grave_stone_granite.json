@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "gravestone:block/pet_grave_stone/granite",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "gravestone:block/pet_grave_stone/granite",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "gravestone:block/pet_grave_stone/granite",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "gravestone:block/pet_grave_stone/granite",
+      "y": 270
+    }
+  }
+}
