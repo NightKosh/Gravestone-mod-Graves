@@ -14,7 +14,7 @@ public interface ISpawnerEntity {
 
     BlockPos getIPos();
 
-    Level getIWorld();
+    Level getILevel();
 
     boolean haveSpawnerHelper();
 

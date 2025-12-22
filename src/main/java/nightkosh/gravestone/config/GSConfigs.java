@@ -101,34 +101,6 @@ public class GSConfigs {
 
         BUILDER.pop();
         SPEC = BUILDER.build();
-
-
-        getGravesText();
-    }
-
-
-    // grave names
-    public static List<String> graveNames;
-    public static List<String> graveDogsNames;
-    public static List<String> graveCatsNames;
-    public static List<String> graveDeathMessages;
-
-    private static void getGravesText() {
-        graveNames = readStringsFromFile("graveNames.txt", GravesDefaultText.NAMES);//TODO path +
-        graveDogsNames = readStringsFromFile("graveDogsNames.txt", GravesDefaultText.DOG_NAMES);//TODO path +
-        graveCatsNames = readStringsFromFile("graveCatsNames.txt", GravesDefaultText.CAT_NAMES);//TODO path +
-        graveDeathMessages = readStringsFromFile("graveDeathMessages.txt", GravesDefaultText.DEATH_TEXT);//TODO path +
-    }
-
-    /*
-     * Read text from file if it exist or get default text
-     */
-    private static List<String> readStringsFromFile(String fileName, String[] defaultValues) {
-        //TODO fileName ignored!
-        List<String> list = new ArrayList<>();
-        list.addAll(Arrays.asList(defaultValues));
-
-        return list;
     }
 
 }

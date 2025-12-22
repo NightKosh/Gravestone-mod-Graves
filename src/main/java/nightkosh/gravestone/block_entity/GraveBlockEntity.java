@@ -8,6 +8,8 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import nightkosh.gravestone.core.GSBlockEntities;
 import nightkosh.gravestone.gui.container.GraveContainerMenu;
@@ -23,7 +25,7 @@ import java.util.Random;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public abstract class GraveBlockEntity extends BlockEntityBase implements MenuProvider {
+public abstract class GraveBlockEntity extends BlockEntity implements MenuProvider {
 
     protected GraveInventory inventory;
     protected String deathMessageJson;

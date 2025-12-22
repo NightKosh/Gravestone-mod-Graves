@@ -10,7 +10,7 @@ import nightkosh.gravestone.api.ModInfo;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.BlockGraveStone;
-import nightkosh.gravestone.item.itemblock.ItemBlockGraveStone;
+import nightkosh.gravestone.block.ItemBlockGraveStone;
 
 import java.util.ArrayList;
 import java.util.EnumMap;

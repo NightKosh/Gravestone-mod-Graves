@@ -193,28 +193,4 @@ public class GraveStoneHelper {
         return ItemStack.EMPTY;
     }
 
-//TODO #245 whf???
-//    public static void replaceOldGraveByNew(Level level, BlockPos pos) {
-//        var oldState = level.getBlockState(pos);
-//        var oldEntity = level.getBlockEntity(pos);
-//        //TODO !!!!!!!!!!!!!!!!!
-//
-//        var newState = GSBlocks.GRAVE_STONE.getStateFromMeta(GSBlock.GRAVE_STONE.getMetaFromState(oldState));//= GSBlock.GRAVE_STONE.getDefaultState();
-//
-//        level.setBlockState(pos, newState);
-//        var newTe = level.getBlockEntity(pos);
-//        if (oldEntity instanceof GraveStoneBlockEntity oldGrave &&
-//                newTe instanceof GraveStoneBlockEntity newTeGS) {
-//
-//            newTeGS.setAge(oldGrave.getAge());
-//            newTeGS.setDeathTextComponent(oldGrave.getDeathTextComponent());
-//            newTeGS.setInventory(oldGrave.getInventory());
-//
-//            newTeGS.setSword(oldGrave.getSword());
-//            newTeGS.setFlower(oldGrave.getFlower());
-//            newTeGS.setOwner(oldGrave.getOwner());
-//            newTeGS.setPurified(oldGrave.isPurified());
-//            newTeGS.setSpawnerHelper(oldGrave.getSpawnerHelper());
-//        }
-//    }
 }

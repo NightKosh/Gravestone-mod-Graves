@@ -61,7 +61,7 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
 //    }
 
     @Override
-    public Level getIWorld() {
+    public Level getILevel() {
         return getLevel();
     }
 

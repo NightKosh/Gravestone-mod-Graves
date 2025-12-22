@@ -31,12 +31,12 @@ import nightkosh.gravestone.api.death_handler.ICustomEntityDeathHandler;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.BlockGraveStone;
+import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.GSBlocks;
 import nightkosh.gravestone.core.MobHandler;
-import nightkosh.gravestone.helper.api.APIGraveGeneration;
 import nightkosh.gravestone.gui.container.GraveInventory;
-import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
+import nightkosh.gravestone.helper.api.APIGraveGeneration;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -319,16 +319,16 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 //                    graveType = EnumGraveType.SWORD;
 //                }
 //            } else {
-                // check death related material
-                material = getGraveMaterialByDeath(damageSource);
-                // otherwise get material by biome
-                if (material == null) {
-                    material = getGraveMaterialByBiomes(level, pos);
-                }
+            // check death related material
+            material = getGraveMaterialByDeath(damageSource);
+            // otherwise get material by biome
+            if (material == null) {
+                material = getGraveMaterialByBiomes(level, pos);
+            }
 
-                if (graveType == null) {
-                    graveType = getDefaultGraveTypes(level.random, graveTypeByEntity);
-                }
+            if (graveType == null) {
+                graveType = getDefaultGraveTypes(level.random, graveTypeByEntity);
+            }
 //            }
         }
 
@@ -430,22 +430,6 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 .anyMatch((area) -> area.isInArea(level, pos));
     }
 
-    @Override
-    public boolean isMagicDamage(DamageSource damageSource) {
-        return damageSource.is(DamageTypes.MAGIC);//TODO || damageSource.damageType.toLowerCase().contains("magic");
-    }
-
-    @Override
-    public boolean isMossyGrave(Level level, BlockPos pos, EnumGraveMaterial graveMaterial, EnumGraveType graveType) {
-        return false;//TODO isMossyGrave(level, pos, EnumGraves.getByTypeAndMaterial(graveType, graveMaterial).getMaterial());
-    }
-
-    //TODO
-//    public static boolean isMossyGrave(Level level, BlockPos pos, EnumGraveMaterial graveMaterial) {
-//        Set<BiomeDictionary.Type> biomeTypesList = BiomeDictionary.getTypes(level.getBiome(pos));
-//        return graveMaterial != EnumGraveMaterial.OTHER && (biomeTypesList.contains(BiomeDictionary.Type.JUNGLE) || biomeTypesList.contains(BiomeDictionary.Type.SWAMP));
-//    }
-
     public static boolean shouldChooseGraveTypeByAgeOrLevel(Entity entity, EnumGraveTypeByEntity graveTypeByEntity, int age) {
         if (graveTypeByEntity == EnumGraveTypeByEntity.PLAYER_GRAVES) {
             return ((Player) entity).experienceLevel >= 40;
@@ -506,7 +490,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         }
         return null;
     }
-//
+
     public static boolean isFireDamage(DamageSource damageSource, String damageType) {
         return damageSource.is(DamageTypes.IN_FIRE) || damageSource.is(DamageTypes.ON_FIRE) || isFireDamage(damageType);
     }
