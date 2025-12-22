@@ -36,24 +36,22 @@ public class GraveInventory {//implements IInventory {
         items = new ArrayList<>(DEFAULT_INVENTORY_SIZE);
 
         for (int i = 0; i < tagList.size(); i++) {
-            //TODO
-//            items.add(new ItemStack(tagList.get(i)));
+            items.add(ItemStack.of(tagList.getCompound(i)));
         }
     }
 
     public void saveItems(CompoundTag tag) {
-        var ntbList = new ListTag();
+        var tags = new ListTag();
 
         for (var stack : items) {
             if (stack != null && stack != ItemStack.EMPTY) {
-                var nbt = new CompoundTag();
-                //TODO
-//                stack.writeToNBT(nbt);
-//                ntbList.appendTag(nbt);
+                var itemTag = new CompoundTag();
+                stack.save(itemTag);
+                tags.add(itemTag);
             }
         }
 
-        tag.put("Items", ntbList);
+        tag.put("Items", tags);
     }
 
     //TODO
