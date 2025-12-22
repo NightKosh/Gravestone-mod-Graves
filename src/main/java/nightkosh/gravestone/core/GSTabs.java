@@ -48,6 +48,9 @@ public class GSTabs {
                 event.accept(new ItemStack(GSBlocks.getGravePlate(mat)));
             }
             for (var mat : EnumGraveMaterial.values()) {
+                event.accept(new ItemStack(GSBlocks.getObelisk(mat)));
+            }
+            for (var mat : EnumGraveMaterial.values()) {
                 event.accept(new ItemStack(GSBlocks.getCelticCross(mat)));
             }
             for (var mat : EnumGraveMaterial.values()) {

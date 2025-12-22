@@ -1,0 +1,118 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"texture": "gravestone:block/obelisk/stone",
+		"particle": "gravestone:block/obelisk/stone"
+	},
+	"elements": [
+		{
+			"name": "bottom1",
+			"from": [5.5, 0, 10],
+			"to": [10.5, 1, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [5.5, 0, 10]},
+			"faces": {
+				"north": {"uv": [3, 0, 5.5, 0.5], "texture": "#texture"},
+				"east": {"uv": [3, 0.5, 5.5, 1], "texture": "#texture"},
+				"south": {"uv": [3, 1, 5.5, 1.5], "texture": "#texture"},
+				"west": {"uv": [3, 1.5, 5.5, 2], "texture": "#texture"},
+				"up": {"uv": [0, 0, 2.5, 2.5], "texture": "#texture"},
+				"down": {"uv": [0, 0, 2.5, 2.5], "texture": "#texture"}
+			}
+		},
+		{
+			"name": "bottom2",
+			"from": [6, 1, 10.5],
+			"to": [10, 2, 14.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 0, 10.5]},
+			"faces": {
+				"north": {"uv": [8.5, 0, 10.5, 0.5], "texture": "#texture"},
+				"east": {"uv": [8.5, 0.5, 10.5, 1], "texture": "#texture"},
+				"south": {"uv": [8.5, 1, 10.5, 1.5], "texture": "#texture"},
+				"west": {"uv": [8.5, 1.5, 10.5, 2], "texture": "#texture"},
+				"up": {"uv": [6, 0, 8, 2], "texture": "#texture"},
+				"down": {"uv": [6, 0, 8, 2], "texture": "#missing"}
+			}
+		},
+		{
+			"name": "pillar1",
+			"from": [6.5, 2, 11],
+			"to": [9.5, 6, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6.5, 2, 11]},
+			"faces": {
+				"north": {"uv": [0, 3, 1.5, 5], "texture": "#texture"},
+				"east": {"uv": [1.5, 3, 3, 5], "texture": "#texture"},
+				"south": {"uv": [3, 3, 4.5, 5], "texture": "#texture"},
+				"west": {"uv": [4.5, 3, 6, 5], "texture": "#texture"},
+				"up": {"uv": [6.5, 3, 8, 4.5], "texture": "#texture"},
+				"down": {"uv": [0, 0, 1.5, 1.5], "texture": "#missing"}
+			}
+		},
+		{
+			"name": "pillar2",
+			"from": [7, 6, 11.5],
+			"to": [9, 11, 13.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 5, 11.5]},
+			"faces": {
+				"north": {"uv": [0, 5.5, 1, 8], "texture": "#texture"},
+				"east": {"uv": [1, 5.5, 2, 8], "texture": "#texture"},
+				"south": {"uv": [2, 5.5, 3, 8], "texture": "#texture"},
+				"west": {"uv": [3, 5.5, 4, 8], "texture": "#texture"},
+				"up": {"uv": [4.5, 5.5, 5.5, 6.5], "texture": "#texture"},
+				"down": {"uv": [0, 0, 1, 1], "texture": "#missing"}
+			}
+		},
+		{
+			"name": "pillar3",
+			"from": [7.5, 11, 12],
+			"to": [8.5, 15, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 9, 12]},
+			"faces": {
+				"north": {"uv": [0, 8.5, 0.5, 10.5], "texture": "#texture"},
+				"east": {"uv": [0.5, 8.5, 1, 10.5], "texture": "#texture"},
+				"south": {"uv": [1, 8.5, 1.5, 10.5], "texture": "#texture"},
+				"west": {"uv": [1.5, 8.5, 2, 10.5], "texture": "#texture"},
+				"up": {"uv": [2.5, 8.5, 3, 9], "texture": "#texture"},
+				"down": {"uv": [0, 0.5, 0.5, 1], "texture": "#missing"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 2.5, -1.75],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 2.5, -1.75],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_righthand": {
+			"rotation": [-25, 0, 0],
+			"translation": [2, 2, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-25, 0, 0],
+			"translation": [2, 2, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"ground": {
+			"translation": [0, 4, 0]
+		},
+		"gui": {
+			"rotation": [0, -45, 0],
+			"translation": [2.5, 0, 0],
+			"scale": [0.85, 0.85, 0.85]
+		},
+		"head": {
+			"translation": [0, 14, -4.5]
+		},
+		"fixed": {
+			"translation": [0, 0, -4]
+		},
+		"on_shelf": {
+			"translation": [0, 0, -8]
+		}
+	}
+}
