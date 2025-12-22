@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "gravestone:block/celtic_cross/prizmarine",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "gravestone:block/celtic_cross/prizmarine",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "gravestone:block/celtic_cross/prizmarine",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "gravestone:block/celtic_cross/prizmarine",
+      "y": 270
+    }
+  }
+}

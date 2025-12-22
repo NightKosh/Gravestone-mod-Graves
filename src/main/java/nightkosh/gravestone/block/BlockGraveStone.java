@@ -142,8 +142,10 @@ public class BlockGraveStone extends BaseEntityBlock {
     private static final VoxelShape CROSS_EAST = Block.box(2, 0, 2, 4, 16, 14);
     private static final VoxelShape CROSS_WEST = Block.box(12, 0, 2, 14, 16, 14);
 
-    private static final VoxelShape CC_NORTH_SOUTH = Block.box(0.125F, 0, 0.35F, 0.875F, 1.3F, 0.65F);
-    private static final VoxelShape CC_EAST_WEST = Block.box(0.35F, 0, 0.125F, 0.65F, 1.3F, 0.875F);
+    private static final VoxelShape CC_SOUTH = Block.box(1, 0, 2, 15, 18, 4);
+    private static final VoxelShape CC_NORTH = Block.box(1, 0, 12, 15, 18, 14);
+    private static final VoxelShape CC_EAST = Block.box(2, 0, 1, 4, 18, 15);
+    private static final VoxelShape CC_WEST = Block.box(12, 0, 1, 14, 18, 15);
 
     private static final VoxelShape OBELISK = Block.box(0.35F, 0, 0.35F, 0.65F, 0.92F, 0.65F);
 
@@ -175,9 +177,11 @@ public class BlockGraveStone extends BaseEntityBlock {
                 default -> CROSS_NORTH;
             };
             case CELTIC_CROSS -> switch (facing) {
-                case EAST, WEST -> CC_EAST_WEST;
-                case SOUTH, NORTH -> CC_NORTH_SOUTH;
-                default -> CC_NORTH_SOUTH;
+                case SOUTH -> CC_SOUTH;
+                case EAST -> CC_EAST;
+                case WEST -> CC_WEST;
+                case NORTH -> CC_NORTH;
+                default -> CC_NORTH;
             };
             case OBELISK -> OBELISK;
             case GRAVE_PLATE -> switch (facing) {

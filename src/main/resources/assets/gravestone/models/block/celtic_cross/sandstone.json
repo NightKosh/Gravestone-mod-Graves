@@ -1,0 +1,7 @@
+{
+  "parent": "gravestone:block/celtic_cross/base",
+  "textures": {
+    "texture": "gravestone:block/celtic_cross/sandstone",
+    "particle": "gravestone:block/celtic_cross/sandstone"
+  }
+}
