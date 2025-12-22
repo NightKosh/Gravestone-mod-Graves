@@ -15,11 +15,6 @@
   "item.grave.sword_name": "Nome da espada",
   "item.grave.sword_damage": "Dano da espada",
 
-  "death.GS.Herobrine": "%1$s foi assassinado brutalmente por Herobrine",
-  "death.GS.death_sentence": "%1$s recebeu uma pena de morte",
-  "death.GS.tortures": "%1$s morreu em torturas cruéis",
-  "death.GS.mom": "Sua mãe",
-
   "grave.cant_be_looted": "Você não pode saquear este túmulo!",
 
   "commands.not_enough_parameters": "Parâmetros insuficientes!",
@@ -28,20 +23,14 @@
   "commands.fill_grave.wrong_block": "Estas coordenadas estão ocupadas por blocos errados!",
 
   "material.title": "Feito de",
-  "material.mossy": "Musgosa",
-  "material.wood": "Madeira",
+  "material.mossy": "Mossy Cobblestone",
   "material.sandstone": "Arenito",
-  "material.red_sandstone": "Arenito Vermelho",
   "material.stone": "Pedra",
   "material.diorite": "Diorito",
   "material.andesite": "Andesito",
   "material.granite": "Granito",
-  "material.iron": "Ferro",
   "material.gold": "Ouro",
   "material.diamond": "Diamante",
-  "material.emerald": "Esmeralda",
-  "material.lapis": "Lápis",
-  "material.redstone": "Redstone",
   "material.obsidian": "Obsidiana",
   "material.quartz": "Quartzo",
   "material.prizmarine": "Prismarinho",

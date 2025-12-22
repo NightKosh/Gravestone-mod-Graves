@@ -15,11 +15,6 @@
   "item.grave.sword_name": "Jméno meče",
   "item.grave.sword_damage": "Poškození meče",
 
-  "death.GS.Herobrine": "%1$s byl brutálně zavražděn Herobrinem",
-  "death.GS.death_sentence": "%1$s obdržel rozsudek smrti",
-  "death.GS.tortures": "%1$s zemřel v krutých bolestech",
-  "death.GS.mom": "Tvoje maminka",
-
   "grave.cant_be_looted": "Nemůžeš vykrást tento hrob!",
 
   "commands.not_enough_parameters": "Není dost parametrů!",
@@ -28,20 +23,14 @@
   "commands.fill_grave.wrong_block": "Souřadnice jsou obsazeny špatnými bloky!",
 
   "material.title": "Vyrobený z",
-  "material.mossy": "Mechu",
-  "material.wood": "Dřeva",
+  "material.mossy": "Mossy Cobblestone",
   "material.sandstone": "Pískového kamene",
-  "material.red_sandstone": "Červeného písku",
   "material.stone": "Kamene",
   "material.diorite": "Dioritu",
   "material.andesite": "Andesitu",
   "material.granite": "Granitu",
-  "material.iron": "Železa",
   "material.gold": "Zlata",
   "material.diamond": "Diamantu",
-  "material.emerald": "Emeraldu",
-  "material.lapis": "Lapisu",
-  "material.redstone": "Ruditu",
   "material.obsidian": "Obsidiánu",
   "material.quartz": "Křemíku",
   "material.prizmarine": "Prizmarínu",

@@ -15,11 +15,6 @@
   "item.grave.sword_name": "Sword Name",
   "item.grave.sword_damage": "Sword Damage",
 
-  "death.GS.Herobrine": "%1$s was brutally murdered by Herobrine",
-  "death.GS.death_sentence": "%1$s received a death sentence",
-  "death.GS.tortures": "%1$s died from cruel torture",
-  "death.GS.mom": "Your mom",
-
   "grave.cant_be_looted": "You can't loot this grave!",
 
   "commands.not_enough_parameters": "Not enough parameters!",
@@ -28,20 +23,14 @@
   "commands.fill_grave.wrong_block": "This coordinates occupied by wrong blocks!",
 
   "material.title": "Made of",
-  "material.mossy": "Mossy",
-  "material.wood": "Wood",
+  "material.mossy": "Mossy Cobblestone",
   "material.sandstone": "Sandstone",
-  "material.red_sandstone": "Red Sandstone",
   "material.stone": "Stone",
   "material.diorite": "Diorite",
   "material.andesite": "Andesite",
   "material.granite": "Granite",
-  "material.iron": "Iron",
   "material.gold": "Gold",
   "material.diamond": "Diamond",
-  "material.emerald": "Emerald",
-  "material.lapis": "Lapis",
-  "material.redstone": "Redstone",
   "material.obsidian": "Obsidian",
   "material.quartz": "Quartz",
   "material.prizmarine": "Prizmarine",

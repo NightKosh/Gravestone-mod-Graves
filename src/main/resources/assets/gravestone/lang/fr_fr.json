@@ -15,11 +15,6 @@
   "item.grave.sword_name": "Nom de l'épée",
   "item.grave.sword_damage": "Dégats de l'épée",
 
-  "death.GS.Herobrine": "%1$s a été violemment tué par Herobrine",
-  "death.GS.death_sentence": "%1$s a reçu une condamnation à mort",
-  "death.GS.tortures": "%1$s a été torturé à mort",
-  "death.GS.mom": "Votre mère",
-
   "grave.cant_be_looted": "Vous ne pouvez pas piller cette tombe !",
 
   "commands.not_enough_parameters": "Nombre de paramètres insuffisant!",
@@ -28,20 +23,14 @@
   "commands.fill_grave.wrong_block": "Cet emplacement est occupé par de mauvais blocs!",
 
   "material.title": "Fait de",
-  "material.mossy": "Moussu",
-  "material.wood": "Bois",
+  "material.mossy": "Mossy Cobblestone",
   "material.sandstone": "Grès",
-  "material.red_sandstone": "Grès rouge",
   "material.stone": "Pierre",
   "material.diorite": "Diorite",
   "material.andesite": "Andésite",
   "material.granite": "Granite",
-  "material.iron": "Fer",
   "material.gold": "Or",
   "material.diamond": "Diamant",
-  "material.emerald": "Émeraude",
-  "material.lapis": "Lapis",
-  "material.redstone": "Pierre rouge",
   "material.obsidian": "Obsidienne",
   "material.quartz": "Quartz",
   "material.prizmarine": "Prismarine",
