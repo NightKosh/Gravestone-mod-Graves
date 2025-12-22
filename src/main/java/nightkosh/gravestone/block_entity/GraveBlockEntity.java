@@ -1,6 +1,9 @@
 package nightkosh.gravestone.block_entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.state.BlockState;
 import nightkosh.gravestone.core.GSBlockEntities;
 import nightkosh.gravestone.inventory.GraveInventory;
@@ -16,7 +19,7 @@ import java.util.Random;
 public abstract class GraveBlockEntity extends BlockEntityBase {
 
     protected GraveInventory inventory;
-    protected GraveStoneDeathText deathText = new GraveStoneDeathText();//TODO is required ????
+    protected String deathMessageJson;
     protected boolean isEditable = true;
     protected int age = -1;
 
@@ -32,12 +35,12 @@ public abstract class GraveBlockEntity extends BlockEntityBase {
         this.inventory = inventory;
     }
 
-    public GraveStoneDeathText getDeathTextComponent() {
-        return deathText;
+    public String getDeathMessageJson() {
+        return deathMessageJson;
     }
 
-    public void setDeathTextComponent(GraveStoneDeathText deathText) {
-        this.deathText = deathText;
+    public void setDeathMessageJson(String deathMessageJson) {
+        this.deathMessageJson = deathMessageJson;
     }
 
     public int getAge() {
@@ -64,55 +67,20 @@ public abstract class GraveBlockEntity extends BlockEntityBase {
 //    public void setEditable(boolean isEditable) {
 //        this.isEditable = isEditable;
 //    }
-//
-//    /**
-//     * Reads a tile entity from NBT.
-//     */
-//    @Override
-//    public void readFromNBT(CompoundTag nbtTag) {
-//        super.readFromNBT(nbtTag);
-//
-//        graveType = nbtTag.getInt("Type");
-//        isEnchanted = nbtTag.getBoolean("Enchanted");
-//        isMossy = nbtTag.getBoolean("Mossy");
-//    }
-//
-//    /**
-//     * Writes a tile entity to NBT.
-//     */
-//    @Override
-//    public CompoundTag writeToNBT(CompoundTag tag) {
-//        tag = super.writeToNBT(tag);
-//
-//        tag.putInt("Type", graveType);
-//        tag.putBoolean("Enchanted", isEnchanted);
-//        tag.putBoolean("Mossy", isMossy);
-//
-//        return tag;
-//    }
-//
-//    /**
-//     * Called when you receive a TileEntityData packet for the location this
-//     * TileEntity is currently in. On the client, the NetworkManager will always
-//     * be the remote server. On the server, it will be whomever is responsible for
-//     * sending the packet.
-//     *
-//     * @param net    The NetworkManager the packet originated from
-//     * @param packet The data packet
-//     */
-//    @Override
-//    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-//        readFromNBT(packet.getNbtCompound());
-//    }
-//
-//    @Override
-//    public Packet<ClientGamePacketListener> getUpdatePacket() {
-//        return new SPacketUpdateTileEntity(this.pos, 1, this.getUpdateTag());
-//    }
-//
-//    @Override
-//    public CompoundTag getUpdateTag() {
-//        return this.writeToNBT(new CompoundTag());
-//    }
+
+    @Override
+    public void handleUpdateTag(CompoundTag tag) {
+        this.load(tag);
+    }
+
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        return this.saveWithoutMetadata();
+    }
 
 }

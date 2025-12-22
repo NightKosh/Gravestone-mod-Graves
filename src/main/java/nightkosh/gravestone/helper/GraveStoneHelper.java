@@ -17,6 +17,7 @@ import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.GSBlocks;
 import nightkosh.gravestone.inventory.GraveInventory;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -183,13 +184,10 @@ public class GraveStoneHelper {
             if (tileEntity != null) {
                 var tag = new CompoundTag();
 
-                if (tileEntity.getDeathTextComponent().isLocalized()) {
-                    tag.putBoolean("isLocalized", true);
-                    tag.putString("name", tileEntity.getDeathTextComponent().getName());
-                    tag.putString("KillerName", tileEntity.getDeathTextComponent().getKillerName());
+                if (StringUtils.isNoneBlank(tileEntity.getDeathMessageJson())) {
+                    tag.putString("deathMessageJson", tileEntity.getDeathMessageJson());
                 }
 
-                tag.putString("DeathText", tileEntity.getDeathTextComponent().getDeathText());
                 tag.putInt("Age", tileEntity.getAge());
 
                 if (tileEntity.isSwordGrave()) {

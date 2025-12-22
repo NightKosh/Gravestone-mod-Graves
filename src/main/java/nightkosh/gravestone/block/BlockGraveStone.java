@@ -5,6 +5,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
@@ -30,6 +33,7 @@ import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.helper.GraveStoneHelper;
 import nightkosh.gravestone.inventory.GraveInventory;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
@@ -102,16 +106,10 @@ public class BlockGraveStone extends BaseEntityBlock {
             if (blockEntity instanceof GraveStoneBlockEntity grave) {
                 if (stack.hasTag()) {
                     var tag = stack.getTag();
-                    if (tag.contains("isLocalized") && tag.getBoolean("isLocalized")) {
-                        grave.getDeathTextComponent().setLocalized();
-
-                        if (tag.contains("name") && tag.contains("KillerName")) {
-                            grave.getDeathTextComponent().setName(tag.getString("name"));
-                            grave.getDeathTextComponent().setKillerName(tag.getString("KillerName"));
-                        }
+                    if (tag.contains("deathMessageJson")) {
+                        grave.setDeathMessageJson(tag.getString("deathMessageJson"));
                     }
 
-                    grave.getDeathTextComponent().setDeathText(tag.getString("DeathText"));
                     grave.setAge(tag.getInt("Age"));
                     grave.setPurified(tag.getBoolean("Purified"));
 
@@ -216,12 +214,12 @@ public class BlockGraveStone extends BaseEntityBlock {
         super.playerWillDestroy(level, pos, state, player);
     }
 
-//    @Override
-//    public boolean onBlockActivated(Level level, BlockPos pos, IBlockState state, Player player,
-//                                    EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-//        var te = (GraveStoneBlockEntity) level.getBlockEntity(pos);
-//
-//        if (te != null) {
+    @Override
+    public InteractionResult use(
+            BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        var te = (GraveStoneBlockEntity) level.getBlockEntity(pos);
+
+        if (te != null) {
 //            if (player.getInventory().getCurrentItem() != null) {
 //                var item = player.getInventory().getCurrentItem();
 //                if (item.getItem().getToolClasses(item).contains("shovel")) {
@@ -234,60 +232,48 @@ public class BlockGraveStone extends BaseEntityBlock {
 //                            player.sendMessage(new TextComponentTranslation("grave.cant_be_looted").setStyle(new Style().setColor(TextFormatting.RED)));
 //                        }
 //                    }
-//                    return false;
+//                    return InteractionResult.SUCCESS;
 //                } else {
-//                    if (te.isMossy()) {
-//                        if (item.getItem() instanceof ShearsItem) {
-//                            if (!level.isClientSide()) {
-//                                GraveInventory.dropItem(new ItemStack(Blocks.VINE, 1), level, pos);
-//                            }
-//                            te.setMossy(false);
-//                            return false;
-//                        }
-//                    } else {
-//                        if (Block.getBlockFromItem(item.getItem()) instanceof VineBlock && te.canBeMossy()) {
-//                            te.setMossy(true);
-//                            player.getInventory().getCurrentItem().setCount(player.getInventory().getCurrentItem().getCount() - 1);
-//                            return true;
-//                        }
-//                    }
-//                    if (te.hasFlower()) {
-//                        if (item.getItem() instanceof ShearsItem) {
-//                            if (!level.isClientSide()) {
-//                                te.dropFlower();
-//                            }
-//                            te.setFlower(null);
-//                            return false;
-//                        }
-//                    } else {
-//                        if (GraveStoneHelper.FLOWERS.contains(Block.getBlockFromItem(item.getItem())) &&
-//                                GraveStoneHelper.canFlowerBePlaced(level, pos, item, te)) {
-//                            te.setFlower(new ItemStack(item.getItem(), 1, item.getItemDamage()));
-//                            player.getInventory().getCurrentItem().setCount(player.getInventory().getCurrentItem().getCount() - 1);
-//                            return true;
-//                        }
-//                    }
+////                    if (te.isMossy()) {
+////                        if (item.getItem() instanceof ShearsItem) {
+////                            if (!level.isClientSide()) {
+////                                GraveInventory.dropItem(new ItemStack(Blocks.VINE, 1), level, pos);
+////                            }
+////                            te.setMossy(false);
+////                            return InteractionResult.SUCCESS;
+////                        }
+////                    } else {
+////                        if (Block.getBlockFromItem(item.getItem()) instanceof VineBlock && te.canBeMossy()) {
+////                            te.setMossy(true);
+////                            player.getInventory().getCurrentItem().setCount(player.getInventory().getCurrentItem().getCount() - 1);
+////                            return InteractionResult.SUCCESS;
+////                        }
+////                    }
+////                    if (te.hasFlower()) {
+////                        if (item.getItem() instanceof ShearsItem) {
+////                            if (!level.isClientSide()) {
+////                                te.dropFlower();
+////                            }
+////                            te.setFlower(null);
+////                            return InteractionResult.SUCCESS;
+////                        }
+////                    } else {
+////                        if (GraveStoneHelper.FLOWERS.contains(Block.getBlockFromItem(item.getItem())) &&
+////                                GraveStoneHelper.canFlowerBePlaced(level, pos, item, te)) {
+////                            te.setFlower(new ItemStack(item.getItem(), 1, item.getItemDamage()));
+////                            player.getInventory().getCurrentItem().setCount(player.getInventory().getCurrentItem().getCount() - 1);
+////                            return InteractionResult.SUCCESS;
+////                        }
+////                    }
 //                }
 //            }
-//            if (level.isClientSide()) {
-//                String name;
-//                String deathText;
-//                String killerName;
-//                deathText = te.getDeathTextComponent().getDeathText();
-//
+            if (level.isClientSide()) {
+                String deathMessageJson = te.getDeathMessageJson();
+                if (StringUtils.isNoneBlank(deathMessageJson)) {
+                    player.displayClientMessage(Component.Serializer.fromJson(deathMessageJson), false);
+                }
+
 //                if (deathText.length() != 0) {
-//                    if (te.getDeathTextComponent().isLocalized()) {
-//                        name = ModGraveStone.proxy.getLocalizedEntityName(te.getDeathTextComponent().getName());
-//                        killerName = ModGraveStone.proxy.getLocalizedEntityName(te.getDeathTextComponent().getKillerName());
-//
-//                        if (killerName.length() == 0) {
-//                            player.sendMessage(new TextComponentTranslation(deathText, new Object[]{name}));
-//                        } else {
-//                            player.sendMessage(new TextComponentTranslation(deathText, new Object[]{name, killerName}));
-//                        }
-//                    } else {
-//                        player.sendMessage(new TextComponentTranslation(deathText));
-//                    }
 //
 //                    if (te.getAge() > 0) {
 //                        String ageStr = ModGraveStone.proxy.getLocalizedString("item.grave.age") +
@@ -298,11 +284,11 @@ public class BlockGraveStone extends BaseEntityBlock {
 //                        player.sendMessage(new TextComponentTranslation(ageStr));
 //                    }
 //                }
-//            }
-//        }
-//
-//        return false;
-//    }
+            }
+        }
+
+        return InteractionResult.SUCCESS;
+    }
 
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {

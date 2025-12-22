@@ -1,10 +1,19 @@
 package nightkosh.gravestone.item.itemblock;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import nightkosh.gravestone.api.grave.EnumGraveMaterial;
+import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.BlockGraveStone;
 import nightkosh.gravestone.core.GSBlocks;
+
+import java.util.List;
 
 /**
  * GraveStone mod
@@ -14,8 +23,13 @@ import nightkosh.gravestone.core.GSBlocks;
  */
 public class ItemBlockGraveStone extends BlockItem {
 
+    public final EnumGraveMaterial material;
+    public final EnumGraveType graveType;
+
     public ItemBlockGraveStone(BlockGraveStone block) {
         super(block, new Item.Properties().stacksTo(64));
+        this.graveType = block.graveType;
+        this.material = block.material;
     }
 
     //TODO
@@ -25,48 +39,34 @@ public class ItemBlockGraveStone extends BlockItem {
 //            stack.setTagCompound(new CompoundTag());
 //        }
 //    }
-//
-//    @Override
-//    public void addInformation(ItemStack stack, @Nullable Level level, List<String> tooltipList, ITooltipFlag flag) {
-//        if (!stack.hasTagCompound()) {
-//            stack.setTagCompound(new CompoundTag());
-//        } else {
-//            CompoundTag nbt = stack.getTag();
-//
-//            String deathText = "";
-//            if (nbt.contains("DeathText") && StringUtils.isNotBlank(nbt.getString("DeathText"))) {
-//                deathText = nbt.getString("DeathText");
+
+    @Override
+    public void appendHoverText(ItemStack stack, Level level, List<Component> tooltips, TooltipFlag flag) {
+
+        var material = this.material;
+        //TODO
+//            if (material != EnumGraveMaterial.OTHER) {
+        tooltips.add(Component.translatable("material.title")
+                .append(" ")
+                .append(Component.translatable("material." + material.name().toLowerCase())));
 //            }
-//
-//            if (nbt.contains("isLocalized") && nbt.getBoolean("isLocalized")) {
-//                if (nbt.contains("name")) {
-//                    String name = ModGraveStone.proxy.getLocalizedEntityName(nbt.getString("name"));
-//                    String killerName = ModGraveStone.proxy.getLocalizedEntityName(nbt.getString("KillerName"));
-//                    if (killerName.length() == 0) {
-//                        tooltipList.add(new TextComponentTranslation(deathText, new Object[]{name}).getFormattedText());
-//                    } else {
-//                        tooltipList.add(new TextComponentTranslation(deathText, new Object[]{name, killerName.toLowerCase()}).getFormattedText());
-//                    }
-//                }
-//            } else {
-//                tooltipList.add(deathText);
-//            }
+
+        if (!stack.hasTag()) {
+            stack.setTag(new CompoundTag());
+        } else {
+            var nbt = stack.getTag();//TODO rename to tag
+
+            if (nbt.contains("deathMessageJson")) {
+                tooltips.add(Component.Serializer.fromJson(nbt.getString("deathMessageJson")));
+            }
 //
 //            if (nbt.getInt("Age") > 0) {
 //                tooltipList.add(ModGraveStone.proxy.getLocalizedString("item.grave.age") + " " + nbt.getInt("Age") + " " + ModGraveStone.proxy.getLocalizedString("item.grave.days"));
 //            }
-//
-//            var material = EnumGraves.getById(stack.getItemDamage()).getMaterial();
-//            if (material != EnumGraveMaterial.OTHER) {
-//                StringBuilder materialStr = new StringBuilder();
-//                materialStr.append(ModGraveStone.proxy.getLocalizedString("material.title"))
-//                        .append(" ")
-//                        .append(ModGraveStone.proxy.getLocalizedMaterial(material));
-//                tooltipList.add(materialStr.toString());
-//            }
-//
+
+
 //            if (nbt.contains("Sword")) {
-//                ItemStack sword = new ItemStack(nbt.getCompoundTag("Sword"));
+//                var sword = new ItemStack(nbt.getCompoundTag("Sword"));
 //
 //                if (StringUtils.isNotBlank(sword.getDisplayName())) {
 //                    tooltipList.add(ModGraveStone.proxy.getLocalizedString("item.grave.sword_name") + " - " + sword.getDisplayName());
@@ -95,8 +95,9 @@ public class ItemBlockGraveStone extends BlockItem {
 //                    }
 //                }
 //            }
-//        }
-//    }
+            super.appendHoverText(stack, level, tooltips, flag);
+        }
+    }
 //
 //    @Override
 //    @SideOnly(Side.CLIENT)

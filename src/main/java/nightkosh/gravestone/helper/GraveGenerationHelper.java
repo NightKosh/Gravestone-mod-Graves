@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -36,7 +37,6 @@ import nightkosh.gravestone.core.GSBlocks;
 import nightkosh.gravestone.core.MobHandler;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
 import nightkosh.gravestone.inventory.GraveInventory;
-import nightkosh.gravestone.block_entity.DeathMessageInfo;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 
 import javax.annotation.Nullable;
@@ -254,18 +254,21 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     public static boolean createGrave(
-            Entity entity, DamageSource damageSource, List<ItemStack> items,
+            LivingEntity entity, DamageSource damageSource, List<ItemStack> items,
             EnumGraveTypeByEntity graveTypeByEntity, boolean isVillager, long spawnTime) {
         if (isInRestrictedArea(entity.level, entity.blockPosition())) {
-            LOGGER.info("Can't generate " + entity.getName() + "'s grave in restricted area. " + entity.blockPosition());
+            LOGGER.info("Can't generate {}'s grave at {} in restricted area. ",
+                    entity.getName().getString(),
+                    entity.blockPosition().toShortString());
             return false;
         } else {
             int age = (int) (entity.level.getGameTime() - spawnTime) / 24000;
             var oldPos = entity.blockPosition();
             var pos = new BlockPos(oldPos.getX(), oldPos.getY(), oldPos.getZ() - 1);
             var graveInfo = getGraveOnDeath(entity.level, pos, entity, graveTypeByEntity, items, age, damageSource);
-            var messageInfo = getDeathMessage((LivingEntity) entity, damageSource, isVillager);
-            return createOnDeath(entity, entity.level, pos, messageInfo, items, age, graveInfo, damageSource);
+
+            String deathMessageJson = Component.Serializer.toJson(damageSource.getLocalizedDeathMessage(entity));
+            return createOnDeath(entity, entity.level, pos, deathMessageJson, items, age, graveInfo, damageSource);
         }
     }
 
@@ -340,7 +343,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     private static boolean createOnDeath(
-            Entity entity, Level level, BlockPos pos, DeathMessageInfo deathInfo, List<ItemStack> items,
+            Entity entity, Level level, BlockPos pos, String deathMessageJson, List<ItemStack> items,
             int age, GraveInfoOnDeath graveInfo, DamageSource damageSource) {
         BlockPos newPos = null;
         Direction direction = null;
@@ -390,11 +393,8 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 if (graveInfo.graveType() == EnumGraveType.SWORD && graveInfo.sword() != null) {
                     graveEntity.setSword(graveInfo.sword());
                 }
-//
-//                graveEntity.getDeathTextComponent().setLocalized();
-                graveEntity.getDeathTextComponent().setName(deathInfo.getName());
-                graveEntity.getDeathTextComponent().setDeathText(deathInfo.getDeathMessage());
-                graveEntity.getDeathTextComponent().setKillerName(deathInfo.getKillerName());
+
+                graveEntity.setDeathMessageJson(deathMessageJson);
                 graveEntity.getInventory().setItems(items);
                 graveEntity.setAge(age);
                 if (entity instanceof Player player) {
@@ -411,11 +411,9 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             return false;
         } else {
             var itemStack = new ItemStack(GSBlocks.getGraveBlock(graveInfo.graveType(), graveInfo.material()).asItem());
+
             var tag = new CompoundTag();
-            tag.putBoolean("isLocalized", true);
-            tag.putString("name", deathInfo.getName());
-            tag.putString("DeathText", deathInfo.getDeathMessage());
-            tag.putString("KillerName", deathInfo.getKillerNameForTE());
+            tag.putString("deathMessageJson", deathMessageJson);
             tag.putInt("Age", age);
             if (graveInfo.graveType() == EnumGraveType.SWORD && graveInfo.sword() != null) {
                 GraveStoneHelper.addSwordInfo(tag, graveInfo.sword());
@@ -424,45 +422,9 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             itemStack.setTag(tag);
             GraveInventory.dropItem(itemStack, level, pos);
 
-            GRAVE_LOGGER.info("Can not create " + deathInfo.getName() + "'s grave at " + pos.getX() + "x" + pos.getY() + "x" + pos.getZ());
+            GRAVE_LOGGER.info("Can not create {}'s grave at {}", entity.getName(), pos.toShortString());
 
             return false;
-        }
-    }
-
-    private static DeathMessageInfo getDeathMessage(LivingEntity entity, DamageSource damageSource, boolean isVillager) {
-        var killer = entity.getLastAttacker();
-        String shortString = "death.attack." + damageSource.toString();
-        String fullString = shortString + ".player";
-
-        String entityName = entity.getScoreboardName();//TODO ??? .getName();
-        if (entityName == null) {
-            entityName = "entity." + EntityType.getKey(entity.getType()).toString() + ".name";
-        }
-
-        if (killer != null) {
-            String killerName;
-            if (killer instanceof Player) {
-                killerName = killer.getDisplayName().getString();
-                if (isVillager) {
-                    GRAVE_LOGGER.info("Villager was killed by " + killerName);
-                }
-            } else {
-                killerName = EntityType.getKey(killer.getType()).toString() ;
-                if (killerName == null) {
-                    killerName = "entity.generic.name";
-                } else {
-                    killerName = "entity." + killerName + ".name";
-                }
-            }
-            //TODO
-//            if (I18n.canTranslate(fullString)) {
-//                return new DeathMessageInfo(entityName, fullString, killerName);
-//            } else {
-                return new DeathMessageInfo(entityName, shortString, killerName);
-//            }
-        } else {
-            return new DeathMessageInfo(entityName, shortString, null);
         }
     }
 

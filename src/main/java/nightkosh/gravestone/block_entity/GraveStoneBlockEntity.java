@@ -15,6 +15,8 @@ import nightkosh.gravestone.helper.IFog;
 import nightkosh.gravestone.helper.ISpawner;
 import nightkosh.gravestone.inventory.GraveInventory;
 
+import javax.annotation.Nonnull;
+
 /**
  * GraveStone mod
  *
@@ -77,56 +79,54 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
 //        return true;
 //    }
 
-    //TODO
-//    @Override
-//    public void readFromNBT(CompoundTag tag) {
-//        super.readFromNBT(tag);
-//        // age
-//        age = tag.getInt("Age");
-//        // grave loot
-//        inventory.readItems(tag);
-//        // death text
-//        deathText.readText(tag);
-//        // sword
-//        readSwordInfo(tag);
-//        // flower
-//        readFlowerInfo(tag);
-//        // owner
-//        playerId = tag.getString("PlayerId");
-//
-//        isPurified = tag.getBoolean("Purified");
-//
-//        //spawnerHelper
-//        if (tag.contains("SpawnerHelperId")) {
-//            spawnerHelperId = tag.getInt("SpawnerHelperId");
-//        }
-//    }
-//
-//    @Override
-//    public CompoundTag writeToNBT(CompoundTag tag) {
-//        tag = super.writeToNBT(tag);
-//        // age
-//        tag.putInt("Age", age);
-//        // grave loot
-//        inventory.saveItems(tag);
-//        // death text
-//        deathText.saveText(tag);
-//        // sword
-//        writeSwordInfo(tag);
-//        // flower
-//        writeFlowerInfo(tag);
-//        // owner
-//        tag.putString("PlayerId", playerId);
-//
-//        tag.putBoolean("Purified", isPurified);
-//
-//        //spawnerHelper
-//        if (haveSpawnerHelper()) {
-//            //TODO
-////            tag.putInt("SpawnerHelperId", spawnerHelper.getEntityId());
-//        }
-//        return tag;
-//    }
+    @Override
+    public void load(@Nonnull CompoundTag tag) {
+        super.load(tag);
+        // age
+        age = tag.getInt("Age");
+        // grave loot
+        inventory.readItems(tag);
+        // death text
+        deathMessageJson = tag.getString("deathMessageJson");
+        // sword
+        readSwordInfo(tag);
+        // flower
+        readFlowerInfo(tag);
+        // owner
+        playerId = tag.getString("PlayerId");
+
+        isPurified = tag.getBoolean("Purified");
+
+        //spawnerHelper
+        if (tag.contains("SpawnerHelperId")) {
+            spawnerHelperId = tag.getInt("SpawnerHelperId");
+        }
+    }
+
+    @Override
+    public void saveAdditional(@Nonnull CompoundTag tag) {
+        super.saveAdditional(tag);
+        // age
+        tag.putInt("Age", age);
+        // grave loot
+        inventory.saveItems(tag);
+        // death text
+        tag.putString("deathMessageJson", deathMessageJson);
+        // sword
+        writeSwordInfo(tag);
+        // flower
+        writeFlowerInfo(tag);
+        // owner
+        tag.putString("PlayerId", playerId);
+
+        tag.putBoolean("Purified", isPurified);
+
+        //spawnerHelper
+        if (haveSpawnerHelper()) {
+            //TODO
+//            tag.putInt("SpawnerHelperId", spawnerHelper.getEntityId());
+        }
+    }
 
     private void readSwordInfo(CompoundTag tag) {
         if (tag.contains("Sword")) {
