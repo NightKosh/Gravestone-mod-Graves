@@ -10,7 +10,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.animal.Cat;
@@ -36,7 +35,7 @@ import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.GSBlocks;
 import nightkosh.gravestone.core.MobHandler;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
-import nightkosh.gravestone.inventory.GraveInventory;
+import nightkosh.gravestone.gui.container.GraveInventory;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 
 import javax.annotation.Nullable;

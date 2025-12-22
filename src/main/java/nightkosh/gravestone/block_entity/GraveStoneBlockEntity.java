@@ -13,7 +13,7 @@ import nightkosh.gravestone.helper.GraveSpawnerHelper;
 import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
 import nightkosh.gravestone.helper.IFog;
 import nightkosh.gravestone.helper.ISpawner;
-import nightkosh.gravestone.inventory.GraveInventory;
+import nightkosh.gravestone.gui.container.GraveInventory;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
@@ -199,10 +199,6 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
 
     public EnumGraveType getGraveType() {
         return ((BlockGraveStone) this.getBlockState().getBlock()).graveType;
-    }
-
-    public boolean isEmpty() {
-        return inventory.isEmpty();
     }
 
     //    @Override

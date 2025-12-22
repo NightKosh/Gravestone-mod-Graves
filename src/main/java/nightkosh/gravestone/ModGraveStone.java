@@ -18,9 +18,7 @@ import nightkosh.gravestone.core.*;
 import nightkosh.gravestone.core.commands.Commands;
 import nightkosh.gravestone.core.compatibility.Compatibility;
 import nightkosh.gravestone.core.event.EventHandlerNetwork;
-import nightkosh.gravestone.core.event.EventsHandler;
 import nightkosh.gravestone.core.logger.GravesLogger;
-import nightkosh.gravestone.core.proxy.CommonProxy;
 import nightkosh.gravestone.helper.GraveGenerationHelper;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
 import org.apache.logging.log4j.LogManager;
@@ -40,10 +38,6 @@ public class ModGraveStone {
     public static final Logger LOGGER = LogManager.getLogger(ModInfo.ID);
     public static final Logger GRAVE_LOGGER = new GravesLogger();
 
-    //TODO
-//    @SidedProxy(clientSide = "nightkosh.gravestone.core.proxy.ClientProxy", serverSide = "nightkosh.gravestone.core.proxy.CommonProxy")
-    public static CommonProxy proxy;
-
     public static final IGraveStoneHelper gravestoneHelper = GraveGenerationHelper.INSTANCE;
     public static final IGraveGeneration apiGraveGeneration = APIGraveGeneration.INSTANCE;
 
@@ -56,6 +50,7 @@ public class ModGraveStone {
 
         GSBlocks.register(eventBus);
         GSBlockEntities.register(eventBus);
+        GSMenu.register(eventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -69,8 +64,6 @@ public class ModGraveStone {
 //        GraveStoneAPI.graveStone = gravestoneHelper;
 //        GraveStoneAPI.graveGenerationAtDeath = apiGraveGeneration;
 //
-//        GSTabs.registration();
-//        GSTileEntity.registration();
 //
 //        CapabilityManager.INSTANCE.register(IBackups.class, new BackupStorage(), Backups.class);
 //    }
@@ -78,11 +71,8 @@ public class ModGraveStone {
 //    @Mod.EventHandler
 //    public void load(FMLInitializationEvent event) {
 //        // register death event
-//        MinecraftForge.EVENT_BUS.register(new EventsHandler());
 //        MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
 //        FMLCommonHandler.instance().bus().register(new EventHandlerNetwork());
-//
-//        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 //    }
 
 //    @Mod.EventHandler

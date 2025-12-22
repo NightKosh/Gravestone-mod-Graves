@@ -4,7 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Mth;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -27,18 +27,21 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.ToolActions;
+import net.minecraftforge.network.NetworkHooks;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.helper.GraveStoneHelper;
-import nightkosh.gravestone.inventory.GraveInventory;
+import nightkosh.gravestone.gui.container.GraveInventory;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
 import static nightkosh.gravestone.ModGraveStone.LOGGER;
+import static nightkosh.gravestone.ModGraveStone.GRAVE_LOGGER;
 
 /**
  * GraveStone mod
@@ -230,73 +233,63 @@ public class BlockGraveStone extends BaseEntityBlock {
     @Override
     public InteractionResult use(
             BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        var te = (GraveStoneBlockEntity) level.getBlockEntity(pos);
-
-        if (te != null) {
-//            if (player.getInventory().getCurrentItem() != null) {
-//                var item = player.getInventory().getCurrentItem();
-//                if (item.getItem().getToolClasses(item).contains("shovel")) {
-//                    if (!level.isClientSide()) {
-//                        if (te.canBeLooted(player)) {
-//                            player.openGui(ModGraveStone.INSTANCE, GuiHandler.GRAVE_INVENTORY_GUI_ID, level, pos.getX(), pos.getY(), pos.getZ());
-//                            GRAVE_LOGGER.info(player.getName() + " open grave inventory at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
-//                            GraveStoneHelper.replaceGround(level, pos.below());
-//                        } else {
-//                            player.sendMessage(new TextComponentTranslation("grave.cant_be_looted").setStyle(new Style().setColor(TextFormatting.RED)));
+        if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave) {
+            if (!level.isClientSide()) {
+                var item = player.getMainHandItem();
+                if (item != null) {
+                    if (item.canPerformAction(ToolActions.SHOVEL_DIG)) {
+                        if (!level.isClientSide()) {
+                            if (grave.canBeLooted(player)) {
+                                if (player instanceof ServerPlayer sp) {
+                                    NetworkHooks.openScreen(sp, grave, pos);
+                                }
+                                GRAVE_LOGGER.info("{} open grave inventory at {}", player.getScoreboardName(), pos.toShortString());
+                                GraveStoneHelper.replaceGround(level, pos.below());
+                                return InteractionResult.SUCCESS;
+                            } else {
+                                player.displayClientMessage(
+                                        Component.translatable("grave.cant_be_looted")
+                                                .withStyle(ChatFormatting.RED), false);
+                                return InteractionResult.FAIL;
+                            }
+                        }
+                    } else {
+//                    if (grave.hasFlower()) {
+//                        if (item.getItem() instanceof ShearsItem) {
+//                            if (!level.isClientSide()) {
+//                                te.dropFlower();
+//                            }
+//                            te.setFlower(null);
+//                            return InteractionResult.SUCCESS;
+//                        }
+//                    } else {
+//                        if (GraveStoneHelper.FLOWERS.contains(Block.getBlockFromItem(item.getItem())) &&
+//                                GraveStoneHelper.canFlowerBePlaced(level, pos, item, grave)) {
+//                            grave.setFlower(new ItemStack(item.getItem(), 1, item.getItemDamage()));
+//                            player.getInventory().getCurrentItem().setCount(player.getInventory().getCurrentItem().getCount() - 1);
+//                            return InteractionResult.SUCCESS;
 //                        }
 //                    }
-//                    return InteractionResult.SUCCESS;
-//                } else {
-////                    if (te.isMossy()) {
-////                        if (item.getItem() instanceof ShearsItem) {
-////                            if (!level.isClientSide()) {
-////                                GraveInventory.dropItem(new ItemStack(Blocks.VINE, 1), level, pos);
-////                            }
-////                            te.setMossy(false);
-////                            return InteractionResult.SUCCESS;
-////                        }
-////                    } else {
-////                        if (Block.getBlockFromItem(item.getItem()) instanceof VineBlock && te.canBeMossy()) {
-////                            te.setMossy(true);
-////                            player.getInventory().getCurrentItem().setCount(player.getInventory().getCurrentItem().getCount() - 1);
-////                            return InteractionResult.SUCCESS;
-////                        }
-////                    }
-////                    if (te.hasFlower()) {
-////                        if (item.getItem() instanceof ShearsItem) {
-////                            if (!level.isClientSide()) {
-////                                te.dropFlower();
-////                            }
-////                            te.setFlower(null);
-////                            return InteractionResult.SUCCESS;
-////                        }
-////                    } else {
-////                        if (GraveStoneHelper.FLOWERS.contains(Block.getBlockFromItem(item.getItem())) &&
-////                                GraveStoneHelper.canFlowerBePlaced(level, pos, item, te)) {
-////                            te.setFlower(new ItemStack(item.getItem(), 1, item.getItemDamage()));
-////                            player.getInventory().getCurrentItem().setCount(player.getInventory().getCurrentItem().getCount() - 1);
-////                            return InteractionResult.SUCCESS;
-////                        }
-////                    }
-//                }
-//            }
-            if (level.isClientSide()) {
-                String deathMessageJson = te.getDeathMessageJson();
-                if (StringUtils.isNoneBlank(deathMessageJson)) {
-                    player.displayClientMessage(Component.Serializer.fromJson(deathMessageJson), false);
+                    }
                 }
+            } else {
+                if (player.getMainHandItem() == null || ItemStack.EMPTY.equals(player.getMainHandItem())) {
+                    String deathMessageJson = grave.getDeathMessageJson();
+                    if (StringUtils.isNoneBlank(deathMessageJson)) {
+                        player.displayClientMessage(Component.Serializer.fromJson(deathMessageJson), false);
+                    }
 
 //                if (deathText.length() != 0) {
-//
 //                    if (te.getAge() > 0) {
 //                        String ageStr = ModGraveStone.proxy.getLocalizedString("item.grave.age") +
 //                                " " +
 //                                te.getAge() +
 //                                " " +
 //                                ModGraveStone.proxy.getLocalizedString("item.grave.days");
-//                        player.sendMessage(new TextComponentTranslation(ageStr));
+//                        player.displayClientMessage(new TextComponentTranslation(ageStr), false);
 //                    }
 //                }
+                }
             }
         }
 

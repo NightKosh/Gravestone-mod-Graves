@@ -2,11 +2,19 @@ package nightkosh.gravestone.block_entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import nightkosh.gravestone.core.GSBlockEntities;
-import nightkosh.gravestone.inventory.GraveInventory;
+import nightkosh.gravestone.gui.container.GraveContainerMenu;
+import nightkosh.gravestone.gui.container.GraveInventory;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Random;
 
 /**
@@ -15,7 +23,7 @@ import java.util.Random;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public abstract class GraveBlockEntity extends BlockEntityBase {
+public abstract class GraveBlockEntity extends BlockEntityBase implements MenuProvider {
 
     protected GraveInventory inventory;
     protected String deathMessageJson;
@@ -58,6 +66,10 @@ public abstract class GraveBlockEntity extends BlockEntityBase {
         return isEditable;
     }
 
+    public boolean isEmpty() {
+        return inventory.isEmpty();
+    }
+
     //TODO
 //    /**
 //     * Sets the grave's isEditable flag to the specified parameter.
@@ -77,9 +89,22 @@ public abstract class GraveBlockEntity extends BlockEntityBase {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
+    @Nonnull
     @Override
     public CompoundTag getUpdateTag() {
         return this.saveWithoutMetadata();
+    }
+
+    @Nonnull
+    @Override
+    public Component getDisplayName() {
+        return Component.empty();
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
+        return new GraveContainerMenu(containerId, inventory, this);
     }
 
 }

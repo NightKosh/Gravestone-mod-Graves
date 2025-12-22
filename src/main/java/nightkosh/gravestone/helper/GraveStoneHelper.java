@@ -15,7 +15,7 @@ import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.BlockGraveStone;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.GSBlocks;
-import nightkosh.gravestone.inventory.GraveInventory;
+import nightkosh.gravestone.gui.container.GraveInventory;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 import org.apache.commons.lang3.StringUtils;
 
