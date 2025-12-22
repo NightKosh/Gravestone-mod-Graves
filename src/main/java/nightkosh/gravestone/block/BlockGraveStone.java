@@ -93,6 +93,7 @@ public class BlockGraveStone extends BaseEntityBlock {
             case OBELISK -> "block.gravestone.obelisk";
             case CELTIC_CROSS -> "block.gravestone.celtic_cross";
             case PET_GRAVE_STONE -> "block.gravestone.pet_grave_stone";
+            case VILLAGER_GRAVE_STONE -> "block.gravestone.villager_grave_stone";
             default -> "block.gravestone.grave_stone";
         };
     }
@@ -114,9 +115,8 @@ public class BlockGraveStone extends BaseEntityBlock {
                     grave.setPurified(tag.getBoolean("Purified"));
 
                     if (tag.contains("Sword")) {
-                        //TODO
-//                    var sword = new ItemStack(tag.get("Sword"));
-//                    grave.setSword(sword);
+                        var sword = ItemStack.of(tag.getCompound("Sword"));
+                        grave.setSword(sword);
                     }
                 }
             }

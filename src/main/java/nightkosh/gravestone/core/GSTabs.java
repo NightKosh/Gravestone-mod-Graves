@@ -50,6 +50,9 @@ public class GSTabs {
             for (var mat : EnumGraveMaterial.values()) {
                 event.accept(new ItemStack(GSBlocks.getPetGraveStone(mat)));
             }
+            for (var mat : EnumGraveMaterial.values()) {
+                event.accept(new ItemStack(GSBlocks.getVillagerGraveStone(mat)));
+            }
         }
     }
 
