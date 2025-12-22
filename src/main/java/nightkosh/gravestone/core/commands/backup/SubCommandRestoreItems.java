@@ -1,10 +1,6 @@
 package nightkosh.gravestone.core.commands.backup;
 
-import nightkosh.gravestone.capability.Backup;
 import nightkosh.gravestone.core.commands.Command;
-import nightkosh.gravestone.inventory.GraveInventory;
-
-import java.util.List;
 
 /**
  * GraveStone mod

@@ -52,7 +52,7 @@ public class GSConfigs {
 //    public static boolean enableTwilightForestKeeping;
 
     static {
-        BUILDER.push("Configs for Sophisticated Wolves Mod");
+        BUILDER.push("Configs for Gravestone mod - Graves");
 
         CAN_PLACE_GRAVES_EVERY_WHERE = BUILDER.define("AllowToPlaceGravesEveryWhere", false);
         GENERATE_PLAYER_GRAVES = BUILDER.define("GeneratePlayersGraves", true);
