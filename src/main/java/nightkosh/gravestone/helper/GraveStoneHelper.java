@@ -3,6 +3,7 @@ package nightkosh.gravestone.helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -10,13 +11,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.BlockGraveStone;
+import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.GSBlocks;
 import nightkosh.gravestone.gui.container.GraveInventory;
-import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -42,6 +42,8 @@ public class GraveStoneHelper {
                 block.equals(Blocks.DIRT_PATH) ||
                 block.equals(Blocks.PODZOL)) {
             level.setBlock(pos, Blocks.DIRT.defaultBlockState(), 3);
+        } else if (block.equals(Blocks.STONE)) {
+            level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
         }
     }
 
@@ -62,17 +64,9 @@ public class GraveStoneHelper {
     /**
      * Check can be grave placed on this type of surface
      */
-    public static boolean canPlaceBlockAt(Level level, BlockPos pos) {
-        return canPlaceBlockAt(level, level.getBlockState(pos).getBlock(), pos);
-    }
-
-    public static boolean canPlaceBlockAt(Level level, Block block, BlockPos pos) {
-        if (GSConfigs.CAN_PLACE_GRAVES_EVERY_WHERE.get()) {
-            return true;
-        } else {
-            String tool = "";//TODO block.getHarvestTool(level.getBlockState(pos));
-            return tool != null && tool.equals("shovel");
-        }
+    public static boolean canPlaceBlockAt(BlockState state) {
+        return GSConfigs.CAN_PLACE_GRAVES_EVERY_WHERE.get() ||
+                state.is(BlockTags.MINEABLE_WITH_SHOVEL);
     }
 
     public static void addSwordInfo(CompoundTag tag, ItemStack sword) {
@@ -126,8 +120,8 @@ public class GraveStoneHelper {
         public boolean isInArea(Level level, BlockPos pos) {
             return //TODO level.provider.getDimension() == dimensionId &&
                     pos.getX() >= firstPoint.getX() && pos.getX() <= lastPoint.getX() &&
-                    pos.getY() >= firstPoint.getY() && pos.getY() <= lastPoint.getY() &&
-                    pos.getZ() >= firstPoint.getZ() && pos.getZ() <= lastPoint.getZ();
+                            pos.getY() >= firstPoint.getY() && pos.getY() <= lastPoint.getY() &&
+                            pos.getZ() >= firstPoint.getZ() && pos.getZ() <= lastPoint.getZ();
         }
 
         public static RestrictedArea getFromString(String area) {
@@ -156,9 +150,10 @@ public class GraveStoneHelper {
 
     public static void dropBlockWithoutInfo(Level level, GraveStoneBlockEntity graveEntity) {
         if (GSConfigs.DROP_GRAVE_BLOCK_AT_DESTRUCTION.get()) {
-            var itemStack = new ItemStack(GSBlocks.getGraveStone(EnumGraveMaterial.STONE).asItem());//TODO EnumGraveMaterial
-
             if (graveEntity != null) {
+                var grave = ((BlockGraveStone) graveEntity.getBlockState().getBlock());
+                var itemStack = new ItemStack(GSBlocks.getGraveBlock(grave.graveType, grave.material).asItem());
+
                 if (graveEntity.isSwordGrave()) {
                     graveEntity.dropSword();
                 } else {
@@ -176,33 +171,26 @@ public class GraveStoneHelper {
      * Get grave block as item block
      */
     public static ItemStack getBlockItemStack(Level level, BlockPos pos, BlockState state) {
-        if (GSConfigs.DROP_GRAVE_BLOCK_AT_DESTRUCTION.get()) {
-            var block = state.getBlock();
-            var itemStack = new ItemStack(GSBlocks.getGraveStone(((BlockGraveStone) block).material).asItem());
-            var tileEntity = (GraveStoneBlockEntity) level.getBlockEntity(pos);
+        if (GSConfigs.DROP_GRAVE_BLOCK_AT_DESTRUCTION.get() &&
+                level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave) {
+            var graveBlock = ((BlockGraveStone) grave.getBlockState().getBlock());
+            var itemStack = new ItemStack(GSBlocks.getGraveBlock(graveBlock.graveType, graveBlock.material).asItem());
 
-            if (tileEntity != null) {
-                var tag = new CompoundTag();
+            var tag = new CompoundTag();
+            tag.putInt("Age", grave.getAge());
+            tag.putBoolean("Purified", true);
 
-                if (StringUtils.isNoneBlank(tileEntity.getDeathMessageJson())) {
-                    tag.putString("deathMessageJson", tileEntity.getDeathMessageJson());
-                }
-
-                tag.putInt("Age", tileEntity.getAge());
-
-                if (tileEntity.isSwordGrave()) {
-                    GraveStoneHelper.addSwordInfo(tag, tileEntity.getSword());
-                }
-
-                tag.putBoolean("Purified", true);
-
-                itemStack.setTag(tag);
+            if (StringUtils.isNoneBlank(grave.getDeathMessageJson())) {
+                tag.putString("deathMessageJson", grave.getDeathMessageJson());
+            }
+            if (grave.isSwordGrave()) {
+                GraveStoneHelper.addSwordInfo(tag, grave.getSword());
             }
 
+            itemStack.setTag(tag);
             return itemStack;
-        } else {
-            return ItemStack.EMPTY;
         }
+        return ItemStack.EMPTY;
     }
 
 //TODO #245 whf???

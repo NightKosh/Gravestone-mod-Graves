@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
@@ -33,15 +34,15 @@ import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 import nightkosh.gravestone.config.GSConfigs;
-import nightkosh.gravestone.helper.GraveStoneHelper;
 import nightkosh.gravestone.gui.container.GraveInventory;
+import nightkosh.gravestone.helper.GraveStoneHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-import static nightkosh.gravestone.ModGraveStone.LOGGER;
 import static nightkosh.gravestone.ModGraveStone.GRAVE_LOGGER;
+import static nightkosh.gravestone.ModGraveStone.LOGGER;
 
 /**
  * GraveStone mod
@@ -125,16 +126,12 @@ public class BlockGraveStone extends BaseEntityBlock {
             }
         }
     }
-//
-//    /**
-//     * Checks to see if its valid to put this block at the specified
-//     * coordinates. Args: level, x, y, z
-//     */
-//    @Override
-//    public boolean canPlaceBlockAt(Level level, BlockPos pos) {
-//        return GraveStoneHelper.canPlaceBlockAt(level, pos.below());
-//    }
-//
+
+    @Override
+    public boolean canSurvive(@Nonnull BlockState state, LevelReader level, BlockPos pos) {
+        return GraveStoneHelper.canPlaceBlockAt(level.getBlockState(pos.below()));
+    }
+
     private static final VoxelShape GS_SOUTH = Block.box(2, 0, 2, 14, 16, 4);
     private static final VoxelShape GS_NORTH = Block.box(2, 0, 12, 14, 16, 14);
     private static final VoxelShape GS_EAST = Block.box(2, 0, 2, 4, 16, 14);
