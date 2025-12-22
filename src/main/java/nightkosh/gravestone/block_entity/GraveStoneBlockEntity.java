@@ -14,6 +14,7 @@ import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
 import nightkosh.gravestone.helper.IFog;
 import nightkosh.gravestone.helper.ISpawner;
 import nightkosh.gravestone.inventory.GraveInventory;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 
@@ -111,7 +112,9 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
         // grave loot
         inventory.saveItems(tag);
         // death text
-        tag.putString("deathMessageJson", deathMessageJson);
+        if (StringUtils.isNoneBlank(deathMessageJson)) {
+            tag.putString("deathMessageJson", deathMessageJson);
+        }
         // sword
         writeSwordInfo(tag);
         // flower
@@ -130,8 +133,7 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
 
     private void readSwordInfo(CompoundTag tag) {
         if (tag.contains("Sword")) {
-            //TODO
-//            sword = new ItemStack(tag.get("Sword"));
+            sword = ItemStack.of(tag.getCompound("Sword"));
         }
     }
 

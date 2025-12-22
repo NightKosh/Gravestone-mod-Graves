@@ -77,7 +77,7 @@ public class GSConfigs {
 //        restrictGraveGenerationInAreaProperty.setComment("List of coordinates in which graves generation must be disabled. \"dimension_id,start_x,start_y,start_z,end_x,end_y,end_z;\". Dimension id is optional - it will be set to 0 by default.");
 //        String ar = restrictGraveGenerationInAreaProperty.getString();
 //        String[] areas = ar.split(";");
-//        restrictGraveGenerationInArea = new ArrayList<>(areas.length);
+        restrictGraveGenerationInArea = new ArrayList<>();//(areas.length);
 //        for (String area : areas) {
 //            GraveStoneHelper.RestrictedArea restrictedArea = GraveStoneHelper.RestrictedArea.getFromString(area);
 //            if (restrictedArea != null) {

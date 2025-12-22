@@ -66,7 +66,7 @@ public class ItemBlockGraveStone extends BlockItem {
 
 
 //            if (nbt.contains("Sword")) {
-//                var sword = new ItemStack(nbt.getCompoundTag("Sword"));
+//                var sword = ItemStack.of(nbt.getCompoundTag("Sword"));
 //
 //                if (StringUtils.isNotBlank(sword.getDisplayName())) {
 //                    tooltipList.add(ModGraveStone.proxy.getLocalizedString("item.grave.sword_name") + " - " + sword.getDisplayName());

@@ -406,8 +406,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 }
                 return true;
             }
-            //TODO
-//            GRAVE_LOGGER.info("Create " + deathInfo.getName() + "'s grave at " + newPos.getX() + "x" + newPos.getY() + "x" + newPos.getZ());
+            GRAVE_LOGGER.info("Create {}'s grave at {}", entity.getName(), newPos.toShortString());
             return false;
         } else {
             var itemStack = new ItemStack(GSBlocks.getGraveBlock(graveInfo.graveType(), graveInfo.material()).asItem());
@@ -421,7 +420,6 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
             itemStack.setTag(tag);
             GraveInventory.dropItem(itemStack, level, pos);
-
             GRAVE_LOGGER.info("Can not create {}'s grave at {}", entity.getName(), pos.toShortString());
 
             return false;
