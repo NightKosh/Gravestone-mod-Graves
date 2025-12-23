@@ -5,7 +5,12 @@ import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.message.Message;
 import org.apache.logging.log4j.spi.AbstractLogger;
 
-import java.io.*;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,23 +25,28 @@ import static nightkosh.gravestone.ModGraveStone.LOGGER;
  */
 public class GravesLogger extends AbstractLogger {
 
-    private static File logFile;
+    private static Path logFile;
     private static final String LOG_FILE_DIRECTORY = "logs/";
     private static final String LOG_FILE_NAME = "graveLogs.log";
     private static final DateFormat FILE_DATE_FORMAT = new SimpleDateFormat("yyyy.MM.dd_HH.mm.ss");
 
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
-    public static void setWorldDirectory(File worldDirectory) {
-        File logsDir = new File(worldDirectory, LOG_FILE_DIRECTORY);
-        logsDir.mkdir();
+    public static void setWorldDirectory(Path worldDirectory) {
+        try {
+            var logsDir = worldDirectory.resolve(LOG_FILE_DIRECTORY);
+            Files.createDirectories(logsDir);
 
-        StringBuilder fileName = new StringBuilder();
-        fileName.append(LOG_FILE_DIRECTORY)
-                .append(FILE_DATE_FORMAT.format(new Date()))
-                .append(" ")
-                .append(LOG_FILE_NAME);
-        logFile = new File(worldDirectory, fileName.toString());
+            String fileName = FILE_DATE_FORMAT.format(new Date()) + "_" + LOG_FILE_NAME;
+            logFile = logsDir.resolve(fileName);
+
+            if (Files.notExists(logFile)) {
+                Files.createFile(logFile);
+            }
+        } catch (Exception e) {
+            LOGGER.error("Failed to init graves logger file", e);
+            logFile = null;
+        }
     }
 
     @Override
@@ -122,43 +132,50 @@ public class GravesLogger extends AbstractLogger {
     @Override
     public void logMessage(String fqcn, Level level, Marker marker, Message msg, Throwable throwable) {
         if (logFile != null) {
-            StringBuilder loggedStr = new StringBuilder();
-            loggedStr.append(DATE_FORMAT.format(new Date()));
-
-            loggedStr.append(" [");
-            loggedStr.append(level.toString());
-            loggedStr.append("] ");
-
-            loggedStr.append(msg.getFormattedMessage());
+            var builder = new StringBuilder()
+                    .append(DATE_FORMAT.format(new Date()))
+                    .append(" [")
+                    .append(level)
+                    .append("] ")
+                    .append(msg.getFormattedMessage());
 
             final Object[] params = msg.getParameters();
-            Throwable t;
-            if (throwable == null && params != null && params.length != 0 && params[params.length - 1] instanceof Throwable) {
-                t = (Throwable) params[params.length - 1];
-            } else {
-                t = throwable;
+            var t = throwable;
+            if (throwable == null &&
+                    params != null &&
+                    params.length != 0 &&
+                    params[params.length - 1] instanceof Throwable newThrowable) {
+                t = newThrowable;
             }
             if (t != null) {
-                loggedStr.append(" ");
-                final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                t.printStackTrace(new PrintStream(baos));
-                loggedStr.append(baos.toString());
+                var sw = new StringWriter();
+                t.printStackTrace(new PrintWriter(sw));
+                builder.append(System.lineSeparator())
+                        .append(sw);
             }
 
+            builder.append(System.lineSeparator());
+
             try {
-                PrintWriter out = new PrintWriter(new FileWriter(logFile, true), true);
-                out.println(loggedStr.toString());
-            } catch (IOException e) {
-                LOGGER.error("Error while writing in graves log file!");
-                e.printStackTrace();
+                Files.writeString(
+                        logFile,
+                        builder.toString(),
+                        StandardCharsets.UTF_8,
+                        StandardOpenOption.CREATE,
+                        StandardOpenOption.WRITE,
+                        StandardOpenOption.APPEND
+                );
+            } catch (Exception e) {
+                LOGGER.error("Error while writing in graves log file!", e);
             }
         } else {
-            LOGGER.error("Graves logs file doesn't exists");
+            LOGGER.error("Graves logs file is not initialized");
         }
     }
 
     @Override
     public Level getLevel() {
-        return null;
+        return org.apache.logging.log4j.Level.ALL;
     }
+
 }
