@@ -5,7 +5,6 @@ import net.minecraft.world.entity.player.Player;
 import nightkosh.gravestone.capability.Backup;
 import nightkosh.gravestone.capability.BackupProvider;
 import nightkosh.gravestone.capability.IBackups;
-import nightkosh.gravestone.core.commands.ISubCommand;
 
 /**
  * GraveStone mod
@@ -13,7 +12,7 @@ import nightkosh.gravestone.core.commands.ISubCommand;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public abstract class SubCommandBackup implements ISubCommand {
+public abstract class SubCommandBackup {//implements ISubCommand {
 
     //TODO
 //    @Override

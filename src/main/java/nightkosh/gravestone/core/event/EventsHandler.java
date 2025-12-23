@@ -12,6 +12,7 @@ import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelResource;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -23,8 +24,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import nightkosh.gravestone.api.ModInfo;
 import nightkosh.gravestone.config.GSConfigs;
+import nightkosh.gravestone.core.GSCommands;
 import nightkosh.gravestone.core.MobHandler;
 import nightkosh.gravestone.core.logger.GravesLogger;
+import nightkosh.gravestone.helper.BackupsHelper;
 import nightkosh.gravestone.helper.GraveGenerationHelper;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
 
@@ -42,8 +45,10 @@ public class EventsHandler {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onPlayerClone(PlayerEvent.Clone event) {
         if (event.isWasDeath()) {
-            //TODO
-//            BackupsHelper.clonePlayer(event.getOriginal(), event.getPlayer());
+            if (GSConfigs.DEBUG_MODE.get()) {
+                LOGGER.info("PlayerEvent.Clone event triggered for {}", event.getEntity().getScoreboardName());
+            }
+            BackupsHelper.clonePlayer(event.getOriginal(), event.getEntity());
         }
     }
 
@@ -216,6 +221,18 @@ public class EventsHandler {
             }
             MobHandler.setMobSpawnTime(event.getEntity());
         }
+    }
+
+    @SubscribeEvent
+    public static void onRegisterCommands(RegisterCommandsEvent event) {
+        if (GSConfigs.DEBUG_MODE.get()) {
+            LOGGER.info("RegisterCommandsEvent triggered");
+        }
+
+        var dispatcher = event.getDispatcher();
+        dispatcher.register(GSCommands.COMMANDS_LIST);
+        dispatcher.register(GSCommands.GRAVE_POSITION);
+        dispatcher.register(GSCommands.RESTORE_ITEMS);
     }
 
 }

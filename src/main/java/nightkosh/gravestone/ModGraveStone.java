@@ -15,9 +15,7 @@ import nightkosh.gravestone.capability.Backups;
 import nightkosh.gravestone.capability.IBackups;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.*;
-import nightkosh.gravestone.core.commands.Commands;
 import nightkosh.gravestone.core.compatibility.Compatibility;
-import nightkosh.gravestone.core.event.EventHandlerNetwork;
 import nightkosh.gravestone.core.logger.GravesLogger;
 import nightkosh.gravestone.helper.GraveGenerationHelper;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
@@ -78,11 +76,6 @@ public class ModGraveStone {
 //    @Mod.EventHandler
 //    public void postInit(FMLPostInitializationEvent event) {
 //        Compatibility.getInstance();
-//    }
-//
-//    @Mod.EventHandler
-//    public void serverStarting(FMLServerStartingEvent event) {
-//        Commands.registration(event);
 //    }
 
 }
