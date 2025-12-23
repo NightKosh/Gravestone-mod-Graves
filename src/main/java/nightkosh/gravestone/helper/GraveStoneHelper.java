@@ -177,8 +177,10 @@ public class GraveStoneHelper {
             var itemStack = new ItemStack(GSBlocks.getGraveBlock(graveBlock.graveType, graveBlock.material).asItem());
 
             var tag = new CompoundTag();
-            tag.putInt("Age", grave.getAge());
             tag.putBoolean("Purified", true);
+            if (grave.getAge() > 0) {
+                tag.putInt("Age", grave.getAge());
+            }
 
             if (StringUtils.isNoneBlank(grave.getDeathMessageJson())) {
                 tag.putString("deathMessageJson", grave.getDeathMessageJson());
