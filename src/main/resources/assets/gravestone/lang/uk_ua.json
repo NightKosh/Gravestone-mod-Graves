@@ -17,11 +17,6 @@
 
   "grave.cant_be_looted": "Ви не можете розграбувати цю могилу!",
 
-  "commands.not_enough_parameters": "Недостатньо параметрів!",
-  "commands.coordinate_error": "Введені не коректні координати!",
-  "commands.fill_grave.empty": "За вказаними координатами немає ніяких блоків!",
-  "commands.fill_grave.wrong_block": "За вказаними координатами розташовуються не коректні блоки!",
-
   "material.title": "Зроблений з",
   "material.mossy": "Mossy Cobblestone",
   "material.sandstone": "Пісковика",

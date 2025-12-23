@@ -17,11 +17,6 @@
 
   "grave.cant_be_looted": "Du kannst dieses Grab nicht looten!",
 
-  "commands.not_enough_parameters": "Unzureichende Parameter!",
-  "commands.coordinate_error": "Fehlerhafte Koordinaten!",
-  "commands.fill_grave.empty": "Es befinden sich keine Blöcke an diesen Koordinaten!",
-  "commands.fill_grave.wrong_block": "Diese Koordinaten werden von den falschen Blöcken genutzt!",
-
   "material.title": "Besteht aus",
   "material.mossy": "Mossy Cobblestone",
   "material.sandstone": "Sandstein",

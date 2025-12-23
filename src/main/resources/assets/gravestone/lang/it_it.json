@@ -17,11 +17,6 @@
 
   "grave.cant_be_looted": "Non puoi saccheggiare questa tomba!",
 
-  "commands.not_enough_parameters": "Non abbastanza parametri!",
-  "commands.coordinate_error": "Errore coordinate!",
-  "commands.fill_grave.empty": "Non ci sono blocchi a queste coordinate!",
-  "commands.fill_grave.wrong_block": "Queste coordinate sono occupate da blocchi sbagliati!",
-
   "material.title": "Fatto da",
   "material.mossy": "Mossy Cobblestone",
   "material.sandstone": "Arenaria",

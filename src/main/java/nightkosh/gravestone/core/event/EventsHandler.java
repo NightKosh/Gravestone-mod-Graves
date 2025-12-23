@@ -1,7 +1,9 @@
 package nightkosh.gravestone.core.event;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.animal.Cat;
@@ -12,6 +14,7 @@ import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelResource;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
@@ -23,6 +26,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import nightkosh.gravestone.api.ModInfo;
+import nightkosh.gravestone.capability.BackupProvider;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.GSCommands;
 import nightkosh.gravestone.core.MobHandler;
@@ -41,6 +45,18 @@ import static nightkosh.gravestone.ModGraveStone.LOGGER;
  */
 @Mod.EventBusSubscriber(modid = ModInfo.ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EventsHandler {
+
+    private static final ResourceLocation BACKUPS_RL = new ResourceLocation(ModInfo.ID, "backups");
+
+    @SubscribeEvent
+    public static void onAttachCaps(AttachCapabilitiesEvent<Entity> event) {
+        if (event.getObject() instanceof Player player) {
+            if (GSConfigs.DEBUG_MODE.get()) {
+                LOGGER.info("AttachCapabilitiesEvent event triggered for player {}", player.getUUID().toString());
+            }
+            event.addCapability(BACKUPS_RL, new BackupProvider());
+        }
+    }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onPlayerClone(PlayerEvent.Clone event) {
@@ -230,9 +246,8 @@ public class EventsHandler {
         }
 
         var dispatcher = event.getDispatcher();
-        dispatcher.register(GSCommands.COMMANDS_LIST);
-        dispatcher.register(GSCommands.GRAVE_POSITION);
-        dispatcher.register(GSCommands.RESTORE_ITEMS);
+        var node = dispatcher.register(GSCommands.root());
+        dispatcher.register(GSCommands.getAlias().redirect(node));
     }
 
 }

@@ -17,11 +17,6 @@
 
   "grave.cant_be_looted": "Vous ne pouvez pas piller cette tombe !",
 
-  "commands.not_enough_parameters": "Nombre de paramètres insuffisant!",
-  "commands.coordinate_error": "Erreur dans les coordonnées !",
-  "commands.fill_grave.empty": "Il n'y a pas de blocs à cet emplacement!",
-  "commands.fill_grave.wrong_block": "Cet emplacement est occupé par de mauvais blocs!",
-
   "material.title": "Fait de",
   "material.mossy": "Mossy Cobblestone",
   "material.sandstone": "Grès",

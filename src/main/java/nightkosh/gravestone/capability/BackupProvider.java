@@ -1,7 +1,12 @@
 package nightkosh.gravestone.capability;
 
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraftforge.common.capabilities.*;
+import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.common.util.LazyOptional;
+
+import javax.annotation.Nonnull;
 
 /**
  * GraveStone mod
@@ -9,31 +14,32 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-//TODO
-public class BackupProvider {//implements ICapabilitySerializable<NBTBase> {
-//
-//    @CapabilityInject(IBackups.class)
-//    public static final Capability<IBackups> BACKUP_CAP = null;
-//    private IBackups instance = BACKUP_CAP.getDefaultInstance();
-//
-//    @Override
-//    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-//        return capability == BACKUP_CAP;
-//    }
-//
-//    @Override
-//    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-//        return capability == BACKUP_CAP ? BACKUP_CAP.<T>cast(this.instance) : null;
-//
-//    }
-//
-//    @Override
-//    public NBTBase serializeNBT() {
-//        return BACKUP_CAP.getStorage().writeNBT(BACKUP_CAP, this.instance, null);
-//    }
-//
-//    @Override
-//    public void deserializeNBT(NBTBase nbt) {
-//        BACKUP_CAP.getStorage().readNBT(BACKUP_CAP, this.instance, null, nbt);
-//    }
+public class BackupProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
+
+    public static final Capability<IBackups> BACKUP_CAP =
+            CapabilityManager.get(new CapabilityToken<>() {});
+
+    private final Backups instance = new Backups();
+    private final LazyOptional<IBackups> optional = LazyOptional.of(() -> instance);
+
+    @Nonnull
+    @Override
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
+        return cap == BACKUP_CAP ? optional.cast() : LazyOptional.empty();
+    }
+
+    public void invalidate() {
+        optional.invalidate();
+    }
+
+    @Override
+    public CompoundTag serializeNBT() {
+        return instance.serializeNBT();
+    }
+
+    @Override
+    public void deserializeNBT(CompoundTag nbt) {
+        instance.deserializeNBT(nbt);
+    }
+
 }

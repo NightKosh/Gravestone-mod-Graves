@@ -17,11 +17,6 @@
 
   "grave.cant_be_looted": "Вы не можете разграбить эту могилу!",
 
-  "commands.not_enough_parameters": "Недостаточно параметров!",
-  "commands.coordinate_error": "Введены не корректные координаты!",
-  "commands.fill_grave.empty": "По указанным координатам нет никаких блоков!",
-  "commands.fill_grave.wrong_block": "По указанным координатам располагаются не корректные блоки!",
-
   "material.title": "Сделан из",
   "material.mossy": "Замшелого камня",
   "material.sandstone": "Песчаника",

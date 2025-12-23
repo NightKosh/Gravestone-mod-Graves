@@ -17,11 +17,6 @@
 
   "grave.cant_be_looted": "Nemůžeš vykrást tento hrob!",
 
-  "commands.not_enough_parameters": "Není dost parametrů!",
-  "commands.coordinate_error": "Chyba souřadnic!",
-  "commands.fill_grave.empty": "Na souřadnicích není žádný blok!",
-  "commands.fill_grave.wrong_block": "Souřadnice jsou obsazeny špatnými bloky!",
-
   "material.title": "Vyrobený z",
   "material.mossy": "Mossy Cobblestone",
   "material.sandstone": "Pískového kamene",

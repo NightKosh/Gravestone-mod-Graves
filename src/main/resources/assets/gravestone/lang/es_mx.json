@@ -17,11 +17,6 @@
 
   "grave.cant_be_looted": "¡No puedes robar esta tumba!",
 
-  "commands.not_enough_parameters": "¡No hay suficientes parámetros!",
-  "commands.coordinate_error": "¡Coordenadas erróneas!",
-  "commands.fill_grave.empty": "¡No hay ningún bloque en estas coordenadas!",
-  "commands.fill_grave.wrong_block": "¡Estas coordenadas están ocupadas por bloques erróneos!",
-
   "material.title": "Hecho de",
   "material.mossy": "Mossy Cobblestone",
   "material.sandstone": "Arenisca",

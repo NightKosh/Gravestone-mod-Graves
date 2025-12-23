@@ -17,11 +17,6 @@
 
   "grave.cant_be_looted": "You can't loot this grave!",
 
-  "commands.not_enough_parameters": "Not enough parameters!",
-  "commands.coordinate_error": "Coordinate error!",
-  "commands.fill_grave.empty": "There aren't any blocks at this coordinates!",
-  "commands.fill_grave.wrong_block": "This coordinates occupied by wrong blocks!",
-
   "material.title": "Made of",
   "material.mossy": "Mossy Cobblestone",
   "material.sandstone": "Sandstone",

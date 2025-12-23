@@ -6,8 +6,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
-import nightkosh.gravestone.core.commands.backup.CommandGravePosition;
-import nightkosh.gravestone.core.commands.backup.CommandRestoreItems;
 
 /**
  * GraveStone mod
@@ -17,7 +15,7 @@ import nightkosh.gravestone.core.commands.backup.CommandRestoreItems;
  */
 public class CommandsList {
 
-    public static final String NAME = "gs";//TODO gravestone
+    public static final String NAME = "commands_list";
 
     private static int execute(CommandContext<CommandSourceStack> ctx) {
         var src = ctx.getSource();
@@ -33,7 +31,7 @@ public class CommandsList {
     }
 
     public static LiteralArgumentBuilder<CommandSourceStack> getCommand() {
-        return Commands.literal(CommandsList.NAME)
+        return Commands.literal(NAME)
                 .requires(src -> src.hasPermission(0))
                 .executes(CommandsList::execute);
     }

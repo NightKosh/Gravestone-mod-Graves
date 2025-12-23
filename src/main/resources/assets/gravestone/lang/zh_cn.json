@@ -17,11 +17,6 @@
 
   "grave.cant_be_looted": "你无法获得这块墓碑!",
 
-  "commands.not_enough_parameters": "没有足够的参数!",
-  "commands.coordinate_error": "坐标错误!",
-  "commands.fill_grave.empty": "在这个坐标上没有任何方块!",
-  "commands.fill_grave.wrong_block": "这个坐标上有错误的方块!",
-
   "material.title": "构成是",
   "material.mossy": "Mossy Cobblestone",
   "material.sandstone": "沙石",

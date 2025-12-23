@@ -2,9 +2,10 @@ package nightkosh.gravestone.core;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import nightkosh.gravestone.core.commands.CommandsList;
-import nightkosh.gravestone.core.commands.backup.CommandGravePosition;
-import nightkosh.gravestone.core.commands.backup.CommandRestoreItems;
+import nightkosh.gravestone.core.commands.CommandGravePosition;
+import nightkosh.gravestone.core.commands.CommandRestoreItems;
 
 /**
  * GraveStone mod
@@ -14,10 +15,18 @@ import nightkosh.gravestone.core.commands.backup.CommandRestoreItems;
  */
 public class GSCommands {
 
-    public static final LiteralArgumentBuilder<CommandSourceStack> COMMANDS_LIST = CommandsList.getCommand();
+    public static final String NAME = "gravestone";
+    public static final String ALIAS = "gs";
 
-    public static final LiteralArgumentBuilder<CommandSourceStack> GRAVE_POSITION = CommandGravePosition.getCommand();
+    public static LiteralArgumentBuilder<CommandSourceStack> root() {
+        return Commands.literal(NAME)
+                .then(CommandsList.getCommand())
+                .then(CommandGravePosition.getCommand())
+                .then(CommandRestoreItems.getCommand());
+    }
 
-    public static final LiteralArgumentBuilder<CommandSourceStack> RESTORE_ITEMS = CommandRestoreItems.getCommand();
+    public static LiteralArgumentBuilder<CommandSourceStack> getAlias() {
+        return Commands.literal(ALIAS);
+    }
 
 }
