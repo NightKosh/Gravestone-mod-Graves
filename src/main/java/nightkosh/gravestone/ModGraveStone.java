@@ -56,10 +56,5 @@ public class ModGraveStone {
 //        GraveStoneAPI.graveStone = gravestoneHelper;
 //        GraveStoneAPI.graveGenerationAtDeath = apiGraveGeneration;
 //    }
-//
-//    @Mod.EventHandler
-//    public void postInit(FMLPostInitializationEvent event) {
-//        Compatibility.getInstance();
-//    }
 
 }
