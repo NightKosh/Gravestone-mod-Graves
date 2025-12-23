@@ -56,11 +56,12 @@ public class ItemBlockGraveStone extends BlockItem {
             if (nbt.contains("deathMessageJson")) {
                 tooltips.add(Component.Serializer.fromJson(nbt.getString("deathMessageJson")));
             }
-//
-//            if (nbt.getInt("Age") > 0) {
-//                tooltipList.add(ModGraveStone.proxy.getLocalizedString("item.grave.age") + " " + nbt.getInt("Age") + " " + ModGraveStone.proxy.getLocalizedString("item.grave.days"));
-//            }
 
+            if (nbt.getInt("Age") > 0) {
+                tooltips.add(Component.translatable("item.grave.age")
+                        .append(" " + nbt.getInt("Age" + " "))
+                        .append(Component.translatable("item.grave.days")));
+            }
 
 //            if (nbt.contains("Sword")) {
 //                var sword = ItemStack.of(nbt.getCompoundTag("Sword"));

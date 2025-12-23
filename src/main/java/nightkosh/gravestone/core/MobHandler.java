@@ -1,18 +1,19 @@
 package nightkosh.gravestone.core;
 
-import com.google.common.io.Files;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtIo;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import nightkosh.gravestone.config.GSConfigs;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import javax.annotation.Nullable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
+import java.util.UUID;
 
 import static nightkosh.gravestone.ModGraveStone.LOGGER;
 
@@ -23,136 +24,132 @@ import static nightkosh.gravestone.ModGraveStone.LOGGER;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class MobHandler {
-    public static final String MOBS_SPAWN_TIME_FILE_NAME = "mobsSpawnTime.gs";
-    public static final String MOBS_SPAWN_TIME_BACKUP_FILE_NAME = "mobsSpawnTimeBackup.gs";
 
-    private static HashMap<String, Long> mobsSpawnTime = new HashMap<>();
+    private static final String MOBS_SPAWN_TIME_FILE_NAME = "MOBS_SPAWN_TIME.mst";
+    private static final String MOBS_SPAWN_TIME_BACKUP_FILE_NAME = "MOBS_SPAWN_TIME_Backup.mst";
 
-    public static void clearMobsSpawnTime(Entity entity) {
+    private static Path file;
+    private static Path backup;
 
-        //TODO
-//        mobsSpawnTime.remove(entity.getUniqueID().toString());
-//        saveMobsSpawnTime(entity.getEntityWorld());
-    }
+    private static final Map<UUID, Long> MOBS_SPAWN_TIME = new HashMap<>();
 
-    public static long getAndRemoveSpawnTime(Entity entity) {
-        return 0;//TODO
-//        if (mobsSpawnTime.containsKey(entity.getUniqueID().toString())) {
-//            long time = mobsSpawnTime.get(entity.getUniqueID().toString());
-//            clearMobsSpawnTime(entity);
-//            return time;
-//        } else {
-//            return entity.getEntityWorld().getWorldTime();
-//        }
-    }
-
-    public static long getMobSpawnTime(Entity entity) {
-        return 0;//TODO
-//        if (!mobsSpawnTime.containsKey(entity.getUniqueID().toString())) {
-//            mobsSpawnTime.put(entity.getUniqueID().toString(), entity.getEntityWorld().getWorldTime());
-//            saveMobsSpawnTime(entity.getEntityWorld());
-//        }
-//        return mobsSpawnTime.get(entity.getUniqueID().toString());
-    }
-
-    public static void setMobSpawnTime(Entity entity) {
-
-        //TODO
-//        if (!mobsSpawnTime.containsKey(entity.getUniqueID().toString())) {
-//            mobsSpawnTime.put(entity.getUniqueID().toString(), entity.getEntityWorld().getWorldTime());
-//            saveMobsSpawnTime(entity.getEntityWorld());
-//        }
-    }
-
-    public static void loadMobsSpawnTime(Level level) {
-        try {
-            //TODO
-//            File file = new File(level.getSaveHandler().getWorldDirectory(), MOBS_SPAWN_TIME_FILE_NAME);
-//            File backup = new File(level.getSaveHandler().getWorldDirectory(), MOBS_SPAWN_TIME_BACKUP_FILE_NAME);
-//
-//            CompoundTag data = null;
-//            boolean save = false;
-//            if (file != null && file.exists()) {
-//                data = getDataFromFile(file);
-//            }
-//            if (file == null || !file.exists() || data == null || data.hasNoTags()) {
-//                LOGGER.error("Data not found. Trying to load backup data.");
-//                if (backup != null && backup.exists()) {
-//                    data = getDataFromFile(backup);
-//                    save = true;
-//                }
-//            }
-//            if (data != null) {
-//                Set keySet = data.getKeySet();
-//                Iterator it = keySet.iterator();
-//                while (it.hasNext()) {
-//                    String tagName = (String) it.next();
-//                    mobsSpawnTime.put(tagName, data.getLong(tagName));
-//                }
-//                if (save) {
-//                    saveMobsSpawnTime(level);
-//                }
-//            }
-        } catch (Exception e) {
-            LOGGER.error("Error loading mobs spawn time", e);
+    public static void removeSpawnTime(LivingEntity entity) {
+        var uuid = entity.getUUID();
+        if (MOBS_SPAWN_TIME.containsKey(uuid)) {
+            MOBS_SPAWN_TIME.remove(uuid);
+            saveMobsSpawnTime(entity.level);
+            if (GSConfigs.DEBUG_MODE.get()) {
+                LOGGER.info("Remove spawn time for entity {} with uuid {}",
+                        entity.getScoreboardName(), uuid);
+            }
+        } else if (GSConfigs.DEBUG_MODE.get()) {
+            LOGGER.info("Cant remove spawn time for entity {} with uuid {} - no records",
+                    entity.getScoreboardName(), uuid);
         }
     }
 
-    public static void saveMobsSpawnTime(Level level) {
-        if (level != null && !level.isClientSide() && mobsSpawnTime != null) {
-            try {
+    public static long getAndRemoveSpawnTime(LivingEntity entity) {
+        var uuid = entity.getUUID();
+        if (MOBS_SPAWN_TIME.containsKey(uuid)) {
+            long time = MOBS_SPAWN_TIME.get(uuid);
+            MOBS_SPAWN_TIME.remove(uuid);
+            saveMobsSpawnTime(entity.level);
+            if (GSConfigs.DEBUG_MODE.get()) {
+                LOGGER.info("Found spawn time for entity {} with uuid {} - {}. Record will be removed.",
+                        entity.getScoreboardName(), uuid, time);
+            }
+            return time;
+        } else {
+            var time = entity.level.getGameTime();
+            if (GSConfigs.DEBUG_MODE.get()) {
+                LOGGER.info("Not found spawn time for entity {} with uuid {}, return current time {}",
+                        entity.getScoreboardName(), uuid, time);
+            }
+            return time;
+        }
+    }
 
-                //TODO
-//                File file = new File(level.getSaveHandler().getWorldDirectory(), MOBS_SPAWN_TIME_FILE_NAME);
-//                File backup = new File(level.getSaveHandler().getWorldDirectory(), MOBS_SPAWN_TIME_BACKUP_FILE_NAME);
-//
-//                if (file != null && file.exists()) {
-//                    try {
-//                        Files.copy(file, backup);
-//                    } catch (Exception e) {
-//                        LOGGER.error("Could not backup old spawn time file");
-//                    }
-//                }
-//                try {
-//                    if (file != null) {
-//                        var data = new CompoundTag();
-//                        for (Map.Entry<String, Long> entry : mobsSpawnTime.entrySet()) {
-//                            if (entry != null) {
-//                                data.setLong(entry.getKey(), entry.getValue());
-//                            }
-//                        }
-//                        FileOutputStream fileoutputstream = new FileOutputStream(file);
-//                        CompressedStreamTools.writeCompressed(data, fileoutputstream);
-//                        fileoutputstream.close();
-//                    }
-//                } catch (Exception e) {
-//                    LOGGER.error("Could not save spawn time file");
-//                    e.printStackTrace();
-//                    if (file.exists()) {
-//                        try {
-//                            file.delete();
-//                        } catch (Exception e2) {
-//                        }
-//                    }
-//                }
+    public static void setMobSpawnTime(LivingEntity entity) {
+        var uuid = entity.getUUID();
+        if (GSConfigs.DEBUG_MODE.get()) {
+            LOGGER.info("Set current time {} as spawn time for entity {} with uuid {}",
+                    entity.level.getGameTime(), entity.getScoreboardName(), uuid);
+        }
+
+        MOBS_SPAWN_TIME.putIfAbsent(uuid, entity.level.getGameTime());
+        saveMobsSpawnTime(entity.level);
+    }
+
+    public static void loadMobsSpawnTime(Level level, Path worldDir) {
+        if (level != null && !level.isClientSide()) {
+            try {
+                file = worldDir.resolve(MOBS_SPAWN_TIME_FILE_NAME);
+                backup = worldDir.resolve(MOBS_SPAWN_TIME_BACKUP_FILE_NAME);
+
+                if (Files.notExists(file)) {
+                    Files.createFile(file);
+                }
+
+                CompoundTag data = null;
+                boolean save = false;
+
+                if (Files.exists(file)) {
+                    data = readDataFromFile(file);
+                }
+                if (data == null || data.isEmpty()) {
+                    LOGGER.error("Data not found. Trying to load backup data.");
+                    if (Files.exists(backup)) {
+                        data = readDataFromFile(backup);
+                    }
+                }
+                if (data != null && !data.isEmpty()) {
+                    for (String key : data.getAllKeys()) {
+                        MOBS_SPAWN_TIME.put(UUID.fromString(key), data.getLong(key));
+                    }
+                }
             } catch (Exception e) {
-                LOGGER.error("Error saving mobs spawn time");
-                e.printStackTrace();
+                LOGGER.error("Error loading mobs spawn time", e);
             }
         }
     }
 
-    private static CompoundTag getDataFromFile(File file) {
-        CompoundTag data = null;
-        try {
-            var fileinputstream = new FileInputStream(file);
-            //TODO
-//            data = CompressedStreamTools.readCompressed(fileinputstream);
-            fileinputstream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static void saveMobsSpawnTime(Level level) {
+        if (level != null && !level.isClientSide() && level instanceof ServerLevel serverLevel) {
+            try {
+                if (Files.exists(file)) {
+                    try {
+                        Files.copy(file, backup, StandardCopyOption.REPLACE_EXISTING);
+                    } catch (Exception e) {
+                        LOGGER.error("Could not backup old spawn time file", e);
+                    }
+                }
+
+                var data = new CompoundTag();
+                for (var entry : MOBS_SPAWN_TIME.entrySet()) {
+                    if (entry != null && entry.getKey() != null) {
+                        data.putLong(entry.getKey().toString(), entry.getValue());
+                    }
+                }
+
+                try (var out = Files.newOutputStream(file)) {
+                    NbtIo.writeCompressed(data, out);
+                } catch (Exception e) {
+                    LOGGER.error("Could not save spawn time file: {}", file, e);
+                }
+            } catch (Exception e) {
+                LOGGER.error("Error saving mobs spawn time", e);
+            }
         }
-        return data;
+    }
+
+    @Nullable
+    private static CompoundTag readDataFromFile(Path file) {
+        try (var in = Files.newInputStream(file)) {
+            return NbtIo.readCompressed(in);
+        } catch (Exception e) {
+            LOGGER.error("Could not read spawn time file: {}", file, e);
+            return null;
+        }
     }
 
 }

@@ -276,16 +276,12 @@ public class BlockGraveStone extends BaseEntityBlock {
                         player.displayClientMessage(Component.Serializer.fromJson(deathMessageJson), false);
                     }
 
-//                if (deathText.length() != 0) {
-//                    if (te.getAge() > 0) {
-//                        String ageStr = ModGraveStone.proxy.getLocalizedString("item.grave.age") +
-//                                " " +
-//                                te.getAge() +
-//                                " " +
-//                                ModGraveStone.proxy.getLocalizedString("item.grave.days");
-//                        player.displayClientMessage(new TextComponentTranslation(ageStr), false);
-//                    }
-//                }
+                    if (grave.getAge() > 0) {
+                        player.displayClientMessage(
+                                Component.translatable("item.grave.age")
+                                        .append(" " + grave.getAge() + " ")
+                                        .append(Component.translatable("item.grave.days")), false);
+                    }
                 }
             }
         }

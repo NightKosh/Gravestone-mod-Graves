@@ -1,7 +1,8 @@
 package nightkosh.gravestone.core.event;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Wolf;
@@ -9,18 +10,21 @@ import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.LevelResource;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import nightkosh.gravestone.api.ModInfo;
-import nightkosh.gravestone.api.death_handler.*;
 import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.MobHandler;
 import nightkosh.gravestone.core.logger.GravesLogger;
-import nightkosh.gravestone.helper.BackupsHelper;
 import nightkosh.gravestone.helper.GraveGenerationHelper;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
 
@@ -141,47 +145,77 @@ public class EventsHandler {
                             return;
                         }
                     }
-
                     GraveGenerationHelper.createPlayerGrave(player, event.getDrops(), event.getSource(), MobHandler.getAndRemoveSpawnTime(player));
                 }
             }
         }
     }
 
-    // TODO
-//
-//    @SubscribeEvent
-//    public static void entityJoinWorldEvent(EntityJoinWorldEvent event) {
-//        if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-//            Entity entity = event.getEntity();
-//            if (entity instanceof Villager ||
-//                    entity instanceof Wolf ||
-//                    entity instanceof Cat ||
-//                    entity instanceof Horse) {
-//                MobHandler.setMobSpawnTime(event.getEntity());
-//            }
-//        }
-//    }
-//
-//    // TODO remove mobs info at despawn
-//
-//    @SubscribeEvent
-//    public static void worldLoading(WorldEvent.Load event) {
-//        if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-//            MobHandler.loadMobsSpawnTime(event.getWorld());
-//            GravesLogger.setWorldDirectory(event.getWorld().getSaveHandler().getWorldDirectory());
-//        }
-//    }
+    @SubscribeEvent
+    public static void entityJoinWorldEvent(EntityJoinLevelEvent event) {
+        if (!event.getEntity().level.isClientSide() && event.getEntity() instanceof LivingEntity entity) {
+            if (entity instanceof Villager ||
+                    entity instanceof Wolf ||
+                    entity instanceof Cat ||
+                    entity instanceof Horse) {
+                if (GSConfigs.DEBUG_MODE.get()) {
+                    LOGGER.info("EntityJoinLevelEvent event triggered for villager, wolf, cat or horse ({})",
+                            entity.getScoreboardName());
+                }
+                MobHandler.setMobSpawnTime(entity);
+            }
+        }
+    }
 
-    //TODO
-//    @SubscribeEvent
-//    public static void onChunkLoad(ChunkEvent.Load event) {
-//        if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-//            Chunk chunk = event.getChunk();
-//            chunk.getTileEntityMap().entrySet().stream().filter(entry -> entry.getValue() instanceof TileEntityGrave).forEach(entry -> {
-//                GraveStoneHelper.replaceOldGraveByNew(event.getWorld(), entry.getKey());
-//            });
-//        }
-//
-//    }
+    @SubscribeEvent
+    public static void entityLeaveLevelEvent(EntityLeaveLevelEvent event) {
+        if (!event.getEntity().level.isClientSide() && event.getEntity() instanceof LivingEntity entity) {
+            if (!entity.isAlive() &&
+                    entity instanceof Villager ||
+                    entity instanceof Wolf ||
+                    entity instanceof Cat ||
+                    entity instanceof Horse) {
+                if (GSConfigs.DEBUG_MODE.get()) {
+                    LOGGER.info("EntityLeaveLevelEvent event triggered for villager, wolf, cat or horse ({})",
+                            entity.getScoreboardName());
+                }
+                MobHandler.removeSpawnTime(entity);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLevelLoad(LevelEvent.Load event) {
+        if (event.getLevel() instanceof ServerLevel serverLevel &&
+                serverLevel.dimension() == Level.OVERWORLD &&
+                !serverLevel.isClientSide()) {
+            if (GSConfigs.DEBUG_MODE.get()) {
+                LOGGER.info("LevelEvent.Load event triggered");
+            }
+            var worldPath = serverLevel.getServer().getWorldPath(LevelResource.ROOT);
+            MobHandler.loadMobsSpawnTime(serverLevel, worldPath);
+            GravesLogger.setWorldDirectory(worldPath);
+        }
+    }
+
+    @SubscribeEvent
+    public static void playerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event) {
+        if (!event.getEntity().level.isClientSide()) {
+            if (GSConfigs.DEBUG_MODE.get()) {
+                LOGGER.info("PlayerEvent.PlayerLoggedInEvent triggered for {}", event.getEntity().getScoreboardName());
+            }
+            MobHandler.setMobSpawnTime(event.getEntity());
+        }
+    }
+
+    @SubscribeEvent
+    public static void playerRespawnInEvent(PlayerEvent.PlayerRespawnEvent event) {
+        if (!event.getEntity().level.isClientSide()) {
+            if (GSConfigs.DEBUG_MODE.get()) {
+                LOGGER.info("PlayerEvent.PlayerRespawnEvent triggered for {}", event.getEntity().getScoreboardName());
+            }
+            MobHandler.setMobSpawnTime(event.getEntity());
+        }
+    }
+
 }
