@@ -29,42 +29,27 @@ public class ItemBlockGraveStone extends BlockItem {
         this.material = block.material;
     }
 
-    //TODO
-//    @Override
-//    public void onCreated(ItemStack stack, Level level, Player player) {
-//        if (!stack.hasTagCompound()) {
-//            stack.setTagCompound(new CompoundTag());
-//        }
-//    }
-
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltips, TooltipFlag flag) {
-
-        var material = this.material;
-        //TODO
-//            if (material != EnumGraveMaterial.OTHER) {
         tooltips.add(Component.translatable("material.title")
                 .append(" ")
-                .append(Component.translatable("material." + material.name().toLowerCase())));
-//            }
+                .append(Component.translatable("material." + this.material.name().toLowerCase())));
 
         if (!stack.hasTag()) {
             stack.setTag(new CompoundTag());
         } else {
-            var nbt = stack.getTag();//TODO rename to tag
-
-            if (nbt.contains("deathMessageJson")) {
-                tooltips.add(Component.Serializer.fromJson(nbt.getString("deathMessageJson")));
+            var tag = stack.getTag();
+            if (tag.contains("deathMessageJson")) {
+                tooltips.add(Component.Serializer.fromJson(tag.getString("deathMessageJson")));
             }
-
-            if (nbt.getInt("Age") > 0) {
+            if (tag.getInt("Age") > 0) {
                 tooltips.add(Component.translatable("item.grave.age")
-                        .append(" " + nbt.getInt("Age" + " "))
+                        .append(" " + tag.getInt("Age" + " "))
                         .append(Component.translatable("item.grave.days")));
             }
 
-//            if (nbt.contains("Sword")) {
-//                var sword = ItemStack.of(nbt.getCompoundTag("Sword"));
+//            if (tag.contains("Sword")) {
+//                var sword = ItemStack.of(tag.getCompoundTag("Sword"));
 //
 //                if (StringUtils.isNotBlank(sword.getDisplayName())) {
 //                    tooltipList.add(ModGraveStone.proxy.getLocalizedString("item.grave.sword_name") + " - " + sword.getDisplayName());
@@ -96,11 +81,5 @@ public class ItemBlockGraveStone extends BlockItem {
             super.appendHoverText(stack, level, tooltips, flag);
         }
     }
-//
-//    @Override
-//    @SideOnly(Side.CLIENT)
-//    public boolean hasEffect(ItemStack stack) {
-//        return stack.hasTagCompound() && stack.getTag().contains("Enchanted");
-//    }
 
 }
