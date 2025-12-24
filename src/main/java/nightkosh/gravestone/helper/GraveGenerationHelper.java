@@ -355,8 +355,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                     newPos = position.gravePosition(level, entity, pos, damageSource);
                     if (newPos != null) {
                         hasCustomLocation = true;
-                        //TODO
-//                        direction = position.graveFacing(level, entity, pos, damageSource);
+                        direction = position.graveFacing(level, entity, pos, damageSource);
                         newLevel = position.getLevel(level, entity, pos, damageSource);
                         break;
                     }

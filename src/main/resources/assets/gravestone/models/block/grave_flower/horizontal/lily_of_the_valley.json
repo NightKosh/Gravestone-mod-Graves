@@ -1,0 +1,6 @@
+{
+  "parent": "gravestone:block/grave_flower/horizontal/base",
+  "textures": {
+    "flower": "minecraft:block/lily_of_the_valley"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "gravestone:block/grave_flower/vertical/base",
+  "textures": {
+    "flower": "minecraft:block/oxeye_daisy"
+  }
+}

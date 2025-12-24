@@ -29,7 +29,6 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
     public static GraveSpawnerHelper graveSpawnerHelper = new GraveSpawnerHelper();
 
     protected ItemStack sword = null;
-    protected ItemStack flower = null;
     protected String playerId = "";
     protected boolean isPurified = false;
     protected int spawnerHelperId;
@@ -91,8 +90,6 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
         deathMessageJson = tag.getString("deathMessageJson");
         // sword
         readSwordInfo(tag);
-        // flower
-        readFlowerInfo(tag);
         // owner
         playerId = tag.getString("PlayerId");
 
@@ -117,8 +114,6 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
         }
         // sword
         writeSwordInfo(tag);
-        // flower
-        writeFlowerInfo(tag);
         // owner
         tag.putString("PlayerId", playerId);
 
@@ -145,21 +140,6 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
         }
     }
 
-    private void readFlowerInfo(CompoundTag tag) {
-        if (tag.contains("Flower")) {
-            //TODO
-//            flower = new ItemStack(tag.get("Flower"));
-        }
-    }
-
-    private void writeFlowerInfo(CompoundTag nbtTag) {
-        if (flower != null) {
-            var flowerTag = new CompoundTag();
-            flower.save(flowerTag);
-            nbtTag.put("Flower", flowerTag);
-        }
-    }
-
     public ItemStack getSword() {
         return this.sword;
     }
@@ -178,35 +158,10 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
         return this.getGraveType() == EnumGraveType.SWORD;
     }
 
-
-    public ItemStack getFlower() {
-        return this.flower;
-    }
-
-    public void setFlower(ItemStack flower) {
-        this.flower = flower;
-    }
-
-    public void dropFlower() {
-        if (this.flower != null) {
-            GraveInventory.dropItem(this.flower, this.getLevel(), this.getBlockPos());
-        }
-    }
-
-    public boolean hasFlower() {
-        return flower != null;
-    }
-
     public EnumGraveType getGraveType() {
         return ((BlockGraveStone) this.getBlockState().getBlock()).graveType;
     }
 
-    //    @Override
-    //    public void setGraveContent(Random random, boolean isPetGrave, GraveInventory.GraveContentType contentType, GraveInventory.GraveCorpseContentType corpseType) {
-
-    /// /        setRandomAge();//TODO
-    /// /        setRandomFlower(random);//TODO
-    //    }
     public String getOwner() {
         return this.playerId;
     }

@@ -11,6 +11,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -53,6 +55,8 @@ import static nightkosh.gravestone.ModGraveStone.LOGGER;
 public class BlockGraveStone extends BaseEntityBlock {
 
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<FlowerType> FLOWER = EnumProperty.create("flower", FlowerType.class);
+
     public final EnumGraveMaterial material;
     public final EnumGraveType graveType;
 
@@ -68,12 +72,13 @@ public class BlockGraveStone extends BaseEntityBlock {
 //        this.setTickRandomly(GSConfigs.REMOVE_EMPTY_GRAVES.get());
 
         this.registerDefaultState(this.stateDefinition.any()
-                .setValue(FACING, Direction.NORTH));
+                .setValue(FACING, Direction.NORTH)
+                .setValue(FLOWER, FlowerType.NONE));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateBuilder) {
-        stateBuilder.add(FACING);
+        stateBuilder.add(FACING, FLOWER);
     }
 
     @Override
@@ -215,10 +220,10 @@ public class BlockGraveStone extends BaseEntityBlock {
                 if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave && grave.canBeLooted(player)) {
                     GraveStoneHelper.spawnMob(level, pos);
 
-                    if (grave.hasFlower()) {
-                        grave.dropFlower();
+                    var flower = state.getValue(FLOWER);
+                    if (flower != FlowerType.NONE) {
+                        GraveInventory.dropItem(new ItemStack(Items.POPPY), level, pos);
                     }
-
                     //TODO
 //                    GraveStoneHelper.dropBlock(level, pos, state);
                 }
@@ -235,38 +240,37 @@ public class BlockGraveStone extends BaseEntityBlock {
                 var item = player.getMainHandItem();
                 if (item != null) {
                     if (item.canPerformAction(ToolActions.SHOVEL_DIG)) {
-                        if (!level.isClientSide()) {
-                            if (grave.canBeLooted(player)) {
-                                if (player instanceof ServerPlayer sp) {
-                                    NetworkHooks.openScreen(sp, grave, pos);
-                                }
-                                GRAVE_LOGGER.info("{} open grave inventory at {}", player.getScoreboardName(), pos.toShortString());
-                                GraveStoneHelper.replaceGround(level, pos.below());
-                                return InteractionResult.SUCCESS;
-                            } else {
-                                player.displayClientMessage(
-                                        Component.translatable("grave.cant_be_looted")
-                                                .withStyle(ChatFormatting.RED), false);
-                                return InteractionResult.FAIL;
+                        if (grave.canBeLooted(player)) {
+                            if (player instanceof ServerPlayer sp) {
+                                NetworkHooks.openScreen(sp, grave, pos);
                             }
+                            GRAVE_LOGGER.info("{} open grave inventory at {}", player.getScoreboardName(), pos.toShortString());
+                            GraveStoneHelper.replaceGround(level, pos.below());
+                            return InteractionResult.SUCCESS;
+                        } else {
+                            player.displayClientMessage(
+                                    Component.translatable("grave.cant_be_looted")
+                                            .withStyle(ChatFormatting.RED), false);
+                            return InteractionResult.FAIL;
                         }
                     } else {
-//                    if (grave.hasFlower()) {
-//                        if (item.getItem() instanceof ShearsItem) {
-//                            if (!level.isClientSide()) {
-//                                te.dropFlower();
-//                            }
-//                            te.setFlower(null);
-//                            return InteractionResult.SUCCESS;
-//                        }
-//                    } else {
-//                        if (GraveStoneHelper.FLOWERS.contains(Block.getBlockFromItem(item.getItem())) &&
-//                                GraveStoneHelper.canFlowerBePlaced(level, pos, item, grave)) {
-//                            grave.setFlower(new ItemStack(item.getItem(), 1, item.getItemDamage()));
-//                            player.getInventory().getCurrentItem().setCount(player.getInventory().getCurrentItem().getCount() - 1);
-//                            return InteractionResult.SUCCESS;
-//                        }
-//                    }
+                        var held = player.getItemInHand(hand);
+                        var flower = FlowerType.fromItem(held);
+                        var flowerType =  state.getValue(FLOWER);
+                        if (flowerType != FlowerType.NONE) {
+                            if (item.getItem() instanceof ShearsItem) {
+                                GraveInventory.dropItem(new ItemStack(flowerType.getFlower()), level, pos);
+                                level.setBlock(pos, state.setValue(FLOWER, FlowerType.NONE), 2);
+                                return InteractionResult.SUCCESS;
+                            }
+                        } else if (flower != FlowerType.NONE &&
+                                GraveStoneHelper.canFlowerBePlaced(level, pos, item, grave)) {
+                            level.setBlock(pos, state.setValue(FLOWER, flower), 2);//.sendBlockUpdated()
+                            if (!player.getAbilities().instabuild) {
+                                held.shrink(1);
+                            }
+                            return InteractionResult.SUCCESS;
+                        }
                     }
                 }
             } else {
@@ -303,19 +307,20 @@ public class BlockGraveStone extends BaseEntityBlock {
      * update, as appropriate
      */
     @Override
-    public void onRemove(BlockState state1, Level level, BlockPos pos, BlockState state2, boolean xz) {
-        var blockEntity = level.getBlockEntity(pos);
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean xz) {
+        if (state.getBlock() != newState.getBlock()) {
+            var blockEntity = level.getBlockEntity(pos);
 
-        if (blockEntity != null && blockEntity instanceof GraveStoneBlockEntity graveEntity) {
-            if (GSConfigs.DEBUG_MODE.get()) {
-                LOGGER.info("Grave destroyed. Going to drop all stored items");
+            if (blockEntity != null && blockEntity instanceof GraveStoneBlockEntity graveEntity) {
+                if (GSConfigs.DEBUG_MODE.get()) {
+                    LOGGER.info("Grave destroyed. Going to drop all stored items");
+                }
+                graveEntity.getInventory().dropAllItems();
             }
-            graveEntity.getInventory().dropAllItems();
+
+            GraveInventory.dropItem(GraveStoneHelper.getBlockItemStack(level, pos, state), level, pos);
         }
-
-        GraveInventory.dropItem(GraveStoneHelper.getBlockItemStack(level, pos, state1), level, pos);
-
-        super.onRemove(state1, level, pos, state2, xz);
+        super.onRemove(state, level, pos, newState, xz);
     }
 
     @Override
@@ -373,7 +378,7 @@ public class BlockGraveStone extends BaseEntityBlock {
 //    }
 
 
-    //TODO
+//TODO
 //    /**
 //     * A randomly called display update to be able to add particles or other
 //     * items for display

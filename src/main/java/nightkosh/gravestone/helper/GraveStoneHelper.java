@@ -19,8 +19,6 @@ import nightkosh.gravestone.core.GSBlocks;
 import nightkosh.gravestone.gui.container.GraveInventory;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
-
 /**
  * GraveStone mod
  *
@@ -28,8 +26,6 @@ import java.util.List;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class GraveStoneHelper {
-
-    public static final List<Block> FLOWERS = List.of(Blocks.DANDELION, Blocks.RED_TULIP);
 
     /**
      * Check ground type and replace it on dirt if it grass or mycelium
@@ -87,19 +83,12 @@ public class GraveStoneHelper {
     }
 
     public static boolean canFlowerBePlaced(Level level, BlockPos pos, ItemStack itemStack, GraveStoneBlockEntity entity) {
-        if (canFlowerBePlacedOnGrave(entity)) {
-            if (Block.byItem(itemStack.getItem()) instanceof FlowerBlock flower) {
-                var posBelow = pos.below();
-                var soil = level.getBlockState(posBelow);
-                return soil.canSustainPlant(level, posBelow, Direction.UP, flower);
-            }
+        if (Block.byItem(itemStack.getItem()) instanceof FlowerBlock flower) {
+            var posBelow = pos.below();
+            var soil = level.getBlockState(posBelow);
+            return soil.canSustainPlant(level, posBelow, Direction.UP, flower);
         }
         return false;
-    }
-
-    public static boolean canFlowerBePlacedOnGrave(GraveStoneBlockEntity entity) {
-        return entity.getGraveType() == EnumGraveType.GRAVE_STONE ||
-                entity.getGraveType() == EnumGraveType.CROSS;
     }
 
     public static class RestrictedArea {
