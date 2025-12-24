@@ -1,22 +1,35 @@
-*.class
-*.db
-*.iml
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
 *.ipr
 *.iws
+*.iml
+.idea
+
+# vscode
+.vscode
+
+# gradle
+build
+.gradle
 gradlew
 gradlew.bat
-.idea
-.gradle
-eclipse
-idea
-gradle
-build
-#api
-src/main/java/mariculture
-src/main/java/micdoodle8
-src/main/java/tconstruct
+gradle/
 
-# Package Files #
-*.jar
-*.war
-*.ear
+# other
+eclipse
+run
+
+# Files from Forge MDK
+changelog.txt
+CREDITS.txt
+LICENSE.txt
+README.txt
+forge*changelog.txt

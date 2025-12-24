@@ -1,0 +1,33 @@
+{
+  "itemGroup.gravestone": "Надгробки",
+
+  "block.gravestone.grave_stone": "Надгробний камінь",
+  "block.gravestone.cross": "Могильний хрест",
+  "block.gravestone.obelisk": "Обеліск",
+  "block.gravestone.celtic_cross": "Кельтський хрест",
+  "block.gravestone.grave_plate": "Надгробна плита",
+  "block.gravestone.pet_grave_stone": "Pet Gravestone",
+  "block.gravestone.villager_grave_stone": "Villager Gravestone",
+  "block.gravestone.sword": "Меч полеглого воїна",
+
+  "item.grave.age": "Прожив",
+  "item.grave.days": "днів",
+  "item.grave.sword_name": "Назва меча",
+  "item.grave.sword_damage": "Пошкодження меча",
+
+  "grave.cant_be_looted": "Ви не можете розграбувати цю могилу!",
+
+  "material.title": "Зроблений з",
+  "material.mossy": "Mossy Cobblestone",
+  "material.sandstone": "Пісковика",
+  "material.stone": "Каменя",
+  "material.diorite": "Диориту",
+  "material.andesite": "Андезиту",
+  "material.granite": "Граніту",
+  "material.gold": "Золота",
+  "material.diamond": "Алмазів",
+  "material.obsidian": "Обсидіану",
+  "material.quartz": "Кварцу",
+  "material.prizmarine": "Призмарину",
+  "material.ice": "Льоду"
+}

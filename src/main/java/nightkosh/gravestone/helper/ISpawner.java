@@ -8,9 +8,8 @@ package nightkosh.gravestone.helper;
  */
 public interface ISpawner {
 
-    public default void update() {
-    }
+    default void update() {}
 
-    public default void setMinDelay() {
-    }
+    default void setMinDelay() {}
+
 }

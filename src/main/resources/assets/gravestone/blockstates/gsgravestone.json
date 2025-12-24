@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=east": { "model": "gravestone:gsgravestone" },
-        "facing=west": { "model": "gravestone:gsgravestone" },
-        "facing=south": { "model": "gravestone:gsgravestone" },
-        "facing=north": { "model": "gravestone:gsgravestone" }
-    }
-}

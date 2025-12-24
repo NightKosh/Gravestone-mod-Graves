@@ -1,0 +1,33 @@
+{
+  "itemGroup.gravestone": "Надгробия",
+
+  "block.gravestone.grave_stone": "Надгробный камень",
+  "block.gravestone.cross": "Могильный крест",
+  "block.gravestone.obelisk": "Обелиск",
+  "block.gravestone.celtic_cross": "Кельтский крест",
+  "block.gravestone.grave_plate": "Надгробная плита",
+  "block.gravestone.pet_grave_stone": "Надгробный камень питомца",
+  "block.gravestone.villager_grave_stone": "Надгробный камень жителя",
+  "block.gravestone.sword": "Меч павшего воина",
+
+  "item.grave.age": "Прожил",
+  "item.grave.days": "дней",
+  "item.grave.sword_name": "Название меча",
+  "item.grave.sword_damage": "Повреждение меча",
+
+  "grave.cant_be_looted": "Вы не можете разграбить эту могилу!",
+
+  "material.title": "Сделан из",
+  "material.mossy": "Замшелого камня",
+  "material.sandstone": "Песчаника",
+  "material.stone": "Камня",
+  "material.diorite": "Диорита",
+  "material.andesite": "Андезита",
+  "material.granite": "Гранита",
+  "material.gold": "Золота",
+  "material.diamond": "Алмазов",
+  "material.obsidian": "Обсидиана",
+  "material.quartz": "Кварца",
+  "material.prizmarine": "Призмарина",
+  "material.ice": "Льда"
+}

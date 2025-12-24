@@ -1,17 +1,18 @@
 package nightkosh.gravestone.helper;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import nightkosh.gravestone.capability.Backup;
 import nightkosh.gravestone.capability.BackupProvider;
-import nightkosh.gravestone.capability.IBackups;
-import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.core.logger.GSLogger;
+import nightkosh.gravestone.config.GSConfigs;
 
+import java.util.ArrayDeque;
 import java.util.List;
+
+import static nightkosh.gravestone.ModGraveStone.LOGGER;
 
 /**
  * GraveStone mod
@@ -21,25 +22,40 @@ import java.util.List;
  */
 public class BackupsHelper {
 
-    public static void clonePlayer(EntityPlayer playerOld, EntityPlayer playerNew) {
-        try {
-            IBackups backupsOld = playerOld.getCapability(BackupProvider.BACKUP_CAP, null);
-            IBackups backupsNew = playerNew.getCapability(BackupProvider.BACKUP_CAP, null);
+    public static void clonePlayer(Player playerOld, Player playerNew) {
+        playerOld.reviveCaps();
 
-            backupsNew.setBackups(backupsOld.getBackups());
-        } catch (Exception e) {
-            GSLogger.logError("Can't restore backups at player death!");
+        playerOld.getCapability(BackupProvider.BACKUP_CAP).ifPresent(oldCap -> {
+            playerNew.getCapability(BackupProvider.BACKUP_CAP).ifPresent(newCap -> {
+                try {
+                    if (GSConfigs.DEBUG_MODE.get()) {
+                        LOGGER.info("Creating player {} backup ", playerOld.getScoreboardName());
+                    }
+                    newCap.setBackups(new ArrayDeque<>(oldCap.getBackups()));
+                } catch (Exception e) {
+                    LOGGER.error("Can't restore backups at player death!", e);
+                }
+            });
+        });
+
+        playerOld.invalidateCaps();
+    }
+
+    public static void addBackup(Entity entity, Level level, BlockPos pos, List<ItemStack> items) {
+        if (GSConfigs.CREATE_BACKUPS.get() && !level.isClientSide && entity instanceof Player player) {
+            player.getCapability(BackupProvider.BACKUP_CAP, null)
+                    .ifPresent(backups -> {
+                        try {
+                            if (GSConfigs.DEBUG_MODE.get()) {
+                                LOGGER.info("Add player {} backup ", player.getScoreboardName());
+                            }
+                            var dim = level.dimension();
+                            backups.addBackup(new Backup(dim, pos, items));
+                        } catch (Exception e) {
+                            LOGGER.error("Can't create backup!", e);
+                        }
+                    });
         }
     }
 
-    public static void addBackup(Entity entity, World world, BlockPos pos, List<ItemStack> items) {
-        if (Config.createBackups && entity instanceof EntityPlayer) {
-            try {
-                entity.getCapability(BackupProvider.BACKUP_CAP, null)
-                        .addBackup(new Backup(world.provider.getDimension(), pos, items));
-            } catch (Exception e) {
-                GSLogger.logError("Can't create backup!");
-            }
-        }
-    }
 }

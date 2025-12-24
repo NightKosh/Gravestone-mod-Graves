@@ -1,0 +1,33 @@
+{
+  "itemGroup.gravestone": "Gravestone(Náhrobek)",
+
+  "block.gravestone.grave_stone": "Náhrobek",
+  "block.gravestone.cross": "Kříž",
+  "block.gravestone.obelisk": "Obelisk",
+  "block.gravestone.celtic_cross": "Keltský kříž",
+  "block.gravestone.grave_plate": "Náhrobní kámenk",
+  "block.gravestone.pet_grave_stone": "Pet Gravestone",
+  "block.gravestone.villager_grave_stone": "Villager Gravestone",
+  "block.gravestone.sword": "Meč padlého válečníka",
+
+  "item.grave.age": "Žil",
+  "item.grave.days": "dní",
+  "item.grave.sword_name": "Jméno meče",
+  "item.grave.sword_damage": "Poškození meče",
+
+  "grave.cant_be_looted": "Nemůžeš vykrást tento hrob!",
+
+  "material.title": "Vyrobený z",
+  "material.mossy": "Mossy Cobblestone",
+  "material.sandstone": "Pískového kamene",
+  "material.stone": "Kamene",
+  "material.diorite": "Dioritu",
+  "material.andesite": "Andesitu",
+  "material.granite": "Granitu",
+  "material.gold": "Zlata",
+  "material.diamond": "Diamantu",
+  "material.obsidian": "Obsidiánu",
+  "material.quartz": "Křemíku",
+  "material.prizmarine": "Prizmarínu",
+  "material.ice": "Ledu"
+}

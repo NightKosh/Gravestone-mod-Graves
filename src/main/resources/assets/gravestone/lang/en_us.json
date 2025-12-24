@@ -1,0 +1,33 @@
+{
+  "itemGroup.gravestone": "Gravestones",
+
+  "block.gravestone.grave_stone": "Gravestone",
+  "block.gravestone.cross": "Cross",
+  "block.gravestone.obelisk": "Obelisk",
+  "block.gravestone.celtic_cross": "Celtic Cross",
+  "block.gravestone.grave_plate": "Grave Plate",
+  "block.gravestone.pet_grave_stone": "Pet Gravestone",
+  "block.gravestone.villager_grave_stone": "Villager Gravestone",
+  "block.gravestone.sword": "Sword of A Fallen Warrior",
+
+  "item.grave.age": "Had lived",
+  "item.grave.days": "days",
+  "item.grave.sword_name": "Sword Name",
+  "item.grave.sword_damage": "Sword Damage",
+
+  "grave.cant_be_looted": "You can't loot this grave!",
+
+  "material.title": "Made of",
+  "material.mossy": "Mossy Cobblestone",
+  "material.sandstone": "Sandstone",
+  "material.stone": "Stone",
+  "material.diorite": "Diorite",
+  "material.andesite": "Andesite",
+  "material.granite": "Granite",
+  "material.gold": "Gold",
+  "material.diamond": "Diamond",
+  "material.obsidian": "Obsidian",
+  "material.quartz": "Quartz",
+  "material.prizmarine": "Prizmarine",
+  "material.ice": "Ice"
+}

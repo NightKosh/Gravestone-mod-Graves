@@ -1,0 +1,7 @@
+{
+  "parent": "gravestone:block/obelisk/base",
+  "textures": {
+    "texture": "gravestone:block/obelisk/prizmarine",
+    "particle": "gravestone:block/obelisk/prizmarine"
+  }
+}

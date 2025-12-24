@@ -1,6 +1,6 @@
 package nightkosh.gravestone.helper;
 
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
+import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 
 /**
  * GraveStone mod
@@ -13,7 +13,9 @@ public class GraveSpawnerHelper {
     public GraveSpawnerHelper() {
     }
 
-    public ISpawner getSpawner(TileEntityGraveStone te) {
-        return new ISpawner() {};
+    public ISpawner getSpawner(GraveStoneBlockEntity te) {
+        return new ISpawner() {
+        };
     }
+
 }

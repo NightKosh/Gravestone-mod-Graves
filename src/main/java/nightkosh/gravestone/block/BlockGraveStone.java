@@ -1,58 +1,50 @@
 package nightkosh.gravestone.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockVine;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemShears;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import nightkosh.gravestone.ModGraveStone;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ShearsItem;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.ToolActions;
+import net.minecraftforge.network.NetworkHooks;
+import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
-import nightkosh.gravestone.block.enums.EnumGraves;
-import nightkosh.gravestone.config.Config;
-import nightkosh.gravestone.core.GSBlock;
-import nightkosh.gravestone.core.GuiHandler;
-import nightkosh.gravestone.core.Tabs;
-import nightkosh.gravestone.core.logger.GSLogger;
-import nightkosh.gravestone.helper.GraveGenerationHelper;
+import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
+import nightkosh.gravestone.config.GSConfigs;
+import nightkosh.gravestone.gui.container.GraveInventory;
 import nightkosh.gravestone.helper.GraveStoneHelper;
-import nightkosh.gravestone.inventory.GraveInventory;
-import nightkosh.gravestone.tileentity.TileEntityGraveStone;
+import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import javax.annotation.Nonnull;
+
+import static nightkosh.gravestone.ModGraveStone.GRAVE_LOGGER;
+import static nightkosh.gravestone.ModGraveStone.LOGGER;
 
 /**
  * GraveStone mod
@@ -60,502 +52,290 @@ import java.util.Random;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class BlockGraveStone extends BlockContainer {
+public class BlockGraveStone extends BaseEntityBlock {
 
-    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<FlowerType> FLOWER = EnumProperty.create("flower", FlowerType.class);
 
-    public BlockGraveStone() {
-        super(Material.ROCK);
-        this.setSoundType(SoundType.STONE);
-        this.setHardness(0.5F);
-        this.setResistance(5);
-        this.setCreativeTab(Tabs.gravesTab);
-        this.setTickRandomly(Config.removeEmptyGraves);
-        this.setRegistryName("GSGraveStone");
+    public final EnumGraveMaterial material;
+    public final EnumGraveType graveType;
+
+    public BlockGraveStone(EnumGraveType graveType, EnumGraveMaterial material) {
+        super(BlockBehaviour.Properties.of(Material.STONE)
+                .strength(1.5F, 6)
+                .explosionResistance(Float.MAX_VALUE)
+                .requiresCorrectToolForDrops()
+                .noCollission());
+        this.graveType = graveType;
+        this.material = material;
+        //TODO
+//        this.setTickRandomly(GSConfigs.REMOVE_EMPTY_GRAVES.get());
+
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(FLOWER, FlowerType.NONE));
     }
 
-    /**
-     * Called when the block is placed in the world
-     */
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase player, ItemStack itemStack) {
-        GraveStoneHelper.replaceGround(world, pos.down());
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateBuilder) {
+        stateBuilder.add(FACING, FLOWER);
+    }
 
-        EnumFacing enumfacing = EnumFacing.getHorizontal(MathHelper.floor((double) (player.rotationYaw * 4 / 360F) + 0.5D) & 3).getOpposite();
-        state = state.withProperty(FACING, enumfacing);
-        world.setBlockState(pos, state, 2);
-        TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+    }
 
-        if (tileEntity != null) {
-            NBTTagCompound nbt = itemStack.getTagCompound();
-            if (nbt != null) {
-                tileEntity.setGraveType(itemStack.getItemDamage());
+    @Nonnull
+    @Override
+    public RenderShape getRenderShape(@Nonnull BlockState state) {
+        return RenderShape.MODEL;
+    }
 
-                if (nbt.hasKey("isLocalized") && nbt.getBoolean("isLocalized")) {
-                    tileEntity.getDeathTextComponent().setLocalized();
+    @Nonnull
+    @Override
+    public String getDescriptionId() {
+        return switch (graveType) {
+            case GRAVE_STONE -> "block.gravestone.grave_stone";
+            case GRAVE_PLATE -> "block.gravestone.grave_plate";
+            case CROSS -> "block.gravestone.cross";
+            case OBELISK -> "block.gravestone.obelisk";
+            case CELTIC_CROSS -> "block.gravestone.celtic_cross";
+            case PET_GRAVE_STONE -> "block.gravestone.pet_grave_stone";
+            case VILLAGER_GRAVE_STONE -> "block.gravestone.villager_grave_stone";
+            default -> "block.gravestone.grave_stone";
+        };
+    }
 
-                    if (nbt.hasKey("name") && nbt.hasKey("KillerName")) {
-                        tileEntity.getDeathTextComponent().setName(nbt.getString("name"));
-                        tileEntity.getDeathTextComponent().setKillerName(nbt.getString("KillerName"));
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+        if (!level.isClientSide) {
+            level.setBlock(pos, state, 2);
+            var blockEntity = level.getBlockEntity(pos);
+
+            if (blockEntity instanceof GraveStoneBlockEntity grave) {
+                if (stack.hasTag()) {
+                    var tag = stack.getTag();
+                    if (tag.contains("deathMessageJson")) {
+                        grave.setDeathMessageJson(tag.getString("deathMessageJson"));
                     }
-                }
 
-                tileEntity.getDeathTextComponent().setDeathText(nbt.getString("DeathText"));
+                    grave.setAge(tag.getInt("Age"));
+                    grave.setPurified(tag.getBoolean("Purified"));
 
-                tileEntity.setAge(nbt.getInteger("Age"));
-
-                tileEntity.setEnchanted(nbt.getBoolean("Enchanted"));
-
-                tileEntity.setMossy(nbt.getBoolean("Mossy"));
-
-                tileEntity.setPurified(nbt.getBoolean("Purified"));
-
-                if (nbt.hasKey("Sword")) {
-                    ItemStack sword = new ItemStack(nbt.getCompoundTag("Sword"));
-                    tileEntity.setSword(sword);
-                    if (sword.isItemEnchanted()) {
-                        tileEntity.setEnchanted(true);
+                    if (tag.contains("Sword")) {
+                        var sword = ItemStack.of(tag.getCompound("Sword"));
+                        grave.setSword(sword);
                     }
                 }
             }
         }
     }
 
-    /**
-     * Checks to see if its valid to put this block at the specified
-     * coordinates. Args: world, x, y, z
-     */
     @Override
-    public boolean canPlaceBlockAt(World world, BlockPos pos) {
-        return GraveStoneHelper.canPlaceBlockAt(world, pos.down());
+    public boolean canSurvive(@Nonnull BlockState state, LevelReader level, BlockPos pos) {
+        return GraveStoneHelper.canPlaceBlockAt(level.getBlockState(pos.below()));
     }
 
-    @Nullable
+    private static final VoxelShape GS_SOUTH = Block.box(2, 0, 2, 14, 16, 4);
+    private static final VoxelShape GS_NORTH = Block.box(2, 0, 12, 14, 16, 14);
+    private static final VoxelShape GS_EAST = Block.box(2, 0, 2, 4, 16, 14);
+    private static final VoxelShape GS_WEST = Block.box(12, 0, 2, 14, 16, 14);
+
+    private static final VoxelShape CROSS_SOUTH = Block.box(2, 0, 2, 14, 16, 4);
+    private static final VoxelShape CROSS_NORTH = Block.box(2, 0, 12, 14, 16, 14);
+    private static final VoxelShape CROSS_EAST = Block.box(2, 0, 2, 4, 16, 14);
+    private static final VoxelShape CROSS_WEST = Block.box(12, 0, 2, 14, 16, 14);
+
+    private static final VoxelShape CC_SOUTH = Block.box(1, 0, 2, 15, 18, 4);
+    private static final VoxelShape CC_NORTH = Block.box(1, 0, 12, 15, 18, 14);
+    private static final VoxelShape CC_EAST = Block.box(2, 0, 1, 4, 18, 15);
+    private static final VoxelShape CC_WEST = Block.box(12, 0, 1, 14, 18, 15);
+
+    private static final VoxelShape OBELISK_SOUTH = Block.box(6, 0, 2, 10, 15, 5);
+    private static final VoxelShape OBELISK_NORTH = Block.box(6, 0, 11, 10, 15, 14);
+    private static final VoxelShape OBELISK_EAST = Block.box(2, 0, 6, 5, 15, 10);
+    private static final VoxelShape OBELISK_WEST = Block.box(11, 0, 6, 14, 15, 10);
+
+    private static final VoxelShape GP_NORTH_SOUTH = Block.box(2, 0, 1, 14, 1, 15);
+    private static final VoxelShape GP_EAST_WEST = Block.box(1, 0, 2, 15, 1, 14);
+    //TODO
+    private static final VoxelShape SWORD_SOUTH_NORTH = Block.box(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
+    private static final VoxelShape SWORD_EAST_WEST = Block.box(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
+
     @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return null;
+    public VoxelShape getShape(
+            @Nonnull BlockState blockState, @Nonnull BlockGetter blockGetter,
+            @Nonnull BlockPos blockPos, @Nonnull CollisionContext collisionContext) {
+        var facing = blockState.getValue(FACING);
+
+        return switch (graveType) {
+            case GRAVE_STONE, VILLAGER_GRAVE_STONE, PET_GRAVE_STONE -> switch (facing) {
+                case SOUTH -> GS_SOUTH;
+                case EAST -> GS_EAST;
+                case WEST -> GS_WEST;
+                case NORTH -> GS_NORTH;
+                default -> GS_NORTH;
+            };
+            case CROSS -> switch (facing) {
+                case SOUTH -> CROSS_SOUTH;
+                case EAST -> CROSS_EAST;
+                case WEST -> CROSS_WEST;
+                case NORTH -> CROSS_NORTH;
+                default -> CROSS_NORTH;
+            };
+            case CELTIC_CROSS -> switch (facing) {
+                case SOUTH -> CC_SOUTH;
+                case EAST -> CC_EAST;
+                case WEST -> CC_WEST;
+                case NORTH -> CC_NORTH;
+                default -> CC_NORTH;
+            };
+            case OBELISK -> switch (facing) {
+                case SOUTH -> OBELISK_SOUTH;
+                case EAST -> OBELISK_EAST;
+                case WEST -> OBELISK_WEST;
+                case NORTH -> OBELISK_NORTH;
+                default -> OBELISK_NORTH;
+            };
+            case GRAVE_PLATE -> switch (facing) {
+                case EAST, WEST -> GP_EAST_WEST;
+                case SOUTH, NORTH -> GP_NORTH_SOUTH;
+                default -> GP_NORTH_SOUTH;
+            };
+            case SWORD -> switch (facing) {
+                case EAST, WEST -> SWORD_EAST_WEST;
+                case SOUTH, NORTH -> SWORD_SOUTH_NORTH;
+                default -> SWORD_SOUTH_NORTH;
+            };
+        };
     }
 
-    private static final AxisAlignedBB VP_SOUTH_BB = new AxisAlignedBB(0.125, 0, 0.0625, 0.875, 0.9375, 0.1875);
-    private static final AxisAlignedBB VP_NORTH_BB = new AxisAlignedBB(0.125F, 0, 0.8125F, 0.875F, 0.9375F, 0.9375F);
-    private static final AxisAlignedBB VP_EAST_BB = new AxisAlignedBB(0.0625F, 0, 0.125F, 0.1875F, 0.9375F, 0.875F);
-    private static final AxisAlignedBB VP_WEST_BB = new AxisAlignedBB(0.8125F, 0, 0.125F, 0.9375F, 0.9375F, 0.875F);
-    private static final AxisAlignedBB CROSS_SOUTH_BB = new AxisAlignedBB(0.125F, 0, 0.0625F, 0.875F, 1, 0.1875F);
-    private static final AxisAlignedBB CROSS_NORTH_BB = new AxisAlignedBB(0.125F, 0, 0.8125F, 0.875F, 1, 0.9375F);
-    private static final AxisAlignedBB CROSS_EAST_BB = new AxisAlignedBB(0.0625F, 0, 0.125F, 0.1875F, 1, 0.875F);
-    private static final AxisAlignedBB CROSS_WEST_BB = new AxisAlignedBB(0.8125F, 0, 0.125F, 0.9375F, 1, 0.875F);
-    private static final AxisAlignedBB CC_NORTH_SOUTH_BB = new AxisAlignedBB(0.125F, 0, 0.35F, 0.875F, 1.3F, 0.65F);
-    private static final AxisAlignedBB CC_EAST_WEST_BB = new AxisAlignedBB(0.35F, 0, 0.125F, 0.65F, 1.3F, 0.875F);
-    private static final AxisAlignedBB PL_STATUES_BB = new AxisAlignedBB(0.35F, 0, 0.35F, 0.65F, 0.92F, 0.65F);
-    private static final AxisAlignedBB HP_NORTH_SOUTH_BB = new AxisAlignedBB(0.09375F, 0, 0.0625F, 0.90625F, 0.0625F, 0.9375F);
-    private static final AxisAlignedBB HP_EAST_WEST_BB = new AxisAlignedBB(0.0625F, 0, 0.09375F, 0.9375F, 0.0625F, 0.90625F);
-    private static final AxisAlignedBB DOG_SOUTH_BB = new AxisAlignedBB(0.35F, 0, 0.3F, 0.6F, 0.5F, 0.9F);
-    private static final AxisAlignedBB DOG_NORTH_BB = new AxisAlignedBB(0.35F, 0, 0.7F, 0.6F, 0.5F, 0.1F);
-    private static final AxisAlignedBB DOG_EAST_BB = new AxisAlignedBB(0.3F, 0, 0.35F, 0.9F, 0.5F, 0.6F);
-    private static final AxisAlignedBB DOG_WEST_BB = new AxisAlignedBB(0.7F, 0, 0.35F, 0.1F, 0.5F, 0.6F);
-    private static final AxisAlignedBB CAT_SOUTH_BB = new AxisAlignedBB(0.43F, 0, 0.3F, 0.57F, 0.5F, 0.75F);
-    private static final AxisAlignedBB CAT_NORTH_BB = new AxisAlignedBB(0.43F, 0, 0.7F, 0.57F, 0.5F, 0.25F);
-    private static final AxisAlignedBB CAT_EAST_BB = new AxisAlignedBB(0.3F, 0, 0.43F, 0.75F, 0.5F, 0.57F);
-    private static final AxisAlignedBB CAT_WEST_BB = new AxisAlignedBB(0.7F, 0, 0.43F, 0.25F, 0.5F, 0.57F);
-    private static final AxisAlignedBB CORPSE_BB = new AxisAlignedBB(0, 0, 0, 1, 0.3F, 1);
-    private static final AxisAlignedBB SWORD_SOUTH_NORTH_BB = new AxisAlignedBB(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
-    private static final AxisAlignedBB SWORD_EAST_WEST_BB = new AxisAlignedBB(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
-    private static final AxisAlignedBB HS_SOUTH_NORTH_BB = new AxisAlignedBB(0.375F, 0, 0.275F, 0.625F, 0.85F, 0.725F);
-    private static final AxisAlignedBB HS_EAST_WEST_BB = new AxisAlignedBB(0.275F, 0, 0.375F, 0.725F, 0.85F, 0.625F);
+    @Override
+    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide) {
+            player.causeFoodExhaustion(0.025F);
+
+            if (!level.isClientSide() && !level.restoringBlockSnapshots) {
+                if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave && grave.canBeLooted(player)) {
+                    GraveStoneHelper.spawnMob(level, pos);
+
+                    var flower = state.getValue(FLOWER);
+                    if (flower != FlowerType.NONE) {
+                        GraveInventory.dropItem(new ItemStack(Items.POPPY), level, pos);
+                    }
+                }
+            }
+        }
+        super.playerWillDestroy(level, pos, state, player);
+    }
 
     @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess access, BlockPos pos) {
-        if (state.getBlock() == GSBlock.GRAVE_STONE) {
-            EnumFacing facing = state.getValue(FACING);
-            EnumGraveType graveType;
-            TileEntityGraveStone tileEntity = (TileEntityGraveStone) access.getTileEntity(pos);
-
-            if (tileEntity != null) {
-                graveType = tileEntity.getGraveType().getGraveType();
+    public InteractionResult use(
+            BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave) {
+            if (!level.isClientSide()) {
+                var item = player.getMainHandItem();
+                if (item != null) {
+                    if (item.canPerformAction(ToolActions.SHOVEL_DIG)) {
+                        if (grave.canBeLooted(player)) {
+                            if (player instanceof ServerPlayer sp) {
+                                NetworkHooks.openScreen(sp, grave, pos);
+                            }
+                            GRAVE_LOGGER.info("{} open grave inventory at {}", player.getScoreboardName(), pos.toShortString());
+                            GraveStoneHelper.replaceGround(level, pos.below());
+                            return InteractionResult.SUCCESS;
+                        } else {
+                            player.displayClientMessage(
+                                    Component.translatable("grave.cant_be_looted")
+                                            .withStyle(ChatFormatting.RED), false);
+                            return InteractionResult.FAIL;
+                        }
+                    } else {
+                        var held = player.getItemInHand(hand);
+                        var flower = FlowerType.fromItem(held);
+                        var flowerType =  state.getValue(FLOWER);
+                        if (flowerType != FlowerType.NONE) {
+                            if (item.getItem() instanceof ShearsItem) {
+                                GraveInventory.dropItem(new ItemStack(flowerType.getFlower()), level, pos);
+                                level.setBlock(pos, state.setValue(FLOWER, FlowerType.NONE), 2);
+                                return InteractionResult.SUCCESS;
+                            }
+                        } else if (flower != FlowerType.NONE &&
+                                GraveStoneHelper.canFlowerBePlaced(level, pos, item, grave)) {
+                            level.setBlock(pos, state.setValue(FLOWER, flower), 2);//.sendBlockUpdated()
+                            if (!player.getAbilities().instabuild) {
+                                held.shrink(1);
+                            }
+                            return InteractionResult.SUCCESS;
+                        }
+                    }
+                }
             } else {
-                graveType = EnumGraveType.VERTICAL_PLATE;
-            }
-
-            switch (graveType) {
-                case VERTICAL_PLATE:
-                    switch (facing) {
-                        case SOUTH:
-                            return VP_SOUTH_BB;
-                        case NORTH:
-                            return VP_NORTH_BB;
-                        case EAST:
-                            return VP_EAST_BB;
-                        case WEST:
-                            return VP_WEST_BB;
-                    }
-                    break;
-                case CROSS:
-                    switch (facing) {
-                        case SOUTH:
-                            return CROSS_SOUTH_BB;
-                        case NORTH:
-                            return CROSS_NORTH_BB;
-                        case EAST:
-                            return CROSS_EAST_BB;
-                        case WEST:
-                            return CROSS_WEST_BB;
-                    }
-                    break;
-                case CELTIC_CROSS:
-                    switch (facing) {
-                        case SOUTH:
-                        case NORTH:
-                            return CC_NORTH_SOUTH_BB;
-                        case EAST:
-                        case WEST:
-                            return CC_EAST_WEST_BB;
-                    }
-                    break;
-                case OBELISK:
-                case CREEPER_STATUE:
-                case VILLAGER_STATUE:
-                    return PL_STATUES_BB;
-                case HORIZONTAL_PLATE:
-                    switch (facing) {
-                        case SOUTH:
-                        case NORTH:
-                            return HP_NORTH_SOUTH_BB;
-                        case EAST:
-                        case WEST:
-                            return HP_EAST_WEST_BB;
-                    }
-                    break;
-                case DOG_STATUE:
-                    switch (facing) {
-                        case SOUTH:
-                            return DOG_SOUTH_BB;
-                        case NORTH:
-                            return DOG_NORTH_BB;
-                        case EAST:
-                            return DOG_EAST_BB;
-                        case WEST:
-                            return DOG_WEST_BB;
-                    }
-                    break;
-                case CAT_STATUE:
-                    switch (facing) {
-                        case SOUTH:
-                            return CAT_SOUTH_BB;
-                        case NORTH:
-                            return CAT_NORTH_BB;
-                        case EAST:
-                            return CAT_EAST_BB;
-                        case WEST:
-                            return CAT_WEST_BB;
-                    }
-                    break;
-                case STARVED_CORPSE:
-                case WITHERED_CORPSE:
-                    return CORPSE_BB;
-                case SWORD:
-                    switch (facing) {
-                        case SOUTH:
-                        case NORTH:
-                            return SWORD_SOUTH_NORTH_BB;
-                        case EAST:
-                        case WEST:
-                            return SWORD_EAST_WEST_BB;
-                    }
-                    break;
-                case HORSE_STATUE:
-                    switch (facing) {
-                        case SOUTH:
-                        case NORTH:
-                            return HS_SOUTH_NORTH_BB;
-                        case EAST:
-                        case WEST:
-                            return HS_EAST_WEST_BB;
-                    }
-                    break;
-            }
-        }
-        return new AxisAlignedBB(0, 0, 0, 1, 1, 1);
-    }
-
-    /**
-     * Called when the block is attempted to be harvested
-     */
-    @Override
-    public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
-        player.addExhaustion(0.025F);
-
-        if (!world.isRemote && !world.restoringBlockSnapshots) {
-            TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
-            if (tileEntity != null && tileEntity.canBeLooted(player)) {
-                GraveStoneHelper.spawnMob(world, pos);
-
-                if (tileEntity.hasFlower()) {
-                    tileEntity.dropFlower();
-                }
-
-                GraveStoneHelper.dropBlock(world, pos, state);
-            }
-        }
-    }
-
-    /**
-     * This returns a complete list of items dropped from this block.
-     */
-    @Override
-    public List<ItemStack> getDrops(IBlockAccess access, BlockPos pos, IBlockState state, int fortune) {
-        List<ItemStack> ret = new ArrayList<>();
-        ret.add(GraveStoneHelper.getBlockItemStack(access, pos, state));
-        return ret;
-    }
-
-    @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, @Nullable ItemStack stack) {
-    }
-
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    public BlockFaceShape getBlockFaceShape(IBlockAccess access, IBlockState state, BlockPos pos, EnumFacing facing) {
-        return BlockFaceShape.UNDEFINED;
-    }
-
-    @Override
-    public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
-        GraveStoneHelper.spawnMob(world, pos);
-    }
-
-    @Override
-    public float getExplosionResistance(Entity entity) {
-        return Float.MAX_VALUE;
-    }
-
-    /**
-     * Called when the block is destroyed by an explosion. Useful for allowing
-     * the block to take into account tile entities, metadata, etc. when
-     * exploded, before it is removed.
-     */
-    @Override
-    public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {
-    }
-
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-        TileEntityGraveStone te = (TileEntityGraveStone) world.getTileEntity(pos);
-
-        if (te != null) {
-            if (player.inventory.getCurrentItem() != null) {
-                ItemStack item = player.inventory.getCurrentItem();
-                if (item.getItem().getToolClasses(item).contains("shovel")) {
-                    if (!world.isRemote) {
-                        if (te.canBeLooted(player)) {
-                            player.openGui(ModGraveStone.instance, GuiHandler.GRAVE_INVENTORY_GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
-                            GSLogger.logInfoGrave(player.getName() + " open grave inventory at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
-                            GraveStoneHelper.replaceGround(world, pos.down());
-                        } else {
-                            player.sendMessage(new TextComponentTranslation("grave.cant_be_looted").setStyle(new Style().setColor(TextFormatting.RED)));
-                        }
-                    }
-                    return false;
-                } else {
-                    if (te.isMossy()) {
-                        if (item.getItem() instanceof ItemShears) {
-                            if (!world.isRemote) {
-                                GraveInventory.dropItem(new ItemStack(Blocks.VINE, 1), world, pos);
-                            }
-                            te.setMossy(false);
-                            return false;
-                        }
-                    } else {
-                        if (Block.getBlockFromItem(item.getItem()) instanceof BlockVine && te.canBeMossy()) {
-                            te.setMossy(true);
-                            player.inventory.getCurrentItem().setCount(player.inventory.getCurrentItem().getCount() - 1);
-                            return true;
-                        }
-                    }
-                    if (te.hasFlower()) {
-                        if (item.getItem() instanceof ItemShears) {
-                            if (!world.isRemote) {
-                                te.dropFlower();
-                            }
-                            te.setFlower(null);
-                            return false;
-                        }
-                    } else {
-                        if (GraveStoneHelper.FLOWERS.contains(Block.getBlockFromItem(item.getItem())) &&
-                                GraveStoneHelper.canFlowerBePlaced(world, pos, item, te)) {
-                            te.setFlower(new ItemStack(item.getItem(), 1, item.getItemDamage()));
-                            player.inventory.getCurrentItem().setCount(player.inventory.getCurrentItem().getCount() - 1);
-                            return true;
-                        }
-                    }
-                }
-            }
-            if (world.isRemote) {
-                String name;
-                String deathText;
-                String killerName;
-                deathText = te.getDeathTextComponent().getDeathText();
-
-                if (deathText.length() != 0) {
-                    if (te.getDeathTextComponent().isLocalized()) {
-                        name = ModGraveStone.proxy.getLocalizedEntityName(te.getDeathTextComponent().getName());
-                        killerName = ModGraveStone.proxy.getLocalizedEntityName(te.getDeathTextComponent().getKillerName());
-
-                        if (killerName.length() == 0) {
-                            player.sendMessage(new TextComponentTranslation(deathText, new Object[]{name}));
-                        } else {
-                            player.sendMessage(new TextComponentTranslation(deathText, new Object[]{name, killerName}));
-                        }
-                    } else {
-                        player.sendMessage(new TextComponentTranslation(deathText));
+                if (player.getMainHandItem() == null || ItemStack.EMPTY.equals(player.getMainHandItem())) {
+                    String deathMessageJson = grave.getDeathMessageJson();
+                    if (StringUtils.isNoneBlank(deathMessageJson)) {
+                        player.displayClientMessage(Component.Serializer.fromJson(deathMessageJson), false);
                     }
 
-                    if (te.getAge() > 0) {
-                        StringBuilder ageStr = new StringBuilder();
-                        ageStr.append(ModGraveStone.proxy.getLocalizedString("item.grave.age"))
-                                .append(" ")
-                                .append(te.getAge())
-                                .append(" ")
-                                .append(ModGraveStone.proxy.getLocalizedString("item.grave.days"));
-                        player.sendMessage(new TextComponentTranslation(ageStr.toString()));
+                    if (grave.getAge() > 0) {
+                        player.displayClientMessage(
+                                Component.translatable("item.grave.age")
+                                        .append(" " + grave.getAge() + " ")
+                                        .append(Component.translatable("item.grave.days")), false);
                     }
                 }
             }
         }
 
-        return false;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world, int var2) {
-        return new TileEntityGraveStone(world);
-    }
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+        super.onPlace(state, level, pos, oldState, isMoving);
 
-    @Override
-    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-        super.onBlockAdded(world, pos, state);
-        GraveStoneHelper.replaceGround(world, pos.down());
+        if (!level.isClientSide) {
+            GraveStoneHelper.replaceGround(level, pos.below());
+        }
     }
 
     /**
-     * ejects contained items into the world, and notifies neighbours of an
+     * ejects contained items into the level, and notifies neighbours of an
      * update, as appropriate
      */
     @Override
-    public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean xz) {
+        if (state.getBlock() != newState.getBlock()) {
+            var blockEntity = level.getBlockEntity(pos);
 
-        if (tileEntity != null) {
-            tileEntity.getInventory().dropAllItems();
-        }
-
-        super.breakBlock(world, pos, state);
-    }
-
-    @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
-        if (!world.isSideSolid(pos.down(), EnumFacing.DOWN, true)) {
-            TileEntityGraveStone te = (TileEntityGraveStone) world.getTileEntity(pos);
-            if (te != null) {
-                if (te.canBeLooted(null)) {
-                    GraveStoneHelper.dropBlockWithoutInfo(te.getWorld(), pos, world.getBlockState(pos));
-                    te.getWorld().setBlockToAir(pos);
+            if (blockEntity != null && blockEntity instanceof GraveStoneBlockEntity graveEntity) {
+                if (GSConfigs.DEBUG_MODE.get()) {
+                    LOGGER.info("Grave destroyed. Going to drop all stored items");
                 }
+                graveEntity.getInventory().dropAllItems();
             }
+
+            GraveInventory.dropItem(GraveStoneHelper.getBlockItemStack(level, pos, state), level, pos);
         }
+        super.onRemove(state, level, pos, newState, xz);
     }
 
     @Override
-    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
-        TileEntityGraveStone te = (TileEntityGraveStone) world.getTileEntity(pos);
-        if (te != null && !te.canBeLooted(player)) {
-            player.sendMessage(new TextComponentTranslation("grave.cant_be_looted").setStyle(new Style().setColor(TextFormatting.RED)));
-            return false;
-        }
-        return super.removedByPlayer(state, world, pos, player, willHarvest);
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new GraveStoneBlockEntity(pos, state);
     }
 
     @Override
-    public int damageDropped(IBlockState state) {
-        return 0;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(CreativeTabs tabs, NonNullList<ItemStack> list) {
-        for (int i = 0; i < EnumGraves.values().length - 1; i++) {
-            ItemStack stack = new ItemStack(this, 1, i);
-            NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setBoolean("Purified", false);
-
-            stack.setTagCompound(nbt);
-            list.add(stack);
-        }
-
-        // custom swords
-        for (Item sword : GraveGenerationHelper.swordsList) {
-            list.add(GraveStoneHelper.getSwordAsGrave(Item.getItemFromBlock(this), new ItemStack(sword, 1)));
-        }
-        for (Item sword : GraveGenerationHelper.swordsList) {
-            try {
-                ItemStack swordStack = new ItemStack(sword, 1);
-                EnchantmentHelper.addRandomEnchantment(new Random(), swordStack, 5, true);
-
-                ItemStack graveStoneStack = GraveStoneHelper.getSwordAsGrave(Item.getItemFromBlock(this), swordStack);
-
-                list.add(graveStoneStack);
-            } catch (IllegalArgumentException exception) {
-                GSLogger.logError("Can't create enchanted sword gravestone");
-                exception.printStackTrace();
-            }
-        }
-    }
-
-    @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        ItemStack itemStack = new ItemStack(Item.getItemFromBlock(this), 1);
-        TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
-
-        if (tileEntity != null) {
-            if (itemStack != null) {
-                NBTTagCompound nbt = new NBTTagCompound();
-                itemStack.setItemDamage(tileEntity.getGraveTypeNum());
-                nbt.setBoolean("Mossy", tileEntity.isMossy());
-
-                itemStack.setTagCompound(nbt);
-                if (tileEntity.isSwordGrave()) {
-                    GraveStoneHelper.addSwordInfo(nbt, tileEntity.getSword());
-                }
-            }
-        }
-        return itemStack;
-    }
-
-    /**
-     * A randomly called display update to be able to add particles or other
-     * items for display
-     */
-    @Override
-    public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
-        if (Config.removeEmptyGraves) {
-            if (!world.isRemote) {
-                TileEntityGraveStone tileEntity = (TileEntityGraveStone) world.getTileEntity(pos);
-                if (tileEntity != null) {
-                    if (!tileEntity.isSwordGrave() && tileEntity.isEmpty()) {
-                        if (Config.showGravesRemovingMessages) {
-                            GSLogger.logInfoGrave("Remove empty grave at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
-                        }
-
-                        world.removeTileEntity(pos);
-                        world.setBlockToAir(pos);
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos fromPos, boolean isMoving) {
+        if (!level.isClientSide) {
+            var belowPos = pos.below();
+            if (!level.getBlockState(belowPos).isFaceSturdy(level, belowPos, Direction.UP)) {
+                var blockEntity = level.getBlockEntity(pos);
+                if (blockEntity != null && blockEntity instanceof GraveStoneBlockEntity graveEntity) {
+                    if (graveEntity.canBeLooted(null)) {
+                        GraveStoneHelper.dropBlockWithoutInfo(level, graveEntity);
+                        level.removeBlock(pos, false);
                     }
                 }
             }
@@ -563,28 +343,66 @@ public class BlockGraveStone extends BlockContainer {
     }
 
     @Override
-    public IBlockState getStateFromMeta(int meta) {
-        EnumFacing enumfacing = EnumFacing.getFront(meta);
-
-        if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
-            enumfacing = EnumFacing.NORTH;
+    public void attack(BlockState state, Level level, BlockPos pos, Player player) {
+        if (!level.isClientSide) {
+            var be = level.getBlockEntity(pos);
+            if (be instanceof GraveStoneBlockEntity grave && !grave.canBeLooted(player)) {
+                player.displayClientMessage(
+                        Component.translatable("grave.cant_be_looted")
+                                .withStyle(ChatFormatting.RED),
+                        true);
+                return;
+            }
         }
-
-        return this.getDefaultState().withProperty(FACING, enumfacing);
+        super.attack(state, level, pos, player);
     }
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getIndex();
-    }
+//TODO
+//    @Override
+//    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, Level level, BlockPos pos, Player player) {
+//        var itemStack = new ItemStack(this.asItem(), 1);
+//
+//        if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave) {
+//            if (itemStack != null) {
+//                var tag = new CompoundTag();
+//
+//                itemStack.setTag(tag);
+//                if (grave.isSwordGrave()) {
+//                    GraveStoneHelper.addSwordInfo(tag, grave.getSword());
+//                }
+//            }
+//        }
+//        return itemStack;
+//    }
+
+
+//TODO
+//    /**
+//     * A randomly called display update to be able to add particles or other
+//     * items for display
+//     */
+//    @Override
+//    public void updateTick(Level level, BlockPos pos, IBlockState state, Random random) {
+//        if (GSConfigs.REMOVE_EMPTY_GRAVES.get()) {
+//            if (!level.isClientSide()) {
+//                GraveStoneBlockEntity tileEntity = (GraveStoneBlockEntity) level.getBlockEntity(pos);
+//                if (tileEntity != null) {
+//                    if (!tileEntity.isSwordGrave() && tileEntity.isEmpty()) {
+//                        if (GSConfigs.SHOW_GRAVE_REMOVAL_MESSAGES.get()) {
+//                            GRAVE_LOGGER.info("Remove empty grave at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
+//                        }
+//
+//                        level.removeTileEntity(pos);
+//                        level.setBlockToAir(pos);
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{FACING});
-    }
-
-    @Override
-    public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
+    public boolean canEntityDestroy(BlockState state, BlockGetter blockGetter, BlockPos pos, Entity entity) {
         return false;
     }
+
 }

@@ -1,0 +1,33 @@
+{
+  "itemGroup.gravestone": "Lápida",
+
+  "block.gravestone.grave_stone": "Lápida",
+  "block.gravestone.cross": "Cruz",
+  "block.gravestone.obelisk": "Obelisco",
+  "block.gravestone.celtic_cross": "Cruz Celta",
+  "block.gravestone.grave_plate": "Placa",
+  "block.gravestone.pet_grave_stone": "Pet Gravestone",
+  "block.gravestone.villager_grave_stone": "Villager Gravestone",
+  "block.gravestone.sword": "Espada de un Caballero Caído",
+
+  "item.grave.age": "Vivió",
+  "item.grave.days": "días",
+  "item.grave.sword_name": "Nombre",
+  "item.grave.sword_damage": "Daño",
+
+  "grave.cant_be_looted": "¡No puedes saquear esta tumba!",
+
+  "material.title": "Hecho de",
+  "material.mossy": "Mossy Cobblestone",
+  "material.sandstone": "Arena",
+  "material.stone": "Piedra",
+  "material.diorite": "Diorita",
+  "material.andesite": "Andesita",
+  "material.granite": "Granito",
+  "material.gold": "Oro",
+  "material.diamond": "Diamante",
+  "material.obsidian": "Obsidiana",
+  "material.quartz": "Cuarzo",
+  "material.prizmarine": "Prismarina",
+  "material.ice": "Hielo"
+}

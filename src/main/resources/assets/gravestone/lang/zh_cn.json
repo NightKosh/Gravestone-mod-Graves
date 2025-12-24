@@ -1,0 +1,33 @@
+{
+  "itemGroup.gravestone": "墓碑",
+
+  "block.gravestone.grave_stone": "墓碑",
+  "block.gravestone.cross": "十字架",
+  "block.gravestone.obelisk": "方尖碑",
+  "block.gravestone.celtic_cross": "Celtic Cross",
+  "block.gravestone.grave_plate": "墓碑板",
+  "block.gravestone.pet_grave_stone": "Pet Gravestone",
+  "block.gravestone.villager_grave_stone": "Villager Gravestone",
+  "block.gravestone.sword": "战魂之剑",
+
+  "item.grave.age": "已生活了",
+  "item.grave.days": "天",
+  "item.grave.sword_name": "剑的名字",
+  "item.grave.sword_damage": "剑的耐久值",
+
+  "grave.cant_be_looted": "你无法获得这块墓碑!",
+
+  "material.title": "构成是",
+  "material.mossy": "Mossy Cobblestone",
+  "material.sandstone": "沙石",
+  "material.stone": "石头",
+  "material.diorite": "闪长岩",
+  "material.andesite": "安山岩",
+  "material.granite": "花岗岩",
+  "material.gold": "金",
+  "material.diamond": "钻石",
+  "material.obsidian": "黑曜石",
+  "material.quartz": "石英",
+  "material.prizmarine": "海晶石",
+  "material.ice": "冰"
+}

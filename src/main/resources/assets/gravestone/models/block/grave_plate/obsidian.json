@@ -1,0 +1,7 @@
+{
+  "parent": "gravestone:block/grave_plate/base",
+  "textures": {
+    "texture": "gravestone:block/grave_plate/obsidian",
+    "particle": "gravestone:block/grave_plate/obsidian"
+  }
+}

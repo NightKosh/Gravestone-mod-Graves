@@ -1,0 +1,7 @@
+{
+  "parent": "gravestone:block/cross/base",
+  "textures": {
+    "texture": "gravestone:block/cross/obsidian",
+    "particle": "gravestone:block/cross/obsidian"
+  }
+}

@@ -1,8 +1,10 @@
 package nightkosh.gravestone.gui.container;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.Container;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 /**
  * GraveStone mod
@@ -12,17 +14,18 @@ import net.minecraft.item.ItemStack;
  */
 public class GraveSlot extends Slot {
 
-    public GraveSlot(IInventory inventory, int slotNum, int xPos, int yPos) {
-        super(inventory, slotNum, xPos, yPos);
+    public GraveSlot(Container container, int slotNum, int xPos, int yPos) {
+        super(container, slotNum, xPos, yPos);
     }
 
     @Override
-    public int getSlotStackLimit() {
+    public int getMaxStackSize() {
         return 0;
     }
 
     @Override
-    public boolean isItemValid(ItemStack stack) {
+    public boolean mayPlace(@Nonnull ItemStack stack) {
         return false;
     }
+
 }

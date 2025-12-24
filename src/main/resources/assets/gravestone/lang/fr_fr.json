@@ -1,0 +1,33 @@
+{
+  "itemGroup.gravestone": "Gravestones",
+
+  "block.gravestone.grave_stone": "Tombe",
+  "block.gravestone.cross": "Croix",
+  "block.gravestone.obelisk": "Obélisque",
+  "block.gravestone.celtic_cross": "Croix celtique",
+  "block.gravestone.grave_plate": "Pierre tombale",
+  "block.gravestone.pet_grave_stone": "Pet Gravestone",
+  "block.gravestone.villager_grave_stone": "Villager Gravestone",
+  "block.gravestone.sword": "Épée du guerrier vaincu",
+
+  "item.grave.age": "A vécu",
+  "item.grave.days": "jours",
+  "item.grave.sword_name": "Nom de l'épée",
+  "item.grave.sword_damage": "Dégats de l'épée",
+
+  "grave.cant_be_looted": "Vous ne pouvez pas piller cette tombe !",
+
+  "material.title": "Fait de",
+  "material.mossy": "Mossy Cobblestone",
+  "material.sandstone": "Grès",
+  "material.stone": "Pierre",
+  "material.diorite": "Diorite",
+  "material.andesite": "Andésite",
+  "material.granite": "Granite",
+  "material.gold": "Or",
+  "material.diamond": "Diamant",
+  "material.obsidian": "Obsidienne",
+  "material.quartz": "Quartz",
+  "material.prizmarine": "Prismarine",
+  "material.ice": "Glace"
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "gravestone:block/villager_grave_stone/base",
+  "textures": {
+    "texture": "gravestone:block/villager_grave_stone/mossy",
+    "particle": "gravestone:block/villager_grave_stone/mossy"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "itemGroup.gravestone": "Gravestones",
+
+  "block.gravestone.grave_stone": "Pietra Sepolcrale",
+  "block.gravestone.cross": "Croce",
+  "block.gravestone.obelisk": "Obelisco",
+  "block.gravestone.celtic_cross": "Croce Celtiva",
+  "block.gravestone.grave_plate": "Lapide",
+  "block.gravestone.pet_grave_stone": "Pet Gravestone",
+  "block.gravestone.villager_grave_stone": "Villager Gravestone",
+  "block.gravestone.sword": "Spada del Guerriero Caduto",
+
+  "item.grave.age": "Ha vissuto",
+  "item.grave.days": "giorni",
+  "item.grave.sword_name": "Nome della Spada",
+  "item.grave.sword_damage": "Danno della Spada",
+
+  "grave.cant_be_looted": "Non puoi saccheggiare questa tomba!",
+
+  "material.title": "Fatto da",
+  "material.mossy": "Mossy Cobblestone",
+  "material.sandstone": "Arenaria",
+  "material.stone": "Pietra",
+  "material.diorite": "Diorite",
+  "material.andesite": "Andesite",
+  "material.granite": "Granito",
+  "material.gold": "Oro",
+  "material.diamond": "Diamante",
+  "material.obsidian": "Ossidiana",
+  "material.quartz": "Quarzo",
+  "material.prizmarine": "Prismarina",
+  "material.ice": "Ghiaccio"
+}

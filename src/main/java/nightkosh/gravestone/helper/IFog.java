@@ -1,7 +1,7 @@
 package nightkosh.gravestone.helper;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 /**
  * GraveStone mod
@@ -11,6 +11,6 @@ import net.minecraft.world.World;
  */
 public interface IFog {
 
-    public default void addFog(World world, BlockPos pos) {
-    }
+    default void addFog(Level level, BlockPos pos) {}
+
 }

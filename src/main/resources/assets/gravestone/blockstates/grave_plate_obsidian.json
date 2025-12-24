@@ -1,0 +1,68 @@
+{
+  "multipart": [
+    { "when": { "facing": "south" }, "apply": { "model": "gravestone:block/grave_plate/obsidian", "y": 0 } },
+    { "when": { "facing": "west"  }, "apply": { "model": "gravestone:block/grave_plate/obsidian", "y": 90 } },
+    { "when": { "facing": "north" }, "apply": { "model": "gravestone:block/grave_plate/obsidian", "y": 180 } },
+    { "when": { "facing": "east"  }, "apply": { "model": "gravestone:block/grave_plate/obsidian", "y": 270 } },
+
+    { "when": { "flower": "poppy", "facing": "south" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/poppy", "y": 0 } },
+    { "when": { "flower": "poppy", "facing": "west"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/poppy", "y": 90 } },
+    { "when": { "flower": "poppy", "facing": "north" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/poppy", "y": 180 } },
+    { "when": { "flower": "poppy", "facing": "east"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/poppy", "y": 270 } },
+
+    { "when": { "flower": "dandelion", "facing": "south" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/dandelion", "y": 0 } },
+    { "when": { "flower": "dandelion", "facing": "west"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/dandelion", "y": 90 } },
+    { "when": { "flower": "dandelion", "facing": "north" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/dandelion", "y": 180 } },
+    { "when": { "flower": "dandelion", "facing": "east"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/dandelion", "y": 270 } },
+
+    { "when": { "flower": "blue_orchid", "facing": "south" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/blue_orchid", "y": 0 } },
+    { "when": { "flower": "blue_orchid", "facing": "west"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/blue_orchid", "y": 90 } },
+    { "when": { "flower": "blue_orchid", "facing": "north" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/blue_orchid", "y": 180 } },
+    { "when": { "flower": "blue_orchid", "facing": "east"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/blue_orchid", "y": 270 } },
+
+    { "when": { "flower": "allium", "facing": "south" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/allium", "y": 0 } },
+    { "when": { "flower": "allium", "facing": "west"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/allium", "y": 90 } },
+    { "when": { "flower": "allium", "facing": "north" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/allium", "y": 180 } },
+    { "when": { "flower": "allium", "facing": "east"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/allium", "y": 270 } },
+
+    { "when": { "flower": "azure_bluet", "facing": "south" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/azure_bluet", "y": 0 } },
+    { "when": { "flower": "azure_bluet", "facing": "west"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/azure_bluet", "y": 90 } },
+    { "when": { "flower": "azure_bluet", "facing": "north" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/azure_bluet", "y": 180 } },
+    { "when": { "flower": "azure_bluet", "facing": "east"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/azure_bluet", "y": 270 } },
+
+    { "when": { "flower": "red_tulip", "facing": "south" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/red_tulip", "y": 0 } },
+    { "when": { "flower": "red_tulip", "facing": "west"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/red_tulip", "y": 90 } },
+    { "when": { "flower": "red_tulip", "facing": "north" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/red_tulip", "y": 180 } },
+    { "when": { "flower": "red_tulip", "facing": "east"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/red_tulip", "y": 270 } },
+
+    { "when": { "flower": "orange_tulip", "facing": "south" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/orange_tulip", "y": 0 } },
+    { "when": { "flower": "orange_tulip", "facing": "west"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/orange_tulip", "y": 90 } },
+    { "when": { "flower": "orange_tulip", "facing": "north" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/orange_tulip", "y": 180 } },
+    { "when": { "flower": "orange_tulip", "facing": "east"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/orange_tulip", "y": 270 } },
+
+    { "when": { "flower": "white_tulip", "facing": "south" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/white_tulip", "y": 0 } },
+    { "when": { "flower": "white_tulip", "facing": "west"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/white_tulip", "y": 90 } },
+    { "when": { "flower": "white_tulip", "facing": "north" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/white_tulip", "y": 180 } },
+    { "when": { "flower": "white_tulip", "facing": "east"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/white_tulip", "y": 270 } },
+
+    { "when": { "flower": "pink_tulip", "facing": "south" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/pink_tulip", "y": 0 } },
+    { "when": { "flower": "pink_tulip", "facing": "west"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/pink_tulip", "y": 90 } },
+    { "when": { "flower": "pink_tulip", "facing": "north" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/pink_tulip", "y": 180 } },
+    { "when": { "flower": "pink_tulip", "facing": "east"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/pink_tulip", "y": 270 } },
+
+    { "when": { "flower": "oxeye_daisy", "facing": "south" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/oxeye_daisy", "y": 0 } },
+    { "when": { "flower": "oxeye_daisy", "facing": "west"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/oxeye_daisy", "y": 90 } },
+    { "when": { "flower": "oxeye_daisy", "facing": "north" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/oxeye_daisy", "y": 180 } },
+    { "when": { "flower": "oxeye_daisy", "facing": "east"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/oxeye_daisy", "y": 270 } },
+
+    { "when": { "flower": "cornflower", "facing": "south" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/cornflower", "y": 0 } },
+    { "when": { "flower": "cornflower", "facing": "west"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/cornflower", "y": 90 } },
+    { "when": { "flower": "cornflower", "facing": "north" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/cornflower", "y": 180 } },
+    { "when": { "flower": "cornflower", "facing": "east"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/cornflower", "y": 270 } },
+
+    { "when": { "flower": "lily_of_the_valley", "facing": "south" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/lily_of_the_valley", "y": 0 } },
+    { "when": { "flower": "lily_of_the_valley", "facing": "west"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/lily_of_the_valley", "y": 90 } },
+    { "when": { "flower": "lily_of_the_valley", "facing": "north" }, "apply": { "model": "gravestone:block/grave_flower/horizontal/lily_of_the_valley", "y": 180 } },
+    { "when": { "flower": "lily_of_the_valley", "facing": "east"  }, "apply": { "model": "gravestone:block/grave_flower/horizontal/lily_of_the_valley", "y": 270 } }
+  ]
+}
