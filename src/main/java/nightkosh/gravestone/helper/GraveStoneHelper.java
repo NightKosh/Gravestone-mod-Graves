@@ -67,18 +67,16 @@ public class GraveStoneHelper {
 
     public static void addSwordInfo(CompoundTag tag, ItemStack sword) {
         var swordTag = new CompoundTag();
-        //TODO
-//        sword.writeToNBT(swordTag);
+        sword.save(swordTag);
         tag.put("Sword", swordTag);
     }
 
     public static ItemStack getSwordAsGrave(Item grave, ItemStack sword) {
-        var graveStoneStack = new ItemStack(grave);//TODO, 1, EnumGraves.SWORD.ordinal());
+        var graveStoneStack = new ItemStack(grave);
         var tag = new CompoundTag();
         tag.putBoolean("Purified", false);
         GraveStoneHelper.addSwordInfo(tag, sword);
-//TODO
-//        graveStoneStack.setTagCompound(tag);
+        graveStoneStack.setTag(tag);
         return graveStoneStack;
     }
 
@@ -107,7 +105,7 @@ public class GraveStoneHelper {
         }
 
         public boolean isInArea(Level level, BlockPos pos) {
-            return //TODO level.provider.getDimension() == dimensionId &&
+            return false &&//TODO level.provider.getDimension() == dimensionId &&
                     pos.getX() >= firstPoint.getX() && pos.getX() <= lastPoint.getX() &&
                             pos.getY() >= firstPoint.getY() && pos.getY() <= lastPoint.getY() &&
                             pos.getZ() >= firstPoint.getZ() && pos.getZ() <= lastPoint.getZ();

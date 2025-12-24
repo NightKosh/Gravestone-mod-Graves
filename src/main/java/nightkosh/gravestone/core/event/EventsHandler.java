@@ -157,7 +157,8 @@ public class EventsHandler {
             }
 
             if (GSConfigs.GENERATE_PLAYER_GRAVES.get() && event.getEntity() instanceof Player player) {
-                if (true) { //TODO !GSConfigs.playerGravesDimensionalBlackList.contains(player.dimension)) {
+                if (!GSConfigs.PLAYER_GRAVES_DIMENSIONAL_BLACKLIST.get().contains(
+                        player.level.dimension().location().toString())) {
                     for (var playerDeathHandler : APIGraveGeneration.PLAYER_DEATH_HANDLERS) {
                         if (playerDeathHandler.cancelGraveGeneration(player, event.getSource())) {
                             if (GSConfigs.DEBUG_MODE.get()) {
@@ -167,6 +168,8 @@ public class EventsHandler {
                         }
                     }
                     GraveGenerationHelper.createPlayerGrave(player, event.getDrops(), event.getSource(), MobHandler.getAndRemoveSpawnTime(player));
+                } else if (GSConfigs.DEBUG_MODE.get()) {
+                    LOGGER.info("Player {} grave generation cancelled in blacklisted dimension", player.getScoreboardName());
                 }
             }
         }

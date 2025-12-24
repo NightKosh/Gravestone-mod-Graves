@@ -37,6 +37,7 @@ import nightkosh.gravestone.core.GSBlocks;
 import nightkosh.gravestone.core.MobHandler;
 import nightkosh.gravestone.gui.container.GraveInventory;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -96,17 +97,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     private static final List<EnumGraveType> GENERATED_CAT_GRAVES_TYPES = List.of(EnumGraveType.PET_GRAVE_STONE);
     private static final List<EnumGraveType> GENERATED_HORSE_GRAVES_TYPES = List.of(EnumGraveType.PET_GRAVE_STONE);
 
-
-    private static void addNonEmptyItems(List<ItemStack> items, NonNullList<ItemStack> itemsToAdd) {
-        for (var stack : itemsToAdd) {
-            if (!stack.isEmpty()) {
-                items.add(stack);
-            }
-        }
-    }
-
     public static void createPlayerGrave(Player player, Collection<ItemEntity> drops, DamageSource damageSource, long spawnTime) {
-        //TODO isInRestrictedArea && emty grave option ????
         if (!player.level.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY) &&
                 GSConfigs.GRAVE_ITEMS_COUNT.get() > 0 &&
                 !isInRestrictedArea(player.level, player.blockPosition())) {
@@ -271,26 +262,26 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         }
     }
 
-    public static void createCustomGrave(Entity entity, LivingDeathEvent event, ICustomEntityDeathHandler customEntityDeathHandler) {
-        //TODO
-//        if (isInRestrictedArea(entity.getEntityWorld(), entity.getPosition())) {
-//            LOGGER.info("Can't generate " + entity.getName() + "'s grave in restricted area. " + entity.getPosition());
-//            if (customEntityDeathHandler.getItems() != null) {
-//                customEntityDeathHandler.getItems().stream().filter(item -> item != null).forEach(item -> {
-//                    GraveInventory.dropItem(item, entity.getEntityWorld(), entity.getPosition());
-//                });
-//            }
-//        } else {
-//            int age = customEntityDeathHandler.getAge();
-//            var graveInfo = new GraveInfoOnDeath();
-//            graveInfo.setGrave(EnumGraves.getByTypeAndMaterial(customEntityDeathHandler.getGraveType(entity, event.getSource()),
-//                    customEntityDeathHandler.getGraveMaterial(entity, event.getSource())));
-//            graveInfo.setSword(customEntityDeathHandler.getSword());
-//
-//            var pos = new BlockPos(entity.posX, Math.round(entity.posY), entity.posZ - 1);
-//            var messageInfo = getDeathMessage((LivingEntity) entity, event.getSource().damageType, false);
-//            return createOnDeath(entity, entity.getEntityWorld(), pos, messageInfo, customEntityDeathHandler.getItems(), age, graveInfo, event.getSource());
-//        }
+    public static boolean createCustomGrave(LivingEntity entity, LivingDeathEvent event, ICustomEntityDeathHandler deathHandler) {
+        if (isInRestrictedArea(entity.level, entity.blockPosition())) {
+            LOGGER.info("Can't generate {}'s grave in restricted area - {}.", entity.getName(), entity.blockPosition().toShortString());
+            if (deathHandler.getItems() != null) {
+                deathHandler.getItems().stream().filter(item -> item != null).forEach(item -> {
+                    GraveInventory.dropItem(item, entity.level, entity.blockPosition());
+                });
+            }
+            return false;
+        } else {
+            int age = deathHandler.getAge();
+            var graveInfo = new GraveInfoOnDeath(
+                    deathHandler.getGraveType(entity, event.getSource()),
+                    deathHandler.getGraveMaterial(entity, event.getSource()),
+                    deathHandler.getSword());
+
+            var pos = new BlockPos(entity.getBlockX(), entity.getBlockY(), entity.getBlockZ() - 1);
+            String deathMessageJson = Component.Serializer.toJson(event.getSource().getLocalizedDeathMessage(entity));
+            return createOnDeath(entity, entity.level, pos, deathMessageJson, deathHandler.getItems(), age, graveInfo, event.getSource());
+        }
     }
 
     private static GraveInfoOnDeath getGraveOnDeath(
@@ -396,11 +387,9 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 graveEntity.getInventory().setItems(items);
                 graveEntity.setAge(age);
                 if (entity instanceof Player player) {
-                    //TODO
-//                    graveEntity.setOwner(player.getUniqueID().toString());
+                    graveEntity.setOwner(player.getUUID().toString());
                 } else if (entity instanceof TamableAnimal tamable && tamable.isTame() && tamable.getOwner() != null) {
-                    //TODO
-//                    graveEntity.setOwner(tamable.getOwner().getUniqueID().toString());
+                    graveEntity.setOwner(tamable.getOwner().getUUID().toString());
                 }
                 return true;
             }
@@ -410,8 +399,12 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             var itemStack = new ItemStack(GSBlocks.getGraveBlock(graveInfo.graveType(), graveInfo.material()).asItem());
 
             var tag = new CompoundTag();
-            tag.putString("deathMessageJson", deathMessageJson);
-            tag.putInt("Age", age);
+            if (StringUtils.isNoneBlank(deathMessageJson)) {
+                tag.putString("deathMessageJson", deathMessageJson);
+            }
+            if (age > 0) {
+                tag.putInt("Age", age);
+            }
             if (graveInfo.graveType() == EnumGraveType.SWORD && graveInfo.sword() != null) {
                 GraveStoneHelper.addSwordInfo(tag, graveInfo.sword());
             }
@@ -491,35 +484,11 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     }
 
     public static boolean isFireDamage(DamageSource damageSource, String damageType) {
-        return damageSource.is(DamageTypes.IN_FIRE) || damageSource.is(DamageTypes.ON_FIRE) || isFireDamage(damageType);
-    }
-
-    public static boolean isFireDamage(String damageType) {
-        return false;//TODO damageType.toLowerCase().contains("nfire");
+        return damageSource.is(DamageTypes.IN_FIRE) || damageSource.is(DamageTypes.ON_FIRE);
     }
 
     public static boolean isLavaDamage(DamageSource damageSource, String damageType) {
-        return damageSource.is(DamageTypes.LAVA) || isLavaDamage(damageType);
-    }
-
-    public static boolean isLavaDamage(String damageType) {
-        return false;//TODO damageType.toLowerCase().contains("lava");
-    }
-
-    public static boolean isMagicDamage(String damageText) {
-        return damageText.toLowerCase().contains("magic");
-    }
-
-    public static boolean isExplosionDamage(DamageSource damageSource) {
-        return false;//TODO isBlastDamage(damageSource.damageType) || isFireballDamage(damageSource.damageType);
-    }
-
-    public static boolean isBlastDamage(String damageType) {
-        return damageType.toLowerCase().contains("explosion");
-    }
-
-    public static boolean isFireballDamage(String damageType) {
-        return damageType.toLowerCase().contains("fireball");
+        return damageSource.is(DamageTypes.LAVA);
     }
 
     public static EnumGraveMaterial getGraveMaterialByBiomes(Level level, BlockPos pos) {

@@ -224,8 +224,6 @@ public class BlockGraveStone extends BaseEntityBlock {
                     if (flower != FlowerType.NONE) {
                         GraveInventory.dropItem(new ItemStack(Items.POPPY), level, pos);
                     }
-                    //TODO
-//                    GraveStoneHelper.dropBlock(level, pos, state);
                 }
             }
         }

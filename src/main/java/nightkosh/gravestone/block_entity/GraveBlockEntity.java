@@ -72,15 +72,6 @@ public abstract class GraveBlockEntity extends BlockEntity implements MenuProvid
         return inventory.isEmpty();
     }
 
-    //TODO
-//    /**
-//     * Sets the grave's isEditable flag to the specified parameter.
-//     */
-//    @SideOnly(Side.CLIENT)
-//    public void setEditable(boolean isEditable) {
-//        this.isEditable = isEditable;
-//    }
-
     @Override
     public void handleUpdateTag(CompoundTag tag) {
         this.load(tag);

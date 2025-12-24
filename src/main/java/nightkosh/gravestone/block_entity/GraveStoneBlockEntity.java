@@ -173,9 +173,10 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
     public boolean canBeLooted(Player player) {
         if (GSConfigs.ONLY_OWNER_CAN_LOOT_GRAVE.get()) {
             if (player != null) {
-                return false;//TODO
-//                String playerId = player.getUniqueID().toString();
-//                return player.isCreative() || StringUtils.isBlank(this.playerId) || playerId.equals(this.playerId) || inventory.getGraveContent().isEmpty();
+                return player.isCreative() ||
+                        StringUtils.isBlank(this.playerId) ||
+                        player.getUUID().toString().equals(this.playerId) ||
+                        inventory.getGraveContent().isEmpty();
             }
             return false;
         }

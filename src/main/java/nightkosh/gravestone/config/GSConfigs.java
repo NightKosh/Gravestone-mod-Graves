@@ -4,7 +4,6 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import nightkosh.gravestone.helper.GraveStoneHelper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,20 +22,18 @@ public class GSConfigs {
     public static ForgeConfigSpec.ConfigValue<Boolean> GENERATE_VILLAGER_GRAVES;
     public static ForgeConfigSpec.ConfigValue<Boolean> GENERATE_PET_GRAVES;
     public static ForgeConfigSpec.ConfigValue<Boolean> GENERATE_GRAVES_IN_LAVA;
-    public static ForgeConfigSpec.ConfigValue<Boolean> GENERATE_SWORD_GRAVES;
+    //    public static ForgeConfigSpec.ConfigValue<Boolean> GENERATE_SWORD_GRAVES;
     public static ForgeConfigSpec.ConfigValue<Boolean> GENERATE_EMPTY_PLAYER_GRAVES;
     public static ForgeConfigSpec.ConfigValue<Boolean> ONLY_OWNER_CAN_LOOT_GRAVE;
-    public static ForgeConfigSpec.ConfigValue<Boolean> REMOVE_EMPTY_GRAVES;
-    public static ForgeConfigSpec.ConfigValue<Boolean> SHOW_GRAVE_REMOVAL_MESSAGES;
+    //    public static ForgeConfigSpec.ConfigValue<Boolean> REMOVE_EMPTY_GRAVES;
+//    public static ForgeConfigSpec.ConfigValue<Boolean> SHOW_GRAVE_REMOVAL_MESSAGES;
     public static ForgeConfigSpec.ConfigValue<Boolean> DROP_GRAVE_BLOCK_AT_DESTRUCTION;
-    public static ForgeConfigSpec.ConfigValue<Boolean> RENDER_GRAVES_FLOWERS;
-    public static ForgeConfigSpec.ConfigValue<Boolean> VANILLA_RENDERER_FOR_SWORDS_GRAVES;
+    //    public static ForgeConfigSpec.ConfigValue<Boolean> VANILLA_RENDERER_FOR_SWORDS_GRAVES;
     public static ForgeConfigSpec.ConfigValue<Boolean> CREATE_BACKUPS;
 
     public static ForgeConfigSpec.ConfigValue<Integer> GRAVE_ITEMS_COUNT;
 
-    //TODO
-//    public static List<Integer> playerGravesDimensionalBlackList;
+    public static ForgeConfigSpec.ConfigValue<List<? extends String>> PLAYER_GRAVES_DIMENSIONAL_BLACKLIST;
 
     public static List<GraveStoneHelper.RestrictedArea> restrictGraveGenerationInArea;
 
@@ -59,14 +56,13 @@ public class GSConfigs {
         GENERATE_VILLAGER_GRAVES = BUILDER.define("GenerateVillagersGraves", true);
         GENERATE_PET_GRAVES = BUILDER.define("GeneratePetsGraves", true);
         GENERATE_GRAVES_IN_LAVA = BUILDER.define("GenerateGravesInLava", true);
-        GENERATE_SWORD_GRAVES = BUILDER.define("GenerateSwordGraves", true);
+//        GENERATE_SWORD_GRAVES = BUILDER.define("GenerateSwordGraves", true);
         GENERATE_EMPTY_PLAYER_GRAVES = BUILDER.define("GenerateEmptyPlayerGraves", true);
         ONLY_OWNER_CAN_LOOT_GRAVE = BUILDER.define("OnlyOwnerCanLootGrave", false);
-        REMOVE_EMPTY_GRAVES = BUILDER.define("RemoveEmptyGraves", false);
-        SHOW_GRAVE_REMOVAL_MESSAGES = BUILDER.define("ShowGraveRemovalMessages", true);
+//        REMOVE_EMPTY_GRAVES = BUILDER.define("RemoveEmptyGraves", false);
+//        SHOW_GRAVE_REMOVAL_MESSAGES = BUILDER.define("ShowGraveRemovalMessages", true);
         DROP_GRAVE_BLOCK_AT_DESTRUCTION = BUILDER.define("DropGraveBlockAtDestruction", true);
-        RENDER_GRAVES_FLOWERS = BUILDER.define("RenderGravesFlowers", true);
-        VANILLA_RENDERER_FOR_SWORDS_GRAVES = BUILDER.define("VanillaRendererForSwordsGraves", true);
+//        VANILLA_RENDERER_FOR_SWORDS_GRAVES = BUILDER.define("VanillaRendererForSwordsGraves", true);
         CREATE_BACKUPS = BUILDER.define("CreateBackups", true);
 
         GRAVE_ITEMS_COUNT = BUILDER.comment("This value is amount of items which should be saved in percents. It should be in range of 0 an 100!")
@@ -85,8 +81,18 @@ public class GSConfigs {
 //            }
 //        }
 //
-//        playerGravesDimensionalBlackList = ConfigsHelper.getDimensionList(config, CATEGORY_GRAVES, "PlayerGravesDimensionalBlackList", "",
-//                "List of dimension ids in which player's graves will not be generated at death");
+        PLAYER_GRAVES_DIMENSIONAL_BLACKLIST = BUILDER
+                .comment("List of dimensions where player graves should not be created",
+                        "Format: \"namespace:path\" (example: minecraft:the_nether)")
+                .defineList(
+                        "PlayerGravesDimensionalBlackList",
+                        List.of(
+                                "minecraft:the_nether",
+                                "minecraft:the_end"
+                        ),
+                        o -> o instanceof String
+                );
+
 
         DEBUG_MODE = BUILDER.comment("Enable debug mode for additional dev logs")
                 .define("Debug Mode", false);
