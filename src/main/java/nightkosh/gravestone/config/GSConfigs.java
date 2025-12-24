@@ -39,15 +39,6 @@ public class GSConfigs {
 
     public static ForgeConfigSpec.ConfigValue<Boolean> DEBUG_MODE;
 
-
-    // COMPATIBILITY
-//    public static boolean storeTheCampingModItems;
-//    public static boolean storeRpgInventoryItems;
-//    public static boolean storeBackpacksItems;
-//    public static boolean enableEnderIOSoulbound;
-//    public static boolean enableTconstructSoulbound;
-//    public static boolean enableTwilightForestKeeping;
-
     static {
         BUILDER.push("Configs for Gravestone mod - Graves");
 
@@ -96,14 +87,6 @@ public class GSConfigs {
 
         DEBUG_MODE = BUILDER.comment("Enable debug mode for additional dev logs")
                 .define("Debug Mode", false);
-
-////        storeBattlegearItems = config.get(CATEGORY_COMPATIBILITY, "StoreBattlegearItems", true).getBoolean(true);
-////        storeTheCampingModItems = config.get(CATEGORY_COMPATIBILITY, "StoreTheCampingModItems", true).getBoolean(true);
-////        storeRpgInventoryItems = config.get(CATEGORY_COMPATIBILITY, "StoreRpgInventoryItems", true).getBoolean(true);
-////        storeBackpacksItems = config.get(CATEGORY_COMPATIBILITY, "StoreBackpacksItems", true).getBoolean(true);
-////        enableEnderIOSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableEnderIOSoulbound", true).getBoolean(true);
-////        enableTconstructSoulbound = config.get(CATEGORY_COMPATIBILITY, "EnableTconstructSoulbound", true).getBoolean(true);
-////        enableTwilightForestKeeping = config.get(CATEGORY_COMPATIBILITY, "EnableTwilightForestCharmsOfKeeping", true).getBoolean(true);
 
         BUILDER.pop();
         SPEC = BUILDER.build();
