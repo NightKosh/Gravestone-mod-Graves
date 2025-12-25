@@ -1,11 +1,12 @@
 package nightkosh.gravestone.core;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtAccounter;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import nightkosh.gravestone.config.GSConfigs;
+import nightkosh.gravestone.core.config.GSConfigs;
 
 import javax.annotation.Nullable;
 import java.nio.file.Files;
@@ -37,7 +38,7 @@ public class MobHandler {
         var uuid = entity.getUUID();
         if (MOBS_SPAWN_TIME.containsKey(uuid)) {
             MOBS_SPAWN_TIME.remove(uuid);
-            saveMobsSpawnTime(entity.level);
+            saveMobsSpawnTime(entity.level());
             if (GSConfigs.DEBUG_MODE.get()) {
                 LOGGER.info("Remove spawn time for entity {} with uuid {}",
                         entity.getScoreboardName(), uuid);
@@ -53,14 +54,14 @@ public class MobHandler {
         if (MOBS_SPAWN_TIME.containsKey(uuid)) {
             long time = MOBS_SPAWN_TIME.get(uuid);
             MOBS_SPAWN_TIME.remove(uuid);
-            saveMobsSpawnTime(entity.level);
+            saveMobsSpawnTime(entity.level());
             if (GSConfigs.DEBUG_MODE.get()) {
                 LOGGER.info("Found spawn time for entity {} with uuid {} - {}. Record will be removed.",
                         entity.getScoreboardName(), uuid, time);
             }
             return time;
         } else {
-            var time = entity.level.getGameTime();
+            var time = entity.level().getGameTime();
             if (GSConfigs.DEBUG_MODE.get()) {
                 LOGGER.info("Not found spawn time for entity {} with uuid {}, return current time {}",
                         entity.getScoreboardName(), uuid, time);
@@ -73,11 +74,11 @@ public class MobHandler {
         var uuid = entity.getUUID();
         if (GSConfigs.DEBUG_MODE.get()) {
             LOGGER.info("Set current time {} as spawn time for entity {} with uuid {}",
-                    entity.level.getGameTime(), entity.getScoreboardName(), uuid);
+                    entity.level().getGameTime(), entity.getScoreboardName(), uuid);
         }
 
-        MOBS_SPAWN_TIME.putIfAbsent(uuid, entity.level.getGameTime());
-        saveMobsSpawnTime(entity.level);
+        MOBS_SPAWN_TIME.putIfAbsent(uuid, entity.level().getGameTime());
+        saveMobsSpawnTime(entity.level());
     }
 
     public static void loadMobsSpawnTime(Level level, Path worldDir) {
@@ -145,7 +146,7 @@ public class MobHandler {
     @Nullable
     private static CompoundTag readDataFromFile(Path file) {
         try (var in = Files.newInputStream(file)) {
-            return NbtIo.readCompressed(in);
+            return NbtIo.readCompressed(in, NbtAccounter.unlimitedHeap());
         } catch (Exception e) {
             LOGGER.error("Could not read spawn time file: {}", file, e);
             return null;
