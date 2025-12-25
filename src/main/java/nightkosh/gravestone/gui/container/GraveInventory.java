@@ -38,21 +38,21 @@ public class GraveInventory implements Container {
         this.grave = grave;
     }
 
-    public void readItems(CompoundTag tag) {
+    public void readItems(CompoundTag tag, @Nonnull HolderLookup.Provider provider) {
         var tagList = tag.getList("Items", 10);
         items = new ArrayList<>(DEFAULT_INVENTORY_SIZE);
 
         for (int i = 0; i < tagList.size(); i++) {
-            items.add(ItemStack.parse(grave.getLevel().registryAccess(), tagList.getCompound(i)).get());
+            items.add(ItemStack.parse(provider, tagList.getCompound(i)).get());
         }
     }
 
-    public void saveItems(CompoundTag tag) {
+    public void saveItems(CompoundTag tag, @Nonnull HolderLookup.Provider provider) {
         var tags = new ListTag();
 
         for (var stack : items) {
             if (stack != null && stack != ItemStack.EMPTY) {
-                tags.add(stack.save(grave.getLevel().registryAccess()));
+                tags.add(stack.save(provider));
             }
         }
 

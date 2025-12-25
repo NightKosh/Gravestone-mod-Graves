@@ -1,15 +1,16 @@
 package nightkosh.gravestone.block;
 
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 /**
@@ -30,26 +31,29 @@ public class ItemBlockGraveStone extends BlockItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Level level, List<Component> tooltips, TooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, @Nonnull Item.TooltipContext context,
+                                List<Component> tooltips, @Nonnull TooltipFlag flag) {
         tooltips.add(Component.translatable("material.title")
                 .append(" ")
                 .append(Component.translatable("material." + this.material.name().toLowerCase())));
 
-        if (!stack.hasTag()) {
-            stack.setTag(new CompoundTag());
-        } else {
-            var tag = stack.getTag();
-            if (tag.contains("deathMessageJson")) {
-                tooltips.add(Component.Serializer.fromJson(tag.getString("deathMessageJson")));
-            }
-            if (tag.getInt("Age") > 0) {
-                tooltips.add(Component.translatable("item.grave.age")
-                        .append(" " + tag.getInt("Age" + " "))
-                        .append(Component.translatable("item.grave.days")));
-            }
+        var data = stack.get(DataComponents.CUSTOM_DATA);
+        if (data != null) {
+            var tag = data.getUnsafe();
+            if (tag != null) {
+                if (tag.contains("deathMessageJson")) {
+                    tooltips.add(Component.Serializer.fromJson(
+                            tag.getString("deathMessageJson"),
+                            Minecraft.getInstance().level.registryAccess()));
+                }
+                if (tag.getInt("Age") > 0) {
+                    tooltips.add(Component.translatable("item.grave.age")
+                            .append(" " + tag.getInt("Age" + " "))
+                            .append(Component.translatable("item.grave.days")));
+                }
 
 //            if (tag.contains("Sword")) {
-//                var sword = ItemStack.of(tag.getCompoundTag("Sword"));
+//                var sword = ItemStack.parse(level.registryAccess(), tag.getCompoundTag("Sword")).get();
 //
 //                if (StringUtils.isNotBlank(sword.getDisplayName())) {
 //                    tooltipList.add(ModGraveStone.proxy.getLocalizedString("item.grave.sword_name") + " - " + sword.getDisplayName());
@@ -78,7 +82,8 @@ public class ItemBlockGraveStone extends BlockItem {
 //                    }
 //                }
 //            }
-            super.appendHoverText(stack, level, tooltips, flag);
+            }
+            super.appendHoverText(stack, context, tooltips, flag);
         }
     }
 
