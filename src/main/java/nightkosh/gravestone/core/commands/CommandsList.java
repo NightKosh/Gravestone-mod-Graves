@@ -34,7 +34,6 @@ public class CommandsList {
 
     public static LiteralArgumentBuilder<CommandSourceStack> getCommand() {
         return Commands.literal(NAME)
-                .requires(src -> src.hasPermission(0))
                 .executes(CommandsList::execute);
     }
 

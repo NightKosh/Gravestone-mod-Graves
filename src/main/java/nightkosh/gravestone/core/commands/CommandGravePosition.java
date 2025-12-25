@@ -8,6 +8,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.permissions.Permissions;
 import nightkosh.gravestone.core.GSBackups;
 
 /**
@@ -43,7 +44,7 @@ public class CommandGravePosition {
                         .withStyle(ChatFormatting.GREEN),
                 false);
         for (var backup : backups.getBackups()) {
-            src.sendSuccess(() -> Component.literal(backup.getDimension().location().getPath())
+            src.sendSuccess(() -> Component.literal(backup.getDimension().identifier().getPath())
                     .append(" : ")
                     .append(Component.literal(backup.getPos().toShortString())), false);
         }
@@ -53,7 +54,7 @@ public class CommandGravePosition {
 
     public static LiteralArgumentBuilder<CommandSourceStack> getCommand() {
         return Commands.literal(NAME)
-                .requires(src -> src.hasPermission(1))
+                .requires(src -> src.permissions().hasPermission(Permissions.COMMANDS_MODERATOR))
                 .executes(ctx -> CommandGravePosition.execute(ctx, null))
                 .then(Commands.argument("player", EntityArgument.player())
                         .executes(ctx ->

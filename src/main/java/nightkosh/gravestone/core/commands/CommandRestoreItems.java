@@ -8,6 +8,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.permissions.Permissions;
 import nightkosh.gravestone.core.GSBackups;
 import nightkosh.gravestone.gui.container.GraveInventory;
 
@@ -61,7 +62,7 @@ public class CommandRestoreItems {
 
     public static LiteralArgumentBuilder<CommandSourceStack> getCommand() {
         return Commands.literal(NAME)
-                .requires(src -> src.hasPermission(3))
+                .requires(src -> src.permissions().hasPermission(Permissions.COMMANDS_ADMIN))
                 .executes(ctx -> {
                     ctx.getSource().sendFailure(Component.literal("<player> required"));
                     return 0;
