@@ -8,7 +8,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import nightkosh.gravestone.capability.BackupProvider;
+import nightkosh.gravestone.core.GSBackups;
 
 /**
  * GraveStone mod
@@ -33,7 +33,7 @@ public class CommandGravePosition {
         }
 
         final String playerName = player.getScoreboardName();
-        var backups = player.getData(BackupProvider.BACKUPS.get());
+        var backups = player.getData(GSBackups.BACKUPS.get());
         if (backups.getBackups().isEmpty()) {
             src.sendSuccess(() -> Component.literal("Backups not found"), false);
             return 1;
