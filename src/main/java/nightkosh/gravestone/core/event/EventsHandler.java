@@ -18,7 +18,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
@@ -52,80 +51,6 @@ public class EventsHandler {
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGH)
-    public static void onEntityLivingDeath(LivingDeathEvent event) {
-        if (!event.getEntity().level().isClientSide()) {
-            if (GSConfigs.DEBUG_MODE.get()) {
-                LOGGER.info("LivingDeathEvent event triggered");
-            }
-
-            if (!GSConfigs.GENERATE_GRAVES_IN_LAVA.get() && event.getSource().is(DamageTypes.LAVA)) {
-                if (GSConfigs.DEBUG_MODE.get()) {
-                    LOGGER.info("Event skipped - death in lava");
-                }
-                return;
-            }
-
-            if (GSConfigs.GENERATE_VILLAGER_GRAVES.get() && event.getEntity() instanceof Villager villager) {
-                for (var villagerDeathHandler : APIGraveGeneration.VILLAGER_DEATH_HANDLERS) {
-                    if (villagerDeathHandler.cancelGraveGeneration(villager, event.getSource())) {
-                        if (GSConfigs.DEBUG_MODE.get()) {
-                            LOGGER.info("Villager grave generation cancelled");
-                        }
-                        return;
-                    }
-                }
-                GraveGenerationHelper.createVillagerGrave(villager, event.getSource());
-                return;
-            } else if (GSConfigs.GENERATE_PET_GRAVES.get()) {
-                if (event.getEntity() instanceof TamableAnimal) {
-                    if (event.getEntity() instanceof Wolf dog) {
-                        for (var dogDeathHandler : APIGraveGeneration.DOG_DEATH_HANDLERS) {
-                            if (dogDeathHandler.cancelGraveGeneration(dog, event.getSource())) {
-                                if (GSConfigs.DEBUG_MODE.get()) {
-                                    LOGGER.info("Dog grave generation cancelled");
-                                }
-                                return;
-                            }
-                        }
-                        GraveGenerationHelper.createDogGrave(dog, event.getSource());
-                        return;
-                    } else if (event.getEntity() instanceof Cat cat) {
-                        for (var catDeathHandler : APIGraveGeneration.CAT_DEATH_HANDLERS) {
-                            if (catDeathHandler.cancelGraveGeneration(cat, event.getSource())) {
-                                if (GSConfigs.DEBUG_MODE.get()) {
-                                    LOGGER.info("Cat grave generation cancelled");
-                                }
-                                return;
-                            }
-                        }
-                        GraveGenerationHelper.createCatGrave(cat, event.getSource());
-                        return;
-                    }
-                } else if (event.getEntity() instanceof AbstractHorse horse) {
-                    for (var horseDeathHandler : APIGraveGeneration.HORSE_DEATH_HANDLERS) {
-                        if (horseDeathHandler.cancelGraveGeneration(horse, event.getSource())) {
-                            if (GSConfigs.DEBUG_MODE.get()) {
-                                LOGGER.info("Horse grave generation cancelled");
-                            }
-                            return;
-                        }
-                    }
-                    GraveGenerationHelper.createHorseGrave(horse, event.getSource());
-                    return;
-                }
-            }
-
-            for (var customEntityDeathHandler : APIGraveGeneration.CUSTOM_ENTITY_DEATH_HANDLERS) {
-                if (event.getEntity().getClass().equals(customEntityDeathHandler.getEntityClass()) &&
-                        customEntityDeathHandler.canGenerateGrave(event.getEntity(), event.getSource())) {
-                    GraveGenerationHelper.createCustomGrave(event.getEntity(), event, customEntityDeathHandler);
-                    return;
-                }
-            }
-        }
-    }
-
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onPlayerDrops(LivingDropsEvent event) {
         if (!event.getEntity().level().isClientSide()) {
@@ -154,6 +79,62 @@ public class EventsHandler {
                     GraveGenerationHelper.createPlayerGrave(player, event.getDrops(), event.getSource(), MobHandler.getAndRemoveSpawnTime(player));
                 } else if (GSConfigs.DEBUG_MODE.get()) {
                     LOGGER.info("Player {} grave generation cancelled in blacklisted dimension", player.getScoreboardName());
+                }
+            } else if (GSConfigs.GENERATE_VILLAGER_GRAVES.get() && event.getEntity() instanceof Villager villager) {
+                for (var villagerDeathHandler : APIGraveGeneration.VILLAGER_DEATH_HANDLERS) {
+                    if (villagerDeathHandler.cancelGraveGeneration(villager, event.getSource())) {
+                        if (GSConfigs.DEBUG_MODE.get()) {
+                            LOGGER.info("Villager grave generation cancelled");
+                        }
+                        return;
+                    }
+                }
+                GraveGenerationHelper.createVillagerGrave(villager, event.getDrops(), event.getSource());
+                return;
+            } else if (GSConfigs.GENERATE_PET_GRAVES.get()) {
+                if (event.getEntity() instanceof TamableAnimal) {
+                    if (event.getEntity() instanceof Wolf dog) {
+                        for (var dogDeathHandler : APIGraveGeneration.DOG_DEATH_HANDLERS) {
+                            if (dogDeathHandler.cancelGraveGeneration(dog, event.getSource())) {
+                                if (GSConfigs.DEBUG_MODE.get()) {
+                                    LOGGER.info("Dog grave generation cancelled");
+                                }
+                                return;
+                            }
+                        }
+                        GraveGenerationHelper.createDogGrave(dog, event.getDrops(), event.getSource());
+                        return;
+                    } else if (event.getEntity() instanceof Cat cat) {
+                        for (var catDeathHandler : APIGraveGeneration.CAT_DEATH_HANDLERS) {
+                            if (catDeathHandler.cancelGraveGeneration(cat, event.getSource())) {
+                                if (GSConfigs.DEBUG_MODE.get()) {
+                                    LOGGER.info("Cat grave generation cancelled");
+                                }
+                                return;
+                            }
+                        }
+                        GraveGenerationHelper.createCatGrave(cat, event.getDrops(), event.getSource());
+                        return;
+                    }
+                } else if (event.getEntity() instanceof AbstractHorse horse) {
+                    for (var horseDeathHandler : APIGraveGeneration.HORSE_DEATH_HANDLERS) {
+                        if (horseDeathHandler.cancelGraveGeneration(horse, event.getSource())) {
+                            if (GSConfigs.DEBUG_MODE.get()) {
+                                LOGGER.info("Horse grave generation cancelled");
+                            }
+                            return;
+                        }
+                    }
+                    GraveGenerationHelper.createHorseGrave(horse, event.getDrops(), event.getSource());
+                    return;
+                }
+            }
+
+            for (var customEntityDeathHandler : APIGraveGeneration.CUSTOM_ENTITY_DEATH_HANDLERS) {
+                if (event.getEntity().getClass().equals(customEntityDeathHandler.getEntityClass()) &&
+                        customEntityDeathHandler.canGenerateGrave(event.getEntity(), event.getSource())) {
+                    GraveGenerationHelper.createCustomGrave(event.getEntity(), event, customEntityDeathHandler);
+                    return;
                 }
             }
         }
