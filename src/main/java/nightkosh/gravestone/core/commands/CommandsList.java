@@ -19,12 +19,14 @@ public class CommandsList {
 
     private static int execute(CommandContext<CommandSourceStack> ctx) {
         var src = ctx.getSource();
-        src.sendSuccess(Component.literal("Gravestone mod commands:").withStyle(ChatFormatting.GREEN), false);
-        src.sendSuccess(Component.literal("/gs ")
-                .append(CommandGravePosition.NAME),
+        src.sendSuccess(() -> Component.literal("Gravestone mod commands:")
+                        .withStyle(ChatFormatting.GREEN),
                 false);
-        src.sendSuccess(Component.literal("/gs ")
-                .append(CommandRestoreItems.NAME),
+        src.sendSuccess(() -> Component.literal("/gs ")
+                        .append(CommandGravePosition.NAME),
+                false);
+        src.sendSuccess(() -> Component.literal("/gs ")
+                        .append(CommandRestoreItems.NAME),
                 false);
 
         return 1;
