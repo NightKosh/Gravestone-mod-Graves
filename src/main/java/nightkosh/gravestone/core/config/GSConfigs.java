@@ -1,6 +1,6 @@
-package nightkosh.gravestone.config;
+package nightkosh.gravestone.core.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import nightkosh.gravestone.helper.GraveStoneHelper;
 
 import java.util.ArrayList;
@@ -14,30 +14,30 @@ import java.util.List;
  */
 public class GSConfigs {
 
-    public static final ForgeConfigSpec SPEC;
-    public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
+    public static final ModConfigSpec SPEC;
+    public static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
-    public static ForgeConfigSpec.ConfigValue<Boolean> CAN_PLACE_GRAVES_EVERY_WHERE;
-    public static ForgeConfigSpec.ConfigValue<Boolean> GENERATE_PLAYER_GRAVES;
-    public static ForgeConfigSpec.ConfigValue<Boolean> GENERATE_VILLAGER_GRAVES;
-    public static ForgeConfigSpec.ConfigValue<Boolean> GENERATE_PET_GRAVES;
-    public static ForgeConfigSpec.ConfigValue<Boolean> GENERATE_GRAVES_IN_LAVA;
-    //    public static ForgeConfigSpec.ConfigValue<Boolean> GENERATE_SWORD_GRAVES;
-    public static ForgeConfigSpec.ConfigValue<Boolean> GENERATE_EMPTY_PLAYER_GRAVES;
-    public static ForgeConfigSpec.ConfigValue<Boolean> ONLY_OWNER_CAN_LOOT_GRAVE;
-    //    public static ForgeConfigSpec.ConfigValue<Boolean> REMOVE_EMPTY_GRAVES;
-//    public static ForgeConfigSpec.ConfigValue<Boolean> SHOW_GRAVE_REMOVAL_MESSAGES;
-    public static ForgeConfigSpec.ConfigValue<Boolean> DROP_GRAVE_BLOCK_AT_DESTRUCTION;
-    //    public static ForgeConfigSpec.ConfigValue<Boolean> VANILLA_RENDERER_FOR_SWORDS_GRAVES;
-    public static ForgeConfigSpec.ConfigValue<Boolean> CREATE_BACKUPS;
+    public static ModConfigSpec.ConfigValue<Boolean> CAN_PLACE_GRAVES_EVERY_WHERE;
+    public static ModConfigSpec.ConfigValue<Boolean> GENERATE_PLAYER_GRAVES;
+    public static ModConfigSpec.ConfigValue<Boolean> GENERATE_VILLAGER_GRAVES;
+    public static ModConfigSpec.ConfigValue<Boolean> GENERATE_PET_GRAVES;
+    public static ModConfigSpec.ConfigValue<Boolean> GENERATE_GRAVES_IN_LAVA;
+    //    public static ModConfigSpec.ConfigValue<Boolean> GENERATE_SWORD_GRAVES;
+    public static ModConfigSpec.ConfigValue<Boolean> GENERATE_EMPTY_PLAYER_GRAVES;
+    public static ModConfigSpec.ConfigValue<Boolean> ONLY_OWNER_CAN_LOOT_GRAVE;
+    //    public static ModConfigSpec.ConfigValue<Boolean> REMOVE_EMPTY_GRAVES;
+//    public static ModConfigSpec.ConfigValue<Boolean> SHOW_GRAVE_REMOVAL_MESSAGES;
+    public static ModConfigSpec.ConfigValue<Boolean> DROP_GRAVE_BLOCK_AT_DESTRUCTION;
+    //    public static ModConfigSpec.ConfigValue<Boolean> VANILLA_RENDERER_FOR_SWORDS_GRAVES;
+    public static ModConfigSpec.ConfigValue<Boolean> CREATE_BACKUPS;
 
-    public static ForgeConfigSpec.ConfigValue<Integer> GRAVE_ITEMS_COUNT;
+    public static ModConfigSpec.ConfigValue<Integer> GRAVE_ITEMS_COUNT;
 
-    public static ForgeConfigSpec.ConfigValue<List<? extends String>> PLAYER_GRAVES_DIMENSIONAL_BLACKLIST;
+    public static ModConfigSpec.ConfigValue<List<? extends String>> PLAYER_GRAVES_DIMENSIONAL_BLACKLIST;
 
     public static List<GraveStoneHelper.RestrictedArea> restrictGraveGenerationInArea;
 
-    public static ForgeConfigSpec.ConfigValue<Boolean> DEBUG_MODE;
+    public static ModConfigSpec.ConfigValue<Boolean> DEBUG_MODE;
 
     static {
         BUILDER.push("Configs for Gravestone mod - Graves");
