@@ -1,14 +1,15 @@
 package nightkosh.gravestone;
 
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import nightkosh.gravestone.api.IGraveGeneration;
 import nightkosh.gravestone.api.IGraveStoneHelper;
 import nightkosh.gravestone.api.ModInfo;
-import nightkosh.gravestone.config.GSConfigs;
+import nightkosh.gravestone.core.GSBackups;
+import nightkosh.gravestone.core.GSTabs;
+import nightkosh.gravestone.core.config.GSConfigs;
 import nightkosh.gravestone.core.GSBlockEntities;
 import nightkosh.gravestone.core.GSBlocks;
 import nightkosh.gravestone.core.GSMenu;
@@ -35,18 +36,17 @@ public class ModGraveStone {
     public static final IGraveStoneHelper gravestoneHelper = GraveGenerationHelper.INSTANCE;
     public static final IGraveGeneration apiGraveGeneration = APIGraveGeneration.INSTANCE;
 
-    public ModGraveStone() {
+    public ModGraveStone(IEventBus eventBus) {
         INSTANCE = this;
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GSConfigs.SPEC, ModInfo.ID + ".toml");
 
-        var eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
+        GSTabs.register(eventBus);
         GSBlocks.register(eventBus);
         GSBlockEntities.register(eventBus);
         GSMenu.register(eventBus);
 
-        MinecraftForge.EVENT_BUS.register(this);
+        GSBackups.ATTACHMENT_TYPES.register(eventBus);
     }
 
     //TODO
