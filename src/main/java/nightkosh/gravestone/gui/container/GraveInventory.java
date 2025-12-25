@@ -1,15 +1,18 @@
 package nightkosh.gravestone.gui.container;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
-import nightkosh.gravestone.config.GSConfigs;
+import nightkosh.gravestone.core.config.GSConfigs;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -40,7 +43,7 @@ public class GraveInventory implements Container {
         items = new ArrayList<>(DEFAULT_INVENTORY_SIZE);
 
         for (int i = 0; i < tagList.size(); i++) {
-            items.add(ItemStack.of(tagList.getCompound(i)));
+            items.add(ItemStack.parse(grave.getLevel().registryAccess(), tagList.getCompound(i)).get());
         }
     }
 
@@ -49,9 +52,7 @@ public class GraveInventory implements Container {
 
         for (var stack : items) {
             if (stack != null && stack != ItemStack.EMPTY) {
-                var itemTag = new CompoundTag();
-                stack.save(itemTag);
-                tags.add(itemTag);
+                tags.add(stack.save(grave.getLevel().registryAccess()));
             }
         }
 
@@ -133,11 +134,6 @@ public class GraveInventory implements Container {
                     level.getRandom().nextGaussian() * 0.2,
                     level.getRandom().nextGaussian() * 0.2,
                     level.getRandom().nextGaussian() * 0.2);
-
-            //TODO redundant ???
-            if (stack.hasTag()) {
-                entityItem.getItem().setTag(stack.getTag().copy());
-            }
             level.addFreshEntity(entityItem);
         }
     }
@@ -223,7 +219,7 @@ public class GraveInventory implements Container {
 
     @Override
     public boolean stillValid(@Nonnull Player player) {
-        return player.level.getBlockEntity(this.grave.getBlockPos()) == this.grave &&
+        return player.level().getBlockEntity(this.grave.getBlockPos()) == this.grave &&
                 player.distanceToSqr(
                         this.grave.getBlockPos().getX() + 0.5,
                         this.grave.getBlockPos().getY() + 0.5,
