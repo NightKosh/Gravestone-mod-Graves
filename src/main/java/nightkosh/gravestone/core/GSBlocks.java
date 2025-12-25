@@ -1,11 +1,11 @@
 package nightkosh.gravestone.core;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import nightkosh.gravestone.api.ModInfo;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
@@ -27,20 +27,20 @@ import java.util.function.Supplier;
 public class GSBlocks {
 
     public static final DeferredRegister<Block> BLOCKS_REGISTER =
-            DeferredRegister.create(ForgeRegistries.BLOCKS, ModInfo.ID);
+            DeferredRegister.create(Registries.BLOCK, ModInfo.ID);
 
     public static final DeferredRegister<Item> ITEMS_REGISTER =
-            DeferredRegister.create(ForgeRegistries.ITEMS, ModInfo.ID);
+            DeferredRegister.create(Registries.ITEM, ModInfo.ID);
 
-    public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
-    public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> GRAVE_PLATES = new EnumMap<>(EnumGraveMaterial.class);
-    public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> CROSSES = new EnumMap<>(EnumGraveMaterial.class);
-    public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> OBELISKS = new EnumMap<>(EnumGraveMaterial.class);
-    public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> CELTIC_CROSSES = new EnumMap<>(EnumGraveMaterial.class);
-    public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> PET_GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
-    public static final Map<EnumGraveMaterial, RegistryObject<BlockGraveStone>> VILLAGER_GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
+    public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
+    public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> GRAVE_PLATES = new EnumMap<>(EnumGraveMaterial.class);
+    public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> CROSSES = new EnumMap<>(EnumGraveMaterial.class);
+    public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> OBELISKS = new EnumMap<>(EnumGraveMaterial.class);
+    public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> CELTIC_CROSSES = new EnumMap<>(EnumGraveMaterial.class);
+    public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> PET_GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
+    public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> VILLAGER_GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
 
-    public static final List<RegistryObject<BlockGraveStone>> GRAVE_LIST = new ArrayList<>();
+    public static final List<DeferredHolder<Block, BlockGraveStone>> GRAVE_LIST = new ArrayList<>();
 
     static {
         for (var mat : EnumGraveMaterial.values()) {
@@ -88,7 +88,7 @@ public class GSBlocks {
         }
     }
 
-    private static <T extends Block> RegistryObject<T> registerBlock(
+    private static <T extends Block> DeferredHolder<Block, T> registerBlock(
             String name, Supplier<T> supplier) {
         var block = BLOCKS_REGISTER.register(name, supplier);
         ITEMS_REGISTER.register(name, () -> new ItemBlockGraveStone((BlockGraveStone) block.get()));

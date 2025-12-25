@@ -2,19 +2,20 @@ package nightkosh.gravestone.helper;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.BlockGraveStone;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
-import nightkosh.gravestone.config.GSConfigs;
+import nightkosh.gravestone.core.config.GSConfigs;
 import nightkosh.gravestone.core.GSBlocks;
 import nightkosh.gravestone.gui.container.GraveInventory;
 import org.apache.commons.lang3.StringUtils;
@@ -65,18 +66,16 @@ public class GraveStoneHelper {
                 state.is(BlockTags.MINEABLE_WITH_SHOVEL);
     }
 
-    public static void addSwordInfo(CompoundTag tag, ItemStack sword) {
-        var swordTag = new CompoundTag();
-        sword.save(swordTag);
-        tag.put("Sword", swordTag);
+    public static void addSwordInfo(Level level, CompoundTag tag, ItemStack sword) {
+        tag.put("Sword", sword.save(level.registryAccess()));
     }
 
     public static ItemStack getSwordAsGrave(Item grave, ItemStack sword) {
         var graveStoneStack = new ItemStack(grave);
         var tag = new CompoundTag();
         tag.putBoolean("Purified", false);
-        GraveStoneHelper.addSwordInfo(tag, sword);
-        graveStoneStack.setTag(tag);
+        //TODO GraveStoneHelper.addSwordInfo(tag, sword);
+        graveStoneStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
         return graveStoneStack;
     }
 
@@ -147,7 +146,7 @@ public class GraveStoneHelper {
                     var tag = new CompoundTag();
                     tag.putBoolean("Purified", true);
 
-                    itemStack.setTag(tag);
+                    itemStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
                     GraveInventory.dropItem(itemStack, level, graveEntity.getBlockPos());
                 }
             }
@@ -173,10 +172,10 @@ public class GraveStoneHelper {
                 tag.putString("deathMessageJson", grave.getDeathMessageJson());
             }
             if (grave.isSwordGrave()) {
-                GraveStoneHelper.addSwordInfo(tag, grave.getSword());
+                GraveStoneHelper.addSwordInfo(level, tag, grave.getSword());
             }
 
-            itemStack.setTag(tag);
+            itemStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
             return itemStack;
         }
         return ItemStack.EMPTY;

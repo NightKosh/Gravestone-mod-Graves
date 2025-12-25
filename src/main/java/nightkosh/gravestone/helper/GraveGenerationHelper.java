@@ -2,7 +2,7 @@ package nightkosh.gravestone.helper;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BiomeTags;
@@ -21,20 +21,22 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import nightkosh.gravestone.api.IGraveStoneHelper;
 import nightkosh.gravestone.api.death_handler.ICustomEntityDeathHandler;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.BlockGraveStone;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
-import nightkosh.gravestone.config.GSConfigs;
 import nightkosh.gravestone.core.GSBlocks;
 import nightkosh.gravestone.core.MobHandler;
+import nightkosh.gravestone.core.config.GSConfigs;
 import nightkosh.gravestone.gui.container.GraveInventory;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
 import org.apache.commons.lang3.StringUtils;
@@ -98,9 +100,9 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     private static final List<EnumGraveType> GENERATED_HORSE_GRAVES_TYPES = List.of(EnumGraveType.PET_GRAVE_STONE);
 
     public static void createPlayerGrave(Player player, Collection<ItemEntity> drops, DamageSource damageSource, long spawnTime) {
-        if (!player.level.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY) &&
+        if (!player.level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY) &&
                 GSConfigs.GRAVE_ITEMS_COUNT.get() > 0 &&
-                !isInRestrictedArea(player.level, player.blockPosition())) {
+                !isInRestrictedArea(player.level(), player.blockPosition())) {
             List<ItemStack> items = new ArrayList<>(41);
 
             if (GSConfigs.DEBUG_MODE.get()) {
@@ -108,7 +110,9 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             }
             for (var entityItem : drops) {
                 if (GSConfigs.DEBUG_MODE.get()) {
-                    LOGGER.info("Next item will be placed to the grave {} x {}", entityItem.getItem().getHoverName().getString(), entityItem.getItem().getCount());
+                    LOGGER.info("Next item will be placed to the grave {} x {}",
+                            entityItem.getItem().getHoverName().getString(),
+                            entityItem.getItem().getCount());
                 }
                 items.add(entityItem.getItem().copy());
             }
@@ -136,7 +140,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             }
 
             if (GSConfigs.GENERATE_EMPTY_PLAYER_GRAVES.get() || !items.isEmpty()) {
-                if (createGrave(player, damageSource, items, EnumGraveTypeByEntity.PLAYER_GRAVES, false, spawnTime)) {
+                if (createGrave(player, damageSource, items, EnumGraveTypeByEntity.PLAYER_GRAVES, spawnTime)) {
                     // graves successfully created, discard all original items to prevent duplication
                     drops.forEach(Entity::discard);
                 }
@@ -145,129 +149,111 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             if (GSConfigs.DEBUG_MODE.get()) {
                 LOGGER.info("Going to create empty grave.");
             }
-            createGrave(player, damageSource, null, EnumGraveTypeByEntity.PLAYER_GRAVES, false, spawnTime);
+            createGrave(player, damageSource, null, EnumGraveTypeByEntity.PLAYER_GRAVES, spawnTime);
         }
     }
 
-    public static void createVillagerGrave(Villager villager, DamageSource damageSource) {
-        var items = new ArrayList<ItemStack>(5);
+    public static void createVillagerGrave(Villager villager, Collection<ItemEntity> drops, DamageSource damageSource) {
+        var items = getDrops(drops);
         for (var additionalItems : APIGraveGeneration.VILLAGER_ITEMS) {
             items.addAll(additionalItems.addItems(villager, damageSource));
         }
 
-        //TODO
-//        IItemHandler itemHandler = villager.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, villager.getHorizontalFacing());
-//        if (villager.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, villager.getHorizontalFacing())) {
-//            for (int slot = 0; slot < itemHandler.getSlots(); slot++) {
-//                var stack = itemHandler.extractItem(slot, 100500, false);
-//                if (stack != null && !stack.isEmpty()) {
-//                    items.add(stack);
-//                }
-//            }
-//        }
-
         long spawnTime = MobHandler.getAndRemoveSpawnTime(villager);
-        createGrave(villager, damageSource, items, GraveGenerationHelper.EnumGraveTypeByEntity.VILLAGERS_GRAVES, true, spawnTime);
+        if (createGrave(villager, damageSource, items, GraveGenerationHelper.EnumGraveTypeByEntity.VILLAGERS_GRAVES, spawnTime)) {
+            // graves successfully created, discard all original items to prevent duplication
+            drops.forEach(Entity::discard);
+        }
     }
 
-    public static void createDogGrave(Wolf dog, DamageSource damageSource) {
+    public static void createDogGrave(Wolf dog, Collection<ItemEntity> drops, DamageSource damageSource) {
         if (dog.isTame()) {
+            var items = getDrops(drops);
+            for (var additionalItems : APIGraveGeneration.DOG_ITEMS) {
+                items.addAll(additionalItems.addItems(dog, damageSource));
+            }
+
             long spawnTime = MobHandler.getAndRemoveSpawnTime(dog);
-            createGrave(dog, damageSource, getDogsItems(dog, damageSource), EnumGraveTypeByEntity.DOGS_GRAVES, false, spawnTime);
+            if (createGrave(dog, damageSource, items, EnumGraveTypeByEntity.DOGS_GRAVES, spawnTime)) {
+                // graves successfully created, discard all original items to prevent duplication
+                drops.forEach(Entity::discard);
+            }
         }
     }
 
-    public static void createCatGrave(Cat cat, DamageSource damageSource) {
+    public static void createCatGrave(Cat cat, Collection<ItemEntity> drops, DamageSource damageSource) {
         if (cat.isTame()) {
+            var items = getDrops(drops);
+            for (var additionalItems : APIGraveGeneration.CAT_ITEMS) {
+                items.addAll(additionalItems.addItems(cat, damageSource));
+            }
+
             long spawnTime = MobHandler.getAndRemoveSpawnTime(cat);
-            createGrave(cat, damageSource, getCatsItems(cat, damageSource), EnumGraveTypeByEntity.CATS_GRAVES, false, spawnTime);
+            if (createGrave(cat, damageSource, items, EnumGraveTypeByEntity.CATS_GRAVES, spawnTime)) {
+                // graves successfully created, discard all original items to prevent duplication
+                drops.forEach(Entity::discard);
+            }
         }
     }
 
-    private static List<ItemStack> getDogsItems(Wolf dog, DamageSource damageSource) {
-        var items = new ArrayList<ItemStack>(5);
-        for (var additionalItems : APIGraveGeneration.DOG_ITEMS) {
-            items.addAll(additionalItems.addItems(dog, damageSource));
-        }
 
-        return items;
-    }
-
-    private static List<ItemStack> getCatsItems(Cat cat, DamageSource damageSource) {
-        var items = new ArrayList<ItemStack>(5);
-        for (var additionalItems : APIGraveGeneration.CAT_ITEMS) {
-            items.addAll(additionalItems.addItems(cat, damageSource));
-        }
-
-        //TODO
-//        IItemHandler itemHandler = cat.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, cat.getHorizontalFacing());
-//        if (cat.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, cat.getHorizontalFacing())) {
-//            for (int slot = 0; slot < itemHandler.getSlots(); slot++) {
-//                ItemStack stack = itemHandler.extractItem(slot, 100500, false);
-//                if (stack != null && !stack.isEmpty()) {
-//                    items.add(stack);
-//                }
-//            }
-//        }
-        return items;
-    }
-
-    public static void createHorseGrave(AbstractHorse horse, DamageSource damageSource) {
+    public static void createHorseGrave(AbstractHorse horse, Collection<ItemEntity> drops, DamageSource damageSource) {
         if (horse.isTamed()) {
-            var items = new ArrayList<ItemStack>();
-            items.addAll(getHorseItems(horse));
-
+            var items = getDrops(drops);
             for (var additionalItems : APIGraveGeneration.HORSE_ITEMS) {
                 items.addAll(additionalItems.addItems(horse, damageSource));
             }
 
             long spawnTime = MobHandler.getAndRemoveSpawnTime(horse);
-            createGrave(horse, damageSource, items, EnumGraveTypeByEntity.HORSE_GRAVES, false, spawnTime);
+            if (createGrave(horse, damageSource, items, EnumGraveTypeByEntity.HORSE_GRAVES, spawnTime)) {
+                // graves successfully created, discard all original items to prevent duplication
+                drops.forEach(Entity::discard);
+            }
         }
     }
 
-    private static List<ItemStack> getHorseItems(AbstractHorse horse) {
+    private static List<ItemStack> getDrops(Collection<ItemEntity> drops) {
         var items = new ArrayList<ItemStack>();
 
-        //TODO
-//        IItemHandler itemHandler = horse.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, horse.getHorizontalFacing());
-//        if (horse.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, horse.getHorizontalFacing())) {
-//            for (int slot = 0; slot < itemHandler.getSlots(); slot++) {
-//                ItemStack stack = itemHandler.extractItem(slot, 100500, false);
-//                if (stack != null && !stack.isEmpty()) {
-//                    items.add(stack);
-//                }
-//            }
-//        }
+        for (var entityItem : drops) {
+            if (GSConfigs.DEBUG_MODE.get()) {
+                LOGGER.info("Next item will be placed to the grave {} x {}",
+                        entityItem.getItem().getHoverName().getString(),
+                        entityItem.getItem().getCount());
+            }
+            items.add(entityItem.getItem().copy());
+        }
 
         return items;
     }
 
     public static boolean createGrave(
             LivingEntity entity, DamageSource damageSource, List<ItemStack> items,
-            EnumGraveTypeByEntity graveTypeByEntity, boolean isVillager, long spawnTime) {
-        if (isInRestrictedArea(entity.level, entity.blockPosition())) {
+            EnumGraveTypeByEntity graveTypeByEntity, long spawnTime) {
+        if (isInRestrictedArea(entity.level(), entity.blockPosition())) {
             LOGGER.info("Can't generate {}'s grave at {} in restricted area. ",
                     entity.getName().getString(),
                     entity.blockPosition().toShortString());
             return false;
         } else {
-            int age = (int) (entity.level.getGameTime() - spawnTime) / 24000;
+            int age = (int) (entity.level().getGameTime() - spawnTime) / 24000;
             var oldPos = entity.blockPosition();
             var pos = new BlockPos(oldPos.getX(), oldPos.getY(), oldPos.getZ() - 1);
-            var graveInfo = getGraveOnDeath(entity.level, pos, entity, graveTypeByEntity, items, age, damageSource);
+            var graveInfo = getGraveOnDeath(entity.level(), pos, entity, graveTypeByEntity, items, age, damageSource);
 
-            String deathMessageJson = Component.Serializer.toJson(damageSource.getLocalizedDeathMessage(entity));
-            return createOnDeath(entity, entity.level, pos, deathMessageJson, items, age, graveInfo, damageSource);
+            String deathMessageJson = Component.Serializer.toJson(
+                    damageSource.getLocalizedDeathMessage(entity),
+                    entity.level().registryAccess());
+            return createOnDeath(entity, entity.level(), pos, deathMessageJson, items, age, graveInfo, damageSource);
         }
     }
 
-    public static boolean createCustomGrave(LivingEntity entity, LivingDeathEvent event, ICustomEntityDeathHandler deathHandler) {
-        if (isInRestrictedArea(entity.level, entity.blockPosition())) {
+    public static boolean createCustomGrave(LivingEntity entity, LivingDropsEvent event, ICustomEntityDeathHandler deathHandler) {
+        if (isInRestrictedArea(entity.level(), entity.blockPosition())) {
             LOGGER.info("Can't generate {}'s grave in restricted area - {}.", entity.getName(), entity.blockPosition().toShortString());
             if (deathHandler.getItems() != null) {
                 deathHandler.getItems().stream().filter(item -> item != null).forEach(item -> {
-                    GraveInventory.dropItem(item, entity.level, entity.blockPosition());
+                    GraveInventory.dropItem(item, entity.level(), entity.blockPosition());
                 });
             }
             return false;
@@ -279,8 +265,10 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                     deathHandler.getSword());
 
             var pos = new BlockPos(entity.getBlockX(), entity.getBlockY(), entity.getBlockZ() - 1);
-            String deathMessageJson = Component.Serializer.toJson(event.getSource().getLocalizedDeathMessage(entity));
-            return createOnDeath(entity, entity.level, pos, deathMessageJson, deathHandler.getItems(), age, graveInfo, event.getSource());
+            String deathMessageJson = Component.Serializer.toJson(
+                    event.getSource().getLocalizedDeathMessage(entity),
+                    entity.level().registryAccess());
+            return createOnDeath(entity, entity.level(), pos, deathMessageJson, deathHandler.getItems(), age, graveInfo, event.getSource());
         }
     }
 
@@ -406,10 +394,10 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 tag.putInt("Age", age);
             }
             if (graveInfo.graveType() == EnumGraveType.SWORD && graveInfo.sword() != null) {
-                GraveStoneHelper.addSwordInfo(tag, graveInfo.sword());
+                GraveStoneHelper.addSwordInfo(level, tag, graveInfo.sword());
             }
 
-            itemStack.setTag(tag);
+            itemStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
             GraveInventory.dropItem(itemStack, level, pos);
             GRAVE_LOGGER.info("Can not create {}'s grave at {}", entity.getName(), pos.toShortString());
 
@@ -516,7 +504,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         if (biome.is(BiomeTags.IS_NETHER)) {
             materials.add(EnumGraveMaterial.QUARTZ);
         }
-        if (biome.is(Tags.Biomes.IS_WATER)) {
+        if (biome.is(Tags.Biomes.IS_AQUATIC)) {
             materials.add(EnumGraveMaterial.PRIZMARINE);
         }
 
@@ -532,7 +520,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         if (pos.getY() <= -64) {
             var groundPos = new BlockPos(pos.getX(), 0, pos.getZ());
             if (level.isEmptyBlock(groundPos) && level.isEmptyBlock(groundPos.above())) {
-                level.setBlock(groundPos, Blocks.GRASS.defaultBlockState(), 3);
+                level.setBlock(groundPos, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
                 return groundPos.above();
             } else {
                 GRAVE_LOGGER.info("Can't find position for grave on death in the void!");

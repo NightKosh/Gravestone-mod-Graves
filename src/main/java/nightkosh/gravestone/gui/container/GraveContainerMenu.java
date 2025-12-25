@@ -27,7 +27,7 @@ public class GraveContainerMenu extends AbstractContainerMenu {
     private final GraveInventory graveInventory;
 
     public GraveContainerMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(containerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()));
+        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
     }
 
     public GraveContainerMenu(int containerId, Inventory playerInventory, BlockEntity blockEntity) {

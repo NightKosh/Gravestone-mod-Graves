@@ -8,7 +8,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import nightkosh.gravestone.capability.BackupProvider;
+import nightkosh.gravestone.core.GSBackups;
 import nightkosh.gravestone.gui.container.GraveInventory;
 
 /**
@@ -23,38 +23,38 @@ public class CommandRestoreItems {
 
     private static int execute(CommandContext<CommandSourceStack> ctx, ServerPlayer player) {
         var src = ctx.getSource();
-        player.getCapability(BackupProvider.BACKUP_CAP).ifPresent(backups -> {
-            if (backups.getBackups().isEmpty()) {
-                src.sendSuccess(Component.literal("Backups not found"), false);
-                return;
-            }
+        var backups = player.getData(GSBackups.BACKUPS.get());
 
-            String playerName = player.getScoreboardName();
-            src.sendSuccess(Component.literal("Going to restore " + playerName + " Items!")
-                            .withStyle(ChatFormatting.GREEN),
+        if (backups.getBackups().isEmpty()) {
+            src.sendSuccess(() -> Component.literal("Backups not found"), false);
+            return 1;
+        }
+
+        String playerName = player.getScoreboardName();
+        src.sendSuccess(() -> Component.literal("Going to restore " + playerName + " Items!")
+                        .withStyle(ChatFormatting.GREEN),
+                false);
+        if (backups.getBackups().isEmpty()) {
+            src.sendFailure(Component.literal(playerName + " has no backups"));
+        } else {
+            src.sendSuccess(() -> Component.literal(playerName + " has " + backups.getBackups().size() + " backups"),
                     false);
-            if (backups.getBackups().isEmpty()) {
-                src.sendFailure(Component.literal(playerName + " has no backups"));
-            } else {
-                src.sendSuccess(Component.literal(playerName + " has " + backups.getBackups().size() + " backups"),
-                        false);
 
-                for (var backup : backups.getBackups()) {
-                    var items = backup.getItems();
+            for (var backup : backups.getBackups()) {
+                var items = backup.getItems();
 
-                    if (items != null && !items.isEmpty()) {
-                        for (var item : items) {
-                            if (item != null) {
-                                GraveInventory.dropItem(item, player.getLevel(), player.blockPosition());
-                            }
+                if (items != null && !items.isEmpty()) {
+                    for (var item : items) {
+                        if (item != null) {
+                            GraveInventory.dropItem(item, player.level(), player.blockPosition());
                         }
                     }
                 }
-                src.sendSuccess(Component.literal(playerName + "'s items restored")
-                                .withStyle(ChatFormatting.GREEN),
-                        false);
             }
-        });
+            src.sendSuccess(() -> Component.literal(playerName + "'s items restored")
+                            .withStyle(ChatFormatting.GREEN),
+                    false);
+        }
 
         return 1;
     }

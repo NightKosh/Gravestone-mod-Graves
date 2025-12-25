@@ -1,6 +1,7 @@
 package nightkosh.gravestone.capability;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -55,14 +56,17 @@ public class Backup {
     }
 
     public void setItems(List<ItemStack> items) {
-        for (var stack : items) {
-            if (stack != null && !stack.isEmpty()) {
-                this.items.add(stack.copy());
+        this.items.clear();
+        if (items != null) {
+            for (var stack : items) {
+                if (stack != null && !stack.isEmpty()) {
+                    this.items.add(stack.copy());
+                }
             }
         }
     }
 
-    public CompoundTag toNBT() {
+    public CompoundTag toNBT(HolderLookup.Provider provider) {
         var tag = new CompoundTag();
 
         if (dimension != null) {
@@ -76,9 +80,10 @@ public class Backup {
         var list = new ListTag();
         for (var stack : items) {
             if (stack != null && !stack.isEmpty()) {
-                CompoundTag s = new CompoundTag();
-                stack.save(s);
-                list.add(s);
+                var saved = stack.saveOptional(provider);
+                if (saved instanceof CompoundTag ct) {
+                    list.add(ct);
+                }
             }
         }
         tag.put("Items", list);
@@ -86,7 +91,7 @@ public class Backup {
         return tag;
     }
 
-    public static Backup fromNBT(CompoundTag tag) {
+    public static Backup fromNBT(CompoundTag tag, HolderLookup.Provider provider) {
         var b = new Backup();
 
         if (tag.contains("Dimension")) {
@@ -99,7 +104,12 @@ public class Backup {
 
         var itemsTag = tag.getList("Items", Tag.TAG_COMPOUND);
         for (int i = 0; i < itemsTag.size(); i++) {
-            b.items.add(ItemStack.of(itemsTag.getCompound(i)));
+            ItemStack.parse(provider, itemsTag.getCompound(i))
+                    .ifPresent(stack -> {
+                        if (!stack.isEmpty()) {
+                            b.items.add(stack);
+                        }
+                    });
         }
 
         return b;

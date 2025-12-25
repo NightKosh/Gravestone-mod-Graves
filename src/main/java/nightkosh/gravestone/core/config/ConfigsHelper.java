@@ -1,4 +1,4 @@
-package nightkosh.gravestone.config;
+package nightkosh.gravestone.core.config;
 
 import org.apache.commons.lang3.StringUtils;
 

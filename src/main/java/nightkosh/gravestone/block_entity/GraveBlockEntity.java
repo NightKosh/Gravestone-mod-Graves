@@ -1,6 +1,7 @@
 package nightkosh.gravestone.block_entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -9,7 +10,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import nightkosh.gravestone.core.GSBlockEntities;
 import nightkosh.gravestone.gui.container.GraveContainerMenu;
@@ -73,8 +73,8 @@ public abstract class GraveBlockEntity extends BlockEntity implements MenuProvid
     }
 
     @Override
-    public void handleUpdateTag(CompoundTag tag) {
-        this.load(tag);
+    public void handleUpdateTag(@Nonnull CompoundTag tag, @Nonnull HolderLookup.Provider provider) {
+        this.loadAdditional(tag, provider);
     }
 
     @Override
@@ -84,8 +84,8 @@ public abstract class GraveBlockEntity extends BlockEntity implements MenuProvid
 
     @Nonnull
     @Override
-    public CompoundTag getUpdateTag() {
-        return this.saveWithoutMetadata();
+    public CompoundTag getUpdateTag(@Nonnull HolderLookup.Provider provider) {
+        return this.saveWithoutMetadata(provider);
     }
 
     @Nonnull

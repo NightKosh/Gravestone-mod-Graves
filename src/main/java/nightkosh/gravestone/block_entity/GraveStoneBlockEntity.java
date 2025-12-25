@@ -1,6 +1,7 @@
 package nightkosh.gravestone.block_entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -8,7 +9,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.BlockGraveStone;
-import nightkosh.gravestone.config.GSConfigs;
+import nightkosh.gravestone.core.config.GSConfigs;
 import nightkosh.gravestone.helper.GraveSpawnerHelper;
 import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
 import nightkosh.gravestone.helper.IFog;
@@ -80,12 +81,12 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
 //    }
 
     @Override
-    public void load(@Nonnull CompoundTag tag) {
-        super.load(tag);
+    public void loadAdditional(@Nonnull CompoundTag tag, @Nonnull HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
         // age
         age = tag.getInt("Age");
         // grave loot
-        inventory.readItems(tag);
+        inventory.readItems(tag, provider);
         // death text
         deathMessageJson = tag.getString("deathMessageJson");
         // sword
@@ -102,12 +103,12 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
     }
 
     @Override
-    public void saveAdditional(@Nonnull CompoundTag tag) {
-        super.saveAdditional(tag);
+    public void saveAdditional(@Nonnull CompoundTag tag, @Nonnull HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
         // age
         tag.putInt("Age", age);
         // grave loot
-        inventory.saveItems(tag);
+        inventory.saveItems(tag, provider);
         // death text
         if (StringUtils.isNoneBlank(deathMessageJson)) {
             tag.putString("deathMessageJson", deathMessageJson);
@@ -128,15 +129,13 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
 
     private void readSwordInfo(CompoundTag tag) {
         if (tag.contains("Sword")) {
-            sword = ItemStack.of(tag.getCompound("Sword"));
+            sword = ItemStack.parse(level.registryAccess(), tag.getCompound("Sword")).get();
         }
     }
 
     private void writeSwordInfo(CompoundTag tag) {
         if (sword != null) {
-            var swordTag = new CompoundTag();
-            sword.save(swordTag);
-            tag.put("Sword", swordTag);
+            tag.put("Sword", sword.save(this.getLevel().registryAccess()));
         }
     }
 

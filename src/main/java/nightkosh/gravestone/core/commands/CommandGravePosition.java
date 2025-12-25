@@ -8,7 +8,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import nightkosh.gravestone.capability.BackupProvider;
+import nightkosh.gravestone.core.GSBackups;
 
 /**
  * GraveStone mod
@@ -33,21 +33,20 @@ public class CommandGravePosition {
         }
 
         final String playerName = player.getScoreboardName();
-        player.getCapability(BackupProvider.BACKUP_CAP).ifPresent(backups -> {
-            if (backups.getBackups().isEmpty()) {
-                src.sendSuccess(Component.literal("Backups not found"), false);
-                return;
-            }
+        var backups = player.getData(GSBackups.BACKUPS.get());
+        if (backups.getBackups().isEmpty()) {
+            src.sendSuccess(() -> Component.literal("Backups not found"), false);
+            return 1;
+        }
 
-            src.sendSuccess(Component.literal(playerName + " player's graves positons: ")
-                            .withStyle(ChatFormatting.GREEN),
-                    false);
-            for (var backup : backups.getBackups()) {
-                src.sendSuccess(Component.literal(backup.getDimension().location().getPath())
-                        .append(" : ")
-                        .append(Component.literal(backup.getPos().toShortString())), false);
-            }
-        });
+        src.sendSuccess(() -> Component.literal(playerName + " player's graves positons: ")
+                        .withStyle(ChatFormatting.GREEN),
+                false);
+        for (var backup : backups.getBackups()) {
+            src.sendSuccess(() -> Component.literal(backup.getDimension().location().getPath())
+                    .append(" : ")
+                    .append(Component.literal(backup.getPos().toShortString())), false);
+        }
 
         return 1;
     }
