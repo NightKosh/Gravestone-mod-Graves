@@ -1,7 +1,8 @@
 package nightkosh.gravestone.core;
 
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.attachment.IAttachmentHolder;
 import net.neoforged.neoforge.attachment.IAttachmentSerializer;
@@ -35,20 +36,29 @@ public final class GSBackups {
                             .build()
             );
 
-    private static final class BackupsSerializer implements IAttachmentSerializer<CompoundTag, Backups> {
+    private static final class BackupsSerializer implements IAttachmentSerializer<Backups> {
 
         @Override
-        public CompoundTag write(Backups attachment, @Nonnull HolderLookup.Provider provider) {
-            return attachment.toNBT(provider);
-        }
-
-        @Nonnull
-        @Override
-        public Backups read(@Nonnull IAttachmentHolder holder, @Nonnull CompoundTag tag, @Nonnull HolderLookup.Provider provider) {
-            Backups backups = new Backups();
-            backups.fromNBT(tag, provider);
+        public Backups read(@Nonnull IAttachmentHolder holder, @Nonnull ValueInput input) {
+            var backups = new Backups();
+            backups.read(input);
             return backups;
         }
+
+        @Override
+        public boolean write(Backups backups, @Nonnull ValueOutput output) {
+            if (backups == null) {
+                return false;
+            } else {
+                backups.write(output);
+                return true;
+            }
+        }
+
+    }
+
+    public static void register(IEventBus eventBus) {
+        ATTACHMENT_TYPES.register(eventBus);
     }
 
 }

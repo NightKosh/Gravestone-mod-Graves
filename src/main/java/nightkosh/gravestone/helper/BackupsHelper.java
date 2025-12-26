@@ -68,7 +68,7 @@ public class BackupsHelper {
     }
 
     public static void addBackup(Entity entity, Level level, BlockPos pos, List<ItemStack> items) {
-        if (GSConfigs.CREATE_BACKUPS.get() && !level.isClientSide && entity instanceof Player player) {
+        if (GSConfigs.CREATE_BACKUPS.get() && !level.isClientSide() && entity instanceof Player player) {
             try {
                 if (GSConfigs.DEBUG_MODE.get()) {
                     LOGGER.info("Add player {} backup", player.getScoreboardName());

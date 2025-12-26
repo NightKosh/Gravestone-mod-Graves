@@ -47,7 +47,7 @@ public class ModGraveStone {
         GSBlockEntities.register(eventBus);
         GSMenu.register(eventBus);
 
-        GSBackups.ATTACHMENT_TYPES.register(eventBus);
+        GSBackups.register(eventBus);
     }
 
     //TODO

@@ -1,9 +1,7 @@
 package nightkosh.gravestone.capability;
 
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -16,6 +14,7 @@ import java.util.Deque;
  */
 public class Backups implements IBackups {
 
+    private static final String KEY_LIST = "Backups";
     private static final int MAX = 5;
 
     private Deque<Backup> backups = new ArrayDeque<>(MAX);
@@ -61,26 +60,21 @@ public class Backups implements IBackups {
         }
     }
 
-    public CompoundTag toNBT(HolderLookup.Provider provider) {
-        var tag = new CompoundTag();
-        var list = new ListTag();
-
+    public void write(ValueOutput out) {
+        var list = out.childrenList(KEY_LIST);
         for (var b : backups) {
-            list.add(b.toNBT(provider));
+            if (b != null) {
+                b.write(list.addChild());
+            }
         }
-
-        tag.put("Backups", list);
-        return tag;
     }
 
-    public void fromNBT(CompoundTag tag, HolderLookup.Provider provider) {
+    public void read(ValueInput in) {
         backups.clear();
 
-        if (!tag.contains("Backups", Tag.TAG_LIST)) return;
-
-        var list = tag.getList("Backups", Tag.TAG_COMPOUND);
-        for (int i = 0; i < list.size(); i++) {
-            backups.addLast(Backup.fromNBT(list.getCompound(i), provider));
+        var list = in.childrenListOrEmpty(KEY_LIST);
+        for (var child : list) {
+            backups.addLast(Backup.read(child));
         }
 
         while (backups.size() > MAX) {
