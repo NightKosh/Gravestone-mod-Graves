@@ -13,7 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -26,12 +26,17 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -41,7 +46,6 @@ import nightkosh.gravestone.api.ModInfo;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
-import nightkosh.gravestone.core.config.GSConfigs;
 import nightkosh.gravestone.gui.container.GraveInventory;
 import nightkosh.gravestone.helper.GraveStoneHelper;
 import org.apache.commons.lang3.StringUtils;
@@ -51,7 +55,6 @@ import javax.annotation.Nonnull;
 
 import static net.minecraft.resources.Identifier.fromNamespaceAndPath;
 import static nightkosh.gravestone.ModGraveStone.GRAVE_LOGGER;
-import static nightkosh.gravestone.ModGraveStone.LOGGER;
 
 /**
  * GraveStone mod
@@ -59,10 +62,11 @@ import static nightkosh.gravestone.ModGraveStone.LOGGER;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class BlockGraveStone extends BaseEntityBlock {
+public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterloggedBlock {
 
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<FlowerType> FLOWER = EnumProperty.create("flower", FlowerType.class);
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public static final MapCodec<BlockGraveStone> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
@@ -81,7 +85,7 @@ public class BlockGraveStone extends BaseEntityBlock {
         super(BlockBehaviour.Properties.of()
                 .setId(id)
                 .sound(SoundType.STONE)
-                .strength(1.5F, 6)
+                .strength(0.5F)
                 .explosionResistance(Float.MAX_VALUE)
                 .requiresCorrectToolForDrops()
                 .noCollision());
@@ -92,17 +96,20 @@ public class BlockGraveStone extends BaseEntityBlock {
 
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
-                .setValue(FLOWER, FlowerType.NONE));
+                .setValue(FLOWER, FlowerType.NONE)
+                .setValue(WATERLOGGED, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateBuilder) {
-        stateBuilder.add(FACING, FLOWER);
+        stateBuilder.add(FACING, FLOWER, WATERLOGGED);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite())
+                .setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos())
+                        .getType() == Fluids.WATER);
     }
 
     @Nonnull
@@ -146,81 +153,6 @@ public class BlockGraveStone extends BaseEntityBlock {
         return GraveStoneHelper.canPlaceBlockAt(level.getBlockState(pos.below()));
     }
 
-    private static final VoxelShape GS_SOUTH = Block.box(2, 0, 2, 14, 16, 4);
-    private static final VoxelShape GS_NORTH = Block.box(2, 0, 12, 14, 16, 14);
-    private static final VoxelShape GS_EAST = Block.box(2, 0, 2, 4, 16, 14);
-    private static final VoxelShape GS_WEST = Block.box(12, 0, 2, 14, 16, 14);
-
-    private static final VoxelShape CROSS_SOUTH = Block.box(2, 0, 2, 14, 16, 4);
-    private static final VoxelShape CROSS_NORTH = Block.box(2, 0, 12, 14, 16, 14);
-    private static final VoxelShape CROSS_EAST = Block.box(2, 0, 2, 4, 16, 14);
-    private static final VoxelShape CROSS_WEST = Block.box(12, 0, 2, 14, 16, 14);
-
-    private static final VoxelShape CC_SOUTH = Block.box(1, 0, 2, 15, 18, 4);
-    private static final VoxelShape CC_NORTH = Block.box(1, 0, 12, 15, 18, 14);
-    private static final VoxelShape CC_EAST = Block.box(2, 0, 1, 4, 18, 15);
-    private static final VoxelShape CC_WEST = Block.box(12, 0, 1, 14, 18, 15);
-
-    private static final VoxelShape OBELISK_SOUTH = Block.box(6, 0, 2, 10, 15, 5);
-    private static final VoxelShape OBELISK_NORTH = Block.box(6, 0, 11, 10, 15, 14);
-    private static final VoxelShape OBELISK_EAST = Block.box(2, 0, 6, 5, 15, 10);
-    private static final VoxelShape OBELISK_WEST = Block.box(11, 0, 6, 14, 15, 10);
-
-    private static final VoxelShape GP_NORTH_SOUTH = Block.box(2, 0, 1, 14, 1, 15);
-    private static final VoxelShape GP_EAST_WEST = Block.box(1, 0, 2, 15, 1, 14);
-    //TODO
-    private static final VoxelShape SWORD_SOUTH_NORTH = Block.box(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
-    private static final VoxelShape SWORD_EAST_WEST = Block.box(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
-
-    @Nonnull
-    @Override
-    public VoxelShape getShape(
-            @Nonnull BlockState blockState, @Nonnull BlockGetter blockGetter,
-            @Nonnull BlockPos blockPos, @Nonnull CollisionContext collisionContext) {
-        var facing = blockState.getValue(FACING);
-
-        return switch (graveType) {
-            case GRAVE_STONE, VILLAGER_GRAVE_STONE, PET_GRAVE_STONE -> switch (facing) {
-                case SOUTH -> GS_SOUTH;
-                case EAST -> GS_EAST;
-                case WEST -> GS_WEST;
-                case NORTH -> GS_NORTH;
-                default -> GS_NORTH;
-            };
-            case CROSS -> switch (facing) {
-                case SOUTH -> CROSS_SOUTH;
-                case EAST -> CROSS_EAST;
-                case WEST -> CROSS_WEST;
-                case NORTH -> CROSS_NORTH;
-                default -> CROSS_NORTH;
-            };
-            case CELTIC_CROSS -> switch (facing) {
-                case SOUTH -> CC_SOUTH;
-                case EAST -> CC_EAST;
-                case WEST -> CC_WEST;
-                case NORTH -> CC_NORTH;
-                default -> CC_NORTH;
-            };
-            case OBELISK -> switch (facing) {
-                case SOUTH -> OBELISK_SOUTH;
-                case EAST -> OBELISK_EAST;
-                case WEST -> OBELISK_WEST;
-                case NORTH -> OBELISK_NORTH;
-                default -> OBELISK_NORTH;
-            };
-            case GRAVE_PLATE -> switch (facing) {
-                case EAST, WEST -> GP_EAST_WEST;
-                case SOUTH, NORTH -> GP_NORTH_SOUTH;
-                default -> GP_NORTH_SOUTH;
-            };
-            case SWORD -> switch (facing) {
-                case EAST, WEST -> SWORD_EAST_WEST;
-                case SOUTH, NORTH -> SWORD_SOUTH_NORTH;
-                default -> SWORD_SOUTH_NORTH;
-            };
-        };
-    }
-
     @Nonnull
     @Override
     public BlockState playerWillDestroy(Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull Player player) {
@@ -235,6 +167,8 @@ public class BlockGraveStone extends BaseEntityBlock {
                     if (flower != FlowerType.NONE) {
                         GraveInventory.dropItem(new ItemStack(Items.POPPY), level, pos);
                     }
+                    grave.getInventory().dropAllItems();
+                    GraveInventory.dropItem(GraveStoneHelper.getBlockItemStack(level, pos, state), level, pos);
                 }
             }
         }
@@ -316,25 +250,6 @@ public class BlockGraveStone extends BaseEntityBlock {
         }
     }
 
-    /**
-     * ejects contained items into the level, and notifies neighbours of an
-     * update, as appropriate
-     */
-    @Override
-    public void affectNeighborsAfterRemoval(BlockState state, @Nonnull ServerLevel level, @Nonnull BlockPos pos, boolean isMoving) {
-        var blockEntity = level.getBlockEntity(pos);
-
-        if (blockEntity != null && blockEntity instanceof GraveStoneBlockEntity graveEntity) {
-            if (GSConfigs.DEBUG_MODE.get()) {
-                LOGGER.info("Grave destroyed. Going to drop all stored items");
-            }
-            graveEntity.getInventory().dropAllItems();
-        }
-
-        GraveInventory.dropItem(GraveStoneHelper.getBlockItemStack(level, pos, state), level, pos);
-        super.affectNeighborsAfterRemoval(state, level, pos, isMoving);
-    }
-
     @Override
     public @Nullable BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
         return new GraveStoneBlockEntity(pos, state);
@@ -348,9 +263,10 @@ public class BlockGraveStone extends BaseEntityBlock {
         if (!level.isClientSide()) {
             var belowPos = pos.below();
             if (!level.getBlockState(belowPos).isFaceSturdy(level, belowPos, Direction.UP)) {
-                if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity graveEntity) {
-                    if (graveEntity.canBeLooted(null)) {
-                        GraveStoneHelper.dropBlockWithoutInfo(level, graveEntity);
+                if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave &&
+                        grave.getInventory().isEmpty()) {
+                    if (grave.canBeLooted(null)) {
+                        GraveStoneHelper.dropBlockWithoutInfo(level, grave);
                         level.removeBlock(pos, false);
                     }
                 }
@@ -426,6 +342,100 @@ public class BlockGraveStone extends BaseEntityBlock {
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
+    }
+
+    @Override
+    protected BlockState updateShape(
+            BlockState state, @Nonnull LevelReader level, @Nonnull ScheduledTickAccess tickAccess,
+            @Nonnull BlockPos pos, @Nonnull Direction direction, @Nonnull BlockPos neighborPos,
+            @Nonnull BlockState neighborState, @Nonnull RandomSource random) {
+        if (state.getValue(WATERLOGGED)) {
+            tickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+        return super.updateShape(state, level, tickAccess, pos, direction, neighborPos, neighborState, random);
+    }
+
+    @Nonnull
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ?
+                Fluids.WATER.getSource(false) :
+                super.getFluidState(state);
+    }
+
+    private static final VoxelShape GS_SOUTH = Block.box(2, 0, 2, 14, 16, 4);
+    private static final VoxelShape GS_NORTH = Block.box(2, 0, 12, 14, 16, 14);
+    private static final VoxelShape GS_EAST = Block.box(2, 0, 2, 4, 16, 14);
+    private static final VoxelShape GS_WEST = Block.box(12, 0, 2, 14, 16, 14);
+
+    private static final VoxelShape CROSS_SOUTH = Block.box(2, 0, 2, 14, 16, 4);
+    private static final VoxelShape CROSS_NORTH = Block.box(2, 0, 12, 14, 16, 14);
+    private static final VoxelShape CROSS_EAST = Block.box(2, 0, 2, 4, 16, 14);
+    private static final VoxelShape CROSS_WEST = Block.box(12, 0, 2, 14, 16, 14);
+
+    private static final VoxelShape CC_SOUTH = Block.box(1, 0, 2, 15, 18, 4);
+    private static final VoxelShape CC_NORTH = Block.box(1, 0, 12, 15, 18, 14);
+    private static final VoxelShape CC_EAST = Block.box(2, 0, 1, 4, 18, 15);
+    private static final VoxelShape CC_WEST = Block.box(12, 0, 1, 14, 18, 15);
+
+    private static final VoxelShape OBELISK_SOUTH = Block.box(6, 0, 2, 10, 15, 5);
+    private static final VoxelShape OBELISK_NORTH = Block.box(6, 0, 11, 10, 15, 14);
+    private static final VoxelShape OBELISK_EAST = Block.box(2, 0, 6, 5, 15, 10);
+    private static final VoxelShape OBELISK_WEST = Block.box(11, 0, 6, 14, 15, 10);
+
+    private static final VoxelShape GP_NORTH_SOUTH = Block.box(2, 0, 1, 14, 1, 15);
+    private static final VoxelShape GP_EAST_WEST = Block.box(1, 0, 2, 15, 1, 14);
+    //TODO
+    private static final VoxelShape SWORD_SOUTH_NORTH = Block.box(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
+    private static final VoxelShape SWORD_EAST_WEST = Block.box(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
+
+    @Nonnull
+    @Override
+    public VoxelShape getShape(
+            @Nonnull BlockState blockState, @Nonnull BlockGetter blockGetter,
+            @Nonnull BlockPos blockPos, @Nonnull CollisionContext collisionContext) {
+        var facing = blockState.getValue(FACING);
+
+        return switch (graveType) {
+            case GRAVE_STONE, VILLAGER_GRAVE_STONE, PET_GRAVE_STONE -> switch (facing) {
+                case SOUTH -> GS_SOUTH;
+                case EAST -> GS_EAST;
+                case WEST -> GS_WEST;
+                case NORTH -> GS_NORTH;
+                default -> GS_NORTH;
+            };
+            case CROSS -> switch (facing) {
+                case SOUTH -> CROSS_SOUTH;
+                case EAST -> CROSS_EAST;
+                case WEST -> CROSS_WEST;
+                case NORTH -> CROSS_NORTH;
+                default -> CROSS_NORTH;
+            };
+            case CELTIC_CROSS -> switch (facing) {
+                case SOUTH -> CC_SOUTH;
+                case EAST -> CC_EAST;
+                case WEST -> CC_WEST;
+                case NORTH -> CC_NORTH;
+                default -> CC_NORTH;
+            };
+            case OBELISK -> switch (facing) {
+                case SOUTH -> OBELISK_SOUTH;
+                case EAST -> OBELISK_EAST;
+                case WEST -> OBELISK_WEST;
+                case NORTH -> OBELISK_NORTH;
+                default -> OBELISK_NORTH;
+            };
+            case GRAVE_PLATE -> switch (facing) {
+                case EAST, WEST -> GP_EAST_WEST;
+                case SOUTH, NORTH -> GP_NORTH_SOUTH;
+                default -> GP_NORTH_SOUTH;
+            };
+            case SWORD -> switch (facing) {
+                case EAST, WEST -> SWORD_EAST_WEST;
+                case SOUTH, NORTH -> SWORD_SOUTH_NORTH;
+                default -> SWORD_SOUTH_NORTH;
+            };
+        };
     }
 
 }
