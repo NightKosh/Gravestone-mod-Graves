@@ -1,7 +1,6 @@
 package nightkosh.gravestone.helper;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.BlockTags;
@@ -11,12 +10,13 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import nightkosh.gravestone.block.BlockGraveStone;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
-import nightkosh.gravestone.core.config.GSConfigs;
 import nightkosh.gravestone.core.GSBlocks;
+import nightkosh.gravestone.core.config.GSConfigs;
 import nightkosh.gravestone.gui.container.GraveInventory;
 import org.apache.commons.lang3.StringUtils;
 
@@ -67,7 +67,8 @@ public class GraveStoneHelper {
     }
 
     public static void addSwordInfo(Level level, CompoundTag tag, ItemStack sword) {
-        tag.put("Sword", sword.save(level.registryAccess()));
+        //TODO
+//        tag.put("Sword", sword.save(level.registryAccess()));
     }
 
     public static ItemStack getSwordAsGrave(Item grave, ItemStack sword) {
@@ -80,10 +81,9 @@ public class GraveStoneHelper {
     }
 
     public static boolean canFlowerBePlaced(Level level, BlockPos pos, ItemStack itemStack, GraveStoneBlockEntity entity) {
-        if (Block.byItem(itemStack.getItem()) instanceof FlowerBlock flower) {
-            var posBelow = pos.below();
-            var soil = level.getBlockState(posBelow);
-            return soil.canSustainPlant(level, posBelow, Direction.UP, flower);
+        if (Block.byItem(itemStack.getItem()) instanceof FlowerBlock) {
+            var belowBlockState = level.getBlockState(pos.below());
+            return belowBlockState.is(BlockTags.DIRT) || belowBlockState.getBlock() instanceof FarmBlock;
         }
         return false;
     }

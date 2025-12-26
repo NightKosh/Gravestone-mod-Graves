@@ -5,12 +5,15 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 import nightkosh.gravestone.core.config.GSConfigs;
 
@@ -38,25 +41,18 @@ public class GraveInventory implements Container {
         this.grave = grave;
     }
 
-    public void readItems(CompoundTag tag, @Nonnull HolderLookup.Provider provider) {
-        var tagList = tag.getList("Items", 10);
+    public void readItems(@Nonnull ValueInput in) {
         items = new ArrayList<>(DEFAULT_INVENTORY_SIZE);
-
-        for (int i = 0; i < tagList.size(); i++) {
-            items.add(ItemStack.parse(provider, tagList.getCompound(i)).get());
+        for (var s : in.listOrEmpty("Items", ItemStack.CODEC)) {
+            items.add(s);
         }
     }
 
-    public void saveItems(CompoundTag tag, @Nonnull HolderLookup.Provider provider) {
-        var tags = new ListTag();
-
-        for (var stack : items) {
-            if (stack != null && stack != ItemStack.EMPTY) {
-                tags.add(stack.save(provider));
-            }
+    public void saveItems(@Nonnull ValueOutput out) {
+        var list = out.list("Items", ItemStack.CODEC);
+        for (var s : items) {
+            list.add(s);
         }
-
-        tag.put("Items", tags);
     }
 
     @Override

@@ -1,15 +1,21 @@
 package nightkosh.gravestone.block;
 
+import com.google.gson.JsonParser;
+import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.resources.RegistryOps;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -26,10 +32,12 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.ToolActions;
+import net.neoforged.neoforge.common.ItemAbilities;
+import nightkosh.gravestone.api.ModInfo;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
@@ -41,6 +49,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
+import static net.minecraft.resources.Identifier.fromNamespaceAndPath;
 import static nightkosh.gravestone.ModGraveStone.GRAVE_LOGGER;
 import static nightkosh.gravestone.ModGraveStone.LOGGER;
 
@@ -55,23 +64,27 @@ public class BlockGraveStone extends BaseEntityBlock {
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<FlowerType> FLOWER = EnumProperty.create("flower", FlowerType.class);
 
-    public static final MapCodec<BlockGraveStone> CODEC = RecordCodecBuilder.mapCodec(instance ->
-            instance.group(
-                    EnumGraveType.CODEC.fieldOf("grave_type").forGetter(b -> b.graveType),
-                    EnumGraveMaterial.CODEC.fieldOf("material").forGetter(b -> b.material)
-            ).apply(instance, BlockGraveStone::new)
+    public static final MapCodec<BlockGraveStone> CODEC = RecordCodecBuilder.mapCodec(
+            instance -> instance.group(
+                            EnumGraveType.CODEC.fieldOf("grave_type").forGetter(b -> b.graveType),
+                            EnumGraveMaterial.CODEC.fieldOf("material").forGetter(b -> b.material))
+                    .apply(instance, (graveType, material) ->
+                            new BlockGraveStone(graveType, material,
+                                    ResourceKey.create(Registries.BLOCK, fromNamespaceAndPath(ModInfo.ID,
+                                            graveType.name().toLowerCase() + "_" + material.name().toLowerCase()))))
     );
 
     public final EnumGraveMaterial material;
     public final EnumGraveType graveType;
 
-    public BlockGraveStone(EnumGraveType graveType, EnumGraveMaterial material) {
+    public BlockGraveStone(EnumGraveType graveType, EnumGraveMaterial material, ResourceKey id) {
         super(BlockBehaviour.Properties.of()
+                .setId(id)
                 .sound(SoundType.STONE)
                 .strength(1.5F, 6)
                 .explosionResistance(Float.MAX_VALUE)
                 .requiresCorrectToolForDrops()
-                .noCollission());
+                .noCollision());
         this.graveType = graveType;
         this.material = material;
         //TODO
@@ -98,44 +111,30 @@ public class BlockGraveStone extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
-    @Nonnull
-    @Override
-    public String getDescriptionId() {
-        return switch (graveType) {
-            case GRAVE_STONE -> "block.gravestone.grave_stone";
-            case GRAVE_PLATE -> "block.gravestone.grave_plate";
-            case CROSS -> "block.gravestone.cross";
-            case OBELISK -> "block.gravestone.obelisk";
-            case CELTIC_CROSS -> "block.gravestone.celtic_cross";
-            case PET_GRAVE_STONE -> "block.gravestone.pet_grave_stone";
-            case VILLAGER_GRAVE_STONE -> "block.gravestone.villager_grave_stone";
-            default -> "block.gravestone.grave_stone";
-        };
-    }
-
     @Override
     public void setPlacedBy(Level level, @Nonnull BlockPos pos, @Nonnull BlockState state,
                             LivingEntity placer, @Nonnull ItemStack stack) {
-        if (!level.isClientSide) {
-            level.setBlock(pos, state, 2);
+        if (!level.isClientSide()) {
+            level.setBlock(pos, state, UPDATE_CLIENTS);
             var blockEntity = level.getBlockEntity(pos);
 
             if (blockEntity instanceof GraveStoneBlockEntity grave) {
                 var data = stack.get(DataComponents.CUSTOM_DATA);
                 if (data != null) {
-                    var tag = data.getUnsafe();
+                    var tag = data.copyTag();
                     if (tag != null) {
                         if (tag.contains("deathMessageJson")) {
-                            grave.setDeathMessageJson(tag.getString("deathMessageJson"));
+                            grave.setDeathMessageJson(tag.getString("deathMessageJson").get());
                         }
 
-                        grave.setAge(tag.getInt("Age"));
-                        grave.setPurified(tag.getBoolean("Purified"));
+                        grave.setAge(tag.getIntOr("Age", 0));
+                        grave.setPurified(tag.getBooleanOr("Purified", true));
 
-                        if (tag.contains("Sword")) {
-                            var sword = ItemStack.parse(level.registryAccess(), tag.getCompound("Sword")).get();
-                            grave.setSword(sword);
-                        }
+                        //TODO
+//                        if (tag.contains("Sword")) {
+//                            var sword = ItemStack.parse(level.registryAccess(), tag.getCompound("Sword")).get();
+//                            grave.setSword(sword);
+//                        }
                     }
                 }
             }
@@ -225,7 +224,7 @@ public class BlockGraveStone extends BaseEntityBlock {
     @Nonnull
     @Override
     public BlockState playerWillDestroy(Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull Player player) {
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             player.causeFoodExhaustion(0.025F);
 
             if (!level.isClientSide() && !level.restoringBlockSnapshots) {
@@ -244,22 +243,22 @@ public class BlockGraveStone extends BaseEntityBlock {
 
     @Nonnull
     @Override
-    public ItemInteractionResult useItemOn(
+    public InteractionResult useItemOn(
             @Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos,
             @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
         if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave) {
             if (!level.isClientSide()) {
-                if (stack.canPerformAction(ToolActions.SHOVEL_DIG)) {
+                if (stack.canPerformAction(ItemAbilities.SHOVEL_DOUSE)) {
                     if (grave.canBeLooted(player)) {
                         player.openMenu(grave, pos);
                         GRAVE_LOGGER.info("{} open grave inventory at {}", player.getScoreboardName(), pos.toShortString());
                         GraveStoneHelper.replaceGround(level, pos.below());
-                        return ItemInteractionResult.SUCCESS;
+                        return InteractionResult.SUCCESS;
                     } else {
                         player.displayClientMessage(
                                 Component.translatable("grave.cant_be_looted")
                                         .withStyle(ChatFormatting.RED), false);
-                        return ItemInteractionResult.FAIL;
+                        return InteractionResult.FAIL;
                     }
                 } else {
                     var held = player.getItemInHand(hand);
@@ -268,27 +267,28 @@ public class BlockGraveStone extends BaseEntityBlock {
                     if (flowerType != FlowerType.NONE) {
                         if (stack.getItem() instanceof ShearsItem) {
                             GraveInventory.dropItem(new ItemStack(flowerType.getFlower()), level, pos);
-                            level.setBlock(pos, state.setValue(FLOWER, FlowerType.NONE), 2);
-                            return ItemInteractionResult.SUCCESS;
+                            level.setBlock(pos, state.setValue(FLOWER, FlowerType.NONE), UPDATE_CLIENTS);
+                            return InteractionResult.SUCCESS;
                         }
                     } else if (flower != FlowerType.NONE &&
                             GraveStoneHelper.canFlowerBePlaced(level, pos, stack, grave)) {
-                        level.setBlock(pos, state.setValue(FLOWER, flower), 2);//.sendBlockUpdated()
-                        if (!player.getAbilities().instabuild) {
-                            held.shrink(1);
-                        }
-                        return ItemInteractionResult.SUCCESS;
+                        level.setBlock(pos, state.setValue(FLOWER, flower), UPDATE_CLIENTS);
+                        held.consume(1, player);
+                        return InteractionResult.SUCCESS;
                     }
                 }
             } else {
                 if (player.getMainHandItem() == null || ItemStack.EMPTY.equals(player.getMainHandItem()) ||
-                        !stack.canPerformAction(ToolActions.SHOVEL_DIG)) {
+                        !stack.canPerformAction(ItemAbilities.SHOVEL_DOUSE)) {
                     String deathMessageJson = grave.getDeathMessageJson();
                     if (StringUtils.isNoneBlank(deathMessageJson)) {
-                        player.displayClientMessage(Component.Serializer.fromJson(
-                                        deathMessageJson,
-                                        Minecraft.getInstance().level.registryAccess()),
-                                false);
+                        var ops = RegistryOps.create(JsonOps.INSTANCE, level.registryAccess());
+                        var json = JsonParser.parseString(deathMessageJson);
+                        var component = ComponentSerialization.CODEC
+                                .parse(ops, json)
+                                .result()
+                                .orElse(Component.empty());
+                        player.displayClientMessage(component, false);
                     }
 
                     if (grave.getAge() > 0) {
@@ -298,12 +298,12 @@ public class BlockGraveStone extends BaseEntityBlock {
                                         .append(Component.translatable("item.grave.days")), false);
                     }
 
-                    return ItemInteractionResult.SUCCESS;
+                    return InteractionResult.SUCCESS;
                 }
             }
         }
 
-        return ItemInteractionResult.FAIL;
+        return InteractionResult.FAIL;
     }
 
     @Override
@@ -311,7 +311,7 @@ public class BlockGraveStone extends BaseEntityBlock {
                         @Nonnull BlockState oldState, boolean isMoving) {
         super.onPlace(state, level, pos, oldState, isMoving);
 
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             GraveStoneHelper.replaceGround(level, pos.below());
         }
     }
@@ -321,20 +321,18 @@ public class BlockGraveStone extends BaseEntityBlock {
      * update, as appropriate
      */
     @Override
-    public void onRemove(BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, BlockState newState, boolean xz) {
-        if (state.getBlock() != newState.getBlock()) {
-            var blockEntity = level.getBlockEntity(pos);
+    public void affectNeighborsAfterRemoval(BlockState state, @Nonnull ServerLevel level, @Nonnull BlockPos pos, boolean isMoving) {
+        var blockEntity = level.getBlockEntity(pos);
 
-            if (blockEntity != null && blockEntity instanceof GraveStoneBlockEntity graveEntity) {
-                if (GSConfigs.DEBUG_MODE.get()) {
-                    LOGGER.info("Grave destroyed. Going to drop all stored items");
-                }
-                graveEntity.getInventory().dropAllItems();
+        if (blockEntity != null && blockEntity instanceof GraveStoneBlockEntity graveEntity) {
+            if (GSConfigs.DEBUG_MODE.get()) {
+                LOGGER.info("Grave destroyed. Going to drop all stored items");
             }
-
-            GraveInventory.dropItem(GraveStoneHelper.getBlockItemStack(level, pos, state), level, pos);
+            graveEntity.getInventory().dropAllItems();
         }
-        super.onRemove(state, level, pos, newState, xz);
+
+        GraveInventory.dropItem(GraveStoneHelper.getBlockItemStack(level, pos, state), level, pos);
+        super.affectNeighborsAfterRemoval(state, level, pos, isMoving);
     }
 
     @Override
@@ -343,9 +341,11 @@ public class BlockGraveStone extends BaseEntityBlock {
     }
 
     @Override
-    public void neighborChanged(@Nonnull BlockState state, Level level, @Nonnull BlockPos pos,
-                                @Nonnull Block neighborBlock, @Nonnull BlockPos fromPos, boolean isMoving) {
-        if (!level.isClientSide) {
+    public void neighborChanged(
+            @Nonnull BlockState state, Level level, @Nonnull BlockPos pos,
+            @Nonnull Block neighborBlock, @javax.annotation.Nullable Orientation orientation,
+            boolean movedByPiston) {
+        if (!level.isClientSide()) {
             var belowPos = pos.below();
             if (!level.getBlockState(belowPos).isFaceSturdy(level, belowPos, Direction.UP)) {
                 if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity graveEntity) {
@@ -360,7 +360,7 @@ public class BlockGraveStone extends BaseEntityBlock {
 
     @Override
     public void attack(@Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player) {
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             var be = level.getBlockEntity(pos);
             if (be instanceof GraveStoneBlockEntity grave && !grave.canBeLooted(player)) {
                 player.displayClientMessage(

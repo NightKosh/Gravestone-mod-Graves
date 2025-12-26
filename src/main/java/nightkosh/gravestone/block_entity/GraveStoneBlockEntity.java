@@ -7,6 +7,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.BlockGraveStone;
 import nightkosh.gravestone.core.config.GSConfigs;
@@ -81,44 +83,45 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
 //    }
 
     @Override
-    public void loadAdditional(@Nonnull CompoundTag tag, @Nonnull HolderLookup.Provider provider) {
-        super.loadAdditional(tag, provider);
+    public void loadAdditional(ValueInput in) {
+        super.loadAdditional(in);
         // age
-        age = tag.getInt("Age");
+        age = in.getIntOr("Age", 0);
         // grave loot
-        inventory.readItems(tag, provider);
+        inventory.readItems(in);
         // death text
-        deathMessageJson = tag.getString("deathMessageJson");
+        deathMessageJson = in.getString("deathMessageJson").orElse(null);
         // sword
-        readSwordInfo(tag);
+        readSwordInfo(in);
         // owner
-        playerId = tag.getString("PlayerId");
+        playerId = in.getString("PlayerId").orElse(null);
 
-        isPurified = tag.getBoolean("Purified");
+        isPurified = in.getBooleanOr("Purified", true);
 
         //spawnerHelper
-        if (tag.contains("SpawnerHelperId")) {
-            spawnerHelperId = tag.getInt("SpawnerHelperId");
-        }
+        //TODO
+//        if (in.contains("SpawnerHelperId")) {
+//            spawnerHelperId = in.getInt("SpawnerHelperId");
+//        }
     }
 
     @Override
-    public void saveAdditional(@Nonnull CompoundTag tag, @Nonnull HolderLookup.Provider provider) {
-        super.saveAdditional(tag, provider);
+    public void saveAdditional(@Nonnull ValueOutput out) {
+        super.saveAdditional(out);
         // age
-        tag.putInt("Age", age);
+        out.putInt("Age", age);
         // grave loot
-        inventory.saveItems(tag, provider);
+        inventory.saveItems(out);
         // death text
         if (StringUtils.isNoneBlank(deathMessageJson)) {
-            tag.putString("deathMessageJson", deathMessageJson);
+            out.putString("deathMessageJson", deathMessageJson);
         }
         // sword
-        writeSwordInfo(tag);
+        writeSwordInfo(out);
         // owner
-        tag.putString("PlayerId", playerId);
+        out.putString("PlayerId", playerId);
 
-        tag.putBoolean("Purified", isPurified);
+        out.putBoolean("Purified", isPurified);
 
         //spawnerHelper
         if (haveSpawnerHelper()) {
@@ -127,15 +130,13 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
         }
     }
 
-    private void readSwordInfo(CompoundTag tag) {
-        if (tag.contains("Sword")) {
-            sword = ItemStack.parse(level.registryAccess(), tag.getCompound("Sword")).get();
-        }
+    private void readSwordInfo(ValueInput in) {
+        sword = in.read("Sword", ItemStack.CODEC).orElse(null);
     }
 
-    private void writeSwordInfo(CompoundTag tag) {
+    private void writeSwordInfo(@Nonnull ValueOutput out) {
         if (sword != null) {
-            tag.put("Sword", sword.save(this.getLevel().registryAccess()));
+            out.store("Sword", ItemStack.CODEC, sword);
         }
     }
 

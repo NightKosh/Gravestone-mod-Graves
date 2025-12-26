@@ -104,8 +104,8 @@ public class MobHandler {
                     }
                 }
                 if (data != null && !data.isEmpty()) {
-                    for (String key : data.getAllKeys()) {
-                        MOBS_SPAWN_TIME.put(UUID.fromString(key), data.getLong(key));
+                    for (String key : data.keySet()) {
+                        MOBS_SPAWN_TIME.put(UUID.fromString(key), data.getLong(key).get());
                     }
                 }
             } catch (Exception e) {

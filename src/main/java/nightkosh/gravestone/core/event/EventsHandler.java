@@ -4,11 +4,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
-import net.minecraft.world.entity.animal.Cat;
-import net.minecraft.world.entity.animal.Wolf;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
-import net.minecraft.world.entity.animal.horse.Horse;
-import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.animal.equine.AbstractHorse;
+import net.minecraft.world.entity.animal.equine.Horse;
+import net.minecraft.world.entity.animal.feline.Cat;
+import net.minecraft.world.entity.animal.wolf.Wolf;
+import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelResource;
@@ -38,7 +38,7 @@ import static nightkosh.gravestone.ModGraveStone.LOGGER;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-@EventBusSubscriber(modid = ModInfo.ID, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(modid = ModInfo.ID)
 public class EventsHandler {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -67,7 +67,7 @@ public class EventsHandler {
 
             if (GSConfigs.GENERATE_PLAYER_GRAVES.get() && event.getEntity() instanceof Player player) {
                 if (!GSConfigs.PLAYER_GRAVES_DIMENSIONAL_BLACKLIST.get().contains(
-                        player.level().dimension().location().toString())) {
+                        player.level().dimension().identifier().toString())) {
                     for (var playerDeathHandler : APIGraveGeneration.PLAYER_DEATH_HANDLERS) {
                         if (playerDeathHandler.cancelGraveGeneration(player, event.getSource())) {
                             if (GSConfigs.DEBUG_MODE.get()) {
