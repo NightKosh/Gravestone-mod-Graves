@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "gravestone:block/grave_stone/obsidian"
+  }
+}

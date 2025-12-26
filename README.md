@@ -14,9 +14,9 @@ For more information visit [official site](http://gravestone.nightkosh.com/) or 
 [Gravestone Mod API](https://github.com/NightKosh/GraveStone-mod-API)
 
 ## Requirements
-1. [Forge](http://files.minecraftforge.net/) (check "build.gradle" file to know required forge version)
-2. [jdk 1.17](https://jdk.java.net/archive/) (do not forget to enable its support in your IDE)
-3. [Gradle 8.14.3](https://gradle.org/releases/)
+1. [NeoForge](https://neoforged.net/) (check "build.gradle" file to know required NeoForge version)
+2. [Jdk 21.0.2](https://jdk.java.net/archive/) (do not forget to enable its support in your IDE)
+3. [Gradle 9.2.1](https://gradle.org/releases/)
 
 ## Dependencies.
 **Be careful some of these API may not be updated yet, or may be bugged!**
@@ -24,39 +24,30 @@ For more information visit [official site](http://gravestone.nightkosh.com/) or 
 
 ## Get started
 1. Clone mod repository
-2. Download forge and copy "gradlew.bat", "gradlew" files and "gradle" directory to mod folder(and any other files which may requires)
+2. Download NeoForge and copy "gradlew.bat", "gradlew" files and "gradle" directory to mod folder(and any other files which may requires)
 3. Download mod's API
-   * Download [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
-      * Run next commands from mod folder:
-      ```
-        git submodule init
-        git submodule update
-      ```
-   * ~~Download other API's manually and place them into "src/main/java" folder~~
-4. Download MDK from forge
+    * Download [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
+        * Run next commands from mod folder:
+       ```
+         git submodule init
+         git submodule update
+       ```
+    * ~~Download other API's manually and place them into "src/main/java" folder~~
+4. Download MDK from NeoForge
 5. Import mod to your ide as "new Gradle project"
 
 ## Gradle commands
-1. Download MDK from forge
-   for eclipse:
-    ```
-        gradlew genEclipseRuns
-    ```
-   for IntelliJ IDEA:
-    ```
-        gradlew genIntellijRuns
-    ```
-2. Running client
+1. Running client
     ```
         gradlew runClient
     ```
-3. Running Server
+2. Running Server
     ```
         gradlew runServer
     ```
-4. Build mod as .jar file
+3. Build mod as .jar file
     ```
         gradlew build
     ```
 
-For more information, look at "minecraft forge" README.txt file (it's not included to this repository) or [this link](https://gist.github.com/mcenderdragon/6c7af2daf6f72b0cadf0c63169a87583)
+For more information, look at "minecraft NeoForge" README.txt file (it's not included to this repository) or [this link](https://docs.neoforged.net/)

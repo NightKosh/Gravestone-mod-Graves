@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
 import nightkosh.gravestone.core.GSBlockEntities;
 import nightkosh.gravestone.gui.container.GraveContainerMenu;
 import nightkosh.gravestone.gui.container.GraveInventory;
@@ -73,8 +74,8 @@ public abstract class GraveBlockEntity extends BlockEntity implements MenuProvid
     }
 
     @Override
-    public void handleUpdateTag(@Nonnull CompoundTag tag, @Nonnull HolderLookup.Provider provider) {
-        this.loadAdditional(tag, provider);
+    public void handleUpdateTag(@Nonnull ValueInput in) {
+        this.loadAdditional(in);
     }
 
     @Override

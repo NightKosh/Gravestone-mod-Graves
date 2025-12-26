@@ -1,10 +1,14 @@
 package nightkosh.gravestone.helper;
 
+import com.google.gson.Gson;
+import com.mojang.serialization.JsonOps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.resources.RegistryOps;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -12,21 +16,21 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
-import net.minecraft.world.entity.animal.Cat;
-import net.minecraft.world.entity.animal.Wolf;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.animal.equine.AbstractHorse;
+import net.minecraft.world.entity.animal.feline.Cat;
+import net.minecraft.world.entity.animal.wolf.Wolf;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import nightkosh.gravestone.api.IGraveStoneHelper;
 import nightkosh.gravestone.api.death_handler.ICustomEntityDeathHandler;
@@ -100,7 +104,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
     private static final List<EnumGraveType> GENERATED_HORSE_GRAVES_TYPES = List.of(EnumGraveType.PET_GRAVE_STONE);
 
     public static void createPlayerGrave(Player player, Collection<ItemEntity> drops, DamageSource damageSource, long spawnTime) {
-        if (!player.level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY) &&
+        if (player.level() instanceof ServerLevel server && !server.getGameRules().get(GameRules.KEEP_INVENTORY) &&
                 GSConfigs.GRAVE_ITEMS_COUNT.get() > 0 &&
                 !isInRestrictedArea(player.level(), player.blockPosition())) {
             List<ItemStack> items = new ArrayList<>(41);
@@ -241,9 +245,13 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             var pos = new BlockPos(oldPos.getX(), oldPos.getY(), oldPos.getZ() - 1);
             var graveInfo = getGraveOnDeath(entity.level(), pos, entity, graveTypeByEntity, items, age, damageSource);
 
-            String deathMessageJson = Component.Serializer.toJson(
-                    damageSource.getLocalizedDeathMessage(entity),
-                    entity.level().registryAccess());
+            var component = damageSource.getLocalizedDeathMessage(entity);
+            var ops = RegistryOps.create(JsonOps.INSTANCE, entity.level().registryAccess());
+            var json = ComponentSerialization.CODEC
+                    .encodeStart(ops, component)
+                    .getOrThrow();
+            String deathMessageJson = new Gson().toJson(json);
+
             return createOnDeath(entity, entity.level(), pos, deathMessageJson, items, age, graveInfo, damageSource);
         }
     }
@@ -265,9 +273,13 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                     deathHandler.getSword());
 
             var pos = new BlockPos(entity.getBlockX(), entity.getBlockY(), entity.getBlockZ() - 1);
-            String deathMessageJson = Component.Serializer.toJson(
-                    event.getSource().getLocalizedDeathMessage(entity),
-                    entity.level().registryAccess());
+
+            var component = event.getSource().getLocalizedDeathMessage(entity);
+            var ops = RegistryOps.create(JsonOps.INSTANCE, entity.level().registryAccess());
+            var json = ComponentSerialization.CODEC
+                    .encodeStart(ops, component)
+                    .getOrThrow();
+            String deathMessageJson = new Gson().toJson(json);
             return createOnDeath(entity, entity.level(), pos, deathMessageJson, deathHandler.getItems(), age, graveInfo, event.getSource());
         }
     }
@@ -363,7 +375,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                     GSBlocks.getGraveBlock(graveInfo.graveType(), graveInfo.material())
                             .defaultBlockState()
                             .setValue(BlockGraveStone.FACING, direction),
-                    2
+                    Block.UPDATE_CLIENTS
             );
 
             if (newLevel.getBlockEntity(newPos) instanceof GraveStoneBlockEntity graveEntity) {
@@ -609,7 +621,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         var state = level.getBlockState(pos);
         var posDown = pos.below();
         var stateDown = level.getBlockState(pos.below());
-        return stateDown.isSolidRender(level, posDown) &&
+        return stateDown.isSolidRender() &&
                 stateDown.isCollisionShapeFullBlock(level, posDown) &&
                 (level.isEmptyBlock(pos) ||
                         state.getFluidState().isSource() ||
