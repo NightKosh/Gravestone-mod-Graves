@@ -22,8 +22,7 @@ public class GSBlockEntities {
                                 .map(DeferredHolder::value)
                                 .toArray(Block[]::new);
 
-                        return BlockEntityType.Builder.of(GraveStoneBlockEntity::new, blocks)
-                                .build(null);
+                        return new BlockEntityType<>(GraveStoneBlockEntity::new, blocks);
                     });
 
     public static void register(IEventBus eventBus) {

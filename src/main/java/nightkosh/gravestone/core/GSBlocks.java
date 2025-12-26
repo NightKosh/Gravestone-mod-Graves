@@ -1,6 +1,7 @@
 package nightkosh.gravestone.core;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
@@ -17,6 +18,8 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+
+import static net.minecraft.resources.Identifier.fromNamespaceAndPath;
 
 /**
  * GraveStone mod
@@ -43,55 +46,44 @@ public class GSBlocks {
     public static final List<DeferredHolder<Block, BlockGraveStone>> GRAVE_LIST = new ArrayList<>();
 
     static {
+        ResourceKey id = null;
         for (var mat : EnumGraveMaterial.values()) {
-            var graveStone = registerBlock(
-                    "grave_stone_" + mat.name().toLowerCase(),
-                    () -> new BlockGraveStone(EnumGraveType.GRAVE_STONE, mat));
+            var graveStone = registerBlock(EnumGraveType.GRAVE_STONE, mat);
             GRAVE_STONES.put(mat, graveStone);
             GRAVE_LIST.add(graveStone);
 
-            var cross = registerBlock(
-                    "cross_" + mat.name().toLowerCase(),
-                    () -> new BlockGraveStone(EnumGraveType.CROSS, mat));
+            var cross = registerBlock(EnumGraveType.CROSS, mat);
             CROSSES.put(mat, cross);
             GRAVE_LIST.add(cross);
 
-            var obelisk = registerBlock(
-                    "obelisk_" + mat.name().toLowerCase(),
-                    () -> new BlockGraveStone(EnumGraveType.OBELISK, mat));
+            var obelisk = registerBlock(EnumGraveType.OBELISK, mat);
             OBELISKS.put(mat, obelisk);
             GRAVE_LIST.add(obelisk);
 
-            var celticCross = registerBlock(
-                    "celtic_cross_" + mat.name().toLowerCase(),
-                    () -> new BlockGraveStone(EnumGraveType.CELTIC_CROSS, mat));
+            var celticCross = registerBlock(EnumGraveType.CELTIC_CROSS, mat);
             CELTIC_CROSSES.put(mat, celticCross);
             GRAVE_LIST.add(celticCross);
 
-            var gravePlate = registerBlock(
-                    "grave_plate_" + mat.name().toLowerCase(),
-                    () -> new BlockGraveStone(EnumGraveType.GRAVE_PLATE, mat));
+            var gravePlate = registerBlock(EnumGraveType.GRAVE_PLATE, mat);
             GRAVE_PLATES.put(mat, gravePlate);
             GRAVE_LIST.add(gravePlate);
 
-            var petGrave = registerBlock(
-                    "pet_grave_stone_" + mat.name().toLowerCase(),
-                    () -> new BlockGraveStone(EnumGraveType.PET_GRAVE_STONE, mat));
+            var petGrave = registerBlock(EnumGraveType.PET_GRAVE_STONE, mat);
             PET_GRAVE_STONES.put(mat, petGrave);
             GRAVE_LIST.add(petGrave);
 
-            var villagerGrave = registerBlock(
-                    "villager_grave_stone_" + mat.name().toLowerCase(),
-                    () -> new BlockGraveStone(EnumGraveType.VILLAGER_GRAVE_STONE, mat));
+            var villagerGrave = registerBlock(EnumGraveType.VILLAGER_GRAVE_STONE, mat);
             VILLAGER_GRAVE_STONES.put(mat, villagerGrave);
             GRAVE_LIST.add(villagerGrave);
         }
     }
 
-    private static <T extends Block> DeferredHolder<Block, T> registerBlock(
-            String name, Supplier<T> supplier) {
-        var block = BLOCKS_REGISTER.register(name, supplier);
-        ITEMS_REGISTER.register(name, () -> new ItemBlockGraveStone((BlockGraveStone) block.get()));
+    private static <T extends Block> DeferredHolder<Block, BlockGraveStone> registerBlock(
+            EnumGraveType gravetype, EnumGraveMaterial mat) {
+        String name = gravetype.name().toLowerCase() + "_" + mat.name().toLowerCase();
+        ResourceKey id = ResourceKey.create(Registries.BLOCK, fromNamespaceAndPath(ModInfo.ID, name));
+        var block = BLOCKS_REGISTER.register(name, () -> new BlockGraveStone(gravetype, mat, id));
+        ITEMS_REGISTER.register(name, () -> new ItemBlockGraveStone(block.get(), id));
         return block;
     }
 

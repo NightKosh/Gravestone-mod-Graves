@@ -1,6 +1,7 @@
 package nightkosh.gravestone;
 
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
@@ -36,10 +37,10 @@ public class ModGraveStone {
     public static final IGraveStoneHelper gravestoneHelper = GraveGenerationHelper.INSTANCE;
     public static final IGraveGeneration apiGraveGeneration = APIGraveGeneration.INSTANCE;
 
-    public ModGraveStone(IEventBus eventBus) {
+    public ModGraveStone(IEventBus eventBus, ModContainer container) {
         INSTANCE = this;
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GSConfigs.SPEC, ModInfo.ID + ".toml");
+        container.registerConfig(ModConfig.Type.COMMON, GSConfigs.SPEC, ModInfo.ID + ".toml");
 
         GSTabs.register(eventBus);
         GSBlocks.register(eventBus);
