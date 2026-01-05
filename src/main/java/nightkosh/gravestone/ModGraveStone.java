@@ -8,12 +8,8 @@ import net.neoforged.fml.config.ModConfig;
 import nightkosh.gravestone.api.IGraveGeneration;
 import nightkosh.gravestone.api.IGraveStoneHelper;
 import nightkosh.gravestone.api.ModInfo;
-import nightkosh.gravestone.core.GSBackups;
-import nightkosh.gravestone.core.GSTabs;
+import nightkosh.gravestone.core.*;
 import nightkosh.gravestone.core.config.GSConfigs;
-import nightkosh.gravestone.core.GSBlockEntities;
-import nightkosh.gravestone.core.GSBlocks;
-import nightkosh.gravestone.core.GSMenu;
 import nightkosh.gravestone.core.logger.GravesLogger;
 import nightkosh.gravestone.helper.GraveGenerationHelper;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
@@ -43,6 +39,7 @@ public class ModGraveStone {
         container.registerConfig(ModConfig.Type.COMMON, GSConfigs.SPEC, ModInfo.ID + ".toml");
 
         GSTabs.register(eventBus);
+        GSItems.register(eventBus);
         GSBlocks.register(eventBus);
         GSBlockEntities.register(eventBus);
         GSMenu.register(eventBus);

@@ -1,6 +1,8 @@
 {
   "itemGroup.gravestone": "Надгробия",
 
+  "item.gravestone.chisel": "Резец для надгробий",
+
   "block.gravestone.grave_stone": "Надгробный камень",
   "block.gravestone.cross": "Могильный крест",
   "block.gravestone.obelisk": "Обелиск",
@@ -22,12 +24,13 @@
   "material.sandstone": "Песчаника",
   "material.stone": "Камня",
   "material.diorite": "Диорита",
-  "material.andesite": "Андезита",
   "material.granite": "Гранита",
   "material.gold": "Золота",
   "material.diamond": "Алмазов",
   "material.obsidian": "Обсидиана",
   "material.quartz": "Кварца",
   "material.prizmarine": "Призмарина",
-  "material.ice": "Льда"
+  "material.ice": "Льда",
+
+  "gui.gravestone.chisel.title" : "Введите текст надгробия"
 }

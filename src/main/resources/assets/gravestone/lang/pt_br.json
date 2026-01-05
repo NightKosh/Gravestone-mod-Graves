@@ -1,6 +1,8 @@
 {
   "itemGroup.gravestone": "Gravestones",
 
+  "item.gravestone.chisel": "Formão de Lápide",
+
   "block.gravestone.grave_stone": "Lápide",
   "block.gravestone.cross": "Cruz",
   "block.gravestone.obelisk": "Obelisco",
@@ -22,12 +24,13 @@
   "material.sandstone": "Arenito",
   "material.stone": "Pedra",
   "material.diorite": "Diorito",
-  "material.andesite": "Andesito",
   "material.granite": "Granito",
   "material.gold": "Ouro",
   "material.diamond": "Diamante",
   "material.obsidian": "Obsidiana",
   "material.quartz": "Quartzo",
   "material.prizmarine": "Prismarinho",
-  "material.ice": "Gelo"
+  "material.ice": "Gelo",
+
+  "gui.gravestone.chisel.title" : "Enter new gravestone text:"
 }

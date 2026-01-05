@@ -1,6 +1,8 @@
 {
   "itemGroup.gravestone": "Lápida",
 
+  "item.gravestone.chisel": "Cincel de lápida",
+
   "block.gravestone.grave_stone": "Lápida",
   "block.gravestone.cross": "Cruz",
   "block.gravestone.obelisk": "Obelisco",
@@ -22,12 +24,13 @@
   "material.sandstone": "Arenisca",
   "material.stone": "Piedra",
   "material.diorite": "Diorita",
-  "material.andesite": "Andesita",
   "material.granite": "Granito",
   "material.gold": "Oro",
   "material.diamond": "Diamante",
   "material.obsidian": "Obsidiana",
   "material.quartz": "Cuarzo",
   "material.prizmarine": "Prismarina",
-  "material.ice": "Hielo"
+  "material.ice": "Hielo",
+
+  "gui.gravestone.chisel.title" : "Enter new gravestone text:"
 }

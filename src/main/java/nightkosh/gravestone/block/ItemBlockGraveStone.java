@@ -83,7 +83,7 @@ public class ItemBlockGraveStone extends BlockItem {
                 }
                 if (tag.getIntOr("Age", 0) > 0) {
                     consumer.accept(Component.translatable("item.grave.age")
-                            .append(" " + tag.getInt("Age" + " "))
+                            .append(" " + tag.getInt("Age").get() + " ")
                             .append(Component.translatable("item.grave.days")));
                 }
 

@@ -26,6 +26,10 @@ public class GSTabs {
                     .icon(() -> new ItemStack(GSBlocks.getGraveStone(EnumGraveMaterial.STONE)))
                     .title(Component.translatable("itemGroup." + ModInfo.ID))
                     .displayItems((parameters, output) -> {
+
+                        output.accept(new ItemStack(GSItems.CHISEL.get()));
+
+                        // graves
                         for (var mat : EnumGraveMaterial.values()) {
                             output.accept(new ItemStack(GSBlocks.getGraveStone(mat)));
                         }

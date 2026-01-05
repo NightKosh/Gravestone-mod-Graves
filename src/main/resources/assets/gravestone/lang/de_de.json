@@ -1,6 +1,8 @@
 {
   "itemGroup.gravestone": "Gravestones",
 
+  "item.gravestone.chisel": "Grabsteinmeißel",
+
   "block.gravestone.grave_stone": "Grabstein",
   "block.gravestone.cross": "Kreuz",
   "block.gravestone.obelisk": "Obelisk",
@@ -22,13 +24,14 @@
   "material.sandstone": "Sandstein",
   "material.stone": "Stein",
   "material.diorite": "Diorit",
-  "material.andesite": "Andersit",
   "material.granite": "Granit",
   "material.gold": "Gold",
   "material.diamond": "Diamant",
   "material.obsidian": "Obsidian",
   "material.quartz": "Quartz",
   "material.prizmarine": "Prismarin",
-  "material.ice": "Eis"
+  "material.ice": "Eis",
+
+  "gui.gravestone.chisel.title" : "Enter new gravestone text:"
 }
 

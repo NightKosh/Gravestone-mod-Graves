@@ -1,6 +1,8 @@
 {
   "itemGroup.gravestone": "Gravestone(Náhrobek)",
 
+  "item.gravestone.chisel": "Hrobnické dláto",
+
   "block.gravestone.grave_stone": "Náhrobek",
   "block.gravestone.cross": "Kříž",
   "block.gravestone.obelisk": "Obelisk",
@@ -22,12 +24,13 @@
   "material.sandstone": "Pískového kamene",
   "material.stone": "Kamene",
   "material.diorite": "Dioritu",
-  "material.andesite": "Andesitu",
   "material.granite": "Granitu",
   "material.gold": "Zlata",
   "material.diamond": "Diamantu",
   "material.obsidian": "Obsidiánu",
   "material.quartz": "Křemíku",
   "material.prizmarine": "Prizmarínu",
-  "material.ice": "Ledu"
+  "material.ice": "Ledu",
+
+  "gui.gravestone.chisel.title" : "Enter new gravestone text:"
 }

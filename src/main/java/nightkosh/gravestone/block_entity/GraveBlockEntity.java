@@ -30,7 +30,6 @@ public abstract class GraveBlockEntity extends BlockEntity implements MenuProvid
 
     protected GraveInventory inventory;
     protected String deathMessageJson;
-    protected boolean isEditable = true;
     protected int age = -1;
 
     public GraveBlockEntity(BlockPos blockPos, BlockState state) {
@@ -65,10 +64,6 @@ public abstract class GraveBlockEntity extends BlockEntity implements MenuProvid
         age = 10 + (new Random()).nextInt(100);
     }
 
-    public boolean isEditable() {
-        return isEditable;
-    }
-
     public boolean isEmpty() {
         return inventory.isEmpty();
     }
@@ -95,9 +90,9 @@ public abstract class GraveBlockEntity extends BlockEntity implements MenuProvid
         return Component.empty();
     }
 
-    @Nullable
+    @Nonnull
     @Override
-    public AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
+    public AbstractContainerMenu createMenu(int containerId, @Nonnull Inventory inventory, @Nonnull Player player) {
         return new GraveContainerMenu(containerId, inventory, this);
     }
 

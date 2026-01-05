@@ -46,6 +46,9 @@ import nightkosh.gravestone.api.ModInfo;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
+import nightkosh.gravestone.core.GSItems;
+import nightkosh.gravestone.core.config.GSConfigs;
+import nightkosh.gravestone.gui.ChiselScreen;
 import nightkosh.gravestone.gui.container.GraveInventory;
 import nightkosh.gravestone.helper.GraveStoneHelper;
 import org.apache.commons.lang3.StringUtils;
@@ -55,6 +58,7 @@ import javax.annotation.Nonnull;
 
 import static net.minecraft.resources.Identifier.fromNamespaceAndPath;
 import static nightkosh.gravestone.ModGraveStone.GRAVE_LOGGER;
+import static nightkosh.gravestone.ModGraveStone.LOGGER;
 
 /**
  * GraveStone mod
@@ -123,9 +127,7 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
                             LivingEntity placer, @Nonnull ItemStack stack) {
         if (!level.isClientSide()) {
             level.setBlock(pos, state, UPDATE_CLIENTS);
-            var blockEntity = level.getBlockEntity(pos);
-
-            if (blockEntity instanceof GraveStoneBlockEntity grave) {
+            if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave) {
                 var data = stack.get(DataComponents.CUSTOM_DATA);
                 if (data != null) {
                     var tag = data.copyTag();
@@ -181,7 +183,19 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
             @Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos,
             @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
         if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave) {
-            if (!level.isClientSide()) {
+            var item = player.getItemInHand(hand);
+            if (item.getItem() == GSItems.CHISEL.get() && StringUtils.isBlank(grave.getDeathMessageJson())) {
+                if (level.isClientSide()) {
+                    if (GSConfigs.DEBUG_MODE.get()) {
+                        LOGGER.info("Going to open chisel screen for grave at {}", pos.toShortString());
+                    }
+                    ChiselScreen.open(grave);
+                } else {
+                    item.setDamageValue(item.getDamageValue() + 1);
+                }
+
+                return InteractionResult.SUCCESS;
+            } else if (!level.isClientSide()) {
                 if (stack.canPerformAction(ItemAbilities.SHOVEL_DOUSE)) {
                     if (grave.canBeLooted(player)) {
                         player.openMenu(grave, pos);
@@ -195,8 +209,7 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
                         return InteractionResult.FAIL;
                     }
                 } else {
-                    var held = player.getItemInHand(hand);
-                    var flower = FlowerType.fromItem(held);
+                    var flower = FlowerType.fromItem(item);
                     var flowerType = state.getValue(FLOWER);
                     if (flowerType != FlowerType.NONE) {
                         if (stack.getItem() instanceof ShearsItem) {
@@ -207,12 +220,12 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
                     } else if (flower != FlowerType.NONE &&
                             GraveStoneHelper.canFlowerBePlaced(level, pos, stack, grave)) {
                         level.setBlock(pos, state.setValue(FLOWER, flower), UPDATE_CLIENTS);
-                        held.consume(1, player);
+                        item.consume(1, player);
                         return InteractionResult.SUCCESS;
                     }
                 }
             } else {
-                if (player.getMainHandItem() == null || ItemStack.EMPTY.equals(player.getMainHandItem()) ||
+                if (item == null || ItemStack.EMPTY.equals(item) ||
                         !stack.canPerformAction(ItemAbilities.SHOVEL_DOUSE)) {
                     String deathMessageJson = grave.getDeathMessageJson();
                     if (StringUtils.isNoneBlank(deathMessageJson)) {

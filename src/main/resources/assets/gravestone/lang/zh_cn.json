@@ -1,6 +1,8 @@
 {
   "itemGroup.gravestone": "墓碑",
 
+  "item.gravestone.chisel": "墓碑凿",
+
   "block.gravestone.grave_stone": "墓碑",
   "block.gravestone.cross": "十字架",
   "block.gravestone.obelisk": "方尖碑",
@@ -22,12 +24,13 @@
   "material.sandstone": "沙石",
   "material.stone": "石头",
   "material.diorite": "闪长岩",
-  "material.andesite": "安山岩",
   "material.granite": "花岗岩",
   "material.gold": "金",
   "material.diamond": "钻石",
   "material.obsidian": "黑曜石",
   "material.quartz": "石英",
   "material.prizmarine": "海晶石",
-  "material.ice": "冰"
+  "material.ice": "冰",
+
+  "gui.gravestone.chisel.title" : "Enter new gravestone text:"
 }
