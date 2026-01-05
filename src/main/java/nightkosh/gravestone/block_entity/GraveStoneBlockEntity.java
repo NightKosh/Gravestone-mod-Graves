@@ -3,23 +3,32 @@ package nightkosh.gravestone.block_entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.BlockGraveStone;
+import nightkosh.gravestone.core.GSBlockEntities;
 import nightkosh.gravestone.core.config.GSConfigs;
+import nightkosh.gravestone.gui.container.GraveContainerMenu;
+import nightkosh.gravestone.gui.container.GraveInventory;
 import nightkosh.gravestone.helper.GraveSpawnerHelper;
 import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
 import nightkosh.gravestone.helper.IFog;
 import nightkosh.gravestone.helper.ISpawner;
-import nightkosh.gravestone.gui.container.GraveInventory;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
+import java.util.Random;
 
 /**
  * GraveStone mod
@@ -27,10 +36,13 @@ import javax.annotation.Nonnull;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerEntity {
+public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, ISpawnerEntity {
 
     public static GraveSpawnerHelper graveSpawnerHelper = new GraveSpawnerHelper();
 
+    protected GraveInventory inventory;
+    protected String deathMessageJson;
+    protected int age = -1;
     protected ItemStack sword = null;
     protected String playerId = "";
     protected boolean isPurified = false;
@@ -41,7 +53,7 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
     };
 
     public GraveStoneBlockEntity(BlockPos blockPos, BlockState state) {
-        super(blockPos, state);
+        super(GSBlockEntities.getGravestone(), blockPos, state);
         spawner = graveSpawnerHelper.getSpawner(this);
         inventory = new GraveInventory(this);
     }
@@ -81,6 +93,67 @@ public class GraveStoneBlockEntity extends GraveBlockEntity implements ISpawnerE
 //
 //        return true;
 //    }
+
+
+    public GraveInventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(GraveInventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public String getDeathMessageJson() {
+        return deathMessageJson;
+    }
+
+    public void setDeathMessageJson(String deathMessageJson) {
+        this.deathMessageJson = deathMessageJson;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    protected void setRandomAge() {
+        age = 10 + (new Random()).nextInt(100);
+    }
+
+    public boolean isEmpty() {
+        return inventory.isEmpty();
+    }
+
+    @Override
+    public void handleUpdateTag(@Nonnull ValueInput in) {
+        this.loadAdditional(in);
+    }
+
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Nonnull
+    @Override
+    public CompoundTag getUpdateTag(@Nonnull HolderLookup.Provider provider) {
+        return this.saveWithoutMetadata(provider);
+    }
+
+    @Nonnull
+    @Override
+    public Component getDisplayName() {
+        return Component.empty();
+    }
+
+    @Nonnull
+    @Override
+    public AbstractContainerMenu createMenu(int containerId, @Nonnull Inventory inventory, @Nonnull Player player) {
+        return new GraveContainerMenu(containerId, inventory, this);
+    }
 
     @Override
     public void loadAdditional(ValueInput in) {
