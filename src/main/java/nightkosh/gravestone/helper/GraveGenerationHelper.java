@@ -621,7 +621,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         var state = level.getBlockState(pos);
         var posDown = pos.below();
         var stateDown = level.getBlockState(pos.below());
-        return stateDown.isSolidRender() &&
+        return (stateDown.isSolidRender() || stateDown.is(Blocks.ICE)) &&
                 stateDown.isCollisionShapeFullBlock(level, posDown) &&
                 (level.isEmptyBlock(pos) ||
                         state.getFluidState().isSource() ||
