@@ -14,6 +14,8 @@ import nightkosh.gravestone.capability.Backups;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
+import static nightkosh.gravestone.ModGraveStone.LOGGER;
+
 /**
  * GraveStone mod
  *
@@ -41,17 +43,26 @@ public final class GSBackups {
         @Override
         public Backups read(@Nonnull IAttachmentHolder holder, @Nonnull ValueInput input) {
             var backups = new Backups();
-            backups.read(input);
+            try {
+                backups.read(input);
+            } catch (Exception e) {
+                LOGGER.error("Can't read backups!", e);
+            }
             return backups;
         }
 
         @Override
         public boolean write(Backups backups, @Nonnull ValueOutput output) {
-            if (backups == null) {
+            try {
+                if (backups == null) {
+                    return false;
+                } else {
+                    backups.write(output);
+                    return true;
+                }
+            } catch (Exception e) {
+                LOGGER.error("Can't write backups!", e);
                 return false;
-            } else {
-                backups.write(output);
-                return true;
             }
         }
 

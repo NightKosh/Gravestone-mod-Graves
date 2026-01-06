@@ -40,14 +40,20 @@ public class BackupsHelper {
     }
 
     public static void clonePlayer(Player oldPlayer, Player newPlayer) {
-        var oldBackups = oldPlayer.getData(GSBackups.BACKUPS.get());
+        try {
+            var oldBackups = oldPlayer.getData(GSBackups.BACKUPS.get());
 
-        var newBackups = newPlayer.getData(GSBackups.BACKUPS.get());
+            var newBackups = newPlayer.getData(GSBackups.BACKUPS.get());
 
-        if (GSConfigs.DEBUG_MODE.get()) {
-            LOGGER.info("Creating player {} backup ", oldPlayer.getScoreboardName());
+            if (GSConfigs.DEBUG_MODE.get()) {
+                LOGGER.info("Creating player {} backup ", oldPlayer.getScoreboardName());
+            }
+            newBackups.setBackups(deepCopy(oldBackups.getBackups()));
+        } catch (Exception e) {
+            if (GSConfigs.DEBUG_MODE.get()) {
+                LOGGER.info("Cant correctly handle backups at clone player event - player {}", oldPlayer.getScoreboardName(), e);
+            }
         }
-        newBackups.setBackups(deepCopy(oldBackups.getBackups()));
     }
 
     private static Deque<Backup> deepCopy(Deque<Backup> src) {
@@ -74,7 +80,9 @@ public class BackupsHelper {
                     LOGGER.info("Add player {} backup", player.getScoreboardName());
                 }
 
-                getBackups(player).addBackup(new Backup(level.dimension(), pos, items));
+                getBackups(player).addBackup(new Backup(level.dimension(),
+                        pos == null ? player.blockPosition() : pos,
+                        items));
             } catch (Exception e) {
                 LOGGER.error("Can't create backup!", e);
             }

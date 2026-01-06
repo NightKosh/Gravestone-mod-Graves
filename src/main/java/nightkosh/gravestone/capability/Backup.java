@@ -13,6 +13,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static nightkosh.gravestone.ModGraveStone.LOGGER;
+
 /**
  * GraveStone mod
  *
@@ -66,7 +68,7 @@ public class Backup {
     }
 
     public void write(ValueOutput out) {
-        if (dimension != null) {
+        if (dimension != null && pos != null) {
             String dim = dimension.identifier().toString();
             if (StringUtils.isNoneBlank(dim)) {
                 out.putString("Dimension", dim);
@@ -80,6 +82,8 @@ public class Backup {
             for (ItemStack s : items) {
                 list.add(s);
             }
+        } else {
+            LOGGER.error("Can't write backup - dimension or pos has invalid value!");
         }
     }
 
