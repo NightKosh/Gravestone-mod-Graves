@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "gravestone_cross",
+  "pattern": [
+    " B ",
+    "   ",
+    "C  "
+  ],
+  "key": {
+    "C": "gravestone:chisel",
+    "B": "minecraft:polished_diorite"
+  },
+  "result": {
+    "id": "gravestone:cross_diorite",
+    "count": 3
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "gravestone_celtic_cross",
+  "pattern": [
+    "   ",
+    "B  ",
+    "C  "
+  ],
+  "key": {
+    "C": "gravestone:chisel",
+    "B": "minecraft:polished_granite"
+  },
+  "result": {
+    "id": "gravestone:celtic_cross_granite",
+    "count": 3
+  }
+}

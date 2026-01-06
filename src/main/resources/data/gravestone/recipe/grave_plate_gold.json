@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "gravestone_grave_plate",
+  "pattern": [
+    "  B",
+    "   ",
+    "C  "
+  ],
+  "key": {
+    "C": "gravestone:chisel",
+    "B": "minecraft:gold_block"
+  },
+  "result": {
+    "id": "gravestone:grave_plate_gold",
+    "count": 3
+  }
+}

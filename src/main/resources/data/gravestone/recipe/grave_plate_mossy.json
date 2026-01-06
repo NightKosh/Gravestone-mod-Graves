@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "gravestone_grave_plate",
+  "pattern": [
+    "  B",
+    "   ",
+    "C  "
+  ],
+  "key": {
+    "C": "gravestone:chisel",
+    "B": "minecraft:mossy_cobblestone"
+  },
+  "result": {
+    "id": "gravestone:grave_plate_mossy",
+    "count": 3
+  }
+}

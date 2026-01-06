@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "gravestone_obelisk",
+  "pattern": [
+    "   ",
+    " B ",
+    "C  "
+  ],
+  "key": {
+    "C": "gravestone:chisel",
+    "B": "minecraft:diamond_block"
+  },
+  "result": {
+    "id": "gravestone:obelisk_diamond",
+    "count": 3
+  }
+}

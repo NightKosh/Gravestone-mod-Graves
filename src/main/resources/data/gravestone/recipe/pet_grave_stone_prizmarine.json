@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "gravestone_pet_grave_stone",
+  "pattern": [
+    "   ",
+    "   ",
+    "CB "
+  ],
+  "key": {
+    "C": "gravestone:chisel",
+    "B": "minecraft:prismarine_bricks"
+  },
+  "result": {
+    "id": "gravestone:pet_grave_stone_prizmarine",
+    "count": 3
+  }
+}
