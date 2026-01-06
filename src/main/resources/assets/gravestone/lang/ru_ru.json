@@ -32,5 +32,7 @@
   "material.prizmarine": "Призмарина",
   "material.ice": "Льда",
 
-  "gui.gravestone.chisel.title" : "Введите текст надгробия"
+  "gui.gravestone.chisel.title" : "Введите текст надгробия",
+
+  "enchantment.gravestone.soulbound": "Душевная связь"
 }

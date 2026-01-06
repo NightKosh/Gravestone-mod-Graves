@@ -1,0 +1,21 @@
+{
+  "weight": 2,
+  "max_level": 1,
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.gravestone.soulbound"
+  },
+  "max_cost": {
+    "base": 75,
+    "per_level_above_first": 25
+  },
+  "min_cost": {
+    "base": 25,
+    "per_level_above_first": 25
+  },
+  "slots": [
+    "any"
+  ],
+  "exclusive_set": [],
+  "supported_items": "#minecraft:enchantable/vanishing"
+}

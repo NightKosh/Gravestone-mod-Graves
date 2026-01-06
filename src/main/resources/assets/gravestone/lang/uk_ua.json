@@ -32,5 +32,7 @@
   "material.prizmarine": "Призмарину",
   "material.ice": "Льоду",
 
-  "gui.gravestone.chisel.title" : "Enter new gravestone text:"
+  "gui.gravestone.chisel.title" : "Enter new gravestone text:",
+
+  "enchantment.gravestone.soulbound": "Soulbound"
 }

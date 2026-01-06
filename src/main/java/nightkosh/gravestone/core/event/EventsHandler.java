@@ -27,6 +27,7 @@ import nightkosh.gravestone.core.MobHandler;
 import nightkosh.gravestone.core.config.GSConfigs;
 import nightkosh.gravestone.core.logger.GravesLogger;
 import nightkosh.gravestone.helper.BackupsHelper;
+import nightkosh.gravestone.helper.GSEnchantmentHelper;
 import nightkosh.gravestone.helper.GraveGenerationHelper;
 import nightkosh.gravestone.helper.api.APIGraveGeneration;
 
@@ -48,6 +49,7 @@ public class EventsHandler {
                 LOGGER.info("PlayerEvent.Clone event triggered for {}", event.getEntity().getScoreboardName());
             }
             BackupsHelper.clonePlayer(event.getOriginal(), event.getEntity());
+            GSEnchantmentHelper.restoreSoulBoundItems(event.getOriginal(), event.getEntity());
         }
     }
 
@@ -57,6 +59,8 @@ public class EventsHandler {
             if (GSConfigs.DEBUG_MODE.get()) {
                 LOGGER.info("LivingDropsEvent event triggered");
             }
+
+            GSEnchantmentHelper.keepSoulBoundItems(event.getEntity(), event.getDrops());
 
             if (!GSConfigs.GENERATE_GRAVES_IN_LAVA.get() && event.getSource().is(DamageTypes.LAVA)) {
                 if (GSConfigs.DEBUG_MODE.get()) {

@@ -51,3 +51,11 @@ For more information visit [official site](http://gravestone.nightkosh.com/) or 
     ```
 
 For more information, look at "minecraft NeoForge" README.txt file (it's not included to this repository) or [this link](https://docs.neoforged.net/)
+
+## Useful commands
+
+## Apply an enchantment on item:
+1. Soul bound
+    ```
+        /enchant @s gravestone:soulbound 1
+    ``` 
