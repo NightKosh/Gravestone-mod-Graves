@@ -77,10 +77,7 @@ public class GSConfigs {
                         "Format: \"namespace:path\" (example: minecraft:the_nether)")
                 .defineList(
                         "PlayerGravesDimensionalBlackList",
-                        List.of(
-                                "minecraft:the_nether",
-                                "minecraft:the_end"
-                        ),
+                        List.of(),
                         o -> o instanceof String
                 );
 
