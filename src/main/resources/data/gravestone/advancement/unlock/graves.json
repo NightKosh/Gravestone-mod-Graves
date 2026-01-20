@@ -1,0 +1,103 @@
+{
+  "criteria": {
+    "has_my_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "gravestone:chisel"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": [
+      "gravestone:celtic_cross_diamond",
+      "gravestone:celtic_cross_diorite",
+      "gravestone:celtic_cross_gold",
+      "gravestone:celtic_cross_granite",
+      "gravestone:celtic_cross_ice",
+      "gravestone:celtic_cross_mossy",
+      "gravestone:celtic_cross_obsidian",
+      "gravestone:celtic_cross_prizmarine",
+      "gravestone:celtic_cross_quartz",
+      "gravestone:celtic_cross_sandstone",
+      "gravestone:celtic_cross_stone",
+
+      "gravestone:cross_diamond",
+      "gravestone:cross_diorite",
+      "gravestone:cross_gold",
+      "gravestone:cross_granite",
+      "gravestone:cross_ice",
+      "gravestone:cross_mossy",
+      "gravestone:cross_obsidian",
+      "gravestone:cross_prizmarine",
+      "gravestone:cross_quartz",
+      "gravestone:cross_sandstone",
+      "gravestone:cross_stone",
+
+      "gravestone:grave_plate_diamond",
+      "gravestone:grave_plate_diorite",
+      "gravestone:grave_plate_gold",
+      "gravestone:grave_plate_granite",
+      "gravestone:grave_plate_ice",
+      "gravestone:grave_plate_mossy",
+      "gravestone:grave_plate_obsidian",
+      "gravestone:grave_plate_prizmarine",
+      "gravestone:grave_plate_quartz",
+      "gravestone:grave_plate_sandstone",
+      "gravestone:grave_plate_stone",
+
+      "gravestone:grave_stone_diamond",
+      "gravestone:grave_stone_diorite",
+      "gravestone:grave_stone_gold",
+      "gravestone:grave_stone_granite",
+      "gravestone:grave_stone_ice",
+      "gravestone:grave_stone_mossy",
+      "gravestone:grave_stone_obsidian",
+      "gravestone:grave_stone_prizmarine",
+      "gravestone:grave_stone_quartz",
+      "gravestone:grave_stone_sandstone",
+      "gravestone:grave_stone_stone",
+
+      "gravestone:obelisk_diamond",
+      "gravestone:obelisk_diorite",
+      "gravestone:obelisk_gold",
+      "gravestone:obelisk_granite",
+      "gravestone:obelisk_ice",
+      "gravestone:obelisk_mossy",
+      "gravestone:obelisk_obsidian",
+      "gravestone:obelisk_prizmarine",
+      "gravestone:obelisk_quartz",
+      "gravestone:obelisk_sandstone",
+      "gravestone:obelisk_stone",
+
+      "gravestone:pet_grave_stone_diamond",
+      "gravestone:pet_grave_stone_diorite",
+      "gravestone:pet_grave_stone_gold",
+      "gravestone:pet_grave_stone_granite",
+      "gravestone:pet_grave_stone_ice",
+      "gravestone:pet_grave_stone_mossy",
+      "gravestone:pet_grave_stone_obsidian",
+      "gravestone:pet_grave_stone_prizmarine",
+      "gravestone:pet_grave_stone_quartz",
+      "gravestone:pet_grave_stone_sandstone",
+      "gravestone:pet_grave_stone_stone",
+
+      "gravestone:villager_grave_stone_diamond",
+      "gravestone:villager_grave_stone_diorite",
+      "gravestone:villager_grave_stone_gold",
+      "gravestone:villager_grave_stone_granite",
+      "gravestone:villager_grave_stone_ice",
+      "gravestone:villager_grave_stone_mossy",
+      "gravestone:villager_grave_stone_obsidian",
+      "gravestone:villager_grave_stone_prizmarine",
+      "gravestone:villager_grave_stone_quartz",
+      "gravestone:villager_grave_stone_sandstone",
+      "gravestone:villager_grave_stone_stone"
+    ]
+  }
+}
