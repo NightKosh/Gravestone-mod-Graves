@@ -16,6 +16,6 @@
   "slots": [
     "any"
   ],
-  "exclusive_set": [],
+  "exclusive_set": "minecraft:vanishing_curse",
   "supported_items": "#minecraft:enchantable/vanishing"
 }
