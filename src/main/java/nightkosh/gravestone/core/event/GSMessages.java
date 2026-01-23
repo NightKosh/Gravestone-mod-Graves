@@ -1,4 +1,4 @@
-package nightkosh.gravestone.core;
+package nightkosh.gravestone.core.event;
 
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.bus.api.SubscribeEvent;

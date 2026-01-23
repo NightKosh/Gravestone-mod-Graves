@@ -2,7 +2,6 @@ package nightkosh.gravestone;
 
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import nightkosh.gravestone.api.IGraveGeneration;
@@ -42,7 +41,7 @@ public class ModGraveStone {
         GSItems.register(eventBus);
         GSBlocks.register(eventBus);
         GSBlockEntities.register(eventBus);
-        GSMenu.register(eventBus);
+        GSMenus.register(eventBus);
 
         GSBackups.register(eventBus);
     }

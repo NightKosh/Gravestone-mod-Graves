@@ -17,7 +17,7 @@ import nightkosh.gravestone.gui.container.GraveContainerMenu;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GSMenu {
+public class GSMenus {
 
     public static final DeferredRegister<MenuType<?>> MENUS_REGISTER =
             DeferredRegister.create(Registries.MENU, ModInfo.ID);

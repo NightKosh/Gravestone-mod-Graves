@@ -156,7 +156,7 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
     }
 
     @Override
-    public void loadAdditional(ValueInput in) {
+    public void loadAdditional(@Nonnull ValueInput in) {
         super.loadAdditional(in);
         // age
         age = in.getIntOr("Age", 0);

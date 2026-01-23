@@ -8,7 +8,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
-import nightkosh.gravestone.core.GSMenu;
+import nightkosh.gravestone.core.GSMenus;
 
 import javax.annotation.Nonnull;
 
@@ -31,7 +31,7 @@ public class GraveContainerMenu extends AbstractContainerMenu {
     }
 
     public GraveContainerMenu(int containerId, Inventory playerInventory, BlockEntity blockEntity) {
-        super(GSMenu.GRAVE.get(), containerId);
+        super(GSMenus.GRAVE.get(), containerId);
         this.graveInventory = ((GraveStoneBlockEntity) blockEntity).getInventory();
 
         graveInventory.startOpen(playerInventory.player);
@@ -45,14 +45,14 @@ public class GraveContainerMenu extends AbstractContainerMenu {
             }
         }
 
-        for (int row = 0; row < PLAYER_INVENTORY_ROWS_COUNT; ++row) {
-            for (int column = 0; column < COLUMNS_COUNT; ++column) {
+        for (int row = 0; row < PLAYER_INVENTORY_ROWS_COUNT; row++) {
+            for (int column = 0; column < COLUMNS_COUNT; column++) {
                 this.addSlot(new Slot(playerInventory, column + row * COLUMNS_COUNT + COLUMNS_COUNT,
                         8 + column * SLOT_WIDTH, 103 + row * SLOT_WIDTH + i));
             }
         }
 
-        for (int column = 0; column < COLUMNS_COUNT; ++column) {
+        for (int column = 0; column < COLUMNS_COUNT; column++) {
             this.addSlot(new Slot(playerInventory, column,
                     8 + column * SLOT_WIDTH, 161 + i));
         }

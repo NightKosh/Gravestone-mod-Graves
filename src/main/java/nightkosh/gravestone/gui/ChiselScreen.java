@@ -10,7 +10,7 @@ import net.minecraft.client.input.KeyEvent;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
-import nightkosh.gravestone.core.GSMessages;
+import nightkosh.gravestone.core.event.GSMessages;
 import nightkosh.gravestone.packet.ChiselMessageToServer;
 
 import javax.annotation.Nonnull;
