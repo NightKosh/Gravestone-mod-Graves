@@ -71,7 +71,7 @@ public class ChiselScreen extends Screen {
     public void render(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
 
-        guiGraphics.drawCenteredString(this.font, this.title, this.width / 2, 60, 0xffffff);
+        guiGraphics.drawCenteredString(this.font, this.title, this.width / 2, 60, 0xFFFFFFFF);
     }
 
     @Override
