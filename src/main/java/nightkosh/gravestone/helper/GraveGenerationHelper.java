@@ -29,6 +29,7 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SupportType;
 import net.minecraft.world.level.gamerules.GameRules;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
@@ -241,8 +242,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             return false;
         } else {
             int age = (int) (entity.level().getGameTime() - spawnTime) / 24000;
-            var oldPos = entity.blockPosition();
-            var pos = new BlockPos(oldPos.getX(), oldPos.getY(), oldPos.getZ() - 1);
+            var pos = entity.blockPosition();
             var graveInfo = getGraveOnDeath(entity.level(), pos, entity, graveTypeByEntity, items, age, damageSource);
 
             var component = damageSource.getLocalizedDeathMessage(entity);
@@ -540,7 +540,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         }
 
         int x = pos.getX();
-        int y = pos.getY();
+        int y = pos.getY() + 2;
         int z = pos.getZ();
         int newY = getGround(level, x, y, z);
 
@@ -621,8 +621,8 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         var state = level.getBlockState(pos);
         var posDown = pos.below();
         var stateDown = level.getBlockState(pos.below());
-        return (stateDown.isSolidRender() || stateDown.is(Blocks.ICE)) &&
-                stateDown.isCollisionShapeFullBlock(level, posDown) &&
+        return (stateDown.isFaceSturdy(level, posDown, Direction.UP, SupportType.CENTER) ||
+                stateDown.is(Blocks.DIRT_PATH) || stateDown.is(Blocks.FARMLAND) || stateDown.is(Blocks.ICE)) &&
                 (level.isEmptyBlock(pos) ||
                         state.getFluidState().isSource() ||
                         state.canBeReplaced());
