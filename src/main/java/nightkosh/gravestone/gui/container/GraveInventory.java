@@ -127,9 +127,7 @@ public class GraveInventory implements Container {
 
             var entityItem = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack.copy());
             entityItem.setDeltaMovement(
-                    level.getRandom().nextGaussian() * 0.2,
-                    level.getRandom().nextGaussian() * 0.2,
-                    level.getRandom().nextGaussian() * 0.2);
+                    0, level.getRandom().nextGaussian() * 0.1, 0);
             level.addFreshEntity(entityItem);
         }
     }

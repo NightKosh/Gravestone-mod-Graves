@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,14 +18,12 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.BlockGraveStone;
+import nightkosh.gravestone.block.FlowerType;
 import nightkosh.gravestone.core.GSBlockEntities;
 import nightkosh.gravestone.core.config.GSConfigs;
 import nightkosh.gravestone.gui.container.GraveContainerMenu;
 import nightkosh.gravestone.gui.container.GraveInventory;
-import nightkosh.gravestone.helper.GraveSpawnerHelper;
-import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
-import nightkosh.gravestone.helper.IFog;
-import nightkosh.gravestone.helper.ISpawner;
+import nightkosh.gravestone.helper.*;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
@@ -201,6 +200,20 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
             //TODO
 //            tag.putInt("SpawnerHelperId", spawnerHelper.getEntityId());
         }
+    }
+
+    @Override
+    public void preRemoveSideEffects(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+        super.preRemoveSideEffects(pos, state);
+
+        GraveStoneHelper.spawnMob(level, pos);
+
+        var flower = state.getValue(BlockGraveStone.FLOWER);
+        if (flower != FlowerType.NONE) {
+            GraveInventory.dropItem(new ItemStack(Items.POPPY), level, pos);
+        }
+        this.inventory.dropAllItems();
+        GraveInventory.dropItem(GraveStoneHelper.getBlockItemStack(level, pos, state), level, pos);
     }
 
     private void readSwordInfo(ValueInput in) {

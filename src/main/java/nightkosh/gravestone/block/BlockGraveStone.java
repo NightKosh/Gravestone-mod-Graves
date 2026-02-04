@@ -20,7 +20,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -157,28 +156,6 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
 
     @Nonnull
     @Override
-    public BlockState playerWillDestroy(Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull Player player) {
-        if (!level.isClientSide()) {
-            player.causeFoodExhaustion(0.025F);
-
-            if (!level.isClientSide() && !level.restoringBlockSnapshots) {
-                if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave && grave.canBeLooted(player)) {
-                    GraveStoneHelper.spawnMob(level, pos);
-
-                    var flower = state.getValue(FLOWER);
-                    if (flower != FlowerType.NONE) {
-                        GraveInventory.dropItem(new ItemStack(Items.POPPY), level, pos);
-                    }
-                    grave.getInventory().dropAllItems();
-                    GraveInventory.dropItem(GraveStoneHelper.getBlockItemStack(level, pos, state), level, pos);
-                }
-            }
-        }
-        return super.playerWillDestroy(level, pos, state, player);
-    }
-
-    @Nonnull
-    @Override
     public InteractionResult useItemOn(
             @Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos,
             @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
@@ -302,24 +279,6 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
         super.attack(state, level, pos, player);
     }
 
-//TODO
-//    @Override
-//    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, Level level, BlockPos pos, Player player) {
-//        var itemStack = new ItemStack(this.asItem(), 1);
-//
-//        if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave) {
-//            if (itemStack != null) {
-//                var tag = new CompoundTag();
-//
-//                itemStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-//                if (grave.isSwordGrave()) {
-//                    GraveStoneHelper.addSwordInfo(tag, grave.getSword());
-//                }
-//            }
-//        }
-//        return itemStack;
-//    }
-
 
 //TODO
 //    /**
@@ -357,6 +316,7 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
         return CODEC;
     }
 
+    @Nonnull
     @Override
     protected BlockState updateShape(
             BlockState state, @Nonnull LevelReader level, @Nonnull ScheduledTickAccess tickAccess,
