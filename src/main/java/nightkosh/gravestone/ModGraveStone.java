@@ -4,6 +4,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import nightkosh.gravestone.api.GraveStoneAPI;
 import nightkosh.gravestone.api.IGraveGeneration;
 import nightkosh.gravestone.api.IGraveStoneHelper;
 import nightkosh.gravestone.api.ModInfo;
@@ -44,14 +45,9 @@ public class ModGraveStone {
         GSMenus.register(eventBus);
 
         GSBackups.register(eventBus);
-    }
 
-    //TODO
-//    @Mod.EventHandler
-//    public void preInit(FMLPreInitializationEvent event) {
-//        // API
-//        GraveStoneAPI.graveStone = gravestoneHelper;
-//        GraveStoneAPI.graveGenerationAtDeath = apiGraveGeneration;
-//    }
+        GraveStoneAPI.graveStone = gravestoneHelper;
+        GraveStoneAPI.graveGenerationAtDeath = apiGraveGeneration;
+    }
 
 }
