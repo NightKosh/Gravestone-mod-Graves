@@ -120,24 +120,6 @@ public class GraveStoneHelper {
         }
     }
 
-    public static void dropBlockWithoutInfo(Level level, GraveStoneBlockEntity graveEntity) {
-        if (GSConfigs.DROP_GRAVE_BLOCK_AT_DESTRUCTION.get()) {
-            if (graveEntity != null) {
-                var grave = ((BlockGraveStone) graveEntity.getBlockState().getBlock());
-                var itemStack = new ItemStack(GSBlocks.getGraveBlock(grave.graveType, grave.material).asItem());
-
-                if (graveEntity.isSwordGrave()) {
-                    graveEntity.dropSword();
-                } else {
-                    var tag = new CompoundTag();
-
-                    itemStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-                    GraveInventory.dropItem(itemStack, level, graveEntity.getBlockPos());
-                }
-            }
-        }
-    }
-
     /**
      * Get grave block as item block
      */

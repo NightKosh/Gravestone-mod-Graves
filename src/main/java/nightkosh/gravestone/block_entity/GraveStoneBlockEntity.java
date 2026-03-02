@@ -259,6 +259,10 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
         return ((BlockGraveStone) this.getBlockState().getBlock()).graveType;
     }
 
+    public boolean hasOwner() {
+        return this.playerId != null;
+    }
+
     public String getOwner() {
         return this.playerId;
     }

@@ -268,9 +268,8 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
             var belowPos = pos.below();
             if (!level.getBlockState(belowPos).isFaceSturdy(level, belowPos, Direction.UP)) {
                 if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave &&
-                        grave.getInventory().isEmpty()) {
+                        (grave.getInventory().isEmpty() || !grave.hasOwner())) {
                     if (grave.canBeLooted(null)) {
-                        GraveStoneHelper.dropBlockWithoutInfo(level, grave);
                         level.removeBlock(pos, false);
                     }
                 }
