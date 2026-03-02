@@ -8,8 +8,11 @@
   "block.gravestone.obelisk": "Obelisk",
   "block.gravestone.celtic_cross": "Keltenkreuz",
   "block.gravestone.grave_plate": "Grabplatte",
+  "block.gravestone.dog_grave_stone": "Hundestatue",
+  "block.gravestone.cat_grave_stone": "Katzenstatue",
+  "block.gravestone.horse_grave_stone": "Pferdestatue",
   "block.gravestone.pet_grave_stone": "Pet Gravestone",
-  "block.gravestone.villager_grave_stone": "Villager Gravestone",
+  "block.gravestone.villager_grave_stone": "Dorfbewohner-Statue",
   "block.gravestone.sword": "Schwert eines gefallenen Kriegers",
 
   "item.grave.age": "Lebte",

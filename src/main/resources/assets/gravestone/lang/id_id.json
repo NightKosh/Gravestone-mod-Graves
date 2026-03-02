@@ -8,8 +8,11 @@
   "block.gravestone.obelisk": "Tugu",
   "block.gravestone.celtic_cross": "Salib Celtic",
   "block.gravestone.grave_plate": "Pelat Makam",
+  "block.gravestone.dog_grave_stone": "Patung Anjing",
+  "block.gravestone.cat_grave_stone": "Patung Kucing",
+  "block.gravestone.horse_grave_stone": "Patung Kuda",
   "block.gravestone.pet_grave_stone": "Pet Gravestone",
-  "block.gravestone.villager_grave_stone": "Villager Gravestone",
+  "block.gravestone.villager_grave_stone": "Patung Desa",
   "block.gravestone.sword": "Pedang Prajurit yang Jatuh",
 
   "item.grave.age": "Pernah hidup",

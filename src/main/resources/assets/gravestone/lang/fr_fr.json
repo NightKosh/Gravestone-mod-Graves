@@ -8,8 +8,11 @@
   "block.gravestone.obelisk": "Obélisque",
   "block.gravestone.celtic_cross": "Croix celtique",
   "block.gravestone.grave_plate": "Pierre tombale",
+  "block.gravestone.dog_grave_stone": "Tombe de chien",
+  "block.gravestone.cat_grave_stone": "Tombe de chat",
+  "block.gravestone.horse_grave_stone": "Statue de cheval",
   "block.gravestone.pet_grave_stone": "Pet Gravestone",
-  "block.gravestone.villager_grave_stone": "Villager Gravestone",
+  "block.gravestone.villager_grave_stone": "Statue de villageois",
   "block.gravestone.sword": "Épée du guerrier vaincu",
 
   "item.grave.age": "A vécu",

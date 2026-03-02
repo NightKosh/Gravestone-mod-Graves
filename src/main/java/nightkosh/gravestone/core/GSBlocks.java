@@ -40,6 +40,10 @@ public class GSBlocks {
     public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> CROSSES = new EnumMap<>(EnumGraveMaterial.class);
     public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> OBELISKS = new EnumMap<>(EnumGraveMaterial.class);
     public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> CELTIC_CROSSES = new EnumMap<>(EnumGraveMaterial.class);
+    public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> DOG_GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
+    public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> CAT_GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
+    public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> HORSE_GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
+    //TODO remove
     public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> PET_GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
     public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> VILLAGER_GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
 
@@ -68,6 +72,18 @@ public class GSBlocks {
             GRAVE_PLATES.put(mat, gravePlate);
             GRAVE_LIST.add(gravePlate);
 
+            var dogGrave = registerBlock(EnumGraveType.DOG_GRAVE_STONE, mat);
+            DOG_GRAVE_STONES.put(mat, dogGrave);
+            GRAVE_LIST.add(dogGrave);
+
+            var catGrave = registerBlock(EnumGraveType.CAT_GRAVE_STONE, mat);
+            CAT_GRAVE_STONES.put(mat, catGrave);
+            GRAVE_LIST.add(catGrave);
+
+            var horseGrave = registerBlock(EnumGraveType.HORSE_GRAVE_STONE, mat);
+            HORSE_GRAVE_STONES.put(mat, horseGrave);
+            GRAVE_LIST.add(horseGrave);
+
             var petGrave = registerBlock(EnumGraveType.PET_GRAVE_STONE, mat);
             PET_GRAVE_STONES.put(mat, petGrave);
             GRAVE_LIST.add(petGrave);
@@ -94,6 +110,9 @@ public class GSBlocks {
             case CROSS -> getCross(material);
             case OBELISK -> getObelisk(material);
             case CELTIC_CROSS -> getCelticCross(material);
+            case DOG_GRAVE_STONE -> getDogGraveStone(material);
+            case CAT_GRAVE_STONE -> getCatGraveStone(material);
+            case HORSE_GRAVE_STONE -> getHorseGraveStone(material);
             case PET_GRAVE_STONE -> getPetGraveStone(material);
             case VILLAGER_GRAVE_STONE -> getVillagerGraveStone(material);
             case SWORD -> getGravePlate(material);//TODO
@@ -123,6 +142,18 @@ public class GSBlocks {
 
     public static Block getCelticCross(EnumGraveMaterial material) {
         return CELTIC_CROSSES.get(material).get();
+    }
+
+    public static Block getDogGraveStone(EnumGraveMaterial material) {
+        return DOG_GRAVE_STONES.get(material).get();
+    }
+
+    public static Block getCatGraveStone(EnumGraveMaterial material) {
+        return CAT_GRAVE_STONES.get(material).get();
+    }
+
+    public static Block getHorseGraveStone(EnumGraveMaterial material) {
+        return HORSE_GRAVE_STONES.get(material).get();
     }
 
     public static Block getPetGraveStone(EnumGraveMaterial material) {

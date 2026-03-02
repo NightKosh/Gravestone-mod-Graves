@@ -99,10 +99,9 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             EnumGraveType.CELTIC_CROSS,
             EnumGraveType.GRAVE_PLATE);
     private static final List<EnumGraveType> GENERATED_VILLAGERS_GRAVES_TYPES = List.of(EnumGraveType.VILLAGER_GRAVE_STONE);
-    //TODO ????
-    private static final List<EnumGraveType> GENERATED_DOGS_GRAVES_TYPES = List.of(EnumGraveType.PET_GRAVE_STONE);
-    private static final List<EnumGraveType> GENERATED_CAT_GRAVES_TYPES = List.of(EnumGraveType.PET_GRAVE_STONE);
-    private static final List<EnumGraveType> GENERATED_HORSE_GRAVES_TYPES = List.of(EnumGraveType.PET_GRAVE_STONE);
+    private static final List<EnumGraveType> GENERATED_DOGS_GRAVES_TYPES = List.of(EnumGraveType.DOG_GRAVE_STONE);
+    private static final List<EnumGraveType> GENERATED_CAT_GRAVES_TYPES = List.of(EnumGraveType.CAT_GRAVE_STONE);
+    private static final List<EnumGraveType> GENERATED_HORSE_GRAVES_TYPES = List.of(EnumGraveType.HORSE_GRAVE_STONE);
 
     public static void createPlayerGrave(Player player, Collection<ItemEntity> drops, DamageSource damageSource, long spawnTime) {
         if (player.level() instanceof ServerLevel server && !server.getGameRules().get(GameRules.KEEP_INVENTORY) &&

@@ -417,6 +417,24 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
                 case SOUTH, NORTH -> GP_NORTH_SOUTH;
                 default -> GP_NORTH_SOUTH;
             };
+            //TODO
+            case DOG_GRAVE_STONE -> switch (facing) {
+                case EAST, WEST -> SWORD_EAST_WEST;
+                case SOUTH, NORTH -> SWORD_SOUTH_NORTH;
+                default -> SWORD_SOUTH_NORTH;
+            };
+            //TODO
+            case CAT_GRAVE_STONE -> switch (facing) {
+                case EAST, WEST -> SWORD_EAST_WEST;
+                case SOUTH, NORTH -> SWORD_SOUTH_NORTH;
+                default -> SWORD_SOUTH_NORTH;
+            };
+            //TODO
+            case HORSE_GRAVE_STONE -> switch (facing) {
+                case EAST, WEST -> SWORD_EAST_WEST;
+                case SOUTH, NORTH -> SWORD_SOUTH_NORTH;
+                default -> SWORD_SOUTH_NORTH;
+            };
             case SWORD -> switch (facing) {
                 case EAST, WEST -> SWORD_EAST_WEST;
                 case SOUTH, NORTH -> SWORD_SOUTH_NORTH;

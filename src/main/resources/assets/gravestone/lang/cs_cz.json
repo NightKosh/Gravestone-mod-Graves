@@ -8,8 +8,11 @@
   "block.gravestone.obelisk": "Obelisk",
   "block.gravestone.celtic_cross": "Keltský kříž",
   "block.gravestone.grave_plate": "Náhrobní kámenk",
+  "block.gravestone.dog_grave_stone": "Socha psa",
+  "block.gravestone.cat_grave_stone": "Socha kočky",
+  "block.gravestone.horse_grave_stone": "Socha koně",
   "block.gravestone.pet_grave_stone": "Pet Gravestone",
-  "block.gravestone.villager_grave_stone": "Villager Gravestone",
+  "block.gravestone.villager_grave_stone": "Socha vesničana",
   "block.gravestone.sword": "Meč padlého válečníka",
 
   "item.grave.age": "Žil",

@@ -8,8 +8,11 @@
   "block.gravestone.obelisk": "方尖碑",
   "block.gravestone.celtic_cross": "Celtic Cross",
   "block.gravestone.grave_plate": "墓碑板",
+  "block.gravestone.dog_grave_stone": "狗雕像",
+  "block.gravestone.cat_grave_stone": "猫雕像",
+  "block.gravestone.horse_grave_stone": "马雕像",
   "block.gravestone.pet_grave_stone": "Pet Gravestone",
-  "block.gravestone.villager_grave_stone": "Villager Gravestone",
+  "block.gravestone.villager_grave_stone": "村民纪念碑",
   "block.gravestone.sword": "战魂之剑",
 
   "item.grave.age": "已生活了",
