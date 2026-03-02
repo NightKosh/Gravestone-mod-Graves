@@ -3,7 +3,6 @@ package nightkosh.gravestone.block;
 import com.google.gson.JsonParser;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.resources.RegistryOps;
@@ -13,16 +12,12 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
-import nightkosh.gravestone.api.ModInfo;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
-import nightkosh.gravestone.core.GSBlocks;
 
 import javax.annotation.Nonnull;
 import java.util.function.Consumer;
-
-import static net.minecraft.resources.Identifier.fromNamespaceAndPath;
 
 /**
  * GraveStone mod
@@ -43,8 +38,9 @@ public class ItemBlockGraveStone extends BlockItem {
         this.material = block.material;
     }
 
+    @Nonnull
     @Override
-    public Component getName(ItemStack stack) {
+    public Component getName(@Nonnull ItemStack stack) {
         return Component.translatable(keyFor(graveType));
     }
 

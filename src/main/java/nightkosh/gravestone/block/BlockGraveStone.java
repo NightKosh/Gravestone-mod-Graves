@@ -372,6 +372,15 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
 
     private static final VoxelShape GP_NORTH_SOUTH = Block.box(2, 0, 1, 14, 1, 15);
     private static final VoxelShape GP_EAST_WEST = Block.box(1, 0, 2, 15, 1, 14);
+
+    private static final VoxelShape DOG_NORTH_SOUTH = Block.box(5, 0, 1, 11, 10, 15);
+    private static final VoxelShape DOG_EAST_WEST = Block.box(1, 0, 5, 15, 10, 11);
+
+    private static final VoxelShape CAT_NORTH_SOUTH = Block.box(2, 0, 1, 14, 1, 15);
+    private static final VoxelShape CAT_EAST_WEST = Block.box(1, 0, 2, 15, 1, 14);
+
+    private static final VoxelShape HORSE_NORTH_SOUTH = Block.box(2, 0, 1, 14, 1, 15);
+    private static final VoxelShape HORSE_EAST_WEST = Block.box(1, 0, 2, 15, 1, 14);
     //TODO
     private static final VoxelShape SWORD_SOUTH_NORTH = Block.box(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
     private static final VoxelShape SWORD_EAST_WEST = Block.box(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
@@ -417,24 +426,22 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
                 case SOUTH, NORTH -> GP_NORTH_SOUTH;
                 default -> GP_NORTH_SOUTH;
             };
-            //TODO
             case DOG_GRAVE_STONE -> switch (facing) {
-                case EAST, WEST -> SWORD_EAST_WEST;
-                case SOUTH, NORTH -> SWORD_SOUTH_NORTH;
-                default -> SWORD_SOUTH_NORTH;
+                case EAST, WEST -> DOG_EAST_WEST;
+                case SOUTH, NORTH -> DOG_NORTH_SOUTH;
+                default -> DOG_NORTH_SOUTH;
             };
-            //TODO
             case CAT_GRAVE_STONE -> switch (facing) {
-                case EAST, WEST -> SWORD_EAST_WEST;
-                case SOUTH, NORTH -> SWORD_SOUTH_NORTH;
-                default -> SWORD_SOUTH_NORTH;
+                case EAST, WEST -> CAT_EAST_WEST;
+                case SOUTH, NORTH -> CAT_NORTH_SOUTH;
+                default -> CAT_NORTH_SOUTH;
             };
-            //TODO
             case HORSE_GRAVE_STONE -> switch (facing) {
-                case EAST, WEST -> SWORD_EAST_WEST;
-                case SOUTH, NORTH -> SWORD_SOUTH_NORTH;
-                default -> SWORD_SOUTH_NORTH;
+                case EAST, WEST -> HORSE_EAST_WEST;
+                case SOUTH, NORTH -> HORSE_NORTH_SOUTH;
+                default -> HORSE_NORTH_SOUTH;
             };
+            //TODO ??
             case SWORD -> switch (facing) {
                 case EAST, WEST -> SWORD_EAST_WEST;
                 case SOUTH, NORTH -> SWORD_SOUTH_NORTH;

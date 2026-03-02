@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "gravestone_dog_grave_stone",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:bone",
+    "gravestone:chisel",
+    "minecraft:packed_ice"
+  ],
+  "result": {
+    "id": "gravestone:dog_grave_stone_ice",
+    "count": 3
+  }
+}
