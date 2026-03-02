@@ -60,7 +60,7 @@ public class GraveStoneHelper {
     public static ItemStack getSwordAsGrave(Item grave, ItemStack sword) {
         var graveStoneStack = new ItemStack(grave);
         var tag = new CompoundTag();
-        tag.putBoolean("Purified", false);
+        tag.putBoolean(GraveStoneBlockEntity.TAG_IS_SPAWNER, true);
         //TODO GraveStoneHelper.addSwordInfo(tag, sword);
         graveStoneStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
         return graveStoneStack;
@@ -130,7 +130,6 @@ public class GraveStoneHelper {
                     graveEntity.dropSword();
                 } else {
                     var tag = new CompoundTag();
-                    tag.putBoolean("Purified", true);
 
                     itemStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
                     GraveInventory.dropItem(itemStack, level, graveEntity.getBlockPos());
@@ -149,13 +148,12 @@ public class GraveStoneHelper {
             var itemStack = new ItemStack(GSBlocks.getGraveBlock(graveBlock.graveType, graveBlock.material).asItem());
 
             var tag = new CompoundTag();
-            tag.putBoolean("Purified", true);
             if (grave.getAge() > 0) {
-                tag.putInt("Age", grave.getAge());
+                tag.putInt(GraveStoneBlockEntity.TAG_AGE, grave.getAge());
             }
 
             if (StringUtils.isNoneBlank(grave.getDeathMessageJson())) {
-                tag.putString("deathMessageJson", grave.getDeathMessageJson());
+                tag.putString(GraveStoneBlockEntity.TAG_DEATH_MESSAGE, grave.getDeathMessageJson());
             }
             if (grave.isSwordGrave()) {
                 GraveStoneHelper.addSwordInfo(level, tag, grave.getSword());

@@ -386,6 +386,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 graveEntity.setDeathMessageJson(deathMessageJson);
                 graveEntity.getInventory().setItems(items);
                 graveEntity.setAge(age);
+                graveEntity.setSpawner(true);
                 if (entity instanceof Player player) {
                     graveEntity.setOwner(player.getUUID().toString());
                 } else if (entity instanceof TamableAnimal tamable && tamable.isTame() && tamable.getOwner() != null) {
@@ -400,14 +401,15 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
             var tag = new CompoundTag();
             if (StringUtils.isNoneBlank(deathMessageJson)) {
-                tag.putString("deathMessageJson", deathMessageJson);
+                tag.putString(GraveStoneBlockEntity.TAG_DEATH_MESSAGE, deathMessageJson);
             }
             if (age > 0) {
-                tag.putInt("Age", age);
+                tag.putInt(GraveStoneBlockEntity.TAG_AGE, age);
             }
             if (graveInfo.graveType() == EnumGraveType.SWORD && graveInfo.sword() != null) {
                 GraveStoneHelper.addSwordInfo(level, tag, graveInfo.sword());
             }
+            tag.putBoolean(GraveStoneBlockEntity.TAG_IS_SPAWNER, false);
 
             itemStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
             GraveInventory.dropItem(itemStack, level, pos);

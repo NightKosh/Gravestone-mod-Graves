@@ -47,12 +47,17 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
 
     public static GraveSpawnerHelper graveSpawnerHelper = new GraveSpawnerHelper();
 
+    public static final String TAG_AGE = "Age";
+    public static final String TAG_DEATH_MESSAGE = "deathMessageJson";
+    public static final String TAG_PLAYER_ID = "PlayerId";
+    public static final String TAG_IS_SPAWNER = "isSpawner";
+
     protected GraveInventory inventory;
     protected String deathMessageJson;
     protected int age = -1;
     protected ItemStack sword = null;
     protected String playerId = "";
-    protected boolean isPurified = false;
+    protected boolean isSpawner = false;
     protected int spawnerHelperId;
     protected GroupOfGravesSpawnerHelper spawnerHelper;
 
@@ -157,17 +162,17 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
     public void loadAdditional(@Nonnull ValueInput in) {
         super.loadAdditional(in);
         // age
-        age = in.getIntOr("Age", 0);
+        age = in.getIntOr(TAG_AGE, 0);
         // grave loot
         inventory.readItems(in);
         // death text
-        deathMessageJson = in.getString("deathMessageJson").orElse(null);
+        deathMessageJson = in.getString(TAG_DEATH_MESSAGE).orElse(null);
         // sword
         readSwordInfo(in);
         // owner
-        playerId = in.getString("PlayerId").orElse(null);
+        playerId = in.getString(TAG_PLAYER_ID).orElse(null);
 
-        isPurified = in.getBooleanOr("Purified", true);
+        isSpawner = in.getBooleanOr(TAG_IS_SPAWNER, false);
 
         if (spawner != null) {
             this.spawner.load(this.level, this.worldPosition, in);
@@ -183,19 +188,19 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
     public void saveAdditional(@Nonnull ValueOutput out) {
         super.saveAdditional(out);
         // age
-        out.putInt("Age", age);
+        out.putInt(TAG_AGE, age);
         // grave loot
         inventory.saveItems(out);
         // death text
         if (StringUtils.isNoneBlank(deathMessageJson)) {
-            out.putString("deathMessageJson", deathMessageJson);
+            out.putString(TAG_DEATH_MESSAGE, deathMessageJson);
         }
         // sword
         writeSwordInfo(out);
         // owner
-        out.putString("PlayerId", playerId);
+        out.putString(TAG_PLAYER_ID, playerId);
 
-        out.putBoolean("Purified", isPurified);
+        out.putBoolean(TAG_IS_SPAWNER, isSpawner);
 
         if (spawner != null) {
             spawner.save(out);
@@ -293,12 +298,12 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
         }
     }
 
-    public boolean isPurified() {
-        return isPurified;
+    public boolean isSpawner() {
+        return isSpawner;
     }
 
-    public void setPurified(boolean isPurified) {
-        this.isPurified = isPurified;
+    public void setSpawner(boolean isSpawner) {
+        this.isSpawner = isSpawner;
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, GraveStoneBlockEntity blockEntity) {

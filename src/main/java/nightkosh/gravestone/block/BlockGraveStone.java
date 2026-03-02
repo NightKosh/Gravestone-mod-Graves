@@ -134,12 +134,12 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
                 if (data != null) {
                     var tag = data.copyTag();
                     if (tag != null) {
-                        if (tag.contains("deathMessageJson")) {
-                            grave.setDeathMessageJson(tag.getString("deathMessageJson").get());
+                        if (tag.contains(GraveStoneBlockEntity.TAG_DEATH_MESSAGE)) {
+                            grave.setDeathMessageJson(tag.getString(GraveStoneBlockEntity.TAG_DEATH_MESSAGE).get());
                         }
 
-                        grave.setAge(tag.getIntOr("Age", 0));
-                        grave.setPurified(tag.getBooleanOr("Purified", true));
+                        grave.setAge(tag.getIntOr(GraveStoneBlockEntity.TAG_AGE, 0));
+                        grave.setSpawner(tag.getBooleanOr(GraveStoneBlockEntity.TAG_IS_SPAWNER, false));
 
                         //TODO
 //                        if (tag.contains("Sword")) {

@@ -16,6 +16,7 @@ import net.minecraft.world.item.component.TooltipDisplay;
 import nightkosh.gravestone.api.ModInfo;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
+import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 import nightkosh.gravestone.core.GSBlocks;
 
 import javax.annotation.Nonnull;
@@ -72,18 +73,18 @@ public class ItemBlockGraveStone extends BlockItem {
         if (data != null) {
             var tag = data.copyTag();
             if (tag != null) {
-                if (tag.contains("deathMessageJson")) {
+                if (tag.contains(GraveStoneBlockEntity.TAG_DEATH_MESSAGE)) {
                     var ops = RegistryOps.create(JsonOps.INSTANCE, context.level().registryAccess());
-                    var json = JsonParser.parseString(tag.getString("deathMessageJson").get());
+                    var json = JsonParser.parseString(tag.getString(GraveStoneBlockEntity.TAG_DEATH_MESSAGE).get());
                     var component = ComponentSerialization.CODEC
                             .parse(ops, json)
                             .result()
                             .orElse(Component.empty());
                     consumer.accept(component);
                 }
-                if (tag.getIntOr("Age", 0) > 0) {
+                if (tag.getIntOr(GraveStoneBlockEntity.TAG_AGE, 0) > 0) {
                     consumer.accept(Component.translatable("item.grave.age")
-                            .append(" " + tag.getInt("Age").get() + " ")
+                            .append(" " + tag.getInt(GraveStoneBlockEntity.TAG_AGE).get() + " ")
                             .append(Component.translatable("item.grave.days")));
                 }
 
