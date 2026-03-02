@@ -5,13 +5,18 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BaseSpawner;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.Spawner;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
@@ -23,7 +28,10 @@ import nightkosh.gravestone.core.GSBlockEntities;
 import nightkosh.gravestone.core.config.GSConfigs;
 import nightkosh.gravestone.gui.container.GraveContainerMenu;
 import nightkosh.gravestone.gui.container.GraveInventory;
-import nightkosh.gravestone.helper.*;
+import nightkosh.gravestone.helper.GraveSpawnerHelper;
+import nightkosh.gravestone.helper.GraveStoneHelper;
+import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
+import nightkosh.gravestone.helper.IFog;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
@@ -35,7 +43,7 @@ import java.util.Random;
  * @author NightKosh
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, ISpawnerEntity {
+public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, ISpawnerEntity, Spawner {
 
     public static GraveSpawnerHelper graveSpawnerHelper = new GraveSpawnerHelper();
 
@@ -47,7 +55,9 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
     protected boolean isPurified = false;
     protected int spawnerHelperId;
     protected GroupOfGravesSpawnerHelper spawnerHelper;
-    protected ISpawner spawner;
+
+    protected final BaseSpawner spawner;
+
     public static IFog fogHandler = new IFog() {
     };
 
@@ -82,17 +92,6 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
     public BlockPos getIPos() {
         return getBlockPos();
     }
-
-    //TODO
-//    @Override
-//    public boolean receiveClientEvent(int par1, int par2) {
-//        if (par1 == 1 && this.getLevel().isClientSide()) {
-//            spawner.setMinDelay();
-//        }
-//
-//        return true;
-//    }
-
 
     public GraveInventory getInventory() {
         return inventory;
@@ -170,6 +169,9 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
 
         isPurified = in.getBooleanOr("Purified", true);
 
+        if (spawner != null) {
+            this.spawner.load(this.level, this.worldPosition, in);
+        }
         //spawnerHelper
         //TODO
 //        if (in.contains("SpawnerHelperId")) {
@@ -195,6 +197,10 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
 
         out.putBoolean("Purified", isPurified);
 
+        if (spawner != null) {
+            spawner.save(out);
+        }
+
         //spawnerHelper
         if (haveSpawnerHelper()) {
             //TODO
@@ -206,7 +212,7 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
     public void preRemoveSideEffects(@Nonnull BlockPos pos, @Nonnull BlockState state) {
         super.preRemoveSideEffects(pos, state);
 
-        GraveStoneHelper.spawnMob(level, pos);
+        graveSpawnerHelper.spawnMobAtGraveDestruction(level, pos);
 
         var flower = state.getValue(BlockGraveStone.FLOWER);
         if (flower != FlowerType.NONE) {
@@ -293,6 +299,30 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
 
     public void setPurified(boolean isPurified) {
         this.isPurified = isPurified;
+    }
+
+    public static void serverTick(Level level, BlockPos pos, BlockState state, GraveStoneBlockEntity blockEntity) {
+        if (blockEntity.getSpawner() != null) {
+            blockEntity.spawner.serverTick((ServerLevel) level, pos);
+        }
+    }
+
+    @Override
+    public boolean triggerEvent(int id, int type) {
+        return this.spawner != null &&
+                (this.spawner.onEventTriggered(this.level, id) || super.triggerEvent(id, type));
+    }
+
+    @Override
+    public void setEntityId(@Nonnull EntityType<?> type, @Nonnull RandomSource random) {
+        if (this.spawner != null) {
+            this.spawner.setEntityId(type, this.level, random, this.worldPosition);
+            this.setChanged();
+        }
+    }
+
+    public BaseSpawner getSpawner() {
+        return this.spawner;
     }
 
 }

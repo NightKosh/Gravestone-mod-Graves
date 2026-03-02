@@ -44,20 +44,6 @@ public class GraveStoneHelper {
         }
     }
 
-    public static void spawnMob(Level level, BlockPos pos) {
-        //TODO !!!
-//        if (GSConfigs.spawnMobAtGraveDestruction && level.random.nextInt(10) == 0) {
-//            if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave) {
-////        TODO
-//                var mob = GSMobSpawn.getMobEntity(level, grave.getGraveType(), pos.getX(), pos.getY(), pos.getZ());
-//
-//                if (mob != null) {
-//                    GSMobSpawn.spawnMob(level, mob, pos.getX(), pos.getY(), pos.getZ(), false);
-//                }
-//            }
-//        }
-    }
-
     /**
      * Check can be grave placed on this type of surface
      */

@@ -1,5 +1,8 @@
 package nightkosh.gravestone.helper;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BaseSpawner;
+import net.minecraft.world.level.Level;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
 
 /**
@@ -13,9 +16,12 @@ public class GraveSpawnerHelper {
     public GraveSpawnerHelper() {
     }
 
-    public ISpawner getSpawner(GraveStoneBlockEntity te) {
-        return new ISpawner() {
-        };
+    public BaseSpawner getSpawner(GraveStoneBlockEntity blockEntity) {
+        return null;
+    }
+
+    public void spawnMobAtGraveDestruction(Level level, BlockPos pos) {
+
     }
 
 }
