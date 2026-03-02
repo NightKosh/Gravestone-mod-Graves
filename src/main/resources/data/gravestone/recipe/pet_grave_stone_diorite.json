@@ -9,7 +9,7 @@
   ],
   "key": {
     "C": "gravestone:chisel",
-    "B": "minecraft:polished_diorite"
+    "B": "minecraft:diorite"
   },
   "result": {
     "id": "gravestone:pet_grave_stone_diorite",

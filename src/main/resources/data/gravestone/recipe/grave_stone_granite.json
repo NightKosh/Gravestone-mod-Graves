@@ -9,7 +9,7 @@
   ],
   "key": {
     "C": "gravestone:chisel",
-    "B": "minecraft:polished_granite"
+    "B": "minecraft:granite"
   },
   "result": {
     "id": "gravestone:grave_stone_granite",
