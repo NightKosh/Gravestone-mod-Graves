@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "gravestone_cat_grave_stone",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:cod",
+    "gravestone:chisel",
+    "minecraft:mossy_cobblestone"
+  ],
+  "result": {
+    "id": "gravestone:cat_grave_stone_mossy",
+    "count": 3
+  }
+}

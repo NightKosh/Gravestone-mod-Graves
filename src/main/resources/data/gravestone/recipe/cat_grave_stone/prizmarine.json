@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "gravestone_cat_grave_stone",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:cod",
+    "gravestone:chisel",
+    "minecraft:prismarine_bricks"
+  ],
+  "result": {
+    "id": "gravestone:cat_grave_stone_prizmarine",
+    "count": 3
+  }
+}

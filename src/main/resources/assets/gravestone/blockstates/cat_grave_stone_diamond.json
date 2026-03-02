@@ -1,0 +1,8 @@
+{
+  "multipart": [
+    { "when": { "facing": "north" }, "apply": { "model": "gravestone:block/cat_grave_stone/diamond", "y": 0 } },
+    { "when": { "facing": "east"  }, "apply": { "model": "gravestone:block/cat_grave_stone/diamond", "y": 90 } },
+    { "when": { "facing": "south" }, "apply": { "model": "gravestone:block/cat_grave_stone/diamond", "y": 180 } },
+    { "when": { "facing": "west"  }, "apply": { "model": "gravestone:block/cat_grave_stone/diamond", "y": 270 } }
+  ]
+}
