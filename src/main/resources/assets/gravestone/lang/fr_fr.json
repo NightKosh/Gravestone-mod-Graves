@@ -19,18 +19,7 @@
 
   "grave.cant_be_looted": "Vous ne pouvez pas piller cette tombe !",
 
-  "material.title": "Fait de",
-  "material.mossy": "Mossy Cobblestone",
-  "material.sandstone": "Grès",
-  "material.stone": "Pierre",
-  "material.diorite": "Diorite",
-  "material.granite": "Granite",
-  "material.gold": "Or",
-  "material.diamond": "Diamant",
-  "material.obsidian": "Obsidienne",
-  "material.quartz": "Quartz",
-  "material.prizmarine": "Prismarine",
-  "material.ice": "Glace",
+  "gravestone.material.title": "Fait de",
 
   "gui.gravestone.chisel.title" : "Enter new gravestone text:",
 

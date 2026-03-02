@@ -19,18 +19,7 @@
 
   "grave.cant_be_looted": "Ви не можете розграбувати цю могилу!",
 
-  "material.title": "Зроблений з",
-  "material.mossy": "Mossy Cobblestone",
-  "material.sandstone": "Пісковика",
-  "material.stone": "Каменя",
-  "material.diorite": "Диориту",
-  "material.granite": "Граніту",
-  "material.gold": "Золота",
-  "material.diamond": "Алмазів",
-  "material.obsidian": "Обсидіану",
-  "material.quartz": "Кварцу",
-  "material.prizmarine": "Призмарину",
-  "material.ice": "Льоду",
+  "gravestone.material.title": "Зроблений з",
 
   "gui.gravestone.chisel.title" : "Enter new gravestone text:",
 

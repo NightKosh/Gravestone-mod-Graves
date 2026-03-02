@@ -19,18 +19,7 @@
 
   "grave.cant_be_looted": "Du kannst dieses Grab nicht looten!",
 
-  "material.title": "Besteht aus",
-  "material.mossy": "Mossy Cobblestone",
-  "material.sandstone": "Sandstein",
-  "material.stone": "Stein",
-  "material.diorite": "Diorit",
-  "material.granite": "Granit",
-  "material.gold": "Gold",
-  "material.diamond": "Diamant",
-  "material.obsidian": "Obsidian",
-  "material.quartz": "Quartz",
-  "material.prizmarine": "Prismarin",
-  "material.ice": "Eis",
+  "gravestone.material.title": "Besteht aus",
 
   "gui.gravestone.chisel.title" : "Enter new gravestone text:",
 

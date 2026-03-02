@@ -65,9 +65,9 @@ public class ItemBlockGraveStone extends BlockItem {
     public void appendHoverText(ItemStack stack, @Nonnull Item.TooltipContext context,
                                 @Nonnull TooltipDisplay tooltipDisplay, @Nonnull Consumer<Component> consumer,
                                 @Nonnull TooltipFlag flag) {
-        consumer.accept(Component.translatable("material.title")
+        consumer.accept(Component.translatable("gravestone.material.title")
                 .append(" ")
-                .append(Component.translatable("material." + this.material.name().toLowerCase())));
+                .append(this.material.getBlock().getName()));
 
         var data = stack.get(DataComponents.CUSTOM_DATA);
         if (data != null) {

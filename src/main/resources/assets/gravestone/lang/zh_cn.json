@@ -19,18 +19,7 @@
 
   "grave.cant_be_looted": "你无法获得这块墓碑!",
 
-  "material.title": "构成是",
-  "material.mossy": "Mossy Cobblestone",
-  "material.sandstone": "沙石",
-  "material.stone": "石头",
-  "material.diorite": "闪长岩",
-  "material.granite": "花岗岩",
-  "material.gold": "金",
-  "material.diamond": "钻石",
-  "material.obsidian": "黑曜石",
-  "material.quartz": "石英",
-  "material.prizmarine": "海晶石",
-  "material.ice": "冰",
+  "gravestone.material.title": "构成是",
 
   "gui.gravestone.chisel.title" : "Enter new gravestone text:",
 

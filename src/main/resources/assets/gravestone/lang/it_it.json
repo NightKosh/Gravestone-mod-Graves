@@ -19,18 +19,7 @@
 
   "grave.cant_be_looted": "Non puoi saccheggiare questa tomba!",
 
-  "material.title": "Fatto da",
-  "material.mossy": "Mossy Cobblestone",
-  "material.sandstone": "Arenaria",
-  "material.stone": "Pietra",
-  "material.diorite": "Diorite",
-  "material.granite": "Granito",
-  "material.gold": "Oro",
-  "material.diamond": "Diamante",
-  "material.obsidian": "Ossidiana",
-  "material.quartz": "Quarzo",
-  "material.prizmarine": "Prismarina",
-  "material.ice": "Ghiaccio",
+  "gravestone.material.title": "Fatto da",
 
   "gui.gravestone.chisel.title" : "Enter new gravestone text:",
 
