@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "gravestone_horse_grave_stone",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:apple",
+    "gravestone:chisel",
+    "minecraft:obsidian"
+  ],
+  "result": {
+    "id": "gravestone:horse_grave_stone_obsidian",
+    "count": 3
+  }
+}

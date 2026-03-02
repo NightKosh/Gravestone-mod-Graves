@@ -376,8 +376,8 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
     private static final VoxelShape CAT_NORTH_SOUTH = Block.box(6, 0, 4, 10, 9, 12);
     private static final VoxelShape CAT_EAST_WEST = Block.box(4, 0, 6, 12, 9, 10);
 
-    private static final VoxelShape HORSE_NORTH_SOUTH = Block.box(2, 0, 1, 14, 1, 15);
-    private static final VoxelShape HORSE_EAST_WEST = Block.box(1, 0, 2, 15, 1, 14);
+    private static final VoxelShape HORSE_NORTH_SOUTH = Block.box(4, 0, 4, 12, 10, 12);
+    private static final VoxelShape HORSE_EAST_WEST = Block.box(4, 0, 4, 12, 10, 12);
     //TODO
     private static final VoxelShape SWORD_SOUTH_NORTH = Block.box(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
     private static final VoxelShape SWORD_EAST_WEST = Block.box(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
