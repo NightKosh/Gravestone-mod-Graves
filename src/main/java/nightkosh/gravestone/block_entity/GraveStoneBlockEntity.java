@@ -272,7 +272,7 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
     }
 
     public boolean canBeLooted(Player player) {
-        if (GSConfigs.ONLY_OWNER_CAN_LOOT_GRAVE.get()) {
+        if (GSConfigs.ONLY_OWNER_CAN_LOOT_GRAVE.get() && this.hasOwner()) {
             if (player != null) {
                 return player.isCreative() ||
                         StringUtils.isBlank(this.playerId) ||

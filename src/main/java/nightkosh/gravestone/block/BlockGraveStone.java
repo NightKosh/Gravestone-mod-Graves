@@ -266,13 +266,11 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
             boolean movedByPiston) {
         if (!level.isClientSide()) {
             var belowPos = pos.below();
-            if (!level.getBlockState(belowPos).isFaceSturdy(level, belowPos, Direction.UP)) {
-                if (level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave &&
-                        (grave.getInventory().isEmpty() || !grave.hasOwner())) {
-                    if (grave.canBeLooted(null)) {
-                        level.removeBlock(pos, false);
-                    }
-                }
+            if (!level.getBlockState(belowPos).isFaceSturdy(level, belowPos, Direction.UP) &&
+                    level.getBlockEntity(pos) instanceof GraveStoneBlockEntity grave &&
+                    (grave.getInventory().isEmpty() || !grave.hasOwner()) &&
+                    grave.canBeLooted(null)) {
+                level.removeBlock(pos, false);
             }
         }
     }
