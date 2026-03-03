@@ -22,10 +22,12 @@ import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.LevelEvent;
 import nightkosh.gravestone.api.ModInfo;
+import nightkosh.gravestone.core.GSAdvancements;
 import nightkosh.gravestone.core.GSCommands;
 import nightkosh.gravestone.core.MobHandler;
 import nightkosh.gravestone.core.config.GSConfigs;
 import nightkosh.gravestone.core.logger.GravesLogger;
+import nightkosh.gravestone.helper.AdvancementsHelper;
 import nightkosh.gravestone.helper.BackupsHelper;
 import nightkosh.gravestone.helper.GSEnchantmentHelper;
 import nightkosh.gravestone.helper.GraveGenerationHelper;
@@ -79,6 +81,10 @@ public class EventsHandler {
                             }
                             return;
                         }
+                    }
+
+                    if (event.getSource().is(DamageTypes.FELL_OUT_OF_WORLD)) {
+                        AdvancementsHelper.giveAdvancement(player, player.level(), GSAdvancements.VOID_INSURANCE);
                     }
                     GraveGenerationHelper.createPlayerGrave(player, event.getDrops(), event.getSource(), MobHandler.getAndRemoveSpawnTime(player));
                 } else if (GSConfigs.DEBUG_MODE.get()) {

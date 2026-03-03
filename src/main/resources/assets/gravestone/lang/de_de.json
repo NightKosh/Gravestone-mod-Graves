@@ -26,6 +26,23 @@
 
   "gui.gravestone.chisel.title" : "Enter new gravestone text:",
 
-  "enchantment.gravestone.soulbound": "Soulbound"
+  "enchantment.gravestone.soulbound": "Soulbound",
+
+  "advancement.gravestone.press_f": "Press F to pay respect",
+  "advancement.gravestone.press_f.desc": "Place a flower on a grave.",
+  "advancement.gravestone.proper_burial": "Proper Burial",
+  "advancement.gravestone.proper_burial.desc": "Place a grave.",
+  "advancement.gravestone.last_words": "Last Words",
+  "advancement.gravestone.last_words.desc": "Engrave a message on a grave.",
+  "advancement.gravestone.faithful_to_the_end": "Faithful to the End",
+  "advancement.gravestone.faithful_to_the_end.desc": "Good Boy Never Forgotten.",
+  "advancement.gravestone.dead_men_trade_no_emeralds": "Dead Men Trade No Emeralds",
+  "advancement.gravestone.dead_men_trade_no_emeralds.desc": "This villager won't restock anymore.",
+  "advancement.gravestone.tomb_raider": "Tomb Raider",
+  "advancement.gravestone.tomb_raider.desc": "Retrieve items from a grave.",
+  "advancement.gravestone.this_is_fine": "This Is Fine",
+  "advancement.gravestone.this_is_fine.desc": "That's okay, things are going to be okay. Even in lava.",
+  "advancement.gravestone.void_insurance": "Void Insurance",
+  "advancement.gravestone.void_insurance.desc": "Even the void leaves something behind."
 }
 

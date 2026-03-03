@@ -1,0 +1,17 @@
+{
+  "parent": "gravestone:tomb_raider",
+  "display": {
+    "icon": { "id": "gravestone:villager_grave_stone_stone" },
+    "title": { "translate": "advancement.gravestone.dead_men_trade_no_emeralds" },
+    "description": { "translate": "advancement.gravestone.dead_men_trade_no_emeralds.desc" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

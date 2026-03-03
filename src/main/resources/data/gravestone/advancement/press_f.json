@@ -1,0 +1,17 @@
+{
+  "parent": "gravestone:proper_burial",
+  "display": {
+    "icon": { "id": "minecraft:poppy" },
+    "title": { "translate": "advancement.gravestone.press_f" },
+    "description": { "translate": "advancement.gravestone.press_f.desc" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

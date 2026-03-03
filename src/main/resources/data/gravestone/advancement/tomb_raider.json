@@ -1,0 +1,17 @@
+{
+  "parent": "minecraft:adventure/root",
+  "display": {
+    "icon": { "id": "minecraft:iron_shovel" },
+    "title": { "translate": "advancement.gravestone.tomb_raider" },
+    "description": { "translate": "advancement.gravestone.tomb_raider.desc" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

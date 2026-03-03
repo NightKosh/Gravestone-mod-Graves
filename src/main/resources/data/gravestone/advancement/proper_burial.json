@@ -1,0 +1,17 @@
+{
+  "parent": "gravestone:tomb_raider",
+  "display": {
+    "icon": { "id": "gravestone:grave_stone_diamond" },
+    "title": { "translate": "advancement.gravestone.proper_burial" },
+    "description": { "translate": "advancement.gravestone.proper_burial.desc" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

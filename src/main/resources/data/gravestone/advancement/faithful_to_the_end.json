@@ -1,0 +1,17 @@
+{
+  "parent": "gravestone:tomb_raider",
+  "display": {
+    "icon": { "id": "gravestone:dog_grave_stone_gold" },
+    "title": { "translate": "advancement.gravestone.faithful_to_the_end" },
+    "description": { "translate": "advancement.gravestone.faithful_to_the_end.desc" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

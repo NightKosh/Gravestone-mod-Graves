@@ -39,6 +39,7 @@ import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 import nightkosh.gravestone.block.BlockGraveStone;
 import nightkosh.gravestone.block_entity.GraveStoneBlockEntity;
+import nightkosh.gravestone.core.GSAdvancements;
 import nightkosh.gravestone.core.GSBlocks;
 import nightkosh.gravestone.core.MobHandler;
 import nightkosh.gravestone.core.config.GSConfigs;
@@ -314,6 +315,8 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             // otherwise get material by biome
             if (material == null) {
                 material = getGraveMaterialByBiomes(level, pos);
+            } else if (material == EnumGraveMaterial.OBSIDIAN && entity instanceof Player player) {
+                AdvancementsHelper.giveAdvancement(player, level, GSAdvancements.THIS_IS_FINE);
             }
 
             if (graveType == null) {
