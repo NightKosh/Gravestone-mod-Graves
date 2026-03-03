@@ -533,8 +533,9 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
 
     private static BlockPos findPlaceForGrave(Level level, Entity entity, BlockPos pos, DamageSource damageSource) {
-        if (pos.getY() <= -64) {
-            var groundPos = new BlockPos(pos.getX(), 0, pos.getZ());
+        if (pos.getY() <= level.getMinY()) {
+            var groundPos = new BlockPos(pos.getX(), level.getMinY() + 1, pos.getZ());
+            // TODO replace blocks option?
             if (level.isEmptyBlock(groundPos) && level.isEmptyBlock(groundPos.above())) {
                 level.setBlock(groundPos, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
                 return groundPos.above();
@@ -611,7 +612,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         while (true) {
             var pos = new BlockPos(x, y - 1, z);
             var state = level.getBlockState(pos);
-            if (y > -63 && (level.isEmptyBlock(pos) ||
+            if (y > level.getMinY() + 1 && (level.isEmptyBlock(pos) ||
                     state.canBeReplaced() ||
                     state.getFluidState().isSource())) {
                 y--;
