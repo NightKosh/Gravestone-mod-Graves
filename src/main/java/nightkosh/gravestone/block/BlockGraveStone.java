@@ -97,8 +97,6 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
                 .noCollision());
         this.graveType = graveType;
         this.material = material;
-        //TODO
-//        this.setTickRandomly(GSConfigs.REMOVE_EMPTY_GRAVES.get());
 
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
@@ -289,31 +287,6 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
         }
         super.attack(state, level, pos, player);
     }
-
-
-//TODO
-//    /**
-//     * A randomly called display update to be able to add particles or other
-//     * items for display
-//     */
-//    @Override
-//    public void updateTick(Level level, BlockPos pos, IBlockState state, Random random) {
-//        if (GSConfigs.REMOVE_EMPTY_GRAVES.get()) {
-//            if (!level.isClientSide()) {
-//                GraveStoneBlockEntity tileEntity = (GraveStoneBlockEntity) level.getBlockEntity(pos);
-//                if (tileEntity != null) {
-//                    if (!tileEntity.isSwordGrave() && tileEntity.isEmpty()) {
-//                        if (GSConfigs.SHOW_GRAVE_REMOVAL_MESSAGES.get()) {
-//                            GRAVE_LOGGER.info("Remove empty grave at " + pos.getX() + "/" + pos.getY() + "/" + pos.getZ());
-//                        }
-//
-//                        level.removeTileEntity(pos);
-//                        level.setBlockToAir(pos);
-//                    }
-//                }
-//            }
-//        }
-//    }
 
     @Override
     public boolean canEntityDestroy(@Nonnull BlockState state, @Nonnull BlockGetter blockGetter,

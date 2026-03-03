@@ -17,6 +17,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BaseSpawner;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.Spawner;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
@@ -36,6 +37,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
+
+import static nightkosh.gravestone.ModGraveStone.LOGGER;
 
 /**
  * GraveStone mod
@@ -310,9 +313,20 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
         this.isSpawner = isSpawner;
     }
 
-    public static void serverTick(Level level, BlockPos pos, BlockState state, GraveStoneBlockEntity blockEntity) {
-        if (blockEntity.getSpawner() != null) {
-            blockEntity.spawner.serverTick((ServerLevel) level, pos);
+    public static void serverTick(Level level, BlockPos pos, BlockState state, GraveStoneBlockEntity grave) {
+        if (grave.getSpawner() != null) {
+            grave.spawner.serverTick((ServerLevel) level, pos);
+        }
+
+        if (GSConfigs.REMOVE_EMPTY_GRAVES.get() && grave.isEmpty()) {
+            try {
+                if (GSConfigs.DEBUG_MODE.get() || GSConfigs.EMPTY_GRAVE_AUTO_REMOVAL_LOGGING.get()) {
+                    LOGGER.info("Going to remove empty grave at {}", pos.toShortString());
+                }
+                level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
+            } catch (Exception e) {
+                LOGGER.error("Can't remove empty grave at {}", pos, e);
+            }
         }
     }
 

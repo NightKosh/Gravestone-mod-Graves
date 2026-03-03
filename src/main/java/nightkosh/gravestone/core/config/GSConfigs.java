@@ -25,8 +25,8 @@ public class GSConfigs {
     //    public static ModConfigSpec.ConfigValue<Boolean> GENERATE_SWORD_GRAVES;
     public static ModConfigSpec.ConfigValue<Boolean> GENERATE_EMPTY_PLAYER_GRAVES;
     public static ModConfigSpec.ConfigValue<Boolean> ONLY_OWNER_CAN_LOOT_GRAVE;
-    //    public static ModConfigSpec.ConfigValue<Boolean> REMOVE_EMPTY_GRAVES;
-//    public static ModConfigSpec.ConfigValue<Boolean> SHOW_GRAVE_REMOVAL_MESSAGES;
+    public static ModConfigSpec.ConfigValue<Boolean> REMOVE_EMPTY_GRAVES;
+    public static ModConfigSpec.ConfigValue<Boolean> EMPTY_GRAVE_AUTO_REMOVAL_LOGGING;
     public static ModConfigSpec.ConfigValue<Boolean> DROP_GRAVE_BLOCK_AT_DESTRUCTION;
     //    public static ModConfigSpec.ConfigValue<Boolean> VANILLA_RENDERER_FOR_SWORDS_GRAVES;
     public static ModConfigSpec.ConfigValue<Boolean> CREATE_BACKUPS;
@@ -50,8 +50,8 @@ public class GSConfigs {
 //        GENERATE_SWORD_GRAVES = BUILDER.define("GenerateSwordGraves", true);
         GENERATE_EMPTY_PLAYER_GRAVES = BUILDER.define("GenerateEmptyPlayerGraves", true);
         ONLY_OWNER_CAN_LOOT_GRAVE = BUILDER.define("OnlyOwnerCanLootGrave", false);
-//        REMOVE_EMPTY_GRAVES = BUILDER.define("RemoveEmptyGraves", false);
-//        SHOW_GRAVE_REMOVAL_MESSAGES = BUILDER.define("ShowGraveRemovalMessages", true);
+        REMOVE_EMPTY_GRAVES = BUILDER.define("RemoveEmptyGraves", false);
+        EMPTY_GRAVE_AUTO_REMOVAL_LOGGING = BUILDER.define("EmptyGraveAutoRemovalLogging", true);
         DROP_GRAVE_BLOCK_AT_DESTRUCTION = BUILDER.define("DropGraveBlockAtDestruction", true);
 //        VANILLA_RENDERER_FOR_SWORDS_GRAVES = BUILDER.define("VanillaRendererForSwordsGraves", true);
         CREATE_BACKUPS = BUILDER.define("CreateBackups", true);
