@@ -201,7 +201,9 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
         // sword
         writeSwordInfo(out);
         // owner
-        out.putString(TAG_PLAYER_ID, playerId);
+        if (playerId != null) {
+            out.putString(TAG_PLAYER_ID, playerId);
+        }
 
         out.putBoolean(TAG_IS_SPAWNER, isSpawner);
 
