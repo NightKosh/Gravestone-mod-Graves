@@ -43,5 +43,7 @@
   "advancement.gravestone.this_is_fine": "This Is Fine",
   "advancement.gravestone.this_is_fine.desc": "That's okay, things are going to be okay. Even in lava.",
   "advancement.gravestone.void_insurance": "Void Insurance",
-  "advancement.gravestone.void_insurance.desc": "Even the void leaves something behind."
+  "advancement.gravestone.void_insurance.desc": "Even the void leaves something behind.",
+  "advancement.gravestone.soulbound": "Soulbound",
+  "advancement.gravestone.soulbound.desc": "Some things stay with you beyond death."
 }

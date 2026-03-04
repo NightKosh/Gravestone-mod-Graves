@@ -1,0 +1,17 @@
+{
+  "parent": "gravestone:tomb_raider",
+  "display": {
+    "icon": { "id": "minecraft:enchanted_book" },
+    "title": { "translate": "advancement.gravestone.soulbound" },
+    "description": { "translate": "advancement.gravestone.soulbound.desc" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

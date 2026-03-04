@@ -18,6 +18,7 @@ public class GSAdvancements {
     public static final Identifier DEAD_MEN_TRADE_NO_EMERALDS = fromNamespaceAndPath(ModInfo.ID, "dead_men_trade_no_emeralds");
     public static final Identifier THIS_IS_FINE = fromNamespaceAndPath(ModInfo.ID, "this_is_fine");
     public static final Identifier VOID_INSURANCE = fromNamespaceAndPath(ModInfo.ID, "void_insurance");
+    public static final Identifier SOULBOUND = fromNamespaceAndPath(ModInfo.ID, "soulbound");
     public static final Identifier PROPER_BURIAL = fromNamespaceAndPath(ModInfo.ID, "proper_burial");
     public static final Identifier LAST_WORDS = fromNamespaceAndPath(ModInfo.ID, "last_words");
     public static final Identifier PRESS_F = fromNamespaceAndPath(ModInfo.ID, "press_f");

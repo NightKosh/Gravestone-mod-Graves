@@ -43,5 +43,7 @@
   "advancement.gravestone.this_is_fine": "This Is Fine",
   "advancement.gravestone.this_is_fine.desc": "Все в порядке, все будет хорошо. Даже в лаве.",
   "advancement.gravestone.void_insurance": "Страховка от бездны",
-  "advancement.gravestone.void_insurance.desc": "Ваши вещи застрахованы даже от бездны."
+  "advancement.gravestone.void_insurance.desc": "Ваши вещи застрахованы даже от бездны.",
+  "advancement.gravestone.soulbound": "Душевная связь",
+  "advancement.gravestone.soulbound.desc": "Некоторые вещи остаются с вами даже после смерти."
 }
