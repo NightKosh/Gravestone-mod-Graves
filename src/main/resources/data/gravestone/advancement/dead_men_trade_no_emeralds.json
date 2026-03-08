@@ -1,5 +1,5 @@
 {
-  "parent": "gravestone:tomb_raider",
+  "parent": "gravestone:faithful_to_the_end",
   "display": {
     "icon": { "id": "gravestone:villager_grave_stone_stone" },
     "title": { "translate": "advancement.gravestone.dead_men_trade_no_emeralds" },

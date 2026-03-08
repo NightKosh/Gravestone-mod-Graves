@@ -10,7 +10,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
-import nightkosh.gravestone.core.GSAdvancements;
 import nightkosh.gravestone.core.GSEnchantments;
 import nightkosh.gravestone.core.config.GSConfigs;
 
@@ -47,7 +46,6 @@ public class GSEnchantmentHelper {
                                 itemStack.getHoverName().getString(),
                                 player.getScoreboardName());
                     }
-                    AdvancementsHelper.giveAdvancement(player, player.level(), GSAdvancements.SOULBOUND);
                     inventory.add(itemStack.copy());
                     it.remove();
                 }

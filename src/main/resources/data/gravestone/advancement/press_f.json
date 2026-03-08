@@ -1,10 +1,10 @@
 {
-  "parent": "gravestone:proper_burial",
+  "parent": "gravestone:last_words",
   "display": {
     "icon": { "id": "minecraft:poppy" },
     "title": { "translate": "advancement.gravestone.press_f" },
     "description": { "translate": "advancement.gravestone.press_f.desc" },
-    "frame": "task",
+    "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false

@@ -1,10 +1,10 @@
 {
-  "parent": "gravestone:tomb_raider",
+  "parent": "gravestone:this_is_fine",
   "display": {
     "icon": { "id": "minecraft:ender_eye" },
     "title": { "translate": "advancement.gravestone.void_insurance" },
     "description": { "translate": "advancement.gravestone.void_insurance.desc" },
-    "frame": "task",
+    "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
