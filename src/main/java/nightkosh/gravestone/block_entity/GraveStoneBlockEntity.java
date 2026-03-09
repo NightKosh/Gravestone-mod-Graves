@@ -32,7 +32,6 @@ import nightkosh.gravestone.gui.container.GraveInventory;
 import nightkosh.gravestone.helper.GraveSpawnerHelper;
 import nightkosh.gravestone.helper.GraveStoneHelper;
 import nightkosh.gravestone.helper.GroupOfGravesSpawnerHelper;
-import nightkosh.gravestone.helper.IFog;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
@@ -66,9 +65,6 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
 
     protected final BaseSpawner spawner;
 
-    public static IFog fogHandler = new IFog() {
-    };
-
     public GraveStoneBlockEntity(BlockPos blockPos, BlockState state) {
         super(GSBlockEntities.getGravestone(), blockPos, state);
         spawner = graveSpawnerHelper.getSpawner(this);
@@ -88,7 +84,6 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
 //
 //        spawner.update();
 //
-//        fogHandler.addFog(this.getLevel(), this.getBlockPos());
 //    }
 
     @Override
