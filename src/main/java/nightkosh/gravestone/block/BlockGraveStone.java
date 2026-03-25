@@ -200,9 +200,9 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
                         GraveStoneHelper.replaceGround(level, pos.below());
                         return InteractionResult.SUCCESS;
                     } else {
-                        player.displayClientMessage(
+                        player.sendSystemMessage(
                                 Component.translatable("grave.cant_be_looted")
-                                        .withStyle(ChatFormatting.RED), false);
+                                        .withStyle(ChatFormatting.RED));
                         return InteractionResult.FAIL;
                     }
                 } else {
@@ -241,14 +241,14 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
                                 .parse(ops, json)
                                 .result()
                                 .orElse(Component.empty());
-                        player.displayClientMessage(component, false);
+                        player.sendSystemMessage(component);
                     }
 
                     if (grave.getAge() > 0) {
-                        player.displayClientMessage(
+                        player.sendSystemMessage(
                                 Component.translatable("item.grave.age")
                                         .append(" " + grave.getAge() + " ")
-                                        .append(Component.translatable("item.grave.days")), false);
+                                        .append(Component.translatable("item.grave.days")));
                     }
 
                     return InteractionResult.SUCCESS;
@@ -295,10 +295,9 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
         if (!level.isClientSide()) {
             var be = level.getBlockEntity(pos);
             if (be instanceof GraveStoneBlockEntity grave && !grave.canBeLooted(player)) {
-                player.displayClientMessage(
+                player.sendOverlayMessage(
                         Component.translatable("grave.cant_be_looted")
-                                .withStyle(ChatFormatting.RED),
-                        true);
+                                .withStyle(ChatFormatting.RED));
                 return;
             }
         }

@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
 import static net.minecraft.resources.Identifier.fromNamespaceAndPath;
 
@@ -99,7 +98,7 @@ public class GSBlocks {
         String name = gravetype.name().toLowerCase() + "_" + mat.name().toLowerCase();
         ResourceKey id = ResourceKey.create(Registries.BLOCK, fromNamespaceAndPath(ModInfo.ID, name));
         var block = BLOCKS_REGISTER.register(name, () -> new BlockGraveStone(gravetype, mat, id));
-        ITEMS_REGISTER.register(name, () -> new ItemBlockGraveStone(block.get(), id));
+        ITEMS_REGISTER.register(name, () -> new ItemBlockGraveStone(block.get(), blockIdToItemId(id)));
         return block;
     }
 
@@ -162,6 +161,10 @@ public class GSBlocks {
 
     public static Block getVillagerGraveStone(EnumGraveMaterial material) {
         return VILLAGER_GRAVE_STONES.get(material).get();
+    }
+
+    private static ResourceKey<Item> blockIdToItemId(ResourceKey<Block> blockName) {
+        return ResourceKey.create(Registries.ITEM, blockName.identifier());
     }
 
 }

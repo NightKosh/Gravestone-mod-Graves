@@ -15,7 +15,7 @@ For more information visit [official site](http://gravestone.nightkosh.com/) or 
 
 ## Requirements
 1. [NeoForge](https://neoforged.net/) (check "build.gradle" file to know required NeoForge version)
-2. [Jdk 21.0.2](https://jdk.java.net/archive/) (do not forget to enable its support in your IDE)
+2. [Jdk 25.0.1](https://jdk.java.net/archive/) (do not forget to enable its support in your IDE)
 3. [Gradle 9.2.1](https://gradle.org/releases/)
 
 ## Dependencies.

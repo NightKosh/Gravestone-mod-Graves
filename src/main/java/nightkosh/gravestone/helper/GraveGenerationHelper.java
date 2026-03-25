@@ -297,7 +297,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 LOGGER.info("Entity experienced enough or lived a long time");
             }
             material = getGraveMaterialByAgeOrLevel(entity, age, graveTypeByEntity);
-            graveType = getDefaultGraveTypes(level.random, graveTypeByEntity);
+            graveType = getDefaultGraveTypes(level.getRandom(), graveTypeByEntity);
         } else {
             // if sword grave TODO
 //            if (graveTypeByEntity == EnumGraveTypeByEntity.PLAYER_GRAVES &&
@@ -317,7 +317,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             }
 
             if (graveType == null) {
-                graveType = getDefaultGraveTypes(level.random, graveTypeByEntity);
+                graveType = getDefaultGraveTypes(level.getRandom(), graveTypeByEntity);
             }
 //            }
         }
@@ -524,7 +524,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         if (materials.isEmpty()) {
             return EnumGraveMaterial.STONE;
         } else {
-            return materials.get(level.random.nextInt(materials.size()));
+            return materials.get(level.getRandom().nextInt(materials.size()));
         }
     }
 
