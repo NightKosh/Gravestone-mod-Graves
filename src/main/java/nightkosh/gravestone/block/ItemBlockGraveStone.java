@@ -54,7 +54,6 @@ public class ItemBlockGraveStone extends BlockItem {
             case DOG_GRAVE_STONE -> "block.gravestone.dog_grave_stone";
             case CAT_GRAVE_STONE -> "block.gravestone.cat_grave_stone";
             case HORSE_GRAVE_STONE -> "block.gravestone.horse_grave_stone";
-            case PET_GRAVE_STONE -> "block.gravestone.pet_grave_stone";
             case VILLAGER_GRAVE_STONE -> "block.gravestone.villager_grave_stone";
             default -> "block.gravestone.grave_stone";
         };

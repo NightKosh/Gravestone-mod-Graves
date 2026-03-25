@@ -42,14 +42,11 @@ public class GSBlocks {
     public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> DOG_GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
     public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> CAT_GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
     public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> HORSE_GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
-    //TODO remove
-    public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> PET_GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
     public static final Map<EnumGraveMaterial, DeferredHolder<Block, BlockGraveStone>> VILLAGER_GRAVE_STONES = new EnumMap<>(EnumGraveMaterial.class);
 
     public static final List<DeferredHolder<Block, BlockGraveStone>> GRAVE_LIST = new ArrayList<>();
 
     static {
-        ResourceKey id = null;
         for (var mat : EnumGraveMaterial.values()) {
             var graveStone = registerBlock(EnumGraveType.GRAVE_STONE, mat);
             GRAVE_STONES.put(mat, graveStone);
@@ -83,10 +80,6 @@ public class GSBlocks {
             HORSE_GRAVE_STONES.put(mat, horseGrave);
             GRAVE_LIST.add(horseGrave);
 
-            var petGrave = registerBlock(EnumGraveType.PET_GRAVE_STONE, mat);
-            PET_GRAVE_STONES.put(mat, petGrave);
-            GRAVE_LIST.add(petGrave);
-
             var villagerGrave = registerBlock(EnumGraveType.VILLAGER_GRAVE_STONE, mat);
             VILLAGER_GRAVE_STONES.put(mat, villagerGrave);
             GRAVE_LIST.add(villagerGrave);
@@ -96,7 +89,7 @@ public class GSBlocks {
     private static <T extends Block> DeferredHolder<Block, BlockGraveStone> registerBlock(
             EnumGraveType gravetype, EnumGraveMaterial mat) {
         String name = gravetype.name().toLowerCase() + "_" + mat.name().toLowerCase();
-        ResourceKey id = ResourceKey.create(Registries.BLOCK, fromNamespaceAndPath(ModInfo.ID, name));
+        var id = ResourceKey.create(Registries.BLOCK, fromNamespaceAndPath(ModInfo.ID, name));
         var block = BLOCKS_REGISTER.register(name, () -> new BlockGraveStone(gravetype, mat, id));
         ITEMS_REGISTER.register(name, () -> new ItemBlockGraveStone(block.get(), blockIdToItemId(id)));
         return block;
@@ -112,7 +105,6 @@ public class GSBlocks {
             case DOG_GRAVE_STONE -> getDogGraveStone(material);
             case CAT_GRAVE_STONE -> getCatGraveStone(material);
             case HORSE_GRAVE_STONE -> getHorseGraveStone(material);
-            case PET_GRAVE_STONE -> getPetGraveStone(material);
             case VILLAGER_GRAVE_STONE -> getVillagerGraveStone(material);
             case SWORD -> getGravePlate(material);//TODO
         };
@@ -153,10 +145,6 @@ public class GSBlocks {
 
     public static Block getHorseGraveStone(EnumGraveMaterial material) {
         return HORSE_GRAVE_STONES.get(material).get();
-    }
-
-    public static Block getPetGraveStone(EnumGraveMaterial material) {
-        return PET_GRAVE_STONES.get(material).get();
     }
 
     public static Block getVillagerGraveStone(EnumGraveMaterial material) {

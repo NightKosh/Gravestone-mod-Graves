@@ -223,8 +223,7 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
                         return InteractionResult.SUCCESS;
                     } else if (item.isEmpty() && StringUtils.isNoneBlank(grave.getDeathMessageJson())) {
                         if (grave.getGraveType() == EnumGraveType.DOG_GRAVE_STONE ||
-                                grave.getGraveType() == EnumGraveType.CAT_GRAVE_STONE ||
-                                grave.getGraveType() == EnumGraveType.PET_GRAVE_STONE) {
+                                grave.getGraveType() == EnumGraveType.CAT_GRAVE_STONE) {
                             AdvancementsHelper.giveAdvancement(player, level, GSAdvancements.FAITHFUL_TO_THE_END);
                         } else if (grave.getGraveType() == EnumGraveType.VILLAGER_GRAVE_STONE) {
                             AdvancementsHelper.giveAdvancement(player, level, GSAdvancements.DEAD_MEN_TRADE_NO_EMERALDS);
@@ -396,7 +395,7 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
         var facing = blockState.getValue(FACING);
 
         return switch (graveType) {
-            case GRAVE_STONE, VILLAGER_GRAVE_STONE, PET_GRAVE_STONE -> switch (facing) {
+            case GRAVE_STONE, VILLAGER_GRAVE_STONE -> switch (facing) {
                 case SOUTH -> GS_SOUTH;
                 case EAST -> GS_EAST;
                 case WEST -> GS_WEST;

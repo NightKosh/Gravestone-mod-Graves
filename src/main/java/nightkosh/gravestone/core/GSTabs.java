@@ -55,9 +55,6 @@ public class GSTabs {
                             output.accept(new ItemStack(GSBlocks.getHorseGraveStone(mat)));
                         }
                         for (var mat : EnumGraveMaterial.values()) {
-                            output.accept(new ItemStack(GSBlocks.getPetGraveStone(mat)));
-                        }
-                        for (var mat : EnumGraveMaterial.values()) {
                             output.accept(new ItemStack(GSBlocks.getVillagerGraveStone(mat)));
                         }
                     })
