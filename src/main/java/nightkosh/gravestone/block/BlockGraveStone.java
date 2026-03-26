@@ -352,10 +352,10 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
-    private static final VoxelShape GS_SOUTH = Block.box(2, 0, 2, 14, 16, 4);
-    private static final VoxelShape GS_NORTH = Block.box(2, 0, 12, 14, 16, 14);
-    private static final VoxelShape GS_EAST = Block.box(2, 0, 2, 4, 16, 14);
-    private static final VoxelShape GS_WEST = Block.box(12, 0, 2, 14, 16, 14);
+    private static final VoxelShape GS_SOUTH = Block.box(2, 0, 2, 14, 15, 4);
+    private static final VoxelShape GS_NORTH = Block.box(2, 0, 12, 14, 15, 14);
+    private static final VoxelShape GS_EAST = Block.box(2, 0, 2, 4, 15, 14);
+    private static final VoxelShape GS_WEST = Block.box(12, 0, 2, 14, 15, 14);
 
     private static final VoxelShape CROSS_SOUTH = Block.box(2, 0, 2, 14, 16, 4);
     private static final VoxelShape CROSS_NORTH = Block.box(2, 0, 12, 14, 16, 14);
