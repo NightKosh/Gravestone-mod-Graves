@@ -1,0 +1,7 @@
+{
+  "parent": "gravestone:block/cat_grave_stone/base",
+  "textures": {
+    "texture": "gravestone:block/cat_grave_stone/iron",
+    "particle": "gravestone:block/cat_grave_stone/iron"
+  }
+}
