@@ -378,6 +378,11 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
     private static final VoxelShape HORSE_NORTH_SOUTH = Block.box(4, 0, 4, 12, 10, 12);
     private static final VoxelShape HORSE_EAST_WEST = Block.box(4, 0, 4, 12, 10, 12);
 
+    private static final VoxelShape VILLAGER_SOUTH = Block.box(4, 0, 1, 12, 17, 9);
+    private static final VoxelShape VILLAGER_NORTH = Block.box(4, 0, 7, 12, 17, 15);
+    private static final VoxelShape VILLAGER_EAST = Block.box(1, 0, 4, 9, 17, 12);
+    private static final VoxelShape VILLAGER_WEST = Block.box(7, 0, 4, 15, 17, 12);
+
     @Nonnull
     @Override
     public VoxelShape getShape(
@@ -386,7 +391,7 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
         var facing = blockState.getValue(FACING);
 
         return switch (graveType) {
-            case GRAVE_STONE, VILLAGER_GRAVE_STONE -> switch (facing) {
+            case GRAVE_STONE -> switch (facing) {
                 case SOUTH -> GS_SOUTH;
                 case EAST -> GS_EAST;
                 case WEST -> GS_WEST;
@@ -433,6 +438,13 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
                 case EAST, WEST -> HORSE_EAST_WEST;
                 case SOUTH, NORTH -> HORSE_NORTH_SOUTH;
                 default -> HORSE_NORTH_SOUTH;
+            };
+            case VILLAGER_GRAVE_STONE -> switch (facing) {
+                case SOUTH -> VILLAGER_SOUTH;
+                case EAST -> VILLAGER_EAST;
+                case WEST -> VILLAGER_WEST;
+                case NORTH -> VILLAGER_NORTH;
+                default -> VILLAGER_NORTH;
             };
         };
     }
