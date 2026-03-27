@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
@@ -49,20 +48,6 @@ public class GraveStoneHelper {
     public static boolean canPlaceBlockAt(BlockState state) {
         return GSConfigs.CAN_PLACE_GRAVES_EVERY_WHERE.get() ||
                 state.is(BlockTags.MINEABLE_WITH_SHOVEL);
-    }
-
-    public static void addSwordInfo(Level level, CompoundTag tag, ItemStack sword) {
-        //TODO
-//        tag.put("Sword", sword.save(level.registryAccess()));
-    }
-
-    public static ItemStack getSwordAsGrave(Item grave, ItemStack sword) {
-        var graveStoneStack = new ItemStack(grave);
-        var tag = new CompoundTag();
-        tag.putBoolean(GraveStoneBlockEntity.TAG_IS_SPAWNER, true);
-        //TODO GraveStoneHelper.addSwordInfo(tag, sword);
-        graveStoneStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-        return graveStoneStack;
     }
 
     public static boolean canFlowerBePlaced(Level level, BlockPos pos, ItemStack itemStack, GraveStoneBlockEntity entity) {
@@ -135,9 +120,6 @@ public class GraveStoneHelper {
 
             if (StringUtils.isNoneBlank(grave.getDeathMessageJson())) {
                 tag.putString(GraveStoneBlockEntity.TAG_DEATH_MESSAGE, grave.getDeathMessageJson());
-            }
-            if (grave.isSwordGrave()) {
-                GraveStoneHelper.addSwordInfo(level, tag, grave.getSword());
             }
 
             itemStack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));

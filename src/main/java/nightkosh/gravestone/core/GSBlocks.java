@@ -106,7 +106,6 @@ public class GSBlocks {
             case CAT_GRAVE_STONE -> getCatGraveStone(material);
             case HORSE_GRAVE_STONE -> getHorseGraveStone(material);
             case VILLAGER_GRAVE_STONE -> getVillagerGraveStone(material);
-            case SWORD -> getGravePlate(material);//TODO
         };
     }
 

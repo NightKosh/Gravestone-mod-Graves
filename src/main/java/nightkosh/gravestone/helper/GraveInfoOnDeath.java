@@ -1,11 +1,9 @@
 package nightkosh.gravestone.helper;
 
-import net.minecraft.world.item.ItemStack;
 import nightkosh.gravestone.api.grave.EnumGraveMaterial;
 import nightkosh.gravestone.api.grave.EnumGraveType;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * GraveStone mod
@@ -15,6 +13,5 @@ import javax.annotation.Nullable;
  */
 public record GraveInfoOnDeath(
         @Nonnull EnumGraveType graveType,
-        @Nonnull EnumGraveMaterial material,
-        @Nullable ItemStack sword) {
+        @Nonnull EnumGraveMaterial material) {
 }

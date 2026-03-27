@@ -57,7 +57,6 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
     protected GraveInventory inventory;
     protected String deathMessageJson;
     protected int age = -1;
-    protected ItemStack sword = null;
     protected String playerId = "";
     protected boolean isSpawner = false;
     protected int spawnerHelperId;
@@ -165,8 +164,6 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
         inventory.readItems(in);
         // death text
         deathMessageJson = in.getString(TAG_DEATH_MESSAGE).orElse(null);
-        // sword
-        readSwordInfo(in);
         // owner
         playerId = in.getString(TAG_PLAYER_ID).orElse(null);
 
@@ -193,8 +190,6 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
         if (StringUtils.isNoneBlank(deathMessageJson)) {
             out.putString(TAG_DEATH_MESSAGE, deathMessageJson);
         }
-        // sword
-        writeSwordInfo(out);
         // owner
         if (playerId != null) {
             out.putString(TAG_PLAYER_ID, playerId);
@@ -225,34 +220,6 @@ public class GraveStoneBlockEntity extends BlockEntity implements MenuProvider, 
         }
         this.inventory.dropAllItems();
         GraveInventory.dropItem(GraveStoneHelper.getBlockItemStack(level, pos, state), level, pos);
-    }
-
-    private void readSwordInfo(ValueInput in) {
-        sword = in.read("Sword", ItemStack.CODEC).orElse(null);
-    }
-
-    private void writeSwordInfo(@Nonnull ValueOutput out) {
-        if (sword != null) {
-            out.store("Sword", ItemStack.CODEC, sword);
-        }
-    }
-
-    public ItemStack getSword() {
-        return this.sword;
-    }
-
-    public void setSword(ItemStack sword) {
-        this.sword = sword;
-    }
-
-    public void dropSword() {
-        if (this.sword != null) {
-            GraveInventory.dropItem(this.sword, this.getLevel(), this.getBlockPos());
-        }
-    }
-
-    public boolean isSwordGrave() {
-        return this.getGraveType() == EnumGraveType.SWORD;
     }
 
     public EnumGraveType getGraveType() {

@@ -12,12 +12,9 @@
   "block.gravestone.cat_grave_stone": "Cat Gravestone",
   "block.gravestone.horse_grave_stone": "Horse Gravestone",
   "block.gravestone.villager_grave_stone": "Villager Gravestone",
-  "block.gravestone.sword": "Espada de um guerreiro caído",
 
   "item.grave.age": "Havia vivido",
   "item.grave.days": "dias",
-  "item.grave.sword_name": "Nome da espada",
-  "item.grave.sword_damage": "Dano da espada",
 
   "grave.cant_be_looted": "Você não pode saquear este túmulo!",
 

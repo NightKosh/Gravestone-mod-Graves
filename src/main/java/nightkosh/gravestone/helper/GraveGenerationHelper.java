@@ -22,9 +22,7 @@ import net.minecraft.world.entity.animal.wolf.Wolf;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -64,16 +62,6 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
     protected static final Random rand = new Random();
 
-    public static ArrayList<Item> swordsList = new ArrayList<>(
-            Arrays.asList(
-                    Items.WOODEN_SWORD,
-                    Items.STONE_SWORD,
-                    Items.IRON_SWORD,
-                    Items.GOLDEN_SWORD,
-                    Items.DIAMOND_SWORD
-            )
-    );
-
     public enum EnumGraveTypeByEntity {
         ALL_GRAVES,
         PLAYER_GRAVES,
@@ -83,13 +71,6 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
         DOGS_GRAVES,
         CATS_GRAVES,
         HORSE_GRAVES
-    }
-
-    @Override
-    public void addSwordToSwordsList(Item sword) {
-        if (sword != null) {
-            swordsList.add(sword);
-        }
     }
 
     private static final List<EnumGraveType> GENERATED_PLAYER_GRAVES_TYPES = List.of(
@@ -268,8 +249,7 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             int age = deathHandler.getAge();
             var graveInfo = new GraveInfoOnDeath(
                     deathHandler.getGraveType(entity, event.getSource()),
-                    deathHandler.getGraveMaterial(entity, event.getSource()),
-                    deathHandler.getSword());
+                    deathHandler.getGraveMaterial(entity, event.getSource()));
 
             var pos = new BlockPos(entity.getBlockX(), entity.getBlockY(), entity.getBlockZ() - 1);
 
@@ -289,7 +269,6 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
 
         EnumGraveMaterial material = null;
         EnumGraveType graveType = null;
-        ItemStack sword = null;
 
         //if entity experienced enough or lived a long time
         if (shouldChooseGraveTypeByAgeOrLevel(entity, graveTypeByEntity, age)) {
@@ -299,16 +278,6 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             material = getGraveMaterialByAgeOrLevel(entity, age, graveTypeByEntity);
             graveType = getDefaultGraveTypes(level.getRandom(), graveTypeByEntity);
         } else {
-            // if sword grave TODO
-//            if (graveTypeByEntity == EnumGraveTypeByEntity.PLAYER_GRAVES &&
-//                    GSConfigs.GENERATE_SWORD_GRAVES.get() &&
-//                    level.random.nextInt(4) == 0) {
-//                sword = getSwordFromInventory(items);
-//                if (sword != null) {
-//                    sword = sword;
-//                    graveType = EnumGraveType.SWORD;
-//                }
-//            } else {
             // check death related material
             material = getGraveMaterialByDeath(damageSource);
             // otherwise get material by biome
@@ -319,16 +288,12 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             if (graveType == null) {
                 graveType = getDefaultGraveTypes(level.getRandom(), graveTypeByEntity);
             }
-//            }
         }
 
         if (GSConfigs.DEBUG_MODE.get()) {
             LOGGER.info("Chosen graveType {}, material {}", graveType, material);
-            if (sword != null) {
-                LOGGER.info("Chosen sword {}", sword.getHoverName().getString());
-            }
         }
-        return new GraveInfoOnDeath(graveType, material, sword);
+        return new GraveInfoOnDeath(graveType, material);
     }
 
     private static boolean createOnDeath(
@@ -378,10 +343,6 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             );
 
             if (newLevel.getBlockEntity(newPos) instanceof GraveStoneBlockEntity graveEntity) {
-                if (graveInfo.graveType() == EnumGraveType.SWORD && graveInfo.sword() != null) {
-                    graveEntity.setSword(graveInfo.sword());
-                }
-
                 graveEntity.setDeathMessageJson(deathMessageJson);
                 graveEntity.getInventory().setItems(items);
                 graveEntity.setAge(age);
@@ -404,9 +365,6 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
             }
             if (age > 0) {
                 tag.putInt(GraveStoneBlockEntity.TAG_AGE, age);
-            }
-            if (graveInfo.graveType() == EnumGraveType.SWORD && graveInfo.sword() != null) {
-                GraveStoneHelper.addSwordInfo(level, tag, graveInfo.sword());
             }
             tag.putBoolean(GraveStoneBlockEntity.TAG_IS_SPAWNER, false);
 
@@ -628,20 +586,6 @@ public class GraveGenerationHelper implements IGraveStoneHelper {
                 (level.isEmptyBlock(pos) ||
                         state.getFluidState().isSource() ||
                         state.canBeReplaced());
-    }
-
-    private static ItemStack getSwordFromInventory(List<ItemStack> items) {
-        if (items != null) {
-            for (var stack : items) {
-                if (stack != null && swordsList.contains(stack.getItem())) {
-                    var sword = stack.copy();
-                    items.remove(stack);
-                    return sword;
-                }
-            }
-        }
-
-        return null;
     }
 
 }

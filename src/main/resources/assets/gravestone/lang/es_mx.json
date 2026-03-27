@@ -12,12 +12,9 @@
   "block.gravestone.cat_grave_stone": "Estatua de gato",
   "block.gravestone.horse_grave_stone": "Estatua de caballo",
   "block.gravestone.villager_grave_stone": "Estatua de aldeano",
-  "block.gravestone.sword": "Espada de un caballero caído",
 
   "item.grave.age": "Vivió",
   "item.grave.days": "días",
-  "item.grave.sword_name": "Nombre",
-  "item.grave.sword_damage": "Daño",
 
   "grave.cant_be_looted": "¡No puedes robar esta tumba!",
 

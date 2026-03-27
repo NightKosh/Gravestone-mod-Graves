@@ -12,12 +12,9 @@
   "block.gravestone.cat_grave_stone": "猫雕像",
   "block.gravestone.horse_grave_stone": "马雕像",
   "block.gravestone.villager_grave_stone": "村民纪念碑",
-  "block.gravestone.sword": "战魂之剑",
 
   "item.grave.age": "已生活了",
   "item.grave.days": "天",
-  "item.grave.sword_name": "剑的名字",
-  "item.grave.sword_damage": "剑的耐久值",
 
   "grave.cant_be_looted": "你无法获得这块墓碑!",
 

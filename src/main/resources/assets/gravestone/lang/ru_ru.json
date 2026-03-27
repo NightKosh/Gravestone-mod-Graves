@@ -12,12 +12,9 @@
   "block.gravestone.cat_grave_stone": "Надгробный камень кошки",
   "block.gravestone.horse_grave_stone": "Надгробный камень лошади",
   "block.gravestone.villager_grave_stone": "Надгробный камень жителя",
-  "block.gravestone.sword": "Меч павшего воина",
 
   "item.grave.age": "Прожил",
   "item.grave.days": "дней",
-  "item.grave.sword_name": "Название меча",
-  "item.grave.sword_damage": "Повреждение меча",
 
   "grave.cant_be_looted": "Вы не можете разграбить эту могилу!",
 

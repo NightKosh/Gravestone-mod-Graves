@@ -12,12 +12,9 @@
   "block.gravestone.cat_grave_stone": "Patung Kucing",
   "block.gravestone.horse_grave_stone": "Patung Kuda",
   "block.gravestone.villager_grave_stone": "Patung Desa",
-  "block.gravestone.sword": "Pedang Prajurit yang Jatuh",
 
   "item.grave.age": "Pernah hidup",
   "item.grave.days": "hari",
-  "item.grave.sword_name": "Nama Pedang",
-  "item.grave.sword_damage": "Kerusakan Pedang",
 
   "grave.cant_be_looted": "Anda tidak bisa menjarah kuburan ini!",
 

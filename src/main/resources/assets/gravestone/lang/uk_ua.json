@@ -12,12 +12,9 @@
   "block.gravestone.cat_grave_stone": "Статуя для могили кішки",
   "block.gravestone.horse_grave_stone": "Статуя для могили коня",
   "block.gravestone.villager_grave_stone": "Статуя жителя",
-  "block.gravestone.sword": "Меч полеглого воїна",
 
   "item.grave.age": "Прожив",
   "item.grave.days": "днів",
-  "item.grave.sword_name": "Назва меча",
-  "item.grave.sword_damage": "Пошкодження меча",
 
   "grave.cant_be_looted": "Ви не можете розграбувати цю могилу!",
 

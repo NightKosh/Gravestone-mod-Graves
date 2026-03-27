@@ -12,12 +12,9 @@
   "block.gravestone.cat_grave_stone": "Socha kočky",
   "block.gravestone.horse_grave_stone": "Socha koně",
   "block.gravestone.villager_grave_stone": "Socha vesničana",
-  "block.gravestone.sword": "Meč padlého válečníka",
 
   "item.grave.age": "Žil",
   "item.grave.days": "dní",
-  "item.grave.sword_name": "Jméno meče",
-  "item.grave.sword_damage": "Poškození meče",
 
   "grave.cant_be_looted": "Nemůžeš vykrást tento hrob!",
 

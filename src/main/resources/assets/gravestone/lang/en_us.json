@@ -12,12 +12,9 @@
   "block.gravestone.cat_grave_stone": "Cat Gravestone",
   "block.gravestone.horse_grave_stone": "Horse Gravestone",
   "block.gravestone.villager_grave_stone": "Villager Gravestone",
-  "block.gravestone.sword": "Sword of A Fallen Warrior",
 
   "item.grave.age": "Had lived",
   "item.grave.days": "days",
-  "item.grave.sword_name": "Sword Name",
-  "item.grave.sword_damage": "Sword Damage",
 
   "grave.cant_be_looted": "You can't loot this grave!",
 

@@ -85,37 +85,6 @@ public class ItemBlockGraveStone extends BlockItem {
                             .append(" " + tag.getInt(GraveStoneBlockEntity.TAG_AGE).get() + " ")
                             .append(Component.translatable("item.grave.days")));
                 }
-
-//            if (tag.contains("Sword")) {
-//                var sword = ItemStack.parse(level.registryAccess(), tag.getCompoundTag("Sword")).get();
-//
-//                if (StringUtils.isNotBlank(sword.getDisplayName())) {
-//                    tooltipList.add(ModGraveStone.proxy.getLocalizedString("item.grave.sword_name") + " - " + sword.getDisplayName());
-//                }
-//
-//                if (sword.getItemDamage() != 0) {
-//                    tooltipList.add(ModGraveStone.proxy.getLocalizedString("item.grave.sword_damage") + " - " + sword.getItemDamage());
-//                }
-//
-//                if (sword.getTag() != null && sword.getTag().contains("ench")) {
-//                    NBTTagList enchantments = sword.getTag().getTagList("ench", 10);
-//
-//                    if (enchantments.tagCount() != 0) {
-//                        for (int i = 0; i < enchantments.tagCount(); i++) {
-//                            short enchantmentId = enchantments.getCompoundTagAt(i).getShort("id");
-//                            short enchantmentLvl = enchantments.getCompoundTagAt(i).getShort("lvl");
-//
-//                            try {
-//                                if (Enchantment.getEnchantmentByID(enchantmentId) != null) {
-//                                    tooltipList.add(Enchantment.getEnchantmentByID(enchantmentId).getTranslatedName(enchantmentLvl));
-//                                }
-//                            } catch (Exception e) {
-//
-//                            }
-//                        }
-//                    }
-//                }
-//            }
             }
             super.appendHoverText(stack, context, tooltipDisplay, consumer, flag);
         }

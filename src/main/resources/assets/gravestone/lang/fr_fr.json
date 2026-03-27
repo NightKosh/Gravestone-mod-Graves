@@ -12,12 +12,9 @@
   "block.gravestone.cat_grave_stone": "Tombe de chat",
   "block.gravestone.horse_grave_stone": "Statue de cheval",
   "block.gravestone.villager_grave_stone": "Statue de villageois",
-  "block.gravestone.sword": "Épée du guerrier vaincu",
 
   "item.grave.age": "A vécu",
   "item.grave.days": "jours",
-  "item.grave.sword_name": "Nom de l'épée",
-  "item.grave.sword_damage": "Dégats de l'épée",
 
   "grave.cant_be_looted": "Vous ne pouvez pas piller cette tombe !",
 

@@ -12,12 +12,9 @@
   "block.gravestone.cat_grave_stone": "Katzenstatue",
   "block.gravestone.horse_grave_stone": "Pferdestatue",
   "block.gravestone.villager_grave_stone": "Dorfbewohner-Statue",
-  "block.gravestone.sword": "Schwert eines gefallenen Kriegers",
 
   "item.grave.age": "Lebte",
   "item.grave.days": "Tage",
-  "item.grave.sword_name": "Schwertname",
-  "item.grave.sword_damage": "Schwertschaden",
 
   "grave.cant_be_looted": "Du kannst dieses Grab nicht looten!",
 

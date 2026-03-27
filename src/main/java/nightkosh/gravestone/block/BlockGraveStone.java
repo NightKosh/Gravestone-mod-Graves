@@ -142,12 +142,6 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
 
                         grave.setAge(tag.getIntOr(GraveStoneBlockEntity.TAG_AGE, 0));
                         grave.setSpawner(tag.getBooleanOr(GraveStoneBlockEntity.TAG_IS_SPAWNER, false));
-
-                        //TODO
-//                        if (tag.contains("Sword")) {
-//                            var sword = ItemStack.parse(level.registryAccess(), tag.getCompound("Sword")).get();
-//                            grave.setSword(sword);
-//                        }
                     }
                 }
             }
@@ -383,9 +377,6 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
 
     private static final VoxelShape HORSE_NORTH_SOUTH = Block.box(4, 0, 4, 12, 10, 12);
     private static final VoxelShape HORSE_EAST_WEST = Block.box(4, 0, 4, 12, 10, 12);
-    //TODO
-    private static final VoxelShape SWORD_SOUTH_NORTH = Block.box(0.375F, 0, 0.4375F, 0.625F, 0.9F, 0.5625F);
-    private static final VoxelShape SWORD_EAST_WEST = Block.box(0.4375F, 0, 0.375F, 0.5625F, 0.9F, 0.625F);
 
     @Nonnull
     @Override
@@ -442,12 +433,6 @@ public class BlockGraveStone extends BaseEntityBlock implements SimpleWaterlogge
                 case EAST, WEST -> HORSE_EAST_WEST;
                 case SOUTH, NORTH -> HORSE_NORTH_SOUTH;
                 default -> HORSE_NORTH_SOUTH;
-            };
-            //TODO ??
-            case SWORD -> switch (facing) {
-                case EAST, WEST -> SWORD_EAST_WEST;
-                case SOUTH, NORTH -> SWORD_SOUTH_NORTH;
-                default -> SWORD_SOUTH_NORTH;
             };
         };
     }

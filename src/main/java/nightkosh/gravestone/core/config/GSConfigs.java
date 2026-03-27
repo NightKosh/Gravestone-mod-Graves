@@ -22,13 +22,11 @@ public class GSConfigs {
     public static ModConfigSpec.ConfigValue<Boolean> GENERATE_VILLAGER_GRAVES;
     public static ModConfigSpec.ConfigValue<Boolean> GENERATE_PET_GRAVES;
     public static ModConfigSpec.ConfigValue<Boolean> GENERATE_GRAVES_IN_LAVA;
-    //    public static ModConfigSpec.ConfigValue<Boolean> GENERATE_SWORD_GRAVES;
     public static ModConfigSpec.ConfigValue<Boolean> GENERATE_EMPTY_PLAYER_GRAVES;
     public static ModConfigSpec.ConfigValue<Boolean> ONLY_OWNER_CAN_LOOT_GRAVE;
     public static ModConfigSpec.ConfigValue<Boolean> REMOVE_EMPTY_GRAVES;
     public static ModConfigSpec.ConfigValue<Boolean> EMPTY_GRAVE_AUTO_REMOVAL_LOGGING;
     public static ModConfigSpec.ConfigValue<Boolean> DROP_GRAVE_BLOCK_AT_DESTRUCTION;
-    //    public static ModConfigSpec.ConfigValue<Boolean> VANILLA_RENDERER_FOR_SWORDS_GRAVES;
     public static ModConfigSpec.ConfigValue<Boolean> CREATE_BACKUPS;
 
     public static ModConfigSpec.ConfigValue<Integer> GRAVE_ITEMS_COUNT;
@@ -47,13 +45,11 @@ public class GSConfigs {
         GENERATE_VILLAGER_GRAVES = BUILDER.define("GenerateVillagersGraves", true);
         GENERATE_PET_GRAVES = BUILDER.define("GeneratePetsGraves", true);
         GENERATE_GRAVES_IN_LAVA = BUILDER.define("GenerateGravesInLava", true);
-//        GENERATE_SWORD_GRAVES = BUILDER.define("GenerateSwordGraves", true);
         GENERATE_EMPTY_PLAYER_GRAVES = BUILDER.define("GenerateEmptyPlayerGraves", true);
         ONLY_OWNER_CAN_LOOT_GRAVE = BUILDER.define("OnlyOwnerCanLootGrave", false);
         REMOVE_EMPTY_GRAVES = BUILDER.define("RemoveEmptyGraves", false);
         EMPTY_GRAVE_AUTO_REMOVAL_LOGGING = BUILDER.define("EmptyGraveAutoRemovalLogging", true);
         DROP_GRAVE_BLOCK_AT_DESTRUCTION = BUILDER.define("DropGraveBlockAtDestruction", true);
-//        VANILLA_RENDERER_FOR_SWORDS_GRAVES = BUILDER.define("VanillaRendererForSwordsGraves", true);
         CREATE_BACKUPS = BUILDER.define("CreateBackups", true);
 
         GRAVE_ITEMS_COUNT = BUILDER.comment("This value is amount of items which should be saved in percents. It should be in range of 0 an 100!")
