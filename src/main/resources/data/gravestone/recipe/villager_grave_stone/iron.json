@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "gravestone_villager_grave_stone",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:emerald",
+    "gravestone:chisel",
+    "minecraft:iron_block"
+  ],
+  "result": {
+    "id": "gravestone:villager_grave_stone_iron",
+    "count": 3
+  }
+}

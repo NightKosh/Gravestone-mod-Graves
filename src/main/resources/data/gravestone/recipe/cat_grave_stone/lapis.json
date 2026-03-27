@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "gravestone_cat_grave_stone",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:cod",
+    "gravestone:chisel",
+    "minecraft:lapis_block"
+  ],
+  "result": {
+    "id": "gravestone:cat_grave_stone_lapis",
+    "count": 3
+  }
+}
