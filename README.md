@@ -24,7 +24,7 @@ For more information visit [official site](http://gravestone.nightkosh.com/) or 
 
 ## Get started
 1. Clone mod repository
-2. Download NeoForge and copy "gradlew.bat", "gradlew" files and "gradle" directory to mod folder(and any other files which may requires)
+2. ~~Download NeoForge and copy "gradlew.bat", "gradlew" files and "gradle" directory to mod folder(and any other files which may requires)~~
 3. Download mod's API
     * Download [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
         * Run next commands from mod folder:
@@ -33,7 +33,7 @@ For more information visit [official site](http://gravestone.nightkosh.com/) or 
          git submodule update
        ```
     * ~~Download other API's manually and place them into "src/main/java" folder~~
-4. Download MDK from NeoForge
+4. ~~Download MDK from NeoForge~~
 5. Import mod to your ide as "new Gradle project"
 
 ## Gradle commands
