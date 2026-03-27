@@ -1,16 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "type": "minecraft:crafting_shapeless",
   "group": "gravestone_villager_grave_stone",
-  "pattern": [
-    "   ",
-    "   ",
-    "C B"
+  "category": "misc",
+  "ingredients": [
+    "minecraft:emerald",
+    "gravestone:chisel",
+    "minecraft:gold_block"
   ],
-  "key": {
-    "C": "gravestone:chisel",
-    "B": "minecraft:gold_block"
-  },
   "result": {
     "id": "gravestone:villager_grave_stone_gold",
     "count": 3

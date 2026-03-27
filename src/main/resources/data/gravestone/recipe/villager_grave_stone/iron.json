@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "group": "gravestone_villager_grave_stone",
   "category": "misc",
   "ingredients": [
