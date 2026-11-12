@@ -34,7 +34,7 @@ public class ChiselScreen extends Screen {
     }
 
     public static void open(GraveStoneBlockEntity grave) {
-        Minecraft.getInstance().setScreen(new ChiselScreen(grave));
+        Minecraft.getInstance().setScreenAndShow(new ChiselScreen(grave));
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ChiselScreen extends Screen {
                                             this.grave.getBlockPos().getZ(),
                                             this.nameField.getValue())
                             );
-                            this.minecraft.setScreen(null); // close GUI
+                            this.minecraft.setScreenAndShow(null); // close GUI
                         })
                         .bounds(x + 5, y + 120, 55, 20)
                         .build()
